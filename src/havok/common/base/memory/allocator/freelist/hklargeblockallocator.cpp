@@ -242,6 +242,8 @@ struct System_e990 {
 void FUN_00887da0(const char* fmt, ...);
 }
 
+// pdb: BSParticleSystemManager::AddEmitter | BSParticleSystemManager.obj | fnv360_0822_retail, ustr, medium
+// pdb params: auiMasterParticleSystemIndex, apEmitter
 void FUN_00dd8750_cls::FUN_00dd8750(void* apBlock, unsigned int auiSize)
 {
     unsigned int index = (unsigned int)apBlock;

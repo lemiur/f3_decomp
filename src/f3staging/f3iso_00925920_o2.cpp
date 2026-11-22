@@ -22,6 +22,8 @@ struct Frame {
     FrameMethods* methods;
     Transform* FUN_00925920(Transform*);
 };
+// pdb: bhkRigidBodyT::GetTransform | bhkRigidBodyT.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arTrans
 Transform* Frame::FUN_00925920(Transform* result) {
     Vector4 rotation;
     methods->translation(this,&result->translation);

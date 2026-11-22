@@ -436,6 +436,7 @@ struct S_00dcc820_Class
 };
 extern "C" void __cdecl SkipWhitespace(void);
 // @fnv 0x00dcc820
+// pdb: hkIstream::operator>> | hkIStream.obj | tesv_win, objrun_sim, low
 S_00dcc820_Class* __thiscall S_00dcc820_Class::FUN_00dcc820(int* result)
 {
     unsigned char ok;

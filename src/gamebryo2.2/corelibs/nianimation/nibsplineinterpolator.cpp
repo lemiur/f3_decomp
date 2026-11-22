@@ -3,6 +3,8 @@
 #include "nibsplineinterpolator_decls.h"
 // Loads the interpolator base data, reads start and end times from the stream, and assigns both spline objects from the stream.
 // @fnv 0x00a58080
+// pdb: NiBSplineInterpolator::LoadBinary | NiBSplineInterpolator.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kStream
 void NiBSplineInterpolator::LoadBinary(NiStream& stream)
 {
     NiInterpolator::LoadBinary(stream);
@@ -20,6 +22,7 @@ struct FUN_00a57f70_shell : public NiBSplineInterpolator
 extern "C" const char* g_011f3fe4_arg1;
 
 // @fnv 0x00a57f70
+// pdb: MagicShaderHitEffect::GetRTTI | MagicShaderHitEffect.obj | fnv360_0822_retail, vtable, low
 void* FUN_00a57f70_shell::FUN_00a57f70()
 {
     return &g_011f3fe4_arg1;
@@ -59,6 +62,8 @@ struct FUN_00a57e50_shell : public NiBSplineInterpolator
     bool LoadNiBSplineInterpolator(NiStream&);
 };
 // @fnv 0x00a57e50
+// pdb: NiBSplineInterpolator::RegisterStreamables | NiBSplineInterpolator.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: kStream
 bool FUN_00a57e50_shell::LoadNiBSplineInterpolator(NiStream& kStream)
 {
     if (!((BaseThunk*)this)->FUN_00a81fe0(kStream))
@@ -80,6 +85,7 @@ struct FUN_00a581e0_shell
 };
 // Calls FUN_00a57f80 on this, deletes this with size 0x1c when bit 0 of a1 is set, and returns this.
 // @fnv 0x00a581e0
+// pdb: ImageSpaceModifierInstance::`scalar deleting destructor' | ImageSpaceModifierInstance.obj | fnv360_0822_retail, vtable, high
 void* FUN_00a581e0_shell::FUN_00a581e0(unsigned int auiFlags)
 {
     FUN_00a57f80(this);
@@ -98,6 +104,7 @@ struct FUN_00a57d60_holder
     void FUN_00a57d60(float&, float&);
 };
 // @fnv 0x00a57d60
+// pdb: NiBSplineInterpolator::GetActiveTimeRange | NiBSplineInterpolator.obj | tesv_win, hash, low
 void FUN_00a57d60_holder::FUN_00a57d60(float& fBegin, float& m_fEndValue)
 {
     if (fBegin == DAT_010231b0 && m_fEndValue == DAT_010241b0)
@@ -179,6 +186,8 @@ class FUN_00a57da0_cls
 
 // Returns the product of v57(a1) and v56(a1), doubled when v60() is true and quadrupled otherwise.
 // @fnv 0x00a57da0
+// pdb: NiBSplineInterpolator::GetAllocatedSize | NiBSplineInterpolator.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: usChannel
 int FUN_00a57da0_cls::FUN_00a57da0(int a1)
 {
     if (v60())
@@ -281,6 +290,8 @@ struct Basis
 };
 
 // @fnv 0x00a57e00
+// pdb: NiBSplineInterpolator::GetControlPointCount | NiBSplineInterpolator.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: usChannel
 int __thiscall SplineShell::FUN_00a57e00(int param)
 {
     int r0 = this->v52();
@@ -562,6 +573,8 @@ struct S_00a58160_Foo : NiBSplineInterpolator
 
 // Calls FUN_00a724d0, then saves m_fStartTime and m_fEndTime to the stream and calls f12 twice.
 // @fnv 0x00a58160
+// pdb: NiBSplineInterpolator::SaveBinary | NiBSplineInterpolator.obj | fnv360_0721_beta, call_seq, high
+// pdb params: kStream
 void S_00a58160_Foo::SaveToStream(S_00a58160_Stream* pStream)
 {
     FUN_00a724d0(pStream);
@@ -663,6 +676,8 @@ class BA58200Sequence
 };
 
 // @fnv 0x00a58200
+// pdb: NiBSplineInterpolator::GetViewerStrings | NiBSplineInterpolator.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void BA58200Sequence::FUN_00a58200(BA58200StringArray* pkStrings)
 {
     BaseGetViewerStrings(pkStrings);

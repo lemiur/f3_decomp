@@ -36,6 +36,8 @@ struct NiVBSet
 };
 
 // @fnv 0x00e94490
+// pdb: NiVBSet::FreeChip | NiVBSet.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: uiBlockIndex, uiChipIndex
 void NiVBSet::FUN_00e94490(unsigned int uiArrayIndex, unsigned int uiChipIndex)
 {
     unsigned int uiPreFreeSpace;
@@ -103,6 +105,8 @@ struct FUN_00e94220_cls
 
 // Inserts node into the doubly linked list ordered by m_key, updating head, next and back pointers.
 // @fnv 0x00e94220
+// pdb: NiVBSet::InsertBlockIntoFreeSpaceList | NiVBSet.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkVBBlock
 void FUN_00e94220_cls::InsertSortedNode(FUN_00e94220_node* node)
 {
     if (m_pFirstNode != 0)
@@ -175,6 +179,7 @@ struct LinkedVBBlock
 extern LinkedVBBlock* DAT_0126fa30;
 // Allocates DAT_011c0cdc LinkedVBBlock objects, initializes each, and links them into a doubly linked list headed by DAT_0126fa30.
 // @fnv 0x00e944f0
+// pdb: NiVBSet::AllocateBlocks | NiVBSet.obj | tesv_win, call_seq, medium
 void __cdecl AllocateVBBlocks()
 {
     for (unsigned int i = 0; i < DAT_011c0cdc; ++i)
@@ -213,6 +218,8 @@ struct VBSet
 };
 
 // @fnv 0x00e94650
+// pdb: NiVBSet::AllocateChip | NiVBSet.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: uiSize, bForceNewBlock
 void* VBSet::FUN_00e94650(unsigned int uiSize, bool bForceNew)
 {
     void* pvChip = 0;
@@ -254,6 +261,8 @@ struct VBLayout
 };
 extern VBLayout* g_pkFreeList;
 // @fnv 0x00e98500
+// pdb: NiVBBlock::FreeChip | NiVBBlock.obj | fnv360_0822_retail, call_seq, high
+// pdb params: uiChipIndex
 unsigned int __fastcall FreeVBBlock(NiVBBlock* object, void*, unsigned int index)
 {
     VBLayout* pLayout = reinterpret_cast<VBLayout*>(object);
@@ -317,6 +326,8 @@ struct HashTableBase
 };
 // Looks up key in the bucket chain, updates the value if found, otherwise allocates, initializes and prepends a new node and increments elementCount.
 // @fnv 0x00b57ea0
+// pdb: NiTMapBase<DFALL<NiTMapItem<unsigned int,CombatThreat *> >,unsigned int,CombatThreat *>::SetAt | CombatThreatMap.obj | fnv360_0822_retail, call_seq, high
+// pdb params: key, val
 void HashTableBase::InsertOrUpdate(unsigned int key, unsigned int value)
 {
     unsigned int bucketIndex = BucketIndex(key);
@@ -478,6 +489,7 @@ struct VBSetCleanup
 
 // Releases each block's VB interface, links non-null blocks into a list, releases the buffer, and destroys the array.
 // @fnv 0x00e943c0
+// pdb: NiVBSet::~NiVBSet | NiVBSet.obj | fnv360_0822_retail, call_gap_sim, medium, conflict (bridge: NiVBSet::AllocateBlocks)
 void VBSetCleanup::FUN_00e943c0()
 {
     for (unsigned int i = 0; i < blocks.size; ++i)

@@ -2429,6 +2429,7 @@ struct __declspec(align(16)) TOIBody
 // @f3 0x00a2a620 (community match, verified in this file)
 extern double DAT_00db38a8, DAT_00e7d368, DAT_00dc1238, DAT_00dc0ac8, DAT_00dd8ac8;
 struct __declspec(align(16)) TOIVec { float x, y, z, w; };
+// pdb: contactPointIsValid | hkpAgent1nMachine.obj | tesv_win, objrun_open, low
 static __declspec(noinline) int FUN_00da37d0(const TOIBody* b, const TOIBody* a, float tolerance, const float* speed, float bias)
 {
     const float* bp = b->m_pos.m128_f32;

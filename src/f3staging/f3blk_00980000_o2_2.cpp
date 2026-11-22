@@ -102,6 +102,8 @@ struct ListenerOwner
 };
 // Sets event->m_pObservedSource to owner, calls callback on each non-null listener in reverse with timers, then calls FUN_00987ce0 to remove null entries.
 // @fnv 0x00988180
+// pdb: hkpEntityCallbackUtil::fireContactPointAddedInternal | hkpEntityCallbackUtil.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: entity, event
 void __cdecl FUN_00988180(ListenerOwner* owner, ListenerEvent* event)
 {
     CFF9B0SmallArray& kListeners = owner->m_kListeners;
@@ -135,6 +137,7 @@ struct PtrArray_00989760 {
     }
 };
 
+// pdb: hkpPhantom::removeNullPhantomListeners | hkpPhantom.obj | tesv_win, call_seq, medium
 static __declspec(noinline) void FUN_00989760(PtrArray_00989760* arr)
 {
     for (int i = arr->m_size - 1; i >= 0; i--)
@@ -1648,6 +1651,8 @@ __forceinline void hkp3AxisSweep::addNodePair( const hkpBpNode* n0, const hkpBpN
 	}
 }
 
+// pdb: hkp3AxisSweep::queryBatchAabbSub | hkp3AxisSweep.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: bitFieldOfQueryNodes, pairsOut, addMode
 void hkp3AxisSweep::FUN_00996690( hkUint32* bitFieldOfQueryNodes, hkArray<hkpBroadPhaseHandlePair>& pairsOut, hkBool addMode ) const
 {
 	hkInplaceArray<BpInt,256> openQueryNodes;

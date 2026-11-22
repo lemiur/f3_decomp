@@ -119,6 +119,7 @@ struct FUN_00e8aa40_Class {
 };
 
 // @fnv 0x00e8aa40
+// pdb: NiDX9SourceCubeMapData::`vector deleting destructor' | NiDX9SourceCubeMapData.obj | tesv_win, objrun_prop, low
 int __thiscall FUN_00e8aa40_Class::FUN_00e8aa40(bool abFree)
 {
     *reinterpret_cast<int*>(this) = reinterpret_cast<int>(&DAT_010efc34);
@@ -129,6 +130,8 @@ int __thiscall FUN_00e8aa40_Class::FUN_00e8aa40(bool abFree)
 }
 
 // @fnv 0x00e8b490
+// pdb: NiTMapBase<DFALL<NiTMapItem<unsigned int,CombatThreat *> >,unsigned int,CombatThreat *>::SetValue | CombatThreatMap.obj | fnv360_0822_retail, vtable, high
+// pdb params: pkItem, key, val
 void __stdcall FUN_00e8b490(int* paiValues, int iFirst, int iSecond)
 {
     paiValues[1] = iFirst;
@@ -139,6 +142,7 @@ struct NiTMapBaseStub { void RemoveAll(); };
 extern NiTMapBaseStub* DAT_0126fa14;
 // Calls RemoveAll on DAT_0126fa14, invokes its first virtual method with 1, then clears the pointer.
 // @fnv 0x00e933d0
+// pdb: NiD3DShaderProgramFactory::_SDMShutdown | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, objrun_prop, low
 void FUN_00e933d0()
 {
     DAT_0126fa14->RemoveAll();
@@ -155,6 +159,7 @@ struct FUN_00e93650_Class {
 };
 // Calls FUN_00e93400, then deallocates this via g_memoryManager if the low bit of the argument is set, and returns this.
 // @fnv 0x00e93650
+// pdb: ExtraFollower::`scalar deleting destructor' | ExtraDataObjects.obj | fnv360_0822_retail, vtable, high
 void* __thiscall FUN_00e93650_Class::FUN_00e93650(int aiFlags)
 {
     FUN_00e93400();
@@ -169,6 +174,7 @@ struct FUN_00e95b80_Class {
     void __thiscall FUN_00e95b80();
 };
 // @fnv 0x00e95b80
+// pdb: NiDX9Resource::~NiDX9Resource | NiDX9Resource.obj | tesv_win, hash, low
 void __thiscall FUN_00e95b80_Class::FUN_00e95b80()
 {
     void** p = *(void***)((char*)this + 0x10);
@@ -186,6 +192,8 @@ struct BSFadeNode {
     static void* __cdecl operator new(unsigned int);
 };
 // @fnv 0x00e978a0
+// pdb: NiXenonShaderConstantManager::Create | NiXenonShaderConstantManager.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: pkRenderer
 int __cdecl FUN_00e978a0(int a, int b)
 {
     void* p = BSFadeNode::operator new(0x8c);
@@ -206,6 +214,8 @@ struct FUN_00e81d00_Class {
 
 // Stores the renderer, releases the previous object, AddRefs the renderer's field at 0x288, and caches the pointer at 0x8b8.
 // @fnv 0x00e81d00
+// pdb: NiTObjectArray<NiPointer<NiShaderConstantMapEntry> >::NiTObjectArray<NiPointer<NiShaderConstantMapEntry> > | NiXenonFragmentShader.obj | fnv360_0721_beta, call_gap_sim, low
+// pdb params: uiMaxSize, uiGrowBy
 void __thiscall FUN_00e81d00_Class::FUN_00e81d00(void* renderer)
 {
     m_pShaderObject = renderer;
@@ -258,6 +268,8 @@ struct FUN_00e87af0_This {
     void __thiscall FUN_00e87af0(void* renderer);
 };
 // @fnv 0x00e87af0
+// pdb: NiD3DShaderFactory::SetRenderer | NiD3DShaderFactory.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: pkRenderer
 void __thiscall FUN_00e87af0_This::FUN_00e87af0(void* renderer)
 {
     *(void**)((char*)this + 0x10fc) = renderer;
@@ -400,6 +412,8 @@ struct FUN_00e89760_Class {
     void __thiscall FUN_00e89760(NiConsoleRendererStub* renderer);
 };
 // @fnv 0x00e89760
+// pdb: NiD3DShaderProgram::SetD3DRenderer | NiD3DShaderProgram.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkD3DRenderer
 void __thiscall FUN_00e89760_Class::FUN_00e89760(NiConsoleRendererStub* renderer)
 {
     *(NiConsoleRendererStub**)((char*)this + 0x24) = renderer;
@@ -444,6 +458,7 @@ struct ShaderNode {
 
 // Walks the linked list at DAT_011f4500, releasing each node's shader at offset 0x24 and following the next pointer at 0x2c.
 // @fnv 0x00e8a9b0
+// pdb: NiDX9TextureData::ClearTextureData | NiDX9TextureData.obj | tesv_win, call_gap, low
 void __cdecl ReleaseShaderNodes()
 {
     int node = DAT_011f4500;
@@ -474,6 +489,7 @@ extern FUN_00e91b90_Class* DAT_0126fa54;
 extern const unsigned char DAT_010bc868[];
 extern int DAT_010f0af4;
 // @fnv 0x00e91b90
+// pdb: NiDX9Renderer::AddDisplayFormat | NiDX9RendererSDM.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00e91b90()
 {
     FUN_00e91b90_Class* p = (FUN_00e91b90_Class*)BSFadeNode::operator new(0x10);
@@ -508,6 +524,8 @@ struct FUN_00e941d0_Node { unsigned int pad[9]; unsigned int count; unsigned int
 struct FUN_00e941d0_This { int pad[11]; FUN_00e941d0_Node* head; };
 // Walks the linked list from head to the first node whose count is at least value, unlinks it, and returns it (or null).
 // @fnv 0x00e941d0
+// pdb: NiVBSet::FindBlockWithFreeSpace | NiVBSet.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: uiFreeSize
 FUN_00e941d0_Node* __fastcall RemoveFirstNodeAtLeast(FUN_00e941d0_This* self, int, unsigned int value)
 {
     FUN_00e941d0_Node* node = 0;
@@ -532,6 +550,7 @@ extern int DAT_0126fa58;
 
 // Walks the list at DAT_0126fa58, clears each node's field 2, frees the node, then sets DAT_0126fa58 to 0.
 // @fnv 0x00e98610
+// pdb: NiVBBlock::DeleteChips | NiVBBlock.obj | fnv360_0822_retail, objrun_prop, medium
 void __cdecl FreeNodeList()
 {
     int* node = (int*)DAT_0126fa58;
@@ -687,6 +706,7 @@ struct FUN_00e8a1f0_Class {
 };
 // Reads the entry at index b (stride 12) and writes its two bytes, int field and int at offset 0x14 into f, e, d and c; returns whether that int is not 0x13.
 // @fnv 0x00e8a1f0
+// pdb: NiPixelFormat::GetComponent | NiDX9TextureData.obj | tesv_win, hash, low
 char FUN_00e8a1f0_Class::GetEntryData(int aiIndex, int* piValue, int* piField, char* pcByte1, char* pcByte2)
 {
     *pcByte2 = *(char*)((char*)this + aiIndex * 12 + 0x1d);
@@ -810,6 +830,7 @@ int FUN_00e88b00_Class::DestroyIfFlagged(bool abDelete)
 }
 
 // @fnv 0x00e8a240
+// pdb: NiPixelFormat::GetNumComponents | NiDX9TextureData.obj | tesv_win, call_seq, medium
 unsigned int __fastcall FUN_00e8a240(char* self, int)
 {
     unsigned int count = 0;
@@ -846,6 +867,7 @@ struct FUN_00e8ceb0_Class {
 };
 // Calls FUN_00e8ceb0, then if flag bit 0 is set frees this with operator delete, and returns this.
 // @fnv 0x00e8d200
+// pdb: NiD3DShaderFactory::`scalar deleting destructor' | NiD3DShaderFactory.obj | fnv360_0822_retail, caller_sim, low
 void* FUN_00e8ceb0_Class::FUN_00e8d200(bool abFree)
 {
     FUN_00e8ceb0();
@@ -869,6 +891,7 @@ void __cdecl _NiFree(void* p);
 
 // Restores two vtable pointers, clears the map twice, releases m_data, and frees this when deleting is set.
 // @fnv 0x00e8f800
+// pdb: NiTMapBase<NiTPointerAllocator<unsigned int>,char const *,NiD3DShaderProgramCreator *>::`scalar deleting destructor' | NiD3DShaderProgramFactory.obj | fnv360_0721_beta, objrun_open, low
 void* __thiscall FUN_00e8f800_Class::FUN_00e8f800(bool deleting)
 {
     m_vptr = DAT_010f02d0;
@@ -988,6 +1011,8 @@ struct FUN_00e935b0_Class {
 };
 
 // @fnv 0x00e935b0
+// pdb: NiTStringTemplateMap<NiTMap<char const *,NiPointer<BSFaceGenModelMap::Entry> >,NiPointer<BSFaceGenModelMap::Entry> >::ClearValue | BSFaceGenManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkItem
 void FUN_00e935b0_Class::FreeIfFlagged(int* a)
 {
     if (m_flag)
@@ -1011,6 +1036,7 @@ struct FUN_00e936f0_Class {
     void* __thiscall FUN_00e936f0(bool b);
 };
 // @fnv 0x00e936f0
+// pdb: ExtraPlayerCrimeList::`scalar deleting destructor' | ExtraDataObjects.obj | fnv360_0822_debug, vtable, high
 void* __thiscall FUN_00e936f0_Class::FUN_00e936f0(bool abFree)
 {
     FUN_00e934d0();
@@ -1063,6 +1089,8 @@ Program* DAT_0126fa10;
 
 // If both the global Program and the given program are non-null, gets the program's name and removes it from the global Program's map.
 // @fnv 0x00e937c0
+// pdb: NiD3DShaderProgramFactory::ReleaseVertexShader | NiD3DShaderProgramFactory.obj | fnv360_0721_beta, objopen_prop, low, conflict (bridge: NiD3DShaderProgramFactory::ReleasePixelShader)
+// pdb params: pkShader
 void __cdecl RemoveProgramFromMap(Program* program)
 {
     if (DAT_0126fa10 && program)
@@ -1152,6 +1180,7 @@ struct FUN_00e94850_Class {
 };
 
 // @fnv 0x00e94850
+// pdb: NiTMapBase<NiTPointerAllocator<unsigned int>,char const *,NiControllerSequence *>::`scalar deleting destructor' | NiControllerManager.obj | fnv360_0721_beta, objrun_open, low
 int* __thiscall FUN_00e94850_Class::FUN_00e94850(int deleting)
 {
     m_ppVirtualMethodTable = &DAT_010f0fb4;
@@ -1189,6 +1218,7 @@ struct FUN_00e96c90_Class {
 };
 
 // @fnv 0x00e96c90
+// pdb: NiD3DHLSLVertexShader::~NiD3DHLSLVertexShader | NiD3DHLSLVertexShader.obj | fnv360_0721_beta, objopen_prop, low
 void __thiscall FUN_00e96c90_Class::FUN_00e96c90()
 {
     m_ppVirtualMethodTable = &DAT_010f10f4;
@@ -1213,6 +1243,7 @@ struct FUN_00e97870_Class {
 };
 
 // @fnv 0x00e97870
+// pdb: NiXenonShaderConstantManager::`scalar deleting destructor' | NiXenonShaderConstantManager.obj | fnv360_0822_retail, objrun, medium
 FUN_00e97870_Class::FUN_00e97870_Class(unsigned char flag) {
     m_ppVirtualMethodTable = &DAT_010f1550;
     FUN_00e989c0();
@@ -1229,6 +1260,7 @@ struct A51BF0Base {
 
 // Allocates DAT_011c1118 zero-initialised 0x20-byte nodes, links each to the previous head via offsets 0x1c and 0x18, and updates DAT_0126fa58 to the new head.
 // @fnv 0x00e985a0
+// pdb: NiVBBlock::GetFreeChip | NiVBBlock.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: NiVBBlock::AllocateChips)
 void AllocateNodeList()
 {
     unsigned int i = 0;
@@ -1277,6 +1309,7 @@ extern GlobalHolder DAT_011f6238;
 
 // If DAT_0126f72c is non-null, calls ReleaseResources on it and FUN_00aa4060 on DAT_011f6238, then sets DAT_0126f72c to null.
 // @fnv 0x00e803f0
+// pdb: BGSLoadedReferenceCollection::Destroy | BGSLoadedReferenceCollection.obj | fnv360_0822_retail, call_gap, low
 void __cdecl ClearSpawnedObject()
 {
     SpawnedObject* p = DAT_0126f72c;
@@ -1309,6 +1342,7 @@ extern int DAT_01101294;
 
 // Builds a key from a and b, checks the entry at the current index in slot c, and if it matches advances the index and returns the entry's value.
 // @fnv 0x00e81b60
+// pdb: D3DTag_SubsetMask | NiD3DShaderConstantMap.obj | fnv360_0822_debug, objrun_open, low
 int FUN_00e81b60_Class::LookupEntry(unsigned int auiLowKey, unsigned int auiHighKey, int aiSlot, int aiUnused)
 {
     unsigned int key = (auiHighKey << DAT_01101294) | auiLowKey;
@@ -1421,6 +1455,8 @@ extern Vec4 DAT_0126f8b0;
 extern Vec4 DAT_0126f900;
 
 // @fnv 0x00e830f0
+// pdb: NiD3DShaderConstantMap::PerformOperatorAdd | NiD3DShaderConstantMap.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: pkShaderProgram, pkEntry, eType1, eType2, bInverse, bTranspose
 int __stdcall SetConstantSum(ConstantTarget* target, int reg, int type1, int type2, int iUnused1, int iUnused2)
 {
     switch (type1) {
@@ -1979,6 +2015,7 @@ public:
 
 // Walks the DAT_011bfce8 pair list until key -1, storing each pair into m_120 and calling the object's vtable slot 57 with key and val.
 // @fnv 0x00e88000
+// pdb: NiXenonRenderState::InitRenderState | NiXenonRenderState.obj | fnv360_0822_retail, objrun_open, low
 void FUN_00e88000_cls::ApplyPairTable()
 {
     typedef void (__stdcall *Fn)(void*, int, int);
@@ -2306,6 +2343,7 @@ struct FUN_00e886b0_cls {
 };
 
 // @fnv 0x00e886b0
+// pdb: hkDisplayCone::getHeight | hkDisplayCone.obj | fnv360_0822_retail, objrun_open, low
 float FUN_00e886b0_cls::FUN_00e886b0() {
     return m_88;
 }
@@ -2349,6 +2387,7 @@ struct FUN_00e886c0_cls {
 };
 
 // @fnv 0x00e886c0
+// pdb: hkDisplayCone::getAngle | hkDisplayCone.obj | fnv360_0822_retail, objrun_open, low
 float FUN_00e886c0_cls::FUN_00e886c0() {
     return m_84;
 }
@@ -6080,6 +6119,8 @@ struct LightSlots {
 
 // Maps key through DAT_0126f92c to a slot index and assigns value to group A or B, moving the slot between groups and updating the active and flagged counts.
 // @fnv 0x00e890c0
+// pdb: NiTPool<NiD3DRenderStateGroup,NiTNewInterface<NiD3DRenderStateGroup> >::CreateNewObjects | NiD3DRenderStateGroup.obj | fnv360_0721_beta, call_dedup, low
+// pdb params: uiSize
 void LightSlots::FUN_00e890c0(int key, int value, bool abGroupA, bool abFlagged)
 {
     unsigned short s = DAT_0126f92c[key];
@@ -6205,6 +6246,8 @@ struct FUN_00e89250_cls
 
 // For each of 8 slots, if m_5c[i] is set dispatches v30 with m_3c[i], else if m_2c[i] is set dispatches with m_0c[i], using DAT_0126f948[i].
 // @fnv 0x00e89250
+// pdb: NiTNewInterface<NiD3DPass>::Deallocate | NiD3DPass.obj | fnv360_0822_debug, objopen_prop, low
+// pdb params: pArray
 int FUN_00e89250_cls::DispatchSlots(int param)
 {
     unsigned int i = 0;
@@ -6332,6 +6375,7 @@ public:
 
 // For each of 5 slots, if m_a4[i] is set calls DAT_0126f99c->v51 with m_90[i], else if m_80[i] is set calls it with m_6c[i], then returns 0.
 // @fnv 0x00e892d0
+// pdb: NiTPoolContainer<NiD3DPass,NiTNewInterface<NiD3DPass> >::`scalar deleting destructor' | NiD3DPass.obj | fnv360_0822_debug, objopen_prop, low
 int FUN_00e892d0_cls::FUN_00e892d0(int a1) {
     for (unsigned int i = 0; i < 5; i++) {
         if (m_a4[i] != 0) {
@@ -6354,6 +6398,7 @@ struct FUN_00e89410_Class
 extern unsigned int DAT_011bf558;
 
 // @fnv 0x00e89410
+// pdb: NiTPoolContainer<NiD3DPass,NiTNewInterface<NiD3DPass> >::~NiTPoolContainer<NiD3DPass,NiTNewInterface<NiD3DPass> > | NiD3DPass.obj | fnv360_0822_debug, objrun_open, low
 void* __thiscall FUN_00e89410_Class::GetItemByIndex(unsigned int index)
 {
     void* item = 0;
@@ -6375,6 +6420,7 @@ struct ScalarDeletingObject {
 };
 // Calls FUN_00e89560, frees this via g_memoryManager when flags has bit 0 set, and returns this.
 // @fnv 0x00e89440
+// pdb: ExtraSavedAnimation::`scalar deleting destructor' | ExtraDataObjects.obj | fnv360_0822_debug, vtable, high
 void* ScalarDeletingObject::DestroyScalarObject(unsigned char flags) {
     FUN_00e89560();
     if (flags & 1)
@@ -6407,6 +6453,7 @@ struct FUN_00e89840_Class {
     void FUN_00e89840();
 };
 // @fnv 0x00e89840
+// pdb: NiD3DShaderProgram::~NiD3DShaderProgram | NiD3DShaderProgram.obj | fnv360_0721_beta, objopen_prop, medium
 void FUN_00e89840_Class::FUN_00e89840()
 {
     m_ppVirtualMethodTable = &DAT_010ef73c;
@@ -7835,6 +7882,7 @@ struct FUN_00e8a9e0_cls {
 
 // Releases the child object through the manager, resets the vtable, runs BaseCleanup and frees this (0x6c bytes) when acFlags bit 0 is set.
 // @fnv 0x00e8a9e0
+// pdb: NiXenonTextureData::`scalar deleting destructor' | NiXenonTextureData.obj | fnv360_0822_retail, objrun_open, low, conflict (bridge: NiTexture::RendererData::`scalar deleting destructor')
 FUN_00e8a9e0_cls* FUN_00e8a9e0_cls::FUN_00e8a9e0(unsigned char acFlags)
 {
     FUN_00e8a9e0_child* pChild = m_pChildObject;
@@ -7914,6 +7962,8 @@ struct FUN_00e8aaf0_cls {
 };
 // Copies data to each cube map surface: gets the surface level, copies data into it, and releases it, logging on failure.
 // @fnv 0x00e8aaf0
+// pdb: NiXenonSourceCubeMapData::CopyDataToCubeMapFace | NiXenonSourceCubeMapData.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: NiDX9SourceCubeMapData::CopyDataToCubeMapFace)
+// pdb params: kPixels, eFace
 void FUN_00e8aaf0_cls::FUN_00e8aaf0(int pData, int iFace) {
     CubeMapSource* src = m_64;
     unsigned int i = 0;
@@ -7993,6 +8043,7 @@ struct FUN_00e8ab70_cls {
 };
 // Copies data into each surface level of the cube map source, releasing each surface and logging a failure if GetSurfaceLevel fails.
 // @fnv 0x00e8ab70
+// pdb: NiXenonSourceCubeMapData::CreateCubeMap | NiXenonSourceCubeMapData.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: NiDX9SourceCubeMapData::CopyRendererDataToCubeMapFace)
 void FUN_00e8ab70_cls::FUN_00e8ab70(int aiData, int a2) {
     CubeMapSource* src = m_64;
     unsigned int i = 0;
@@ -8046,6 +8097,8 @@ public:
 };
 
 // @fnv 0x00e8b170
+// pdb: NiTexture::RendererData::SetTextureReplacementFormat | NiTexture.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: kFormat
 void FUN_00e8b170_cls::FUN_00e8b170()
 {
     m_pFlagTarget->v68(0x8b, 0, 0, 0);
@@ -8502,6 +8555,8 @@ unsigned int unk38;
 };
 // Clears the record's active item: notifies the callback, disables the item, removes it from the list, clears its flag bit and frees it.
 // @fnv 0x00e8bd40
+// pdb: D3DSurface_GetDesc | texture.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: pSurface, pDesc
 void Owner::DeactivateActiveItem(Record* record) {
  Record* original = record;
  Item* item = original->active;
@@ -8613,6 +8668,8 @@ struct FUN_00e8d0e0 : RefObjStub {
 
 // Initializes the critical section, stores and AddRefs the device, clears the three maps and resets unk3c.
 // @fnv 0x00e8d0e0
+// pdb: NiXenonVertexBufferManager::NiXenonVertexBufferManager | NiXenonVBManager.obj | fnv360_0721_beta, call_gap, low, conflict (skyrim: NiDX9VertexBufferManager::NiDX9VertexBufferManager)
+// pdb params: pkD3DDevice9
 FUN_00e8d0e0::FUN_00e8d0e0(ComStub* device)
     : unk40(0), unk44(0), unk48(0), unk4c(0)
 {
@@ -8689,6 +8746,8 @@ public:
 
 // Sets the vftable, zeroes the ref count and four int members, and increments a global counter.
 // @fnv 0x00e8ead0
+// pdb: NiTSet<NiPointer<NiMaterialResource>,NiTNewInterface<NiPointer<NiMaterialResource> > >::Add | NiD3DGPUProgramCache.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: element
 FUN_00e8ead0::FUN_00e8ead0()
 {
     m_pVftable = DAT_0101dce4;
@@ -8728,6 +8787,7 @@ struct FUN_00e8f7c0_Class {
 };
 
 // @fnv 0x00e8f7c0
+// pdb: NiTMapBase<DFALL<NiTMapItem<unsigned int,TESObjectREFR *> >,unsigned int,TESObjectREFR *>::`scalar deleting destructor' | BGSLoadedReferenceCollection.obj | fnv360_0822_retail, vtable, medium
 void* FUN_00e8f7c0_Class::FUN_00e8f7c0(unsigned char deleting)
 {
     m_vptr = (void*)&DAT_010f02b0;
@@ -8877,6 +8937,8 @@ struct FUN_00e94150_Class {
 
 // Searches the linked list starting at m_2c for node, unlinks it by patching its neighbours' m_3c/m_40 links, and updates m_2c if it was the head.
 // @fnv 0x00e94150
+// pdb: NiVBSet::RemoveBlockFromFreeSpaceList | NiVBSet.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pkVBBlock
 void __thiscall FUN_00e94150_Class::RemoveNode(FUN_00e94150_Node* node)
 {
     FUN_00e94150_Node* current = m_2c;
@@ -8927,6 +8989,7 @@ struct FUN_00e94810_cls {
 };
 
 // @fnv 0x00e94810
+// pdb: NiTMapBase<DFALL<NiTMapItem<NiAVObject *,TESObjectCELL::QUEUED_ATTACH> >,NiAVObject *,TESObjectCELL::QUEUED_ATTACH>::`scalar deleting destructor' | TESObjectCELL.obj | fnv360_0822_retail, vtable, medium
 FUN_00e94810_cls* FUN_00e94810_cls::FUN_00e94810(unsigned int acFlags)
 {
     m_vptr = (int)&DAT_010c4cf8;
@@ -8950,6 +9013,7 @@ public:
 };
 
 // @fnv 0x00e95b60
+// pdb: NiXenonResource::NiXenonResource | NiXenonResource.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: NiDX9IndexBufferManager::NiDX9IBResource::NiDX9IBResource)
 FUN_00e95b60_cls* FUN_00e95b60_cls::Reset() {
     m_00 = -1;
     m_04 = 0xffff;
@@ -8964,6 +9028,8 @@ struct S_00e97790_This {
 
 
 // @fnv 0x00e97790
+// pdb: NiXenonShaderConstantManager::NiXenonShaderConstantManager | NiXenonShaderConstantManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkD3DRenderer
 int FUN_00e97790_Class::InitFromSource(int a, int apSource)
 {
     S_00e97790_This* pThis =
@@ -9050,6 +9116,8 @@ struct FUN_00e984d0_Struct {
 };
 
 // @fnv 0x00e984d0
+// pdb: NiStreamSaveBinary<char const > | NiD3DUtility.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: binstream, value, uiNumEls
 void __cdecl FUN_00e984d0(FUN_00e984d0_Struct* pStruct, int aiArg1, int aiArg2)
 {
     int local = 1;
@@ -9061,6 +9129,7 @@ struct FnvCpu_FUN_00e98e10_CpuOwner {
     void FUN_00e98e10();
 };
 // @fnv 0x00e98e10
+// pdb: TESAIForm::ClearDataComponent | TESAIForm.obj | fnv360_0822_retail, vtable, medium
 void FnvCpu_FUN_00e98e10_CpuOwner::FUN_00e98e10()
 {
     reinterpret_cast<FnvCpu_FUN_00e98e10_CpuTarget*>(reinterpret_cast<char*>(this) + (24))->FUN_00e98cb0();
@@ -9080,6 +9149,8 @@ extern FNV_CondFn_e9c8c0* DAT_0126fa94;
 
 // Looks up a function pointer in DAT_0126fa94 indexed by the two objects' indices and calls it, swapping the argument pairs if the first lookup is null.
 // @fnv 0x00e9c8c0
+// pdb: NiBoundingVolume::TestIntersect | NiBoundingVolume.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: fTime, kBV0, kVel0, kBV1, kVel1
 bool __cdecl CallConditionFunction(float afValue, FUN_00e9c8c0_obj* apFirst, unsigned int auiFirstArg, FUN_00e9c8c0_obj* apSecond, unsigned int auiSecondArg)
 {
     unsigned int uiFirstIndex = apFirst->GetIndex() * 6;
@@ -9109,6 +9180,8 @@ public:
 
 // Looks up a handler in DAT_0126fa98 by the two objects' Slot3 values and calls it, swapping the object and argument order for the fallback lookup.
 // @fnv 0x00e9c950
+// pdb: NiBoundingVolume::FindIntersect | NiBoundingVolume.obj | fnv360_0822_retail, objrun_open, low, conflict (bridge: NiBoundingVolume::TestIntersect)
+// pdb params: fTime, kBV0, kVel0, kBV1, kVel1, fIntrTime, kIntrPt, bCalcNormals, kNormal0, kNormal1
 int DispatchPairHandler(float afValue, FUN_00e9c950_cls_key* pFirst, int aiFirstArg, FUN_00e9c950_cls_key* pSecond, int aiSecondArg, int aiArg6, int aiArg7, int aiArg8, int aiArg9, int aiArg10)
 {
     int iFirstKey = pFirst->Slot3() * 3;
@@ -9211,6 +9284,8 @@ inline bool FUN_00e9e840_Class::m_virtual09(int value)
     return value != 0;
 }
 
+// pdb: NiCapsuleBV::operator!= | NiCapsuleBV.obj | fnv360_0721_beta, objopen_prop, low
+// pdb params: kABV
 bool FUN_00e9e840_Class::FUN_00e9e840(int value)
 {
     return !m_virtual09(value);
@@ -9230,6 +9305,8 @@ bool __cdecl CallConditionFunction(float a1, void* a2, unsigned int a3, void* a4
 
 // Searches a2's items against a4's items with CallConditionFunction and, on a match, stores both indices in foundIndex and returns true.
 // @fnv 0x00e9e9e0
+// pdb: NiUnionBV::UnionUnionTestIntersect | NiUnionBV.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: fTime, kABV0, kV0, kABV1, kV1
 bool __cdecl FindMatchingItemPair(float afValue, ItemArrayOwner* apOwnerA, unsigned int a3, ItemArrayOwner* apOwnerB, unsigned int a5)
 {
     for (unsigned int i = 0; i < apOwnerA->count; i++) {
@@ -9260,6 +9337,8 @@ bool __cdecl DispatchPairHandler(float f, void* item, int a2, int a3, int a4, in
 
 // Iterates holder->m_08 up to holder->m_0e, calls DispatchPairHandler on each item, stores the matching index in holder->m_14 and returns true, else false.
 // @fnv 0x00e9eae0
+// pdb: NiUnionBV::UnionOtherFindIntersect | NiUnionBV.obj | fnv360_0822_retail, objopen_prop, low, conflict (bridge: NiUnionBV::UnionOtherTestIntersect)
+// pdb params: fTime, kABV0, kV0, kABV1, kV1, fIntrTime, kIntrPt, bCalcNormals, kNormal0, kNormal1
 bool __cdecl FindItemByPredicate(float f, FNVItemHolder* holder, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9)
 {
     for (unsigned int i = 0; i < holder->m_0e; ++i) {
@@ -9294,6 +9373,8 @@ extern "C" bool __cdecl E9C950_probe(float a0, void* a1, int a2, void* a3,
 
 // Scans every pair of entries from two item lists through E9C950_probe and, on the first match, stores both indices in m_result and returns true.
 // @fnv 0x00e9eb60
+// pdb: NiUnionBV::UnionUnionFindIntersect | NiUnionBV.obj | fnv360_0822_retail, objopen_prop, low, conflict (bridge: NiUnionBV::UnionUnionTestIntersect)
+// pdb params: fTime, kABV0, kV0, kABV1, kV1, fIntrTime, kIntrPt, bCalcNormals, kNormal0, kNormal1
 bool __cdecl FindMatchingPair(float a0, E9EB60_Item* a1, int a2, E9EB60_Item* pListB,
                           int a4, int a5, int a6, int a7, int a8, int a9)
 {
@@ -9552,6 +9633,8 @@ public:
 
 // Allocates a new block of the given size, adds each entry to the free list, and links the block at the head of m_pkBlocks.
 // @fnv 0x00e894b0
+// pdb: NiTSet<NiD3DPass *,NiTMallocInterface<NiD3DPass *> >::Realloc | NiD3DPass.obj | fnv360_0822_debug, objrun_open, low, conflict (bridge: NiTPool<NiGeomMorpherUpdateTask,NiTNewInterface<NiGeomMorpherUpdateTask> >::CreateNewObjects)
+// pdb params: uiNewSize
 void E94B0Pool::AddBlock(unsigned int ItemUpdateArray)
 {
     E94B0Block* pkBlock = new E94B0Block(ItemUpdateArray);
@@ -9577,6 +9660,7 @@ struct GlobalPoolStub {
 
 // Pops a free item from the global pool, growing it when empty, marks the item as used, and returns it.
 // @f3 0x0088ed30 (community match, verified in this file)
+// pdb: NiD3DTextureStage::InitializePools | NiD3DTextureStage.obj | fnv360_1110_retail, objrun_open, low
 PoolItemStub* __cdecl AllocatePoolItem()
 {
     GlobalPoolStub* pool = (GlobalPoolStub*)DAT_0126f9a0;
@@ -9789,6 +9873,8 @@ public:
 
 // Reallocates the string array to uiMaxSize, copies existing elements into the new buffer, frees the old buffer and updates m_pBase and m_uiMaxSize.
 // @fnv 0x00e8e290
+// pdb: NiTSet<NiFixedString,NiTNewInterface<NiFixedString> >::Realloc | NiD3DGPUProgramCache.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: uiNewSize
 void FixedStrArray::FUN_00e8e290(unsigned int uiNewMaxSize)
 {
     if (uiNewMaxSize == m_uiMaxSize)
@@ -10019,6 +10105,8 @@ public:
 
 // Initializes the renderer object: fills lookup tables with sentinel keys, resets counters, creates an NiAlphaProperty, and sets default index and color values.
 // @fnv 0x00e881a0
+// pdb: NiXenonRenderState::NiXenonRenderState | NiXenonRenderState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: pkRenderer
 FUN_00e881a0::FUN_00e881a0(void* renderer)
     : NiRefObject(), m_74(0), m_8c(), m_f8()
 {
@@ -10195,6 +10283,7 @@ struct FUN_00e8bf80_Object {
     void __thiscall FUN_00e8bf80();
 };
 // @fnv 0x00e8bf80
+// pdb: NiDX9VertexBufferManager::EndFrame | NiDX9VBManager.obj | tesv_win, objrun_prop, low
 void __thiscall FUN_00e8bf80_Object::FUN_00e8bf80() {
     ++m_uiItemCount;
 }
@@ -10216,6 +10305,8 @@ struct Seq9ea
 
 // Iterates the sequence's items, calls DispatchByVirtualIndex on each, and on success stores the index in m_uiLast and returns true.
 // @fnv 0x00e9ea70
+// pdb: NiUnionBV::UnionTriTestIntersect | NiUnionBV.obj | fnv360_1110_retail, objrun_open, low
+// pdb params: fTime, kABV0, kV0, kVert0, kVert1, kVert2, kV1
 bool FUN_00e9ea70(float fTime, Seq9ea* pkSeq, void* p2, void* p3, void* p4, void* p5, void* p6)
 {
     for (unsigned int i = 0; i < pkSeq->m_usElementCount; i++)
@@ -10466,6 +10557,8 @@ struct S00e8f190_Cls {
 extern "C" const char str_010f0184[];
 // Calls object's vtable slot 27 to get an interface pointer; if flag is set, calls slot 13 on it; on failure calls FUN_00a29680 with a string and returns 0.
 // @fnv 0x00e8f190
+// pdb: NiXenonIndexBufferManager::CreateIndexBuffer | NiXenonIBManager.obj | fnv360_0822_retail, objrun_prop, low, conflict (F3 string "NiDX9IndexBufferManager::CreateIndexBuffer FAILED")
+// pdb params: uiLength, uiUsage, eFormat, ePool, pkDesc
 S00e8f190_Iface* __thiscall S00e8f190_Cls::FUN_00e8f190(int a, int b, int c, int d, void* flag)
 {
     S00e8f190_Iface* result = 0;
@@ -10554,6 +10647,8 @@ struct StageSet {
 
 // Stores obj at index in m_20, updating m_14, m_18, m_1C, and obj->m_04, or shrinks m_14 when obj is null.
 // @fnv 0x00e802b0
+// pdb: BSShader::SetupDefaultStage | BSShader.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: apStage, aiStageNum, aiAddressValue, aiMipFilter, abAniso
 int StageSet::FUN_00e802b0(unsigned int index, Stage321* obj)
 {
     if (index >= DAT_011bf560)
@@ -10591,6 +10686,7 @@ struct S00e81b00_Mat {
 
 // Copies all 16 float elements of a 4x4 matrix from src to dst.
 // @fnv 0x00e81b00
+// pdb: FillDataArray | NiD3DShaderConstantMap.obj | fnv360_0822_retail, call_gap_sim, medium
 static __declspec(noinline) void CopyMatrix(S00e81b00_Mat* dst, const S00e81b00_Mat* src) {
     dst->m00 = src->m00; dst->m04 = src->m04; dst->m08 = src->m08; dst->m0c = src->m0c;
     dst->m10 = src->m10; dst->m14 = src->m14; dst->m18 = src->m18; dst->m1c = src->m1c;
@@ -11025,6 +11121,8 @@ struct ThisObj {
     VBEntry* FUN_00e8c570(C_00e8f010* owner, unsigned short count, const TwoComponentVector* pos, const float* col, const unsigned int* uv, unsigned int streamFlags, VBEntry* existing, void* data);
 };
 // @fnv 0x00e8c570
+// pdb: NiXenonVertexBufferManager::PackTransformedVB | NiXenonVBManager.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkBuffData, usVerts, pkScreenSpaceVerts, pkColors, pkTex, usDirtyFlags, pakVertexElements, pkOldVBChip, pvLockedBuff
 VBEntry* ThisObj::FUN_00e8c570(C_00e8f010* owner, unsigned short count, const TwoComponentVector* pos, const float* col, const unsigned int* uv, unsigned int streamFlags, VBEntry* existing, void* data) {
     if (count == 0 || pos == 0)
         return existing;
@@ -11185,6 +11283,8 @@ struct S00e8f360_Mgr {
 };
 // Reuses or creates a 16-bit index buffer sized for quadCount quads, fills it with quad indices (on reuse only if populate), and caches it in m_indexBuffer.
 // @fnv 0x00e8f360
+// pdb: NiXenonIndexBufferManager::ResizeTempPointConnectivity | NiXenonIBManager.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (F3 string "NiDX9IndexBufferManager::CreateIndexBuffer FAILED")
+// pdb params: uiPoints, uiMaxPoints, bRefill, uiUsage, ePool
 S00e8f360_IB* S00e8f360_Mgr::EnsureIndexBuffer(unsigned int minQuads, unsigned int quadCount, bool populate, unsigned int usage, unsigned int pool)
 {
     if (!m_device)
@@ -11302,6 +11402,8 @@ public:
 
 // Resizes or creates a temporary index buffer for line connectivity, packing vertex indices from pucConnect and storing it in m_pkTempLineConnectivityIB.
 // @fnv 0x00e8f520
+// pdb: NiXenonIndexBufferManager::ResizeTempLineConnectivity | NiXenonIBManager.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiDX9IndexBufferManager::ResizeTempLineConnectivity)
+// pdb params: uiPoints, pbFlags, uiConn, pkD3DIB9, uiUsage, ePool
 IDirect3DIndexBuffer9Like* NiDX9IndexBufferManager::ResizeTempLineConnectivityIB(unsigned int uiVertexCount,
     const unsigned char* pucConnect, unsigned int* puiIndexCount, unsigned int uiUsage, int ePool)
 {
@@ -11451,6 +11553,7 @@ struct Owner8F6D0 {
 
 // Releases and deletes all chips and entries in m_kEntries, then releases m_pkResource0C and m_pkResource14.
 // @fnv 0x00e8f6d0
+// pdb: NiDX9IndexBufferManager::DestroyDefaultBuffers | NiDX9IBManager.obj | tesv_win, call_gap_sim, low
 void Owner8F6D0::FUN_00e8f6d0()
 {
     Item8F6D0* pos = m_kEntries.GetFirstPos();
@@ -11509,6 +11612,8 @@ extern "C" void* __cdecl FUN_00aa1070(unsigned int length);
 extern "C" void __cdecl FUN_00ec65a6(void* destination, unsigned int length, const char* source);
 
 // @fnv 0x00e93470
+// pdb: NiTStringTemplateMap<NiTMap<char const *,IDLE_ANIM_ROOT *>,IDLE_ANIM_ROOT *>::SetValue | TESIdleManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkItem, pcKey, val
 void FUN_00e93470_Class::FUN_00e93470(FUN_00e93470_Output* out, const char* text, unsigned int data)
 {
     if (m_copyText) {
@@ -11544,6 +11649,7 @@ struct ShaderDataE989 : RefBaseE989 {
 };
 // Calls FUN_00aa10f0 on 12 pointer members, then calls Release on m_80 and nulls it if set.
 // @fnv 0x00e989c0
+// pdb: NiD3DShaderConstantManager::~NiD3DShaderConstantManager | NiD3DShaderConstantManager.obj | fnv360_0822_retail, objrun_prop, low
 ShaderDataE989::~ShaderDataE989() throw()
 {
     FUN_00aa10f0(m_08);
@@ -11590,6 +11696,8 @@ extern void **DAT_0126faa0;
 
 // Looks up a function pointer in DAT_0126faa0 using the object's index and calls it with the forwarded value and arguments.
 // @fnv 0x00e9ca50
+// pdb: NiBoundingVolume::TestTriIntersect | NiBoundingVolume.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: fTime, kBV0, kVel0, kVert0, kVert1, kVert2, kVel1
 void __cdecl FUN_00e9ca50(
     float value,
     FUN_00e9ca50_Object *object,
@@ -11667,6 +11775,7 @@ void* FUN_00aa13e0(unsigned int size);
 
 // Packs a and b into a key, looks up the selected map by c, and creates a new node if the key is not found.
 // @fnv 0x00e8fa80
+// pdb: NiDX9IndexBufferManager::GetIBInfo | NiDX9IBManager.obj | tesv_win, call_seq, medium
 S00e8fa80_Node* S00e8fa80_Obj::GetOrCreateNode(int aiHigh, unsigned int aiLow, int aiMapIndex)
 {
     S00e8fa80_Map* map;
@@ -11744,6 +11853,8 @@ extern int DAT_0126fa58;
 void AllocateNodeList();
 
 // @fnv 0x00e98660
+// pdb: NiVBBlock::AllocateChip | NiVBBlock.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: uiSize
 unsigned int __thiscall BlockAllocator::FUN_00e98660(unsigned int size) {
     if (unk24 < size) {
         return 0;
@@ -13607,6 +13718,8 @@ inline bool IsPowerOfTwo(unsigned int value) {
 
 // Creates a DeviceResource from a TextureInput, resolving a surface or direct resource and falling back to a default target when needed.
 // @fnv 0x00e8abf0
+// pdb: NiXenonSourceCubeMapData::Create | NiXenonSourceCubeMapData.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiDX9SourceCubeMapData::Create)
+// pdb params: pkTexture, pkRenderer
 DeviceResource* __cdecl FUN_00e8abf0(TextureInput* input, ResourceConfig* config)
 {
     TextureDescription** renderTargets = config->renderTargets;
@@ -13822,6 +13935,8 @@ __declspec(noinline) char PixelComponentReader093::GetEntryData(int index, int* 
 }
 // Returns the first choice that validator->Accept accepts for the request, trying choices in an order set by request kind and traits; returns 0 if none.
 // @fnv 0x00e8a300
+// pdb: NiXenonTextureData::FindMatchingPixelFormat | NiXenonTextureData.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiDX9TextureData::FindMatchingPixelFormat)
+// pdb params: kSrcFmt, kPrefs, ppkDestFmts
 void* __stdcall FUN_00e8a300(ShaderRequest093* request, ShaderTraits093* traits, ShaderChoices093* choices)
 {
     int type;
@@ -14072,6 +14187,7 @@ extern "C" bool __stdcall SetProgram(void* a);
 
 // If the item at m_08->m_3c changed (m_68 != m_84 or SetProgram true), calls v5, sets m_84, and calls FUN_00e8aaf0 per entry of the result if m_64.
 // @fnv 0x00e8b0c0
+// pdb: NiXenonSourceCubeMapData::Update | NiXenonSourceCubeMapData.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiDX9SourceCubeMapData::Update)
 void FUN_00e8b0c0_Class::FUN_00e8b0c0()
 {
     if (m_6c != 0) {
@@ -14152,6 +14268,8 @@ struct FUN_00e98910_Class {
 };
 
 // @fnv 0x00e98910
+// pdb: NiD3DShaderConstantManager::NiD3DShaderConstantManager | NiD3DShaderConstantManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkD3DRenderer
 FUN_00e98910_Class* __thiscall
 FUN_00e98910_Class::FUN_00e98910(int* context) {
     this->unk00 = &DAT_0101dce4;
@@ -14232,6 +14350,7 @@ struct E895A0_Object {
 
 // Sets m_08 to 0, frees node m_0c's block, calls DestroyScalarObject(1) on its next node, deallocates the node, then calls NiFree on m_00.
 // @fnv 0x00e895a0
+// pdb: NiTArray<NiPointer<NiD3DTextureStage>,NiTNewInterface<NiPointer<NiD3DTextureStage> > >::~NiTArray<NiPointer<NiD3DTextureStage>,NiTNewInterface<NiPointer<NiD3DTextureStage> > > | NiD3DPass.obj | fnv360_0822_debug, objopen_prop, low
 void E895A0_Object::FUN_00e895a0()
 {
     E895A0_Node* node = m_0c;
@@ -14476,6 +14595,7 @@ public:
 
 // Releases all index buffers and arrays in the three maps, clears device indices, releases device resources, and destroys the maps.
 // @f3 0x008899e0 (community match, verified in this file)
+// pdb: NiDX9IndexBufferManager::~NiDX9IndexBufferManager | NiDX9IBManager.obj | tesv_win, objrun, medium
 void IndexBufferOwnerE8F::FUN_00e8f840()
 {
     *(void**)this = &kVtbl_NiDX9IndexBufferManager;
@@ -14576,6 +14696,8 @@ namespace ShaderSubtractData {
 
 // Subtracts DAT_0126f8b0 from DAT_0126f8a0 into DAT_0126f900 based on typeA and typeB, then calls target->SetConstant(reg, &DAT_0126f900.x, 0).
 // @fnv 0x00e83320
+// pdb: NiD3DShaderConstantMap::PerformOperatorSubtract | NiD3DShaderConstantMap.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: pkShaderProgram, pkEntry, eType1, eType2, bInverse, bTranspose
 int __stdcall FUN_00e83320(ConstantTarget* target, int reg, int typeA, int typeB, int aiUnused5, int aiUnused6) {
     switch (typeA) {
         case 3:
@@ -14649,6 +14771,8 @@ extern "C" {
 
 // Computes a divided matrix or vector from DAT_0126f820/DAT_0126f8a0 by DAT_0126f8b0, optionally inverting/transposing, then calls target->SetConstant.
 // @fnv 0x00e82e70
+// pdb: NiD3DShaderConstantMap::PerformOperatorDivide | NiD3DShaderConstantMap.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: pkShaderProgram, pkEntry, eType1, eType2, bInverse, bTranspose
 int __stdcall FUN_00e82e70(ConstantTarget* target, int aiRegister, int type1, int type2, bool abInverse, bool abTranspose) {
     switch (type1) {
     case 9: {

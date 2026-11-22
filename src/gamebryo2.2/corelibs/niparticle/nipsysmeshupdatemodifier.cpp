@@ -139,6 +139,7 @@ struct Unk21730
     void* DestroyIfFlagged(unsigned int);
 };
 // @fnv 0x00c21730
+// pdb: NiPSysMeshUpdateModifier::`scalar deleting destructor' | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, objrun, high
 void* Unk21730::DestroyIfFlagged(unsigned int auiFlags)
 {
     void* tmp = b;
@@ -204,6 +205,7 @@ struct RefArray
 
 // Removes and returns the last entry of the array, decrementing the count and releasing the slot's reference.
 // @fnv 0x00c20fd0
+// pdb: NiTArray<NiPointer<NiAVObject>,NiTNewInterface<NiPointer<NiAVObject> > >::RemoveEnd | NiPSysMeshUpdateModifier.obj | fnv360_0721_beta, callee_sim, high
 NiPointer RefArray::PopBack()
 {
     if (!size)
@@ -370,6 +372,8 @@ struct MeshLookup
 };
 // If index is within meshCount and meshes[index] is non-null, assigns a clone handle of that mesh to result; otherwise clears result.
 // @fnv 0x00c21340
+// pdb: NiMeshPSysData::RemoveFromPool | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, call_gap, high
+// pdb params: uiGeneration, aspAVObject
 void MeshLookup::GetMeshHandle(unsigned int index, CloneHandle* result)
 {
     if (index >= meshCount)
@@ -455,6 +459,7 @@ class C217F0Modifier : public C217F0ModifierBase
 
 // Allocates and returns a new C217F0Modifier object.
 // @fnv 0x00c217f0
+// pdb: NiPSysMeshUpdateModifier::CreateObject | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, objopen_prop, medium
 C217F0Object* C217F0Modifier::CreateModifier()
 {
     return new C217F0Modifier;
@@ -525,6 +530,7 @@ class BC21890Node : public BC21890AVObject
 };
 
 // @fnv 0x00c21890
+// pdb: NiPSysMeshUpdateModifier::CreateClone | NiPSysMeshUpdateModifier.obj | tesv_win, caller_sim, low
 BC21890Node* BC21890Node::FUN_00c21890(BC21890CloningProcess& kCloning)
 {
     BC21890Node* pkClone = new BC21890Node;
@@ -673,6 +679,8 @@ class MyMeshUpdateMod
 
 // Stores pkMesh at uiIndex in the mesh pointer array, returning the previous entry in spOld (or null when growing).
 // @fnv 0x00c215d0
+// pdb: NiPSysMeshUpdateModifier::SetMeshAt | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: uiIndex, pkMesh, aspAVObject
 void MyMeshUpdateMod::SetMeshAt(unsigned int uiIndex, MyMeshObj* pkMesh, MyMeshObjPtr& spOld)
 {
     if (uiIndex < m_kSceneObjects.GetSize())
@@ -733,6 +741,8 @@ class MeshUpdateStreamWriter : public NiPSysMeshUpdateModifier
 };
 // Writes the mesh count to the stream, then registers each mesh object with the stream.
 // @fnv 0x00c211c0
+// pdb: NiPSysMeshUpdateModifier::SaveBinary | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void MeshUpdateStreamWriter::WriteMeshUpdate(NiStream* stream)
 {
     FUN_00c31950(stream);
@@ -769,6 +779,8 @@ struct ReferenceContainer
 };
 // Resizes the array to the source's count, then copies each referenced object into the array while adjusting its reference count.
 // @fnv 0x00c214c0
+// pdb: NiPSysMeshUpdateModifier::LinkObject | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void ReferenceContainer::CopyReferencesFromSource(ReferenceSource* source)
 {
     FUN_00c31650(source);
@@ -1252,6 +1264,8 @@ class FUN_00c21400_cls
 
 // Looks up or clones a mesh by usIndex, sets its m_uiValue1 flag, starts controllers, attaches it to the sink, and releases the reference.
 // @fnv 0x00c21400
+// pdb: NiPSysMeshUpdateModifier::Initialize | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkData, usNewParticle
 void FUN_00c21400_cls::AttachMesh(MeshLookup* pkLookup, unsigned short usIndex)
 {
     unsigned short usMesh = ((Entry_c21*)pkLookup->unk70)[usIndex].m_usIndex;
@@ -1326,6 +1340,8 @@ class S_c21770_Mod
 };
 // Calls FUN_00c31780 on pkDest, then clones each non-null entry of m_kSceneObjects via MakeClone and stores it in pkDest with SetMeshAt.
 // @fnv 0x00c21770
+// pdb: NiPSysMeshUpdateModifier::CopyMembers | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pkDest, kCloning
 void S_c21770_Mod::CloneInto(S_c21770_Mod* pkDest, NiCloningProcess_c217& kCloning)
 {
     FUN_00c31780(pkDest, kCloning);

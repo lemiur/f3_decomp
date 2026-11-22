@@ -29,6 +29,7 @@ struct FUN_00a99950_shell
     void __thiscall FUN_00a99950();
 };
 // @fnv 0x00a99950
+// pdb: NiIntegersExtraData::~NiIntegersExtraData | NiIntegersExtraData.obj | tesv_win, hash, low
 void __thiscall FUN_00a99950_shell::FUN_00a99950()
 {
     void* p = *(void**)((char*)this + 0x10);
@@ -50,6 +51,7 @@ struct NiExtraDataShell : NiExtraData
     void FUN_00a7b2e0();
 };
 // @fnv 0x00a99a10
+// pdb: NiIntegersExtraData::CreateObject | NiIntegersExtraData.obj | fnv360_0822_retail, caller_sim, low
 NiExtraData* FUN_00a99a10()
 {
     NiExtraData* data = static_cast<NiExtraData*>(BSFadeNode::operator new(0x14));
@@ -80,6 +82,7 @@ struct FUN_00a99a50_shell
     void __cdecl operator delete(void* p, unsigned int);
 };
 // @fnv 0x00a99a50
+// pdb: NiFloatsExtraData::`scalar deleting destructor' | NiFloatsExtraData.obj | fnv360_0822_retail, objrun, medium
 FUN_00a99a50_shell* __thiscall FUN_00a99a50_shell::FUN_00a99a50(int flag)
 {
     vtbl = (int)&DAT_010a0c7c;
@@ -209,6 +212,8 @@ struct NiIntegersExtraDataView : NiExtraData
 };
 
 // @fnv 0x00a99b20
+// pdb: NiIntegersExtraData::GetViewerStrings | NiIntegersExtraData.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pStrings
 void NiIntegersExtraDataView::FUN_00a99b20(NiViewerStringsArray* pkStrings)
 {
     BaseGetViewerStrings(pkStrings);

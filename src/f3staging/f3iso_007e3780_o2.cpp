@@ -394,6 +394,8 @@ struct HeadingHandler7e3780 : ::native2108::UpdateHandler {
     __declspec(noinline) void FUN_007e3780(float& headingOut, float& lookingOut);
 };
 
+// pdb: DetailedActorPathHandler::ComputeHeadingAndLooking | DetailedActorPathHandler.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arfHeading, arfLooking
 __declspec(noinline) void HeadingHandler7e3780::FUN_007e3780(float& headingOut, float& lookingOut)
 {
     using namespace ::native2108;

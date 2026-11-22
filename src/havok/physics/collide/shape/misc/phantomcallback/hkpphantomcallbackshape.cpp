@@ -11,6 +11,7 @@ void __stdcall FUN_00c9e390(int, int, int)
 #include <xmmintrin.h>
 
 // @fnv 0x00c9e3d0
+// pdb: CreateNS_bhkSimpleShapePhantom::Create | bhkSimpleShapePhantom.obj | tesv_win, objrun_open, low
 void __stdcall FUN_00c9e3d0(char* p, int a, int b)
 {
     *p = 0;

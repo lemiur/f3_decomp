@@ -192,6 +192,8 @@ struct S0049add0_Owner {
     bool FUN_0049add0(void* object, const S0049add0_Point* position, const S0049add0_Matrix* rotation);
 };
 
+// pdb: TESWaterSystem::RemovePlaceableWater | TESWater.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apWaterRef, arPosition, arRotation
 bool S0049add0_Owner::FUN_0049add0(void* object, const S0049add0_Point* position, const S0049add0_Matrix* rotation) {
     if (DAT_00f4cf80 && DAT_0106fdcc) {
         S0049add0_Point dir(0.0f, 0.0f, 1.0f);

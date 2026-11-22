@@ -60,6 +60,8 @@ struct __declspec(align(16)) DFFObject
 };
 
 // @fnv 0x00dff1a0
+// pdb: hkpBallSocketChainData::hkpBallSocketChainData | hkpBallSocketChainData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: getVtablehkpBallSocketChainData)
+// pdb params: f
 void* FUN_00dff1a0()
 {
     DFFFinishFlag f;
@@ -222,6 +224,8 @@ class hkDisplaySemiCircle : public S00de49b0_Base // src: F3_EXE vtable 0x00e870
 };
 
 // @f3 0x00a6ac90 (community match, verified in this file)
+// pdb: hkDisplaySemiCircle::hkDisplaySemiCircle | hkDisplaySemiCircle.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: center, normal, startPerp, thetaMin, thetaMax, radius, numSegments
 hkDisplaySemiCircle::hkDisplaySemiCircle(const S00de49b0_Vec4& kC, const S00de49b0_Vec4& kA, const S00de49b0_Vec4& kB,
                            float f1, float f2, float f3, int i1)
     : S00de49b0_Base(5)
@@ -585,6 +589,7 @@ class __declspec(align(16)) S00dfb2b0_Object
 
 // Havok getVtable helper: build the object with the finish-loading flag and read its vtable pointer.
 // @fnv 0x00dfb2b0
+// pdb: getVtablehkpStorageExtendedMeshShapeShapeSubpartStorage | hkpCollidehkpExtendedMeshShapeReflections.obj | tesv_win, objrun_prop, low
 const void* __cdecl FUN_00dfb2b0()
 {
     FinishingFlag flag;
@@ -618,6 +623,7 @@ class __declspec(align(16)) S00dfb400_Object
 
 // Havok getVtable helper: build the object with the finish-loading flag and read its vtable pointer.
 // @fnv 0x00dfb400
+// pdb: getVtablehkpMalleableConstraintData | hkpDynamicsReflections.obj | tesv_win, caller_sim, low
 const void* __cdecl FUN_00dfb400()
 {
     FinishingFlag flag;
@@ -806,6 +812,7 @@ class __declspec(align(16)) S00dfcb70_Object
 
 // Havok getVtable helper: build the object with the finish-loading flag and read its vtable pointer.
 // @fnv 0x00dfcb70
+// pdb: getVtablehkpBallGun | hkpUtilitiesReflections.obj | tesv_win, objopen_prop, low
 const void* __cdecl FUN_00dfcb70()
 {
     FinishingFlag flag;
@@ -839,6 +846,8 @@ struct __declspec(align(16)) FUN_00d53df0
     int unk3C;
 };
 // @fnv 0x00dfce10
+// pdb: hkpPoweredChainData::hkpPoweredChainData | hkpPoweredChainData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: getVtablehkpPoweredChainData)
+// pdb params: f
 int __cdecl FUN_00dfce10()
 {
     Handle_dfce10 kHandle = {0};
@@ -874,6 +883,7 @@ class __declspec(align(16)) S00dfcf40_Object
 
 // Havok getVtable helper: build the object with the finish-loading flag and read its vtable pointer.
 // @fnv 0x00dfcf40
+// pdb: getVtablehkpStorageMeshShapeSubpartStorage | hkpCollidehkpMeshShapeReflections.obj | tesv_win, objrun_prop, low
 const void* __cdecl FUN_00dfcf40()
 {
     FinishingFlag flag;
@@ -1278,6 +1288,7 @@ class __declspec(align(16)) S00dff4f0_Object
 
 // Havok getVtable helper: build the object with the finish-loading flag and read its vtable pointer.
 // @fnv 0x00dff4f0
+// pdb: getVtablehkpGenericConstraintData | hkpDynamicsReflections.obj | tesv_win, caller_sim, low
 const void* __cdecl FUN_00dff4f0()
 {
     FinishingFlag flag;
@@ -1382,6 +1393,7 @@ class __declspec(align(16)) S00dffbb0_Object
 
 // Havok getVtable helper: build the object with the finish-loading flag and read its vtable pointer.
 // @fnv 0x00dffbb0
+// pdb: getVtablehkpCylinderShape | hkpCollideReflections.obj | tesv_win, caller_sim, low
 const void* __cdecl FUN_00dffbb0()
 {
     FinishingFlag flag;

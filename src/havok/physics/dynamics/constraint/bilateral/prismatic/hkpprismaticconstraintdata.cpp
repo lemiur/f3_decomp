@@ -12,12 +12,15 @@ struct FUN_00d4f880_class
 };
 
 // @fnv 0x00d4f880
+// pdb: hkpPrismaticConstraintData::getConstraintInfo | hkpPrismaticConstraintData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: infoOut
 void* __thiscall FUN_00d4f880_class::FUN_00d4f880(int a)
 {
     return FUN_00d21a60((char*)this + 0x10, 0xc0, (void*)a);
 }
 
 // @fnv 0x00d4f8a0
+// pdb: hkpPrismaticConstraintData::getRuntimeInfo | hkpPrismaticConstraintData.obj | tesv_win, objrun_sim, low
 void __stdcall FUN_00d4f8a0(int aiUnused, hkpPrismaticConstraintData* apConstraintData)
 {
     *(int*)((char*)apConstraintData + 4) = 8;
@@ -48,6 +51,7 @@ void FUN_00d4f8d0_class::FUN_00d4f8d0()
 
 // FUN_00d4f8c0: cdecl constant-return leaf (mov eax,6; ret)
 // @fnv 0x00d4f8c0
+// pdb: hkpLinFrictionConstraintAtom::hkpLinFrictionConstraintAtom | hkpPrismaticConstraintData.obj | fnv360_0822_debug, objrun_open, low
 int FUN_00d4f8c0()
 {
     return 6;
@@ -90,6 +94,7 @@ class hkObjD4FD
 };
 
 // @fnv 0x00d4fdd0
+// pdb: hkpPrismaticConstraintData::isValid | hkpPrismaticConstraintData.obj | fnv360_0822_retail, objrun_open, low
 hkBoolD4FD hkObjD4FD::IsValid() const
 {
     return m_kPointA.IsOrthonormal(DAT_01017d00) && m_kPointB.IsOrthonormal(DAT_01017d00) && m_kMinimumCorner <= m_kMaximumCorner;
@@ -174,6 +179,7 @@ struct FUN_00d50c50
 // @f3 0x009ddf00 (community match, verified in this file)
 extern int FUN_00e803ac;
 extern int FUN_00dcc494;
+// pdb: hkpGenericConstraintData::~hkpGenericConstraintData | hkpGenericConstraintData.obj | fnv360_0822_debug, call_seq, medium
 FUN_00d50c50::~FUN_00d50c50()
 {
     vtbl = &FUN_00e803ac;

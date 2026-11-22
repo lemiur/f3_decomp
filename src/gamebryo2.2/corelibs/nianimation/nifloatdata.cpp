@@ -3,6 +3,8 @@
 #include "nifloatdata_decls.h"
 
 // @fnv 0x00a3cdc0
+// pdb: NiFloatData::ReplaceAnim | NiFloatData.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkKeys, uiNumKeys, eType
 void NiFloatData::SetColorKeys(TimedAnimationKey* keys, unsigned int count, AnimationKey::KeyType eKeyType)
 {
     if (m_pKeyArray)
@@ -33,6 +35,7 @@ extern const void* vftable_NiFloatData[];
 void __fastcall FUN_00a5d3d0(NiObject*);
 
 // @fnv 0x00a3cc80
+// pdb: NiFloatData::~NiFloatData | NiFloatData.obj | fnv360_0822_retail, call_seq, high
 void FUN_00a3cc80_shell::FUN_00a3cc80()
 {
     *(const void***)this = vftable_NiFloatData;
@@ -54,6 +57,8 @@ struct S00a3cc40
 };
 // Calls UpdateSlotStates with the key count, key pointer and two floats, then stores the updated key pointer back.
 // @fnv 0x00a3cc40
+// pdb: NiFloatData::GuaranteeKeysAtStartAndEnd | NiFloatData.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: fStartTime, fEndTime
 void S00a3cc40::FUN_00a3cc40(float m_fStartTime, float m_fMaximumDistance)
 {
     void* pkKeys = m_pKeyArray;
@@ -103,6 +108,7 @@ void __fastcall _Call_a5d3a0(void* object);
 extern const char vftable_NiFloatData[];
 
 // @fnv 0x00a3cd00
+// pdb: NiFloatData::CreateObject | NiFloatData.obj | fnv360_0822_retail, objrun, medium
 NiFloatData* CreateNiFloatData()
 {
     NiFloatData* object = static_cast<NiFloatData*>(A51BF0Base::operator new(0x18));
@@ -157,6 +163,8 @@ char* __cdecl _FUN_00a7d330(GlobalObjectO2_00a7b610* object);
 char* __cdecl FUN_00a7d510(char const* name, unsigned int value);
 
 // @fnv 0x00a3d050
+// pdb: NiFloatData::GetViewerStrings | NiFloatData.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pStrings
 void FUN_00a3d050_shell::FUN_00a3d050(StrArr* strings)
 {
     AppendCameraPathEntries(strings);
@@ -209,6 +217,8 @@ struct FUN_00a3cfd0_shell : NiFloatData
 };
 extern void(__cdecl* DAT_011f3a50[])(NiStream*, TimedAnimationKey*, unsigned int);
 // @fnv 0x00a3cfd0
+// pdb: NiFloatData::SaveBinary | NiFloatData.obj | fnv360_0822_retail, vtable, high
+// pdb params: stream
 void FUN_00a3cfd0_shell::WriteToStream(NiStream* stream)
 {
     reinterpret_cast<NiObject_Ext*>(this)->FUN_00a89af0(stream);
@@ -247,6 +257,8 @@ extern void __cdecl NiAnimationKey_CopySequence(int, int, TimedAnimationKey*, un
                                  unsigned int*);
 
 // @fnv 0x00a3ce20
+// pdb: NiFloatData::GetSequenceData | NiFloatData.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: fStartTime, fEndTime, aspFloatData
 void FUN_00a3ce20_shell::FUN_00a3ce20(float m_fStartTime, float m_fMaximumDistance, NiFloatData** ppResult)
 {
     NiFloatData* pData = 0;

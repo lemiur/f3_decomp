@@ -28,6 +28,8 @@ struct FUN_00d47260_cls
 };
 
 // @fnv 0x00d47260
+// pdb: hkClass::getAttribute | hkClass.obj | fnv360_0822_retail, objrun_sim, medium
+// pdb params: id
 void* FUN_00d47260_cls::FUN_00d47260(const char* name) const
 {
     if (m_pCustomAttributes)
@@ -70,6 +72,8 @@ int __cdecl FUN_00cb0fa0(const char*, const char*);
 
 // Scans the container's members by index and returns the first whose name matches the given string, or 0 if none match.
 // @fnv 0x00d46f90
+// pdb: hkClass::getMemberByName | hkClass.obj | fnv360_0822_retail, call_gap, high
+// pdb params: name
 int Container::FindMemberByName(const char* name) const
 {
     Container* self = const_cast<Container*>(this);
@@ -150,6 +154,7 @@ struct FUN_00d87150_class
 
 // Looks up name via cls, stores the result, and sets m_offset to baseOffset plus the result's m_bitOffset when found.
 // @fnv 0x00d87150
+// pdb: hkClassMemberAccessor::connect | hkClassMemberAccessor.obj | tesv_win, call_seq, medium
 void FUN_00d87150_class::InitBitOffset(int baseOffset, FUN_00d46fe0_class* apClass, const char* name)
 {
     m_offset = 0;
@@ -206,6 +211,8 @@ struct FUN_00d46f60_Class
 };
 
 // @fnv 0x00d46f60
+// pdb: bhkBlendCollisionObjectAddRotation::SaveBinary | bhkBlendCollisionObjectAddRotation.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: arStream
 void* FUN_00d46f60_Class::FUN_00d46f60(int a1)
 {
     return FUN_00d46f20(a1);
@@ -238,6 +245,7 @@ struct FnvCpu_FUN_00d470d0_CpuObject
     int FUN_00d470d0();
 };
 // @fnv 0x00d470d0
+// pdb: BaseProcess::GetInstanceDataThatIsRunning | BaseProcess.obj | fnv360_0822_retail, vtable, medium
 int FnvCpu_FUN_00d470d0_CpuObject::FUN_00d470d0()
 {
     return value;
@@ -363,6 +371,8 @@ struct ClassRec
     void __thiscall WriteToStream(void* stream) const;
 };
 // @fnv 0x00d47490
+// pdb: hkClass::writeSignature | hkClass.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: w
 void ClassRec::WriteToStream(void* stream) const
 {
     Archive out;
@@ -433,6 +443,7 @@ struct FUN_00d47690_class
 
 // Computes a CRC over this class and, unless SIGNATURE_LOCAL is set, over its parent chain, returning the CRC value.
 // @fnv 0x00d47690
+// pdb: hkClass::getSignature | hkClass.obj | tesv_win, call_dedup, low
 unsigned int FUN_00d47690_class::ComputeSignature(int signatureFlags) const
 {
     FUN_00db7870 crc(0);
@@ -472,6 +483,8 @@ struct hkVariantD476
 
 // Looks up the type info for type, and if its size is at most 0x40, stores type and copies that many bytes from src into m_data, returning 0; otherwise returns 1.
 // @fnv 0x00d476e0
+// pdb: hkTypedUnion::setSimple | hkClass.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: orig, type
 int hkVariantD476::SetData(const void* src, const void* type)
 {
     hkTypeInfoD476* info = FUN_00d868a0(type);
@@ -495,6 +508,7 @@ struct FUN_00d86b30_class
 };
 
 // @fnv 0x00d86b30
+// pdb: hkClassMember::getArrayType | hkClassMember.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 unsigned int FUN_00d86b30_class::FUN_00d86b30()
 {
     return unk0D;
@@ -569,6 +583,8 @@ __declspec(noinline) int HkClassNode::hkClass_getNumMembers()
 
 // Resolves a global member index i by walking up the HkClassNode parent chain and returning the matching HkMem entry from m_members.
 // @fnv 0x00d46f20
+// pdb: hkClass::getMember | hkClass.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: memberIndex
 HkMem* HkClassNode::FUN_00d46f20(int aiIndex)
 {
     HkClassNode* pNode = this;
@@ -639,6 +655,7 @@ class ResultPtr
 
 // Follows parent links, updating lastNode, then writes whether lastNode->unk0c is non-zero through out.p.
 // @fnv 0x00d470f0
+// pdb: hkClass::hasVtable | hkClass.obj | fnv360_0822_retail, call_dedup, low
 static __declspec(noinline) char* __stdcall GetLastNodeFlag(ZN0d46d50* apStartNode, ZN0d46d50* lastNode, ResultPtr out)
 {
     ZN0d46d50* next = FUN_00d46d50(apStartNode);
@@ -679,6 +696,8 @@ struct FUN_00d47130_class
 };
 // Looks up name via FUN_00d47130 and, on success, calls target->vf10 with the index and p->FUN_00d86980().
 // @fnv 0x00d471c0
+// pdb: hkClass::getDefault | hkClass.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: memberIndex, writer
 int __thiscall FUN_00d47130_class::InvokeTarget(const char* name, FUN_00d471c0_target* target)
 {
     int index;
@@ -720,6 +739,7 @@ class OwnerD4728
 };
 
 // @fnv 0x00d47280
+// pdb: hkClass::getFlags | hkClass.obj | fnv360_0822_retail, objrun_sim, medium
 MemberD4728* OwnerD4728::FUN_00d47280()
 {
     return &m_kMember;
@@ -773,6 +793,7 @@ S00d47350_Res __fastcall FUN_00d47130(Zt* self, DataS obj, Outs r);
 
 // Uses the member returned by FUN_00d47130 to populate output according to the member's type.
 // @fnv 0x00d47350
+// pdb: hkClass::getDefault | hkClass.obj | tesv_win, hash, low
 S00d47350_Res __fastcall FUN_00d47350(Zt* self, int, void* data, S00d47350_Out* output)
 {
     S00d47350_Member* holder;

@@ -5,6 +5,7 @@
 #include "havok/hkpConvexShape.h"
 
 // @fnv 0x00c9e1e0
+// pdb: hkArrayBase<hkaDetectRagdollPenetration::BonePenetration>::getCapacity | bhkRagdollPenetrationUtil.obj | fnv360_0822_debug, objrun_open, low
 int __stdcall FUN_00c9e1e0(int a1, int a2, int a3, int a4, int a5, int a6, int a7)
 {
     return 2;

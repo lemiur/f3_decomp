@@ -36,6 +36,8 @@ struct NiBlendQuaternionInterpolator : NiBlendInterpolator
 };
 
 // @fnv 0x00a554c0
+// pdb: TESLevItem::LoadGame | TESLevItem.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apLoadGameBuffer
 void NiBlendQuaternionInterpolator::FUN_00a554c0(NiStream& kStream)
 {
     NiBlendInterpolator::LoadBinary(kStream);
@@ -71,6 +73,8 @@ struct FUN_00a37ec0_tgt
 };
 
 // @fnv 0x00a554e0
+// pdb: TESLevItem::Revert | TESLevItem.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apLoadGameBuffer
 void NiBlendQuaternionInterpolator::FUN_00a554e0(NiStream* kStream)
 {
     ((FUN_00a37ec0_tgt*)this)->FUN_00a37ec0(kStream);
@@ -158,6 +162,8 @@ struct NiInterpolator
 
 // Returns whether the given NiInterpolator is a quaternion interpolator by calling its IsQuaternionInterpolator method.
 // @fnv 0x00a55450
+// pdb: NiBlendQuaternionInterpolator::InterpolatorIsCorrectType | NiBlendQuaternionInterpolator.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: pkInterpolator
 bool __stdcall FUN_00a55450(NiInterpolator* pkInterpolator)
 {
     return pkInterpolator->IsQuaternionInterpolator();
@@ -176,6 +182,8 @@ struct FUN_00a55510_shell : NiBlendQuaternionInterpolator
     void* CloneInterpolator(void* kCloning);
 };
 // @fnv 0x00a55510
+// pdb: NiBlendQuaternionInterpolator::CreateClone | NiBlendQuaternionInterpolator.obj | fnv360_0721_beta, objrun, high
+// pdb params: kCloning
 void* FUN_00a55510_shell::CloneInterpolator(void* kCloning)
 {
     void* pkObject = BSFadeNode::operator new(0x40);
@@ -215,6 +223,8 @@ struct FUN_00a55920_shell : NiBlendQuaternionInterpolator
 };
 
 // @fnv 0x00a55920
+// pdb: NiBlendQuaternionInterpolator::Update | NiBlendQuaternionInterpolator.obj | fnv360_0721_beta, objrun, high
+// pdb params: fTime, pkInterpTarget, kValue
 bool FUN_00a55920_shell::Interpolate(float fTime, void* pkInterpTarget, NiQuaternion* kValue)
 {
     bool bReturnValue = false;
@@ -259,6 +269,7 @@ struct FUN_00a55590_cls
 
 // Returns false if Probe(pkParam) fails, otherwise returns the negation of m_30.Check(pkParam + 0x30).
 // @fnv 0x00a55590
+// pdb: NiBlendQuaternionInterpolator::IsEqual | NiBlendQuaternionInterpolator.obj | tesv_win, caller_sim, low
 unsigned char FUN_00a55590_cls::CheckWithOffset(void* pkParam)
 {
     if (!Probe(pkParam))
@@ -496,6 +507,8 @@ struct QBlendInterp
     bool FUN_00a556b0(float fTime, void* pkTarget, NiQuat& kValue);
 };
 // @fnv 0x00a556b0
+// pdb: NiBlendQuaternionInterpolator::BlendValues | NiBlendQuaternionInterpolator.obj | fnv360_0721_beta, objrun, medium
+// pdb params: fTime, pkInterpTarget, kValue
 bool QBlendInterp::FUN_00a556b0(float fTime, void* pkTarget, NiQuat& kValue)
 {
     m_kValue.SetValues(0.0f, 0.0f, 0.0f, 0.0f);

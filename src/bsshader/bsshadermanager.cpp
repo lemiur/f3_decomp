@@ -175,6 +175,8 @@ extern ShadowSceneNode* DAT_011f91c8[4];
 
 // Stores mode in DAT_011f91b8 and sets DAT_011f9f3c and DAT_011f9f38 from the per-mode tables, falling back to index 0 when an entry is null.
 // @fnv 0x00b4f450
+// pdb: BSShaderManager::SetRenderMode | BSShaderManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: auiRenderMode
 void BSShaderManager::SetRenderMode(unsigned int mode)
 {
     DAT_011f91b8 = mode;
@@ -187,6 +189,7 @@ void BSShaderManager::SetRenderMode(unsigned int mode)
 }
 
 // @fnv 0x00b4f4a0
+// pdb: BSShaderManager::GetShaderLevelString | BSShaderManager.obj | fnv360_0721_beta, ustr, high
 char* BSShaderManager::GetRenderModeName()
 {
     switch (fnv_particle_shader_renderer_level)
@@ -213,6 +216,8 @@ char* BSShaderManager::GetRenderModeName()
 }
 
 // @fnv 0x00b4f5e0
+// pdb: BSShaderManager::GetModifiedTextureFilename | BSShaderManager.obj | fnv360_0822_retail, call_gap, high
+// pdb params: apDstFileName, apSrcFileName, apPostfix, abCheckData
 void BSShaderManager::BuildTexturePath(char* acOutPath, const char* acInputPath, const char* suffix,
                                        bool abAddDataPrefix)
 {
@@ -239,6 +244,8 @@ void BSShaderManager::BuildTexturePath(char* acOutPath, const char* acInputPath,
 }
 
 // @fnv 0x00b54000
+// pdb: ActiveEffect::FinishLoadActiveEffectList | ActiveEffect.obj | fnv360_0822_retail, call_seq, low
+// pdb params: apLoadGameBuffer, apActiveEffectList
 void BSShaderManager::SetFOV(float angle)
 {
     angle = static_cast<float>(angle * 0.5 * DAT_01023128);
@@ -249,6 +256,8 @@ void BSShaderManager::SetFOV(float angle)
 }
 
 // @fnv 0x00b55540
+// pdb: BSShaderManager::SetFogProperty | BSShaderManager.obj | fnv360_0822_retail, caller, high
+// pdb params: aiShadowSceneNode, apFog
 void BSShaderManager::SetFogPropertyForIndex(int index, BSFogProperty* fog)
 {
     DAT_011f91c8[index]->SetFogPropertyForIndex(fog);
@@ -258,6 +267,8 @@ void BSShaderManager::SetFogPropertyForIndex(int index, BSFogProperty* fog)
 extern "C" bool __cdecl FUN_00829350(const char* pcName, NiPointer<NiTexture>& kTexture);
 extern NiTexture::TextureFormatPreferences DAT_00f72be0;
 NiSourceTexture* __cdecl FUN_00424d50(NiRTTI* pkRTTI, NiObject* pkObject);
+// pdb: BSShaderManager::GetTexture | BSShaderManager.obj | fnv360_0822_retail, ustr, high
+// pdb params: apFilename, abCheckHardDrive, aspTexture, abCheckForMipMaps, abCubeMap
 void BSShaderManager::GetTexture(const char* filename, bool load, NiPointer<NiTexture>& texture, bool checkMipmaps,
                                  bool cube)
 {
@@ -301,6 +312,8 @@ clearTexture:
 
 
 // @fnv 0x00b57e30
+// pdb: BSShaderManager::PrepareObject | BSShaderManager.obj | fnv360_0822_retail, caller, medium
+// pdb params: apObject, abFaceGenModel, abSkipPreCache
 void BSShaderManager::UpdateObjectTypeRecurse(NiAVObject* object, bool dynamic, bool skipRenderer)
 {
     object->UpdateSceneObject();
@@ -315,6 +328,8 @@ void BSShaderManager::UpdateObjectTypeRecurse(NiAVObject* object, bool dynamic, 
 #pragma optimize("", on)
 
 // @fnv 0x00b4f2f0
+// pdb: BSShaderManager::SetShadowSceneNode | BSShaderManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiIndex, apSSN
 void __cdecl FUN_00b4f2f0(int aiIndex, ShadowSceneNode* apNode)
 {
     DAT_011f91c8[aiIndex] = apNode;
@@ -334,6 +349,7 @@ struct ImageSpaceManager
 extern ImageSpaceManager* DAT_011f91ac;
 
 // @fnv 0x00b54090
+// pdb: BSShaderManager::GetSceneDepthTexture | BSShaderManager.obj | fnv360_0822_retail, caller_sim, medium
 NiTexture* GetImageSpaceTexture()
 {
     return ((ImageSpaceTexture*)((char*)DAT_011f91ac + 0x204))->GetTexture();
@@ -344,6 +360,7 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile lo
 
 // Replaces the global NiTexture pointer with pkTexture, releasing the previous texture and incrementing the new one's reference count.
 // @fnv 0x00b54ac0
+// pdb: NiImageConverter::SetImageConverter | NiImageConverter.obj | tesv_win, callee_sim, low
 void __cdecl FUN_00b54ac0(NiTexture* pkTexture)
 {
     if (DAT_011f95ec != pkTexture)
@@ -377,6 +394,8 @@ struct PropHelper
 void __cdecl ProcessPropertyTree(PropHelper*, int);
 
 // @fnv 0x00b55360
+// pdb: BSShaderManager::SetObjectTypeRecurse | BSShaderManager.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apObject, aeObjectType
 void __cdecl ProcessPropertyTree(PropHelper* pProp, int param2)
 {
     if (!pProp)
@@ -397,6 +416,8 @@ void __cdecl ProcessPropertyTree(PropHelper* pProp, int param2)
 }
 
 // @fnv 0x00b55520
+// pdb: BSShaderManager::GetFogProperty | BSShaderManager.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: aiShadowSceneNode
 BSFogProperty* __cdecl FUN_00b55520(int aiShadowSceneNode)
 {
     return *(BSFogProperty**)((char*)DAT_011f91c8[aiShadowSceneNode] + 0x134);
@@ -406,6 +427,8 @@ void ProcessPropertyTree(NiAVObject*, unsigned int);
 
 // If obj is non-null, calls DAT_011f91ec to get a value (0 if unset) and passes obj and that value to ProcessPropertyTree.
 // @fnv 0x00b55b80
+// pdb: BSShaderManager::SetObjectType | BSShaderManager.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apObject
 void FUN_00b55b80(NiAVObject* apObject)
 {
     if (apObject)
@@ -431,6 +454,8 @@ extern float DAT_011f9600;
 
 // Computes half width/height from apLoadedRect and stores the rect center and half extents into four globals.
 // @fnv 0x00b4f300
+// pdb: BSShaderManager::SetLoadedRange | BSShaderManager.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apLoadedRect
 void __cdecl SetRectCenterAndHalfExtents(tagRECT* apLoadedRect)
 {
     int lhalfHeight;
@@ -492,6 +517,7 @@ extern const char DAT_00e8fdcc[];
 extern const char DAT_00e8ff90[];
 extern const char DAT_00e8ff74[];
 
+// pdb: BSShaderManager::RegisterStreamables | BSShaderManager.obj | fnv360_0822_retail, strset, low
 void RegisterNiStreamFactories()
 {
     NiStream::RegisterObjectLoader(DAT_00e90110, FUN_00ba9250);
@@ -605,6 +631,7 @@ class B4F9A0ShaderManager
 
 // Iterates the 35 shader slots and calls ClearCachedState on each non-null shader.
 // @fnv 0x00b4f9a0
+// pdb: BSShaderManager::ClearAllShaderPassStages | BSShaderManager.obj | fnv360_0822_retail, call_seq, medium
 void B4F9A0ShaderManager::ClearAllCachedStates()
 {
     for (int i = 0; i < 35; i++)
@@ -617,6 +644,8 @@ void B4F9A0ShaderManager::ClearAllCachedStates()
 int sprintf_s(char* apBuffer, unsigned int auiSize, const char* apFormat, ...);
 
 // @fnv 0x00b4f9d0
+// pdb: BSShaderManager::GetPassName | BSShaderManager.obj | fnv360_0822_retail, ustr, medium
+// pdb params: passNo
 const char* FUN_00b4f9d0(int aiShader)
 {
     switch (aiShader)
@@ -2212,6 +2241,7 @@ struct ImageSpaceTail
 
 // Iterates shader entries, calls vfn_120 on each whose node list contains DAT_0126f554, then calls Tail on DAT_011f91ac.
 // @fnv 0x00b557d0
+// pdb: BSShaderManager::ReloadShaders | BSShaderManager.obj | fnv360_0822_retail, objrun_prop, low
 void __cdecl FUN_00b557d0()
 {
     ShaderEntryBase** ppEntry = (ShaderEntryBase**)&DAT_011f9548;
@@ -2257,6 +2287,8 @@ struct FUN_00b55b00_prop
 };
 
 // @f3 0x00adbf10 (community match, verified in this file)
+// pdb: BSShaderManager::RecursiveSetForcedDarkness | BSShaderManager.obj | fnv360_0721_retail, call_seq, medium
+// pdb params: apObj, afForcedDarkness
 void __cdecl FUN_00b55b00(PropHelper* pPropHelper, float fValue)
 {
     FUN_00b55b00_prop* prop = (FUN_00b55b00_prop*)pPropHelper->GetProperty(3);
@@ -2592,6 +2624,8 @@ inline bool IsExactB(Shader* s, RTTIStub* r)
 Shader* __cdecl FUN_00b55560(void*);
 
 // @fnv 0x00b579e0
+// pdb: BSShaderManager::PrepareGeometry | BSShaderManager.obj | fnv360_0822_retail, ustr, high
+// pdb params: apGeometry, aeObjectType, abFaceGenModel, abSkipPreCache
 void __cdecl UpdateShaderProperty(AVObj* obj, bool abUnused, bool abFlag8, bool a3)
 {
     char buf[1000];
@@ -2679,6 +2713,8 @@ struct FUN_00b7ff40
 };
 // Initializes m_name to null and, when value is positive, allocates and stores a formatted "Data\Shaders\shaderpackage%03i.sdp" path.
 // @fnv 0x00b7ff40
+// pdb: ShaderBuffer::ShaderBuffer | ShaderBuffer.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aeBufferType
 FUN_00b7ff40::FUN_00b7ff40(int aiPackageIndex)
 {
     m_unk04 = 0;
@@ -2780,6 +2816,8 @@ struct Walker : PropHelper
 };
 // Copies the material property (index 2) of obj and its descendants, cloning it when it has no controller and reattaching it.
 // @fnv 0x00b57c60
+// pdb: BSShaderManager::CloneMaterialPropertyRecurse | BSShaderManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObject
 void __cdecl CopyMaterialPropertyRecursive(Walker* apWalker)
 {
     if (apWalker)
@@ -3039,6 +3077,8 @@ struct ReaderStub
     virtual void vfn_1c(int, int);
 };
 
+// pdb: ShaderBuffer::Load | ShaderBuffer.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apFileName
 bool FUN_00b7fe40_cls::LoadFromReader(int param)
 {
     bool result = false;
@@ -3514,6 +3554,8 @@ RefShader* __cdecl CreateTreeShader();
 
 // Returns the cached RefShader for the given index, lazily creating it via a switch on the index if it is not yet initialized.
 // @f3 0x00adb960 (community match, verified in this file)
+// pdb: BSShaderManager::GetShader | BSShaderManager.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: aiShaderIndex
 Shader* __cdecl FUN_00b55560(void* aiIndex)
 {
     if (!DAT_011f9508 || (unsigned int)aiIndex > 0x22)
@@ -4215,6 +4257,7 @@ struct FUN_00af10f0 {
     static void* operator new(unsigned int n) { return _g_memoryManager.Allocate(n); }
     static void operator delete(void* p) { reinterpret_cast<InitMemory*>(&_g_memoryManager)->Deallocate(p); }
 };
+// pdb: BSShaderManager::Initialize | BSShaderManager.obj | fnv360_0822_retail, call_gap, low, conflict (bridge: Main::Main)
 void InitRenderSystem()
 {
     {

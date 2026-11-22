@@ -49,6 +49,8 @@ struct NiPSysGravityStrengthCtlr : BaseStandIn
     bool FUN_00c2a910(NiObjectNET*);
 };
 // @fnv 0x00c2a910
+// pdb: NiPSysGravityStrengthCtlr::InterpTargetIsCorrectType | NiPSysGravityStrengthCtlr.obj | fnv360_0721_retail, objopen_prop, low
+// pdb params: pkTarget
 bool NiPSysGravityStrengthCtlr::FUN_00c2a910(NiObjectNET* pkTarget)
 {
     if (!BaseStandIn::IsTargetParticleSystem(pkTarget))
@@ -115,6 +117,7 @@ class C2A8C0Object : public C2A8C0Base
 };
 
 // @fnv 0x00c2a8c0
+// pdb: NiPSysGravityStrengthCtlr::CreateClone | NiPSysGravityStrengthCtlr.obj | tesv_win, caller_sim, low
 C2A8C0Object* C2A8C0Object::FUN_00c2a8c0(C2A8C0CloningProcess& kCloning)
 {
     C2A8C0Object* pkDest = new C2A8C0Object;

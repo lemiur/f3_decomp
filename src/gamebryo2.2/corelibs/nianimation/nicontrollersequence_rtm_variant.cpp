@@ -3145,6 +3145,8 @@ struct LegacySequence : ::NiObject
     bool FUN_00a34480(char*, LegacyController*);
 };
 // @fnv 0x00a352f0
+// pdb: NiControllerSequence::PostLinkObject | NiControllerSequence.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void LegacySequence::FUN_00a352f0(NiStream& stream)
 {
     ::NiObject::LinkObject(stream);

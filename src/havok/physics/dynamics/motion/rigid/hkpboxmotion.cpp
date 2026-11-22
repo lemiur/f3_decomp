@@ -16,6 +16,8 @@ struct FUN_00d1e670_StandIn
 };
 
 // @fnv 0x00d1e670
+// pdb: hkpBoxMotion::setMass | hkpBoxMotion.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: mass
 void FUN_00d1e670_StandIn::FUN_00d1e670(float value)
 {
     f4(1.0f / value);
@@ -141,6 +143,8 @@ struct StubVirt
     virtual __m128* FUN_00d1e7b0_get(__m128* pOut);
 };
 
+// pdb: bhkRigidBody::GetRotation | TESObjectREFR.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arRot
 void Cls_00d1e7b0::WriteDiagonal(float* pOut)
 {
     __m128 buf;

@@ -337,6 +337,7 @@ extern FUN_0086ba60_cls DAT_01090a78;
 extern int DAT_00db582c;
 extern int DAT_00db5760;
 
+// pdb: ExtraLock::~ExtraLock | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, high
 void FUN_00401150_cls::FUN_00401150()
 {
     void* p = *(void**)((char*)this + 0xc);

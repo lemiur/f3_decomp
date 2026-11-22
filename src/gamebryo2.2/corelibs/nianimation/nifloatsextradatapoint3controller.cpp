@@ -12,6 +12,7 @@ extern int DAT_0109917c;
 extern int EmptyFS;
 
 // @fnv 0x00a4ecd0
+// pdb: NiFloatsExtraDataPoint3Controller::CreateObject | NiFloatsExtraDataPoint3Controller.obj | fnv360_0822_retail, objrun, medium
 int* __cdecl FUN_00a4ecd0()
 {
     int* p = (int*)BSFadeNode::operator new(0x48);
@@ -38,6 +39,8 @@ struct NiFloatsExtraDataPoint3Controller : NiPSysModifierCtlr {
     NiFloatsExtraDataPoint3Controller* FUN_00a4ec80(void* proc);
 };
 // @fnv 0x00a4ec80
+// pdb: NiFloatsExtraDataPoint3Controller::CreateClone | NiFloatsExtraDataPoint3Controller.obj | fnv360_0822_retail, objrun_sim, high
+// pdb params: kCloning
 NiFloatsExtraDataPoint3Controller* NiFloatsExtraDataPoint3Controller::FUN_00a4ec80(void* proc)
 {
     NiFloatsExtraDataPoint3Controller* p = (NiFloatsExtraDataPoint3Controller*)BSFadeNode::operator new(0x48);
@@ -73,6 +76,8 @@ struct NiFloatsExtraDataPoint3Controller : NiPSysModifierCtlr {
     void FUN_00a4ee90(NiStream&);
 };
 // @fnv 0x00a4ee90
+// pdb: NiFloatsExtraDataPoint3Controller::LoadBinary | NiFloatsExtraDataPoint3Controller.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void NiFloatsExtraDataPoint3Controller::FUN_00a4ee90(NiStream& stream)
 {
     NiPSysModifierCtlr::LoadBinary(stream);
@@ -134,6 +139,8 @@ struct FUN_00a4eb50_cls {
 
 // Reads three values from the stub at m_40, packs them into a Vec12, allocates a 0x20-byte sink and passes the vector to it.
 // @fnv 0x00a4eb50
+// pdb: NiFloatsExtraDataPoint3Controller::CreatePoseInterpolator | NiFloatsExtraDataPoint3Controller.obj | fnv360_0822_retail, objrun_prop, high
+// pdb params: usIndex
 int FUN_00a4eb50_cls::BuildAndDispatchVec12(int unused)
 {
     ExtraStub* stub = m_3c;
@@ -178,6 +185,7 @@ struct FUN_00a4ed10_cls {
 };
 
 // @fnv 0x00a4ed10
+// pdb: NiFloatsExtraDataPoint3Controller::`scalar deleting destructor' | NiFloatsExtraDataPoint3Controller.obj | fnv360_0822_retail, objrun, high
 FUN_00a4ed10_cls* FUN_00a4ed10_cls::Destroy(unsigned char acFlags)
 {
     *(void* volatile*)this = (void*)&DAT_0109917c;
@@ -236,6 +244,8 @@ public:
 };
 
 // @fnv 0x00a4edd0
+// pdb: NiFloatsExtraDataPoint3Controller::Update | NiFloatsExtraDataPoint3Controller.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: UpdateData
 void Ctlr4edd::UpdateController(const float& fTime)
 {
     if (GetMC())
@@ -350,6 +360,8 @@ struct VertexRenderer {
 };
 
 // @fnv 0x00e8c820
+// pdb: NiXenonVertexBufferManager::PackSkinnedVB | NiXenonVBManager.obj | fnv360_0822_debug, ustr, low, conflict (skyrim: NiDX9VertexBufferManager::PackSkinnedVB)
+// pdb params: pkData, pkSkin, pkPartition, usDirtyFlags, pakVertexElements, pkOldVBChip, pvLockedBuff
 VertexBufferLockInfo* VertexRenderer::FUN_00e8c820(VertexSource* source, unsigned unused, VertexData* data, unsigned flags, VertexBufferLockInfo* existing, char* option)
 {
     unsigned vertexCount;

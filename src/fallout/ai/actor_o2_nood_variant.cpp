@@ -553,6 +553,7 @@ struct GameBlendController {
     void __thiscall FUN_008e5c40(int);
     void __thiscall FUN_00c7c870();
 };
+// pdb: bhkRagdollController::DoRagdollFeedback | bhkRagdollController.obj | fnv360_0822_retail, call_gap, medium
 void BlendController::FUN_00c7c870()
 {
     GameBlendController* controller = (GameBlendController*)this;
@@ -1291,6 +1292,8 @@ extern float DAT_010f2d30, DAT_010f2d3c, DAT_010f2d48, DAT_010f2d54;
 
 
 
+// pdb: bhkRagdollController::Init | bhkRagdollController.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apObject, apScaledSkeletonName
 void SceneOwner::FUN_00c7e9a0(Argument* sourceInput, const char* requestedName) {
     using namespace RagdollSetup;
     NameOf(this) = requestedName;
@@ -2524,6 +2527,8 @@ struct EntryRecordReference {
     void release() { if (allocationSize && --references==0) delete this; }
 };
 struct EntryMapping { int unk00,unk04,unk08,unk0c; MappingEntry* data; int count; };
+// pdb: bhkRagdollController::InitFootIK | bhkRagdollController.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: arboneNameA
 void __thiscall ParticleTable::FUN_00c7c3a0(FNVInput* incoming) {
     FNVInput* input=incoming;
     unsigned count=incoming->count;
@@ -3067,6 +3072,8 @@ public:
 inline void Zero83(__m128& v) { v.m128_f32[3]=0.0f; v.m128_f32[2]=0.0f; v.m128_f32[1]=0.0f; v.m128_f32[0]=0.0f; }
 inline void Identity83(__m128& v) { v.m128_f32[0]=0.0f; v.m128_f32[1]=0.0f; v.m128_f32[2]=0.0f; v.m128_f32[3]=1.0f; }
 inline void Ones83(__m128& v) { v.m128_f32[0]=1.0f; v.m128_f32[1]=1.0f; v.m128_f32[2]=1.0f; v.m128_f32[3]=1.0f; }
+// pdb: bhkRagdollController::bhkRagdollController | bhkRagdollController.obj | fnv360_0822_retail, uconst, low
+// pdb params: apObject, apPose, apScaledSkeletonName
 FUN_00c7f060::FUN_00c7f060(NodeArg* a,NodeOrFlag b,void* c) {
     unk23c=0.0f;
     unk48=0; unk4c=0; unk50=0; unk54=0; unk58=0; unk5c=0;

@@ -13,6 +13,7 @@ struct ByteReader9380 {
     int FUN_00ba9380();
 };
 
+// pdb: CTreeFileAccess::PeekToken | FileAccess.obj | fnv360_0822_retail, call_gap, medium
 int ByteReader9380::FUN_00ba9380() {
     return *(int*)&data[offset];
 }
@@ -44,6 +45,8 @@ struct PriorityGreater_aab70
     }
 };
 
+// pdb: std::_Push_heap<CIdvBranch * *,int,CIdvBranch *,CBranchVolumeSorter> | Branch.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: _First, _Hole, _Top, _Val, _Pred
 void FUN_00baab70(SortedEntry_aab70** first, SortedEntry_aab70** mid, SortedEntry_aab70** last)
 {
     PriorityGreater_aab70 pred;
@@ -156,6 +159,8 @@ public:
     FloatWriter writer;
     void FUN_00bb0ce0(const StoredPoint3* source);
 };
+// pdb: CIndexedGeometry::AddVertexTangent | IndexedGeometry.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: pTangent
 void PointWriterOwner::FUN_00bb0ce0(const StoredPoint3* source) {
     StoredPoint3 local = { source->x, source->y, source->z };
     writer.FUN_0058da30(&local.x);
@@ -241,6 +246,7 @@ struct Owner930 {
     unsigned int count04;
     void FUN_00bbd160();
 };
+// pdb: CVec3::Magnitude | FrondEngine.obj | fnv360_1110_debug, objrun_open, low, conflict (skyrim: std::locale::facet::_Incref)
 void Owner930::FUN_00bbd160() {
     Guard930 guard;
     guard.FUN_00bff149(0);
@@ -272,6 +278,8 @@ struct Record {
     Triple unk48;
     Record& FUN_00bbe9c0(const Record& other);
 };
+// pdb: SIdvLeafTexture::operator= | TreeEngine.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: __that
 Record& Record::FUN_00bbe9c0(const Record& other)
 {
     unk00 = other.unk00;
@@ -304,6 +312,7 @@ struct Holder_bbad10 {
 extern "C" void __cdecl FUN_00bb8e80(void* a, unsigned int b, Holder_bbad10* c, Holder_bbad10* d);
 extern "C" void __cdecl FUN_00401010(void* p);
 
+// pdb: std::vector<SFrondGuide,std::allocator<SFrondGuide> >::~vector<SFrondGuide,std::allocator<SFrondGuide> > | FrondEngine.obj | fnv360_0822_retail, caller_sim, low
 void __stdcall FUN_00bbad10(Holder_bbad10* self)
 {
     void* buf = self->m_pBuf;
@@ -387,6 +396,8 @@ typedef SortedEntry_aad80* EP;
 
 void FUN_00baac90(EP* a, EP* b, EP* c, PriorityGreater_aad80 p);
 
+// pdb: std::_Unguarded_partition<CIdvBranch * *,CBranchVolumeSorter> | Branch.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: _First, _Last, _Pred
 std::pair<EP*, EP*> FUN_00baad80(EP* _First, EP* _Last, PriorityGreater_aad80 _Pred)
 {
     EP* _Mid = _First + (_Last - _First) / 2;
@@ -564,6 +575,7 @@ __forceinline void codeBits(const Code& entry) {
 }
 
 };
+// pdb: compress_block | trees.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: send_all_trees)
 static __declspec(noinline) void FUN_00ba0230(Stream* s,Code* literal,Code* distance) {
  unsigned int i=0;
  if(s->unk1698!=0)do {
@@ -802,6 +814,8 @@ struct TreeC4
 };
 // Fills OutC4 from the speed tree: computes weight from FUN_00ba14c0, sets active flags, data/value pointers and list endpoints.
 // @fnv 0x00b0c4f0
+// pdb: CSpeedTreeRT::GetSimpleBillboardGeometry | SpeedTreeRT.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: sGeometry
 void TreeC4::FUN_00ba26e0(OutC4* out)
 {
     if (DAT_01178274)
@@ -1073,6 +1087,7 @@ static void FUN_00b9f7b0(deflate_state* s, tree_desc* desc)
     }
 }
 
+// pdb: build_bl_tree | trees.obj | fnv360_0822_retail, objrun_sim, low, conflict (skyrim: gen_codes)
 static void FUN_00ba08d0(ct_data* tree, int max_code, ushf* bl_count)
 {
     ush next_code[15+1]; 
@@ -1177,6 +1192,8 @@ struct FillRecordFO3
     int unk14;
     int unk18;
 };
+// pdb: std::vector<CSpeedTreeRT *,std::allocator<CSpeedTreeRT *> >::_Inside | SpeedTreeRT.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: _Ptr
 void FUN_00ba2db0(FillRecordFO3* first, FillRecordFO3* last, const FillRecordFO3& value)
 {
     for (; first != last; ++first)
@@ -1380,6 +1397,7 @@ static const ct_data static_ltree[288] = {
 {{  3},{  8}}, {{131},{  8}}, {{ 67},{  8}}, {{195},{  8}}, {{ 35},{  8}},
 {{163},{  8}}, {{ 99},{  8}}, {{227},{  8}}
 };
+// pdb: bi_flush | trees.obj | fnv360_0822_retail, call_dedup, low
 static __declspec(noinline) void FUN_00ba06d0(deflate_state* s)
 {
     if (s->bi_valid == 16) {
@@ -2070,6 +2088,8 @@ void _tr_stored_block(deflate_state *s, charf *buf, ulg stored_len, int eof)
     copy_block(s, buf, (unsigned)stored_len, 1); 
 }
 
+// pdb: _tr_flush_block | trees.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: s, buf, stored_len, eof
 void FUN_00ba0ec0(deflate_state *s, charf *buf, ulg stored_len, int eof)
 {
     ulg opt_lenb, static_lenb; 
@@ -2169,6 +2189,7 @@ static void FUN_00ba0230(deflate_state *s, ct_data *ltree, ct_data *dtree)
     s->last_eob_len = ltree[256].dl.len;
 }
 
+// pdb: set_data_type | trees.obj | tesv_win, call_seq, medium
 static void FUN_00ba0640(deflate_state *s)
 {
     int n = 0;
@@ -2190,6 +2211,7 @@ static unsigned bi_reverse(unsigned code, int len)
     return res >> 1;
 }
 
+// pdb: bi_windup | trees.obj | tesv_win, call_seq, medium
 static void FUN_00ba0750(deflate_state *s)
 {
     if (s->bi_valid > 8) {
@@ -2348,6 +2370,7 @@ struct FUN_00ba1c50 : BasePart
 };
 // Default constructor for FUN_00ba1c50 that initializes m_38 and m_74 to -1.0f.
 // @fnv 0x00b029f0
+// pdb: CSpeedTreeRT::SGeometry::SGeometry | SpeedTreeRT.obj | fnv360_0822_retail, call_seq, medium
 FUN_00ba1c50::FUN_00ba1c50() : m_38(-1.0f), m_74(-1.0f)
 {}
 
@@ -2386,6 +2409,7 @@ struct CB28
 };
 // Frees the twelve heap buffers of each of the count LOD entries and nulls the pointers.
 // @fnv 0x00b28ed0
+// pdb: CLeafGeometry::FreeLODDataArrays | LeafGeometry.obj | fnv360_0822_retail, call_seq, medium
 void CB28::FUN_00bb3070()
 {
     if (lods && count)
@@ -2536,6 +2560,8 @@ struct UIntVector {
  bool FUN_00baf7a0(unsigned int);
  UIntVector& FUN_00bafd80(const UIntVector&);
 };
+// pdb: std::_Move<std::vector<unsigned short,std::allocator<unsigned short> > *,std::vector<unsigned short,std::allocator<unsigned short> > *> | IndexedGeometry.obj | fnv360_0822_retail, call_gap, low
+// pdb params: _First, _Last, _Dest, __formal
 UIntVector& UIntVector::FUN_00bafd80(const UIntVector& r) {
  if (this != &r) {
   if (r.size() == 0) FUN_00bab240();
@@ -2574,6 +2600,8 @@ struct UIntVector
     bool FUN_004315d0(unsigned int);
     UIntVector& FUN_00bb6160(const UIntVector& source);
 };
+// pdb: std::vector<float,std::allocator<float> >::operator= | FrondEngine.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: _Right
 UIntVector& UIntVector::FUN_00bb6160(const UIntVector& source)
 {
     if (this != &source)
@@ -2717,6 +2745,8 @@ struct WordVector580 {
     unsigned int* FUN_00bab360(unsigned int*, unsigned int, const unsigned int&);
     void FUN_00baf7f0(WordIterator580 where, unsigned int count, const unsigned int& value);
 };
+// pdb: std::vector<int,std::allocator<int> >::reserve | Branch.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: _Count
 void WordVector580::FUN_00baf7f0(WordIterator580 where, unsigned int count, const unsigned int& value)
 {
     unsigned int temporary = value;
@@ -2810,6 +2840,8 @@ int unkec;
 int global;
 void FUN_00bbf090(); void FUN_00bbed60(float); void FUN_00bbfa10(float);
 };
+// pdb: CTreeEngine::Compute | TreeEngine.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: fLeafSizeIncreaseFactor
 void Owner::FUN_00bbfa10(float dt) {
  DAT_01068b30 = !mode;
  engine = new FUN_00babd50(0);
@@ -2959,6 +2991,8 @@ float a,b,c,d; unsigned int unk2c,unk30; Override* overrideData; unsigned int un
 unsigned short FUN_00ba1f20(float); void FUN_00ba4bd0(Output*,short); };
 struct Logger { void FUN_0042f100(const char*,int); }; extern Logger DAT_01068a70; extern char str_00ea72a0[]; extern unsigned char DAT_01178274;
 void __cdecl FUN_00ba14c0(float,unsigned short,float,float,float,float,float*,float*,short*,float*);
+// pdb: CSpeedTreeRT::GetFrondGeometry | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: sGeometry, sOverrideLodValue
 void Owner::FUN_00ba4bd0(Output* out,short level) {
 if(geometry) {
 unsigned short& vertices=out->vertices; vertices=(unsigned short)(geometry->v68.size()/3);
@@ -3001,6 +3035,8 @@ struct Record48 { std::vector<P56> points; float length,half; unsigned char styl
 struct Style44 { int u00,u04,u08,u0c,u10,u14,u18; float factor,mult,low,high; };
 struct Random5 { Random5() { FUN_00bc4c50(); } ~Random5() { FUN_00a29680(); } void FUN_00bc4c50(); void FUN_00a29680(); float FUN_00bc4b40(float,float); };
 struct Target5 { int u00,u04; std::vector<Record48> records; int u18,u1c,u20,u24,u28,u2c,u30,u34,u38,u3c; std::vector<Style44> styles; void FUN_00bb4860(float); };
+// pdb: CFrondEngine::EndGuide | FrondEngine.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: fLodSizeScalar
 void Target5::FUN_00bb4860(float scale) {
  Record48& r=records[records.size()-1];
  unsigned i=0;
@@ -3129,6 +3165,8 @@ struct Obj4820 {
  unsigned short FUN_00ba1ec0(float);
  void FUN_00ba4820(Out4820*,short);
 };
+// pdb: CSpeedTreeRT::GetBranchGeometry | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: sGeometry, sOverrideLodValue
 void Obj4820::FUN_00ba4820(Out4820* out,short index) {
  if(data) {
  out->count=(unsigned short)(data->vec68.size()/3);
@@ -3277,6 +3315,8 @@ struct FlareOwner1540 {
     std::vector<Flare1540*> flares60;
     void FUN_00bbe370(FlareReader1540*);
 };
+// pdb: CTreeEngine::ParseFlareInfo | TreeEngine.obj | fnv360_0822_retail, ustr, medium
+// pdb params: cFile
 void FlareOwner1540::FUN_00bbe370(FlareReader1540* reader)
 {
     for (unsigned int i=0;i<flares60.size();++i) {
@@ -3389,6 +3429,8 @@ struct TreeOwner1541 {
     void FUN_00ba40c0(TreeReader1541*);
 };
 
+// pdb: CSpeedTreeRT::ParseTextureCoordInfo | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
+// pdb params: pFile
 void TreeOwner1541::FUN_00ba40c0(TreeReader1541* reader)
 {
     mesh4C=new(DAT_01090a78) TreeMesh1541;
@@ -3477,6 +3519,8 @@ public:
     void FUN_00bb36a0(int a, int b);
     void FUN_00bb3d00(int a, int b, const QSrc3d00* src);
 };
+// pdb: CLeafGeometry::Init | LeafGeometry.obj | fnv360_0822_retail, call_gap, low
+// pdb params: usNumLeafLods, pvLeafLods, sLeafInfo
 void Q3d00Owner::FUN_00bb3d00(int a, int b, const QSrc3d00* src)
 {
     unk08 = src->unk38;
@@ -3554,6 +3598,8 @@ public:
     void FUN_00ba4560(unsigned index, int* id, QVec3* a, QVec3* b);
 };
 
+// pdb: CSpeedTreeRT::GetCollisionObject | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: nIndex, eType, pPosition, pDimensions
 void QTree::FUN_00ba4560(unsigned index, int* id, QVec3* a, QVec3* b)
 {
     if (objects) {
@@ -3633,6 +3679,8 @@ void UIntVector::FUN_00ba5630(Iterator where,unsigned int count,const unsigned i
 #include <math.h>
 namespace f3m_00ba14c0 {
 
+// pdb: CSpeedTreeRT::GetTransitionValues | SpeedTreeRT.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: fLodLevel, usLodCount, fOverlapRadius, fTransitionFactor, fCurveExponent, fTargetAlphaValue, fHighValue, fLowValue, sHighLod, sLowLod
 void __cdecl FUN_00ba14c0(float start, unsigned short count, float x, float z, float p, float base,
                           float* out1, float* out2, short* out3, short* out4)
 {
@@ -3707,6 +3755,7 @@ struct TreeNode
     ~TreeNode();
 };
 
+// pdb: CIdvBranch::~CIdvBranch | Branch.obj | fnv360_0822_retail, call_gap, low
 TreeNode::~TreeNode()
 {
     ::operator delete(buffer);
@@ -3753,6 +3802,8 @@ struct FUN_00ba3920:FUN_00ba3730 {
  FUN_00ba3920(const String&,bool);
  virtual ~FUN_00ba3920();
 };
+// pdb: IdvFileError::IdvFileError | SpeedTreeRT.obj | fnv360_0822_retail, call_seq, high
+// pdb params: strDetails, bAppendSystemError
 FUN_00ba3920::FUN_00ba3920(const String&message,bool systemError):FUN_00ba3730(message+" ["+(systemError?String(FUN_00c07efc(*FUN_00c02a76())):String(""))+"]"){}
 }
 }   // namespace f3m_00ba3920
@@ -3899,6 +3950,8 @@ class CLeafGeometryWind
 };
 
 // @fnv 0x00b29190
+// pdb: CLeafGeometry::ComputeWindEffect | LeafGeometry.obj | fnv360_0822_retail, caller, medium
+// pdb params: nLodLevel
 void CLeafGeometryWind::FUN_00bb31b0(unsigned short usLod)
 {
     SLeafLod* pLod;
@@ -4216,6 +4269,7 @@ struct IdvFilename : public String
 };
 
 // @fnv 0x00b09f90
+// pdb: CIdvFilename::NoPath | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, medium
 IdvFilename IdvFilename::FUN_00ba3c00() const
 {
     char szBuffer[1024];
@@ -4265,6 +4319,8 @@ struct Vector {
     bool FUN_00bb5780(unsigned);
     Vector& FUN_00bb5fe0(const Vector&);
 };
+// pdb: std::vector<CVec,std::allocator<CVec> >::operator= | FrondEngine.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: _Right
 Vector& Vector::FUN_00bb5fe0(const Vector& other) {
     if(this!=&other) {
         Element* sourceBegin=other.begin;
@@ -4424,6 +4480,8 @@ struct Tree:Camera {
     void SetBounds(float a,float b,float c){dimensions.lower=a;dimensions.upper=b;dimensions.depth=c;}
     void UpdateBounds(){volatile float h=dimensions.height*2.0f;float w=static_cast<float>(dimensions.width*45.0);dimensions.lower=-w;dimensions.upper=w;dimensions.depth=h;}
 };
+// pdb: CTreeEngine::CTreeEngine | TreeEngine.obj | fnv360_0822_retail, uvref, medium
+// pdb params: pBranchGeometry
 Tree::Tree(unsigned int source):scaleX(1.0f),scaleY(1.0f),threshold(-1.0f),phase(0.0f),
     control(),enabled(1),branch(),unk58(0),seed(0),first(),mode(6),second(),config(),
     unkD4(0),active(0),ratio(0.5f),weight(1.0f),frequency(0.3f),offset(0.0f),range(0.05f),kind(1),dimensions(){
@@ -4482,6 +4540,8 @@ struct Geom0a70
     std::vector<unsigned char> sel;
     void FUN_00bb0a70(const float* uv, short selection);
 };
+// pdb: CIndexedGeometry::AddVertexTexCoord0 | IndexedGeometry.obj | fnv360_0822_retail, call_gap, low
+// pdb params: pTexCoord, sIndex
 void Geom0a70::FUN_00bb0a70(const float* uv, short selection)
 {
     if (index22 == uvs.size() / 2)
@@ -4579,6 +4639,8 @@ struct T0c
     void FUN_00ba2a80(O0c* pOut, unsigned int uiFlags);
 };
 // @fnv 0x00b0c050
+// pdb: CSpeedTreeRT::Get360BillboardGeometry | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
+// pdb params: sGeometry, ulBitVector
 void T0c::FUN_00ba2a80(O0c* pOut, unsigned int uiFlags)
 {
     FUN_00ba26e0(pOut);
@@ -4948,6 +5010,8 @@ struct TreeRuntime
 };
 
 // @fnv 0x00b0bc00
+// pdb: CSpeedTreeRT::GetLeafGeometry | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
+// pdb params: sGeometry, sOverrideLeafLodValue
 void TreeRuntime::FUN_00ba23d0(TreeOutput* output, short forcedLod)
 {
     float resultVal;
@@ -5085,6 +5149,8 @@ unsigned unk4c;
 unsigned unk50;
 unsigned unk54;
 CollisionList* pColl;void FUN_00ba89c0(Parser*);};
+// pdb: CSpeedTreeRT::ParseCollisionObjects | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pFile
 void Tree::FUN_00ba89c0(Parser* p)
 {
     pColl = new CollisionList;
@@ -5200,6 +5266,8 @@ struct Owner
     float nearDistance, farDistance, bias;
     void FUN_00ba3d80(Reader*);
 };
+// pdb: CSpeedTreeRT::ParseLodInfo | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pFile
 void Owner::FUN_00ba3d80(Reader* reader)
 {
     int tag = reader->FUN_00ba92d0();
@@ -5254,6 +5322,8 @@ struct List {
     std::vector<Elem> v;
     void FUN_00ba3010(const Mat& M);
 };
+// pdb: SCollisionObjects::TransformAll | SpeedTreeRT.obj | fnv360_0822_retail, objrun, medium
+// pdb params: cTransform
 void List::FUN_00ba3010(const Mat& M)
 {
     for (std::vector<Elem>::iterator it = v.begin(); it != v.end(); ++it)
@@ -5340,6 +5410,8 @@ struct TextureOwner150 {
     std::vector<TextureControl150*> controls60;
     void FUN_00bbe150(TextureReader150*);
 };
+// pdb: CTreeEngine::ParseTextureControls | TreeEngine.obj | fnv360_0822_retail, ustr, medium
+// pdb params: cFile
 void TextureOwner150::FUN_00bbe150(TextureReader150* reader)
 {
     for (unsigned int i=0;i<controls60.size();++i) {
@@ -5435,6 +5507,8 @@ struct SpdWindReader {
     void FUN_00ba3fa0(SpdParser3fa0* pParser);
 };
 
+// pdb: CSpeedTreeRT::ParseWindInfo | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pFile
 void SpdWindReader::FUN_00ba3fa0(SpdParser3fa0* pParser)
 {
     int nToken = pParser->ParseToken();
@@ -5465,6 +5539,7 @@ void SpdWindReader::FUN_00ba3fa0(SpdParser3fa0* pParser)
 namespace f3m_00bbca30 {
 namespace f3m_00bbca30 {
 
+// pdb: IdvFormatString | FrondEngine.obj | fnv360_0822_retail, call_seq, medium
 static __declspec(noinline) std::string FUN_00bb56f0(const char* format, ...)
 {
     char text[1024];
@@ -5513,6 +5588,8 @@ struct FrondEngine {
     void FUN_00bbca30(FrondGeometry*, void*);
 };
 
+// pdb: CFrondEngine::Compute | FrondEngine.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pGeometry, pLightingEngine
 void FrondEngine::FUN_00bbca30(FrondGeometry* output, void* context)
 {
     geometry = output;
@@ -5857,6 +5934,8 @@ struct Entry {
     int x, y;
 };
 
+// pdb: std::vector<SFrondVertex,std::allocator<SFrondVertex> >::operator= | FrondEngine.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: _Right
 void __cdecl FUN_00bb6600(Entry* left, Entry* right)
 {
     Entry tmp(*left);
@@ -5889,6 +5968,8 @@ struct LeafLodLoader716 {
     bool loaded;
     void FUN_00bbf6f0(BinaryReader716*);
 };
+// pdb: CTreeEngine::ParseLeafCluster | TreeEngine.obj | fnv360_0822_retail, ustr, medium
+// pdb params: cFile
 void LeafLodLoader716::FUN_00bbf6f0(BinaryReader716* reader)
 {
     int level = 0;
@@ -5975,6 +6056,7 @@ struct LeafLodBuilder {
     void FUN_00bbf090();
 };
 
+// pdb: CTreeEngine::BuildBranchLods | TreeEngine.obj | fnv360_0822_retail, call_gap, low
 void LeafLodBuilder::FUN_00bbf090()
 {
     std::vector<LeafCluster*> leaves;
@@ -6072,6 +6154,8 @@ struct Vector {
     Vector& FUN_00bb1310(const Vector& right);
 };
 
+// pdb: std::vector<std::vector<unsigned short,std::allocator<unsigned short> >,std::allocator<std::vector<unsigned short,std::allocator<unsigned short> > > >::operator= | IndexedGeometry.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: _Right
 Vector& Vector::FUN_00bb1310(const Vector& right)
 {
     if (this != &right) {
@@ -6118,6 +6202,8 @@ struct Shape {
     std::vector<float> m_points;
     void FUN_00baeee0(Bound* bound);
 };
+// pdb: CIndexedGeometry::ComputeExtents | IndexedGeometry.obj | fnv360_0822_retail, call_gap, low
+// pdb params: cExtents
 void Shape::FUN_00baeee0(Bound* bound)
 {
     unsigned short count = (unsigned short)(m_points.size() / 3);
@@ -6230,6 +6316,7 @@ FUN_00bbc300();
 }
 ;
 
+// pdb: CFrondEngine::CFrondEngine | FrondEngine.obj | fnv360_0822_retail, ustr, medium
 FUN_00bbc300::FUN_00bbc300():a(0),b(0),u28(1),u2c(2),u34(4),u38(1),flag(false),u50(4),x54(1.0f),y58(0.0f),z5c(0.0f),f60(0.05f),u64(2),u68(1){
 object=new FUN_00bc4810(String(DAT_00ea7d00,153));
 }
@@ -6340,6 +6427,8 @@ struct Target {
  float scale;int pada8[6];int count;int padc4[4];Vector* values;int padd8[3];float parameter;
  void FUN_00bbed60(float);
 };
+// pdb: CTreeEngine::BuildLeafLods | TreeEngine.obj | fnv360_0822_retail, call_gap, low
+// pdb params: fLeafSizeIncreaseFactor
 void Target::FUN_00bbed60(float step) {
  float maximum=-1.0f;
  for(unsigned i=0;i<records.size();i++) {
@@ -6421,6 +6510,7 @@ struct Mgr {
     NodeVec* lists;
     void FUN_00bbdd30();
 };
+// pdb: CTreeEngine::FreeTransientData | TreeEngine.obj | fnv360_0822_retail, call_seq, medium
 void Mgr::FUN_00bbdd30()
 {
     if (!active) return;
@@ -6466,6 +6556,8 @@ struct Grid {
     void FUN_00ba9c60(void* owner, Strip* strip);
 };
 
+// pdb: CIdvBranch::ComputeLod | Branch.obj | fnv360_0822_retail, call_gap, low
+// pdb params: nDiscreteLodLevel, pGeometry
 void Grid::FUN_00ba9c60(void* owner, Strip* strip)
 {
     if (m_cols < 2)
@@ -6513,6 +6605,8 @@ struct Elem56 {
 };
 
 struct Vec56 : std::vector<Elem56> {
+    // pdb: std::vector<SFrondVertex,std::allocator<SFrondVertex> >::operator= | FrondEngine.obj | fnv360_0721_beta, objrun_prop, low
+    // pdb params: _Right
     Vec56& FUN_00bb5d10(const Vec56& _Right)
     {
         if (this != &_Right) {
@@ -6563,6 +6657,7 @@ struct FUN_00bb1c50 {
     ~FUN_00bb1c50();
 };
 
+// pdb: CIndexedGeometry::~CIndexedGeometry | IndexedGeometry.obj | fnv360_0822_retail, call_gap, low
 FUN_00bb1c50::~FUN_00bb1c50()
 {
     delete buffer;
@@ -6597,6 +6692,7 @@ struct Outer00ba3540 {
     void FUN_00ba3540();
 };
 
+// pdb: CSpeedTreeRT::FreeBranchWindData | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
 void Outer00ba3540::FUN_00ba3540() {
     if (unk04) unk04->FUN_00ba3420();
 }
@@ -6620,6 +6716,8 @@ struct FUN_00bb5f90_Element {
     void __thiscall FUN_0042eff0(FUN_00bb5f90_Element* source, int b, int a);
 };
 
+// pdb: std::vector<SFrondVertex,std::allocator<SFrondVertex> >::vector<SFrondVertex,std::allocator<SFrondVertex> > | FrondEngine.obj | fnv360_1110_retail, objopen_prop, low
+// pdb params: _Right
 int __cdecl FUN_00bb5f90(FUN_00bb5f90_Element* first,
                           FUN_00bb5f90_Element* last,
                           FUN_00bb5f90_Element* dest) {
@@ -6672,6 +6770,7 @@ struct FUN_00ba5ae0_Obj {
     void FUN_00ba5ae0();
 };
 
+// pdb: CSpeedTreeRT::DeleteTransientData | SpeedTreeRT.obj | fnv360_0822_retail, ustr_rel, medium
 void FUN_00ba5ae0_Obj::FUN_00ba5ae0() {
     FUN_00ba5ae0_Data* data = unk00;
 
@@ -6948,6 +7047,8 @@ struct BranchNode
                       const BranchPoint&, BranchMesh*, void*, float, unsigned int, float);
 };
 
+// pdb: CIdvBranch::Compute | Branch.obj | fnv360_0822_retail, call_gap, low
+// pdb params: nSeed, fSize, nLevel, cBasePos, fPercentOfParent, fCombinedPercentOfParent, cBaseTransform, cZAxis, pBranchGeometry, vLeaves, fWindWeight, nWindGroup, fParentRadius
 void BranchNode::FUN_00bacd10(unsigned int seed, float scale, int level, const BranchPoint& origin, float age,
                               float parentFactor, const BranchMatrix& transform, const BranchPoint& axis,
                               BranchMesh* mesh, void* context, float weight, unsigned int id, float cap)
@@ -7260,6 +7361,7 @@ public:
     void __thiscall FUN_00ba34f0();
 };
 
+// pdb: CSpeedTreeRT::FreeBranchColors | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
 void __thiscall FUN_00ba34f0_Owner::FUN_00ba34f0()
 {
     FUN_00ba34f0_Data* data = unk04;
@@ -7332,6 +7434,8 @@ struct FUN_00bb2c70
     FUN_00bb2c70(int value);
 };
 
+// pdb: CLeafGeometry::CLeafGeometry | LeafGeometry.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pWindEngine
 FUN_00bb2c70::FUN_00bb2c70(int value)
 {
     unk00 = 0;
@@ -7378,6 +7482,8 @@ public:
     int FUN_00bb2ce0(int* out);
 };
 
+// pdb: CLeafGeometry::GetLeafBillboardTable | LeafGeometry.obj | fnv360_0721_beta, objrun, medium
+// pdb params: nEntryCount
 int FNV_Bb2ce0_Obj::FUN_00bb2ce0(int* out)
 {
     int count = (unk1C * unk08) << 5;
@@ -7423,6 +7529,8 @@ struct Ow00bb2f30
     void FUN_00bb2f30(int idx, const float* src);
 };
 
+// pdb: CLeafGeometry::SetTextureCoords | LeafGeometry.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: nLeafMapIndex, pTexCoords
 void Ow00bb2f30::FUN_00bb2f30(int idx, const float* src)
 {
     if (unk14 == 0) return;
@@ -7461,6 +7569,8 @@ struct Output {
     unsigned short FUN_00ba1a50();
     void FUN_00bb0d80(void* context, Values* values);
 };
+// pdb: CFrondEngine::SetTextureCoords | FrondEngine.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: pGeometry, nFrondMapIndex, pTexCoords, bFlip
 void __stdcall FUN_00bb5070(Output* output, void* context, const Values* source, bool flip) {
     Values values = *source;
     if (flip) {
@@ -7635,6 +7745,8 @@ struct Owner {
     void FUN_00ba16a0(int value);
 };
 
+// pdb: CSpeedTreeRT::ParseShadowProjectionInfo | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
+// pdb params: pFile
 void Owner::FUN_00ba16a0(int value)
 {
     child = new Child;
@@ -7784,6 +7896,8 @@ struct Elem { int a, b; };
 struct V : std::vector<Elem> {
     void FUN_00bb55c0();
 };
+// pdb: std::vector<SFrondVertex,std::allocator<SFrondVertex> >::vector<SFrondVertex,std::allocator<SFrondVertex> > | FrondEngine.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: _Right
 void V::FUN_00bb55c0()
 {
     erase(begin(), end());
@@ -7800,6 +7914,8 @@ struct Reader {
     std::vector<char> data;
     bool FUN_00ba1ab0();
 };
+// pdb: CTreeEngine::SetBranchLevelForWeighting | SpeedTreeRT.obj | fnv360_0822_debug, call_gap, low
+// pdb params: nLevel
 bool Reader::FUN_00ba1ab0()
 {
     return offset >= data.size();
@@ -7821,6 +7937,8 @@ struct Obj {
     ByteTrack frame;
     void FUN_00bb0c90(float t, unsigned char index);
 };
+// pdb: CIndexedGeometry::AddVertexWind | IndexedGeometry.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: fWindWeight, ucWindMatrixIndex
 void Obj::FUN_00bb0c90(float t, unsigned char index)
 {
     index = (unsigned char)(index % info->count + info->base);
@@ -7834,6 +7952,8 @@ void Obj::FUN_00bb0c90(float t, unsigned char index)
 namespace f3m_00baabd0 {
 void FUN_00baa3e0(SortedEntry_aab70** first, int hole, int top, SortedEntry_aab70* value, PriorityGreater_aab70 pred);
 
+// pdb: std::_Adjust_heap<CIdvBranch * *,int,CIdvBranch *,CBranchVolumeSorter> | Branch.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: _First, _Hole, _Bottom, _Val, _Pred
 void FUN_00baabd0(SortedEntry_aab70** first, int hole, int bottom, SortedEntry_aab70* value, PriorityGreater_aab70 pred)
 {
     int top = hole;
@@ -7859,6 +7979,8 @@ void FUN_00baabd0(SortedEntry_aab70** first, int hole, int bottom, SortedEntry_a
 namespace f3m_00baec30 {
 namespace f3m_00baec30 {
 struct Elem16 { int a, b, c, d; };
+// pdb: std::allocator<std::vector<SFrondGuide,std::allocator<SFrondGuide> > >::allocate | FrondEngine.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: _Count
 Elem16* __cdecl FUN_00baec30(unsigned int count, Elem16*)
 {
     if (count <= 0)
@@ -7884,6 +8006,7 @@ struct Vec12 {
     unsigned int FUN_00baa2c0();
 };
 
+// pdb: std::vector<FR2Vect3TC<float>,std::allocator<FR2Vect3TC<float> > >::size | BSFaceGenModel.obj | fnv360_0822_debug, call_gap, low
 unsigned int Vec12::FUN_00baa2c0()
 {
     return first == 0 ? 0 : last - first;
@@ -7901,6 +8024,8 @@ struct NonscalarTag { };
 struct RangeCheckedTag { };
 inline RandomTag IterRandom(Elem44*, Elem44*) { RandomTag cat; return cat; }
 void __cdecl FUN_00bb5f90(Elem44* first, Elem44* last, Elem44* dest, RandomTag, NonscalarTag, RangeCheckedTag);
+// pdb: SFrondGuide::SFrondGuide | FrondEngine.obj | fnv360_1110_retail, objrun_open, low
+// pdb params: __that
 Elem44* __cdecl FUN_00bb64a0(Elem44* first, Elem44* last, Elem44* dest)
 {
     FUN_00bb5f90(first, last, dest, IterRandom(first, dest), NonscalarTag(), RangeCheckedTag());
@@ -7936,6 +8061,8 @@ struct NonscalarTag { };
 struct RangeCheckedTag { };
 inline RandomTag IterRandom(Elem48*, Elem48*) { RandomTag cat; return cat; }
 void __cdecl FUN_00bb6430(Elem48* first, Elem48* last, Elem48* dest, RandomTag, NonscalarTag, RangeCheckedTag);
+// pdb: std::_Move<SFrondGuide *,SFrondGuide *> | FrondEngine.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: _First, _Last, _Dest, __formal
 Elem48* __cdecl FUN_00bb6c10(Elem48* first, Elem48* last, Elem48* dest)
 {
     FUN_00bb6430(first, last, dest, IterRandom(first, dest), NonscalarTag(), RangeCheckedTag());
@@ -7952,6 +8079,8 @@ struct Handle {
     Impl* impl;
     void FUN_00ba1380(float value);
 };
+// pdb: CSpeedTreeRT::SetBranchDimmingScalar | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afBranchDimmingScalar
 void Handle::FUN_00ba1380(float value)
 {
     if (impl)
@@ -8009,6 +8138,8 @@ Elem* Vec::FUN_00ba33f0(Elem* first, Elem* last, Elem* dest)
 namespace f3m_00bb4690 {
 namespace f3m_00bb4690 {
 struct Elem24 { int a, b, c, d, e, f; };
+// pdb: std::allocator<SIdvBranchFlare>::allocate | Branch.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: _Count
 Elem24* __cdecl FUN_00bb4690(unsigned int count, Elem24*)
 {
     if (count <= 0)
@@ -8027,6 +8158,7 @@ namespace f3m_00ba3d50 {
 
 struct Log4820 { void FUN_0042f100(const char*, int); };
 
+// pdb: CLeafGeometry::Invalidate | LeafGeometry.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void FUN_00ba3d50(const char* p) {
     DAT_01068a70.FUN_0042f100(p, (int)strlen(p));
 }
@@ -8042,6 +8174,8 @@ struct Obj {
     FloatTrack track;
     void FUN_00bb0a40(const Vec3& v);
 };
+// pdb: CIndexedGeometry::AddVertexNormal | IndexedGeometry.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: pNormal
 void Obj::FUN_00bb0a40(const Vec3& v)
 {
     track.FUN_0058da30(v.x);
@@ -8061,6 +8195,8 @@ struct Obj {
     int unk08, unk0c, unk10, unk14, unk18; float a, b, c, d; int unk2c, unk30; Branch* branch;
     unsigned short FUN_00ba1ec0(float t);
 };
+// pdb: CSpeedTreeRT::GetDiscreteBranchLodLevel | SpeedTreeRT.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: fLodLevel
 unsigned short Obj::FUN_00ba1ec0(float t)
 {
     if (t == -1.0f) {
@@ -8086,6 +8222,8 @@ struct Obj {
     FloatTrack track;
     void FUN_00bb0d30(const Vec3& v);
 };
+// pdb: CIndexedGeometry::AddVertexBinormal | IndexedGeometry.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: pBinormal
 void Obj::FUN_00bb0d30(const Vec3& v)
 {
     Vec3 copy(v);
@@ -8226,6 +8364,7 @@ public:
     int unk14;
     Owner_00bbd270* FUN_00bbd270();
 };
+// pdb: CVec::CVec | Vec.obj | fnv360_0822_retail, call_seq, low
 Owner_00bbd270* Owner_00bbd270::FUN_00bbd270()
 {
     *(volatile float*)&unk10 = 0.0f;
@@ -8327,6 +8466,7 @@ struct FUN_00bb3320_cls
     void FUN_00bb3320();
 };
 
+// pdb: CLeafGeometry::~CLeafGeometry | LeafGeometry.obj | fnv360_0822_retail, call_gap, low
 void FUN_00bb3320_cls::FUN_00bb3320()
 {
     FUN_00401010(reinterpret_cast<void*>(unk20));
@@ -8420,6 +8560,7 @@ struct State {
 };
 }
 
+// pdb: CSpeedTreeRT::SGeometry::~SGeometry | SpeedTreeRT.obj | fnv360_0822_retail, call_seq, medium
 void f3m_00ba1dd0::State::FUN_00ba1dd0()
 {
     unk11c = 0;
@@ -8486,6 +8627,8 @@ struct CharBuffer : std::vector<char> {
 };
 }
 
+// pdb: std::vector<unsigned char,std::allocator<unsigned char> >::push_back | FileAccess.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: _Val
 void f3m_00ba80d0::CharBuffer::FUN_00ba80d0(const char& value)
 {
     if (size() < capacity())
@@ -8516,6 +8659,8 @@ struct Elem {
 };
 }
 
+// pdb: SFrondGuide::operator= | FrondEngine.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: __that
 void __cdecl FUN_00bb6c70(f3m_00bb6c70::Elem* first, f3m_00bb6c70::Elem* last, const f3m_00bb6c70::Elem& value)
 {
     for (; first != last; ++first)
@@ -8532,6 +8677,8 @@ struct Data {
     std::vector<float> vertices;
     float* FUN_00baee70(int index);
 };
+// pdb: CIndexedGeometry::GetVertexCoord | IndexedGeometry.obj | fnv360_0721_beta, call_gap, low
+// pdb params: nVertexIndex
 float* Data::FUN_00baee70(int index)
 {
     return &vertices[0] + index * 3;
@@ -8565,6 +8712,8 @@ struct TreeEngine
     LeafEntry* entries;
     void FUN_00bb3010(TreeGeometry* out, unsigned short index, float a, float b, float c);
 };
+// pdb: CLeafGeometry::SmallUpdate | LeafGeometry.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: sGeometry, usLodLevel, fAzimuth, fPitch, fSizeIncreaseFactor
 void TreeEngine::FUN_00bb3010(TreeGeometry* out, unsigned short index, float, float, float)
 {
     if (entries && index < count && p10 && p24 && p20 && p04 && p0c) {
@@ -8630,6 +8779,8 @@ unsigned short* ShortVec::FUN_00baf6b0(unsigned short* from, unsigned short* to,
 
 // @f3 0x00ba2d60 (community match, verified in this file)
 namespace f3m_00ba2d60 {
+// pdb: std::vector<unsigned char,std::allocator<unsigned char> >::_Inside | SpeedTreeRT.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: _Ptr
 void __cdecl FUN_00ba2d60(char* first, char* last, const char* value) {
     if (first != last) {
         do {
@@ -8671,6 +8822,7 @@ struct Owner {
 };
 }
 
+// pdb: std::_Iterator012<std::bidirectional_iterator_tag,std::pair<std::basic_string<char,std::char_traits<char>,std::allocator<char> > const ,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >,int,std::pair<std::basic_string<char,std::char_traits<char>,std::allocator<char> > const ,std::basic_string<char,std::char_traits<char>,std::allocator<char> > > const *,std::pair<std::basic_string<char,std::char_traits<char>,std::allocator<char> > const ,std::basic_string<char,std::char_traits<char>,std::allocator<char> > > const &,std::_Iterator_base12>::_Iterator012<std::bidirectional_iterator_tag,std::pair<std::basic_string<char,std::char_traits<char>,std::allocator<char> > const ,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >,int,std::pair<std::basic_string<char,std::char_traits<char>,std::allocator<char> > const ,std::basic_string<char,std::char_traits<char>,std::allocator<char> > > const *,std::pair<std::basic_string<char,std::char_traits<char>,std::allocator<char> > const ,std::basic_string<char,std::char_traits<char>,std::allocator<char> > > const &,std::_Iterator_base12> | algs.obj | fnv360_1110_debug, objrun_open, low, conflict (skyrim: std::basic_streambuf<char,struct std::char_traits<char> >::pptr)
 int f3m_00bbd670::Owner::FUN_00bbd670()
 {
     if (*state != 0)
@@ -8808,6 +8960,8 @@ struct Vec3 {
 };
 }
 
+// pdb: CVec3::operator!= | SpeedTreeRT.obj | fnv360_0822_debug, callee_sim, low
+// pdb params: cVec
 bool f3m_00ba1100::Vec3::FUN_00ba1100(const Vec3& o) const
 {
     return x != o.x || y != o.y || z != o.z;
@@ -8816,6 +8970,8 @@ bool f3m_00ba1100::Vec3::FUN_00ba1100(const Vec3& o) const
 
 // @f3 0x00ba11a0 (community match, verified in this file)
 namespace f3m_00ba11a0 {
+// pdb: VecInterpolate | SpeedTreeRT.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: fStart, fEnd, fPercent
 float __cdecl FUN_00ba11a0(float a, float b, float t)
 {
     b = a + (b - a) * t;
@@ -8836,6 +8992,7 @@ struct State {
 };
 }
 
+// pdb: CSpeedTreeRT::SGeometry::SLeaf::SLeaf | SpeedTreeRT.obj | fnv360_0822_retail, objrun, medium
 f3m_00ba11c0::State* f3m_00ba11c0::State::FUN_00ba11c0()
 {
     value = -1.0f;
@@ -8866,6 +9023,7 @@ struct Block {
 };
 }
 
+// pdb: CSpeedTreeRT::STextures::STextures | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
 f3m_00ba1230::Block* f3m_00ba1230::Block::FUN_00ba1230()
 {
     unk00 = 0;
@@ -8889,6 +9047,7 @@ struct Owner {
 };
 }
 
+// pdb: CSpeedTreeRT::InstanceOf | SpeedTreeRT.obj | fnv360_0822_retail, call_seq, medium
 int f3m_00ba12f0::Owner::FUN_00ba12f0()
 {
     int* p = value;
@@ -8910,6 +9069,8 @@ struct Owner {
 };
 }
 
+// pdb: CSpeedTreeRT::SetLeafRockingState | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
+// pdb params: bFlag
 void f3m_00ba1370::Owner::FUN_00ba1370(char flag)
 {
     target->flag = flag;
@@ -8928,6 +9089,8 @@ struct Owner {
 };
 }
 
+// pdb: CSpeedTreeRT::SetLeafDimmingScalar | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afLeafDimmingScalar
 void f3m_00ba13a0::Owner::FUN_00ba13a0(float value)
 {
     if (target)
@@ -8950,6 +9113,7 @@ struct Owner {
 };
 }
 
+// pdb: CSpeedTreeRT::GetTrunkWidth | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
 float f3m_00ba13c0::Owner::FUN_00ba13c0()
 {
     if (impl) {
@@ -8976,6 +9140,8 @@ struct Owner {
 };
 }
 
+// pdb: CSpeedTreeRT::SetMinimumBudAngle | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afAngle
 void f3m_00ba1400::Owner::FUN_00ba1400(float v)
 {
     if (impl)
@@ -8998,6 +9164,8 @@ struct Owner {
 };
 }
 
+// pdb: CSpeedTreeRT::SetMaximumBudAngle | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afAngle
 void f3m_00ba1420::Owner::FUN_00ba1420(float v)
 {
     if (impl)
@@ -9020,6 +9188,8 @@ struct Owner {
 };
 }
 
+// pdb: CSpeedTreeRT::SetLodLimits | SpeedTreeRT.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: fNear, fFar
 void f3m_00ba1470::Owner::FUN_00ba1470(float a, float b)
 {
     impl->FUN_00bbdaf0(a, b);
@@ -9041,6 +9211,7 @@ struct Owner {
 };
 }
 
+// pdb: CSpeedTreeRT::GetNumLeafLodLevels | SpeedTreeRT.obj | fnv360_0822_retail, call_dedup, low
 unsigned short f3m_00ba14a0::Owner::FUN_00ba14a0()
 {
     return At<unsigned short>(impl, 0xc0);
@@ -9063,6 +9234,7 @@ struct Owner {
 };
 }
 
+// pdb: CSpeedTreeRT::FreeLeafLODDataArrays | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
 void f3m_00ba14b0::Owner::FUN_00ba14b0()
 {
     if (other)
@@ -9118,6 +9290,7 @@ struct Reader {
 };
 }
 
+// pdb: SFrondTexture::~SFrondTexture | FrondEngine.obj | fnv360_0721_beta, callee_sim, low
 bool f3m_00ba1a80::Reader::FUN_00ba1a80()
 {
     unsigned int i = position++;
@@ -9137,6 +9310,8 @@ struct Scaled {
 };
 }
 
+// pdb: CSimpleBillboard::GetBillboardCoords | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
+// pdb params: fWidth, fHeight
 f3m_00ba1ba0::Scaled* f3m_00ba1ba0::Scaled::FUN_00ba1ba0(float a, float b)
 {
     if (!valid) {
@@ -9174,6 +9349,7 @@ struct Volume {
 };
 }
 
+// pdb: CSpeedTreeRT::SetupHorizontalBillboard | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
 void f3m_00ba1870::Volume::FUN_00ba1870()
 {
     if (enabled) {
@@ -9207,6 +9383,7 @@ struct Owner {
 };
 }
 
+// pdb: CSpeedTreeRT::GetCollisionObjectCount | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
 unsigned int f3m_00ba2040::Owner::FUN_00ba2040() const
 {
     std::vector<Elem>* l = list;
@@ -9228,6 +9405,7 @@ struct List : std::vector<Elem> {
 };
 }
 
+// pdb: CIndexedGeometry::GetVertexTexIndices | SpeedTreeRT.obj | fnv360_0822_debug, objrun_open, low
 f3m_00ba28e0::Elem& f3m_00ba28e0::List::FUN_00ba28e0(size_type index)
 {
     return (*this)[index];
@@ -9268,6 +9446,8 @@ struct Elem { int v[7]; };   // 0x1c bytes
 }
 
 // std::_Uninit_fill_n for a trivially copyable 0x1c-byte element (VC8 xmemory body)
+// pdb: std::vector<SShape,std::allocator<SShape> >::_Inside | SpeedTreeRT.obj | fnv360_0822_debug, callee_sim, low
+// pdb params: _Ptr
 void __cdecl FUN_00ba2de0(f3m_00ba2de0::Elem* first, unsigned int count, const f3m_00ba2de0::Elem& value,
                           std::allocator<f3m_00ba2de0::Elem>& al, std::_Nonscalar_ptr_iterator_tag, std::_Range_checked_iterator_tag)
 {
@@ -9315,6 +9495,7 @@ struct Buffer {
 };
 }
 
+// pdb: CTreeFileAccess::~CTreeFileAccess | SpeedTreeRT.obj | fnv360_0822_retail, objrun, low
 void f3m_00ba34c0::Buffer::FUN_00ba34c0()
 {
     if (first)
@@ -9355,6 +9536,7 @@ struct Data {
 };
 }
 
+// pdb: SEmbeddedTexCoords::~SEmbeddedTexCoords | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
 void f3m_00ba2fb0::Data::FUN_00ba2fb0()
 {
     DAT_01090a78.FUN_0086ba60(first);
@@ -9377,6 +9559,8 @@ struct List : std::vector<int> {
 };
 }
 
+// pdb: std::vector<float,std::allocator<float> >::operator[] | BSFaceGenManager.obj | fnv360_0822_debug, call_gap, low
+// pdb params: _Pos
 f3m_00ba2e10::List::iterator f3m_00ba2e10::List::FUN_00ba2e10(iterator first, iterator last)
 {
     if (first != last) {
@@ -9406,6 +9590,7 @@ struct Buffers {
 };
 }
 
+// pdb: CIndexedGeometry::FreeVertexWindData | SpeedTreeRT.obj | fnv360_0822_retail, call_seq, medium
 void f3m_00ba3420::Buffers::FUN_00ba3420()
 {
     indices.clear();
@@ -9478,6 +9663,8 @@ struct Element {
 };
 }
 
+// pdb: CSpeedTreeRT::ParseUserData | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
+// pdb params: pFile
 void f3m_00ba31d0::Element::FUN_00ba31d0(Reader* reader)
 {
     int token = reader->FUN_00ba92d0();
@@ -9539,6 +9726,7 @@ struct Model {
 };
 }
 
+// pdb: CSpeedTreeRT::FreeProjectedShadowData | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, medium
 void f3m_00ba3550::Model::FUN_00ba3550()
 {
     if (named) {
@@ -9591,6 +9779,7 @@ struct Str : String {
 };
 }
 
+// pdb: CSpeedTreeRT::FreeLeafLODDataArrays | SpeedTreeRT.obj | fnv360_0822_debug, objrun_open, low
 f3m_00ba3700::Str& f3m_00ba3700::Str::FUN_00ba3700(const char* s)
 {
     return (Str&)append(s, traits_type::length(s));
@@ -9636,6 +9825,7 @@ struct Str : String {
 };
 }
 
+// pdb: std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::assign | BipedAnim.obj | tesv_win, call_seq, medium
 f3m_00ba3820::Str& f3m_00ba3820::Str::FUN_00ba3820(const char* s)
 {
     return (Str&)assign(s, traits_type::length(s));
@@ -9681,6 +9871,8 @@ struct Str : String {
 };
 }
 
+// pdb: CIdvFilename::CIdvFilename | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
+// pdb params: strFilename
 f3m_00ba37a0::Str::Str(String s) : String(s)
 {
 }
@@ -9832,6 +10024,7 @@ public:
 };
 }
 
+// pdb: std::runtime_error::`vector deleting destructor' | TESScriptFunctions_Console.obj | tesv_win, vtable_prefix, medium
 f3m_00ba3bb0::Error* f3m_00ba3bb0::Error::FUN_00ba3bb0(unsigned int flags)
 {
     this->Error::~Error();
@@ -9884,6 +10077,8 @@ public:
     f3m_00ba3f00::String message;
 };
 
+// pdb: std::runtime_error::runtime_error | SpeedTreeRT.obj | fnv360_0822_debug, objrun_prop, low
+// pdb params: __that
 FUN_00ba3f00::FUN_00ba3f00(const FUN_00ba3f00& other) : std::exception(other), message(other.message)
 {
 }
@@ -9929,6 +10124,8 @@ extern Vec3 DAT_01068b04;   // camera direction
 extern String DAT_01068a70; // last error
 }
 
+// pdb: CSpeedTreeRT::GetCamera | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pPosition, pDirection
 void __cdecl FUN_00ba60e0(f3m_00ba60e0::Vec3* position, f3m_00ba60e0::Vec3* direction)
 {
     if (position && direction) {
@@ -9974,6 +10171,8 @@ struct Geometry {
  FloatList positions,windPositions;
  void FUN_00bb09b0(const Vector3&);
 };
+// pdb: CIndexedGeometry::AddVertexCoord | IndexedGeometry.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: pCoord
 void Geometry::FUN_00bb09b0(const Vector3& point){
  Vector3 copy={point.x,point.y,point.z};
  positions.FUN_0058da30(copy.x);positions.FUN_0058da30(copy.y);positions.FUN_0058da30(copy.z);
@@ -10252,6 +10451,8 @@ inline pair<_RanIt, _RanIt> FUN_00baad80(_RanIt _First, _RanIt _Last, _Pr _Pred)
 }
 
 // @fnv 0x00b16b60
+// pdb: std::_Sort<CIdvBranch * *,int,CBranchVolumeSorter> | Branch.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: _First, _Last, _Ideal, _Pred
 void __cdecl FUN_00bab3f0(Entry** first, Entry** last, int ideal, Predicate pred)
 {
     int count;
@@ -10365,6 +10566,8 @@ struct Tree {
     unsigned short GetCount() { unsigned int value = data->count; return (unsigned short)value; }
     unsigned short FUN_00ba1f80(float lod);
 };
+// pdb: CSpeedTreeRT::GetDiscreteLeafLodLevel | SpeedTreeRT.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: fLodLevel
 unsigned short Tree::FUN_00ba1f80(float lod)
 {
     unsigned short level = 0;
@@ -10634,6 +10837,8 @@ struct Vector {
     Allocator allocator;
     Block* FUN_00bbbec0(Block* pointer,unsigned int count,const Block& value);
 };
+// pdb: std::vector<SFrondGuide,std::allocator<SFrondGuide> >::erase | FrondEngine.obj | fnv360_0721_beta, objrun_sim, low
+// pdb params: _Where
 Block* Vector::FUN_00bbbec0(Block* pointer,unsigned int count,const Block& value)
 {
     FUN_00bbbb70(pointer,count,value,allocator,PointerCategory(pointer,pointer),RangeChecked());
@@ -10675,6 +10880,8 @@ struct Elem {
     int unk0c;
 };
 inline void SwapField(int& x, int& y) { int t = x; x = y; y = t; }
+// pdb: std::_Uninit_move<std::vector<float,std::allocator<float> > *,std::vector<float,std::allocator<float> > *,std::allocator<std::vector<float,std::allocator<float> > >,std::vector<float,std::allocator<float> > > | FrondEngine.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: _First, _Last, _Dest, _Al, __formal, __formal
 Elem* FUN_00bb9030(Elem* first, Elem* last, Elem* dest)
 {
     while (first != last) {
@@ -10733,6 +10940,8 @@ inline Iter add(Iter it, int n) {
     if (it.ptr + n > it.cont->last || it.ptr + n < it.cont->first) FUN_00c01e8b();
     it.ptr += n; return it;
 }
+// pdb: std::vector<unsigned short,std::allocator<unsigned short> >::push_back | IndexedGeometry.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: _Val
 Iter Vec::FUN_00bb0110(Iter where, const short& val)
 {
     unsigned int off = size() == 0 ? 0 : diff(where, begin());
@@ -10766,6 +10975,8 @@ struct Obj {
     float unk44;
     void FUN_00bbdaf0(float a, float b);
 };
+// pdb: CTreeEngine::SetLodLimits | TreeEngine.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fNear, fFar
 void Obj::FUN_00bbdaf0(float a, float b)
 {
     unk44 = a;
@@ -10827,6 +11038,8 @@ struct Obj {
     Vec slots;
     void FUN_00baf1d0(unsigned short v);
 };
+// pdb: CIndexedGeometry::ResetStripCounter | IndexedGeometry.obj | fnv360_0822_retail, call_gap, low
+// pdb params: nLodLevel
 void Obj::FUN_00baf1d0(unsigned short v)
 {
     index = v;
@@ -10847,6 +11060,7 @@ struct FUN_00bbd2c0 {
     int mode;
     FUN_00bbd2c0(float x, float y);
 };
+// pdb: std::ctype_base::ctype_base | TESScriptFunctions_Console.obj | tesv_win, objrun_open, low
 FUN_00bbd2c0::FUN_00bbd2c0(float x, float y)
 {
     a = x;
@@ -10869,6 +11083,8 @@ struct Vector {
     Block* end;
     bool FUN_00baf750(unsigned int capacity);
 };
+// pdb: std::vector<std::vector<unsigned short,std::allocator<unsigned short> >,std::allocator<std::vector<unsigned short,std::allocator<unsigned short> > > >::_Buy | IndexedGeometry.obj | fnv360_0822_retail, call_gap, low
+// pdb params: _Capacity
 bool Vector::FUN_00baf750(unsigned int capacity)
 {
     first=0, last=0, end=0;
@@ -10938,6 +11154,8 @@ struct CategoryTag {};
 
 extern "C" void __cdecl FUN_00401010(int);
 
+// pdb: std::_Destroy_range<std::allocator<std::vector<float,std::allocator<float> > > > | FrondEngine.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: _First, _Last, _Al
 void __cdecl FUN_00baf710(Elem16* first, Elem16* last, Vec16& alloc, vec16_bb1460::CategoryTag tag) {
     for (; first != last; first = (Elem16*)((char*)first + 0x10)) {
         if (first->b != 0) {
@@ -11013,6 +11231,8 @@ float m00,m01,m02,m10,m11,m12,m20,m21,m22;
 BranchMatrix() { m00=1.0f; m01=0.0f; m02=0.0f; m10=0.0f; m11=1.0f; m12=0.0f; m20=0.0f; m21=0.0f; m22=1.0f; }
 BranchMatrix FUN_00ba9610(const BranchMatrix&);
 };
+// pdb: CRotTransform::operator* | Branch.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: cTrans
 BranchMatrix BranchMatrix::FUN_00ba9610(const BranchMatrix& a)
 {
     BranchMatrix result;
@@ -11177,6 +11397,8 @@ struct PriorityGreater_aad80
 };
 typedef SortedEntry_aad80* EP;
 void __cdecl FUN_00baab70(EP*,EP*,EP*,PriorityGreater_aad80);
+// pdb: std::_Median<CIdvBranch * *,CBranchVolumeSorter> | Branch.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: _First, _Mid, _Last, _Pred
 void __cdecl FUN_00baac90(EP* first,EP* mid,EP* last,PriorityGreater_aad80 pred) {
     if(40 < last-first) {
         int step=(last-first+1)/8;
@@ -11281,6 +11503,8 @@ struct Owner
     bool FUN_00ba9e40(Link* link, float input);
 };
 // @fnv 0x00b13b50
+// pdb: CIdvBranch::IsBlossom | Branch.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: pParent, fPercentOfParent
 bool Owner::FUN_00ba9e40(Link* link, float input)
 {
     bool result = false;
@@ -11355,6 +11579,8 @@ struct FUN_00b14be0_cls
 };
 
 // @fnv 0x00b14be0
+// pdb: CIdvBranch::FillBranch | Branch.obj | fnv360_0822_retail, call_gap, low
+// pdb params: sBranch, fChildGrowthPos
 void FUN_00b14be0_cls::FUN_00ba9f60(OutPair* out, float afValue)
 {
     if (m_20 != 0 && m_24 >= 2)
@@ -11530,6 +11756,7 @@ public:
     virtual ~RuntimeError() {}
     virtual const char* what() const { return message.c_str(); }
 };
+// pdb: stdext::exception::_Raise | TESObject.obj | fnv360_0721_beta, call_gap, low
 RuntimeError::RuntimeError(const std::string& text) : message(text) {}
 }   // namespace f3m_00ba3730
 
@@ -11580,6 +11807,8 @@ struct FUN_00b1c7a0_cls
 };
 
 // @fnv 0x00b1c7a0
+// pdb: CIdvBezierSpline::operator= | FrondEngine.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: __that
 FUN_00b1c7a0_cls& FUN_00b1c7a0_cls::FUN_00bb6a50(const FUN_00b1c7a0_cls& that)
 {
     f00 = that.f00;
@@ -11725,6 +11954,7 @@ struct FUN_00bbd1e0 {
  Facet* ptr;
  ~FUN_00bbd1e0();
 };
+// pdb: std::locale::`scalar deleting destructor' | algs.obj | fnv360_0721_beta, callee_sim, low, conflict (skyrim: std::locale::~locale)
 FUN_00bbd1e0::~FUN_00bbd1e0() {
  if(ptr) delete ptr->decref();
 }
@@ -11744,6 +11974,7 @@ virtual ~Error() {}
 virtual const char* what() const { return message.c_str(); }
 void* FUN_00bbd7b0(unsigned int flags);
 };
+// pdb: std::ios_base::failure::`scalar deleting destructor' | TESScriptFunctions_Console.obj | tesv_win, vtable_prefix, medium
 void* Error::FUN_00bbd7b0(unsigned int flags) {
 this->Error::~Error();
 if(flags&1) ::operator delete(this);
@@ -11759,6 +11990,8 @@ struct Elem {unsigned int f00,f04,f08,f0c,f10,f14;};
 __declspec(noreturn) void __cdecl FUN_00bc5f00();
 Elem* __cdecl FUN_00bb4690(unsigned int,const void*);
 struct Vector {unsigned int allocatorState; Elem* first; Elem* last; Elem* limit; bool FUN_00bb5780(unsigned int);};
+// pdb: std::vector<CVec,std::allocator<CVec> >::_Buy | FrondEngine.obj | fnv360_0822_retail, call_gap, low
+// pdb params: _Capacity
 bool Vector::FUN_00bb5780(unsigned int capacity) {
  first=0; last=0; limit=0;
  if(capacity==0) return false;
@@ -11823,6 +12056,8 @@ struct Owner_bb4630 {
     Elem48_bb4630* FUN_00bb4630(unsigned int index);
 };
 
+// pdb: std::vector<SFrondGuide,std::allocator<SFrondGuide> >::operator[] | FrondEngine.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: _Pos
 Elem48_bb4630* Owner_bb4630::FUN_00bb4630(unsigned int index) {
     return &items[index];
 }
@@ -11864,6 +12099,8 @@ namespace f3_2773 {
 struct Node;
 struct Comparator { bool operator()(const Node*,const Node*) const; };
 void FUN_00baabd0(Node**,int,int,Node*,Comparator);
+// pdb: std::vector<int,std::allocator<int> >::_Reserve | Branch.obj | fnv360_0822_retail, objrun, medium
+// pdb params: _Count
 void FUN_00baad40(Node** first,Node** last,Comparator pred,int*,Node**) {
 int bottom=last-first;
 for(int hole=bottom/2;0<hole;) {
@@ -11942,6 +12179,8 @@ struct Owner {
  Floats values; void FUN_00bb0c40(const float&);
 };
 // @fnv 0x00b304f0
+// pdb: CIndexedGeometry::AddVertexTexCoord1 | IndexedGeometry.obj | fnv360_0721_beta, objrun, medium
+// pdb params: pTexCoord
 void Owner::FUN_00bb0c40(const float& afValue)
 {
     float f;
@@ -12053,6 +12292,8 @@ struct Vector {
 unsigned char allocator; Row* first; Row* last; Row* end;
 bool FUN_00bbe940(unsigned int);
 };
+// pdb: std::vector<CIdvBranch *,std::allocator<CIdvBranch *> >::operator[] | TreeEngine.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: _Pos
 bool Vector::FUN_00bbe940(unsigned int capacity) {
 first=0,last=0,end=0;
 if(capacity==0) return false;
@@ -12089,6 +12330,7 @@ struct Buffer {
  Locale* locale;
  Locale FUN_00bbd230() const;
 };
+// pdb: std::locale::id::operator unsigned int | TESScriptFunctions_Console.obj | tesv_win, objrun_prop, low
 Locale Buffer::FUN_00bbd230() const {return *locale;}
 }
 }   // namespace f3m_00bbd230
@@ -12099,6 +12341,7 @@ namespace task2780 {
 struct CB770Lockit { int kind; void FUN_00bff149(int) throw();void FUN_00bff16a() throw();CB770Lockit(int k) throw(){FUN_00bff149(k);}~CB770Lockit() throw(){FUN_00bff16a();} };
 struct CB770Facet { virtual void v0();unsigned m_uiRefs;CB770Facet* FUN_00bbd190(); };
 // @fnv 0x00acb770
+// pdb: std::locale::facet::_Incref | algs.obj | fnv360_0721_beta, caller_sim, low, conflict (skyrim: std::locale::facet::_Decref)
 CB770Facet* CB770Facet::FUN_00bbd190()
 {
     CB770Lockit kLock(0);
@@ -12138,6 +12381,8 @@ int field30,field34,field38,field3c,field40,field44,field48,field4c,field50;
 };
 struct Allocator {};
 struct NonscalarTag {};
+// pdb: std::_Destroy_range<std::allocator<SIdvLeafTexture> > | TreeEngine.obj | fnv360_0822_retail, call_gap, low
+// pdb params: _First, _Last, _Al, __formal
 void FUN_00bbead0(Row* first,Row* last,Allocator&,NonscalarTag) {
 for(;first!=last;++first) first->~Row();
 }
@@ -12209,6 +12454,7 @@ public:
  Iterator FUN_00bb0e80(Iterator,Iterator);
  void FUN_00bb0fa0();
 };
+// pdb: std::vector<std::vector<unsigned short,std::allocator<unsigned short> >,std::allocator<std::vector<unsigned short,std::allocator<unsigned short> > > >::clear | IndexedGeometry.obj | fnv360_0822_retail, call_gap, low
 void Vector::FUN_00bb0fa0() { FUN_00bb0e80(begin(),end()); }
 }
 }   // namespace f3m_00bb0fa0
@@ -12326,6 +12572,7 @@ public:
  Iterator FUN_00bb8d50(Iterator,Iterator);
  void FUN_00bb91e0();
 };
+// pdb: std::vector<SFrondTexture,std::allocator<SFrondTexture> >::clear | FrondEngine.obj | fnv360_0822_retail, call_seq, medium
 void Vector::FUN_00bb91e0() { FUN_00bb8d50(begin(),end()); }
 }
 
@@ -12367,6 +12614,8 @@ public:
     void FUN_00bbda40(float a, float b);
 };
 
+// pdb: CTreeEngine::SetSize | TreeEngine.obj | fnv360_0822_retail, call_gap, low
+// pdb params: fSize, fVariance
 void S00bbda40::FUN_00bbda40(float a, float b)
 {
     this->unk4C = a;
@@ -12407,6 +12656,8 @@ int unk28;
 int unk2c;
 int unk30;
 Lod* lod;void FUN_00ba6b90(float);};
+// pdb: CSpeedTreeRT::SetLodLevel | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: fLevel
 void Owner::FUN_00ba6b90(float level){if(level>=0.0 && level<=1.0){if(lod)lod->value10=level;else root->value14=level;}else DAT_01068a70.FUN_0042f100("SetLodLevel() expects a value in the range of 0.0 to 1.0",56);}
 }
 }   // namespace f3m_00ba6b90
@@ -12417,6 +12668,8 @@ namespace Task2900 {
 struct Vec {float x,y,z;Vec(float a,float b,float c):x(a),y(b),z(c){}};
 struct Data {int header;Vec value;};
 struct Owner {Data* primary;int pad[12];Data* alternate;void FUN_00ba1310(float,float,float);};
+// pdb: CSpeedTreeRT::SetTreePosition | SpeedTreeRT.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: x, y, z
 void Owner::FUN_00ba1310(float a,float b,float c) {
  Data* target=alternate; if(target){target->value.x=a;target->value.y=b;target->value.z=c;}
  else {Vec temp(a,b,c);primary->value=temp;}
@@ -12429,6 +12682,8 @@ void Owner::FUN_00ba1310(float a,float b,float c) {
 namespace f3m_00bae370 {
 namespace task2914 {
 struct Object {float unk00,f04,unk08,unk0c,unk10,unk14,f18,f1c,f20,f24;void FUN_00bae370(const float*);};
+// pdb: CWindEngine::Init | WindEngine.obj | fnv360_0822_retail, call_gap, low
+// pdb params: cWindInfo
 void Object::FUN_00bae370(const float* p){f18=p[0];f1c=p[1];f20=8.0*p[6]*f1c;f24=180.0*p[6]*f18;f04=p[6];}
 }
 }   // namespace f3m_00bae370
@@ -12478,6 +12733,8 @@ unsigned short count;
 float GetLevel() { float level=-1.0f; if(optional) level=optional->level; else level=primary->level; return level; }
 short FUN_00ba1f20(float);
 };
+// pdb: CSpeedTreeRT::GetDiscreteFrondLodLevel | SpeedTreeRT.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: fLodLevel
 short Levels::FUN_00ba1f20(float level) {
 short index=0;
 if(level==-1.0f) level=GetLevel();
@@ -12522,6 +12779,8 @@ struct Entry {
 template<class T> inline void destroy(T* p) {p->~T();}
 struct Alloc {void destroy(Entry* p) {Task2922::destroy(p);}};
 struct Nonscalar {};
+// pdb: std::_Destroy_range<std::allocator<SFrondGuide> > | FrondEngine.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: _First, _Last, _Al
 void __cdecl FUN_00bb8e80(Entry* first, Entry* last, Alloc& al, Nonscalar) {
  for(;first!=last;++first) al.destroy(first);
 }
@@ -12600,6 +12859,8 @@ struct State00bae3b0 {
     unsigned int first, second;
     void FUN_00bae3b0(unsigned int a, unsigned int b);
 };
+// pdb: CWindEngine::SetLocalMatrices | WindEngine.obj | fnv360_0822_retail, call_gap, low
+// pdb params: nStartingMatrix, nMatrixSpan
 void State00bae3b0::FUN_00bae3b0(unsigned int a, unsigned int b) {
     first = a;
     second = b;
@@ -12649,6 +12910,8 @@ struct ReceiverView_bbdb60 {
     unsigned int value54;
     void FUN_00bbdb60(SourceView_ba92d0* source);
 };
+// pdb: CTreeEngine::ParseFlareSeed | TreeEngine.obj | fnv360_0822_retail, call_gap, low
+// pdb params: cFile
 void ReceiverView_bbdb60::FUN_00bbdb60(SourceView_ba92d0* source) { value54 = source->FUN_00ba92d0(); }
 }   // namespace f3m_00bbdb60
 
@@ -12660,6 +12923,7 @@ struct State00ba9530 {
     float x, y, z;
     State00ba9530* FUN_00ba9530();
 };
+// pdb: CIdvCamera::CIdvCamera | Camera.obj | fnv360_0822_retail, call_seq, medium
 State00ba9530* State00ba9530::FUN_00ba9530() {
     x = 0.0f;
     table = &DAT_00ea7c04;
@@ -12704,6 +12968,8 @@ struct State00ba9560 {
     Vector00ba9560 vector;
     State00ba9560* FUN_00ba9560(const State00ba9560* other);
 };
+// pdb: CIdvCamera::operator= | Camera.obj | fnv360_0822_retail, vtable, medium
+// pdb params: cRight
 State00ba9560* State00ba9560::FUN_00ba9560(const State00ba9560* other) {
     if (other != this)
         vector = other->vector;
@@ -12749,6 +13015,7 @@ struct Reader_ba92d0 {
     std::vector<char> data;
     unsigned int FUN_00ba92d0();
 };
+// pdb: CTreeFileAccess::ParseInt | FileAccess.obj | fnv360_0822_retail, call_dedup, medium
 unsigned int Reader_ba92d0::FUN_00ba92d0()
 {
     unsigned int index = offset;
@@ -12771,6 +13038,8 @@ struct Vector {
  Element& FUN_00ba1990(unsigned int index);
  unsigned int size() const {return first ? (unsigned int)(last-first):0;}
 };
+// pdb: std::vector<SShape,std::allocator<SShape> >::operator[] | SpeedTreeRT.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: _Pos
 Element& Vector::FUN_00ba1990(unsigned int index) {
  if(index>=size()) FUN_00c01e8b();
  return first[index];
@@ -12828,6 +13097,7 @@ struct Reader00ba9300 {
     std::vector<char> data;
     unsigned int FUN_00ba9300();
 };
+// pdb: CTreeFileAccess::ParseLong | FileAccess.obj | fnv360_0822_retail, call_gap_sim, low
 unsigned int Reader00ba9300::FUN_00ba9300() {
     unsigned int index = offset;
     char* current = &data[index];
@@ -12903,6 +13173,7 @@ struct List_bb2cb0 {
     Entry_bb2cb0* entries2c;
     void FUN_00bb2cb0();
 };
+// pdb: CLeafGeometry::Invalidate | LeafGeometry.obj | fnv360_0822_retail, call_gap, low
 void List_bb2cb0::FUN_00bb2cb0()
 {
     if (entries2c) {
@@ -12943,6 +13214,8 @@ typedef f3m_00bb5fe0::Slot1VectorBB::Element Element_bb53b0;
 struct Vector_bb53b0 : std::vector<Element_bb53b0> {
     std::vector<Element_bb53b0>::iterator FUN_00bb53b0();
 };
+// pdb: std::vector<SFrondGuide,std::allocator<SFrondGuide> >::insert<SFrondGuide &> | FrondEngine.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: _Where, _Val
 std::vector<Element_bb53b0>::iterator Vector_bb53b0::FUN_00bb53b0()
 {
     return end();
@@ -13033,6 +13306,8 @@ struct FUN_00bbdb10_Obj {
     void FUN_00bbdb10(int value);
 };
 
+// pdb: CTreeEngine::SetSeed | TreeEngine.obj | fnv360_0822_retail, caller, medium
+// pdb params: nSeed
 void FUN_00bbdb10_Obj::FUN_00bbdb10(int value)
 {
     if (value == 0) {
@@ -13075,6 +13350,8 @@ struct Obj {
     float unk50;
     void FUN_00bbda20(float& a, float& b) const;
 };
+// pdb: CTreeEngine::GetSize | TreeEngine.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: fSize, fVariance
 void Obj::FUN_00bbda20(float& a, float& b) const
 {
     a = unk4c;
@@ -13226,6 +13503,7 @@ struct Reader {
     Bytes buf;
     float FUN_00ba92a0();
 };
+// pdb: CTreeFileAccess::ParseFloat | FileAccess.obj | fnv360_0822_retail, call_dedup, low
 float Reader::FUN_00ba92a0()
 {
     char& c = buf[pos];
@@ -13254,6 +13532,8 @@ struct Obj {
     Str name;
     void FUN_00bbea40(const Str& s);
 };
+// pdb: CTreeEngine::SetBranchTexture | TreeEngine.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: strFilename
 void Obj::FUN_00bbea40(const Str& s)
 {
     Str tmp(s);
@@ -13326,6 +13606,8 @@ inline Iter add(Iter it, int n) {
     if (it.ptr + n > it.cont->last || it.ptr + n < it.cont->first) FUN_00c01e8b();
     it.ptr += n; return it;
 }
+// pdb: std::vector<SFrondGuide,std::allocator<SFrondGuide> >::vector<SFrondGuide,std::allocator<SFrondGuide> > | FrondEngine.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: _Right
 Iter Vec::FUN_00bbc270(Iter where, const Elem16& val)
 {
     unsigned int off = size() == 0 ? 0 : diff(where, begin());
@@ -13357,6 +13639,7 @@ public:
     float FUN_00ba13e0();
 };
 
+// pdb: CSpeedTreeRT::GetTrunkLength | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
 float C00ba13e0::FUN_00ba13e0()
 {
     void* p = *(void**)((char*)this + 0x00);
@@ -13383,6 +13666,8 @@ public:
     C00bbd290* FUN_00bbd290(int n);
 };
 
+// pdb: CVec::CVec | Vec.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: nSize
 C00bbd290* C00bbd290::FUN_00bbd290(int n)
 {
     float z = 0.0f;
@@ -13624,6 +13909,8 @@ struct FUN_00bbd800 {
  FUN_00bbd800(const char*);
  ~FUN_00bbd800();
 };
+// pdb: std::_Locinfo::_Locinfo | algs.obj | fnv360_0822_retail, ustr, medium
+// pdb params: _Pch
 FUN_00bbd800::FUN_00bbd800(const char* name):lock(0){
  if(!name)throw std::runtime_error("bad locale name");
  FUN_00bff43d(this,name);
@@ -13638,6 +13925,8 @@ namespace f3m_00ba9b00 {
 namespace task2992 {
 inline float difference(float a,float b){return a-b;}
 struct ParticleFalloff{float unk00,unk04,unk08,unk0c,unk10,unk14;float FUN_00ba9b00(float,float);};
+// pdb: SIdvBranchFlare::Distance | Branch.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: fInputAngle, fInputProgress
 float ParticleFalloff::FUN_00ba9b00(float a, float b)
 {
     float result2 = 0.0f;
@@ -13808,6 +14097,8 @@ struct Builder {
  unsigned int levels,unk54,unk58,unk5c,unk60,minRows,halfColumns;
  void FUN_00bb4cb0(unsigned int level,unsigned int base,Grid* grid);
 };
+// pdb: CFrondEngine::ComputeExtrusion | FrondEngine.obj | fnv360_0822_retail, call_gap, low
+// pdb params: nLod, nStart, sGuide
 void Builder::FUN_00bb4cb0(unsigned int level,unsigned int base,Grid* grid) {
  if (!resource) return;
  float t;
@@ -13872,6 +14163,7 @@ struct State1200 {
     int unk10, unk14, unk18, unk1c, unk20, unk24, unk28, unk2c, unk30, unk34, unk38;
     void FUN_00ba1200();
 };
+// pdb: CSpeedTreeRT::SGeometry::SLeaf::~SLeaf | SpeedTreeRT.obj | fnv360_0822_retail, objrun, medium
 void State1200::FUN_00ba1200() {
     unk10=0; unk14=0; unk18=0; unk24=0; unk28=0; unk2c=0; unk30=0;
     unk1c=0; unk20=0; unk34=0; unk38=0;
@@ -14021,6 +14313,8 @@ struct FUN_00bb0e80_Vector
     f3m_00bb0e80::Iterator FUN_00bb0e80(f3m_00bb0e80::Iterator first, f3m_00bb0e80::Iterator last);
 };
 
+// pdb: std::_Destroy_range<std::allocator<std::vector<unsigned short,std::allocator<unsigned short> > > > | IndexedGeometry.obj | fnv360_0721_beta, objopen_prop, low
+// pdb params: _First, _Last, _Al
 f3m_00bb0e80::Iterator FUN_00bb0e80_Vector::FUN_00bb0e80(f3m_00bb0e80::Iterator first, f3m_00bb0e80::Iterator last)
 {
     if (first.m_pCont == 0 || first.m_pCont != last.m_pCont)
@@ -14045,6 +14339,8 @@ struct Root {
     Node* node;
     int FUN_00ba1300();
 };
+// pdb: CSpeedTreeRT::GetTreeSize | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
+// pdb params: fSize, fVariance
 int Root::FUN_00ba1300()
 {
     return node->FUN_00bbda20();
@@ -14061,6 +14357,7 @@ struct Outer {
     Inner* node;
     short FUN_00ba1490();
 };
+// pdb: CSpeedTreeRT::GetNumBranchLodLevels | SpeedTreeRT.obj | fnv360_0822_retail, objrun, low
 short Outer::FUN_00ba1490()
 {
     return node->unk70;
@@ -14361,6 +14658,8 @@ struct ParticleEmitter
 };
 
 // @fnv 0x00b14ca0
+// pdb: CIdvBranch::ComputeFlareEntries | Branch.obj | fnv360_0721_beta, call_gap, low
+// pdb params: sInfo
 void ParticleEmitter::FUN_00bac610(CreationSettings* settings)
 {
     if (settings->count != 0)
@@ -14404,6 +14703,8 @@ unsigned int __cdecl FUN_00bb0340(unsigned int value2, unsigned int context,
 void __cdecl FUN_00baf710(unsigned int result, unsigned int context,
                           FUN_00bb0ee0_Obj* self, int* volatile output);
 
+// pdb: std::_Destroy_range<std::allocator<std::vector<unsigned short *,std::allocator<unsigned short *> > > > | IndexedGeometry.obj | fnv360_0721_beta, objopen_prop, low
+// pdb params: _First, _Last, _Al
 void __thiscall FUN_00bb0ee0_Obj::FUN_00bb0ee0(int* volatile output,
                                                 unsigned int id,
                                                 unsigned int value,
@@ -14440,6 +14741,8 @@ extern "C" void __cdecl FUN_00c01e8b();
 extern "C" int __cdecl FUN_00bb6b80(int other, int allocator, int value);
 extern "C" void __cdecl FUN_00bb5cd0(int entry, int allocator, FUN_00bb8d50_Obj* owner, int* output);
 
+// pdb: std::_Destroy_range<std::allocator<SFrondTexture> > | FrondEngine.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: _First, _Last, _Al, __formal
 void __thiscall FUN_00bb8d50_Obj::FUN_00bb8d50(int* volatile output, int key, int value, int key2, int other)
 {
     if (key == 0 || key != key2)
@@ -14489,6 +14792,8 @@ struct VectorStorageBBA0 {
     LeafClusterBBA0** end;
 };
 
+// pdb: CIdvBranch::SortBranchVector | Branch.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: vAllBranches
 void __cdecl FUN_00babba0(VectorStorageBBA0* storage)
 {
     volatile unsigned char flag = 0;
@@ -14530,6 +14835,8 @@ struct FUN_00bae300_Obj {
     float FUN_00bae300(float a, float b, float c);
 };
 
+// pdb: CWindEngine::SetWindStrength | WindEngine.obj | fnv360_0822_retail, call_gap, low
+// pdb params: fNewStrength, fOldStrength, fOldTimeShift
 float FUN_00bae300_Obj::FUN_00bae300(float a, float b, float c) {
     unk04 = a;
     float i;
@@ -14593,6 +14900,8 @@ IterA& IterA::operator+=(int off)
     ptr += off;
     return *this;
 }
+// pdb: std::vector<float,std::allocator<float> >::vector<float,std::allocator<float> > | FrondEngine.obj | fnv360_0822_retail, call_seq, low
+// pdb params: _Right
 IterA VecA::FUN_00bba810(IterA where, const Elem16& value)
 {
     unsigned int off = size() == 0 ? 0 : where - begin();
@@ -14672,6 +14981,8 @@ void __cdecl FUN_00bb52e0(Elem* dest, unsigned int count, const Elem* val,
                           FUN_00bb6ab0_Obj* al, const Elem* val2, Tag tag);
 void __cdecl FUN_00c01e8b();
 
+// pdb: std::vector<SFrondVertex,std::allocator<SFrondVertex> >::push_back | FrondEngine.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: _Val
 void FUN_00bb6ab0_Obj::FUN_00bb6ab0(const Elem* volatile val)
 {
     Iter it;
@@ -14715,6 +15026,8 @@ public:
     void FUN_00bb0850(unsigned short usIdx, unsigned int uiVal, unsigned short usDelta);
 };
 
+// pdb: CIndexedGeometry::AddStrip | IndexedGeometry.obj | fnv360_0721_beta, caller, medium
+// pdb params: nLodLevel, pStrip, nStripLength
 void Owner_bb0850::FUN_00bb0850(unsigned short usIdx, unsigned int uiVal, unsigned short usDelta)
 {
     m_kWords[usIdx].resize(m_usCount + 1, 0);
@@ -14763,6 +15076,8 @@ struct FrondGeometryB2a70 {
     void FUN_00bb2a70(unsigned short n);
 };
 
+// pdb: CIndexedGeometry::SetNumLodLevels | IndexedGeometry.obj | fnv360_0822_retail, call_gap, low
+// pdb params: nLevels
 void FrondGeometryB2a70::FUN_00bb2a70(unsigned short n)
 {
     strips38.clear();
@@ -15065,6 +15380,8 @@ struct Owner {
     }
     void __thiscall FUN_00bb71d0(int a0, int a1, int a2, Block36 blk, float f, int a13);
 };
+// pdb: CFrondEngine::AddGuideVertex | FrondEngine.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: cPos, cTrans, fCrossSectionWeight, nWindGroup
 void Owner::FUN_00bb71d0(int a0, int a1, int a2, Block36 blk, float f, int a13)
 {
     Args56 args;
@@ -15104,6 +15421,8 @@ public:
     void FUN_00bbac30(const Elem* pv);
 };
 
+// pdb: std::vector<std::vector<float,std::allocator<float> >,std::allocator<std::vector<float,std::allocator<float> > > >::push_back | FrondEngine.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: _Val
 void Obj_bbac30::FUN_00bbac30(const Elem* pv)
 {
     Iter it;
@@ -15155,6 +15474,8 @@ inline Iter16::Iter16(Elem16* p, Vec16* v)
     cont = v;
     ptr = p;
 }
+// pdb: std::vector<std::vector<SFrondGuide,std::allocator<SFrondGuide> >,std::allocator<std::vector<SFrondGuide,std::allocator<SFrondGuide> > > >::push_back | FrondEngine.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: _Val
 void Vec16::FUN_00bbc520(const Elem16& val)
 {
     if (size() < capacity())
@@ -15212,6 +15533,8 @@ struct Target {
  void FUN_00bb45d0(void*);
  void FUN_00bba060(Reader*);
 };
+// pdb: CFrondEngine::Parse | FrondEngine.obj | fnv360_0822_retail, ustr, medium
+// pdb params: cFile
 void Target::FUN_00bba060(Reader* r) {
  int token=r->FUN_00ba92d0();
  do {
@@ -15288,6 +15611,8 @@ public:
     iterator FUN_00bbffa0(iterator _First, iterator _Last);
 };
 
+// pdb: std::vector<SIdvLeafTexture,std::allocator<SIdvLeafTexture> >::resize | LeafInfo.obj | fnv360_1110_retail, caller_sim, low
+// pdb params: _Newsize
 ItemVector00bbffa0::iterator ItemVector00bbffa0::FUN_00bbffa0(iterator _First, iterator _Last)
 {
     if (_First != _Last)
@@ -15600,6 +15925,8 @@ struct List : std::vector<Elem> {
 };
 }
 
+// pdb: std::_Uninitialized_copy<std::_Vector_const_iterator<std::_Vector_val<SFrondVertex,std::allocator<SFrondVertex> > >,SFrondVertex *,std::allocator<SFrondVertex> > | FrondEngine.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: _First, _Last, _Dest, _Al
 f3m_00bb5490::List::iterator f3m_00bb5490::List::FUN_00bb5490(iterator first, iterator last)
 {
     if (first != last) {
@@ -15653,6 +15980,7 @@ struct Reader {
 };
 }
 
+// pdb: CTreeFileAccess::ParseVector3 | FileAccess.obj | fnv360_0822_retail, objrun, medium
 f3m_00ba9330::Vec3& f3m_00ba9330::Reader::FUN_00ba9330(Vec3& v)
 {
     v.x = v.y = v.z = 0.0f;
@@ -15674,6 +16002,8 @@ struct List : std::vector<Elem> {
 };
 }
 
+// pdb: std::vector<SFrondTexture,std::allocator<SFrondTexture> >::push_back | FrondEngine.obj | fnv360_0822_retail, call_gap, low
+// pdb params: _Val
 void f3m_00bb9cc0::List::FUN_00bb9cc0(const Elem& value)
 {
     if (size() < capacity())
@@ -15695,6 +16025,8 @@ struct List : std::vector<Elem> {
 };
 }
 
+// pdb: std::vector<SShape,std::allocator<SShape> >::push_back | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
+// pdb params: _Val
 void f3m_00ba81b0::List::FUN_00ba81b0(const Elem& value)
 {
     if (size() < capacity())
@@ -15716,6 +16048,8 @@ struct List : std::vector<Elem> {
 };
 }
 
+// pdb: std::vector<SIdvBranchFlare,std::allocator<SIdvBranchFlare> >::push_back | Branch.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: _Val
 void f3m_00babe60::List::FUN_00babe60(const Elem& value)
 {
     if (size() < capacity())
@@ -15807,6 +16141,8 @@ struct List : std::vector<Elem> {
 };
 }
 
+// pdb: std::vector<SIdvBranch,std::allocator<SIdvBranch> >::push_back | Branch.obj | fnv360_0822_retail, call_gap, low
+// pdb params: _Val
 void f3m_00babdc0::List::FUN_00babdc0(const Elem& value)
 {
     if (size() < capacity())
@@ -15849,6 +16185,8 @@ struct List : std::vector<Elem> {
 }
 
 // std::vector::insert(where, value) (VC8 release body)
+// pdb: SFrondTexture::SFrondTexture | FrondEngine.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: __that
 f3m_00bb9980::List::iterator f3m_00bb9980::List::FUN_00bb9980(iterator where, const Elem& value)
 {
     size_type off = size() == 0 ? 0 : where - begin();
@@ -15952,6 +16290,7 @@ struct Owner {
 };
 }
 
+// pdb: CIndexedGeometry::DeleteIndexData | IndexedGeometry.obj | fnv360_0822_retail, call_seq, medium
 void f3m_00bb1100::Owner::FUN_00bb1100()
 {
     for (unsigned int i = 0; i < lists.size(); i++) {
@@ -16041,6 +16380,8 @@ struct Vec {
     Iter FUN_00bb9c60(Iter where);
 };
 
+// pdb: std::vector<SFrondGuide,std::allocator<SFrondGuide> >::erase | FrondEngine.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: _Where
 Iter Vec::FUN_00bb9c60(Iter where)
 {
     FUN_00bb6c10(where.ptr + 1, last, where.ptr, IterRandom(where.ptr + 1, where.ptr), MoveCat(where.ptr), CheckedTag());
@@ -16114,6 +16455,7 @@ struct Obj {
     Sub sub;
     void FUN_00bbbe30();
 };
+// pdb: CFrondEngine::StartGuide | FrondEngine.obj | fnv360_0721_beta, objrun_prop, low
 void Obj::FUN_00bbbe30()
 {
     Query q;
@@ -16308,6 +16650,8 @@ struct Effect
     void FUN_00bac160(const Vector3&, float, Effect*, const Vector3&, const Vector3&, float, int, int);
 };
 // @fnv 0x00b13100
+// pdb: CIdvBranch::ComputeBud | Branch.obj | fnv360_0822_retail, call_gap, low
+// pdb params: pParent, fSize, nLevel, cBasePos, fPercentOfParent, cBaseTransform, cZAxis, vLeaves, fWindWeight, nWindGroup
 void Effect::FUN_00bac830(ParentNode* node, float amount, unsigned int index, const Vector3& position, float time,
                           const FloatMatrix3& rotation, const Vector3& axis, int flags, float speed, int mode)
 {
@@ -16372,6 +16716,8 @@ struct Owner {
     unsigned int FUN_00ba29a0(short index);
 };
 }
+// pdb: CIndexedGeometry::GetStripLengthsPointer | SpeedTreeRT.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: sLodLevel
 unsigned int f3m_00ba29a0::Owner::FUN_00ba29a0(short index) {
         if (index > -1) {
             return lists[index].size();
@@ -16444,6 +16790,8 @@ public:
     void FUN_00baf7f0(iterator _Where, size_type _Count, unsigned int* const& _Val);
     iterator FUN_00baffd0(iterator _Where, unsigned int* const& _Val);
 };
+// pdb: std::vector<int,std::allocator<int> >::push_back | Branch.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: _Val
 PtrVec::iterator PtrVec::FUN_00baffd0(iterator _Where, unsigned int* const& _Val)
 {
     size_type _Off = size() == 0 ? 0 : _Where - begin();
@@ -16575,6 +16923,7 @@ struct Ctx00ba9ed0 {
     void FUN_00ba9ed0();
 };
 
+// pdb: CIdvBranch::ComputeVolume | Branch.obj | fnv360_0822_retail, call_gap, low
 void Ctx00ba9ed0::FUN_00ba9ed0()
 {
     if (this->elems != 0) {
@@ -16743,6 +17092,8 @@ struct S00ba53b0_Owner {
     void FUN_00ba53b0(TreeReader1541*);
 };
 }
+// pdb: CSpeedTreeRT::ParseSupplementalTexCoordInfo | SpeedTreeRT.obj | fnv360_0822_retail, ustr_rel, medium
+// pdb params: pFile
 void S00ba53b0_ns::S00ba53b0_Owner::FUN_00ba53b0(TreeReader1541* reader)
 {
     if(mesh4C) {
@@ -16845,6 +17196,8 @@ struct S00baf220_Leaves
     bool FUN_00baf220(short group);
 };
 
+// pdb: CIndexedGeometry::ComputeWindEffect | IndexedGeometry.obj | fnv360_0822_retail, call_gap, low
+// pdb params: nLodLevel
 bool S00baf220_Leaves::FUN_00baf220(short group)
 {
     bool ok = false;
@@ -16922,6 +17275,7 @@ struct Target {
     void FUN_00bb45d0(FUN_00bc2e20* p);
 };
 
+// pdb: CIdvBezierSpline::~CIdvBezierSpline | IdvSpline.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void Target::FUN_00bb45d0(FUN_00bc2e20* p)
 {
     if (m_30 != p) {
@@ -16937,6 +17291,8 @@ namespace f3m_00bab2b0 {
 namespace f3m_00bab2b0 {
 void __cdecl FUN_00baabd0(SortedEntry_aab70** first, int hole, int bottom, SortedEntry_aab70* value, PriorityGreater_aab70 pred);
 
+// pdb: std::_Sort_heap<CIdvBranch * *,CBranchVolumeSorter> | Branch.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: _First, _Last, _Pred
 void __cdecl FUN_00bab2b0(SortedEntry_aab70** first, SortedEntry_aab70** last, PriorityGreater_aab70 pred) {
     for (; 1 < last - first; --last) {
         if (1 < last - first) {
@@ -16978,6 +17334,8 @@ namespace f3m_00bb6e10 {
 namespace Sortbb6e10 {
 struct Record {int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20;float priority;};
 void FUN_00bb6600(Record*,Record*);
+// pdb: std::_Move_backward<SFrondGuide *,SFrondGuide *> | FrondEngine.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: _First, _Last, _Dest, __formal
 void FUN_00bb6e10(Record* first,Record* middle,Record* last){if(middle->priority>first->priority)FUN_00bb6600(middle,first);if(last->priority>middle->priority)FUN_00bb6600(last,middle);if(middle->priority>first->priority)FUN_00bb6600(middle,first);}
 }
 
@@ -16996,6 +17354,8 @@ void FUN_00c24b70();};
 struct Iterator {void* owner;Entry* position;};
 void FUN_00c01e8b();Entry* FUN_00bb5220(Entry*,Entry*,Entry*);
 struct Object {int unk00,unk04;Entry* end;Iterator* FUN_00bb5520(Iterator*,void*,Entry*,void*,Entry*);};
+// pdb: std::vector<CVec,std::allocator<CVec> >::resize | IdvSpline.obj | fnv360_0822_retail, call_gap_sim, low, conflict (bridge: std::_Tree<std::_Tmap_traits<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,CIdvBezierSpline *,std::less<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >,std::allocator<std::pair<std::basic_string<char,std::char_traits<char>,std::allocator<char> > const ,CIdvBezierSpline *> >,0> >::clear)
+// pdb params: _Newsize
 Iterator* Object::FUN_00bb5520(Iterator* output,void* firstOwner,Entry* first,void* lastOwner,Entry* last){if(!firstOwner||firstOwner!=lastOwner)FUN_00c01e8b();if(first!=last){Entry* newEnd=FUN_00bb5220(last,end,first);Entry* oldEnd=end;for(Entry* current=newEnd;current!=oldEnd;++current)current->FUN_00c24b70();end=newEnd;}output->owner=firstOwner;output->position=first;return output;}
 }
 }   // namespace f3m_00bb5520
@@ -17015,6 +17375,8 @@ void Object::FUN_00babf70(Context* context){Object* self=this;context->FUN_00bab
 namespace f3m_00bab100 {
 namespace Sort304 {
 struct Entry {int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28;float priority;};struct Pred {bool operator()(Entry* a,Entry* b)const{return a->priority>b->priority;}};
+// pdb: std::_Make_heap<CIdvBranch * *,int,CIdvBranch *,CBranchVolumeSorter> | Branch.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: _First, _Last, _Pred, __formal, __formal
 void FUN_00bab100(Entry** first,Entry** last){Pred pred;if(first!=last)for(Entry** next=first;++next!=last;){if(pred(*next,*first)){Entry** next1=next;std::rotate(first,next,++next1);}else{Entry** dest=next;for(Entry** dest0=dest;pred(*next,*--dest0);dest=dest0){}Entry** next1=next;std::rotate(dest,next,++next1);}}}
 }
 }   // namespace f3m_00bab100
@@ -17024,6 +17386,8 @@ void FUN_00bab100(Entry** first,Entry** last){Pred pred;if(first!=last)for(Entry
 namespace f3m_00ba8260 {
 namespace Buffer306 {
 struct FUN_00ba8260 {int position;std::vector<char> data;FUN_00ba8260(const char*,int);};
+// pdb: CTreeFileAccess::CTreeFileAccess | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: pMemory, nNumBytes
 FUN_00ba8260::FUN_00ba8260(const char* source,int length):position(0){data.resize(length,0);for(int i=0;i<length;++i)data[i]=source[i];}
 }
 }   // namespace f3m_00ba8260
@@ -17072,6 +17436,7 @@ struct FUN_00bbec80 : FUN_00ba9550 {
     ~FUN_00bbec80();
 };
 
+// pdb: CTreeEngine::~CTreeEngine | TreeEngine.obj | fnv360_0822_retail, call_seq, medium
 FUN_00bbec80::~FUN_00bbec80()
 {
 }
@@ -17080,6 +17445,7 @@ FUN_00bbec80::~FUN_00bbec80()
 // @f3 0x00ba07d0 (community match, verified in this file)
 namespace f3m_00ba07d0 {
 using namespace f3m_00ba0ec0;
+// pdb: bi_windup | trees.obj | fnv360_0822_retail, call_dedup, low, conflict (skyrim: copy_block)
 static __declspec(noinline) void FUN_00ba07d0(deflate_state *s, charf *buf, unsigned len, int header)
 {
     FUN_00ba0750(s);
@@ -17146,6 +17512,8 @@ struct String
     }
     int FUN_00bbdc40(unsigned int off, unsigned int n0, const char* ptr, unsigned int count) const;
 };
+// pdb: std::basic_string<char,std::char_traits<char>,std::allocator<char> >::compare | binaryFile.obj | fnv360_0822_retail, call_gap, low, conflict (bridge: CTreeFileAccess::ParseString)
+// pdb params: _Off, _N0, _Ptr, _Count
 int String::FUN_00bbdc40(unsigned int off, unsigned int n0, const char* ptr, unsigned int count) const
 {
     if (size < off)
@@ -17219,6 +17587,8 @@ struct Vector
     }
     Iterator FUN_00bb9d60(Iterator first, Iterator last);
 };
+// pdb: std::vector<std::vector<float,std::allocator<float> >,std::allocator<std::vector<float,std::allocator<float> > > >::_Reserve | FrondEngine.obj | fnv360_0721_beta, objrun, medium
+// pdb params: _Count
 Iterator Vector::FUN_00bb9d60(Iterator first, Iterator last)
 {
     if (first != last)
@@ -17245,6 +17615,8 @@ struct Engine {
  Geometry* geometry;unsigned unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24,unk28,blades;
  void FUN_00bb4bf0(unsigned,int,Guide&);
 };
+// pdb: CFrondEngine::ComputeBlade | FrondEngine.obj | fnv360_0822_retail, call_gap, low
+// pdb params: nLod, nStart, sGuide
 void Engine::FUN_00bb4bf0(unsigned level,int start,Guide& guide){
  if(geometry){
   for(unsigned blade=0;blade<blades;++blade){
@@ -17349,6 +17721,8 @@ struct S00bb3390_Wind
     void FUN_00bb31b0(unsigned short usLod);
     void FUN_00bb3390(TreeGeometry* out, unsigned short index, float a, float b, float t);
 };
+// pdb: CLeafGeometry::Update | LeafGeometry.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: sGeometry, usLodLevel, fAzimuth, fPitch, fSizeIncreaseFactor
 void S00bb3390_Wind::FUN_00bb3390(TreeGeometry* out, unsigned short index, float, float, float t)
 {
     if (entries && index < count && blocks && centers && sizes && runtime && p0c) {
@@ -17445,6 +17819,7 @@ struct TreeData {
     ~TreeData();
 };
 
+// pdb: CFrondEngine::~CFrondEngine | FrondEngine.obj | fnv360_0822_retail, call_gap, low
 TreeData::~TreeData()
 {
     Child* c = child;
@@ -17461,6 +17836,8 @@ TreeData::~TreeData()
 #include <vector>
 extern std::vector<void*> DAT_011782d4;
 namespace f3m_00bab300 {
+// pdb: CIdvBranch::BuildBranchVector | Branch.obj | fnv360_0721_retail, objrun, medium
+// pdb params: vAllBranches
 void __cdecl FUN_00bab300()
 {
     DAT_011782d4.clear();
@@ -17523,6 +17900,8 @@ struct GeneralTreeLoader70 {
     void FUN_00bbfd70(BinaryReader70* reader);
 };
 
+// pdb: CTreeEngine::ParseTreeInfo | TreeEngine.obj | fnv360_0822_retail, ustr, medium
+// pdb params: cFile
 void GeneralTreeLoader70::FUN_00bbfd70(BinaryReader70* reader)
 {
     int token = reader->FUN_00ba92d0();
@@ -17622,6 +18001,8 @@ struct Branch_ba9fe0
     void FUN_00ba9fe0(Mesh_ba9fe0* pGeometry, unsigned short nSides);
 };
 
+// pdb: CIdvBranch::ComputeBranchNormals | Branch.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: pBranchGeometry, usSegments
 void Branch_ba9fe0::FUN_00ba9fe0(Mesh_ba9fe0* pGeometry, unsigned short nSides)
 {
     for (int i = 0; i < entryCount; ++i)
@@ -17842,6 +18223,8 @@ public:
     void FUN_00bb7280(FrondGuide& guide);
 };
 
+// pdb: CFrondEngine::BuildBladeVertices | FrondEngine.obj | fnv360_0822_retail, call_gap, low
+// pdb params: sGuide
 void FrondEngine::FUN_00bb7280(FrondGuide& guide)
 {
     if (geometry && lighting)
@@ -18012,6 +18395,7 @@ struct Owner {
     const char* FUN_00ba2fa0() const;
 };
 }
+// pdb: std::logic_error::what | BipedAnim.obj | tesv_win, vtable, medium
 const char* f3m_00ba2fa0::Owner::FUN_00ba2fa0() const
 {
     return name.c_str();
@@ -18028,6 +18412,7 @@ struct State {
  float upper,lower;
  float FUN_00bbda60();
 };
+// pdb: CTreeEngine::ComputeLod | TreeEngine.obj | fnv360_0822_retail, objrun, medium
 float State::FUN_00bbda60() {
  
  union { float f; int i; } d;
@@ -18049,6 +18434,7 @@ struct S_00bb45c0 {
     char m;
     char FUN_00bb45c0();
 };
+// pdb: CFrondEngine::Enabled | FrondEngine.obj | fnv360_0822_retail, call_gap, low
 char S_00bb45c0::FUN_00bb45c0()
 {
     return m;
@@ -18126,6 +18512,7 @@ struct Owner {
     void FUN_00ba7530();
 };
 
+// pdb: CSpeedTreeRT::~CSpeedTreeRT | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
 void Owner::FUN_00ba7530() {
     if (!instanceData) {
         EnterCriticalSection(&DAT_0117827c);
@@ -18235,6 +18622,8 @@ struct QMesh {
     void FUN_00bb2d40(const QMatrix& m);
 };
 
+// pdb: CLeafGeometry::Transform | LeafGeometry.obj | fnv360_0822_retail, objrun, medium
+// pdb params: cTransform
 void QMesh::FUN_00bb2d40(const QMatrix& m)
 {
     if (!unk2C || !unk20)
@@ -18345,6 +18734,7 @@ struct Self {
     int unk54, unk58, unk5c; int unk60;
     void FUN_00ba1720();
 };
+// pdb: CSpeedTreeRT::ComputeSelfShadowTexCoords | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
 void Self::FUN_00ba1720()
 {
     int first = unk04;
@@ -18439,6 +18829,8 @@ struct LeafGeometry
     void FUN_00bb3f10(FUN_00bc4990& output);
 };
 
+// pdb: CLeafGeometry::ComputeExtents | LeafGeometry.obj | fnv360_0822_retail, call_gap, low
+// pdb params: cExtents
 void LeafGeometry::FUN_00bb3f10(FUN_00bc4990& output)
 {
     if (origins && sizes && lods)
@@ -18593,6 +18985,8 @@ float BranchFlare::FUN_00ba9b00(float angle, float position)
     return offset;
 }
 
+// pdb: CIdvBranch::BuildCrossSection | Branch.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: pVertex, fBranchProgress, fCombinedBranchProgress, nSegments, pBranchGeometry, cTile, fWindWeight, nWindGroup, fTileOffset, nLevel
 void BranchNode::FUN_00baa6d0(BranchEntry* entry, float position, float factor, int sides, BranchMesh* mesh,
                               const BranchPoint& shape, float weight, unsigned int id, float step, int level)
 {
@@ -18841,6 +19235,8 @@ class RowVector : public std::vector<Row>
 public:
     void FUN_00bbbf90(iterator _Where, size_type _Count, const Row& _Val);
 };
+// pdb: std::_Uninit_move<SFrondGuide *,SFrondGuide *,std::allocator<SFrondGuide>,SFrondGuide> | FrondEngine.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: _First, _Last, _Dest, _Al, __formal, __formal
 void RowVector::FUN_00bbbf90(iterator _Where, size_type _Count, const Row& _Val)
 {
     Row _Tmp = _Val;
@@ -18955,6 +19351,8 @@ struct Tree {
  BranchData* branch; CompositeData* composite; int unk54,unk58; FrondData* frondData;
  void FUN_00ba50e0(Output* out);
 };
+// pdb: CSpeedTreeRT::GetTextures | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: sTextures
 void Tree::FUN_00ba50e0(Output* out) {
  try {
  out->branch=data->name.c_str();
@@ -19138,6 +19536,8 @@ static __declspec(noinline) Text FUN_00bb56f0(const char* format,...) {
  vsprintf(text,format,args);va_end(args);
  return Text(text);
 }
+// pdb: CSpeedTreeRT::SetCamera | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pPosition, pDirection
 void FUN_00ba7d10(const float* position,const float* direction) {
  try {
   if(position && direction) {
@@ -20117,6 +20517,8 @@ public:
     void FUN_00bbad60(FrondSpine& spine);
 };
 
+// pdb: CFrondEngine::BuildExtrusionVertices | FrondEngine.obj | fnv360_0822_retail, call_gap, low
+// pdb params: sGuide
 void FrondEngine::FUN_00bbad60(FrondSpine& spine)
 {
     if (mesh && lighting)
@@ -21140,6 +21542,8 @@ struct CSpeedTreeRT {
     void FUN_00ba5fb0(int method);
 };
 
+// pdb: CSpeedTreeRT::SetFrondLightingMethod | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: eMethod
 void CSpeedTreeRT::FUN_00ba5fb0(int method)
 {
     try {
@@ -21225,6 +21629,8 @@ namespace f3m_00ba7fd0 {
 // The complete catch structure follows the shared SetTime handoff.
 // Reuse the formatter, error sink and notification function already in this unit.
 namespace f3m_00ba7fd0 {
+// pdb: CSpeedTreeRT::SetTime | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
+// pdb params: fTime
 void FUN_00ba7fd0(float time)
 {
     using namespace sol7d10;
@@ -21258,6 +21664,8 @@ struct CSpeedTreeRT {
     const float* FUN_00ba6d10(int* entryCount);
 };
 
+// pdb: CSpeedTreeRT::GetLeafBillboardTable | SpeedTreeRT.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: nEntryCount
 const float* CSpeedTreeRT::FUN_00ba6d10(int* entryCount)
 {
     using namespace sol7d10;
@@ -21338,6 +21746,8 @@ struct CSpeedTreeRT {
     void FUN_00ba5d50(int method);
 };
 
+// pdb: CSpeedTreeRT::SetBranchLightingMethod | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: eMethod
 void CSpeedTreeRT::FUN_00ba5d50(int method)
 {
     using namespace sol7d10;
@@ -21382,6 +21792,8 @@ struct CSpeedTreeRT {
     void FUN_00ba5e80(ELightingMethod method);
 };
 
+// pdb: CSpeedTreeRT::SetLeafLightingMethod | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: eMethod
 void CSpeedTreeRT::FUN_00ba5e80(ELightingMethod method) {
     using namespace sol7d10;
     try {
@@ -21419,6 +21831,7 @@ struct CSpeedTreeRT : W474Tree {
     CSpeedTreeRT* FUN_00ba88b0();
 };
 
+// pdb: CSpeedTreeRT::MakeInstance | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
 CSpeedTreeRT* CSpeedTreeRT::FUN_00ba88b0()
 {
     CSpeedTreeRT* instance = 0;
@@ -21460,6 +21873,7 @@ struct Tree {
     void FUN_00ba6be0();
 };
 
+// pdb: CSpeedTreeRT::DeleteBranchGeometry | SpeedTreeRT.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void Tree::FUN_00ba6be0() {
     try {
         if (ownsGeometry && branchGeometry && !instanceData && *referenceCount == 1) {
@@ -21501,6 +21915,7 @@ struct CSpeedTreeRT {
     void FUN_00ba46f0();
 };
 
+// pdb: CSpeedTreeRT::DeleteFrondGeometry | SpeedTreeRT.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void CSpeedTreeRT::FUN_00ba46f0()
 {
     using namespace sol7d10;
@@ -21617,6 +22032,8 @@ struct CSpeedTreeRT {
     void FUN_00ba63b0(int method);
 };
 
+// pdb: CSpeedTreeRT::SetBranchWindMethod | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: eMethod
 void CSpeedTreeRT::FUN_00ba63b0(int method)
 {
     try {
@@ -21737,6 +22154,8 @@ struct CSpeedTreeRT {
     void FUN_00ba6500(int method);
 };
 
+// pdb: CSpeedTreeRT::SetFrondWindMethod | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: eMethod
 void CSpeedTreeRT::FUN_00ba6500(int method)
 {
     try {
@@ -21901,6 +22320,8 @@ struct CSpeedTreeRT {
     void FUN_00ba6150(int groups);
 };
 
+// pdb: CSpeedTreeRT::SetNumLeafRockingGroups | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: nRockingGroups
 void CSpeedTreeRT::FUN_00ba6150(int groups)
 {
     try {
@@ -22013,6 +22434,8 @@ struct CSpeedTreeRT {
     void FUN_00ba6280(int method);
 };
 
+// pdb: CSpeedTreeRT::SetLeafWindMethod | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: eMethod
 void CSpeedTreeRT::FUN_00ba6280(int method)
 {
     try {
@@ -22150,6 +22573,8 @@ struct CSpeedTreeRT {
     void FUN_00ba68f0(unsigned int startingMatrix, unsigned int matrixSpan);
 };
 
+// pdb: CSpeedTreeRT::SetLocalMatrices | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: nStartingMatrix, nMatrixSpan
 void CSpeedTreeRT::FUN_00ba68f0(unsigned int startingMatrix, unsigned int matrixSpan) {
     using namespace sol7d10;
     try {
@@ -22204,6 +22629,8 @@ struct Tree {
     bool FUN_00ba8fd0(const char* filename);
 };
 
+// pdb: CSpeedTreeRT::LoadTree | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pFilename
 bool Tree::FUN_00ba8fd0(const char* filename) {
     bool loaded = false;
     TreeFile* file = 0;
@@ -22448,6 +22875,8 @@ struct Tree {
  Engine* engine;
  void FUN_00ba5b00(float size, float variance);
 };
+// pdb: CSpeedTreeRT::SetTreeSize | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: fNewSize, fNewVariance
 void Tree::FUN_00ba5b00(float size, float variance) {
  try {
   if (engine->flag21) {
@@ -22521,6 +22950,7 @@ struct CSpeedTreeRT {
     void FUN_00ba6e00();                    // ComputeLeafStaticLighting
 };
 
+// pdb: CSpeedTreeRT::ComputeLeafStaticLighting | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
 void CSpeedTreeRT::FUN_00ba6e00()
 {
     try {
@@ -22586,6 +23016,8 @@ public:
 };
 
 // CSpeedTreeRT::GetGeometry
+// pdb: CSpeedTreeRT::GetGeometry | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, low
+// pdb params: sGeometry, ulBitVector, sOverrideBranchLodValue, sOverrideFrondLodValue, sOverrideLeafLodValue
 void CSpeedTreeRT::FUN_00ba71d0(Geometry* g, unsigned long flags, unsigned short branchLod, unsigned short frondLod, unsigned short leafLod)
 {
     try
@@ -22708,6 +23140,8 @@ struct CSpeedTreeRT {
     float FUN_00ba6650(float fNewStrength, float fOldStrength, float fFrequencyTimeOffset);   // SetWindStrength
 };
 
+// pdb: CSpeedTreeRT::SetWindStrength | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: fNewStrength, fOldStrength, fFrequencyTimeOffset
 float CSpeedTreeRT::FUN_00ba6650(float fNewStrength, float fOldStrength, float fFrequencyTimeOffset)
 {
     float fNewFrequencyTimeShift = 0.0f;
@@ -22860,6 +23294,8 @@ public:
     bool FUN_00ba8c40(const char* block, int size);
 };
 
+// pdb: CSpeedTreeRT::LoadTree | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: pBlock, nNumBytes
 bool CSpeedTreeRT::FUN_00ba8c40(const char* block, int size)
 {
     bool bSuccess = false;
@@ -23139,6 +23575,8 @@ public:
     bool FUN_00ba7860(const float* pTransform, unsigned int nSeed, bool bCompositeStrips);
 };
 
+// pdb: CSpeedTreeRT::Compute | SpeedTreeRT.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pTransform, nSeed, bCompositeStrips
 bool CSpeedTreeRT::FUN_00ba7860(const float* pTransform, unsigned int nSeed, bool bCompositeStrips)
 {
     try {
@@ -23234,6 +23672,7 @@ struct Stream {
     char ReadChar() { return buffer[pos++]; }
     Text FUN_00ba9460();
 };
+// pdb: CTreeFileAccess::ParseString | FileAccess.obj | fnv360_0822_retail, call_seq, medium
 Text Stream::FUN_00ba9460()
 {
     Text result;

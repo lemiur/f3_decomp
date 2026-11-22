@@ -3,6 +3,7 @@
 #include "nialphacontroller_decls.h"
 
 // @fnv 0x00a57620
+// pdb: Interface::GetScreenWidth | Interface.obj | fnv360_0822_retail, call_gap, medium
 void NiAlphaController::CopyMemberData(NiAlphaController* clone, CloningProcess& process)
 {
     reinterpret_cast<NiTransformController*>(this)->CopyMemberData(reinterpret_cast<NiTransformController*>(clone),
@@ -62,6 +63,8 @@ struct FUN_00bc3050_Obj
 };
 // Checks whether pkTarget's RTTI chain contains g_011f4a5c, returning false for a null target or null RTTI.
 // @fnv 0x00bc3050
+// pdb: BSMaterialEmittanceMultController::InterpTargetIsCorrectType | BSMaterialEmittanceMultController.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: pkTarget
 bool __stdcall FUN_00bc3050(FUN_00bc3050_Obj* pkTarget)
 {
     if (!pkTarget)
@@ -214,6 +217,7 @@ struct FUN_00a56a90_shell
 };
 // Decrements m_pEntryObject's count, calls F1 at zero, invokes FUN_00a6d290, optionally deletes this, and returns this.
 // @fnv 0x00a56a90
+// pdb: NiTransformController::`scalar deleting destructor' | NiTransformController.obj | tesv_win, vtable_prefix, medium
 void* __thiscall FUN_00a56a90_shell::FUN_00a56a90(unsigned int uiFlags)
 {
     Obj_00a56a90* p = m_pEntryObject;

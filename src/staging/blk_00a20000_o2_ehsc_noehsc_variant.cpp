@@ -2854,6 +2854,7 @@ struct LoadKey48 {
     static void operator delete[](void* apBlock) { DAT_011f6238.Free(apBlock); }
 };
 // @fnv 0x00a2a070
+// pdb: NiEulerRotKey::CreateFromStream | NiEulerRotKey.obj | tesv_win, objrun, medium
 LoadKey48* __cdecl FUN_00a2a070(A29F00Stream& kStream, unsigned int uiNumKeys) {
     LoadKey48* pkKeys = new LoadKey48[uiNumKeys];
     for (unsigned int i = 0; i < uiNumKeys; i++)
@@ -2874,6 +2875,7 @@ struct LoadKey20 {
     static void operator delete[](void* apBlock) { DAT_011f6238.Free(apBlock); }
 };
 // @fnv 0x00a2a320
+// pdb: NiLinColorKey::CreateFromStream | NiLinColorKey.obj | tesv_win, objrun_sim, low
 LoadKey20* __cdecl FUN_00a2a320(S_a2c300_Stream* s, unsigned int count) {
     LoadKey20* keys = new LoadKey20[count];
     for (unsigned int i = 0; i < count; i++)

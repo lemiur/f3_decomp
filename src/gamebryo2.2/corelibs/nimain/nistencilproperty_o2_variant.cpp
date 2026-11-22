@@ -17,6 +17,8 @@ struct EqBase
     bool FUN_00a6f070(NiObject*);
 };
 // @fnv 0x00a6f070
+// pdb: NiStencilProperty::IsEqual | NiStencilProperty.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkObject
 bool EqBase::FUN_00a6f070(NiObject* pkObject)
 {
     NiStencilProperty* pkStencil = (NiStencilProperty*)pkObject;
@@ -33,6 +35,8 @@ char* __cdecl NiSprintf(char* dst, unsigned int size, const char* fmt, ...);
 void* __cdecl NiMalloc(unsigned int size);
 
 // @fnv 0x00a6f2d0
+// pdb: NiStencilProperty::GetViewerString | NiStencilProperty.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pcPrefix, eMode
 char* FUN_00a6f2d0(const char* name, int stencil)
 {
     unsigned int length = strlen(name) + 0x16;
@@ -79,6 +83,7 @@ struct S00a6f4d0
 extern S00a6f4d0* DAT_011f4a14;
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile*);
 // @fnv 0x00a6f4d0
+// pdb: NiStencilProperty::_SDMShutdown | NiStencilProperty.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: NiImageConverter::_SDMShutdown)
 void FUN_00a6f4d0()
 {
     if (DAT_011f4a14)
@@ -93,6 +98,8 @@ void FUN_00a6f4d0()
 char* __cdecl NiSprintf(char* dst, unsigned int size, const char* fmt, ...);
 void* __cdecl NiMalloc(unsigned int size);
 // @fnv 0x00a6f1e0
+// pdb: NiStencilProperty::GetViewerString | NiStencilProperty.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pcPrefix, eAct
 char* FUN_00a6f1e0(const char* name, int stencil)
 {
     unsigned int size = strlen(name) + 22;
@@ -143,6 +150,8 @@ struct FUN_00a6f390 : NiProperty
     void* MakeClone(CloningProcess&);
 };
 // @fnv 0x00a6f390
+// pdb: NiStencilProperty::CreateClone | NiStencilProperty.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kCloning
 void* FUN_00a6f390::MakeClone(CloningProcess& kCloning)
 {
     if (*(unsigned int*)((char*)this + 0xc))
@@ -175,6 +184,8 @@ void* FUN_00a6f390::MakeClone(CloningProcess& kCloning)
 }  // namespace fnv_00a6f390
 
 // @fnv 0x00a6f0b0
+// pdb: NiStencilProperty::GetViewerString | NiStencilProperty.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pcPrefix, eFunc
 char* FUN_00a6f0b0(const char* name, int test)
 {
     unsigned int size = strlen(name) + 22;
@@ -240,6 +251,8 @@ struct Property : Base
     void FUN_00a6f740(Stream*);
 };
 // @fnv 0x00a6f740
+// pdb: NiStencilProperty::SaveBinary | NiStencilProperty.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void Property::FUN_00a6f740(Stream* stream)
 {
     FUN_00a5d7b0(stream);
@@ -294,6 +307,8 @@ struct Property284
 {
     void AppendString(S_00a5f640_Arr*);
 };
+// pdb: NiStencilProperty::GetViewerStrings | NiStencilProperty.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pcStrings
 void StencilDebugProperty::FUN_00a6f7d0(StrArr* strings)
 {
     ((Property284*)this)->AppendString((S_00a5f640_Arr*)strings);
@@ -515,6 +530,8 @@ struct Stencil
     void FUN_00a6f500(Input& stream);
 };
 // @fnv 0x00a6f500
+// pdb: NiStencilProperty::LoadBinary | NiStencilProperty.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void Stencil::FUN_00a6f500(Input& stream)
 {
     FUN_00a5d7f0(stream);
@@ -580,6 +597,7 @@ class StencilRefObj
 };
 
 // @fnv 0x00a6f450
+// pdb: NiStencilProperty::_SDMInit | NiStencilProperty.obj | fnv360_0822_retail, call_gap, medium
 void FUN_00a6f450()
 {
     StencilRefObj* obj = (StencilRefObj*)BSFadeNode::operator new(0x24);

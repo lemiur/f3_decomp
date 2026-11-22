@@ -9,6 +9,7 @@ BSTextureSet::BSTextureSet()
 #pragma optimize("", on)
 // Initializes the NiGeometry object by setting model, skin and shader pointers to null.
 // @fnv 0x00a80540
+// pdb: NiGeometry::NiGeometry | NiGeometry.obj | fnv360_0822_retail, caller_sim, high
 NiGeometry::NiGeometry()
 {
     model = 0;

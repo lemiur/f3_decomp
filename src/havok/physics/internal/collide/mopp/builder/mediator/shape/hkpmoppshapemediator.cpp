@@ -3,6 +3,8 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 // @fnv 0x00dd51f0
+// pdb: hkpMoppShapeMediator::getPrimitiveProperties | hkpMoppShapeMediator.obj | fnv360_0822_retail, vtable, high
+// pdb params: primitiveIn, cid
 int __stdcall ReadIntField(const void* a, int* piValue)
 {
     *piValue = *(const int*)((const char*)a + 4);
@@ -54,6 +56,8 @@ struct FUN_00dd5210_Object
 
 // Fills count records with successive values from unk08, starting at GetValue() and advancing via UseValue().
 // @fnv 0x00dd5210
+// pdb: hkpMoppShapeMediator::getPrimitives | hkpMoppShapeMediator.obj | fnv360_0822_retail, vtable, high
+// pdb params: primitives
 void FUN_00dd5210_Object::FillRecords(FUN_00dd5210_Record* records)
 {
     int count = unk0c;
@@ -96,6 +100,8 @@ class FUN_00dd52a0_cls : public SpawnedBase
 
 // Sets m_flag06 to 1, destroys the base, stores src in m_src08, stores src->Second() in m_result0c and returns this.
 // @fnv 0x00dd52a0
+// pdb: hkpMoppShapeMediator::hkpMoppShapeMediator | hkpMoppShapeMediator.obj | fnv360_0822_retail, uvref, high
+// pdb params: shapeArray
 FUN_00dd52a0_cls* FUN_00dd52a0_cls::InitFromSource(SpawnedSource* pSource)
 {
     m_flag06 = 1;
@@ -191,6 +197,8 @@ struct ProjectionShape
 };
 
 // @f3 0x00a54c10 (community match, verified in this file)
+// pdb: hkpMoppShapeMediator::projectPrimitives | hkpMoppShapeMediator.obj | fnv360_0822_retail, vtable, high
+// pdb params: direction, directionIndex, primitives, numPrimitives, absMinOut, absMaxOut
 void ProjectionShape::ComputeProjectionRange(const hkVector4& direction, int unused, ProjectionSample* samples,
                                              int numSamples, hkReal* minOut, hkReal* maxOut)
 {

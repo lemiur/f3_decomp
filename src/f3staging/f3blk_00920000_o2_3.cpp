@@ -87,6 +87,8 @@ struct Derived : Base {
     int unk50[0x1c];
     int unkc0;
 };
+// pdb: ahkpCharacterProxy::ahkpCharacterProxy | bhkCharacterProxy.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arInfo
 Derived::Derived(void* info) : Base(info)
 {
     unkc0 = 0;
@@ -2005,6 +2007,8 @@ extern "C"
 	void __cdecl hkAgentNnMachine_AppendTrack( hkpAgentNnTrack& track, hkpAgentNnTrack& appendee);
 }
 
+// pdb: hkpWorldOperationUtil::setRigidBodyMotionType | hkpWorldOperationUtil.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: body, newState, initialActivationState, collisionFilterUpdateMode
 void hkpWorldOperationUtil::FUN_00929670( hkpRigidBody* body, hkpMotion::MotionType newState, hkpEntityActivation initialActivationState, hkpUpdateCollisionFilterOnEntityMode collisionFilterUpdateMode)
 {
 	hkpMotion::MotionType oldState = body->getMotionType();

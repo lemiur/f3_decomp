@@ -124,6 +124,8 @@ static RawF3* AllocF3(unsigned int uiSize)
     return pkObject;
 }
 
+// pdb: hkpRagdollConstraintData::setMotorsActive | hkpRagdollConstraintData.obj | fnv360_0822_debug, call_gap, low, conflict (skyrim: hkpConstraintDataCloningUtil::cloneIfCanHaveMotors)
+// pdb params: instance, toBeEnabled
 Object858* __cdecl FUN_00d858f0(Object858* pkSource)
 {
     switch (((ObjectView858*)pkSource)->GetType())

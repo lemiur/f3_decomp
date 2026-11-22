@@ -29,6 +29,7 @@ struct NiMorphData
     void* FUN_00a41a00(unsigned int);
 };
 // @fnv 0x00a41a00
+// pdb: NiMorphData::`scalar deleting destructor' | NiMorphData.obj | fnv360_0822_retail, objrun, high
 void* NiMorphData::FUN_00a41a00(unsigned int auiFlags)
 {
     void* p = m_pMorphTargets;
@@ -76,6 +77,8 @@ struct NiMorphData : NiObject
 };
 // Registers the base object's streamables, then streams the _04 field of each morph target, returning false if registration fails.
 // @fnv 0x00a41710
+// pdb: NiMorphData::RegisterStreamables | NiMorphData.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: stream
 bool __thiscall NiMorphData::FUN_00a41710(NiStream& kStream)
 {
     if (!NiObject::RegisterStreamables(kStream))
@@ -110,6 +113,8 @@ struct FUN_00a57850_shell
 };
 
 // @fnv 0x00a57850
+// pdb: NiTextKey::RegisterStreamables | NiTextKey.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: stream
 void FUN_00a57850_shell::FUN_00a57850(NiStream& kStream)
 {
     kStream.RegisterStreamable((void*)((char*)this + 4));
@@ -125,6 +130,7 @@ struct Object
     Object* __thiscall FUN_00a415f0();
 };
 // @fnv 0x00a415f0
+// pdb: NiMorphData::MorphTarget::MorphTarget | NiMorphData.obj | tesv_win, objrun_open, low
 Object* __thiscall Object::FUN_00a415f0()
 {
     field_00 = 0;
@@ -163,6 +169,8 @@ class FUN_00a41610_cls
 };
 
 // @fnv 0x00a41610
+// pdb: NiMorphData::ReplaceTargets | NiMorphData.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: aMorphTargets, uiNumTargets, uiNumVertsPerTarget
 void FUN_00a41610_cls::ReleaseResources()
 {
     ((GlobalMgr_b9415*)&DAT_011f6238)->FUN_00aa4060(m_00);
@@ -205,6 +213,7 @@ struct Owner_00a41660
     void* __thiscall FUN_00a41660(unsigned char flags);
 };
 // @fnv 0x00a41660
+// pdb: NiMorphData::~NiMorphData | NiMorphData.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: NiMorphData::MorphTarget::`vector deleting destructor')
 void* __thiscall Owner_00a41660::FUN_00a41660(unsigned char flags)
 {
     if (flags & 2)
@@ -252,6 +261,8 @@ struct FUN_00a417f0_cls
     bool Equals(FUN_00a417f0_cls* other, unsigned int n);
 };
 // @fnv 0x00a417f0
+// pdb: NiMorphData::MorphTarget::IsEqual | NiMorphData.obj | fnv360_0822_retail, objrun_sim, medium
+// pdb params: pkOther, uiNumVerts
 bool FUN_00a417f0_cls::Equals(FUN_00a417f0_cls* other, unsigned int n)
 {
     for (unsigned int i = 0; i < n; ++i)
@@ -615,6 +626,8 @@ struct NiMorphDataV : NiObjectBase
 
 // Appends the base object's strings, the target and vertex counts, a MorphTargets header, and each target's name to pkStrings.
 // @fnv 0x00a41ea0
+// pdb: NiMorphData::GetViewerStrings | NiMorphData.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pStrings
 void NiMorphDataV::AppendToStrings(ViewerStrings* pkStrings)
 {
     NiObjectBase::AppendCameraPathEntries(pkStrings);
@@ -645,6 +658,8 @@ template <class T> inline unsigned int FNVReadElements(FNVBinaryInput& stream, c
 }
 // Reads count unsigned int elements from the stream pointed to by context->unk24C via FNVReadElements.
 // @fnv 0x00a41770
+// pdb: NiStreamLoadBinary<float> | BSDecalPVExtraData.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: kStream, pValue, uiNumEls
 void __cdecl ReadElements(NiStreamM* apStreamContext, const unsigned int* data, unsigned int count)
 {
     FNVBinaryInput* stream = reinterpret_cast<FNVBinaryInput*>(apStreamContext->unk24C);
@@ -850,6 +865,8 @@ struct MorphTarget_a41940
 };
 // Reads m_kName, optionally m_fMorphWeight, and allocates and fills m_aVerts from kStream based on m_uiNifVersion.
 // @fnv 0x00a41940
+// pdb: NiMorphData::MorphTarget::LoadBinary | NiMorphData.obj | fnv360_0822_retail, objrun, high
+// pdb params: kStream, uiNumVerts
 void MorphTarget_a41940::Load(NiStreamL_a41940& kStream, unsigned int m_uiScaleCount)
 {
     if (kStream.m_uiNifVersion < 0x14010001)

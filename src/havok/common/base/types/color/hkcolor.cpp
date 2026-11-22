@@ -9,6 +9,8 @@ unsigned int __cdecl PackBytesBigEndian(unsigned char r, unsigned char g, unsign
 
 // Scales RGBA floats to 0-255 via hkMath_hkFloatToInt and packs them into a big-endian unsigned int via PackBytesBigEndian.
 // @fnv 0x00cabb30
+// pdb: hkColor::rgbFromFloats | hkColor.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: red, green, blue, alpha
 unsigned int __cdecl PackColorBigEndian(float afRed, float afGreen, float afBlue, float afAlpha)
 {
     unsigned char ucAlpha = hkMath_hkFloatToInt((float)(afAlpha * 255.0));

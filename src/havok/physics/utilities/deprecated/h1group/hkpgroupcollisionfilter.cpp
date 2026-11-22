@@ -27,6 +27,8 @@ struct hkLayerFilter
 
 // Returns m_defaultResult if mask or value is zero, otherwise ORs selected m_layerMasks entries per mask bits and returns whether value overlaps the result.
 // @fnv 0x00e455f0
+// pdb: hkpGroupCollisionFilter::isCollisionEnabled | hkpGroupCollisionFilter.obj | fnv360_0822_retail, call_seq, high
+// pdb params: groupA, groupB
 hkBoolC hkLayerFilter::FUN_00e455f0(int mask, int value)
 {
     if (mask == 0 || value == 0)
@@ -136,6 +138,8 @@ class hkpGroupCollisionFilterE459 : public hkReferencedObjectE459,
 };
 // Gets the filter info for each shape key from its container and returns FUN_00e455f0 applied to both values.
 // @fnv 0x00e45910
+// pdb: hkpGroupCollisionFilter::isCollisionEnabled | hkpGroupCollisionFilter.obj | fnv360_0822_retail, vtable, high
+// pdb params: input, collectionBodyA, collectionBodyB, containerShapeA, containerShapeB, keyA, keyB
 hkBoolE459 hkpGroupCollisionFilterE459::FUN_00e45910(const hkpCollisionInputE459& input, const hkpCdBodyE459& a,
                                                      const hkpCdBodyE459& b,
                                                      const hkpShapeContainerE459& containerShapeA,
@@ -222,6 +226,8 @@ class hkpGroupCollisionFilterE459 : public hkReferencedObjectE459,
 
 // Gets the filter info for the shape key from the container and returns the result of FUN_00e455f0 with the input filter info.
 // @fnv 0x00e45950
+// pdb: hkpGroupCollisionFilter::isCollisionEnabled | hkpGroupCollisionFilter.obj | fnv360_0822_retail, vtable, high
+// pdb params: aInput, shape, bContainer, bKey
 hkBoolE459 hkpGroupCollisionFilterE459::FUN_00e45950(const hkpShapeRayCastInputE459& aInput, const hkpShapeE459& bShape,
                                                      const hkpShapeContainerE459& bContainer, int bKey) const
 {

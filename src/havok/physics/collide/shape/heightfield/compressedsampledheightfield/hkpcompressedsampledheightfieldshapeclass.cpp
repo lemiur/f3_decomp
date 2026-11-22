@@ -45,6 +45,7 @@ struct FUN_00e01140_cls
 };
 
 // @fnv 0x00e01140
+// pdb: cleanupLoadedObjecthkpStorageSampledHeightFieldShape | hkpStorageSampledHeightFieldShapeClass.obj | fnv360_0822_retail, objrun_open, low
 ByteFlag FUN_00e01140_cls::FUN_00e01140()
 {
     return ByteFlag(m_cFlag);

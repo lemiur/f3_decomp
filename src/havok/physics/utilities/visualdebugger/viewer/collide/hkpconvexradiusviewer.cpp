@@ -25,6 +25,8 @@ struct FUN_00d68a70_class
 };
 // Scans the entries array for the first entry whose first int equals key and returns its index, or -1 if none match.
 // @fnv 0x00d68a70
+// pdb: hkpConvexRadiusViewer::findWorld | hkpConvexRadiusViewer.obj | fnv360_0822_retail, objrun, medium
+// pdb params: world
 int FUN_00d68a70_class::FindKeyIndex(int key)
 {
     int limit = count;
@@ -104,6 +106,7 @@ struct D68FC0Object : D68FC0Primary, D68FC0Listener
 };
 
 // @fnv 0x00d68fc0
+// pdb: hkpConvexRadiusViewer::init | hkpConvexRadiusViewer.obj | fnv360_0822_retail, vtable, medium
 void D68FC0Object::FUN_00d68fc0()
 {
     if (m_pOwningWorld)
@@ -122,6 +125,8 @@ struct Outer
     void FUN_00d69000();
 };
 // @fnv 0x00d69000
+// pdb: hkpRigidBodyInertiaViewer::worldRemovedCallback | hkpRigidBodyInertiaViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void Outer::FUN_00d69000()
 {
     ((Target*)((char*)this - 0x20))->FUN_00d68e60();
@@ -138,6 +143,8 @@ struct Sub
 };
 // Calls FindKeyIndex on the Base at this-0x20 with value, and if the result is non-negative passes it to FUN_00d69010.
 // @fnv 0x00d69160
+// pdb: hkpConvexRadiusViewer::worldRemovedCallback | hkpConvexRadiusViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void Sub::FUN_00d69160(int value)
 {
     Base* base = reinterpret_cast<Base*>(reinterpret_cast<char*>(this) - 0x20);
@@ -182,6 +189,8 @@ struct FUN_00d68940_cls
 // @f3 0x009f52e0 (community match, verified in this file)
 extern void* DAT_01169828;
 
+// pdb: hkpConvexRadiusViewer::inactiveEntityMovedCallback | hkpConvexRadiusViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: entity
 void FUN_00d68940_cls::DispatchToTarget(char* pData)
 {
     FUN_00d68940_target* target = *(FUN_00d68940_target**)((char*)this - 0x14);
@@ -249,6 +258,8 @@ static void __forceinline RemoveAt(void**& arr, int& count, int i)
     count = count - 1;
     arr[i] = arr[count];
 }
+// pdb: hkpConvexRadiusViewer::entityRemovedCallback | hkpConvexRadiusViewer.obj | fnv360_0822_retail, objrun, medium
+// pdb params: entity
 void FUN_00d68aa0_cls::RemoveItem(FUN_00d68aa0_req* pRequest)
 {
     if (pRequest->m_10 == 0)
@@ -770,6 +781,8 @@ struct CpuObject
     float FUN_00c91020();
 };
 
+// pdb: hkpConvexRadiusViewer::postSimulationCallback | hkpConvexRadiusViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void D68970_Listener::FUN_00d68970(D68970_Owner* owner)
 {
     __assume(this != 0);

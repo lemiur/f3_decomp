@@ -17,6 +17,8 @@ struct FUN_00d4c000
 };
 
 // @f3 0x009d8cb0 (community match, verified in this file)
+// pdb: hkpPhysicsData::findPhysicsSystemByName | hkpPhysicsData.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: name
 int FUN_00d4c000::Method(int a)
 {
     int __cdecl FUN_00923300(int, int);
@@ -45,6 +47,7 @@ struct FUN_00d4c220_s
 };
 
 // @fnv 0x00d4c220
+// pdb: hkpPhysicsData::hkpPhysicsData | hkpPhysicsData.obj | fnv360_0822_retail, call_seq, high
 FUN_00d4c220_s::FUN_00d4c220_s()
 {
     m_06 = 1;
@@ -70,6 +73,8 @@ struct FUN_00d4c050_obj
 // Scans m_10 entries, checks each entry's sub-items via CompareStringsCaseInsensitive on the masked field at offset 0x74, and returns the first matching item or 0.
 // @f3 0x009d8d00 (community match, verified in this file)
 int __cdecl FUN_00923300(int, int);
+// pdb: hkpPhysicsData::findRigidBodyByName | hkpPhysicsData.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: name
 int FUN_00d4c050_obj::FindMatchingEntry(int a)
 {
     for (int i = 0; i < m_10; ++i)

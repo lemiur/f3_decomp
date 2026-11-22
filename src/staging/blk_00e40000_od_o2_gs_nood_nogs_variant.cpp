@@ -56,6 +56,8 @@ struct FNV_ALIGN(16) FUN_00dd1bf0
 };
 
 // @fnv 0x00e5cfe0
+// pdb: hkMoppObbVirtualMachine_queryObb | hkpMoppMachine.obj | fnv360_0822_retail, objrun, medium
+// pdb params: code, BvToWorld, extent, radius, primitives_out
 void FUN_00e5cfe0(int a1, int a2, int a3, float a4, int a5)
 {
     FUN_00dd1bf0 obj;

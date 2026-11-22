@@ -23,6 +23,8 @@ struct FUN_007ed3c0 : Base5a9b40 { char pad[0xac]; FUN_007ed3c0(int a, int b, in
 struct FUN_007f31b0 : Base5a9b40 { char pad[0x9c]; FUN_007f31b0(); };
 struct FUN_007f2a20 : Base5a9b40 { char pad[0xb4]; FUN_007f2a20(); };
 struct FUN_005a8440 : Base5a9b40 { char pad[0x80]; FUN_005a8440(); };
+// pdb: TESPackage::CreatePackage | Package.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aPackageType
 Base5a9b40* __cdecl FUN_005a9b40(int type)
 {
     Base5a9b40* p = 0;

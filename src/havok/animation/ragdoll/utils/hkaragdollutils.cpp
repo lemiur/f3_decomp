@@ -10,6 +10,8 @@ extern "C"
 }
 
 // @fnv 0x00cea7c0
+// pdb: hkaRagdollUtils::reorderAndAlignForRagdoll | hkaRagdollUtils.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: rigidBodiesInOut, constraintsInOut, warnOnAlignment
 int __cdecl FUN_00cea7c0(void* apFirst, void* apSecond, void* apThird)
 {
     if (FUN_00cea030(apFirst, apSecond))
@@ -62,6 +64,7 @@ extern hkError* DAT_01268360;
 
 // Returns true if obj->inner->getSomething() is one of 0,1,2,6,7,8; otherwise optionally reports an unsupported-constraint error and returns false.
 // @f3 0x0095e380 (community match, verified in this file)
+// pdb: _isConstraintSupported | hkaRagdollUtils.obj | fnv360_0822_retail, call_gap, high
 static __declspec(noinline) bool IsSupportedRagdollConstraint(Obj* obj, bool reportError) throw()
 {
     extern hkError* DAT_010f3364;

@@ -98,6 +98,8 @@ struct S_00d49350
 // Compares the stored string with s using S_00d49350_Compare and returns whether they are equal.
 // @f3 0x00617860 (community match, verified in this file)
 int __cdecl FUN_00c009eb(const char* a, const char* b);
+// pdb: BSStringT<char>::StrCmp | EffectSetting.obj | fnv360_0721_beta, call_gap, low
+// pdb params: apString, abIgnoreCase
 bool S_00d49350::Equals(const char* aString) const
 {
     int r;

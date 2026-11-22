@@ -20,6 +20,7 @@ struct Data {
     float mode;
 };
 struct Owner {int unk00;Data* data;int FUN_006e2c20();};
+// pdb: Calendar::GetSeason | calendar.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: `anonymous namespace'::FindTimeSpanForHour)
 int Owner::FUN_006e2c20() {
     int result=0;
     int mode=data ? (signed char)data->mode : 7;

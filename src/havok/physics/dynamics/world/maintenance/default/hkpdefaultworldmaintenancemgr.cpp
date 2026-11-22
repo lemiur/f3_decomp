@@ -21,6 +21,7 @@ struct hkpDefaultWorldMaintenanceMgr : S_00d0b250_RefObj // src: F3_EXE vtable 0
 
 // Initializes the object's two float members to 33.0 and 63.0 and sets the base reference count to 1.
 // @fnv 0x00d0b250
+// pdb: hkpDefaultWorldMaintenanceMgr::hkpDefaultWorldMaintenanceMgr | hkpDefaultWorldMaintenanceMgr.obj | fnv360_0822_retail, uvref, high
 hkpDefaultWorldMaintenanceMgr::hkpDefaultWorldMaintenanceMgr() : m_kPointA(33.0f), m_kPointB(63.0f)
 {}
 
@@ -45,6 +46,8 @@ struct FUN_00d0b230_class
 };
 
 // @fnv 0x00d0b230
+// pdb: hkpDefaultWorldMaintenanceMgr::init | hkpDefaultWorldMaintenanceMgr.obj | fnv360_0822_retail, vtable, high
+// pdb params: world
 void FUN_00d0b230_class::SetDstFields(S_00d0b230_Arg* a)
 {
     S_00d0b230_Dst* pDst = a->unk08;
@@ -154,6 +157,8 @@ struct FUN_00d0b350_cls
 };
 // Writes a trace entry, calls hkpDefaultWorldMaintenanceMgr_resetWorldTime(first, second) if *second >= unk0c, then writes a closing trace entry.
 // @fnv 0x00d0b350
+// pdb: hkpDefaultWorldMaintenanceMgr::performMaintenanceNoSplit | hkpDefaultWorldMaintenanceMgr.obj | fnv360_0822_retail, vtable, high
+// pdb params: world, stepInfo
 void FUN_00d0b350_cls::TraceConditionalCall(float* first, float* second)
 {
     TraceBuffer* buffer = (TraceBuffer*)TlsGetValue(DAT_0126835c);

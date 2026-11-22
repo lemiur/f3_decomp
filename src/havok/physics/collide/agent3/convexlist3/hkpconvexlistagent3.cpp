@@ -5,6 +5,8 @@
 void __cdecl hkAgent1nMachine_InvalidateTim(void* a, void* b);
 
 // @fnv 0x00d32b20
+// pdb: hkConvexListAgent3::invalidateTim | hkpConvexListAgent3.obj | fnv360_0822_retail, objrun, high
+// pdb params: entry, agentData, input
 void __cdecl CallIfNotFlagged(int aiUnused, int pObject, int c)
 {
     if (!(*(char*)(pObject + 0xb) & 0x20))
@@ -73,6 +75,8 @@ void __cdecl DispatchInputRecord(int a, int b, void* c);
 
 // Calls DispatchInputRecord with a, b and c, then sets bit 0x20 and clears bit 0x40 in byte 0xb of c.
 // @fnv 0x00d32b70
+// pdb: hkConvexListAgent3::create | hkpConvexListAgent3.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: input, entry, agentData
 void __cdecl SetFlagAndCall(int aiArg1, int aiArg2, int c)
 {
     char* p = (char*)c;
@@ -165,6 +169,8 @@ struct FnvCpu_FUN_00d33230_CpuOwner
     void FUN_00d33230(int arg0);
 };
 // @fnv 0x00d33230
+// pdb: hkpMalleableConstraintData::getRuntimeInfo | hkpMalleableConstraintData.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: wantRuntime, infoOut
 void FnvCpu_FUN_00d33230_CpuOwner::FUN_00d33230(int arg0)
 {
     target->Invoke(arg0);
@@ -190,6 +196,8 @@ struct Self
 };
 
 // @fnv 0x00d33240
+// pdb: hkpMapPointsToSubShapeContactMgr::processContactImpl | hkpConvexListAgent3.obj | fnv360_0822_retail, vtable, high
+// pdb params: a, b, input, collisionData
 void __fastcall FUN_00d33240(Self* self, int unused, int arg)
 {
     self->unk0c->vfn18(arg);
@@ -292,6 +300,8 @@ class hkpConvexListProcessorD333
 
 // Resolves convex-list child shapes for both bodies from the cache keys, flags an invalid cache on mismatch, and delegates to m_processor->process.
 // @f3 0x009bd210 (community match, verified in this file)
+// pdb: hkpMapPointsToSubShapeContactMgr::addContactPointImpl | hkpConvexListAgent3.obj | fnv360_0822_retail, vtable, high
+// pdb params: a, b, input, output, contactCache, cp
 unsigned short hkpConvexListProcessorD333::ProcessConvexListChildren(const hkpCdBodyD333& kBodyA, const hkpCdBodyD333& kBodyB,
                                                           const void* pvInput, const void* pvTransform,
                                                           hkpGskCacheD333* pkCache, void* pvOutput) throw()
@@ -375,6 +385,8 @@ struct Container
 
 // Compares the source's time field with this object's, notifies the callback and copies the value block on change, then copies the tag and payload.
 // @fnv 0x00d33600
+// pdb: hkpProcessCollisionOutputBackup::rollbackOutput | hkpConvexListAgent3.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: bodyA, bodyB, output, mgr
 void Container::FUN_00d33600(void* unusedA, void* unusedB, char* source, Callback* callback)
 {
     float sourceTime = *reinterpret_cast<float*>(source + 0x3030);
@@ -399,6 +411,7 @@ void __cdecl hkAgent1nMachine_Destroy(int* data, void* collector, void* input, v
 
 void __cdecl FUN_00d41860();
 // @fnv 0x00d32bd0
+// pdb: TESSpellList::ClearDataComponent | TESSpellList.obj | fnv360_0822_retail, vtable, medium
 void __cdecl FUN_00d32bd0(int a, int b, int c)
 {
     FUN_00d41860();
@@ -445,6 +458,8 @@ class hkpCollisionDispatcherD331
 // @f3 0x009bcf60 (community match, verified in this file)
 void __cdecl FUN_009bcf00(hkpAgent3FuncsD331& kFuncs);
 
+// pdb: hkConvexListAgent3::registerAgent3 | hkpConvexListAgent3.obj | fnv360_0822_retail, objrun_prop, high
+// pdb params: dispatcher
 void __cdecl RegisterAgent3Entries(hkpCollisionDispatcherD331* pkDispatcher)
 {
     __declspec(align(16)) hkpAgent3FuncsD331 kFuncs;
@@ -529,6 +544,8 @@ struct D33330_OrientedBox : D33330_Box
     virtual ~D33330_OrientedBox();
 };
 
+// pdb: BSMultiBoundOBB::BSMultiBoundOBB | BGSPrimitive.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arCenter, arHalfExtents, arAxis
 FUN_00d33330_t& FUN_00d33330_t::FUN_00d33330(const FUN_00d33330_t& first, const FUN_00d33330_t& second, const FUN_00d33330_t& third)
 {
     const D33330_Point3& centre = reinterpret_cast<const D33330_Point3&>(first);

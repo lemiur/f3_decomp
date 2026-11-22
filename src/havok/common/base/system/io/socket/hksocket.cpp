@@ -17,6 +17,7 @@ struct S_00d2b790
     void* DispatchToTarget(void* pArg);
 };
 // @fnv 0x00d2b790
+// pdb: hkSocket::ReaderAdapter::isOk | hkSocket.obj | fnv360_0822_retail, vtable, high
 void* S_00d2b790::DispatchToTarget(void* pArg)
 {
     m_pFlagTarget->v0C(pArg);
@@ -175,6 +176,7 @@ struct FUN_00d2b800_cls
 };
 
 // @fnv 0x00d2b800
+// pdb: hkSocket::WriterAdapter::isOk | hkSocket.obj | fnv360_0822_retail, vtable, high
 void* FUN_00d2b800_cls::ForwardToTarget(void* apArg)
 {
     m_08->v3(apArg);
@@ -231,6 +233,7 @@ class FUN_00d2b850 : public hkReferencedObjectD2B
 };
 
 // @fnv 0x00d2b850
+// pdb: hkSocket::hkSocket | hkSocket.obj | fnv360_0822_retail, uvref, high
 FUN_00d2b850::FUN_00d2b850() throw()
 {
     m_partA.m_pOwnerObject = this;

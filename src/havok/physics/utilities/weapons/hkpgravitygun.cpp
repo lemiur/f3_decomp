@@ -113,6 +113,8 @@ struct Layout448 {
 
 } // namespace ns_00448e80
 
+// pdb: TESFile::TESRewind | TESFile.obj | fnv360_0822_retail, call_gap, low
+// pdb params: getform
 void FUN_00e46300::finishLoadedObject(hkFinishLoadedObjectFlagE463 flag)
 {
     ns_00448e80::Layout448* s = (ns_00448e80::Layout448*)this;

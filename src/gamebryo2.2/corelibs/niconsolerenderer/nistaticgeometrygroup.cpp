@@ -17,6 +17,7 @@ struct NiGeometryGroup
 };
 // If p->buf is set, removes it from the group, deletes it, and clears p->buf.
 // @fnv 0x00e94740
+// pdb: NiUnsharedGeometryGroup::RemoveObject | NiUnsharedGeometryGroup.obj | tesv_win, objrun_open, low
 void NiGeometryGroup::RemoveAndDeleteBuffer(FUN_00e94740_Param* p)
 {
     NiGeometryBufferData* q = p->buf;
@@ -97,6 +98,7 @@ struct NiStaticGeometryGroup
 };
 // Resets vtables, clears the map at offset 12, frees its buffer, calls cleanup, and optionally deletes the object.
 // @fnv 0x00e94890
+// pdb: NiStaticGeometryGroup::~NiStaticGeometryGroup | NiStaticGeometryGroup.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiStaticGeometryGroup::`scalar deleting destructor')
 void* NiStaticGeometryGroup::Destroy(unsigned int flag)
 {
     vtbl = (void*)&DAT_010f0fd4;
@@ -157,6 +159,8 @@ struct NiGeometryGroup
 };
 // Frees the NiGeometryBufferData stored at offset 0x1c of pkData via RemoveObject and delete, then clears the pointer.
 // @fnv 0x00e94db0
+// pdb: NiTPointerMap<char const *,NiObject * (__cdecl*)(void)>::DeleteItem | NiStream.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: NiStaticGeometryGroup::RemoveObject)
+// pdb params: pkItem
 void NiGeometryGroup::FUN_00e94db0(NiGeometryData* pkData)
 {
     NiGeometryBufferData* pkBuffData = *(NiGeometryBufferData**)((char*)pkData + 0x1c);
@@ -203,6 +207,7 @@ struct FUN_00e94ab0 : GeometryBase
 };
 // Constructs the object, whose GeometryMap member allocates and zeroes its bucket array.
 // @fnv 0x00e94ab0
+// pdb: NiStaticGeometryGroup::Create | NiStaticGeometryGroup.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: NiStaticGeometryGroup::NiStaticGeometryGroup)
 FUN_00e94ab0::FUN_00e94ab0()
 {}
 
@@ -227,6 +232,7 @@ __declspec(noinline) FUN_00e94ab0::FUN_00e94ab0()
     unk18 = 0;
 }
 // @fnv 0x00e94c00
+// pdb: NiStaticGeometryGroup::Create | NiStaticGeometryGroup.obj | tesv_win, caller_sim, low
 FUN_00e94ab0* __cdecl FUN_00e94c00()
 {
     return new FUN_00e94ab0;
@@ -414,6 +420,8 @@ struct S_00e948f0_Holder
 };
 
 // @fnv 0x00e948f0
+// pdb: NiStaticGeometryGroup::AddObject | NiStaticGeometryGroup.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pkData, pkSkinInstance, pkPartition
 void S_00e948f0_Holder::InitData(S_00e948f0_Obj* apObj, int aiUnused, S_00e948f0_Y* apY)
 {
     S_00e948f0_Data* d;
@@ -618,6 +626,8 @@ struct FUN_00e94c20_cls
 
 // Looks up or creates a VbNode, calls FUN_00e94650 with vertex-count times stride and count>1, then stores a quotient in d->m_38.
 // @fnv 0x00e94c20
+// pdb: NiStaticGeometryGroup::CreateChip | NiStaticGeometryGroup.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pkBuffData, uiStream
 VbNode* FUN_00e94c20_cls::GetOrCreateNode(VbDesc* apDesc, unsigned int uiStrideIndex)
 {
     VbNode* pNode = 0;

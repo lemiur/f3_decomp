@@ -17,6 +17,7 @@ struct FUN_00da2dc0_class
     void CloseSocket();
 };
 // @fnv 0x00da2dc0
+// pdb: hkBsdSocket::close | hkBsdSocket.obj | fnv360_0822_retail, vtable, medium
 void FUN_00da2dc0_class::CloseSocket()
 {
     if (m_pSocket != -1)
@@ -36,6 +37,7 @@ struct hkBsdSocket
 };
 
 // @fnv 0x00da3080
+// pdb: hkBsdSocket::~hkBsdSocket | hkBsdSocket.obj | tesv_win, hash, low
 void __thiscall hkBsdSocket::Destroy()
 {
     *(int*)this = (int)&DAT_010d5030;
@@ -60,6 +62,7 @@ struct FUN_00da30a0_cls
 
 // Calls FUN_00d2b850, sets the vtable to DAT_010d5030 and m_field_0x20 to param, calls hkBsdSocket_createSocket if param is -1, and returns this.
 // @fnv 0x00da30a0
+// pdb: hkBsdSocket::hkBsdSocket | hkBsdSocket.obj | tesv_win, call_gap, low
 void* __thiscall FUN_00da30a0_cls::InitWithParam(int param)
 {
     FUN_00d2b850();
@@ -152,6 +155,7 @@ struct FUN_00da2f90_cls
 };
 extern "C" int __stdcall FUN_00ee6d7a(int, int, int, int);
 // @fnv 0x00da2f90
+// pdb: hkBsdSocket::asyncSelect | hkBsdSocket.obj | tesv_win, hash, low
 bool FUN_00da2f90_cls::FUN_00da2f90(int aiArg1, int aiArg2, int c)
 {
     return FUN_00ee6d7a(m_pSocket, aiArg1, aiArg2, ((c & 3) | ((c & 0xc) << 2))) != 0;
@@ -162,6 +166,7 @@ extern "C" __declspec(dllimport) int __stdcall setsockopt(unsigned int s, int le
                                                           int optlen);
 
 // @fnv 0x00ee6d9e
+// pdb: D3DXMatrixMultiply | d3dx9_42.dll | tesv_win, objrun_open, low
 int __stdcall FUN_00ee6d9e(unsigned int s, int level, int optname, const char* optval, int optlen)
 {
     return setsockopt(s, level, optname, optval, optlen);
@@ -191,6 +196,8 @@ struct FUN_00da2e10_cls
 };
 
 // @fnv 0x00da2e10
+// pdb: hkBsdSocket::read | hkBsdSocket.obj | fnv360_0822_retail, vtable, high
+// pdb params: buf, nbytes
 int FUN_00da2e10_cls::Read(void* buf, int len)
 {
     if (m_pSocket != -1)
@@ -267,6 +274,7 @@ struct S00da2ff0_Err
 extern char DAT_0116c258;
 extern S00da2ff0_Err* DAT_010f3364;
 int __stdcall FUN_00c208f8(unsigned short, void*);
+// pdb: hkBsdNetworkInit | hkBsdSocket.obj | fnv360_0822_retail, ustr, high
 void InitWinsock()
 {
     if (DAT_0116c258 == 0)

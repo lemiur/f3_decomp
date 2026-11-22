@@ -49,6 +49,7 @@ public:
     void FUN_00724c90();
 };
 
+// pdb: MobileObjectTaskletData::SendEndMessage | AITaskManager.obj | fnv360_0822_retail, call_gap_sim, low
 void WorkerSet_724c90::FUN_00724c90()
 {
     for (int i = 0; i < count; i++)
@@ -102,6 +103,8 @@ public:
     void FUN_00724ba0(void* context);
 };
 
+// pdb: AITaskThreadManager::AddThread | AITaskManager.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aiThread
 void TaskThreadOwner::FUN_00724ba0(void* context)
 {
     if (count < 3)
@@ -393,6 +396,8 @@ public:
     void FUN_0072aca0(char* source);
 };
 
+// pdb: HighActorCuller::Init | HighActorCuller.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCamera
 void SceneOwner::FUN_0072aca0(char* source)
 {
     unk14 = source;
@@ -648,6 +653,8 @@ public:
     unsigned short Actor_GetAnimGroup(unsigned int group, WeaponInfo* context, int first, int second);
     float FUN_00729d40(unsigned int requested);
 };
+// pdb: Creature::GetMovementAnimationSpeed | Creature.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: aeMoveMode
 float AnimationOwner::FUN_00729d40(unsigned int requested) {
     if (!GetAnimData())
         return DAT_00dbeb38;
@@ -666,6 +673,7 @@ struct Owner274 {
     State274* state;
     void FUN_0072a4e0();
 };
+// pdb: CharacterProgression::InitializeData | FalloutCharacterProgression.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: TESDataHandler::SortAllList)
 void Owner274::FUN_0072a4e0() {
     State274* current = state;
     if (current) {
@@ -700,6 +708,7 @@ public:
     unsigned int value38;
     BSPlayerDistanceCheckController();
 };
+// pdb: BSPlayerDistanceCheckController::BSPlayerDistanceCheckController | BSPlayerDistanceCheckController.obj | fnv360_0822_retail, call_gap, low
 BSPlayerDistanceCheckController::BSPlayerDistanceCheckController() : value34(0.0f), value38(0) {}
 
 // @f3 0x00729b50 (community match, verified in this file)
@@ -717,6 +726,7 @@ struct Owner353 {
     float FUN_006f6590();
     int FUN_00729b50();
 };
+// pdb: Creature::GetAttackDamage | Creature.obj | fnv360_0822_retail, caller_sim, medium
 int Owner353::FUN_00729b50() {
     unsigned int index = FUN_004515d0(source);
     return static_cast<int>(FUN_00582630(FUN_006f6590(), index));
@@ -954,6 +964,7 @@ struct Cls_0072a200 {
     float FUN_0072a200();
 };
 
+// pdb: Creature::CalculateWalkSpeed | Creature.obj | fnv360_0822_retail, objrun, medium
 float Cls_0072a200::FUN_0072a200()
 {
     float res = 0.0f;
@@ -1492,6 +1503,8 @@ struct ActorSave {
  void FUN_00754fc0(void*);
  void FUN_00738430(unsigned int flags,void* context);
 };
+// pdb: HighProcess::SaveGame | HighProcess.obj | fnv360_0721_beta, objrun, medium
+// pdb params: aiFlags, pmob
 void ActorSave::FUN_00738430(unsigned int flags,void* context) {
  FUN_0075a650(flags,context);
  unsigned int headerCount=0;
@@ -1652,6 +1665,8 @@ public:
     void FUN_00731760(int p);
 };
 
+// pdb: HighProcess::ProcessSandman | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 void Self731760::FUN_00731760(int p)
 {
     int other = ((VI0)((*(void***)this)[0x278 / 4]))(this);
@@ -1768,6 +1783,7 @@ void* FUN_005e9ad0(void);
 void FUN_005167b0(void);
 void FUN_00516580(void);
 
+// pdb: AILinearTaskThreadManager::AIThread1TaskFunc | AILinearTaskThreadManager.obj | fnv360_0721_retail, objrun, medium
 void FUN_007246b0(void) {
     ((FUN_007246b0_Obj*)DAT_0107a0d4)->FUN_006e48f0();
     void (__stdcall* pA)(int, int, int) = FUN_00d9b088;
@@ -2790,6 +2806,7 @@ struct Window {
 Window* __cdecl FUN_00be78d0();
 struct State { bool active; bool FUN_0072a480(int level); };
 struct Owner { State* state; void FUN_0072a500(); };
+// pdb: CharacterProgression::FinishLevelUp | FalloutCharacterProgression.obj | fnv360_0822_retail, call_gap, low
 void Owner::FUN_0072a500() {
     State* current = state;
     if (!current->FUN_0072a480(DAT_0107a104->Actor_GetLevel() + 1)) {
@@ -2845,6 +2862,8 @@ public:
     void FUN_00724c50();
 };
 
+// pdb: AITaskQueue::Enqueue | AITaskManager.obj | fnv360_0721_beta, call_gap_sim, low
+// pdb params: pTaskData
 void Set_724c50::FUN_00724c50()
 {
     for (int i = 0; i < count; i++)
@@ -3162,6 +3181,8 @@ struct Actor {
     void FUN_00731eb0(Target* target);
 };
 
+// pdb: HighProcess::ProcessCreateFollow | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 void Actor::FUN_00731eb0(Target* target)
 {
     ItemQuery query;
@@ -3744,6 +3765,7 @@ static __forceinline bool Disallowed(Record* record)
     return category == 0xf || category == 0x13 || category == 0x20;
 }
 
+// pdb: Character::InitiateSpectator | Character.obj | fnv360_0822_retail, caller_sim, low
 void Actor::FUN_00728300()
 {
     if (MobileObject_GetCurrentPackage() && MobileObject_GetCurrentPackage()->type == 0x16)
@@ -4418,6 +4440,8 @@ struct Object {
     __forceinline bool ValidOwner(Object* source) { return owner && (owner->v100() || source->FUN_004e8530(owner->GetId())); }
     bool FUN_0073e030(Object* source, int unused);
 };
+// pdb: HighProcess::ProcessEscortOneHour | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, afTimeDelta
 bool Object::FUN_0073e030(Object* source, int unused)
 {
     Context* context = v278();
@@ -5027,6 +5051,8 @@ struct Updater {
     void FUN_00726210(Reference* reference);
 };
 
+// pdb: PackageUpdateTaskData::HandleMobMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apMob
 void Updater::FUN_00726210(Reference* reference)
 {
     if (!reference)
@@ -5135,6 +5161,7 @@ extern ShaderEntry* DAT_0107b344;
 extern void* volatile DAT_011785d0;
 extern SingletonTarget* g_011f42c0;
 
+// pdb: InitCameraShake | CameraShake.obj | fnv360_0822_retail, ustr, medium
 void __cdecl FUN_00727c60()
 {
     char buf[260];
@@ -5183,6 +5210,8 @@ public:
     void FUN_007395b0(void* param);
 };
 
+// pdb: HighProcess::ProcessSummonCreatureDefend | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 void Owner395::FUN_007395b0(void* param)
 {
     Node395* node = 0;
@@ -5237,6 +5266,7 @@ struct Steps724 {
     void FUN_00437290(float a);
 };
 void BGSDestructibleObjectForm_UpdateDestructibleObjects();
+// pdb: AILinearTaskThreadManager::AIThread2TaskFunc | AILinearTaskThreadManager.obj | fnv360_0721_retail, objrun, medium
 void FUN_007248d0() {
     ((Steps724*)&DAT_0107afb4)->FUN_00724500(0, 1);
     ((Steps724*)DAT_0107a79c)->FUN_006f0c10();
@@ -5549,6 +5579,7 @@ struct Process {
     unsigned char referenceFlags[6];
     bool FUN_00730780();
 };
+// pdb: HighProcess::CanSetActionHeadTrackTarget | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
 bool Process::FUN_00730780() {
     for (int index = 5; index >= 1; --index)
         if (referenceFlags[index])
@@ -5560,6 +5591,7 @@ bool Process::FUN_00730780() {
 
 // @f3 0x007271b0 (community match, verified in this file)
 namespace f3m_007271b0 {
+// pdb: BaseProcess::GetLastHitData | BaseProcess.obj | fnv360_0721_beta, objrun_open, low
 int __stdcall FUN_007271b0(int a, int b, int c) {
     return -1;
 }
@@ -5567,6 +5599,7 @@ int __stdcall FUN_007271b0(int a, int b, int c) {
 
 // @f3 0x007271a0 (community match, verified in this file)
 namespace f3m_007271a0 {
+// pdb: BaseProcess::GetCreatureLipSynchStartTime | BaseProcess.obj | fnv360_0721_beta, objrun_open, low
 int __stdcall FUN_007271a0(int,int,int,int,int,int){return 0x101;}
 }   // namespace f3m_007271a0
 
@@ -5902,6 +5935,8 @@ struct ActorConsumeShell {
     void FUN_007214b0(MagicItem*, bool);
 };
 
+// pdb: Actor::CastAlchemy | Actor_Magic.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apPotionIngredient, abLast
 void ActorConsumeShell::FUN_007214b0(MagicItem* pItem, bool bApply)
 {
     if ((int)pItem->vfn_18() == 7 || (int)pItem->vfn_18() == 8)
@@ -6290,6 +6325,8 @@ public:
     bool FUN_00730bc0(Reference* reference, int unused);
 };
 
+// pdb: HighProcess::ComputeCanRespondToDialogueFromNPC | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, apInitiatingActor
 bool Actor::FUN_00730bc0(Reference* reference, int unused)
 {
     if (GetLock() || IsDead() || reference->FUN_006f73e0(1) ||
@@ -6335,6 +6372,7 @@ void __thiscall FUN_00724cd0_Interface::vf01(FUN_00724cd0_Args* args)
     (void)args;
 }
 
+// pdb: MobileObjectTaskletData::SendEndMessage | AITaskManager.obj | fnv360_0721_beta, call_gap_sim, low
 void __thiscall FUN_00724cd0_Owner::FUN_00724cd0()
 {
     FUN_00724cd0_Args args;
@@ -6448,6 +6486,8 @@ struct Owner0073b250 {
     unsigned char FUN_0073b250();
 };
 
+// pdb: MiddleHighProcess::SetWeaponEnchantmentVisuals | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apEffect
 unsigned char Owner0073b250::FUN_0073b250() {
     return unk17c;
 }
@@ -6552,6 +6592,7 @@ struct Owner0073b260 {
     float FUN_0073b260();
 };
 
+// pdb: MiddleHighProcess::GetShouldRefreshMagicShadersEffects | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
 float Owner0073b260::FUN_0073b260() {
     return unk170;
 }
@@ -6657,6 +6698,7 @@ struct Owner0073b280 {
     float FUN_0073b280();
 };
 
+// pdb: MiddleHighProcess::GetAlphaMult | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
 float Owner0073b280::FUN_0073b280() {
     return unk174;
 }
@@ -6725,6 +6767,8 @@ struct Owner0073b2a0 {
     unsigned char FUN_0073b2a0();
 };
 
+// pdb: MiddleHighProcess::SetAlphaMult | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: afAlpha
 unsigned char Owner0073b2a0::FUN_0073b2a0() {
     return unke0;
 }
@@ -6835,6 +6879,7 @@ struct Owner0073b2d0 {
     unsigned char FUN_0073b2d0();
 };
 
+// pdb: MiddleHighProcess::SetRefreshFlareFlags | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
 unsigned char Owner0073b2d0::FUN_0073b2d0() {
     return unk188;
 }
@@ -6984,6 +7029,7 @@ struct Owner0073b2f0 {
     int FUN_0073b2f0();
 };
 
+// pdb: MiddleHighProcess::GetPickpocketed | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
 int Owner0073b2f0::FUN_0073b2f0() {
     return unk224;
 }
@@ -7095,6 +7141,7 @@ struct Owner0073b3a0 {
     unsigned char FUN_0073b3a0();
 };
 
+// pdb: MiddleHighProcess::GetAll3DUpdateFlags | HighProcess.obj | fnv360_0822_retail, vtable, medium
 unsigned char Owner0073b3a0::FUN_0073b3a0() {
     return unk18c;
 }
@@ -8092,6 +8139,8 @@ public:
     void FUN_00723f40(int actorValue);
 };
 
+// pdb: ActorValueCache::SetRelatedActorValuesOutOfDate | ActorValueCache.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: aiParent
 void ActorValueStore::FUN_00723f40(int actorValue)
 {
     int numDependents = 0;
@@ -10766,6 +10815,8 @@ struct ActorView {
     virtual Marker* FindMarker(void*, void*);
     Point3 FUN_0072f7d0(void* first, void* second);
 };
+// pdb: HighProcess::GetLastPositionDetected | HighProcess.obj | fnv360_0822_retail, objrun, low
+// pdb params: apActor, abWhichList
 Point3 ActorView::FUN_0072f7d0(void* first, void* second)
 {
     Point3 position = DAT_0108ec68;
@@ -12969,6 +13020,8 @@ struct Process {
  int state;
  void FUN_0072b630(Actor*);
 };
+// pdb: HighProcess::FinishSetupSpecialIdle | HighProcess.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apActor
 void Process::FUN_0072b630(Actor* actor) {
  Animation* animation=actor->GetAnimation();
  if(animation && idle) {
@@ -15448,6 +15501,8 @@ struct FUN_006b5c50 {
 struct ProcessLists { void FUN_00793f90(FUN_006b5c50*); };
 extern ProcessLists DAT_0107c0a0;
 struct ActorPart { void FUN_00721d50(int,int); };
+// pdb: Actor::EffectReflected | Actor_Magic.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCaster, apEffect
 void ActorPart::FUN_00721d50(int unused1,int unused2) {
  Shader* shader=DAT_0106c860;
  FUN_006b5c50* effect=new FUN_006b5c50((Reference*)((char*)this-0x8c),shader,0.0f);
@@ -15674,6 +15729,7 @@ struct Owner0073bd60 {
     int FUN_0073bd60();
 };
 
+// pdb: HighProcess::ClearLastHeadTrackTarget | HighProcess.obj | fnv360_0822_retail, objrun_open, low
 int Owner0073bd60::FUN_0073bd60() {
     return unk34c;
 }
@@ -15899,6 +15955,7 @@ struct Owner0073bd70 {
     int FUN_0073bd70();
 };
 
+// pdb: HighProcess::ClearDialogTarget | HighProcess.obj | fnv360_0822_retail, objrun_open, low
 int Owner0073bd70::FUN_0073bd70() {
     return unk354;
 }
@@ -16287,6 +16344,8 @@ struct FUN_006b5c50 : F3HitEffectBase {
 struct F3HitEffectLists {void FUN_00793f90(FUN_006b5c50* effect);};
 
 struct F3MagicReceiver {void FUN_00721c90(int unused1,int unused2);};
+// pdb: Actor::EffectAbsorbed | Actor_Magic.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: PlayerCharacter::ShowInsufficientChargeMessage)
+// pdb params: apCaster, apEffect
 void F3MagicReceiver::FUN_00721c90(int unused1,int unused2)
 {
     F3EffectShader* shader=DAT_0106c864;
@@ -16369,6 +16428,8 @@ public:
     void FUN_00755170(void* arg);
     void FUN_00738b20(CArg* arg);
 };
+// pdb: HighProcess::SaveGame | HighProcess.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apSaveGameBuffer
 void C738b20::FUN_00738b20(CArg* arg)
 {
     char flag;
@@ -16540,6 +16601,7 @@ struct Foo {
     unsigned char FUN_007281f0();
 };
 
+// pdb: Character::GetRace | Character.obj | fnv360_0822_retail, objrun_open, low
 unsigned char Foo::FUN_007281f0() {
     return ((const unsigned char*)this)[0x1a8];
 }
@@ -16554,6 +16616,7 @@ public:
     float FUN_00728210();
 };
 
+// pdb: Character::IsTresPassing | Character.obj | fnv360_0822_retail, objrun_open, low
 float Foo_728210::FUN_00728210() {
     return value;
 }
@@ -16568,6 +16631,8 @@ public:
     unsigned char FUN_00728220();
 };
 
+// pdb: Character::SetEquippedWeight | Character.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: afvalue
 unsigned char Standin_728220::FUN_00728220()
 {
     return (unsigned char)data[0x1a9];
@@ -16576,6 +16641,8 @@ unsigned char Standin_728220::FUN_00728220()
 
 // @f3 0x0072a410 (community match, verified in this file)
 namespace f3m_0072a410 {
+// pdb: CharacterProgression::GetSaveSize | FalloutCharacterProgression.obj | fnv360_0721_beta, objrun, medium
+// pdb params: aiFlags
 unsigned short __stdcall FUN_0072a410(int)
 {
     return 5;
@@ -16590,6 +16657,7 @@ struct Foo {
     int FUN_0072b250();
 };
 
+// pdb: HighProcess::GetAnimActionAnimSeq | HighProcess.obj | fnv360_0822_retail, objrun, medium
 int Foo::FUN_0072b250() {
     return value;
 }
@@ -16617,6 +16685,8 @@ public:
     int FUN_007306f0();
 };
 
+// pdb: HighProcess::SetHasHealingSpells | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: aiHasHealingSpell
 int C_007306f0::FUN_007306f0() {
     return value;
 }
@@ -16630,6 +16700,7 @@ struct FUN_0073aea0_Holder {
     float FUN_0073aea0();
 };
 
+// pdb: LowProcess::GetCurrentActionComplete | HighProcess.obj | fnv360_0822_retail, objrun_open, low
 float FUN_0073aea0_Holder::FUN_0073aea0() {
     return value;
 }
@@ -16670,6 +16741,7 @@ struct ActorSaveStub {
     unsigned int unk3d4;
     void FUN_00731510();
 };
+// pdb: HighProcess::RemoveDetectionEvent | HighProcess.obj | fnv360_0822_retail, objrun, medium
 void ActorSaveStub::FUN_00731510()
 {
     unsigned int v = unk3d4;
@@ -16687,6 +16759,7 @@ class Foo_729ae0 {
 public:
     char FUN_00729ae0();
 };
+// pdb: Creature::HasRagDoll | Creature.obj | fnv360_0822_retail, objrun, low
 char Foo_729ae0::FUN_00729ae0()
 {
     return *((char*)this + 0x1a0);
@@ -16725,6 +16798,7 @@ struct Foo {
     int FUN_0073b1d0();
 };
 
+// pdb: MiddleHighProcess::GetRunOncePackageInstanceData | HighProcess.obj | fnv360_0822_retail, objrun_open, low
 int Foo::FUN_0073b1d0()
 {
     return value;
@@ -16860,6 +16934,7 @@ struct Foo_73b220
     int FUN_0073b220();
 };
 
+// pdb: MiddleHighProcess::GetLastBoundWeapon | HighProcess.obj | fnv360_0822_retail, call_seq, medium
 int Foo_73b220::FUN_0073b220()
 {
     return *(int*)((char*)this + 0x15c);
@@ -16875,6 +16950,8 @@ public:
     unsigned char FUN_0073b320();
 };
 
+// pdb: MiddleHighProcess::SetPickpocketed | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: abflag
 unsigned char Cls_0073b320::FUN_0073b320() {
     return unk18d;
 }
@@ -16913,6 +16990,7 @@ public:
     unsigned int FUN_0073b230();
 };
 
+// pdb: MiddleHighProcess::GetWeaponEnchantmentVisuals | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
 unsigned int FUN_0073b230_Class::FUN_0073b230() {
     return *(unsigned int*)((char*)this + 0x16c);
 }
@@ -17058,6 +17136,7 @@ float Standin_73ba30::FUN_0073ba30()
 
 // @f3 0x0073b340 (community match, verified in this file)
 namespace f3m_0073b340 {
+// pdb: MiddleHighProcess::GetIsSummonedCreature | HighProcess.obj | fnv360_0822_retail, vtable, medium
 char __fastcall FUN_0073b340(char* self)
 {
     return self[0x18B];
@@ -17165,6 +17244,7 @@ struct C_0073bc90 {
     int FUN_0073bc90();
 };
 
+// pdb: HighProcess::GetDetectionModifier | HighProcess.obj | fnv360_0822_retail, objrun_open, low
 int C_0073bc90::FUN_0073bc90() {
     return unk138;
 }
@@ -17192,6 +17272,7 @@ public:
     void FUN_0073b2c0();
 };
 
+// pdb: MiddleHighProcess::ClearFaceAnimationData | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
 void Cls_0073b2c0::FUN_0073b2c0() {
     unk180 = 1;
 }
@@ -17293,6 +17374,8 @@ public:
     int FUN_0073b200();
 };
 
+// pdb: MiddleHighProcess::SetAcquireObject | HighProcess.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: apacquire
 int Owner73b200::FUN_0073b200()
 {
     return unk158;
@@ -17308,6 +17391,7 @@ public:
     int FUN_0073bd50();
 };
 
+// pdb: HighProcess::ClearPostAnimationActions | HighProcess.obj | fnv360_0822_retail, objrun_open, low
 int Cls73bd50::FUN_0073bd50()
 {
     return unk220;
@@ -17372,6 +17456,7 @@ struct Owner0073aee0 {
     int FUN_0073aee0();
 };
 
+// pdb: LowProcess::GetIsAggressor | HighProcess.obj | fnv360_0721_retail, objrun_open, low
 int Owner0073aee0::FUN_0073aee0() {
     return unk30 & 1;
 }
@@ -17396,6 +17481,7 @@ struct Owner0073af40 {
     int FUN_0073af40();
 };
 
+// pdb: LowProcess::IsPackageDoneOnce | HighProcess.obj | fnv360_0721_retail, objrun_open, low
 int Owner0073af40::FUN_0073af40() {
     return unk30 >> 7;
 }
@@ -17598,6 +17684,7 @@ struct Owner0073b380 {
     void FUN_0073b380();
 };
 
+// pdb: MiddleHighProcess::ClearAll3DUpdateFlags | HighProcess.obj | fnv360_0822_retail, objrun, medium
 void Owner0073b380::FUN_0073b380() {
     unk18c = false;
 }
@@ -17607,6 +17694,8 @@ void Owner0073b380::FUN_0073b380() {
 extern float FUN_00db7260;
 namespace f3m_00727070 {
 
+// pdb: BaseProcess::GetLastTimeDetected | BaseProcess.obj | fnv360_1110_retail, objrun_open, low
+// pdb params: apActor, abWhichList
 float __stdcall FUN_00727070(int a, int b)
 {
     return FUN_00db7260;
@@ -17898,6 +17987,8 @@ struct ProcessView {
     int resetValue;
     void FUN_0072fd20(int unused, unsigned char flag);
 };
+// pdb: HighProcess::FadeIn | HighProcess.obj | fnv360_0721_retail, call_seq, medium
+// pdb params: apActor, abTeleport
 void ProcessView::FUN_0072fd20(int unused, unsigned char flag)
 {
     if (state == 6 || state == 5)
@@ -18188,6 +18279,8 @@ public:
     void FUN_007255a0(int arg);
 };
 
+// pdb: MovementTaskData::HandleCountMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: auiCount
 void Cls_7255a0::FUN_007255a0(int arg)
 {
     field38 = 0;
@@ -18372,6 +18465,8 @@ struct ItemActor {
     Caster caster;
     bool FUN_007213f0(MagicItem* item, int count, bool force);
 };
+// pdb: Actor::DrinkPotion | Actor_Magic.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apPotion, pextra, abNow
 bool ItemActor::FUN_007213f0(MagicItem* item, int count, bool force)
 {
     if (!item)
@@ -18413,6 +18508,8 @@ public:
     void __thiscall FUN_0072a6d0(FUN_0072a6d0_Target* target);
 };
 
+// pdb: CharacterProgression::SaveGame | FalloutCharacterProgression.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apSaveGameBuffer
 void __thiscall FUN_0072a6d0_Owner::FUN_0072a6d0(FUN_0072a6d0_Target* target)
 {
     int value = unk00;
@@ -18693,6 +18790,7 @@ void RefreshTargetState() {
 }
 void FUN_007398b0();
 };
+// pdb: HighProcess::ClearDefaultHeadTrackTarget | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
 void Process::FUN_007398b0() {
  references[0]=0;
  flags[0]=false;
@@ -18720,6 +18818,8 @@ struct Proc739{
     bool FUN_007300a0(n739::Actor739* a,n739::Ref739* r);
     bool FUN_00739520(n739::Actor739* a,n739::Ref739* r);
 };
+// pdb: HighProcess::ShouldRunCombatDetection | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, apTarget
 bool Proc739::FUN_00739520(n739::Actor739* a,n739::Ref739* r){
     if(r->v139(0)||r->mfc==3)return false;
     bool check=n739::DAT_00f6e68c[type].flag;
@@ -18747,6 +18847,8 @@ void Obj73bb70::FUN_0073bb70(float v)
 namespace f3m_007255c0 {
 extern void (__stdcall *FUN_00d9b0a0)(void*);
 
+// pdb: MovementTaskData::HandleEndMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiThread
 void __stdcall FUN_007255c0(int unused)
 {
     void (__stdcall *leaveCriticalSection)(void*) = FUN_00d9b0a0;
@@ -19014,6 +19116,8 @@ struct Owner {
 }
 using namespace n731980;
 
+// pdb: HighProcess::SetPathLookAtTarget | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apRef
 void Owner::FUN_00731980(Item* p)
 {
     item = p;
@@ -19211,6 +19315,8 @@ struct Process {
     void HighProcess_FindSpecialIdletoPlay(Actor*,int,int);
     void FUN_00732b80(Actor* actor);
 };
+// pdb: HighProcess::ProcessAlertBehavior | HighProcess.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apActor
 void Process::FUN_00732b80(Actor* actor) {
     Actor* currentActor = reinterpret_cast<Virtuals*>(this)->v158();
     if (currentActor == 0) return;
@@ -19413,6 +19519,8 @@ struct Owner {
     virtual void v280(int);
     void FUN_00727800(int,int,void*);
 };
+// pdb: BaseProcess::FinishInitLoadGame | BaseProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiFlags, aiOldFlags, pmob
 void Owner::FUN_00727800(int,int,void* p)
 {
     void* t=FUN_00c0050a(p,0,DAT_00f47c40,DAT_00f47ac4,0);
@@ -19435,6 +19543,7 @@ struct Ref {
 };
 }
 
+// pdb: Actor::IsRefractive | Actor_Magic.obj | fnv360_0822_retail, call_seq, medium, conflict (skyrim: MagicTarget::QUpdating)
 bool n721eb0::Ref::FUN_00721eb0()
 {
     ExtraList* list = &extra;
@@ -19706,6 +19815,7 @@ struct Creature {
     float FUN_00729d40(int group);
     float FUN_0072a260();
 };
+// pdb: Creature::CalculateRunSpeed | Creature.obj | fnv360_0822_retail, objrun, medium
 float Creature::FUN_0072a260() {
     float speed = 0.0f;
     if (!Overencumbered())
@@ -19753,6 +19863,7 @@ public:
     void FUN_007243b0();
 };
 
+// pdb: AILinearTaskThreadManager::WaitForThreads | AILinearTaskThreadManager.obj | fnv360_0822_retail, call_gap_sim, low, conflict (bridge: AILinearTaskThreadManager::AILinearTaskThreadManager)
 void WorkerSet_724c90_L::FUN_007243b0()
 {
     unsigned int i = 0;
@@ -19937,6 +20048,8 @@ public:
     void __thiscall FUN_0073bd80(void* value);
 };
 
+// pdb: HighProcess::RemoveSpokenToActor | HighProcess.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apActor
 void __thiscall FUN_0073bd80_Owner::FUN_0073bd80(void* value)
 {
     unk25C->FUN_00421610(&value);
@@ -20112,6 +20225,7 @@ struct Actor {
 };
 }
 
+// pdb: HighProcess::ClearMuzzleFlash | HighProcess.obj | fnv360_0822_debug, objrun_open, low
 void n739900::Actor::FUN_00739900(bool on)
 {
     int old = m3ec;
@@ -20319,6 +20433,8 @@ struct Actor {
     Face* Actor_GetFaceAnimationData();
 };
 struct Process { void FUN_0072b710(Actor*); };
+// pdb: HighProcess::PostAnimFreeUpSpecialIdle | HighProcess.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apActor
 void Process::FUN_0072b710(Actor* actor) {
     if (actor->GetState() != 0 && actor->GetState() != 4 && actor->GetState() != 9) return;
     struct { Face* face; Animation* animation; } locals;
@@ -20357,6 +20473,8 @@ __declspec(noinline) unsigned char Target73a5d0::vf18(int value)
     return 0;
 }
 
+// pdb: BSTCommonMessageQueue<ActorPathingMessage>::Pop | HighProcess.obj | fnv360_0822_retail, vtable, high
+// pdb params: aMessage
 unsigned char Target73a5d0::FUN_0073a5d0(int value)
 {
     long volatile* lock = &lockValue;
@@ -20386,6 +20504,8 @@ struct Wrapper7277 {
     List7277 list;
     void FUN_007277e0(int, int, int);
 };
+// pdb: BaseProcess::InitLoadGame | BaseProcess.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiFlags, aiOldFlags, pmob
 void Wrapper7277::FUN_007277e0(int first, int second, int)
 {
     list.FUN_00723910(first, second);
@@ -21055,6 +21175,7 @@ struct Owner {
     Record* record;
     void FUN_00731540();
 };
+// pdb: HighProcess::CheckForExpiredDetectionEvent | HighProcess.obj | fnv360_0822_retail, objrun, medium
 void Owner::FUN_00731540() {
     if(record) {
         float elapsed=DAT_0108cba0-record->time;
@@ -21081,6 +21202,8 @@ extern Actor* DAT_0107a104;
 int __cdecl FUN_005850f0(int);
 void __cdecl FUN_006854e0(); void __cdecl FUN_006844f0();
 struct Owner { void FUN_0072a500(); void FUN_0072a570(int); };
+// pdb: CharacterProgression::ForceLevel | FalloutCharacterProgression.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: aiLevel
 void Owner::FUN_0072a570(int level) {
  if(level != DAT_0107a104->Actor_GetLevel()) {
  State* state=DAT_0107a104->unk7B0;
@@ -21124,6 +21247,8 @@ public:
     void FUN_00727110(int a);
 };
 
+// pdb: BaseProcess::AddToCurrentProcedureIndex | BaseProcess.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: GFxFontData::GetGlyphRaster)
+// pdb params: aiOffset
 void Foo::FUN_00727110(int a)
 {
     unk10 += a;
@@ -21137,6 +21262,7 @@ public:
     void FUN_00727120();
 };
 
+// pdb: BaseProcess::GetProcedureIndexRunning | BaseProcess.obj | fnv360_0822_retail, objrun_open, low
 void C_727120::FUN_00727120() {
     void** vtable = *(void***)this;
     void* fn = vtable[0x238 / 4];
@@ -21196,6 +21322,8 @@ public:
     void FUN_00727ad0(float value);
 };
 
+// pdb: BSPlayerDistanceCheckController::SetCheckDistance | BSPlayerDistanceCheckController.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afDist
 void Cls_727ad0::FUN_00727ad0(float value)
 {
     unk34 = value;
@@ -21274,6 +21402,7 @@ struct C7307a0 {
     unsigned char unk404;
     unsigned char FUN_007307a0();
 };
+// pdb: HighProcess::CanSetCombatHeadTrackTarget | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
 unsigned char C7307a0::FUN_007307a0() {
     return unk404 == 0;
 }
@@ -21353,6 +21482,7 @@ public:
     int x;
     char FUN_007348c0();
 };
+// pdb: HighProcess::CheckPhantom | HighProcess.obj | fnv360_0822_retail, call_gap, low
 char Foo7348c0::FUN_007348c0() {
     return x != 0;
 }
@@ -21380,6 +21510,8 @@ struct Foo {
     void FUN_00729ad0(unsigned char value);
 };
 
+// pdb: Creature::SetRagDoll | Creature.obj | fnv360_0822_retail, objrun, medium
+// pdb params: abFound
 void Foo::FUN_00729ad0(unsigned char value) {
     unk1a0 = value;
 }
@@ -21393,6 +21525,7 @@ struct C00728240 {
     float unk1a4;
     void FUN_00728240();
 };
+// pdb: Character::ResetArmorRating | Character.obj | fnv360_0721_beta, objrun_open, low
 void C00728240::FUN_00728240() {
     this->unk1a4 = FUN_00db38b8;
 }
@@ -21407,6 +21540,8 @@ public:
     void FUN_007306e0(unsigned int value);
 };
 
+// pdb: HighProcess::SetHasHealingSpells | HighProcess.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: aiHasHealingSpell
 void Standin7306e0::FUN_007306e0(unsigned int value)
 {
     unk3a4 = value;
@@ -21419,6 +21554,8 @@ class FUN_00730700_cls {
 public:
     void FUN_00730700(unsigned int value);
 };
+// pdb: HighProcess::SetHasHealingPotions | HighProcess.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: aiHasHealingPotion
 void FUN_00730700_cls::FUN_00730700(unsigned int value)
 {
     *(unsigned int*)((char*)this + 0x3a8) = value;
@@ -21433,6 +21570,8 @@ struct S_00730ee0 {
     void FUN_00730ee0(int value);
 };
 
+// pdb: HighProcess::AddPostAnimationAction | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aeAction
 void S_00730ee0::FUN_00730ee0(int value)
 {
     field |= value;
@@ -21532,6 +21671,8 @@ struct Cls_0073b1c0 {
     void FUN_0073b1c0(unsigned char value);
 };
 
+// pdb: MiddleHighProcess::AddToRunOnceProcedureIndex | HighProcess.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: aiOffset
 void Cls_0073b1c0::FUN_0073b1c0(unsigned char value) {
     field_13c = value;
 }
@@ -21568,6 +21709,8 @@ struct C {
     void FUN_0073b240(int value);
 };
 
+// pdb: MiddleHighProcess::AddToRunOnceProcedureIndex | HighProcess.obj | fnv360_1110_retail, objrun_open, low
+// pdb params: aiOffset
 void C::FUN_0073b240(int value) {
     *(int *)((char *)this + 0x16c) = value;
 }
@@ -21856,6 +21999,7 @@ public:
     int FUN_00730710();
 };
 
+// pdb: HighProcess::GetHasHealingSpells | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
 int Owner730710::FUN_00730710()
 {
     return value3A8;
@@ -21937,6 +22081,8 @@ struct SomeClass {
     void FUN_0073b350(unsigned char value);
 };
 
+// pdb: MiddleHighProcess::Set3DUpdateFlag | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aeFlag
 void SomeClass::FUN_0073b350(unsigned char value) {
     flags |= value;
 }
@@ -22677,6 +22823,8 @@ extern char DAT_0107b118;
 namespace f3m_007254e0 {
 extern void (__cdecl *FUN_00d9b0a0)(void*);
 
+// pdb: ActorUpdateTaskData::HandleEndMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiThread
 void __cdecl FUN_007254e0(void* a)
 {
     FUN_00d9b0a0(&DAT_0107b118);
@@ -22732,6 +22880,7 @@ public:
     void FUN_00727210();
 };
 
+// pdb: BaseProcess::~BaseProcess | BaseProcess.obj | fnv360_0721_beta, call_seq, medium
 void C1_727210::FUN_00727210() {
     *(int*)this = 0xe13a34;
     ((C2_723660*)((char*)this + 4))->FUN_00723660();
@@ -22905,6 +23054,8 @@ int Owner73b550::FUN_0073b550(int a)
 // @f3 0x00727130 (community match, verified in this file)
 namespace f3m_00727130 {
 struct C { int FUN_00727130(); };
+// pdb: BaseProcess::SetProcedureIndexRunning | BaseProcess.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: aiNewIndex
 int C::FUN_00727130() { typedef int (__thiscall *Fn)(C*); Fn f = (Fn)((*(void***)this)[0x8D]); return f(this); }
 }   // namespace f3m_00727130
 
@@ -22948,6 +23099,7 @@ struct FUN_00723660_Outer {
     void FUN_00723660();
 };
 
+// pdb: ActorPackage::~ActorPackage | ActorPackage.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: TESPackage::GetFOFlags)
 void FUN_00723660_Outer::FUN_00723660() {
     FUN_00723660_Target* p = unk4;
     if (p) {
@@ -23067,6 +23219,7 @@ struct Owner721970
     void FUN_00721970();
 };
 
+// pdb: Actor::ResetRadiationResistanceMult | Actor_Magic.obj | fnv360_0822_retail, call_gap, low
 void Owner721970::FUN_00721970()
 {
     unk190 = FUN_00db38b8;
@@ -23228,6 +23381,8 @@ public:
     void FUN_00727870(const void* value, int unused);
 };
 
+// pdb: BaseProcess::Revert | BaseProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aiFlags, pmob
 void FUN_00727870_owner::FUN_00727870(const void* value, int unused)
 {
     inner.FUN_0078c030(value);
@@ -23242,6 +23397,8 @@ struct Foo_0073b390 {
     signed char FUN_0073b390(signed char a);
 };
 
+// pdb: MiddleHighProcess::Get3DUpdateFlag | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aeFlag
 signed char Foo_0073b390::FUN_0073b390(signed char a) {
     return (unk18c & a) != 0;
 }
@@ -24134,6 +24291,7 @@ struct FUN_00726830_Outer {
     void FUN_00726830();
 };
 
+// pdb: ArrowProjectile::ClearAttachedRef | ArrowProjectile.obj | fnv360_0822_retail, call_gap_sim, low
 void FUN_00726830_Outer::FUN_00726830() {
     if (field80) {
         field80->field28 = 0;
@@ -24148,6 +24306,8 @@ struct Foo {
     int FUN_00727140(int a, int b);
 };
 
+// pdb: BaseProcess::GetSoundHandle | BaseProcess.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: aeType
 int Foo::FUN_00727140(int a, int b) {
     typedef int (__thiscall *Fn)(Foo*, int);
     Fn fn = (Fn)vtbl[0x8F];
@@ -24570,6 +24730,7 @@ struct Cls_0072edd0 {
     void FUN_0072edd0();
 };
 
+// pdb: HighProcess::ModDetectionModifierTimer | HighProcess.obj | fnv360_0822_retail, objrun, medium
 void Cls_0072edd0::FUN_0072edd0() {
     unk3b8 -= DAT_01090bac;
 }
@@ -24581,6 +24742,8 @@ struct Foo_72b6f0 {
     void FUN_0072b6f0(int x);
 };
 
+// pdb: HighProcess::FreeUpSpecialIdle | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor
 void Foo_72b6f0::FUN_0072b6f0(int x)
 {
     void* vt = *(void**)this;
@@ -24801,6 +24964,7 @@ struct Owner72c500
     void FUN_0072c500();
 };
 
+// pdb: HighProcess::ReduceDetectionTimer | HighProcess.obj | fnv360_0822_retail, objrun, medium
 void Owner72c500::FUN_0072c500()
 {
     unk2F0 = unk2F0 - FUN_01090bac;
@@ -24831,6 +24995,7 @@ struct Foo {
 };
 
 
+// pdb: HighProcess::SetDetectionModifierTimer | HighProcess.obj | fnv360_0822_retail, objrun_open, low
 void Foo::FUN_0073bc50(float a) {
     this->unk38 = DAT_0108cba0;
     this->unk3c = a;
@@ -25409,6 +25574,8 @@ struct Owner73deb0
     int FUN_0073deb0(char a2);
 };
 
+// pdb: HighProcess::AddTalkedtoActor | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor
 int Owner73deb0::FUN_0073deb0(char a2)
 {
     return unk25C->FUN_0049fac0(&a2);
@@ -25421,6 +25588,7 @@ struct Foo_00721980 {
     int FUN_00721980();
 };
 
+// pdb: Actor::GetCurrentSpell | Actor_Magic.obj | fnv360_0822_retail, vtable, medium
 int Foo_00721980::FUN_00721980() {
     void* p = *(void**)((char*)this - 0x20);
     if (p) {
@@ -25690,6 +25858,7 @@ struct Inner_00721700 {
 struct Foo_00721700 {
     int FUN_00721700();
 };
+// pdb: Actor::GetActiveEffectList | Actor_Magic.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: bhkRagdollController::QRagdollFeedbackActive)
 int Foo_00721700::FUN_00721700() {
     Inner_00721700* p = *(Inner_00721700**)((char*)this - 0x2c);
     if (p) {
@@ -25735,6 +25904,8 @@ public:
     void FUN_007219a0(int a);
 };
 
+// pdb: Actor::SetCurrentSpell | Actor_Magic.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCurrentSpell
 void Standin_7219a0::FUN_007219a0(int a) {
     void* p = *(void**)((char*)this - 0x20);
     if (p) {
@@ -25753,6 +25924,7 @@ public:
     int FUN_007219c0();
 };
 
+// pdb: Actor::GetDesiredTarget | Actor_Magic.obj | fnv360_0822_retail, vtable, medium
 int StandIn_7219c0::FUN_007219c0()
 {
     void* p = *(void**)((char*)this - 0x20);
@@ -25854,6 +26026,8 @@ namespace N729FA0 { struct Attribute {
  int unk40;
 unsigned flags; bool Redirect() const { return (flags >> 10) & 1; } }; extern Attribute* DAT_01073eb8[1]; }
 struct Owner729FA0 { void FUN_006f5220(unsigned,float,int); void FUN_00729fa0(unsigned,float,int); };
+// pdb: Creature::PermanentModActorValue | Creature.obj | fnv360_0822_retail, objrun, low
+// pdb params: aiWhich, afValue, apAttacker
 void Owner729FA0::FUN_00729fa0(unsigned index,float value,int arg) { if(N729FA0::DAT_01073eb8[index]->Redirect()) index=45; FUN_006f5220(index,value,arg); }
 }   // namespace f3m_00729fa0
 
@@ -26149,6 +26323,7 @@ struct Owner {
     unsigned char active[6];
     void* FUN_00730940();
 };
+// pdb: HighProcess::GetCurrentHeadTrackType | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
 void* Owner::FUN_00730940() {
     for(int i=5;i>=0;--i) {
         if(active[i]) return values[i];
@@ -26582,6 +26757,7 @@ struct Memory { void* FUN_008f6f60(int,int); };
 void FUN_0092e8f0(Object*);
 struct System { void FUN_0043cc40(); }; extern System* DAT_0106cdcc;
 }
+// pdb: AILinearTaskThread::OnStartup | AILinearTaskThread.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: AILinearTaskThreadManager::AddThread)
 void FUN_00723ff0() { using namespace SmallThreadMemory; Object* p=new(16) Object(DAT_010f3400,16); FUN_0092e8f0(p); Memory* memory=(Memory*)DAT_00d9b080(DAT_010f3170); void* buffer=memory->FUN_008f6f60(0x32000,1); p->table->set(p,buffer,0x32000); DAT_0106cdcc->FUN_0043cc40(); }
 }   // namespace f3m_00723ff0
 
@@ -27047,6 +27223,8 @@ struct Owner {
     unsigned id;int unk30;float radius;void (__cdecl* callback)(Object*);
     void FUN_00727b20(int);
 };
+// pdb: BSPlayerDistanceCheckController::Update | BSPlayerDistanceCheckController.obj | fnv360_0822_retail, vtable, medium
+// pdb params: UpdateData
 void Owner::FUN_00727b20(int unused) {
     if(radius<0.0f) return;
     if(!callback || !DAT_0107a104) return;
@@ -27156,6 +27334,7 @@ void Owner73bc::FUN_0073bca0(NiPointer<Ref73bc> incoming) { value=incoming; }
 namespace f3m_0072f8f0 {
 struct Position8f0 { float x; float y; float z; }; struct Ref8f0; struct Table8f0 {void* unk000;void* unk004;void* unk008;void* unk00c;void* unk010;void* unk014;void* unk018;void* unk01c;void* unk020;void* unk024;void* unk028;void* unk02c;void* unk030;void* unk034;void* unk038;void* unk03c;void* unk040;void* unk044;void* unk048;void* unk04c;void* unk050;void* unk054;void* unk058;void* unk05c;void* unk060;void* unk064;void* unk068;void* unk06c;void* unk070;void* unk074;void* unk078;void* unk07c;void* unk080;void* unk084;void* unk088;void* unk08c;void* unk090;void* unk094;void* unk098;void* unk09c;void* unk0a0;void* unk0a4;void* unk0a8;void* unk0ac;void* unk0b0;void* unk0b4;void* unk0b8;void* unk0bc;void* unk0c0;void* unk0c4;void* unk0c8;void* unk0cc;void* unk0d0;void* unk0d4;void* unk0d8;void* unk0dc;void* unk0e0;void* unk0e4;void* unk0e8;void* unk0ec;void* unk0f0;void* unk0f4;void* unk0f8;void* unk0fc;void* unk100;void* unk104;void* unk108;void* unk10c;void* unk110;void* unk114;void* unk118;void* unk11c;void* unk120;void* unk124;void* unk128;void* unk12c;void* unk130;void* unk134;void* unk138;void* unk13c;void* unk140;void* unk144;void* unk148;void* unk14c;void* unk150;void* unk154;void* unk158;void* unk15c;void* unk160;void* unk164;void* unk168;void* unk16c;void* unk170;void* unk174;void* unk178;void* unk17c;void* unk180;void* unk184;void* unk188;void* unk18c;void* unk190;void* unk194;void* unk198;void* unk19c;void* unk1a0;void* unk1a4;void* unk1a8;void* unk1ac;void* unk1b0;void* unk1b4;void* unk1b8;void* unk1bc;void* unk1c0;void* unk1c4;void* unk1c8;void* unk1cc;void* unk1d0;void* unk1d4;void* unk1d8;void* unk1dc;void* unk1e0;void* unk1e4;void* unk1e8;void* unk1ec;void* unk1f0; Position8f0* (__thiscall* position)(Ref8f0*); }; struct Ref8f0 { Table8f0* table; };
 struct Owner8f0 {int unk000;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;Ref8f0* unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;int unk080;int unk084;int unk088;int unk08c;int unk090;int unk094;int unk098;int unk09c;int unk0a0;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4;int unk0d8;int unk0dc;int unk0e0;int unk0e4;int unk0e8;int unk0ec;int unk0f0;int unk0f4;int unk0f8; Position8f0 position; void FUN_0072f8f0(); };
+// pdb: HighProcess::SetLastSeenLocation | HighProcess.obj | fnv360_0822_retail, objrun, medium
 void Owner8f0::FUN_0072f8f0() { if(unk040) position=*unk040->table->position(unk040); }
 }   // namespace f3m_0072f8f0
 
@@ -27165,6 +27344,8 @@ struct Info {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk
 extern Info* DAT_01073eb8[];
 static __forceinline unsigned char Bit10(unsigned int value){return (unsigned char)(value>>10)&1;}
 struct Owner {void FUN_006f5330(int,float,int);void FUN_0072a010(int,float,int);};
+// pdb: Creature::DamageModActorValue | Creature.obj | fnv360_0822_retail, objrun, low
+// pdb params: aiWhich, afValue, apAttacker
 void Owner::FUN_0072a010(int id,float value,int flags){if(Bit10(DAT_01073eb8[id]->flags))id=0x2d;FUN_006f5330(id,value,flags);}
 }
 
@@ -27214,6 +27395,7 @@ struct View7282 {
     unsigned int unk9c;
     int FUN_00728250();
 };
+// pdb: Character::GetAttackDamage | Character.obj | fnv360_0721_beta, objopen_prop, low
 int View7282::FUN_00728250() {
     float first = 0.0f;
     float second = 0.0f;
@@ -27233,6 +27415,8 @@ struct Actor { ActorTable* table; };
 struct Extras { void FUN_00412490(bool,float); };
 void __cdecl FUN_00aebb10(void*,bool,float,int,float,int);
 struct Owner { OwnerTable* table; int unk004; int unk008; int unk00C; int unk010; int unk014; int unk018; int unk01C; int unk020; int unk024; int unk028; int unk02C; int unk030; int unk034; int unk038; int unk03C; Extras extras; int unk044; int unk048; int unk04C; int unk050; int unk054; int unk058; int unk05C; Actor* actor; void FUN_00721e10(bool,float); };
+// pdb: Actor::SetRefraction | Actor_Magic.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: abEnable, afRefractionPower
 void Owner::FUN_00721e10(bool active,float original) {
  float amount=original;
  if(active && amount<=0.0f) { Actor* current=actor; if(current) amount=current->table->amount(current); }
@@ -27252,6 +27436,8 @@ struct Heap { void* FUN_0086b930(unsigned int); void FUN_0086ba60(void*); }; ext
 struct FUN_00723fa0 { int unk000; int unk004; int unk008; int unk00C; int unk010; int unk014; int unk018; int unk01C; int unk020; int unk024; int unk028; int unk02C; int unk030; int unk034; int unk038; int unk03C; int unk040; int unk044; int unk048; int unk04C; int unk050; int unk054; int unk058; int unk05C; int unk060; int unk064; int unk068; int unk06C; int unk070; int unk074; int unk078; int unk07C; int unk080; int unk084; int unk088; int unk08C; int unk090; int unk094; int unk098; int unk09C; int unk0A0; int unk0A4; int unk0A8; int unk0AC; int unk0B0; int unk0B4; int unk0B8; int unk0BC; int unk0C0; int unk0C4; int unk0C8; int unk0CC; int unk0D0; int unk0D4; int unk0D8; int unk0DC; int unk0E0; int unk0E4; int unk0E8; int unk0EC; int unk0F0; int unk0F4; int unk0F8; int unk0FC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; int unk128; int unk12C; int unk130; int unk134; int unk138; int unk13C; int unk140; int unk144; int unk148; int unk14C; int unk150; int unk154; int unk158; int unk15C; int unk160; int unk164; int unk168; int unk16C; int unk170; int unk174; int unk178; int unk17C; int unk180; int unk184; int unk188; int unk18C; int unk190; int unk194; int unk198; int unk19C; int unk1A0; int unk1A4; int unk1A8; int unk1AC; int unk1B0; int unk1B4; int unk1B8; int unk1BC; int unk1C0; int unk1C4; int unk1C8; int unk1CC; int unk1D0; int unk1D4; int unk1D8; int unk1DC; int unk1E0; int unk1E4; int unk1E8; int unk1EC; int unk1F0; int unk1F4; int unk1F8; int unk1FC; int unk200; int unk204; int unk208; int unk20C; int unk210; int unk214; int unk218; int unk21C; int unk220; int unk224; int unk228; int unk22C; int unk230; int unk234; int unk238; int unk23C; int unk240; int unk244; FUN_00723fa0(); void FUN_00723fc0(int); static void* operator new(unsigned int n){return DAT_01090a78.FUN_0086b930(n);} static void operator delete(void* p){DAT_01090a78.FUN_0086ba60(p);} };
 struct Data { int unk000; int unk004; int unk008; int unk00C; int unk010; int unk014; int unk018; int unk01C; int unk020; int unk024; int unk028; int unk02C; int unk030; int unk034; int unk038; int unk03C; int unk040; unsigned int flags; bool Skip(){return (flags>>8)&1;} }; extern Data* DAT_01073eb8[];
 struct Owner { int unk000; int unk004; int unk008; int unk00C; int unk010; int unk014; int unk018; int unk01C; int unk020; int unk024; int unk028; int unk02C; int unk030; int unk034; int unk038; int unk03C; int unk040; int unk044; int unk048; int unk04C; int unk050; int unk054; int unk058; int unk05C; int unk060; int unk064; int unk068; int unk06C; int unk070; int unk074; int unk078; int unk07C; int unk080; int unk084; int unk088; int unk08C; int unk090; int unk094; int unk098; int unk09C; int unk0A0; int unk0A4; int unk0A8; int unk0AC; int unk0B0; int unk0B4; int unk0B8; int unk0BC; int unk0C0; int unk0C4; int unk0C8; int unk0CC; int unk0D0; int unk0D4; int unk0D8; int unk0DC; int unk0E0; int unk0E4; int unk0E8; int unk0EC; int unk0F0; int unk0F4; int unk0F8; int unk0FC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; int unk128; int unk12C; int unk130; int unk134; int unk138; int unk13C; int unk140; int unk144; int unk148; int unk14C; int unk150; int unk154; int unk158; int unk15C; int unk160; int unk164; int unk168; int unk16C; int unk170; int unk174; int unk178; int unk17C; int unk180; int unk184; int unk188; int unk18C; int unk190; int unk194; int unk198; int unk19C; int unk1A0; int unk1A4; int unk1A8; int unk1AC; int unk1B0; int unk1B4; int unk1B8; int unk1BC; int unk1C0; int unk1C4; int unk1C8; int unk1CC; int unk1D0; int unk1D4; int unk1D8; int unk1DC; int unk1E0; int unk1E4; int unk1E8; int unk1EC; int unk1F0; int unk1F4; int unk1F8; int unk1FC; int unk200; int unk204; int unk208; int unk20C; int unk210; int unk214; int unk218; int unk21C; int unk220; int unk224; int unk228; int unk22C; int unk230; int unk234; int unk238; int unk23C; int unk240; int unk244; int unk248; int unk24C; int unk250; int unk254; int unk258; int unk25C; int unk260; int unk264; int unk268; int unk26C; int unk270; int unk274; int unk278; int unk27C; int unk280; int unk284; int unk288; int unk28C; int unk290; int unk294; int unk298; int unk29C; int unk2A0; int unk2A4; int unk2A8; int unk2AC; int unk2B0; int unk2B4; int unk2B8; int unk2BC; int unk2C0; int unk2C4; int unk2C8; int unk2CC; int unk2D0; int unk2D4; int unk2D8; int unk2DC; int unk2E0; int unk2E4; int unk2E8; int unk2EC; int unk2F0; int unk2F4; int unk2F8; int unk2FC; int unk300; int unk304; int unk308; int unk30C; int unk310; int unk314; int unk318; int unk31C; int unk320; int unk324; int unk328; int unk32C; int unk330; int unk334; int unk338; int unk33C; int unk340; int unk344; int unk348; int unk34C; int unk350; int unk354; int unk358; int unk35C; int unk360; int unk364; int unk368; int unk36C; int unk370; int unk374; int unk378; int unk37C; int unk380; int unk384; int unk388; int unk38C; int unk390; int unk394; int unk398; int unk39C; int unk3A0; int unk3A4; int unk3A8; int unk3AC; int unk3B0; int unk3B4; int unk3B8; int unk3BC; int unk3C0; int unk3C4; int unk3C8; int unk3CC; int unk3D0; int unk3D4; int unk3D8; int unk3DC; int unk3E0; int unk3E4; int unk3E8; int unk3EC; int unk3F0; int unk3F4; int unk3F8; int unk3FC; int unk400; int unk404; int unk408; int unk40C; int unk410; int unk414; FUN_00723fa0* unk418; void FUN_00763bc0(void*,int,float); void FUN_00730440(void*,int,float); };
+// pdb: HighProcess::TempModActorValue | HighProcess.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apActor, aiWhich, afValue
 void Owner::FUN_00730440(void* object,int id,float value) {
  FUN_00763bc0(object,id,value);
  if(!DAT_01073eb8[id]->Skip()) {
@@ -27268,6 +27454,8 @@ namespace SmallRead {
 struct Stream { void FUN_006e1830(void*,int,int); };
 struct Member {int unk00;int unk04;int unk08;int unk0C;int unk10;int unk14;void FUN_00723940(Stream*);};
 struct Owner {int unk00;Member member;int unk1C;int unk20;int unk24;void FUN_00727880(Stream*);};
+// pdb: BaseProcess::SaveGame | BaseProcess.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apSaveGameBuffer
 void Owner::FUN_00727880(Stream* stream) {stream->FUN_006e1830(&unk1C,4,0);stream->FUN_006e1830(&unk20,4,0);stream->FUN_006e1830(&unk24,4,0);member.FUN_00723940(stream);}
 }
 }   // namespace f3m_00727880
@@ -27292,6 +27480,8 @@ float Owner::FUN_00729c50() {
 
 // @f3 0x00727090 (community match, verified in this file)
 namespace f3m_00727090 {
+// pdb: BaseProcess::GetLastPositionDetected | BaseProcess.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: apActor, abWhichList
 namespace Position7090 { struct Vec { float x; float y; float z; }; extern Vec DAT_0108ec68; Vec __stdcall FUN_00727090(int,int) { return DAT_0108ec68; } }
 }   // namespace f3m_00727090
 
@@ -27498,6 +27688,7 @@ struct Owner721a {
     Object721a* object;
     float FUN_00721a80();
 };
+// pdb: hkpFirstCdBodyPairCollector::hasHit | PlayerCharacter.obj | tesv_win, objopen_prop, low
 float Owner721a::FUN_00721a80() { if(object && !object->unk028) return object->value; return 1.0f; }
 }   // namespace f3m_00721a80
 
@@ -27505,6 +27696,8 @@ float Owner721a::FUN_00721a80() { if(object && !object->unk028) return object->v
 namespace f3m_00729ea0 {
 namespace redirect9e { struct Data { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; unsigned int flags; bool Redirect(){return (flags>>10)&1;} }; extern Data* DAT_01073eb8[];
 struct Owner { int FUN_0076bbb0(int); int FUN_00729ea0(int); };
+// pdb: Creature::SetActorValue | Creature.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aiWhich, aiValue
 int Owner::FUN_00729ea0(int id) { if(DAT_01073eb8[id]->Redirect()) id=0x2d; return FUN_0076bbb0(id); }
 }
 }   // namespace f3m_00729ea0
@@ -27641,6 +27834,8 @@ struct Owner {
     int unk00;Sub sub;
     unsigned short FUN_00727450(int,int);
 };
+// pdb: BaseProcess::GetSaveSize | BaseProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiFlags, pmob
 unsigned short Owner::FUN_00727450(int arg,int unused) {
     unsigned short result=0;
     if(DAT_01079ca4->TESSaveLoadGame_UseSaveGameBlocks()) result=6;
@@ -27673,6 +27868,8 @@ struct Queue73a6 {
     Queue73a6(const Message73a6& message) { FUN_00607180(&message); }
     void FUN_0073a6e0(Message73a6);
 };
+// pdb: BSSimpleArray<TESIdleForm *,1024>::Clear | HighProcess.obj | fnv360_0721_beta, objrun, medium
+// pdb params: abFreeMemory
 void Queue73a6::FUN_0073a6e0(Message73a6 message)
 {
     new(this) Queue73a6(message);
@@ -27682,6 +27879,7 @@ void Queue73a6::FUN_0073a6e0(Message73a6 message)
 // @f3 0x00726060 (community match, verified in this file)
 namespace f3m_00726060 {
 namespace Delete6060 { struct Heap { void FUN_0086ba60(void*); }; extern Heap DAT_01090a78; extern int DAT_00e1396c; struct Object { void* table; void FUN_00725eb0(); Object* FUN_00726060(unsigned); };
+// pdb: ActorsScriptTaskData::`scalar deleting destructor' | AITaskManager.obj | fnv360_0822_retail, vtable, medium
 Object* Object::FUN_00726060(unsigned mode) { table=&DAT_00e1396c; FUN_00725eb0(); if(mode&1) DAT_01090a78.FUN_0086ba60(this); return this; } }
 }   // namespace f3m_00726060
 
@@ -27691,6 +27889,8 @@ extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void*);
 struct Lock {void* debugInfo;long lockCount;long recursionCount;void* owner;void* semaphore;unsigned long spinCount;};
 extern Lock DAT_0107b118,DAT_0107b0ec,DAT_0107b0d0;
 struct Owner {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;void* value;void FUN_00725550(int);};
+// pdb: ActorsScriptTaskData::HandleCountMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: auiCount
 void Owner::FUN_00725550(int unused){value=0;EnterCriticalSection(&DAT_0107b118);EnterCriticalSection(&DAT_0107b0ec);EnterCriticalSection(&DAT_0107b0d0);}
 }
 
@@ -27990,6 +28190,8 @@ public:
     void FUN_00722c20(int value);
 };
 
+// pdb: Actor::CheckDeletedCaster | Actor_Magic.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apMagicCaster
 void FUN_00722c20_Owner::FUN_00722c20(int value)
 {
     if (value == 0)
@@ -28025,6 +28227,8 @@ namespace f3m_007337b0 {
 
 void __stdcall FUN_0072edf0(int param_1, float param_2, int param_3);
 
+// pdb: HighProcess::ProcessAccompanyOneHour | HighProcess.obj | fnv360_0822_debug, caller_sim, low
+// pdb params: apActor, fTimeDelta
 void __stdcall FUN_007337b0(int param_1, float param_2) {
     FUN_0072edf0(param_1, param_2, 1);
 }
@@ -28035,6 +28239,7 @@ namespace f3m_00723f00 {
 namespace reset3f {
 struct Entry { bool enabled; float value; };
 struct Owner { Entry entries[73]; void FUN_00723f00(); };
+// pdb: ActorValueCache::ResetCachedActorValues | ActorValueCache.obj | fnv360_0822_retail, call_seq, medium
 void Owner::FUN_00723f00() { for(int i=0;i<73;++i) { entries[i].value=0.0f; entries[i].enabled=true; } }
 }
 }   // namespace f3m_00723f00
@@ -28043,6 +28248,8 @@ void Owner::FUN_00723f00() { for(int i=0;i<73;++i) { entries[i].value=0.0f; entr
 namespace f3m_007397f0 {
 struct Item397f0 { void FUN_004e6a90(int); };
 struct Target397f0 { void FUN_007307b0(); void FUN_007397f0(unsigned int index, Item397f0* item); };
+// pdb: HighProcess::SetActionHeadTrackTarget | HighProcess.obj | fnv360_0822_retail, objrun_sim, low, conflict (skyrim: BSPathingRequest::SetGoDirectIfPathingFails)
+// pdb params: apRef
 void Target397f0::FUN_007397f0(unsigned int index, Item397f0* item)
 {
     *(Item397f0**)((char*)this + 0x3e8 + index * 4) = item;
@@ -28318,6 +28525,8 @@ struct Owner7309 {
     unsigned char flags[6];
     int FUN_00730970();
 };
+// pdb: HighProcess::ClearPathLookTarget | HighProcess.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: apRef
 int Owner7309::FUN_00730970() { for(int index=5;index>=0;--index) if(flags[index])return index; return 0; }
 }   // namespace f3m_00730970
 
@@ -28335,6 +28544,7 @@ struct Object {
     static void operator delete(void* p){DAT_01090a78.FUN_0086ba60(p);}
 };
 struct Owner {Object* object;void FUN_0072a750();};
+// pdb: CharacterProgression::AllocateData | FalloutCharacterProgression.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void Owner::FUN_0072a750() {object=new Object;}
 }
 
@@ -28516,6 +28726,8 @@ struct Table730e {
 struct Record730e { int unk00; int unk04; int unk08; int count; float value; };
 extern void* FUN_00563cf0(int,int);
 struct Owner730e { Table730e* table; void FUN_00730e90(void*,Record730e*); };
+// pdb: HighProcess::ProcessGuardWarn | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, apData
 void Owner730e::FUN_00730e90(void* first,Record730e* record) {
     Existing730e* old=table->existing(this);
     if(old) old->TESObjectREFR_GetOwner();
@@ -28535,6 +28747,8 @@ struct Target237e0 {
     unsigned int value10;
     void FUN_007237e0(unsigned int unused);
 };
+// pdb: ActorPackage::SaveGame | ActorPackage.obj | fnv360_0822_retail, call_seq, low
+// pdb params: aiFlags
 void Target237e0::FUN_007237e0(unsigned int unused)
 {
     unsigned int id = 0;
@@ -28569,6 +28783,8 @@ namespace N729ED0 { struct Attribute {
  int unk40;
 unsigned flags; bool Redirect() const { return (flags >> 10) & 1; } }; extern Attribute* DAT_01073eb8[1]; }
 struct Owner729ED0 { void FUN_006f4fb0(unsigned,float); void FUN_00729ed0(unsigned,float); };
+// pdb: Creature::SetActorValue | Creature.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: aiWhich, afValue
 void Owner729ED0::FUN_00729ed0(unsigned index,float value) { if(N729ED0::DAT_01073eb8[index]->Redirect()) index=45; FUN_006f4fb0(index,value); }
 }   // namespace f3m_00729ed0
 
@@ -28581,6 +28797,7 @@ public:
  virtual __forceinline ~AnimationTaskData(){}
  void* FUN_00725f60(unsigned int);
 };
+// pdb: AnimationTaskData::`scalar deleting destructor' | AITaskManager.obj | fnv360_0822_retail, vtable, medium
 void* AnimationTaskData::FUN_00725f60(unsigned int flags){this->AnimationTaskData::~AnimationTaskData();if(flags&1)AnimationDataHeapA::DAT_01090a78.FUN_0086ba60(this);return this;}
 }   // namespace f3m_00725f60
 
@@ -28594,6 +28811,8 @@ struct RefOps {void* unk00;void (__thiscall *Release)(Ref*);};
 struct Ref {RefOps* ops;long count;};
 struct Object {int unk00;int unk04;int unk08;int unk0c;int unk10;Ref ref;};
 struct Holder {Object* object;Holder& FUN_00731a00(Object*);};
+// pdb: NiPointer<ActorPathingMessageQueue>::operator= | HighProcess.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pObject
 Holder& Holder::FUN_00731a00(Object* other){
  if(object!=other){
   if(object){Ref* ref=&object->ref;if(InterlockedDecrement(&ref->count)==0)ref->ops->Release(ref);}
@@ -28635,6 +28854,7 @@ struct Owner7282 {
     Query7282 query;
     int FUN_007282d0();
 };
+// pdb: Character::GetBestAmmo | Character.obj | fnv360_1110_retail, objrun, medium
 int Owner7282::FUN_007282d0() { int result=0; Item7282* item=query.FUN_0040ab00(); if(item){ void* argument=object; result=item->FUN_00483b80(argument,0); }return result; }
 }   // namespace f3m_007282d0
 
@@ -28950,6 +29170,8 @@ struct Owner {
     void FUN_00723670();
     void FUN_00723710(Object*,int);
 };
+// pdb: ActorPackage::InitFromPackage | ActorPackage.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apPackage, apTarget
 void Owner::FUN_00723710(Object* value,int arg) {
     if(value!=object) {
         FUN_00723670();
@@ -28970,6 +29192,8 @@ void Owner::FUN_00723710(Object* value,int arg) {
 namespace f3m_00730250 {
 namespace RoundedQueryA {
 struct Owner {float (__thiscall **methods)(Owner*,int,int,int);int FUN_00730250(int,int,int);};
+// pdb: HighProcess::GetActorValue | HighProcess.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apActorBase, aiWhich, apActor
 int Owner::FUN_00730250(int a,int b,int c){float value=methods[0xe6](this,a,b,c);float integral=(float)(int)value;double result;if(!(value-integral>=0.0))result=integral-1.0;else result=integral;return (int)(float)result;}
 }
 }   // namespace f3m_00730250
@@ -28987,6 +29211,8 @@ void* __cdecl FUN_00887da0(const char*);
 struct Subobject { Parent* Owner(); void FUN_00721c50(Argument*); };
 struct Parent { Actor* actor; int unk004; int unk008; int unk00C; int unk010; int unk014; int unk018; int unk01C; int unk020; int unk024; int unk028; Subobject sub; };
 inline Parent* Subobject::Owner() {return (Parent*)((char*)this - offsetof(Parent,sub));}
+// pdb: Actor::EffectRemoved | Actor_Magic.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: PlayerCharacter::DeathMenu)
+// pdb params: apEffect
 void Subobject::FUN_00721c50(Argument* argument) {
  if(argument && Owner()->actor) { const char* text=argument->name->text; if(FUN_00887da0(text)) Owner()->actor->table->notify(Owner()->actor); }
 }
@@ -29425,6 +29651,8 @@ int unk300;
 int unk304;
 int unk308;
 Handle handle;bool FUN_0072f9c0(Actor*);};}
+// pdb: HighProcess::IsTalking | HighProcess.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apActor
 bool N72F9C0::Owner::FUN_0072f9c0(Actor* actor){bool result=false;if(actor&&actor->MobileObject_IsinDialogue()){Form* form=table->query(this);if(form&&form->type==0x1c&&form->actor==actor)result=true;}else if(handle.BSSoundHandle_IsValid()||table->check(this))result=true;return result;}
 }   // namespace f3m_0072f9c0
 
@@ -29433,6 +29661,8 @@ namespace f3m_0072a730 {
 namespace reset2a7 {
 struct State { unsigned char flag; int value; }; int __cdecl FUN_005850f0(int);
 struct Owner { State* state; void FUN_0072a730(int); };
+// pdb: CharacterProgression::Revert | FalloutCharacterProgression.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apLoadGameBuffer
 void Owner::FUN_0072a730(int) { State* current=state; current->flag=0; current->value=FUN_005850f0(2); }
 }
 }   // namespace f3m_0072a730
@@ -29624,6 +29854,8 @@ int unk74;
 int unk78;
 int unk7c;
 Caster caster;void FUN_0076f4c0(int);void FUN_00721280(Item*,int);};extern Owner* DAT_0107a104;}
+// pdb: Actor::CastScroll | Actor_Magic.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apScroll, apTarget
 void N721280::Owner::FUN_00721280(Item* item,int arg){if(item&&(item->flags&1)&&item->spell){table->apply(this,item,0,1,0,0,0,0,0,1,0);Spell* spell=item->spell;MagicItem* magic=spell?&spell->magic:0;caster.FUN_006ad970(magic,arg,0);if(this==DAT_0107a104)DAT_0107a104->FUN_0076f4c0(0);}}
 }   // namespace f3m_00721280
 
@@ -29631,6 +29863,8 @@ void N721280::Owner::FUN_00721280(Item* item,int arg){if(item&&(item->flags&1)&&
 namespace Queue727a {
 struct Manager {void FUN_00421610(void**);};
 extern Manager DAT_0107b2ac;
+// pdb: BSDoorHavokController::ReleaseDoor | BSDoorHavokController.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apDoor
 void __cdecl FUN_00727a80(void* value) {
     if(value) DAT_0107b2ac.FUN_00421610(&value);
 }
@@ -29645,6 +29879,7 @@ public:
  virtual __forceinline ~ActorUpdateTaskData(){}
  void* FUN_00725fe0(unsigned int);
 };
+// pdb: ActorUpdateTaskData::`scalar deleting destructor' | AITaskManager.obj | fnv360_0822_retail, vtable, medium
 void* ActorUpdateTaskData::FUN_00725fe0(unsigned int flags){this->ActorUpdateTaskData::~ActorUpdateTaskData();if(flags&1)AnimationDataHeapA::DAT_01090a78.FUN_0086ba60(this);return this;}
 }   // namespace f3m_00725fe0
 
@@ -29762,6 +29997,8 @@ struct Owner {
  float cached;
  void FUN_0070fb50(void*);void FUN_007289f0(void*);
 };
+// pdb: Character::Revert | Character.obj | fnv360_0822_retail, vtable_prefix, high
+// pdb params: aiFlags
 void Owner::FUN_007289f0(void* arg){FUN_0070fb50(arg);if(DAT_01079ca4->mode==0)cached=DAT_00db38b8;}
 }
 
@@ -30278,6 +30515,8 @@ public:
     void FUN_007304f0(int a, int b, int c);
 };
 
+// pdb: HighProcess::DamageModActorValue | HighProcess.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apActor, aiWhich, aiValue
 void Tgt7304f0::FUN_007304f0(int a, int b, int c)
 {
     FUN_00749e60(a, b, c);
@@ -31010,6 +31249,8 @@ extern Player* DAT_0107a104;
 struct Setting{int* FUN_004241e0();};extern Setting DAT_00f62300;
 void FUN_00648830(int);
 }
+// pdb: CharacterProgression::ActorValueModifiedCallback | FalloutCharacterProgression.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, aiWhich, afOriginalValue, afDelta, apActorSource
 void FUN_0072a620(N72A620::ActorValueOwner* valueOwner,unsigned code,int unused,float amount){
  using namespace N72A620;
  if(!valueOwner)return;
@@ -31029,6 +31270,8 @@ namespace f3m_00723f20 {
 namespace ActorValueSet {
 struct Entry {bool pending;float value;};
 struct Values {Entry entries[73];void FUN_00723f20(unsigned int,float);};
+// pdb: ActorValueCache::SetCachedActorValue | ActorValueCache.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aiWhich, afValue
 void Values::FUN_00723f20(unsigned int index,float value){if(index<=72){entries[index].pending=false;entries[index].value=value;}}
 }
 }   // namespace f3m_00723f20
@@ -31039,6 +31282,8 @@ struct Writer {void FUN_00454330(const void*,unsigned int);};
 extern Writer* DAT_0107a104;
 struct Entry {unsigned char state;float value;};
 struct Owner {Entry* entry;void FUN_0072a420(void*);};
+// pdb: CharacterProgression::SaveGame | FalloutCharacterProgression.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: BGSStoryManagerTreeForm::BGSStoryManagerTreeForm)
+// pdb params: aiFlags
 void Owner::FUN_0072a420(void*){DAT_0107a104->FUN_00454330(&entry->state,1);DAT_0107a104->FUN_00454330(&entry->value,4);}
 }
 
@@ -31131,6 +31376,8 @@ struct Owner{
  int unknown38;
  unsigned count;void FUN_00724ed0(Target*);};
 }
+// pdb: ActorsScriptTaskData::HandleMobMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apMob
 void N724ED0::Owner::FUN_00724ed0(Target* target){if(target&&target->Enabled()&&FUN_00516780()){target->FUN_004e6c50();++count;}}
 }   // namespace f3m_00724ed0
 
@@ -31337,6 +31584,8 @@ struct Owner{
  int unknown308;
  Entry entries[1];void FUN_0072fff0(unsigned);};
 }
+// pdb: HighProcess::StopSoundHandle | HighProcess.obj | fnv360_0822_debug, objrun, medium
+// pdb params: aeType
 void N72FFF0::Owner::FUN_0072fff0(unsigned index){entries[index].Reset();}
 }   // namespace f3m_0072fff0
 
@@ -31695,6 +31944,8 @@ later:
    }
  return true;
 }
+// pdb: HighProcess::EvaluateOrderAcquireList | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 void Actor73::FUN_0073c230(Actor73* actor) {
  List73* head=&pending;
  List73* it=head;
@@ -31725,6 +31976,8 @@ struct Object {void** methods;};
 typedef Type* (__thiscall *GetType)(Object*);
 Object* __cdecl FUN_00424fe0(void*);
 static __forceinline bool IsKindOf(Object* object){Type* type=((GetType)object->methods[2])(object);while(type){if(type==&DAT_010f2ee0)return true;type=type->parent;}return false;}
+// pdb: bhkBlendCollisionObject::GetbhkBlendCollisionObject | ActorLook.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObject
 Object* __cdecl FUN_007235f0(void* value){Object* object=FUN_00424fe0(value);if(!object)return 0;return IsKindOf(object)?object:0;}
 }
 
@@ -31751,6 +32004,8 @@ struct Owner {
     Array* array;
     Element* FUN_00728c40(unsigned);
 };
+// pdb: NiMorphData::MorphTarget::SetName | NiMorphData.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: kName
 Element* Owner::FUN_00728c40(unsigned index) {
     if(index<array->count) return &array->data[index];
     return 0;
@@ -31761,6 +32016,8 @@ Element* Owner::FUN_00728c40(unsigned index) {
 // @f3 0x0072bb90 (community match, verified in this file)
 namespace f3m_0072bb90 {
 struct Ownerbb90; struct Tablebb90 {void* unk000;void* unk004;void* unk008;void* unk00c;void* unk010;void* unk014;void* unk018;void* unk01c;void* unk020;void* unk024;void* unk028;void* unk02c;void* unk030;void* unk034;void* unk038;void* unk03c;void* unk040;void* unk044;void* unk048;void* unk04c;void* unk050;void* unk054;void* unk058;void* unk05c;void* unk060;void* unk064;void* unk068;void* unk06c;void* unk070;void* unk074;void* unk078;void* unk07c;void* unk080;void* unk084;void* unk088;void (__thiscall* initialize)(Ownerbb90*,void*);void* unk090;void* unk094;void* unk098;void* unk09c;void* unk0a0;void* unk0a4;void* unk0a8;void* unk0ac;void* unk0b0;void* unk0b4;void* unk0b8;void* unk0bc;void* unk0c0;void* unk0c4;void* unk0c8;void* unk0cc;void* unk0d0;void* unk0d4;void* unk0d8;void* unk0dc;void* unk0e0;void* unk0e4;void* unk0e8;void* unk0ec;void* unk0f0;void* unk0f4;void* unk0f8;void* unk0fc;void* unk100;void* unk104;void* unk108;void* unk10c;void* unk110;void* unk114;void* unk118;void* unk11c;void* unk120;void* unk124;void* unk128;void* unk12c;void* unk130;void* unk134;void* unk138;void* unk13c;void* unk140;void* unk144;void* unk148;void* unk14c;void* unk150;void* unk154;void* unk158;void* unk15c;void* unk160;void* unk164;void* unk168;void* unk16c;void* unk170;void* unk174;void* unk178;void* unk17c;void* unk180;void* unk184;void* unk188;void* unk18c;void* unk190;void* unk194;void* unk198;void* unk19c;void* unk1a0;void* unk1a4;void* unk1a8;void* unk1ac;void* unk1b0;void* unk1b4;void* unk1b8;void* unk1bc;void* unk1c0;void* unk1c4;void* unk1c8;void* unk1cc;void* unk1d0;void* unk1d4;void* unk1d8;void* unk1dc;void* unk1e0;void* unk1e4;void* unk1e8;void* unk1ec;void* unk1f0;void* unk1f4;void* unk1f8;void* unk1fc;void* unk200;void* unk204;void* unk208;void* unk20c;void* unk210;void* unk214;void* unk218;void* unk21c;void* unk220;void* unk224;void* unk228;void* unk22c;void* unk230;void* unk234;void* unk238;void* unk23c;void* unk240;void* unk244;void* unk248;void* unk24c;void* unk250;void* unk254;void* unk258;void* unk25c;void* unk260;void* unk264;void* unk268;void* unk26c;void* unk270;void* unk274;void* unk278;void* unk27c;void* unk280;void (__thiscall* set)(Ownerbb90*,void*,int);}; struct Ownerbb90 { Tablebb90* table;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;int unk3c;int unk40; void FUN_0072bb90(void*); };
+// pdb: HighProcess::ProcessNotify | HighProcess.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apActor
 void Ownerbb90::FUN_0072bb90(void* value) { if(!unk40) table->initialize(this,value); table->set(this,value,1); }
 }   // namespace f3m_0072bb90
 
@@ -31779,6 +32036,8 @@ struct Controller : FUN_00837e10 {
  void FUN_00837bc0(Controller*,void*);
  Controller* FUN_00727bc0(void*);
 };
+// pdb: BSPlayerDistanceCheckController::CreateClone | BSPlayerDistanceCheckController.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kCloning
 Controller* Controller::FUN_00727bc0(void* context) {
  Controller* result=new Controller;
  result->value38=value38;
@@ -31816,6 +32075,7 @@ struct Member7270 {
     void FUN_00723640();
 };
 struct Owner7270 {void* table;Member7270 member;int state;Owner7270* FUN_00727020();};
+// pdb: BaseProcess::BaseProcess | BaseProcess.obj | fnv360_0721_beta, call_seq, medium
 Owner7270* Owner7270::FUN_00727020(){table=&G7270::DAT_00e13a34;member.FUN_00723640();state=0;return this;}
 }   // namespace f3m_00727020
 
@@ -31825,6 +32085,8 @@ namespace QueueActorEntry {
 struct Object {unsigned int FUN_005a5100(void*);};
 struct Entries {void FUN_00723710(Object*,unsigned int);};
 struct Owner {int unk00;Entries entries;void FUN_00727410(Object*,void*);};
+// pdb: BaseProcess::SetCurrentPackage | BaseProcess.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apNewPackage, apMob
 void Owner::FUN_00727410(Object* object,void* context){entries.FUN_00723710(object,object->FUN_005a5100(context));}
 }
 }   // namespace f3m_00727410
@@ -32246,6 +32508,7 @@ namespace N730990 {struct Owner;struct Table{
  void*unknown66c;
  void*unknown670;
  unsigned(__thiscall*mode)(Owner*);};struct Owner{Table*table;__forceinline unsigned Mode(){return table->mode(this);}const char* FUN_00730990();};}
+// pdb: HighProcess::GetCurrentHeadTrackTypeString | HighProcess.obj | fnv360_0822_debug, ustr, medium
 const char* N730990::Owner::FUN_00730990(){switch(Mode()){case 0:return "DEFAULT";case 1:return "ACTION";case 2:return "SCRIPT";case 3:return "COMBAT";case 4:return "DIALOG";default:return "NONE";}}
 }   // namespace f3m_00730990
 
@@ -32257,6 +32520,8 @@ struct Owner {
     void* object;int handle;int context;int state;float time;
     void FUN_00723770(Owner*);
 };
+// pdb: ActorPackage::MoveTo | ActorPackage.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apDestPackageInstance
 void Owner::FUN_00723770(Owner* output) {
     output->object=object;
     output->handle=handle;
@@ -32273,6 +32538,8 @@ void Owner::FUN_00723770(Owner* output) {
 // @f3 0x0073a310 (community match, verified in this file)
 namespace f3m_0073a310 {
 struct Itema310 {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c; void* key; }; struct Nodea310 { Itema310* value; Nodea310* next; }; struct Ownera310 {int unk000;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;int unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;int unk080;int unk084;int unk088;int unk08c;int unk090;int unk094;int unk098;int unk09c;int unk0a0;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4;int unk0d8;int unk0dc;int unk0e0;int unk0e4;int unk0e8;int unk0ec;int unk0f0;int unk0f4;int unk0f8;int unk0fc;int unk100;int unk104;int unk108;int unk10c;int unk110;int unk114;int unk118;int unk11c;int unk120;int unk124;int unk128;int unk12c;int unk130;int unk134;int unk138;int unk13c;int unk140;int unk144;int unk148;int unk14c;int unk150;int unk154;int unk158;int unk15c;int unk160;int unk164;int unk168;int unk16c;int unk170;int unk174;int unk178;int unk17c;int unk180;int unk184;int unk188;int unk18c;int unk190;int unk194;int unk198;int unk19c;int unk1a0;int unk1a4;int unk1a8;int unk1ac;int unk1b0;int unk1b4;int unk1b8;int unk1bc;int unk1c0;int unk1c4;int unk1c8;int unk1cc;int unk1d0;int unk1d4;int unk1d8;int unk1dc;int unk1e0;int unk1e4;int unk1e8;int unk1ec;int unk1f0;int unk1f4;int unk1f8;int unk1fc;int unk200;int unk204;int unk208;int unk20c;int unk210;int unk214;int unk218;int unk21c;int unk220;int unk224;int unk228;int unk22c;int unk230;int unk234;int unk238;int unk23c;int unk240;int unk244;int unk248;int unk24c;int unk250;int unk254;int unk258;int unk25c;int unk260;int unk264;int unk268;int unk26c;int unk270;int unk274;int unk278;int unk27c;int unk280;int unk284;int unk288;int unk28c;int unk290;int unk294;int unk298;int unk29c;int unk2a0;int unk2a4;int unk2a8;int unk2ac;int unk2b0;int unk2b4;int unk2b8;int unk2bc;int unk2c0;int unk2c4;int unk2c8;int unk2cc;int unk2d0;int unk2d4;int unk2d8;int unk2dc;int unk2e0;int unk2e4;int unk2e8;int unk2ec;int unk2f0;int unk2f4;int unk2f8;int unk2fc;int unk300;int unk304;int unk308;int unk30c;int unk310;int unk314;int unk318;int unk31c;int unk320;int unk324;int unk328;int unk32c;int unk330;int unk334;int unk338;int unk33c;int unk340;int unk344;int unk348;int unk34c;int unk350;int unk354;int unk358;int unk35c;int unk360;int unk364;int unk368;int unk36c;int unk370;int unk374;int unk378;int unk37c;int unk380;int unk384;int unk388;int unk38c;int unk390;int unk394;int unk398;int unk39c;int unk3a0;int unk3a4;int unk3a8;int unk3ac;int unk3b0;int unk3b4;int unk3b8;int unk3bc;int unk3c0;int unk3c4;int unk3c8;int unk3cc;int unk3d0;int unk3d4;int unk3d8;int unk3dc;int unk3e0;int unk3e4;int unk3e8;int unk3ec;int unk3f0;int unk3f4;int unk3f8;int unk3fc;int unk400;int unk404;int unk408;int unk40c;int unk410;int unk414;int unk418;int unk41c;int unk420;int unk424;int unk428;int unk42c;int unk430;int unk434;int unk438; Nodea310* head; bool FUN_0073a310(void*); };
+// pdb: HighProcess::IsAvoidAreaInAvoidPathingList | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRef
 bool Ownera310::FUN_0073a310(void* key) { bool found=false; Nodea310* node=head; while(node) { Itema310* item=node->value; if(!item || found) break; node=node->next; if(item->key==key) found=true; } return found; }
 }   // namespace f3m_0073a310
 
@@ -32529,6 +32796,8 @@ unsigned kind;
 unsigned char FUN_007300a0(void*,void*);
 unsigned char FUN_00730130(void*,void*);
 };
+// pdb: HighProcess::ShouldRunCombatDetectionEventCheck | HighProcess.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: BSPathingGoal::SetAngleToFace)
+// pdb params: apActor, apTarget
 unsigned char Owner::FUN_00730130(void* first,void* second){if(!DAT_00f6e688[kind].enabled)return false;return FUN_007300a0(first,second)!=0;}
 }
 
@@ -32943,6 +33212,8 @@ unsigned unk3e0;
 unsigned unk3e4;
 unsigned saved;unsigned unk3ec,unk3f0,unk3f4;unsigned current;unsigned unk3fc,unk400;bool pending;
 void FUN_007307b0();void FUN_007399d0(bool);};
+// pdb: GuardActorPackageData::SetState | HighProcess.obj | fnv360_0822_debug, objopen_prop, low
+// pdb params: aeState
 void Owner::FUN_007399d0(bool apply){unsigned old=current;current=0;pending=false;if(apply){saved=old;table->Apply(this,DAT_00f5e8fc);}else FUN_007307b0();}
 }
 }   // namespace f3m_007399d0
@@ -32950,6 +33221,8 @@ void Owner::FUN_007399d0(bool apply){unsigned old=current;current=0;pending=fals
 // @f3 0x007254c0 (community match, verified in this file)
 namespace f3m_007254c0 {
 namespace Lock54c0 { extern int DAT_0107b118; extern void (__stdcall* DAT_00d9b09c)(void*); struct Owner {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38; void FUN_007254c0(void*); };
+// pdb: ActorUpdateTaskData::HandleCountMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiCount
 void Owner::FUN_007254c0(void*) { unk38=0; DAT_00d9b09c(&DAT_0107b118); } }
 }   // namespace f3m_007254c0
 
@@ -33727,12 +34000,15 @@ namespace N730190 {struct Object{
  __forceinline bool Blocked(){return table->blocked(this);}
  __forceinline void Clear(unsigned a){table->clear(this,a,0,0);}
  bool FUN_00756da0(unsigned a1,unsigned a2,unsigned a3,unsigned a4,unsigned a5,unsigned a6,unsigned a7,unsigned a8,unsigned a9,unsigned a10,unsigned a11,unsigned a12,unsigned a13);bool FUN_00730190(unsigned a1,unsigned a2,unsigned a3,unsigned a4,unsigned a5,unsigned a6,unsigned a7,unsigned a8,unsigned a9,unsigned a10,unsigned a11,unsigned a12,unsigned a13);};}
+// pdb: HighProcess::EnterCombat | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, apTarget, abCheckForAmbush, absendalarm, apGroup, abfleeing, abForceFlee, abIsAggressor, acTeam, bforcecombat, bIgnoreDefensivePackage, abCastSpell, apPackage
 bool N730190::Owner::FUN_00730190(unsigned a1,unsigned a2,unsigned a3,unsigned a4,unsigned a5,unsigned a6,unsigned a7,unsigned a8,unsigned a9,unsigned a10,unsigned a11,unsigned a12,unsigned a13){Object*object=Get();Update();if(Blocked()||(object&&object->type==16))return false;if(active){Clear(a1);active=false;timer=DAT_00f5ec08;}return FUN_00756da0(a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13);}
 }   // namespace f3m_00730190
 
 // @f3 0x007233c0 (community match, verified in this file)
 namespace f3m_007233c0 {
 namespace Clear33c0 { struct Heap { void FUN_0086ba60(void*); }; extern Heap DAT_01090a78; struct Node { void* value; Node* next; void FUN_006c8220(); }; struct Owner {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;int unk3c;int unk40;int unk44;int unk48;int unk4c;int unk50;int unk54;int unk58;int unk5c;int unk60;int unk64;int unk68;int unk6c;int unk70;int unk74;int unk78;int unk7c;int unk80;int unk84;int unk88;int unk8c;int unk90;int unk94;int unk98;int unk9c;int unka0;int unka4;int unka8;int unkac;int unkb0;int unkb4;int unkb8;int unkbc;int unkc0;int unkc4;int unkc8;int unkcc;int unkd0;int unkd4;int unkd8;int unkdc;int unke0;int unke4; Node head; Node* Head() { return &head; } void FUN_007233c0(); };
+// pdb: Actor::DeleteCastPowers | Actor_Magic.obj | fnv360_0822_retail, call_gap, medium
 void Owner::FUN_007233c0() { Node* list=Head(); for(Node* node=Head();node;node=node->next) if(node->value) DAT_01090a78.FUN_0086ba60(node->value); list->FUN_006c8220(); } }
 }   // namespace f3m_007233c0
 
@@ -33765,6 +34041,8 @@ void Actor::Character_PrecacheData(){
 // @f3 0x00727040 (community match, verified in this file)
 namespace f3m_00727040 {
 namespace Position7040 { struct Vector { float x; float y; float z; }; extern Vector DAT_0108ec68;
+// pdb: BaseProcess::GetCurrentPackageLocation | BaseProcess.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: apActor
 Vector __stdcall FUN_00727040(int) { return DAT_0108ec68; } }
 }   // namespace f3m_00727040
 
@@ -34474,6 +34752,8 @@ int unk5d8;
 int unk5dc;
 Component* Actor_GetClass(); Object* FUN_005ad6c0(); bool FUN_00710630(Object*,int,int*,int); void Actor_EndInterruptPackage(bool); void FUN_00735f80(Object* target); };
 
+// pdb: HighProcess::ProcessAlarm | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 void Object::FUN_00735f80(Object* target) {
  State* st=state();
  bool hasSpecial=false;
@@ -34731,6 +35011,8 @@ unsigned unk50;
 unsigned unk54;
 unsigned unk58;
 unsigned unk5c;
+// pdb: Actor::SetAlpha | Actor_Magic.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: hkpFirstCdBodyPairCollector::~hkpFirstCdBodyPairCollector)
+// pdb params: afNewAlpha
 Inner*inner;void FUN_00721a60(float);};void Owner::FUN_00721a60(float value){if(inner&&!inner->mode)inner->value=value;}}
 }   // namespace f3m_00721a60
 
@@ -34740,6 +35022,7 @@ namespace f3m_00728c60 {
 namespace ConstructCharacter {
 // Explicit observed Character layout; all six method-table subobjects verified through local RTTI.
 struct Character {void** methods;unsigned char formType;int unk008;int unk00c;int unk010;int unk014;void** childMethods;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;int unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;void** casterMethods;int unk084;int unk088;void** targetMethods;int unk090;int unk094;int unk098;void** valueMethods;void** cacheMethods;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4;int unk0d8;int unk0dc;int unk0e0;int unk0e4;int unk0e8;int unk0ec;int unk0f0;int unk0f4;int unk0f8;int unk0fc;int unk100;int unk104;int unk108;int unk10c;int unk110;int unk114;int unk118;int unk11c;int unk120;int unk124;bool state128;void* pointer12c;int state130;int state134;bool state138;int unk13c;int unk140;int unk144;int unk148;int unk14c;int unk150;int unk154;int unk158;int unk15c;int unk160;int unk164;int unk168;int unk16c;int unk170;int unk174;int unk178;int unk17c;int unk180;int unk184;int unk188;int unk18c;int unk190;int unk194;int unk198;int unk19c;int state1a0;float time1a4;bool state1a8;bool state1a9;float time1ac; void FUN_0070c750(bool);Character* FUN_00728c60();};
+// pdb: Character::Character | Character.obj | fnv360_0822_retail, call_gap, medium
 Character* Character::FUN_00728c60(){FUN_0070c750(true);state1a0=0;time1a4=-1.0f;time1ac=-1.0f;state1a9=false;state1a8=false;state128=false;pointer12c=0;state130=0;state134=0;state138=false;methods=PTR_00e1447c;childMethods=PTR_00e14470;casterMethods=PTR_00e1441c;targetMethods=PTR_00e143e8;valueMethods=PTR_00e143b8;cacheMethods=PTR_00e14374;formType=0x3b;return this;}
 }
 }   // namespace f3m_00728c60
@@ -34752,6 +35035,8 @@ struct Triple{int x,y,z;};
 struct Node{int x,y,z;Node* next;Node(const Triple& t):x(t.x),y(t.y),z(t.z){}};
 struct Pool{bool FUN_00725da0(void**);};
 struct Queue{int unk00,unk04;Pool* pool;Node* head;Node** tail;bool FUN_007267a0(Triple*);};
+// pdb: BSTCommonLLMessageQueue<MobileObjectMessage>::DoTryPush | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aMessage
 bool Queue::FUN_007267a0(Triple* value){
  if(pool){
   Triple copy=*value;
@@ -35111,6 +35396,8 @@ struct Obj {
  Rot* rotation;
  bool FUN_004e8530(int); bool FUN_006f8d70(); bool FUN_006f8d80(); float FUN_004edbf0(Obj*,int,int); int FUN_006f58b0(); void FUN_006f8ca0(int); void Actor_SetPathfindingGoal(const Vec*,int,int,float,int); __forceinline int GetID() const { return unk00c; } __forceinline bool Disabled() const { return (unk008 >> 11) & 1; } void FUN_0072c020(Obj* source);
 };
+// pdb: HighProcess::ProcessAccompany | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor
 void Obj::FUN_0072c020(Obj* source) {
  Ctx* ctx=v278();
  if(ctx && !(*((unsigned char*)ctx+0x1e)&1)) {
@@ -35433,6 +35720,8 @@ FUN_00723fa0* cache;
  float FUN_00763b20(int,unsigned,int);
  float FUN_007302c0(int,unsigned,int);
 };
+// pdb: HighProcess::GetActorFloatValue | HighProcess.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apActorBase, aiWhich, apActor
 float Actor::FUN_007302c0(int first,unsigned index,int third) {
  if(!cache) cache=new FUN_00723fa0;
  if(cache->entries[index].dirty) cache->FUN_00723f20(index,FUN_00763b20(first,index,third));
@@ -35702,6 +35991,8 @@ struct Owner {
  int count;
  void FUN_00724e90(Receiver* receiver);
 };
+// pdb: ActorUpdateTaskData::HandleMobMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apMob
 void Owner::FUN_00724e90(Receiver* receiver) {
  if(receiver && receiver->table->isEligible(receiver)) {
   if(receiver->active) receiver->table->setValue(receiver,0.0f);
@@ -35721,6 +36012,7 @@ extern int (__stdcall *DAT_00d9b088)(void*,long,long*);
 struct Semaphore {long count;void* handle;int unk08;void Wait(){DAT_00d9b08c(handle,~0u);DAT_00d9b064(&count);}void Signal(){ReleaseSemaphore(handle,1,0);DAT_00d9b068(&count);}};
 struct Thread;struct Table {int unk00,unk04;void (__thiscall *start)(Thread*);void (__thiscall *stop)(Thread*);void (__thiscall *work)(Thread*);};
 struct Thread {Table* table;int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; Semaphore ready,done;bool quit;unsigned FUN_00724100();};
+// pdb: BSLinearTaskThread::ThreadProc | AILinearTaskThreadManager.obj | fnv360_0822_retail, vtable, medium
 unsigned Thread::FUN_00724100(){table->start(this);while(!quit){ready.Wait();if(quit)break;table->work(this);done.Signal();}table->stop(this);done.Signal();return 0;}
 }
 }   // namespace f3m_00724100
@@ -35844,6 +36136,8 @@ struct Object {
  void FUN_0070c750(void*);
  Object* FUN_00729af0(void*);
 };
+// pdb: Creature::Creature | Creature.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: abadd
 Object* Object::FUN_00729af0(void* argument) {
  FUN_0070c750(argument);
  value=DAT_00db38b8;
@@ -35877,6 +36171,8 @@ namespace N725120 {struct Owner{
  int unknown30;
  int unknown34;
  float value;unsigned count;void FUN_00725120(unsigned);};}
+// pdb: DetectionTaskData::HandleCountMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: auiCount
 void N725120::Owner::FUN_00725120(unsigned unused){value=0;count=0;EnterCriticalSection(&::DAT_0107b0ec);EnterCriticalSection(&::DAT_0107b0d0);}
 }   // namespace f3m_00725120
 
@@ -36081,6 +36377,8 @@ unsigned unk308;
 unsigned unk30c;
 unsigned unk310;
 unsigned unk314;
+// pdb: HighProcess::StartTorchSound | HighProcess.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apActor
 Value cached;void FUN_00730040(Source*);};void Owner::FUN_00730040(Source*source){if(!cached.BSSoundHandle_IsValid()){Setting*setting=DAT_0106cdcc->FUN_0043bcc0(DAT_00e150b8);if(source&&setting)cached=source->MobileObject_PlaySound(setting->Value(),true,2,true);}}}
 }   // namespace f3m_00730040
 
@@ -36098,6 +36396,8 @@ typedef bool (__thiscall *CanSave)(Form*,void*);
 typedef void (__thiscall *SaveForm)(Form*,Stream*);
 typedef char (__thiscall *GetType)(Extra*);
 typedef void (__thiscall *SaveExtra)(Extra*,Stream*);
+// pdb: ActorPackage::SaveGame | ActorPackage.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apSaveGameBuffer
 void Entry::FUN_00723940(Stream* stream){void* context=((GetContext)stream->methods[2])(stream);stream->FUN_006e17e0(form,0);if(form){if(Registered(form->id)){char type=form->type;if(!((CanSave)form->methods[87])(form,context))type=-1;stream->FUN_006e1830(&type,1,0);if(type!=-1)((SaveForm)form->methods[21])(form,stream);}char extraType=extra?((GetType)extra->methods[2])(extra):-1;stream->FUN_006e1830(&extraType,1,0);if(extraType!=-1)((SaveExtra)extra->methods[3])(extra,stream);stream->FUN_006e1830(&a,4,0);stream->FUN_006e1830(&b,4,0);stream->FUN_006e1830(&c,4,0);stream->FUN_006e17e0(reference,0);}}
 }
 }   // namespace f3m_00723940
@@ -36376,6 +36676,7 @@ namespace N721A00 {struct Context;struct Table{
  int unknown58;
  int unknown5c;
  Context*context;bool FUN_00721a00();};}
+// pdb: Actor::GetShouldCheckMagicNode | Actor_Magic.obj | fnv360_0822_retail, call_gap, low
 bool N721A00::Owner::FUN_00721a00(){if(context)return context->Get();return 0;}
 }   // namespace f3m_00721a00
 
@@ -36462,6 +36763,8 @@ struct Receiver {
  Table* table;
  void FUN_0072b610(Other*);
 };
+// pdb: HighProcess::EndMoveMessage | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor
 void Receiver::FUN_0072b610(Other* other) {
  table->setEnabled(this,1);
  if(other) other->FUN_006f8ce0();
@@ -36474,6 +36777,7 @@ struct Object;struct Table{int unk000; int unk004; int unk008; int unk00c; int u
 struct Node{Object* value;Node* next;void FUN_006c8220();};
 extern Object* DAT_0107b2ac;extern Node* DAT_0107b2b0;
 struct Heap{void FUN_0086ba60(void*);};extern Heap DAT_01090a78;
+// pdb: BSDoorHavokController::ReenableDoors | BSDoorHavokController.obj | fnv360_0822_retail, objrun_open, low, conflict (bridge: PlayerCharacter::GetRecentAction)
 void __cdecl FUN_00727a10(){Node* node=DAT_0107b2b0;while(node||DAT_0107b2ac){
  DAT_0107b2ac->table->process(DAT_0107b2ac);
  node=DAT_0107b2b0;
@@ -36604,6 +36908,8 @@ float otherScale;
 void FUN_0070c750(int);
  Object* FUN_00728d10(int);
 };
+// pdb: Character::Character | Character.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abadd
 Object* Object::FUN_00728d10(int arg) {
  FUN_0070c750(arg);
  scale=DAT_00db38b8; state=0; otherScale=DAT_00db38b8; flag2=0;flag1=0;
@@ -36620,6 +36926,8 @@ namespace Query72f8 {
 struct Entry{int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; bool alternate;char unk1d;bool normal;};
 struct Object;struct Table{int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; int unk08c; int unk090; int unk094; int unk098; int unk09c; int unk0a0; int unk0a4; int unk0a8; int unk0ac; int unk0b0; int unk0b4; int unk0b8; int unk0bc; int unk0c0; int unk0c4; int unk0c8; int unk0cc; int unk0d0; int unk0d4; int unk0d8; int unk0dc; int unk0e0; int unk0e4; int unk0e8; int unk0ec; int unk0f0; int unk0f4; int unk0f8; int unk0fc; int unk100; int unk104; int unk108; int unk10c; int unk110; int unk114; int unk118; int unk11c; int unk120; int unk124; int unk128; int unk12c; int unk130; int unk134; int unk138; int unk13c; int unk140; int unk144; int unk148; int unk14c; int unk150; int unk154; int unk158; int unk15c; int unk160; int unk164; int unk168; int unk16c; int unk170; int unk174; int unk178; int unk17c; int unk180; int unk184; int unk188; int unk18c; int unk190; int unk194; int unk198; int unk19c; int unk1a0; int unk1a4; int unk1a8; int unk1ac; int unk1b0; int unk1b4; int unk1b8; int unk1bc; int unk1c0; int unk1c4; int unk1c8; int unk1cc; int unk1d0; int unk1d4; int unk1d8; int unk1dc; int unk1e0; int unk1e4; int unk1e8; int unk1ec; int unk1f0; int unk1f4; int unk1f8; int unk1fc; int unk200; int unk204; int unk208; int unk20c; int unk210; int unk214; int unk218; int unk21c; int unk220; int unk224; int unk228; int unk22c; int unk230; int unk234; int unk238; int unk23c; int unk240; int unk244; int unk248; int unk24c; int unk250; int unk254; int unk258; int unk25c; int unk260; int unk264; int unk268; int unk26c; int unk270; int unk274; int unk278; int unk27c; int unk280; int unk284; int unk288; int unk28c; int unk290; int unk294; int unk298; int unk29c; int unk2a0; int unk2a4; int unk2a8; int unk2ac; int unk2b0; int unk2b4; int unk2b8; int unk2bc; int unk2c0; int unk2c4; int unk2c8; int unk2cc; int unk2d0; int unk2d4; int unk2d8; int unk2dc; int unk2e0; int unk2e4; int unk2e8; int unk2ec; int unk2f0; int unk2f4; int unk2f8; int unk2fc; int unk300; int unk304; int unk308; int unk30c; int unk310; int unk314; int unk318; int unk31c; int unk320; int unk324; int unk328; int unk32c; int unk330; int unk334; int unk338; int unk33c; int unk340; int unk344; int unk348; int unk34c; int unk350; int unk354; int unk358; int unk35c; int unk360; int unk364; int unk368; int unk36c; int unk370; int unk374; int unk378; int unk37c; int unk380; int unk384; int unk388; int unk38c; int unk390; int unk394; int unk398; int unk39c; int unk3a0; int unk3a4; int unk3a8; int unk3ac; int unk3b0; int unk3b4; int unk3b8; int unk3bc; int unk3c0; int unk3c4; int unk3c8; int unk3cc; int unk3d0; int unk3d4; int unk3d8; int unk3dc; int unk3e0; int unk3e4; int unk3e8; int unk3ec; int unk3f0; int unk3f4; int unk3f8; int unk3fc; int unk400; int unk404; int unk408; int unk40c; int unk410; int unk414; int unk418; int unk41c; int unk420; int unk424; int unk428; int unk42c; int unk430; int unk434; int unk438; int unk43c; int unk440; int unk444; int unk448; int unk44c; int unk450; int unk454; int unk458; int unk45c; int unk460; int unk464; int unk468; int unk46c; int unk470; int unk474; int unk478; int unk47c; int unk480; int unk484; int unk488; int unk48c; int unk490; int unk494; int unk498; int unk49c; int unk4a0; int unk4a4; int unk4a8; int unk4ac; int unk4b0; int unk4b4; int unk4b8; int unk4bc; int unk4c0; int unk4c4; int unk4c8; int unk4cc; int unk4d0; int unk4d4; int unk4d8; int unk4dc; int unk4e0; int unk4e4; int unk4e8; int unk4ec; int unk4f0; int unk4f4; int unk4f8; Entry* (__thiscall* lookup)(Object*,int,int);};
 struct Object{Table* table;bool FUN_0072f880(int,int,int,bool);};
+// pdb: HighProcess::GetLineSightonActor | HighProcess.obj | fnv360_0822_retail, objrun, low
+// pdb params: apActor, apTarget, abWhichList, ab360
 bool Object::FUN_0072f880(int unused,int first,int second,bool alternate){
  Entry* entry=table->lookup(this,first,second);
  bool value=false;
@@ -36632,6 +36940,8 @@ bool Object::FUN_0072f880(int unused,int first,int second,bool alternate){
 // @f3 0x00725580 (community match, verified in this file)
 namespace f3m_00725580 {
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void*);
+// pdb: ActorsScriptTaskData::HandleEndMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiThread
 namespace Release7255 {extern int DAT_0107b0d0,DAT_0107b0ec,DAT_0107b118;struct Release{void FUN_00725580(int);};void Release::FUN_00725580(int unused){LeaveCriticalSection(&DAT_0107b0d0);LeaveCriticalSection(&DAT_0107b0ec);LeaveCriticalSection(&DAT_0107b118);}}
 }   // namespace f3m_00725580
 
@@ -36642,6 +36952,8 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedCompareExchange(volat
 struct Node {int unk00,unk04;Node* next;};
 struct Lock {long value;__forceinline void Acquire(){while(InterlockedCompareExchange(&value,1,0)){} }__forceinline void Release(){InterlockedCompareExchange(&value,0,1);}};
 struct Queue {int unk00;Lock lock;Node* head;void FUN_0073a610(Node**);};
+// pdb: BSTFreeList<PathingMessage>::DoDeallocate | PathManager.obj | fnv360_0721_beta, call_seq, low
+// pdb params: apElem
 void Queue::FUN_0073a610(Node** node){lock.Acquire();(*node)->next=head;head=*node;*node=0;lock.Release();}
 }
 }   // namespace f3m_0073a610
@@ -36651,6 +36963,8 @@ namespace f3m_00723fc0 {
 namespace InvalidateActorValue {
 struct Entry {bool pending;float value;};
 struct Values {Entry entries[73];void FUN_00723f40(unsigned int);void FUN_00723fc0(unsigned int);};
+// pdb: ActorValueCache::SetCachedActorValueOutOfDate | ActorValueCache.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: aiWhich
 void Values::FUN_00723fc0(unsigned int index){if(index<=72){entries[index].pending=true;FUN_00723f40(index);}}
 }
 }   // namespace f3m_00723fc0
@@ -36660,6 +36974,7 @@ namespace current727 {
 extern char DAT_00e1425c;
 extern void __cdecl FUN_0089ec10(void*,unsigned);
 struct Object { void* table; void FUN_00837e80(); Object* FUN_00727af0(unsigned); };
+// pdb: BSPlayerDistanceCheckController::`scalar deleting destructor' | BSPlayerDistanceCheckController.obj | fnv360_0822_retail, vtable, high
 Object* Object::FUN_00727af0(unsigned flags) {
  table=&DAT_00e1425c;
  FUN_00837e80();
@@ -36673,6 +36988,8 @@ namespace f3m_007319a0 {
 namespace SetActorTarget {
 struct Actor {void** methods;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;int unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;int unk080;int unk084;int unk088;int unk08c;int unk090;int unk094;int unk098;int unk09c;int unk0a0;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4;int unk0d8;int unk0dc;int unk0e0;int unk0e4;int unk0e8;int unk0ec;int unk0f0;int unk0f4;int unk0f8;int unk0fc;int unk100;int unk104;int unk108;int unk10c;int unk110;int unk114;int unk118;int unk11c;int unk120;int unk124;int unk128;int unk12c;int unk130;int unk134;int unk138;int unk13c;int unk140;int unk144;int unk148;int unk14c;int unk150;int unk154;int unk158;int unk15c;int unk160;int unk164;int unk168;int unk16c;int unk170;int unk174;int unk178;int unk17c;int unk180;int unk184;int unk188;int unk18c;int unk190;int unk194;int unk198;int unk19c;int unk1a0;int unk1a4;int unk1a8;int unk1ac;int unk1b0;int unk1b4;int unk1b8;int unk1bc; void* current;void FUN_007544d0(void*);void FUN_007319a0(void*);};
 typedef void (__thiscall *Clear)(Actor*,int,void*);
+// pdb: HighProcess::SetAnimation | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apAnim
 void Actor::FUN_007319a0(void* target){if(current&&!target)((Clear)methods[250])(this,-1,target);FUN_007544d0(target);}
 }
 }   // namespace f3m_007319a0
@@ -36686,6 +37003,8 @@ struct Parent;struct ParentTable {int unk00; int unk04; int unk08; int unk0c; in
 struct Table {int unk00,unk04,unk08;Collection* (__thiscall *get)(Object*);};
 struct Object {Table* table;int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; Parent* parent;};
 struct Owner {bool FUN_0072a0b0(Object*);};
+// pdb: Creature::FindRagDoll | Creature.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObject
 bool Owner::FUN_0072a0b0(Object* object){bool result=false;if(!object)return false;Parent* parent=object->parent;int value=parent?parent->table->get(parent):0;++DAT_0107b424;if(value)result=true;else if(DAT_0107b424<4){Collection* collection=object->table->get(object);if(collection)result=FUN_0072a0b0(collection->FUN_00434470(0));}--DAT_0107b424;return result;}
 }
 }   // namespace f3m_0072a0b0
@@ -36702,6 +37021,7 @@ void __cdecl FUN_0092e8f0(Object*);
 struct Thread{void* FUN_008f6f60(unsigned,int);};
 struct Manager{void FUN_0043cc40();};extern Manager* DAT_0106cdcc;
 struct Allocation{void* ptr;Allocation(void* p):ptr(p){}~Allocation(){if(ptr)FUN_00723fe0(ptr);}};
+// pdb: AITaskThread::OnStartup | AITaskManager.obj | fnv360_0822_debug, callee_sim, low
 void __cdecl FUN_00726090(){
  Object* result;
  {void* memory=DAT_00f7b4cc(816,16);Allocation allocation(memory);result=0;if(memory)result=((Object*)memory)->FUN_008f6a50(DAT_010f3400,16);allocation.ptr=0;}
@@ -36730,6 +37050,8 @@ struct Owner {
     void FUN_00730650(int a);
 };
 }
+// pdb: HighProcess::SetCachedActorValueOutOfDate | HighProcess.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: aiWhich
 void n730650::Owner::FUN_00730650(int a)
 {
     if (!child)
@@ -36740,6 +37062,8 @@ void n730650::Owner::FUN_00730650(int a)
 
 // @f3 0x007237c0 (community match, verified in this file)
 namespace f3m_007237c0 {
+// pdb: ActorPackage::GetSaveSize | ActorPackage.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiFlags
 namespace Size{struct Owner{void*value;unsigned Payload(){unsigned result=4;if(value)result=8;return result;}unsigned FUN_007237c0(unsigned);};unsigned Owner::FUN_007237c0(unsigned unused){return Payload()+4;}}
 }   // namespace f3m_007237c0
 
@@ -36756,6 +37080,7 @@ struct Owner {
     void FUN_007307b0();
 };
 }
+// pdb: HighProcess::OnNewHeadTrackTarget | HighProcess.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: BSPathingSearchParameters::SetFlag)
 void n7307b0::Owner::FUN_007307b0()
 {
     int value = 0;
@@ -36804,6 +37129,7 @@ struct Owner {
  List list;
  void FUN_0073bf50();
 };
+// pdb: HighProcess::ClearAcquireList | HighProcess.obj | fnv360_0822_retail, objrun, medium
 void Owner::FUN_0073bf50() {
  List* entries=&list;
  while(entries->next || entries->item) {
@@ -36835,6 +37161,8 @@ namespace N729F70 {struct Info{
  int unknown3c;
  int unknown40;
  unsigned flags;__forceinline bool Remap(){return (flags>>10)&1;}};extern Info*DAT_01073eb8[];struct Owner{void FUN_006fac20(unsigned,int);void FUN_00729f70(unsigned,int);};}
+// pdb: Creature::PermanentModActorValue | Creature.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aiWhich, aiValue, apAttacker
 void N729F70::Owner::FUN_00729f70(unsigned index,int delta){if(DAT_01073eb8[index]->Remap())index=45;FUN_006fac20(index,delta);}
 }   // namespace f3m_00729f70
 
@@ -37007,6 +37335,7 @@ namespace f3m_00728660 {
 namespace refresh660 {
 struct Owner;struct Source {bool FUN_004dac10(Owner*);};
 struct Owner {int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; Source* source;int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; int unk08c; int unk090; int unk094; int unk098; int unk09c; int unk0a0; int unk0a4; int unk0a8; int unk0ac; int unk0b0; int unk0b4; int unk0b8; int unk0bc; int unk0c0; int unk0c4; int unk0c8; int unk0cc; int unk0d0; int unk0d4; int unk0d8; int unk0dc; int unk0e0; int unk0e4; int unk0e8; int unk0ec; int unk0f0; int unk0f4; int unk0f8; int unk0fc; int unk100; int unk104; int unk108; int unk10c; int unk110; int unk114; int unk118; int unk11c; int unk120; int unk124; int unk128; int unk12c; int unk130; int unk134; int unk138; int unk13c; int unk140; int unk144; int unk148; int unk14c; int unk150; int unk154; int unk158; int unk15c; int unk160; int unk164; int unk168; int unk16c; int unk170; int unk174; int unk178; int unk17c; int unk180; int unk184; int unk188; int unk18c; int unk190; int unk194; int unk198; int unk19c; int unk1a0; int unk1a4; bool value;void FUN_00728660();};
+// pdb: Character::SetTresPassing | Character.obj | fnv360_0721_beta, objrun, medium
 void Owner::FUN_00728660(){Source* receiver=source;bool result=receiver?receiver->FUN_004dac10(this):false;value=result;}
 }
 }   // namespace f3m_00728660
@@ -37624,6 +37953,8 @@ unsigned unk3cc;
 unsigned unk3d0;
 unsigned unk3d4;
 unsigned unk3d8;
+// pdb: HighProcess::FadeAndDelete | HighProcess.obj | fnv360_0721_retail, call_seq, medium
+// pdb params: apActor
 unsigned state;float value;unsigned counter;void FUN_0072fdc0(Actor*);};void Owner::FUN_0072fdc0(Actor*actor){state=6;counter=0;if(value<=0.0f)value=1.0f;bool old=true;if(actor==DAT_0107a104){old=DAT_0107a104->mode;if(!old)DAT_0107a104->FUN_00775430(false);}actor->FUN_006f8ce0();actor->FUN_0071f3c0(1.0f,1.0f);if(!old)DAT_0107a104->FUN_00775430(true);}}
 }   // namespace f3m_0072fdc0
 
@@ -38016,6 +38347,7 @@ unsigned unk50;
 unsigned unk54;
 unsigned unk58;
 unsigned unk5c;
+// pdb: Actor::GetAlphaMult | Actor_Magic.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: hkpCdBodyPairCollector::getEarlyOut)
 Inner*inner;float FUN_00721aa0();};float Owner::FUN_00721aa0(){return inner?inner->table->Value(inner):1.0f;}}
 }   // namespace f3m_00721aa0
 
@@ -38265,6 +38597,7 @@ unsigned unk3bc;
 unsigned unk3c0;
 unsigned unk3c4;
 unsigned unk3c8;
+// pdb: HighProcess::ClearMuzzleFlash | HighProcess.obj | fnv360_0822_retail, caller_sim, low
 Child*child;void FUN_00730e30();};void Owner::FUN_00730e30(){Child*saved=child;if(saved){saved->FUN_007c6dd0();DAT_01090a78.FUN_0086ba60(saved);}child=0;}}
 }   // namespace f3m_00730e30
 
@@ -38291,6 +38624,8 @@ struct Owner {
     void FUN_00730db0(int a, int b);
 };
 }
+// pdb: HighProcess::CreateMuzzleFlash | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apProjectile, apParentRef
 void n730db0::Owner::FUN_00730db0(int a, int b)
 {
     if (!child)
@@ -38616,6 +38951,8 @@ unsigned unk3c0;
 unsigned unk3c4;
 unsigned unk3c8;
 unsigned unk3cc;
+// pdb: HighProcess::CheckTargetCombatDetectionState | HighProcess.obj | fnv360_0721_beta, call_seq, low, conflict (skyrim: BSPathingGoal::SetTargetType)
+// pdb params: apActor, apTarget
 unsigned mode;bool FUN_007300a0(Actor*,Actor*);};bool Owner::FUN_007300a0(Actor*actor,Actor*other){switch(DAT_00f6e688[mode].kind){case 0:if(other==actor->related)return true;break;case 1:if(other==actor->related||actor->Actor_IsInCombatWithActor(other))return true;break;case 2:if(other==actor->related)return true;if(!actor->Actor_IsInCombatWithActor(other)&&!actor->FUN_00703bf0(other))return true;break;}return false;}}
 }   // namespace f3m_007300a0
 
@@ -38870,12 +39207,16 @@ namespace N72FEE0 {struct Target{void Actor_UpdateAlpha();};struct Owner{
  int unknown3d4;
  int unknown3d8;
  int state;float value;void FUN_0072fee0(Target*);};}
+// pdb: HighProcess::SkipFadeIn | HighProcess.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apActor
 void N72FEE0::Owner::FUN_0072fee0(Target*target){if(state==1||state==3){state=0;value=1.0f;target->Actor_UpdateAlpha();}}
 }   // namespace f3m_0072fee0
 
 // @f3 0x0073a590 (community match, verified in this file)
 namespace f3m_0073a590 {
 extern "C" __declspec(dllimport) long __stdcall InterlockedCompareExchange(volatile long*,long,long);
+// pdb: BSTCommonMessageQueue<ActorPathingMessage>::Push | HighProcess.obj | fnv360_0822_retail, vtable, high
+// pdb params: aMessage
 namespace Locked{struct Owner;struct Table{void*unk00;void*unk04;void*unk08;void*unk0c;void*unk10;bool(__thiscall*Handle)(Owner*,void*);};struct Owner{Table*table;long lock;bool FUN_0073a590(void*);};bool Owner::FUN_0073a590(void*argument){while(InterlockedCompareExchange(&lock,1,0)!=0){}bool result=table->Handle(this,argument);InterlockedCompareExchange(&lock,0,1);return result;}}
 }   // namespace f3m_0073a590
 
@@ -39075,6 +39416,8 @@ public:
     void FUN_0072b260(unsigned short value, unsigned int count);
 };
 
+// pdb: HighProcess::SetAnimAction | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aeAction, apAnimSeq
 void FUN_0072b260_Obj::FUN_0072b260(unsigned short value, unsigned int count)
 {
     unk2E4 = value;
@@ -39097,6 +39440,8 @@ struct Manager {
     void FUN_007254f0(int unused);
 };
 }
+// pdb: PackageUpdateTaskData::HandleCountMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: uiCount
 void n7254f0::Manager::FUN_007254f0(int unused)
 {
     count = 0;
@@ -39142,6 +39487,8 @@ struct Package {
     int f3e4;
     void FUN_0072fe50(Actor* actor);
 };
+// pdb: HighProcess::FadeAndDisable | HighProcess.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apActor
 void Package::FUN_0072fe50(Actor* actor)
 {
     state = 5;
@@ -39170,6 +39517,7 @@ struct A8C_0073bc30 {
     float unk04;
     int FUN_0073bc30();
 };
+// pdb: Actor::DidPathingFail | Actor.obj | fnv360_0822_retail, call_gap, low
 int A8C_0073bc30::FUN_0073bc30() {
     return DAT_0108cba0 - unk00 > unk04;
 }
@@ -39185,6 +39533,8 @@ struct S {
     Node list;
     Item* FUN_00722c80(void* key);
 };
+// pdb: Actor::GetCastPowerItem | Actor_Magic.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apPower
 Item* S::FUN_00722c80(void* key) {
     Item* result = 0;
     if (key && list.item) {
@@ -39301,6 +39651,8 @@ struct Obj {
     int value;
     void FUN_007274f0(int arg, int unused);
 };
+// pdb: BaseProcess::SaveGame | BaseProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiFlags, pmob
 void Obj::FUN_007274f0(int arg, int unused)
 {
     unsigned short size = 0;
@@ -39987,6 +40339,8 @@ struct A11Ref
     void FUN_0072e5f0(int a);
 };
 
+// pdb: HighProcess::ProcessKill | HighProcess.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apActor
 void A11Ref::FUN_0072e5f0(int a)
 {
     if (unk40)
@@ -40057,6 +40411,8 @@ struct Actor {
     virtual bool v492(Ctrl* ctrl, int unk);
     void FUN_0072e650(Ctrl* ctrl);
 };
+// pdb: HighProcess::ProcessPickPocket | HighProcess.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apActor
 void Actor::FUN_0072e650(Ctrl* ctrl)
 {
     ctrl->busy = true;
@@ -40085,6 +40441,8 @@ struct Cursor {
     int index;
     void FUN_00723910(int a, int b);
 };
+// pdb: ActorPackage::InitLoadGame | ActorPackage.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: TESPackage::IncRefCount)
+// pdb params: aiFlags, aiOldFlags
 void Cursor::FUN_00723910(int a, int b)
 {
     if (source) {
@@ -40110,6 +40468,8 @@ public:
 
 extern int __cdecl FUN_00563cf0(int, int);
 
+// pdb: HighProcess::SayGoodBye | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 void __stdcall FUN_00730a00(void* self)
 {
     int r = FUN_00563cf0(1, 2);
@@ -40475,6 +40835,8 @@ public:
     void FUN_00730390(int a, int index, int value);
 };
 
+// pdb: HighProcess::TempModActorValue | HighProcess.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apActor, aiWhich, aiValue
 void Owner::FUN_00730390(int a, int index, int value)
 {
     FUN_00763b90(a, index, value);
@@ -40489,6 +40851,8 @@ void Owner::FUN_00730390(int a, int index, int value)
 
 // @f3 0x00721a20 (community match, verified in this file)
 namespace f3m_00721a20 {
+// pdb: Actor::CheckCast | Actor_Magic.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apSpell, afEffectStrength, apReason, abUseBaseMagicka
 bool __stdcall FUN_00721a20(int unk, float* pf, int* pi, int unk2)
 {
     if (pi)
@@ -40517,6 +40881,7 @@ struct Cls_725fa0
     void* FUN_00725fa0(unsigned int flags);
 };
 
+// pdb: PackageUpdateTaskData::`scalar deleting destructor' | AITaskManager.obj | fnv360_0822_retail, vtable, medium
 void* Cls_725fa0::FUN_00725fa0(unsigned int flags)
 {
     *(int**)this = &DAT_00e1390c;
@@ -40548,6 +40913,8 @@ public:
     bool FUN_0073a650(Node_73a650** out);
 };
 
+// pdb: BSTFreeList<PathingMessage>::Allocate<PathingMessage> | PathManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apResult, aP0
 bool ThreadList_73a650::FUN_0073a650(Node_73a650** out)
 {
     while (InterlockedCompareExchange(&m_lock, 1, 0) != 0)
@@ -40590,6 +40957,7 @@ public:
     void FUN_00724a80();
 };
 
+// pdb: AILinearTaskThreadManager::CreateThreads | AILinearTaskThreadManager.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: AILinearTaskThreadManager::Init)
 void TaskThreadSet_724a80::FUN_00724a80()
 {
     if (DAT_0106cd30 > 2)
@@ -41074,6 +41442,8 @@ public:
     void FUN_00730720(int value);
 };
 
+// pdb: HighProcess::ClearPathLookTarget | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apRef
 void P_730720::FUN_00730720(int value)
 {
     if (value2a4 == value)
@@ -41132,6 +41502,8 @@ public:
     void FUN_00727960(unsigned int which);
 };
 
+// pdb: BaseProcess::Revert | BaseProcess.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apLoadGameBuffer
 void SearchOwner::FUN_00727960(unsigned int which)
 {
     unk20 = -1.0f;
@@ -41304,6 +41676,8 @@ public:
     void FUN_00702d60(LocalObj*);
     void FUN_0072ecc0(Obj* source);
 };
+// pdb: HighProcess::ProcessSurfaceOneHour | HighProcess.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: apActor
 void Obj::FUN_0072ecc0(Obj* source)
 {
     if (source) {
@@ -41326,6 +41700,7 @@ extern const char DAT_00f47ac4; extern const char DAT_00f46078;
 void* __cdecl TESForm_GetFormByNumericID(void*);
 int __cdecl FUN_00c0050a(void*,int,const void*,const void*,int);
 struct Owner { void* p; void FUN_0072b200(); };
+// pdb: DetectionState::InitLoadGame | HighProcess.obj | fnv360_0822_retail, call_gap, low
 void Owner::FUN_0072b200() { p = p ? (void*)FUN_00c0050a(TESForm_GetFormByNumericID(p),0,&DAT_00f46078,&DAT_00f47ac4,0) : 0; }
 }
 
@@ -41337,6 +41712,8 @@ struct Owner727 {
     int unk00; Part727 part; int unk08, unk0C, unk10, unk14, unk18, unk1C, unk20, unk24, unk28; Child727* child;
     void FUN_00727920(void*);
 };
+// pdb: BaseProcess::InitLoadGame | BaseProcess.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apLoadGameBuffer
 void Owner727::FUN_00727920(void* arg) {
     part.FUN_00723ba0(arg);
     Child727* c = child;
@@ -41359,6 +41736,8 @@ namespace F3_731590 {
 struct Item { void** vtable; }; struct Info { char pad[0x18]; int type; }; struct Entry { Info* info; int x; int id; };
 struct Actor { void** vtable; bool FUN_00716fb0(Item*); };
 struct Owner { void** vtable; Entry a; char pad[0xd4]; Entry b; void FUN_00731590(Actor*,Item*,int); };
+// pdb: HighProcess::NotifyGuardAboutActivation | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, apActionRef, apActivated
 void Owner::FUN_00731590(Actor* actor,Item* item,int id) { if(!((bool (__thiscall*)(Item*))item->vtable[64])(item))return; if(actor==(Actor*)id)return; Entry* entries[2]={&b,&a}; for(int i=0;i<2;i++) { Entry* e=entries[i]; if(e->info && e->info->type==0x29 && e->id==id && actor->FUN_00716fb0(item)) { ((void (__thiscall*)(Owner*,Actor*,Item*,int,int,int,int,int,int,int,int,int,int,int))vtable[206])(this,actor,item,0,0,0,0,0,0,0,0,0,1,0); return; } } }
 }
 }   // namespace f3m_00731590
@@ -42166,6 +42545,7 @@ public:
     F3Ref_734870* unk424;
     void FUN_00734870();
 };
+// pdb: HighProcess::RemovePhantom | HighProcess.obj | fnv360_0822_retail, call_seq, medium
 void C734870::FUN_00734870()
 {
     if (unk424)
@@ -42345,6 +42725,8 @@ struct Actor724 {
     int unk7C, unk80, unk84, unk88, unk8C, unk90, unk94, unk98, unk9C, unkA0, unkA4, unkA8, unkAC, unkB0;
     unsigned char flagB4;
 };
+// pdb: AnimationTaskData::HandleMobMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apMob
 void __stdcall FUN_00724e50(Actor724* actor) {
     if (actor) {
         if (actor->vfn100()) {
@@ -42683,6 +43065,8 @@ struct Candidate {
     virtual Result* query(int, int);
     int FUN_0072f8c0(int, int);
 };
+// pdb: HighProcess::GetDetectionActor | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor, abWhichList
 int Candidate::FUN_0072f8c0(int a, int b) {
     Result* result = query(a, b);
     if (result != 0) return result->value;
@@ -42694,6 +43078,7 @@ int Candidate::FUN_0072f8c0(int a, int b) {
 namespace f3m_00728140 {
 struct ActorBase728 {unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0c;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1c;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2c;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3c;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned int unk4c;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5c;unsigned int unk60;unsigned int unk64;unsigned int unk68;unsigned int unk6c;unsigned int unk70;unsigned int unk74;unsigned int unk78;unsigned int unk7c;unsigned int unk80;unsigned int unk84;unsigned int unk88;unsigned int unk8c;unsigned int unk90;unsigned int unk94;unsigned int unk98;unsigned int unk9c;unsigned int unka0; void FUN_0070c9b0(); __forceinline ~ActorBase728() { FUN_0070c9b0(); } };
 struct FUN_00728140 : ActorBase728 { ~FUN_00728140(); void FUN_004fc020(int,int); bool flagSet() { return (*(volatile unsigned*)&unk08>>14)&1; } };
+// pdb: Character::~Character | Character.obj | fnv360_0822_retail, call_seq, medium
 FUN_00728140::~FUN_00728140() { *(void* volatile*)&unk00=&DAT_00e1447c; *(void* volatile*)&unk18=&DAT_00e14470; *(void* volatile*)&unk80=&DAT_00e1441c; *(void* volatile*)&unk8c=&DAT_00e143e8; *(void* volatile*)&unk9c=&DAT_00e143b8; *(void* volatile*)&unka0=&DAT_00e14374; if(!flagSet()) FUN_004fc020(0,0); }
 }   // namespace f3m_00728140
 
@@ -42711,6 +43096,8 @@ struct Owner {
     void FUN_00723670();void FUN_00723710(Object*,int);
     void FUN_00723840(int,int);
 };
+// pdb: ActorPackage::LoadGame | ActorPackage.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiFlags, aiCurrentFlags
 void Owner::FUN_00723840(int unused,int unused2) {
     unsigned id;
     bool ok=DAT_01079ca4->FUN_006dcdd0(&id,4);
@@ -43028,6 +43415,8 @@ public:
     bool FUN_00725060(int arg);
 };
 
+// pdb: BSTCommonMessageQueue<ActorPathingMessage>::TryPop | HighProcess.obj | fnv360_0822_retail, vtable, high
+// pdb params: aMessage
 bool FUN_00725060_Q::FUN_00725060(int arg)
 {
     if (InterlockedCompareExchange(&lock, 1, 0) == 0) {
@@ -43066,6 +43455,8 @@ struct QOwner {
  QAnchor* unk3d4;
  void FUN_00731440(int a1, QPos pos, int ref, int a6, QSink* sink);
 };
+// pdb: HighProcess::SetActorsDetectionEvent | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, aLocation, aiSoundLevel, aiDetectionEventType, apRef
 void QOwner::FUN_00731440(int a1, QPos pos, int ref, int a6, QSink* sink) {
  if (unk3d4) DAT_01090a78.FUN_0086ba60(unk3d4);
  unk3d4 = new QAnchor;
@@ -43094,6 +43485,8 @@ struct QWaiter {
     QSlot slots[3];
     void FUN_00724500(int index, unsigned int target);
 };
+// pdb: AILinearTaskThreadManager::WaitOnThreadStage | AILinearTaskThreadManager.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: aiThreadIndex, aiStage
 void QWaiter::FUN_00724500(int index, unsigned int target) {
     if (counts[index] < target) {
         QSlot* s = &slots[index];
@@ -43119,6 +43512,8 @@ struct Q8b30 {
     void FUN_00710360(int a);
     void FUN_00728b30(int a);
 };
+// pdb: Character::Revert | Character.obj | fnv360_0822_retail, vtable_prefix, high
+// pdb params: apLoadGameBuffer
 void Q8b30::FUN_00728b30(int a)
 {
     FUN_00710360(a);
@@ -43289,6 +43684,8 @@ struct QActorSize {
  unsigned short FUN_00754f40(void* context);
  unsigned short FUN_007382e0(unsigned int flags, void* context);
 };
+// pdb: HighProcess::GetSaveSize | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiFlags, pmob
 unsigned short QActorSize::FUN_007382e0(unsigned int flags, void* context) {
  unsigned short size = FUN_0075a4c0(flags, context);
  unsigned short start = size;
@@ -43609,6 +44006,8 @@ struct QOwn920 {
     QTgt920* unk40;
     int FUN_0072f920(QAct920* actor, QTgt920* target);
 };
+// pdb: HighProcess::GetEmotionsDispostion | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor, pRef
 int QOwn920::FUN_0072f920(QAct920* actor, QTgt920* target) {
     int result = 0x32;
     if (actor->vf134() && !target) {
@@ -43687,6 +44086,7 @@ public:
     void FUN_007241b0();
 };
 
+// pdb: AILinearTaskThreadManager::DestroyThreads | AILinearTaskThreadManager.obj | fnv360_0822_retail, call_gap, low
 void Owner_7241b0::FUN_007241b0()
 {
     for (unsigned int i = 0; i < 2; i++) {
@@ -43704,6 +44104,8 @@ void Owner_7241b0::FUN_007241b0()
 namespace f3m_007271d0 {
 namespace F3_7271d0 {
 struct Result { int id; char flag; int value; };
+// pdb: BaseProcess::GetSoundHandle | BaseProcess.obj | fnv360_1110_retail, objrun_open, low
+// pdb params: aeType
 void __stdcall FUN_007271d0(Result* p,int unused) { p->id=-1; p->flag=0; p->value=0; }
 }
 }   // namespace f3m_007271d0
@@ -43953,6 +44355,8 @@ virtual void o156();
 virtual void o157();
 virtual Target236* GetTarget();
 bool FUN_0072ec80(void*,void*);};
+// pdb: HighProcess::IsActorInsideAmbushArea | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor, apTarget
 bool Owner236::FUN_0072ec80(void* a,void* b){Target236* target=GetTarget();if(target && target->Invoke(b,a,0,-1.0f,0))return true;return false;}
 }
 }   // namespace f3m_0072ec80
@@ -44009,6 +44413,7 @@ public:
     long lock;
 };
 
+// pdb: BSTCommonLLMessageQueue<MobileObjectMessage>::~BSTCommonLLMessageQueue<MobileObjectMessage> | AITaskManager.obj | fnv360_0822_retail, call_seq, medium
 FUN_00725cc0::~FUN_00725cc0()
 {
     Msg_725cc0 msg = {2, 0, 0};
@@ -44029,6 +44434,8 @@ namespace N73B360 {
 struct Obj73b { int unk000; int unk004; int unk008; int unk00C; int unk010; int unk014; int unk018; int unk01C; int unk020; int unk024; int unk028; int unk02C; int unk030; int unk034; int unk038; int unk03C; int unk040; int unk044; int unk048; int unk04C; int unk050; int unk054; int unk058; int unk05C; int unk060; int unk064; int unk068; int unk06C; int unk070; int unk074; int unk078; int unk07C; int unk080; int unk084; int unk088; int unk08C; int unk090; int unk094; int unk098; int unk09C; int unk0A0; int unk0A4; int unk0A8; int unk0AC; int unk0B0; int unk0B4; int unk0B8; int unk0BC; int unk0C0; int unk0C4; int unk0C8; int unk0CC; int unk0D0; int unk0D4; int unk0D8; int unk0DC; int unk0E0; int unk0E4; int unk0E8; int unk0EC; int unk0F0; int unk0F4; int unk0F8; int unk0FC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; int unk128; int unk12C; int unk130; int unk134; int unk138; int unk13C; int unk140; int unk144; int unk148; int unk14C; int unk150; int unk154; int unk158; int unk15C; int unk160; int unk164; int unk168; int unk16C; int unk170; int unk174; int unk178; int unk17C; int unk180; int unk184; int unk188; char value;
     void FUN_0073b360(char mask);
 };
+// pdb: MiddleHighProcess::Clear3DUpdateFlag | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aeFlag
 void Obj73b::FUN_0073b360(char mask) {
     value *= ~mask;
 }
@@ -44046,6 +44453,8 @@ int __cdecl FUN_005850f0(int item);
 struct Obj72a { bool done;
     bool FUN_0072a480(int item);
 };
+// pdb: CharacterProgressionData::CheckCanLevelUp | FalloutCharacterProgression.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiToLevel
 bool Obj72a::FUN_0072a480(int item) {
     bool result = false;
     if (DAT_0107a104->Actor_GetLevel() >= DAT_00f62304) return false;
@@ -44063,6 +44472,8 @@ namespace f3m_0072a700 {
 struct Stream247{void FUN_006e0750(const void*,unsigned int);};
 struct Data247{unsigned char tag,unk01,unk02,unk03;unsigned int value;};
 struct Owner247{Data247*data;void FUN_0072a700(Stream247*);};
+// pdb: CharacterProgression::LoadGame | FalloutCharacterProgression.obj | fnv360_0721_beta, objrun, low
+// pdb params: apLoadGameBuffer
 void Owner247::FUN_0072a700(Stream247* stream){Data247* value=data;stream->FUN_006e0750(value,1);stream->FUN_006e0750(&value->value,4);}
 }   // namespace f3m_0072a700
 
@@ -44077,6 +44488,8 @@ extern Map72a DAT_010f3228;
 extern void* DAT_0107b48c[];
 Found72a* __cdecl FUN_00aab350(void* root, void* name, int flag);
 Node72a* __cdecl FUN_00424d50(Map72a* map, int key);
+// pdb: ClearGunWobble | GunWobble.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aeWeaponType, apRoot
 void FUN_0072ab10(int index, void* root) {
     void* name = DAT_0107b48c[index];
     if (!name) return;
@@ -44134,6 +44547,7 @@ struct Self_724d00
     void FUN_00724d00();
 };
 
+// pdb: MobileObjectTaskletData::Process | AITaskManager.obj | fnv360_0822_retail, vtable, medium
 void Self_724d00::FUN_00724d00()
 {
     Rec_724d00 rec = { 2, 0, 0 };
@@ -44210,6 +44624,8 @@ struct Owner723 {
     TESPackage* package; Target723* target; TESObjectREFR* ref; int index; int unk10; unsigned char flags;
     void FUN_00723ba0(void* arg);
 };
+// pdb: ActorPackage::InitLoadGame | ActorPackage.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apLoadGameBuffer
 void Owner723::FUN_00723ba0(void* arg) {
     if (flags & 1) {
         unsigned int id = DAT_01079858->BGSSaveLoadGame_GetChangedFormID((unsigned int)package);
@@ -44237,6 +44653,8 @@ namespace Read254{
 struct Stream254{void FUN_00454340(void*,unsigned int);};extern Stream254* DAT_0107a104;
 struct Data254{unsigned char tag,unk01,unk02,unk03;unsigned int value;};
 struct Owner254{Data254*data;void FUN_0072a450(unsigned int,unsigned int);};
+// pdb: CharacterProgression::LoadGame | FalloutCharacterProgression.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: BGSStoryManagerNodeBase::~BGSStoryManagerNodeBase)
+// pdb params: aiFlags, aiCurrentFlags
 void Owner254::FUN_0072a450(unsigned int,unsigned int){DAT_0107a104->FUN_00454340(data,1);DAT_0107a104->FUN_00454340(&data->value,4);}
 }
 }   // namespace f3m_0072a450
@@ -44246,6 +44664,8 @@ extern "C" __declspec(dllimport) int __stdcall ReleaseSemaphore(void*,long,long*
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long*);
 namespace Toggle256{
 extern volatile bool DAT_0107af88;extern void* DAT_0107aff8;extern long DAT_0107aff4;
+// pdb: AILinearTaskThreadManager::SetMainRendering | AILinearTaskThreadManager.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: abVal
 void __cdecl FUN_007244b0(bool enabled){if(DAT_0107af88){if(!enabled){DAT_0107af88=enabled;ReleaseSemaphore(DAT_0107aff8,1,0);InterlockedIncrement(&DAT_0107aff4);}DAT_0107af88=enabled;}else DAT_0107af88=enabled;}
 }
 
@@ -44556,6 +44976,8 @@ virtual void v292();
 virtual void v293();
 virtual bool Skip();
 void FUN_0072b5a0(Value258*,int,bool);};
+// pdb: HighProcess::SetActorsAnimation | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, emovemode, abCheckAlwaysRun
 void Owner258::FUN_0072b5a0(Value258* value,int mode,bool allow){if(!Skip()){Target258* target=GetTarget();if(mode==-1)mode=256;if(allow&&target&&target->IsSpecial())mode=513;unsigned short flags=(value->FUN_006f58b0()&0xc00)|mode;value->FUN_006f8ca0((short)flags);}}
 }
 }   // namespace f3m_0072b5a0
@@ -44887,6 +45309,8 @@ struct Obj72f {
     virtual Data72f* vfn4FC(int a, int b);
     char FUN_0072f850(int unused, int a, int b);
 };
+// pdb: HighProcess::Get360LineSightonActor | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor, apTarget, abWhichList
 char Obj72f::FUN_0072f850(int unused, int a, int b) {
     Data72f* d = vfn4FC(a, b);
     char result = 0;
@@ -44914,6 +45338,8 @@ public:
     int FUN_00728290(int arg);
 };
 
+// pdb: Character::GetBestWeapon | Character.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aeType
 int Cls_728290::FUN_00728290(int arg)
 {
     int r = 0;
@@ -44963,6 +45389,8 @@ struct Owner72a {
     int FUN_006f5430(int id);
     int FUN_0072a050(int id);
 };
+// pdb: Creature::ModActorBaseValue | Creature.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aiWhich, aiValue
 int Owner72a::FUN_0072a050(int id) {
     if (DAT_01073eb8[id]->IsFlag10()) id = 0x2d;
     return FUN_006f5430(id);
@@ -45095,6 +45523,8 @@ public:
     void FUN_7307b0();
 };
 
+// pdb: HighProcess::ProcessGuardInit | HighProcess.obj | fnv360_0822_debug, objopen_prop, low
+// pdb params: apActor, apData
 void C739a10_Obj::FUN_00739a10(bool enable)
 {
     int old = unk3e8[5];
@@ -45118,6 +45548,8 @@ extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void*);
 namespace Finish273{
 extern float DAT_01090bac;extern unsigned char DAT_0107b0d0;
 struct Manager273{void FUN_007923d0(float);};extern Manager273 DAT_0107c0a0;
+// pdb: PackageUpdateTaskData::HandleEndMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiThread
 void __stdcall FUN_00725520(void*){DAT_0107c0a0.FUN_007923d0(DAT_01090bac);LeaveCriticalSection(&DAT_0107b0d0);}
 }
 
@@ -45487,6 +45919,8 @@ struct ActorView {
     float FUN_0072f820(void* first, void* second);
 };
 
+// pdb: HighProcess::GetLastTimeDetected | HighProcess.obj | fnv360_0822_retail, objrun, low
+// pdb params: apActor, abWhichList
 float ActorView::FUN_0072f820(void* first, void* second)
 {
     float value = FUN_00db7260;
@@ -45942,6 +46376,8 @@ struct Owner730 {
     void FUN_00730e60(int a, Obj730* b);
 };
 
+// pdb: HighProcess::ProcessExplosionReaction | HighProcess.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: apActor
 void Owner730::FUN_00730e60(int a, Obj730* b) {
     vtable->fn7e0(this, a, b);
     b->field10 = 0.0f;
@@ -45973,6 +46409,8 @@ struct List_73cdd0 {
 extern List_73cdd0 DAT_0107b5d8;
 int __cdecl TESObjectREFR_GetTeleport();
 
+// pdb: HighProcess::FindDoorsToSendYellAlarm | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apRef, aiFilterData
 bool __cdecl FUN_0073cdd0(Ref_73cdd0* reference)
 {
     if (!reference)
@@ -45991,6 +46429,8 @@ bool __cdecl FUN_0073cdd0(Ref_73cdd0* reference)
 
 // @f3 0x007254a0 (community match, verified in this file)
 namespace f3m_007254a0 {
+// pdb: AnimationTaskData::HandleEndMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiThread
 void __stdcall FUN_007254a0(int arg)
 {
     LeaveCriticalSection(&DAT_0107b0ec);
@@ -46084,6 +46524,8 @@ struct QA167 {
     QA167Set set8c;
     bool FUN_007215f0(QA167Item* item);
 };
+// pdb: Actor::AddSpell | Actor_Magic.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apSpellIn
 bool QA167::FUN_007215f0(QA167Item* item) {
     bool result = owner->HasItem(item);
     if (result)
@@ -46113,6 +46555,7 @@ struct Subobject {Parent* Owner();int FUN_00722780();};
 struct Parent {ParentTable* table;int unk004; int unk008; int unk00C; int unk010; int unk014; int unk018; int unk01C; int unk020; int unk024; int unk028; int unk02C; int unk030; int unk034; int unk038; int unk03C; int unk040; int unk044; int unk048; int unk04C; int unk050; int unk054; int unk058; int unk05C; int unk060; int unk064; int unk068; int unk06C; int unk070; int unk074; int unk078; int unk07C; Subobject sub;Item* FUN_0076ff40(int);Result* FUN_0076cce0(int);};
 extern Parent* DAT_0107a104;extern const char* DAT_0106e7dc;
 inline Parent* Subobject::Owner(){return (Parent*)((char*)this - offsetof(Parent,sub));}
+// pdb: Actor::GetMagicNode | Actor_Magic.obj | fnv360_0822_retail, vtable, medium
 int Subobject::FUN_00722780() {
  Parent* parent=Owner();
  if(parent->table->check(parent)) {
@@ -46804,6 +47247,8 @@ public:
     void FUN_00731320(Q731320Arg* arg, Q731320Data* data);
 };
 
+// pdb: HighProcess::ChangePackage | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor, apPack
 void Q731320Self::FUN_00731320(Q731320Arg* arg, Q731320Data* data)
 {
     if (data) {
@@ -46845,6 +47290,8 @@ public:
     FUN_00724b30(void* ctx);
     virtual void Run();
 };
+// pdb: AITaskThread::AITaskThread | AITaskManager.obj | fnv360_0822_retail, uvref, medium
+// pdb params: aiThread
 FUN_00724b30::FUN_00724b30(void* ctx) {
     context = ctx;
     flag = 0;
@@ -46856,6 +47303,7 @@ FUN_00724b30::FUN_00724b30(void* ctx) {
 namespace f3m_00723fa0 {
 struct Elem723 { unsigned char flag; float value; };
 struct Mgr723 { Elem723 e[0x49]; Mgr723* FUN_00723fa0(); };
+// pdb: ActorValueCache::ActorValueCache | ActorValueCache.obj | fnv360_0721_beta, call_seq, medium
 Mgr723* Mgr723::FUN_00723fa0() { for (int i = 0; i < 0x49; i++) { e[i].flag = 1; e[i].value = 0.0f; } return this; }
 }   // namespace f3m_00723fa0
 
@@ -47136,6 +47584,7 @@ namespace N72BB50 {struct Heap{void FUN_0086ba60(void*);};extern Heap DAT_01090a
  int unknown43c;
  int unknown440;
  int state;void FUN_0072bb50();};}
+// pdb: HighProcess::ClearGreetingInfoData | HighProcess.obj | fnv360_0822_retail, caller_sim, low
 void N72BB50::Owner::FUN_0072bb50(){delete item;item=0;state=0;}
 }   // namespace f3m_0072bb50
 
@@ -47150,6 +47599,7 @@ extern Global* DAT_011790c8;
 extern Player* DAT_0107a104;
 struct Flag { unsigned char value; };
 struct Obj { Flag* flag; void FUN_0072a3d0(); };
+// pdb: CharacterProgression::BeginLevelUp | FalloutCharacterProgression.obj | fnv360_0721_beta, ustr_rel, medium
 void Obj::FUN_0072a3d0() {
     if (*(unsigned char*)flag != 0) {
         DAT_011790c8->BSAudio_Precache(0xE03788, 0x121);
@@ -47177,6 +47627,8 @@ struct Obj {
     void FUN_0072aca0(char* a);
     void FUN_0072b010(char* a);
 };
+// pdb: HighActorCuller::Run | HighActorCuller.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCamera
 void Obj::FUN_0072b010(char* a) {
     if (unkA0 == 0) {
         FUN_0072aca0(a);
@@ -47228,6 +47680,7 @@ struct Obj {
     void FUN_00752560();
     void FUN_0072b540();
 };
+// pdb: HighProcess::SetupNewPackage | HighProcess.obj | fnv360_0822_retail, objrun, medium
 void Obj::FUN_0072b540() {
     FUN_00752560();
     unk2b4 = 0.0f;
@@ -47258,6 +47711,7 @@ struct Obj {
     unsigned char changed;
     void FUN_00739a50();
 };
+// pdb: HighProcess::ClearAllHeadTrackTargets | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
 void Obj::FUN_00739a50() {
     for (int i = 0; i < 6; i++) {
         values[i] = 0;
@@ -47290,6 +47744,8 @@ struct Obj {
     unsigned char changed;
     void FUN_00739ab0(unsigned int v);
 };
+// pdb: HighProcess::RemoveHeadTrackTarget | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apRef
 void Obj::FUN_00739ab0(unsigned int v) {
     for (int i = 0; i < 6; i++) {
         if (values[i] == v) { values[i] = 0; flags[i] = 0; }
@@ -47316,6 +47772,7 @@ struct Owner {
     double FUN_006f6200();
     float FUN_00729bd0();
 };
+// pdb: Creature::GetReach | Creature.obj | fnv360_0822_retail, caller_sim, low
 float Owner::FUN_00729bd0() {
     TESCreature* c = dynamic_cast<TESCreature*>(source);
     if (!c) return FUN_006f6200();
@@ -47596,6 +48053,8 @@ void Refresh() {
 }
 void FUN_007396c0(Reference* target);
 };
+// pdb: HighProcess::SetDefaultHeadTrackTarget | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apRef
 void Process::FUN_007396c0(Reference* target) {
     values[0]=target;
     flags[0]=true;
@@ -47619,6 +48078,7 @@ struct FUN_00729da0 : B0, S1, S2, S3, S4, S5 {
     ~FUN_00729da0();
     bool Flag() const { return (flags >> 14) & 1; }
 };
+// pdb: Creature::~Creature | Creature.obj | fnv360_0822_retail, call_seq, medium
 FUN_00729da0::~FUN_00729da0() {
     if (!Flag()) FUN_004fc020(0, 0);
 }
@@ -48087,6 +48547,7 @@ struct Process {
     unsigned char referenceFlags[6];
     bool FUN_00730740();
 };
+// pdb: HighProcess::CanSetDefaultHeadTrackTarget | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
 bool Process::FUN_00730740()
 {
     for (int i = 5; i > 0; --i)
@@ -48363,6 +48824,7 @@ struct PrioritySlots {
     bool dirty410;
     void FUN_007307f0();
 };
+// pdb: HighProcess::UpdateHeadTrackTargets | HighProcess.obj | fnv360_0822_retail, call_gap, low
 void PrioritySlots::FUN_007307f0() {
     bool changed=false;
     if (enabled400[5] && (!records3E8[5] || records3E8[5]->IsDeleted())) {
@@ -48413,6 +48875,8 @@ void PrioritySlots::FUN_007307f0() {
 namespace f3m_0072a9e0 {
 namespace batch14_06 {
 struct Matrix {float m[9];bool NiMatrix3_Inverse(Matrix*);Matrix* FUN_00424020(Matrix*,const Matrix*);};struct Update {float value;bool a,b,c,d,e;Update(float f):value(f),a(true),b(false),c(false),d(false),e(false){}};struct Inner {unsigned unk000;unsigned unk004;unsigned unk008;unsigned unk00c;unsigned unk010;float value;};struct Object {unsigned unk000;unsigned unk004;unsigned unk008;Inner* inner;unsigned unk010;unsigned unk014;unsigned unk018;unsigned unk01c;unsigned unk020;unsigned unk024;unsigned unk028;unsigned unk02c;unsigned unk030;Matrix matrix;void FUN_008264c0(Update*);};extern Object* DAT_0107b4bc[12];extern void* DAT_0107b48c[12];extern Matrix DAT_00f72574;
+// pdb: GetGunWobble | GunWobble.obj | fnv360_0822_debug, objrun, medium
+// pdb params: aeWeaponType, afTime, apReturnWobble
 void* FUN_0072a9e0(unsigned index,float value,Matrix* output){if(DAT_0107b4bc[index]&&DAT_0107b48c[index]){if(index){Update initial(DAT_0107b4bc[index]->inner->value);DAT_0107b4bc[index]->FUN_008264c0(&initial);}Matrix saved=DAT_0107b4bc[index]->matrix;Update update(value);DAT_0107b4bc[index]->FUN_008264c0(&update);Matrix* current=&DAT_0107b4bc[index]->matrix;Matrix inverse;if(!saved.NiMatrix3_Inverse(&inverse)){inverse.m[0]=0;inverse.m[3]=0;inverse.m[6]=0;inverse.m[1]=0;inverse.m[4]=0;inverse.m[7]=0;inverse.m[2]=0;inverse.m[5]=0;inverse.m[8]=0;}*output=*inverse.FUN_00424020(&saved,current);return DAT_0107b48c[index];}*output=DAT_00f72574;return 0;}
 }
 }   // namespace f3m_0072a9e0
@@ -48422,6 +48886,8 @@ namespace f3m_00726850 {
 class MobileObject {public:virtual ~MobileObject();virtual void m1();virtual void m2();virtual void m3();virtual void Destroy(int);unsigned unk004;unsigned unk008;unsigned unk00c;unsigned unk010;unsigned unk014;unsigned unk018;void* owner;unsigned unk020;unsigned unk024;unsigned unk028;unsigned unk02c;unsigned unk030;unsigned unk034;unsigned unk038;unsigned unk03c;unsigned unk040;unsigned unk044;unsigned unk048;unsigned unk04c;unsigned unk050;unsigned unk054;unsigned unk058;unsigned unk05c;unsigned unk060;unsigned unk064;unsigned unk068;unsigned unk06c;unsigned unk070;unsigned unk074;unsigned unk078;unsigned unk07c;struct Source {unsigned unk000;unsigned unk004;unsigned unk008;unsigned unk00c;unsigned unk010;unsigned unk014;unsigned unk018;unsigned unk01c;unsigned unk020;unsigned unk024;void* owner;}* source;unsigned mode;unsigned unk088;unsigned unk08c;unsigned unk090;unsigned unk094;unsigned unk098;unsigned unk09c;unsigned unk0a0;unsigned unk0a4;unsigned unk0a8;unsigned unk0ac;unsigned unk0b0;unsigned unk0b4;char u0b8;bool enabled;};
 class ArrowProjectile:public MobileObject {};
 extern MobileObject** DAT_0107c0a8;inline MobileObject* GetObject(unsigned i){return DAT_0107c0a8[i];}extern unsigned DAT_0107c0c4,DAT_0107c0c8;
+// pdb: ArrowProjectile::DeleteAttachedArrows | ArrowProjectile.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pAmmoType, aiCount, apTargetObject, abInstant, abAddedOnly
 void FUN_00726850(void* owner,int maximum,void* source,bool destroy,bool enabledOnly){int count=0;unsigned index=0;for(;count<maximum;++index){if(index>=DAT_0107c0c4)break;ArrowProjectile* p=dynamic_cast<ArrowProjectile*>(GetObject(index));if(p&&(p->source?p->source->owner:0)==source&&p->owner==owner&&(!enabledOnly||p->enabled)){if(destroy)p->Destroy(1);else p->mode=3;++count;}}for(index=DAT_0107c0c8;count<maximum;++index){if(index>=DAT_0107c0c8)break;ArrowProjectile* p=dynamic_cast<ArrowProjectile*>(GetObject(index));if(p&&(p->source?p->source->owner:0)==source&&p->owner==owner&&(!enabledOnly||p->enabled)){p->Destroy(1);++count;}}}
 }   // namespace f3m_00726850
 
@@ -48458,6 +48924,8 @@ struct StandinProcess {
     void FUN_007275e0(void* a2, void* a3, void* a4);
 };
 
+// pdb: BaseProcess::LoadGame | BaseProcess.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aiFlags, aiCurrentFlags, pmob
 void StandinProcess::FUN_007275e0(void* a2, void* a3, void* a4) {
     unsigned short blockSize = 0;
     unsigned int startOffset = 0;
@@ -49364,6 +49832,8 @@ struct Player : Actor {
     bool changed6E7;
 };
 extern Player* DAT_0107a104;
+// pdb: HighProcess::ProcessCannibal | HighProcess.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apActor
 void Actor::FUN_00731640(Actor* other) {
     Prepare278();
     if (!owner40) SetOwner8C(other);
@@ -49549,6 +50019,8 @@ struct BaseProcess {
  void* m_pCachedValues;
  void FUN_00727220(BaseProcess*);
 };
+// pdb: BaseProcess::Copy | BaseProcess.obj | fnv360_0822_retail, uvref, medium
+// pdb params: apProcess
 void BaseProcess::FUN_00727220(BaseProcess* source)
 {
     if (!source)
@@ -50442,6 +50914,8 @@ struct Actor {
     void Actor_EndInterruptPackage(bool);
     bool FUN_00728520(Reference* reference);
 };
+// pdb: Character::InitiateTresPassPackage | Character.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apPack
 bool Actor::FUN_00728520(Reference* reference) {
     if(!blockedF8 && !Is22C(false) && !FUN_006f6ff0() && !FUN_006f7060(false) && !Is438()
         && (!reference || reference->count98<=1)
@@ -50818,6 +51292,8 @@ public:
 };
 }
 
+// pdb: HighProcess::HighCopy | HighProcess.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apProcess
 void ProcessCopyFast::HighProcess::FUN_0073bda0(const HighProcess* source)
 {
     field2AC=source->field2AC;
@@ -51444,6 +51920,8 @@ extern unsigned int DAT_0107c0b8;
 extern unsigned int DAT_0107c0c4;
 extern unsigned int DAT_0107c0c8;
 
+// pdb: ArrowProjectile::DeleteAttachedArrows | ArrowProjectile.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apRef, abInstant
 void FUN_00726d90(MobileObject* owner, bool enable)
 {
     if (!owner || owner->IsProjectile())
@@ -51791,6 +52269,8 @@ struct Wrap_7219e0
     void FUN_007219e0(int a);
 };
 
+// pdb: Actor::SetDesiredTarget | Actor_Magic.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apDesiredTarget
 void Wrap_7219e0::FUN_007219e0(int a)
 {
     Obj_7219e0* o = ((Wrap_7219e0*)((char*)this - 0x20))->obj;
@@ -51964,6 +52444,8 @@ public:
     void FUN_00702d60(LocalObj*);
     void FUN_0072bef0(Obj* source);
 };
+// pdb: HighProcess::ProcessSurface | HighProcess.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apActor
 void Obj::FUN_0072bef0(Obj* source)
 {
     if (!source)
@@ -52010,6 +52492,8 @@ struct Owner {
     void FUN_00723670();
     void FUN_00723a40(Stream* stream);
 };
+// pdb: ActorPackage::LoadGame | ActorPackage.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apLoadGameBuffer
 void Owner::FUN_00723a40(Stream* stream) {
     int zero = 0;
     unsigned int id = zero;
@@ -52216,6 +52700,7 @@ struct Owner {
  Ref* ref;Extra* extra;unsigned int unk08;int unk0c;float value;unsigned int unk14;
  void FUN_00723670();
 };
+// pdb: ActorPackage::Clear | ActorPackage.obj | fnv360_0721_beta, call_seq, medium
 void Owner::FUN_00723670(){
  if(ref){
   if(ref==DAT_0107a104->current)DAT_0107a104->current=0;
@@ -52580,6 +53065,8 @@ int unk34;
 int unk38;
 int unk3c;
 void FUN_00725180(Actor39* actor); };
+// pdb: DetectionTaskData::HandleMobMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apMob
 void Owner::FUN_00725180(Actor39* actor) {
  float chance = (float)unk30 * DAT_01090bac;
  if (!(chance < 5.0f)) chance = 5.0f;
@@ -53133,6 +53620,8 @@ extern unsigned char DAT_0108C3E5;
 extern float DAT_0108CBA0;
 extern double DAT_00DBE1E8;
 
+// pdb: HighProcess::ComputeCanInitiateDialogueWithNPC | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, apTalkToActor
 bool Actor::FUN_00730a80(Actor* param1, Actor* param2)
 {
     if (DAT_0107a104->FUN_0076e0a0() || *(unsigned char*)((char*)DAT_0107a104 + 0x628))
@@ -53674,6 +54163,8 @@ extern Actor_72edf0* DAT_0107a104;
 extern int DAT_00f5e83c;
 extern float DAT_00db38b8;
 
+// pdb: HighProcess::ProcessFollowOneHour | HighProcess.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apActor, afTimeDelta, abInterateIndex
 bool Controller_72edf0::FUN_0072edf0(Target_72edf0* target, int, bool notify)
 {
     State_72edf0* state = GetState();
@@ -53758,6 +54249,7 @@ extern Heap72 DAT_01090a78;
 struct FUN_00725f20{
     virtual ~FUN_00725f20();
     void FUN_00725eb0();
+    // pdb: DetectionTaskData::`scalar deleting destructor' | AITaskManager.obj | fnv360_0822_retail, vtable, medium
     static void operator delete(void* p){n725::DAT_01090a78.FUN_0086ba60(p);}
 };
 FUN_00725f20::~FUN_00725f20(){FUN_00725eb0();}
@@ -53777,6 +54269,8 @@ extern char DAT_0107b0d0[0x1c];
 }
 using namespace n725150;
 
+// pdb: DetectionTaskData::HandleEndMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiThread
 void __stdcall FUN_00725150(int unused)
 {
     n725150::DAT_0107a104->FUN_007794b0();
@@ -53800,6 +54294,8 @@ public:
     int FUN_00729f30(int id, float value, int extra);
 };
 
+// pdb: Creature::TempModActorValue | Creature.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aiWhich, afValue, apAttacker
 int QOwner_729f30::FUN_00729f30(int id, float value, int extra)
 {
     if (((unsigned char)(DAT_01073eb8[id]->flags44 >> 10)) & 1)
@@ -53816,6 +54312,7 @@ struct Base726 {
 
 struct FUN_00726020 : Base726 {
     virtual ~FUN_00726020();
+    // pdb: MovementTaskData::`scalar deleting destructor' | AITaskManager.obj | fnv360_0822_retail, vtable, medium
     static void operator delete(void* p) { ActorAction::DAT_01090a78.FUN_0086ba60(p); }
 };
 
@@ -53836,6 +54333,8 @@ struct Owner729e70 {
     void FUN_00729e70(int index, int unused);
 };
 
+// pdb: Creature::GetActorFloatValue | Creature.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiWhich
 void Owner729e70::FUN_00729e70(int index, int unused) {
     if (static_cast<unsigned char>(DAT_01073eb8[index]->flags >> 10) & 1)
         index = 0x2d;
@@ -54013,6 +54512,8 @@ struct Owner7305a0 {
     FUN_00723fa0* task() { return *(FUN_00723fa0**)((char*)this + 0x418); }
     FUN_00723fa0*& taskRef() { return *(FUN_00723fa0**)((char*)this + 0x418); }
 };
+// pdb: HighProcess::DamageModActorValue | HighProcess.obj | fnv360_0721_beta, caller_sim, low
+// pdb params: apActor, aiWhich, afValue
 void Owner7305a0::FUN_007305a0(int a, int index, float c) {
     FUN_00763c00(a, index, c);
     if (!((unsigned char)(*(volatile unsigned int*)&DAT_01073eb8[index]->flags >> 8) & 1)) {
@@ -54029,6 +54530,8 @@ namespace f3m_00729fe0 {
 struct Item729fe0 { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; unsigned flags; bool Special() const { return (flags>>10)&1; } };
 extern Item729fe0* DAT_01073eb8[];
 struct Q729 { void FUN_006fad30(unsigned index); void FUN_00729fe0(unsigned index); };
+// pdb: Creature::DamageModActorValue | Creature.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aiWhich, aiValue, apAttacker
 void Q729::FUN_00729fe0(unsigned index)
 {
     if (DAT_01073eb8[index]->Special()) index = 0x2d;
@@ -54205,6 +54708,8 @@ struct QVT2 { int unk000; int unk004; int unk008; int unk00c; int unk010; int un
 };
 struct QObj { QVT2* vt; };
 
+// pdb: HighProcess::GuardCallforHelp | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, apCriminal
 void __stdcall FUN_0073ce10(Ref* a, Ref* b) {
   Node* saved;
   int destBase;
@@ -54631,6 +55136,7 @@ public:
     NiPointer<ProcessEmbeddedRef1578> pointer458;
 };
 
+// pdb: HighProcess::HighProcess | HighProcess.obj | fnv360_0822_retail, call_seq, medium
 HighProcess::HighProcess()
 {
     unk2c8 = 0.0f;
@@ -54824,6 +55330,7 @@ public:
 };
 }
 
+// pdb: HighActorCuller::~HighActorCuller | HighActorCuller.obj | fnv360_0822_retail, caller_sim, low
 ActorCullerFast::HighActorCuller::~HighActorCuller()
 {
     third=0;
@@ -54889,6 +55396,7 @@ extern Sync_725a00* DAT_0107b110;
 
 
 
+// pdb: AITaskManager::StartTasksDuringRendering | AITaskManager.obj | fnv360_0822_retail, call_gap, low
 void Owner_725a00::FUN_00725a00()
 {
     if (DAT_0106cd30 != 1)
@@ -54975,6 +55483,8 @@ struct Caster;struct CastTable{void* unk000; void* unk004; void* unk008; void* u
 struct Owner;struct OwnerTable{void* unk000; void* unk004; void* unk008; void* unk00c; void* unk010; void* unk014; void* unk018; void* unk01c; void* unk020; void* unk024; void* unk028; void* unk02c; void* unk030; void* unk034; void* unk038; void* unk03c; void* unk040; void* unk044; void* unk048; void* unk04c; void* unk050; void* unk054; void* unk058; void* unk05c; void* unk060; void* unk064; void* unk068; void* unk06c; void* unk070; void* unk074; void* unk078; void* unk07c; void* unk080; void* unk084; void* unk088; void* unk08c; void* unk090; void* unk094; void* unk098; void* unk09c; void* unk0a0; void* unk0a4; void* unk0a8; void* unk0ac; void* unk0b0; void* unk0b4; void* unk0b8; void* unk0bc; void* unk0c0; void* unk0c4; void* unk0c8; void* unk0cc; void* unk0d0; void* unk0d4; void* unk0d8; void* unk0dc; void* unk0e0; void* unk0e4; void* unk0e8; void* unk0ec; void* unk0f0; void* unk0f4; void* unk0f8; void* unk0fc; void* unk100; void* unk104; void* unk108; void* unk10c; void* unk110; void* unk114; void* unk118; void* unk11c; void* unk120; void* unk124; void* unk128; void* unk12c; void* unk130; void* unk134; void* unk138; void* unk13c; void* unk140; void* unk144; void* unk148; void* unk14c; void* unk150; void* unk154; void* unk158; void* unk15c; void* unk160; void* unk164; void* unk168; void* unk16c; void* unk170; void* unk174; void* unk178;void (__thiscall* remove)(Owner*,Object*,int,int,int,int,int,int,int,int,int);};
 struct Manager{bool FUN_008257f0();};extern Manager* DAT_01079ca4;extern Owner* DAT_0107a104;extern int FUN_00f65460;extern float FUN_00dbcbd0;extern char DAT_00dc0c38[];extern void __cdecl FUN_0061b850(int,int,const char*,int,float);extern void __cdecl Script_SetActionFlag(void*,void*,int);
 struct Owner{OwnerTable* table;int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c;Caster caster;bool FUN_00777d40(void*);void FUN_007212f0(Object*,int,bool);};
+// pdb: Actor::Eat | Actor_Magic.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: apfood, pextra, abNow
 void Owner::FUN_007212f0(Object* object,int count,bool special){if(!object)return;if(object->table->blocked(object)){if(this==DAT_0107a104)FUN_0061b850(FUN_00f65460,0,DAT_00dc0c38,0,FUN_00dbcbd0);return;}if(!DAT_01079ca4->FUN_008257f0()){Script_SetActionFlag(this,(void*)count,2);Script_SetActionFlag(object,&unk040,2);}void* effect=0;if(object->table->effect(object))effect=&object->effectData;if(this==DAT_0107a104 && !special){if(!DAT_0107a104->FUN_00777d40(effect))return;}else{caster.table->apply(&caster,effect);caster.FUN_006aff40(0);if(this==DAT_0107a104)return;}table->remove(this,object,count,1,0,0,0,0,0,1,0);}
 }
 }   // namespace f3m_007212f0
@@ -55016,6 +55526,7 @@ struct Owner {
  Collection collection;float FUN_007288c0();
 };
 }
+// pdb: Character::GetClothingValue | Character.obj | fnv360_0822_retail, call_seq, medium
 float N7288C0::Owner::FUN_007288c0(){
  float result=0;
  List* list=collection.FUN_0040ab00();
@@ -55182,6 +55693,8 @@ struct Owner7234 {
     void* FUN_00722c80(void*);
     bool FUN_00723400(void*);
 };
+// pdb: Actor::RemoveSpell | Actor_Magic.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apSpellIn
 bool Owner7234::FUN_00723400(void* argument) {
     Item7234* item=(Item7234*)argument;
     bool changed=false;
@@ -55227,12 +55740,15 @@ unsigned unk34;
 unsigned unk38;
 unsigned unk3c;
 unsigned unk40;
+// pdb: Creature::ModActorBaseValue | Creature.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiWhich, afValue
 unsigned flags;bool NeedsRemap(){return (flags>>10)&1;}};extern Entry* DAT_01073eb8[];struct Owner{void FUN_006f5450(unsigned,float);void FUN_0072a080(int,float);};void Owner::FUN_0072a080(int id,float value){if(DAT_01073eb8[id]->NeedsRemap())id=45;FUN_006f5450(id,value);} }
 }   // namespace f3m_0072a080
 
 // @f3 0x00724fb0 (community match, verified in this file)
 namespace f3m_00724fb0 {
 namespace Join724f {extern unsigned long (__stdcall* const DAT_00d9b08c)(void*,unsigned long);extern long (__stdcall* const DAT_00d9b064)(long*);struct WaitState{long refs;void* handle;void Join(){DAT_00d9b08c(handle,0xffffffffu);DAT_00d9b064(&refs);}};struct Worker{int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38;WaitState waiter;};extern Worker* DAT_0107b110;}
+// pdb: AITaskManager::WaitForTasksDuringRendering | AITaskManager.obj | fnv360_0822_retail, call_gap_sim, low
 void __fastcall FUN_00724fb0(f3m_00726570::FUN_00726570* owner,void*){if(owner->unk10180){Join724f::DAT_0107b110->waiter.Join();owner->unk10180=0;}}
 }   // namespace f3m_00724fb0
 
@@ -55250,6 +55766,7 @@ struct C73Queue {
 };
 struct C73Methods {void* unk00;void* unk04;void* unk08;void* unk0c;void* unk10;void* unk14;bool (__thiscall* take)(C73Queue*,C73Item*);};
 struct FUN_0073a4d0:C73Queue {~FUN_0073a4d0();};
+// pdb: BSTCommonLLMessageQueue<ActorPathingMessage>::~BSTCommonLLMessageQueue<ActorPathingMessage> | HighProcess.obj | fnv360_0822_retail, call_seq, high
 FUN_0073a4d0::~FUN_0073a4d0() {
     C73Item item;
     long* guard=&lock;
@@ -55267,6 +55784,8 @@ namespace f3m_007313b0 {
 namespace workerB7313b0 {struct Lookup{int FUN_0040ad00(int,int);};struct Hub{int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;int unk3c;Lookup lookup;};struct Sink{void Script_Run(Hub*,int);};
 struct Target{int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;unsigned flags;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;int unk3c;int unk40;int unk44;int unk48;int unk4c;int unk50;int unk54;int unk58;void* first;Sink* sink;void* last;bool Flag(){return (flags>>2)&1;}};
 struct Owner{virtual void slot000();virtual void slot004();virtual void slot008();virtual void slot00c();virtual void slot010();virtual void slot014();virtual void slot018();virtual void slot01c();virtual void slot020();virtual void slot024();virtual void slot028();virtual void slot02c();virtual void slot030();virtual void slot034();virtual void slot038();virtual void slot03c();virtual void slot040();virtual void Apply(Hub*,void*,int,int,int,int);virtual void slot048();virtual void slot04c();virtual void slot050();virtual void slot054();virtual void slot058();virtual void slot05c();virtual void slot060();virtual void slot064();virtual void slot068();virtual void slot06c();virtual void slot070();virtual void slot074();virtual void slot078();virtual void slot07c();virtual void slot080();virtual void slot084();virtual void slot088();virtual void slot08c();virtual void slot090();virtual void slot094();virtual void slot098();virtual void slot09c();virtual void slot0a0();virtual void slot0a4();virtual void slot0a8();virtual void slot0ac();virtual void slot0b0();virtual void slot0b4();virtual void slot0b8();virtual void slot0bc();virtual void slot0c0();virtual void slot0c4();virtual void slot0c8();virtual void slot0cc();virtual void slot0d0();virtual void slot0d4();virtual void slot0d8();virtual void slot0dc();virtual void slot0e0();virtual void slot0e4();virtual void slot0e8();virtual void slot0ec();virtual void slot0f0();virtual void slot0f4();virtual void slot0f8();virtual void slot0fc();virtual void slot100();virtual void slot104();virtual void slot108();virtual void slot10c();virtual void slot110();virtual void slot114();virtual void slot118();virtual void slot11c();virtual void slot120();virtual void slot124();virtual void slot128();virtual void slot12c();virtual void slot130();virtual void slot134();virtual void slot138();virtual void slot13c();virtual void slot140();virtual void slot144();virtual void slot148();virtual void slot14c();virtual void slot150();virtual void slot154();virtual void slot158();virtual void slot15c();virtual void slot160();virtual void slot164();virtual void slot168();virtual void slot16c();virtual void slot170();virtual void slot174();virtual void slot178();virtual void slot17c();virtual void slot180();virtual void slot184();virtual void slot188();virtual void slot18c();virtual void slot190();virtual void slot194();virtual void slot198();virtual void slot19c();virtual void slot1a0();virtual void slot1a4();virtual void slot1a8();virtual void slot1ac();virtual void slot1b0();virtual void slot1b4();virtual void slot1b8();virtual void slot1bc();virtual void slot1c0();virtual void slot1c4();virtual void slot1c8();virtual void slot1cc();virtual void slot1d0();virtual void slot1d4();virtual void slot1d8();virtual void slot1dc();virtual void slot1e0();virtual void slot1e4();virtual void slot1e8();virtual void slot1ec();virtual void slot1f0();virtual void slot1f4();virtual void slot1f8();virtual void slot1fc();virtual void slot200();virtual void slot204();virtual void slot208();virtual void slot20c();virtual void slot210();virtual void slot214();virtual void slot218();virtual void slot21c();virtual void slot220();virtual void slot224();virtual void slot228();virtual void slot22c();virtual void slot230();virtual void slot234();virtual void slot238();virtual void slot23c();virtual void slot240();virtual void slot244();virtual void slot248();virtual void slot24c();virtual void slot250();virtual void slot254();virtual void slot258();virtual void slot25c();virtual void slot260();virtual void slot264();virtual void slot268();virtual void slot26c();virtual void slot270();virtual void slot274();virtual void slot278();virtual void slot27c();virtual void slot280();virtual void slot284();virtual void slot288();virtual void slot28c();virtual void slot290();virtual void slot294();virtual void slot298();virtual void slot29c();virtual void Last(Hub*,void*,int,int,int,int);virtual void slot2a4();virtual void slot2a8();virtual void slot2ac();virtual void slot2b0();virtual void slot2b4();virtual void slot2b8();virtual void slot2bc();virtual void slot2c0();virtual void slot2c4();virtual void slot2c8();virtual void slot2cc();virtual void slot2d0();virtual void slot2d4();virtual void slot2d8();virtual void slot2dc();virtual void slot2e0();virtual void slot2e4();virtual void slot2e8();virtual void slot2ec();virtual void slot2f0();virtual void slot2f4();virtual void slot2f8();virtual void slot2fc();virtual void slot300();virtual void slot304();virtual void slot308();virtual void slot30c();virtual void slot310();virtual void slot314();virtual void slot318();virtual void slot31c();virtual void slot320();virtual void slot324();virtual void slot328();virtual void slot32c();virtual void slot330();virtual void slot334();virtual void slot338();virtual void slot33c();virtual void slot340();virtual void slot344();virtual void slot348();virtual void slot34c();virtual void slot350();virtual void slot354();virtual void slot358();virtual void slot35c();virtual void slot360();virtual void slot364();virtual void slot368();virtual void slot36c();virtual void slot370();virtual void slot374();virtual void slot378();virtual void slot37c();virtual void slot380();virtual void slot384();virtual void slot388();virtual void slot38c();virtual void slot390();virtual void slot394();virtual void slot398();virtual void slot39c();virtual void slot3a0();virtual void slot3a4();virtual void slot3a8();virtual void slot3ac();virtual void slot3b0();virtual void slot3b4();virtual void slot3b8();virtual void slot3bc();virtual void slot3c0();virtual void slot3c4();virtual void slot3c8();virtual void slot3cc();virtual void slot3d0();virtual void slot3d4();virtual void slot3d8();virtual void slot3dc();virtual void slot3e0();virtual void slot3e4();virtual void slot3e8();virtual void slot3ec();virtual void slot3f0();virtual void slot3f4();virtual void slot3f8();virtual void slot3fc();virtual void slot400();virtual void slot404();virtual void slot408();virtual void slot40c();virtual void slot410();virtual void slot414();virtual void slot418();virtual void slot41c();virtual void slot420();virtual void slot424();virtual void slot428();virtual void slot42c();virtual void slot430();virtual void slot434();virtual void slot438();virtual void slot43c();virtual void slot440();virtual void slot444();virtual void slot448();virtual void slot44c();virtual void slot450();virtual void slot454();virtual void slot458();virtual void slot45c();virtual void slot460();virtual void slot464();virtual void slot468();virtual void slot46c();virtual void slot470();virtual void slot474();virtual void slot478();virtual void slot47c();virtual void slot480();virtual void slot484();virtual void slot488();virtual void slot48c();virtual void slot490();virtual void slot494();virtual void slot498();virtual void slot49c();virtual void slot4a0();virtual void slot4a4();virtual void slot4a8();virtual void slot4ac();virtual void slot4b0();virtual void slot4b4();virtual void slot4b8();virtual void slot4bc();virtual void slot4c0();virtual void slot4c4();virtual void slot4c8();virtual void slot4cc();virtual void slot4d0();virtual void slot4d4();virtual void slot4d8();virtual void slot4dc();virtual void slot4e0();virtual void slot4e4();virtual void slot4e8();virtual void slot4ec();virtual void slot4f0();virtual void slot4f4();virtual void slot4f8();virtual void slot4fc();virtual void slot500();virtual void slot504();virtual void slot508();virtual void slot50c();virtual void slot510();virtual void slot514();virtual void slot518();virtual void slot51c();virtual void slot520();virtual void slot524();virtual void slot528();virtual void slot52c();virtual void slot530();virtual void slot534();virtual void slot538();virtual void slot53c();virtual void slot540();virtual void slot544();virtual void slot548();virtual void slot54c();virtual void slot550();virtual void slot554();virtual void slot558();virtual void slot55c();virtual void slot560();virtual void slot564();virtual void slot568();virtual void slot56c();virtual void slot570();virtual void slot574();virtual void slot578();virtual void slot57c();virtual void slot580();virtual void slot584();virtual void Enable(int);void FUN_007313b0(Hub*,Target*);};
+// pdb: HighProcess::PackageDone | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor, apPack
 void Owner::FUN_007313b0(Hub* hub,Target* target){if(target){Sink* sink=target->sink;if(sink)sink->Script_Run(hub,hub->lookup.FUN_0040ad00(0,1));if(target->first){Apply(hub,target->first,2,1,0,1);if(target->Flag())Enable(1);}void* last=target->last;if(last)Last(hub,last,0,0,1,1);}}
 }
 }   // namespace f3m_007313b0
@@ -55354,6 +55873,8 @@ int unk110;
 int unk114;
 unsigned char blocked;unsigned FUN_006f58b0();};
 struct C731Owner {void** methods;int FUN_00731c20(C731Actor*,float,float,float,bool,bool);};
+// pdb: HighProcess::CalculateMoveMode | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, afdistance, afshortdist, aflongdist, balarmcombat, abpuretravel
 int C731Owner::FUN_00731c20(C731Actor* actor,float x,float y,float z,bool b,bool c){
 actor->FUN_006f58b0(); C731State* state=((C731State* (__thiscall*)(C731Owner*))methods[158])(this);
 if(actor->type==5||actor->type==3)return 0;
@@ -55407,6 +55928,8 @@ int unk7c;
 };
 struct C721Caster {virtual ~C721Caster();virtual void slot04();virtual void slot08();virtual void slot0c();virtual void FUN_007216c0(int,int,int);int unk04;int unk08;};
 struct C721Actor:C721Mobile,C721Caster {void FUN_007216c0(int,int,int);};
+// pdb: Actor::TransferDisease | Actor_Magic.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apSpell, apDesiredTarget, abLoadCast
 void C721Actor::FUN_007216c0(int a,int b,int c) {if(handler)handler->Dispatch(this,a,b,c);}
 }   // namespace f3m_007216c0
 
@@ -55920,6 +56443,7 @@ __forceinline Rec* Lookup(Entry* e)
     return 0;
 }
 
+// pdb: Actor::CheckMagicNode | Actor_Magic.obj | fnv360_0822_retail, call_gap, low
 void Actor::FUN_00722f90()
 {
     Target* target = source.GetTarget();
@@ -56013,6 +56537,7 @@ void FUN_005167b0(void);
 void FUN_00516580(void);
 void BGSDestructibleObjectForm_UpdateDestructibleObjects(void);
 
+// pdb: AILinearTaskThreadManager::AIThreadCombined | AILinearTaskThreadManager.obj | fnv360_0721_retail, objrun, medium
 void __cdecl FUN_00724550(void) {
     ((Obj724550*)DAT_0107a0d4)->FUN_006e48f0();
     if (DAT_0107afb4 != 0) {
@@ -56190,6 +56715,7 @@ struct Owner728da0 {
     float FUN_00728da0();
 };
 
+// pdb: Character::GetArmorRating | Character.obj | fnv360_0721_retail, caller_sim, low
 float Owner728da0::FUN_00728da0() {
     int count = 0;
     int ids[20];
@@ -56933,6 +57459,8 @@ struct This {
     float unk440f;
     void FUN_0073a340(Param* p);
 };
+// pdb: HighProcess::ProcessAvoidArea | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 void This::FUN_0073a340(Param* p)
 {
     if (!unk40)
@@ -57163,6 +57691,7 @@ extern unsigned char DAT_0107af89;
 struct Signal { long count; void* handle; };
 struct Worker { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; Signal signal; };
 struct Owner { Worker* workers[2]; int unk08; volatile int completed[2]; void FUN_00724350(); };
+// pdb: AILinearTaskThreadManager::StartThreads | AILinearTaskThreadManager.obj | fnv360_0822_retail, call_gap, low
 void Owner::FUN_00724350() {
  volatile int* current=completed; unsigned int remaining=2; do { *current++=0; } while(--remaining);
  int (__stdcall *release)(void*,long,long*)=ReleaseSemaphore;
@@ -57210,6 +57739,7 @@ void Owner::ActorPackage_FinishLoadGame(void* arg){if(IsFlag())ClearFlag();else 
 
 // @f3 0x00729880 (community match, verified in this file)
 namespace f3m_00729880 {
+// pdb: Character::Reset3D | Character.obj | fnv360_0822_retail, call_seq, medium
 __declspec(thread) void* DAT_0117c248=0;__declspec(thread) void* DAT_0117c24c=0;namespace Batch5Scene{struct Owner;struct Target{void**methods;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int count;int unk02c;int unk030;int unk034;int unk038;int unk03c;int unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;int unk080;int unk084;int unk088;int unk08c;int unk090;int unk094;int unk098;int unk09c;int unk0a0;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4;int unk0d8;int unk0dc;int unk0e0;int unk0e4;int unk0e8;int unk0ec;int unk0f0;int unk0f4;int unk0f8;int unk0fc;int unk100;int unk104;int unk108;int unk10c;int unk110;int unk114;int unk118;int unk11c;int unk120;int unk124;int unk128;int unk12c;int unk130;int unk134;int unk138;int unk13c;int unk140;int unk144;int unk148;int unk14c;int unk150;int unk154;int unk158;int unk15c;int unk160;int unk164;int unk168;int unk16c;int unk170;int unk174;int unk178;int unk17c;int unk180;int unk184;int unk188;int unk18c;int unk190;int unk194;int unk198;int unk19c;int unk1a0;int unk1a4;int unk1a8;int unk1ac;int unk1b0;int unk1b4;int unk1b8;int unk1bc;int unk1c0;int unk1c4;int unk1c8;int unk1cc;int unk1d0;int unk1d4;int unk1d8;int unk1dc;int unk1e0;int unk1e4;int unk1e8;int unk1ec;int unk1f0;int unk1f4;int unk1f8;int unk1fc;int unk200;int unk204;int unk208;int unk20c;int unk210;int unk214;int unk218;int unk21c;int unk220;int unk224;int unk228;int unk22c;int unk230;int unk234;int unk238;int unk23c;int unk240;int unk244;int unk248;int unk24c;int unk250;int unk254;int unk258;int unk25c;int unk260;int unk264;int unk268;int unk26c;int unk270;int unk274;int unk278;int unk27c;int unk280;int unk284;int unk288;int unk28c;int unk290;int unk294;int unk298;int unk29c;int unk2a0;int unk2a4;int unk2a8;int unk2ac;int unk2b0;int unk2b4;int unk2b8;int unk2bc;int unk2c0;int unk2c4;int unk2c8;int unk2cc;int unk2d0;int unk2d4;int unk2d8;int unk2dc;int unk2e0;int unk2e4;int unk2e8;int unk2ec;int unk2f0;int unk2f4;int unk2f8;int unk2fc;int unk300;int unk304;int unk308;int unk30c;int unk310;int unk314;int unk318;int unk31c;int unk320;int unk324;int unk328;int unk32c;int unk330;int unk334;int unk338;int unk33c;int unk340;int unk344;int unk348;int unk34c;int unk350;int unk354;int unk358;int unk35c;int unk360;int unk364;int unk368;int unk36c;int unk370;int unk374;int unk378;int unk37c;int unk380;int unk384;int unk388;int unk38c;int unk390;int unk394;int unk398;int unk39c;int unk3a0;int unk3a4;int unk3a8;int unk3ac;int unk3b0;int unk3b4;int unk3b8;int unk3bc;int unk3c0;int unk3c4;int unk3c8;int unk3cc;int unk3d0;int unk3d4;int unk3d8;int unk3dc;int unk3e0;int unk3e4;int unk3e8;int unk3ec;int unk3f0;int unk3f4;int unk3f8;int unk3fc;int unk400;int unk404;int unk408;int unk40c;int unk410;int unk414;int unk418;float value;};struct Data{int unk000;int unk004;int unk008;int unk00c;int unk010;void*selected;};struct Owner{int unk000;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;int unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;Data*data;Target*target;void*Selected(){if(this==DAT_0117c24c)return DAT_0117c248;Data*p=data;void*r;if(p)r=p->selected;else r=0;return r;}void FUN_00729880();};struct Service{void FUN_006f3280(Owner*);};extern Service*DAT_0107a79c;extern Owner*DAT_0107a104;struct Manager{void**methods;};bool __cdecl FUN_00724400();Manager* __cdecl Interface_GetPipboy();typedef void(__thiscall*ManagerCall)(Manager*);typedef void(__thiscall*TargetCall)(Target*,int);typedef void(__thiscall*SetOwner)(Target*,Owner*);void Owner::FUN_00729880(){void*selected=Selected();if(!selected)return;if(FUN_00724400()){DAT_0107a79c->FUN_006f3280(this);return;}if(this==DAT_0107a104){Manager*m=Interface_GetPipboy();((ManagerCall)m->methods[10])(m);}((TargetCall)target->methods[281])(target,1);((TargetCall)target->methods[281])(target,2);((TargetCall)target->methods[281])(target,4);((TargetCall)target->methods[281])(target,16);((SetOwner)target->methods[280])(target,this);if(this==DAT_0107a104){Manager*m=Interface_GetPipboy();((ManagerCall)m->methods[9])(m);}Target*t=target;if(!t->count)t->value=0.0f;}}
 }   // namespace f3m_00729880
 
@@ -57257,6 +57787,8 @@ int unk7c;
     Target target;
     void FUN_00721590(TESBoundObject* form, int unused);
 };
+// pdb: Actor::CheckEquipWornEnchantment | Actor_Magic.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apObject, apExtra
 void Owner::FUN_00721590(TESBoundObject* form, int unused) {
     if (form->type == 0x18 || form->type == 0x1a) {
         TESEnchantableForm* e = dynamic_cast<TESEnchantableForm*>(form);
@@ -57691,6 +58223,8 @@ struct Owner{
  int unknown2d4;
  float timer;
  void FUN_0072bbc0(Actor*);};}
+// pdb: HighProcess::ProcessSearchforTarget | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 void N72BBC0::Owner::FUN_0072bbc0(Actor* actor){Object* object=0;Object* initial=GetObject();if(!initial)return;if(initial->type==30)object=GetObject();if(!target)SetTarget(actor);actor->FUN_006f6f90(true);timer+=DAT_01090bac;Notify(actor,0x201,true);if(actor->FUN_006f8d70()){SetState(true);Point point;object->FUN_007f0c70(&point,actor);void* item=target->item;if(actor->Actor_SetPathfindingGoal(&point,item,target->FUN_004e8880(),0.0f,0))position=point;}}
 
 
@@ -58200,6 +58734,7 @@ struct Owner72 {
     Actor72* actor;
     bool FUN_00722cc0();
 };
+// pdb: Actor::CheckSummonedActor | Actor_Magic.obj | fnv360_0822_retail, uvref, medium
 bool Owner72::FUN_00722cc0() {
     bool changed=false;
     if (!actor || !actor->Get()) return false;
@@ -58253,6 +58788,7 @@ namespace Concurrency
     }
 }
 
+// pdb: BSTreeNode::GetBillboard | BSTreeNode.obj | fnv360_0822_retail, vtable, medium
 Concurrency::IScheduler* Concurrency::details::SchedulerBase::FUN_0073b160() const
 {
     return *reinterpret_cast<IScheduler* const*>(reinterpret_cast<const char*>(this) + 0xF0);
@@ -58300,6 +58836,8 @@ unsigned int unk40;
 unsigned int low:10;unsigned int remap:1;unsigned int remaining:21;};struct Holder262{Entry262* entry;bool NeedsRemap()const{return entry->remap!=0;}};extern Holder262 DAT_01073eb8[];inline bool NeedsRemap(unsigned int id){return DAT_01073eb8[id].NeedsRemap();}
 
 struct RemapOwner262 { void FUN_006f4f00(unsigned int); void FUN_00729e40(unsigned int id); };
+// pdb: Creature::GetActorValue | Creature.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiWhich
 void RemapOwner262::FUN_00729e40(unsigned int id) { if(DAT_01073eb8[id].NeedsRemap()) id=45; FUN_006f4f00(id); }
 }
 }   // namespace f3m_00729e40
@@ -58319,6 +58857,8 @@ struct Owner {
     void FUN_006fab20(int index, int value, int flags);
     void FUN_00729f00(int index, int value, int flags);
 };
+// pdb: Creature::TempModActorValue | Creature.obj | fnv360_0822_retail, objrun, low
+// pdb params: aiWhich, aiValue, apAttacker
 void Owner::FUN_00729f00(int index, int value, int flags) {
     if (DAT_01073eb8[index]->Redirect()) index = 45;
     FUN_006fab20(index, value, flags);
@@ -58340,6 +58880,7 @@ struct FUN_00725c30 : Base {
     FUN_00c24b70 messages[4096];
     virtual ~FUN_00725c30();
 };
+// pdb: BSTStaticFreeList<MobileObjectMessage,4096>::~BSTStaticFreeList<MobileObjectMessage,4096> | AITaskManager.obj | fnv360_0822_debug, call_seq, medium
 FUN_00725c30::~FUN_00725c30() {}
 }
 }   // namespace f3m_00725c30
@@ -59683,6 +60224,8 @@ float timer;
 
 bool FUN_007507f0(Arg*, bool); void FUN_00756290(Arg*); bool FUN_0072b390(Arg*, bool); };
 
+// pdb: HighProcess::CheckforNewPackage | HighProcess.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apActor, abFlag
 bool Owner::FUN_0072b390(Arg* arg, bool force) {
 
  if (arg->kind()!=0 && arg->kind()!=4 && arg->kind()!=9) return false;
@@ -60011,6 +60554,7 @@ virtual void slot20();
 virtual void slot24();
 virtual bool CanCast(Item*,bool,int*,int);virtual void slot2c();virtual void slot30();virtual Item* GetQueuedItem();
 void FUN_007234e0();};
+// pdb: Actor::StartCast | Actor_Magic.obj | fnv360_0822_retail, vtable, medium
 void Caster::FUN_007234e0(){
  int effect;
  if(!CanCast(GetQueuedItem(),false,&effect,0)){
@@ -60750,6 +61294,8 @@ struct OwnerT {
     void* FUN_0073ded0(RefT* param1, void* param2);
 };
 
+// pdb: HighProcess::CreateWeaponAcquireList | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, aeType
 void* OwnerT::FUN_0073ded0(RefT* param1, void* param2)
 {
     NodeT* node = &list;
@@ -60793,6 +61339,8 @@ struct Actor {virtual void v0();virtual void v4();virtual void v8();virtual void
 struct Setting {unsigned name;float value;float* FUN_00401eb0();};extern Setting DAT_00f61e98;
 float __cdecl FUN_00585810(float,float);
 struct Target {unsigned unk00,unk04,unk08,unk0c;AV values;float FUN_00721720(void*,Item*,Effect*);};
+// pdb: Actor::CheckResistance | Actor_Magic.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCaster, apSpell, apActiveEffect
 float Target::FUN_00721720(void* caster,Item* item,Effect* effect){
 if(!item->effects.FUN_00403250() || effect->Flagged())return 1.0f;
 Alchemy* source=item->GetMagicType()==7 ? (Alchemy*)FUN_00c0050a(item,0,&DAT_00f460a8,&DAT_00f460c0,0):0;
@@ -61545,6 +62093,8 @@ int unk340;
 int unk344;
 int animationState;void FUN_0072b790(Actor*);
 };
+// pdb: HighProcess::RandomlyPlaySpecialIdles | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 void Process::FUN_0072b790(Actor* actor){
  if(!actor->Get3D())return;
  Package* package;Anim* animation;float value;
@@ -62371,6 +62921,8 @@ __forceinline Actor& MagicCaster::ActorOwner() {
 
 }
 
+// pdb: Actor::AddTarget | Actor_Magic.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: PlayerCharacter::SetRefraction)
+// pdb params: apCaster, apSpell, apActiveEffect, abAreaTarget
 bool MagicCaster::FUN_00721af0(MagicCaster* caster,MagicItem* item,CastOrigin* origin,bool allow) {
     if(ActorOwner().FUN_006f7ba0() && item->GetType18()!=4) return false;
     bool result=FUN_006b85b0(caster,item,origin,false);
@@ -63355,6 +63907,8 @@ int unk60;
 Item104* item;
 bool FUN_007527c0(Actor104*);bool FUN_0072f370(Actor104*,int);
 };
+// pdb: HighProcess::ProcessActivateOneHour | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, afTimeDelta
 bool Proc104::FUN_0072f370(Actor104* actor, int unused)
 {
     Package104* pPackage = 0;
@@ -64485,6 +65039,8 @@ extern InteractionActor* DAT_0107a104;
 InteractionPackage* __cdecl FUN_00563cf0(int, int);
 // Advances the interaction process for actor: checks package state, distance and pairing, then approaches, finishes or updates packages accordingly.
 // @fnv 0x008e8600
+// pdb: HighProcess::ProcessDialogueActivate | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 bool InteractionProcess::FUN_0072dac0(InteractionActor* actor)
 {
     InteractionPackage* packageCurrent = GetAssignedPackage();
@@ -65821,6 +66377,8 @@ int unk320;
 bool disabled;
 void FUN_00756470();void FUN_007362e0(Actor63*,const Vec63*,float);
 };
+// pdb: HighProcess::ProcessWander | HighProcess.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apActor, apCenter, afRadius
 void Process63::FUN_007362e0(Actor63* actor, const Vec63* overridePosition, float distanceOverride)
 {
     if (disabled)
@@ -66081,6 +66639,8 @@ static __forceinline float RandomFractionFE()
     unsigned int value=generator->FUN_0086c4b0(-1);
     return (float)((float)value*DAT_00dbb288);
 }
+// pdb: HighProcess::ComputeRandomPoint | HighProcess.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aStartPoint, afMaxRadius, afMinRadius, bRandZ
 VectorFE* FUN_0072c3a0(VectorFE* output,VectorFE center,float rangeA,float rangeB,bool includeZ)
 {
     float r0=RandomFractionFE();
@@ -66108,6 +66668,8 @@ struct Object {virtual void V000();virtual void V004();virtual void V008();virtu
 struct MobileObject {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;int unk3c;int unk40;int unk44;int unk48;int unk4c;int unk50;int unk54;int unk58;int unk5c;Object* object;int unk64;int unk68;int unk6c;int unk70;int unk74;int unk78;int unk7c;};
 struct MagicCaster {void** methods;int unk04,unk08;void FUN_00721690(void*,void*);};
 struct Actor:MobileObject,MagicCaster {};
+// pdb: Actor::CastAbility | Actor_Magic.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apSpell, abLoadCast
 void MagicCaster::FUN_00721690(void* first,void* second){Object* object=reinterpret_cast<Actor*>(reinterpret_cast<char*>(this)-0x80)->object;if(object)object->Forward(reinterpret_cast<Actor*>(reinterpret_cast<char*>(this)-0x80),first,second);}
 }
 }   // namespace f3m_00721690
@@ -66158,6 +66720,7 @@ struct AnimationOwner_L_wrapper {
 
 typedef int (__thiscall *VFunc_t)(void* thisPtr, int arg);
 
+// pdb: Creature::GetWeaponSkill | Creature.obj | fnv360_0822_retail, call_gap_sim, low
 float AnimationOwner_L_wrapper::FUN_00729b80() {
  void* result = FUN_00c0050a(*(void**)((char*)this + 0x1c), 0, &DAT_00f47bbc, &DAT_00f46b08, 0);
  int val;
@@ -66210,6 +66773,8 @@ extern int DAT_0107b344;
 extern Scene* DAT_0107a224;
 bool FUN_00619160();
 
+// pdb: ShakeCamera | CameraShake.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afMult, arPos
 void __cdecl FUN_00727dd0(float strength, Point* source)
 {
     if (!DAT_0107b344 || !(strength > 0.0f))
@@ -67767,6 +68332,8 @@ bool FUN_007527c0(Actor*); void FUN_0072c520(Actor*);
 
 };
 
+// pdb: HighProcess::ProcessBuyObject | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor
 void Process::FUN_0072c520(Actor* actor) {
 
  Control* control=v278();
@@ -68155,6 +68722,8 @@ unsigned int p25c_78;
 };
 // Updates the process's dialogue target from the list, handling actor states, timers and face animation data.
 // @fnv 0x008e26e0
+// pdb: HighProcess::ProcessSleep | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 void ProcessShell::FUN_0073bf90(Actor* actor)
 {
     int unused = ((V27c*)this)->get();
@@ -68397,6 +68966,8 @@ public:
     float Actor_IsPointDeepUnderWater(float value, int index);
     bool FUN_0072b280(Target* other);
 };
+// pdb: HighProcess::CanForceGreet | HighProcess.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apActor
 bool Target::FUN_0072b280(Target* other) {
     volatile float result;
     if (DAT_0108d0a0)
@@ -69448,6 +70019,8 @@ unsigned unk100;
 unsigned unk104;
 int currentProcedure;
 void FUN_0072e5f0(Actor17*);void FUN_0073d7f0(Actor17*);};
+// pdb: HighProcess::ProcessAcquire | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 void Process17::FUN_0073d7f0(Actor17* actor)
 {
     Package17* p = 0;
@@ -70262,6 +70835,8 @@ struct Requirement {
     void FUN_0072bcb0(Actor* actor);
 };
 
+// pdb: HighProcess::ProcessFleeNonCombat | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 void Requirement::FUN_0072bcb0(Actor* actor)
 {
     Base* base = GetBase();
@@ -70640,6 +71215,8 @@ struct Fader739 {
     bool FUN_007392e0(Actor739* a);
 };
 
+// pdb: HighProcess::FadeUpdate | HighProcess.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apActor
 bool Fader739::FUN_007392e0(Actor739* a)
 {
     if (state == 0) {
@@ -72201,6 +72778,8 @@ struct Actor7231 {
     void FUN_006fbe50(float);
     void FUN_00723100(bool);
 };
+// pdb: Actor::UpdateMagic | Actor_Magic.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: abSleeping
 void Actor7231::FUN_00723100(bool force)
 {
     if(Blocked())
@@ -72336,6 +72915,7 @@ struct FUN_007240a0 : Base544 {
     FUN_007240a0();
 };
 
+// pdb: BSLinearTaskThread::BSLinearTaskThread | AILinearTaskThreadManager.obj | fnv360_0822_retail, uvref, high
 FUN_007240a0::FUN_007240a0() {
     flag = false;
 }
@@ -73065,6 +73645,8 @@ unsigned unk0f4;
     void FUN_00728690(Actor* target, unsigned int first, unsigned int third, unsigned int second);
 };
 
+// pdb: Character::InitiateCannibal | Character.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apTarget
 void Actor::FUN_00728690(Actor* target, unsigned int first, unsigned int third, unsigned int second)
 {
     if (IsLocked())
@@ -73779,6 +74361,8 @@ int unkec;
 int unkf0;
 int unkf4;
 bool active; bool IsActive() const {return active;} Activity* MobileObject_GetCurrentPackage(); void FUN_00728f50(Argument*); };
+// pdb: Character::InitiateCannibal | Character.obj | fnv360_0721_beta, objrun, low
+// pdb params: apTarget
 void Owner::FUN_00728f50(Argument* argument) {
     if(IsActive()) return;
     process->Reset(0,this);
@@ -74917,6 +75501,8 @@ unsigned unk2d4;
 float m_fAnimationTimer;
 void FUN_00762170(Ref2102*,int,Ref2102*);void FUN_00756470();bool FUN_007527c0(Ref2102*);void FUN_0073c620(Ref2102*,Ref2102*);};
 
+// pdb: HighProcess::ProcessEat | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, apLocRef
 void ProcessEatProcess008e3140::FUN_0073c620(Ref2102* actor, Ref2102* preferred)
 {
     Package2102* aShared = 0;
@@ -75522,6 +76108,8 @@ struct Self {
     void FUN_0072aeb0(Arg* arg);
 };
 
+// pdb: HighActorCuller::Operate | HighActorCuller.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apMob
 void Self::FUN_0072aeb0(Arg* arg)
 {
     void* x;
@@ -75622,6 +76210,7 @@ extern WobbleMesh* DAT_0107b4bc[12];
 extern char* DAT_0107b48c[12];
 extern bool DAT_00f4882c;
 
+// pdb: InitGunWobble | GunWobble.obj | fnv360_0822_retail, ustr, medium
 void __cdecl FUN_0072a7e0()
 {
     char path[260];
@@ -76231,6 +76820,8 @@ struct TargetObj {
     int unk098;
     SubObj sub;
 };
+// pdb: HighProcess::UpdateRadiation | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor, afDelta
 void Owner730ef0::FUN_00730ef0(TargetObj* target, float delta) {
     TargetObj* r = target;
     if (!r->v215() && !r->v135()) return;
@@ -76268,6 +76859,8 @@ struct Node { int unk00, unk04, unk08; Node* next; };
 struct List { Node* head;
   __forceinline bool Pop(Node** out) { if (head) { *out = head; head = (*out)->next; (*out)->next = 0; return true; } return false; } };
 struct Owner { int unk00; long lock; List list; bool FUN_00725da0(Node** out); };
+// pdb: BSTFreeList<MobileObjectMessage>::Allocate<MobileObjectMessage> | AITaskManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apResult, aP0
 bool Owner::FUN_00725da0(Node** out)
 {
     volatile long* lp = &lock;
@@ -76855,6 +77448,8 @@ virtual void v436();
 virtual void v437();
 virtual void Apply(unsigned char v);
  void FUN_00731080(Subject*, Context*); };
+// pdb: HighProcess::FireAtObject | HighProcess.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apActor, apWeapon
 void Owner::FUN_00731080(Subject* subject, Context* context) {
  bool valid;
  if(!PredC()) return;
@@ -76891,6 +77486,8 @@ struct Actor { void** table; int unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20
 struct World { Cell* TESDataHandler_GetCellFromWorldCoord(float,float,int,int); }; extern World* DAT_0106cdcc; extern float DAT_00dbeb38,DAT_00db5744,DAT_00dc0bc8; extern const char DAT_00e15084[];
 void __cdecl FUN_005f6700(FUN_00601cc0*,Vec*); Actor* FUN_006193c0(); void __cdecl FUN_006195d0(const char*);
 struct Owner { void** table; bool FUN_0072f170(Actor*,int); };
+// pdb: HighProcess::ProcessWanderOneHour | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor, afTimeDelta
 bool Owner::FUN_0072f170(Actor* actor, int unused)
 {
     if (!actor->GetCell())
@@ -77248,6 +77845,8 @@ struct T737140Owner {
     float timer;
     void FUN_00737140(T737140Actor* actor, bool mode);
 };
+// pdb: HighProcess::CreateFollownoEscort | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, abflag
 void T737140Owner::FUN_00737140(T737140Actor* actor, bool mode)
 {
     T737140Effect* src = ((T737140Effect*(__thiscall*)(T737140Owner*))table[0x278/4])(this);
@@ -77356,6 +77955,7 @@ struct Actor {
 };
 }
 void n7224c0::Entry::operator delete(void* p) { DAT_01090a78.FUN_0086ba60(p); }
+// pdb: Actor::PreloadPermanentMagic | Actor_Magic.obj | fnv360_0822_retail, call_gap, low
 void n7224c0::Actor::FUN_007224c0()
 {
     StopAll(&m1c->list);
@@ -77387,6 +77987,8 @@ struct Subject { void** table; int unk4; int unk8; int unkc; int unk10; int unk1
 extern float DAT_00f5f4b4,DAT_00f5f544,DAT_00e150b4; extern Vec DAT_0108ec68;
 Vec __cdecl FUN_007b7bf0(Subject*); Vec __cdecl FUN_007b9e10(Subject*,Item*,int,Resource*,float,bool); Vec __cdecl CombatUtilities_GetTargetFiringLocation(Item*,int); bool __cdecl FUN_007ba460(Subject*,Vec*,float,float); bool __cdecl CombatUtilities_IsTargetWithinStrikeAngle(Subject*,Item*,int);
 struct Owner { int unk0; int unk4; int unk8; int unkc; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8; int unkac; int unkb0; int unkb4; int unkb8; int unkbc; int unkc0; int unkc4; int unkc8; int unkcc; int unkd0; int unkd4; int unkd8; int unkdc; unsigned char unke0; unsigned char used; bool FUN_0072fa30(Subject*,Item*,bool); };
+// pdb: HighProcess::AimAtTarget | HighProcess.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apActor, apTarget, abHighArc
 bool Owner::FUN_0072fa30(Subject* subject, Item* item, bool mode) {
     if(!item) return false;
     Vec position = DAT_0108ec68;
@@ -78057,6 +78659,8 @@ extern Setting72b980 DAT_00f5e940;
 extern __declspec(thread) int tls72b980[0x100];
 int __cdecl FUN_00563cf0(int a, int b);
 
+// pdb: HighProcess::ProcessWarning | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 void FUN_0072b980_Owner::FUN_0072b980(Actor* actor)
 {
     Item* item = GetItem();
@@ -78546,6 +79150,8 @@ struct Actor {
     void FUN_00756290(Package* p);
     void FUN_0072fc10(Package* p);
 };
+// pdb: HighProcess::CleanUpAfterProcessUseWeapon | HighProcess.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apActor
 void Actor::FUN_0072fc10(Package* p)
 {
     Info* info = GetRace()->FUN_005a50b0();
@@ -78587,6 +79193,8 @@ struct bhkSphereRepShape:bhkShape {bhkSphereRepShape(){table=(void**)&boxCounter
 struct bhkConvexShape:bhkSphereRepShape {bhkConvexShape(){table=(void**)&boxCounters73::DAT_00dcdfec;++boxCounters73::DAT_010f3264;}~bhkConvexShape();};
 struct BoxInput73 {float x,y,z;};
 struct bhkBoxShape:bhkConvexShape {bhkBoxShape(const BoxInput73*);~bhkBoxShape();};
+// pdb: bhkBoxShape::bhkBoxShape | HighProcess.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arExt
 bhkBoxShape::bhkBoxShape(const BoxInput73* value){table=(void**)&boxCounters73::DAT_00dce7e4;++boxCounters73::DAT_010f32ec;BoxVector73 scaled(value->x*boxCounters73::DAT_00dbe7c0,value->y*boxCounters73::DAT_00dbe7c0,value->z*boxCounters73::DAT_00dbe7c0);BoxInfo73 info(scaled);((BoxDispatch73*)this)->set(&info);}
 
 // @f3 0x00736e00 (community match, verified in this file)
@@ -80561,6 +81169,8 @@ public:
     void FUN_00703490(float f, int b);
     void FUN_00739b20(Obj739* p1, Obj739* p2, bool p3);
 };
+// pdb: HighProcess::ProcessGuardIdle | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, apData, abAtLoc
 void Obj739::FUN_00739b20(Obj739* p1, Obj739* p2, bool p3)
 {
     Obj739* a = v278();
@@ -81126,6 +81736,8 @@ virtual void slot6f8();
 virtual void slot6fc();
 virtual void v700(Subject*);
  int unk4; int unk8; int unkc; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8; int unkac; int unkb0; int unkb4; int unkb8; int unkbc; int unkc0; int unkc4; int unkc8; int unkcc; int unkd0; int unkd4; int unkd8; int unkdc; int unke0; int unke4; int unke8; int unkec; int unkf0; int unkf4; int unkf8; int unkfc; int unk100; int unk104; int unk108; int unk10c; int unk110; int unk114; int unk118; int unk11c; int unk120; int unk124; int unk128; int unk12c; int unk130; int unk134; int unk138; int unk13c; int unk140; int unk144; int unk148; int unk14c; int unk150; int unk154; int unk158; int unk15c; int unk160; int unk164; int unk168; int unk16c; int unk170; int unk174; int unk178; int unk17c; int unk180; int unk184; int unk188; int unk18c; int unk190; int unk194; int unk198; int unk19c; int unk1a0; int unk1a4; int unk1a8; int unk1ac; int unk1b0; int unk1b4; int unk1b8; int unk1bc; int unk1c0; int unk1c4; int unk1c8; int unk1cc; int unk1d0; int unk1d4; int unk1d8; int unk1dc; int unk1e0; int unk1e4; int unk1e8; int unk1ec; int unk1f0; int unk1f4; int unk1f8; int unk1fc; int unk200; int unk204; int unk208; int unk20c; int unk210; int unk214; int unk218; int unk21c; int unk220; int unk224; int unk228; int unk22c; int unk230; int unk234; int unk238; int unk23c; int unk240; int unk244; int unk248; int unk24c; int unk250; int unk254; int unk258; int unk25c; int unk260; int unk264; int unk268; int unk26c; int unk270; int unk274; int unk278; int unk27c; int unk280; int unk284; int unk288; int unk28c; int unk290; int unk294; int unk298; int unk29c; int unk2a0; int unk2a4; int unk2a8; int unk2ac; int unk2b0; int unk2b4; int unk2b8; int unk2bc; int unk2c0; int unk2c4; int unk2c8; int unk2cc; int unk2d0; int unk2d4; int unk2d8; int unk2dc; int unk2e0; int unk2e4; int unk2e8; int unk2ec; int unk2f0; int unk2f4; int unk2f8; int unk2fc; int unk300; int unk304; int unk308; int unk30c; int unk310; int unk314; int unk318; int unk31c; int unk320; int unk324; int unk328; int unk32c; int unk330; int unk334; int unk338; int unk33c; int unk340; int unk344; Target* pendingIdle348; int unk34c; int unk350; int unk354; int unk358; int unk35c; int unk360; int unk364; int unk368; int unk36c; int unk370; int unk374; int unk378; int unk37c; int unk380; int unk384; int unk388; int unk38c; int unk390; int unk394; int unk398; int unk39c; int unk3a0; int unk3a4; int unk3a8; int unk3ac; int unk3b0; int unk3b4; int unk3b8; int unk3bc; int unk3c0; int unk3c4; int unk3c8; int unk3cc; int unk3d0; int unk3d4; int unk3d8; int unk3dc; int unk3e0; int unk3e4; int unk3e8; int unk3ec; int unk3f0; int unk3f4; int unk3f8; int unk3fc; int unk400; int unk404; int unk408; int unk40c; int unk410; int unk414; int unk418; int unk41c; int unk420; bool FUN_00731cd0(Subject*,Target*,int,bool,bool,bool); };
+// pdb: HighProcess::SetupSpecialIdle | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apMobile, apIdle, aeType, abForce3rd, abChooseNewOne, abTestConditions
 bool Owner::FUN_00731cd0(Subject* subject,Target* target,int mode,bool action,bool required,bool relation) {
  typedef bool (__thiscall *SPred)(Subject*); typedef int (__thiscall *SInt)(Subject*); typedef void* (__thiscall *OQuery)(Owner*);
  Data* data=((Data*(__thiscall*)(Subject*))subject->table[0x1e4/4])(subject);
@@ -82309,6 +82921,8 @@ struct HighProcess
 };
 // Evaluates the current package's target/location, updates or clears the actor's path, and issues movement
 // requests based on arrival, furniture markers and distance (FNV HighProcess::UpdateActorStateWithOptions).
+// pdb: HighProcess::ProcessTravel | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, abNewpackage, abInterateindex, aemovemode, abSecondLoc
 void HighProcess::FUN_0072c840(Actor* subject, bool force, bool update, unsigned int movement, bool location)
 {
     Package* package = 0;
@@ -84171,6 +84785,8 @@ extern FloatSetting DAT_00f5e640;
 
 // Runs the actor's current flee package: checks targets and destinations, issues follow/move requests, and advances
 // package timers.
+// pdb: HighProcess::ProcessFlee | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 void Process::FUN_00732bf0(Actor* actor)
 {
     Package* package38 = 0;
@@ -84460,6 +85076,7 @@ namespace n724 { extern long DAT_0107afd8; }
 
 static inline unsigned int SumA() { unsigned int c = *(volatile unsigned int*)&n724::DAT_0107afd8; c += *(volatile unsigned int*)&f3m_00722f90::DAT_0107afc4; return c; }
 static inline unsigned int SumB() { unsigned int c = *(volatile unsigned int*)f3m_00731760::DAT_0107afcc; c += *(volatile unsigned int*)&f3m_00722f90::DAT_0107afc0; return c; }
+// pdb: AILinearTaskThreadManager::ShouldQueue3DTask | AILinearTaskThreadManager.obj | fnv360_0822_retail, call_seq, medium
 bool __cdecl FUN_00724400()
 {
     bool result = false;
@@ -85672,6 +86289,8 @@ virtual bool CanUse(Actor*, int);
 };
 typedef void (__thiscall *TimerFunction)(Process*, float);
 // @fnv 0x0073f910
+// pdb: HighProcess::ProcessUseItemAt | HighProcess.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: AIProcess::ProcessUseItemAt_High)
+// pdb params: apActor
 bool Process::FUN_0073f910(Actor* actor)
 {
     Package* packageSlot2 = 0;
@@ -86521,6 +87140,8 @@ int unk2a4;
 int unk2a8;
 float unk2ac;
 Task* MobileObject_GetCurrentPackage(); int FUN_006f58b0(); void FUN_00703430(Vec,int); void FUN_006f8ce0(); void FUN_0072e6e0(Obj*); };
+// pdb: HighProcess::ProcessDialogue | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 void Obj::FUN_0072e6e0(Obj* other) {
  Task* const& task=GetTask();
  if(task->unk20!=0x1c) { SetTask(other,-2); return; }
@@ -88119,6 +88740,8 @@ virtual void vfn_644(int aX);
 };
 // Evaluates the current package target and pathing state, updating the actor's movement, cover, and follow behavior based on package type and distance.
 // @fnv 0x008e9640
+// pdb: HighProcess::ProcessActivate | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, abInterateindex
 bool This8e9::FUN_00734b00(Arg8ee* aArg, bool aB)
 {
   if (((Obj8804*)DAT_01075974)->FUN_00617c50(1) > 0.0 || (vfn_4bc() != 4 && vfn_4bc() != 0))
@@ -89022,6 +89645,8 @@ extern S73dd10_Grid* DAT_0106cdcc;
 bool __cdecl FUN_0073cdd0(S73dd10_Actor* actor);
 void __cdecl FUN_004e48e0(int cell, int a, float ra, int b, float rb, bool (__cdecl* filter)(S73dd10_Actor*), S73dd10_Param* param);
 
+// pdb: HighProcess::CallforHelp | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, pCriminal, pcrime
 void __stdcall FUN_0073dd10(S73dd10_Actor* subject, S73dd10_Actor* owner, S73dd10_Param* request)
 {
     S73dd10_Base* base = 0;
@@ -89706,6 +90331,7 @@ struct FUN_00723640_t
 };
 
 
+// pdb: ActorPackage::ActorPackage | ActorPackage.obj | fnv360_0822_retail, call_seq, medium
 FUN_00723640_t* FUN_00723640_t::FUN_00723640()
 {
     unk10 = flt_00db38b8;
@@ -89810,6 +90436,8 @@ public:
     bool FUN_00730160(unsigned char* p);
 };
 
+// pdb: HighProcess::ShouldRunPlayerDetection | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor
 bool Obj_00730160::FUN_00730160(unsigned char* p)
 {
     if (p[0xf8] != 0)
@@ -89827,6 +90455,8 @@ extern CriticalSection_7255a0 g_aiLock0;
 extern CriticalSection_7255a0 g_aiLock1;
 namespace f3m_00725480 {
 
+// pdb: AnimationTaskData::HandleCountMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: uiCount
 void __stdcall FUN_00725480(void* unused)
 {
     EnterCriticalSection(&g_aiLock0);
@@ -89858,6 +90488,7 @@ public:
 
 extern CallTarget_00429640* DAT_0106ca70;
 
+// pdb: FreeCameraShake | CameraShake.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: BSPlayerDistanceCheckController::GetCheckDistance)
 void FUN_00727d60()
 {
     if (DAT_0107b344)
@@ -89895,6 +90526,8 @@ struct Record {
     void FUN_0072b0b0(Stream* stream);
 };
 
+// pdb: DetectionState::SaveGame | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apSaveGameBuffer
 void Record::FUN_0072b0b0(Stream* stream)
 {
     stream->FUN_006e17e0(f00, 0);
@@ -90507,6 +91140,8 @@ struct Owner {
     unsigned char unk110;
     void FUN_00731250(Hub* hub, Target* target);
 };
+// pdb: HighProcess::StartNewPackage | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, apPack
 void Owner::FUN_00731250(Hub* hub, Target* target)
 {
     if (target) {
@@ -90536,6 +91171,7 @@ namespace Scale731a70 {
 struct Vec3 {float x,y,z;};extern Vec3 DAT_01092a50;extern double DAT_00db88e8;
 struct Data {int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c;Vec3 position;};
 struct Object {int unk00,unk04;Data* data;Vec3* FUN_00731a70(Vec3*);};
+// pdb: bhkBoxShape::GetHalfExtents | HighProcess.obj | fnv360_0822_retail, call_seq, medium
 Vec3* Object::FUN_00731a70(Vec3* output){const Vec3* input=this&&data?&data->position:&DAT_01092a50;Vec3 scaled;scaled.x=input->x*DAT_00db88e8;scaled.y=input->y*DAT_00db88e8;scaled.z=input->z*DAT_00db88e8;*output=scaled;return output;}
 }
 }   // namespace f3m_00731a70
@@ -90653,6 +91289,7 @@ struct Object {
  void FUN_0070c750(bool);
  Object* FUN_00729a70();
 };
+// pdb: Creature::Creature | Creature.obj | fnv360_0822_retail, call_gap, medium
 Object* Object::FUN_00729a70() {
  FUN_0070c750(true);
  value=DAT_00db38b8;
@@ -90673,6 +91310,8 @@ Object* Object::FUN_00729a70() {
 namespace f3m_0072f050 {
 namespace Act72f050 {
 struct Item {virtual void v000(); virtual void v004(); virtual void v008(); virtual void v00c(); virtual void v010(); virtual void v014(); virtual void v018(); virtual void v01c(); virtual void v020(); virtual void v024(); virtual void v028(); virtual void v02c(); virtual void v030(); virtual void v034(); virtual void v038(); virtual void v03c(); virtual void v040(); virtual void v044(); virtual void v048(); virtual void v04c(); virtual void v050(); virtual void v054(); virtual void v058(); virtual void v05c(); virtual void v060(); virtual void v064(); virtual void v068(); virtual void v06c(); virtual void v070(); virtual void v074(); virtual void v078(); virtual void v07c(); virtual void v080(); virtual void v084(); virtual void v088(); virtual void v08c(); virtual void v090(); virtual void v094(); virtual void v098(); virtual void v09c(); virtual void v0a0(); virtual void v0a4(); virtual void v0a8(); virtual void v0ac(); virtual void v0b0(); virtual void v0b4(); virtual void v0b8(); virtual void v0bc(); virtual void v0c0(); virtual void v0c4(); virtual void v0c8(); virtual void v0cc(); virtual void v0d0(); virtual void v0d4(); virtual void v0d8(); virtual void v0dc(); virtual void v0e0(); virtual void v0e4(); virtual void v0e8(); virtual void v0ec(); virtual void v0f0(); virtual void v0f4(); virtual void v0f8(); virtual void v0fc(); virtual void v100(); virtual void v104(); virtual void v108(); virtual void v10c(); virtual void v110(); virtual void v114(); virtual void v118(); virtual void v11c(); virtual void v120(); virtual void v124(); virtual void v128(); virtual void v12c(); virtual void v130(); virtual void v134(); virtual void v138(); virtual void v13c(); virtual void v140(); virtual void v144(); virtual void v148(); virtual void v14c(); virtual void v150(); virtual void v154(); virtual void v158(); virtual void v15c(); virtual void v160(); virtual void v164(); virtual void v168(); virtual void v16c(); virtual void v170(); virtual void v174(); virtual void v178(); virtual void v17c(); virtual void v180(); virtual void v184(); virtual void v188(); virtual void v18c(); virtual void v190(); virtual void v194(); virtual void v198(); virtual void v19c(); virtual void v1a0(); virtual void v1a4(); virtual void v1a8(); virtual void v1ac(); virtual void v1b0(); virtual void v1b4(); virtual void v1b8(); virtual void v1bc(); virtual void v1c0(); virtual void v1c4(); virtual void v1c8(); virtual void v1cc(); virtual void v1d0(); virtual void v1d4(); virtual void v1d8(); virtual void v1dc(); virtual void v1e0(); virtual void v1e4(); virtual void v1e8(); virtual void v1ec(); virtual void v1f0(); virtual void v1f4(); virtual void v1f8(); virtual void v1fc(); virtual void v200(); virtual void v204(); virtual void v208(); virtual void v20c(); virtual void v210(); virtual int type();};struct Handle {virtual void v000(); virtual void v004(); virtual void v008(); virtual void v00c(); virtual void v010(); virtual void v014(); virtual void v018(); virtual void v01c(); virtual void v020(); virtual void v024(); virtual void v028(); virtual void v02c(); virtual void v030(); virtual void v034(); virtual void v038(); virtual void v03c(); virtual void v040(); virtual void v044(); virtual void v048(); virtual void v04c(); virtual void v050(); virtual void v054(); virtual void v058(); virtual void v05c(); virtual void v060(); virtual void v064(); virtual void v068(); virtual void v06c(); virtual void v070(); virtual void v074(); virtual void v078(); virtual void v07c(); virtual void v080(); virtual void v084(); virtual void v088(); virtual void v08c(); virtual void v090(); virtual void v094(); virtual void v098(); virtual void v09c(); virtual void v0a0(); virtual void v0a4(); virtual void v0a8(); virtual void v0ac(); virtual void v0b0(); virtual void v0b4(); virtual void v0b8(); virtual void v0bc(); virtual void v0c0(); virtual void v0c4(); virtual void v0c8(); virtual void v0cc(); virtual void v0d0(); virtual void v0d4(); virtual void v0d8(); virtual void v0dc(); virtual void v0e0(); virtual void v0e4(); virtual void v0e8(); virtual void v0ec(); virtual void v0f0(); virtual void v0f4(); virtual void v0f8(); virtual void v0fc(); virtual void v100(); virtual void v104(); virtual void v108(); virtual void v10c(); virtual void v110(); virtual void v114(); virtual void v118(); virtual void v11c(); virtual void v120(); virtual void v124(); virtual void v128(); virtual void v12c(); virtual void v130(); virtual void v134(); virtual void v138(); virtual bool act(Item*,int,float,int);};struct Object {virtual void v000(); virtual void v004(); virtual void v008(); virtual void v00c(); virtual void v010(); virtual void v014(); virtual void v018(); virtual void v01c(); virtual void v020(); virtual void v024(); virtual void v028(); virtual void v02c(); virtual void v030(); virtual void v034(); virtual void v038(); virtual void v03c(); virtual void v040(); virtual void v044(); virtual void v048(); virtual void v04c(); virtual void v050(); virtual void v054(); virtual void v058(); virtual void v05c(); virtual void v060(); virtual void v064(); virtual void v068(); virtual void v06c(); virtual void v070(); virtual void v074(); virtual void v078(); virtual void v07c(); virtual void v080(); virtual void v084(); virtual void v088(); virtual void v08c(); virtual void v090(); virtual void v094(); virtual void v098(); virtual void v09c(); virtual void v0a0(); virtual void v0a4(); virtual void v0a8(); virtual void v0ac(); virtual void v0b0(); virtual void v0b4(); virtual void v0b8(); virtual void v0bc(); virtual void v0c0(); virtual void v0c4(); virtual void v0c8(); virtual void v0cc(); virtual void v0d0(); virtual void v0d4(); virtual void v0d8(); virtual void v0dc(); virtual void v0e0(); virtual void v0e4(); virtual void v0e8(); virtual void v0ec(); virtual void v0f0(); virtual void v0f4(); virtual void v0f8(); virtual void v0fc(); virtual void v100(); virtual void v104(); virtual void v108(); virtual void v10c(); virtual void v110(); virtual void v114(); virtual void notify(int); virtual void v11c(); virtual void v120(); virtual void v124(); virtual void v128(); virtual void v12c(); virtual void v130(); virtual void v134(); virtual void v138(); virtual void v13c(); virtual void v140(); virtual void v144(); virtual void v148(); virtual void v14c(); virtual void v150(); virtual void v154(); virtual void v158(); virtual void v15c(); virtual void v160(); virtual void v164(); virtual void v168(); virtual void v16c(); virtual void v170(); virtual void v174(); virtual void v178(); virtual void v17c(); virtual void v180(); virtual void v184(); virtual void v188(); virtual void v18c(); virtual void v190(); virtual void v194(); virtual void v198(); virtual void v19c(); virtual void v1a0(); virtual void v1a4(); virtual void v1a8(); virtual void v1ac(); virtual void v1b0(); virtual void v1b4(); virtual void v1b8(); virtual void v1bc(); virtual void v1c0(); virtual void v1c4(); virtual void v1c8(); virtual void v1cc(); virtual void v1d0(); virtual void v1d4(); virtual void v1d8(); virtual void v1dc(); virtual void v1e0(); virtual void v1e4(); virtual void v1e8(); virtual void v1ec(); virtual void v1f0(); virtual void v1f4(); virtual void v1f8(); virtual void v1fc(); virtual void v200(); virtual void v204(); virtual void v208(); virtual void v20c(); virtual void v210(); virtual void v214(); virtual void v218(); virtual void v21c(); virtual void v220(); virtual void v224(); virtual void v228(); virtual void v22c(); virtual void v230(); virtual void v234(); virtual void v238(); virtual void v23c(); virtual void v240(); virtual void v244(); virtual void v248(); virtual void v24c(); virtual void v250(); virtual void v254(); virtual void v258(); virtual void v25c(); virtual void v260(); virtual void v264(); virtual void v268(); virtual void v26c(); virtual void v270(); virtual void v274(); virtual Handle* get(); virtual void v27c(); virtual void clear(int); virtual void v284(); virtual void v288(); virtual void v28c(); virtual void set(Item*);bool FUN_0072f050(Item*,int);};
+// pdb: HighProcess::ProcessSleepOneHour | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor, afTimeDelta
 bool Object::FUN_0072f050(Item* item,int){Handle* h=get();if(h){set(item);if(h->act(item,0,-1.0f,0)||item->type()==9)notify(1);else clear(0);}return false;}
 }
 
@@ -90683,6 +91322,8 @@ bool Object::FUN_0072f050(Item* item,int){Handle* h=get();if(h){set(item);if(h->
 namespace f3m_0072f0e0 {
 namespace Act275 {
 struct Item {virtual void v000(); virtual void v004(); virtual void v008(); virtual void v00c(); virtual void v010(); virtual void v014(); virtual void v018(); virtual void v01c(); virtual void v020(); virtual void v024(); virtual void v028(); virtual void v02c(); virtual void v030(); virtual void v034(); virtual void v038(); virtual void v03c(); virtual void v040(); virtual void v044(); virtual void v048(); virtual void v04c(); virtual void v050(); virtual void v054(); virtual void v058(); virtual void v05c(); virtual void v060(); virtual void v064(); virtual void v068(); virtual void v06c(); virtual void v070(); virtual void v074(); virtual void v078(); virtual void v07c(); virtual void v080(); virtual void v084(); virtual void v088(); virtual void v08c(); virtual void v090(); virtual void v094(); virtual void v098(); virtual void v09c(); virtual void v0a0(); virtual void v0a4(); virtual void v0a8(); virtual void v0ac(); virtual void v0b0(); virtual void v0b4(); virtual void v0b8(); virtual void v0bc(); virtual void v0c0(); virtual void v0c4(); virtual void v0c8(); virtual void v0cc(); virtual void v0d0(); virtual void v0d4(); virtual void v0d8(); virtual void v0dc(); virtual void v0e0(); virtual void v0e4(); virtual void v0e8(); virtual void v0ec(); virtual void v0f0(); virtual void v0f4(); virtual void v0f8(); virtual void v0fc(); virtual void v100(); virtual void v104(); virtual void v108(); virtual void v10c(); virtual void v110(); virtual void v114(); virtual void v118(); virtual void v11c(); virtual void v120(); virtual void v124(); virtual void v128(); virtual void v12c(); virtual void v130(); virtual void v134(); virtual void v138(); virtual void v13c(); virtual void v140(); virtual void v144(); virtual void v148(); virtual void v14c(); virtual void v150(); virtual void v154(); virtual void v158(); virtual void v15c(); virtual void v160(); virtual void v164(); virtual void v168(); virtual void v16c(); virtual void v170(); virtual void v174(); virtual void v178(); virtual void v17c(); virtual void v180(); virtual void v184(); virtual void v188(); virtual void v18c(); virtual void v190(); virtual void v194(); virtual void v198(); virtual void v19c(); virtual void v1a0(); virtual void v1a4(); virtual void v1a8(); virtual void v1ac(); virtual void v1b0(); virtual void v1b4(); virtual void v1b8(); virtual void v1bc(); virtual void v1c0(); virtual void v1c4(); virtual void v1c8(); virtual void v1cc(); virtual void v1d0(); virtual void v1d4(); virtual void v1d8(); virtual void v1dc(); virtual void v1e0(); virtual void v1e4(); virtual void v1e8(); virtual void v1ec(); virtual void v1f0(); virtual void v1f4(); virtual void v1f8(); virtual void v1fc(); virtual void v200(); virtual void v204(); virtual void v208(); virtual void v20c(); virtual void v210(); virtual int type();};struct Handle {virtual void v000(); virtual void v004(); virtual void v008(); virtual void v00c(); virtual void v010(); virtual void v014(); virtual void v018(); virtual void v01c(); virtual void v020(); virtual void v024(); virtual void v028(); virtual void v02c(); virtual void v030(); virtual void v034(); virtual void v038(); virtual void v03c(); virtual void v040(); virtual void v044(); virtual void v048(); virtual void v04c(); virtual void v050(); virtual void v054(); virtual void v058(); virtual void v05c(); virtual void v060(); virtual void v064(); virtual void v068(); virtual void v06c(); virtual void v070(); virtual void v074(); virtual void v078(); virtual void v07c(); virtual void v080(); virtual void v084(); virtual void v088(); virtual void v08c(); virtual void v090(); virtual void v094(); virtual void v098(); virtual void v09c(); virtual void v0a0(); virtual void v0a4(); virtual void v0a8(); virtual void v0ac(); virtual void v0b0(); virtual void v0b4(); virtual void v0b8(); virtual void v0bc(); virtual void v0c0(); virtual void v0c4(); virtual void v0c8(); virtual void v0cc(); virtual void v0d0(); virtual void v0d4(); virtual void v0d8(); virtual void v0dc(); virtual void v0e0(); virtual void v0e4(); virtual void v0e8(); virtual void v0ec(); virtual void v0f0(); virtual void v0f4(); virtual void v0f8(); virtual void v0fc(); virtual void v100(); virtual void v104(); virtual void v108(); virtual void v10c(); virtual void v110(); virtual void v114(); virtual void v118(); virtual void v11c(); virtual void v120(); virtual void v124(); virtual void v128(); virtual void v12c(); virtual void v130(); virtual void v134(); virtual void v138(); virtual bool act(Item*,int,float,int);};struct Object {virtual void v000(); virtual void v004(); virtual void v008(); virtual void v00c(); virtual void v010(); virtual void v014(); virtual void v018(); virtual void v01c(); virtual void v020(); virtual void v024(); virtual void v028(); virtual void v02c(); virtual void v030(); virtual void v034(); virtual void v038(); virtual void v03c(); virtual void v040(); virtual void v044(); virtual void v048(); virtual void v04c(); virtual void v050(); virtual void v054(); virtual void v058(); virtual void v05c(); virtual void v060(); virtual void v064(); virtual void v068(); virtual void v06c(); virtual void v070(); virtual void v074(); virtual void v078(); virtual void v07c(); virtual void v080(); virtual void v084(); virtual void v088(); virtual void v08c(); virtual void v090(); virtual void v094(); virtual void v098(); virtual void v09c(); virtual void v0a0(); virtual void v0a4(); virtual void v0a8(); virtual void v0ac(); virtual void v0b0(); virtual void v0b4(); virtual void v0b8(); virtual void v0bc(); virtual void v0c0(); virtual void v0c4(); virtual void v0c8(); virtual void v0cc(); virtual void v0d0(); virtual void v0d4(); virtual void v0d8(); virtual void v0dc(); virtual void v0e0(); virtual void v0e4(); virtual void v0e8(); virtual void v0ec(); virtual void v0f0(); virtual void v0f4(); virtual void v0f8(); virtual void v0fc(); virtual void v100(); virtual void v104(); virtual void v108(); virtual void v10c(); virtual void v110(); virtual void v114(); virtual void notify(int); virtual void v11c(); virtual void v120(); virtual void v124(); virtual void v128(); virtual void v12c(); virtual void v130(); virtual void v134(); virtual void v138(); virtual void v13c(); virtual void v140(); virtual void v144(); virtual void v148(); virtual void v14c(); virtual void v150(); virtual void v154(); virtual void v158(); virtual void v15c(); virtual void v160(); virtual void v164(); virtual void v168(); virtual void v16c(); virtual void v170(); virtual void v174(); virtual void v178(); virtual void v17c(); virtual void v180(); virtual void v184(); virtual void v188(); virtual void v18c(); virtual void v190(); virtual void v194(); virtual void v198(); virtual void v19c(); virtual void v1a0(); virtual void v1a4(); virtual void v1a8(); virtual void v1ac(); virtual void v1b0(); virtual void v1b4(); virtual void v1b8(); virtual void v1bc(); virtual void v1c0(); virtual void v1c4(); virtual void v1c8(); virtual void v1cc(); virtual void v1d0(); virtual void v1d4(); virtual void v1d8(); virtual void v1dc(); virtual void v1e0(); virtual void v1e4(); virtual void v1e8(); virtual void v1ec(); virtual void v1f0(); virtual void v1f4(); virtual void v1f8(); virtual void v1fc(); virtual void v200(); virtual void v204(); virtual void v208(); virtual void v20c(); virtual void v210(); virtual void v214(); virtual void v218(); virtual void v21c(); virtual void v220(); virtual void v224(); virtual void v228(); virtual void v22c(); virtual void v230(); virtual void v234(); virtual void v238(); virtual void v23c(); virtual void v240(); virtual void v244(); virtual void v248(); virtual void v24c(); virtual void v250(); virtual void v254(); virtual void v258(); virtual void v25c(); virtual void v260(); virtual void v264(); virtual void v268(); virtual void v26c(); virtual void v270(); virtual void v274(); virtual Handle* get(); virtual void v27c(); virtual void clear(int); virtual void v284(); virtual void v288(); virtual void v28c(); virtual void set(Item*);bool FUN_0072f0e0(Item*,int);};
+// pdb: HighProcess::ProcessEatOneHour | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor, afTimeDelta
 bool Object::FUN_0072f0e0(Item* item,int){Handle* h=get();if(!h)return false;{set(item);if(h->act(item,0,-1.0f,0)||item->type()==4)notify(1);else {clear(0);return true;}}return false;}
 }
 
@@ -90695,6 +91336,8 @@ namespace f3m_00724f10 {
 namespace Update343 {
 struct Manager{int FUN_0076c8e0();};extern Manager* DAT_0107a104;
 struct Actor{virtual void v000(); virtual void v004(); virtual void v008(); virtual void v00c(); virtual void v010(); virtual void v014(); virtual void v018(); virtual void v01c(); virtual void v020(); virtual void v024(); virtual void v028(); virtual void v02c(); virtual void v030(); virtual void v034(); virtual void v038(); virtual void v03c(); virtual void v040(); virtual void v044(); virtual void v048(); virtual void v04c(); virtual void v050(); virtual void v054(); virtual void v058(); virtual void v05c(); virtual void v060(); virtual void v064(); virtual void v068(); virtual void v06c(); virtual void v070(); virtual void v074(); virtual void v078(); virtual void v07c(); virtual void v080(); virtual void v084(); virtual void v088(); virtual void v08c(); virtual void v090(); virtual void v094(); virtual void v098(); virtual void v09c(); virtual void v0a0(); virtual void v0a4(); virtual void v0a8(); virtual void v0ac(); virtual void v0b0(); virtual void v0b4(); virtual void v0b8(); virtual void v0bc(); virtual void v0c0(); virtual void v0c4(); virtual void v0c8(); virtual void v0cc(); virtual void v0d0(); virtual void v0d4(); virtual void v0d8(); virtual void v0dc(); virtual void v0e0(); virtual void v0e4(); virtual void v0e8(); virtual void v0ec(); virtual void v0f0(); virtual void v0f4(); virtual void v0f8(); virtual void v0fc(); virtual bool isActor();virtual void v104(); virtual void v108(); virtual void v10c(); virtual void v110(); virtual void v114(); virtual void v118(); virtual void v11c(); virtual void v120(); virtual void v124(); virtual void v128(); virtual void v12c(); virtual void v130(); virtual void v134(); virtual void v138(); virtual void v13c(); virtual void v140(); virtual void v144(); virtual void v148(); virtual void v14c(); virtual void v150(); virtual void v154(); virtual void v158(); virtual void v15c(); virtual void v160(); virtual void v164(); virtual void v168(); virtual void v16c(); virtual void v170(); virtual void v174(); virtual void v178(); virtual void v17c(); virtual void v180(); virtual void v184(); virtual void v188(); virtual void v18c(); virtual void v190(); virtual void v194(); virtual void v198(); virtual void v19c(); virtual void v1a0(); virtual void v1a4(); virtual void v1a8(); virtual void v1ac(); virtual void v1b0(); virtual void v1b4(); virtual void v1b8(); virtual void v1bc(); virtual void v1c0(); virtual void v1c4(); virtual void v1c8(); virtual void v1cc(); virtual void v1d0(); virtual void v1d4(); virtual void v1d8(); virtual void v1dc(); virtual void v1e0(); virtual void v1e4(); virtual void v1e8(); virtual void v1ec(); virtual void v1f0(); virtual void v1f4(); virtual void v1f8(); virtual void v1fc(); virtual void v200(); virtual void v204(); virtual void v208(); virtual void v20c(); virtual void v210(); virtual void v214(); virtual void v218(); virtual void v21c(); virtual bool isA();virtual bool isB();virtual void v228(); virtual void v22c(); virtual void v230(); virtual void v234(); virtual void v238(); virtual void v23c(); virtual void v240(); virtual void v244(); virtual void v248(); virtual void v24c(); virtual void v250(); virtual void v254(); virtual void v258(); virtual void v25c(); virtual void v260(); virtual void v264(); virtual void v268(); virtual void v26c(); virtual void v270(); virtual void v274(); virtual void v278(); virtual void v27c(); virtual void v280(); virtual void v284(); virtual void v288(); virtual void v28c(); virtual void v290(); virtual void v294(); virtual void v298(); virtual void v29c(); virtual void v2a0(); virtual void v2a4(); virtual void v2a8(); virtual void v2ac(); virtual void v2b0(); virtual void v2b4(); virtual void v2b8(); virtual void v2bc(); virtual void v2c0(); virtual void v2c4(); virtual void v2c8(); virtual void v2cc(); virtual void v2d0(); virtual void v2d4(); virtual void v2d8(); virtual void v2dc(); virtual void v2e0(); virtual void v2e4(); virtual void v2e8(); virtual void v2ec(); virtual void v2f0(); virtual void v2f4(); virtual void v2f8(); virtual void v2fc(); virtual void v300(); virtual void v304(); virtual void v308(); virtual void v30c(); virtual void v310(); virtual void v314(); virtual void v318(); virtual void v31c(); virtual void v320(); virtual void v324(); virtual void v328(); virtual void v32c(); virtual void v330(); virtual void v334(); virtual void v338(); virtual void v33c(); virtual void v340(); virtual void v344(); virtual void update(float,int);int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8; int unkac; int unkb0; unsigned char enabled;void FUN_007c7600(float);void FUN_007bbb00(float);};
+// pdb: MovementTaskData::HandleMobMessage | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apMob
 struct Owner{int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int count;void FUN_00724f10(Actor*);};void Owner::FUN_00724f10(Actor* a){if(a&&a->isActor()){if(a->enabled){typedef void (__thiscall *Update)(Actor*,float,int);Update& method=*(Update*)(*(char**)a+0x348);method(a,0.0f,DAT_0107a104->FUN_0076c8e0());}}else if(a->isB())a->FUN_007c7600(0.0f);else if(a->isA())a->FUN_007bbb00(0.0f);++count;}
 }
 
@@ -90706,6 +91349,8 @@ namespace Events361 {
 struct Event{int type,a,b;Event():type(2),a(0),b(0){}};
 struct Source{virtual void v0();virtual void v4();virtual void v8();virtual bool next(Event*);};
 struct Owner{virtual void v0();virtual void v4();virtual void v8();virtual void vc();virtual void first(int);virtual void second(int);virtual void finish(int);int unk04,unk08,unk0c,unk10,unk14,unk18;Source source;int unk20,unk24,unk28,unk2c;int current,target;void FUN_00724da0(int);};
+// pdb: MobileObjectTaskletData::RunToCompletion | AITaskManager.obj | fnv360_0822_retail, caller, medium
+// pdb params: aiThread
 void Owner::FUN_00724da0(int value){target=value;Event event;while(source.next(&event)){switch(event.type){case 0:current=event.a;first(event.a);break;case 1:second(event.b);break;case 2:finish(value);return;}}}
 }
 
@@ -90767,6 +91412,8 @@ typedef long (__stdcall *Exchange)(volatile long*,long,long);
 extern Exchange const DAT_00d9b06c;
 struct Node {int unk00,unk04,unk08;Node* next;};
 struct Pool {int unk00;volatile long lock;Node* head;void FUN_00725d60(Node**);};
+// pdb: BSTFreeList<MobileObjectMessage>::DoDeallocate | AITaskManager.obj | fnv360_0822_retail, call_seq, low
+// pdb params: apElem
 void Pool::FUN_00725d60(Node** incoming){volatile long* guard=&lock;Exchange exchange=DAT_00d9b06c;while(exchange(guard,1,0)){} (*incoming)->next=head;head=*incoming;*incoming=0;exchange(guard,0,1);}
 }
 
@@ -90833,6 +91480,7 @@ struct Worker
     int FUN_00726140();
 };
 
+// pdb: AITaskThread::ThreadProc | AITaskManager.obj | fnv360_0822_retail, vtable, medium
 int Worker::FUN_00726140()
 {
     FUN_00726090();
@@ -91432,6 +92080,8 @@ struct Data160 {
     void FUN_0072b160(Stream160* stream);
 };
 
+// pdb: DetectionState::LoadGame | HighProcess.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apLoadGameBuffer
 void Data160::FUN_0072b160(Stream160* stream)
 {
     stream->FUN_006e06d0(&formID);
@@ -92726,6 +93376,8 @@ unsigned int unk624;
 bool flag628; unsigned char unk629,unk62a,unk62b;
 void FUN_0076d210();
 }; extern Player732* DAT_0107a104;
+// pdb: HighProcess::ProcessGreet | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor, apGreetTopic, abForceSub, abStop, abQue, abSayCallBack
 void Owner732::FUN_00732110(Ref732* input,Factory732* factory,int unused,bool mode,bool reuse,bool transition)
 {
     Ref732* actor=input;
@@ -93855,6 +94507,8 @@ extern ProcessLists DAT_0107c0a0;
 
 }
 
+// pdb: Actor::EffectAdded | Actor_Magic.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apEffect
 void MagicCaster::FUN_00722ae0(CastEvent* ev) {
     CastEvent* event = *(CastEvent* volatile*)&ev;
     if(!event || !*(CasterProcess**)((char*)this-0x2c)) return;
@@ -94138,6 +94792,8 @@ __forceinline void* Param::GetNode() {
     if (q) r = q->f14; else r = 0;
     return r;
 }
+// pdb: HighProcess::FinishDying | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 void ThisCls::FUN_00737320(Param* p) {
     bool b = bhkWorld_IsActive(p->GetNode(), 1, 0);
     if (b) {
@@ -94571,6 +95227,8 @@ public:
     bool FUN_00721ed0(Entry* entry, Target* target, Actor* actor, bool* flag);
 };
 
+// pdb: Actor::CheckCastWhenStrikesEnchantment | Actor_Magic.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apWeapon, apTarget, apProjectile, abInsufficientCharge
 bool Owner::FUN_00721ed0(Entry* entry, Target* target, Actor* actor, bool* flag)
 {
     *flag = false;
@@ -96076,6 +96734,8 @@ Stage* __cdecl FUN_0050c4b0(float f);
 bool __cdecl FUN_0061b850(const char* text, int a, const char* icon, const char* sound, float time);
 }
 
+// pdb: Actor::CheckRadiationLevelChange | Actor_Magic.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, aiWhich, afOriginalValue, afDelta, apActorSource
 void FUN_00722d80(N722d80::ActorValueOwner* owner, int actorValue, float oldValue, float delta)
 {
     typedef N722d80::Actor Actor;
@@ -96354,6 +97014,8 @@ extern float DAT_00f5e5cc;   /* value field of a game setting, default 30.0f */
 extern float DAT_00f5e5d8;   /* value field of a game setting, default 5.0f  */
 extern float __cdecl FUN_005829d0(float lo, float hi);
 
+// pdb: HighProcess::ProcessSandBoxDialogue | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, aptalkTarget
 bool Actor::FUN_00730c30(Actor* a, Actor* b)
 {
     if (0 == b || !b->Slot100())
@@ -98942,6 +99604,8 @@ inline Vector4 __cdecl FUN_00468f10(const Point3& in)
 extern bool __cdecl FUN_00424d20(const void* rtti, const void* object);
 extern void __cdecl FUN_004e5e40(Transform& out, const WorldTransform& in);
 
+// pdb: ArrowProjectile::PickSceneGraph | ArrowProjectile.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apObject, aPickFrom, aDirection, afPickLength, abIgnoreHead
 SceneObject* __cdecl FUN_00726970(SceneObject* object, Point3 start, Point3 direction, float* length, bool ignore)
 {
     bool hit = false;
@@ -99113,6 +99777,8 @@ extern float DAT_0107b350;
 extern float DAT_01090bac;
 extern Setting DAT_00f62210;
 
+// pdb: GetCameraShake | CameraShake.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afTime, apReturnShake
 float __cdecl FUN_00727fb0(float value, Matrix* output)
 {
     if (DAT_0107b344 && DAT_0107b34c != 0.0f && DAT_0107b350 != 0.0f) {
@@ -99491,6 +100157,8 @@ struct Manager {
     Item* FUN_0073f410(Actor* a1, int a2, bool a3, int a4, int a5, bool a6, bool a7);
 };
 
+// pdb: HighProcess::InsertIntoDetectionList | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor, aedetect, abLineSight, aiLevel, abWhichList, ab360view, abcombat
 Item* Manager::FUN_0073f410(Actor* a1, int a2, bool a3, int a4, int a5, bool a6, bool a7)
 {
     Item* item = new Item;
@@ -99572,6 +100240,7 @@ struct FUN_00729a50 {
     void FUN_0072a750();
     FUN_00729a50();
 };
+// pdb: CharacterProgression::CharacterProgression | CharacterProgression.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 FUN_00729a50::FUN_00729a50() {
     FUN_0072a750();
 }
@@ -99692,6 +100361,8 @@ struct Owner73f7f0 {
     Node73f7f0* head258;
     void FUN_0073f7f0(void* key, int mode);
 };
+// pdb: HighProcess::RemoveDetectionActor | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor, abWhichList
 void Owner73f7f0::FUN_0073f7f0(void* key, int mode)
 {
     bool again = false;
@@ -99755,6 +100426,7 @@ void Owner73f7f0::FUN_0073f7f0(void* key, int mode)
 
 // @f3 0x007270c0 (community match, verified in this file)
 namespace f3m_007270c0 {
+// pdb: BaseProcess::IsWandering | BaseProcess.obj | fnv360_0721_beta, objrun_open, low
 void __stdcall FUN_007270c0(int p0, int p1, int p2, int p3, int p4, int p5, int p6)
 {
 }
@@ -99762,6 +100434,7 @@ void __stdcall FUN_007270c0(int p0, int p1, int p2, int p3, int p4, int p5, int 
 
 // @f3 0x007270d0 (community match, verified in this file)
 namespace f3m_007270d0 {
+// pdb: BaseProcess::GetProcessedDay | BaseProcess.obj | fnv360_0721_beta, objrun_open, low
 void __stdcall FUN_007270d0(int p0, int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9, int p10)
 {
 }
@@ -99774,6 +100447,7 @@ struct S_0073aec0 {
     int m;
     int FUN_0073aec0();
 };
+// pdb: LowProcess::IsAFollower | HighProcess.obj | fnv360_0822_retail, objrun_open, low
 int S_0073aec0::FUN_0073aec0()
 {
     return m;
@@ -99782,6 +100456,8 @@ int S_0073aec0::FUN_0073aec0()
 
 // @f3 0x00721a40 (community match, verified in this file)
 namespace f3m_00721a40 {
+// pdb: Actor::CheckAbsorb | Actor_Magic.obj | fnv360_0721_beta, objrun_sim, low, conflict (skyrim: MagicTarget::CheckResistance)
+// pdb params: apCaster, apSpell, apActiveEffect, abReducedChance
 bool __stdcall FUN_00721a40(int p0, int p1, int p2, int p3)
 {
     return false;
@@ -99790,6 +100466,8 @@ bool __stdcall FUN_00721a40(int p0, int p1, int p2, int p3)
 
 // @f3 0x00721a50 (community match, verified in this file)
 namespace f3m_00721a50 {
+// pdb: Actor::GetMagicEffectivenessModifier | Actor_Magic.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: abJustArmor, afUseThisFatigue
 float __stdcall FUN_00721a50(int p0, int p1)
 {
     return 1.0f;
@@ -99798,6 +100476,8 @@ float __stdcall FUN_00721a50(int p0, int p1)
 
 // @f3 0x00727190 (community match, verified in this file)
 namespace f3m_00727190 {
+// pdb: BaseProcess::CalculateMoveMode | BaseProcess.obj | fnv360_0721_retail, objrun_open, low
+// pdb params: apActor, distance, afshortdist, aflongdist, balarmcombat, abpuretravel
 bool __stdcall FUN_00727190(int p0, int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9, int p10, int p11, int p12)
 {
     return false;
@@ -99806,6 +100486,7 @@ bool __stdcall FUN_00727190(int p0, int p1, int p2, int p3, int p4, int p5, int 
 
 // @f3 0x007271c0 (community match, verified in this file)
 namespace f3m_007271c0 {
+// pdb: BaseProcess::GetLastAttackHitData | BaseProcess.obj | fnv360_0721_beta, objrun_open, low
 float __stdcall FUN_007271c0(int p0, int p1, int p2)
 {
     return 0.0f;
@@ -99818,6 +100499,7 @@ struct S_0072a3c0 {
     char* m;
     char FUN_0072a3c0();
 };
+// pdb: CharacterProgression::QReadyToLevelUp | FalloutCharacterProgression.obj | fnv360_0822_retail, call_gap, low
 char S_0072a3c0::FUN_0072a3c0()
 {
     return *m;
@@ -99909,6 +100591,8 @@ struct Owner {
     Node* FUN_0073f310(int unused);
 };
 
+// pdb: HighProcess::GetWhoDetectsMe | HighProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor
 Node* Owner::FUN_0073f310(int unused) {
     Node* source = unk258;
     Node* list = new Node;
@@ -100090,6 +100774,8 @@ struct Iter {
     __forceinline Entry* Item() const { return cur->item; }
     __forceinline void Next() { cur = cur->next; }
 };
+// pdb: HighProcess::ReconcileDetectionData | HighProcess.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apActor
 void Owner::FUN_0073f500(Owner* actor)
 {
     Node* n = pending1;
@@ -100925,6 +101611,8 @@ struct ElapsedValue {
       : value(UpdateElapsed(state,delta)) {}
    float get() const { return value; }
 };
+// pdb: HighProcess::ProcessGuardWaitToAttack | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, apData
 void Obj739::FUN_00739f10(Obj739* actor,State739* state) {
  Obj739* target=state->target;
  bool special=false;
@@ -101978,6 +102666,8 @@ void FUN_0074b090(Obj124*);
 void FUN_0074b130(Obj124*);
 // Runs the actor's current AI package: dispatches on its package type, advances timers, and re-evaluates the package when it changes or completes.
 // @fnv 0x008f4020
+// pdb: HighProcess::Update | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apRef, afTimeDelta
 void Obj124::FUN_0073e740(Obj124* ref, float time)
 {
     if (!ref)
@@ -103811,6 +104501,8 @@ inline float FloatAbs(float f)
     return (float)fabs(f);
 }
 
+// pdb: HighProcess::ProcessUseWeapon | HighProcess.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: AIProcess::ProcessUseWeapon_High)
+// pdb params: apActor
 bool Proc737::FUN_00737460(Actor* actor)
 {
     Package* package = v278();
@@ -105483,6 +106175,8 @@ extern const float DAT_00eaad58=0.0f,DAT_00e129e0=8192.0f,DAT_00dbcbd0=2.0f; ext
 extern Setting0073CF DAT_00f5e34c,DAT_00f5e2e0,DAT_00f5e340,DAT_00f60a7c;
 int __cdecl FUN_00580d50(int,int,float,int,int,bool,bool,unsigned char,unsigned,int,bool);
 
+// pdb: HighProcess::RunDetection | HighProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, fnumber
 void Actor0073CF::FUN_0073cf20(Actor0073CF* source,float delta)
 {
  list384.FUN_006c8220(); list38C.FUN_006c8220();
@@ -105912,6 +106606,7 @@ struct Obj {
     void* data;
     void FUN_0072a2e0();
 };
+// pdb: CharacterProgression::DeleteData | FalloutCharacterProgression.obj | fnv360_0822_retail, call_seq, medium
 void Obj::FUN_0072a2e0() {
     if (data) {
         DAT_01090a78.FUN_0086ba60(data);
@@ -105931,6 +106626,7 @@ struct Target {
     ~Target();
     void* FUN_0072a2c0(unsigned int flags);
 };
+// pdb: Creature::`scalar deleting destructor' | Creature.obj | fnv360_0822_retail, vtable_prefix, high
 void* Target::FUN_0072a2c0(unsigned int flags) {
     this->~Target();
     if (flags & 1) {
@@ -106533,6 +107229,7 @@ struct FUN_00726460 {
     Sub174 m_s174;
     ~FUN_00726460();
 };
+// pdb: AITaskManager::~AITaskManager | AITaskManager.obj | fnv360_0822_retail, objrun, medium
 FUN_00726460::~FUN_00726460() {
 }
 }
@@ -106550,6 +107247,8 @@ struct Obj {
     Node* head;
     bool FUN_00726530(Data* out);
 };
+// pdb: BSTCommonLLMessageQueue<MobileObjectMessage>::DoTryPop | AITaskManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aMessage
 bool Obj::FUN_00726530(Data* out) {
     Node* n = head;
     if (n) {

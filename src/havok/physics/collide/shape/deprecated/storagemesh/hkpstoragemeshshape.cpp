@@ -168,6 +168,8 @@ namespace MeshMemory2109 {
 extern unsigned long DAT_010f3170;
 struct Heap {void FUN_008f6d90(void*,unsigned int,int) throw();void* FUN_008f6d30(unsigned int,int) throw();};
 }
+// pdb: hkpStorageMeshShape::hkpStorageMeshShape | hkpStorageMeshShape.obj | fnv360_0822_retail, call_dedup, high
+// pdb params: mesh
 FUN_00d4bab0::FUN_00d4bab0(const FUN_00dcd310& src) throw()
  :FUN_00dcd310(src.m_fSphereRadius,src.m_iNumBitsForSubpartIndex){
  const volatile float* scale=src.m_kScaling.m_vComponents.m128_f32;
@@ -417,6 +419,7 @@ template <> hkArrayD4B4<hkRefD4B4*>::~hkArrayD4B4() throw()
         heap->FUN_008f6d90(m_data,capacity*4,23);
     }
 }
+// pdb: hkpStorageMeshShape::~hkpStorageMeshShape | hkpStorageMeshShape.obj | fnv360_0822_retail, call_seq, high
 FUN_00d4b400::~FUN_00d4b400() throw()
 {
     for(int i=0;i<m_children.m_iElementCount;++i)
@@ -723,6 +726,8 @@ static __declspec(noinline) int FUN_009d6300(int triangles,int indicesPerTriangl
 }
 }
 using namespace storage_mesh_subpart;
+// pdb: hkpStorageMeshShape::addSubpart | hkpStorageMeshShape.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: partIn
 void FUN_00dcd310::FUN_00d4b480(const hkpMeshShapeSubpartD4B& sourceRaw) throw() {
     const TriangleSubpart& source=reinterpret_cast<const TriangleSubpart&>(sourceRaw);
     Array<TriangleSubpart>& parts=*reinterpret_cast<Array<TriangleSubpart>*>(&m_kSubparts);
@@ -916,6 +921,8 @@ class FUN_00d4ba30 : public FUN_00dcd380
 
 // Constructor: calls the base constructor and, if flag.m_bFinishing is set, points each subpart's data fields at the begin of the matching storage arrays.
 // @fnv 0x00d4ba30
+// pdb: hkpStorageMeshShape::hkpStorageMeshShape | hkpStorageMeshShape.obj | fnv360_0822_retail, objrun, high
+// pdb params: flag
 FUN_00d4ba30::FUN_00d4ba30(FinishingFlag flag) : FUN_00dcd380(flag)
 {
     if (flag.m_bFinishing)

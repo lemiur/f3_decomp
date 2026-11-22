@@ -11,6 +11,7 @@ struct FUN_00d08330 {
 };
 
 // @fnv 0x00d08330
+// pdb: `anonymous namespace'::NearestHitCollector::`scalar deleting destructor' | hkpSampledHeightFieldShape.obj | fnv360_0822_retail, vtable, high
 FUN_00d08330::FUN_00d08330(char acFlags)
 {
     m_p = &DAT_010ccf7c;
@@ -307,6 +308,8 @@ struct Real00d08ff0 {
     virtual int Get(Real00d08ff0*, int);
 };
 
+// pdb: Actor::GetSellValuePercentage | Actor.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: PathingStreamScrapMaps::~PathingStreamScrapMaps)
+// pdb params: apActor
 void __stdcall FUN_00d08ff0(FUN_00d08ff0_t* self)
 {
     int r = ((Real00d08ff0*)self)->sub.FUN_005a29a0(0x20);
@@ -321,6 +324,7 @@ struct FUN_00d0a150 {
     FUN_00d0a150(bool b);
 };
 // @fnv 0x00d0a150
+// pdb: hkProcessHandler::`scalar deleting destructor' | hkServerProcessHandler.obj | fnv360_0822_retail, vtable, medium
 FUN_00d0a150::FUN_00d0a150(bool abFree)
 {
     p = &DAT_010ccfac;
@@ -356,6 +360,7 @@ struct FUN_00d0a130 {
     void* __thiscall Set(char b);
 };
 // @fnv 0x00d0a130
+// pdb: hkProcess::`scalar deleting destructor' | hkServerProcessHandler.obj | fnv360_0822_retail, vtable, medium
 void* FUN_00d0a130::Set(char abFree)
 {
     p = &DAT_010ccfa0;

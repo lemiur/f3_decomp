@@ -140,6 +140,7 @@ struct FUN_00d0c6d0_Obj {
     int unk24;
     S_00d0c6d0_Pair* m_pair;
 };
+// pdb: hkLs_toiActivateConstraintsLinkingActivatedEntities | hkpContinuousSimulation.obj | tesv_win, call_gap, low
 void FUN_00d0c6d0(S_00d0c6d0_EntryArray* aEntries, int* aIndex, S_00d0c6d0_ByteArray* table) {
     for (int i = *aIndex; i < aEntries->m_iElementCount; i++) {
         S_00d0c6d0_Pair* pair = ((FUN_00d0c6d0_Obj*)aEntries->m_data[i].m_obj)->m_pair;
@@ -166,6 +167,8 @@ struct S_00d0f2e0
     void* FUN_00d0f2e0(void* a, void* b, void* c);
 };
 // @fnv 0x00d0f2e0
+// pdb: hkpContinuousSimulation::collideEntitiesNarrowPhaseContinuous | hkpContinuousSimulation.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: entities, numEntities, input
 void* S_00d0f2e0::FUN_00d0f2e0(void* a, void* b, void* c)
 {
     return FUN_00cf9480(a, b, c, InitAndDispatch, 0);
@@ -238,6 +241,8 @@ struct ControllerMemberView
     void FUN_0098e4a0(Body** apBodies, int iCount, World* pWorld);
 };
 
+// pdb: hkpContinuousSimulation::reintegrateAndRecollideEntities | hkpContinuousSimulation.obj | fnv360_0822_retail, vtable, high
+// pdb params: entities, numEntities, world, reintegrateRecollideMode
 void Controller::ProcessBodies(Body** bodies, int count, Context* context, int flags)
 {
     ControllerContextView* ctx = (ControllerContextView*)context;
@@ -276,6 +281,7 @@ struct SpawnedObject
 };
 
 // @f3 0x0098c220 (community match, verified in this file)
+// pdb: hkpToiResources::hkpToiResources | hkpContinuousSimulation.obj | fnv360_0822_debug, objrun_open, low
 bool* __cdecl IsLessByUnkD4(bool* result, SpawnedObject* first, SpawnedObject* second) {
     *result = ((unsigned int*)first)[0x30] < ((unsigned int*)second)[0x30];
     return result;
@@ -326,6 +332,8 @@ struct H05Item {
     H05SubItem* volatile sub;
 };
 
+// pdb: hkLs_toiActivateConstraintsLinkingToFixedAndKeyframedEntities | hkpContinuousSimulation.obj | fnv360_0822_retail, objrun, medium
+// pdb params: constraintStatus, firstNonActiveConstraintStatus, numOfConstraintsToCheckAtTheEndOfTheList
 hkBool __cdecl CompareItemPriority(const Item* apItemA, const Item* apItemB)
 {
     const H05SubItem* subA = ((const H05Item*)apItemA)->sub;
@@ -408,6 +416,8 @@ struct D0BD00Controller {
 
 // Adds offset to the first float of every entry in the track referenced by the controller's binding.
 // @fnv 0x00d0bd00
+// pdb: hkpContinuousSimulation::warpTime | hkpContinuousSimulation.obj | fnv360_0822_retail, vtable, medium
+// pdb params: warpDeltaTime
 void D0BD00Controller::OffsetEntries(float offset)
 {
     D0BD00Track* track = m_pBinding->m_pTrack;
@@ -436,6 +446,7 @@ struct FUN_00d0bd30_p {
 
 // Scans arr for the index whose fabs value times scale exceeds a threshold derived from p and tbl, returning that index or -1.
 // @f3 0x0098ce40 (community match, verified in this file)
+// pdb: hkLs_areVelocitiesOk | hkpContinuousSimulation.obj | tesv_win, call_seq, medium
 int __cdecl FUN_00d0bd30(float scale, FUN_00d0bd30_p* pParams, float* pafValues, int aiCount, char** ppTable)
 {
     FUN_00d0bd30_q* q = pParams->m_00;
@@ -547,6 +558,8 @@ public:
 struct ScopeEntryOps4 {
     void FUN_00990390(ScopeEntry* last);
 };
+// pdb: hkpContinuousSimulation::removeCollisionInformationForAgent | hkpContinuousSimulation.obj | fnv360_0822_retail, vtable, medium
+// pdb params: agent
 void FUN_00d0bfc0_cls::RemoveMatchingEntries(ScopeQuery* q)
 {
     int count = m_34 - 1;
@@ -710,6 +723,7 @@ int __cdecl FUN_00a27c00(int a, int b, int c, int d, void* e);
 int __cdecl FUN_0098ce40(float f, Entry* entry, void* out, int a, int b);
 void __cdecl FUN_00901f10(Vec* vec, unsigned int elemSize);
 
+// pdb: hkLs_toiCheckFinalValidityOfCriticalConstraints | hkpContinuousSimulation.obj | tesv_win, call_gap, low
 unsigned char* __cdecl CollectMatchingEntries(unsigned char* pResult, SrcA* pSrc, Vec* pVec, int a4, Vec* dst)
 {
     unsigned int auiBuffer[0x100];
@@ -1198,6 +1212,8 @@ static __forceinline void CopyEventFloat(char* dest,int dstOffset,const char* sr
 {
     *(float*)(dest+dstOffset)=*(const float*)(src+srcOffset);
 }
+// pdb: hkpContinuousSimulation::addToiEvent | hkpContinuousSimulation.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: processOutput, entry
 void S_00d0d150::QueueToiEvent(const S_00d0d150_CollisionOutput& result,const S_00d0d150_AgentNnEntry& entry) throw()
 {
     if (m_kToiEventQueue.m_iElementCount == (m_kToiEventQueue.m_iCapacityState & 0x3fffffff))
@@ -1567,6 +1583,8 @@ void __cdecl FUN_00999610(ThingX* apX, ThingP* apP, ThingS* apS, int aiValue);
 extern float FUN_00de6e60;
 extern double FUN_00de7348;
 
+// pdb: hkpContinuousSimulation::processAgentCollideContinuous | hkpContinuousSimulation.obj | fnv360_0822_retail, objrun_prop, high
+// pdb params: entry, processInput, processOutput
 void FUN_00d0daa0_cls::InitAndDispatch(ThingX* apX, ThingP* apP, ThingS* apS)
 {
     apS->m_blk3000.m_fValue = DAT_0104da48;
@@ -1781,6 +1799,8 @@ void __cdecl hkpSimpleCollisionResponse_solveSingleContact(hkVector4*,float,Para
 void __cdecl hkpWorldCallbackUtil_fireContactImpulseLimitBreached(void*,State*,int);
 }
 // @fnv 0x00d0c480
+// pdb: hkLs_doSimpleCollisionResponse | hkpContinuousSimulation.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: world, event, rotateNormal, toBeActivated
 void __cdecl ProcessCollisionEvent(void* context, CollisionEvent* rawEvent, float deltaTime, CollisionQueue* rawQueue)
 {
  Task2017::Event* event=(Task2017::Event*)rawEvent;Task2017::Queue* queue=(Task2017::Queue*)rawQueue;
@@ -2056,6 +2076,7 @@ struct ArrStubF5 {
 void hkSweptTransformUtil_lerp2(void* pTarget, float fValue, void* pMotion);
 void FUN_00901f10(ArrStubF5* arr, unsigned int size);
 
+// pdb: hkLs_collectAgentEntriesToProcess | hkpContinuousSimulation.obj | tesv_win, call_gap_sim, low
 void CollectUnsaturatedObjects(SrcL* pSource, int level, float fValue, unsigned char** ppFlags, ArrL<ObjL*>* out)
 {
     for (int i = 0; i < ((SrcStubF5*)pSource)->m_iCount; i++)
@@ -2086,10 +2107,13 @@ void CollectUnsaturatedObjects(SrcL* pSource, int level, float fValue, unsigned 
 
 // Empty function body that takes three int arguments and does nothing.
 // @fnv 0x00d0bc50
+// pdb: hkArrayBase<hkMonitorStreamAnalyzer::Node *>::clear | hkStreamStatisticsCollector.obj | fnv360_0822_debug, objrun_open, low
 void __stdcall FUN_00d0bc50(int, int, int) {
 }
 
 // @fnv 0x00d0bcf0
+// pdb: hkpKeyframedRigidMotion::setInertiaLocal | hkpKeyframedRigidMotion.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: inertia
 void __stdcall FUN_00d0bcf0(int a)
 {
 }
@@ -2208,6 +2232,8 @@ struct PairOwnerStandIn
 	int unk24;
 	BodyPairStandIn* m_pair;
 };
+// pdb: hkLs_toiActivateConstraintsLinkingActivatedEntities | hkpContinuousSimulation.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkLs_toiActivateConstraintsLinkingToFixedAndKeyframedEntities)
+// pdb params: constraintStatus, firstNonActiveConstraintStatus, entityState
 void PartitionMotionPairs(PairEntryArray* apEntryArray, int* apiFixedCount, int index)
 {
     for (index = apEntryArray->m_iElementCount - index; index < apEntryArray->m_iElementCount; index++) {
@@ -2825,6 +2851,8 @@ struct CurrentCtx {
 static inline void ReleaseCurrent(CurrentCtx* c) { --c->m_94; if(c->m_94 != 0) return; if(c->m_9c != 0) return; if(c->m_8c) c->FUN_00902550(); }
 namespace ConstraintStep1173 { extern const char DAT_00e7d3e4[], DAT_00e7d3cc[], DAT_00e32798[]; }
 void __cdecl hkpWorldCallbackUtil_fireIslandPostCollideCallback(CurrentCtx*, BodyL*, Param*);
+// pdb: hkpContinuousSimulation::collideInternal | hkpContinuousSimulation.obj | fnv360_0822_retail, vtable, medium
+// pdb params: stepInfoIn
 void __fastcall FUN_00d0ef40(ThisFull* original, void* edx_unused, StepArg arg)
 {
     CurrentThisFull* th = (CurrentThisFull*)original;
@@ -3192,6 +3220,8 @@ struct ThingXEntryArray_00d0c9c0 {
     int      m_iCount;
 };
 
+// pdb: hkpContinuousSimulation::processAgentNnEntries | hkpContinuousSimulation.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: entries, numEntries, collisionInput, island, forceManifoldQualityType
 void __stdcall FUN_00d0c9c0(ThingX** apEntries, int aiCount, ThingP* apP, int aiValue)
 {
     ThingXEntryArray_00d0c9c0* entries = (ThingXEntryArray_00d0c9c0*)apEntries;
@@ -3846,6 +3876,8 @@ static __forceinline void S91_visit(S91_Body* body, S91_Constraint* c, int level
         }
     }
 }
+// pdb: hkLs_toiActivateEntitiesAndCheckConstraints | hkpContinuousSimulation.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: collisionInput, minPriorityToProcess, time, toBeActivated, entityState, newTouchedEntities, newTouchedConstraints
 void FUN_00d0e4b0(World* world, int level, float time, Se4b0_Arr<Se4b0_Body*>* bodies, Se4b0_States* states, Se4b0_Arr<Se4b0_Body*>* outBodies, Se4b0_Arr<ItemObj*>* outItems)
 {
     {
@@ -6227,6 +6259,8 @@ struct RenderParams;
 
 // The function under the unit's declaration of FUN_00d0d3f0: its four parameters are the island's entities, their
 // number, the world and the solver's export flag (the SDK's hkpEntity**, int, hkpWorld* and hkChar*).
+// pdb: hkpContinuousSimulation::collideEntitiesBroadPhaseContinuous | hkpContinuousSimulation.obj | fnv360_0822_retail, strset, low
+// pdb params: entities, numEntities, world, exportFinished
 void __stdcall FUN_00d0d3f0(Source** sources, int count, RenderParams* context, void* marker)
 {
 	using namespace f3m_0098df40;
@@ -8562,6 +8596,7 @@ struct Scene;
 struct DynamicNode;
 struct StateTable;
 template <class T> class List;
+// pdb: hkLs_localizedSolveToi | hkpContinuousSimulation.obj | tesv_win, call_gap_sim, low
 int FUN_00d0f300( const Limits& limits, Resources& resources, PairEvent& pairEvent, ResourceManager& manager, Scene* scene, List<DynamicNode*>& active, StateTable& states, float ) {
 	using namespace hk550;
 	using hk550::hkBool;

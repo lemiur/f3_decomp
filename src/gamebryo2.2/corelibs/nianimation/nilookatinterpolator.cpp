@@ -32,6 +32,7 @@ extern "C" void __cdecl FUN_00a4be20();
 extern "C" void __cdecl __Dummy_00b6fef0(void* p, unsigned int flags);
 
 // @fnv 0x00a4c5c0
+// pdb: PathingSolution::`scalar deleting destructor' | PathingSolution.obj | fnv360_0822_retail, vtable, medium
 void* __thiscall NiLookAtInterpolator::FUN_00a4c5c0(unsigned int flags)
 {
     FUN_00a4be20();
@@ -85,6 +86,8 @@ struct Host_00a4bb80 : NiLookAtInterpolator
     void __thiscall FUN_00a4bb80(CloningProcess&);
 };
 // @fnv 0x00a4bb80
+// pdb: NiLookAtInterpolator::ProcessClone | NiLookAtInterpolator.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCloning
 void __thiscall Host_00a4bb80::FUN_00a4bb80(CloningProcess& kCloning)
 {
     bool bCloned;
@@ -310,6 +313,7 @@ struct Holder : NiLookAtInterpolator
 };
 // Calls the two-float virtual method on each of the three FakeInterp pointers stored at offset 0x38, skipping null entries.
 // @fnv 0x00a4b9f0
+// pdb: NiLookAtInterpolator::Collapse | NiLookAtInterpolator.obj | fnv360_0822_retail, objrun_open, low
 void __thiscall Holder::FUN_00a4b9f0(float afValue1, float afValue2)
 {
     unsigned int ui;
@@ -592,6 +596,8 @@ struct Builder
     BSFadeNode* CreateFadeNode(unsigned int);
 };
 // @fnv 0x00a4c5e0
+// pdb: NiLookAtInterpolator::CreateClone | NiLookAtInterpolator.obj | fnv360_0822_retail, objrun, high
+// pdb params: kCloning
 BSFadeNode* Builder::CreateFadeNode(unsigned int flags)
 {
     BSFadeNode* allocated = static_cast<BSFadeNode*>(BSFadeNode::operator new(0x44));
@@ -676,6 +682,8 @@ struct FUN_00a4c780_cls
 };
 
 // @f3 0x008c66c0 (community match, verified in this file)
+// pdb: NiLookAtInterpolator::GetViewerStrings | NiLookAtInterpolator.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FUN_00a4c780_cls::FUN_00a4c780(Arg_b9286* a)
 {
     FUN_00a570b0(a);
@@ -1234,6 +1242,8 @@ struct LookAt341 : Interpolator341
 };
 // Serializes the LookAt's flags, target link, target name, transform and three interpolator links to the stream.
 // @fnv 0x00a4c700
+// pdb: NiLookAtInterpolator::SaveBinary | NiLookAtInterpolator.obj | fnv360_0721_beta, objrun, medium
+// pdb params: kStream
 void LookAt341::SaveToStream(Stream341* stream)
 {
     FUN_00a724d0(stream);
@@ -1454,6 +1464,8 @@ struct FUN_00a4bcf0 : public NiInterpolator
 };
 
 // @fnv 0x00a4bcf0
+// pdb: NiLookAtInterpolator::NiLookAtInterpolator | NiLookAtInterpolator.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: pkLookAt, eAxis, bFlip
 FUN_00a4bcf0::FUN_00a4bcf0(unsigned int pkLookAt, unsigned int eAxis, bool bFlip)
     : m_uiObjectFlags(0), m_pkLookAt(pkLookAt), m_fScale(DAT_01096b8c)
 {
@@ -1685,6 +1697,8 @@ struct LookAt
 };
 // Computes the look-at transform for a node by calculating world position, orientation toward target, and optional roll/scale, storing the result in output.
 // @fnv 0x00a4bec0
+// pdb: NiLookAtInterpolator::Update | NiLookAtInterpolator.obj | fnv360_0822_retail, uconst, high
+// pdb params: fTime, pkInterpTarget, kValue
 bool LookAt::Update(float time, LookNode* apNode, LookTransform& apTransform)
 {
     if (!target)

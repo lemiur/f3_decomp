@@ -40,6 +40,7 @@ struct FUN_0049ec80_cls
     FUN_0049ec80_child* FUN_0049ec80();
 };
 
+// pdb: TESRegionDataGrass::Copy | TESRegionDataGrass.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 FUN_0049ec80_child* FUN_0049ec80_cls::FUN_0049ec80()
 {
     return new FUN_0049ec80_child(this);
@@ -119,6 +120,8 @@ public:
     void FUN_0049dec0(FUN_0049dec0_Node* n);
 };
 
+// pdb: BSTransCon::RemoveControlledItems | BSBipNode.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apObject
 void FUN_0049dec0_Owner::FUN_0049dec0(FUN_0049dec0_Node* n)
 {
     if (n) {
@@ -153,6 +156,8 @@ extern FUN_0048c360_Obj* DAT_0106f2f8[26];
 
 FUN_0048c360_Obj* __cdecl Tile_GetMenuByClass(int value);
 
+// pdb: InterfaceManager::SetStatsPageNumber | InterfaceManager.obj | fnv360_0822_debug, objopen_prop, low
+// pdb params: acTab
 void __cdecl FUN_0048c360(int param_1, unsigned int param_2) {
     if (param_1 < 0x1a) {
         FUN_0048c360_Obj* entry = DAT_0106f2f8[param_1];
@@ -194,6 +199,7 @@ struct NameOwner_49f1 {
     bool FUN_0049f170();
 };
 
+// pdb: TESRegionDataLandscape::Validate | TESRegionDataLandscape.obj | fnv360_0822_retail, objrun_open, low
 bool NameOwner_49f1::FUN_0049f170()
 {
     if (unk08 && unk08->unk04.Length())
@@ -240,6 +246,8 @@ struct TESRegionDataLandscape : Base_49f6 { // src: F3_EXE vtable 0x00dc3798 (ol
     virtual ~TESRegionDataLandscape();
 };
 
+// pdb: TESRegionDataLandscape::TESRegionDataLandscape | TESRegionDataLandscape.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aData
 TESRegionDataLandscape::TESRegionDataLandscape(const TESRegionDataLandscape& other) : Base_49f6(other)
 {
     unk08 = new NameHolder_49f6();
@@ -313,6 +321,7 @@ public:
     void FUN_0049e730();
 };
 
+// pdb: TESRegion::ClearData | TESRegion.obj | fnv360_0822_retail, vtable, medium
 void OwnerStandIn_49e730::FUN_0049e730()
 {
     if (helper18)
@@ -417,6 +426,8 @@ __declspec(noinline) void ObjectQueue::FUN_004c25a0(const QueueReference& object
     }
 }
 
+// pdb: BSTempEffect::RemoveDecalFromList | BGSDecalNode.obj | fnv360_0822_retail, call_dedup, low, conflict (skyrim: BSTempEffect::RemoveDecal)
+// pdb params: apDecal
 void FUN_0049c400(QueuedObject* object)
 {
     {
@@ -439,6 +450,7 @@ public:
     FUN_00493cf0_StandIn* __thiscall FUN_00493cf0();
 };
 
+// pdb: BSPortal::QMultiBoundRoomLeft | TESWater1.obj | tesv_win, objrun_open, low
 FUN_00493cf0_StandIn* __thiscall FUN_00493cf0_StandIn::FUN_00493cf0() {
     unk00 = 0;
     unk01 = 0;
@@ -454,6 +466,8 @@ FUN_00493cf0_StandIn* __thiscall FUN_00493cf0_StandIn::FUN_00493cf0() {
 struct LipPath { const char* value; };
 void __cdecl FUN_00403a00(LipPath* path, const char* format, ...);
 
+// pdb: LipSynchAnim::ChangeFilenameToLipSynch | LipSynchAnim.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aFilename
 bool FUN_0048c2d0(LipPath* path)
 {
     char buffer[0x104];
@@ -469,6 +483,7 @@ bool FUN_0048c2d0(LipPath* path)
 // @f3 0x0048c7a0 (community match, verified in this file)
 void _fnv_CopyFilePath(char* dst, unsigned int size, const char* src, unsigned int n);
 
+// pdb: BSstrncpy | ExtraDataObjects.obj | tesv_win, caller_sim, low
 void FUN_0048c7a0(char* dst, const char* src, unsigned int n)
 {
     _fnv_CopyFilePath(dst, n + 1, src, n);
@@ -505,6 +520,7 @@ class FUN_0049fb20_Queue
     void FUN_0049fb20();
 };
 
+// pdb: TESRegionDataList::Clear | TESRegionDataList.obj | fnv360_0822_retail, call_seq, medium
 void FUN_0049fb20_Queue::FUN_0049fb20()
 {
     if (FUN_0049fa20())
@@ -545,6 +561,7 @@ struct BufferStandIn48e {
     void FUN_0048ec40();
 };
 
+// pdb: RagDollData::`scalar deleting destructor' | ExtraDataObjects.obj | fnv360_0822_debug, call_seq, high
 void BufferStandIn48e::FUN_0048ec40()
 {
     g_memoryHeap.Free(unk04);
@@ -613,6 +630,7 @@ class MiscStatManager_c6b0
     MiscStatManager_c6b0* FUN_0048c6b0();
 };
 
+// pdb: MiscStatManager::MiscStatManager | MiscStats.obj | fnv360_0822_debug, udata, high
 MiscStatManager_c6b0* MiscStatManager_c6b0::FUN_0048c6b0()
 {
     if (!g_miscStats_c6b0[0]) {
@@ -627,6 +645,7 @@ extern unsigned char DAT_0106fcc4;
 extern unsigned int DAT_0106faf4;
 extern unsigned int DAT_0106fb74;
 
+// pdb: BSRenderer::Resize | BSRenderer.obj | tesv_win, objrun_open, low
 void __cdecl FUN_0048fd60(unsigned int param_1, unsigned int param_2) {
     if (DAT_0106fcc4 == 0) {
         DAT_0106faf4 = param_1;
@@ -762,6 +781,8 @@ struct RefItem496d90
 Entry496d90* __stdcall GetEntry493d50(void* key, RefItem496d90* ref, float value);
 void Notify4ef150(int id);
 
+// pdb: TESWaterSystem::AddTESObjectToWaterGroup | TESWater.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apWaterRef, apObjectRef, afWaterHeight
 void __stdcall FUN_00496d90(void* key, RefItem496d90* ref, float value)
 {
     if (!key && !ref->unk3C)
@@ -821,6 +842,8 @@ struct Typed49FF
     virtual int GetType();
 };
 
+// pdb: TESRegionDataManager::IsRegionDataMap | TESRegionDataManager.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: apData
 Typed49FF* __stdcall FUN_0049ff00(Typed49FF* object)
 {
     if (object && object->GetType() == 4)
@@ -835,6 +858,7 @@ struct Random_1730 {
 
 Random_1730* FUN_0044a2d0();
 
+// pdb: NiSymmetricRandom | Precipitation.obj | fnv360_0822_retail, call_gap_sim, low
 float FUN_00491730()
 {
     Random_1730* random = FUN_0044a2d0();
@@ -851,6 +875,8 @@ public:
     unsigned int size;
     int FUN_0048c740(void* item);
 };
+// pdb: NiFormArray::GetIndexForForm | NiFormArray.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apForm
 int PointerArray::FUN_0048c740(void* item) {
     int result = -1;
     if (item) {
@@ -874,6 +900,8 @@ public:
     unsigned char value;
     bool FUN_0049e960(unsigned char percent);
 };
+// pdb: TESRegionData::SetPriority | TESRegionData.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: Main::GetActive)
+// pdb params: acPriority
 bool PercentValue::FUN_0049e960(unsigned char percent) {
     if (percent <= 100) {
         value = percent;
@@ -889,6 +917,8 @@ public:
     unsigned char type;
     FUN_0049fa40(unsigned char value);
 };
+// pdb: TESRegionDataList::TESRegionDataList | TESRegionDataList.obj | fnv360_0721_beta, call_seq, low
+// pdb params: abOwnsDataMemory
 FUN_0049fa40::FUN_0049fa40(unsigned char value) : first(0), second(0), type(value) {}
 
 // @f3 0x0049dd00 (community match, verified in this file)
@@ -957,6 +987,8 @@ public:
     bool UpdatesProperties() const { return updateProperties != 0; }
     void FUN_0049dd00(unsigned int time, bool propertiesEnabled);
 };
+// pdb: NiAVObject::UpdateObjectControllers | BSBipNode.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: UpdateData, bProperties
 void UpdateOwner::FUN_0049dd00(unsigned int time, bool propertiesEnabled) {
     if (propertiesEnabled && UpdatesProperties()) {
         PropertyNode* node = properties;
@@ -1077,6 +1109,8 @@ public:
     void FUN_006e1830(void* buffer, unsigned int size, bool flag);
 };
 
+// pdb: MiscStatManager::SaveGame | MiscStats.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apSaveGameBuffer
 void FUN_0048c4b0(Writer48c4b0* writer)
 {
     unsigned int count = 0x1A;
@@ -1106,6 +1140,8 @@ public:
     unsigned char percent;
     bool FUN_0049e9b0(const ByteSettings* settings);
 };
+// pdb: TESRegionData::LoadRegionData | TESRegionData.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: apData
 bool SettingsOwner::FUN_0049e9b0(const ByteSettings* settings) {
     if (!settings)
         return false;
@@ -1121,6 +1157,8 @@ namespace Selection211 {
 extern void* DAT_0116efac;
 extern void* DAT_0116efb0;
 }
+// pdb: BSShaderManager::GetShaderLevel | Renderer.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: b2xLevel
 void* FUN_0048f8f0(bool first) {
     if (first)
         return Selection211::DAT_0116efac;
@@ -1135,6 +1173,8 @@ public:
     unsigned int unk08, count;
     void* FUN_0048c780(unsigned int index);
 };
+// pdb: NiFormArray::GetFormAt | NiFormArray.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiIndex
 void* CheckedArray221::FUN_0048c780(unsigned int index) {
     void* result = 0;
     if (index < count)
@@ -1149,6 +1189,7 @@ public:
     unsigned char first, second, value;
     FUN_0049e8b0();
 };
+// pdb: TESRegionData::TESRegionData | TESRegionData.obj | fnv360_0822_retail, call_seq, high
 FUN_0049e8b0::FUN_0049e8b0() {
     first = 0;
     value = 0x32;
@@ -1162,6 +1203,8 @@ struct FUN_0048b9f0_Obj {
     int unk04;
     float FUN_0048b9f0();
 };
+// pdb: BSSoundHandle::PlayAfter | BSSoundHandle.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: aiDelay, aiPlayFlags
 float FUN_0048b9f0_Obj::FUN_0048b9f0() {
     volatile float r;
     if (unk04 < 0) r = (float)(-unk04) * FUN_00dc0cf8;
@@ -1181,6 +1224,7 @@ struct FUN_0048ec10_Obj {
     int unk10;
     FUN_0048ec10_Obj* FUN_0048ec10();
 };
+// pdb: RagDollData::RagDollData | RagDollData.obj | fnv360_0822_retail, call_seq, medium
 FUN_0048ec10_Obj* FUN_0048ec10_Obj::FUN_0048ec10()
 {
     FUN_0048ec10_Obj* self = this;
@@ -1202,6 +1246,7 @@ struct FUN_0049e290_Owner {
     FUN_0049e290_Node* unk164;
 };
 extern FUN_0049e290_Owner* DAT_0106cdcc;
+// pdb: TESRegion::GetSaveSize | TESRegion.obj | fnv360_0822_retail, call_gap, medium
 int FUN_0049e290()
 {
     int count = 0;
@@ -1497,6 +1542,7 @@ struct List {
 struct Owner { List* list; unsigned value; void* form; void FUN_004804f0();
  __forceinline void LoadNode(Node* node) { node->FUN_00414660(0,0,0); list->FUN_0061c430(&node); }
 };
+// pdb: ItemChange::LoadGame | InventoryChanges.obj | fnv360_0822_retail, call_gap_sim, low
 void Owner::FUN_004804f0() {
  unsigned short size=0;
  unsigned start=0;
@@ -1541,6 +1587,7 @@ void Owner::FUN_004804f0() {
 void __cdecl FUN_00b0dfd0(int a, int b);
 extern int DAT_01175aa0;
 
+// pdb: NiNode::QPreProcessedNode | BSCullingProcess.obj | fnv360_0822_debug, objrun_open, low
 void __cdecl FUN_00493270(int a1)
 {
     DAT_01175aa0 -= a1;
@@ -1554,6 +1601,7 @@ public:
     CountNode234* next;
     unsigned int FUN_0049fa20() const;
 };
+// pdb: VATS::GetCount | VATS.obj | fnv360_0822_retail, call_seq, low
 unsigned int CountNode234::FUN_0049fa20() const {
     unsigned int count = 0;
     for (const CountNode234* node = this; node; node = node->next)
@@ -1583,6 +1631,7 @@ struct IconComponent238 {
     void FUN_0049e910();
     void FUN_0049eff0();
 };
+// pdb: TESRegionDataLandscape::Save | TESRegionDataLandscape.obj | fnv360_0822_retail, caller_sim, medium
 void IconComponent238::FUN_0049eff0() {
     FUN_0049e910();
     writer->FUN_0045b8e0(0x4E4F4349);
@@ -1644,6 +1693,8 @@ struct Owner246 {
     void FUN_008ab870(unsigned int first, unsigned int data, unsigned int second);
     void FUN_0049cf90(unsigned int first, unsigned int second);
 };
+// pdb: BSAnimGroupSequence::ResolveTransformInterpolators | BSAnimGroupSequence.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apNode, aiTransformControllerCount
 void Owner246::FUN_0049cf90(unsigned int first, unsigned int second) {
     unsigned int value = data->value78;
     FUN_008ab870(first, value, second);
@@ -1651,6 +1702,7 @@ void Owner246::FUN_0049cf90(unsigned int first, unsigned int second) {
 
 // @f3 0x00493010 (community match, verified in this file)
 double __cdecl FUN_00c03f30(double value);
+// pdb: BSSimpleArray<float,1024>::GetLast | Tile.obj | fnv360_0822_debug, callee_sim, low
 float __cdecl FUN_00493010(float value) {
     return static_cast<float>(FUN_00c03f30(value));
 }
@@ -1692,6 +1744,7 @@ struct Version269 {
     unsigned char version;
 };
 namespace VersionSize269 { extern Version269* DAT_01079ca4; }
+// pdb: BSAnimGroupSequence::GetSequenceSaveSize | BSAnimGroupSequence.obj | fnv360_0822_retail, call_seq, medium
 unsigned int __cdecl FUN_0049cb90() {
     unsigned int size = 8;
     if (VersionSize269::DAT_01079ca4->version < 0x71) size = 12;
@@ -1713,6 +1766,8 @@ struct Owner276 {
     Item276* item;
     bool FUN_0049faa0();
 };
+// pdb: BSSimpleList<TESRegionData *>::IsInList | TESRegionDataList.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: item
 bool Owner276::FUN_0049faa0() {
     if (this) {
         bool result;
@@ -1739,6 +1794,8 @@ void __cdecl FUN_004932b0(unsigned int count) {
 // @f3 0x0048f950 (community match, verified in this file)
 extern "C" char* __cdecl strcpy(char* destination, const char* source);
 namespace Text307 { extern char DAT_0106f500[]; }
+// pdb: Renderer::SetErrorString | Renderer.obj | fnv360_0822_debug, callee_sim, low, conflict (skyrim: BSRenderer::SetErrorString)
+// pdb params: apReason
 void __cdecl FUN_0048f950(const char* text) {
     Text307::DAT_0106f500[0] = 0;
     if (text) strcpy(Text307::DAT_0106f500, text);
@@ -1753,6 +1810,8 @@ public:
     unsigned char third;
     FUN_0049e8d0(const FUN_0049e8d0& other);
 };
+// pdb: TESRegionData::TESRegionData | TESRegionData.obj | fnv360_0822_retail, call_seq, high
+// pdb params: aData
 FUN_0049e8d0::FUN_0049e8d0(const FUN_0049e8d0& other) {
     first = other.first;
     third = other.third;
@@ -1766,6 +1825,8 @@ struct Object309 {
     virtual void Slot08() = 0;
     virtual unsigned int GetType() = 0;
 };
+// pdb: TESRegionDataManager::IsRegionDataObjects | TESRegionDataManager.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: apData
 Object309* __stdcall FUN_0049fea0(Object309* object) {
     if (object && object->GetType() == 2) return object;
     return 0;
@@ -1778,6 +1839,8 @@ struct Object310 {
     virtual void Slot08() = 0;
     virtual unsigned int GetType() = 0;
 };
+// pdb: TESRegionDataManager::IsRegionDataWeather | TESRegionDataManager.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: apData
 Object310* __stdcall FUN_0049fed0(Object310* object) {
     if (object && object->GetType() == 3) return object;
     return 0;
@@ -1790,6 +1853,8 @@ struct Object311 {
     virtual void Slot08() = 0;
     virtual unsigned int GetType() = 0;
 };
+// pdb: TESRegionDataManager::IsRegionDataLandscape | TESRegionDataManager.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: apData
 Object311* __stdcall FUN_0049ff30(Object311* object) {
     if (object && object->GetType() == 5) return object;
     return 0;
@@ -1802,6 +1867,8 @@ struct Object312 {
     virtual void Slot08() = 0;
     virtual unsigned int GetType() = 0;
 };
+// pdb: TESRegionDataManager::IsRegionDataGrass | TESRegionDataManager.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: apData
 Object312* __stdcall FUN_0049ff60(Object312* object) {
     if (object && object->GetType() == 6) return object;
     return 0;
@@ -1814,6 +1881,8 @@ struct Object313 {
     virtual void Slot08() = 0;
     virtual unsigned int GetType() = 0;
 };
+// pdb: TESRegionDataManager::IsRegionDataSound | TESRegionDataManager.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: apData
 Object313* __stdcall FUN_0049ff90(Object313* object) {
     if (object && object->GetType() == 7) return object;
     return 0;
@@ -1834,6 +1903,7 @@ struct Cls_0049cb60 {
     void FUN_0049cb60();
 };
 
+// pdb: BSAnimGroupSequence::ClearBlendInterp | BSAnimGroupSequence.obj | fnv360_0822_retail, call_gap_sim, low
 void Cls_0049cb60::FUN_0049cb60() {
     for (unsigned int i = 0; i < count; i++) {
         items[i].m_8 = 0;
@@ -1889,6 +1959,7 @@ extern unsigned char DAT_0106fcf4;
 extern GlobalOwner322* DAT_0106fd24;
 extern unsigned int DAT_0106fce8;
 }
+// pdb: ScreenSplatter::Clear | ScreenSplatter.obj | fnv360_0822_retail, callee_sim, low
 void __cdecl FUN_00491eb0() {
     if (State322::DAT_0106fcf4) {
         State322::DAT_0106fd24->component.FUN_00aaab30();
@@ -1925,6 +1996,8 @@ void __cdecl FUN_00492fe0() {
 }
 
 // @f3 0x0048c480 (community match, verified in this file)
+// pdb: MiscStatManager::GetAll | MiscStats.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: ExtraTextDisplayData::ReplaceQuestTagsInString)
+// pdb params: apValues
 void __cdecl FUN_0048c480(int* output) {
     for (int i = 0; i < 26; ++i) output[i] = DAT_0106f2f8[i]->unk04;
 }
@@ -1953,6 +2026,8 @@ struct Owner355 {
     float FUN_008aa930(float value, unsigned int mode);
     float FUN_0049cac0(float value);
 };
+// pdb: BSAnimGroupSequence::GetScaledTime | BSAnimGroupSequence.obj | fnv360_0822_retail, caller, medium
+// pdb params: afTime
 float Owner355::FUN_0049cac0(float value) {
     switch (kind) {
     case 1:
@@ -2124,6 +2199,8 @@ struct Arr48f6d0 {
     void FUN_0048f6d0(Param48f6d0* param);
     void FUN_0048f070(Value48f6d0* value, int* flag, int mode);
 };
+// pdb: RagDollData::CreateRagDollBoneArray | RagDollData.obj | fnv360_0721_beta, call_seq, low, conflict (skyrim: BSVisit::TraverseScenegraphAVObjects<struct `anonymous namespace'::ResetCollision>)
+// pdb params: apRef
 void Arr48f6d0::FUN_0048f6d0(Param48f6d0* param)
 {
     m_count = 0;
@@ -2355,6 +2432,8 @@ struct FUN_0048f3c0_Obj {
     Point48f3c0 angle;
     void FUN_0048f3c0(Ref48f3c0* ref);
 };
+// pdb: RagDollData::UpdateBip01NodeFromRagdollData | RagDollData.obj | fnv360_0822_debug, objrun, medium
+// pdb params: apRef
 void FUN_0048f3c0_Obj::FUN_0048f3c0(Ref48f3c0* ref)
 {
     if (angle == DAT_0108ec68)
@@ -2395,6 +2474,7 @@ struct FUN_0049e250_Obj {
     Node49e250* list;
     bool FUN_0049e250();
 };
+// pdb: TESRegion::Validate | TESRegion.obj | fnv360_0822_retail, vtable, medium
 bool FUN_0049e250_Obj::FUN_0049e250()
 {
     Node49e250* node = list;
@@ -2485,6 +2565,8 @@ public:
     void __thiscall FUN_0049cbb0(float value);
 };
 
+// pdb: BSAnimGroupSequence::SaveGame | BSAnimGroupSequence.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afTime
 void __thiscall FUN_0049cbb0_Obj::FUN_0049cbb0(float value)
 {
     value = unk48 + value;
@@ -2544,6 +2626,7 @@ public:
     Obj* obj;
     void FUN_00486f50();
 };
+// pdb: InventoryChanges::`scalar deleting destructor' | ExtraDataObjects.obj | fnv360_0822_debug, call_seq, low
 void Owner::FUN_00486f50()
 {
     for (ListNode* n = lists; n; )
@@ -2751,6 +2834,7 @@ public:
 };
 
 
+// pdb: BSAnimGroupSequence::ValidateTargetsFromPalette | BSAnimGroupSequence.obj | fnv360_0822_retail, call_gap, low
 void Target_49cfb0::FUN_0049cfb0()
 {
     Helper_49cfb0* helper = unk40->unk78;
@@ -2797,6 +2881,8 @@ namespace f3m_0048c3f0 {
 
 void __cdecl FUN_00887da0(const char* message, ...);
 
+// pdb: MiscStatManager::GetIDByName | MiscStats.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: BSFurnitureMarker::GetAnimPropertyFromDisplayString)
+// pdb params: apName
 int __cdecl FUN_0048c3f0(const char* name)
 {
     for (int i = 0; i < 26; i++)
@@ -2845,6 +2931,8 @@ class Owner486d40
     void FUN_00486d40(int key, List486d40* out);
 };
 
+// pdb: InventoryChanges::GetItemGroup | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObj, apReturnList
 void Owner486d40::FUN_00486d40(int key, List486d40* out)
 {
     Owner486d40* self = this;
@@ -2903,6 +2991,7 @@ struct Owner851 {
     void FUN_0049c490();
     Owner851* FUN_0049c840(unsigned int flags);
 };
+// pdb: BGSDecalNode::`scalar deleting destructor' | BGSDecalNode.obj | fnv360_0822_retail, vtable, high
 Owner851* Owner851::FUN_0049c840(unsigned int flags) {
     FUN_0049c490();
     if (flags & 1) FUN_0089ec10(this, 0xb4);
@@ -2919,6 +3008,8 @@ struct Setting
 };
 extern Setting* DAT_0106f2f8[26];
 
+// pdb: MiscStatManager::SetAll | MiscStats.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apValues
 void __cdecl FUN_0048c440(int* values)
 {
     for (int i = 0; i < 26; i++)
@@ -2928,6 +3019,8 @@ void __cdecl FUN_0048c440(int* values)
 
 // @f3 0x0048c3a0 (community match, verified in this file)
 namespace f3m_0048c3a0 {
+// pdb: MiscStatManager::Increment | MiscStats.obj | fnv360_0721_retail, call_seq, low, conflict (skyrim: MagicTarget::SetDisplacementSpell)
+// pdb params: aeID
 void __cdecl FUN_0048c3a0(int param_1, int param_2) {
     if (param_2) {
         if (param_1 < 0x1a) {
@@ -2973,6 +3066,7 @@ struct Source
     TESRegionDataLandscape* FUN_0049f7c0();
 };
 
+// pdb: TESRegionDataLandscape::Copy | TESRegionDataLandscape.obj | fnv360_0721_beta, caller_sim, low
 TESRegionDataLandscape* Source::FUN_0049f7c0()
 {
     return new TESRegionDataLandscape(this);
@@ -3002,6 +3096,8 @@ struct Stream {
 
 using namespace f3m_0048c070;
 
+// pdb: LipSynchAnim::Decompress | LipSynchAnim.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apFile, apDest, aiBufferSize, aiDecompSize
 bool __cdecl FUN_0048c070(Stream* stream, unsigned char* out, unsigned int size)
 {
     bool result = true;
@@ -3070,6 +3166,8 @@ public:
 
 using namespace f3m_0048f350;
 
+// pdb: RagDollData::CountRagDollBones | RagDollData.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apNode
 unsigned char __cdecl FUN_0048f350(Node48f350* node)
 {
     unsigned char count = 0;
@@ -3144,6 +3242,8 @@ struct Object49c7a0
     static void* operator new(unsigned int bytes) { return FUN_0089eb90(bytes); }
     Object49c7a0();
 };
+// pdb: BGSDecalNode::CreateClone | BGSDecalNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 Object49c7a0* __stdcall FUN_0049c9f0(int unused)
 {
     return new Object49c7a0();
@@ -3177,6 +3277,8 @@ public:
 
 int __stdcall FUN_00493d50(int param1, void* param2, float param3);
 
+// pdb: TESWaterSystem::RemoveTESObjectFromWaterGroup | TESWater.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apWaterRef, apObjectRef, afWaterHeight
 void __thiscall FUN_00499af0_Obj::FUN_00499af0(int param1, void* param2, float param3)
 {
     if (param1 != 0 || (param2 != 0 && ((FUN_00499af0_Obj*)param2)->unk3C != 0)) {
@@ -3208,6 +3310,7 @@ struct FUN_00494380_Obj
     bool FUN_00494380();
 };
 
+// pdb: TESWaterSystem::CheckUpdateActorsInWater | TESWater.obj | fnv360_0822_retail, call_gap, low
 bool FUN_00494380_Obj::FUN_00494380()
 {
     if (DAT_0106fdb4)
@@ -3276,12 +3379,16 @@ inline ArrBase4969a0::ArrBase4969a0(unsigned int uiMaxSize, unsigned int uiGrowB
     else
         data = 0;
 }
+// pdb: NiTPrimitiveArray<enum BSTextureManager::eTextureType>::NiTPrimitiveArray<enum BSTextureManager::eTextureType> | TESWater.obj | fnv360_0822_retail, uvref, medium
+// pdb params: uiMaxSize, uiGrowBy
 FUN_004969a0::FUN_004969a0() {}
 }   // namespace f3m_004969a0
 
 // @f3 0x00493030 (community match, verified in this file)
 #include <math.h>
 namespace f3m_00493030 {
+// pdb: BSWrap | TESWater.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aVal, aMin, aMax
 void __cdecl FUN_00493030(float* value, float lo, float hi)
 {
     if (!(lo > hi)) {
@@ -3340,6 +3447,8 @@ struct Holder49e7b0 {
     void FUN_00454420(Data* d);
     Data* FUN_0049e7b0(Data* d);
 };
+// pdb: TESRegion::Copy | TESRegion.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCopyInto
 Data* Holder49e7b0::FUN_0049e7b0(Data* d)
 {
     Data* r = d ? d : new Data();
@@ -3364,6 +3473,7 @@ struct NiPoint2U4930 {
     float FUN_004930d0();
 };
 
+// pdb: NiPointer<NiScreenElementsData>::~NiPointer<NiScreenElementsData> | ImageSpaceEffectWaterDisplacement.obj | fnv360_0721_beta, call_gap, low, conflict (skyrim: NiPoint2::Unitize)
 float NiPoint2U4930::FUN_004930d0()
 {
     float sum = x * x + y * y;
@@ -3410,6 +3520,8 @@ struct FUN_00484c30_cls {
     void FUN_00484c30(int a, int b, int c);
 };
 
+// pdb: InventoryChanges::RemoveGold | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apRef, aiamount, apCont
 void FUN_00484c30_cls::FUN_00484c30(int a, int b, int c)
 {
     if (unk04 != 0) {
@@ -3454,6 +3566,8 @@ struct SaveStream48c5
 }
 using namespace f3m_0048c520;
 
+// pdb: MiscStatManager::LoadGame | MiscStats.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apLoadGameBuffer
 void __cdecl FUN_0048c520(SaveStream48c5* stream)
 {
     unsigned int count = 0x15;
@@ -3505,6 +3619,8 @@ struct Table_48ec60
     int unk10;
     void FUN_0048ec60(const Table_48ec60* other);
 };
+// pdb: RagDollData::Copy | RagDollData.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCopy
 void Table_48ec60::FUN_0048ec60(const Table_48ec60* other)
 {
     if (other) {
@@ -3538,6 +3654,8 @@ struct FUN_0049f700_cls {
     void FUN_0049f700(FUN_0049f700_sink* s);
 };
 
+// pdb: TESRegionDataLandscape::GetCanopyShadowTexture | TESRegionDataLandscape.obj | fnv360_0721_beta, objrun, medium
+// pdb params: aDest
 void FUN_0049f700_cls::FUN_0049f700(FUN_0049f700_sink* s)
 {
     if (unk08 == 0) {
@@ -3570,6 +3688,8 @@ struct Obj_49f010
 };
 }
 using namespace f3m_0049f010;
+// pdb: TESRegionDataLandscape::LoadRegionDataLandscape | TESRegionDataLandscape.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apFile
 bool Obj_49f010::FUN_0049f010(Chunk_49f010* chunk)
 {
     if (!chunk)
@@ -3660,6 +3780,8 @@ public:
     void FUN_00a5e780(RefObj* p, RefPtr& ref);
 };
 
+// pdb: BGSDecalNode::DetachChild | BGSDecalNode.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: TESObjectREFR::RemoveMasterParticleAddonNodes)
+// pdb params: apDecal
 void S2::FUN_0049c950(Obj49c950* obj)
 {
     RefPtr ref;
@@ -3841,6 +3963,8 @@ public:
     Node* list;
     void FUN_0049c660(int param);
 };
+// pdb: BGSDecalNode::OnVisible | BGSDecalNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCuller
 void Owner::FUN_0049c660(int param)
 {
     if (info)
@@ -3914,6 +4038,8 @@ struct Obj {
     void FUN_0049a570(Ref* ref, Vec3B* pos, Mat3B* rot);
     void FUN_0049b050(Ref* ref);
 };
+// pdb: TESWaterSystem::AddPlaceableWater | TESWater.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apWaterRef
 void Obj::FUN_0049b050(Ref* ref)
 {
     XformB* x = ref->GetXform();
@@ -3938,6 +4064,8 @@ struct Owner1046 {
     void FUN_00845b60(void* context);
     Owner1046* FUN_00491840(const Four1046* source);
 };
+// pdb: BSSplatterExtraData::BSSplatterExtraData | ScreenSplatter.obj | fnv360_0822_retail, uvref, high
+// pdb params: aSplatterData
 Owner1046* Owner1046::FUN_00491840(const Four1046* source) {
     FUN_00845b60(DAT_0106fcf0);
     vtable00 = &DAT_00dc275c;
@@ -4031,6 +4159,7 @@ public:
     void FUN_00493d10();
 };
 
+// pdb: TESWaterSystem::ResetStencilBitRefs | TESWater.obj | fnv360_0822_retail, call_gap, medium
 void Owner_493d10::FUN_00493d10() {
     int index = 1;
     Node_493d10* node = unk3C;
@@ -4280,6 +4409,8 @@ struct R_93f10 {
 };
 bool __cdecl FUN_004784d0(Node_93f10* n, int b);
 
+// pdb: TESWaterSystem::IsWaterNodeVisible | TESWater.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apWaterRef, apCamera
 bool __stdcall FUN_00493f10(A_93f10* a, int b)
 {
     Node_93f10* n = a->vf1D0();
@@ -4432,6 +4563,8 @@ public:
     bool FUN_0048f770(Obj_0048f770* p);
 };
 
+// pdb: RagDollData::UpdateDataFromReference | RagDollData.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRef
 bool Owner_0048f770::FUN_0048f770(Obj_0048f770* p)
 {
     int local = 0;
@@ -4539,6 +4672,8 @@ struct FUN_0049d750_cls {
 };
 
 
+// pdb: BSAnimGroupSequence::Deactivate | BSAnimGroupSequence.obj | fnv360_0822_retail, vtable, medium
+// pdb params: afEaseOutTime, abTransition
 void FUN_0049d750_cls::FUN_0049d750(float p1, int p2)
 {
     if (unk60 != 0) {
@@ -4588,6 +4723,8 @@ struct FUN_0049f740_Cls {
     bool FUN_0049f740(const String_49f6& newName);
 };
 
+// pdb: TESRegionDataLandscape::SetCanopyShadowTexture | TESRegionDataLandscape.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: aCanopyShadowTexture
 bool FUN_0049f740_Cls::FUN_0049f740(const String_49f6& newName)
 {
     if (unk08)
@@ -4668,6 +4805,8 @@ public:
     void FUN_0049df50(Df50Node* n);
 };
 
+// pdb: BSTransCon::RemoveTreadControlledItems | BSBipNode.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: apObject
 void Df50Owner::FUN_0049df50(Df50Node* n)
 {
     if (n) {
@@ -4711,6 +4850,8 @@ public:
     void FUN_00493ca0(RefObj493*& p);
 };
 
+// pdb: NiTMapBase<NiTPointerAllocator<unsigned int>,TESWaterForm *,bool>::GetAt | TESWater.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: key, val
 void Owner493::FUN_00493ca0(RefObj493*& p)
 {
     RefObj493* old = p;
@@ -4731,6 +4872,8 @@ namespace f3m_00491770 {
 struct FUN_00aa5140;
 FUN_00aa5140& FUN_0044a2d0();
 struct Generator1142 { unsigned int FUN_0086c4b0(unsigned int maximum); };
+// pdb: RandomBool | ScreenCustomSplatter.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afPercentTrue
 int __cdecl FUN_00491770(float threshold) {
  Generator1142* generator=reinterpret_cast<Generator1142*>(&FUN_0044a2d0());
  unsigned int value=generator->FUN_0086c4b0(0xffffffffu);
@@ -4762,6 +4905,7 @@ struct Obj494150 {
 
 extern Obj494150* DAT_0106ff08;
 
+// pdb: TESWaterSystem::ClearWaterRoot | TESWater.obj | fnv360_0822_retail, call_gap, low
 void FUN_00494150()
 {
     if (DAT_0106ff08) {
@@ -4816,6 +4960,8 @@ virtual void v8C();
 virtual void v90();
 virtual void v94(); virtual Wrapper1154* Lookup(int); };
 struct Owner1154 { void FUN_0082eb10(Wrapper1154*); void FUN_0049c3a0(Source1154*,int); };
+// pdb: BGSDecalNode::AttachChild | BGSDecalNode.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: NiSwitchNode::AttachChild)
+// pdb params: apDecal, bFirstAvail
 void Owner1154::FUN_0049c3a0(Source1154* source,int index) {
  State1154* state=source->Lookup(3)->FUN_00826590();
  if(state)state->value5C=1.0f;
@@ -4835,6 +4981,8 @@ struct FUN_0048c280_Holder
     void* unk00;
 };
 
+// pdb: LipSynchAnim::LoadFromFile | LipSynchAnim.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: `anonymous namespace'::DispelEffectFunctor::operator())
+// pdb params: apFilename
 void* __cdecl FUN_0048c280(FUN_0048c280_Holder* h)
 {
     void* obj = h->unk00;
@@ -4889,6 +5037,8 @@ struct FUN_0049caf0_cls {
     unsigned char FUN_0049caf0(void* p, unsigned int* outIdx);
 };
 
+// pdb: BSAnimGroupSequence::GetPriority | BSAnimGroupSequence.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apBoneName, apReturnIndex
 unsigned char FUN_0049caf0_cls::FUN_0049caf0(void* p, unsigned int* outIdx)
 {
     for (unsigned int i = 0; i < unk0C; ++i) {
@@ -5129,6 +5279,8 @@ public:
     void FUN_0049cd70(Stream_49cd70* stream, float base);
 };
 
+// pdb: BSAnimGroupSequence::LoadGame | BSAnimGroupSequence.obj | fnv360_0822_retail, caller, medium
+// pdb params: apLoadGameBuffer, afTime
 void Obj_49cd70::FUN_0049cd70(Stream_49cd70* stream, float base)
 {
     float value = 0.0f;
@@ -5208,6 +5360,8 @@ void AnimationSaveFO3::BSAnimGroupSequence_SaveGame(SaveBufferFO3* buffer, float
 // @f3 0x0049c5d0 (community match, verified in this file)
 namespace f3m_0049c5d0 {
 struct Owner1287{int unk00,unk04,unk08,unk0C,unk10,unk14,unk18,unk1C,unk20,unk24,unk28,unk2C,unk30,unk34,unk38,unk3C,unk40,unk44,unk48,unk4C,unk50,unk54,unk58,unk5C,unk60,unk64,unk68,unk6C,unk70,unk74,unk78,unk7C,unk80,unk84,unk88,unk8C,unk90,unk94,unk98,unk9C,unkA0,unkA4,unkA8; ObjectQueue* queueAC;void FUN_0049c5d0(QueuedObject*);};
+// pdb: BGSDecalNode::RemoveFromDecalList | BGSDecalNode.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apDecal
 void Owner1287::FUN_0049c5d0(QueuedObject* object){QueueReference reference(object);queueAC->FUN_004c25a0(reference);}
 }   // namespace f3m_0049c5d0
 
@@ -5233,6 +5387,7 @@ public:
     OwnedHelper* m_pkHelper;
 };
 
+// pdb: TESRegionDataGrass::`scalar deleting destructor' | TESRegionDataGrass.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: TESRegionDataGrass::~TESRegionDataGrass)
 FUN_0049ead0::~FUN_0049ead0()
 {
     delete m_pkHelper;
@@ -5323,6 +5478,8 @@ public:
     void FUN_0049de40(float fTime);
 };
 
+// pdb: BSBipNode::UpdateAllButBip | BSBipNode.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afTime
 void CtrlOwner::FUN_0049de40(float fTime)
 {
     CtrlNode* node = unk0C;
@@ -5406,6 +5563,8 @@ struct Owner49f050 {
     void FUN_0049f050(int value);
 };
 
+// pdb: NiTexturingProperty::SetBaseClampMode | TESRegionDataLandscape.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: eMode
 void Owner49f050::FUN_0049f050(int value)
 {
     Property49f050* item = unk1C.GetAt(0);
@@ -5528,6 +5687,8 @@ struct QArr8ee70 {
 };
 }
 using namespace q8ee70;
+// pdb: RagDollData::Load | RagDollData.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apFile
 bool QArr8ee70::FUN_0048ee70(QFile8ee70* file)
 {
     bool ok = false;
@@ -5989,6 +6150,8 @@ struct FUN_0048f4c0_Owner
     void __thiscall FUN_0048f4c0(FUN_0048f4c0_V53* param_2);
 };
 
+// pdb: RagDollData::UpdateRagDollDataFromBip01Node | RagDollData.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apRef
 void __thiscall FUN_0048f4c0_Owner::FUN_0048f4c0(FUN_0048f4c0_V53* param_2)
 {
     if (param_2)
@@ -6044,6 +6207,8 @@ struct FUN_0049cc40_cls {
     void FUN_0049cc40(float p);
 };
 
+// pdb: BSAnimGroupSequence::LoadGame | BSAnimGroupSequence.obj | fnv360_0822_debug, objrun, medium
+// pdb params: afTime
 void FUN_0049cc40_cls::FUN_0049cc40(float p)
 {
     float v;
@@ -6374,6 +6539,8 @@ struct QOwner {
     QForm* FUN_004941a0(QObj* obj);
     void FUN_00495a70(QData* data, int unused1, int unused2);
 };
+// pdb: TESWaterSystem::ClearReflectionTexturePointers | TESWater.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apGroup, abRemovingGroup, abRecurse
 void QOwner::FUN_00495a70(QData* data, int unused1, int unused2)
 {
     if (!data)
@@ -6485,6 +6652,7 @@ struct FUN_0049e150_Class
 
 void __cdecl FUN_00454890(unsigned int a, unsigned int b);
 
+// pdb: TESRegion::Save | TESRegion.obj | fnv360_0822_retail, vtable, medium
 void FUN_0049e150_Class::FUN_0049e150()
 {
     FUN_004547d0();
@@ -6676,6 +6844,7 @@ struct Heap {void FUN_0086ba60(void*);};extern Heap DAT_01090a78;
 struct FUN_0045bd00 {~FUN_0045bd00();static void operator delete(void*p){DAT_01090a78.FUN_0086ba60(p);}};
 struct FUN_0049e900 {virtual ~FUN_0049e900();unsigned unk04;};
 struct FUN_0049f0f0:FUN_0049e900 {FUN_0045bd00* userData;virtual ~FUN_0049f0f0();};
+// pdb: TESRegionDataLandscape::`scalar deleting destructor' | TESRegionDataLandscape.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: TESRegionDataLandscape::~TESRegionDataLandscape)
 FUN_0049f0f0::~FUN_0049f0f0(){if(userData)delete userData;}
 }
 }   // namespace f3m_0049f0f0
@@ -6690,6 +6859,7 @@ public:
     void* unk04;
 };
 
+// pdb: TESRegionDataManager::TESRegionDataManager | TESRegionDataManager.obj | fnv360_0822_retail, uvref, low, conflict (skyrim: TESRegionDataManager::~TESRegionDataManager)
 TESRegionDataManager::TESRegionDataManager()
     : unk04(0)
 {
@@ -6760,6 +6930,7 @@ public:
 
 extern NiPointer<SceneGraph> g_menuSceneGraph_f9e0;
 
+// pdb: Main::CreateMenuRootNode | Main.obj | fnv360_0721_beta, call_gap, low
 void FUN_0048f9e0()
 {
     g_menuSceneGraph_f9e0 = new SceneGraph("Menu", true, 0);
@@ -7271,6 +7442,7 @@ extern int DAT_00f60c78,DAT_00f60c84,DAT_00f60c90;
 extern int DAT_0108ec68;
 extern const char DAT_00f725a4[];
 void __cdecl FUN_0057e900(int*,int);
+// pdb: ScreenCustomSplatter::Init | ScreenCustomSplatter.obj | fnv360_0822_retail, objrun, medium
 void FUN_00491a90() {
  ContextGuard guard(7);
  DAT_0106fcf4=DAT_0106fd0c;
@@ -7404,6 +7576,7 @@ struct FUN_00498980 {
  Tail498 tail;float f98;bool f9c;
  FUN_00498980();
 };
+// pdb: TESWaterSystem::TESWaterSystem | TESWater.obj | fnv360_0721_beta, udata, high
 FUN_00498980::FUN_00498980():m4c(37),m5c(37),m6c(37),m7c(37){
  f24=0.0f;
  DAT_01174e80=DAT_0106fea4;DAT_01067ba9=false;
@@ -7444,6 +7617,8 @@ Entry* find(TESAmmo* form) { Changes* n=changes; bool searching=true; while(n &&
 Inventory* inventory(){return base?base->FUN_004e66c0():0;}
 Entry* FUN_00483b80(Actor* actor,int unused);
 };
+// pdb: InventoryChanges::GetBestAmmo | InventoryChanges.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apActorBase, abUseCanNotWear
 Entry* Owner::FUN_00483b80(Actor* actor,int unused) {
  MemScope scope(0x36);
  float best=-FLT_MAX;
@@ -8125,6 +8300,7 @@ extern Host* DAT_0108f048;
 struct Counter {void FUN_00b0d230(int,int);};
 extern Counter DAT_01175720;
 struct Owner { void FUN_00494aa0(Vec,int); void FUN_004962b0(); };
+// pdb: TESWaterSystem::MTRenderSkyReflectionTexture | TESWater.obj | fnv360_0822_retail, call_gap, low
 void Owner::FUN_004962b0() {
  Context context(0x1d);
  if(!DAT_0106fe0c || !DAT_0106ff98) return; {
@@ -8193,6 +8369,7 @@ struct FUN_0049c7a0 : Base {
     void BGSDecalNode_Init();
 };
 
+// pdb: BGSDecalNode::BGSDecalNode | BGSDecalNode.obj | fnv360_0822_debug, call_seq, low, conflict (bridge: BGSDecalNode::Init)
 FUN_0049c7a0::FUN_0049c7a0() : Base(0) {
     BGSDecalNode_Init();
     if (DAT_0106fffc) {
@@ -8246,6 +8423,7 @@ struct FUN_0049e1c0_cls
     void FUN_0049e1c0();
 };
 
+// pdb: TESRegion::InitItem | TESRegion.obj | fnv360_0822_retail, vtable, medium
 void FUN_0049e1c0_cls::FUN_0049e1c0()
 {
     if (!IsBit3()) {
@@ -8285,6 +8463,7 @@ struct Arr48ece0 {
     Elem* items;
     void FUN_0048ece0();
 };
+// pdb: RagDollData::LoadGame | RagDollData.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: RagDollBone::Endian)
 void Arr48ece0::FUN_0048ece0()
 {
     DAT_01079ca4->FUN_006db490(this, 1);
@@ -8338,6 +8517,7 @@ struct Game {
 extern Game* DAT_0106cdcc;
 }
 
+// pdb: TESRegion::SaveGame | TESRegion.obj | fnv360_0822_retail, call_gap, medium
 void __cdecl FUN_0049e2c0()
 {
     using namespace f3m_0049e2c0;
@@ -8455,6 +8635,7 @@ struct Derived : Base {
 }
 using namespace f3m_0049e090;
 
+// pdb: TESRegion::TESRegion | TESRegion.obj | fnv360_0822_retail, call_seq, high
 Derived::Derived()
 {
     part = new Part(true);
@@ -8528,6 +8709,7 @@ public:
     AnimGroupPointer animGroup;
 };
 
+// pdb: BSAnimGroupSequence::~BSAnimGroupSequence | BSAnimGroupSequence.obj | fnv360_0822_retail, call_seq, high
 BSAnimGroupSequence::~BSAnimGroupSequence()
 {
 }
@@ -8930,6 +9112,7 @@ struct QTreeWindow {
     void FUN_0048ce10(int x, int y, int width, int height);
 };
 
+// pdb: WindowPointToRay | BSMath.obj | tesv_win, uimport, low
 void QTreeWindow::FUN_0048ce10(int x, int y, int width, int height)
 {
     QInitCC icc;
@@ -9051,6 +9234,8 @@ struct F3Owner48bd
     bool FUN_0048bd00(F3Obj48bd* obj, float amount);
 };
 
+// pdb: LipSynchAnim::ApplyToNode | LipSynchAnim.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apData, afEmptyAtEnd
 bool F3Owner48bd::FUN_0048bd00(F3Obj48bd* obj, float amount)
 {
     F3Buf40 buf1;
@@ -9129,6 +9314,7 @@ public:
 
 extern NiFixedString* DAT_0106fcf0;
 
+// pdb: BSSplatterExtraData::InitSDM | ScreenSplatter.obj | fnv360_0822_retail, call_gap_sim, low
 void __cdecl FUN_004917c0()
 {
     DAT_0106fcf0 = new NiFixedString("SPD");
@@ -9143,6 +9329,7 @@ struct Heap {void* FUN_0086b930(unsigned);void FUN_0086ba60(void*);};extern Heap
 struct Base {Base();virtual ~Base();virtual void v0();unsigned char flags,priority,unknown;};
 struct Item {Item(int);~Item();int a,b,c,d,e;static void* operator new(unsigned n){return DAT_01090a78.FUN_0086b930(n);}static void operator delete(void* p){DAT_01090a78.FUN_0086ba60(p);}};
 struct FUN_0049e9e0:Base {FUN_0049e9e0();~FUN_0049e9e0();virtual void v0();Item* item;};
+// pdb: TESRegionDataGrass::TESRegionDataGrass | TESRegionDataGrass.obj | fnv360_0822_retail, caller_sim, high
 FUN_0049e9e0::FUN_0049e9e0(){item=new Item(1);}
 }
 }   // namespace f3m_0049e9e0
@@ -9227,6 +9414,7 @@ struct String {char* data;unsigned short length,capacity;void FUN_004019c0(const
 struct Child {int unk00;String text04;Child();static void* operator new(unsigned int n){return Task1510::DAT_01090a78.FUN_0086b930(n);}static void operator delete(void* p){Task1510::DAT_01090a78.FUN_0086ba60(p);}};
 struct Base {Base();virtual ~Base();int unk04;};
 struct FUN_0049f5b0:Base {Child* child08;FUN_0049f5b0();virtual ~FUN_0049f5b0();};
+// pdb: TESRegionDataLandscape::TESRegionDataLandscape | TESRegionDataLandscape.obj | fnv360_0822_retail, ustr, high
 FUN_0049f5b0::FUN_0049f5b0(){child08=new Child();child08->text04.FUN_004019c0(&Task1510::DAT_00dc37e0,0);}
 }
 
@@ -9367,6 +9555,8 @@ struct FUN_0049c870 : Base_49c870
     unsigned char unkB0;
     FUN_0049c870(Param_49c870* p, unsigned char flag);
 };
+// pdb: BGSDecalNode::BGSDecalNode | BGSDecalNode.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apNode, abSkinnedNode
 FUN_0049c870::FUN_0049c870(Param_49c870* p, unsigned char flag) : Base_49c870(0)
 {
     Local_49c870 local;
@@ -9631,6 +9821,8 @@ public:
     QCreatedObj* FUN_0049b7b0(QData* data, int unused, float scale);
 };
 
+// pdb: TESWaterSystem::CreateWadingWaterGeometry | TESWater.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apGroup, pParentNode, fMeshSize
 QCreatedObj* QOwner::FUN_0049b7b0(QData* data, int unused, float scale)
 {
     void* helperRes = FUN_0049b240(scale, scale, 0x200, 1, 1, 1);
@@ -10025,6 +10217,8 @@ public:
     void FUN_004965a0(PlaceableWaterGroup* group, unsigned short stencilMask);
 };
 
+// pdb: TESWaterSystem::MTRenderSelectiveDepthTexture | TESWater.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apWaterGroup, auReadMask
 void TESWaterSystem::FUN_004965a0(PlaceableWaterGroup* group, unsigned short stencilMask)
 {
     AutoMemContext memCtx(0x1d);
@@ -10081,6 +10275,8 @@ struct Renderer48;
 struct Renderer48 { virtual void unk000(); virtual void unk004(); virtual void unk008(); virtual void unk00c(); virtual void unk010(); virtual void unk014(); virtual void unk018(); virtual void unk01c(); virtual void unk020(); virtual void unk024(); virtual void unk028(); virtual void unk02c(); virtual void unk030(); virtual void unk034(); virtual void unk038(); virtual void unk03c(); virtual void unk040(); virtual void unk044(); virtual void unk048(); virtual void unk04c(); virtual void unk050(); virtual void unk054(); virtual void unk058(); virtual void unk05c(); virtual void unk060(); virtual void unk064(); virtual void unk068(); virtual void unk06c(); virtual void unk070(); virtual void unk074(); virtual void unk078(); virtual void unk07c(); virtual void unk080(); virtual void unk084(); virtual void unk088(); virtual void unk08c(); virtual void unk090(); virtual void unk094(); virtual void unk098(); virtual void unk09c(); virtual void unk0a0(); virtual void unk0a4(); virtual void unk0a8(); virtual void SetClearColor(Color48*); };
 extern Point48 DAT_0106f9d8;
 extern Renderer48* DAT_0106f8d8;
+// pdb: Renderer::SetBackgroundColor | Renderer.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: arColor
 bool __cdecl FUN_0048fd80(const Point48& color)
 {
     DAT_0106f9d8 = color;
@@ -10156,6 +10352,7 @@ struct FUN_00491490 : Base491490 {
     virtual ~FUN_00491490();
 };
 
+// pdb: SettingT<INIPrefSettingCollection>::~SettingT<INIPrefSettingCollection> | Renderer.obj | fnv360_0822_retail, call_seq, medium
 FUN_00491490::~FUN_00491490()
 {
     if (f3m_00491390::DAT_01179578 == 0) {
@@ -10193,6 +10390,7 @@ struct Window {
     void FUN_0048ce10(int,int,int,int);
     void FUN_0048e9a0(void*,int);
 };
+// pdb: NiParallelUpdateTaskManager::SignalRenderSema | InterfaceManager.obj | fnv360_0822_retail, call_gap, low
 Window::Window(void* application,void* parentWindow,void* rootObject,const char* text,int x,int y,int width,int height) {
     instance=application;
     parent=parentWindow;
@@ -10216,6 +10414,7 @@ struct Heap1160 { void FUN_0086ba60(void*); };
 extern Heap1160 DAT_01090a78;
 extern Entry1160* DAT_0106f2f8[26];
 
+// pdb: MiscStatManager::ReleaseMemory | MiscStats.obj | fnv360_0822_retail, call_gap_sim, low
 void __cdecl FUN_0048c5c0()
 {
     Entry1160** cursor = DAT_0106f2f8;
@@ -10307,6 +10506,7 @@ struct FUN_0049c490 : Base_c490 {
     virtual ~FUN_0049c490();
 };
 
+// pdb: BGSDecalNode::~BGSDecalNode | BGSDecalNode.obj | fnv360_0822_retail, call_seq, high
 FUN_0049c490::~FUN_0049c490()
 {
     Tmp_c490 tmp(this);
@@ -10376,6 +10576,7 @@ public:
     virtual ~FUN_0049e3a0_cls();
 };
 
+// pdb: TESRegion::~TESRegion | TESRegion.obj | fnv360_0822_retail, call_seq, medium
 FUN_0049e3a0_cls::~FUN_0049e3a0_cls()
 {
     Guard_e3a0 guard;
@@ -10444,6 +10645,8 @@ public:
     void FUN_00486e40(int a1, Pair486* list);
 };
 
+// pdb: InventoryChanges::GetRepairItemGroup | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObj, apReturnList
 void Owner486::FUN_00486e40(int a1, Pair486* list)
 {
     Item486* esi = GetItem486(0);
@@ -10792,6 +10995,8 @@ public:
     static void* operator new(unsigned int n) { return FUN_00aa13e0(n); }
     NiTriShapeData_49b240(unsigned short,QuadPoint_49b240*,QuadPoint_49b240*,RgbaColor_49b240*,QuadUV_49b240*,unsigned short,int,unsigned short,unsigned short*);
 };
+// pdb: TESWaterSystem::CreateQuadData | TESWater.obj | fnv360_0822_retail, ustr, medium
+// pdb params: afMeshSizeWidth, afMeshSizeHeight, textureSize, tile, bNormals, bColors
 NiTriShapeData_49b240* __stdcall FUN_0049b240(float width,float height,int unused,unsigned int tiles,bool withNormals,bool withColors)
 {
     AllocationScope_49b240 scope;
@@ -10921,6 +11126,7 @@ public:
     Pointer9a4 spObjecta8;
 };
 
+// pdb: PlaceableWaterGroup::PlaceableWaterGroup | TESWater.obj | fnv360_0822_retail, call_gap, low
 FUN_0049a420::FUN_0049a420() {
     spObject94 = 0;
     spObject98 = 0;
@@ -11642,6 +11848,8 @@ struct Main61
     FUN_004f9970* FUN_0049aa30(FUN_00ad2a40*, World61*, FUN_00ad2a40*, FUN_00ad2a40*, bool);
 };
 // @fnv 0x004e4c80
+// pdb: TESWaterSystem::AddLODWater | TESWater.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apLODWater, apWorldSpace, apWaterLODRoot, apBound, abLODWaterHeight
 FUN_004f9970* Main61::FUN_0049aa30(FUN_00ad2a40* geometry, World61* world, FUN_00ad2a40* parent, FUN_00ad2a40* intermediate,
                                           bool extra)
 {
@@ -11873,6 +12081,8 @@ __declspec(noinline) void Owner::FUN_0049add0(Object* object, const Point* posit
     unk04 = position->x;
     unk08 = rotation->elements[0][0];
 }
+// pdb: TESWaterSystem::RemovePlaceableWater | TESWater.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apWaterRef
 void Owner::FUN_0049b1d0(Object* object) {
     Point position = object->GetNode()->GetPosition();
     Matrix rotation = object->GetNode()->GetRotation();
@@ -11926,6 +12136,7 @@ Obj2::Obj2() { unk00 = unk04 = unk08 = 0; FUN_0049f5b0(); }
 Obj3::Obj3() { unk00 = unk04 = unk08 = 0; FUN_0049e9e0(); }
 Obj4::Obj4() { unk00 = unk04 = unk08 = unk0C = unk10 = 0; FUN_004a0aa0(); }
 
+// pdb: TESRegionDataManager::ConstructRegionData | TESRegionDataManager.obj | tesv_win, caller_sim, low
 void* __stdcall FUN_0049fd20(int type)
 {
     int idx = type - 3;
@@ -12009,6 +12220,7 @@ extern Factory* DAT_0116ef98;
 extern const float DAT_00dbe1e0;
 void __cdecl FUN_00aeec60(int,void*);
 void __cdecl FUN_00aeeb20();
+// pdb: TESWaterSystem::InitializeGreyTexture | TESWater.obj | fnv360_0822_retail, call_gap, low
 Token* __cdecl FUN_00494c20() {
     ContextGuard guard(0x1d);
     Vector prior;
@@ -12066,6 +12278,8 @@ struct Owner {
     OuterNode* head;
     void FUN_00486980(Stream* s);
 };
+// pdb: InventoryChanges::LoadGame | InventoryChanges.obj | fnv360_0721_retail, call_seq, medium
+// pdb params: apLoadGameBuffer
 void Owner::FUN_00486980(Stream* s)
 {
     int v = s->v04();
@@ -12166,6 +12380,8 @@ extern unsigned int DAT_00f60c6c;
 extern Secondary* DAT_0106fd24;
 
 
+// pdb: ScreenSplatter::Activate | ScreenSplatter.obj | fnv360_0822_retail, call_gap, low
+// pdb params: auiCount, afDuration, aeType
 void __cdecl FUN_00492e70(unsigned int count, float scale)
 {
     if (DAT_0106fcf4) {
@@ -12231,6 +12447,8 @@ public:
     virtual GrassList* v24(Grass* g);
     bool FUN_0049eb40(File* file);
 };
+// pdb: TESRegionDataGrass::LoadRegionDataGrass | TESRegionDataGrass.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apFile
 bool Region::FUN_0049eb40(File* file)
 {
     if (!file || file->TESFile_GetTESChunk() != 0x53474452)
@@ -12651,6 +12869,7 @@ struct Cls {
     void FUN_004854d0();
 };
 
+// pdb: InventoryChanges::InitFromContainerExtra | InventoryChanges.obj | fnv360_0822_retail, call_gap, medium
 void Cls::FUN_004854d0()
 {
     Inventory* inv = unk04 ? unk04->FUN_004e66c0() : 0;
@@ -12743,6 +12962,7 @@ extern float DAT_00f60be8;
 extern double DAT_00dc27f0;
 extern double DAT_00db38a8;
 
+// pdb: ScreenCustomSplatter::Update | ScreenCustomSplatter.obj | fnv360_0822_retail, call_gap_sim, low
 void __cdecl FUN_004918f0()
 {
     if (!DAT_0106fcf4)
@@ -14274,6 +14494,8 @@ struct Counter {void FUN_00b0d230(int,int);};
 extern Counter DAT_01175720;
 struct Arg { int m0; float m4, m8, mc, m10; char pad14[0x40]; RefHolder m54; char pad58[0x3c]; int m94; int m98; int m9c; int ma0; Ref* ma4; };
 struct Owner { void FUN_00494aa0(Vec,int); void FUN_00496010(Arg* a); };
+// pdb: TESWaterSystem::MTRenderSelectiveReflectionTexture | TESWater.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apWaterGroup
 void Owner::FUN_00496010(Arg* a) {
  Context context(0x1d);
  if(!DAT_0106fe0c || !a->ma4) return;
@@ -14726,6 +14948,7 @@ struct Owner {
     void FUN_00499b30();
 };
 
+// pdb: TESWaterSystem::UpdateWaterDisplacementSimulation | TESWater.obj | fnv360_0721_beta, objrun, medium
 void Owner::FUN_00499b30()
 {
     if (unk98 < 10.0) {
@@ -16189,6 +16412,8 @@ public:
 
 void __cdecl FUN_008af710(int a, int b, NiPointer<RefObject>* out);
 
+// pdb: BSAnimGroupSequence::CreateSequenceFromFile | BSAnimGroupSequence.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kStream, uiIndex, aspControllerSequence
 void __cdecl FUN_0049d910(int a, int b, NiPointer<RefObject>* target)
 {
     NiPointer<RefObject> value(0);
@@ -16378,6 +16603,8 @@ struct Owner {
 };
 extern Actor* DAT_0107a104;
 extern float DAT_0106fe40;
+// pdb: TESWaterSystem::ActorWithinRangeOfWadingWater | TESWater.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apGroup
 bool __stdcall FUN_00494270(const Owner* owner)
 {
     Node* node=owner->head;
@@ -16432,6 +16659,8 @@ struct Changes { Entry* data; Changes* next; };
 struct Owner { Changes* changes;
 Entry* FUN_00483eb0(int slot, bool bOnlyArmor);
 };
+// pdb: InventoryChanges::GetWornItem | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeBodyPart, bOnlyArmor
 Entry* Owner::FUN_00483eb0(int slot, bool bOnlyArmor) {
  MemScope scope(0x36);
  Changes* node=changes;
@@ -17588,6 +17817,8 @@ public:
     void FUN_00497160(void* input, State* state, bool special);
 };
 
+// pdb: TESWaterSystem::MTSetupSelectiveReflectionTexture | TESWater.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apCamera, apWaterGroup, abLOD
 void Owner::FUN_00497160(void* input, State* state, bool special)
 {
     HeapContext context;
@@ -17982,6 +18213,8 @@ public:
     void FUN_00496d50(QData* data);
     void FUN_00499970(int param, bool force);
 };
+// pdb: TESWaterSystem::UpdateLODWater | TESWater.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apCamera, abForceUpdate
 void QOwner::FUN_00499970(int param, bool force)
 {
     if (!unk48)
@@ -18138,6 +18371,8 @@ struct Arr48f070 {
     bool FUN_0048f070(Node48f070* node, unsigned int* index, bool store);
 };
 
+// pdb: RagDollData::UpdateRagDollDataFromNode | RagDollData.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apNode, aiBoneIndex, abInit
 bool Arr48f070::FUN_0048f070(Node48f070* node, unsigned int* index, bool store)
 {
     bool result = true;
@@ -18400,6 +18635,7 @@ struct Owner {
     void FUN_0049eed0();
 };
 
+// pdb: TESRegionDataGrass::Save | TESRegionDataGrass.obj | fnv360_0822_retail, caller_sim, low
 void Owner::FUN_0049eed0()
 {
     Entry* entries = 0;
@@ -18633,6 +18869,7 @@ public:
 
 extern Ref486750* DAT_0107a104;
 
+// pdb: InventoryChanges::ClearAllChangeItems | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
 void InventoryChanges486750::FUN_00486750()
 {
     SimpleList486750<ItemChange486750*>* pIter = pListofChanges;
@@ -18786,6 +19023,7 @@ struct PropertyPtr {
 };
 extern PropertyPtr DAT_0107010c;
 extern const double FUN_00dbeb78, FUN_00db38b0;
+// pdb: TESRegionDataLandscape::GetDefaultFullMaskTextureProp | TESRegionDataLandscape.obj | fnv360_0822_retail, ustr, medium
 Property* FUN_0049f1b0() {
  if(!DAT_0107010c.p) {
   NiPixelData& pixels=*new NiPixelData(64,64,DAT_011aa2a0,1,1);
@@ -19233,6 +19471,7 @@ struct WaterSound
     void FUN_004932e0();
 };
 
+// pdb: TESWaterSystem::UpdateWaterSounds | TESWater.obj | fnv360_0822_retail, call_gap, low
 void WaterSound::FUN_004932e0()
 {
     Cell* cell;
@@ -19428,6 +19667,8 @@ public:
     FUN_004913e0(const char* name, float value);
 };
 
+// pdb: INIPrefSetting::INIPrefSetting | Renderer.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apID, afValue
 FUN_004913e0::FUN_004913e0(const char* name, float value) : Setting(name, value)
 {
     using namespace NativeSettings4913e0;
@@ -19597,6 +19838,8 @@ struct WaterOwner
     bool FUN_00495b90(bool release, bool keep);
 };
 
+// pdb: TESWaterSystem::DisableWaterSystem | TESWater.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: abFreeMemory, abFinal
 bool WaterOwner::FUN_00495b90(bool release, bool keep)
 {
     DAT_00f4cf80 = 0;
@@ -20124,6 +20367,8 @@ public:
     void FUN_0049b0c0(Reference* reference, void* unused, Target* target);
 };
 
+// pdb: BGSTerrainChunk::RemoveWaterFromSystem | BGSTerrainChunk.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abForce
 void Owner::FUN_0049b0c0(Reference* reference, void* unused, Target* target)
 {
     target->Accept(reference->GetToken());
@@ -20329,6 +20574,7 @@ struct FUN_0049a1c0 {
  NiPointer<Ref> ptra4,ptra8;
  ~FUN_0049a1c0();
 };
+// pdb: PlaceableWaterGroup::~PlaceableWaterGroup | TESWater.obj | fnv360_0822_retail, objrun, medium
 FUN_0049a1c0::~FUN_0049a1c0() {
  ptr94=0; ptr98=0;
  DAT_0107a0d8->owner->FUN_00495a70(this,1,0);
@@ -20998,6 +21244,8 @@ __declspec(noinline) bool InventoryMove::InventoryChanges_RemoveWorn(bool* a0, T
     return result3;
 }
 
+// pdb: InventoryChanges::RemoveAllItems | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRef, apStolenContainer, abStealing, abowner, abRemoveOwnership, abSilent, aiFormType, apDoNotRemoveList
 float InventoryMove::FUN_00489d70(MoveOwner* owner, MoveOwner* destination, bool retainOwner, bool SetOwnerPointer,
                                   bool clearOwner, bool silent)
 {
@@ -21665,6 +21913,8 @@ struct InventoryChanges
     void FUN_00481940(InvChange* apChange, bool abDelete);
 };
 
+// pdb: InventoryChanges::AddChangeItem | InventoryChanges.obj | fnv360_0822_debug, caller, medium
+// pdb params: apChange, abDelete
 void InventoryChanges::FUN_00481940(InvChange* apChange, bool abDelete)
 {
     InvMemContext kContext(0x36);
@@ -21901,6 +22151,8 @@ struct C4808d0 {
     n4808d0::ENode* list;
     void FUN_004808d0(n4808d0::Entry* ref, int key);
 };
+// pdb: InventoryChanges::RemoveHotKeyItem | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apItem, aiHotkey
 void C4808d0::FUN_004808d0(n4808d0::Entry* ref, int key)
 {
     void* form = ref->form;
@@ -22262,6 +22514,8 @@ struct Owner {
     Entry* FUN_00493d50(Ref* ref, Holder* holder, float z);
 };
 
+// pdb: TESWaterSystem::FindWaterGroup | TESWater.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apWaterRef, apObjectRef, afWaterHeight
 Entry* Owner::FUN_00493d50(Ref* ref, Holder* holder, float z)
 {
     Point normal(0.0f, 0.0f, 1.0f);
@@ -22450,6 +22704,8 @@ __forceinline void Sequence::Apply(int i, AVObject* target, float time, QuatTran
     }
 }
 
+// pdb: BSTransCon::UpdateAllButTarget | BSBipNode.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afTime, abSkipSelectiveUpdateTest
 void Sequence::FUN_0049db10(float time, bool all)
 {
     if (!IsActive())
@@ -22909,6 +23165,7 @@ inline int GetMultiSample() { return DAT_0106f62c; }
 
 using namespace D3DModeSelect;
 
+// pdb: BSRenderer::ValidateSettings | BSRenderer.obj | tesv_win, ustr, medium
 unsigned char __cdecl FUN_0048fff0()
 {
     unsigned char success = 0;
@@ -23255,6 +23512,8 @@ struct Owner {
     Node<Group>* first;
     void FUN_00493f80(bool off, bool filter, bool toggle);
 };
+// pdb: TESWaterSystem::DisplayWater | TESWater.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: abVisible, abLOD, abInverseCull
 void Owner::FUN_00493f80(bool off, bool filter, bool toggle)
 {
     Node<Group>* group = first;
@@ -25259,6 +25518,8 @@ struct Arg { int a00,a04,a08,a0c,a10,a14,a18,a1c,a20; Node4959* list; int a28,a2
 extern Ref4959 DAT_0106fdc0, DAT_0106ff0c;
 extern int DAT_0116fda0;
 struct Owner4959 { Object* FUN_004941a0(Entry4959*); void FUN_00495960(Arg*); };
+// pdb: TESWaterSystem::UpdateReflectionTexturePointers | TESWater.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apGroup
 void Owner4959::FUN_00495960(Arg* arg) {
     Node4959* node = arg->list;
     while (node) {
@@ -25350,6 +25611,7 @@ inline void ReleaseGlobal(QueuedObject*& pointer) {
         pointer=0;
     }
 }
+// pdb: TESWaterSystem::~TESWaterSystem | TESWater.obj | fnv360_0822_retail, call_gap, low
 FUN_00496ad0::~FUN_00496ad0() {
     FUN_00495b90(1,1);
     ReleaseGlobal(DAT_0106fec8);
@@ -25400,6 +25662,8 @@ public:
     }
     void FUN_0049ecf0(Layer* other, int apply);
 };
+// pdb: TESRegionDataGrass::BlendInto | TESRegionDataGrass.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apRegionData, aiTotalBlending
 void Layer::FUN_0049ecf0(Layer* other, int apply) {
     if (!other || other->GetType() != 6 || !apply)
         return;
@@ -25525,6 +25789,8 @@ struct Water {
     void FUN_004932e0();
     void FUN_0049bf80(Camera* camera,int unused);
 };
+// pdb: TESWaterSystem::UpdateWaterSystem | TESWater.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCamera, apNode
 void Water::FUN_0049bf80(Camera* camera,int unused)
 {
     MemScope context(0x1d);
@@ -25637,6 +25903,7 @@ struct Owner {
     void FUN_0048ed40();
 };
 
+// pdb: RagDollData::Save | RagDollData.obj | fnv360_0822_retail, call_gap, low
 void Owner::FUN_0048ed40()
 {
     if (count) {
@@ -26655,6 +26922,8 @@ struct TNode {
     virtual void vb8(UpdData* d);
 };
 
+// pdb: RagDollData::UpdateNodeFromRagDollData | RagDollData.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apNode, aiBoneIndex
 bool Q48::FUN_0048f1c0(TNode* node, unsigned int* idx)
 {
     bool result = true;
@@ -26969,6 +27238,7 @@ public:
 extern struct Obj49F* DAT_0107010C;                  // ORIG: mov eax,dword_107010C ✓✓ (a sibling body news up a property object into the neighbouring global at 0x107010c, line 18415) 
 extern struct Obj49F* DAT_01070104;                  // ORIG: mov eax,dword_1070104 ✓✓ 
 
+// pdb: TESRegionDataLandscape::ClearDefaultTextureProps | TESRegionDataLandscape.obj | fnv360_0822_retail, call_gap, low
 void FUN_0049f550() {
     if (DAT_0107010C != 0) {                         // ORIG: test eax,eax ; jz past - and the past target is AFTER the store of zero, so that store belongs inside this block ✓✓ 
         DAT_0107010C->Release();                     // ORIG: banked pointer in ESI, InterlockedDecrement through EDI-cached import address, virtual slot +0x04 when it reaches zero ✓✓ 
@@ -26988,6 +27258,7 @@ void Obj49F::vfn04() {}
 
 // @f3 0x0048f820 (community match, verified in this file)
 namespace f3m_0048f820 {
+// pdb: NiDX9Renderer::GetD3DFormat | BSRenderer.obj | tesv_win, call_seq, medium
 int __cdecl FUN_0048f820(int x)
 {
     switch (x) {
@@ -27039,6 +27310,8 @@ int __cdecl FUN_0048f820(int x)
 namespace Clear48c590 {
 struct Item {int unk00;int value;};
 extern Item* DAT_0106f2f8[26];
+// pdb: MiscStatManager::Revert | MiscStats.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: BSMIN)
+// pdb params: apLoadGameBuffer
 void FUN_0048c590(){for(unsigned i=0;i<26;i++){if(DAT_0106f2f8[i]) DAT_0106f2f8[i]->value=0;}}
 }
 
@@ -27054,6 +27327,7 @@ struct Object {
  char* text;
  void FUN_0049ca60(char* const*);
 };
+// pdb: BSFixedString::operator= | BSFixedString.obj | tesv_win, call_gap, low
 void Object::FUN_0049ca60(char* const* input) {
  char* value=*input;
  if(text!=value) {
@@ -27182,6 +27456,7 @@ namespace Copy49ea60 {
 struct Item {Item* TESRegionGrassObjectList_Copy(int);};
 struct FUN_0049e8d0 {void* vtable;int unk04;FUN_0049e8d0(const FUN_0049e8d0&);~FUN_0049e8d0();};
 struct FUN_0049ea60:FUN_0049e8d0 {Item* item;FUN_0049ea60(const FUN_0049ea60&);};
+// pdb: TESRegionDataGrass::Copy | TESRegionDataGrass.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: TESRegionDataGrass::TESRegionDataGrass)
 FUN_0049ea60::FUN_0049ea60(const FUN_0049ea60& other):FUN_0049e8d0(other){vtable=&DAT_00dc371c;item=other.item->TESRegionGrassObjectList_Copy(0);}
 }
 }   // namespace f3m_0049ea60
@@ -27193,6 +27468,7 @@ void FUN_0089e890(void*);extern char DAT_00dc2e34,DAT_00dc2dec,DAT_00dc2de4;
 struct First {void* vtable;void* data;int unk08,unk0c;~First(){void* buffer=data;vtable=&DAT_00dc2de4;FUN_0089e890(buffer);}};
 struct Second {void* vtable;void* data;int unk08,unk0c;~Second(){void* buffer=data;vtable=&DAT_00dc2dec;FUN_0089e890(buffer);}};
 struct FUN_00496a20 {void* vtable;First first;Second second;~FUN_00496a20();};
+// pdb: ImageSpaceEffectParam::~ImageSpaceEffectParam | TESWater.obj | fnv360_0822_debug, call_seq, medium
 FUN_00496a20::~FUN_00496a20(){vtable=&DAT_00dc2e34;}
 }
 
@@ -27201,6 +27477,8 @@ FUN_00496a20::~FUN_00496a20(){vtable=&DAT_00dc2e34;}
 // @f3 0x0048eb70 (community match, verified in this file)
 namespace f3m_0048eb70 {
 namespace Equal332 {
+// pdb: NiMatrix3::operator== | RagDollData.obj | fnv360_0822_retail, call_seq, high
+// pdb params: mat
 struct Matrix{float a,b,c,d,e,f,g,h,i;int FUN_0048eb70(const Matrix*);};int Matrix::FUN_0048eb70(const Matrix* o){return a==o->a&&b==o->b&&c==o->c&&d==o->d&&e==o->e&&f==o->f&&g==o->g&&h==o->h&&i==o->i;}
 }
 }   // namespace f3m_0048eb70
@@ -27210,6 +27488,8 @@ namespace f3m_00493150 {
 namespace Matrix341 {
 struct Vec3{float x,y,z;Vec3(float a,float b,float c):x(a),y(b),z(c){}};
 struct Input{int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; float m00,m01,m02,m10,m11,m12,m20,m21,m22;Vec3 position;int unk98; int unk9c; int unka0; int unka4; int unka8; int unkac; int unkb0; int unkb4; int unkb8; int unkbc; int unkc0; int unkc4; int unkc8; int unkcc; int unkd0; int unkd4; int unkd8; Vec3 attribute;int unke8; int unkec; int unkf0; int unkf4; int unkf8; int unkfc; Vec3 other;};
+// pdb: NiXenonRenderer::SetCameraData | TESWater.obj | fnv360_0822_retail, call_gap, low
+// pdb params: pkCamera
 struct Owner{virtual void v000(); virtual void v004(); virtual void v008(); virtual void v00c(); virtual void v010(); virtual void v014(); virtual void v018(); virtual void v01c(); virtual void v020(); virtual void v024(); virtual void v028(); virtual void v02c(); virtual void v030(); virtual void v034(); virtual void v038(); virtual void v03c(); virtual void v040(); virtual void v044(); virtual void v048(); virtual void v04c(); virtual void v050(); virtual void v054(); virtual void v058(); virtual void v05c(); virtual void v060(); virtual void v064(); virtual void v068(); virtual void v06c(); virtual void v070(); virtual void v074(); virtual void v078(); virtual void v07c(); virtual void v080(); virtual void v084(); virtual void v088(); virtual void v08c(); virtual void v090(); virtual void v094(); virtual void v098(); virtual void v09c(); virtual void v0a0(); virtual void v0a4(); virtual void v0a8(); virtual void v0ac(); virtual void v0b0(); virtual void v0b4(); virtual void v0b8(); virtual void v0bc(); virtual void v0c0(); virtual void v0c4(); virtual void v0c8(); virtual void v0cc(); virtual void v0d0(); virtual void v0d4(); virtual void v0d8(); virtual void v0dc(); virtual void v0e0(); virtual void v0e4(); virtual void v0e8(); virtual void v0ec(); virtual void v0f0(); virtual void v0f4(); virtual void v0f8(); virtual void v0fc(); virtual void v100(); virtual void v104(); virtual void v108(); virtual void v10c(); virtual void v110(); virtual void v114(); virtual void v118(); virtual void v11c(); virtual void v120(); virtual void v124(); virtual void v128(); virtual void v12c(); virtual void v130(); virtual void v134(); virtual void v138(); virtual void v13c(); virtual void v140(); virtual void v144(); virtual void v148(); virtual void v14c(); virtual void v150(); virtual void v154(); virtual void v158(); virtual void v15c(); virtual void v160(); virtual void v164(); virtual void v168(); virtual void v16c(); virtual void v170(); virtual void v174(); virtual void v178(); virtual void v17c(); virtual void v180(); virtual void v184(); virtual void v188(); virtual void update(Vec3*,Vec3*,Vec3*,Vec3*,Vec3*,Vec3*);int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8; int unkac; int unkb0; int unkb4; int unkb8; int unkbc; int unkc0; int unkc4; int unkc8; int unkcc; int unkd0; int unkd4; int unkd8; int unkdc; int unke0; int unke4; int unke8; int unkec; int unkf0; int unkf4; int unkf8; int unkfc; int unk100; int unk104; int unk108; int unk10c; int unk110; int unk114; int unk118; int unk11c; int unk120; int unk124; int unk128; int unk12c; int unk130; int unk134; int unk138; int unk13c; int unk140; int unk144; int unk148; int unk14c; int unk150; int unk154; int unk158; int unk15c; int unk160; int unk164; int unk168; int unk16c; int unk170; int unk174; int unk178; int unk17c; int unk180; int unk184; int unk188; int unk18c; int unk190; int unk194; int unk198; int unk19c; int unk1a0; int unk1a4; int unk1a8; int unk1ac; int unk1b0; int unk1b4; int unk1b8; int unk1bc; int unk1c0; int unk1c4; int unk1c8; int unk1cc; int unk1d0; int unk1d4; int unk1d8; int unk1dc; int unk1e0; int unk1e4; int unk1e8; int unk1ec; int unk1f0; int unk1f4; int unk1f8; int unk1fc; int mode;int unk204;unsigned char enabled;void FUN_00493150(Input*);};void Owner::FUN_00493150(Input* p){Vec3 z(p->m02,p->m12,p->m22);Vec3 y(p->m01,p->m11,p->m21);Vec3 x(p->m00,p->m10,p->m20);if((mode==1||mode==2)&&enabled==1)update(&p->position,&x,&y,&z,&p->attribute,&p->other);}
 }
 }   // namespace f3m_00493150
@@ -27393,6 +27673,7 @@ struct Owner49cea0 {
     void __thiscall FUN_0049cea0();
 };
 
+// pdb: BSAnimGroupSequence::ValidateTargets | BSAnimGroupSequence.obj | fnv360_0822_retail, call_seq, medium
 void Owner49cea0::FUN_0049cea0() {
     if (!holder40) {
         return;
@@ -27481,6 +27762,7 @@ struct List {void* TESRegionDataList_Find(int);};
 struct Part {void* FUN_00500ad0();};
 struct Entry {int unk00,unk04;Part part;};
 struct Owner {int unk00,unk04,unk08,unk0c,unk10,unk14;List* list;int unk1c,unk20;void* value;void FUN_0049e050();};
+// pdb: TESRegion::UpdateWeather | TESRegion.obj | fnv360_0822_retail, uvref, low, conflict (skyrim: TESRegion::GetWeatherOfType)
 void Owner::FUN_0049e050(){value=0;if(list){Entry* entry=(Entry*)FUN_00c0050a(list->TESRegionDataList_Find(3),0,&DAT_00f4d330,&DAT_00f4d34c,0);if(entry)value=entry->part.FUN_00500ad0();}}
 }
 }   // namespace f3m_0049e050
@@ -27504,6 +27786,8 @@ struct Table_48ba20 {
     Table_48ba20* FUN_0048ba20(unsigned int n, int value);
 };
 
+// pdb: LipSynchAnim::LipSynchAnim | LipSynchAnim.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiNumFrames, aiStartingFrame
 Table_48ba20* Table_48ba20::FUN_0048ba20(unsigned int n, int value)
 {
     count = n;
@@ -27683,6 +27967,8 @@ struct Owner
     AVObject* FUN_004941a0(Ref* ref);
 };
 
+// pdb: TESWaterSystem::GetWaterGeometry | TESWater.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apWaterRef
 AVObject* Owner::FUN_004941a0(Ref* ref)
 {
     if (!ref || !ref->Get3D())
@@ -27741,6 +28027,8 @@ struct Owner {
     void InventoryChanges_RemoveWorn(bool& changed,Form*,int count,unsigned argument,bool firstFlag,bool secondFlag,bool thirdFlag);
     void FUN_00487120(unsigned unused,unsigned argument);
 };
+// pdb: InventoryChanges::RemoveAllObjectsWorn | InventoryChanges.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: abSkipCanNotWear, apRef
 void Owner::FUN_00487120(unsigned unused,unsigned argument) {
     Node* position=first;
     while(position) {
@@ -27766,6 +28054,7 @@ struct Heap {void* FUN_0086b930(unsigned);void FUN_0086ba60(void*);};extern Heap
 int __cdecl FUN_00403230(char*,unsigned,const char*,...);
 struct FUN_00403100 {unsigned unk00,unk04,unk08;FUN_00403100(char*,void*);static void* operator new(unsigned n){return DAT_01090a78.FUN_0086b930(n);}static void operator delete(void* p){DAT_01090a78.FUN_0086ba60(p);}};
 struct FUN_0048c610 {FUN_00403100* object;unsigned value;FUN_0048c610(void*,unsigned,unsigned);};
+// pdb: MiscStatManager::MiscStatManager | MiscStats.obj | fnv360_0822_retail, ustr, medium
 FUN_0048c610::FUN_0048c610(void* input,unsigned id,unsigned state){value=state;char* text=(char*)DAT_01090a78.FUN_0086b930(13);FUN_00403230(text,13,&DAT_00dc0f98,id);object=new FUN_00403100(text,input);}
 }
 }   // namespace f3m_0048c610
@@ -27794,6 +28083,7 @@ extern NiPointer<Owner1e00> DAT_0106fd24;
 extern NiPointer<Scene1e00> DAT_0106fcfc;
 extern NiPointer<RefObject1e00> DAT_0106fd18[3];
 
+// pdb: ScreenCustomSplatter::Shutdown | ScreenCustomSplatter.obj | fnv360_0822_retail, call_gap, low
 void __cdecl FUN_00491e00()
 {
     if (DAT_0106fcf4) {
@@ -27822,6 +28112,8 @@ struct Table {
     float FUN_0048bb10(int index);
 };
 
+// pdb: LipSynchAnim::GetPuppetValue | LipSynchAnim.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: aiFrame
 float Table::FUN_0048bb10(int index)
 {
     int idx;
@@ -27920,6 +28212,8 @@ struct Owner {
     void FUN_00480250(void* input);
 };
 
+// pdb: ItemChange::SetItemOwnership | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apowner
 void Owner::FUN_00480250(void* input)
 {
     if (input) {
@@ -27955,6 +28249,8 @@ struct Obj48 {
 extern NiPointer<Obj48> g_ptr48;
 extern bool DAT_0116d6b3;
 void __cdecl FUN_00adaa30(bool);
+// pdb: Renderer::Kill | Renderer.obj | fnv360_0721_retail, udata, medium
+// pdb params: abFinalKill
 void __cdecl FUN_0048fb40(bool flag) {
     FUN_00adaa30(flag);
     if (flag) {
@@ -28044,6 +28340,8 @@ struct FUN_0049d7c0 : FUN_008ac9e0 {
     FUN_0049d7c0(RefObject* group, FUN_008ac9e0* source);
     virtual ~FUN_0049d7c0();
 };
+// pdb: BSAnimGroupSequence::BSAnimGroupSequence | BSAnimGroupSequence.obj | fnv360_0721_retail, caller, medium
+// pdb params: apAnimGroup, apSeq
 FUN_0049d7c0::FUN_0049d7c0(RefObject* group, FUN_008ac9e0* source) : FUN_008ac9e0(source->name, 0, 1)
 {
     animGroup = group;
@@ -28136,6 +28434,7 @@ public:
 
 float FUN_00403210(float x);
 
+// pdb: TESRegionDataLandscape::BlendInto | TESRegionDataLandscape.obj | tesv_win, vtable, medium
 void Target::FUN_0049f830(Source* src, int enable)
 {
     FUN_00401b10 text;
@@ -28191,6 +28490,8 @@ inline bool IsK2(const NiRTTI* t, const Ctl* o){ if(!o) return false; return o->
 inline Ctl* DC(const NiRTTI* t, Ctl* o){ return IsK(t,o)?o:0; }
 inline Ctl* DC2(const NiRTTI* t, Ctl* o){ return o->IsKindOf(t)?o:0; }
 inline Ctl* DC3(const NiRTTI* t, Ctl* o){ return o ? (o->IsKindOf(t)?o:0) : 0; }
+// pdb: BSBipNode::RemoveObject | BSBipNode.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObject
 void Object::FUN_0049dfc0(int value){
  for(Ctl* p=GetControllers(); p; p=p->GetNext()){
   Ctl* a = DC3(&DAT_01091f0c,p);
@@ -28833,6 +29134,8 @@ struct WaterMgrW {
     bool FUN_0049a570(WaterRefW* object, const NiPointW* origin, const NiMatrixW* rotation);
 };
 
+// pdb: TESWaterSystem::AddPlaceableWater | TESWater.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apWaterRef, arPosition, arRotation
 bool WaterMgrW::FUN_0049a570(WaterRefW* object, const NiPointW* origin, const NiMatrixW* rotation)
 {
     if (!DAT_0106fdcc)
@@ -29851,6 +30154,8 @@ struct Owner
     void FUN_00484d10(void* source, void* destination);
 };
 
+// pdb: InventoryChanges::DuplicateAllItems | InventoryChanges.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apRef, apDupContainer
 void Owner::FUN_00484d10(void* source, void* destination)
 {
     if (!destination || !source)
@@ -30210,6 +30515,8 @@ struct Owner {
     void FUN_004947e0(Camera* source, Scene* scene, int unused, unsigned short index);
 };
 
+// pdb: TESWaterSystem::RenderWaterGroupStencil | TESWater.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apCamera, apWaterGroup, abClearAll, auWriteMask
 void Owner::FUN_004947e0(Camera* source, Scene* scene, int unused, unsigned short index)
 {
     if (!DAT_0106fe0c || !source)
@@ -30442,6 +30749,8 @@ struct Host {
     Resource* FUN_0049b7b0(RenderNode* node,void* source,float radius);
     void FUN_0049ba60(Point2 origin,float height,float radius);
 };
+// pdb: TESWaterSystem::AddRipple | TESWater.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arPosition, afSize
 void Host::FUN_0049ba60(Point2 origin,float height,float radius) {
     if(!DAT_0106ff64 || !DAT_0106fdb4) return;
     Point2 normalized;
@@ -30767,6 +31076,8 @@ struct TESRegion_49e490 {
     void TESForm_SetInitialized(bool b);
 };
 
+// pdb: TESRegion::Load | TESRegion.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool TESRegion_49e490::FUN_0049e490(TESFile_49e490* file)
 {
     RegionPointList_49e490* invalid;
@@ -31135,6 +31446,7 @@ struct InventoryChanges
     void FUN_00488b10();
 };
 
+// pdb: InventoryChanges::CleanUpBadData | InventoryChanges.obj | fnv360_0822_retail, call_gap_sim, low
 void InventoryChanges::FUN_00488b10()
 {
     BSSimpleList<ContainerObject*>* pkBase = GetContainer()->GetObjects();
@@ -31711,6 +32023,8 @@ bool __cdecl FUN_0048c070(Stream130* stream, unsigned char* out, unsigned int si
 int __cdecl FUN_0048be80(void* buf, unsigned int n);
 }
 
+// pdb: LipSynchAnim::LoadFromFile | LipSynchAnim.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apFile
 int __cdecl FUN_0048c130(f3m_0048c130::Stream130* s, int a2, int a3) {
     using namespace f3m_0048c130;
     if (s) {
@@ -31919,6 +32233,7 @@ public:
     void FUN_00485660();
 };
 
+// pdb: InventoryChanges::RemoveDefaultLeveledItems | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
 void Changes::FUN_00485660()
 {
     pRef->MarkAsModified(0x8000000);
@@ -31977,6 +32292,8 @@ struct Owner_0049dd70 {
     void FUN_0049dd70(float fTime, UpdateOwner* target);
 };
 
+// pdb: BSBipNode::UpdateBipOnly | BSBipNode.obj | fnv360_0822_retail, call_seq, low, conflict (bridge: Animation::UpdateBipOnly)
+// pdb params: afTime, apAccumRoot
 void Owner_0049dd70::FUN_0049dd70(float fTime, UpdateOwner* target)
 {
     *(int*)((char*)&DAT_0117c000 + 0x2a0) = 3;
@@ -32426,6 +32743,7 @@ Geometry49* FUN_004941a0(Ref49*);
 bool FUN_00493f10(Ref49*,Camera49*);
 void FUN_004943c0();
 };
+// pdb: TESWaterSystem::RenderWadingWaterStencil | TESWater.obj | fnv360_0822_retail, call_gap_sim, low
 void Owner49::FUN_004943c0() {
  Camera49 camera;
  float high=FLT_MAX;
@@ -32552,6 +32870,8 @@ struct ChangesA0 {
     EntryA0* FUN_0047e180(FormA0* f, int create, int unused);
     void FUN_00480a00(EntryA0* entry, XListA0* extra, unsigned int hotkey);
 };
+// pdb: InventoryChanges::SetHotKeyItem | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apItem, apExtra, aiKey
 void ChangesA0::FUN_00480a00(EntryA0* entry, XListA0* extra, unsigned int hotkey)
 {
     HeapCtxA0 ctx(0x36);
@@ -32651,6 +32971,8 @@ struct Owner
     void FUN_00480390(bool add, void* b, bool free);
 };
 
+// pdb: ItemChange::SetWorn | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abflag, ableft, abdelete
 void Owner::FUN_00480390(bool add, void* b, bool free)
 {
     Item* item;
@@ -32950,6 +33272,8 @@ struct InventoryOwner {
     Container* GetContainer() { return owner ? owner->FUN_004e66c0() : 0; }
     Entry* FUN_00488040(int unused, int mask, bool equipped);
 };
+// pdb: InventoryChanges::GetBestArmor | InventoryChanges.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apActorBase, aeBodySlot, abUseCanNotWear
 Entry* InventoryOwner::FUN_00488040(int unused, int mask, bool equipped)
 {
     MemoryScope scope;
@@ -33446,6 +33770,8 @@ struct Owner {
     FormMap map;
     void FUN_00496f80(Form* item);
 };
+// pdb: TESWaterSystem::RemoveTESObjectFromAllAutoWaterGroups | TESWater.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObjectRef
 void Owner::FUN_00496f80(Form* item)
 {
     KeyMap* keys = item->extra.FUN_0040e710();
@@ -34390,6 +34716,8 @@ struct InventoryChanges
                       bool bMode);
 };
 
+// pdb: InventoryChanges::AddWorn | InventoryChanges.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apObject, aiNumber, apActor, apExtra, ableft, abForceEquip
 void InventoryChanges::FUN_00480c70(TESForm* pkItem, int iCount, TESObjectREFR* pkActor, ExtraDataList* pkExtra,
                                     bool bFlag, bool bMode)
 {
@@ -34827,6 +35155,7 @@ public:
     Created49bd* FUN_0049b7b0(Data49bd* data, int unused, float scale);
     void FUN_0049bd30();
 };
+// pdb: TESWaterSystem::UpdateActorsInWater | TESWater.obj | fnv360_0822_retail, call_gap, low
 void Owner49bd::FUN_0049bd30()
 {
     Player49bd* player = DAT_0107a0d8->unk34;
@@ -35846,6 +36175,7 @@ int unk8C;
 int unk90;
 int unk94;
 int unk98; bool enabled; void FUN_00494aa0(Vec4,int); void FUN_00497f50(); };
+// pdb: TESWaterSystem::MTRenderWorldReflectionTexture | TESWater.obj | fnv360_0721_beta, objrun, medium
 void Owner::FUN_00497f50() {
  MemScope scope(29);
  if (!DAT_0106fe0c || !DAT_0106fe2c) return;
@@ -36150,6 +36480,8 @@ struct InventoryMove
     void FUN_00488760(MoveOwner* source, MoveOwner* destination, TESBoundObject* onlyForm);
 };
 
+// pdb: InventoryChanges::RemoveStolenItems | InventoryChanges.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRef, apStolenContainer, apOwner
 void InventoryMove::FUN_00488760(MoveOwner* source, MoveOwner* destination, TESBoundObject* onlyForm)
 {
     MoveItem* item = 0;
@@ -36410,6 +36742,8 @@ struct ContainerChanges {
 // Calls callback(entry, param) for every inventory entry: first the base container items that have
 // no changed entry, then the changed entries with their total count; stops when the callback
 // returns true. Returns the number of entries visited.
+// pdb: InventoryChanges::IterateInventory | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCallback, apData, aiIterateFlags
 int ContainerChanges::FUN_00486ad0(EntryCallback callback, void* param, int flags)
 {
     int count = 0;
@@ -37536,6 +37870,8 @@ struct Owner {
     void FUN_00498cf0(Camera* camera, bool force);
 };
 
+// pdb: TESWaterSystem::UpdatePlaceableWater | TESWater.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apCamera, abForceUpdate
 void Owner::FUN_00498cf0(Camera* camera, bool force)
 {
     bool anyVisible = false;
@@ -37956,6 +38292,8 @@ extern float DAT_00f60c30;   // fBloodSplatterMaxOpacity2
 extern float DAT_00f60c3c;   // fBloodSplatterOpacityChance
 extern float DAT_00f60c54;   // fBloodSplatterFlareSize
 
+// pdb: ScreenSplatter::CreateGeometry | ScreenSplatter.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: auiCount
 Node* __cdecl FUN_00491ee0(unsigned int count)
 {
     Node* node = new Node(0);
@@ -38719,6 +39057,8 @@ struct Inventory4877 {
     int InventoryChanges_GetObjectCount(Item4877*);
     Entry4877* FUN_004877e0(Ref4877*,float*,int,bool);
 };
+// pdb: InventoryChanges::GetBestWeapon | InventoryChanges.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apActorBase, afvalue, aeType, abUseCanNotWear
 Entry4877* Inventory4877::FUN_004877e0(Ref4877* actor,float* out,int category,bool useSelected) {
     ScopedContext context(0x36);
     float bestScore=0.0f;
@@ -39127,6 +39467,8 @@ struct InventoryChanges
     void FUN_0048b4f0(InvRef* apRef, int aiCount, int aiUnused, bool abWorn);
 };
 
+// pdb: InventoryChanges::AddItem | InventoryChanges.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apObject, ainumber, abAddRefId, abWearit
 void InventoryChanges::FUN_0048b4f0(InvRef* apRef, int aiCount, int aiUnused, bool abWorn)
 {
     InvMemContext kContext(0x36);
@@ -39903,6 +40245,8 @@ public:
     void FUN_00498350(FUN_0083b6d0* input, WaterState* state);
 };
 
+// pdb: TESWaterSystem::MTSetupSelectiveDepthTexture | TESWater.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCamera, apWaterGroup
 void Owner::FUN_00498350(FUN_0083b6d0* input, WaterState* state)
 {
     HeapContext context;
@@ -40075,6 +40419,8 @@ struct ItemList {
     }
     ItemList* FUN_0049fb90(ItemList* dest);
 };
+// pdb: TESRegionDataList::Copy | TESRegionDataList.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCopyIntoList
 ItemList* ItemList::FUN_0049fb90(ItemList* dest)
 {
     Node* node = &head;
@@ -40360,6 +40706,8 @@ struct InventoryChanges
     void FUN_00485e90(InventoryChanges* apCopy, TESObjectREFR* apRef, bool bdontcopyquestitems);
 };
 
+// pdb: InventoryChanges::CreateCopyofList | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCopy, apRef, bdontcopyquestitems
 void InventoryChanges::FUN_00485e90(InventoryChanges* apCopy, TESObjectREFR* apRef, bool bdontcopyquestitems)
 {
     MemContext tempMemContext(0x36);
@@ -40910,6 +41258,8 @@ struct InventoryChanges
     void FUN_00487210(TESForm* apObject, ExtraDataList* apExtra, int ainumber);
 };
 
+// pdb: InventoryChanges::AddItem | InventoryChanges.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apObject, pextra, ainumber
 void InventoryChanges::FUN_00487210(TESForm* apObject, ExtraDataList* apExtra, int ainumber)
 {
     MemContext tempMemContext(0x36);
@@ -41263,6 +41613,8 @@ struct InventoryChanges
     EntryData* FUN_00484430(int requested);
 };
 
+// pdb: InventoryChanges::GetItembyIndex | InventoryChanges.obj | fnv360_0822_debug, caller, medium
+// pdb params: aiIndex
 EntryData* InventoryChanges::FUN_00484430(int requested)
 {
     MemContext context(0x36);
@@ -41506,6 +41858,8 @@ struct LipTable : f3m_0048ba20::Table_48ba20 {
 using namespace f3w_48be80;
 
 namespace f3m_0048c130 {
+// pdb: LipSynchAnim::Scatter | LipSynchAnim.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: pBuffer, nBufferSize
 int __cdecl FUN_0048be80(void* buf, unsigned int size) {
     unsigned int* data = (unsigned int*)buf;
     if (!data || !size || size < 4)
@@ -41564,6 +41918,7 @@ struct Target {
     ~Target();
     void* FUN_00491890(unsigned int flags);
 };
+// pdb: BSSplatterExtraData::`scalar deleting destructor' | ScreenSplatter.obj | fnv360_0822_retail, vtable, medium
 void* Target::FUN_00491890(unsigned int flags) {
     this->~Target();
     if (flags & 1) {
@@ -41586,6 +41941,7 @@ struct Holder {
     static void operator delete(void* p) { DAT_01090a78.FUN_0086ba60(p); }
 };
 extern Holder* DAT_0106fcf0;
+// pdb: BSSplatterExtraData::KillSDM | ScreenSplatter.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BSRandom::Bool)
 void __cdecl FUN_004918b0() {
     delete DAT_0106fcf0;
     DAT_0106fcf0 = 0;
@@ -41926,6 +42282,8 @@ inline void SetGamma(float value) {
     }
 }
 
+// pdb: Renderer::Init | Renderer.obj | fnv360_0822_retail, ustr, low, conflict (F3 string "NiXAdapaterDesc::GetDeviceCaps() failed.")
+// pdb params: ahWnd, ahInstance
 Renderer* __cdecl FUN_00490420(HWND window, HINSTANCE instance)
 {
     MemoryContext context(4);

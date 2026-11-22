@@ -3,6 +3,8 @@
 #include "niscreenelementsdata_decls.h"
 
 // @fnv 0x00a88020
+// pdb: NiScreenElementsData::SetRectangle | NiScreenElementsData.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: iPolygon, fLeft, fTop, fWidth, fHeight
 bool NiScreenElementsData::SetRectangle(int iPolygon, float fLeft, float fTop, float afWidth, float afHeight)
 {
     if (iPolygon < 0 || iPolygon >= m_usMaxPQuantity)
@@ -37,6 +39,8 @@ bool NiScreenElementsData::SetRectangle(int iPolygon, float fLeft, float fTop, f
 }
 
 // @fnv 0x00a88130
+// pdb: NiScreenElementsData::SetTextures | NiScreenElementsData.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: iPolygon, usSet, fLeft, fTop, fRight, fBottom
 bool NiScreenElementsData::SetRectangleBounds(int iPolygonIndex, unsigned short usTextureSetIndex, float fLeft,
                                               float fTop, float fRight, float fBottom)
 {
@@ -75,6 +79,7 @@ struct Holder00a87aa0
 };
 // Frees the two pointers at offsets 0x58 and 0x5c, calls FUN_00a7b8c0 on this, and deletes this (0x70 bytes) when f has bit 0 set.
 // @fnv 0x00a87aa0
+// pdb: NiScreenElementsData::`scalar deleting destructor' | NiScreenElementsData.obj | fnv360_0822_retail, objrun, high
 void* Holder00a87aa0::Destroy(unsigned int auiFlags)
 {
     void* p = *(void**)((char*)this + 0x58);
@@ -125,6 +130,8 @@ struct NiScreenElementsDataShell : NiScreenElementsData
 };
 
 // @fnv 0x00a87ae0
+// pdb: NiScreenElementsData::Insert | NiScreenElementsData.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: usNumVertices, usNumTriangles, ausTriList
 unsigned int NiScreenElementsDataShell::FUN_00a87ae0(unsigned short usVertexCount, unsigned short usTriangleCount,
                                                      const unsigned short* pusTriangleList)
 {
@@ -344,6 +351,8 @@ static inline NiPoint3 NegatePoint(const NiPoint3& p)
 
 // Initialises the screen-elements data: allocates polygon, indexer, vertex, normal, colour and texture arrays from the given capacities and clears the counts.
 // @f3 0x00852a30 (community match, verified in this file)
+// pdb: NiScreenElementsData::NiScreenElementsData | NiScreenElementsData.obj | fnv360_0822_retail, call_gap, high
+// pdb params: bWantNormals, bWantColors, usNumTextureSets, iMaxPQuantity, iPGrowBy, iMaxVQuantity, iVGrowBy, iMaxTQuantity, iTGrowBy
 FUN_00a881e0::FUN_00a881e0(bool bWantNormals, bool bWantColors, unsigned short usNumTextureSets, int iMaxPQuantity,
                            int iPGrowBy, int iMaxVQuantity, int iVGrowBy, int iMaxTQuantity, int iTGrowBy)
 {
@@ -437,6 +446,8 @@ struct FUN_00a88410_shell : NiScreenElementsData
     void LoadScreenElementsData(NiStream485& kStream);
 };
 // @fnv 0x00a88410
+// pdb: NiScreenElementsData::LoadBinary | NiScreenElementsData.obj | fnv360_0822_retail, objrun, high
+// pdb params: kStream
 void FUN_00a88410_shell::LoadScreenElementsData(NiStream485& kStream)
 {
     NiTriShapeData_LoadBinary(kStream);
@@ -518,6 +529,8 @@ struct FUN_00a88590_shell : public NiScreenElementsData
 };
 // Writes the base screen elements data and the polygon, indexer and quantity fields to the binary stream.
 // @fnv 0x00a88590
+// pdb: NiScreenElementsData::SaveBinary | NiScreenElementsData.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void FUN_00a88590_shell::WriteToStream(NiStream& kStream)
 {
     ((FUN_00a7bbe0_shell*)this)->NiTriShapeData_SaveBinary(&kStream);
@@ -546,6 +559,8 @@ struct FUN_00a87980_shell : public NiScreenElementsData
 
 // Compares this NiScreenElementsData with pkOther, checking base equality, quantity fields, polygon data, and polygon index arrays.
 // @fnv 0x00a87980
+// pdb: NiScreenElementsData::IsEqual | NiScreenElementsData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pkObject
 bool FUN_00a87980_shell::FUN_00a87980(const FUN_00a87980_shell* pkOther)
 {
     if (!((TriShapeDataEq*)this)->IsEqualBase((const TriShapeDataEq*)pkOther))

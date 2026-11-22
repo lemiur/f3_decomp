@@ -243,6 +243,8 @@ struct D057A0Queue
 };
 
 // @fnv 0x00d057a0
+// pdb: hkJobQueue::DynamicData::operator new | hkJobQueue.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: hkQueue<struct hkJobQueue::JobQueueEntry>::enqueue)
+// pdb params: nbytes
 void D057A0Queue::FUN_00d057a0(const D057A0Element& element)
 {
     if (m_iNodeCount >= m_pRayCursor)
@@ -278,6 +280,8 @@ struct ItemPool
 
 // Grows the pool if full, then stores item at the next free slot and increments the count.
 // @fnv 0x00d057f0
+// pdb: hkJobQueue::addJobQueueLocked | hkJobQueue.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: data, job, priority
 void ItemPool::FUN_00d057f0(const Item& item)
 {
     if (m_uiItemCount >= m_pRayCursor)
@@ -603,6 +607,8 @@ struct S_00d056a0_Heap
 };
 extern "C" void __cdecl FUN_009234e0(void* dst, const void* src, int nbytes);
 
+// pdb: hkQueue<hkJobQueue::JobQueueEntry>::setCapacity | hkJobQueue.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: n
 void hkQueue128::FUN_00d056d0(int aiMinCapacity)
 {
     if (m_pRayCursor < aiMinCapacity)

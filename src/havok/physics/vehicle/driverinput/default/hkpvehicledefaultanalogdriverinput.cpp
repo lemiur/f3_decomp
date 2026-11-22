@@ -45,6 +45,8 @@ struct NiPlaybackFile
     bool FUN_007fa880(const char* path, bool quiet, bool option, bool sample);
 };
 
+// pdb: Movie::LoadBink | MoviePlayer_Xenon.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apFileName, abSkipWarning, abPreloadBink, abLetterBoxed
 bool NiPlaybackFile::FUN_007fa880(const char* path, bool quiet, bool option, bool sample)
 {
     if (!source && !FUN_007fa6c0(path, quiet, option, false))

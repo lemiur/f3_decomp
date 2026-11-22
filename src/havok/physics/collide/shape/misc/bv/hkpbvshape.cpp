@@ -27,12 +27,15 @@ struct FUN_00c9d970_class
 };
 
 // @fnv 0x00c9d970
+// pdb: hkpBvShape::getAabbImpl | hkpBvShape.obj | fnv360_0822_retail, objrun, high
+// pdb params: localToWorld, tolerance, out
 void FUN_00c9d970_class::DispatchShapeMethod7(int value, float currentTime, void* queryFilter)
 {
     shape->method7(value, currentTime, queryFilter);
 }
 
 // @fnv 0x00c9d8b0
+// pdb: std::basic_streambuf<char,std::char_traits<char> >::_Lock | algs.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: std::basic_streambuf<char,struct std::char_traits<char> >::overflow)
 int __stdcall FUN_00c9d8b0(int a1)
 {
     return -1;
@@ -44,6 +47,7 @@ struct hkpBvShapeContainerView : hkpBvShape
 };
 
 // @fnv 0x00c9d920
+// pdb: NonActorMagicTarget::GetActiveEffectList | NonActorMagicTarget.obj | fnv360_0822_retail, vtable, medium
 hkpSingleShapeContainer* hkpBvShapeContainerView::FUN_00c9d920()
 {
     return &m_pContainedShape;
@@ -119,6 +123,8 @@ struct Rs_c9d9e0_Self
 
 // Wraps m_pChildAtom->V20 in timer records and a counter increment/decrement on o; zeroes o->unk00[counter + 8] afterwards if *ret is nonzero; returns ret.
 // @fnv 0x00c9d9e0
+// pdb: hkpBvShape::castRayImpl | hkpBvShape.obj | fnv360_0822_retail, objrun_sim, medium
+// pdb params: input, results
 char* Rs_c9d9e0_Self::FUN_00c9d9e0(char* ret, int a, Rs_c9d9e0_Input* o)
 {
     static_cast<Rs_c9d9e0_Stream*>(TlsGetValue(DAT_0126835c))->timer(str_010c7024);
@@ -279,6 +285,8 @@ __forceinline void FUN_00c9da80_cls::FUN_00c9da80(const void* pkInput, const hkp
 
 
 }
+// pdb: hkpBvShape::castRayWithCollectorImpl | hkpBvShape.obj | fnv360_0822_retail, objrun_sim, medium
+// pdb params: input, cdBody, collector
 void FUN_00c9da80_cls::FUN_00c9da80(const void* input,const hkpCdBody_c9da80& parent,void* collector)const{reinterpret_cast<const Native1441::FUN_00c9da80_cls*>(this)->FUN_00c9da80(input,reinterpret_cast<const Native1441::hkpCdBody_c9da80&>(parent),collector);}
 
 
@@ -306,6 +314,7 @@ struct C9D930View
     FUN_009316f0_cls* unk18;
     FUN_009316f0_cls* unk1c;
 };
+// pdb: hkpBinaryAction::~hkpBinaryAction | hkpBinaryAction.obj | fnv360_0822_retail, call_seq, high
 void BvShapeReleaseView::FUN_00c9d930()
 {
     C9D930View* self = (C9D930View*)this;

@@ -5,6 +5,8 @@
 #include "niblendtransforminterpolator_NiObjectNET.h"
 
 // @fnv 0x00a41110
+// pdb: NiBlendTransformInterpolator::Update | NiBlendTransformInterpolator.obj | fnv360_0822_retail, objrun_prop, high
+// pdb params: fTime, pkInterpTarget, kValue
 bool NiBlendTransformInterpolator::Update(float fTime, NiObjectNET* pkObject, NiQuatTransform& kTransform)
 {
     bool bSuccess = false;
@@ -67,6 +69,8 @@ class FUN_00a40980 : public FUN_00a40980_base
 
 // Forwards the three constructor arguments to the base class constructor.
 // @fnv 0x00a40980
+// pdb: NiBlendTransformInterpolator::NiBlendTransformInterpolator | NiBlendTransformInterpolator.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: bManagerControlled, fWeightThreshold, ucArraySize
 FUN_00a40980::FUN_00a40980(int a, float b, int c) : FUN_00a40980_base(a, b, c)
 {}
 
@@ -99,6 +103,8 @@ struct FUN_00a40a50_cls : NiUpdateOwner_b9169
 };
 
 // @fnv 0x00a40a50
+// pdb: NiBlendTransformInterpolator::CreateClone | NiBlendTransformInterpolator.obj | fnv360_0822_retail, objrun, high
+// pdb params: kCloning
 NiBlendObject_b9169* FUN_00a40a50_cls::CreateBlendObject(int aiValue)
 {
     NiBlendObject_b9169* p = new NiBlendObjectDerived_b9169();
@@ -192,6 +198,8 @@ class QuatBlockArg
 };
 
 // @fnv 0x00a40ab0
+// pdb: NiBlendTransformInterpolator::LoadBinary | NiBlendTransformInterpolator.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void __stdcall FUN_00a40ab0(FUN_00a40ab0_obj* a1)
 {
     FUN_00a37980(a1);
@@ -240,6 +248,8 @@ void __stdcall FUN_00a38080(AGViewerStrings* pkStrings);
 const char* __cdecl FUN_00a7d330(const char* pcText);
 
 // @fnv 0x00a41170
+// pdb: NiVertWeightsExtraData::GetViewerStrings | NiVertWeightsExtraData.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pStrings
 void __stdcall FUN_00a41170(AGViewerStrings* pkStrings)
 {
     FUN_00a38080(pkStrings);
@@ -249,6 +259,7 @@ void __stdcall FUN_00a41170(AGViewerStrings* pkStrings)
 void __cdecl FUN_00a37510();
 
 // @fnv 0x00a40aa0
+// pdb: ExteriorCellLoader::CancelAllCellLoads | ExteriorCellLoader.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_00a40aa0()
 {
     FUN_00a37510();
@@ -371,6 +382,8 @@ struct BlendTransformInterpolator : NiBlendTransformInterpolator
 };
 // Blends available interpolator components into output, normalizing translation and scale by their weights and rotation by its length.
 // @fnv 0x00a40c10
+// pdb: NiBlendTransformInterpolator::BlendValues | NiBlendTransformInterpolator.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: fTime, pkInterpTarget, kValue
 bool BlendTransformInterpolator::FUN_00a40c10(float time, NiObjectNET* object, BlendTransform& output)
 {
     float translationWeight = 1.0f;

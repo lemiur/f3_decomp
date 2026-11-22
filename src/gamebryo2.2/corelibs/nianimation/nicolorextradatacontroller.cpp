@@ -15,6 +15,7 @@ struct FUN_00a4fb10_shell
 };
 
 // @fnv 0x00a4fb10
+// pdb: NiGeometryData::`scalar deleting destructor' | NiGeometryData.obj | fnv360_0822_retail, objrun_prop, high
 void* __thiscall FUN_00a4fb10_shell::FUN_00a4fb10(int aiFlags)
 {
     FUN_00a572d0();
@@ -55,6 +56,8 @@ struct Holder_00a55f80
     void* __thiscall FUN_00a55f80(int, float, int);
 };
 // @fnv 0x00a4fa70
+// pdb: NiColorExtraDataController::CreateBlendInterpolator | NiColorExtraDataController.obj | fnv360_1110_retail, objopen_prop, low
+// pdb params: usIndex, bManagerControlled, bAccumulateAnimations, fWeightThreshold, ucArraySize
 void* __stdcall FUN_00a4fa70(int a1, int a2, int a3, float a4, int a5)
 {
     void* p = BSFadeNode::operator new(0x44);
@@ -157,6 +160,8 @@ struct InterpVT_00a4faa0
 
 // Calls IsCorrectType on the interpolator's vtable and returns the result, ignoring the index.
 // @fnv 0x00a4faa0
+// pdb: NiColorExtraDataController::InterpolatorIsCorrectType | NiColorExtraDataController.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: pkInterpolator, usIndex
 bool __stdcall FUN_00a4faa0(NiInterpolator* pkInterpolator, unsigned short usIndex)
 {
     return reinterpret_cast<InterpVT_00a4faa0*>(pkInterpolator)->IsCorrectType();
@@ -179,6 +184,8 @@ struct FUN_00a4fb80_cls
 
 // Allocates a 0x40-byte object, initialises it with InitTimeController and a vtable, then calls FUN_00c312f0 with arg and returns it.
 // @fnv 0x00a4fb80
+// pdb: NiColorExtraDataController::CreateClone | NiColorExtraDataController.obj | fnv360_1110_retail, objrun, high
+// pdb params: kCloning
 FUN_00a4fb80_obj* FUN_00a4fb80_cls::CreateObject(unsigned int arg)
 {
     FUN_00a4fb80_obj* p = (FUN_00a4fb80_obj*)FUN_00aa13e0(0x40);
@@ -333,6 +340,8 @@ class NiColorControllerA4F : public NiTimeControllerA4F
 };
 
 // @fnv 0x00a4fce0
+// pdb: NiColorExtraDataController::Update | NiColorExtraDataController.obj | fnv360_0822_retail, objrun_open, high
+// pdb params: UpdateData
 void NiColorControllerA4F::UpdateColorController(NiUpdateDataA4F& kUpdateData)
 {
     if (GetManagerControlled())
@@ -359,6 +368,8 @@ void NiColorControllerA4F::UpdateColorController(NiUpdateDataA4F& kUpdateData)
 extern "C" void __cdecl IsEquivalent();
 
 // @fnv 0x00a4faf0
+// pdb: Interface::SetEnemyActor | Interface.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apActor
 void __cdecl FUN_00a4faf0()
 {
     IsEquivalent();

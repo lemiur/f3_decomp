@@ -212,6 +212,7 @@ struct SlotHolderOrig
     void FUN_008f6960(int index);
 };
 
+// pdb: hkStatisticsCollector::`vector deleting destructor' | hkStatisticsCollector.obj | tesv_win, objrun_open, low
 void FUN_00d2c7a0_class::FUN_00d2c7a0()
 {
     SlotHolderOrig* self = (SlotHolderOrig*)this;

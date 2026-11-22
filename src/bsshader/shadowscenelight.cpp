@@ -4,6 +4,8 @@
 
 // If object has a node with a world bound and radius, dispatches it to one of two handlers; otherwise forwards tri-based geometry to AddGeometry.
 // @fnv 0x00ba0110
+// pdb: ShadowSceneLight::AddObject | ShadowSceneLight.obj | fnv360_0721_beta, caller, low
+// pdb params: apAVObject
 void ShadowSceneLight::AddObject(NiAVObject* object)
 {
     if (object)
@@ -35,6 +37,8 @@ void ShadowSceneLight::AddObject(NiAVObject* object)
 }
 
 // @fnv 0x00b9f6a0
+// pdb: ShadowSceneLight::ParseObjectAddRadius | ShadowSceneLight.obj | fnv360_0822_retail, call_seq, high
+// pdb params: apObject
 void ShadowSceneLight::AddShadowObject(NiAVObject* object)
 {
     unsigned int active = m_kFrustumPlanes.m_uiActivePlaneMask;
@@ -71,6 +75,8 @@ done:
     m_kFrustumPlanes.m_uiActivePlaneMask = active;
 }
 // @fnv 0x00b9f5b0
+// pdb: ShadowSceneLight::ParseObjectAddFrustum | ShadowSceneLight.obj | fnv360_0822_retail, call_seq, high
+// pdb params: apObject
 void ShadowSceneLight::ProcessShadowObject(NiAVObject* object)
 {
     unsigned int active = m_kFrustumPlanes.m_uiActivePlaneMask;
@@ -117,6 +123,7 @@ __forceinline void ShadowMatrixIdentity(D3DXMATRIX& m)
     m._11 = m._22 = m._33 = m._44 = 1.0f;
 }
 // @fnv 0x00b9fda0
+// pdb: ShadowSceneLight::ShadowSceneLight | ShadowSceneLight.obj | fnv360_0822_retail, call_seq, medium
 ShadowSceneLight::ShadowSceneLight()
 {
     m_fShadowParameter3 = 0.0f;
@@ -170,6 +177,7 @@ static __forceinline int IsShaderPropRange_b20af0(char* prop)
     unsigned int t = *(unsigned int*)(prop + 0x1c);
     return t >= 1 && t <= 11;
 }
+// pdb: ShadowSceneLight::ClearRenderPasses | ShadowSceneLight.obj | fnv360_0822_retail, call_seq, medium
 void __fastcall ClearShaderPropRefs(char* self)
 {
     Node_00b9e770* pNode = *(Node_00b9e770**)(self + 0x138);
@@ -238,6 +246,7 @@ struct SsArr
 };
 // Destructs the SsArr object, frees its data block, and deallocates the object itself when flags has bit 0 set.
 // @fnv 0x00b9e920
+// pdb: BSSimpleArray<TESBoundObject *,1024>::`scalar deleting destructor' | ExtraDataList.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: TESObjectREFR::SetVisibleDistant)
 SsArr* __fastcall DestroySsArr(SsArr* p, int, unsigned int flags)
 {
     p->SsArr::~SsArr();
@@ -254,6 +263,7 @@ struct GlobalObjectO2_00b9fda0
 };
 
 // @fnv 0x00ba00e0
+// pdb: ShadowSceneLight::`scalar deleting destructor' | ShadowSceneLight.obj | fnv360_0822_retail, caller_sim, medium
 GlobalObjectO2_00b9fda0* __fastcall FUN_00ba00e0(GlobalObjectO2_00b9fda0* this_ptr, int /*edx*/, int param2)
 {
     this_ptr->~GlobalObjectO2_00b9fda0();
@@ -300,6 +310,7 @@ struct FUN_00b9e7c0_list
 };
 
 // @fnv 0x00b9e7c0
+// pdb: NiTPointerListBase<NiTPointerAllocator<unsigned int>,NiPointer<NiProperty> >::RemoveHead | BSFaceGenManager.obj | fnv360_0822_retail, call_seq, high
 RefPtr_b9e7c0 FUN_00b9e7c0_list::PopFront()
 {
     ListItem_b9e7c0* pkNode = m_pkHead;
@@ -378,6 +389,8 @@ struct List_b9fcc0
 };
 
 // @fnv 0x00b9fcc0
+// pdb: NiTPointerListBase<NiTPointerAllocator<unsigned int>,NiPointer<NiProperty> >::Remove | BSFaceGenManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: element
 RefPtr_b9fcc0 List_b9fcc0::FUN_00b9fcc0(const RefPtr_b9fcc0& element)
 {
     void* kPos = FindPos(element);
@@ -422,6 +435,7 @@ struct FUN_00b9e850_list
 };
 
 // @fnv 0x00b9e850
+// pdb: NiTPointerListBase<NiTPointerAllocator<unsigned int>,NiPointer<NiProperty> >::RemoveTail | BSFaceGenManager.obj | fnv360_0822_retail, call_seq, high
 RefPtr_b9e850 FUN_00b9e850_list::PopBack()
 {
     ListItem_b9e850* pkNode = m_pkTail;
@@ -498,6 +512,7 @@ struct FUN_00b9fba0_s
     void FUN_00b9fba0();
 };
 // @fnv 0x00b9fba0
+// pdb: ShadowSceneLight::InsertUnusedFence | ShadowSceneLight.obj | fnv360_0822_retail, call_gap, low
 void FUN_00b9fba0_s::FUN_00b9fba0()
 {
     char* self = reinterpret_cast<char*>(this);
@@ -572,6 +587,8 @@ struct FUN_00b9bc50_t
 
 // Computes a light's attenuation at apPoint from its dimmed color and distance/radius falloff, storing and returning the result at this+0xc.
 // @fnv 0x00b9bc50
+// pdb: ShadowSceneLight::GetLuminanceAtPoint | ShadowSceneLight.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apPoint, apIgnore
 float FUN_00b9bc50_t::ComputeLightAttenuation(V3 apPoint, NiLight* apIgnore)
 {
     char* pkLight = *(char**)((char*)this + 0xf8);
@@ -697,6 +714,7 @@ struct FUN_00b9f0c0_cls : public NiRefObject
 };
 
 // @fnv 0x00b9f0c0
+// pdb: ShadowSceneLight::~ShadowSceneLight | ShadowSceneLight.obj | fnv360_0822_retail, caller_sim, low
 FUN_00b9f0c0_cls::~FUN_00b9f0c0_cls()
 {
     ((LightD*)this)->FUN_00b9ef30();
@@ -1131,6 +1149,7 @@ void FUN_00b6c0d0(LightView*, AccumulatorView*, int);
 void FUN_00b71360(unsigned int, WaterView*, float);
 void FUN_00b6b790();
 // @fnv 0x00bd77c0
+// pdb: BSCubeMapCamera::ClickCubeMap | BSCubeMapCamera.obj | fnv360_1110_retail, call_seq, medium
 void LightView::RenderFaces()
 {
     Color4 old = DAT_011a9bd0;
@@ -1353,6 +1372,7 @@ class RestartMultiBoundLayout
     RemovalList pending;
     ActiveList active;
 };
+// pdb: BSTextureManager::BorrowFrustumShadowTexture | BSTextureManager.obj | fnv360_0822_retail, call_gap, medium
 NiRefObject* MultiBoundLists::ActivatePending()
 {
     RestartMultiBoundLayout* layout = reinterpret_cast<RestartMultiBoundLayout*>(this);
@@ -1575,6 +1595,8 @@ struct RemovalList
 
 // Removes the ListItem_b9fcc0 at position, updating the position pointer to the next item, and returns the removed RefPtr_b9fcc0 element.
 // @fnv 0x00b9efa0
+// pdb: NiTPointerListBase<NiTPointerAllocator<unsigned int>,NiPointer<NiAVObject> >::RemovePos | BSPortalGraph.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: kPos
 RefPtr_b9fcc0 RemovalList::FUN_00b9efa0(void*& position)
 {
     ListItem_b9fcc0* item = (ListItem_b9fcc0*)position;
@@ -1955,6 +1977,8 @@ struct Property504 {
 };
 struct List504 {void FUN_00af2fb0(Node_b9f480*,Node_b9f480*);void FUN_00af0680(GeomHolder_b9f480*);};
 extern NiBound DAT_0108edc8;
+// pdb: ShadowSceneLight::AddTriGeom | ShadowSceneLight.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTriGeom
 void ShadowSceneLight_b9f480::AddGeometry(Geom_b9f480* geometry) {
     static GeomHolder_b9f480 shared;
     if(geometry->pShader && reinterpret_cast<unsigned int>(CastShader504(geometry->pShader))!=0) {
@@ -2919,6 +2943,8 @@ struct ShadowPass : ShadowSceneLight
 };
 // Renders the shadow pass by setting up the shadow matrices from the light and camera, then applies the image space effect to the light rendered texture.
 // @fnv 0x00b9f780
+// pdb: ShadowSceneLight::MTRenderFrustumDepthMap | ShadowSceneLight.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arCuller, aiIndex
 void ShadowPass::FUN_00b9f780(PassContext* context, int pass)
 {
     g_01200088.FUN_00ba3130(1, pass + 17);
@@ -3363,6 +3389,8 @@ static inline int IsLightingShader(ShaderDirtyView_b9e* prop)
     int type = prop->type;
     return type >= 1 && type <= 11;
 }
+// pdb: ShadowSceneLight::TestFrustumCull | ShadowSceneLight.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arCuller
 void ShadowUpdate_b9e::FUN_00b9e970(CameraCullView_b9e* camera)
 {
     task1896::LightView* self = reinterpret_cast<task1896::LightView*>(this);

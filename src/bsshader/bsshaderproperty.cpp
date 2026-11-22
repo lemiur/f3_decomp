@@ -4,6 +4,8 @@
 
 // Initializes the shader property with geometry, pass, first-pass flag, light count, and copies the given lights into a newly allocated array.
 // @fnv 0x00ba8ec0
+// pdb: BSShaderProperty::RenderPass::RenderPass | BSShaderProperty.obj | fnv360_0822_retail, call_seq, medium, conflict (skyrim: BSLightingShaderMaterialBase::GetTextures)
+// pdb params: apGeometry, ausPassEnum, abFirstPass, ausNumLights, apSceneLight
 BSShaderProperty::ShaderPassEntry::ShaderPassEntry(NiGeometry* geometry, unsigned short passEnum, bool firstPass,
                                                    unsigned char numLights, ShadowSceneLight* light0, ...)
 {
@@ -27,6 +29,8 @@ BSShaderProperty::ShaderPassEntry::ShaderPassEntry(NiGeometry* geometry, unsigne
 }
 
 // @fnv 0x00ba9ee0
+// pdb: BSShaderProperty::RenderPassArray::Add | BSShaderProperty.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apGeometry, ausPassEnum, abFirstPass, ausNumLights, apSceneLight, apSceneLight1, apSceneLight2, apSceneLight3
 void BSShaderProperty::ShaderPassList::Add(NiGeometry* geometry, unsigned short passEnum, bool firstPass,
                                            unsigned char numLights, ShadowSceneLight* light0, ShadowSceneLight* light1,
                                            ShadowSceneLight* light2, ShadowSceneLight* light3)
@@ -57,6 +61,8 @@ struct FUN_00ba8ab0_shell : public BSShaderProperty
 
 // Resets the int at offset 0x38 when the stored float at 0x28 crosses the 1.0 threshold, then stores afAlpha at 0x28.
 // @fnv 0x00ba8ab0
+// pdb: BSShaderProperty::SetAlpha | BSShaderProperty.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: afAlpha
 void FUN_00ba8ab0_shell::FUN_00ba8ab0(float afAlpha)
 {
     if ((*(float*)((char*)this + 0x28) >= 1.0f && afAlpha < 1.0f) ||
@@ -69,6 +75,7 @@ void FUN_00ba8ab0_shell::FUN_00ba8ab0(float afAlpha)
 
 // Resets the count at offset 4, frees the light pointer at offset 0xC if set, and clears the byte at offset 0xB.
 // @fnv 0x00ba8cd0
+// pdb: BSShaderProperty::RenderPass::~RenderPass | BSShaderProperty.obj | fnv360_0822_retail, call_gap, low
 void __fastcall FUN_00ba8cd0(char* pThis)
 {
     *(unsigned short*)(pThis + 4) = 0;
@@ -90,6 +97,7 @@ void __fastcall FUN_00ba9520(void* pThis);
 
 // Clears the int at offset 0x38, then for each pointer at offsets 0x3c-0x54 calls FUN_00ba9520, deallocates it via g_memoryManager and nulls it.
 // @fnv 0x00baa000
+// pdb: BSShaderProperty::FreeRenderPasses | BSShaderProperty.obj | fnv360_0822_retail, call_dedup, medium
 void FUN_00baa000_shell::FUN_00baa000()
 {
     char* self = reinterpret_cast<char*>(this);
@@ -177,6 +185,8 @@ struct BSSP_stub4 : NiObject_stub
     float m_fFogDepth;
 };
 // @fnv 0x00ba8b10
+// pdb: BSShaderProperty::CopyMembers | BSShaderProperty.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: pDest, arCloneData
 void __fastcall FUN_00ba8b10(BSSP_stub4* self, int, BSSP_stub4* dst, int arg)
 {
     self->FUN_00a81430(dst, arg);
@@ -191,6 +201,8 @@ void __fastcall FUN_00ba8b10(BSSP_stub4* self, int, BSSP_stub4* dst, int arg)
 
 extern bool DAT_0120045c;
 // @fnv 0x00ba8b60
+// pdb: Script::SetProcessScripts | TESScript.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: abProcessScripts
 void __cdecl FUN_00ba8b60(bool v)
 {
     DAT_0120045c = v;
@@ -198,6 +210,7 @@ void __cdecl FUN_00ba8b60(bool v)
 
 extern bool DAT_0120045d;
 // @fnv 0x00ba8b70
+// pdb: BSShaderProperty::PreviousTransform::ToggleConsole | BSShaderProperty.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: BSLightingShaderMaterialBase::QDefault)
 void __cdecl ToggleGlobalFlag()
 {
     DAT_0120045d = !DAT_0120045d;
@@ -215,6 +228,8 @@ struct BSSP_stub : NiObjectNET_stub
     float m_depth;
 };
 // @fnv 0x00ba8be0
+// pdb: BSShaderProperty::PostLinkObject | BSShaderProperty.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kStream
 void __fastcall FUN_00ba8be0(BSSP_stub* self, int, int arg)
 {
     self->FUN_00a5c6a0(arg);
@@ -237,6 +252,8 @@ struct BSSP_stub2
 };
 // Allocates an array of n AllocElem objects and stores its pointer in self->m_p.
 // @fnv 0x00ba8c00
+// pdb: BSShaderProperty::RenderPass::AllocateLightArray | BSShaderProperty.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aucNumLights
 void __fastcall AllocateElemArray(BSSP_stub2* self, int, unsigned char n)
 {
     self->m_p = new AllocElem[n];
@@ -249,6 +266,7 @@ struct FUN_00ba8c30_shell2
     void FUN_00ba8c30();
 };
 // @fnv 0x00ba8c30
+// pdb: BSShaderProperty::RenderPass::FreeLightArray | BSShaderProperty.obj | fnv360_0822_retail, call_gap, medium
 void __fastcall FUN_00ba8c30(FUN_00ba8c30_shell2* self, int)
 {
     if (self->m_p)
@@ -274,6 +292,7 @@ struct NiShadeProperty
 };
 // Calls DestroyFogProperty on this, frees this with _delete when flags has bit 0 set, and returns this.
 // @fnv 0x00a81460
+// pdb: NiShadeProperty::`vector deleting destructor' | NiShadeProperty.obj | tesv_win, objrun_open, low
 void* NiShadeProperty::Destroy(unsigned int flags)
 {
     DestroyFogProperty(this);
@@ -378,6 +397,7 @@ struct FUN_00ba8e50_cls : FUN_00ba8e50_base
 // Initializes the object: calls InitBase, sets the vtable pointer, and zeroes or defaults the member fields, returning this.
 // @f3 0x00b2afb0 (community match, verified in this file)
 extern int DAT_00e9ef88;
+// pdb: BSShaderProperty::BSShaderProperty | BSShaderProperty.obj | fnv360_0822_retail, call_seq, medium
 FUN_00ba8e50_cls* FUN_00ba8e50_cls::FUN_00ba8e50()
 {
     InitBase();
@@ -416,6 +436,8 @@ class FUN_00ba8b80
 };
 
 // @fnv 0x00ba8b80
+// pdb: NiTArray<BSShaderProperty::RenderPass *,NiTNewInterface<BSShaderProperty::RenderPass *> >::NiTArray<BSShaderProperty::RenderPass *,NiTNewInterface<BSShaderProperty::RenderPass *> > | BSShaderProperty.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: uiMaxSize, uiGrowBy
 FUN_00ba8b80::FUN_00ba8b80(unsigned int maxSize, unsigned short growBy)
 {
     unsigned short n = (unsigned short)maxSize;
@@ -435,6 +457,8 @@ FUN_00ba8b80::FUN_00ba8b80(unsigned int maxSize, unsigned short growBy)
 
 // Resizes the array to newSize: clears and shrinks entries above the new size, reallocates the base buffer, copies existing entries and zero-fills the rest.
 // @fnv 0x00ba8d30
+// pdb: NiTArray<TESObjectREFR *,NiTNewInterface<TESObjectREFR *> >::SetSize | GarbageCollector.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: uiMaxSize
 void NiTArray<BSShaderProperty::ShaderPassEntry*, NiTNewInterface<BSShaderProperty::ShaderPassEntry*> >::FUN_00ba8d30(
     unsigned int newSize)
 {
@@ -492,6 +516,8 @@ struct FUN_00ba8d00_cls
 };
 // Sets or clears bit 0x10 in unk20, zeroing unk38 when the bit's state changes.
 // @fnv 0x00ba8d00
+// pdb: BSShaderProperty::SetMotionBlurred | BSShaderProperty.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: abIsMotionBlurred
 void FUN_00ba8d00_cls::FUN_00ba8d00(bool enable)
 {
     if (enable)
@@ -682,6 +708,8 @@ extern int __cdecl FUN_00847d30(const char*, int);
 extern unsigned int __cdecl FUN_00847d80(const char*, unsigned int);
 extern int __cdecl FUN_00847e70(const char*, const char*);
 extern const char* __cdecl FUN_00ad5de0(unsigned int);
+// pdb: BSShaderProperty::GetViewerStrings | BSShaderProperty.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apStrings
 void ShaderPropertyRecord::WriteToSettingArray(SettingArray* output)
 {
     ((BaseWriter*)this)->FUN_008608e0(output);
@@ -768,6 +796,7 @@ struct FUN_00ba8e20
     void* m_p;
     FUN_00ba8e20();
     virtual ~FUN_00ba8e20();
+    // pdb: NiTArray<TESObjectREFR *,NiTNewInterface<TESObjectREFR *> >::`scalar deleting destructor' | GarbageCollector.obj | fnv360_0822_retail, vtable, medium
     static void operator delete(void* p)
     {
         g_memoryManager.Deallocate(p);
@@ -829,6 +858,8 @@ struct FUN_00bb73f0_shell
 
 // Computes a pass key from arg2 and arg4, sets alpha and light index, and returns the appropriate render pass list for the given geometry.
 // @fnv 0x00bb73f0
+// pdb: BSDistantTreeShaderProperty::GetRenderPasses | BSDistantTreeShaderProperty.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apGeom, aiEnabledPasses, asCount, auiRenderMode, apAccumulator, abUpdateList
 BSShaderProperty::ShaderPassList* FUN_00bb73f0_shell::FUN_00bb73f0(int geometry, unsigned int arg2, int aiUnused,
                                                                    unsigned int arg4, int aiUnused2, int aiUnused3)
 {

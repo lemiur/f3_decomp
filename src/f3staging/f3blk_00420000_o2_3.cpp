@@ -102,6 +102,7 @@ struct Pool {
     void FUN_004336d0();
     bool FUN_00434d90();
 };
+// pdb: TES::ClearOldestBufferedCell | TES.obj | fnv360_0822_retail, call_gap, low
 bool Pool::FUN_00434d90() {
     Entry* e;
     if (!unk34) {

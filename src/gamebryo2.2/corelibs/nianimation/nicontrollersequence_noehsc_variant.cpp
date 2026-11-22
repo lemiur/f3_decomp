@@ -1546,6 +1546,8 @@ struct CloneSequence
     void FUN_00a33570(CloneSequence*, void*);
 };
 // @fnv 0x00a33570
+// pdb: NiControllerSequence::CopyMembers | NiControllerSequence.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: pkDest, kCloning
 void CloneSequence::FUN_00a33570(CloneSequence* dest, void* context)
 {
     CreateVertexBufferSet(dest, context);
@@ -1684,6 +1686,7 @@ struct SequenceArrays
 };
 
 // @fnv 0x00a32330
+// pdb: NiControllerSequence::ReallocateArrays | NiControllerSequence.obj | fnv360_0822_retail, objrun, medium
 bool SequenceArrays::FUN_00a32330()
 {
     if (m_uiNumIDTags == 0)
@@ -1986,6 +1989,8 @@ struct Sequence71
     void FUN_00a33e40(Stream71&);
 };
 // @fnv 0x00a33e40
+// pdb: NiControllerSequence::LoadBinary | NiControllerSequence.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void Sequence71::FUN_00a33e40(Stream71& stream)
 {
     ReadGroup(stream);

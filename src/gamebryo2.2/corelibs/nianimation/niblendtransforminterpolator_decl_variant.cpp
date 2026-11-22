@@ -174,6 +174,8 @@ __forceinline void Invalidate850(NiQuatTransform& value)
     value.m_fScale = value.m_kRotate.m_fVectorY = value.m_kTranslate.x = -3.402823466e+38F;
 }
 // @fnv 0x00a40b30
+// pdb: NiBlendTransformInterpolator::StoreSingleValue | NiBlendTransformInterpolator.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: fTime, pkInterpTarget, kValue
 bool NiBlendTransformInterpolator::FUN_00a40b30(float time, NiObjectNET* object, NiQuatTransform& value)
 {
     if (m_uiObjectFlags & 1)

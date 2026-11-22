@@ -392,6 +392,8 @@ struct StreamS
     float readFloat() { float f; FUN_00a60ca0(&f,4,1); return f; }
     void FUN_00a62ad0(DisplayS*& out);
 };
+// pdb: hkDisplaySerializeIStream::readDisplayGeometry | hkDisplaySerializeIStream.obj | fnv360_0822_retail, objrun, medium
+// pdb params: dg
 void hkDisplaySerializeIStreamQ::FUN_00ddada0(hkDisplayGeometryQ*& geometry)
 {
     StreamS* self=(StreamS*)this;

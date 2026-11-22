@@ -49,6 +49,8 @@ struct D92740Heap
 };
 extern unsigned int DAT_010f3170;
 __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
+// pdb: hkpSimpleContactConstraintAtomUtil::optimizeCapacity | hkpConstraintAtomUtil.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: oldAtom_mightGetDeallocated, numFreeElemsLeft, atomReallocated
 D92740Block* __cdecl ShrinkBlockIfSparse(D92740Block* block, int numToAdd, bool* pbResized)
 {
     if ((block->m_iAllocatedCount + numToAdd) * 2 <= block->m_pRayCursor)
@@ -93,6 +95,8 @@ struct Block_w152_f2
     unsigned short f12;
     unsigned int contactData[7];
 };
+// pdb: hkpSimpleContactConstraintAtomUtil::allocateAtom | hkpConstraintAtomUtil.obj | fnv360_0822_retail, call_seq, high
+// pdb params: numReservedContactPoints, numExtraUserDatasA, numExtraUserDatasB, maxNumContactPoints
 D92740Block* __cdecl AllocateBlock(int capacity, int typeA, int typeB, int extra)
 {
     unsigned int uiTypeSum;

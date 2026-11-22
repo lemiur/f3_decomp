@@ -288,6 +288,8 @@ inline void* MorphTaskArr::operator new[](size_t size, unsigned int count)
 }
 
 // @fnv 0x00a56ce0
+// pdb: NiTNewInterface<NiGeomMorpherUpdateTask>::Allocate | NiGeomMorpherUpdateTask.obj | fnv360_0822_retail, call_gap, low
+// pdb params: uiNumElements
 NiGeomMorpherUpdateTask* __cdecl FUN_00a56ce0(unsigned int ItemUpdateArray) throw()
 {
     return (NiGeomMorpherUpdateTask*)(new (ItemUpdateArray) MorphTaskArr[ItemUpdateArray]);

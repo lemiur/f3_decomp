@@ -9,6 +9,8 @@ struct FUN_00d479e0_class
 };
 
 // @fnv 0x00d479e0
+// pdb: BGSMessageIcon::SetMessageIconTextureName | BGSMessageIcon.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apTexture
 void* __thiscall FUN_00d479e0_class::FUN_00d479e0(const void* key)
 {
     return ((FUN_00d479e0_class*)((char*)this + 8))->GetValue(key, 0);
@@ -21,6 +23,8 @@ struct FUN_00d47a80_class
 };
 
 // @fnv 0x00d47a80
+// pdb: hkDynamicClassNameRegistry::getClassByName | hkBuiltinTypeRegistry.obj | fnv360_0822_retail, vtable, high
+// pdb params: className
 void* FUN_00d47a80_class::ForwardToOffsetMember(void* apArg)
 {
     return ((FUN_00d47a80_class*)((char*)this + 0xc))->GetValue(apArg, 0);
@@ -35,6 +39,8 @@ struct hkVtableClassRegistry
     unsigned long LookupClassByVtable(const unsigned long* p);
 };
 // @fnv 0x00d47c40
+// pdb: hkVtableClassRegistry::getClassFromVirtualInstance | hkBuiltinTypeRegistry.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: obj
 unsigned long hkVtableClassRegistry::LookupClassByVtable(const unsigned long* pVtable)
 {
     unsigned long v = *pVtable;
@@ -87,6 +93,8 @@ struct FUN_00d47ad0_class
 };
 
 // @fnv 0x00d47ad0
+// pdb: hkDynamicClassNameRegistry::merge | hkBuiltinTypeRegistry.obj | fnv360_0822_retail, vtable, high
+// pdb params: mergeFromMap
 void FUN_00d47ad0_class::ProcessRegistryEntries(FUN_00d874b0_class* reg)
 {
     int key = ((FUN_00d87410_Class*)reg)->FUN_00d87410();
@@ -104,6 +112,7 @@ void FUN_00d47ad0_class::ProcessRegistryEntries(FUN_00d874b0_class* reg)
 extern int DAT_01269b18;
 
 // @fnv 0x00d47a00
+// pdb: BGSTextureSet::GetNullTextureSet | BGSTextureSet.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BGSTextureSet::ClearNullTextureSet)
 int __cdecl FUN_00d47a00()
 {
     return DAT_01269b18;
@@ -112,6 +121,7 @@ int __cdecl FUN_00d47a00()
 extern int DAT_01269b14;
 
 // @fnv 0x00d47a10
+// pdb: TESIdleManager::GetUsedItem | TESIdleManager.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BGSCollisionLayer::QDebugColor)
 int __cdecl FUN_00d47a10()
 {
     return DAT_01269b14;
@@ -120,6 +130,7 @@ int __cdecl FUN_00d47a10()
 extern int DAT_01269b10;
 
 // @fnv 0x00d47a20
+// pdb: TESIdleManager::GetUsedItemLevel | TESIdleManager.obj | fnv360_0822_retail, call_seq, medium
 int FUN_00d47a20()
 {
     return DAT_01269b10;
@@ -200,6 +211,8 @@ class hkClassNameRegistryD478
 };
 
 // @fnv 0x00d478e0
+// pdb: hkTypeInfoRegistry::registerTypeInfo | hkBuiltinTypeRegistry.obj | fnv360_0721_beta, caller_sim, high
+// pdb params: info
 void hkClassNameRegistryD478::RegisterClass(const hkClassD478* pkClass)
 {
     m_map.FUN_00d874d0(pkClass->getName(), (int)pkClass);
@@ -254,6 +267,8 @@ struct FUN_00d47970_Class
 };
 
 // @fnv 0x00d47970
+// pdb: hkTypeInfoRegistry::merge | hkBuiltinTypeRegistry.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: mergeFrom
 void FUN_00d47970_Class::FUN_00d47970(void* iterator)
 {
     FUN_00d87410_Class* registry = (FUN_00d87410_Class*)((char*)iterator + 8);
@@ -290,6 +305,8 @@ class hkObjD47A
 
 // Calls add on each name in the null-terminated array ppcNames with flags 0.
 // @fnv 0x00d47a50
+// pdb: hkDynamicClassNameRegistry::registerList | hkBuiltinTypeRegistry.obj | fnv360_0822_retail, vtable, high
+// pdb params: classes
 void hkObjD47A::AddNames(const char* const* ppcNames)
 {
     for (; *ppcNames; ++ppcNames)

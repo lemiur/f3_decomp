@@ -21,6 +21,8 @@ struct NiPSysVolumeEmitter
 };
 
 // @fnv 0x00c1fa30
+// pdb: NavMeshInfo::SetNavMesh | NavMeshInfo.obj | fnv360_0822_retail, call_dedup, low, conflict (bridge: NiPSysCylinderEmitter::GetRTTI)
+// pdb params: apNavMesh
 void NiPSysVolumeEmitter::FUN_00c1fa30(NiAVObject* pkEmitterObj)
 {
     m_pkEmitterObj = pkEmitterObj;
@@ -43,6 +45,8 @@ struct NiPSysCylinderEmitter : NiPSysVolumeEmitter
     bool __thiscall FUN_00c1f9e0(NiAVObject* pkObject);
 };
 // @fnv 0x00c1f9e0
+// pdb: NiPSysSphereEmitter::IsEqual | NiPSysSphereEmitter.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiPSysCylinderEmitter::IsEqual)
+// pdb params: pkObject
 bool __thiscall NiPSysCylinderEmitter::FUN_00c1f9e0(NiAVObject* pkObject)
 {
     NiPSysCylinderEmitter* pkDest = (NiPSysCylinderEmitter*)pkObject;
@@ -55,6 +59,7 @@ bool __thiscall NiPSysCylinderEmitter::FUN_00c1f9e0(NiAVObject* pkObject)
 extern double DAT_01011588;
 extern double DAT_01016ff0;
 // @fnv 0x00c1ced0
+// pdb: BSFastSqrt | NiPSysMeshEmitter.obj | tesv_win, hash, low
 float FUN_00c1ced0(float number)
 {
     float y = number;
@@ -87,6 +92,7 @@ struct NiPSysMeshEmitter
     void* __thiscall Destroy(unsigned int);
 };
 // @fnv 0x00c1f500
+// pdb: NiPSysMeshEmitter::`vector deleting destructor' | NiPSysMeshEmitter.obj | tesv_win, vtable_prefix, medium
 void* __thiscall NiPSysMeshEmitter::Destroy(unsigned int flags)
 {
     void* tmp1 = m_68;
@@ -327,6 +333,8 @@ struct Host_c1d170
 
 // Validates the geometry and its skin instance, builds a partition from the skin data if missing, stores it in m_spPartition and returns whether it succeeded.
 // @fnv 0x00c1d170
+// pdb: NiPSysMeshEmitter::NiSkinnedEmitterData::CreatePartition | NiPSysMeshEmitter.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: pkGeom
 bool Host_c1d170::EnsureSkinPartition(Geom_c1d170* pkGeometry)
 {
     if (!pkGeometry || !pkGeometry->v7())
@@ -676,6 +684,8 @@ struct MeshEmitter_c1cf50
 };
 // Transforms position into the emitter object's space and computes velocity from velocityMode using the geometry's world transform and random values.
 // @fnv 0x00c1cf50
+// pdb: NiPSysMeshEmitter::TransformIntoCoordinateSpace | NiPSysMeshEmitter.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: pkObj, kPosition, kVelocity
 void MeshEmitter_c1cf50::ComputeEmitterParticleTransform(NiAVObject* geometry, NiPoint3b& arPosition,
                                                          NiPoint3b& arVelocity)
 {
@@ -768,6 +778,8 @@ struct Emit_c1f880
 };
 
 // @fnv 0x00c1f880
+// pdb: NiPSysMeshEmitter::CreateClone | NiPSysMeshEmitter.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCloning
 Emit_c1f880* Emit_c1f880::FUN_00c1f880(unsigned int uiArg)
 {
     Emit_c1f880* pkNew = (Emit_c1f880*)FUN_00aa13e0(0x88);
@@ -830,6 +842,7 @@ struct NiPSysMeshEmitterObject
 };
 
 // @fnv 0x00c1f970
+// pdb: NiPSysMeshEmitter::CreateObject | NiPSysMeshEmitter.obj | fnv360_0822_retail, caller_sim, medium
 NiPSysMeshEmitterObject* __cdecl CreateNiPSysMeshEmitterObject()
 {
     return new NiPSysMeshEmitterObject;
@@ -838,6 +851,8 @@ NiPSysMeshEmitterObject* __cdecl CreateNiPSysMeshEmitterObject()
 extern "C" void __cdecl FUN_00c31750();
 
 // @fnv 0x00c1fa20
+// pdb: NiLinesData::RegisterStreamables | NiLinesData.obj | fnv360_1110_retail, objrun, low, conflict (skyrim: NiParticlesData::LinkObject)
+// pdb params: kStream
 void __cdecl FUN_00c1fa20()
 {
     FUN_00c31750();
@@ -1063,6 +1078,8 @@ void scale(NiPoint3& r, const NiPoint3& a, float f)
 }
 // Accumulates weighted transformed positions and normals for the selected vertex, then writes the results to the output vectors.
 // @fnv 0x00c1d230
+// pdb: NiPSysMeshEmitter::DeformBySkin | NiPSysMeshEmitter.obj | fnv360_0822_retail, objrun, medium
+// pdb params: kVert, kNormal, pkGeom, pkSkin, pkPart, uiWhichIndex
 void __stdcall SkinVertex(NiPoint3* outPos, NiPoint3* outVel, Arg3Obj* arg3, Arg4Obj* arg4, Arg5Obj* arg5, int vert)
 {
     BoneHead* skin = arg4->m_08;
@@ -1245,6 +1262,8 @@ struct SkinEmitter
 };
 // Picks a random skin record and vertex, computes a particle position and velocity, and transforms them into emitter space.
 // @fnv 0x00c1dec0
+// pdb: NiPSysMeshEmitter::EmitFromSkinnedVertex | NiPSysMeshEmitter.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pkSkinEmitterData, pkGeomEmitter, kPosition, kVelocity
 bool SkinEmitter::GetRandomEmitterParticle(SkinInst* skin, SkinGeometry* geometry, Point3& position, Point3& velocity)
 {
     if (!geometry || !geometry->IsReady())
@@ -1407,6 +1426,8 @@ struct EmitterAccessor
 
 // Picks a random skin partition and triangle, samples two vertices and normals, computes a position, and may update motion velocity.
 // @fnv 0x00c1e4e0
+// pdb: NiPSysMeshEmitter::EmitFromSkinnedEdge | NiPSysMeshEmitter.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pkSkinEmitterData, pkGeomEmitter, kPosition, kVelocity
 bool EmitterAccessor::FUN_00c1e4e0(NiSkinInstance* pkSkinInstance, NiGeometry* pkGeometry, NiPoint3& kPosition,
                                    NiPoint3& kMotionVelocity)
 {
@@ -1618,6 +1639,8 @@ extern const char* DAT_0116ebf8;
 char* __cdecl FUN_00847b50(const char* label);
 char* __cdecl FUN_00847e70(const char* label, const char* value);
 char* __cdecl FUN_00847dd0(const char* label, float value);
+// pdb: NiPSysMeshEmitter::GetViewerStrings | NiPSysMeshEmitter.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void MeshEmitter::WriteToViewerStrings(NiViewerStringsArray* pkStrings)
 {
     static_cast<EmitterViewerBase*>(static_cast<void*>(this))->FUN_00ac21e0(pkStrings);
@@ -1755,6 +1778,8 @@ struct FUN_00c1d6b0_cls
 
 // Returns false on failed equality, count, item, or integer-field checks; otherwise returns the negation of m_7C.FUN_00439090.
 // @fnv 0x00c1d6b0
+// pdb: NiPSysMeshEmitter::IsEqual | NiPSysMeshEmitter.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pkObject
 bool FUN_00c1d6b0_cls::IsEquivalent(FUN_00c1d6b0_cls* other)
 {
     if (!Equals(other))
@@ -1788,6 +1813,8 @@ struct C1d9e0_Emitter : MeshEmitter_c1cf50
     bool __thiscall PickRandomVertex(NiGeometry* pkGeometry, NiPoint3& kPosition, NiPoint3& kMotionVelocity);
 };
 // @fnv 0x00c1d9e0
+// pdb: NiPSysMeshEmitter::EmitFromVertex | NiPSysMeshEmitter.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pkGeomEmitter, kPosition, kVelocity
 bool __thiscall C1d9e0_Emitter::PickRandomVertex(NiGeometry* pkGeometry, NiPoint3& kPosition, NiPoint3& kMotionVelocity)
 {
     int iRandomIndex = FUN_00ecadb8();
@@ -1959,6 +1986,8 @@ struct MeshEmitterCandidate : FUN_00c1f5f0_shell
 
 // Selects triangle vertices or a consecutive vertex pair, computes position and velocity, then applies the particle transform.
 // @fnv 0x00c1dae0
+// pdb: NiPSysMeshEmitter::EmitFromEdge | NiPSysMeshEmitter.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pkGeomEmitter, kPosition, kVelocity
 bool MeshEmitterCandidate::PickEmitterParticle(NiGeometry* geometry, MeshPoint& position, MeshPoint& velocity)
 {
     if (!geometry)
@@ -2284,6 +2313,8 @@ class LoadObjectC1E
 };
 // Calls FUN_00c223b0, NiStream_ReadMultipleLinkIDs, reads two unsigned ints into m_uiValue74 and m_uiValue78, then calls m_kMember7C.FUN_00a59be0.
 // @fnv 0x00c1e850
+// pdb: NiPSysMeshEmitter::LoadBinary | NiPSysMeshEmitter.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void LoadObjectC1E::Load(NiStreamC1E& kStream)
 {
     FUN_00c223b0(kStream);
@@ -2435,6 +2466,8 @@ struct MeshEmitterCandidate : FUN_00c1f5f0_shell
 };
 // For triangle geometry, selects triangle vertices, averages their positions and normals, applies mode-dependent sampling, then transforms the particle.
 // @fnv 0x00c1eb20
+// pdb: NiPSysMeshEmitter::EmitFromFace | NiPSysMeshEmitter.obj | fnv360_0721_retail, objrun, medium
+// pdb params: pkGeomEmitter, kPosition, kVelocity
 bool MeshEmitterCandidate::EmitFromMesh(NiGeometry* geometry, MeshPoint& position, MeshPoint& velocity)
 {
     if (geometry)
@@ -2559,6 +2592,8 @@ struct CloneEmitter
 };
 // Looks up each non-null item in the process map and appends its mapped value, or the original item when absent, to output.
 // @fnv 0x00c1f8f0
+// pdb: NiPSysMeshEmitter::ProcessClone | NiPSysMeshEmitter.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCloning
 void __thiscall CloneEmitter::CloneItems(CloneProcess& process)
 {
     FUN_00c317e0(process);
@@ -2601,6 +2636,7 @@ struct FUN_00c1d660_cls
 
 // Releases the referenced NiRefObject, clears m_00, decrements a global counter, and optionally frees memory when acFlags has bit 0 set.
 // @fnv 0x00c1d660
+// pdb: NiPSysMeshEmitter::NiSkinnedEmitterData::`scalar deleting destructor' | NiPSysMeshEmitter.obj | fnv360_0822_retail, objrun, high
 FUN_00c1d660_cls* FUN_00c1d660_cls::Release(unsigned char acFlags)
 {
     LONG(__stdcall * pDecrement)(LONG volatile*) = &InterlockedDecrement;
@@ -2736,6 +2772,8 @@ struct FUN_00c1f790_cls : NiPSysMeshEmitter
 
 // Sets skin geometry on the emitter, updating m_54 and m_64 slots, and sets flags 0x33 on the geometry's flags.
 // @fnv 0x00c1f790
+// pdb: NiPSysMeshEmitter::AddGeometryEmitter | NiPSysMeshEmitter.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pkGeomEmitter
 void __thiscall FUN_00c1f790_cls::SetSkinGeom(NiSkinGeom790* pkGeom)
 {
     NiSkinGeom790* pSkinGeom = pkGeom;
@@ -2890,6 +2928,8 @@ class MeshReconstruction : public FUN_00c1f5f0_shell
 };
 // Picks a random particle from a skin group, computes its position and velocity from three skinned vertices, and applies velocity-space and mode transforms.
 // @fnv 0x00c1e080
+// pdb: NiPSysMeshEmitter::EmitFromSkinnedFace | NiPSysMeshEmitter.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pkSkinEmitterData, pkGeomEmitter, kPosition, kVelocity
 bool MeshReconstruction::FUN_00c1e080(NiSkinInstance* apSkinInstance, NiGeometry* geometry, NiPoint3& position,
                                       NiPoint3& velocity)
 {
@@ -2986,6 +3026,7 @@ bool MeshReconstruction::FUN_00c1e080(NiSkinInstance* apSkinInstance, NiGeometry
 
 // @f3 0x00577f20 (community match, verified in this file)
 #include <stdlib.h>
+// pdb: NiUnitRandom | BSPSysArrayEmitter.obj | tesv_win, call_gap, low
 float __cdecl FUN_00639780()
 {
     return (float)rand() / DAT_01029790;

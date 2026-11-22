@@ -16,6 +16,7 @@ extern char const* const DAT_0109f0a0;
 NiObject* __cdecl FUN_00a982d0();
 
 // @fnv 0x00a98460
+// pdb: NiPersistentSrcTextureRendererData::ResetStreamingFunctions | NiPersistentSrcTextureRendererData.obj | fnv360_0822_debug, caller_sim, low
 void __cdecl RegisterNiStreamFactory()
 {
     NiStream::UnregisterObjectLoader((char const*)&DAT_0109f0a0);
@@ -36,6 +37,7 @@ struct NiPersistentSrcTextureRendererData
 
 // Frees m_pucPixels and clears the pixel pointer, width, height and offset fields.
 // @fnv 0x00a980e0
+// pdb: NiPersistentSrcTextureRendererData::FreeData | NiPersistentSrcTextureRendererData.obj | fnv360_0822_retail, objrun_open, low
 void NiPersistentSrcTextureRendererData::FreePixelData()
 {
     if (m_pucPixels)
@@ -73,6 +75,8 @@ struct NiPersistentSrcTextureRendererData
 };
 // Links the object to the stream, then swaps m_spPalette to the stream's palette, releasing the old one and incrementing the new one's refcount.
 // @fnv 0x00a98110
+// pdb: NiPersistentSrcTextureRendererData::LinkObject | NiPersistentSrcTextureRendererData.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: kStream
 void NiPersistentSrcTextureRendererData::LinkPalette(NiStream& kStream)
 {
     ((NiObjectHelper*)this)->NiObjectHelper::LinkObject(kStream);
@@ -127,6 +131,8 @@ struct NiPersistentSrcTextureRendererData
 };
 // Registers the object's streamables with kStream, then registers m_spPalette's streamables if it is set; returns false on failure.
 // @fnv 0x00a98170
+// pdb: NiPersistentSrcTextureRendererData::RegisterStreamables | NiPersistentSrcTextureRendererData.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: kStream
 bool NiPersistentSrcTextureRendererData::FUN_00a98170(NiStream& kStream)
 {
     if (!((NiObjectHelper*)this)->NiObjectHelper::RegisterStreamables(kStream))
@@ -146,6 +152,7 @@ struct S
 };
 // Calls FUN_00a98240, then deletes this with size 0x94 when f has bit 0 set, and returns this.
 // @fnv 0x00a98480
+// pdb: NiPersistentSrcTextureRendererData::`vector deleting destructor' | NiPersistentSrcTextureRendererData.obj | tesv_win, vtable_prefix, medium
 void* S::DestroyIfFlagged(unsigned int auiFlags)
 {
     FUN_00a98240();
@@ -396,6 +403,8 @@ inline bool IsKindOf_s(const NiRTTI* pkRTTI, NiObj_s* pkObject)
 extern "C" int __cdecl memcmp(const void*, const void*, unsigned int);
 
 // @fnv 0x00a982f0
+// pdb: NiPersistentSrcTextureRendererData::IsEqual | NiPersistentSrcTextureRendererData.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: pkObject
 bool PSTRData_s::FUN_00a982f0(NiObj_s* pkObject)
 {
     if (!IsKindOf_s(&ms_kRTTI, pkObject))
@@ -502,6 +511,8 @@ struct ViewerData : PSTRData_s
 };
 // Appends the texture's width, height, mipmap levels, faces, sizes and a target-platform string to the given string array.
 // @f3 0x00862990 (community match, verified in this file)
+// pdb: NiPersistentSrcTextureRendererData::GetViewerStrings | NiPersistentSrcTextureRendererData.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void ViewerData::AppendToStrings(ViewerArray* strings)
 {
     ((ViewerBase*)this)->AppendCameraPathEntries(strings);
@@ -808,6 +819,8 @@ extern bool DAT_011f5f00;
 void* __cdecl NiMalloc(unsigned int);
 void* __cdecl memcpy(void*, const void*, unsigned int);
 // @fnv 0x00e917e0
+// pdb: NiXenonPersistentSrcTextureRendererData::LoadBinary | NiXenonPersistentSrcTextureRendererData.obj | fnv360_0822_retail, uconst, high
+// pdb params: kStream
 void TextureLoad::LoadTextureData(LoadStream& stream)
 {
     LoadBase(stream);
@@ -1148,6 +1161,8 @@ struct Cls
 }
 // Allocates a pixel buffer and sets m_puiWidth, m_puiHeight, and m_puiOffsetInBytes for a mip map with uiLevels and uiFaces.
 // @fnv 0x00a98090
+// pdb: NiPersistentSrcTextureRendererData::AllocateData | NiPersistentSrcTextureRendererData.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: uiLevels, uiFaces, uiBytes
 void nsa98::Cls::AllocateMipMap(unsigned int uiLevels, unsigned int uiFaces, unsigned int uiBytes)
 {
     unsigned int uiStride = (uiBytes + 3) & ~3;

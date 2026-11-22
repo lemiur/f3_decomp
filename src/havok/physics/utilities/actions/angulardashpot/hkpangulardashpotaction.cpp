@@ -44,6 +44,8 @@ class FUN_00d4dbe0 : public FUN_00cf4d80
 };
 
 // @f3 0x009da8b0 (community match, verified in this file)
+// pdb: hkpAngularDashpotAction::hkpAngularDashpotAction | hkpAngularDashpotAction.obj | fnv360_0822_retail, call_seq, high
+// pdb params: entityA, entityB, userData
 FUN_00d4dbe0::FUN_00d4dbe0(void* pkEntityA, void* pkEntityB, unsigned long ulUserData) throw()
     : FUN_00cf4d80(pkEntityA, pkEntityB, ulUserData), m_fSpringStrength(0.1f), m_fMotorDamping(0.01f)
 {

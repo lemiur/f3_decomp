@@ -43,6 +43,8 @@ extern PC7d* g_thePlayer;
 // @f3 0x00635990 (community match, verified in this file)
 extern int DAT_01075fdc;
 extern int DAT_01075f70;
+// pdb: CharGenMenu::TagSkillsFunc | CharGenMenu.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apTile, aeIndex
 void __cdecl FUN_00754530(Tile* tile, ActorValue::Index index)
 {
     if (((TGF*)tile)->GetFloat(0xfac) == 0.0f)

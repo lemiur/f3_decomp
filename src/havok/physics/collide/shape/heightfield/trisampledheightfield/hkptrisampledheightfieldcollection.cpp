@@ -28,6 +28,8 @@ struct Vt00d263f0
     virtual int v6(int a, int b);
 };
 
+// pdb: hkpTriSampledHeightFieldCollection::getWeldingInfo | hkpTriSampledHeightFieldCollection.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: key
 int FUN_00d263f0_t::FUN_00d263f0(int a, int b)
 {
     int limit = b - 0x24;
@@ -45,6 +47,7 @@ int FUN_00d263f0_t::FUN_00d263f0(int a, int b)
 
 
 // @fnv 0x00d26390
+// pdb: hkpMoppLongRayVirtualMachine::hkpMoppLongRayVirtualMachine | hkpMoppBvTreeShape.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: hkpBallAndSocketConstraintData::getType)
 int FUN_00d26390()
 {
     return 0;
@@ -70,6 +73,8 @@ struct FUN_00d263a0_cls
 
 // Returns the next key in a sequence derived from the given key, or -1 when the sequence is exhausted.
 // @fnv 0x00d263a0
+// pdb: hkpTriSampledHeightFieldCollection::getAabbImpl | hkpTriSampledHeightFieldCollection.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: localToWorld, tolerance, out
 int __thiscall FUN_00d263a0_cls::GetNextKey(unsigned int key)
 {
     if ((key & 1) == 0)
@@ -89,6 +94,8 @@ int __thiscall FUN_00d263a0_cls::GetNextKey(unsigned int key)
 }
 
 // @fnv 0x00d26440
+// pdb: hkpTriSampledHeightFieldCollection::getCollisionFilterInfo | hkpTriSampledHeightFieldCollection.obj | fnv360_1110_retail, objrun_open, low, conflict (skyrim: hkpTriSampledHeightFieldBvTreeShape::getContainer)
+// pdb params: key
 int __stdcall FUN_00d26440(int arg0)
 {
     return 0;
@@ -106,6 +113,7 @@ struct FUN_00d26450_Obj
     void* FUN_00d26450();
 };
 // @fnv 0x00d26450
+// pdb: hkpTriSampledHeightFieldCollection::getHeightFieldShape | hkpTriSampledHeightFieldCollection.obj | fnv360_1110_retail, objrun_prop, low
 void* FUN_00d26450_Obj::FUN_00d26450()
 {
     return unk18;

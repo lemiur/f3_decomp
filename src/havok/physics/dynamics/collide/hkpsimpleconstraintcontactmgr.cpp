@@ -50,6 +50,8 @@ struct FUN_00cfcc70_class {
 };
 
 // @fnv 0x00cfcc70
+// pdb: hkpSimpleConstraintContactMgr::reserveContactPointsImpl | hkpSimpleConstraintContactMgr.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: numPoints
 int FUN_00cfcc70_class::FUN_00cfcc70(int value) {
     FUN_00cfcc70_data* data = static_cast<FUN_00cfcc70_data*>(m_3c);
     int field4 = data->m_04;
@@ -150,6 +152,7 @@ struct FUN_00cfd720 {
 void __cdecl hkpWorldOperationUtil_removeConstraintImmediately(void*, void*, int);
 
 // @fnv 0x00cfd720
+// pdb: hkpSimpleConstraintContactMgr::~hkpSimpleConstraintContactMgr | hkpSimpleConstraintContactMgr.obj | fnv360_0822_retail, call_seq, medium
 FUN_00cfd720::~FUN_00cfd720() {
     *(void**)this = (void*)&DAT_010cc984;
     if (*(unsigned short*)(*(char**)((char*)this + 0x3c) + 4) != 0) {
@@ -171,6 +174,7 @@ struct FUN_00cfd7d0_class {
 
 // For each byte in m_00 up to m_04, if the byte is not 0xff and greater than value, decrements it by one.
 // @fnv 0x00cfd7d0
+// pdb: hkpDynamicsCpIdMgr::decrementValuesGreater | hkpSimpleConstraintContactMgr.obj | tesv_win, call_seq, medium
 void FUN_00cfd7d0_class::DecrementBytesAboveValue(unsigned int auiThreshold)
 {
     for (int i = (int)m_04 - 1; i >= 0; --i) {
@@ -196,6 +200,7 @@ struct Derived_00cfd660 : First_00cfd660, Base_00cfd660 {
 };
 __declspec(noinline) void Base_00cfd660::target() { g_sink_00cfd660 = 1; }
 // @fnv 0x00cfd660
+// pdb: TESLandTexture::ClearData | TESLandTexture.obj | fnv360_0822_retail, vtable, medium
 void Derived_00cfd660::FUN_00cfd660() { Base_00cfd660::target(); }
 
 extern int DAT_01268798;
@@ -208,6 +213,7 @@ int* __cdecl FUN_00cfdad0()
 
 struct FnvCpu_FUN_00cfcc60_CpuObject { char* FUN_00cfcc60(); };
 // @fnv 0x00cfcc60
+// pdb: hkpSimpleConstraintContactMgr::getConstraintInstance | hkpSimpleConstraintContactMgr.obj | fnv360_0822_retail, objrun_open, low
 char* FnvCpu_FUN_00cfcc60_CpuObject::FUN_00cfcc60()
 {
     return reinterpret_cast<char*>(this) + 68;
@@ -275,6 +281,7 @@ struct Self86
     Target86 m_14;
 };
 
+// pdb: hkpSimpleConstraintContactMgr::toiCollisionResponseEndCallback | hkpSimpleConstraintContactMgr.obj | tesv_win, objrun_sim, low
 void FUN_00cfccc0_class::ForwardToVf44(int a, float b, int c, int d, int e, int f)
 {
     ((Self86*)this)->m_14.vf34(a, b, c, d, e, f);
@@ -309,6 +316,8 @@ struct FUN_00cfccf0_class {
 void __cdecl hkpWorldCallbackUtil_fireContactPointRemoved(void*, ContactRecord*);
 void __cdecl hkpEntityCallbackUtil_fireContactPointRemovedInternal(void*, ContactRecord*);
 
+// pdb: hkpReportContactMgr::removeToiImpl | hkpReportContactMgr.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: constraintOwner, properties
 void FUN_00cfccf0_class::ProcessContactPair(void* firstInput, void* secondInput) {
     void* entityA = this->m_10;
     void* p = *(void**)((char*)entityA + 8);
@@ -772,6 +781,8 @@ public:
 };
 
 // @fnv 0x00cfd450
+// pdb: hkpSimpleConstraintContactMgr::Factory::Factory | hkpSimpleConstraintContactMgr.obj | fnv360_0822_retail, uvref, high
+// pdb params: mgr
 FUN_00cfd450::FUN_00cfd450(hkWorldCFD4* pkWorld)
 {
     m_pOwningWorld = pkWorld;
@@ -846,6 +857,8 @@ struct DummyData {
     void FUN_0097a020(int enabled);
 };
 
+// pdb: hkpSimpleConstraintContactMgr::hkpSimpleConstraintContactMgr | hkpSimpleConstraintContactMgr.obj | fnv360_0822_retail, call_seq, high
+// pdb params: sm, bodyA, bodyB
 ContactManager* ContactManager::InitContact(const unsigned char* first,
                                            const unsigned char* second,
                                            const unsigned char* third)

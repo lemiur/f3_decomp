@@ -20,6 +20,7 @@ void __cdecl operator delete(void* p, unsigned int size);
 
 // Calls FUN_00c309d0, then deletes this with size 0x98 when bit 0 of flags is set, and returns this.
 // @fnv 0x00c30bd0
+// pdb: BSBatchRenderer::`scalar deleting destructor' | BSBatchRenderer.obj | fnv360_0822_debug, caller_sim, low
 void* __thiscall NiMeshPSysData::FUN_00c30bd0(unsigned int flags)
 {
     FUN_00c309d0();
@@ -153,6 +154,8 @@ struct FUN_00c30940_shell
 };
 // Registers the streamables of this object and of the NiNodeHelper stored at offset 0x7c, returning false if the first registration fails.
 // @fnv 0x00c30940
+// pdb: NiMeshPSysData::RegisterStreamables | NiMeshPSysData.obj | fnv360_0721_retail, objrun_prop, low
+// pdb params: kStream
 bool FUN_00c30940_shell::FUN_00c30940(NiStream& kStream)
 {
     if (!((NiPSysData_Helper*)this)->RegisterStreamables(kStream))
@@ -184,6 +187,7 @@ struct BaseCall00c30a90
     void __thiscall FUN_00c24d20();
 };
 // @fnv 0x00c30a90
+// pdb: NiMeshPSysData::ResolveAddedParticles | NiMeshPSysData.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: NiMeshPSysData::SetActiveVertexCount)
 void __thiscall S_00c30a90::FUN_00c30a90()
 {
     unsigned short us;
@@ -216,6 +220,7 @@ struct Holder_00c30c50
     NiObject* __thiscall FUN_00c30c50(CloningProcess&);
 };
 // @fnv 0x00c30c50
+// pdb: NiMeshPSysData::CreateClone | NiMeshPSysData.obj | tesv_win, caller_sim, low
 NiObject* __thiscall Holder_00c30c50::FUN_00c30c50(CloningProcess& kCloning)
 {
     NiMeshPSysData* pkObject;
@@ -274,6 +279,8 @@ struct NiMeshPSysData_00c30920 : NiObject
 };
 
 // @fnv 0x00c30920
+// pdb: bhkExtraData::ProcessClone | bhkExtraData.obj | fnv360_0822_debug, caller_sim, low, conflict (skyrim: NiMeshPSysData::ProcessClone)
+// pdb params: arCloneData
 void NiMeshPSysData_00c30920::FUN_00c30920(CloningProcess& kCloning)
 {
     NiObject::ProcessClone(kCloning);
@@ -299,6 +306,7 @@ extern int DAT_010c07e0;
 void __cdecl _NiFree(void* p);
 
 // @fnv 0x00c309a0
+// pdb: NiTArray<MobileObject *,NiTMallocInterface<MobileObject *> >::`scalar deleting destructor' | ProcessArray.obj | fnv360_0822_retail, vtable, medium
 void* __thiscall FUN_00c309a0_shell::Destroy(unsigned char deallocate)
 {
     void* p = data;
@@ -476,6 +484,8 @@ class C30AE0Modifier : public C30AE0Base
 };
 
 // @fnv 0x00c30ae0
+// pdb: NiMeshPSysData::LinkObject | NiMeshPSysData.obj | fnv360_0721_beta, objrun, low, conflict (skyrim: NiMeshPSysData::CopyMembers)
+// pdb params: kStream
 void C30AE0Modifier::CloneTo(C30AE0Modifier* pkDest, C30AE0CloningProcess& kCloning)
 {
     C30AE0Base::CopyMemberData(pkDest, kCloning);
@@ -505,6 +515,7 @@ struct NiMeshPSysData308
     void __thiscall FUN_00c30b70(NiStream& kStream);
 };
 // @fnv 0x00c30b70
+// pdb: NiTPrimitiveArray<NiTObjectArray<NiPointer<NiAVObject> > *>::`scalar deleting destructor' | NiMeshPSysData.obj | fnv360_0721_beta, objrun, low, conflict (skyrim: NiMeshPSysData::LinkObject)
 void __thiscall NiMeshPSysData308::FUN_00c30b70(NiStream& kStream)
 {
     ((NiPSysDataLinkHelper*)this)->LinkObject(kStream);
@@ -746,6 +757,8 @@ struct MeshSave
 };
 // Calls NiPSysData_SaveBinary, then writes value, active, count and each element's id (or zero) to the stream, and saves a link to particleMeshes.
 // @fnv 0x00c30cc0
+// pdb: NiMeshPSysData::SaveBinary | NiMeshPSysData.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void MeshSave::WriteToStream(SaveStream& stream)
 {
     NiPSysData_SaveBinary(stream);
@@ -924,6 +937,7 @@ class FUN_00c309d0 : public BaseC30
 
 // Destructor that repeatedly removes the last element from m_kElements and deletes it until the array is empty.
 // @fnv 0x00c309d0
+// pdb: NiMeshPSysData::~NiMeshPSysData | NiMeshPSysData.obj | fnv360_0822_retail, caller_sim, low
 FUN_00c309d0::~FUN_00c309d0() throw()
 {
     while (m_kElements.GetSize() > 0)
@@ -1139,6 +1153,8 @@ struct NiMeshPSysDataSI : NiPSysData_StandIn
 };
 
 // @fnv 0x00c30e80
+// pdb: NiMeshPSysData::RemoveParticle | NiMeshPSysData.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: usParticle
 void NiMeshPSysDataSI::FUN_00c30e80(unsigned short usParticleIndex)
 {
     unsigned short usLastParticle = m_usActive - 1;
@@ -1257,6 +1273,8 @@ struct Owner436
 };
 // Grows or shrinks the children array to count, deleting removed entries and allocating new Array436 entries sized to arraySize.
 // @fnv 0x00c30f90
+// pdb: NiMeshPSysData::SetNumGenerations | NiMeshPSysData.obj | fnv360_0822_retail, objrun, medium
+// pdb params: uiNumGenerations
 void Owner436::ResizeChildren(unsigned count)
 {
     unsigned previous = children.size;

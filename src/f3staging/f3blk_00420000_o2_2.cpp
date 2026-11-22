@@ -49,6 +49,7 @@ struct TaskSingleton
 };
 extern TaskSingleton* DAT_0106ca70;
 
+// pdb: ModelLoader::PauseCallback | ModelLoader.obj | fnv360_0822_retail, objrun, medium
 void FUN_004247a0()
 {
     TaskBarrier* barrier = DAT_0106ca70->barrier;
@@ -306,6 +307,8 @@ class QueuedHelmet : public QueuedHelmetBase
     bool unk120;
 };
 
+// pdb: QueuedHelmet::QueuedHelmet | ModelLoader.obj | fnv360_0822_retail, uvref, medium
+// pdb params: apBipedAnim, aePriority, aeBipedObject
 QueuedHelmet::QueuedHelmet(HelmetActorData* actor, void* owner, unsigned int unused)
     : QueuedHelmetBase(owner), m_actor(actor)
 {
@@ -403,6 +406,8 @@ class QueuedMagicItem : public QueuedFileBase9340
     void* m_target;
 };
 
+// pdb: ModelLoader::QueueMagicItem | ModelLoader.obj | fnv360_0822_retail, uvref, low
+// pdb params: apMagicItem, apAVEffectSetting, aePriority
 void __stdcall FUN_00429340(void* item, void* target, void* owner)
 {
     if (item && target) {
@@ -420,6 +425,8 @@ struct FUN_00434130_Arg
     unsigned char unk04;
 };
 
+// pdb: TESObjectWEAP::GetProjectile | TESObjectWEAP.obj | fnv360_0822_debug, call_gap, low, conflict (bridge: TES::GetLODMult)
+// pdb params: apWeaponHolder
 int __cdecl FUN_00434130(FUN_00434130_Arg* arg)
 {
     switch (arg->unk04)
@@ -487,6 +494,7 @@ public:
 
 using namespace f3m_004225a0;
 
+// pdb: ExtraFriendHits::AddHit | ExtraDataObjects.obj | fnv360_0721_beta, call_seq, medium
 void Sampler::FUN_004225a0()
 {
     FUN_00421010();
@@ -508,6 +516,8 @@ struct StringAssignFO3 : std::string {
     StringAssignFO3& FUN_0042eff0(const StringAssignFO3& right, size_type offset, size_type count);
 };
 
+// pdb: std::basic_string<char,std::char_traits<char>,std::allocator<char> >::assign | TESObject.obj | fnv360_0721_retail, call_seq, low
+// pdb params: _Right, _Roff, _Count
 StringAssignFO3& StringAssignFO3::FUN_0042eff0(const StringAssignFO3& right, size_type offset, size_type count)
 {
     if (right.size() < offset)
@@ -541,6 +551,7 @@ private:
     std::string message;
 };
 
+// pdb: std::logic_error::logic_error | FanFgFile.obj | tesv_win, caller_sim, low
 LogicErrorCopy::LogicErrorCopy(const LogicErrorCopy& other)
     : std::exception(other), message(other.message)
 {
@@ -554,6 +565,8 @@ namespace f3m_00424af0 {
 namespace task1450 {
 struct Heap {void* FUN_0086b930(unsigned int);};
 extern Heap DAT_01090a78;
+// pdb: std::allocator<float>::allocate | TESNPC.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: _Count
 void* FUN_00424af0(unsigned int count){
  if(count<=0){count=0;}
  else if((unsigned int)-1/count<4){const char* msg=0;throw std::bad_alloc(msg);}
@@ -598,6 +611,8 @@ struct Owner : Base {
     int zero;
     Owner(unsigned, unsigned, int);
 };
+// pdb: LockFreeMap<char const *,Model *>::LockFreeMap<char const *,Model *> | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiMaxThreads, aiNumBuckets, aiDeleteBatchSize
 Owner::Owner(unsigned n, unsigned m, int v) {
     Guard guard;
     zero = 0;
@@ -625,6 +640,7 @@ struct C {
     Obj* m;
     void FUN_004274a0();
 };
+// pdb: std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::_Myptr | BipedAnim.obj | tesv_win, objrun_open, low
 void C::FUN_004274a0()
 {
     if(m)m->DecRef();
@@ -1003,6 +1019,8 @@ void __cdecl FUN_006ef100(unsigned char*);
 void __cdecl FUN_0046fbd0(float*, float*, bool, bool);
 void __cdecl FUN_0046f720(float, BatchString*, int);
 extern BatchMemory* DAT_0108ee00;inline BatchMemory* BatchMemoryHead(){return DAT_0108ee00;}
+// pdb: TES::TestAllCells | TES.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aiControl
 void BatchTES::FUN_0043ac20(int mode)
 {
     if (mode == 4 || mode == 5 || mode == 9)
@@ -1338,6 +1356,8 @@ struct FUN_00427200_cls {
     bool FUN_00427200(const char* path, EntryPtr* out);
 };
 
+// pdb: ModelLoader::FindModel | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apFilename, aspOutModel
 bool FUN_00427200_cls::FUN_00427200(const char* path, EntryPtr* out)
 {
     *out = 0;
@@ -1421,6 +1441,8 @@ struct Thing {
     void FUN_0042ba60(const Holder&);
 };
 
+// pdb: LockFreeQueue<NiPointer<QueuedReference> >::LockFreeQueueInterface::Push | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arData
 void Thing::FUN_0042ba60(const Holder& value)
 {
     HeapContextGuard context(6);

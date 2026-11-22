@@ -40,6 +40,8 @@ public:
     int unk4C;
 };
 
+// pdb: BGSPlaceableWater::Compare | BGSPlaceableWater.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompare
 bool BGSPlaceableWater::FUN_004a5d30(TESForm* other)
 {
     BGSPlaceableWater* otherWater = dynamic_cast<BGSPlaceableWater*>(other);
@@ -492,6 +494,8 @@ struct Form {
     void TESForm_LoadData(File*,void*,unsigned);
     bool FUN_004ae610(File*);
 };
+// pdb: TESGrass::Load | TESGrass.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Form::FUN_004ae610(File* file) {
     if(file->TESFile_GetTESForm()!=0x24) return false;
     Data* contents=&data;
@@ -540,6 +544,8 @@ struct Tree;
 struct Vtable {void* unknown000[56];void (__thiscall* bounds)(Tree*,File*);void* unknown0e4[20];void (__thiscall* editor)(Tree*,char*);};
 void __cdecl FUN_00458210(void*,File*);void __cdecl TESTexture_LoadTextureChunk(void*,File*);void __cdecl FUN_0044c110(void*,File*);
 struct Tree { Vtable* vt; char unknown004[0x2c];char model[0x18];char texture[0xc];char destructible[8];Seeds seeds;Data data;float billboard[2];void FUN_00454410(File*);bool FUN_004bb210(File*);};
+// pdb: TESObjectTREE::Load | TESObjectTREE.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Tree::FUN_004bb210(File*file){
  if(file->TESFile_GetTESForm()!=37)return false;
  FUN_00454410(file);
@@ -972,6 +978,8 @@ struct Weapon {
     void LoadData(ChunkFile*, int, int);
     bool FUN_004bd470(ChunkFile* file);
 };
+// pdb: TESObjectWEAP::Load | TESObjectWEAP.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Weapon::FUN_004bd470(ChunkFile* file) {
     if (file->Type() != 0x28) return false;
     Initialize(file);

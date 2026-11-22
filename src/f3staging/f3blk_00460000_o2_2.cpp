@@ -34,6 +34,8 @@ public:
     RefHolderV(RefCountedV* object, int value8, int value0);
 };
 
+// pdb: BGSDecalEmitter::BGSDecalEmitter | BGSDecalManager.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParticleData, apImpactData, aiNumDecals
 RefHolderV::RefHolderV(RefCountedV* object, int value8, int value0)
 {
     spObject = object;
@@ -81,6 +83,7 @@ public:
     NiPointer<NiRefObject> spObject2C;
 };
 
+// pdb: BGSPrimitive::~BGSPrimitive | BGSPrimitive.obj | fnv360_0822_retail, call_seq, medium
 BGSPrimitive::~BGSPrimitive()
 {
     DetachGeometryV();
@@ -133,6 +136,7 @@ class BGSPrimitiveBox : public BGSPrimitive
     virtual ~BGSPrimitiveBox();
 };
 
+// pdb: BGSPrimitiveBox::BGSPrimitiveBox | BGSPrimitive.obj | fnv360_0822_retail, uvref, medium
 BGSPrimitiveBox::BGSPrimitiveBox()
 {
     unk24 = 0;
@@ -251,6 +255,7 @@ public:
     void FUN_0046c8c0();
 };
 
+// pdb: BGSPrimitivePlane::Build | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
 void PlaneOwnerAL46::FUN_0046c8c0()
 {
     m_plane = new PlaneObjAL46;
@@ -331,6 +336,7 @@ public:
     ~BSCullingProcess();
 };
 
+// pdb: BSCullingProcess::~BSCullingProcess | BGSDecalManager.obj | fnv360_0822_retail, call_seq, medium
 BSCullingProcess::~BSCullingProcess()
 {
     Culler_469140* culler = unkC4;
@@ -386,6 +392,7 @@ struct Obj46c770
 };
 }
 using namespace f3m_0046c770;
+// pdb: BGSPrimitive::BGSPrimitive | BGSPrimitive.obj | fnv360_0822_retail, call_seq, medium
 Obj46c770::Obj46c770() : unk14(0.0f)
 {
     unk24 = 0;
@@ -433,6 +440,8 @@ void* BipedAnim_GetLightingProperty(Obj470960* p);
 int FUN_00c020cb(void* a, const char* s, int len);
 int FUN_00887da0(const char* fmt, void* a, void* b);
 
+// pdb: BipedAnim::GetSkinBipedObject | BipedAnim.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: BSDismemberSkinInstance::EnableAllParts)
+// pdb params: apObj, apLightingProperty
 int FUN_00470960(Obj470960* p1, Rec470960* p2)
 {
     Rec470960* r = p2;
@@ -497,6 +506,7 @@ public:
     void FUN_00475020();
 };
 
+// pdb: BSCloneReserver::DecRefCount | BSClonePool.obj | fnv360_0822_retail, call_seq, medium
 void Ref47::FUN_00475020() {
     if (InterlockedDecrement(&m_08) != 0)
         return;
@@ -774,6 +784,8 @@ struct FUN_00469a50 {
     NiPointer<F3RefCounted> m_pReferencedObject;
     ~FUN_00469a50();
 };
+// pdb: NiTPointerListBase<NiTPointerAllocator<unsigned int>,BGSDecalEmitter *>::RemovePos | BGSDecalManager.obj | fnv360_1110_debug, call_seq, low
+// pdb params: kPos
 FUN_00469a50::~FUN_00469a50() {
     m_pReferencedObject = (F3RefCounted*)0;
 }
@@ -1929,6 +1941,8 @@ bool AnimData::FUN_0045c980()
     return !queue.IsEmpty();
 }
 
+// pdb: Animation::Update | Animation.obj | fnv360_0822_retail, ustr, medium
+// pdb params: ownerObject, fSecondsPassed, forceTime
 void AnimData::FUN_00462020(Reference* ref, float delta, float requestedTime)
 {
     if (FUN_0045c980()) {
@@ -2857,6 +2871,7 @@ struct MyThis
 };
 
 
+// pdb: BGSPrimitiveSphere::Build | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
 void MyThis::FUN_0046df60()
 {
     if (!m_pkNodeA)

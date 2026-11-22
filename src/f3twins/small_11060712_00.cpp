@@ -11,6 +11,8 @@ struct SA : public B { unsigned int m_0c; unsigned int m_10; SA() { m_0c = 0; m_
 struct SB : public SA { SB() { m_vft = (unsigned int)&DAT_00dcde2c; DAT_010f324c += 1; } };
 struct SC : public SB { unsigned char m_14; SC() { m_vft = (unsigned int)&DAT_00dce194; DAT_010f3270 += 1; m_14 = 0; } };
 struct F : public SC { F(unsigned int a); void FUN_0090e600(unsigned int a); };
+// pdb: bhkSimpleShapePhantom::bhkSimpleShapePhantom | TESObjectREFR.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: arInfo
 F::F(unsigned int a)
 {
     m_vft = (unsigned int)&DAT_00dce334;
@@ -27,6 +29,8 @@ struct SA : public B { unsigned int m_0c; unsigned int m_10; SA() { m_0c = 0; m_
 struct SB : public SA { SB() { m_vft = (unsigned int)&DAT_00dcde2c; DAT_010f324c += 1; } };
 struct SC : public SB { unsigned char m_14; SC() { m_vft = (unsigned int)&DAT_00dce194; DAT_010f3270 += 1; m_14 = 0; } };
 struct F : public SC { F(unsigned int a); void FUN_009459c0(unsigned int a); };
+// pdb: bhkCachingShapePhantom::bhkCachingShapePhantom | bhkCharacterController.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: arInfo
 F::F(unsigned int a)
 {
     m_vft = (unsigned int)&DAT_00e3314c;

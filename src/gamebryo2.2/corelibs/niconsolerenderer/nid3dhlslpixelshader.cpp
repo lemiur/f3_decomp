@@ -28,6 +28,8 @@ typedef unsigned int(__thiscall* FNC_F20)(void*, void*, unsigned int, unsigned i
 typedef long(__thiscall* FNC_F18)(void*, void*, unsigned int, unsigned int*, unsigned int&);
 
 // @fnv 0x00e96d40
+// pdb: NiD3DHLSLVertexShader::GetVariableName | NiD3DHLSLVertexShader.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: uiIndex
 unsigned int FUN_00e96d40_Class::FUN_00e96d40(unsigned int a)
 {
     FUN_00e96d40_Out out;
@@ -52,6 +54,8 @@ struct FUN_00e96d00_Class
     void __thiscall FUN_00e96d00();
 };
 // @fnv 0x00e96d00
+// pdb: hkBallAndSocketConstraintCinfo::GetViewerStrings | bhkBallAndSocketConstraint.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apStrings
 void __thiscall FUN_00e96d00_Class::FUN_00e96d00()
 {
     ((FUN_00e898d0_shell*)this)->FUN_00e898d0();

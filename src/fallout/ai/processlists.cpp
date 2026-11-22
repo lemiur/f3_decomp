@@ -17,6 +17,8 @@
 #pragma optimize("gty", on)
 // @f3 0x008d6240 (community match, verified in this file)
 extern void __cdecl FUN_008d4c10();
+// pdb: bhkWorld::StopBatchingRemovals | bhkWorld.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: bhkWorld::ProcessBatchAdds)
+// pdb params: abAllowPartial
 void bhkWorld::SetWorldActive(bool arg)
 {
     if (*(unsigned int*)&m_pObjectAt24 > 0u)

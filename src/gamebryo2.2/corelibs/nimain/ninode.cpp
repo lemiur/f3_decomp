@@ -4,6 +4,8 @@
 
 // Searches this node's children recursively for an object matching name, returning the first match or null.
 // @fnv 0x00a5e560
+// pdb: NiNode::GetObjectByName | NiNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kName
 NiAVObject* NiNode::GetObjectByName(const NiFixedString& name)
 {
     NiAVObject* result = NiAVObject::GetObjectByName(name);
@@ -23,6 +25,8 @@ NiAVObject* NiNode::GetObjectByName(const NiFixedString& name)
 }
 
 // @fnv 0x00a5dc80
+// pdb: NiNode::CopyMembers | NiNode.obj | fnv360_0822_retail, call_gap, low
+// pdb params: pkDest, kCloning
 void NiNode::CopyMemberData(NiNode* target, CloningProcess& process)
 {
     NiAVObject::FUN_00a5ac90(target, process);
@@ -39,6 +43,8 @@ void NiNode::CopyMemberData(NiNode* target, CloningProcess& process)
 
 // Applies the property state to this node, propagates it to all children, and destroys the temporary state if one was created.
 // @fnv 0x00a5db60
+// pdb: NiNode::UpdatePropertiesDownward | NiNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkParentState
 void NiNode::UpdatePropertiesDownwardPass(NiPropertyState* state)
 {
     NiAVObject::UpdatePropertiesDownwardPass(state);
@@ -56,6 +62,8 @@ void NiNode::UpdatePropertiesDownwardPass(NiPropertyState* state)
 
 // Updates world data when the transform flag is set, recurses into children, and recomputes or merges m_kWorldBound from child bounds.
 // @fnv 0x00a5e0b0
+// pdb: NiNode::UpdateTransformAndBounds | NiNode.obj | fnv360_0822_retail, vtable, high
+// pdb params: UpdateData
 void NiNode::UpdateTransformAndBounds(NiUpdateData& data)
 {
     if (TransformFlag())
@@ -106,6 +114,8 @@ void NiNode::UpdateTransformAndBounds(NiUpdateData& data)
 
 // Updates controllers and world data, then recurses into children, merging or setting the world bound depending on bound flags.
 // @fnv 0x00a5dd70
+// pdb: NiNode::UpdateDownwardPass | NiNode.obj | fnv360_0822_retail, vtable, high
+// pdb params: UpdateData, uFlags
 void NiNode::UpdateDownwardPass(NiUpdateData& aUpdateData, unsigned int flags)
 {
     if (aUpdateData.updateControllers)
@@ -159,6 +169,8 @@ void NiNode::UpdateDownwardPass(NiUpdateData& aUpdateData, unsigned int flags)
 
 // Updates selected child nodes' controllers and world bounds, recursing into selected children and merging their bounds into m_kWorldBound.
 // @fnv 0x00a5ded0
+// pdb: NiNode::UpdateSelectedDownwardPass | NiNode.obj | fnv360_0822_retail, vtable, high
+// pdb params: UpdateData, uFlags
 void NiNode::UpdateSelectedDownwardPass(NiUpdateData& aUpdateData, unsigned int flags)
 {
     bool bSavedControllers = aUpdateData.updateControllers;
@@ -263,6 +275,7 @@ struct FUN_00a5db30_shell : public NiNode
 
 // Recomputes this node's world bound, then passes the update up to the parent.
 // @fnv 0x00a5db30
+// pdb: NiNode::UpdateUpwardPass | NiNode.obj | fnv360_0822_retail, vtable, medium
 void FUN_00a5db30_shell::FUN_00a5db30()
 {
     NiNode* pkParent = m_pkParent;
@@ -428,6 +441,8 @@ struct FUN_00a5dce0_shell : public NiNode
 
 // Processes the clone of this node and recursively processes each child node through the cloning map.
 // @fnv 0x00a5dce0
+// pdb: NiNode::ProcessClone | NiNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kCloning
 void FUN_00a5dce0_shell::FUN_00a5dce0(CloningProcess* kCloning)
 {
     NiAVObject::ProcessClone(*kCloning);
@@ -543,6 +558,7 @@ struct NiMemObject
 
 // Calls FUN_00a5e930 on pThis, then frees pThis with NiMemObject::operator delete when flags has bit 0 set, and returns pThis.
 // @fnv 0x00a5ece0
+// pdb: NiNode::`scalar deleting destructor' | NiNode.obj | tesv_win, vtable_prefix, medium
 void* __fastcall FUN_00a5ece0(void* pThis, int, unsigned int flags)
 {
     FUN_00a5e930(pThis);
@@ -631,6 +647,8 @@ struct NodeStub
 
 // Retrieves the child reference at index i from node and decrements its reference count if non-null.
 // @fnv 0x00a5d8a0
+// pdb: BSParticleSystemManager::DetachChildAt | BSParticleSystemManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: i
 void __fastcall ReleaseChildRef(NiNode* node, int, unsigned int uiIndex)
 {
     RefStub* spRetainedObject = 0;
@@ -715,6 +733,8 @@ struct NodeStub
 };
 
 // @fnv 0x00a5d8f0
+// pdb: BSParticleSystemManager::DetachChild | BSParticleSystemManager.obj | fnv360_0822_retail, vtable, high
+// pdb params: pkChild
 void __fastcall FUN_00a5d8f0(NiNode* node, int, NiAVObject* pkChild)
 {
     RefStub* spRetainedObject = 0;
@@ -775,6 +795,8 @@ void __fastcall NiNode_UpdateRigidDownwardPass(NiNode* node, int, NiUpdateData& 
 namespace fnv_00a5e280 {
 
 // @fnv 0x00a5e280
+// pdb: NiNode::UpdateControllers | NiNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: UpdateData
 void __fastcall UpdateChildControllers(NiNode* node, int, NiUpdateData& kData)
 {
     node->UpdateTimeControllers(kData, true);
@@ -822,6 +844,8 @@ struct BaseStub
 
 // Calls FUN_00a59f00 on the node, then registers streamables for each of its child pointers, returning false if the base call fails.
 // @fnv 0x00a5e5b0
+// pdb: NiNode::RegisterStreamables | NiNode.obj | fnv360_0822_retail, vtable, high
+// pdb params: kStream
 bool __fastcall RegisterChildStreamables(NiNode* node, int, NiStream& kStream)
 {
     if (!((BaseStub*)node)->FUN_00a59f00(kStream))
@@ -855,6 +879,7 @@ struct ArrStub
 };
 
 // @fnv 0x00a89890
+// pdb: NiPropertyState::~NiPropertyState | NiPropertyState.obj | fnv360_0822_retail, call_seq, medium
 void __fastcall ReleaseAllRefs(ArrStub* self)
 {
     for (unsigned int i = 0; i < 7; i++)
@@ -956,6 +981,8 @@ struct NodeStub
 
 // Calls SetAt on the node with index i and pkChild, then decrements the ref count of the returned child if non-null.
 // @fnv 0x00a93ea0
+// pdb: BSParticleSystemManager::SetAt | BSParticleSystemManager.obj | fnv360_0822_retail, vtable, high
+// pdb params: i, pkChild
 void __fastcall SetChildAt(NiNode* node, int, unsigned int uiIndex, NiAVObject* pkChild)
 {
     RefStub* spRetainedObject = 0;
@@ -999,6 +1026,8 @@ struct FUN_00a5ea70_t
 };
 
 // @fnv 0x00a5ea70
+// pdb: NiNode::GetViewerStrings | NiNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkStrings
 void FUN_00a5ea70_t::FUN_00a5ea70(StrArr* pkStrings)
 {
     FUN_00a5ad00(pkStrings);
@@ -1101,6 +1130,8 @@ struct StandInNode
 
 // Applies a transform to each child node, composing the matrix and translation with this node's own when bOnLeft is set.
 // @fnv 0x00a5d940
+// pdb: NiNode::ApplyTransform | NiNode.obj | fnv360_0822_retail, vtable, high
+// pdb params: kMat, kTrn, bOnLeft
 void StandInNode::ApplyTransformToChildren(const ThreeByThreeMatrix& kMat, const StandInPt3& kTrn, bool bOnLeft)
 {
     StandInNode* pkChild;
@@ -1383,6 +1414,8 @@ class FUN_00a5ebe0_Array : public NiTArrayA5E<NiPointerA5E<NiObjectA5E> >
 
 // Inserts a non-null element at uiIndex, shifting existing entries up by one and returning the index, or ~0 if the element is null.
 // @fnv 0x00a5ebe0
+// pdb: NiTArray<NiPointer<NiAVObject>,NiTNewInterface<NiPointer<NiAVObject> > >::InsertAt | NiNode.obj | fnv360_0822_retail, call_seq, high
+// pdb params: uiIndex, element
 unsigned int FUN_00a5ebe0_Array::FUN_00a5ebe0(unsigned int uiIndex, const NiPointerA5E<NiObjectA5E>& element)
 {
     if (element == NiPointerA5E<NiObjectA5E>(0))
@@ -1588,6 +1621,8 @@ class BA5EFA0Node : public BA5EFA0AVObject
 };
 
 // @fnv 0x00a5efa0
+// pdb: NiNode::CreateClone | NiNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kCloning
 BA5EFA0Node* BA5EFA0Node::FUN_00a5efa0(BA5EFA0CloningProcess& kCloning)
 {
     BA5EFA0Node* pkClone = new BA5EFA0Node;
@@ -1644,6 +1679,7 @@ class Node2 : public AV
     void UpdateWorldBoundFromChildren();
 };
 // @fnv 0x00a5e2d0
+// pdb: NiNode::UpdateWorldBound | NiNode.obj | fnv360_0822_retail, vtable, medium
 void Node2::UpdateWorldBoundFromChildren()
 {
     if (!F13() && F19())
@@ -1732,6 +1768,8 @@ struct S_00a5eb20_Arr
 };
 // Adds a ref-counted pointer to the array: reuses the first null slot or appends, growing the array if needed, and returns its index or -1 for a null pointer.
 // @fnv 0x00a5eb20
+// pdb: NiTArray<NiPointer<NiAVObject>,NiTNewInterface<NiPointer<NiAVObject> > >::AddFirstEmpty | BSPortalGraph.obj | fnv360_0822_retail, call_seq, high
+// pdb params: element
 unsigned int S_00a5eb20_Arr::FUN_00a5eb20(const S_00a5eb20_Ptr& e)
 {
     if (e == S_00a5eb20_Ptr(0))
@@ -1871,6 +1909,8 @@ class NodeA5E8
 
 // Saves the node's size, child link IDs, and a terminating zero to the stream after calling the base save routine.
 // @fnv 0x00a5e880
+// pdb: NiNode::SaveBinary | NiNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void NodeA5E8::FUN_00a5e880(NiStreamA5E8& kStream)
 {
     FUN_00a5a900(kStream);
@@ -2093,6 +2133,8 @@ void S00a5e690_sub::FUN_00869260(NiRefA*& out, unsigned int index)
 
 // Returns the child at index via out, releasing the previous value and any temporary reference.
 // @fnv 0x00a5e690
+// pdb: NiNode::DetachChildAt | NiNode.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: NiNode::DetachChild)
+// pdb params: i, aspAVObject
 void S00a5e690_Obj::GetChild(unsigned int index, NiRefA** out)
 {
     if (index < m_usESize)
@@ -2262,6 +2304,8 @@ struct NodeStandIn
     void FUN_00a5e780(RefObj* pkChild, RefPtr& pChild);
 };
 // @fnv 0x00a5e780
+// pdb: NiNode::DetachChild | NiNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkChild, aspAVObject
 void NodeStandIn::FUN_00a5e780(RefObj* pkChild, RefPtr& spRemovedChild)
 {
     for (unsigned int i = 0; i < m_kChildren.GetSize(); i++)
@@ -2463,6 +2507,8 @@ class Node
 
 // Reads the child object count and objects from pkStream, then reads and discards uiEffects objects based on m_uiFileVersion.
 // @fnv 0x00a5e9d0
+// pdb: NiNode::LinkObject | NiNode.obj | fnv360_0822_retail, vtable, high
+// pdb params: kStream
 void Node::ReadChildListFromStream(Stream* pkStream)
 {
     ReadFromStream(pkStream);
@@ -2660,6 +2706,8 @@ __declspec(noinline) void ChildArray::FUN_00a5eb20(const HeldChild& element) thr
 
 // Adds pkChild to m_kChildren, placing it in the first available slot if firstAvailable is true, otherwise appending it.
 // @fnv 0x00a5ed10
+// pdb: NiNode::AttachChild | NiNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkChild, bFirstAvail
 void ChildNode::FUN_00a5ed10(ChildObj* pkChild, bool firstAvailable)
 {
     if (pkChild)

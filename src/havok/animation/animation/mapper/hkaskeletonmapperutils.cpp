@@ -7,6 +7,8 @@ struct GlobalStub { float FUN_006e2a90(); };
 extern GlobalStub DAT_01079f68;
 struct X { void FUN_006f5500(int a, float b); };
 extern void __cdecl FUN_00450ba0(X* self, int a, float b, float c);
+// pdb: Actor::GetMissedPacks | Actor.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apPacks, afStartdate
 void X::FUN_006f5500(int a, float b)
 {
     float c = DAT_01079f68.FUN_006e2a90();

@@ -25,6 +25,7 @@ struct Holder_00a4da90
     void* FUN_00a4da90(unsigned int);
 };
 // @fnv 0x00a4da90
+// pdb: NiKeyframeManager::`scalar deleting destructor' | NiKeyframeManager.obj | fnv360_0822_retail, objrun, high
 void* Holder_00a4da90::FUN_00a4da90(unsigned int flags)
 {
     _map.FUN_00a4d660();
@@ -398,6 +399,8 @@ struct TargetD810
     void FUN_00a4d810(StreamD810& akStream);
 };
 // @fnv 0x00a4d810
+// pdb: NiKeyframeManager::LinkObject | NiKeyframeManager.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void TargetD810::FUN_00a4d810(StreamD810& akStream)
 {
     FUN_00a6d500(akStream);
@@ -507,6 +510,8 @@ struct S_00a4dac0
     bool __thiscall FUN_00a4dac0(int a, const char* name, int b) throw();
 };
 // @fnv 0x00a4dac0
+// pdb: NiKeyframeManager::Add | NiKeyframeManager.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: pcSequenceFile, pcSequenceName, uiIndex
 bool __thiscall S_00a4dac0::FUN_00a4dac0(int a, const char* name, int b) throw()
 {
     S_00a4dac0_Obj* obj = 0;

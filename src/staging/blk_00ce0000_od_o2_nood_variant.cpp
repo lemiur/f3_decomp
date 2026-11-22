@@ -38,6 +38,7 @@ public:
 
 typedef hkBool (__cdecl* SortLess1142)(const SortElem16&, const SortElem16&);
 
+// pdb: hkAlgorithm::quickSortRecursive<struct hkGeomConvexHullBuilder::WeightedNeighbour,class hkBool (__cdecl*)(struct hkGeomConvexHullBuilder::WeightedNeighbour const &,struct hkGeomConvexHullBuilder::WeightedNeighbour const &)> | hkGeomConvexHullBuilder.obj | tesv_win, call_seq, medium
 void __cdecl FUN_00cf83c0(SortElem16* storage, int low, int high, SortLess1142 less)
 {
     SortRecord1142* values = reinterpret_cast<SortRecord1142*>(storage);
@@ -139,6 +140,8 @@ typedef char*(__cdecl* SortCmp)(void* tag, const SortRec* lhs, const SortRec* rh
 void __cdecl FUN_00ce245a(SortRec* a, int low, int high, SortCmp cmp);
 
 // @fnv 0x00cf8510
+// pdb: hkAlgorithm::quickSortRecursive<hkWorldOperation::BiggestOperation,hkBool (__cdecl*)(hkWorldOperation::BiggestOperation const &,hkWorldOperation::BiggestOperation const &)> | hkpWorldOperationQueue.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: pArr, d, h, cmpLess
 void __cdecl FUN_00cf8510(SortRec* a, int low, int high, SortCmp cmp)
 {
     char tagLo;

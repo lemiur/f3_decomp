@@ -1622,6 +1622,7 @@ struct ColorArray
     int m_count;
     int m_cap;
 };
+// pdb: drawNumber | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, call_dedup, low, conflict (bridge: drawStatistics)
 static __declspec(noinline) void FUN_00e0daf0(const Se0e0c0_FrameInfo& info, int frame,
     const Se0e0c0_ArrayBase<Se0e0c0_Node*>& trees, int* image, int rows,
     Se0e0c0_ColorTable* colors, int stride, int samples, float duration,

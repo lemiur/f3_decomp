@@ -25,6 +25,8 @@ struct NiPSysBombModifier : NiPSysModifier
     void FUN_00c2e610(CloningProcess&);
 };
 // @fnv 0x00c2e610
+// pdb: NiPSysBombModifier::ProcessClone | NiPSysBombModifier.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: kCloning
 void NiPSysBombModifier::FUN_00c2e610(CloningProcess& kCloning)
 {
     bool bFound;
@@ -92,6 +94,8 @@ struct BombMod : NiPSysBombModifier
 };
 
 // @fnv 0x00c2eaf0
+// pdb: NiPSysBombModifier::IsEqual | NiPSysBombModifier.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkObject
 bool BombMod::FUN_00c2eaf0(NiObject* pkObject)
 {
     if (!FUN_00c31830(pkObject))
@@ -207,6 +211,8 @@ struct BombMod : BombModBase
 
 // Appends the base strings plus the bomb object name, axis, decay, deltaV, decay type and symmetry type to pkStrings.
 // @fnv 0x00c2ed00
+// pdb: NiPSysBombModifier::GetViewerStrings | NiPSysBombModifier.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void BombMod::AppendToStrings(StrArr* pkStrings)
 {
     FUN_00c319e0(pkStrings);

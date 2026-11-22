@@ -30,6 +30,7 @@ class FUN_00cd1e70
     virtual ~FUN_00cd1e70() {}
 };
 
+// pdb: hkpBroadPhaseBorder::~hkpBroadPhaseBorder | hkpBroadPhaseBorder.obj | fnv360_0822_retail, call_seq, medium
 FUN_00cbc4a0::~FUN_00cbc4a0()
 {
     *(int**)((char*)this + 0x00) = (int*)0xe7dabc;

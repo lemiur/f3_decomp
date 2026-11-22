@@ -19,6 +19,8 @@ struct FUN_00d2bf00_class
 };
 
 // @fnv 0x00d2bf00
+// pdb: hkStdioStreamWriter::seek | hkStdioStreamWriter.obj | fnv360_0822_retail, vtable, high
+// pdb params: offset, whence
 bool FUN_00d2bf00_class::Seek(long offset, int whence)
 {
     return _fseek(m8, offset, whence) != 0;
@@ -62,6 +64,8 @@ struct FUN_00d2bf30
 extern void* __cdecl FUN_00ecdf44();
 // Sets the vtable and flags, then stores a pointer into the block returned by FUN_00ecdf44, offset by 0x40 when mode is 2 and 0x20 otherwise.
 // @fnv 0x00d2bf30
+// pdb: hkStdioStreamWriter::hkStdioStreamWriter | hkStdioStreamWriter.obj | fnv360_0822_debug, objrun_sim, low
+// pdb params: s
 FUN_00d2bf30::FUN_00d2bf30(int mode)
 {
     unk06 = 1;
@@ -96,6 +100,8 @@ struct Candidate : FUN_00d2be30
 };
 // Sets flags to 1, installs the vtable, clears file, marks opened, and if fileName is non-null calls SetFile with DAT_0106e798 as mode; returns this.
 // @fnv 0x00d2bf70
+// pdb: hkStdioStreamWriter::hkStdioStreamWriter | hkStdioStreamWriter.obj | fnv360_0822_debug, callee_sim, medium
+// pdb params: nameIn
 void* Candidate::OpenFile(const char* fileName)
 {
     flags = 1;
@@ -120,6 +126,8 @@ struct FUN_00d2be80_cls
 
 // Reads n bytes from m8 into p via FUN_00ecb086; if the read returns <= 0, calls FUN_00d2be50, and returns the byte count (0 when m8 is null).
 // @fnv 0x00d2be80
+// pdb: hkStdioStreamWriter::write | hkStdioStreamWriter.obj | fnv360_0822_retail, vtable, high
+// pdb params: buf, nbytes
 int FUN_00d2be80_cls::ReadBytes(char* apBuffer, int aiCount)
 {
     void* stream = m8;
@@ -144,6 +152,7 @@ struct FUN_00d2bed0_cls
 };
 
 // @fnv 0x00d2bed0
+// pdb: hkStdioStreamWriter::isOk | hkStdioStreamWriter.obj | fnv360_0822_retail, vtable, high
 unsigned char* FUN_00d2bed0_cls::GetFlagAsByte(unsigned char* out)
 {
     *out = m_08 != 0;

@@ -137,6 +137,8 @@ struct MorphViewer : NiGeomMorpherController
 extern char* DAT_01091f78;
 extern NiRTTI DAT_010926a8, DAT_01091f90;
 
+// pdb: NiGeomMorpherController::GetViewerStrings | NiGeomMorpherController.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void MorphViewer::FUN_00a3b700(StrArr* array)
 {
     union HeaderScratch

@@ -236,6 +236,7 @@ struct FUN_00406d70_shell
     FUN_00406d70_shell(int a0);
 };
 
+// pdb: ActiveEffect::FromWornEnchantment | ActiveEffect.obj | tesv_win, objrun_open, low
 FUN_00406d70_shell::FUN_00406d70_shell(int a0)
 {
     int z = 0;

@@ -2492,6 +2492,7 @@ class hkAgentDispatchUtilHelper
 
 }
 
+// pdb: hkpBvTreeAgent::prepareCollisionPartners | hkpBvTreeAgent.obj | tesv_win, caller_sim, low
 void SolUpdater::FUN_00d2fac0( const SolBody& bodyA, const SolBody& bodyB, const SolInput& input, SolOwner& constraintOwner )
 {
 	using namespace hk_009b8230;

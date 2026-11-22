@@ -17,6 +17,7 @@ struct NiPSysEmitterInitialRadiusCtlr : NiPSysModifierFloatCtlr
 };
 
 // @fnv 0x00c2b760
+// pdb: NiPSysEmitterInitialRadiusCtlr::GetTargetFloatValue | NiPSysEmitterInitialRadiusCtlr.obj | tesv_win, objrun_open, low
 void NiPSysEmitterInitialRadiusCtlr::FUN_00c2b760(float& fOut) const
 {
     fOut = *(float*)((const char*)*(void**)((const char*)this + 0x3c) + 0x40);
@@ -29,6 +30,7 @@ struct NiPSysEmitterInitialRadiusCtlr
 };
 
 // @fnv 0x00c2b770
+// pdb: NiPSysEmitterInitialRadiusCtlr::SetTargetFloatValue | NiPSysEmitterInitialRadiusCtlr.obj | tesv_win, objrun_open, low
 void __thiscall NiPSysEmitterInitialRadiusCtlr::FUN_00c2b770(float value)
 {
     float* p = *(float**)((char*)this + 0x3c);
@@ -65,6 +67,7 @@ class NiPSysOwnerC2B
 };
 
 // @fnv 0x00c2b780
+// pdb: NiPSysEmitterInitialRadiusCtlr::CreateClone | NiPSysEmitterInitialRadiusCtlr.obj | tesv_win, caller_sim, low
 NiPSysBaseC2B* NiPSysOwnerC2B::FUN_00c2b780(void* pvProcess)
 {
     NiPSysDerivedC2B* pkClone = new NiPSysDerivedC2B;

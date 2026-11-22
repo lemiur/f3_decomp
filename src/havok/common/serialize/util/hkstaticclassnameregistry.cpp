@@ -23,6 +23,8 @@ struct FUN_00db7ae0_cls
 
 // Resets the slot table, then scans m_slots for the first entry whose Key matches p via MatchSlotKey and returns it, or 0 if none match.
 // @fnv 0x00db7ae0
+// pdb: hkStaticClassNameRegistry::getClassByName | hkStaticClassNameRegistry.obj | fnv360_0822_retail, vtable, high
+// pdb params: className
 SlotEntry* FUN_00db7ae0_cls::FindSlotByKey(void* apKey)
 {
     ResetSlots();

@@ -22,6 +22,8 @@ struct FUN_00473960_elem
     short unk06;
 };
 
+// pdb: hkpPhysicsSystem::removeAction | hkpPhysicsSystem.obj | fnv360_0822_retail, callee_sim, low, conflict (skyrim: tryMoveEntity)
+// pdb params: i
 void FUN_00473960_shell::FUN_00473960(void* aArg)
 {
     unsigned int index = (unsigned int)aArg;

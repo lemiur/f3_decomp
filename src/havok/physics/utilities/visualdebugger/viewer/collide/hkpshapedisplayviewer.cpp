@@ -20,6 +20,7 @@ struct FUN_00d65f70_class
 };
 // If m_1c is set, iterates its count at offset 0x70 and calls FUN_00d65970 on each entry from the array at 0x6c.
 // @fnv 0x00d65f70
+// pdb: hkpShapeDisplayViewer::init | hkpShapeDisplayViewer.obj | fnv360_0822_retail, vtable, medium
 void FUN_00d65f70_class::FUN_00d65f70()
 {
     if (m_1c)
@@ -82,6 +83,8 @@ struct S_00c6d840
 };
 
 // @f3 0x00477900 (community match, verified in this file)
+// pdb: bhkWorldObject::GetProperty | bhkWorldObject.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: BSPointerHandleManagerInterface<class Projectile,class HandleManager>::GetHandle)
+// pdb params: apObj, aiKey
 S_00c6d840_Pair S_00c6d840::FindEntry(int key)
 {
     for (int i = 0; i < m_uiItemCount; i++)
@@ -128,6 +131,7 @@ struct FUN_00d653e0_cls
 };
 
 // @fnv 0x00d653e0
+// pdb: hkpShapeDisplayViewer::clearCache | hkpShapeDisplayViewer.obj | fnv360_0822_retail, objrun_sim, low
 void FUN_00d653e0_cls::FUN_00d653e0()
 {
     sub54.ResetEntries();
@@ -157,6 +161,8 @@ struct FUN_00d655e0_class
 };
 // Scans the items array for an entry whose key equals key and returns its index, or -1 if none matches.
 // @fnv 0x00d655e0
+// pdb: hkpShapeDisplayViewer::findWorld | hkpShapeDisplayViewer.obj | fnv360_0822_retail, objrun, medium
+// pdb params: world
 int FUN_00d655e0_class::FindItemIndex(int key)
 {
     for (int i = 0; i < count34; ++i)
@@ -208,6 +214,7 @@ extern GlobalObjectO2_00d472a0 g_01268f2c;
 extern void* __cdecl FUN_00d65910(void*);
 
 // @fnv 0x00d65950
+// pdb: hkpMousePickingViewer::registerViewer | hkpMousePickingViewer.obj | fnv360_0822_debug, udata, high
 void RegisterShapesProcess()
 {
     void* process = FUN_00dd9380->FUN_00dd9380("Shapes", (void*)&FUN_00d65910);
@@ -223,6 +230,8 @@ struct Adjustor
     void FUN_00d65fb0();
 };
 // @fnv 0x00d65fb0
+// pdb: hkpShapeDisplayViewer::worldAddedCallback | hkpShapeDisplayViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void Adjustor::FUN_00d65fb0()
 {
     ((Target*)((char*)this - 0x20))->FUN_00d65970();
@@ -231,6 +240,7 @@ void Adjustor::FUN_00d65fb0()
 extern int g_D661D0Value;
 
 // @fnv 0x00d661d0
+// pdb: NiGeometryData::GetGroup | NiGeometryData.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: NiDX92DBufferData::IsTriShape)
 int __cdecl FUN_00d661d0()
 {
     return g_D661D0Value;
@@ -253,6 +263,8 @@ struct FUN_00d652a0_cls
 };
 
 // @fnv 0x00d652a0
+// pdb: hkpShapeDisplayViewer::synchronizeTransforms | hkpShapeDisplayViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void FUN_00d652a0_cls::FUN_00d652a0(int arg)
 {
     v10(m_18, arg);
@@ -290,6 +302,8 @@ struct FUN_00d66160_cls
 
 // Calls FindItemIndex on the owner object at this-0x20 and, if the result is non-negative, passes it to FUN_00d65fc0.
 // @fnv 0x00d66160
+// pdb: hkpShapeDisplayViewer::worldRemovedCallback | hkpShapeDisplayViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void FUN_00d66160_cls::FUN_00d66160(int arg)
 {
     OwnerObject* pOwner = (OwnerObject*)((char*)this - 0x20);
@@ -362,6 +376,8 @@ struct FUN_00477900_stub
     D66180PropertyValue FUN_00477900(unsigned int key);
 };
 
+// pdb: hkpShapeDisplayViewer::getId | hkpShapeDisplayViewer.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: entity
 void* __cdecl GetProperty1134(D66180Entity* entity)
 {
     int count = *(int*)((char*)entity + 0x78);
@@ -497,6 +513,8 @@ inline void* operator new(unsigned int, PoolD64650* pool) throw()
 }
 struct SpawnOwnerD64650 { void FUN_00903ae0(void*); void FUN_00903be0(void*); };
 extern "C" void __cdecl FUN_00901f10(SpawnList*, int);
+// pdb: hkpSweptTransformDisplayViewer::addWorld | hkpSweptTransformDisplayViewer.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: world
 void FUN_00d64650_cls::FUN_00d64650(SpawnOwner* owner)
 {
     ((SpawnOwnerD64650*)owner)->FUN_00903ae0(this ? (char*)this + 0x28 : 0);
@@ -553,6 +571,8 @@ struct D65610Self : D65610Prim, D65610Sec
 // Calls v10 on the stored object with the entity's offset 0xf0 pointer, the result of GetProperty1134(e), and DAT_01268fe0.
 // @f3 0x009f2580 (community match, verified in this file)
 extern int DAT_01269cd8;
+// pdb: hkpShapeDisplayViewer::inactiveEntityMovedCallback | hkpShapeDisplayViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: entity
 void D65610Self::FUN_00d65610(D66180Entity* pEntity)
 {
     D65610Obj* obj = m_pEntryObject;
@@ -891,6 +911,8 @@ static void __forceinline TtPushEvent(const char* name)
 
 // Pushes a TthkpShapeDisplayViewer event, returns early if m_flag34 is false, otherwise calls GetOuter()->v10 with m_18 and arg, then pushes an Et event.
 // @fnv 0x00d65520
+// pdb: hkpShapeDisplayViewer::postSimulationCallback | hkpShapeDisplayViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void TtShapeDisplayInner::FUN_00d65520(int arg)
 {
     TtPushEvent("TthkpShapeDisplayViewer");
@@ -1261,6 +1283,8 @@ struct ItemFix
     }
 };
 
+// pdb: hkpShapeDisplayViewer::synchronizeTransforms | hkpShapeDisplayViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: displayHandler, world
 void S00d653f0_Obj::FUN_00d653f0(Visitor* apVisitor, Node* apNode)
 {
     float f = (m_68 > 0.0f) ? m_68 : ((CpuObject*)apNode)->FUN_00c91020();
@@ -1518,6 +1542,8 @@ int __cdecl FUN_009f3010(AudioParam* param);
 extern int DAT_011697fc;
 }
 
+// pdb: hkpShapeDisplayViewer::entityRemovedCallback | hkpShapeDisplayViewer.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: entity
 void AudioNodeSub::FUN_00d65640(AudioParam* pParam)
 {
     using namespace Native933;
@@ -1717,6 +1743,8 @@ struct Slot7HavokThreadMemory
 };
 void __cdecl FUN_00901f10(void* arr, int n);
 
+// pdb: hkpShapeDisplayViewer::addWorld | hkpShapeDisplayViewer.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: world
 void S_00d65970_Obj::FUN_00d65970(S_00d65970_Arg* arg)
 {
     reinterpret_cast<Slot7RegistrationView*>(arg)->FUN_00903ae0(this);

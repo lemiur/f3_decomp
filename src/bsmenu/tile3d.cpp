@@ -61,6 +61,8 @@ struct FUN_00a20720_shell : public Tile3D
     void InitTile(Tile* apParent, const char* apName, Tile* apReplacedTile);
 };
 // @f3 0x00bfddf0 (community match, verified in this file)
+// pdb: Tile3D::Init | Tile3D.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParent, apName, apReplacedTile
 void FUN_00a20720_shell::InitTile(Tile* apParent, const char* apName, Tile* apReplacedTile)
 {
     Tile::Init(apParent, apName, apReplacedTile);

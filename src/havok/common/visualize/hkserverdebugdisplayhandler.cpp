@@ -10,6 +10,7 @@ struct FUN_00dd97c0
     FUN_00dd97c0(char f);
 };
 // @fnv 0x00dd97c0
+// pdb: std::locale::facet::`scalar deleting destructor' | algs.obj | fnv360_0822_retail, vtable, high
 FUN_00dd97c0::FUN_00dd97c0(char acFlags)
 {
     m_p = &DAT_010d7cfc;
@@ -51,6 +52,8 @@ struct WorldLockStub
     void FUN_00908a00();
 };
 
+// pdb: hkServerDebugDisplayHandler::displayPoint | hkServerDebugDisplayHandler.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: position, color, id, tag
 bool FUN_00dd9ab0_cls::FUN_00dd9ab0(unsigned int a1, unsigned int a2, int a3, unsigned int a4)
 {
     bool ok;
@@ -101,6 +104,8 @@ struct FUN_00dd9be0_cls
 };
 
 // @f3 0x00a62120 (community match, verified in this file)
+// pdb: hkServerDebugDisplayHandler::sendMemStatsDump | hkServerDebugDisplayHandler.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: data, length
 bool FUN_00dd9be0_cls::FUN_00dd9be0(unsigned int value, unsigned int length)
 {
     static_cast<WorldLockStub*>(m_cs)->FUN_00908a00();
@@ -158,6 +163,7 @@ struct Cfg_w137 : FUN_00d605d0_Class
 };
 extern "C" __declspec(dllimport) void __stdcall _fnv_LeaveCriticalSection(void* section);
 
+// pdb: hkServerDebugDisplayHandler::holdImmediate | hkServerDebugDisplayHandler.obj | fnv360_0822_retail, caller_sim, medium
 bool S_00dd9c60::FUN_00dd9c60()
 {
     ((CS_w137*)unk08)->FUN_00908a00();
@@ -191,6 +197,7 @@ struct DD9D70StringArray
 };
 
 // @fnv 0x00dd9d70
+// pdb: _getGeometryByteSize | hkServerDebugDisplayHandler.obj | fnv360_0822_retail, objrun_open, low
 static __declspec(noinline) int FUN_00dd9d70(const DD9D70StringArray& strings)
 {
     int size = 4;
@@ -243,6 +250,8 @@ struct Lock95{
     void FUN_00908a00();
 };
 struct Parent95{void FUN_00a61800(unsigned int value);};
+// pdb: hkServerDebugDisplayHandler::displayGeometry | hkServerDebugDisplayHandler.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: geometries, transform, color, id, tag
 bool FUN_00dd9df0_cls::FUN_00dd9df0(unsigned int a1,unsigned int a2,unsigned int a3,unsigned int a4){
     ((Lock95*)criticalSection)->FUN_00908a00();
     if(config){
@@ -354,6 +363,8 @@ struct FUN_00dda290_cfg
 };
 int FUN_009233f0(unsigned int value);
 
+// pdb: hkServerDebugDisplayHandler::displayText | hkServerDebugDisplayHandler.obj | fnv360_0822_retail, objrun_open, low, conflict (bridge: hkServerDebugDisplayHandler::displayAnnotation)
+// pdb params: text, color, id, tag
 int FUN_00dda290_cls::WriteConfigValue(unsigned int a, int aiValue, unsigned int c)
 {
     reinterpret_cast<FUN_00dda290_lock*>(criticalSection)->FUN_00908a00();
@@ -445,6 +456,8 @@ struct DD97E0LockF3
         LeaveCriticalSection(&m_kCriticalSection);
     }
 };
+// pdb: hkServerDebugDisplayHandler::addGeometryInstance | hkServerDebugDisplayHandler.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: originalInstanceID, transform, id, tag, shapeIdHint
 int DD97E0DisplayHandler::FUN_00dd97e0(int aUnused, int bUnused, int c, int dUnused, int eUnused)
 {
     ((DD97E0LockF3*)m_pSynchronizationLock)->FUN_00908a00();
@@ -485,6 +498,8 @@ struct W56Lock
     int unk1c;
     void FUN_00908a00();
 };
+// pdb: hkServerDebugDisplayHandler::displayLine | hkServerDebugDisplayHandler.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: start, end, color, id, tag
 int Output::WriteRecord(unsigned int first, unsigned int second, unsigned int third)
 {
     ((W56Lock*)lock)->FUN_00908a00();
@@ -583,6 +598,8 @@ struct DD9950LockF3
         LeaveCriticalSection(&m_kCriticalSection);
     }
 };
+// pdb: hkServerDebugDisplayHandler::updateGeometry | hkServerDebugDisplayHandler.obj | fnv360_0822_retail, caller_sim, low, conflict (bridge: hkServerDebugDisplayHandler::removeGeometry)
+// pdb params: transform, id, tag
 DD9950Result DD9950DisplayServer::FUN_00dd9950(unsigned long id, int tag, unsigned long shapeIdHint)
 {
     ((DD9950LockF3*)m_outStreamLock)->FUN_00908a00();

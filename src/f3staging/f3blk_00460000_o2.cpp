@@ -87,6 +87,7 @@ struct FUN_0047deb0_owner {
     void FUN_0047deb0();
 };
 
+// pdb: ItemChange::InitLoadGame | InventoryChanges.obj | fnv360_0721_retail, call_seq, medium
 void FUN_0047deb0_owner::FUN_0047deb0() {
     FUN_0047deb0_node* n = unk00;
     while (n) {
@@ -114,6 +115,7 @@ extern void FUN_00dbe6cc();
 void __cdecl FUN_00824ed0();
 void __cdecl FUN_0089ec10(FUN_004651a0_Class* obj, int value);
 
+// pdb: NiStencilProperty::`scalar deleting destructor' | BGSAutoWater.obj | fnv360_0822_retail, vtable, medium
 FUN_004651a0_Class* __thiscall FUN_004651a0_Class::FUN_004651a0(unsigned char flag) {
     unk00 = (int)(void*)&FUN_00dbe6cc;
     FUN_00824ed0();
@@ -194,6 +196,8 @@ __forceinline ClassifiedObject47* FindObject47(LookupOwner47* owner)
     LookupResult47 result;
     return owner->FUN_00477900(&result, DAT_010f2c30)->item;
 }
+// pdb: bhkPCollisionObject::Getbhk | GlobalFunc.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apPhantom
 ClassifiedObject47* __cdecl FUN_00477a30(LookupOwner47* owner)
 {
     ClassifiedObject47* object = FindObject47(owner);
@@ -222,6 +226,8 @@ int FUN_004776e0_Owner::vf04(int value)
     return value;
 }
 
+// pdb: NiTMapBase<DFALL<NiTMapItem<unsigned int,VertexDist> >,unsigned int,VertexDist>::GetNext | GlobalFunc.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: pos, key, val
 void __thiscall FUN_004776e0_Owner::FUN_004776e0(int** result, int* value, int* values)
 {
     int* table = *result;
@@ -279,6 +285,8 @@ struct PointOwner_4651 {
     int unk24;
 };
 
+// pdb: BGSAutoWater::IsPolyonInsidePolygon | BGSAutoWater.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apPoly1, apPoly2
 bool FUN_004651d0(PointOwner_4651* owner, Area_4651* area)
 {
     for (int i = 0; i < owner->unk24; i++) {
@@ -314,6 +322,8 @@ struct GroupList_47f3 {
     bool FUN_0047f300(int key);
 };
 
+// pdb: InventoryChanges::IsLevelItemInited | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiIndex
 bool GroupList_47f3::FUN_0047f300(int key)
 {
     bool found = false;
@@ -358,6 +368,7 @@ public:
     int FUN_0047cec0();
 };
 
+// pdb: ItemChange::NumberLeveledExtra | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
 int EntryList_47cec0::FUN_0047cec0()
 {
     int total = 0;
@@ -382,6 +393,8 @@ extern unsigned int g_uiTotalMemory_46f7;
 unsigned int GetTotalMemory_46f7();
 int FormatString_46f7(char* buffer, const char* format, ...);
 
+// pdb: BGSSceneInfo::BuildMNumberString | BGSSceneInfo.obj | fnv360_0822_retail, ustr, medium
+// pdb params: afMnumber, aOutText, abForActor
 void FUN_0046f720(float used, char* buffer, bool useCached)
 {
     float total;
@@ -421,6 +434,7 @@ public:
     int FUN_0047d2a0();
 };
 
+// pdb: ItemChange::GetScript | InventoryChanges.obj | fnv360_0822_retail, call_gap, medium
 int FUN_0047d2a0_Owner::FUN_0047d2a0() {
     FUN_0047d2a0_Node* node = unk00;
 
@@ -540,6 +554,8 @@ public:
     unsigned short capacity;
     unsigned short count;
 };
+// pdb: AddNoLightingPropertyRecurse | GlobalFunc.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apObject
 void FUN_0047acf0(TraversalObject* object)
 {
     if (object->AsGeometry() && !object->FUN_00826590(3))
@@ -621,6 +637,8 @@ struct GroupListM
     int FUN_0047f9c0(int key, void* item);
 };
 
+// pdb: InventoryChanges::GetExtraDataListIndexForItem | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObject, apExtra
 int GroupListM::FUN_0047f9c0(int key, void* item)
 {
     if (key && item && head00)
@@ -655,6 +673,8 @@ struct ShortPair475080 {
 	ShortPair475080* FUN_00475080(const ShortPair475080* other);
 };
 
+// pdb: Date::Date | Date.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aDate
 ShortPair475080* ShortPair475080::FUN_00475080(const ShortPair475080* other)
 {
 	unk00 = other->unk00;
@@ -664,6 +684,8 @@ ShortPair475080* ShortPair475080::FUN_00475080(const ShortPair475080* other)
 
 // @f3 0x004750e0 (community match, verified in this file)
 extern unsigned short g_daysInMonth50e0[12];
+// pdb: Date::CalculateDate | Date.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: asDay, asMonth
 unsigned short FUN_004750e0(unsigned short day, unsigned short month) {
     unsigned short d = day;
     unsigned short m = month;
@@ -739,6 +761,8 @@ struct InventoryOwner910 {
     void* FUN_0047e910(TESLevItem* levItem);
 };
 
+// pdb: InventoryChanges::GetLeveledCalculatedBaseObject | InventoryChanges.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apLevelItem
 void* InventoryOwner910::FUN_0047e910(TESLevItem* levItem) {
     void* result = 0;
     if (levItem) {
@@ -774,6 +798,8 @@ void* InventoryOwner910::FUN_0047e910(TESLevItem* levItem) {
 }   // namespace f3m_0047e910
 
 // @f3 0x00475850 (community match, verified in this file)
+// pdb: IsAnInteger | GlobalFunc.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: ActorValue::GetActorValueIndex)
+// pdb params: str
 int FUN_00475850(const char* text)
 {
     char first = *text++;
@@ -799,6 +825,7 @@ struct FNV_0046c090_Obj {
     float FUN_0046c090();
 };
 
+// pdb: BGSSaveLoadManager::LoadMostRecentSaveGame | BGSSaveLoadManager.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 float FNV_0046c090_Obj::FUN_0046c090() {
     return unk04 * unk04 + unk00 * unk00 + unk08 * unk08;
 }
@@ -815,6 +842,8 @@ struct FUN_0047d200_Holder {
     void FUN_0047d200(int value);
 };
 
+// pdb: ItemChange::SetPoison | InventoryChanges.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apPoison
 void __thiscall FUN_0047d200_Holder::FUN_0047d200(int value) {
     FUN_0047d200_Object** objects = unk00;
     if (objects != 0) {
@@ -837,6 +866,8 @@ float __cdecl FUN_00475740(float param_1, float param_2, float param_3,
 // @f3 0x00475970 (community match, verified in this file)
 #include <math.h>
 
+// pdb: GetUnclampedZAngleFromVector | GlobalFunc.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: NiPoint3::GetUnclampedZAngleFromVector)
+// pdb params: aDirection
 float FUN_00475970(const float* vec)
 {
     float angle;
@@ -880,6 +911,8 @@ struct Pair4751
     Pair4751* FUN_004751a0(int first, int second, short extra);
 };
 
+// pdb: Date::Date | Date.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: asDay, asMonth, asYear
 Pair4751* Pair4751::FUN_004751a0(int first, int second, short extra)
 {
     unk00 = FUN_004750e0(first, second);
@@ -959,6 +992,8 @@ struct AnimHolder464600
     void FUN_00464600(NameNode464600* list, const char* folder);
 };
 
+// pdb: Animation::AddSpecialAnimations | Animation.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apFileList, apPath
 void AnimHolder464600::FUN_00464600(NameNode464600* list, const char* folder)
 {
     for (NameNode464600* node = list; node; node = node->next)
@@ -979,6 +1014,7 @@ public:
 };
 extern Heap479b00 DAT_01090a78;  // game heap
 
+// pdb: NiTMap<unsigned int,VertexDist>::NewItem | GlobalFunc.obj | fnv360_0822_retail, vtable, medium
 void* FUN_00479b00()
 {
     return DAT_01090a78.FUN_0086b930(0x14);
@@ -1002,6 +1038,7 @@ public:
     bool FUN_0047ce90();
 };
 
+// pdb: BSSimpleList<ContainerObject *>::`scalar deleting destructor' | TESContainer.obj | fnv360_0822_debug, call_gap_sim, low
 bool List47ce90::FUN_0047ce90()
 {
     for (Node47ce90* node = first; node; node = node->next) {
@@ -1046,6 +1083,8 @@ struct Vec4_477880
     void FUN_00477880(const Matrix_477880& m, const Vec3_477880& v);
 };
 
+// pdb: hkpBoxBoxCollisionDetection::debugCheckManifold | hkpBoxBoxCollisionDetection.obj | fnv360_0822_debug, objrun_prop, low
+// pdb params: manifold, result
 void Vec4_477880::FUN_00477880(const Matrix_477880& m, const Vec3_477880& v)
 {
     float px = v.x;
@@ -1068,6 +1107,7 @@ struct Quad46c350
     void FUN_0046c350();
 };
 
+// pdb: BSOcclusionShape::QAdjustedViewPlanes | BSOcclusionPlane.obj | tesv_win, objrun_open, low
 void Quad46c350::FUN_0046c350()
 {
     d = c = b = a = 0.0f;
@@ -1219,6 +1259,7 @@ public:
     OwnedList list;
     ~FUN_0046ffe0();
 };
+// pdb: BSSimpleList<TESForm *>::RemoveAll | BGSTextureUseMap.obj | fnv360_0721_beta, call_dedup, low
 FUN_0046ffe0::~FUN_0046ffe0() {
     list.FUN_006c8220();
 }
@@ -1337,6 +1378,8 @@ extern const char DAT_00dbfdb4[];
 extern const char DAT_00dc0a8c[];
 int FUN_00c009eb(const char* first, const char* second);
 int FUN_00c020cb(const char* first, const char* second, unsigned int length);
+// pdb: RemoveScabard | GlobalFunc.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: RemoveScabbard)
+// pdb params: apNode
 bool FUN_004781c0(SceneNode* node) {
     if (node) {
         for (unsigned int i = 0; i < node->count; ++i) {
@@ -1863,6 +1906,8 @@ public:
     unsigned short count;        // A6
 };
 
+// pdb: UnTintScenegraph | GlobalFunc.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRoot
 void FUN_004788d0(AVObject4788d0* object)
 {
     Object4788d0* prop = object->FUN_00826590(3);
@@ -2021,6 +2066,7 @@ public:
     bool FUN_0047e210();
 };
 
+// pdb: InventoryChanges::WearingVoiceModulateItem | InventoryChanges.obj | fnv360_0822_retail, caller_sim, low
 bool Container47e210::FUN_0047e210()
 {
     bool found = false;
@@ -2112,6 +2158,8 @@ struct AFLinkRegistry {
     void FUN_004700e0(AFLinkKey* key, int value, AFLinkTarget* target);
 };
 
+// pdb: BGSTextureUseMap::AddTexUse | BGSTextureUseMap.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apTex, aulMemorySize, apForm
 void AFLinkRegistry::FUN_004700e0(AFLinkKey* key, int value, AFLinkTarget* target)
 {
     if (!key || !target)
@@ -2199,6 +2247,8 @@ public:
     ColorSurface* surface;
     void FUN_0046d790(const ColorWords* source);
 };
+// pdb: BGSPrimitiveSphere::SetColor | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aColor
 void ColorOwner::FUN_0046d790(const ColorWords* source) {
     color = *source;
     if (surface) {
@@ -2211,18 +2261,21 @@ void ColorOwner::FUN_0046d790(const ColorWords* source) {
 }
 
 // @f3 0x0046c1d0 (community match, verified in this file)
+// pdb: BSOcclusionPlane::QDebugGeomShapeSize | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
 int __cdecl FUN_0046c1d0()
 {
     return 0x1e;
 }
 
 // @f3 0x0046c650 (community match, verified in this file)
+// pdb: bhkLiquidAction::QCinfoSize | Explosion.obj | fnv360_0822_retail, vtable, medium
 int __cdecl FUN_0046c650()
 {
     return 0x18;
 }
 
 // @f3 0x0046c660 (community match, verified in this file)
+// pdb: BSMultiBoundAABB::QDebugGeomShapeSize | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
 int __cdecl FUN_0046c660()
 {
     return 0x24;
@@ -2233,6 +2286,8 @@ struct RadiusVector3 {
     float x, y, z;
     float SquaredLength() const { return x*x + y*y + z*z; }
 };
+// pdb: LengthCheck | GlobalFunc.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aVector, afCompLength
 int FUN_00476720(const RadiusVector3* vector, float radius) {
     float length = vector->SquaredLength();
     radius *= radius;
@@ -2261,6 +2316,8 @@ struct FUN_00468d00_Vec {
     void FUN_00468d00();
 };
 
+// pdb: NiSinCos | TESObjectWEAP.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: NiPoint3::Unitize)
+// pdb params: fRadians, fSin, fCos
 void FUN_00468d00_Vec::FUN_00468d00() {
     volatile float sumSq = x * x + y * y + z * z;
     volatile float rooted = (float)sqrt((double)sumSq);
@@ -2296,6 +2353,8 @@ struct Owner_0047ce40 {
     int __thiscall FUN_0047ce40(char flag);
 };
 
+// pdb: ItemChange::GetExtraTotalCount | InventoryChanges.obj | fnv360_0822_retail, call_gap, low, conflict (bridge: ItemChange::GetExtraTotalDefaultCount)
+// pdb params: abWornIgnore
 int __thiscall Owner_0047ce40::FUN_0047ce40(char flag) {
     int total = 0;
     Node_0047ce40* current = node;
@@ -2333,6 +2392,7 @@ struct Owner47 {
 };
 extern void* DAT_01071564;
 
+// pdb: GridCellArray::ToggleCollisionGeometry | GridCell.obj | fnv360_0822_retail, caller_sim, low
 void Owner47::FUN_0047b940() {
     G47* g = (G47*)DAT_01071564;
     if (!g) return;
@@ -2352,6 +2412,7 @@ struct Mat_4752c0 {
     float m00, m01, m02, m10, m11, m12, m20, m21, m22;
     Vec3_4752c0 FUN_004752c0(const Vec3_4752c0& in);
 };
+// pdb: NiMatrix3::operator* | InventoryChanges.obj | tesv_win, call_seq, medium
 Vec3_4752c0 Mat_4752c0::FUN_004752c0(const Vec3_4752c0& in) {
     Vec3_4752c0 out;
     out.x = m00 * in.x + m01 * in.y + m02 * in.z;
@@ -2368,6 +2429,8 @@ struct S768 {
     float f;
 };
 bool __cdecl FUN_00476780(S768* s, void* p);
+// pdb: PointInFrustum | GlobalFunc.obj | fnv360_0822_retail, caller, medium
+// pdb params: aTestLocation, apCamera, afDistance
 bool __cdecl FUN_004768c0(int a1, int a2, int a3, void* p4, float a5) {
     if (!p4) return false;
     S768 s;
@@ -2442,6 +2505,8 @@ extern int DAT_0116ebd8;
 
 bool __cdecl FUN_004782c0(int* param_1);
 
+// pdb: HasParticleSystem | GlobalFunc.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: apObj
 bool __cdecl FUN_004782c0(int* param_1) {
     if (param_1 == 0) {
         return false;
@@ -2483,6 +2548,7 @@ extern const TypeInfo DAT_0116eeec;
 
 int __cdecl FUN_00404050(const char *s1, const char *s2);
 
+// pdb: GetCollisionObjectCount | GlobalFunc.obj | fnv360_0822_retail, objrun, medium
 void FUN_00478960(void *a1, void *a2)
 {
     if ((*(unsigned char *)((char *)a2 + 0x18) & 1) && a1)
@@ -2552,6 +2618,8 @@ public:
     float m_18;
 };
 struct Pt46c300 { float x, y, z; float SqrLength() const { return x * x + y * y + z * z; } };
+// pdb: BGSPrimitiveSphere::IsInside | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aPoint
 bool __fastcall FUN_0046c300(const Obj46c300* self, int, const Pt46c300* p)
 {
     return self->m_18 * self->m_18 > p->SqrLength();
@@ -2616,6 +2684,7 @@ struct Singleton47cbf0 {
     virtual void DeleteThis(bool free);
 };
 extern Singleton47cbf0* DAT_0106ea24;
+// pdb: InventoryChanges::KillTempRef | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
 void FUN_0047cbf0()
 {
     if (DAT_0106ea24)
@@ -2634,6 +2703,7 @@ struct Key4751d0 {
     unsigned short id;
 };
 Pair4751d0 __cdecl FUN_00475140(unsigned int id);
+// pdb: Date::GetDay | Date.obj | fnv360_0822_retail, objrun_prop, low
 int __fastcall FUN_004751d0(Key4751d0* key)
 {
     Pair4751d0 pair = FUN_00475140(key->id);
@@ -2643,16 +2713,20 @@ int __fastcall FUN_004751d0(Key4751d0* key)
 
 // @f3 0x00475070 (community match, verified in this file)
 struct Owner588{unsigned short first,second;Owner588* FUN_00475070();};
+// pdb: Date::Date | Date.obj | fnv360_0822_retail, call_seq, high
 Owner588* Owner588::FUN_00475070(){first=0;second=0;return this;}
 
 // @f3 0x0047cbe0 (community match, verified in this file)
 struct Target591{int FUN_004e66c0();};
 struct Owner591{int unk00;Target591* target;int FUN_0047cbe0();};
+// pdb: InventoryChanges::GetOriginalContainer | InventoryChanges.obj | fnv360_0822_retail, caller_sim, low
 int Owner591::FUN_0047cbe0(){return target?target->FUN_004e66c0():0;}
 
 // @f3 0x0046dd40 (community match, verified in this file)
 namespace f3m_0046dd40 {
 struct Owner631{void FUN_0046d800(float);void FUN_0046dd40(const float*);};
+// pdb: BGSPrimitiveSphere::SetRadii | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aRadii
 void Owner631::FUN_0046dd40(const float* value){FUN_0046d800(*value);}
 }   // namespace f3m_0046dd40
 
@@ -2673,6 +2747,8 @@ struct Owner646{
     int unk28;    Entry646 entries[16];
     void FUN_00471570(Entry646*);void FUN_00472200(unsigned int);
 };
+// pdb: BipedAnim::RemovePart | BipedAnim.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aeObj, abClear, aiClearValue
 void Owner646::FUN_00472200(unsigned int index){FUN_00471570(&entries[index]);}
 }   // namespace f3m_00472200
 
@@ -2687,6 +2763,7 @@ struct Owner647 {
     unsigned short value;
     unsigned int FUN_004751f0();
 };
+// pdb: Date::GetMonth | Date.obj | fnv360_0822_retail, objrun_prop, low
 unsigned int Owner647::FUN_004751f0()
 {
     return FUN_00475140(value).index;
@@ -2704,6 +2781,7 @@ struct RelativeValue648 {
     int unk14;
     unsigned char tag;
 };
+// pdb: bhkUnaryAction::GetRTTI | bhkCartTether.obj | tesv_win, objrun_open, low
 char* FUN_00475660(RelativeValue648* value)
 {
     if (value->tag == 2)
@@ -2734,6 +2812,7 @@ public:
     C* unk10;
 };
 
+// pdb: GetHavokWorldObjectCount | GlobalFunc.obj | fnv360_0822_retail, objrun, medium
 void FUN_00478a50(D* a1, C* a2)
 {
     C* eax = a1->unk10;
@@ -2780,6 +2859,8 @@ struct FUN_00470740_Obj {
     Slot470740 slots[20];
     Slot470740* FUN_00470740(void* key);
 };
+// pdb: BipedAnim::FindBipObject | BipedAnim.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObj
 Slot470740* FUN_00470740_Obj::FUN_00470740(void* key)
 {
     if (!key)
@@ -2809,6 +2890,8 @@ public:
     bool FUN_00468ec0(unsigned int index);
 };
 
+// pdb: BSShaderProperty::GetFlag | BGSDecalManager.obj | fnv360_0721_beta, call_gap, low, conflict (bridge: NiObject::IsExactKindOf)
+// pdb params: aiFlag
 bool FlagSet_468ec0::FUN_00468ec0(unsigned int index)
 {
     return (unk20[index >> 5] & (1u << (index & 0x1F))) > 0;
@@ -2839,6 +2922,8 @@ struct Grid {
     }
     void FUN_0047b740(int arg);
 };
+// pdb: GridCellArray::ShowLandBorders | GridCell.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: GridCellArray::RunAnimations)
+// pdb params: abShow
 void Grid::FUN_0047b740(int arg) {
     for (unsigned int x = 0; x < dim; x++) {
         for (unsigned int y = 0; y < dim; y++) {
@@ -2882,6 +2967,7 @@ struct FUN_0046c560 : Base {
     RefPtr unk104;
     ~FUN_0046c560();
 };
+// pdb: BSPortal::~BSPortal | BGSPrimitive.obj | fnv360_0822_retail, call_seq, medium
 FUN_0046c560::~FUN_0046c560()
 {
 }
@@ -2913,6 +2999,7 @@ public:
     static Tab_46b690* ms_pStringTable;
 };
 
+// pdb: BGSDecalManager::GetInstance | BGSDecalManager.obj | fnv360_0822_retail, call_gap, low
 Tab_46b690* FUN_0046b690()
 {
     if (!Tab_46b690::ms_pStringTable)
@@ -2961,6 +3048,7 @@ struct Owner {
     List list;
     void FUN_0046bff0();
 };
+// pdb: BGSDecalManager::UpdateDecalEmitters | BGSDecalManager.obj | fnv360_0822_retail, call_seq, medium
 void Owner::FUN_0046bff0() {
     Node* n = list.head;
     while (n) {
@@ -3112,6 +3200,7 @@ public:
     float FUN_0047cda0();
 };
 
+// pdb: TESObjectARMO::GetArmorRating | InventoryChanges.obj | fnv360_0822_debug, call_gap, low
 float Owner_0047cda0::FUN_0047cda0()
 {
     return (float)(unk178 / 100.0);
@@ -3125,6 +3214,7 @@ struct Obj468ef0 {
     int unk00, unk04, unk08, unk0C, unk10, unk14, unk18;
     int type;
 };
+// pdb: NiPointer<BSTempEffectGeometryDecal>::~NiPointer<BSTempEffectGeometryDecal> | BGSDecalManager.obj | fnv360_0822_debug, call_gap_sim, low
 int FUN_00468ef0(Obj468ef0* obj)
 {
     if (!obj)
@@ -3165,6 +3255,8 @@ struct BoundOwner
     NiBound* bound;
 };
 
+// pdb: NodeInFrustum | GlobalFunc.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObject, apCamera
 bool FUN_004784d0(BoundOwner* owner)
 {
     if (owner) {
@@ -3218,6 +3310,8 @@ struct PtrHolder_0047b7b0
     RefObject_0047b7b0* __thiscall FUN_0047b7b0(int index);
 };
 
+// pdb: BSSimpleArray<NiPoint2,1024>::operator[] | ImageSpaceEffectWaterDisplacement.obj | fnv360_0822_debug, call_seq, low, conflict (skyrim: NiScreenElements::SetRectangle)
+// pdb params: aiIndex
 RefObject_0047b7b0* PtrHolder_0047b7b0::FUN_0047b7b0(int index)
 {
     return this ? m_kEntries[index] : NiPointer<RefObject_0047b7b0>();
@@ -3242,6 +3336,8 @@ struct Walker47;
 void __cdecl FUN_00478a50(void* elem, WalkOpts47* opts);
 void __cdecl FUN_008d5790(Walker47* node, WalkOpts47* opts, void (__cdecl* cb)(void*, WalkOpts47*));
 
+// pdb: GetHavokWorldObjectCountInSceneGraph | GlobalFunc.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRoot
 int __cdecl FUN_00478a70(Walker47* node)
 {
     WalkOpts47 opts;
@@ -3284,6 +3380,8 @@ public:
     int FUN_004708a0(int index);
 };
 
+// pdb: BipedAnim::IsFaceGenObject | BipedAnim.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeBipedObject
 int Owner_004708a0::FUN_004708a0(int index)
 {
     Entry_004708a0_target* p = entries[index + 3].unk00;
@@ -3323,6 +3421,7 @@ struct Obj_468dd0 {
     Obj_468dd0* FUN_00468dd0();
 };
 
+// pdb: BGSDecalManager::GetInstance | BGSDecalManager.obj | fnv360_0721_retail, caller, medium
 Obj_468dd0* Obj_468dd0::FUN_00468dd0()
 {
     p60.x = 0.0f;
@@ -3428,6 +3527,8 @@ struct Owner705 {
     Point705 position;
     void FUN_0046c630(const Point705* supplied);
 };
+// pdb: BSMultiBoundSphere::SetCenter | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCenter
 void Owner705::FUN_0046c630(const Point705* supplied)
 {
     position = *supplied;
@@ -3441,6 +3542,8 @@ struct Owner706 {
     void FUN_004704a0(int first, int third);
     void FUN_00470600(int first, int second, int third);
 };
+// pdb: BGSTextureUseMap::CollectTexUseData | BGSTextureUseMap.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apNode, apDefaultUser, abCheckActors
 void Owner706::FUN_00470600(int first, int second, int third)
 {
     value = second;
@@ -3452,6 +3555,7 @@ void Owner706::FUN_00470600(int first, int second, int third)
 extern bool DAT_01073a30;
 extern bool DAT_01073a60;
 namespace f3m_004706c0 {
+// pdb: BSFaceGenManager::GetUseMultiThreading | BipedAnim.obj | fnv360_0822_retail, call_gap, low
 int FUN_004706c0()
 {
     if (DAT_01073a30 && DAT_01073a60) return 1;
@@ -3463,6 +3567,7 @@ int FUN_004706c0()
 extern bool DAT_01075b28;
 extern bool DAT_01075cac;
 namespace f3m_00477b00 {
+// pdb: Interface::Has360Controller | Interface.obj | fnv360_0822_debug, call_seq, medium
 int FUN_00477b00()
 {
     if (DAT_01075b28 && !DAT_01075cac) return 1;
@@ -3474,6 +3579,8 @@ int FUN_00477b00()
 namespace Match752 {
 struct Heap { void* FUN_0086b930(unsigned int bytes); };
 extern Heap DAT_01090a78;
+// pdb: BSSimpleArray<PathSmootherPOVLink,1024>::_Allocate | PathSmootherPOV.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiSizeInItem
 void* __stdcall FUN_0046eab0(unsigned int count)
 {
     return DAT_01090a78.FUN_0086b930(count << 6);
@@ -3490,6 +3597,7 @@ struct Owner {
     void FUN_0046bff0();
     void FUN_0046c070();
 };
+// pdb: BGSDecalManager::ClearDecalsThisFrame | BGSDecalManager.obj | fnv360_0822_debug, udata, medium
 void Owner::FUN_0046c070()
 {
     DAT_0106def4 = 0;
@@ -3526,6 +3634,8 @@ int Owner760::FUN_00475530()
 namespace Match777 {
 struct Heap { void* FUN_0086bae0(void* memory, unsigned int bytes); };
 extern Heap DAT_01090a78;
+// pdb: BSSimpleArray<PathSmootherPOVLink,1024>::_Reallocate | PathSmootherPOV.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apBuffer, aiNewSizeInItem
 void* __stdcall FUN_0046ead0(void* memory, unsigned int count)
 {
     return DAT_01090a78.FUN_0086bae0(memory, count << 6);
@@ -3542,6 +3652,8 @@ struct Owner789 {
     Data789* data;
     int FUN_004706e0();
 };
+// pdb: ImpactMixer::PlayHitSound | ImpactMixer.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: apAttacker, afDamage, afDefDamage, apTarget, aiWeaponType, aiArmorType, aiShieldType, abFakeHit, abEnchantedWeapon
 int Owner789::FUN_004706e0()
 {
     if (this && data) {
@@ -3700,6 +3812,7 @@ int Owner805::TESObjectWEAP_IsThrownWeapon()
 namespace f3m_00470870 {
 struct Item840 { virtual ~Item840(); };
 struct Owner840 { Item840* first; Item840* second; void FUN_00470870(); };
+// pdb: NiCloningProcess::~NiCloningProcess | BipedAnim.obj | fnv360_0822_retail, call_seq, high
 void Owner840::FUN_00470870() {
     delete first;
     delete second;
@@ -3786,6 +3899,8 @@ public:
     void FUN_0047cb40(float value);
 };
 
+// pdb: TESObjectWEAP::GetAttackSpeed | CombatFormulas.obj | fnv360_0822_retail, call_gap, low
+// pdb params: bModValue
 void FUN_0047cb40_Owner::FUN_0047cb40(float value)
 {
     if (!(value < DAT_00dc0ac8)) {
@@ -3800,6 +3915,7 @@ void FUN_0047cb40_Owner::FUN_0047cb40(float value)
 namespace f3m_0047d230 {
 struct Item842 { int FUN_0040acc0(); void FUN_0040b920(); };
 struct Owner842 { Item842** items; void FUN_0047d230(); };
+// pdb: ItemChange::RemovePoison | InventoryChanges.obj | fnv360_0822_retail, caller, medium
 void Owner842::FUN_0047d230() {
     Item842** list = items;
     if (list) {
@@ -3812,6 +3928,7 @@ void Owner842::FUN_0047d230() {
 // @f3 0x00475250 (community match, verified in this file)
 namespace f3m_00475250 {
 struct Vec849 { float x, y, z; float FUN_00475250(const Vec849* other); };
+// pdb: NiPoint3::operator* | GlobalFunc.obj | tesv_win, call_dedup, low
 float Vec849::FUN_00475250(const Vec849* other) {
     return other->y * y + other->x * x + other->z * z;
 }
@@ -3821,6 +3938,8 @@ float Vec849::FUN_00475250(const Vec849* other) {
 namespace f3m_00477760 {
 struct Payload850 { int x, y, z; };
 struct Node850 { int unk00, key04; Payload850 values08; };
+// pdb: NiTMapBase<DFALL<NiTMapItem<unsigned int,VertexDist> >,unsigned int,VertexDist>::SetValue | GlobalFunc.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkItem, key, val
 Node850* __stdcall FUN_00477760(Node850* node, int key, Payload850 values) {
     node->key04 = key;
     node->values08 = values;
@@ -3831,6 +3950,7 @@ Node850* __stdcall FUN_00477760(Node850* node, int key, Payload850 values) {
 // @f3 0x00468cd0 (community match, verified in this file)
 namespace f3m_00468cd0 {
 struct Vec865 { float x, y, z; };
+// pdb: operator* | ExtraDataObjects.obj | tesv_win, call_seq, medium
 Vec865* __cdecl FUN_00468cd0(Vec865* output, float scale, const Vec865* source) {
     output->x = source->x * scale;
     output->y = source->y * scale;
@@ -3861,6 +3981,7 @@ struct Owner887 {
     void FUN_00824e90();
     Owner887* FUN_00465160();
 };
+// pdb: NiStencilProperty::NiStencilProperty | BGSAutoWater.obj | fnv360_0822_retail, call_gap, low
 Owner887* Owner887::FUN_00465160() {
     FUN_00824e90();
     vtable00 = &DAT_00dbe6cc;
@@ -3887,6 +4008,8 @@ extern const char DAT_00f46078[], DAT_00f46a4c[];
 namespace f3m_0047caa0 {
 struct Value889 { int unk00; unsigned int value04; };
 Value889* __cdecl FUN_00c0050a(void* object, int unused, const void* baseType, const void* targetType, int flags);
+// pdb: TESEnchantableForm::GetFormEnchanting | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apForm
 unsigned int __cdecl FUN_0047caa0(void* object) {
     Value889* value = FUN_00c0050a(object, 0, DAT_00f46078, DAT_00f46a4c, 0);
     if (value) return value->value04;
@@ -3912,6 +4035,7 @@ struct FUN_0046c0c0_Class {
     FUN_0046c0c0_Class* __thiscall FUN_0046c0c0(FUN_0046c0c0_Obj* source);
 };
 
+// pdb: BSOcclusionPlane::GetFrustumPlanes | BSOcclusionPlane.obj | tesv_win, objrun_open, low
 FUN_0046c0c0_Class* __thiscall FUN_0046c0c0_Class::FUN_0046c0c0(FUN_0046c0c0_Obj* source) {
     volatile float value = source->unk0C;
 
@@ -3944,6 +4068,8 @@ public:
 };
 extern FileFinder* DAT_011785d0;
 
+// pdb: BipedAnim::Get1stPersonModelFileName | BipedAnim.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apModel, ap1stPersonFileName
 bool __stdcall FUN_00470a30(ModelSource* source, char* path)
 {
     char fullPath[0x104];
@@ -3978,6 +4104,7 @@ struct Owner
     int FUN_0047d170();
 };
 
+// pdb: ItemChange::GetItemOwnership | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
 int Owner::FUN_0047d170()
 {
     if (holder) {
@@ -4175,6 +4302,8 @@ public:
     NiAVObject* GetAt(unsigned int index) const { return children[index]; }
 };
 
+// pdb: HasMorpherController | GlobalFunc.obj | fnv360_0822_debug, caller, medium
+// pdb params: apObj
 bool __cdecl FUN_00478250(NiAVObject* object)
 {
     if (!object)
@@ -4240,6 +4369,8 @@ public:
 
 using namespace f3m_004691c0;
 
+// pdb: BSCullingProcess::SetAccumulator | BGSDecalManager.obj | fnv360_0822_debug, objrun, low
+// pdb params: apAccumulator
 void Owner::FUN_004691c0(RefObject* object)
 {
     unkC4 = object;
@@ -4416,6 +4547,8 @@ struct FUN_0046e700_Table {
 };
 extern FUN_0046e700_Table DAT_00f4bf68;
 
+// pdb: BGSSceneInfo::TexUseCB | BGSSceneInfo.obj | fnv360_0721_beta, objrun, low
+// pdb params: apTexture, aulMemorySize, apParam
 void __cdecl FUN_0046e700(int key, int amount, int** counter)
 {
     bool found = false;
@@ -4488,6 +4621,8 @@ struct Owner925 {
     Child925* child08;
     float FUN_00475710();
 };
+// pdb: hkpRigidBody::applyLinearImpulse | MagicCaster.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: bhkRigidBody::GetDynamicMass)
+// pdb params: imp
 float Owner925::FUN_00475710() {
     return this && child08 ? child08->componentD0.FUN_008f8410() : 0.0f;
 }
@@ -4501,6 +4636,8 @@ struct Owner926 {
     int* data10;
     int* FUN_0047b220(unsigned int row, unsigned int column);
 };
+// pdb: GridCellArray::Get | GridCell.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: Actor::RequestDetectionState)
+// pdb params: aiX, aiY
 int* Owner926::FUN_0047b220(unsigned int row, unsigned int column) {
     if (row < size0C && column < size0C) return &data10[size0C * row + column];
     return 0;
@@ -4539,6 +4676,8 @@ extern Manager470770* DAT_0116efb8;
 void __cdecl FUN_00478bb0(Form470770* form);
 void __cdecl FUN_008d7720(Form470770* form, int a, int b);
 
+// pdb: BipedAnim::RunBiped3DDetach | BipedAnim.obj | fnv360_0822_retail, call_gap, low
+// pdb params: ap3D
 void __cdecl FUN_00470770(Form470770* form)
 {
     if (form) {
@@ -4555,6 +4694,8 @@ void __cdecl FUN_00470770(Form470770* form)
 // @f3 0x00477b20 (community match, verified in this file)
 namespace f3m_00477b20 {
 float FUN_00475910(float angle);
+// pdb: GetZAngleFromVector | GlobalFunc.obj | fnv360_0822_retail, call_seq, medium, conflict (skyrim: NiPoint3::GetZAngleFromVector)
+// pdb params: aDirection
 float FUN_00477b20(const float* vec)
 {
     float angle;
@@ -4588,6 +4729,7 @@ public:
     int FUN_0047d1d0();
 };
 
+// pdb: ItemChange::GetPoison | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
 int FUN_0047d1d0_Holder::FUN_0047d1d0() {
     int result = 0;
     do {
@@ -4609,6 +4751,8 @@ struct Entry464e20 {
     float value;
 };
 }
+// pdb: SortY | BGSAutoWater.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pV1, pV2
 int __cdecl FUN_00464e20(const f3m_00464e20::Entry464e20* a, const f3m_00464e20::Entry464e20* b)
 {
     if (a->value > b->value)
@@ -4689,6 +4833,7 @@ namespace f3m_00475490 {
 struct Mat33 { float m[3][3]; };
 bool __stdcall NiMatrix3_Inverse(Mat33* m);
 
+// pdb: NiMatrix3::Inverse | GlobalFunc.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 Mat33* __stdcall FUN_00475490(Mat33* m)
 {
     if (!NiMatrix3_Inverse(m))
@@ -4743,6 +4888,7 @@ struct Owner965 {
     float x18, y1C, z20;
     float FUN_0046c670();
 };
+// pdb: BSMultiBoundAABB::QMultiBoundRadius | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
 float Owner965::FUN_0046c670() { return sqrt(y1C * y1C + x18 * x18 + z20 * z20); }
 }   // namespace f3m_0046c670
 
@@ -4933,6 +5079,8 @@ struct Obj {
 }
 using namespace f3m_00470fd0;
 
+// pdb: BipedAnim::BipedAnim | BipedAnim.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRef, apNode
 Obj* Obj::FUN_00470fd0(int a, int b)
 {
     memset(this, 0, sizeof(Obj));
@@ -4970,6 +5118,7 @@ namespace f3m_0047d2d0 {
 struct Object973 { int FUN_0040ad00(); };
 struct Node973 { Object973* object00; Node973* next04; };
 struct Owner973 { Node973* head00; int FUN_0047d2d0(); };
+// pdb: ItemChange::GetScriptLocals | InventoryChanges.obj | fnv360_0822_retail, call_gap, medium
 int Owner973::FUN_0047d2d0() {
     Node973* node = head00;
     while (node) {
@@ -5093,6 +5242,8 @@ struct Owner {
 }
 using namespace f3m_0047e400;
 
+// pdb: InventoryChanges::GetObjectbyType | InventoryChanges.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aeFormID, ainumb
 Form* Owner::FUN_0047e400(int type, int* count)
 {
     Container* container = baseForm ? baseForm->FUN_004e66c0() : 0;
@@ -5144,6 +5295,8 @@ Form* Owner::FUN_0047e400(int type, int* count)
 
 // @f3 0x00464df0 (community match, verified in this file)
 namespace f3m_00464df0 {
+// pdb: SortX | BGSAutoWater.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pV1, pV2
 int __cdecl FUN_00464df0(const float* left, const float* right) {
     if (*left > *right) return 1;
     if (*right > *left) return -1;
@@ -5214,6 +5367,8 @@ public:
     Derived46c* FUN_0046c360(int unused);
 };
 
+// pdb: BGSPrimitiveSphere::MakeMultiBoundShape | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
+// pdb params: akAngle
 Derived46c* Owner46c::FUN_0046c360(int unused)
 {
     volatile Vec3_46c v;
@@ -5232,6 +5387,7 @@ struct Vec3
 struct Mat3 { float m[3][3]; };
 }
 using namespace f3m_00475320;
+// pdb: operator* | LocalMap.obj | tesv_win, call_gap, low
 Vec3 FUN_00475320(const Vec3& v, const Mat3& mat)
 {
     return Vec3(mat.m[0][0] * v.x + mat.m[1][0] * v.y + mat.m[2][0] * v.z,
@@ -5266,6 +5422,8 @@ struct Owner47fa20 {
     Item47fa20* FUN_0047fa20(int key, int index);
 };
 
+// pdb: InventoryChanges::GetExtraDataListFromIndexForItem | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObject, aiExtraIndex
 Item47fa20* Owner47fa20::FUN_0047fa20(int key, int index)
 {
     if (key == 0 || index == -1)
@@ -5325,6 +5483,8 @@ void FUN_00477680_cls::vf00() {}
 int FUN_00477680_cls::vf04(int key) { return key; }
 bool FUN_00477680_cls::vf08(int key, int nodeKey) { return nodeKey == key; }
 
+// pdb: NiTMapBase<DFALL<NiTMapItem<unsigned int,VertexDist> >,unsigned int,VertexDist>::GetAt | GlobalFunc.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: key, val
 bool FUN_00477680_cls::FUN_00477680(int key, FUN_00477680_out* out)
 {
     FUN_00477680_node* n = unk08[vf04(key)];
@@ -5382,6 +5542,8 @@ __forceinline ClassifiedObject* FindObject(LookupOwner* owner)
 }
 }
 using namespace f3m_004779d0;
+// pdb: bhkCollisionObject::Getbhk | GlobalFunc.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: TESObjectREFR::GetHandle)
+// pdb params: apBody
 ClassifiedObject* __cdecl FUN_004779d0(LookupOwner* owner)
 {
     ClassifiedObject* object = FindObject(owner);
@@ -5431,6 +5593,8 @@ typedef void (__cdecl *Callback_478b70)();
 void __cdecl FUN_00478b30();
 void __cdecl FUN_008d5790(int, void*, Callback_478b70);
 
+// pdb: GetHavokWorldObjectByIndexInSceneGraph | GlobalFunc.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apRoot, aiIndex
 int __cdecl FUN_00478b70(int param_1, int param_2)
 {
     Local_478b70 local;
@@ -5510,6 +5674,7 @@ extern f3m_0046e540::Manager* DAT_0107a0d8;
 extern int DAT_0106e1b8;
 extern int DAT_0106e17c;
 extern int DAT_0106e284;
+// pdb: BGSSceneInfo::GetLoadedAreaNonActorMemoryBudgetCap | BGSSceneInfo.obj | fnv360_0822_retail, call_seq, medium
 int __cdecl FUN_0046e540()
 {
     int result = DAT_0106e1b8;
@@ -5587,6 +5752,8 @@ int FUN_0046deb0(float v, void* arg);
 int FUN_0046de00(const Pt3_46e* p, void* arg);
 }
 using namespace f3m_0046e470;
+// pdb: BGSPrimitive::CreateAbstract | BGSPrimitive.obj | fnv360_0822_retail, call_gap, low
+// pdb params: eType, aRadii, aColor
 int FUN_0046e470(int type, const Pt3_46e* v, void* arg)
 {
     switch (type)
@@ -5619,6 +5786,7 @@ namespace f3m_0047d1a0 {
 struct Object999 { signed char FUN_0040e260(); };
 struct Node999 { Object999* object00; Node999* next04; };
 struct Owner999 { Node999* head00; int FUN_0047d1a0(); };
+// pdb: ItemChange::GetHotKey | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
 int Owner999::FUN_0047d1a0() {
     Node999* node = head00;
     int result = -1;
@@ -5723,6 +5891,8 @@ public:
     virtual ~FUN_0046c490();
 };
 
+// pdb: BSPortal::BSPortal | BGSPrimitive.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arCenter, arHalfExtents, arRotation
 FUN_0046c490::FUN_0046c490(int a, int b, int c) : Base46(a, b, c)
 {
     m0e4 = 1;
@@ -5754,6 +5924,8 @@ struct FUN_004650c0_cls {
     unsigned int FUN_004650c0(void* key, unsigned int start, ElemPred pred);
 };
 
+// pdb: BSSimpleArray<NavMeshEdgeHandle,1024>::Find<NavMeshEdgeHandle> | NavMeshObstacleCutter.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aValue, aiStartIndex, apFunc
 unsigned int FUN_004650c0_cls::FUN_004650c0(void* key, unsigned int start, ElemPred pred)
 {
     for (unsigned int i = start; i < size; i++) {
@@ -5792,6 +5964,8 @@ struct Biped_00472c60 {
     void FUN_00471020(Scene* s);
     void FUN_00472c60(void* key);
 };
+// pdb: BipedAnim::RemovePart | BipedAnim.obj | fnv360_0721_beta, objrun, low, conflict (skyrim: BipedAnim::QueueHelmetLoad)
+// pdb params: apObj
 void Biped_00472c60::FUN_00472c60(void* key)
 {
     if (!key)
@@ -5825,6 +5999,8 @@ struct Obj_469000 {
 };
 }
 using namespace f3m_00469000;
+// pdb: BGSDecalManager::IsValidDecalImpact | BGSDecalManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCollidee, aeDecalType
 bool __cdecl FUN_00469000(Obj_469000* obj)
 {
     switch (obj->unk1C->typeID)
@@ -5842,6 +6018,8 @@ bool __cdecl FUN_00469000(Obj_469000* obj)
 
 // @f3 0x0047ca30 (community match, verified in this file)
 namespace f3m_0047ca30 {
+// pdb: BSRoundToNearest | InventoryChanges.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: afVal, afNearest
 float FUN_0047ca30(float value, float step)
 {
     value = value / step;
@@ -5860,6 +6038,8 @@ struct Owner1020 {
     void FUN_00470f10(unsigned int index, void* value);
     unsigned int FUN_004721c0(void* value);
 };
+// pdb: NiTArray<NiPointer<NiAVObject>,NiTNewInterface<NiPointer<NiAVObject> > >::Add | BipedAnim.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: element
 unsigned int Owner1020::FUN_004721c0(void* value) {
     unsigned int capacity = capacity08;
     unsigned int index = size0A;
@@ -5925,6 +6105,8 @@ struct Owner1027 {
     void FUN_00833810(int value);
     Owner1027* FUN_004690f0(int value);
 };
+// pdb: BSCullingProcess::BSCullingProcess | BGSDecalManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apVisibleSet
 Owner1027* Owner1027::FUN_004690f0(int value) {
     FUN_00833810(value);
     value090 = 0;
@@ -5989,6 +6171,7 @@ struct Cls_477a90 {
 };
 
 
+// pdb: hkMouseSpringActionCinfo::hkMouseSpringActionCinfo | GlobalFunc.obj | fnv360_0822_debug, call_gap, low
 Cls_477a90* Cls_477a90::FUN_00477a90() {
     unk00 = 0;
     unk04 = 0;
@@ -6032,6 +6215,7 @@ struct Sphere_4754d0 {
     float radius;
     int FUN_004754d0(const Plane_4754d0& s);
 };
+// pdb: NiBound::WhichSide | GlobalFunc.obj | tesv_win, objopen_prop, low
 int Sphere_4754d0::FUN_004754d0(const Plane_4754d0& s)
 {
     float dist = s.x * x + s.y * y + s.z * z;
@@ -6133,6 +6317,8 @@ struct Obj46d150 {
     void FUN_0046d150(const Color46d150* c);
 };
 
+// pdb: BGSPrimitiveBox::SetColor | BGSPrimitive.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BGSPrimitiveBox::SetRadii)
+// pdb params: aColor
 void Obj46d150::FUN_0046d150(const Color46d150* c)
 {
     color = *c;
@@ -6245,6 +6431,7 @@ struct Owner_00469ae0 {
     void FUN_00469ae0();
 };
 
+// pdb: BSPerformanceTimerManager::BeginFrame | BSPerformanceTimer.obj | fnv360_0822_debug, call_gap_sim, low
 void Owner_00469ae0::FUN_00469ae0()
 {
     if (unk10 > 0) {
@@ -6316,6 +6503,8 @@ struct Pair
     Target* target;
     int value;
 };
+// pdb: BGSTextureUseMap::TexUseCB | BGSTextureUseMap.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apTexture, aulMemorySize, apParam
 void __cdecl FUN_00470480(int a, int b, Pair* p)
 {
     if (p->target)
@@ -6327,6 +6516,8 @@ void __cdecl FUN_00470480(int a, int b, Pair* p)
 // @f3 0x004758a0 (community match, verified in this file)
 namespace f3m_004758a0 {
 namespace f3m_004758a0 {
+// pdb: IsAFloat | GlobalFunc.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: str
 int FUN_004758a0(const char* s)
 {
     bool dot = false;
@@ -6371,6 +6562,8 @@ public:
 
 extern Holder_474ba0* DAT_0106e578;
 
+// pdb: BSClonePools::GetInstance | BSClonePool.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: abCreate
 Holder_474ba0* __cdecl FUN_00474ba0(char create)
 {
     if (!DAT_0106e578 && create)
@@ -6388,6 +6581,8 @@ struct Vec3_477f60 {
 
 int __cdecl FUN_00476720(const Vec3_477f60* v, float r);
 
+// pdb: LengthCheck | GlobalFunc.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aPt1, aPt2, afCompLength
 int __cdecl FUN_00477f60(const Vec3_477f60* a, const Vec3_477f60* b, float r)
 {
     Vec3_477f60 d;
@@ -6422,6 +6617,8 @@ struct Obj {
 }
 extern void (__cdecl* g_011aa050)(unsigned short count, unsigned int src, void* out, void* xf);
 using namespace f3m_00477d30;
+// pdb: CreateWorldVertices | GlobalFunc.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apGeom
 Vert* __cdecl FUN_00477d30(Obj* obj)
 {
     if (!obj || !obj->data->count)
@@ -6466,6 +6663,8 @@ struct Search_478ae0
 using namespace f3m_00478ae0;
 void FUN_008d5790(void* root, Search_478ae0* search, void (*cb)(void*, Search_478ae0*));
 void FUN_00478ab0(void* node, Search_478ae0* search);
+// pdb: GetHavokWorldObjectIndexInSceneGraph | GlobalFunc.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRoot, apWorldObject
 int FUN_00478ae0(void* root, int key)
 {
     Search_478ae0 s;
@@ -6487,6 +6686,8 @@ namespace f3m_00474fe0 {
 struct Manager1068 { void FUN_00474c70(int first, int second); };
 Manager1068* __cdecl FUN_00474ba0(bool create);
 struct Owner1068 { int first00, second04, result08; Owner1068* FUN_00474fe0(int first, int second); };
+// pdb: BSCloneReserver::BSCloneReserver | BSClonePool.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apLoadedObject, aiCloneCount
 Owner1068* Owner1068::FUN_00474fe0(int first, int second) {
     first00 = first;
     second04 = second;
@@ -6507,6 +6708,8 @@ struct Owner1106 {
     void FUN_00aad5f0();
     Owner1106* FUN_0046c5e0(const Vector1106* first, const Vector1106* second);
 };
+// pdb: BSMultiBoundAABB::BSMultiBoundAABB | BGSPrimitive.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arCenter, arHalfExtents
 Owner1106* Owner1106::FUN_0046c5e0(const Vector1106* first, const Vector1106* second) {
     FUN_00aad5f0();
     vtable00 = &DAT_00dbeef4;
@@ -6575,6 +6778,7 @@ public:
     void FUN_0047b6e0();
 };
 
+// pdb: GridCellArray::RunAnimations | GridCell.obj | fnv360_0822_retail, call_seq, medium
 void Owner_0047b6e0::FUN_0047b6e0()
 {
     unsigned int i = 0;
@@ -6651,6 +6855,8 @@ struct Owner477 {
 
 int __cdecl FUN_00424fe0(Node477* node);
 
+// pdb: FindFirstCollisionObject | GlobalFunc.obj | fnv360_0822_debug, caller, medium
+// pdb params: ap3D
 int __cdecl FUN_00477d90(Node477* node)
 {
     int result = 0;
@@ -6693,6 +6899,7 @@ struct FUN_0047ba30_owner {
     void FUN_0047ba30();
 };
 
+// pdb: GridCellArray::ClearCanopyShadowMaskTexture | GridCell.obj | fnv360_0822_debug, caller, medium
 void FUN_0047ba30_owner::FUN_0047ba30() {
     if (unk24 == 0) return;
     int (__stdcall* fn)(void*) = FUN_00d9b064;
@@ -6806,6 +7013,7 @@ struct Owner {
     Obj* FUN_0046cfd0();
 };
 
+// pdb: BGSPrimitivePlane::MakePortal | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
 Obj* Owner::FUN_0046cfd0() {
     return new Obj(&DAT_0108ec68, Vec2(unk18, unk20), (void*)FUN_00f72574);
 }
@@ -6856,6 +7064,8 @@ struct Owner_0046c290 {
     unsigned char FUN_0046c290(const float* v) const;
 };
 
+// pdb: BGSPrimitivePlane::IsInside | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aPoint
 unsigned char Owner_0046c290::FUN_0046c290(const float* v) const
 {
     return !(v[0] < -unk18) && !(v[1] < -unk1C) && !(v[2] < -unk20) && !(v[0] > unk18) && !(v[1] > unk1C) && !(v[2] > unk20);
@@ -6888,6 +7098,7 @@ struct Owner_0047d5b0 {
     const char* FUN_0047d5b0();
 };
 
+// pdb: ItemChange::GetFullName | InventoryChanges.obj | fnv360_0822_retail, call_dedup, medium
 const char* Owner_0047d5b0::FUN_0047d5b0()
 {
     TESBoundObject* obj = unk08;
@@ -6915,6 +7126,7 @@ namespace f3m_00474ae0 {
 void __cdecl FUN_006c8220();
 struct Pair1187 { void* first; void* second; Pair1187():first(0),second(0){} ~Pair1187(); };
 struct FUN_00474ae0 { Pair1187 pair; FUN_00474ae0(); };
+// pdb: BSSimpleList<BSClonePools::ClonePool *>::RemoveAll | BSClonePool.obj | fnv360_0721_beta, call_seq, medium
 FUN_00474ae0::FUN_00474ae0() { FUN_006c8220(); }
 }   // namespace f3m_00474ae0
 
@@ -7042,6 +7254,8 @@ struct Owner471 {
     Mgr471* unk10;
     void FUN_00471020(Obj471* obj);
 };
+// pdb: BipedAnim::RecursivelyRemoveAllDecalPlacementVectorDataFromWeaponBone | BipedAnim.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apRoot
 void Owner471::FUN_00471020(Obj471* obj)
 {
     if (!obj) return;
@@ -7078,6 +7292,7 @@ void Owner471::FUN_00471020(Obj471* obj)
 namespace f3m_00474c20 {
 struct Pair1208 { int first,second;Pair1208():first(0),second(0){}~Pair1208();void FUN_005e3010(); };
 struct FUN_00474c20 { int unk00;Pair1208 member04;FUN_00474c20(); };
+// pdb: BSSimpleList<NiPointer<NiAVObject> >::RemoveAll | BSClonePool.obj | fnv360_0721_beta, call_gap, low
 FUN_00474c20::FUN_00474c20() { unk00=0;member04.FUN_005e3010(); }
 }   // namespace f3m_00474c20
 
@@ -7096,6 +7311,8 @@ struct FUN_004789f0_Opts {
 int __cdecl FUN_008d5790(int a, FUN_004789f0_Opts* opts, void* callback);
 void __cdecl FUN_00478960();
 
+// pdb: GetCollisionObjectCountInSceneGraph | GlobalFunc.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRoot, abIgnoreWeaponBone, abIgnoreFadeNodes, abIgnoreArrows
 int __cdecl FUN_004789f0(int a, unsigned char b, unsigned char c, unsigned char d)
 {
     FUN_004789f0_Opts o;
@@ -7126,6 +7343,7 @@ struct Owner1223 {
  __forceinline Item1223** At(unsigned int x,unsigned int y){if(x>=dimension||y>=dimension)return 0;return &items[dimension*x+y];}
  void FUN_0047b500();
 };
+// pdb: GridCellArray::UpdateDistantLandBlending | GridCell.obj | fnv360_0822_retail, call_gap_sim, low
 void Owner1223::FUN_0047b500(){
  unsigned int count=dimension;
  for(unsigned int x=0;x<count;++x)for(unsigned int y=0;y<count;++y){Item1223** slot=At(x,y);if(slot&&*slot)(*slot)->TESObjectCELL_GetLand()->TESObjectLAND_InitDistantTextureBlending();}
@@ -7137,6 +7355,8 @@ void Owner1223::FUN_0047b500(){
 extern double FUN_00dc0438;
 extern float DAT_00f4c824;
 namespace f3m_00475210 {
+// pdb: NiASin | GlobalFunc.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: fValue
 float __cdecl FUN_00475210(float value) {
     if (value > FUN_00dc0438) {
         if (value < 1.0f) return (float)asin(value); return DAT_00f4c824;
@@ -7176,6 +7396,8 @@ struct Loader
     void FUN_0046fa90(int a, bool flag, int b);
 };
 
+// pdb: BGSSceneInfo::CollectSceneDataFromNode | BGSSceneInfo.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apNode, abIncludeAddonNodes, abTrackActors
 void Loader::FUN_0046fa90(int a, bool flag, int b)
 {
     DAT_00f4bf88.FUN_006bd950();
@@ -7267,6 +7489,8 @@ inline FUN_00478ce0_Node* FUN_00478ce0_Obj::vf08() {
     return unk0C;
 }
 
+// pdb: SetPhase | GlobalFunc.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: GetCollisionObjectIndexInSceneGraph)
+// pdb params: apNode, afPhase
 void __cdecl FUN_00478ce0(FUN_00478ce0_Obj* object, float value) {
     if (object == 0) {
         return;
@@ -7320,6 +7544,7 @@ struct FUN_0047d0a0_Obj {
 
 extern FUN_0047d0a0_Result* __cdecl FUN_00c0050a(int, int, int, int, int);
 
+// pdb: ItemChange::GetItemCharge | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
 float FUN_0047d0a0_Obj::FUN_0047d0a0() {
     FUN_0047d0a0_Result* result = FUN_00c0050a(unk08, 0, 0xF460FC, 0xF46A4C, 0);
     if (result != 0) {
@@ -7340,6 +7565,8 @@ float FUN_0047d0a0_Obj::FUN_0047d0a0() {
 // @f3 0x00475910 (community match, verified in this file)
 #include <math.h>
 namespace f3m_00475910 {
+// pdb: ClampAngle | GlobalFunc.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afAngle
 float __cdecl FUN_00475910(float value){
  if(value < 0.0f) {value=(float)(value+6.2831854820251465);value=(float)fmod((double)value,6.2831854820251465);*(volatile float*)&value=value;return value;}
  else if(value >= 6.2831854820251465) {value=(float)fmod((double)value,6.2831854820251465);*(volatile float*)&value=value;return value;}
@@ -7366,6 +7593,7 @@ struct Pn4afe
 
 // Decrements unk0A while the last entry of the unk04 pointer array is null, stopping at the first non-null entry or zero.
 // @fnv 0x004afe50
+// pdb: NiTArray<NiPointer<NiAVObject>,NiTNewInterface<NiPointer<NiAVObject> > >::UpdateSize | BipedAnim.obj | fnv360_0822_retail, call_seq, medium
 void Pn4afe::FUN_00470e10()
 {
     while (unk0A > 0)
@@ -7425,6 +7653,8 @@ struct Owner47e310 {
     void* FUN_0047e310(int key, int* out);
 };
 
+// pdb: InventoryChanges::GetObjectbyPackObjType | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aeObjectType, ainumb
 void* Owner47e310::FUN_0047e310(int key, int* out)
 {
     Container47e310* container = baseForm ? baseForm->FUN_004e66c0() : 0;
@@ -7494,6 +7724,8 @@ struct Element46e5c0 {
     int unk3C;
 };
 
+// pdb: BSSimpleArray<PathSmootherPOVLink,1024>::_MoveItems | PathSmootherPOV.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apDestAddr, apSrcAddr, aiCount
 void __stdcall FUN_0046e5c0(Element46e5c0* dest, Element46e5c0* source, unsigned int count)
 {
     if (count > 0) {
@@ -7517,6 +7749,7 @@ struct Point475280 {
     Point475280 FUN_00475280(const Point475280& p) const;
 };
 
+// pdb: NiPoint3::Cross | BGSGrassManager.obj | tesv_win, call_gap, low
 Point475280 Point475280::FUN_00475280(const Point475280& p) const
 {
     Point475280 r(y * p.z - z * p.y, z * p.X() - x * p.z, x * p.y - y * p.X());
@@ -7535,6 +7768,7 @@ extern Data47f6a0* DAT_01079ca4;
 extern bool DAT_01079d20;
 Obj47f6a0* __cdecl TESForm_GetFormByNumericID(int form);
 void __cdecl FUN_00c24b70(const char* fmt, ...);
+// pdb: InventoryChanges::GetSaveSize | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
 unsigned short List47f6a0::FUN_0047f6a0()
 {
     unsigned short size = 0;
@@ -7590,6 +7824,8 @@ struct GridOwner_464e60
     int TESObjectCELL_GetDataY();
 };
 
+// pdb: BGSAutoWater::WhichCellEdge | BGSAutoWater.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apCell, arVert
 int __cdecl FUN_00464e60(GridOwner_464e60* object, float x, float y)
 {
     int result = 0;
@@ -7661,6 +7897,8 @@ public:
     void FUN_005b8560(Element* destination, const Element* source, unsigned count);
     void FUN_00466a70(unsigned index, const Element& value);
 };
+// pdb: BSSimpleArray<BSSimpleArray<NiPoint3,1024>,1024>::Insert | BGSAutoWater.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiIndex, aValue
 void ElementArray::FUN_00466a70(unsigned index, const Element& value)
 {
     unsigned destination;
@@ -7836,6 +8074,8 @@ struct BipedAnim {
     void FUN_00472f70(Race*, SEX);
 };
 // @fnv 0x004ab250
+// pdb: BipedAnim::InitNaked | BipedAnim.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apRace, aeSex
 void BipedAnim::FUN_00472f70(Race* race, SEX sex)
 {
     if (!race)
@@ -7937,6 +8177,7 @@ extern FixedStringInitializer1546* DAT_0106e890;
 extern FixedStringInitializer1546* DAT_0106e894;
 extern FixedStringInitializer1546* DAT_0106e898;
 
+// pdb: FixedStrings::InitSDM | GlobalFunc.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: FixedStrings::FixedStrings)
 void FUN_00476920()
 {
     DAT_0106e7c4 = new FixedStringInitializer1546("Bip01");
@@ -7999,6 +8240,8 @@ void FUN_00476920()
 namespace f3m_00475550 {
 extern int __cdecl FUN_00c00b52(int value);
 
+// pdb: BSstristr | GlobalFunc.obj | fnv360_0822_debug, caller, medium
+// pdb params: apString1, apString2
 char* __cdecl FUN_00475550(char* text, char* pattern)
 {
     int textLength = strlen(text);
@@ -8128,6 +8371,8 @@ public:
     unsigned short capacity;
     unsigned short count;
 };
+// pdb: TintScenegraph | GlobalFunc.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRoot, aColor, apTextureEffectData
 void FUN_00478620(AVObject478620* object, const Color478620* color, Material478620* material)
 {
     NiPointer<Material478620> spMaterial = material;
@@ -8268,6 +8513,8 @@ struct BoxObj {
     void FUN_0046d230(NiPoint3* ext);
 };
 
+// pdb: BGSPrimitiveBox::SetRadii | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aRadii
 void BoxObj::FUN_0046d230(NiPoint3* ext)
 {
     ext->x = fabs(ext->x);
@@ -8361,6 +8608,8 @@ public:
     void FUN_00470d10(int flags, int a2, int a3);
 };
 
+// pdb: BipedAnim::QueueSkinTextures | BipedAnim.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiModelSkinFlags, aePriority, apParent
 void QOwner::FUN_00470d10(int flags, int a2, int a3)
 {
     char name[0x104];
@@ -8676,6 +8925,7 @@ struct Actor472310 {
     void FUN_00472310();
 };
 
+// pdb: BipedAnim::RemoveBipedWeapon | BipedAnim.obj | fnv360_0822_retail, call_gap, low
 void Actor472310::FUN_00472310()
 {
     if (unk7C && (unk7C->flags100 & 0x10) && unkA4)
@@ -8751,6 +9001,7 @@ public:
     }
     void FUN_0047b650();
 };
+// pdb: GridCellArray::UpdateManagedNodeTransforms | GridCell.obj | fnv360_0822_retail, call_seq, medium
 void CellGrid::FUN_0047b650()
 {
     unsigned int size = width;
@@ -8819,6 +9070,7 @@ struct Owner {
     int FUN_0047e810();
 };
 
+// pdb: InventoryChanges::GetGoldAmount | InventoryChanges.obj | fnv360_0822_retail, call_gap, medium
 int Owner::FUN_0047e810()
 {
     int total = 0;
@@ -9022,6 +9274,8 @@ public:
     void FUN_0046cae0(DebugPoint1564* dimensions);
 };
 
+// pdb: BGSPrimitivePlane::SetRadii | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aRadii
 void DebugBox1564::FUN_0046cae0(DebugPoint1564* dimensions)
 {
     dimensions->x = (float)fabs(dimensions->x);
@@ -9140,6 +9394,8 @@ public:
     NamedSlot slots[5];
     void FUN_00470c20(NamedObject* input);
 };
+// pdb: BipedAnim::InitRoot | BipedAnim.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apNode
 void NamedObjectSet::FUN_00470c20(NamedObject* input)
 {
     root = FUN_00aab350(input, DAT_00dbe948, true);
@@ -9270,6 +9526,8 @@ __declspec(noinline) bool Map460af0::FUN_0045c6e0(unsigned short key, Item460af0
     return true;
 }
 
+// pdb: Animation::StartGroup | Animation.obj | fnv360_0822_retail, call_gap, low
+// pdb params: asNewGroup, aeSection
 void* Owner460af0::FUN_00460af0(unsigned short id, int kind)
 {
     Item460af0* res;
@@ -9338,6 +9596,8 @@ public:
     QShapeBase* FUN_0046d620(const QPt& r);
 };
 
+// pdb: BGSPrimitiveBox::MakeMultiBoundShape | BGSPrimitive.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BGSPrimitiveBox::MakeOcclusionBox)
+// pdb params: akAngle
 QShapeBase* QOwner620::FUN_0046d620(const QPt& r)
 {
     bool rotated = false;
@@ -9363,6 +9623,8 @@ struct QArr {
     void Alloc(unsigned int n);
     QArr(unsigned int n = 0) { vtable00 = &DAT_00dbe764; data04 = 0; size08 = 0; capacity0C = 0; if (n) Alloc(n); }
 };
+// pdb: BSSimpleArray<BSSimpleArray<NiPoint3,1024>,1024>::Add | BGSAutoWater.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aValue
 void __stdcall FUN_00465250(QArr* items, unsigned int count)
 {
     for (unsigned int i = 0; i < count; ++i)
@@ -9384,6 +9646,8 @@ struct QOwner {
     QNode* head;
     QItem* FUN_0047e180(int key, int unused, int formKey);
 };
+// pdb: InventoryChanges::GetObjectInList | InventoryChanges.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: apObj, ableveled, aId
 QItem* QOwner::FUN_0047e180(int key, int unused, int formKey)
 {
     QNode* n = head;
@@ -9449,6 +9713,8 @@ struct FUN_0047fd60 {
     FUN_0047fd60(const FUN_0047fd60& src);
 };
 
+// pdb: ItemChange::ItemChange | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCopy
 FUN_0047fd60::FUN_0047fd60(const FUN_0047fd60& src)
 {
     unk08 = src.unk08;
@@ -9484,6 +9750,8 @@ struct Object {
  Object();
  static void* operator new(unsigned size) {return DAT_01090a78.FUN_0086b930(size);}
 };
+// pdb: BGSPrimitive::CreatePlane | BGSPrimitive.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aSize, aColor
 Object* FUN_0046dd60(const float* values,unsigned ui) {
  Object* p=new Object;
  p->Configure(ui);
@@ -9629,6 +9897,7 @@ static inline BSAnimNoteReceiver::BSAnimNoteReceiverType* RemoveEnd(BSAnimNoteRe
     return element;
 }
 
+// pdb: BSAnimNoteReceiver::~BSAnimNoteReceiver | BSAnimNoteReceiver.obj | fnv360_0822_retail, call_seq, high
 BSAnimNoteReceiver::~BSAnimNoteReceiver()
 {
     unsigned int count = m_kReceivers.m_usSize;
@@ -9723,6 +9992,7 @@ public:
     hkArray<hkpWorldRayCastOutput> m_hits;
 };
 
+// pdb: hkpAllRayHitCollector::~hkpAllRayHitCollector | BGSDecalManager.obj | fnv360_0822_retail, call_seq, medium
 hkpAllRayHitCollector::~hkpAllRayHitCollector()
 {
 }
@@ -9736,6 +10006,8 @@ namespace f3m_004766a0 {
 
 extern "C" void FUN_00a29680(const char* format, ...);
 
+// pdb: XSetFileCacheSize | filemisc.obj | fnv360_0721_retail, objrun_prop, low, conflict (skyrim: FillUserNameGlobal)
+// pdb params: dwCacheSize
 void __cdecl FUN_004766a0(const char* arg)
 {
     DWORD size = 260;
@@ -9761,6 +10033,7 @@ struct Owner0420 {
     void FUN_00470060();
     ~Owner0420();
 };
+// pdb: BGSTextureUseMap::~BGSTextureUseMap | BGSTextureUseMap.obj | fnv360_0721_beta, call_seq, medium
 Owner0420::~Owner0420()
 {
     FUN_00470060();
@@ -9773,6 +10046,7 @@ struct Node1000 { void FUN_006c8220(); };
 struct Heap1000 { void FUN_0086ba60(void* object); };
 extern Heap1000 DAT_01090a78;
 struct Owner1000 { Node1000* head00; void FUN_0047fd30(); };
+// pdb: ItemChange::~ItemChange | InventoryChanges.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BSTArray<struct TESRegionSound *,class BSTArrayHeapAllocator>::operator[])
 void Owner1000::FUN_0047fd30() {
     if (head00) head00->FUN_006c8220();
     Node1000* node = head00;
@@ -9802,6 +10076,7 @@ struct FUN_00465540 {
     void* unk04;
     int unk08;
     int unk0C;
+    // pdb: BSSimpleArray<NiPoint3,1024>::`scalar deleting destructor' | BGSAutoWater.obj | fnv360_0822_retail, vtable, medium
     static void operator delete(void* p) { DAT_01090a78.FUN_0086ba60(p); }
 };
 
@@ -9836,6 +10111,7 @@ extern void FUN_00dbf320();
 extern void (__stdcall* DAT_00dbf328)(void*);
 extern a43840_Mem DAT_01090a78;
 
+// pdb: BSSimpleArray<SCENE_INFO_DATA_STRUCT,1024>::`scalar deleting destructor' | BGSSceneInfo.obj | fnv360_0822_retail, vtable, medium
 FUN_0046f420_Class* FUN_0046f420_Class::FUN_0046f420(unsigned char flag) {
     unk00 = (int)(void*)&FUN_00dbf320;
 
@@ -9947,6 +10223,8 @@ struct Owner
 }
 extern f3m_00474a70::Heap DAT_01090a78;
 namespace f3m_00474a70 {
+// pdb: BSAnimNoteReceiver::Register | BSAnimNoteReceiver.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeType, apCallbackFunc
 bool Owner::FUN_00474a70(int a, int b)
 {
     if (FUN_004748f0(a, b) == -1)
@@ -9994,6 +10272,8 @@ struct Obj34 {
     static void* operator new(unsigned int n) throw() { return DAT_01090a78.FUN_0086b930(n); }
 };
 
+// pdb: BGSPrimitive::CreateSphere | BGSPrimitive.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afRadius, aColor
 Obj34* FUN_0046deb0(float f, int n)
 {
     Obj34* p = new Obj34();
@@ -10023,6 +10303,8 @@ struct FUN_0047cdc0_cls {
     FUN_0047cdc0_cls* FUN_0047cdc0(void* a, int b);
 };
 
+// pdb: ItemChange::ItemChange | InventoryChanges.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: apObject, aiNumber
 FUN_0047cdc0_cls* FUN_0047cdc0_cls::FUN_0047cdc0(void* a, int b)
 {
     unk08 = a;
@@ -10059,6 +10341,7 @@ public:
     int unk0C;
 };
 
+// pdb: BSSimpleArray<BSSimpleArray<NiPoint3,1024>,1024>::~BSSimpleArray<BSSimpleArray<NiPoint3,1024>,1024> | BGSAutoWater.obj | fnv360_0822_retail, call_seq, medium
 Arr4654::~Arr4654()
 {
     if (unk04 != 0) {
@@ -10128,6 +10411,7 @@ struct FUN_00464240 : FUN_00464240_Base {
     virtual ~FUN_00464240();
 };
 
+// pdb: AnimSequenceMultiple::~AnimSequenceMultiple | Animation.obj | fnv360_0822_retail, call_seq, medium
 FUN_00464240::~FUN_00464240()
 {
     FUN_00464240_Buf buf;
@@ -10186,6 +10470,8 @@ struct FUN_0042cd20_owner {
 
 extern FUN_0042cd20_owner* DAT_0106ca70;
 
+// pdb: BipedAnim::QueueHelmetLoad | BipedAnim.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aePriority, apParent, aeBipedObject
 void FUN_00471e50_cls::FUN_00471e50(int a1, int a2, int a3)
 {
     FUN_00471e50_ref tmp;
@@ -10221,6 +10507,8 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile lo
 
 extern "C" char __cdecl FUN_00477BC0(int a1, int a2, int a3, float a4, int a5);
 
+// pdb: PickDistance | GlobalFunc.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apPick, aOrigin, aDir, afDistance, apTarget, abClearResults
 char __cdecl FUN_00479b50(NiPick* a1, int a2, int a3, float a4, int a5, char a6)
 {
     char result = 0;
@@ -10607,6 +10895,7 @@ void __cdecl BGSAutoWater_GatherLineSegments(WaterCell* cell) {
     }
 }
 
+// pdb: NiPlane::WhichSide | BSTempEffectSimpleDecal.obj | tesv_win, call_seq, medium
 inline int FUN_00832f70::FUN_00464cf0(const WaterPoint& p) {
     float d=normal.x*p.x+normal.y*p.y+normal.z*p.z-constant;
     if(d<0.0f) return 2;
@@ -10651,6 +10940,8 @@ public:
     void FUN_0047b9c0(int arg);
 };
 
+// pdb: GridCellArray::ShowPrimitives | GridCell.obj | fnv360_0822_retail, objrun, low
+// pdb params: abShow
 void Owner47b9c0::FUN_0047b9c0(int arg)
 {
     if (!DAT_01071564)
@@ -10822,6 +11113,8 @@ void FUN_00ade300(FUN_0083f750*, unsigned int, unsigned int);
 __forceinline void* __cdecl operator new[](unsigned n) { return task1545::DAT_01090a78.FUN_0086b930(n); }
 namespace task1545 {
 // @fnv 0x004b3890
+// pdb: MakeLine | GlobalFunc.obj | fnv360_0822_retail, call_seq, low, conflict (bridge: TES::AddTempDebugObject)
+// pdb params: aStart, aStartColor, aEnd, aEndColor, abWithNoLightingProp
 FUN_0083f750* __cdecl FUN_0047a4e0(const FUN_006815c0& aStartVertex, const FUN_0046c350& startColor,
                                    const FUN_006815c0& aEndVertex, const FUN_0046c350& endColor, bool addShader)
 {
@@ -10857,6 +11150,8 @@ struct Calendar1232 {
     unsigned short day;
 };
 
+// pdb: Date::CalculateFullDate | Date.obj | fnv360_0822_retail, objrun, medium
+// pdb params: asDate
 Calendar1232 __cdecl FUN_00475140(unsigned short value) {
     unsigned short day = value;
     unsigned short month = 1;
@@ -10893,6 +11188,7 @@ struct FUN_0046dc90: FUN_0046c770 {
  virtual ~FUN_0046dc90();
  FUN_0046dc90();
 };
+// pdb: BGSPrimitiveSphere::BGSPrimitiveSphere | BGSPrimitive.obj | fnv360_0822_retail, uvref, medium
 FUN_0046dc90::FUN_0046dc90(){
  first.Reset();
  second.Reset();
@@ -10919,6 +11215,8 @@ struct FUN_0046c0f0:FUN_00825800 {
  unsigned char flagE4,flagE5,unkE6,unkE7,unkE8,unkE9,flagEA;
  FUN_0046c0f0(Point&,Pair&,Matrix&);virtual ~FUN_0046c0f0();
 };
+// pdb: BSOcclusionPlane::BSOcclusionPlane | BGSPrimitive.obj | fnv360_0822_retail, call_seq, high
+// pdb params: arCenter, arHalfExtents, arRotation
 FUN_0046c0f0::FUN_0046c0f0(Point&a,Pair&b,Matrix&c):center(a),pair(b),matrix(c){flagE4=1;flagE5=1;value40=0;flagEA=1;}
 }
 }   // namespace f3m_0046c0f0
@@ -11063,6 +11361,8 @@ void __cdecl FUN_00ade300(NiAVObject* apObject, int a, int b);
 
 // Builds a three-vertex FUN_0083f490 from three points and a color, optionally attaching a lighting property and initializing the geometry shader.
 // @fnv 0x004b3570
+// pdb: MakeTriangle | GlobalFunc.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: aPt1, aPt2, aPt3, aColor, abWithNoLightingProp
 FUN_0083f490* __cdecl FUN_0047a320(NiPoint3V kP0, NiPoint3V kP1, NiPoint3V kP2, const FUN_0046c350& kColor,
                                  bool bEnableLighting)
 {
@@ -11157,6 +11457,7 @@ struct Owner {
         slot.handle=0;
     }
 };
+// pdb: BipedAnim::RemoveAllParts | BipedAnim.obj | fnv360_0721_beta, call_seq, medium
 void Owner::FUN_00472af0()
 {
     DAT_00d9b09c(&DAT_0106e334);
@@ -11281,6 +11582,7 @@ struct Owner {
     bool FUN_0047f300(unsigned);
     void FUN_0047f350();
 };
+// pdb: InventoryChanges::InitLeveledItems | InventoryChanges.obj | fnv360_0822_retail, call_gap, medium
 void Owner::FUN_0047f350() {
     Inventory* inventory=reference?reference->FUN_004e66c0():0;
     Node* node=inventory->Head();
@@ -11479,6 +11781,8 @@ struct FUN_00af2240 : NiObject
 void __cdecl FUN_00ade300(NiAVObject* apObject, int a, int b);
 
 // @fnv 0x004b2eb0
+// pdb: MakeQuadBox | GlobalFunc.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aPoint1, aPoint2, aPoint3, aPoint4, aPoint5, aPoint6, aPoint7, aPoint8, aColor, abWithNoLightingProp
 FUN_0083f490* FUN_00479f20(const NiPoint3V& aCorner0, const NiPoint3V& aCorner1, const NiPoint3V& aCorner2, const NiPoint3V& aCorner3,
                       const NiPoint3V& aCorner4, const NiPoint3V& aCorner5, const NiPoint3V& aCorner6, const NiPoint3V& aCorner7,
                       const FUN_0046c350& color, bool extra)
@@ -11650,6 +11954,7 @@ __forceinline void DeleteAll(Map& map)
     }
 }
 
+// pdb: BGSTextureUseMap::ClearAllTexUseData | BGSTextureUseMap.obj | fnv360_0721_beta, callee_sim, low
 void Owner::FUN_00470060()
 {
     DeleteAll(map);
@@ -11685,6 +11990,7 @@ struct EntryData
     int FUN_0047fee0();
 };
 
+// pdb: ItemChange::GetAmountNonDefaultExtra | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
 int EntryData::FUN_0047fee0()
 {
     ListNode* node = extendData;
@@ -11729,6 +12035,7 @@ struct Owner46ff60 {
     int FUN_0046ff60();
 };
 
+// pdb: BGSTextureUseMap::GetTotalTextureSize | BGSTextureUseMap.obj | fnv360_0822_retail, call_gap, low
 int Owner46ff60::FUN_0046ff60()
 {
     int sum = 0;
@@ -11765,6 +12072,7 @@ struct FUN_00460e20 : Base {
     FUN_00424aa0 entries[2];
     virtual ~FUN_00460e20();
 };
+// pdb: AnimIdle::~AnimIdle | Animation.obj | fnv360_0822_retail, call_seq, medium
 FUN_00460e20::~FUN_00460e20() { FUN_0045fd30(this); }
 }
 }   // namespace f3m_00460e20
@@ -11865,6 +12173,8 @@ struct Obj47e0 {
     int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c;
     Link47e0 link;
 };
+// pdb: InventoryChanges::GetInventoryChanges | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRef
 FUN_0047df80* __cdecl FUN_0047e090(Obj47e0* obj)
 {
     FUN_0047df80* result = 0;
@@ -11909,6 +12219,8 @@ struct Owner461 {
     bool FUN_00461a10(Ref461* p, int unused);
 };
 
+// pdb: AnimSequenceMultiple::RemoveSequence | Animation.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apSeq, abReleaseModelLoader
 bool Owner461::FUN_00461a10(Ref461* p, int unused)
 {
     Ref461* q = *(Ref461* volatile*)&p;
@@ -11954,6 +12266,7 @@ struct Ref {
 struct Grid:GridBase {Point position;bool loaded;unsigned char unk21,unk22,unk23;Ref world;
     virtual void v0();Grid();
 };
+// pdb: GridCellArray::GridCellArray | GridCell.obj | fnv360_0822_retail, call_gap, low
 Grid::Grid(){
     if(DAT_0106e9cc<5)DAT_0106e9cc=5;else if(!(DAT_0106e9cc&1))++DAT_0106e9cc;
     dimension=DAT_0106e9cc;
@@ -11983,6 +12296,7 @@ struct InplaceHits {Entry* data;unsigned int count,capacity,unk0C;Entry entries[
 };
 struct Collector:RayBase {InplaceHits hits;virtual void AddRayHit();Collector();};
 typedef char EntrySize[(sizeof(Entry)==0x60)?1:-1];
+// pdb: hkpAllRayHitCollector::hkpAllRayHitCollector | BGSDecalManager.obj | fnv360_0822_retail, call_gap, medium
 Collector::Collector(){earlyOut=1.0f;hits.count=0;}
 }
 }   // namespace f3m_0046a820
@@ -11995,6 +12309,7 @@ struct Object984 {
 };
 struct Node984 { Object984* object00; Node984* next04; };
 struct Owner984 { Node984* head00; void FUN_0047ce10(); };
+// pdb: BSSimpleList<CasinoData *>::`scalar deleting destructor' | PlayerCharacter.obj | fnv360_0822_debug, call_seq, low, conflict (bridge: TeleportPath::Clear)
 void Owner984::FUN_0047ce10() {
     Node984* node = head00;
     while (node && node->object00) {
@@ -12072,6 +12387,7 @@ struct Owner_0046d060 {
     void FUN_0046d060();
 };
 
+// pdb: BGSPrimitiveBox::Build | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
 void Owner_0046d060::FUN_0046d060()
 {
     if (m_obj == 0) {
@@ -12141,6 +12457,7 @@ struct FUN_0046a9a0 {
     ~FUN_0046a9a0();
 };
 
+// pdb: BGSDecalManager::~BGSDecalManager | BGSDecalManager.obj | fnv360_0822_retail, call_seq, medium
 FUN_0046a9a0::~FUN_0046a9a0()
 {
     DecalCaster_ClearInstance();
@@ -12188,6 +12505,7 @@ inline Iface_fb10* Get_fb10()
     }
     return l;
 }
+// pdb: BGSSceneInfo::ReloadBudgetCaps | BGSSceneInfo.obj | fnv360_0721_beta, call_seq, medium
 void __cdecl FUN_0046fb10()
 {
     for (int* p = &DAT_00f4be24[0].b; (int)p < (int)&DAT_00f4be24[16].b; p += 5) {
@@ -13257,6 +13575,8 @@ unsigned int unk2a8;
 unsigned int unk2ac;
 Actor* actor;void FUN_00472220(Form*);void FUN_004724d0(Form*);
 };
+// pdb: BipedAnim::AttachBipedWeapon | BipedAnim.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apWeapon, iModSlots
 void Owner::FUN_004724d0(Form* weapon){
 if(!weapon || (int)weapon->GetFormType()!=0x28 || (weapon==parent && scene))return;
 FUN_00472220(weapon);
@@ -13353,6 +13673,7 @@ struct Holder {
     }
     void FUN_004609a0();
 };
+// pdb: Animation::ShutdownAllAnimIdles | Animation.obj | fnv360_0822_retail, call_gap, low
 void Holder::FUN_004609a0()
 {
     fcd = true;
@@ -13427,6 +13748,8 @@ struct Actor472220 {
     void FUN_00472220(Form472220* form);
 };
 
+// pdb: BipedAnim::SetBipedWeapon | BipedAnim.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apWeapon, iModSlots
 void Actor472220::FUN_00472220(Form472220* form)
 {
     if (!form || form->type04 != 0x28)
@@ -13492,6 +13815,7 @@ struct Grid47b860 {
     void FUN_0047b860();
 };
 
+// pdb: GridCellArray::AttachAllLand3D | GridCell.obj | fnv360_0822_retail, call_gap, low
 void Grid47b860::FUN_0047b860()
 {
     if (done)
@@ -13618,6 +13942,7 @@ struct Self {
     Owner* m8;
     void FUN_0047dd50();
 };
+// pdb: ItemChange::SaveGame | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
 void Self::FUN_0047dd50()
 {
     short size = 0;
@@ -13732,6 +14057,8 @@ struct Animation
     void FUN_00460090(bool abFreeQueued, bool abForceDelete);
 };
 
+// pdb: Animation::SpecialIdleFree | Animation.obj | fnv360_0822_retail, ustr, medium
+// pdb params: abFreeQueued, abForceDelete
 void Animation::FUN_00460090(bool abFreeQueued, bool abForceDelete)
 {
     if (LocalInput)
@@ -13999,6 +14326,8 @@ inline Prop479* GetTexturing(AV479* o)
 }
 }
 using namespace n479030;
+// pdb: SwapPlatformLanguageTextures | GlobalFunc.obj | fnv360_0822_debug, caller, medium
+// pdb params: ap3D
 bool __cdecl FUN_00479030(AV479* object)
 {
     bool changed = false;
@@ -14059,6 +14388,8 @@ inline int GetPlatform()
     return 0;
 }
 
+// pdb: SwapPlatformLanguageTexturePath | GlobalFunc.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apInPath, apOutPath, aiOutPathSize
 bool __cdecl FUN_00478d70(const char* path, char* out, unsigned int outSize)
 {
     if (!path || !out || !outSize)
@@ -14159,6 +14490,8 @@ int __cdecl FUN_0046dd60(const Point*,Parameters*);
 int __cdecl FUN_0046de00(const Point*,Parameters*);
 int __cdecl FUN_0046deb0(float,Parameters*);
 
+// pdb: BGSPrimitive::Copy | BGSPrimitive.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCopy
 int __cdecl FUN_0046e340(const Request* request)
 {
     int result=0;
@@ -14222,6 +14555,8 @@ struct Obj {
     static void* operator new(unsigned int size) { return DAT_01090a78.FUN_0086b930(size); }
     static void operator delete(void* p) { DAT_01090a78.FUN_0086ba60(p); }
 };
+// pdb: BGSPrimitive::CreateBox | BGSPrimitive.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aSize, aColor
 Obj* __cdecl FUN_0046de00(Vec3* pos, int value) {
     Obj* obj = new Obj;
     obj->vf08(value);
@@ -14551,6 +14886,8 @@ public:
     bool FUN_00464330(FileList* files, NiNode* rootNode, TESObjectREFR* actor, bool activate);
 };
 
+// pdb: Animation::Init | Animation.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apFileList, apRoot, apRef, abUpdate3D
 bool Animation::FUN_00464330(FileList* files, NiNode* rootNode, TESObjectREFR* actor, bool activate)
 {
     AutoMemContext context(0x33);
@@ -14675,6 +15012,7 @@ struct FUN_0046b560 {
     NiPointer<FUN_0083b6d0> unk24;
     FUN_0046b560();
 };
+// pdb: BGSDecalManager::BGSDecalManager | BGSDecalManager.obj | fnv360_0822_retail, call_seq, medium
 FUN_0046b560::FUN_0046b560()
 {
     unk20 = new FUN_00ae9090(0x63, 1, 0x2f7);
@@ -14709,6 +15047,7 @@ extern Data47f750* DAT_01079ca4;
 extern bool DAT_01079d20;
 Obj47f750* __cdecl TESForm_GetFormByNumericID(int form);
 void __cdecl FUN_00c24b70(const char* fmt, ...);
+// pdb: InventoryChanges::SaveGame | InventoryChanges.obj | fnv360_0822_retail, call_gap, medium
 void List47f750::FUN_0047f750()
 {
     short blockSize = 0;
@@ -14876,6 +15215,8 @@ struct Owner {
     Entry entries[4];
     SceneObject* FUN_00471ca0(const void* enabled,ModelForm* model,unsigned index);
 };
+// pdb: BipedAnim::CloneHelmet | BipedAnim.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apfgModel, apNode, aeBipedObject
 SceneObject* Owner::FUN_00471ca0(const void* enabled,ModelForm* model,unsigned index)
 {
     if (entries[index].existing || !enabled || !model)
@@ -14932,6 +15273,8 @@ public:
     void FUN_0046e5c0(Element* destination, Element* source, unsigned count);
     void FUN_0046f820(unsigned index, const Element& value);
 };
+// pdb: BSSimpleArray<SCENE_INFO_DATA_STRUCT,1024>::Insert | BGSSceneInfo.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiIndex, aValue
 void ElementArray::FUN_0046f820(unsigned index, const Element& value)
 {
     unsigned destination;
@@ -15239,6 +15582,8 @@ struct Owner {
     void FUN_00463650();
     void FUN_004649f0(unsigned first, Actor* actor, int type, unsigned mode);
 };
+// pdb: Animation::SpecialIdleAuto | Animation.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apIdleForm, apActor, aeSection, aeType
 void Owner::FUN_004649f0(unsigned first, Actor* actor, int type, unsigned mode)
 {
     TagScope tag(0x33);
@@ -15272,6 +15617,8 @@ struct Owner {
  BaseForm* baseForm;
  bool FUN_0047e9d0(unsigned refID);
 };
+// pdb: InventoryChanges::HasObjectId | InventoryChanges.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aId
 bool Owner::FUN_0047e9d0(unsigned refID) {
  int count = 0;
  Container* container = baseForm ? baseForm->FUN_004e66c0() : 0;
@@ -15444,6 +15791,8 @@ struct Owner {
     }
     int FUN_0047f050(bool includeQuestItems, bool includeCaps);
 };
+// pdb: InventoryChanges::GetInventoryValue | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: abCountQuest, abCountGold
 int Owner::FUN_0047f050(bool includeQuestItems, bool includeCaps)
 {
     int total = 0;
@@ -15738,6 +16087,8 @@ struct Obj {
     bool b10;
     Obj* FUN_0047df80(Ref* r);
 };
+// pdb: InventoryChanges::InventoryChanges | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRef
 Obj* Obj::FUN_0047df80(Ref* r)
 {
     TlsTagGuard guard(0x36);
@@ -15804,6 +16155,8 @@ void __cdecl FUN_00ade300(NiAVObject* apObject, int a, int b);
 }
 using namespace n47a660;
 
+// pdb: MakeRectangle | GlobalFunc.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afDrawSize, aColor, abWithNoLightingProp
 FUN_0083f750* FUN_0047a660(float size, const FUN_0046c350& color, bool lighting)
 {
     Pt3_47a660* verts = new Pt3_47a660[4];
@@ -15866,6 +16219,8 @@ extern NiPt DAT_0108ec68;
 }
 using namespace n47cc10;
 
+// pdb: InventoryChanges::DropItemIntoWorld | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apRef, apObject, ainumber, apCreatedRef, apPoint, apRotate
 Result* __stdcall FUN_0047cc10(Ref* ref, int a2, int count, int a4, NiPt* pos, NiPt* rot)
 {
     NiPt p;
@@ -15992,6 +16347,8 @@ public:
         unk6C[i].unk00 = -1;
     }
 };
+// pdb: Animation::Revert | Animation.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRef
 void Process::FUN_00461190(int unused)
 {
     if (FUN_006191f0() != 1) {
@@ -16049,6 +16406,8 @@ struct NiFrustumPlanes {
     void FUN_0083f470(NiCamera* cam);
     NiPlane GetPlane(unsigned int i) const { return m_akCullingPlanes[i]; }
 };
+// pdb: BoundInFrustum | GlobalFunc.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aBound, apCamera
 bool FUN_00476780(const NiBound* bound, NiCamera* cam)
 {
     if (!cam)
@@ -16172,6 +16531,8 @@ public:
     void FUN_00470d10(int flags, int a, int b);
     void FUN_004715f0(int a, ModelPtr* out, int b);
 };
+// pdb: BipedAnim::QueueBipedParts | BipedAnim.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aePriority, aspQueuedHelmet, apParent
 void Owner::FUN_004715f0(int a, ModelPtr* out, int b)
 {
     ModelPtr spModel;
@@ -16235,6 +16596,7 @@ template <class T> struct Ptr {
 using namespace f3m_004635f0;
 struct Owner1236 {int unk000,unk004,unk008,unk00C,unk010,unk014,unk018,unk01C,unk020,unk024,unk028,unk02C,unk030,unk034,unk038,unk03C,unk040,unk044,unk048,unk04C,unk050,unk054,unk058,unk05C,unk060,unk064,unk068,unk06C,unk070,unk074,unk078,unk07C,unk080,unk084,unk088,unk08C,unk090,unk094,unk098,unk09C,unk0A0,unk0A4,unk0A8,unk0AC,unk0B0,unk0B4,unk0B8,unk0BC,unk0C0,unk0C4,unk0C8,unk0CC,unk0D0,unk0D4,unk0D8,unk0DC,unk0E0,unk0E4,unk0E8,unk0EC,unk0F0,unk0F4,unk0F8,unk0FC,unk100,unk104,unk108,unk10C,unk110,unk114,unk118;
  Ptr<Task1236> task; bool FUN_00461a70(void*,int); bool FUN_004635f0();};
+// pdb: Animation::SpecialIdleReplace | Animation.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: BSTempEffectSimpleDecal::CheckOcclusionQueryResults)
 bool Owner1236::FUN_004635f0()
 {
     Task1236* current = task.m_pObject;
@@ -16367,6 +16729,8 @@ struct BipedAnim {
     void FUN_00472ce0(Form* pForm, Model* pModel, BIPED_OBJECT eBipedObject);
 };
 
+// pdb: BipedAnim::SetBipedPart | BipedAnim.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apParent, apModel, aeObjectSlot
 void BipedAnim::FUN_00472ce0(Form* pForm, Model* pModel, BIPED_OBJECT eBipedObject) {
     BipedModelForm* pBipedModel = FUN_00451da0(pForm);
     ArmorAddon* pArmorAddon = FUN_00c0050a(pForm, 0, DAT_00f46078, DAT_00f494b8, 0);
@@ -16620,6 +16984,8 @@ struct AFHavokBody {
     void FUN_00469bd0(const AFPoint3& point);
 };
 
+// pdb: TESObjectCELL::Pick | TESObjectCELL.obj | fnv360_0721_beta, call_gap, low
+// pdb params: arResult
 void AFHavokBody::FUN_00469bd0(const AFPoint3& point)
 {
     AFVector4 scaled;
@@ -16677,6 +17043,8 @@ struct Node
 };
 
 // @fnv 0x004a9240
+// pdb: BGSSceneInfo::GetHavokFaceCount | BGSSceneInfo.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apShape
 int __cdecl FUN_0046e750(Node* node)
 {
     if (node == 0)
@@ -17318,6 +17686,7 @@ struct ImpactTask
     void FUN_0046b830();
 };
 
+// pdb: BGSDecalEmitter::Update | BGSDecalManager.obj | fnv360_0822_retail, call_gap, low
 void ImpactTask::FUN_0046b830()
 {
     if (ConsoleManager::Instance(true)->IsVisible() || IsStartMenuFlag1Set())
@@ -17492,6 +17861,7 @@ struct FUN_00474e90
     RefList list;
     ~FUN_00474e90();
 };
+// pdb: BSClonePools::ClonePool::~ClonePool | BSClonePool.obj | fnv360_0721_beta, objrun, medium
 FUN_00474e90::~FUN_00474e90()
 {
     header = 0;
@@ -18037,6 +18407,8 @@ struct DecalManager
     bool FUN_00469ce0(DecalRequest* apRequest);
 };
 
+// pdb: BGSDecalManager::AddGeometryDecalRecurse | BGSDecalManager.obj | fnv360_0822_retail, ustr, medium
+// pdb params: arDecalData
 bool DecalManager::FUN_00469ce0(DecalRequest* apRequest)
 {
     if (DAT_0106def4 >= DAT_0106df74)
@@ -18161,6 +18533,8 @@ public:
     }
     void FUN_0047b5a0(float t);
 };
+// pdb: GridCellArray::UpdateManagedNodes | GridCell.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: GridCellArray::UpdateManagedNodeTransforms)
+// pdb params: afTime
 void CellGrid::FUN_0047b5a0(float t)
 {
     FUN_004d7360(t);
@@ -18269,6 +18643,8 @@ inline WorldObject* GetPhantom(const Collidable* c)
 using namespace f3m_004780d0;
 NiRef* __cdecl FUN_004779d0(Entity* body);
 NiRef* __cdecl FUN_00477a30(WorldObject* phantom);
+// pdb: GetAVObjectForCollidable | GlobalFunc.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aphkCol
 void* __cdecl FUN_004780d0(Collidable* collidable)
 {
     void* result = 0;
@@ -18411,6 +18787,8 @@ bool FUN_0045cd20(Scene*);
 void FUN_00887da0(const char*,...);
 void FUN_00471830(Scene*,Scene*,Scene*,int,int,int);
 Scene* FUN_00470720(Scene*,const void*);
+// pdb: BipedAnim::LoadAndAttachAddOn | BipedAnim.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apObject, apModel, aeAttachmentType, apRequester, apObj3D
 Scene* __cdecl FUN_00471ef0(Form* form,Model* model,int slot,Actor* actor,Scene* root)
 {
     if(!model || !actor) return 0;
@@ -18511,6 +18889,7 @@ struct Self {
     void FUN_0046ef10(void* node, Entry* e, int a, int b);
     void FUN_0046f930();
 };
+// pdb: BGSSceneInfo::CollectSceneDataFromAddonNodes | BGSSceneInfo.obj | fnv360_0822_retail, call_seq, medium
 void Self::FUN_0046f930()
 {
     unsigned int n = DAT_0106cdcc->Count();
@@ -18748,6 +19127,8 @@ struct FStr {
     ~FStr() { if (s.p != DAT_00e207a8) ::InterlockedDecrement((LONG*)s.p - 2); }
 };
 
+// pdb: BipedAnim::AttachToParent | BipedAnim.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apSkeleton, apNode, apClonedFromNode, apBipedAnim, aeBipedObject, apfgModel
 void __cdecl FUN_00471830(Root* a0, Node* obj, Node* flag, void* a3, int a4)
 {
     Node* parent = 0;
@@ -19079,6 +19460,8 @@ struct Data {
     bool FUN_0047eae0(Form* exactForm,int category,int required,int* outValue,unsigned int formID,Reference* candidate);
 };
 
+// pdb: InventoryChanges::ContainerHasObjects | InventoryChanges.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apObj, aeObjectType, ainumber, aeMatchId, aId, apRef
 bool Data::FUN_0047eae0(Form* exactForm,int category,int required,int* outValue,unsigned int formID,Reference* candidate)
 {
     int total=0;
@@ -19348,6 +19731,8 @@ struct FUN_00460340_cls {
     void FUN_00460340(int a);
 };
 
+// pdb: Animation::Revert | Animation.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apLoadGameBuffer
 void FUN_00460340_cls::FUN_00460340(int a)
 {
     unk114 = 0;
@@ -19794,6 +20179,8 @@ struct Owner {
 };
 
 
+// pdb: AnimIdle::Loaded | Animation.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apKFModel
 void Owner::FUN_004647c0(Idle* idle)
 {
     TagScope tag(0x33);
@@ -19919,6 +20306,7 @@ struct CmpPtrArray
 };
 
 // @fnv 0x00c63030
+// pdb: NiTArray<NiPointer<NiAVObject>,NiTNewInterface<NiPointer<NiAVObject> > >::Compact | BipedAnim.obj | fnv360_0822_retail, call_seq, high
 void CmpPtrArray::FUN_004712a0()
 {
     if (m_usESize == m_usSize)
@@ -20296,6 +20684,8 @@ Node*FUN_00473ab0(Node*,int,bool,bool,Face*);
 void ApplyReferenceExtraData(Node*model,Node*clone,int,Actor*){Extra*e=model->FUN_00824a50(DAT_0116d6e0);if(e&&e->Test())TESObjectREFR_AddAddonNodes(clone);}
 void FUN_00473c50(Face*,Node*,int);
 };
+// pdb: BipedAnim::AttachHelmet | BipedAnim.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apfgModel, apNode, aeBipedObject
 void Holder::FUN_00473c50(Face* apFaceGenModel, Node* apNode, int aeBipedObject)
 {
     Node* pcloneNode = 0;
@@ -20467,6 +20857,7 @@ struct Proc {
     void* Animation_PlayGroup(int a, int b, int c, int d);
     bool FUN_00463650();
 };
+// pdb: Animation::SpecialIdlePlay | Animation.obj | fnv360_0721_beta, call_seq, medium
 bool Proc::FUN_00463650()
 {
     if (f11c)
@@ -20980,6 +21371,8 @@ public:
     void FUN_004730a0(NiAVObject* apObj, bool abForceReadjust);
 };
 
+// pdb: BipedAnim::AdjustSkinComplexion | BipedAnim.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apObj, abForceReadjust
 void BipedAnim::FUN_004730a0(NiAVObject* apObj, bool abForceReadjust)
 {
     BSShaderPPLightingProperty* plightprop = FindLightingShaderProperty(apObj);
@@ -21051,6 +21444,8 @@ int __cdecl FUN_0058ef70(String* name,int,int,int,int,int,int);
 struct Loader {
     int FUN_00471b70(int index);
 };
+// pdb: BipedAnim::LoadFaceGenModel | BipedAnim.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeBipedObject
 int Loader::FUN_00471b70(int index) {
     DAT_00d9b09c(&DAT_0106e334);
     Model* model=*reinterpret_cast<Model**>(reinterpret_cast<char*>(this)+(index+3)*16);
@@ -21234,6 +21629,7 @@ struct FUN_004613b0 {
 
 using namespace f3m_004613b0;
 
+// pdb: Animation::~Animation | Animation.obj | fnv360_0822_retail, call_seq, medium
 FUN_004613b0::~FUN_004613b0()
 {
     FUN_004609a0();
@@ -21366,6 +21762,8 @@ struct S47f4b0_Owner {
     bool FUN_0047f4b0(S47f4b0_Param* param);
 };
 
+// pdb: InventoryChanges::RunScripts | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
+// pdb params: pOwner
 bool S47f4b0_Owner::FUN_0047f4b0(S47f4b0_Param* param)
 {
     unk10 = false;
@@ -21445,6 +21843,8 @@ struct Entry {
 
 
 namespace S0047cf30_ {
+// pdb: ItemChange::GetItemHealth | InventoryChanges.obj | fnv360_0822_retail, call_seq, low, conflict (bridge: BGSBipedModelList::GetFormAsBipedModelList)
+// pdb params: abPercentage
 float Entry::FUN_0047cf30(bool percent)
 {
     TESHealthForm* base = FUN_004566c0(object);
@@ -21587,6 +21987,8 @@ struct ScaledShapeD {
     void FUN_0046d800(float scale);
 };
 
+// pdb: BGSPrimitiveSphere::SetRadius | BGSPrimitive.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: fRadius
 void ScaledShapeD::FUN_0046d800(float scale)
 {
     scale = fabs(scale);
@@ -21750,6 +22152,8 @@ struct FUN_0083f490
 
 void __cdecl FUN_00ade300(FUN_0083f490* shape, int a, int b);
 
+// pdb: MakeTriPoint | GlobalFunc.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afDrawSize, aColor, abWithNoLightingProp
 FUN_0083f490* FUN_00479c00(float radius, const FUN_0046c350* color, bool addProperty)
 {
     NiPoint3* vertices = (NiPoint3*)DAT_01090a78.FUN_0086b930(6 * sizeof(NiPoint3));
@@ -21888,6 +22292,8 @@ struct Owner {
     void FUN_004617a0(float t);
 };
 
+// pdb: Animation::SetLipTime | Animation.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: afPercent
 void Owner::FUN_004617a0(float t)
 {
     if (t == 0.0f) {
@@ -21999,6 +22405,7 @@ struct FUN_00460660 {
     FUN_00460660();
 };
 
+// pdb: Animation::Animation | Animation.obj | fnv360_0822_retail, call_gap, medium
 FUN_00460660::FUN_00460660() : unk108(0), unk12c(0)
 {
     unk08 = 0;
@@ -22076,6 +22483,8 @@ inline bool IsKindOf7e00(U7e00* o, const TypeInfo* type)
     return false;
 }
 
+// pdb: FindHeaviestRigidBody | GlobalFunc.obj | fnv360_0822_retail, objrun, medium
+// pdb params: ap3D
 T7e00* __cdecl FUN_00477e00(T7e00* obj)
 {
     if (obj)
@@ -22394,6 +22803,8 @@ struct Owner
     void FUN_004704a0(Object* object, bool force);
 };
 
+// pdb: BGSTextureUseMap::CollectTexUseDataRecursive | BGSTextureUseMap.obj | fnv360_0822_retail, call_gap, low
+// pdb params: ap3D, abCheckActors
 void Owner::FUN_004704a0(Object* object, bool force)
 {
     Pair pair;
@@ -22497,6 +22908,7 @@ struct F3List_478ab0
     int iSaved14;
 };
 
+// pdb: GetHavokWorldObjectIndex | GlobalFunc.obj | fnv360_0822_retail, objrun, low
 void __cdecl FUN_00478ab0(void* pHolder, F3List_478ab0* pList)
 {
     F3Node_478ab0* pNode = *(F3Node_478ab0**)((char*)pHolder + 0x10);
@@ -22612,6 +23024,7 @@ extern const char DAT_00db4360[];
 Obj* __cdecl TESForm_GetFormByNumericID(int form);
 void __cdecl FUN_00c24b70(const char* fmt, ...);
 
+// pdb: ItemChange::GetSaveSize | InventoryChanges.obj | fnv360_0721_retail, call_seq, medium
 unsigned short Item::FUN_0047dca0()
 {
     unsigned short size = 0;
@@ -22640,6 +23053,8 @@ namespace Visit47df50 {
 struct Item {void FUN_00419d30(void*,void*);};
 struct Node {Item* item;Node* next;};
 struct List {Node* head;int unk04;void* context;void FUN_0047df50(void*);};
+// pdb: ItemChange::InitLoadGame | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apLoadGameBuffer
 void List::FUN_0047df50(void* arg){for(Node* node=head;node;node=node->next){if(node->item)node->item->FUN_00419d30(arg,context);}}
 }
 }   // namespace f3m_0047df50
@@ -22654,6 +23069,7 @@ struct Object {
  void FUN_0047b180(float a,float b,float c);
 };
 inline unsigned bits(float f) { return *reinterpret_cast<unsigned*>(&f); }
+// pdb: Actor::ModHeading | Actor.obj | tesv_win, objrun_open, low
 void Object::FUN_0047b180(float a,float b,float c) {
  struct Triple {float x,y,z;}; volatile Triple local;
  local.x=a; x=*reinterpret_cast<volatile unsigned*>(&local.x);
@@ -22670,6 +23086,7 @@ namespace Visit478b30 {
 struct Item {int unk00,unk04;void* value;};
 struct Input {int unk00,unk04,unk08,unk0c;Item* item;};
 struct Output {int unk00,unk04,unk08;int count;void* selected;int target;};
+// pdb: GetHavokWorldObjectByIndex | GlobalFunc.obj | fnv360_0822_retail, objrun, low
 void FUN_00478b30(Input* input,Output* output) {
  Item* item=input->item;
  if(item) {
@@ -22691,6 +23108,8 @@ struct Entry {unsigned first,second;};
 struct Object {int unk00,unk04,unk08;Entry** data;unsigned short capacity,count;
  int FUN_004748f0(unsigned first,unsigned second);
 };
+// pdb: BSAnimNoteReceiver::Registered | BSAnimNoteReceiver.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: aeType, apCallbackFunc
 int Object::FUN_004748f0(unsigned first,unsigned second) {
  int result=-1;
  for(unsigned i=0;i<count;++i)if(data[i]->first==first && data[i]->second==second)result=i;
@@ -22785,6 +23204,7 @@ virtual bool predicate();};struct CastResult {int unk00;float value;};
 extern char DAT_00f4621c[],DAT_00f460fc[];extern float DAT_00db38b8;
 CastResult* FUN_00c0050a(Base*,int,void*,void*,int);
 struct Object {int unk00,unk04;Base* object;float FUN_0047cb80(void*,void*,void*);};
+// pdb: InventoryChanges::ResetCachedWeights | InventoryChanges.obj | fnv360_1110_retail, objrun, medium
 float Object::FUN_0047cb80(void*,void*,void*){float result=DAT_00db38b8;CastResult* cast=FUN_00c0050a(object,0,DAT_00f460fc,DAT_00f4621c,0);if(cast){result=cast->value;if(object->predicate())result=0;}return result;}
 }
 
@@ -22850,6 +23270,8 @@ struct Owner {
     void FUN_00461a70(int value, bool flag);
     void FUN_004646a0(Node* list);
 };
+// pdb: Animation::AddAnimationsFromList | Animation.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apFileList
 void Owner::FUN_004646a0(Node* list)
 {
     if (!list)
@@ -22912,6 +23334,8 @@ struct Owner {
     void FUN_00460600(Item* item, int unused);
 };
 
+// pdb: AnimSequenceMultiple::SetSequence | Animation.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apSeq, abReleaseModelLoader
 void Owner::FUN_00460600(Item* item, int unused)
 {
     item->IncRef();
@@ -22940,6 +23364,8 @@ struct Owner {
     void FUN_0047def0(Stream* stream);
 };
 
+// pdb: ItemChange::SaveGame | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apSaveGameBuffer
 void Owner::FUN_0047def0(Stream* stream)
 {
     stream->FUN_006e17e0(unk08, 0);
@@ -23013,6 +23439,7 @@ void* FUN_0089eb90(unsigned);void FUN_0089e850(void*);extern char DAT_00f72574,D
 struct Pair {float x,y;Pair(float a,float b):x(a),y(b){}};
 struct FUN_0046c0f0 {int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8; int unkac; int unkb0; int unkb4; int unkb8; int unkbc; int unkc0; int unkc4; int unkc8; int unkcc; int unkd0; int unkd4; int unkd8; int unkdc; int unke0; int unke4; int unke8; int unkec; int unkf0; int unkf4; int unkf8;FUN_0046c0f0(void*,const Pair&,void*);static void* operator new(unsigned n){return FUN_0089eb90(n);}static void operator delete(void*p){FUN_0089e850(p);}};
 struct Object {int unk00,unk04,unk08,unk0c,unk10,unk14;float x;int unk1c;float y;FUN_0046c0f0* FUN_0046c200();};
+// pdb: BGSPrimitivePlane::MakeOcclusionPlane | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
 FUN_0046c0f0* Object::FUN_0046c200(){return new FUN_0046c0f0(&DAT_0108ec68,Pair(x,y),&DAT_00f72574);}
 }
 }   // namespace f3m_0046c200
@@ -23022,6 +23449,8 @@ namespace f3m_00477fa0 {
 namespace Find331 {
 struct Controller {int unk00,unk04,unk08,unk0c,unk10,unk14,unk18;int type;};struct Object{virtual void v0();virtual void v4();virtual void v8();virtual Object* node();virtual void v10();virtual void v14();virtual void* leaf();int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; Object** children;unsigned short capacity,count;Controller* FUN_00826590(int);};
 int valid(Controller* c){return c->type>=7&&c->type<=11;}
+// pdb: FindPerPixelLighting_Recurse | GlobalFunc.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apNode
 Controller* FUN_00477fa0(Object* object){unsigned short count=object->count;Controller* result=0;if(!count)return 0;for(unsigned i=0;i<count&&!result;++i){Object* child=object->children[i];if(child){if(child->node())result=FUN_00477fa0(child);else if(child->leaf()){Controller* c=child->FUN_00826590(3);if(c){c=valid(c)?c:0;if(c)return c;}}}}return result;}
 }
 }   // namespace f3m_00477fa0
@@ -23029,6 +23458,8 @@ Controller* FUN_00477fa0(Object* object){unsigned short count=object->count;Cont
 // @f3 0x004775e0 (community match, verified in this file)
 namespace f3m_004775e0 {
 namespace Insert340 {
+// pdb: NiTMapBase<DFALL<NiTMapItem<unsigned int,VertexDist> >,unsigned int,VertexDist>::SetAt | GlobalFunc.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: key, val
 struct Vec3{float x,y,z;};struct Node{Node* next;int key;Vec3 value;};struct Map{virtual void v0();virtual unsigned hash(int);virtual bool equal(int,int);virtual void initialize(Node*,int,Vec3);virtual void v10();virtual Node* create();unsigned capacity;Node** table;unsigned size;void FUN_004775e0(int,Vec3);};void Map::FUN_004775e0(int key,Vec3 value){unsigned index=hash(key);Node* node=table[index];while(node){if(equal(key,node->key)){node->value=value;return;}node=node->next;}node=create();initialize(node,key,value);node->next=table[index];table[index]=node;++size;}
 }
 }   // namespace f3m_004775e0
@@ -23049,6 +23480,7 @@ struct Ref{virtual void v0();virtual void destroy();volatile long refs;void rele
 struct Ptr{Ref* p;void clear(){Ref* old=p;if(old){old->release();p=0;}}};
 struct Base{Base();virtual ~Base();int kind,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20;Ptr a;int unk28;Ptr b;};
 struct FUN_0046db30:Base{FUN_0046db30();virtual ~FUN_0046db30();};
+// pdb: BGSPrimitivePlane::BGSPrimitivePlane | BGSPrimitive.obj | fnv360_0822_retail, uvref, medium
 FUN_0046db30::FUN_0046db30(){a.clear();b.clear();kind=3;}
 }
 
@@ -23205,6 +23637,7 @@ struct Holder {
     RefObj* c;
     void FUN_0046c840();
 };
+// pdb: BGSPrimitive::ClearGeometryData | BGSPrimitive.obj | fnv360_0822_retail, call_gap, low
 void Holder::FUN_0046c840()
 {
     if (a) { RefObj* p = a; if (InterlockedDecrement(&p->refCount) == 0) p->DeleteThis(); a = 0; }
@@ -23265,6 +23698,8 @@ struct Owner_4707c0 {
 };
 struct Finder_4707c0 { bool FUN_0055f640(Owner_4707c0* owner, int key, char* out); };
 
+// pdb: BipedAnim::QueueSkinTexture | BipedAnim.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apNpc, aeBipedObject, aePriority, apParent
 void __stdcall FUN_004707c0(Owner_4707c0* owner, int key, int a3, int a4)
 {
     char path[0x104];
@@ -23546,6 +23981,8 @@ struct Owner {
     float FUN_0047cf30(int mode);
     float FUN_0047d400(int unused);
 };
+// pdb: ItemChange::GetModifiedArmorRating | InventoryChanges.obj | fnv360_0721_retail, call_seq, medium
+// pdb params: apActor
 float Owner::FUN_0047d400(int unused) {
     float result = -1.0f;
     Form* item = form;
@@ -23639,6 +24076,7 @@ struct Owner {
     Source* source;
     bool FUN_0047ed10();
 };
+// pdb: InventoryChanges::HasQuestObject | InventoryChanges.obj | fnv360_0822_retail, call_seq, low, conflict (bridge: InventoryChanges::RemoveDefaultLeveledItems)
 bool Owner::FUN_0047ed10() {
     bool found = false;
     BaseData* data = source ? source->FUN_004e66c0() : 0;
@@ -23737,6 +24175,8 @@ struct FUN_00461930 : Base
     FUN_00461930(Source* source);
 };
 
+// pdb: AnimSequenceMultiple::AnimSequenceMultiple | Animation.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apSingleSeq
 FUN_00461930::FUN_00461930(Source* source)
 {
     *(void***)this = DAT_00dbe448;
@@ -24169,6 +24609,8 @@ bool __cdecl FUN_004eb950(SceneObject* object); CollisionResult* __cdecl FUN_004
 void __cdecl FUN_0046e700(int key,int amount,int** counter);
 struct Statistics { unsigned int unk00; Counters counters; void FUN_0046ef10(SceneObject* object,Counters* supplied,bool descendActors,Node* parent); };
 static __forceinline int TextureKindValue(Property* property) { if(!property || property->kind < 7 || property->kind > 11) return 0; return 1; }
+// pdb: BGSSceneInfo::CollectSceneDataRecursive | BGSSceneInfo.obj | fnv360_0822_retail, ustr, medium
+// pdb params: ap3D, pStructToFill, abTrackActors, apParent
 void Statistics::FUN_0046ef10(SceneObject* object, Counters* supplied, bool descendActors, Node* parent)
 {
     Counters* stats = supplied ? supplied : &counters;
@@ -24318,6 +24760,8 @@ struct Writer {virtual unsigned Position();unsigned unk04,unk08,unk0c,unk10;unsi
 struct Item {void FUN_0047def0(Writer*);};
 struct Node {Item* item;Node* next;};
 struct Owner {Node* head;void FUN_0047f8b0(Writer*);};
+// pdb: InventoryChanges::SaveGame | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apSaveGameBuffer
 void Owner::FUN_0047f8b0(Writer* writer){unsigned oldPosition=writer->Position();unsigned oldFlags=writer->Flags();unsigned count=0;writer->position20=0;writer->Flags()=0x400;unsigned marker=writer->BGSSaveGameBuffer_StartVariableSizedValue();for(Node* node=head;node;node=node->next){if(node->item){node->item->FUN_0047def0(writer);++count;}}writer->FUN_006e16e0(count,marker);writer->position20=oldPosition;writer->Flags()=oldFlags;}
 }
 
@@ -24328,6 +24772,8 @@ void Owner::FUN_0047f8b0(Writer* writer){unsigned oldPosition=writer->Position()
 namespace f3m_00464d70 {
 namespace Small533 {
 struct Point {float x,y,z;};
+// pdb: CloseTo | BGSAutoWater.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arP1, arP2, afEpsilon
 int __cdecl FUN_00464d70(const Point* a,const Point* b,float tolerance){float x=a->x-b->x;x=(float)fabs(x);if(x<=tolerance){float y=a->y-b->y;y=(float)fabs(y);if(y<=tolerance){float z=a->z-b->z;z=(float)fabs(z);if(z<=tolerance)return 1;}}return 0;}
 }
 }   // namespace f3m_00464d70
@@ -24818,6 +25264,8 @@ __forceinline void Remove(Node* node){if(node==first)FUN_005878f0();else if(node
 };extern List* DAT_0106dee0;
 extern bool DAT_01072a48;
 void FUN_00ade300(Object*,int,int);
+// pdb: BGSAutoWater::GeneratePlaceableWater | BGSAutoWater.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apCell
 void FUN_00466330(Cell* cell){
  Assign464b10::TagScope tag(0x1d);
  if(DAT_0106dee0){
@@ -24889,6 +25337,8 @@ struct Entry {
  }
  float FUN_0047d300(void*,float,int);
 };
+// pdb: ItemChange::GetModifiedAttackDamage | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apActor, afDamageMultiplier, abIgnoreExplosion
 float Entry::FUN_0047d300(void* target,float mult,int flags) {
  if(object->type==40) {
   Form* form=object;
@@ -24909,6 +25359,8 @@ struct Model {virtual void v00(); unsigned u04,u08,u0c,u10,u14;void FUN_00459610
 extern Model DAT_0106e350[20];
 bool __stdcall FUN_00470a30(Model*,char*);
 inline Model* GetModel(int index){return &DAT_0106e350[index];}
+// pdb: BipedAnim::Get1stPersonModel | BipedAnim.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aeBipedObject, apModel
 Model* __stdcall FUN_00470b00(int index,Model* source){
  char path[260];
  if(source!=&DAT_0106e350[index] && FUN_00470a30(source,path)) {DAT_0106e350[index].FUN_00459610(path);return &DAT_0106e350[index];}
@@ -25324,6 +25776,7 @@ struct FUN_0047bbc0 : Base47aef0 {
     ~FUN_0047bbc0();
 };
 
+// pdb: GridCellArray::~GridCellArray | GridCell.obj | fnv360_0822_retail, call_seq, high
 FUN_0047bbc0::~FUN_0047bbc0() {
     GridCellArray_KillAll();
     FUN_0047ba30();
@@ -25339,6 +25792,8 @@ struct Object;struct Children {int unk00; int unk04; int unk08; int unk0c; int u
 struct Controller {int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18;unsigned kind;int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c;int value;};
 struct Object {virtual void v000(); virtual void v004(); virtual void v008();virtual Children* children();virtual void v010(); virtual void v014();virtual int isLeaf();Controller* FUN_00826590(int);};
 __forceinline int valid(Controller* c){if(!c)return 0;switch(c->kind){case 1:case 2:case 3:case 4:case 5:case 6:case 7:case 8:case 9:case 10:case 11:return 1;default:return 0;}}__forceinline Controller* cast(Controller* c){return valid(c)?c:0;}
+// pdb: SetReferenceIDOnScenegraph | GlobalFunc.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apObject, auiID
 void FUN_00478c40(Object* object,int value){if(object){if(object->isLeaf()){Controller* c=cast(object->FUN_00826590(3));if(c)c->value=value;}else{Children* c=object->children();if(c){for(unsigned i=0;i<c->count;++i)FUN_00478c40(c->data[i],value);}}}}
 }
 
@@ -25372,6 +25827,8 @@ struct bhkMouseSpringAction : ::bhkUnaryAction {
     bhkMouseSpringAction(void*);
     virtual ~bhkMouseSpringAction();
 };
+// pdb: bhkMouseSpringAction::bhkMouseSpringAction | GlobalFunc.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: arInfo
 bhkMouseSpringAction::bhkMouseSpringAction(void* p){FUN_008f9170(p);++DAT_010f31c4;}
 
 // @f3 0x004784f0 (community match, verified in this file)
@@ -25427,6 +25884,8 @@ struct StringKey {
     }
 };
 
+// pdb: FindTimeForNoteKey | GlobalFunc.obj | fnv360_0822_retail, call_gap, low
+// pdb params: pObject, pcSequenceName, pcKeyName
 float FUN_004784f0(Object* object, const char* key, const char* prefix)
 {
     if (!object)
@@ -25495,6 +25954,8 @@ struct Process {
     PointerMap<Object*>* clones; PointerMap<bool>* states; unsigned int copyType; unsigned char append;
     Process* FUN_00471430(unsigned int n);
 };
+// pdb: NiCloningProcess::NiCloningProcess | BipedAnim.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: uiHashSize
 Process* Process::FUN_00471430(unsigned int n) {
     clones = new PointerMap<Object*>(n);
     states = new PointerMap<bool>(n);
@@ -25553,6 +26014,8 @@ struct F7Owner {
     bool FUN_0047fa70(F7Iter* s, void** out, unsigned int flags);
 };
 
+// pdb: InventoryChanges::GetNextItem | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arIterator, arpItemChange, aiIterateFlags
 bool F7Owner::FUN_0047fa70(F7Iter* s, void** out, unsigned int flags)
 {
     if (s->done)
@@ -25649,6 +26112,7 @@ namespace f3m_0047b2e0 {
 namespace Forward47 {
 void GridArray_Init();
 void FUN_004e2320();
+// pdb: GridCellArray::Init | GridCell.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void FUN_0047b2e0() { GridArray_Init(); FUN_004e2320(); }
 }
 }   // namespace f3m_0047b2e0
@@ -25743,6 +26207,8 @@ public:
     NiAVObject* FUN_00473360(NiAVObject* obj, NiAVObject* parent, int index, bool a3, bool a4, FaceModel* a5);
     NiAVObject* FUN_00473ab0(NiAVObject* obj, int index, bool a3, bool a4, FaceModel* a5);
 };
+// pdb: BipedAnim::ApplySkinnedObjects | BipedAnim.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apClone, aeBipedObject, abFirstPerson, abPipboy, apfgModel
 NiAVObject* Attacher::FUN_00473ab0(NiAVObject* obj, int index, bool a3, bool a4, FaceModel* a5)
 {
     NiAVObject* result = obj;
@@ -25787,6 +26253,7 @@ struct FUN_0047aee0 {
     void* vftable;
     FUN_0047aee0();
 };
+// pdb: GridArray::GridArray | GridArray.obj | fnv360_0721_beta, callee_sim, low
 FUN_0047aee0::FUN_0047aee0()
 {
     vftable = &DAT_00dc0b1c;
@@ -25874,6 +26341,7 @@ struct Owner {
     InvEntry* FUN_0047e570();
 };
 
+// pdb: InventoryChanges::GetBestFood | InventoryChanges.obj | fnv360_0822_retail, caller_sim, low
 InvEntry* Owner::FUN_0047e570()
 {
     S47e570_MemContext context(0x36);
@@ -26016,6 +26484,8 @@ struct Owner {
     Flags* secondary;
     void FUN_0046c9b0(const Color&);
 };
+// pdb: BGSPrimitivePlane::SetColor | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aColor
 void Owner::FUN_0046c9b0(const Color& value) {
     color=value;
     Mesh* mesh=primary;
@@ -26131,6 +26601,8 @@ struct Obj {
     void FUN_0047ffd0(float value, QOwner* owner, FUN_0040eda0* target, bool flag);
 };
 
+// pdb: ItemChange::SetItemHealth | InventoryChanges.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afHealth, pchange, apextra, abdelete
 void Obj::FUN_0047ffd0(float value, QOwner* owner, FUN_0040eda0* target, bool flag)
 {
 
@@ -26219,6 +26691,7 @@ struct S_004750b0 {
     short m;
     short FUN_004750b0();
 };
+// pdb: Date::GetYear | Date.obj | fnv360_0822_retail, call_gap, low
 short S_004750b0::FUN_004750b0()
 {
     return m;
@@ -26231,6 +26704,7 @@ struct S_004750a0 {
     short m;
     short FUN_004750a0();
 };
+// pdb: Date::GetDate | Date.obj | fnv360_0822_retail, call_gap, low
 short S_004750a0::FUN_004750a0()
 {
     return m;
@@ -26305,6 +26779,8 @@ void __cdecl BGSAutoWater_GatherLineSegments(WaterCell468bd0* cell);
 void __cdecl FUN_004655b0(WaterCell468bd0* cell);
 void __cdecl FUN_00466330(WaterCell468bd0* cell);
 }
+// pdb: BGSAutoWater::GeneratePlaceableWaterForCell | BGSAutoWater.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apCell
 void __cdecl FUN_00468bd0(f3m_00468bd0::WaterCell468bd0* cell)
 {
     using namespace f3m_00468bd0;
@@ -26410,6 +26886,8 @@ struct Owner {
     void FUN_00460ed0(unsigned idle, unsigned section);
 };
 
+// pdb: Animation::SpecialIdleQueue | Animation.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apIdleForm, aeSection
 void Owner::FUN_00460ed0(unsigned idle, unsigned section)
 {
     AutoMemContext context(0x33);
@@ -26538,6 +27016,8 @@ struct FUN_00460ba0 : ::ObRefObject {
     ~FUN_00460ba0();
 };
 
+// pdb: AnimIdle::AnimIdle | Animation.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apIdleForm, aeSection, aeType, apActor, abForceLoad, apAnimation
 FUN_00460ba0::FUN_00460ba0(n460ba0::IdleForm* idle, int sectionArg, int typeArg, n460ba0::Actor* actorArg, bool forceLoad, int animationArg)
 {
     sequence = 0;
@@ -26626,6 +27106,8 @@ struct PairMap:MapBase{PairMap(unsigned n):MapBase(n){}virtual ~PairMap();
 Point* FUN_00477d30(Geometry*); bool FUN_00408df0(float,float,float);Point FUN_00468cd0(float,const Point&);extern Geometry* DAT_0106e9a0;
 }
 // @fnv 0x004b3e60
+// pdb: FixNormals | GlobalFunc.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apSource, apDest, afTolerance, abDisplayMatches, abExtrudeMatches
 bool __cdecl FUN_0047a850(match3069::Geometry* source, match3069::Geometry* target, float threshold, float unused, bool adjust)
 {
     match3069::PairMap map30(37);
@@ -27401,6 +27883,8 @@ inline bool IsKindOf(const NiRTTI* target, NiObject* obj)
     return false;
 }
 
+// pdb: Animation::AddAnimation | Animation.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apKFModel, abDelaySequenceClone
 bool Animation::FUN_00461a70(KFModel* model, bool queue)
 {
     NiPointer<NiControllerSequence> group(model->controllerSequence);
@@ -27634,6 +28118,8 @@ Property* __cdecl FUN_00477fa0(Node* node);
 }
 using namespace f3m_00478040;
 
+// pdb: FindPerPixelLighting | GlobalFunc.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apNode
 Property* __cdecl FUN_00478040(Node* node)
 {
     if (!node->GetChildCount())
@@ -27708,6 +28194,8 @@ struct InventoryChanges {
     }
     float FUN_0047ee00();
 };
+// pdb: InventoryChanges::GetInventoryWeight | InventoryChanges.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: abIsHardcore
 float InventoryChanges::FUN_0047ee00()
 {
     Actor* actor = 0;
@@ -27875,6 +28363,8 @@ struct Form {
 
 }
 
+// pdb: BSClonePools::MakeClones | BSClonePool.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apLoadedObject, aiCloneCount
 void w52::Manager::FUN_00474c70(Form* form, unsigned int count)
 {
     if (!form)
@@ -27977,6 +28467,8 @@ inline int valid(int kind)
 }
 }
 
+// pdb: RecursivelyRemoveAllDecals | GlobalFunc.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apRoot
 void __cdecl FUN_00478bb0(ns_00478bb0::Object* object)
 {
     if (object) {
@@ -28070,6 +28562,8 @@ __declspec(noinline) void EntryList_4f10::FUN_00421610(Entry_4f10* const& value)
 }
 
 // Drop up to count references from the entry of key; an entry left empty is removed from the list and deleted.
+// pdb: BSClonePools::KillClones | BSClonePool.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apLoadedObject, aiCloneCount
 void EntryList_4f10::FUN_00474f10(void* key, unsigned int count)
 {
     if (!key)
@@ -28227,6 +28721,8 @@ struct List {
     float FUN_0047f1e0(Actor* actor);
 };
 
+// pdb: InventoryChanges::GetEquippedWeight | InventoryChanges.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apOwner
 float List::FUN_0047f1e0(Actor* actor)
 {
     float total = 0.0f;
@@ -28714,6 +29210,8 @@ struct Owner { Node* root; int unk04,unk08,unk0c; Object* unk10;
 Object* FUN_00aab440(Node*,const S473_FixedString*,int);
 void FUN_00887da0(const char*,...);
 struct Processor { void FUN_00596070(Map*,Object*,int); };
+// pdb: BipedAnim::AttachSkinnedObject | BipedAnim.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apNode, apParentNode, aeBipedObject, abFirstPerson, abPipboy, apfgModel
 Object* Owner::FUN_00473360(Node* model,Node* dest,int slot,bool upper,bool off,void* processor)
 {
  Object* result=0; Node* destination=dest; Ptr retained;
@@ -30286,6 +30784,8 @@ struct DWork
 };
 // Checks limits and object conditions, may create decal effects, and returns a status.
 // @fnv 0x004a2070
+// pdb: BGSDecalManager::AddProjectedDecalRecurse | BGSDecalManager.obj | fnv360_0822_retail, ustr, medium
+// pdb params: arDecalData
 bool DWork::FUN_0046a080(DArg* arg)
 {
     if (*DAT_0106df58.FUN_00403e20() <= 0.0)
@@ -30701,6 +31201,8 @@ struct S46ad40_DecalManager {
     void FUN_0046ad40(S46ad40_Request* apRequest, int aiType, bool abForce);
 };
 
+// pdb: BGSDecalManager::AddDecal | BGSDecalManager.obj | fnv360_0822_retail, ustr, medium
+// pdb params: arDecalData, aeDecalType, abForceAdd
 void S46ad40_DecalManager::FUN_0046ad40(S46ad40_Request* apRequest, int aiType, bool abForce)
 {
     S46ad40_MemContext kContext(7);
@@ -30982,6 +31484,8 @@ struct S46f470_Owner {
 
 namespace s46f470 {
 
+// pdb: BGSSceneInfo::CollectWaterSceneDataFromCell | BGSSceneInfo.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apCell
 void S46f470_Owner::FUN_0046f470(S46f470_Ref* ref)
 {
     S46f470_Cell* tmp = ((S46f470_Game*)s46f470::DAT_0107a0d8)->unk64;
@@ -31345,6 +31849,7 @@ struct Grid47 {
     void FUN_0047bc90();
 };
 
+// pdb: GridCellArray::RecreateCanopyShadowMaskTexture | GridCell.obj | fnv360_0822_retail, call_gap, low
 void Grid47::FUN_0047bc90()
 {
     MemContext47 context(0x20);
@@ -31870,6 +32375,8 @@ void Owner::ReleasePending(Entry& pend)
     pend.form = 0;
 }
 
+// pdb: BipedAnim::LoadBipedParts | BipedAnim.obj | fnv360_0822_retail, ustr, medium
+// pdb params: abForceLoadImmediate
 void Owner::FUN_00473ea0(bool deferred)
 {
     bool isPlayerX = false;
@@ -32368,6 +32875,8 @@ struct DecalCamera
 
 using namespace D469230;
 
+// pdb: BGSDecalManager::IssueDecalOcclusionQuery | BGSDecalManager.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apDecal
 void DecalCamera::FUN_00469230(DecalInput* input)
 {
     Vec3 direction = input->GetDirection();
@@ -32683,6 +33192,8 @@ struct MemContext {
     ~MemContext() { f3m_00464330::g_tls.allocTag = saved; }
 };
 
+// pdb: BGSAutoWater::GeneratePolygons | BGSAutoWater.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCell
 void __cdecl FUN_004655b0(TESObjectCELL* apCell)
 {
     MemContext tempMemContext(0x1d);
@@ -33004,6 +33515,8 @@ public:
     static void operator delete(void* memory) { DAT_01090a78.FUN_0086ba60(memory); }
 };
 
+// pdb: BGSSceneInfo::CollectSceneDataForLoadedArea | BGSSceneInfo.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afOutTNumber, afOutMNumber, abCollectTextures, abIncludeAddonNodes
 void __cdecl FUN_0046fbd0(float* afOutTNumber, float* afOutMNumber, bool abCollectTextures, bool abIncludeAddonNodes)
 {
     *afOutTNumber = 0.0f;
@@ -33099,6 +33612,8 @@ struct BipedAnim_471570 {
     void FUN_00471570(n471570::BipedObject* part, bool clear, n471570::Model* replacement);
 };
 
+// pdb: BipedAnim::RemovePart | BipedAnim.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObj, abClear, aiClearValue
 void BipedAnim_471570::FUN_00471570(n471570::BipedObject* part, bool clear, n471570::Model* replacement)
 {
     if (part->scene) {
@@ -33133,6 +33648,8 @@ struct Obj {
     void FUN_00471430(int flags);
     Obj* FUN_00471550(float value);
 };
+// pdb: BSCloningProcess::BSCloningProcess | BipedAnim.obj | fnv360_0822_retail, call_seq, high
+// pdb params: afScale
 Obj* Obj::FUN_00471550(float value) {
     FUN_00471430(0x101);
     unk10 = unk14 = unk18 = value;
@@ -33269,6 +33786,7 @@ struct Manager46ab00 {
 
 extern void __cdecl FUN_00887da0(const char*, ...);
 
+// pdb: BGSDecalManager::UpdateSimpleDecals | BGSDecalManager.obj | fnv360_0822_retail, ustr, medium
 void f3m_0046ab00::Manager46ab00::FUN_0046ab00()
 {
     if (m_list.m_uiCount <= 0)

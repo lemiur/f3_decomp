@@ -5,6 +5,7 @@
 extern "C" void* g_011f3ef0;
 
 // @fnv 0x00a44350
+// pdb: NiFloatData::GetRTTI | TESImageSpaceModifier.obj | fnv360_0822_retail, vtable, medium
 void* __cdecl FUN_00a44350()
 {
     return &g_011f3ef0;
@@ -20,6 +21,7 @@ void __cdecl _delete(void* p, unsigned int size);
 
 // Calls FUN_00a44830, then frees this with _delete when flags has bit 1 set, and returns this.
 // @fnv 0x00a44360
+// pdb: BSMultiBoundSphere::`scalar deleting destructor' | BGSPrimitive.obj | fnv360_0822_retail, vtable_prefix, medium
 void* __thiscall FUN_00a44360_shell::Destroy(unsigned int flags)
 {
     FUN_00a44830();
@@ -42,6 +44,8 @@ struct FUN_00a44310_shell
 };
 
 // @fnv 0x00a44310
+// pdb: BSGrabIKNote::IsEqual | BSGrabIKNote.obj | fnv360_0822_retail, objrun_open, low, conflict (bridge: BSLookIKNote::IsEqual)
+// pdb params: apObject
 bool FUN_00a44310_shell::Equals(const void* pOther)
 {
     if (Matches(pOther) && m_10 == *(const unsigned int*)((const char*)pOther + 0x10) &&
@@ -317,6 +321,8 @@ struct S_00a44530_Class
 };
 // Calls ReadBinaryFields, then reads three 4-byte values from the stream into unk10, unk14 and unk18.
 // @fnv 0x00a44530
+// pdb: BSGrabIKNote::LoadBinary | BSGrabIKNote.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: arStream
 void __thiscall S_00a44530_Class::LoadFromStream(S_00a44530_Stream* stream)
 {
     ReadBinaryFields(stream);
@@ -365,6 +371,8 @@ static unsigned int StreamReadPart(StreamFile* f, void* buf)
 }
 // Reads three 4-byte values from the stream into m_10, m_14 and m_18, advancing the stream position after each read.
 // @fnv 0x00a445c0
+// pdb: BSGrabIKNote::SaveBinary | BSGrabIKNote.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arStream
 void FUN_00a445c0_cls::ReadFromStream(StreamOwner* stream)
 {
     BSAnimNote_SaveBinary(stream);
@@ -418,6 +426,8 @@ struct ArmNote : ArmNoteBase
 
 // Appends the arm, gain and state viewer strings to pkStrings after the base viewer strings.
 // @fnv 0x00a44650
+// pdb: BSGrabIKNote::GetViewerStrings | BSGrabIKNote.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apStrings
 void ArmNote::FUN_00a44650(ViewerStrings* pkStrings)
 {
     BaseGetViewerStrings(pkStrings);

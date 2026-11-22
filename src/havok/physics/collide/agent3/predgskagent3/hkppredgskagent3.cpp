@@ -4,6 +4,7 @@
 
 extern "C" void __cdecl FUN_00d41860(int a, int b, int c, int d);
 // @fnv 0x00d418b0
+// pdb: hkBoxBoxAgent3::destroy | hkpBoxBoxAgent3.obj | tesv_win, objrun, medium
 void __cdecl ForwardToTarget(int aiArg1, int aiArg2, int aiArg3, int aiArg4, int unused)
 {
     FUN_00d41860(aiArg1, aiArg2, aiArg3, aiArg4);
@@ -58,6 +59,8 @@ struct RResult
     void hkpGskCache_init(void* a, void* b, void* c);
 };
 
+// pdb: hkPredGskAgent3::create | hkpPredGskAgent3.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: input, entry, agentData
 void* __cdecl DispatchInputRecord(InputData* input, unsigned char* status, ResultData* result)
 {
     InputObject* pObject = input->unk00;
@@ -132,6 +135,8 @@ int FUN_009cc030(int, FUN_00d41830_table*, unsigned short);
 int FUN_009cc070(int, int, int, int);
 void FUN_009cc0c0(int, int, int, int);
 
+// pdb: hkPredGskCylinderAgent3::registerAgent3 | hkpPredGskCylinderAgent3.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: dispatcher
 void RegisterScriptHandlers(void* pScript)
 {
     HandlerTable tab;
@@ -186,6 +191,8 @@ struct S_00d417b0_Obj
 void __cdecl FUN_00dae340(S_00d417b0_Sub* sub, int index);
 
 // @fnv 0x00d417b0
+// pdb: hkPredGskAgent3::removePoint | hkpPredGskAgent3.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: entry, agentData, idToRemove
 void __cdecl RemoveEntryById(int aiUnused, S_00d417b0_Obj* obj, short sId)
 {
     S_00d417b0_Sub* sub = &obj->m_sub;
@@ -221,6 +228,8 @@ struct Table
 
 // Scans table->slots for the first entry whose id is 0xffff and replaces it with value, stopping at table->count.
 // @fnv 0x00d417f0
+// pdb: hkPredGskAgent3::commitPotential | hkpPredGskAgent3.obj | fnv360_0822_retail, objrun, high
+// pdb params: entry, agentData, idToCommit
 void __cdecl InsertSlotId(int aiUnused, Table* table, unsigned short ausId)
 {
     int i;
@@ -255,6 +264,8 @@ struct FUN_00d41830_table
 
 // Scans the table's entries for one whose key02 matches key, clears its unk00 and unk01 bytes, and returns the matching index (or count if none).
 // @fnv 0x00d41830
+// pdb: hkPredGskAgent3::createZombie | hkpPredGskAgent3.obj | fnv360_0822_retail, objrun, high
+// pdb params: entry, agentData, idToConvert
 int __cdecl FindEntryByKey(int unused, FUN_00d41830_table* table, unsigned short key)
 {
     int i = 0;
@@ -297,6 +308,8 @@ extern "C" void __cdecl ReleaseAllEntries(void* p, int obj, int data);
 
 // Calls ReleaseAllEntries on the record at b+0x0C, computes an aligned size from three bytes, clears byte 2 of a, and returns b plus that size.
 // @fnv 0x00d41860
+// pdb: hkPredGskAgent3::cleanup | hkpPredGskAgent3.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: entry, agentData, mgr, constraintOwner
 extern "C" int __cdecl FUN_00d41860_impl(int apOut, int apRecord, int aObj, int aData)
 {
     unsigned char* rec = (unsigned char*)apRecord + 0x0C;

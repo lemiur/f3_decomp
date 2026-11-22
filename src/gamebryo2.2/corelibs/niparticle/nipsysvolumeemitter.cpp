@@ -3,6 +3,8 @@
 #include "nipsysvolumeemitter_match_types.h"
 
 // @fnv 0x00c31b20
+// pdb: NiPSysVolumeEmitter::LoadBinary | NiPSysVolumeEmitter.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kStream
 void NiPSysVolumeEmitter::LoadBinary(NiStream& stream)
 {
     NiPSysEmitter::LoadBinary(stream);
@@ -10,6 +12,8 @@ void NiPSysVolumeEmitter::LoadBinary(NiStream& stream)
 }
 
 // @fnv 0x00c31b40
+// pdb: NiPSysVolumeEmitter::LinkObject | NiPSysVolumeEmitter.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kStream
 void NiPSysVolumeEmitter::LinkObject(NiStream& stream)
 {
     NiPSysEmitter::LinkObject(stream);
@@ -52,6 +56,8 @@ static inline void CallBaseProcessClone(NiPSysModifier* pThis, CloningProcess& k
 }
 
 // @fnv 0x00c31c90
+// pdb: NiPSysVolumeEmitter::ProcessClone | NiPSysVolumeEmitter.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kCloning
 void FUN_00c31c90_shell::FUN_00c31c90(CloningProcess* kCloning)
 {
     CallBaseProcessClone(this, *kCloning);
@@ -128,6 +134,8 @@ typedef void(__thiscall* ComputeVolumeInitialPositionAndVelocity_t)(void*, NiTra
 
 // Builds the emitter-to-PSys transform from the emitter and target transforms (or identity) and calls the volume emitter's virtual compute function with it.
 // @fnv 0x00c31cf0
+// pdb: NiPSysVolumeEmitter::ComputeInitialPositionAndVelocity | NiPSysVolumeEmitter.obj | fnv360_0822_retail, vtable, high
+// pdb params: kPosition, kVelocity
 void FUN_00c31cf0_shell::ComputeEmitterInitialPositionAndVelocity(NiPoint3* kPosition, NiPoint3* kMotionVelocity)
 {
     if (m_pkEmitterObject)
@@ -249,6 +257,8 @@ struct FUN_00c31db0_cls
 };
 
 // @fnv 0x00c31db0
+// pdb: NiPSysVolumeEmitter::GetViewerStrings | NiPSysVolumeEmitter.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: pkStrings
 void FUN_00c31db0_cls::FUN_00c31db0(NameArray_b9457* arr)
 {
     FUN_00c22780(arr);

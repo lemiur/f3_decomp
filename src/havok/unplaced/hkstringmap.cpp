@@ -10,6 +10,8 @@ struct FUN_00d87430_class
 };
 
 // @fnv 0x00d87430
+// pdb: hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getKey | hkStringMap.obj | fnv360_0822_retail, call_seq, high
+// pdb params: it
 int FUN_00d87430_class::GetEntry(int idx)
 {
     return m_p[m_iThirdValue + idx + 1];
@@ -23,6 +25,8 @@ struct FUN_00d87440_Class
     int __thiscall FUN_00d87440(int a);
 };
 // @fnv 0x00d87440
+// pdb: hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getValue | hkStringMap.obj | fnv360_0822_retail, call_seq, high
+// pdb params: it
 int __thiscall FUN_00d87440_Class::FUN_00d87440(int aiIndex)
 {
     return *(int*)((char*)m_iWordAt00 + aiIndex * 4 + m_8 * 8 + 8);
@@ -37,6 +41,8 @@ struct SlotBitmap
 };
 
 // @fnv 0x00d87480
+// pdb: hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getNext | hkStringMap.obj | fnv360_0822_retail, call_seq, high
+// pdb params: it
 int SlotBitmap::FindNextUsedSlot(int aiStartIndex)
 {
     ++aiStartIndex;
@@ -64,6 +70,8 @@ struct FUN_00d874b0_class
 };
 
 // @fnv 0x00d874b0
+// pdb: hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid | hkStringMap.obj | fnv360_0822_retail, call_seq, high
+// pdb params: it
 char* FUN_00d874b0_class::SetBoolFromThreshold(char* pbOut, int value)
 {
     *pbOut = value <= m_cByteAtOffset2;
@@ -79,6 +87,7 @@ struct FUN_00d87760_class
 };
 
 // @fnv 0x00d87760
+// pdb: hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::clear | hkStringMap.obj | fnv360_0822_retail, objrun_open, low
 void FUN_00d87760_class::ClearEntries()
 {
     int i;
@@ -152,6 +161,8 @@ static __forceinline int stringHash(const char* str)
 }
 
 // @fnv 0x00d87580
+// pdb: hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::findKey | hkStringMap.obj | fnv360_0822_retail, caller, high
+// pdb params: key
 int FUN_00d87820_Class::FindStringKey(int key)
 {
     const char* str = (const char*)key;
@@ -206,6 +217,8 @@ struct ThreadMemory
     void* AllocateChunk(int size, int flags);
 };
 
+// pdb: hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> | hkStringMap.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: ops
 FUN_00d87790::FUN_00d87790(int a)
 {
     ThreadMemory* mem = (ThreadMemory*)TlsGetValue(DAT_010f3170);
@@ -225,6 +238,8 @@ class hkObjectD878
 };
 
 // @fnv 0x00d87800
+// pdb: hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getWithDefault | hkStringMap.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: key, def
 int hkObjectD878::GetValue(int a, int aiDefault)
 {
     int iValue = aiDefault;
@@ -268,6 +283,8 @@ struct MapOps
     int hkpContinuousSimulation_removeToiEventsOfEntity(int value);
 };
 
+// pdb: hkpContinuousSimulation::resetCollisionInformationForEntities | hkpContinuousSimulation.obj | fnv360_0822_retail, vtable, high
+// pdb params: entities, numEntities, world, resetInfo
 int hkStringMapD876::GetOrSetInt(const char* key, int def, void* a, void* b)
 {
     ((MapOps*)this)->hkpSimulation_resetCollisionInformationForEntities(key, def, a, b);
@@ -305,6 +322,8 @@ class hkStringMapD8765
 
 // Looks up key; if found writes its value to out and returns 0, otherwise returns 1.
 // @fnv 0x00d87650
+// pdb: hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::get | hkStringMap.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: key, out
 int hkStringMapD8765::FUN_00d87650(const char* key, int* piOut)
 {
     int it = FindStringKey(key);
@@ -366,6 +385,8 @@ struct MapD878F3
     int m_iPairCount;
     void FUN_009b0e60(const char* pcKey, int iValue);
 };
+// pdb: hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::resizeTable | hkStringMap.obj | fnv360_0822_debug, call_seq, high
+// pdb params: newcap
 void FUN_00d874d0_s::FUN_00d87860(int iNewCap)
 {
     MapD878F3* self = (MapD878F3*)this;
@@ -399,6 +420,8 @@ struct S00d876a0_Map
 
 // Removes the element at index it from the open-addressing hash table, compacting remaining entries to fill the gap.
 // @fnv 0x00d876a0
+// pdb: hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::remove | hkStringMap.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: it
 void S00d876a0_Map::FUN_00d876a0(int aiIndex)
 {
     unsigned i = aiIndex;
@@ -466,6 +489,8 @@ class hkStringMapD874
 
 // Inserts a key-value pair into the hash map, growing the table if the load factor exceeds half capacity.
 // @fnv 0x00d874d0
+// pdb: hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::insert | hkStringMap.obj | fnv360_0822_retail, call_seq, high
+// pdb params: key, val
 void hkStringMapD874::FUN_00d874d0(const char* pcKey, int iValue)
 {
     int uiHash = hash(pcKey);

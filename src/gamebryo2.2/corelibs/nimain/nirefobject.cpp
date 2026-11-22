@@ -3,6 +3,7 @@
 #include "NiRefObject.h"
 #pragma optimize("gty", on)
 // @fnv 0x00cfcc20
+// pdb: hkpReportContactMgr::cleanup | hkpReportContactMgr.obj | fnv360_0822_retail, vtable, high
 void NiRefObject::DeleteThis()
 {
     delete this;

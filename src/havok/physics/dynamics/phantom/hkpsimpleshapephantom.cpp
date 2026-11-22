@@ -5,6 +5,7 @@
 #include "havok/hkpSimpleShapePhantom.h"
 
 // @fnv 0x00d1f220
+// pdb: hkpSphereShape::getNumCollisionSpheresImpl | hkpSphereShape.obj | fnv360_0822_retail, objrun_open, low
 int FUN_00d1f220()
 {
     return 1;
@@ -106,6 +107,8 @@ class hkpSimpleShapePhantomD1F5 : public FUN_00ca9520_class
 };
 
 // @f3 0x0099e780 (community match, verified in this file)
+// pdb: hkpSimpleShapePhantom::removeOverlappingCollidable | hkpSimpleShapePhantom.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: collidable
 void hkpSimpleShapePhantomD1F5::FUN_00d1f5a0(hkpCollidableD1F5* pkCollidable) throw()
 {
     char* self = reinterpret_cast<char*>(this);
@@ -1092,6 +1095,8 @@ class PhantomD1F
     void DispatchOverlaps(void* collector, const hkpCollisionInputD1F* input);
 };
 // @f3 0x0099e7f0 (community match, verified in this file)
+// pdb: hkpSimpleShapePhantom::getClosestPoints | hkpSimpleShapePhantom.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: collector, input
 void PhantomD1F::DispatchOverlaps(void* collector, const hkpCollisionInputD1F* apCollisionInput)
 {
     if (!apCollisionInput)
@@ -1259,6 +1264,8 @@ struct FUN_00d1f520_Phantom : public hkpSimpleShapePhantom
 };
 // Iterates collision details and calls the dispatcher's agent2 penetration query function, breaking early when the collector reports a hit distance.
 // @f3 0x0099e870 (community match, verified in this file)
+// pdb: hkpSimpleShapePhantom::getPenetrations | hkpSimpleShapePhantom.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: collector, input
 void FUN_00d1f520_Phantom::QueryPenetrations(FUN_00d1f520_Collector& collector, const FUN_00d1f520_Input* input)
 {
     if (!input)

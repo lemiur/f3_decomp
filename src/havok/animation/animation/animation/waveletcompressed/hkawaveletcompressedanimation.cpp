@@ -5,6 +5,8 @@
 
 // Computes an offset from a and the first two bytes of b: ((a - b[1]) * b[0] + 7) / 8 + b[1] * 4.
 // @fnv 0x00e51da0
+// pdb: hkCalcQuantizedSize | hkaQuantizeReal.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: nValues, desc
 int __cdecl FUN_00e51da0(int aiValue, const char* apBytes)
 {
     unsigned char x = (unsigned char)apBytes[1];
@@ -29,6 +31,7 @@ struct FUN_00e2f8b0_Obj
     int FUN_00e2f8b0();
 };
 // @fnv 0x00e2f8b0
+// pdb: BSTempEffectSimpleDecal::Get3D | BSTempEffectSimpleDecal.obj | fnv360_0822_retail, vtable, medium
 int FUN_00e2f8b0_Obj::FUN_00e2f8b0()
 {
     return unk28;
@@ -68,6 +71,7 @@ struct SolverSettingsView50d260
 };
 }
 
+// pdb: DecalData::DecalData | DecalData.obj | fnv360_0822_retail, call_dedup, high
 FUN_00e2f860::FUN_00e2f860()
 {
     f3m_0050d260::SolverSettingsView50d260* self = reinterpret_cast<f3m_0050d260::SolverSettingsView50d260*>(this);
@@ -100,6 +104,8 @@ public:
 // @f3 0x00584760 (community match, verified in this file)
 void __cdecl FUN_005845b0(ObjE2F8* self, float time, int first, int second, int fourth, int fifth);
 
+// pdb: GamePlayFormulas::GetActorSwimWalkSpeed | GamePlayFormulas.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: CombatFormulas::CalcHandToHandDamage)
+// pdb params: apActor, pWeap, pArmor, abNoWeapon, abIsNpc, abOverEncumbered
 void __cdecl FUN_00e2f8e0(ObjE2F8* self, float time, int second, int fourth, int fifth)
 {
     FUN_005845b0(self, time, 0, second, fourth, fifth);
@@ -177,6 +183,8 @@ void __cdecl FUN_00e51140(float* out, int n);
 //   mov ecx,eax ; shr ecx,10h ; and ecx,0FFh ; mov [edx],ecx                 (edx = arg_8)
 //   movzx ecx,ah ; mov [edx],ecx                                             (edx = arg_C)  - the high byte, taken directly
 //   movzx eax,al ; mov [ecx],eax                                             (ecx = arg_10) - the low byte
+// pdb: WritePrivateProfileString | XSettingsFile.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: apAppName, apKeyName, apString, apFileName
 void FUN_0061dbe0(unsigned int value, unsigned int& top, unsigned int& upperMiddle, unsigned int& lowerMiddle, unsigned int& bottom) {
     top = value >> 24;                       // ORIG: mov ecx,eax ; shr ecx,18h ; mov [edx],ecx ??
     upperMiddle = (value >> 16) & 0xFFu;     // ORIG: mov ecx,eax ; shr ecx,10h ; and ecx,0FFh ; mov [edx],ecx ??

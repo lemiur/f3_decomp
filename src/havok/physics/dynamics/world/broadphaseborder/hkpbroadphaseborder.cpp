@@ -62,6 +62,7 @@ struct AllocatorOwnerBody
     Item* m_pEntries[6];
 };
 
+// pdb: hkpBroadPhaseBorder::deactivate | hkpBroadPhaseBorder.obj | fnv360_0822_retail, vtable, high
 void AllocatorOwner::ReleaseEntries()
 {
     AllocatorOwnerBody* pBody = (AllocatorOwnerBody*)this;
@@ -128,6 +129,8 @@ struct RestartDispatchLayout {
     int mode;
     void RestartDispatchItemByMode(RestartDispatchItem* item);
 };
+// pdb: hkpBroadPhaseBorder::maxPositionExceededCallback | hkpBroadPhaseBorder.obj | fnv360_0822_retail, vtable, high
+// pdb params: entity
 void Dispatcher::DispatchItemByMode(DispatchItem* item) {
     RestartDispatchLayout* layout = reinterpret_cast<RestartDispatchLayout*>(this);
     RestartDispatchItem* target = reinterpret_cast<RestartDispatchItem*>(item);
@@ -312,6 +315,8 @@ static inline void ResetBaseVptrs(int* vptrs)
 }  // namespace fnv_00d0bb20
 
 // @fnv 0x00d0b520
+// pdb: hkpKeyframedRigidMotion::setMassInv | hkpKeyframedRigidMotion.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: mInv
 void __stdcall FUN_00d0b520(int)
 {}
 

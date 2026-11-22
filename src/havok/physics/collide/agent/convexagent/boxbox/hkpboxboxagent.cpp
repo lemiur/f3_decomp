@@ -55,6 +55,8 @@ struct S_00d40180
     void DispatchAndDelete(void* p);
 };
 // @fnv 0x00d40180
+// pdb: hkpBoxBoxAgent::cleanup | hkpBoxBoxAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: constraintOwner
 void S_00d40180::DispatchAndDelete(void* apArg)
 {
     for (int i = 0; i < m_uiItemCount; i++)
@@ -86,6 +88,8 @@ void __cdecl D41FD0StaticLinearCast();
 
 // Fills a collision agent function table with the static agent callbacks and registers it for collision type pair 0x12/0x12.
 // @f3 0x009cc8d0 (community match, verified in this file)
+// pdb: hkpPredGskfAgent::registerAgent | hkpPredGskfAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: dispatcher
 void __cdecl RegisterStaticCollisionAgent(D41FD0CollisionDispatcher* dispatcher)
 {
     D41FD0AgentFuncs agentFuncs;
@@ -195,6 +199,8 @@ callPath:
 extern "C" void __cdecl FUN_00d40470(void* a, void* b, void* c, void* d);
 
 // @fnv 0x00d406a0
+// pdb: hkpBoxBoxAgent::getClosestPoints | hkpBoxBoxAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 extern "C" void __stdcall FUN_00d406a0(void* apArg1, void* apArg2, void* apArg3, void* apArg4)
 {
     FUN_00d40470(apArg1, apArg2, apArg3, apArg4);
@@ -221,6 +227,8 @@ struct BoxAgentRegistry
 // Initializes a FUN_00d408e0_1 struct with zeroed fields, calls FUN_00d408e0 to populate it, and registers it with pkObj via FUN_00cfbbe0.
 // @f3 0x009c9fa0 (community match, verified in this file)
 void __cdecl FUN_009c9f80(FUN_00d408e0_1* pkFuncs);
+// pdb: hkpSphereSphereAgent::registerAgent | hkpSphereSphereAgent.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: dispatcher
 void __cdecl FUN_00d40910(BoxAgentRegistry* pkObj)
 {
     FUN_00d408e0_1 kFuncs;

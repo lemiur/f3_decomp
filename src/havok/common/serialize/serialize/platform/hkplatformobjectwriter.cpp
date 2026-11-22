@@ -13,6 +13,8 @@ struct E02A40StreamWriter
 
 // Calls writer->write with buf and nbytes and returns nonzero if the number of bytes written differs from nbytes.
 // @fnv 0x00e02a40
+// pdb: hkPlatformObjectWriter::writeRaw | hkPlatformObjectWriter.obj | fnv360_0822_retail, vtable, high
+// pdb params: writer, data, dataLen
 int __stdcall WriteAllOrFail(E02A40StreamWriter* writer, const void* buf, int aiNumBytes)
 {
     return writer->write(buf, aiNumBytes) != aiNumBytes;
@@ -26,6 +28,7 @@ struct OffsetView
     char* FUN_00e02a70();
 };
 // @fnv 0x00e02a70
+// pdb: hkPlatformObjectWriter::getLayout | hkPlatformObjectWriter.obj | fnv360_0822_debug, objrun, medium
 char* OffsetView::FUN_00e02a70()
 {
     return unk08 + 12;
@@ -132,6 +135,8 @@ struct Cache
 };
 }
 
+// pdb: hkPlatformObjectWriter::hkPlatformObjectWriter | hkPlatformObjectWriter.obj | fnv360_0822_retail, call_seq, high
+// pdb params: layout
 FUN_00e02bb0_cls* FUN_00e02bb0_cls::FUN_00e02bb0(int stream)
 {
     using namespace NativePlatformWriter;
@@ -258,6 +263,8 @@ struct FUN_009b2a50_cls
 
 void __cdecl FUN_00901f10(void* pArray, int iElemSize);
 
+// pdb: hkPlatformObjectWriter::Cache::get | hkPlatformObjectWriter.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: klass, layout
 hkObjectE02* hkLoaderE02::GetOrCreateObject(const char* pcName, hkTrackerE02* pkTracker)
 {
     hkObjectE02* pkObject;
@@ -387,6 +394,7 @@ struct Owner004e0ca0 {
     void FUN_004e0b30();
     void FUN_004e0ca0();
 };
+// pdb: TESObjectCELL::Clear3D | TESObjectCELL.obj | fnv360_0822_retail, call_gap, low
 void Owner004e0ca0::FUN_004e0ca0() {
     Obj004e0ca0_Target* target = unk28.FUN_00410f00();
     if (target && DAT_01071528) {

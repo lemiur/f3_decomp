@@ -71,6 +71,7 @@ unsigned int __cdecl FUN_00b9f270(unsigned int,const unsigned char*,unsigned int
 unsigned int __cdecl FUN_00b9f650(unsigned int,const unsigned char*,unsigned int);
 void __cdecl _tr_align(DeflateState*);
 void __cdecl _tr_stored_block(DeflateState*,const char*,unsigned int,int);
+// pdb: putShortMSB | deflate.obj | tesv_win, hash, low
 static __declspec(noinline) void FUN_00b9d280(DeflateState* state,unsigned int value)
 {
     state->pending_buf[state->pending]=(unsigned char)(value>>8);
@@ -78,6 +79,7 @@ static __declspec(noinline) void FUN_00b9d280(DeflateState* state,unsigned int v
     state->pending_buf[state->pending]=(unsigned char)value;
     ++state->pending;
 }
+// pdb: flush_pending | deflate.obj | fnv360_0822_retail, call_gap, low
 static __declspec(noinline) void FUN_00b9d2b0(DeflateStream* strm)
 {
     unsigned int len=strm->state->pending;
@@ -203,6 +205,8 @@ struct Owner412 {
     unsigned int unk2C, unk30;
     unsigned int ownsResource;
 };
+// pdb: inflateEnd | inflate.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: strm
 int __cdecl FUN_00b9d230(Owner412* owner) {
     if (!owner || !owner->resource || !owner->release)
         return -2;
@@ -365,6 +369,7 @@ struct F7State {
     unsigned long static_len;
 };
 
+// pdb: gen_bitlen | trees.obj | fnv360_0822_retail, objrun_open, low
 static __declspec(noinline) void FUN_00b9f7b0(F7State* s, F7TreeDesc* desc)
 {
     F7CtData* tree = desc->dyn_tree;
@@ -439,6 +444,8 @@ extern unsigned short DAT_00ea45b8[];
 extern unsigned short DAT_00ea45f8[];
 namespace f3m_00b9ed90 {
 struct DecodeEntry { unsigned char op, bits; unsigned short val; };
+// pdb: inflate_table | inftrees.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: type, lens, codes, table, bits, work
 int __cdecl FUN_00b9ed90(int type, unsigned short *lens, unsigned codes,
                        DecodeEntry **table, unsigned *bits, unsigned short *work)
 {
@@ -771,6 +778,7 @@ typedef struct internal_state {
 typedef char CheckBitTreeOffset[offsetof(deflate_state,bl_tree)==0xa74?1:-1];
 typedef char CheckBitBufferOffset[offsetof(deflate_state,bi_buf)==0x16b0?1:-1];
 
+// pdb: send_tree | trees.obj | fnv360_0721_beta, call_seq, medium
 static void FUN_00b9fac0(deflate_state* s, ct_data* tree, int max_code)
 {
     int n;                     
@@ -1024,6 +1032,8 @@ typedef struct z_stream_s {
     inflate_state *state;       /* 0x1c not visible by applications */
 } z_stream;
 
+// pdb: inflate_fast | inffast.obj | fnv360_0822_retail, strset, low
+// pdb params: strm, start
 void __cdecl FUN_00b9e8d0(z_stream *strm, unsigned start)
 {
     inflate_state *state;
@@ -1501,6 +1511,8 @@ extern float DAT_01177124;
 extern float DAT_01177128;
 extern float DAT_0117712c;
 
+// pdb: Lighting30Shader::UpdatePass | Lighting30Shader_Update.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: aePassEnum, apL30Prop
 PassEntry_b8d170* PassShader_b8d170::FUN_00b8d170(int kind, PassContext_b8d170* context)
 {
     PassEntry_b8d170* pass = 0;
@@ -2151,6 +2163,7 @@ static __forceinline void FlushPendingInline(DeflateStream* strm)
         strm->state->pending_out = strm->state->pending_buf;
 }
 
+// pdb: deflate_stored | deflate.obj | fnv360_0822_retail, objrun, medium
 int __cdecl FUN_00b9dbf0(DeflateState* s, int flush)
 {
     unsigned long max_block_size = 0xffff;
@@ -2438,6 +2451,8 @@ namespace f3m_00b9f270 {
 */
 
 namespace fo3_00b9f270 {
+// pdb: adler32 | adler32.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: adler, buf, len
 unsigned long __cdecl FUN_00b9f270(unsigned long adler, const unsigned char* buf, unsigned int len)
 {
     unsigned long s1 = adler & 0xffff;
@@ -2672,6 +2687,7 @@ class FUN_00b78980_shell
     void FUN_00b82f60();
 };
 // @fnv 0x00c01020
+// pdb: ShadowLightShader::PresetRenderNormalsPasses_2x | ShadowLightShader_Preset_2x.obj | fnv360_0822_retail, uconst, low
 void FUN_00b78980_shell::FUN_00b82f60()
 {
     ObjPtr pObj;
@@ -3027,6 +3043,7 @@ inline unsigned int FloatBits(float value)
 {
     return *(unsigned int*)&value;
 }
+// pdb: ShadowLightShader::PresetDepthPasses_2x | ShadowLightShader_Preset_2x.obj | fnv360_0822_retail, uconst, low
 void FUN_00b83700()
 {
     ShaderPassPointer pass;
@@ -3182,6 +3199,8 @@ class Point3
 };
 // Calls FUN_00b23bc0(0-2) on both shader entries from fields of DAT_0116ef6c and mode, FUN_00b23bc0(3) on the second if DAT_0116f200 > 0, and sets DAT_011760b0 to 3.0f.
 // @fnv 0x00bd66c0
+// pdb: ImageSpaceEffectDepthOfField::UpdateParams | ImageSpaceEffectDepthOfField.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: apParam
 bool Shader66::FUN_00b84ba0(int unused)
 {
     float nearClip = DAT_0116ef6c->fieldec;
@@ -3342,6 +3361,7 @@ extern const float DAT_011761d8;
 
 // Assigns shader constant maps and config values to two FNVConfigObject instances and sets four global constants.
 // @fnv 0x00c01c20
+// pdb: ShadowLightShader::PresetVelocityPasses_2x | ShadowLightShader_Preset_2x.obj | fnv360_0822_retail, uconst, low
 void __cdecl FUN_00b83b60()
 {
     NiPointer<FNVConfigObject> p;
@@ -3465,6 +3485,7 @@ struct FUN_00b85180 : FUN_00b850f0
 
 // Deletes the effect parameter objects stored in m_Array at indices 2, 1, 0, 0 and 3, clearing each slot to null.
 // @fnv 0x00bd6fc0
+// pdb: ImageSpaceEffectDepthOfField::~ImageSpaceEffectDepthOfField | ImageSpaceEffectDepthOfField.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
 FUN_00b85180::~FUN_00b85180()
 {
     if (m_Array.GetAt(2))
@@ -3956,6 +3977,7 @@ block_state deflate_fast(deflate_state* s, int flush)
 // @f3 0x00b9ffd0 (community match, verified in this file)
 // zlib1.2.1 send_all_trees, Copyright 1995-2003 Jean-loup Gailly.
 namespace f3m_00b9fac0 {
+// pdb: send_all_trees | trees.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: compress_block)
 static __declspec(noinline) void FUN_00b9ffd0(deflate_state* s, int lcodes, int dcodes, int blcodes)
 {
     int rank;                    
@@ -4699,6 +4721,8 @@ void __cdecl FUN_00b0f230(void*, unsigned short, int, int, int);
 
 // Sets up the geometry's owner, settings and mode, applies clear color and render target, runs the 0x2f6 pass, and restores the previous clear color.
 // @fnv 0x00c03d80
+// pdb: ImageSpaceShader::Render | ImageSpaceShader.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apGeometry, apRenderer, apParam, abEndFrame
 void RenderSecondary::FUN_00b86390(RenderGeometry* geometry, int unused, RenderSettings* apSettings,
                                               bool restore)
 {
@@ -5389,6 +5413,7 @@ extern unsigned int DAT_01176798;
 extern unsigned int DAT_0117695c;
 extern unsigned int DAT_0117679c;
 
+// pdb: Lighting30Shader::PresetStages | Lighting30Shader_Preset.obj | fnv360_0822_retail, uconst, low
 void PassManager::FUN_00b88770()
 {
     PassRef kIter;
@@ -6431,6 +6456,7 @@ extern "C" void __cdecl FUN_00b62c70(TemporaryResource* res, unsigned int a, uns
                                            unsigned int d);
 extern "C" GraphicsManager* __cdecl FUN_00890750();
 // @fnv 0x00c00be0
+// pdb: ShadowLightShader::PresetTextureEffectPasses_2x | ShadowLightShader_Preset_2x.obj | fnv360_0822_retail, objrun, medium
 void __cdecl FUN_00b82b20()
 {
     ScopedSystem systemScope;
@@ -6677,6 +6703,7 @@ extern unsigned int DAT_011725d4;
 extern unsigned int DAT_011725d8;
 
 // @fnv 0x00c01f60
+// pdb: ShadowLightShader::PresetLocalMapPasses_2x | ShadowLightShader_Preset_2x.obj | fnv360_0822_retail, objrun, medium
 void FUN_00b83ea0()
 {
     NiPointer<NiD3DPass> spRenderPass;
@@ -6721,6 +6748,7 @@ void FUN_00b83ea0()
 extern const unsigned long DAT_00ea4638[8][256];
 namespace f3m_00b9f3b0 {
 namespace crc1408 {
+// pdb: crc32_big | crc32.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: crc32_little)
 static __declspec(noinline) unsigned long FUN_00b9f3b0(unsigned long crc,const unsigned char* buf,unsigned len){
 unsigned int c;const unsigned int* buf4;
 c=(unsigned int)crc;c=~c;
@@ -6751,6 +6779,7 @@ void Emit(){outputCrc=FUN_00b9f3b0(inputCrc,inputBuffer,inputLength);}
 // @f3 0x00b9e8c0 (community match, verified in this file)
 namespace f3m_00b9e8c0 {
 extern "C" void __cdecl FUN_00c064b8(unsigned int size);
+// pdb: zcfree | zutil.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00b9e8c0(void* ctx, unsigned int size) {
     FUN_00c064b8(size);
 }
@@ -6759,6 +6788,7 @@ void __cdecl FUN_00b9e8c0(void* ctx, unsigned int size) {
 // @f3 0x00b9e8a0 (community match, verified in this file)
 namespace f3m_00b9e8a0 {
 extern "C" void* __cdecl FUN_00c063f5(unsigned int bytes);
+// pdb: zcalloc | zutil.obj | tesv_win, caller_sim, low
 void* __cdecl FUN_00b9e8a0(void* ctx, unsigned int count, unsigned int size) {
     return FUN_00c063f5(count * size);
 }
@@ -6766,6 +6796,8 @@ void* __cdecl FUN_00b9e8a0(void* ctx, unsigned int count, unsigned int size) {
 
 // @f3 0x00b9f650 (community match, verified in this file)
 namespace f3m_00b9f650 {
+// pdb: crc32 | crc32.obj | fnv360_0822_retail, call_gap, low
+// pdb params: crc, buf, len
 unsigned int __cdecl FUN_00b9f650(unsigned int crc,const unsigned char* buf,unsigned int len)
 {
     if (buf == 0) return 0;
@@ -6776,6 +6808,8 @@ unsigned int __cdecl FUN_00b9f650(unsigned int crc,const unsigned char* buf,unsi
 // @f3 0x00b9bd50 (community match, verified in this file)
 namespace f3m_00b9bd50 {
 int __cdecl inflateInit2_(z_streamp strm,int windowBits,const char* version,int stream_size);
+// pdb: inflateInit_ | inflate.obj | fnv360_0822_retail, call_gap, low
+// pdb params: strm, version, stream_size
 int __cdecl FUN_00b9bd50(z_streamp strm,const char* version,int stream_size)
 {
     return inflateInit2_(strm,15,version,stream_size);
@@ -6786,6 +6820,8 @@ int __cdecl FUN_00b9bd50(z_streamp strm,const char* version,int stream_size)
 namespace f3m_00b9e870 {
 struct F650Obj;
 int __cdecl deflateInit2_(F650Obj* obj,int a2,int a3,int a4,int a5,int a6,char* a7,int a8);
+// pdb: deflateInit_ | deflate.obj | fnv360_0822_retail, call_gap, low
+// pdb params: strm, level, version, stream_size
 int __cdecl FUN_00b9e870(z_streamp strm,int level,char* version,int stream_size)
 {
     return deflateInit2_((F650Obj*)strm,level,8,15,8,0,version,stream_size);
@@ -6794,6 +6830,7 @@ int __cdecl FUN_00b9e870(z_streamp strm,int level,char* version,int stream_size)
 
 // @f3 0x00b9f670 (community match, verified in this file)
 namespace f3m_00b9f670 {
+// pdb: init_block | trees.obj | tesv_win, call_seq, medium
 static __declspec(noinline) void FUN_00b9f670(int unused0, int unused1, unsigned char* s)
 {
     unsigned short* p;
@@ -6962,6 +6999,7 @@ typedef struct internal_state
 } deflate_state;
 }
 
+// pdb: scan_tree | trees.obj | fnv360_0721_beta, objrun, medium
 static __declspec(noinline) void FUN_00b9f9d0(f3m_00b9f9d0::deflate_state* s, f3m_00b9f9d0::ct_data* tree, int max_code)
 {
     int n;
@@ -7138,6 +7176,8 @@ struct Obj00b87e10 {
     void FUN_00b87e10(int a);
 };
 
+// pdb: ImageSpaceEffectBloom::BorrowTextures | ImageSpaceEffectBloom.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pParam
 void Obj00b87e10::FUN_00b87e10(int a) {
     C1* local = (C1*)((char*)this + 0x5c);
     local->FUN_00b223d0(0x19);
@@ -7191,6 +7231,8 @@ extern FeatureState* DAT_0117495c[];
 extern FeatureState* DAT_011749b4[];
 extern unsigned int DAT_01172a00[];
 extern unsigned int DAT_01171e20[];
+// pdb: ShadowLightShader::EnableConstantsForPass_1x | ShadowLightShader_Update_1x.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: auiPassEnum
 void __cdecl FUN_00b85a10(unsigned int index)
 {
     unsigned int i = 2;
@@ -7225,6 +7267,7 @@ struct DeflateStateEx : DeflateState
     int nice_match;
 };
 
+// pdb: lm_init | deflate.obj | tesv_win, call_gap, low
 static __declspec(noinline) void FUN_00b9d7d0(int a, int b, int c, DeflateStateEx* s)
 {
     s->window_size = s->w_size * 2;
@@ -7464,6 +7507,8 @@ struct Effect4e60 {
     void FUN_00b84e60(void* unused);
 };
 
+// pdb: ImageSpaceEffectDepthOfField::BorrowTextures | ImageSpaceEffectDepthOfField.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: pParam
 void Effect4e60::FUN_00b84e60(void* unused)
 {
     ImageSpaceTexture4e60* tex = &tex8c;
@@ -7497,6 +7542,8 @@ struct Array {
  unsigned short capacity,size,count;
  void FUN_00b84fc0(unsigned int);
 };
+// pdb: NiTArray<bool,NiTMallocInterface<bool> >::SetSize | ImageSpaceEffectDepthOfField.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: uiMaxSize
 void Array::FUN_00b84fc0(unsigned int desired) {
  if(desired==capacity) return;
  if(desired<size) {
@@ -8258,6 +8305,7 @@ struct deflate_state
     int heap_max;
     unsigned char depth[573];
 };
+// pdb: pqdownheap | trees.obj | fnv360_0822_retail, objrun_open, low
 static __declspec(noinline) void FUN_00b9f6e0(deflate_state* s, ct_data* tree, int k)
 {
     int v = s->heap[k];
@@ -8294,6 +8342,8 @@ struct Obj {
     int FUN_0083c190(int a);
     int FUN_00b8e5a0(int a);
 };
+// pdb: TallGrassTriStrips::CreateClone | TallGrassTriStrips.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: arCloneData
 int Obj::FUN_00b8e5a0(int a)
 {
     return FUN_0083c190(a);

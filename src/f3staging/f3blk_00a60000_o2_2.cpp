@@ -174,6 +174,8 @@ struct ChainOwner
     void FUN_00a6a7b0(int iArg);
 };
 
+// pdb: hkpHingeLimitsDrawer::drawConstraint | hkpHingeLimitsDrawer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: constraint, displayHandler, id, tag
 void ChainOwner::FUN_00a6cc50(ChainInstance* apChain, Listener* apListener, int aiArg)
 {
     ConstraintData* data = apChain->m_data;
@@ -245,6 +247,8 @@ __declspec(noinline) void Cls_00a6b600::FUN_00a6b1f0(float* out)
     out[12] = 0.0f; out[13] = 0.0f; out[14] = 0.0f; out[15] = 1.0f;
 }
 
+// pdb: hkDisplayPlane::getWireframeGeometry | hkDisplayPlane.obj | fnv360_0822_retail, vtable, medium
+// pdb params: lines, a
 void Cls_00a6b600::FUN_00a6b600(Obj_00a6b600* a1)
 {
     int count = a1->unk08 & 0x3fffffff;
@@ -326,6 +330,7 @@ struct Shape740 {
     void* v30; Slot740* data; int size, capacity;
     void FUN_00a740c0();
 };
+// pdb: hkpDisableEntityCollisionFilter::~hkpDisableEntityCollisionFilter | hkpDisableEntityCollisionFilter.obj | fnv360_0822_retail, call_seq, high
 void Shape740::FUN_00a740c0() {
     v0 = &FUN_00e83cbc; v8 = &FUN_00e83cb0; vc = &FUN_00e83c9c; v10 = &FUN_00e83c90; v14 = &FUN_00e83c84; v30 = &FUN_00e83c6c;
     for (int i = 0; i < size; ++i) {
@@ -376,6 +381,8 @@ struct FUN_00a6f9f0_Class {
     void FUN_00a6f9f0(int index, const float* values);
 };
 
+// pdb: hkpPoweredChainMapper::setTargetOrientation | hkpPoweredChainMapper.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: linkIndex, newTarget
 void FUN_00a6f9f0_Class::FUN_00a6f9f0(int index, const float* values)
 {
     FUN_00a6f9f0_Entry* entry = entries + index;
@@ -437,6 +444,7 @@ struct D00a63e10 : B0, B8 {
     ~D00a63e10() throw();
 };
 
+// pdb: hkStatisticsProcess::~hkStatisticsProcess | hkStatisticsProcess.obj | fnv360_0822_retail, call_seq, medium
 D00a63e10::~D00a63e10() throw()
 {
     this->B0::vt = DAT_00e86de8;
@@ -455,6 +463,7 @@ struct State00a60250 {
     Array00a60250 array;
     void FUN_00a60250(unsigned short value);
 };
+// pdb: hkGeomHull::initializeWithVertex | hkGeomHull.obj | tesv_win, call_gap_sim, low
 void State00a60250::FUN_00a60250(unsigned short value) {
     Item00a60250 item;
     item.first = 0;
@@ -495,6 +504,8 @@ struct FUN_00a6b500 : Base {
     FUN_00a6b500(Vec4* pa, Vec4* pb, Vec4* pc, Vec4* pd);
 };
 
+// pdb: hkDisplayPlane::hkDisplayPlane | hkDisplayPlane.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: normal, perpToNormal, center, extent
 FUN_00a6b500::FUN_00a6b500(Vec4* pa, Vec4* pb, Vec4* pc, Vec4* pd) : Base(7)
 {
     vptr = DAT_00e87080;
@@ -529,6 +540,8 @@ struct ThreadMemory {
 struct Object { void FUN_00a8d0f0(); };
 template <class T> struct hkArray { T* data; int size; int capAndFlags; };
 void __stdcall FUN_00a651b0(hkArray<Object*>* out, int flags);
+// pdb: hkStreamStatisticsCollector::writeStatistics | hkStreamStatisticsCollector.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: outstream, reportLevel
 void __stdcall FUN_00a65450(int a, int b)
 {
     hkArray<Object*> list;
@@ -581,6 +594,7 @@ public:
     void FUN_00a61170();
 };
 
+// pdb: hkProcessFactory::~hkProcessFactory | hkProcessFactory.obj | fnv360_0822_retail, call_seq, high
 void StandIn_a61170::FUN_00a61170() {
     unk00 = (unsigned int)&DAT_00e86c50;
     if (unk18 != 0) {
@@ -629,6 +643,8 @@ struct Obj {
     void* __thiscall FUN_00a646f0();
 };
 
+// pdb: hkDebugDisplayProcess::create | hkDebugDisplayProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: contexts
 void* __cdecl FUN_00a64790(void)
 {
     MemCtx* ctx = (MemCtx*)TlsGetValue(DAT_010f3170);
@@ -711,6 +727,8 @@ struct FUN_00a61800_Class {
     void FUN_00a61800(IntArr* arr);
 };
 
+// pdb: hkServerDebugDisplayHandler::sendGeometryData | hkServerDebugDisplayHandler.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: geometries
 void FUN_00a61800_Class::FUN_00a61800(IntArr* arr) {
     m_critSec->FUN_00908a00();
     m_renderer->FUN_009ee8d0(arr->count);
@@ -792,6 +810,8 @@ struct Setter6ba40 {
     float f2;
     void FUN_00a6ba40(float first, float second, int kind, const float* a, const float* b);
 };
+// pdb: hkDisplayCone::setParameters | hkDisplayCone.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: coneAngle, coneHeight, numSegments, coneAxis, startPos
 void Setter6ba40::FUN_00a6ba40(float first, float second, int kind, const float* a, const float* b)
 {
     f1 = first;
@@ -834,6 +854,7 @@ public:
     ObjA692() throw() {}
     virtual ~ObjA692();
 };
+// pdb: hkpUserConvexRadiusBuildercreate | hkpConvexRadiusBuilder.obj | fnv360_0822_retail, uvref, medium
 ObjA692* __cdecl FUN_00a692a0()
 {
     PoolA692* pool = static_cast<PoolA692*>(TlsGetValue(DAT_010f3170));
@@ -874,6 +895,8 @@ struct A655f0 {
     void FUN_00a655f0(unsigned int value, int key);
 };
 
+// pdb: hkpUserShapeDisplayBuilder::registerUserShapeDisplayBuilder | hkpShapeDisplayBuilder.obj | fnv360_0822_retail, objrun, medium
+// pdb params: f, type
 void A655f0::FUN_00a655f0(unsigned int value, int key)
 {
     for (int i = 0; i < m_array.size; i++) {
@@ -905,6 +928,7 @@ struct A60 {
     A60* FUN_00a60840();            // thiscall member, no stack params (ret)
 };
 
+// pdb: hkGeomHull::hkGeomHull | hkGeomHull.obj | tesv_win, call_gap, low
 A60* A60::FUN_00a60840() {
     Inner60* in = &inner;               // ORIG: lea esi,[edi+4] up front and keeps it live across the call
     slot0 = 0;
@@ -980,6 +1004,8 @@ struct ClipPlane_a7fe10 {
     int FUN_00a7fe10(float* point, float* lo, float* hi);
 };
 
+// pdb: hkpWingedEdge::Triangle::calcStateAndUpdateTolerance | hkpConvexPenetrationUtil.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: hkWingedEdge::Triangle::calcStateAndUpdateTolerance)
+// pdb params: pointOfView, toleranceBorder, previousMinimumDistance
 int ClipPlane_a7fe10::FUN_00a7fe10(float* point, float* lo, float* hi)
 {
     __declspec(align(16)) float diff[3];
@@ -1048,6 +1074,8 @@ struct Owner {
     void FUN_00a61800(int a);
 };
 
+// pdb: hkServerDebugDisplayHandler::addGeometry | hkServerDebugDisplayHandler.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: geometries, transform, id, tag, shapeIdHint
 bool Part::FUN_00a61860(int a, int b, int c, int d, int e)
 {
     m_lock->FUN_00908a00();
@@ -1136,6 +1164,8 @@ struct LockHolder : RefBase, Interface {
     virtual void Release();
     virtual void F0();
 };
+// pdb: hkServerDebugDisplayHandler::hkServerDebugDisplayHandler | hkServerDebugDisplayHandler.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: stream
 LockHolder::LockHolder(int v) : value(v)
 {
     lock = new Lock;
@@ -1184,6 +1214,7 @@ public:
     f3m_00a6f8c0::Array<f3m_00a6f8c0::Entry> entries;   // 0x08
 };
 
+// pdb: hkpSerializedDisplayRbTransforms::~hkpSerializedDisplayRbTransforms | hkpSerializedDisplayRbTransforms.obj | fnv360_0822_retail, call_seq, high
 FUN_00a6f8c0::~FUN_00a6f8c0() throw()
 {
     int count = entries.size;
@@ -1273,6 +1304,8 @@ struct Owner19 {
     bool FUN_00a619f0(int value1, int value2, int value3);
 };
 
+// pdb: hkServerDebugDisplayHandler::displayGeometry | hkServerDebugDisplayHandler.obj | fnv360_0721_beta, objopen_prop, medium
+// pdb params: geometries, color, id, tag
 bool Owner19::FUN_00a619f0(int value1, int value2, int value3)
 {
     m_other->FUN_00908a00();
@@ -1368,6 +1401,8 @@ struct FUN_00a65650_Owner {
     void* FUN_00a65650(FUN_00a65650_Array* param);
 };
 
+// pdb: hkpShapeDisplayBuilder::getCurrentRawGeometry | hkpShapeDisplayBuilder.obj | fnv360_0822_retail, objrun, medium
+// pdb params: displayGeometries
 void* FUN_00a65650_Owner::FUN_00a65650(FUN_00a65650_Array* param) {
     if (unk10 == 0) {
         FUN_00a65650_Grid* grid = new FUN_00a65650_Grid;
@@ -1429,6 +1464,8 @@ struct FUN_00a6c100_cls {
     void FUN_00a6c100(VecArr* out);
 };
 
+// pdb: hkDisplayCone::getWireframeGeometry | hkDisplayCone.obj | fnv360_0822_retail, vtable, medium
+// pdb params: lines, a
 void FUN_00a6c100_cls::FUN_00a6c100(VecArr* out)
 {
     __declspec(align(16)) VecArr tmp;
@@ -1557,6 +1594,8 @@ struct Cls {
  Drawer drawer;
  void FUN_00a6a7b0(void* context);
 };
+// pdb: hkpConstraintDrawer::drawBodyFrames | hkpConstraintDrawer.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: id, tag
 void Cls::FUN_00a6a7b0(void* context)
 {
     unsigned int c0 = FUN_00921880(1.0f, 1.0f, 0.0f, 1.0f);
@@ -1635,6 +1674,7 @@ struct S00a60350_Triangulator {
     void FUN_00a60350(int a, int b, int c);
 };
 
+// pdb: hkGeomHull::initializeWithTriangle | hkGeomHull.obj | tesv_win, call_gap_sim, low
 void S00a60350_Triangulator::FUN_00a60350(int a, int b, int c)
 {
     m_edges.m_size = 0;
@@ -1710,6 +1750,8 @@ struct ZDrawer {
  void FUN_00a6a750(int); void FUN_00a6a7b0(int);
  void FUN_00a6e650(ZConstraint*,ZDisplay*,int);
 };
+// pdb: hkpPrismaticDrawer::drawConstraint | hkpPrismaticDrawer.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: constraint, displayHandler, id, tag
 void ZDrawer::FUN_00a6e650(ZConstraint* constraint,ZDisplay* display,int tag) {
  ZLimits* limits=constraint->unk0c;
  unkc0.FUN_00a8f460(display);
@@ -1754,6 +1796,7 @@ void ZDrawer::FUN_00a6e650(ZConstraint* constraint,ZDisplay* display,int tag) {
 namespace f3m_00a602b0 {
 namespace Fill356 {
 struct __declspec(align(4)) Entry{unsigned short id,a,b;Entry(unsigned short i,unsigned short x,unsigned short y):id(i),a(x),b(y){}};struct Array{Entry* data;int size;unsigned capacity;void push(const Entry& e);};void FUN_00901f10(Array*,int);void Array::push(const Entry&e){if(size==(int)(capacity&0x3fffffff))FUN_00901f10(this,8);data[size]=e;++size;}
+// pdb: hkGeomHull::initializeWithEdge | hkGeomHull.obj | tesv_win, call_gap_sim, low
 struct Owner{int unk00;Array array;void FUN_00a602b0(unsigned short,unsigned short);};void Owner::FUN_00a602b0(unsigned short a,unsigned short b){array.size=0;Entry first(a,1,1),second(b,0,0);array.push(first);array.push(second);}
 }
 }   // namespace f3m_00a602b0
@@ -1958,6 +2001,8 @@ struct hkDisplayCone
     void FUN_00a6bb60(hkArray<hkVector4>& conePoints);
 };
 
+// pdb: hkDisplayCone::generateConeVertices | hkDisplayCone.obj | fnv360_0822_debug, objrun, medium
+// pdb params: conePoints
 void hkDisplayCone::FUN_00a6bb60(hkArray<hkVector4>& conePoints)
 {
     int numSegments = m_numSegments;
@@ -2166,6 +2211,8 @@ struct CommandRouter
     hkBool FUN_00a61680(Stream* stream);
 };
 
+// pdb: hkCommandRouter::consumeCommands | hkCommandRouter.obj | fnv360_0822_retail, ustr, medium
+// pdb params: stream
 hkBool CommandRouter::FUN_00a61680(Stream* stream)
 {
     unsigned char command;
@@ -2249,6 +2296,8 @@ struct Box
     void FUN_00a67e10(VecArray& lines);
 };
 
+// pdb: hkDisplayBox::getWireframeGeometry | hkDisplayBox.obj | fnv360_0822_retail, vtable, medium
+// pdb params: lines, a
 void Box::FUN_00a67e10(VecArray& lines)
 {
     int capacity = lines.capacityAndFlags & 0x3fffffff;
@@ -2403,6 +2452,8 @@ struct Arc
     void FUN_00a6ada0(VecArray& points);
 };
 
+// pdb: hkDisplaySemiCircle::generatePoints | hkDisplaySemiCircle.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: points
 void Arc::FUN_00a6ada0(VecArray& points)
 {
     float step = (endAngle - startAngle) / numSegments;
@@ -2582,6 +2633,8 @@ struct VelocityPair
     Vector m_angular;
 };
 
+// pdb: hkPoweredChain_RestoreVelocityValue | hkpPoweredChainSolverUtil.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: modifiedConstraintIndex, modifiedCoordinateIndex, info, velocities
 void FUN_00a7acf0(int link, int axis, ChainSolverState* info, VelocityPair* output)
 {
     // Note: the number of named locals in this block decides the operand order of the first x87 product of
@@ -2688,6 +2741,7 @@ struct CurveQ
     int unk1c;
     ArrayQ points;
 };
+// pdb: hkpLinearParametricCurve::getNearestPoint | hkpLinearParametricCurve.obj | tesv_win, objopen_prop, low
 float CurveQ::FUN_00a75380(float t, const VecQ& nearPoint, VecQ& pointOnCurve)
 {
     if (t < 0.0f)
@@ -3124,6 +3178,8 @@ struct Owner
     Shape* second;
     void FUN_00a7e0c0(const Vector&, Result&);
 };
+// pdb: hkpConvexPenetrationUtil::getPointForSimplex | hkpConvexPenetrationUtil.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: direction, result
 void Owner::FUN_00a7e0c0(const Vector& direction, Result& result)
 {
     first->Support(direction, result.first);
@@ -3303,6 +3359,7 @@ struct hkpLinearParametricCurve
     void FUN_00a75860(hkReal t, hkVector4& tangent);
 };
 
+// pdb: hkpLinearParametricCurve::getTangent | hkpLinearParametricCurve.obj | tesv_win, objopen_prop, low
 void hkpLinearParametricCurve::FUN_00a75860(hkReal t, hkVector4& tangent)
 {
     hkReal smooth_tol = m_smoothingFactor;
@@ -4145,6 +4202,8 @@ public:
     void FUN_00a6d020(hkpConstraintInstance* constraint, hkDebugDisplayHandler* displayHandler, int tag);
 };
 
+// pdb: hkpPulleyDrawer::drawConstraint | hkpPulleyDrawer.obj | fnv360_0822_retail, uconst, low
+// pdb params: constraint, displayHandler, id, tag
 void hkpPulleyDrawer::FUN_00a6d020(hkpConstraintInstance* constraint, hkDebugDisplayHandler* displayHandler, int tag)
 {
     hkpPulleyConstraintData* pulley = static_cast<hkpPulleyConstraintData*>(constraint->getData());
@@ -4405,6 +4464,8 @@ public:
     void FUN_00a6d890(hkpConstraintInstance* constraint, hkDebugDisplayHandler* displayHandler, int tag);
 };
 
+// pdb: hkpPointToPlaneDrawer::drawConstraint | hkpPointToPlaneDrawer.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: constraint, displayHandler, id, tag
 void hkpPointToPlaneDrawer::FUN_00a6d890(hkpConstraintInstance* constraint, hkDebugDisplayHandler* displayHandler, int tag)
 {
     hkpPointToPlaneConstraintData* plane = static_cast<hkpPointToPlaneConstraintData*>(constraint->getData());
@@ -4561,6 +4622,7 @@ struct S687a0_MonitorStream
 };
 
 
+// pdb: hkContactPointViewer_displayArrow | hkpContactPointViewer.obj | fnv360_0822_retail, ustr, medium
 static __declspec(noinline) void FUN_00a687a0(const S687a0_Vector4& from, const S687a0_Vector4& dir, S687a0_Handler* handler, int color, int id)
 {
     const S687a0_Vector4& d = dir;     // read through a local reference, which sets the original's operand order
@@ -4889,6 +4951,8 @@ public:
     void FUN_00a6ddd0(hkpConstraintInstance* constraint, hkDebugDisplayHandler* displayHandler, int tag);
 };
 
+// pdb: hkpWheelDrawer::drawConstraint | hkpWheelDrawer.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: constraint, displayHandler, id, tag
 void hkpWheelDrawer::FUN_00a6ddd0(hkpConstraintInstance* constraint, hkDebugDisplayHandler* displayHandler, int tag)
 {
     hkpWheelConstraintData* wheel = static_cast<hkpWheelConstraintData*>(constraint->getData());
@@ -5357,6 +5421,8 @@ struct Self {
     bool FUN_00a61e50(Vec4* a, Vec4* b, Vec4* c, int d, int e);
 };
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void*);
+// pdb: hkServerDebugDisplayHandler::displayTriangle | hkServerDebugDisplayHandler.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: a, b, c, color, id, tag
 bool Self::FUN_00a61e50(Vec4* a, Vec4* b, Vec4* c, int d, int e)
 {
     AVec4 pl[4];
@@ -5637,6 +5703,8 @@ struct DbgLineViewer
     void FUN_00a6dbd0(DbgLineInput* input, DbgLineDrawer* drawer, int id);
 };
 
+// pdb: hkpPointToPathDrawer::drawConstraint | hkpPointToPathDrawer.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: constraint, displayHandler, id, tag
 void DbgLineViewer::FUN_00a6dbd0(DbgLineInput* input, DbgLineDrawer* drawer, int id)
 {
     DbgLineScene* scene = input->m_scene;
@@ -5714,6 +5782,8 @@ struct QThis {
     int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; int unkBC;
     QC0 cC0;
 };
+// pdb: hkpStiffSpringDrawer::drawConstraint | hkpStiffSpringDrawer.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: constraint, displayHandler, id, tag
 void QThis::FUN_00a6e460(QArg* a, QDisplay* d, int tag)
 {
     QBody* body = a->body;
@@ -5853,6 +5923,8 @@ struct QA32 {
     void FUN_00a6f090(QA32Body* body, QA32Disp* disp, int tag);
 };
 
+// pdb: hkpBallSocketDrawer::drawConstraint | hkpBallSocketDrawer.obj | fnv360_0822_retail, call_gap, low, conflict (bridge: hkpHingeDrawer::drawConstraint)
+// pdb params: constraint, displayHandler, id, tag
 void QA32::FUN_00a6f090(QA32Body* body, QA32Disp* disp, int tag)
 {
     QA32Obj* obj = body->unk0c;
@@ -5945,6 +6017,7 @@ struct PathLengths
     void FUN_00a75f80(const hkVector4& point);
 };
 
+// pdb: hkpLinearParametricCurve::addPoint | hkpLinearParametricCurve.obj | tesv_win, objrun_open, low
 void PathLengths::FUN_00a75f80(const hkVector4& point)
 {
     m_points.pushBack(point);
@@ -6054,6 +6127,8 @@ public:
     void FUN_00a77290(const hkTransform& localToWorld, float tolerance, hkAabb& out) const;
 };
 
+// pdb: hkpConvexPieceMeshShape::getAabbImpl | hkpConvexPieceMeshShape.obj | fnv360_0822_retail, objrun, low
+// pdb params: localToWorld, tolerance, out
 void hkpShapeCollection::FUN_00a77290(const hkTransform& localToWorld, float tolerance, hkAabb& out) const
 {
     out.m_min.setAll3(3.40282e38f);
@@ -6101,6 +6176,8 @@ template <class T> inline T maxOf(T a, T b) { return a >= b ? a : b; }
 }
 using namespace f3m_00a7c820;
 
+// pdb: hkPoweredChain_UpdateLuDecomposition | hkpPoweredChainSolverUtil.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: firstConstraintToProcess, numConstraints, motorsState, triples
 void __cdecl FUN_00a7c820(int start, int end, Mat* mats, Elem* elems)
 {
  int first = maxOf(start - 1, 0);
@@ -6199,6 +6276,8 @@ struct QA16Tester
     int FUN_00a7e290(QA16Shape* shape, const QA16Tri* tri, const QA16Vec* pos, int* result);
 };
 
+// pdb: hkpConvexPenetrationUtil::tryToExpandPolytope | hkpConvexPenetrationUtil.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: we, nearestTriangle, newVertex, failureReason
 int QA16Tester::FUN_00a7e290(QA16Shape* shape, const QA16Tri* tri, const QA16Vec* pos, int* result)
 {
     QA16Edges edges;
@@ -6248,6 +6327,8 @@ struct QThis {
     void FUN_00a7e0c0(const QVec4& plane, QRes* out);
     void FUN_00a7e6e0(const QVec4& plane, const QVec4& point, QRes* best, float* dist);
 };
+// pdb: hkpConvexPenetrationUtil::findBestProjection | hkpConvexPenetrationUtil.obj | fnv360_0822_retail, objrun, medium
+// pdb params: direction, from, result, bestDistanceOut
 void QThis::FUN_00a7e6e0(const QVec4& plane, const QVec4& point, QRes* best, float* dist)
 {
     QVec4 neg;
@@ -6364,6 +6445,8 @@ void __cdecl FUN_00a98480(hkMatrix6* out, const hkMatrix6* a, const hkMatrix6* b
 void __cdecl FUN_00a98230(hkMatrix6* m, const hkMatrix6* c);
 void __cdecl FUN_00a98f40(hkMatrix6* m, const hkMatrix6* e);
 
+// pdb: hkPoweredChain_ComputeConstraintMatrixLuDecomposition_ForOneRow | hkpPoweredChainSolverUtil.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: isNotLastRow, triple, motorsState, mtxPrevOffdiag, triplePrevUpper
 void __cdecl FUN_00a798b0(S00a798b0_P1* p1, S00a798b0_Obj* obj, S00a798b0_P3* p3, hkMatrix6* p4, hkMatrix6** p5)
 {
     hkMatrix6 a = obj->m240;
@@ -6862,6 +6945,8 @@ struct Viewer : WorldViewer, WorldPostSimulationListener {
     void __thiscall FUN_00a68b40(const Island* island) throw();
 };
 
+// pdb: hkpContactPointViewer::drawAllContactPointsInIsland | hkpContactPointViewer.obj | fnv360_0822_retail, ustr, medium
+// pdb params: island
 void __thiscall Viewer::FUN_00a68b40(const Island* island) throw() {
     ProfileScope timer(DAT_00e86fd0);
 

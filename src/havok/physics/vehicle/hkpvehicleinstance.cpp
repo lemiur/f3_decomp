@@ -247,6 +247,8 @@ struct Obj38_7988 {
     virtual void vf(void* arg);
 };
 extern "C" void __stdcall FUN_00aa5a60(void* world, void* param2);
+// pdb: LipTask::Cancel | LipSyncBackgroundManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aePreviousState, apTaskOwner
 void __thiscall VUC_VehicleInstance::FUN_00e378e0(void* world, void* param2)
 {
     FUN_00aa5a60(world, param2);
@@ -471,6 +473,7 @@ struct RefTarget_423be0
     unsigned int refID;
 };
 
+// pdb: DoorTeleportData::SaveGame | TeleportData.obj | fnv360_0822_retail, call_gap, low
 void FUN_00e37910_cls::FUN_00e37910()
 {
     DAT_01079ca4->FUN_006db460(&m_04, 12);

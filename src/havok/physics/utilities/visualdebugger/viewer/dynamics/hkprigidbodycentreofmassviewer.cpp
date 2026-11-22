@@ -52,6 +52,7 @@ struct View
 };
 // Iterates entries and calls FUN_00d69c10 on each item via the owner at this-8.
 // @fnv 0x00d69f60
+// pdb: hkpRigidBodyCentreOfMassViewer::init | hkpRigidBodyCentreOfMassViewer.obj | fnv360_0822_retail, vtable, medium
 void View::FUN_00d69f60()
 {
     if (entries)
@@ -71,6 +72,8 @@ struct FUN_00d69fb0_cls
 };
 // Calls FUN_00d69c10 on the Target object located 0x20 bytes before this.
 // @fnv 0x00d69fb0
+// pdb: hkpRigidBodyCentreOfMassViewer::worldAddedCallback | hkpRigidBodyCentreOfMassViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void FUN_00d69fb0_cls::CallTargetMethod()
 {
     ((Target*)((char*)this - 0x20))->FUN_00d69c10();
@@ -247,6 +250,8 @@ struct FUN_00d69b20_cls
 
 // Attaches and detaches this object's slots on a1, then dispatches every element of a1's three lists through m_28.v08.
 // @fnv 0x00d69b20
+// pdb: hkpRigidBodyCentreOfMassViewer::removeWorld | hkpRigidBodyCentreOfMassViewer.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: world
 void FUN_00d69b20_cls::AttachAndDispatch(ArgOwner* apOwner)
 {
     apOwner->Attach(this != 0 ? (void*)&m_28 : 0);
@@ -295,6 +300,8 @@ class FUN_00d69fa0_cls
 };
 
 // @fnv 0x00d69fa0
+// pdb: hkpRigidBodyInertiaViewer::worldAddedCallback | hkpRigidBodyInertiaViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void FUN_00d69fa0_cls::FUN_00d69fa0()
 {
     ((FUN_00d69b20_cls*)((char*)this - 0x20))->FUN_00d69b20_target();
@@ -332,6 +339,8 @@ struct FUN_00d6a040 : FUN_00ddccb0
     FUN_00d6a040(void* input);
 };
 // @fnv 0x00d6a040
+// pdb: hkpConvexRadiusViewer::hkpConvexRadiusViewer | hkpConvexRadiusViewer.obj | fnv360_0822_retail, objrun, medium
+// pdb params: contexts
 FUN_00d6a040::FUN_00d6a040(void* input) : FUN_00ddccb0(input)
 {
     unk28 = (void*)str_0102f13c;
@@ -614,6 +623,8 @@ static __forceinline void Mark(const char* name) {
 }
 }
 
+// pdb: hkpRigidBodyCentreOfMassViewer::postSimulationCallback | hkpRigidBodyCentreOfMassViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void COMViewerPart::FUN_00d69d00(void*)
 {
     using namespace f3_center_axes;
@@ -833,6 +844,8 @@ struct CenterOfMassRemovalDispatcher
 };
 // Passes callback28 and data2c to context, then calls callback28.deliver for each entry in the data48 lists of list28, list34 and special20.
 // @fnv 0x00d69c10
+// pdb: hkpRigidBodyCentreOfMassViewer::addWorld | hkpRigidBodyCentreOfMassViewer.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: world
 void CenterOfMassRemovalDispatcher::FUN_00d69c10(Context* context)
 {
     context->FUN_00c93820(this ? &callback28 : 0);

@@ -109,6 +109,8 @@ __forceinline bool Finish(EdiObj* edi, MainObj* pObj, V3& pos, V3 t)
     return !edi->method_C8(&s);
 }
 
+// pdb: MagicCaster::RunExplosionLOSPick | MagicCaster.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aLocation, apTarget
 bool __stdcall FUN_006ae540(V3 pos, MainObj *pObj) {
     if (pObj == 0) return false;
 
@@ -206,6 +208,7 @@ struct QThis {
     void FUN_006bbc40();
 };
 
+// pdb: TelekinesisEffect::RemoveSpring | TelekinesisEffect.obj | fnv360_0822_retail, call_seq, medium
 void QThis::FUN_006bbc40() {
     QPlayer* player = DAT_0107a104;
     if (!player->ctrl) return;
@@ -1501,6 +1504,7 @@ public:
     int unk4ec;
 };
 
+// pdb: MagicFogProjectile::InitHavok | MagicFogProjectile.obj | fnv360_0822_retail, vtable, medium
 void S6b1280_Refr::FUN_006b1280()
 {
     if (unk60 && unk60->unk28 == 0) {

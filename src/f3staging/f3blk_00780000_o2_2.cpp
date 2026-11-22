@@ -94,6 +94,7 @@ struct FUN_00794c40_Obj {
     void FUN_00794c40(int value);
 };
 
+// pdb: UpdateTempEffect | ProcessLists.obj | fnv360_0822_debug, objrun_open, low
 void __thiscall FUN_00794c40_Obj::FUN_00794c40(int value)
 {
     FUN_005a22f0_Obj* oldValue = unk118;
@@ -291,6 +292,7 @@ struct ActorList
     void FUN_0078c970();
 };
 
+// pdb: ProcessLists::SortActorsCloseToPlayer | ProcessLists.obj | fnv360_0721_retail, call_seq, medium
 void ActorList::FUN_0078c970()
 {
     lock.FUN_00409a80(0);
@@ -329,6 +331,8 @@ namespace task796730 {
 struct Entry { int unk00,unk04; void FUN_007bb870(int,int); };
 struct Base { virtual void Slot(); Entry first,second,third; Base(int); ~Base(); };
 struct FUN_00796730: Base { FUN_00796730(int); virtual void Slot(); };
+// pdb: CombatActionAttackRangedExplosive::CombatActionAttackRangedExplosive | CombatActions.obj | fnv360_0822_retail, uvref, medium
+// pdb params: aeType
 FUN_00796730::FUN_00796730(int x):Base(x) {
  first.FUN_007bb870(3,0); first.FUN_007bb870(8,0);
  second.FUN_007bb870(5,1); second.FUN_007bb870(6,0); second.FUN_007bb870(11,0); second.FUN_007bb870(10,0);
@@ -349,6 +353,8 @@ struct CombatAction {
  unsigned int actionType,descriptor;
  CombatAction(unsigned int);
 };
+// pdb: CombatAction::CombatAction | CombatAction.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeType
 CombatAction::CombatAction(unsigned int type) { actionType=type;descriptor=DAT_00f6f170[type].value; }
 }
 }   // namespace f3m_00796180
@@ -370,6 +376,8 @@ struct FUN_00796c00 : FUN_00796180 {
     virtual ~FUN_00796c00();
     FUN_00796c00(int action);
 };
+// pdb: CombatActionAttackGrenade::CombatActionAttackGrenade | CombatActions.obj | fnv360_0822_retail, uvref, medium
+// pdb params: aeType
 FUN_00796c00::FUN_00796c00(int action) : FUN_00796180(action)
 {
     preconditions.FUN_007bb870(3, 0);
@@ -394,6 +402,8 @@ struct RangeTable78b930 {
     unsigned int ends[4];
     int FUN_0078b930(unsigned int index);
 };
+// pdb: ProcessArray::GetProcessLevelFromIndex | ProcessArray.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: auiIndex
 int RangeTable78b930::FUN_0078b930(unsigned int index)
 {
     for (int i = 0; i < 4; i++) {
@@ -441,6 +451,8 @@ struct Owner {
     Node list;
     bool FUN_00791300(void* target, void* value);
 };
+// pdb: ProcessLists::FlareHitEffect | ProcessLists.obj | fnv360_0721_beta, caller, medium
+// pdb params: apEffectTarget, aeFlareType
 bool Owner::FUN_00791300(void* target, void* value)
 {
     if (!list.IsEmpty()) {

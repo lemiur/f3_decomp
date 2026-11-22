@@ -17,6 +17,8 @@ struct FUN_00d2bb20_cls
 };
 
 // @fnv 0x00d2bb20
+// pdb: hkBufferedStreamReader::setMark | hkBufferedStreamReader.obj | fnv360_0822_retail, vtable, high
+// pdb params: markLimit
 int FUN_00d2bb20_cls::SetValueAndCompare(int iValue)
 {
     m_1c = m_10;
@@ -67,6 +69,8 @@ struct FUN_00d2ba80_cls
 };
 // Advances the read position by n bytes, refilling the buffer via v12() when the remaining bytes are insufficient, and returns the number of bytes consumed.
 // @fnv 0x00d2ba80
+// pdb: hkBufferedStreamReader::skip | hkBufferedStreamReader.obj | fnv360_0822_retail, vtable, high
+// pdb params: nbytes
 int FUN_00d2ba80_cls::SkipBytes(int aiByteCount)
 {
     int iRemaining = aiByteCount;
@@ -199,6 +203,8 @@ struct TlsMemory
 {
     virtual void* v0(unsigned int size, void* ptr, int type);
 };
+// pdb: hkBufferedStreamReader::Buffer::Buffer | hkBufferedStreamReader.obj | fnv360_0822_retail, objrun, high
+// pdb params: cap
 FUN_00d2bbd0_cls* FUN_00d2bbd0_cls::Init(int p)
 {
     TlsMemory* mm = (TlsMemory*)TlsGetValue(DAT_010f3170);
@@ -243,6 +249,7 @@ class hkBufferedStreamWriterD2B9
 };
 
 // @fnv 0x00d2b990
+// pdb: hkBufferedStreamReader::refillBuffer | hkBufferedStreamReader.obj | fnv360_0822_retail, vtable, high
 int hkBufferedStreamWriterD2B9::Flush()
 {
     if (!m_stream->IsStreamValid().m_cBooleanValue)
@@ -317,6 +324,7 @@ struct FUN_00d2bba0_cls
 };
 // Returns the stream's Tell() offset adjusted by (m_10 - m_14), or -1 if Tell() is negative.
 // @fnv 0x00d2bba0
+// pdb: hkBufferedStreamReader::tell | hkBufferedStreamReader.obj | tesv_win, vtable, medium
 int FUN_00d2bba0_cls::GetCurrentPosition()
 {
     int r = m_stream->Tell();
@@ -359,6 +367,8 @@ class hkTrackerD2BB
 };
 
 // @fnv 0x00d2bb80
+// pdb: hkBufferedStreamReader::seek | hkBufferedStreamReader.obj | fnv360_0822_retail, vtable, high
+// pdb params: offset, whence
 void hkTrackerD2BB::Reset(int flags)
 {
     m_pHeadNode = -1;

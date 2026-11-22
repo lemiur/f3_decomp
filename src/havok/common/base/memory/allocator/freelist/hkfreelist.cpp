@@ -56,6 +56,7 @@ struct FreeReceiver {
     void FUN_0086ba60(void* memory);
 };
 extern FreeReceiver DAT_01090a78;
+// pdb: CSpeedTreeRT::STextures::~STextures | SpeedTreeRT.obj | fnv360_0822_retail, call_gap, medium
 void FUN_00dd7200_hkFreeList::FUN_00dd7200() {
     DAT_01090a78.FUN_0086ba60(m_next);
     m_next = 0;
@@ -141,6 +142,7 @@ struct Shader447 {
     bool FUN_0050a800();
 };
 
+// pdb: BGSListForm::Save | BGSListForm.obj | fnv360_0822_retail, vtable, medium
 bool Shader447::FUN_0050a800()
 {
     FUN_00b874f0();

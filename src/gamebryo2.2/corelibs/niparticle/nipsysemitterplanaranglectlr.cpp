@@ -99,6 +99,7 @@ struct S_00c2b580
 
 // Allocates a S_00c2b580_TargetObj, initializes it via FUN_00c32de0 with arg, and returns it.
 // @fnv 0x00c2b580
+// pdb: NiPSysEmitterPlanarAngleCtlr::CreateClone | NiPSysEmitterPlanarAngleCtlr.obj | tesv_win, caller_sim, low
 void* __thiscall S_00c2b580::CreateTargetObj(void* arg)
 {
     S_00c2b580_TargetObj* obj = new S_00c2b580_TargetObj();

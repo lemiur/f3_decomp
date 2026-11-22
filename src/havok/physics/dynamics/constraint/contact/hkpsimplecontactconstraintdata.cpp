@@ -8,6 +8,8 @@ struct FUN_00d927b0_class
     void FUN_00d927b0(unsigned int arg);
 };
 // @fnv 0x00d927b0
+// pdb: hkpSimpleContactConstraintData::getConstraintInfo | hkpSimpleContactConstraintData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: infoOut
 void FUN_00d927b0_class::FUN_00d927b0(unsigned int arg)
 {
     void* atom = *(void**)((char*)this + 0x28);
@@ -15,6 +17,7 @@ void FUN_00d927b0_class::FUN_00d927b0(unsigned int arg)
 }
 
 // @fnv 0x00d927d0
+// pdb: hkpSimpleContactConstraintData::getRuntimeInfo | hkpSimpleContactConstraintData.obj | tesv_win, objrun_open, low
 void __stdcall FUN_00d927d0(int, int* paiValues)
 {
     paiValues[0] = 0;
@@ -90,6 +93,7 @@ S_00d92690* FUN_00d92690(S_00d92690* apContainer, bool* grew)
 
 
 // @fnv 0x00d92810
+// pdb: hkpSimpleContactConstraintData::getType | hkpSimpleContactConstraintData.obj | tesv_win, objrun_open, low
 int __cdecl FUN_00d92810()
 {
     return 11;
@@ -142,6 +146,8 @@ struct FUN_00d92f20
 // Initialises the object's vtable and fields, allocates a buffer sized from first[0xd1] and second[0xd1], and zeroes the packet result header fields.
 // @f3 0x00a268d0 (community match, verified in this file)
 extern unsigned char DAT_00e7d7c8;
+// pdb: hkpSimpleContactConstraintData::hkpSimpleContactConstraintData | hkpSimpleContactConstraintData.obj | fnv360_0822_retail, call_seq, high
+// pdb params: constraint, bodyA, bodyB
 FUN_00d92f20::FUN_00d92f20(void* atom, const unsigned char* first, const unsigned char* second)
 {
     active06 = 1;
@@ -211,6 +217,8 @@ struct FUN_00d93140_cls
 // @f3 0x00a26970 (community match, verified in this file)
 void __cdecl FUN_00901f10(void* array, int sizeOfElement);
 
+// pdb: hkpDynamicsCpIdMgr::newId | hkpSimpleContactConstraintData.obj | fnv360_0822_retail, call_seq, high
+// pdb params: value
 unsigned int FUN_00d93140_cls::ReplaceOrAppendByte(unsigned char value)
 {
     int i = (int)m_len - 1;

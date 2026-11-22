@@ -24,6 +24,8 @@ struct FUN_00455330_cls {
     bool FUN_00455330(FUN_00455330_node* p);
 };
 
+// pdb: TESForm::SavesBefore | TESForm.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apGroupFORM
 bool FUN_00455330_cls::FUN_00455330(FUN_00455330_node* p)
 {
     bool r = false;
@@ -86,6 +88,7 @@ struct Form {
     Member18 unk18;
     void FUN_00453cd0();
 };
+// pdb: TESForm::ClearDataAllComponents | TESForm.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: TESForm::InitializeDataAllComponents)
 void Form::FUN_00453cd0()
 {
     switch (kind) {

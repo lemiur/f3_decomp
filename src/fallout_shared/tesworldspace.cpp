@@ -76,6 +76,8 @@ int __cdecl TruncateFloatToInt(float);
 int __cdecl FUN_00c01895(double value);
 int __cdecl FUN_00c018aa(double value);
 
+// pdb: TESWorldSpace::GetKeyForWorldCoord | TESWorldSpace.obj | fnv360_0822_retail, uconst, low
+// pdb params: aCoord
 int __cdecl FUN_00587440(const NiPoint3* aCoord)
 {
     if (!FUN_00c01895(aCoord->x) || !FUN_00c01895(aCoord->y) || !FUN_00c01895(aCoord->z) ||

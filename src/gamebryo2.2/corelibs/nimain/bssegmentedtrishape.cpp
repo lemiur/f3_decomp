@@ -13,6 +13,8 @@ struct FUN_00a86ff0_shell
 
 // Sets the byte at offset 8 of the 20-byte entry at index to whether its dword at offset 4 is nonzero, then sets the flag at 0xcc.
 // @fnv 0x00a86ff0
+// pdb: BSSegmentedTriShape::EnableSegment | BSSegmentedTriShape.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: aiSegment
 void __thiscall FUN_00a86ff0_shell::SetEntryActive(unsigned int index)
 {
     unsigned char* p = (unsigned char*)this;
@@ -40,6 +42,7 @@ struct FUN_00a87290_shell
 
 // Sets the vtable, deallocates the pointer at offset 0xc4, calls FUN_00a89760 on this, and frees the object with _delete when flags has bit 0 set.
 // @fnv 0x00a87290
+// pdb: BSSegmentedTriShape::`scalar deleting destructor' | BSSegmentedTriShape.obj | fnv360_0822_retail, objrun, high
 void* __thiscall FUN_00a87290_shell::FUN_00a87290(unsigned int flags)
 {
     void* old = *(void**)((char*)this + 0xc4);
@@ -116,6 +119,8 @@ struct Target
     void DisableEntry(unsigned int index);
 };
 // @fnv 0x00a87020
+// pdb: BSSegmentedTriShape::DisableSegment | BSSegmentedTriShape.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: aiSegment
 void Target::DisableEntry(unsigned int index)
 {
     entries[index].enabled = 0;
@@ -213,6 +218,7 @@ struct FUN_00a872d0_shell
 
 // Marks the first record selected with the input count, deselects the rest, activates records with a non-null object, and clears dirty.
 // @fnv 0x00a872d0
+// pdb: BSSegmentedTriShape::EnableAllSegments | BSSegmentedTriShape.obj | fnv360_0822_retail, call_gap_sim, low
 void FUN_00a872d0_shell::ResetRecordSelection()
 {
     records[0].selected = true;
@@ -259,6 +265,8 @@ struct FUN_00a871a0_cls : Target
 };
 // Calls FUN_00a744c0, frees apDst->entries, then copies unkC8 and active and deep-copies the entries array into apDst, or clears it when entries is null.
 // @fnv 0x00a871a0
+// pdb: BSSegmentedTriShape::CopyMembers | BSSegmentedTriShape.obj | fnv360_0822_retail, objrun_prop, high
+// pdb params: pkDest, kCloning
 void FUN_00a871a0_cls::CopyEntries(Target* apDst, unsigned int aFlag)
 {
     FUN_00a744c0(apDst, aFlag);
@@ -301,6 +309,8 @@ struct FUN_00a87340_cls
 };
 
 // @fnv 0x00a87340
+// pdb: BSSegmentedTriShape::CreateClone | BSSegmentedTriShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: kCloning
 Target* FUN_00a87340_cls::CreateTarget(unsigned int volatile flags)
 {
     Target* self = reinterpret_cast<Target*>(this);
@@ -560,6 +570,8 @@ struct S_a873b0_T : S_a873b0_Base
 
 // Reads the entry count and each entry's fields from the stream, allocates the entries array, and marks the object active.
 // @fnv 0x00a873b0
+// pdb: BSSegmentedTriShape::LoadBinary | BSSegmentedTriShape.obj | fnv360_0721_beta, objrun, high
+// pdb params: kStream
 void S_a873b0_T::ReadFromStream(S_a873b0_Stream* pStream)
 {
     FUN_00a98ea0(pStream);
@@ -605,6 +617,8 @@ struct FUN_00a87520_shell : Target
 };
 // Reads a count, then reads one byte and two four-byte values for each 20-byte entry from the stream at owner+0x250.
 // @fnv 0x00a87520
+// pdb: BSSegmentedTriShape::SaveBinary | BSSegmentedTriShape.obj | fnv360_0721_beta, objrun, high
+// pdb params: kStream
 void FUN_00a87520_shell::ReadEntries(void* owner)
 {
     FUN_00a71d10(owner);
@@ -721,6 +735,7 @@ struct S00a87040_Obj
 
 // Propagates flags and sums values from the last entry down to the first, then clears the active flag.
 // @fnv 0x00a87040
+// pdb: BSSegmentedTriShape::MergeEnabledSegments | BSSegmentedTriShape.obj | fnv360_0822_retail, call_gap_sim, medium
 void S00a87040_Obj::FinalizeEntries()
 {
     if (active == 0)
@@ -855,6 +870,8 @@ struct S00a87620_Obj
 };
 
 // @f3 0x00851f50 (community match, verified in this file)
+// pdb: BSSegmentedTriShape::GetViewerStrings | BSSegmentedTriShape.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void S00a87620_Obj::AddToItemList(ItemList* apItemList)
 {
     this->FUN_00a74690(apItemList);

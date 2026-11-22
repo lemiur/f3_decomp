@@ -20,6 +20,8 @@ extern float DAT_01170024;
 extern float DAT_01170028;
 
 // @fnv 0x00b78ef0
+// pdb: ShadowLightShader::SetupGeometryConstants_EyePos | ShadowLightShader.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: epass, aWorld, d3dInvWorld
 void __stdcall FUN_00afba40(unsigned int type, char* geom, Matrix_b78ef0 matrix)
 {
     if ((*(char**)&DAT_0117497c)[8] || (*(char**)&DAT_011749c4)[8]) {
@@ -98,6 +100,8 @@ extern bool DAT_0116f29a;
 float __cdecl FUN_00401e20(float,float);
 float __cdecl FUN_0090d870(float,float);
 // @fnv 0x00b791f0
+// pdb: ShadowLightShader::SetupGeometryConstants_SkinToCube | ShadowLightShader.obj | fnv360_0822_retail, caller, low, conflict (bridge: ShadowLightShader::SetupGeometryConstants_LandTextureMask)
+// pdb params: apSkin
 void __stdcall FUN_00afbd40(unsigned int mode, Params* first, Params* second) {
  if(!reinterpret_cast<Gate*>(DAT_011749ac.m_pObject)->enabled) return;
  if(mode==254) { (*reinterpret_cast<Quad*>(const_cast<float*>(DAT_0116fe30)))=Quad(first->value80,DAT_01067b48,0.0f,0.0f); return; }
@@ -120,6 +124,8 @@ struct L_00b0f980 { unsigned short m_item; L_00b0f980* m_pkNext; void FUN_00b0f4
 struct M_00b0f980 { bool FUN_00bea7b0(unsigned int uiKey, unsigned int& ruiValue) const; };
 struct C_00b0f980 { int unk00, unk04, unk08; M_00b0f980 m_kPassMap; int unk10, unk14, unk18, unk1C; unsigned int m_uiCurrentFirstPass; unsigned int m_uiCurrentLastPass; int unk28; L_00b0f980 m_kActivePassIndexList; bool FUN_00b0e710(unsigned int uiValue, int iSubBucketIndex); bool FUN_00b0f980(unsigned int& ruiPass, int iSubBucketIndex); };
 
+// pdb: BSBatchRenderer::PrepareNextRenderPass_SetNextPass | BSBatchRenderer.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: auiPass, aiBucket
 bool C_00b0f980::FUN_00b0f980(unsigned int& ruiPass, int iSubBucketIndex)
 {
     L_00b0f980* pkList = &m_kActivePassIndexList;
@@ -174,6 +180,8 @@ extern P_00b5a000 DAT_00f725a4;
 extern const P_00b5a000 DAT_00f725b0;
 struct C_00b5a000 { int unk[0x23]; P_00b5a000 position; void FUN_0083a590(const P_00b5a000& position, const P_00b5a000& direction); void FUN_00b5a000(unsigned int face); };
 
+// pdb: BSCubeMapCamera::SetupTransformation | BSCubeMapCamera.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: aeFace
 void C_00b5a000::FUN_00b5a000(unsigned int face)
 {
     P_00b5a000 direction0, position0, direction1, position1, position2;
@@ -266,6 +274,8 @@ extern G00404db0* DAT_0106cdcc;
 struct B00404db0 { virtual void v0(); virtual void v1(); virtual void v2(); virtual void v3(); virtual void v4(); virtual void v5(); virtual void v6(); virtual void v7(); virtual void v8(); virtual void v9(); virtual void v10(); virtual void v11(); virtual void v12(); virtual void v13(); virtual void v14(); virtual void v15(); virtual void v16(); virtual void v17(); virtual void v18(); virtual void v19(); virtual void v20(); virtual void v21(); virtual void v22(); virtual void v23(); virtual void v24(); virtual void v25(); virtual void v26(); virtual void v27(); virtual void v28(); virtual void v29(); virtual void v30(); virtual void v31(); virtual void v32(); virtual void v33(); virtual void v34(); virtual void v35(); virtual void v36(); virtual void v37(); virtual void v38(); virtual void v39(); virtual void v40(); virtual void v41(); virtual void v42(); virtual void v43(); virtual void v44(); virtual void v45(); virtual void v46(); virtual void v47(); virtual void v48(); virtual void v49(); virtual void v50(); virtual void v51(); virtual void v52(); virtual void v53(); virtual void v54(); virtual void v55(); virtual void v56(); virtual void v57(); virtual void v58(); virtual void v59(); virtual void v60(); virtual void v61(); virtual void v62(); virtual void v63(); virtual void v64(); virtual void v65(); virtual void v66(); virtual void v67(); virtual void v68(); virtual void v69(); virtual void v70(); virtual void v71(); virtual void v72(); virtual void v73(); virtual void v74(int); int f04; unsigned flags; int f0c; char pad10[0x48]; void FUN_00454480(B00404db0*); bool Flag14() const { return (flags >> 14) & 1; } bool GetBit(int n) const { return (flags >> n) & 1; } char FlagB() const { return (char)((flags >> 14) & 1); } };
 struct D00404db0 : B00404db0 { int f58; float f5c; int f60; int f64; int f68; char pad6c[4]; int f70; float f74; int f78; int f7c; int f80; int f84; int f88; int f8c; float f90; float f94; int f98; int f9c; int fa0; void FUN_00404c50(int*); void FUN_00404db0(B00404db0* src); };
 
+// pdb: EffectSetting::Copy | EffectSetting.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCopy
 void D00404db0::FUN_00404db0(B00404db0* src)
 {
     D00404db0* d = dynamic_cast<D00404db0*>(src);

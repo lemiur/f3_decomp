@@ -19,6 +19,7 @@ struct FUN_00c74e70_cls
 
 // Sets the object's vtable pointer to DAT_010c4b60 and, when bit 0 of acFlags is set, releases the object through DAT_011f6238, returning this.
 // @fnv 0x00c74e70
+// pdb: LockFreeMap<TESObjectREFR *,NiPointer<QueuedHelmet> >::LockFreeMapIterator::`scalar deleting destructor' | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 FUN_00c74e70_cls* FUN_00c74e70_cls::FUN_00c74e70(unsigned char acFlags)
 {
     m_vptr = (int)&DAT_010c4b60;

@@ -594,6 +594,8 @@ class bhkPickData : public hkpShapeRayCastInput
     }
 };
 
+// pdb: Projectile::PickSceneGraph | Projectile.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apPickData, apObject, abIgnoreHead, abSort
 bool __cdecl FUN_007c9760(bhkPickData* apPickData, NiAVObject* apObject, bool abIgnoreWeapon, bool abSortHits)
 {
     bool bHit = false;
@@ -1909,6 +1911,7 @@ CollisionObject* __cdecl FUN_00477d90(Node* node);
 void __cdecl FUN_008d7720(Node* node, int first, int second);
 void __cdecl FUN_00aeeca0(Node* node, int enabled);
 
+// pdb: Projectile::InitHavok | Projectile.obj | fnv360_0822_retail, vtable, medium
 void Actor::FUN_007ca320()
 {
     Node* node = Get3D();
@@ -2795,6 +2798,7 @@ __declspec(noinline) bool S7cd730_Self::FUN_007cbc10(S7cd730_PickData* apPickDat
 }
 
 
+// pdb: Projectile::TestProjectileInTriggerZone | Projectile.obj | fnv360_0822_retail, call_seq, low
 bool S7cd730_Self::FUN_007cd730()
 {
     if (pTarget != DAT_0107a104)
@@ -3320,6 +3324,8 @@ S7cc540_ColObj* __cdecl FUN_00477d90(NiAVObject* node);
 bool __cdecl FUN_007c8ac0(S7cc540_Ref* ref, const S7cc540_Collidable* collidable, S7cc540_Projectile* projectile,
                           S7cc540_ProjBase* base);
 
+// pdb: Projectile::ProcessTargetPick | Projectile.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apPickData, apProjectile, apProjectileBase, apHitFraction, bUseCharacterController, afWaterHitRatio
 NiAVObject* __cdecl FUN_007cc540(S7cc540_PickData* pick, S7cc540_Projectile* projectile, S7cc540_ProjBase* base,
                                  float* hitTime, bool acceptCharController, float maxTime)
 {
@@ -3897,6 +3903,8 @@ struct Response {RefActor* source;RefActor* target;int unk08,unk0c;int material;
  unsigned char FlagByte(){return (unsigned char)(flags>>11);}
  void FUN_007c3770(Other*);
 };
+// pdb: HitData::SetTargetedLimb | HitData.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apProjectile
 void Response::FUN_007c3770(Other* other){
  if(!target || !target->eligible())return;
  MaterialMap* map=target->base->materialMap();
@@ -4736,6 +4744,8 @@ struct S007ceb30_Owner
     void FUN_007ceb30(S007ceb30_Contact* apContact);
 };
 
+// pdb: ProjectileListener::contactPointAddedCallback | ProjectileListener.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apProxy, point
 void S007ceb30_Owner::FUN_007ceb30(S007ceb30_Contact* apContact)
 {
     bool bMiss = true;
@@ -5285,6 +5295,7 @@ bool S7cdd90_Projectile::FUN_007cbc10(S7cdd90_PickData* apPickData, float* afWat
     return false;
 }
 
+// pdb: Projectile::RunTargetPick | Projectile.obj | fnv360_0822_retail, vtable, medium
 bool S7cdd90_Projectile::FUN_007cdd90()
 {
     if (!GetParentCell() || !GetParentCell()->GetWorld())
@@ -6005,6 +6016,7 @@ int __cdecl FUN_007cc540(bhkPickData* apPickData, FlameProjectile* apProjectile,
 BSDebugLine* __cdecl FUN_0047a4e0(const NiPoint3* apFrom, const NiColorA* apFromColor, const NiPoint3* apTo,
                                   const NiColorA* apToColor, bool abArg5);
 
+// pdb: FlameProjectile::RunTargetPick | FlameProjectile.obj | fnv360_0822_retail, vtable, medium
 bool FlameProjectile::FUN_007c16d0()
 {
     if (!GetParentCell() || !GetParentCell()->GetbhkWorld())

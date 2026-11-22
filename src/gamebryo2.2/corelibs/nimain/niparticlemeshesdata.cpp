@@ -15,6 +15,8 @@ struct NiParticleMeshesData : NiParticlesData
     void FUN_00a98a10(NiStream&);
 };
 // @fnv 0x00a98a10
+// pdb: BSMultiBound::LoadBinary | BSMultiBound.obj | fnv360_0822_retail, vtable, high
+// pdb params: arStream
 void NiParticleMeshesData::FUN_00a98a10(NiStream& stream)
 {
     NiParticlesData::LoadBinary(stream);
@@ -227,6 +229,8 @@ struct Holder
 };
 // Checks the base hook against pkObject, then compares this holder's mesh node with the other holder's mesh node via IsEqual.
 // @fnv 0x00a98ad0
+// pdb: NiParticleMeshesData::IsEqual | NiParticleMeshesData.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pkObject
 bool Holder::IsMeshNodeEqual(void* pkObject)
 {
     Holder* pkPart = (Holder*)pkObject;
@@ -290,6 +294,7 @@ struct Unk98dc0
 };
 // Calls FUN_00a98b90 on this, frees this with _delete when flags has bit 1 set, and returns this.
 // @fnv 0x00a98dc0
+// pdb: BSAnimGroupSequence::`scalar deleting destructor' | Animation.obj | fnv360_0822_retail, vtable, high
 void* Unk98dc0::DestroyIfFlagged(unsigned int flags)
 {
     ((Unk98b90*)this)->FUN_00a98b90();
@@ -439,6 +444,7 @@ class FUN_00a98b10 : public A98B10Base
 
 // Initializes the object by allocating a new A98B10Node with zero children and setting the flag to false.
 // @fnv 0x00a98b10
+// pdb: NiParticleMeshesData::NiParticleMeshesData | NiParticleMeshesData.obj | fnv360_0822_retail, objrun, medium
 FUN_00a98b10::FUN_00a98b10() throw()
 {
     m_spRootNode = new A98B10Node(0);
@@ -570,6 +576,8 @@ struct A98BF0ParticleMeshesData : A98BF0ParticlesData
 };
 
 // @fnv 0x00a98bf0
+// pdb: NiParticleMeshesData::RemoveParticle | NiParticleMeshesData.obj | fnv360_0822_retail, objrun, high
+// pdb params: usParticle
 void A98BF0ParticleMeshesData::RemoveParticleMesh(unsigned short usParticle)
 {
     unsigned short usFinalIndex = m_usActiveVertices - 1;
@@ -715,6 +723,7 @@ struct FUN_00a98c90_shell
 };
 
 // @fnv 0x00a98c90
+// pdb: NiParticleMeshesData::UpdateParticles | NiParticleMeshesData.obj | fnv360_0822_retail, call_seq, high
 void FUN_00a98c90_shell::UpdateParticleMeshes()
 {
     for (unsigned int i = 0; i < m_usActiveVertices; i++)
@@ -819,6 +828,7 @@ struct FUN_00a98b90 : S_00a98b90_Base
     virtual ~FUN_00a98b90() throw();
 };
 // @fnv 0x00a98b90
+// pdb: NiParticleMeshesData::~NiParticleMeshesData | NiParticleMeshesData.obj | fnv360_0822_retail, caller_sim, medium
 FUN_00a98b90::~FUN_00a98b90() throw()
 {
     unk70 = 0;

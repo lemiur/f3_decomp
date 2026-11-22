@@ -111,6 +111,7 @@ extern char DAT_01092a20;
 extern char DAT_01092a38;
 extern char DAT_00e7bfb4;
 
+// pdb: TESIcon::GetDefaultPath | TESIcon.obj | fnv360_0721_retail, objrun_prop, low
 __declspec(noinline) void* FUN_00456760()
 {
     return &DAT_00db8cac;
@@ -122,6 +123,7 @@ __declspec(noinline) void* BSOcclusionPlane_GetRTTI()
     return &DAT_0116d108;
 }
 
+// pdb: BSPortal::GetRTTI | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
 __declspec(noinline) void* FUN_0046c550()
 {
     return &DAT_0116d9a0;
@@ -139,16 +141,19 @@ __declspec(noinline) void* NiBinaryExtraData_GetRTTI()
     return &DAT_0108f4b0;
 }
 
+// pdb: NiAdditionalGeometryData::GetRTTI | TESLand.obj | fnv360_0822_retail, vtable, medium
 __declspec(noinline) void* FUN_004ce490()
 {
     return &DAT_0108f424;
 }
 
+// pdb: BSPackedAdditionalGeometryData::GetRTTI | TESLand.obj | fnv360_0822_retail, vtable, medium
 __declspec(noinline) void* FUN_004ce4c0()
 {
     return &DAT_0108f4b8;
 }
 
+// pdb: bhkShape::GetRTTI | TESObjectREFR.obj | fnv360_0822_retail, objrun_open, low
 __declspec(noinline) void* FUN_004e5ca0()
 {
     return &DAT_010f317c;
@@ -178,21 +183,25 @@ __declspec(noinline) void* bhkShapePhantom_GetRTTI()
     return &DAT_010f3274;
 }
 
+// pdb: bhkSimpleShapePhantom::GetRTTI | TESObjectREFR.obj | fnv360_0822_retail, objrun, medium
 __declspec(noinline) void* FUN_004e6550()
 {
     return &DAT_010f32a4;
 }
 
+// pdb: bhkSphereShape::GetRTTI | TESObjectREFR.obj | fnv360_1110_retail, objrun, medium
 __declspec(noinline) void* FUN_004e95e0()
 {
     return &DAT_010f32b0;
 }
 
+// pdb: bhkRigidBody::GetRTTI | TESObjectREFR.obj | fnv360_0822_retail, objrun, medium
 __declspec(noinline) void* FUN_004f0750()
 {
     return &DAT_010f3220;
 }
 
+// pdb: bhkBoxShape::GetRTTI | TESObjectREFR.obj | fnv360_0822_retail, objrun, medium
 __declspec(noinline) void* FUN_004f0860()
 {
     return &DAT_010f32f0;
@@ -210,11 +219,13 @@ __declspec(noinline) void* BSFaceGenAnimationData_GetRTTI()
     return &DAT_0107397c;
 }
 
+// pdb: BSFaceGenMorphDataHead::GetRTTI | BSFaceGenMorphData.obj | fnv360_0822_retail, vtable, medium
 __declspec(noinline) void* FUN_00597730()
 {
     return &DAT_01073ba0;
 }
 
+// pdb: BSFaceGenMorphDataHair::GetRTTI | BSFaceGenMorphData.obj | fnv360_0822_retail, vtable, medium
 __declspec(noinline) void* FUN_00597840()
 {
     return &DAT_01073b94;
@@ -226,6 +237,7 @@ __declspec(noinline) void* BSFaceGenBaseMorphExtraData_GetRTTI()
     return &DAT_01073b8c;
 }
 
+// pdb: BSFaceGenNiNode::GetRTTI | BSFaceGenNiNode.obj | fnv360_0822_debug, vtable, low
 __declspec(noinline) void* FUN_00599870()
 {
     return &DAT_01073bd4;
@@ -249,6 +261,7 @@ __declspec(noinline) void* bhkMultiSphereShape_GetRTTI()
     return &DAT_010f33c8;
 }
 
+// pdb: BSTreeNode::GetRTTI | BSTreeNode.obj | fnv360_0822_retail, vtable, medium
 __declspec(noinline) void* FUN_0059fef0()
 {
     return &DAT_01073d6c;
@@ -260,6 +273,7 @@ __declspec(noinline) void* BSTempEffectDebris_GetRTTI()
     return &DAT_0107434c;
 }
 
+// pdb: BSDismemberSkinInstance::GetRTTI | BSTempEffectGeometryDecal.obj | fnv360_0822_retail, vtable, medium
 __declspec(noinline) void* FUN_005b0540()
 {
     return &DAT_0108f3cc;
@@ -271,6 +285,7 @@ __declspec(noinline) void* BSTempEffectParticle_GetRTTI()
     return &DAT_01074418;
 }
 
+// pdb: Interface::GetMeshesFolder | Interface.obj | fnv360_0822_retail, ustr_rel, medium
 __declspec(noinline) void* FUN_0061a8d0()
 {
     return &DAT_00dbe3e4;
@@ -282,11 +297,13 @@ __declspec(noinline) void* MagicModelHitEffect_GetRTTI()
     return &DAT_01078708;
 }
 
+// pdb: NiCollisionData::GetRTTI | NiCollisionData.obj | fnv360_0721_beta, objrun, low
 __declspec(noinline) void* FUN_0080fa50()
 {
     return &DAT_0108ec3c;
 }
 
+// pdb: NiObjectNET::GetRTTI | NiObjectNET.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 __declspec(noinline) void* FUN_00824ec0()
 {
     return &DAT_0108ec84;
@@ -297,6 +314,7 @@ __declspec(noinline) void* FUN_0082f3c0()
     return &DAT_0108ee0c;
 }
 
+// pdb: NiSourceTexture::GetRTTI | NiSourceTexture.obj | fnv360_0721_beta, objrun, medium
 __declspec(noinline) void* FUN_0082f440()
 {
     return &DAT_0108f20c;
@@ -358,6 +376,7 @@ __declspec(noinline) void* BSResizableTriShape_GetRTTI()
     return &DAT_01090528;
 }
 
+// pdb: NiScreenElements::GetRTTI | NiScreenElements.obj | fnv360_0822_retail, objrun_prop, low
 __declspec(noinline) void* FUN_00853230()
 {
     return &DAT_01090544;
@@ -369,6 +388,7 @@ __declspec(noinline) void* NiVertWeightsExtraData_GetRTTI()
     return &DAT_0109055c;
 }
 
+// pdb: NiTriBasedGeom::GetRTTI | NiTriBasedGeom.obj | fnv360_0822_retail, objrun_open, low
 __declspec(noinline) void* FUN_00855410()
 {
     return &DAT_01090574;
@@ -386,6 +406,7 @@ __declspec(noinline) void* NiPalette_GetRTTI()
     return &DAT_01090608;
 }
 
+// pdb: NiShader::GetRTTI | NiShader.obj | fnv360_0822_retail, objrun_sim, low
 __declspec(noinline) void* FUN_0085a2e0()
 {
     return &DAT_01090708;
@@ -397,6 +418,7 @@ __declspec(noinline) void* NiParticlesData_GetRTTI()
     return &DAT_01090720;
 }
 
+// pdb: NiScreenGeometry::GetRTTI | NiOldScreenSpace.obj | fnv360_0822_retail, objrun_prop, low
 __declspec(noinline) void* FUN_0085bf20()
 {
     return &DAT_01090854;
@@ -408,6 +430,7 @@ __declspec(noinline) void* NiVectorExtraData_GetRTTI()
     return &DAT_0109087c;
 }
 
+// pdb: NiSwitchStringExtraData::GetRTTI | NiSwitchStringExtraData.obj | fnv360_0822_retail, objrun_open, medium
 __declspec(noinline) void* FUN_0085f520()
 {
     return &DAT_010908a4;
@@ -437,6 +460,7 @@ __declspec(noinline) void* NiScreenLODData_GetRTTI()
     return &DAT_010908e4;
 }
 
+// pdb: NiPersistentSrcTextureRendererData::GetRTTI | NiXenonPersistentSrcTextureRendererData.obj | fnv360_0721_retail, objrun_prop, low
 __declspec(noinline) void* FUN_00862440()
 {
     return &DAT_010908f8;
@@ -460,6 +484,7 @@ __declspec(noinline) void* NiDX9ImplicitDepthStencilBufferData_GetRTTI()
     return &DAT_01091834;
 }
 
+// pdb: NiD3DShader::GetRTTI | NiXenonFragmentShader.obj | fnv360_0822_retail, objrun_sim, low
 __declspec(noinline) void* FUN_00886740()
 {
     return &DAT_01091988;
@@ -477,6 +502,7 @@ __declspec(noinline) void* NiTransformInterpolator_GetRTTI()
     return &DAT_010926a0;
 }
 
+// pdb: NiBlendFloatInterpolator::GetRTTI | NiBlendFloatInterpolator.obj | fnv360_0822_retail, objrun_prop, low
 __declspec(noinline) void* FUN_008ba820()
 {
     return &DAT_010926a8;
@@ -488,6 +514,7 @@ __declspec(noinline) void* NiBlendTransformInterpolator_GetRTTI()
     return &DAT_010926b4;
 }
 
+// pdb: NiFloatExtraDataController::GetRTTI | NiFloatExtraDataController.obj | fnv360_0822_retail, objopen_prop, low
 __declspec(noinline) void* FUN_008bb5f0()
 {
     return &DAT_010926bc;
@@ -517,26 +544,31 @@ __declspec(noinline) void* BSGrabIKNote_GetRTTI()
     return &DAT_01092730;
 }
 
+// pdb: NiVisController::GetRTTI | NiVisController.obj | fnv360_0822_retail, objopen_prop, low
 __declspec(noinline) void* FUN_008beff0()
 {
     return &DAT_01092748;
 }
 
+// pdb: NiUVController::GetRTTI | NiUVController.obj | fnv360_0822_retail, objrun_open, low
 __declspec(noinline) void* FUN_008bfc80()
 {
     return &DAT_01092758;
 }
 
+// pdb: NiTextureTransformController::GetRTTI | NiTextureTransformController.obj | fnv360_0822_retail, objrun_open, low
 __declspec(noinline) void* FUN_008c05d0()
 {
     return &DAT_01092760;
 }
 
+// pdb: NiRotData::GetRTTI | NiRotData.obj | fnv360_0822_retail, objrun_open, low
 __declspec(noinline) void* FUN_008c2120()
 {
     return &DAT_01092790;
 }
 
+// pdb: NiRollController::GetRTTI | NiRollController.obj | fnv360_0822_retail, objrun_open, low
 __declspec(noinline) void* FUN_008c2580()
 {
     return &DAT_01092798;
@@ -566,16 +598,19 @@ __declspec(noinline) void* NiLookAtInterpolator_GetRTTI()
     return &DAT_010927d0;
 }
 
+// pdb: NiLookAtController::GetRTTI | NiLookAtController.obj | fnv360_0822_retail, objopen_prop, low
 __declspec(noinline) void* FUN_008c6c70()
 {
     return &DAT_010927d8;
 }
 
+// pdb: NiLightDimmerController::GetRTTI | NiLightDimmerController.obj | fnv360_0822_retail, objopen_prop, low
 __declspec(noinline) void* FUN_008c6ed0()
 {
     return &DAT_010927e0;
 }
 
+// pdb: NiLightColorController::GetRTTI | NiLightColorController.obj | fnv360_0721_retail, objrun, medium
 __declspec(noinline) void* FUN_008c7150()
 {
     return &DAT_010927e8;
@@ -593,11 +628,13 @@ __declspec(noinline) void* NiTransformData_GetRTTI()
     return &DAT_010927fc;
 }
 
+// pdb: NiFloatsExtraDataPoint3Controller::GetRTTI | NiFloatsExtraDataPoint3Controller.obj | fnv360_0822_retail, objrun_open, low
 __declspec(noinline) void* FUN_008c8ac0()
 {
     return &DAT_01092804;
 }
 
+// pdb: NiFloatsExtraDataController::GetRTTI | NiFloatsExtraDataController.obj | fnv360_1110_retail, objrun, medium
 __declspec(noinline) void* FUN_008c8f60()
 {
     return &DAT_0109280c;
@@ -609,6 +646,7 @@ __declspec(noinline) void* NiFlipController_GetRTTI()
     return &DAT_01092814;
 }
 
+// pdb: NiColorExtraDataController::GetRTTI | NiColorExtraDataController.obj | fnv360_0822_retail, objrun_open, low
 __declspec(noinline) void* FUN_008c9ae0()
 {
     return &DAT_0109281c;
@@ -686,6 +724,7 @@ __declspec(noinline) void* NiBlendColorInterpolator_GetRTTI()
     return &DAT_010928b4;
 }
 
+// pdb: NiBlendBoolInterpolator::GetRTTI | NiBlendBoolInterpolator.obj | fnv360_0822_retail, objrun_prop, low
 __declspec(noinline) void* FUN_008d0240()
 {
     return &DAT_010928bc;
@@ -703,11 +742,13 @@ __declspec(noinline) void* NiFloatInterpController_GetRTTI()
     return &DAT_01092a20;
 }
 
+// pdb: NiPoint3InterpController::GetRTTI | NiPoint3InterpController.obj | fnv360_0822_retail, objrun_prop, medium
 __declspec(noinline) void* FUN_008d18a0()
 {
     return &DAT_01092a38;
 }
 
+// pdb: hkpPhysicsContext::getType | hkpPhysicsContext.obj | fnv360_0822_retail, vtable, medium
 __declspec(noinline) void* FUN_00954ac0()
 {
     return &DAT_00e7bfb4;

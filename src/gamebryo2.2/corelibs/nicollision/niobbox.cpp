@@ -55,6 +55,8 @@ struct S_00eba480
 
 // Transforms the center, axes and extents by kXform into the world-space center, axes and extents.
 // @fnv 0x00eba480
+// pdb: NiOBBox::Transform | NiOBBox.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: xform
 void S_00eba480::UpdateWorldBounds(const NiTransform& kXform)
 {
     m_kWorldCenter = kXform.m_fScale * (kXform.m_kOrientation * m_kCenter) + kXform.m_kTranslation;
@@ -106,6 +108,8 @@ struct S_00ebf4a0_Class
 };
 
 // @fnv 0x00ebf4a0
+// pdb: NiOBBox::ComputeNormal | NiOBBox.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: p, normal
 void S_00ebf4a0_Class::ProjectOntoAxes(const S_00ebf4a0_Vec3* in, S_00ebf4a0_Vec3* out)
 {
     S_00ebf4a0_Vec3 norm;
@@ -1332,6 +1336,8 @@ struct BoxE
 };
 // Performs a swept OBB vs OBB collision test using relative motion over root->Time(), returning 1 if the boxes intersect during the sweep.
 // @fnv 0x00eba680
+// pdb: NiOBBox::TestIntersection | NiOBBox.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: box
 int BoxE::FUN_00eba680(const BoxE& other)
 {
     const NiPoint3* a = axes;

@@ -17,6 +17,7 @@ struct bhkRagdollController
     void* FUN_00c7de30(unsigned int);
 };
 // @fnv 0x00c7de30
+// pdb: ProjectileListener::`scalar deleting destructor' | ProjectileListener.obj | fnv360_0822_retail, vtable_prefix, medium
 void* bhkRagdollController::FUN_00c7de30(unsigned int flag)
 {
     FUN_00c7d900();
@@ -45,6 +46,7 @@ struct FUN_00c7fa70_Class
 };
 
 // @fnv 0x00c7fa70
+// pdb: bhkUnaryAction::`scalar deleting destructor' | GlobalFunc.obj | fnv360_0822_retail, vtable_prefix, high
 void* __thiscall FUN_00c7fa70_Class::FUN_00c7fa70(int flags)
 {
     FUN_00cc58c0();
@@ -77,6 +79,7 @@ struct FUN_00cda4b0_cls
 };
 
 // @fnv 0x00cda4b0
+// pdb: BSShaderBloodSplatter::ReloadShaders | BSShaderBloodSplatter.obj | fnv360_0822_debug, caller_sim, low
 void __thiscall FUN_00cda4b0_cls::FUN_00cda4b0()
 {
     FUN_00cda340();
@@ -90,6 +93,7 @@ struct FUN_00cda8d0_class
 };
 
 // @fnv 0x00cda8d0
+// pdb: hkaPose::getSyncedPoseModelSpace | hkaPose.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: hkaPose::getSyncedPoseLocalSpace)
 void* FUN_00cda8d0_class::FUN_00cda8d0()
 {
     FUN_00cda340();
@@ -102,6 +106,7 @@ struct FUN_00cdb290
     void* __thiscall GetPlus4();
 };
 // @fnv 0x00cdb290
+// pdb: hkaPose::getSyncedPoseModelSpace | hkaPose.obj | tesv_win, objrun_open, low
 void* __thiscall FUN_00cdb290::GetPlus4()
 {
     FUN_00cda690();
@@ -153,6 +158,8 @@ struct MyNode
     unsigned short count;
 };
 // @fnv 0x00c802d0
+// pdb: bhkUtilFunctions::FindNextCollisionObject | bhkUtilFunctions.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apObj
 MyNode* __cdecl FUN_00c802d0(MyNode* p)
 {
     MyNode* r = p->field_1c;
@@ -265,6 +272,7 @@ struct FUN_00c6ffc0_Class
 };
 
 // @f3 0x008ecaa0 (community match, verified in this file)
+// pdb: bhkCharacterController::KillDisplayGeometry | bhkCharacterController.obj | fnv360_0822_retail, call_seq, medium
 void FUN_00c6ffc0_Class::FUN_00c6ffc0()
 {
     Target* p = FUN_00c6e0b0();
@@ -416,6 +424,8 @@ inline unsigned char GetFlag6(unsigned short w)
 }
 
 // @f3 0x008e7690 (community match, verified in this file)
+// pdb: bhkRagdollController::CopyPoseTo3D | bhkRagdollController.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: apSkeleton, apPose, arPoseA, arbPrevUseVel, arePrevMotion
 void __cdecl FUN_00c7d3b0(NiNode* param_1, void* param_2, void* param_3, char* param_4, unsigned int* param_5)
 {
     MyNode* node = FUN_00c802d0((MyNode*)param_1);
@@ -720,6 +730,8 @@ __forceinline void Controller::Update(float)
 
 // The pack's class names its callees by their New Vegas addresses, so the body lives in a stand-in class with this
 // game's callee names and is forced inline here.
+// pdb: bhkRagdollController::DoRagdollAnim | bhkRagdollController.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: abUpdateBones
 void FUN_00c7d630_t::FUN_00c7d630(float dt)
 {
     reinterpret_cast<f3m_008e7b20::Controller*>(this)->Update(dt);
@@ -753,6 +765,7 @@ struct FUN_00c7d810_Cls
 };
 
 // @fnv 0x00c7d810
+// pdb: bhkRagdollController::SyncRagdollTo3D | bhkRagdollController.obj | fnv360_0822_retail, call_gap, medium
 void FUN_00c7d810_Cls::FUN_00c7d810()
 {
     Xform nitrans = *(Xform*)((char*)(*(void**)((char*)this + 0x58)) + 0x68);
@@ -773,6 +786,8 @@ void FUN_00c7d810_Cls::FUN_00c7d810()
 void* __cdecl FUN_00ec7230(char*, char const*, unsigned int);
 
 // @fnv 0x00c7f900
+// pdb: BSSimpleArray<DetailedActorPathHandler::ActorAvoidanceData,1024>::_MoveItems | DetailedActorPathHandler.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apDestAddr, apSrcAddr, aiCount
 void __stdcall FUN_00c7f900(char* dst, char* src, unsigned int count)
 {
     if (count <= 0)
@@ -848,6 +863,8 @@ struct FlagController
     void FUN_00c7ba10(bool);
 };
 // @fnv 0x00c7ba10
+// pdb: bhkRagdollController::EnableRagdollFeedback | bhkRagdollController.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: Projectile::HavokDetached)
+// pdb params: abEnable
 void FlagController::FUN_00c7ba10(bool enabled)
 {
     unsigned char* state = (unsigned char*)this;
@@ -1081,6 +1098,7 @@ struct L_c7d5c0_Layout {
     unsigned int cap;
 };
 
+// pdb: hkpListShape::~hkpListShape | hkpListShape.obj | fnv360_0822_retail, call_seq, high
 void FUN_00c7d5c0_cls::FUN_00c7d5c0()
 {
     L_c7d5c0_Layout* self = (L_c7d5c0_Layout*)this;
@@ -1140,6 +1158,8 @@ struct FUN_00c7f9e0 : MiddleObject
 };
 
 // @fnv 0x00c7f9e0
+// pdb: bhkHingeConstraint::bhkHingeConstraint | MissileProjectile.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: arInfo
 FUN_00c7f9e0::FUN_00c7f9e0(void* context) : MiddleObject()
 {
     classTable = DAT_010c52bc;
@@ -1353,6 +1373,8 @@ __forceinline bool IsNodeF3(Obj_c9b* pkObj)
     }
     return false;
 }
+// pdb: bhkBlendController::DoGetUp | bhkBlendController.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apObject, afTime
 void __cdecl FUN_00c9bdf0(Obj_c9b* pkObj, float f)
 {
     if (pkObj && IsNodeF3(pkObj) && pkObj->m_usElementCount > 0)
@@ -1403,6 +1425,8 @@ struct FUN_0046e5c0_stub
     void FUN_0046e5c0(char* dst, char* src, unsigned int count);
 };
 
+// pdb: BSSimpleArray<PathSmootherPOVLink,1024>::_ReallocateBuffer | PathSmootherPOV.obj | fnv360_0822_retail, call_seq, low
+// pdb params: aiNewSize, aiCopyCount
 void FUN_00c7f970_cls::FUN_00c7f970(unsigned int uiNew, unsigned int uiOld)
 {
     if (m_pData)
@@ -1483,6 +1507,7 @@ struct BooleanFloatQuery
     void FUN_007c2870();
 };
 
+// pdb: HitData::ClearData | HitData.obj | fnv360_0822_retail, call_seq, medium
 void BooleanFloatQuery::FUN_007c2870()
 {
     m_14 = 0.0f;
@@ -1579,6 +1604,8 @@ struct FUN_00cb9650_Object
 extern const char DAT_012683f4[];
 
 // @fnv 0x00cb9650
+// pdb: bhkForceController::RemoveForce | bhkForceController.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObject
 void __cdecl FUN_00cb9650(FUN_00cb9650_Object* object)
 {
     if (object != 0)
@@ -1635,6 +1662,8 @@ struct RagController
     void FUN_00c75580(unsigned char enabled);
 };
 // @f3 0x008dc2e0 (community match, verified in this file)
+// pdb: bhkRagdollController::SetLookIKActive | bhkRagdollController.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abActive
 void RagController::FUN_00c75580(unsigned char enabled)
 {
     int state;
@@ -2080,6 +2109,8 @@ struct Native2030Cls
 };
 
 // @fnv 0x00c7ba50
+// pdb: bhkRagdollController::DoPoseMatching | bhkRagdollController.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: arWorldFromModel, apRagdollDrivePoseLS, arbUseDrivePose
 void Cls::FUN_00c7ba50(void* a1, void* a2, bool* a3)
 {
     Native2030Cls* self=(Native2030Cls*)this;
@@ -2760,6 +2791,7 @@ void RagdollCtl::bhkRagdollController_DisableRagdollAnim(bool b)
 
 
 // @fnv 0x00c7f4a0
+// pdb: hkVector4::isOk4 | hkVector4.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkVector4isOk)
 static __declspec(noinline) unsigned char* FUN_00c7f4a0(unsigned char* out, const float* src, int count)
 {
     int i = 0;
@@ -2806,6 +2838,7 @@ static __declspec(noinline) bool* CheckFloatsValid(const float* pData, int iCoun
     return pOut;
 }
 // @fnv 0x00c7f500
+// pdb: hkVector4::isOk4 | hkVector4.obj | tesv_win, objrun_prop, low
 void HkFloatCheck::FUN_00c7f500(bool* pOut)
 {
     CheckFloatsValid((const float*)this, 4, pOut);
@@ -2877,6 +2910,8 @@ struct S_InnerCall
 {
     int FUN_008f9c90(int arg);
 };
+// pdb: bhkUtilFunctions::GetNiAVObject | bhkUtilFunctions.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apCollidable
 int __cdecl FUN_00c7fa90(S_Obj* p)
 {
     int result = 0;
@@ -3560,6 +3595,8 @@ struct KNodeUpdateView
     void FUN_008330a0();
 };
 
+// pdb: bhkBlendCollisionObject::SetBipTransform | bhkBlendCollisionObject.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObject, arDelta, abZeroZ
 void FUN_00c821b0(KObject* root, KPoint3* outDelta, bool update)
 {
     if (!root)

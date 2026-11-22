@@ -5,14 +5,20 @@
 #include "havok/hkpKeyframedRigidMotion.h"
 
 // @fnv 0x00d1dec0
+// pdb: hkpKeyframedRigidMotion::setInertiaInvLocal | hkpKeyframedRigidMotion.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: inertiaInv
 void __stdcall FUN_00d1dec0(int)
 {}
 
 // @fnv 0x00d1ded0
+// pdb: hkpKeyframedRigidMotion::applyLinearImpulse | hkpKeyframedRigidMotion.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: imp
 void __stdcall FUN_00d1ded0(int)
 {}
 
 // @fnv 0x00d1dee0
+// pdb: hkpKeyframedRigidMotion::applyAngularImpulse | hkpKeyframedRigidMotion.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: imp
 void __stdcall FUN_00d1dee0(int)
 {}
 
@@ -25,14 +31,20 @@ void __stdcall FUN_00d1df00(int)
 {}
 
 // @fnv 0x00d1df10
+// pdb: hkpKeyframedRigidMotion::applyPointImpulse | hkpKeyframedRigidMotion.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: imp, p
 void __stdcall FUN_00d1df10(int, int)
 {}
 
 // @fnv 0x00d1df20
+// pdb: hkDisplayCapsule::getWireframeGeometry | hkDisplayCapsule.obj | fnv360_0822_retail, vtable, medium
+// pdb params: lines, a
 void __stdcall FUN_00d1df20(int)
 {}
 
 // @fnv 0x00d1df30
+// pdb: hkpKeyframedRigidMotion::applyForce | hkpKeyframedRigidMotion.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: deltaTime, force
 void __stdcall FUN_00d1df30(int, int)
 {}
 
@@ -42,10 +54,14 @@ void __stdcall hkpMultiThreadedSimulation_assertThereIsNoCollisionInformationFor
 {}
 
 // @fnv 0x00d1df50
+// pdb: hkpKeyframedRigidMotion::applyTorque | hkpKeyframedRigidMotion.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: deltaTime, torque
 void __stdcall FUN_00d1df50(int, int)
 {}
 
 // @fnv 0x00d1df60
+// pdb: hkpKeyframedRigidMotion::setStepPosition | hkpKeyframedRigidMotion.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: position, timestep
 void __stdcall FUN_00d1df60(int, int)
 {}
 

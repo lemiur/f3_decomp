@@ -17,6 +17,8 @@
 
 // Looks up the texture name for a texture type, resolves it via BSShaderManager::GetTexture, and assigns it to textureOut with refcount handling.
 // @fnv 0x00ba87f0
+// pdb: BSShaderTextureSet::GetTexture | BSShaderTextureSet.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiType, aspTexture
 void BSShaderTextureSet::GetTexture(BSShaderProperty::TextureTypeEnum textureType, NiPointer<NiTexture>& textureOut)
 {
     NiPointer<NiTexture> texture;
@@ -40,6 +42,8 @@ struct FUN_00ba88d0_shell : public BSShaderTextureSet
 };
 
 // @fnv 0x00ba88d0
+// pdb: BSShaderTextureSet::LoadBinary | BSShaderTextureSet.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void FUN_00ba88d0_shell::LoadTextureSet(NiStream* kStream)
 {
     BSTextureSet::LoadBinary(*kStream);
@@ -71,12 +75,16 @@ struct FUN_00ba89e0_shell : public BSShaderTextureSet
 };
 
 // @fnv 0x00ba89e0
+// pdb: BSShaderTextureSet::SetTextureFilename | BSShaderTextureSet.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BSShaderTextureSet::LinkObject)
+// pdb params: aiType, apFilename
 void FUN_00ba89e0_shell::FUN_00ba89e0(int aiType, char* apFilename)
 {
     reinterpret_cast<BSStringT<char>*>(reinterpret_cast<char*>(this) + 8)[aiType].Set(apFilename, 0);
 }
 
 // @fnv 0x00ba87e0
+// pdb: BipedAnim::GetParentBone | BipedAnim.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aeType
 int __fastcall FUN_00ba87e0(int* self, int unused, int index)
 {
     return self[index * 2 + 2];
@@ -84,6 +92,7 @@ int __fastcall FUN_00ba87e0(int* self, int unused, int index)
 
 void __cdecl _MyHelper00a5d2f0(int a);
 // @fnv 0x00a81fe0
+// pdb: BGSMoviePlayer::UnPauseMusic | BGSMoviePlayer.obj | fnv360_0822_retail, objrun, medium
 void __cdecl FUN_00a81fe0(int a)
 {
     _MyHelper00a5d2f0(a);
@@ -92,6 +101,8 @@ void __cdecl FUN_00a81fe0(int a)
 void FUN_00a89af0();
 
 // @fnv 0x00a724d0
+// pdb: ValueModifierEffect::LoadGame | AbsorbEffect.obj | fnv360_0721_retail, vtable, medium
+// pdb params: apActor
 void FUN_00a724d0()
 {
     FUN_00a89af0();

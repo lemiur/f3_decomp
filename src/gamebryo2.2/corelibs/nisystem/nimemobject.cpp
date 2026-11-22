@@ -20,6 +20,8 @@ struct _NiAllocatorDummy
     virtual void Deallocate(void* pvMemory, int aiAllocationType, size_t stSizeInBytes);
 };
 
+// pdb: NiMemObject::operator delete[] | NiMemObject.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pvMem, stElementSize
 __pragma(optimize("gsty", on))
 // @fnv 0x00aa1490
     void __cdecl FUN_00aa1490(void* apMemory, unsigned int stElementSize)

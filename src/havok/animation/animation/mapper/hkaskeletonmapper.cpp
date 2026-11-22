@@ -58,6 +58,8 @@ struct hkError
 #include <math.h>
 // Clamps the input to the domain of asin and returns the result, substituting the sign of pi/2 when the magnitude is at least 1.0f.
 // @fnv 0x00ce0c40
+// pdb: hkMath::asin | hkaLookAtIkSolver.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: r
 float ClampAsin(float angle)
 {
     float original = angle;

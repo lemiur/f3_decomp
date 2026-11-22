@@ -21,6 +21,8 @@ struct FUN_00e4a540_cls
 };
 
 // @fnv 0x00e4a540
+// pdb: BGSSaveLoadGame::QueueSubBuffer | BGSSaveLoadGame.obj | fnv360_0721_retail, call_seq, low
+// pdb params: aeType, apLoadFormBuffer, apParentForm
 void FUN_00e4a540_cls::FUN_00e4a540()
 {
     m_14->Run();

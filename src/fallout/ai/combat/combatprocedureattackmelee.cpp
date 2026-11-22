@@ -43,6 +43,7 @@ struct FUN_009cc4d0_shell : CombatProcedure
 };
 // Gets the attacker Actor, runs the base procedure, then calls two functions on the attacker with false.
 // @f3 0x007d2ae0 (community match, verified in this file)
+// pdb: CombatProcedureAttackMelee::Shutdown | CombatProcedureAttackMelee.obj | fnv360_0822_retail, vtable, medium
 void FUN_009cc4d0_shell::RunCombatProcedure()
 {
     Actor* pattacker = FUN_00996de0();

@@ -50,6 +50,7 @@ struct WriterCC0
 
 // Writes the string s to w, or the literal "(null)" when s is null.
 // @fnv 0x00cc0080
+// pdb: writeString | hkOStream.obj | tesv_win, hash, low
 static __declspec(noinline) void FUN_00cc0080(WriterCC0* apWriter, const char* apString)
 {
     if (apString)
@@ -77,6 +78,7 @@ struct SinkOwner
 };
 
 // @fnv 0x00cc01c0
+// pdb: hkOstream::operator<< | hkOStream.obj | tesv_win, hash, low
 SinkOwner* SinkOwner::FUN_00cc01c0(const char* text)
 {
     FUN_00cc0080(writer, text);
@@ -100,6 +102,7 @@ void __cdecl FUN_009233d0(void* destination, const void* source, int length);
 
 void* __cdecl FUN_00cb11b0(void* apSource, int anMaxLen, void* apAllocator);
 namespace fnv_00cb11b0 { void* __cdecl FUN_00cb11b0(void* apSource, int anMaxLen, void* apAllocator); }
+// pdb: strNdup | hkStringPtr.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void* __cdecl ::fnv_00cb11b0::FUN_00cb11b0(void* apSource, int anMaxLen, void* apAllocator)
 {
     int length = (int)FUN_009233f0(static_cast<const char*>(apSource));

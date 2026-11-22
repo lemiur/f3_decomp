@@ -68,6 +68,8 @@ struct TargetTableView6
 
 extern int DAT_00dc4dc0;
 
+// pdb: PathingLocation::PathingLocation | PathingLocation.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aLocation, apRef
 int TargetClass::FUN_004eedd0(int a, int b)
 {
     ArgumentObjectView6* p = (ArgumentObjectView6*)b;

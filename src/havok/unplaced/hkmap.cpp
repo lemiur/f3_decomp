@@ -12,6 +12,8 @@ struct FUN_00cb18f0_t
 };
 
 // @fnv 0x00cb1fb0
+// pdb: hkMapBase<unsigned long,unsigned long,hkMapOperations<unsigned long> >::remove | hkMap.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: key
 int __thiscall FUN_00cb18f0_t::FUN_00cb1fb0(int key)
 {
     int found = FindSlot(key);
@@ -32,6 +34,8 @@ struct FUN_00cb1930_t
 };
 
 // @f3 0x009227d0 (community match, verified in this file)
+// pdb: hkMapBase<unsigned long,unsigned long,hkMapOperations<unsigned long> >::getWithDefault | hkMap.obj | fnv360_0822_retail, call_seq, high
+// pdb params: key, def
 int FUN_00cb1930_t::LookupHashEntry(int key,int defaultValue) {
     int limit=m_iPairCount;
     int* table=m_uiStandInValue;
@@ -55,6 +59,8 @@ struct DepthLimit
 };
 // Hashes key, and if the hash is within the limit, writes the bucket's paired value to out and returns 0; otherwise returns 1.
 // @f3 0x00922820 (community match, verified in this file)
+// pdb: hkMapBase<unsigned long,unsigned long,hkMapOperations<unsigned long> >::get | hkMap.obj | fnv360_0822_retail, call_seq, high
+// pdb params: key, out
 int __fastcall LookupBucketValue(DepthLimit* self, int, int key, int* output) {
     int index = self->FindSlot(key);
     int depth = ((int*)self)[2];
@@ -150,6 +156,8 @@ class hkMapBaseCB19
 
 // Removes the map entry at the given slot, invalidates its key, and shifts later entries back to fill the gap.
 // @f3 0x00922860 (community match, verified in this file)
+// pdb: hkMapBase<unsigned long,unsigned long,hkMapOperations<unsigned long> >::remove | hkMap.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: it
 void hkMapBaseCB19::RemoveEntry(void* it) throw()
 {
     typedef hkMapOperatorsCB19 OPS;
@@ -208,6 +216,8 @@ class FUN_00cb1830
 };
 
 // @f3 0x00922640 (community match, verified in this file)
+// pdb: hkMapBase<unsigned long,unsigned long,hkMapOperations<unsigned long> >::hkMapBase<unsigned long,unsigned long,hkMapOperations<unsigned long> > | hkMap.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: ptr, sizeInBytes
 FUN_00cb1830::FUN_00cb1830(void* apElements, unsigned int sizeInBytes)
 {
     int maxKeys = sizeInBytes / sizeof(hkMapPairCB18);
@@ -465,6 +475,8 @@ struct hkMapOperationsCB1F
 
 // Hashes key into the open-addressing table and linearly probes for a matching entry, returning its slot index or a not-found value.
 // @f3 0x00922790 (community match, verified in this file)
+// pdb: hkMapBase<unsigned long,unsigned long,hkMapOperations<unsigned long> >::findKey | hkMap.obj | fnv360_0822_retail, call_gap, high
+// pdb params: key
 __declspec(noinline) int FUN_00cb18f0_t::FindSlot(int key)
 {
     unsigned int limit = m_iPairCount;

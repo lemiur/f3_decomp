@@ -767,6 +767,8 @@ const hkpTriSampledHeightFieldCollection* hkpTriSampledHeightFieldBvTreeShape::F
 }
 }
 
+// pdb: hkpTriSampledHeightFieldBvTreeShape::queryAabb | hkpTriSampledHeightFieldBvTreeShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: aabbIn, hits
 void TriSampledHeightFieldBvTreeShapeq::CollectHits(const hkAabbq& aabbInq, hkShapeKeyArray& hitsq) const
 {
 	const hk9a88c0::hkpSampledHeightFieldShape* hf = reinterpret_cast<const hk9a88c0::hkpTriSampledHeightFieldBvTreeShape*>(this)->FUN_009a82b0()->FUN_009a7e90();

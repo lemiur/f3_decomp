@@ -15,6 +15,8 @@ struct FUN_00cbb1c0 : FUN_00d2b1f0
 };
 
 // @fnv 0x00cbb1c0
+// pdb: hkpMouseSpringAction::entityRemovedCallback | hkpMouseSpringAction.obj | fnv360_0822_retail, vtable, high
+// pdb params: entity
 void __thiscall FUN_00cbb1c0::Method(int aiValue)
 {
     EntityRemovedCallback(aiValue);
@@ -38,6 +40,7 @@ void FUN_00cbb1b0_Class::hkpMouseSpringAction_setMaxRelativeForce(hkReal a)
 extern "C" int DAT_01268a14;
 
 // @fnv 0x00cbb8a0
+// pdb: bhkBlendController::GetRTTI | bhkBlendController.obj | fnv360_0822_retail, objrun_open, low
 int __cdecl FUN_00cbb8a0()
 {
     return (int)&DAT_01268a14;
@@ -521,6 +524,8 @@ struct F8feb20_Object
 
 static const float kPhysicsToWorld = 6.99904f;
 
+// pdb: bhkRigidBody::CreateDisplayGeometry | bhkRigidBody.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apNode
 F8feb20_Object* F8feb20_Object::FUN_008feb20(int arg)
 {
     F8feb20_Object* copy = FUN_008fa0e0(arg);

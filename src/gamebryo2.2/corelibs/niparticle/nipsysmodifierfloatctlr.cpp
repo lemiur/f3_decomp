@@ -2,6 +2,8 @@
 #include "f3_common.h"
 #include "nipsysmodifierfloatctlr_decls.h"
 // @fnv 0x00c32e10
+// pdb: NiPSysModifierFloatCtlr::LinkObject | NiPSysModifierFloatCtlr.obj | fnv360_0822_retail, objopen_prop, high
+// pdb params: kStream
 void NiPSysModifierFloatCtlr::LinkObject(NiStream& stream)
 {
     NiPSysModifierCtlr::LinkObject(stream);
@@ -27,6 +29,8 @@ struct FUN_00a3a710_shell
 };
 
 // @fnv 0x00a3a710
+// pdb: NiFloatsExtraDataController::InterpolatorIsCorrectType | NiFloatsExtraDataController.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: pkInterpolator, usIndex
 void __thiscall FUN_00a3a710_shell::CallVirtualMethodAtOffsetA8(void* pObject, void* pUnused)
 {
     typedef void(__thiscall * fp)(void*);
@@ -177,6 +181,8 @@ struct Ctlr_c32ee0
 };
 
 // @fnv 0x00c32ee0
+// pdb: NiPSysModifierFloatCtlr::Update | NiPSysModifierFloatCtlr.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: UpdateData
 void Ctlr_c32ee0::UpdateController(float& fTime)
 {
     bool b = (m_uiObjectFlags & 0x20) != 0;
@@ -201,6 +207,7 @@ void Ctlr_c32ee0::UpdateController(float& fTime)
 
 void __cdecl FUN_00a57780();
 // @fnv 0x00a44cd0
+// pdb: KillHavokSystem | HavokStream.obj | fnv360_0822_retail, call_gap, low
 void __cdecl FUN_00a44cd0()
 {
     FUN_00a57780();

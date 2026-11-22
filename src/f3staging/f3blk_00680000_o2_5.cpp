@@ -133,6 +133,8 @@ int unk1c0;
 int mode;
 bool Flag(unsigned f){return (flags&f)!=0;}bool FUN_0067aee0();void StartMenu__UpdateProfileSpecificData();bool FUN_00683980(int,int);
 };extern Menu* DAT_010770ac;
+// pdb: StartMenu::DoGamepad | StartMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiButton, afValue
 bool Menu::FUN_00683980(int button,int unused){
 if(FUN_0061c490(0x3f5)){
 if(button>0){

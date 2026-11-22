@@ -64,6 +64,7 @@ public:
     FUN_0091ba60();
     virtual ~FUN_0091ba60();
 };
+// pdb: ahkpMalleableConstraintData::ahkpMalleableConstraintData | bhkMalleableConstraint.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: bhkMalleableConstraint::~bhkMalleableConstraint)
 FUN_0091ba60::FUN_0091ba60()
 {
     m_constraintData = 0;

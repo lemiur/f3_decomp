@@ -12,6 +12,7 @@ struct ConstraintNode {
     ConstraintNode* next;
     int FUN_009a1ee0(void* payload);
 };
+// pdb: hkpModifierConstraintAtom::addAllModifierDataToConstraintInfo | hkpConstraintAtom.obj | tesv_win, call_gap, low
 int __cdecl FUN_00d22120(void* first, void* payload, void*) {
     ConstraintNode* node = static_cast<ConstraintNode*>(first);
     int result = 0;
@@ -24,6 +25,8 @@ int __cdecl FUN_00d22120(void* first, void* payload, void*) {
 
 
 // @fnv 0x00d21d00
+// pdb: hkpMassChangerModifierConstraintAtom::collisionResponseEndCallback | hkpConstraintAtom.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: cp, impulseApplied, inA, velA, inB, velB
 void __stdcall FUN_00d21d00(int, int, int, int, int, int)
 {}
 
@@ -38,6 +41,8 @@ struct FUN_00d21de0_cls
 };
 
 // @f3 0x009a1c00 (community match, verified in this file)
+// pdb: hkpSimpleContactConstraintAtom::hkpSimpleContactConstraintAtom | hkpConstraintAtom.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: f
 FUN_00d21de0_cls* FUN_00d21de0_cls::FUN_00d21de0(int) {
     unk0A = (unsigned char)((unk09 + unk08 + 5) * 4);
     return this;
@@ -70,6 +75,8 @@ void __cdecl FUN_00d21a60(ConstraintAtom* atom, unsigned int count, ConstraintIn
 
 // Walks the atom chain while type >= 23, then subtracts the partial solver temps, results and schema size from info unless the atom type is 22 or 1.
 // @fnv 0x00d22030
+// pdb: hkpIgnoreModifierConstraintAtom::getConstraintInfo | hkpConstraintAtom.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: info
 int ConstraintAtom::FUN_00d22030(ConstraintInfo* info)
 {
     ConstraintAtom* atom = this;

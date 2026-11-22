@@ -657,6 +657,7 @@ struct FUN_00c90e60_cls
 __forceinline float Round501(float value) {return value;}
 extern double DAT_00db7de8;
 
+// pdb: hkReferencedObject::addReference | hkReferencedObject.obj | fnv360_0721_beta, call_gap, low, conflict (skyrim: hkpConstraintQueryIn::set)
 void FUN_00c90e60_cls::FUN_00c90e60(float fRadius, float m_fGlyphExtent)
 {
     float fHalfRadius;

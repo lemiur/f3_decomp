@@ -10,6 +10,8 @@ struct FUN_00cdd3f0_s
 };
 
 // @f3 0x00957b80 (community match, verified in this file)
+// pdb: hkaSkeletonUtils::unlockTranslations | hkaSkeletonUtils.obj | fnv360_0822_retail, objrun_sim, medium
+// pdb params: skeleton
 void FUN_00cdd3f0(FUN_00cdd3f0_s* entries) {
     int count = entries->a[4];
     for (int index = 0; index < count; ++index)
@@ -22,6 +24,8 @@ extern int DAT_01268700;
 
 // Calls FUN_00cddad0 with a, b, the address of DAT_01268700, c and d.
 // @fnv 0x00cddcf0
+// pdb: hkaSkeletonUtils::transformLocalPoseToModelPose | hkaSkeletonUtils.obj | fnv360_0822_debug, caller, medium
+// pdb params: numTransforms, parentIndices, poseLocal, poseModelOut
 void __cdecl CallWithGlobal(int aiArg1, int aiArg2, int aiArg3, int aiArg4)
 {
     FUN_00cddad0(aiArg1, aiArg2, &DAT_01268700, aiArg3, aiArg4);
@@ -74,6 +78,8 @@ struct FindTableLayout
     int m_iArrayLength;
 };
 
+// pdb: hkaSkeletonUtils::findBoneWithName | hkaSkeletonUtils.obj | fnv360_0822_retail, call_seq, high
+// pdb params: skeleton, name, compare
 short __cdecl FindIndexByKey(S_00cdd390_Table* pSearchEntries, const void* pKey, int(__cdecl* pfnCompare)(const void*, const void*))
 {
     FindTableLayout* t = (FindTableLayout*)pSearchEntries;
@@ -122,6 +128,8 @@ struct LimitStub
     int unk00, unk04, unk08, unk0c;
     int limit;
 };
+// pdb: hkaSkeletonUtils::unlockTranslations | hkaSkeletonUtils.obj | fnv360_0822_debug, objrun_sim, low
+// pdb params: skeleton
 bool* __cdecl AreSequenceValuesInRange(bool* pbInRange, FUN_00cdd3f0_s* limits, Sequence* sequence)
 {
     SequenceStub* seq = (SequenceStub*)sequence;
@@ -226,6 +234,8 @@ struct DstView958060
 };
 }
 
+// pdb: hkaSkeletonUtils::bindByName | hkaSkeletonUtils.obj | fnv360_0822_retail, ustr, high
+// pdb params: skeleton, anim, compare, bindingOut
 int __cdecl MapTracksToBones(Names* namesIn, Src* srcIn, CmpFn cmp, Dst* dstIn)
 {
     f3m_00958060::NamesView958060* names = reinterpret_cast<f3m_00958060::NamesView958060*>(namesIn);
@@ -331,6 +341,8 @@ struct FUN_00d27f50_Obj
     void FUN_00d27f50(int a, int b);
 };
 
+// pdb: hkaSkeletonUtils::getBoneChain | hkaSkeletonUtils.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: hkLifoAllocator::allocateFromNewSlab)
+// pdb params: skeleton, startBone, endBone, bonesInOut
 unsigned char* WalkChainUntilLimit(unsigned char* pabResult, ScanRec* rec, short asLimit, short asStart, ScanObj* obj)
 {
     int s = (unsigned short)asStart;
@@ -713,6 +725,8 @@ struct ModifierAtom
 
 }  // namespace smc_abd0
 
+// pdb: hkpResponseModifier::setSurfaceVelocity | hkpResponseModifier.obj | fnv360_0822_retail, ustr, high
+// pdb params: manager, body, constraintOwner, velWorld
 void SetModifierConstraint(HkWorld* apWorld, int owner, HkObj* apObj, Vec4* apVec)
 {
     using namespace smc_abd0;

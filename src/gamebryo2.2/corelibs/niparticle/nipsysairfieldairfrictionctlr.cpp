@@ -18,6 +18,7 @@ struct NiPSysAirFieldAirFrictionCtlr : NiPSysModifierFloatCtlr
 };
 
 // @fnv 0x00c307d0
+// pdb: NiPSysAirFieldAirFrictionCtlr::GetTargetFloatValue | NiPSysAirFieldAirFrictionCtlr.obj | tesv_win, objrun_open, low
 void NiPSysAirFieldAirFrictionCtlr::FUN_00c307d0(float& rfValue)
 {
     NiPSysModifierFloatCtlr* pTarget = *(NiPSysModifierFloatCtlr**)((char*)this + 0x3c);
@@ -69,6 +70,8 @@ struct FUN_00c306f0_class : BaseStandIn
     bool HasModifierAfter(NiObjectNET*);
 };
 // @fnv 0x00c306f0
+// pdb: NiPSysAirFieldAirFrictionCtlr::InterpTargetIsCorrectType | NiPSysAirFieldAirFrictionCtlr.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: pkTarget
 bool FUN_00c306f0_class::HasModifierAfter(NiObjectNET* target)
 {
     if (!IsTargetParticleSystem(target))
@@ -102,6 +105,7 @@ struct WorkerAirFriction : NiPSysAirFieldAirFrictionCtlr
 };
 // Clamps value to [0,1] and stores it in target->targetValue.
 // @fnv 0x00c307e0
+// pdb: NiPSysAirFieldAirFrictionCtlr::SetTargetFloatValue | NiPSysAirFieldAirFrictionCtlr.obj | tesv_win, hash, low
 void WorkerAirFriction::FUN_00c307e0(float value)
 {
     WorkerTarget* pTarget = target;
@@ -149,6 +153,7 @@ class FUN_00c30830_cls
 
 // Allocates a 0x40-byte SpawnedObject, initialises it, passes it to FUN_00c32de0 with arg, and returns it.
 // @fnv 0x00c30830
+// pdb: NiPSysAirFieldAirFrictionCtlr::CreateClone | NiPSysAirFieldAirFrictionCtlr.obj | tesv_win, caller_sim, low
 SpawnedObject* FUN_00c30830_cls::CreateSpawnedObject(unsigned int arg)
 {
     SpawnedObject* obj = (SpawnedObject*)FUN_00aa13e0(0x40);
@@ -171,6 +176,8 @@ struct NiStream;
 void __cdecl LoadBinaryWithVersionCheck(NiPSysModifierCtlr*, int, NiStream&);
 
 // @fnv 0x00c29e80
+// pdb: NiXenonRenderer::Do_BatchRenderShape | NiXenonRenderer.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkTriShape
 void __cdecl FUN_00c29e80(NiPSysModifierCtlr* a1, int a2, NiStream& a3)
 {
     LoadBinaryWithVersionCheck(a1, a2, a3);
@@ -179,6 +186,8 @@ void __cdecl FUN_00c29e80(NiPSysModifierCtlr* a1, int a2, NiStream& a3)
 extern "C" void __cdecl FUN_00a44cd0();
 
 // @fnv 0x00c29f80
+// pdb: NiXenonFragmentShader::PreProcessPipeline | NiXenonFragmentShader.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pkGeometry, pkSkin, pkRendererData, pkState, pkEffects, kWorld, kWorldBound
 void __cdecl FUN_00c29f80()
 {
     FUN_00a44cd0();
@@ -187,6 +196,8 @@ void __cdecl FUN_00c29f80()
 void __cdecl FUN_00c32e10();
 
 // @fnv 0x00c2b450
+// pdb: NiXenonPersistentSrcTextureRendererData::LinkObject | NiXenonPersistentSrcTextureRendererData.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: NiDX9PersistentSrcTextureRendererData::LinkObject)
+// pdb params: kStream
 void __cdecl FUN_00c2b450()
 {
     FUN_00c32e10();
@@ -194,6 +205,8 @@ void __cdecl FUN_00c2b450()
 
 void __cdecl FUN_00a41220();
 // @fnv 0x00c2b8a0
+// pdb: NiXenonPersistentSrcTextureRendererData::SaveBinary | NiXenonPersistentSrcTextureRendererData.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiDX9PersistentSrcTextureRendererData::SaveBinary)
+// pdb params: kStream
 void __cdecl FUN_00c2b8a0()
 {
     FUN_00a41220();

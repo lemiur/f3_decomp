@@ -32,6 +32,7 @@ extern int DAT_010a0b64;
 
 // Allocates a 0xd4-byte BSFadeNode, runs its constructor, installs the vtable, zeroes two fields, sets a byte flag to 1 and returns the object.
 // @fnv 0x00a99710
+// pdb: NiLODNode::CreateObject | NiLODNode.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void* __cdecl FUN_00a99710()
 {
     void* p = BSFadeNode::operator new(0xd4);
@@ -50,6 +51,8 @@ void* __cdecl FUN_00a99710()
 
 struct NiStream;
 // @fnv 0x00a992e0
+// pdb: NiLODNode::RegisterStreamables | NiLODNode.obj | fnv360_0721_beta, objrun, medium
+// pdb params: kStream
 bool __thiscall NiLODNode::FUN_00a992e0(NiStream* stream)
 {
     if (!FUN_00a93c40(stream))
@@ -69,6 +72,7 @@ struct NiLODNode : public NiSwitchNode
 };
 // Calls FUN_00a99470, frees this with operator delete when flags has bit 0 set, and returns this.
 // @fnv 0x00a99670
+// pdb: NiLODNode::`scalar deleting destructor' | NiLODNode.obj | fnv360_0822_retail, caller_sim, low
 NiLODNode* __thiscall NiLODNode::FUN_00a99670(unsigned int flags)
 {
     FUN_00a99470();
@@ -130,6 +134,8 @@ struct LODNodeStandIn : NiLODNode
 };
 // Updates this object's world data, then calls Sel on the helper stored at offset 0xCC if it is non-null.
 // @fnv 0x00a99110
+// pdb: NiLODNode::UpdateWorldData | NiLODNode.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: UpdateData
 void __thiscall LODNodeStandIn::FUN_00a99110(class NiUpdateData& UpdateData)
 {
     ((NiAVObject*)this)->UpdateWorldData(UpdateData);
@@ -163,6 +169,8 @@ struct NodeStandIn : NiLODNode
     void __thiscall FUN_00a99310(NiStream&);
 };
 // @fnv 0x00a99310
+// pdb: NiLODNode::SaveBinary | NiLODNode.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void NodeStandIn::FUN_00a99310(NiStream& kStream)
 {
     ((Unk94610*)this)->FUN_00a94610(kStream);
@@ -194,6 +202,8 @@ struct Holder
 };
 // Replaces m_sp with p, releasing the old object and incrementing the new one's reference count when they differ.
 // @fnv 0x00a99340
+// pdb: NiPointer<NiLODData>::operator= | NiLODNode.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: pObject
 void Holder::AssignRefCounted(Obj* apObj)
 {
     Obj* old = m_sp;
@@ -274,6 +284,7 @@ struct FUN_00a991d0_shell
 };
 
 // @fnv 0x00a991d0
+// pdb: NiLODNode::UpdateAllChildren | NiLODNode.obj | fnv360_0822_retail, objrun, medium
 void FUN_00a991d0_shell::UpdateChildrenWorldData()
 {
     unsigned char* base = reinterpret_cast<unsigned char*>(this);
@@ -362,6 +373,8 @@ struct FUN_00a99390_shell : public NiLODNode
 };
 
 // @fnv 0x00a99390
+// pdb: NiLODNode::CopyMembers | NiLODNode.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: pkDest, kCloning
 void FUN_00a99390_shell::FUN_00a99390(NiSwitchNode* pkDest, CloningProcess& kCloning)
 {
     ((FUN_00a93c00_shell*)this)->FUN_00a93c00(pkDest, kCloning);
@@ -463,6 +476,8 @@ struct FUN_00a99140_cls
 
 // If enabled and a target is set, recomputes m_iIndex via v35/v38 and walks it down to a valid array slot, then calls UpdateSwitchChild.
 // @fnv 0x00a99140
+// pdb: NiLODNode::OnVisible | NiLODNode.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCuller
 void FUN_00a99140_cls::UpdateTargetIndex(Arg99* arg)
 {
     if (m_bModifierActive && m_pkTarget)
@@ -589,6 +604,7 @@ class FUN_00a99470_cls : public BA99470Base
 
 // Destructor for the class; the body is empty, member cleanup is handled by the compiler-generated member destructors.
 // @fnv 0x00a99470
+// pdb: NiLODNode::~NiLODNode | NiLODNode.obj | fnv360_0822_retail, caller_sim, medium
 FUN_00a99470_cls::~FUN_00a99470_cls() throw()
 {}
 
@@ -619,6 +635,8 @@ struct FUN_00a996a0_shell : FUN_00a99390_shell
     CloneLODNode* CreateCloneLODNode(CloningProcess& process);
 };
 // @fnv 0x00a996a0
+// pdb: NiLODNode::CreateClone | NiLODNode.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCloning
 CloneLODNode* FUN_00a996a0_shell::CreateCloneLODNode(CloningProcess& process)
 {
     void* memory = BSFadeNode::operator new(0xd4);
@@ -749,6 +767,8 @@ class A99760Node
 };
 
 // @f3 0x008639d0 (community match, verified in this file)
+// pdb: NiLODNode::GetViewerStrings | NiLODNode.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void A99760Node::FUN_00a99760(A99760StrArray* pkStrings)
 {
     GetViewerStringsBase(pkStrings);
@@ -882,6 +902,8 @@ struct Owner_A99270
     void LoadRefFromStream(Stream_A99270* stream);
 };
 // @fnv 0x00a99270
+// pdb: NiLODNode::LinkObject | NiLODNode.obj | fnv360_0822_retail, uconst, low
+// pdb params: kStream
 void Owner_A99270::LoadRefFromStream(Stream_A99270* stream)
 {
     FUN_00a9a730(stream);
@@ -934,6 +956,8 @@ struct Cls : Holder
 };
 // Calls FUN_00a94000, checks m_sp nullness, then compares v02 results and calls v23 when they match.
 // @fnv 0x00a99400
+// pdb: NiLODNode::IsEqual | NiLODNode.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pkObject
 bool Cls::FUN_00a99400(Holder* other)
 {
     if (!FUN_00a94000(other))
@@ -1033,6 +1057,8 @@ struct LODLoader : Holder
     }
 };
 // @fnv 0x00a994d0
+// pdb: NiLODNode::LoadBinary | NiLODNode.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void __thiscall LODLoader::FUN_00a994d0(NiStream* pStream)
 {
     LODStreamEx* stream = (LODStreamEx*)pStream;

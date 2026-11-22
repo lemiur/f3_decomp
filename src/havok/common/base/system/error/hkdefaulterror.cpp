@@ -14,6 +14,8 @@ struct FUN_00d2b3b0_Class
     unsigned char* FUN_00d2b3b0(unsigned char* result, int value);
 };
 // @fnv 0x00d2b3b0
+// pdb: hkDefaultError::isEnabled | hkDefaultError.obj | fnv360_0822_retail, vtable, medium
+// pdb params: id
 unsigned char* FUN_00d2b3b0_Class::FUN_00d2b3b0(unsigned char* result, int value)
 {
     *result = (helper.LookupHashEntry(value, 0) == 0);
@@ -228,6 +230,7 @@ struct FUN_00d2b5b0_Class
     void FUN_00d2b5b0();
 };
 // @fnv 0x00d2b5b0
+// pdb: hkDefaultError::sectionEnd | hkDefaultError.obj | fnv360_0822_retail, vtable, medium
 void FUN_00d2b5b0_Class::FUN_00d2b5b0()
 {
     unk18--;
@@ -274,6 +277,8 @@ struct D2ErrorHost
 
 // Resolves index to last item if -1, validates it via v14, maps mode to a name and flag, calls hkDefaultError_showMessage, returns 1 for modes 2 or 3.
 // @fnv 0x00d2b4f0
+// pdb: hkDefaultError::message | hkDefaultError.obj | fnv360_0822_retail, vtable, medium
+// pdb params: msg, id, description, file, line
 int D2ErrorHost::FUN_00d2b4f0(int mode, int index, int aiArg3, int aiArg4, int aiArg5)
 {
     if (index == -1)

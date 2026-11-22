@@ -8,6 +8,8 @@ struct FUN_00dce8d0_class
     unsigned long GetValueOrDefault(unsigned long key);
 };
 // @fnv 0x00dce8d0
+// pdb: TESSoundFile::SetSoundFile | TESSoundFile.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apSound
 unsigned long FUN_00dce8d0_class::GetValueOrDefault(unsigned long key)
 {
     return ((FUN_00dce8d0_class*)((char*)this + 4))->LookupHashEntry(key, 0);
@@ -1583,6 +1585,8 @@ static int DCD6A0GetAgentId(DCD6A0AgentFunc func)
 int(__cdecl* g_DCD6A0GetAgentId)(DCD6A0AgentFunc) = DCD6A0GetAgentId;
 
 // @fnv 0x00dcd6a0
+// pdb: hkpSaveContactPointsUtil::destroyOldEntry | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: agentType, input, mgr, constraintOwner, nnEntry
 int __cdecl DispatchItemToAgent(int aiExpectedAgentId, DCD6A0Context** contextPtr, int aiArg1, int aiArg2,
                                 DCD6A0Item* item)
 {
@@ -1906,6 +1910,8 @@ struct ListenerDCDDF3
     void hkpPhysicsSystemWithContacts_addContact(ObjDCDDF3* obj);
 };
 int __cdecl FUN_00a4cdf0(void* a, S_00dcdd80_Item* item, int c, ObjDCDDF3* obj);
+// pdb: hkpSaveContactPointsUtil::saveContactPoints | hkpSaveContactPointsUtil.obj | fnv360_0721_beta, objrun, medium
+// pdb params: input, entries, numEntries, sys
 void FUN_00dcdd80(void* a, S_00dcdd80_Item** items, int count, S_00dcdd80_Listener* listener)
 {
     S_00dcdd80_World2* world = S_00dcdd80_getRigidBody(items[0]->unk10)->m_pOwningWorld;
@@ -2029,6 +2035,8 @@ extern int DAT_010d77c0;
 extern "C" void __cdecl hkpSaveContactPointsUtil_loadContactPointsInternal(int, int, int, LocalContext*);
 // Sets up a LocalContext with DAT_010d77c0 as its vtable and forwards first, second and third to hkpSaveContactPointsUtil_loadContactPointsInternal.
 // @fnv 0x00dce7b0
+// pdb: hkpSaveContactPointsUtil::loadContactPoints | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, uvref, high
+// pdb params: input, sys, world
 void __cdecl RunWithLocalContext(int first, int second, int third)
 {
     LocalContext local;
@@ -2331,6 +2339,8 @@ struct BlkPool
     void* Alloc(int aiFirst, int aiSecond);
 };
 
+// pdb: hkpSaveContactPointsUtil::deserialize1nTrack | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, call_seq, high
+// pdb params: serializedTrack, input, sectorsOut
 int __cdecl CopyAudioNodeTree(SrcNode* apSrc, int aiCount, DstBlock* apDst)
 {
     int count = apSrc->m_iArrayLength;
@@ -2544,6 +2554,8 @@ struct MergedBlockArr
         }
     }
 };
+// pdb: hkpSaveContactPointsUtil::saveContactPoints | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: input, world, sys
 void __cdecl ProcessCollisionRecords(void* arg1, S_00dcda40_World* world, S_00dcdd80_Listener* sink)
 {
     MergedBlockArr mergedBlocks(world->first);
@@ -3628,6 +3640,8 @@ __forceinline int ParseS00dcd720(S00dcd720_Src* src, int c, S00dcd720_Out* out)
     return r;
 }
 
+// pdb: hkpSaveContactPointsUtil::serializeCollisionEntry | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: input, entry, collisionInput, serializedEntryOut
 int __cdecl FUN_00dcd720(S00dcd720_Cb* cb, S00dcd720_Src* src, int c, S00dcd720_Out* out)
 {
     if (src->m_pCollisionShape->v34() != 0 || src->m_pCollisionShape->m_hdr->m_numA <= 0)

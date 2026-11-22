@@ -39,6 +39,7 @@ struct FUN_00a86d30_shell : BSResizableTriShape
 };
 
 // @fnv 0x00a86d30
+// pdb: TallGrassTriStrips::GetRTTI | TallGrassTriStrips.obj | fnv360_0721_beta, objrun_open, low
 NiBound* __thiscall FUN_00a86d30_shell::FUN_00a86d30()
 {
     return &LocalBound;
@@ -55,6 +56,7 @@ struct FUN_00a86da0_shell : BSResizableTriShape
 
 // Sets the vtable pointer, calls FUN_00a89760 on this, and if flags bit 0 is set deletes this with size 0xd8, returning this.
 // @fnv 0x00a86da0
+// pdb: BSResizableTriShape::`scalar deleting destructor' | BSResizableTriShape.obj | fnv360_0721_beta, objrun, medium
 void* FUN_00a86da0_shell::FUN_00a86da0(unsigned int flags)
 {
     ((void**)(this))[0] = &DAT_0109e704;
@@ -77,6 +79,7 @@ struct FUN_00a86e40_shell
 
 // Copies four dwords from offsets 0xc8-0xd4 into the NiBound at this+0x20, then calls FUN_00a74600 with the renderer.
 // @fnv 0x00a86e40
+// pdb: BSResizableTriShape::UpdateWorldBound | BSResizableTriShape.obj | fnv360_0721_beta, objrun, low, conflict (bridge: BSResizableTriShape::OnlyRenderImmediate)
 void __thiscall FUN_00a86e40_shell::FUN_00a86e40(NiRenderer* apRenderer)
 {
     float fW = *(float*)(this + 0xd4);
@@ -98,6 +101,8 @@ struct FUN_00a86dd0 : BSResizableTriShape
 };
 // Calls the base constructor with a, installs the vtable pointer, and zeroes the field at offset 0xC4.
 // @fnv 0x00a86dd0
+// pdb: BSResizableTriShape::BSResizableTriShape | BSResizableTriShape.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: apModelData
 FUN_00a86dd0::FUN_00a86dd0(unsigned int a)
 {
     ((FUN_00a74480_holder*)this)->FUN_00a74480(a);
@@ -121,6 +126,8 @@ struct FUN_00a86e80_shell : BSResizableTriShape
     NiObject* __thiscall FUN_00a86e80(CloningProcess& kCloning);
 };
 // @fnv 0x00a86e80
+// pdb: BSResizableTriShape::CreateClone | BSResizableTriShape.obj | fnv360_0721_beta, objrun, low, conflict (bridge: NiScreenGeometry::CreateClone)
+// pdb params: kCloning
 NiObject* __thiscall FUN_00a86e80_shell::FUN_00a86e80(CloningProcess& kCloning)
 {
     BSResizableTriShape* pkObject;
@@ -160,6 +167,8 @@ struct FUN_00a86ed0_shell : BSResizableTriShape
     void __thiscall FUN_00a86ed0(NiStream&);
 };
 // @fnv 0x00a86ed0
+// pdb: BSResizableTriShape::SaveBinary | BSResizableTriShape.obj | fnv360_0721_beta, objrun, low, conflict (skyrim: BSLODTriShape::SaveBinary)
+// pdb params: kStream
 void __thiscall FUN_00a86ed0_shell::FUN_00a86ed0(NiStream& stream)
 {
     ((FUN_00a71d10_shell*)this)->FUN_00a71d10(stream);
@@ -192,6 +201,8 @@ struct FUN_00a86f10_shell : BaseX86f10
 };
 // Calls FUN_00a98ea0, then reads 4 bytes from the stream's binary reader into m_val and advances the stream position.
 // @fnv 0x00a86f10
+// pdb: BSResizableTriShape::LoadBinary | BSResizableTriShape.obj | fnv360_0721_beta, objrun, low, conflict (skyrim: BSLODTriShape::LoadBinary)
+// pdb params: kStream
 void __thiscall FUN_00a86f10_shell::ReadValueFromStream(NiStream& stream)
 {
     FUN_00a98ea0(stream);
@@ -253,6 +264,7 @@ struct FUN_00c1a4a0_Shape : BSResizableTriShape
 };
 // Allocates and initialises the world bound if absent, then updates it from the object's bound and transform.
 // @fnv 0x00c1a4a0
+// pdb: TallGrassTriStrips::UpdateWorldBound | TallGrassTriStrips.obj | fnv360_0721_retail, objrun, medium
 void __thiscall FUN_00c1a4a0_Shape::UpdateWorldBound()
 {
     NiBound* kBound;
@@ -386,6 +398,8 @@ struct FUN_00a86e00_cls
 
 // Copies m_bound into the object pointed to by m_pBound, then calls FUN_00a745c0.
 // @fnv 0x00a86e00
+// pdb: BSResizableTriShape::RenderImmediate | BSResizableTriShape.obj | fnv360_0721_beta, objrun, low
+// pdb params: apRenderer
 void FUN_00a86e00_cls::FUN_00a86e00()
 {
     NiBound* pBound = m_pBound;

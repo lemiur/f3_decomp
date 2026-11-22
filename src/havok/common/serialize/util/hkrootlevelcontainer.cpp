@@ -84,6 +84,8 @@ struct SlotNameEntry
 };
 int __cdecl MatchSlotKey(void* ctx, const char* name);
 
+// pdb: hkRootLevelContainer::findObjectByType | hkRootLevelContainer.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: typeName, prevObject
 int Cls_d48150::FUN_00d48150(void* ctx, int key)
 {
     int i = 0;

@@ -10,6 +10,8 @@ struct S_00a768b0
 {
     int FUN_00a768b0(int a1, A_00a768b0* a2, int a3, V_00a768b0* a4, int a5);
 };
+// pdb: hkpGroupFilter::isCollisionEnabled | hkpGroupFilter.obj | fnv360_0822_retail, vtable, high
+// pdb params: aInput, bShape, bContainer, bKey
 int S_00a768b0::FUN_00a768b0(int a1, A_00a768b0* a2, int a3, V_00a768b0* a4, int a5)
 {
     ((F_00a768b0*)((char*)this - 0x10))->FUN_00a76800(a1, a2->f20, a4->Call(a5));
@@ -34,6 +36,7 @@ N_00acf8b0::N_00acf8b0() throw()
     vp = (void*)&DAT_00e8f2ec;
 }
 struct O_00acf8b0 { void FUN_00ad2420(N_00acf8b0*, int); N_00acf8b0* FUN_00acf8b0(int); };
+// pdb: NiPSysAirFieldSpreadCtlr::CreateClone | NiPSysAirFieldSpreadCtlr.obj | tesv_win, caller_sim, low
 N_00acf8b0* O_00acf8b0::FUN_00acf8b0(int a)
 {
     N_00acf8b0* p = new N_00acf8b0;
@@ -109,6 +112,8 @@ extern G_00afbba0* DAT_01174988;
 extern char DAT_01174a08[64];
 void __cdecl FUN_00bffa60(void*, const void*, unsigned);
 
+// pdb: ShadowLightShader::UpdatePipelineZOnlyTexEffect | ShadowLightShader.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: apGeometry, apBSSProp, apPass
 void __stdcall FUN_00afbba0(void* p)
 {
     if (DAT_01174988->v && p) {

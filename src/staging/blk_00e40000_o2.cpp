@@ -23,6 +23,7 @@ class BSStream : public A8AE50Stream
 public:
     virtual void unk00();
 };
+// pdb: BSStream::BSStream | ModelLoader.obj | fnv360_0822_retail, call_gap, low
 FUN_00e4e400_class* FUN_00e4e400_class::FUN_00e4e400()
 {
     reinterpret_cast<BSStream*>(this)->BSStream::BSStream();
@@ -86,6 +87,8 @@ struct FUN_00e459c0_class {
 
 // If both masks are zero sets byte 0x30 to 1; otherwise ORs each set bit's mask into the corresponding int at offset 0x34.
 // @fnv 0x00e459c0
+// pdb: hkpGroupCollisionFilter::enableCollisionGroups | hkpGroupCollisionFilter.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: groupBitsA, groupBitsB
 void FUN_00e459c0_class::SetBitMaskFlags(int a, int b)
 {
     if (!a && !b)
@@ -107,6 +110,8 @@ struct FUN_00e45a10_class {
 };
 // If both masks are zero, clears the byte at offset 0x30; otherwise for each of 32 bits, clears the other mask's bits in the corresponding dword at 0x34 + i*4.
 // @fnv 0x00e45a10
+// pdb: hkpGroupCollisionFilter::disableCollisionGroups | hkpGroupCollisionFilter.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: groupBitsA, groupBitsB
 void __thiscall FUN_00e45a10_class::ClearFlags(int a, int b)
 {
     if (!a && !b)
@@ -426,6 +431,7 @@ extern int DAT_010ec1fc;
 struct S_00e4af60_inner {
     void FUN_00922cb0();
 };
+// pdb: hkSerializeMultiMap<class hkDataClassDict *,class hkDataClassDict *,class hkPointerMap<class hkDataClassDict *,int,struct hkContainerHeapAllocator> >::clear | hkDataObjectDict.obj | tesv_win, caller_sim, low
 S_00e4af60_class* S_00e4af60_class::FUN_00e4af60()
 {
     this->unk06 = 1;
@@ -459,6 +465,7 @@ AudioHolder* __cdecl FUN_00c85750() throw();
 extern const float g_x;
 
 // @fnv 0x00e52f40
+// pdb: MagicSystem::GetChameleonMaxRefraction | MagicSystem.obj | fnv360_0822_retail, call_seq, medium
 float __cdecl FUN_00e52f40()
 {
     return g_x;
@@ -467,6 +474,8 @@ float __cdecl FUN_00e52f40()
 extern const float g_010ec960;
 
 // @fnv 0x00e52f50
+// pdb: AiFormulas::AVDeriveBodyPartCondition | AiFormulas.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apActor, aiWhich
 float __cdecl FUN_00e52f50()
 {
     return g_010ec960;
@@ -475,6 +484,8 @@ float __cdecl FUN_00e52f50()
 extern const float g_010af2f0;
 
 // @fnv 0x00e52f60
+// pdb: CombatFormulas::GetPowerAttackDamageMultiplier | CombatFormulas.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aiWeaponSkill, aePowerAttackGroup
 float __cdecl FUN_00e52f60()
 {
     return g_010af2f0;
@@ -483,6 +494,7 @@ float __cdecl FUN_00e52f60()
 extern const float g_010ec964;
 
 // @fnv 0x00e52f70
+// pdb: ActionPoints::GetActionPointsRestoreRate | ActionPoints.obj | fnv360_0822_retail, objrun_open, low
 float __cdecl FUN_00e52f70()
 {
     return g_010ec964;
@@ -491,6 +503,7 @@ float __cdecl FUN_00e52f70()
 extern const float DAT_010ec968;
 
 // @fnv 0x00e52f80
+// pdb: Interface::GetRenderedMenuScreenWidth | Interface.obj | fnv360_0822_retail, call_gap_sim, low
 float __cdecl FUN_00e52f80()
 {
     return DAT_010ec968;
@@ -499,6 +512,7 @@ float __cdecl FUN_00e52f80()
 extern float DAT_0104da4c;
 
 // @fnv 0x00e52f90
+// pdb: StatsMenu::GetRadMeterMax | StatsMenu.obj | fnv360_0822_retail, call_gap_sim, low
 float __cdecl FUN_00e52f90(void)
 {
     return DAT_0104da4c;
@@ -525,6 +539,7 @@ struct FUN_00e53180_cls {
 };
 
 // @f3 0x005686c0 (community match, verified in this file)
+// pdb: hkpCdPointCollector::`scalar deleting destructor' | CameraCaster.obj | fnv360_1110_retail, objrun, medium
 FUN_00e53180_cls::FUN_00e53180_cls(const float* pSrc)
 {
     m_00 = pSrc[0];
@@ -587,6 +602,8 @@ struct FUN_00e53200_cls {
 
 // Multiplies the four float members m_00, m_04, m_08 and m_0c by s.
 // @f3 0x006b1f50 (community match, verified in this file)
+// pdb: NiPoint3::operator*= | MultiBoundMarkerData.obj | fnv360_0822_debug, call_gap, low, conflict (skyrim: TESHavokUtilities::AddVelocity)
+// pdb params: fScalar
 FUN_00e53200_cls::FUN_00e53200_cls(float afScale)
 {
     m_00 = m_00 * afScale;
@@ -773,6 +790,8 @@ struct C7e02b0
     bool FUN_007e02b0(NP3_7e02b0 pt, int d) const;
 };
 
+// pdb: ActorMover::RequestRotateActor | ActorMover.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aTargetPoint, abForceTurn
 bool C7e02b0::FUN_007e02b0(NP3_7e02b0 pt, int d) const
 {
     const float* v = unk28->vf1f4();
@@ -1010,6 +1029,8 @@ struct S_00e65ee0_Class {
 
 // Stores value in a local struct and calls FUN_00e65ee0 with a zeroed buffer and object->unk20.
 // @fnv 0x00e5cfb0
+// pdb: hkMoppFindAllVirtualMachine_getAllKeys | hkpMoppMachine.obj | fnv360_0822_retail, objrun, medium
+// pdb params: code, primitives_out
 void __cdecl FUN_00e5cfb0(S_00e5cfb0_Object* object, int value)
 {
     S_00e65ee0_Class local;
@@ -1157,6 +1178,7 @@ public:
 
 // Initializes the manager by constructing its base and default-constructing the enabled flag and slot table members.
 // @fnv 0x00e45530
+// pdb: hkpGroupCollisionFilter::hkpGroupCollisionFilter | hkpGroupCollisionFilter.obj | tesv_win, hash, low
 FUN_00e45530_Manager::FUN_00e45530_Manager()
 {
 }
@@ -1364,6 +1386,8 @@ struct FUN_00e46e80 {
 };
 
 // @fnv 0x00e46e80
+// pdb: hkpExtendedMaterial::hkpExtendedMaterial | bhkExtendedMeshShape.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: auiFilter, auiMaterial
 FUN_00e46e80::FUN_00e46e80()
 {
     m_00 = 0;
@@ -1391,6 +1415,7 @@ struct FnvCpu_FUN_00e473f0_CpuObject {
     void FUN_00e473f0(unsigned char arg0);
 };
 // @fnv 0x00e473f0
+// pdb: hkpLinearParametricCurve::isClosedLoop | hkpLinearParametricCurve.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkpLinearParametricCurve::setClosedLoop)
 void FnvCpu_FUN_00e473f0_CpuObject::FUN_00e473f0(unsigned char arg0)
 {
     value = arg0;
@@ -1416,6 +1441,7 @@ struct FUN_00e48400 {
     FUN_00e48400(const SourceData* source);
 };
 // @fnv 0x00e48400
+// pdb: hkpCallbackConstraintMotor::hkpCallbackConstraintMotor | hkpCallbackConstraintMotor.obj | tesv_win, caller, medium
 FUN_00e48400::FUN_00e48400(const SourceData* source) {
     m_ppVirtualMethodTable = &DAT_010cb76c;
     m_flags = 1;
@@ -1458,6 +1484,8 @@ struct FUN_00e484a0_Class
 };
 // For each of m_count10 items, reads the byte at arg->m_base20 + (item >> 8), stores it in the item's low byte, and zeroes that byte.
 // @fnv 0x00e484a0
+// pdb: hkpRemoveTerminalsMoppModifier::applyRemoveTerminals | hkpRemoveTerminalsMoppModifier.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: moppCode
 void FUN_00e484a0_Class::ClearReferencedBytes(FUN_00e484a0_Arg* arg)
 {
     for (int i = 0; i < m_count10; ++i)
@@ -1492,6 +1520,8 @@ struct FUN_00e484e0_class {
 };
 // For each of m_10 entries in m_0c, writes the low byte of the entry into dst->m_20 at index entry >> 8.
 // @fnv 0x00e484e0
+// pdb: hkpRemoveTerminalsMoppModifier::undoRemoveTerminals | hkpRemoveTerminalsMoppModifier.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: moppCode
 void FUN_00e484e0_class::ScatterBytes(FUN_00e484e0_dst* dst) {
     for (int i = 0; i < m_10; ++i) {
         unsigned int v = m_0c[i];
@@ -1515,6 +1545,8 @@ struct FUN_00e48db0_class {
 };
 // Calls FUN_00dcd310 with f and p, then stores pointers to DAT_010e8ab0 and DAT_010e8a90 in m_00 and m_10, returning this.
 // @fnv 0x00e48db0
+// pdb: hkpFastMeshShape::hkpFastMeshShape | hkpFastMeshShape.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: radius, numBitsForSubpartIndex
 FUN_00e48db0_class* FUN_00e48db0_class::InitFromFloatAndPointer(float f, void* p)
 {
     ((FUN_00e48db0_holder*)this)->FUN_00dcd310(f, p);
@@ -1545,6 +1577,7 @@ struct GtrStand_ {
     void* FUN_00e4af40();
 };
 // @fnv 0x00e4af40
+// pdb: hkpConvexTransformShape::getContainer | hkpConvexTransformShape.obj | fnv360_0822_retail, objrun_open, low
 void* GtrStand_::FUN_00e4af40()
 {
     return &unk14;
@@ -1553,6 +1586,8 @@ void* GtrStand_::FUN_00e4af40()
 struct HolderStub;
 HolderStub* __cdecl FUN_00c85750();
 // @fnv 0x00e4e3f0
+// pdb: bhkSPCollisionObject::LoadBinary | bhkSPCollisionObject.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 HolderStub* __cdecl FUN_00e4e3f0()
 {
     return FUN_00c85750();
@@ -1572,6 +1607,8 @@ public:
 int GetUnsignedValue(const char*, bool, unsigned*);
 
 // @fnv 0x00e5c8a0
+// pdb: bhkSPCollisionObject::LinkObject | bhkSPCollisionObject.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 int FUN_00e5c8a0(const char* p, bool b, unsigned* u)
 {
     return GetUnsignedValue(p, b, u);
@@ -1608,12 +1645,14 @@ public:
 };
 
 // @fnv 0x00e48460
+// pdb: getMoppInstruction | hkpRemoveTerminalsMoppModifier.obj | fnv360_0822_retail, objrun_open, low
 unsigned char __cdecl FUN_00e48460(unsigned char value)
 {
     return value;
 }
 
 // @fnv 0x00e48470
+// pdb: getMoppOffset | hkpRemoveTerminalsMoppModifier.obj | fnv360_0822_retail, objrun_open, low
 __declspec(noinline) static unsigned int FUN_00e48470(unsigned int uiValue) {
     return uiValue >> 8;
 }
@@ -1626,6 +1665,7 @@ struct e48480_cls { unsigned char b; };
 extern "C" e48480_cls* e48480_target(void);
 extern "C" unsigned char e48480_val(void);
 // @fnv 0x00e48480
+// pdb: setMoppInstruction | hkpRemoveTerminalsMoppModifier.obj | fnv360_0822_retail, objopen_prop, low
 static __declspec(noinline) void FUN_00e48480(e48480_cls* dst, unsigned char val)
 {
     *(unsigned char*)dst = 0;
@@ -1647,6 +1687,7 @@ E48490Cell* E48490PtrSrc();
 int E48490ValSrc();
 
 // @fnv 0x00e48490
+// pdb: setMoppOffset | hkpRemoveTerminalsMoppModifier.obj | fnv360_0822_retail, objrun_open, low
 static __declspec(noinline) int FUN_00e48490(E48490Cell* cell, int value)
 {
     unsigned int shifted = value << 8;
@@ -1753,6 +1794,8 @@ static __forceinline void SetZero4(__m128* v)
     f[0] = 0.0f;
 }
 
+// pdb: hkpReorientAction::hkpReorientAction | hkpReorientAction.obj | fnv360_0822_debug, caller_sim, high
+// pdb params: body, rotationAxis, upAxis, strength, damping
 MotorObject* MotorObject::FUN_00e444c0()
 {
     FUN_00d2b260(0, 0);
@@ -1787,6 +1830,7 @@ struct FUN_00bce490 : Base00bce490 {
     Holder00bce490 holder;
     virtual ~FUN_00bce490();
 };
+// pdb: BSXenonTaskletData::~BSXenonTaskletData | BSXenonTaskletData.obj | fnv360_0822_debug, caller, low, conflict (skyrim: BSWin32TaskletData::~BSWin32TaskletData)
 FUN_00bce490::~FUN_00bce490()
 {
     holder.FUN_00bce450();
@@ -1847,6 +1891,8 @@ struct BitLinks {
 
 // Sets the bit for b in m_ppLinks[a] and the bit for a in m_ppLinks[b], recording a symmetric link between the two indices.
 // @fnv 0x00e48910
+// pdb: hkpGroupFilter::enableCollisionsBetween | hkpGroupFilter.obj | fnv360_0822_retail, objrun, medium
+// pdb params: layerA, layerB
 void BitLinks::SetLink(int aiIndexA, int aiIndexB)
 {
     m_ppLinks[aiIndexA] |= 1u << aiIndexB;
@@ -1895,6 +1941,8 @@ struct Owner {
 
 // Accumulates m_iBase and per-index sizes into pkStats, tracking the max control point size and computing the average.
 // @fnv 0x00e493a0
+// pdb: hkpConvexPieceMeshShape::getStats | hkpConvexPieceMeshShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: statsOut
 void Owner::FUN_00e493a0(Stats* pkStats)
 {
     pkStats->m_iTotal += m_pkLayout->m_iBase;
@@ -2067,6 +2115,8 @@ void __cdecl ResizeAudioStream(void* pAllocator, void* pArray, int auiNewSize);
 
 // @f3 0x00a914e0 (community match, verified in this file)
 void __cdecl FUN_00901f10(void* array, int sizeOfElement);
+// pdb: hkpConstraintChainUtil::getAdjointEntities | hkpConstraintChainUtil.obj | fnv360_0822_retail, call_gap, high
+// pdb params: allConstraints, entity, entitiesOut, constraintsOut
 void __cdecl CollectConnectedNodesAndEdges(ChainArray<void*>* src, void* node, ChainArray<void*>* outNodes, ChainArray<void*>* outEdges)
 {
     for (int i = 0; i < src->m_iElementCount; ++i)
@@ -2155,6 +2205,7 @@ struct Mid : RefObject, CollectorBase {
 
 struct FnvCpu_FUN_00e49bb0_CpuObject { char* FUN_00e49bb0(); };
 // @fnv 0x00e49bb0
+// pdb: hkpCollisionFilterList::getCollisionFilters | hkpCollisionFilterList.obj | fnv360_0822_retail, objrun_open, low
 char* FnvCpu_FUN_00e49bb0_CpuObject::FUN_00e49bb0()
 {
     return reinterpret_cast<char*>(this) + 48;
@@ -2572,6 +2623,8 @@ struct Pc_Instance : Pc_RefObj {
 // last allocation sinks below the argument loads of the constructor call.
 Se5b160_Instance* __cdecl CreatePoweredConstraint(const Se5b160_Instance* __restrict original, Se5b160_Motor* motor, bool enableMotors);
 
+// pdb: hkpConstraintUtils::convertToPowered | hkpConstraintUtils.obj | fnv360_0822_retail, ustr, high
+// pdb params: originalConstraint, constraintMotor, enableMotors
 Se5b160_Instance* __cdecl CreatePoweredConstraint(const Se5b160_Instance* original, Se5b160_Motor* motor, bool enableMotors) {
     // View the shared prototype through the independently checked target-build layout.
     const Pc_Instance* originalConstraint = reinterpret_cast<const Pc_Instance*>(original);
@@ -2733,6 +2786,7 @@ struct Node
     void FUN_00615e50();
 };
 
+// pdb: BGSTerrainNode::UnloadPersistentDataRecurse | BGSTerrainNode.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BGSTerrainManager::GetCurrentWorldHasLOD)
 void Node::FUN_00615e50()
 {
     Payload* owned = payload;

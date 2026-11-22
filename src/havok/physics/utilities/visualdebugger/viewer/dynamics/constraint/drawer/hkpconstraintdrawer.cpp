@@ -86,6 +86,7 @@ struct DE47B0Object
 };
 
 // @fnv 0x00de47b0
+// pdb: hkJobThreadPool::hkJobThreadPool | hkCpuJobThreadPool.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: hkCpuJobThreadPool::isProcessing)
 void DE47B0Object::FUN_00de47b0(float value)
 {
     m_uiFilterValue = value;
@@ -105,6 +106,8 @@ struct FUN_00de47d0_cls
 };
 
 // @fnv 0x00de47d0
+// pdb: hkpMalleableConstraintData::getRuntimeInfo | hkpMalleableConstraintData.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: wantRuntime, infoOut
 void FUN_00de47d0_cls::FUN_00de47d0(float afValue)
 {
     m_fValue = afValue;
@@ -133,6 +136,7 @@ void FUN_00de47a0_cls::FUN_00de47a0(unsigned int value)
 
 // @f3twin 0x00a752a0 of 0x00941ff0
 struct F3Twin_00a752a0 : public DE47B0Object { void F3_FUN_00a752a0(float value) ; };
+// pdb: hkpLinearParametricCurve::setSmoothingFactor | hkpLinearParametricCurve.obj | tesv_win, objrun_open, low
 void F3Twin_00a752a0::F3_FUN_00a752a0(float value) 
 {
     m_uiFilterValue = value;

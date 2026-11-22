@@ -17,6 +17,8 @@ struct Sky {void FUN_0057aeb0(Buffer*);};Sky* __cdecl Sky_GetInstance();
 void __cdecl FUN_006d13c0(Buffer*);void __cdecl FUN_006d1a30(Buffer*);void __cdecl FUN_0061a210(Buffer*);
 void __cdecl BGSSaveLoadGlobalData_SaveEffects(Buffer*);void __cdecl FUN_0048c4b0(Buffer*);void __cdecl FUN_005a1d10(Buffer*);
 void __cdecl FalloutRadio_SaveGame(Buffer*);void __cdecl FUN_006bd7b0(Buffer*);void __cdecl FUN_006cd570(const char*,...);
+// pdb: BGSSaveLoadGlobalData::SaveGlobalData | BGSSaveLoadGlobalData.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiGlobalDataType, apSaveGameBuffer
 bool __cdecl FUN_006d1c50(unsigned type,Buffer* buffer){
 switch(type){
 case 1:FUN_006d13c0(buffer);return true;

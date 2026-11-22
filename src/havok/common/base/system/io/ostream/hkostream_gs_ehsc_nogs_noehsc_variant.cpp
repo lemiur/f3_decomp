@@ -323,6 +323,8 @@ static __declspec(noinline) void FUN_00cc0080(hkWriter0080* out, const char* str
 }
 
 // @fnv 0x00cc0410
+// pdb: hkOstream::printf | hkOStream.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: fmt
 void __cdecl FUN_00cc0410(hkOstream* self, const char* fmt, ...)
 {
     char buf[0x2728];

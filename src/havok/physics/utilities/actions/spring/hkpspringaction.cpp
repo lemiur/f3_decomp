@@ -89,6 +89,7 @@ class FUN_00d4f000
 
 // Constructs the object by initialising its embedded shape members; the zero-fill branch is never taken because pcBegin equals pcEnd.
 // @fnv 0x00d4f000
+// pdb: hkpWheelConstraintData::Atoms::Atoms | hkpWheelConstraintData.obj | tesv_win, objrun_open, low
 FUN_00d4f000::FUN_00d4f000() throw()
 {
     char* pcBegin = (char*)&m_sB0;
@@ -135,6 +136,8 @@ struct FUN_00d4d340 : FUN_00cf4d80
 };
 // Calls the base constructor, sets the vtable, m_fMass to 1.0, spring constant and damping from globals, and sets both bool flags to true.
 // @fnv 0x00d4d340
+// pdb: hkpSpringAction::hkpSpringAction | hkpSpringAction.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: entityA, entityB, userData
 FUN_00d4d340::FUN_00d4d340(void* a, void* b, unsigned long c) : FUN_00cf4d80(a, b, c)
 {
     float* __restrict pf = &m_fSpringConstant;

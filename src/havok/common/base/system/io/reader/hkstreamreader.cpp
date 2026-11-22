@@ -13,6 +13,8 @@ struct VersionedDataBlock
 };
 // Reads up to size bytes in chunks of at most 512 into a local buffer, stopping on a zero-length read, and returns the number of bytes read.
 // @fnv 0x00cb14f0
+// pdb: hkStreamReader::skip | hkStreamReader.obj | fnv360_0822_retail, vtable, high
+// pdb params: nbytes
 int VersionedDataBlock::ReadBytes(int size)
 {
     unsigned int buffer[128];
@@ -39,6 +41,7 @@ class Stream
 };
 
 // @fnv 0x00cb1550
+// pdb: hkStreamReader::readChar | hkStreamReader.obj | fnv360_0822_retail, call_seq, medium
 int Stream::ReadChar()
 {
     char c;
@@ -59,6 +62,7 @@ int S_00cb1570::hkEntitySelectorAll_isEntityOk(void* pArg)
 }
 
 // @fnv 0x00cb1580
+// pdb: Random::nelems | IdvRandom.obj | fnv360_0721_beta, vtable, medium
 int __cdecl FUN_00cb1580()
 {
     return 1;
@@ -77,6 +81,8 @@ struct CB1590Object
 };
 
 // @fnv 0x00cb1590
+// pdb: hkFileSystem::listDirectory | HavokStream.obj | fnv360_0721_beta, vtable, medium
+// pdb params: basePath, listingOut
 int CB1590Object::FUN_00cb1590(const void* a, const void* b) const
 {
     return 1;
@@ -105,6 +111,8 @@ CB15B0Bool CB15B0Object::hkStreamWriter_seekTellSupported() const
 }
 
 // @fnv 0x00cb15a0
+// pdb: MagicSystem::MagicSchoolToSkill | MagicSystem.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: aeSchool
 int FUN_00cb15a0()
 {
     return -1;

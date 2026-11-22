@@ -4,6 +4,8 @@
 
 // Reads the control point count and compact control point count from the stream, allocating and reading the corresponding float and short arrays.
 // @fnv 0x00a52870
+// pdb: NiBSplineData::LoadBinary | NiBSplineData.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void NiBSplineData::LoadBinary(NiStream& stream)
 {
     ReadGroup(stream);
@@ -35,6 +37,8 @@ void NiBSplineData::LoadBinary(NiStream& stream)
 
 // Evaluates the B-spline at the given time using the basis weights and control points, accumulating the weighted result into value.
 // @fnv 0x00a526b0
+// pdb: NiBSplineData::GetCompactedValueDegree3 | NiBSplineData.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: fTime, afPos, uiDimension, pkBasisData, kControlPointHandle, fOffset, fHalfRange
 void NiBSplineData::CalculateSplineValue(float time, float* value, unsigned int dimension,
                                          NiBSplineBasisData* basisData, unsigned int handle, float offset,
                                          float halfRange)
@@ -70,6 +74,7 @@ void __fastcall FUN_00a5d3d0(void*);
 void __cdecl FUN_00aa1460(void*, unsigned int);
 
 // @fnv 0x00a52510
+// pdb: NiBSplineData::`scalar deleting destructor' | NiBSplineData.obj | fnv360_0822_retail, objrun, high
 void* __fastcall FUN_00a52510(void** pThis, int, unsigned int flags)
 {
     *pThis = &DAT_01099e54;
@@ -91,6 +96,8 @@ struct NiBSplineData_shell : NiBSplineData
 };
 
 // @fnv 0x00a51e50
+// pdb: NiBSplineData::IsEqual | NiBSplineData.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pkObject
 bool NiBSplineData_shell::FUN_00a51e50(NiObject* pkObject)
 {
     if (IsSameAs(pkObject))
@@ -146,6 +153,8 @@ struct FUN_00a52950_cls : NiBSplineData
 
 // Loads the base spline data, then reads the control point count and its array, followed by the compact control point count and its array.
 // @fnv 0x00a52950
+// pdb: NiBSplineData::SaveBinary | NiBSplineData.obj | fnv360_0822_retail, objrun, medium
+// pdb params: kStream
 void FUN_00a52950_cls::LoadControlPoints(NiStream& stream)
 {
     reinterpret_cast<NiBSplineBaseStand*>(this)->LoadStream(stream);
@@ -203,6 +212,8 @@ class FUN_00a52a20_cls
 };
 
 // @fnv 0x00a52a20
+// pdb: NiBSplineData::GetViewerStrings | NiBSplineData.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pStrings
 void FUN_00a52a20_cls::LoadFromStream(ArrayArg& kStream)
 {
     reinterpret_cast<NiBase_stand*>(this)->LoadStream(kStream);
@@ -244,6 +255,8 @@ class SplData : public NiBSplineData
 
 // Evaluates a B-spline at fTime by accumulating weighted control points into afPos using basis weights and uiDimension.
 // @fnv 0x00a52550
+// pdb: NiBSplineData::GetValueDegree3 | NiBSplineData.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: fTime, afPos, uiDimension, pkBasisData, kControlPointHandle
 void SplData::FUN_00a52550(float fTime, float* afPos, unsigned int uiDimension, NiBSplineBasisData* pkBasisData,
                            unsigned int uiControlPointOffset)
 {

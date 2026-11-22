@@ -13,6 +13,7 @@ extern void __cdecl FUN_00a7b300();
 extern void __cdecl operator delete(void*, unsigned int);
 
 // @fnv 0x00a9a4b0
+// pdb: NiFloatExtraData::`scalar deleting destructor' | NiFloatExtraData.obj | fnv360_0822_retail, objrun, high
 void* NiFloatExtraData::Destroy(unsigned int flags)
 {
     this->m_ppVirtualMethodTable = &DAT_010a0ec4;
@@ -33,6 +34,8 @@ struct FUN_00a9a3f0_Class
 };
 // Returns true if pObject is non-null and its float at offset 12 equals m_fValue, otherwise false.
 // @fnv 0x00a9a3f0
+// pdb: NiFloatExtraData::IsEqual | NiFloatExtraData.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pObject
 bool FUN_00a9a3f0_Class::MatchesFloatValue(NiObject* pObject)
 {
     NiFloatExtraData* pExtra = (NiFloatExtraData*)pObject;
@@ -54,6 +57,8 @@ struct NiExtraData
     void* CloneFloatExtraData(void*);
 };
 // @fnv 0x00a9a430
+// pdb: NiFloatExtraData::CreateClone | NiFloatExtraData.obj | fnv360_0822_retail, objrun, high
+// pdb params: kCloning
 void* NiExtraData::CloneFloatExtraData(void* kCloning)
 {
     NiFloatExtraData* pkObject;
@@ -126,6 +131,8 @@ struct Cls_00a9a4e0 : NiExtraData
 };
 // Calls NiExtraData::SaveBinary then writes the 4-byte m_fValue to the stream and advances its position.
 // @fnv 0x00a9a4e0
+// pdb: NiSphere::SaveBinary | NiSphere.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kStream
 void Cls_00a9a4e0::FUN_00a9a4e0(NiStream& stream)
 {
     NiExtraData::SaveBinary(stream);

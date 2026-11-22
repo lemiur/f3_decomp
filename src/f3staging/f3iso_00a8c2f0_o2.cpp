@@ -86,6 +86,7 @@ struct FUN_00a8d060 {
 };
 typedef FUN_00a8d060 MonitorNode;
 
+// pdb: findChildWithHint | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, objrun, medium, conflict (skyrim: hkDefaultMemoryTracker::ClassAlloc::operator==)
 static __declspec(noinline) bool FUN_00a8c2f0(const char* name, int& hint, const MonitorNode* parent)
 {
     if (parent->children.size > hint && hkString_strCmp(parent->children[hint]->name, name) == 0)

@@ -14,6 +14,7 @@ struct NiPSysAirFieldModifier
 
 // Calls FUN_00c31750, then if flags has bit 1 set calls __Dummy_00b6fef0 on this with 0x68, and returns this.
 // @fnv 0x00c2f5a0
+// pdb: NiPSysAirFieldModifier::`scalar deleting destructor' | NiPSysAirFieldModifier.obj | fnv360_0822_retail, objrun, medium
 void* __thiscall NiPSysAirFieldModifier::Destroy(unsigned int flags)
 {
     void* p = this;
@@ -44,6 +45,8 @@ struct AirTmp : NiPSysFieldModifier
     void __thiscall NiPSysAirFieldModifier_SetDirection(void*);
 };
 // @fnv 0x00c2fad0
+// pdb: NiPSysAirFieldModifier::CreateClone | NiPSysAirFieldModifier.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kCloning
 NiObject* __thiscall NiPSysFieldModifier::Clone(CloningProcess& kCloning)
 {
     AirTmp* pkObject;
@@ -63,6 +66,7 @@ struct A51BF0Base
 };
 
 // @fnv 0x00c2f630
+// pdb: NiPSysAirFieldModifier::CreateObject | NiPSysAirFieldModifier.obj | fnv360_0822_retail, caller_sim, medium
 void* __cdecl CreateAirTmp()
 {
     AirTmp* p = (AirTmp*)A51BF0Base::operator new(0x68);
@@ -138,6 +142,7 @@ struct FUN_00c2fb10_cls
 };
 
 // @fnv 0x00c2fb10
+// pdb: NiPSysAirFieldModifier::IsEqual | NiPSysAirFieldModifier.obj | tesv_win, hash, low
 bool FUN_00c2fb10_cls::FUN_00c2fb10(void* other)
 {
     FUN_00c2fb10_cls* p = (FUN_00c2fb10_cls*)other;
@@ -440,6 +445,7 @@ class FUN_00c2f5c0_cls : public BC2F5C0Modifier
 
 // Initialises the modifier: sets direction to -unit Z, resets the point to zero, and sets the float to FLT_MAX.
 // @fnv 0x00c2f5c0
+// pdb: NiPSysAirFieldModifier::NiPSysAirFieldModifier | NiPSysAirFieldModifier.obj | fnv360_0822_retail, caller_sim, high
 FUN_00c2f5c0_cls::FUN_00c2f5c0_cls() throw()
 {
     SetDirection(-g_kC2F5C0UnitZ);
@@ -686,6 +692,8 @@ inline void* operator new(unsigned int, void* pv)
 
 // For particles within the squared distance limit, adds an air-friction-scaled field velocity over elapsed time when relative velocity points against it.
 // @fnv 0x00c2f650
+// pdb: NiPSysAirFieldModifier::UpdateNoAttenuationNoInheritNoSpread | NiPSysAirFieldModifier.obj | fnv360_0822_retail, objrun, high
+// pdb params: fTime, pkData
 void Cls_00c2f650::UpdateParticleAirFriction(float fTime, NiPSysData* pkData)
 {
     if (m_fInfluence == 0.0f)
@@ -853,6 +861,8 @@ struct S00c2f8d0_Mod
 
 // When influence is nonzero, transforms the field direction and adjusts particle velocities using air friction and the time delta.
 // @fnv 0x00c2f8d0
+// pdb: NiPSysAirFieldModifier::UpdateNoAttenuationNoInheritNoSpreadNoMaxDistance | NiPSysAirFieldModifier.obj | fnv360_0822_retail, objrun, high
+// pdb params: fTime, pkData
 void S00c2f8d0_Mod::UpdateAirFriction(float fTime, NiPSysData* pkData)
 {
     if (m_fInfluence == 0.0f)

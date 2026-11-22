@@ -27,6 +27,8 @@ struct FUN_006d3080_Tri
     int c;
 };
 
+// pdb: ReferenceInitialData::Initialize | BGSSaveLoadInitialData.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: apReferenceLocationInitialData
 int* FUN_00d85a20_Stub::CopyStateFrom(int* p)
 {
     char* s = (char*)p;
@@ -413,6 +415,8 @@ struct S_00d85af0_Real : S_00d85af0_Base {
     const S_00d85af0_T3& D4c() const { return unkd4; }
 };
 
+// pdb: PathingRequestCover::CopyTo | PathingRequestCover.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apDest
 S_00d85af0_Cls* S_00d85af0_Cls::AssignFrom(const S_00d85af0_Cls* o)
 {
     S_00d85af0_Real* src = (S_00d85af0_Real*)this;
@@ -446,6 +450,7 @@ CpuOpaque* __cdecl FUN_00d9f6c0()
 extern int DAT_010cc4f4;
 
 // @fnv 0x00d9f6e0
+// pdb: getVtablehkpSerializedDisplayMarkerList | hkpSerializedDisplayMarkerListClass.obj | fnv360_0822_retail, objrun_open, low
 unsigned int __cdecl FUN_00d9f6e0() {
     return reinterpret_cast<unsigned int>(&DAT_010cc4f4);
 }
@@ -667,6 +672,7 @@ struct S {
     void SetValueAndPtr(unsigned int a, B* b);
 };
 // @fnv 0x00d87130
+// pdb: hkClassMemberAccessor::connect | hkClassMemberAccessor.obj | tesv_win, objrun_prop, low
 void S::SetValueAndPtr(unsigned int uiValue, B* b) {
 m0 = uiValue + b->w12; m4 = b;
 }
@@ -678,6 +684,7 @@ struct FUN_00d871c0_class {
     FUN_00d871c0_class* Append(FUN_00d871c0_class* a, int b, const void* p);
 };
 // @fnv 0x00d871c0
+// pdb: hkClassMemberAccessor::hkClassMemberAccessor | hkClassMemberAccessor.obj | tesv_win, hash, low
 FUN_00d871c0_class* FUN_00d871c0_class::Append(FUN_00d871c0_class* apData, int b, const void* p)
 {
     ((D871A0Buffer*)this)->append(apData, b, (int)p);
@@ -701,6 +708,7 @@ struct FUN_00d87380_Class {
 
 // Calls Append on target with this->unk00, the result of this->unk04->FUN_00d86910(), and arg2, then returns target.
 // @fnv 0x00d87380
+// pdb: hkClassMemberAccessor::member | hkClassMemberAccessor.obj | tesv_win, hash, low
 TargetClass* FUN_00d87380_Class::CallTargetMethod(TargetClass* target, int aiArg) {
     target->Append(this->unk00, this->unk04->FUN_00d86910(), aiArg);
     return target;
@@ -716,6 +724,7 @@ public:
 };
 
 // @fnv 0x00d87410
+// pdb: hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getIterator | hkStringMap.obj | fnv360_0822_retail, call_seq, high
 int hkSetD874::FUN_00d87410() const
 {
     int i;
@@ -734,6 +743,7 @@ struct FUN_00d87910_cls {
 };
 
 // @fnv 0x00d87910
+// pdb: hkThread::hkThread | hkWin32Thread.obj | tesv_win, call_seq, medium
 FUN_00d87910_cls* FUN_00d87910_cls::FUN_00d87910()
 {
     m_00 = 0;
@@ -743,6 +753,7 @@ FUN_00d87910_cls* FUN_00d87910_cls::FUN_00d87910()
 extern "C" unsigned int (__stdcall *DAT_00fdf1d0)();
 
 // @fnv 0x00d87a40
+// pdb: hkThread::getMyThreadId | hkWin32Thread.obj | tesv_win, objrun, medium
 unsigned __int64 __cdecl FUN_00d87a40()
 {
     return DAT_00fdf1d0();
@@ -784,6 +795,8 @@ struct FUN_00d880f0_Class {
 };
 
 // @fnv 0x00d880f0
+// pdb: ModifierList::SetZeroValuesAllowed | ModifierList.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: NiRenderTargetGroup::SetResolveDepthBufferMode)
+// pdb params: abZeroValuesAllowed
 void FUN_00d880f0_Class::FUN_00d880f0(unsigned char val) {
     unk08 = val;
 }
@@ -799,6 +812,8 @@ struct DispatchTarget {
     virtual void Dispatch(int argument);
 };
 // @fnv 0x00d921e0
+// pdb: hkAgent3Bridge::updateFilter | hkpAgent3Bridge.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkAgent3Bridge::destroy)
+// pdb params: entry, agentData, bodyA, bodyB, input, mgr, constraintOwner
 void __cdecl InvokeDispatch(void* context, DispatchTarget** target, void* reserved, int argument) {
     (*target)->Dispatch(argument);
 }
@@ -818,6 +833,8 @@ public:
 
 // Calls process on the target object pointed to by ppkTarget, forwarding a, b, c and d.
 // @fnv 0x00d92200
+// pdb: hkAgent3Bridge::updateFilter | hkpAgent3Bridge.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: entry, agentData, bodyA, bodyB, input, mgr, constraintOwner
 void __cdecl FUN_00d92200(void* pvContext, hkTargetD922B** ppkTarget, void* a, void* b, void* c, void* pvUnused, void* d)
 {
     (*ppkTarget)->process(a, b, c, d);
@@ -842,6 +859,8 @@ struct FUN_00d92250_holder {
 };
 
 // @fnv 0x00d92250
+// pdb: hkAgent3Bridge::invalidateTim | hkpAgent3Bridge.obj | fnv360_0822_retail, objrun, high
+// pdb params: entry, agentData, input
 void __cdecl CallObjectVirtual(void* pvUnused, FUN_00d92250_holder* pkHolder, int iValue)
 {
     pkHolder->m_object->V9(iValue);
@@ -864,6 +883,8 @@ struct FUN_00d92270_Dispatch
 
 // Calls virtual method v10 on the object pointed to by a2 with a3, a4 and a5, returning its result.
 // @fnv 0x00d92270
+// pdb: hkAgent3Bridge::warpTime | hkpAgent3Bridge.obj | fnv360_0822_retail, objrun, high
+// pdb params: entry, agentData, oldTime, newTime, input
 int DispatchVirtualCall(int aiUnused, FUN_00d92270_Dispatch** a2, float afArg1, float afArg2, int aiArg3)
 {
     return (*a2)->v10(afArg1, afArg2, aiArg3);
@@ -932,6 +953,8 @@ struct FUN_00d922e0_Iface {
 };
 
 // @fnv 0x00d922e0
+// pdb: hkAgent3Bridge::createZombie | hkpAgent3Bridge.obj | fnv360_0822_retail, objrun, high
+// pdb params: entry, agentData, idTobecomeZombie
 void* __cdecl CallIfaceMethod(int unused, FUN_00d922e0_Iface** p, int arg) {
     return (*p)->unk34(arg);
 }
@@ -960,6 +983,8 @@ struct FUN_00d92380_holder {
 };
 // Calls the virtual method v6 on h->m0 with v->a0, v->a4, v->ac and arg, then returns the address of h->m10.
 // @f3 0x00a260a0 (community match, verified in this file)
+// pdb: hkAgent3Bridge::process | hkpAgent3Bridge.obj | fnv360_0822_retail, objrun, high
+// pdb params: input, entry, agentData, separatingNormalOut, result
 int* __cdecl CallVirtualWithVectorArgs(FUN_00d92380_vec* pVec, int u1, FUN_00d92380_holder* pHolder, int u2, int arg)
 {
     pHolder->m0->v6(pVec->a0, pVec->a4, pVec->a8, arg);
@@ -976,6 +1001,7 @@ struct FUN_00d93310_cls {
 };
 
 // @fnv 0x00d93310
+// pdb: hkpFixedSizePhysicsCommandQueue<512>::hkpFixedSizePhysicsCommandQueue<512> | hkpCpuAgentSectorJob.obj | tesv_win, call_gap_sim, low
 FUN_00d93310_cls* FUN_00d93310_cls::FUN_00d93310()
 {
     m_00 = 0x10;
@@ -1072,6 +1098,8 @@ struct QCursor {
 extern "C" void __cdecl FUN_00a0d700(void* p, int a2, int a3, int a4, bool* pb);
 }
 
+// pdb: hkCpuSolveIntegrateVelocitiesJob | hkpCpuSolveConstraintsJobs.obj | fnv360_0822_retail, ustr, high
+// pdb params: tl, jobQueue, jobInOut
 void LogIntegrateVelocity(Arg0* arg0, Arg1* arg1, Arg2* arg2)
 {
     using namespace f3m_00a236b0;
@@ -1166,6 +1194,8 @@ struct FUN_00d98390 {
 // Constructor of the pack's own record FUN_00d98390. The pack declares the class and this constructor,
 // so nothing is declared or redefined at file level here. unk00 holds the address of the class's
 // function table (DAT_00dc4dc0).
+// pdb: BSSimpleArray<PathingLocation,1024>::_FillMemory | NavMeshSearchMultipleGoals.obj | fnv360_0822_debug, call_seq, low
+// pdb params: apAddress, aiCount
 FUN_00d98390::FUN_00d98390()
 {
     extern char DAT_00dc4dc0;
@@ -1188,6 +1218,7 @@ void __cdecl FUN_00d98630(void*, void*, void*, void*);
 
 // Calls FUN_00d98630 with the four arguments and returns a1.
 // @fnv 0x00d99540
+// pdb: std::char_traits<char>::_Move_s | BipedAnim.obj | tesv_win, caller_sim, low
 void* __cdecl FUN_00d99540(void* a1, void* a2, void* a3, void* a4)
 {
     FUN_00d98630(a1, a2, a3, a4);
@@ -1204,6 +1235,7 @@ struct FnvCpu_FUN_00d9f6b0_CpuInterface {
     virtual void Invoke(int value);
 };
 // @fnv 0x00d9f6b0
+// pdb: cleanupLoadedObjecthkpSerializedDisplayRbTransforms | hkpSerializedDisplayRbTransformsClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00d9f6b0(FnvCpu_FUN_00d9f6b0_CpuInterface* object)
 {
     object->Invoke(0);
@@ -1214,12 +1246,15 @@ struct FUN_00d9fb30_Stub {
     void FUN_00d9fb30();
 };
 // @fnv 0x00d9fb30
+// pdb: BGSRepairItemList::~BGSRepairItemList | BGSRepairItemList.obj | fnv360_0822_retail, call_gap, low
 void FUN_00d9fb30_Stub::FUN_00d9fb30()
 {
     *(int*)this = (int)&DAT_0102e388;
 }
 
 // @fnv 0x00d9fb40
+// pdb: hkaPose::checkInternalFlagIsClear | hkaPose.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: flag
 void __stdcall FUN_00d9fb40(unsigned char* output, int unused1)
 {
     *output = 1;
@@ -1236,6 +1271,8 @@ void __stdcall hkpContinuousSimulation_assertThereIsNoCollisionInformationForEnt
 }
 
 // @fnv 0x00d9fcc0
+// pdb: hkpMeshShape::assertSubpartValidity | hkpMeshShape.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: part
 void __stdcall FUN_00d9fcc0(int) {
 }
 
@@ -1287,6 +1324,8 @@ struct DataD861 {
 
 // Writes the m_0c and m_10 fields of pkData to the stream's backing binary stream via NiStreamSaveBinaryD861.
 // @fnv 0x00d86100
+// pdb: bhkLimitedForceConstraintMotor::LoadBinary | bhkLimitedForceConstraintMotor.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: arStream, arMotor
 void __cdecl FUN_00d86100(NiStreamD861& kStream, DataD861* pkData)
 {
     NiStreamSaveBinaryD861(*kStream.m_pBackingStream, pkData->m_0c);
@@ -1328,6 +1367,8 @@ struct DataD8616 {
 
 // Reads two unsigned int fields from the stream into pkData->m_0c and pkData->m_10.
 // @fnv 0x00d86160
+// pdb: bhkLimitedForceConstraintMotor::SaveBinary | bhkLimitedForceConstraintMotor.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: arStream, arMotor
 void __cdecl FUN_00d86160(NiStreamD8616& kStream, DataD8616* pkData)
 {
     NiStreamLoadBinaryD8616(*kStream.m_pUnderlyingStream, pkData->m_0c);
@@ -1348,6 +1389,7 @@ struct FUN_00d86220_Class {
 };
 // Initializes the object's vtable pointer, sets m_word06 to 1, m_byte08 to 3, m_float0C to -1000000.0f, m_float10 to 1000000.0f, and m_float14/m_float18 to 0.0f.
 // @fnv 0x00d86220
+// pdb: hkpSpringDamperConstraintMotor::hkpSpringDamperConstraintMotor | hkpSpringDamperConstraintMotor.obj | tesv_win, objrun_open, low
 FUN_00d86220_Class::FUN_00d86220_Class()
 {
     m_word06 = 1;
@@ -1470,12 +1512,14 @@ struct S_00d87a60 {
 };
 
 // @fnv 0x00d87a60
+// pdb: hkClass::getName | hkClass.obj | fnv360_0822_retail, call_seq, high
 int S_00d87a60::GetValue() {
     return m_uiFilterValue;
 }
 
 extern void* DAT_012691fc;
 // @fnv 0x00d880a0
+// pdb: hkpSweptTransformDisplayViewer::getProcessTag | hkpSweptTransformDisplayViewer.obj | fnv360_0822_retail, vtable, medium
 void* __cdecl FUN_00d880a0()
 {
     return DAT_012691fc;
@@ -1567,6 +1611,8 @@ struct StubD9A4Vt {
     virtual float v1(ArgD9A4* pkArg);
 };
 
+// pdb: BaseProcess::HandleDeletedReference | BaseProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRef
 float ObjD9A4::FUN_00d9a480(ArgD9A4* pkArg)
 {
     reinterpret_cast<StubD9A4Obj08*>(&unk08)->FUN_007ee180(pkArg);
@@ -1817,6 +1863,8 @@ struct HkString93e240 {
 };
 }
 
+// pdb: hkClassMember::getSubtypeOf | hkClassMember.obj | fnv360_0822_retail, ustr_rel, high
+// pdb params: name
 int __cdecl GetTypeCodeFromString(const char* name) throw()
 {
     if (FUN_009232f0(name, "hkArray<", 8) == 0) {
@@ -1842,6 +1890,8 @@ struct FUN_00d87180_cls : S {
 };
 
 // @fnv 0x00d87180
+// pdb: hkClassMemberAccessor::hkClassMemberAccessor | hkClassMemberAccessor.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: obj, mem
 FUN_00d87180_cls* FUN_00d87180_cls::FUN_00d87180(unsigned int auiValue, B* apPtr)
 {
     void (S::*call)(unsigned int, B*) = &S::SetValueAndPtr;
@@ -1858,6 +1908,7 @@ public:
 };
 
 // @fnv 0x00d87a50
+// pdb: hkThread::getChildThreadId | hkWin32Thread.obj | tesv_win, objrun, medium
 unsigned __int64 OwnerD87A::GetCurrentValue() const
 {
     return m_uiCurrentValue;
@@ -1888,6 +1939,8 @@ static inline char* alignDownD881(char* p) { return (char*)((unsigned int)p & ~1
 
 // Stores step, solver, and query pointers, then carves the aligned buffer into velocity accumulators and three buffer states with computed ray start/end offsets.
 // @fnv 0x00d881d0
+// pdb: hkpConstraintSolverSetup::initializeSolverState | hkpConstraintSolverSetup.obj | fnv360_0822_retail, objopen_prop, low, conflict (bridge: hkpSolverInfo::operator=)
+// pdb params: stepInfo, solverInfo, constraintQueryIn, buffer, bufferSize, s
 void __cdecl InitializeConstraintSolverResources(hkStepInfoD881* pkStepInfo, hkpSolverInfoD881* pkSolverInfo, hkpConstraintQueryInD881* pkQueryIn, char* pcBuffer, int iBufferSize, hkpConstraintSolverResourcesD881* pkOut)
 {
     pkOut->m_pStepInfo = pkStepInfo;
@@ -2251,6 +2304,7 @@ void __cdecl FUN_00d6f460(short* a1, unsigned short a2, StructB* a3, int** a4);
 struct d94eb0_cls { unsigned char b; };
 extern "C" d94eb0_cls* d94eb0_target(void);
 // @fnv 0x00d94eb0
+// pdb: canSolveOnSingleProcessor | hkpCpuIntegrateJob.obj | fnv360_0822_retail, objrun_open, low
 static __declspec(noinline) void FUN_00d94eb0(d94eb0_cls* dst)
 {
     *(unsigned char*)dst = 0;
@@ -2516,6 +2570,7 @@ extern double FUN_00dd2790;
 extern float FUN_01092a50[4];
 struct __declspec(align(16)) FourChannels { float x,y,z,w; };
 struct FourIntegers { int x,y,z,w; };
+// pdb: hkVector4Util::getFloatToInt32FloorCorrection | hkVector4Util.obj | tesv_win, objrun_open, low
 float FUN_00d974f0()
 {
     float high = FUN_00db8ea4;
@@ -2638,6 +2693,7 @@ struct HasFlag_d86 {
 };
 
 // @fnv 0x00d86a70
+// pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high
 hkBool_d86 HasFlag_d86::HasFlag() const
 {
     return (m_flags & 0x200) == 0x200;
@@ -3003,6 +3059,7 @@ struct PopRec {
     int FUN_00a7cd60(int** slot, PopRec* dst);
 };
 
+// pdb: hkpJobQueueUtils::popIntegrateJob | hkpDynamicsJobQueueUtils.obj | tesv_win, objrun_open, low
 int __cdecl PopPart(int callbackCtx, int callbackIndex, D96600Blob* a, D96600Blob* b)
 {
     PopRec* src = (PopRec*)a;
@@ -3223,6 +3280,7 @@ public:
 
 // Returns 2 if the thread handle is null, otherwise queries the thread exit code and returns 1 if it equals 0x103, else 0.
 // @fnv 0x00d87a10
+// pdb: hkThread::getStatus | hkWin32Thread.obj | tesv_win, hash, low
 int FUN_00d87a10_Obj::FUN_00d87a10() {
     if (unk00 == 0)
         return 2;

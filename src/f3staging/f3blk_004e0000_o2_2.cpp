@@ -99,6 +99,8 @@ struct FUN_004f18c0_cls {
     void FUN_004f18c0(Out4f18* out, Req4f18* req);
 };
 
+// pdb: TESObjectREFR::CreateGroupData | TESObjectREFR.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apOutGroupFORM, apParentGroup
 void FUN_004f18c0_cls::FUN_004f18c0(Out4f18* out, Req4f18* req)
 {
     if (out == 0)
@@ -166,6 +168,7 @@ struct Owner1131 {
     Extra1131 extra40;
     void* FUN_004e7690();
 };
+// pdb: TESObjectREFR::GetExtraLock | TESObjectREFR.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: ExtraLock::UnLockDoor)
 void* Owner1131::FUN_004e7690() {
     Extra1131* extra = &extra40;
     void* result = extra->BaseExtraList_GetExtraData(0x2a);
@@ -226,6 +229,7 @@ extern float DAT_00f4faa8;
 
 RefObject* __cdecl FUN_004e1e00(Vector3* position);
 
+// pdb: TESObjectCELL::InitStatics | TESObjectCELL.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void __cdecl FUN_004e2320()
 {
     Vector3 position = DAT_0108ec68;
@@ -546,6 +550,7 @@ struct Target {
  Matrix3 FUN_004e7c10();
  void FUN_004f85a0();
 };
+// pdb: TESObjectREFR::InitHavokForAcousticSpace | TESObjectREFR.obj | fnv360_0822_retail, uvref, medium
 void Target::FUN_004f85a0() {
  Bounds* bound=bounds.FUN_0040cdd0();
  if(!cell) return;

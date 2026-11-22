@@ -54,6 +54,8 @@ struct StringX
 };
 }
 
+// pdb: std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string<char,std::char_traits<char>,std::allocator<char> > | FanCtlFile.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: _Right
 void* FUN_00ec19a0_Class::FUN_00ec19a0(const void* right)
 {
     *(int*)((char*)this + 0x18) = 0xf;

@@ -225,6 +225,7 @@ namespace f3m_00990ab0
     };
 }
 
+// pdb: hkp3AxisSweep::updateNodesAfterInsert | hkp3AxisSweep.obj | tesv_win, objrun_prop, low
 extern "C" void __stdcall FUN_00990ab0(f3m_00990ab0::BpNode* nodes, int numNodes, f3m_00990ab0::BpNode& newNode)
 {
     using namespace f3m_00990ab0;
@@ -2183,6 +2184,8 @@ class hkpWorld : public hkReferencedObject
 		__forceinline void	allowCriticalOperations(hkBool allow);
 		explicit hkpWorld( hkFinishLoadedObjectFlag flag );
 };
+// pdb: hkpBroadPhaseBorder::hkpBroadPhaseBorder | hkpBroadPhaseBorder.obj | fnv360_0822_retail, call_gap, low
+// pdb params: world, type, postponeAndSortCallbacks
 FUN_0098bd20::FUN_0098bd20( hkpWorld* world, hkpWorldCinfo::BroadPhaseBorderBehaviour type )
 {
 	m_world = world;
@@ -2945,6 +2948,7 @@ __forceinline void hkp3AxisSweep::collect(hkpBroadPhaseHandle* object, int nodeI
     }
 }
 
+// pdb: hkp3AxisSweep::addObject | hkp3AxisSweep.obj | tesv_win, objrun_prop, low
 void hkp3AxisSweep::FUN_00994260(hkpBroadPhaseHandle* object, const hkAabbUint32& aabb, hkArray<hkpBroadPhaseHandlePair>& newPairsOut)
 {
     hkAabbUint32 a;
@@ -4524,6 +4528,8 @@ default:
 break;
 }
 }
+// pdb: hkAgentNnMachine_ProcessAgent | hkpAgentNnMachine.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: entry, input, output, mgr
 void __cdecl FUN_00999610(hkpAgentNnEntry*entry,const hkpProcessCollisionInput&input,hkpProcessCollisionOutput&output,hkpContactMgr*mgr)
 {
 int numTim=0;
@@ -9492,6 +9498,7 @@ static inline void removeReferenceFrom( hkReferencedObject* obj ) {
 	obj->removeReference();
 }
 hkBool islandLess( const hkWorldOperation::BiggestOperation& a, const hkWorldOperation::BiggestOperation& b );
+// pdb: hkpWorldOperationQueue::executeAllPending | hkpWorldOperationQueue.obj | tesv_win, call_seq, medium
 void hkpWorldOperationQueue::FUN_00983680() {
 	hkArray<hkWorldOperation::BiggestOperation> stolenPending;
 	stolenPending.swap( m_pending );

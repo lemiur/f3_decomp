@@ -19,6 +19,7 @@ struct FUN_00e463c0_cls
 };
 
 // @fnv 0x00e463c0
+// pdb: PlayerCharacter::StartAim | PlayerCharacter.obj | fnv360_0822_retail, vtable, low
 void FUN_00e463c0_cls::FUN_00e463c0(int a)
 {
     this->Tail(a);

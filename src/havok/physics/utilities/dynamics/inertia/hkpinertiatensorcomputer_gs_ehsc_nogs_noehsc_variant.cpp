@@ -148,6 +148,7 @@ struct __declspec(align(16)) FUN_00971350
     FUN_00971350();
 };
 
+// pdb: hkInertiaTensorComputer::computeBoxSurfaceMassProperties | hkInertiaTensorComputer.obj | tesv_win, caller_sim, low
 int __cdecl FUN_00cece50(float* src, float mass, float thickness, CE50Body* out, ...)
 {
     if (!(mass <= 0.0f) && src[0] > thickness && src[1] > thickness &&

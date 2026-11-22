@@ -40,6 +40,7 @@ struct S_00a485c0 {
 };
 // Calls FUN_00a57990, frees this with _delete when flags has bit 1 set, and returns this.
 // @fnv 0x00a485c0
+// pdb: TESAnimGroup::`scalar deleting destructor' | TESAnimGroup.obj | fnv360_0822_retail, vtable, medium
 void* S_00a485c0::DestroyIfFlagged(unsigned int flags)
 {
 	FUN_00a57990();
@@ -96,6 +97,8 @@ struct A486F0Controller : A486F0ControllerBase {
 
 // Allocates a new controller, copies this object's state into it via the cloning process, and returns the clone.
 // @fnv 0x00a486f0
+// pdb: NiLookAtController::CreateClone | NiLookAtController.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiRollController::CreateClone)
+// pdb params: kCloning
 A486F0Object* A486F0Controller::FUN_00a486f0(A486F0CloningProcess& kCloning)
 {
     A486F0Controller* pkClone = new A486F0Controller;
@@ -121,6 +124,7 @@ void __cdecl FUN_00a48570()
 void __cdecl FUN_00a57b00();
 
 // @fnv 0x00a48580
+// pdb: PathingRequestFlee::GetType | PathingRequestFlee.obj | fnv360_0721_beta, objrun, medium
 void __cdecl FUN_00a48580() {
     FUN_00a57b00();
 }
@@ -128,6 +132,8 @@ void __cdecl FUN_00a48580() {
 void __cdecl FUN_00a57b20();
 
 // @fnv 0x00a48590
+// pdb: PathingRequestSafeStraightLine::CopyTo | PathingRequestSafeStraightLine.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apDest
 void __cdecl FUN_00a48590()
 {
     FUN_00a57b20();
@@ -192,6 +198,7 @@ public:
 };
 
 // @fnv 0x00a485e0
+// pdb: NiRollController::Update | NiRollController.obj | tesv_win, caller_sim, low
 void NiRollControllerA485::FUN_00a485e0(NiUpdateDataA485& kUpdateData)
 {
     if (!m_pkTarget || NiTimeController_DontDoUpdate(kUpdateData.m_fTime))

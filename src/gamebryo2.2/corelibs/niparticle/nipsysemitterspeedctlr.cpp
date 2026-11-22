@@ -12,6 +12,7 @@ struct NiPSysEmitterSpeedCtlr
 };
 
 // @fnv 0x00c2b370
+// pdb: NiPSysInitialRotSpeedCtlr::GetTargetFloatValue | NiPSysInitialRotSpeedCtlr.obj | tesv_win, objrun_open, low
 void NiPSysEmitterSpeedCtlr::FUN_00c2b370(float& rfValue)
 {
     NiPSysModifierFloatCtlr* pkTarget = *(NiPSysModifierFloatCtlr**)(this + 0x3c);
@@ -33,6 +34,8 @@ struct NiPSysEmitterSpeedCtlr
 };
 
 // @fnv 0x00c29fa0
+// pdb: NiPSysAirFieldAirFrictionCtlr::GetTargetFloatValue | NiPSysAirFieldAirFrictionCtlr.obj | fnv360_0721_retail, objrun_open, low, conflict (skyrim: NiPSysInitialRotSpeedCtlr::SetTargetFloatValue)
+// pdb params: fValue
 void NiPSysEmitterSpeedCtlr::FUN_00c29fa0(float fValue)
 {
     m_pFloatCtlr->m_fTarget = fValue;
@@ -58,6 +61,7 @@ struct FUN_00c2b380_cls
 
 // Allocates a 0x40-byte object, runs its base constructor and sets its vtable, then passes it to FUN_00c32de0 with a1 and returns it.
 // @fnv 0x00c2b380
+// pdb: NiPSysEmitterSpeedCtlr::CreateClone | NiPSysEmitterSpeedCtlr.obj | tesv_win, caller_sim, low
 void* FUN_00c2b380_cls::FUN_00c2b380(unsigned int a1)
 {
     FUN_00c2b380_cls* p = (FUN_00c2b380_cls*)FUN_00aa13e0(0x40);

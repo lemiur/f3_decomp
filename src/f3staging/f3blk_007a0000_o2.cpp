@@ -45,6 +45,8 @@ struct VectorSettings7b {
 };
 extern "C" Vector7b* __cdecl FUN_007b7bf0(Vector7b* out, int mode);
 extern "C" void __cdecl CombatUtilities_GetProjectedPointForTarget(Vector7b* out, Vector7b direction, Vector7b first, Vector7b second, float amount, float factor, unsigned char flags);
+// pdb: CombatUtilities::GetProjectedPointForTarget | CombatUtilities.obj | fnv360_0721_retail, call_seq, medium
+// pdb params: apAttacker, aTargetLocation, aTargetVelocity, apReleasePoint, apProjectile, afProjectileSpeed, abHighArc
 extern "C" Vector7b* __cdecl FUN_007b9440(Vector7b* out, int mode, Vector7b first, Vector7b second,
                                             Vector7b* direction, VectorSettings7b* settings, float amount, unsigned char flags)
 {
@@ -355,6 +357,8 @@ class FUN_007bc2f0 : public PrjMid
     float unkF8;
 };
 
+// pdb: Explosion::Explosion | Explosion.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apExplosionBase, apOwnerRef, apCell, aOrigin, aRotation
 FUN_007bc2f0::FUN_007bc2f0(PrjArg0* a0, PrjQueryObj* a1, int a2, PrjPoint3 pos, PrjMatrix3 rot)
     : unk9C(0), unkA0(0), unkAC(0), unkB8(0)
 {
@@ -640,6 +644,8 @@ public:
     void FUN_007bbb00(int value);
 };
 
+// pdb: Explosion::ProcessMovement | Explosion.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afDelta
 void FUN_007bbb00_Obj::FUN_007bbb00(int value)
 {
     float amount = DAT_01090bac;
@@ -772,6 +778,7 @@ public:
     void FUN_007aec10();
     void FUN_007af570();
 };
+// pdb: CombatState::Disarmed | CombatState.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: ExtraDataList::GetExtraData)
 void SettingPairOwner::FUN_007af570() {
     if (value05C < value050) {
         value05C = value050;
@@ -797,6 +804,7 @@ struct Object7b {
     int index;
 };
 
+// pdb: CombatGroupStrategy::InitGroupStrategies | CombatGroupStrategy.obj | fnv360_0822_retail, uvref, medium
 extern "C" void* __cdecl FUN_007a65f0(int type)
 {
     Object7b* object;
@@ -852,6 +860,7 @@ struct Owner306 {
     int cached;
     bool FUN_007a6790();
 };
+// pdb: CombatGroupData::GetMembersTargetsIntersecting | CombatGroupStrategy.obj | fnv360_0822_retail, objrun, medium
 bool Owner306::FUN_007a6790() {
     if (cached == -1) cached = provider->FUN_0079f2d0() != 0;
     return cached == 1 ? true : false;
@@ -894,6 +903,8 @@ struct Owner374 {
     int FUN_007a1940();
     int FUN_007a3a10(const FUN_0079ded0* value);
 };
+// pdb: BSSimpleArray<CombatTarget,1024>::Add | CombatGroup.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: aValue
 int Owner374::FUN_007a3a10(const FUN_0079ded0* value) {
     int index = FUN_007a1940();
     new (&items[index]) FUN_0079ded0;
@@ -1027,6 +1038,8 @@ struct Owner389 {
     Checker389* checker;
     void FUN_007abd10(Input389* input, unsigned int unused1, unsigned int unused2, unsigned int unused3);
 };
+// pdb: CombatState::ActivatedReference | CombatState.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apRef, apObject, aiCount, abActivatedScriptOnly
 void Owner389::FUN_007abd10(Input389* input, unsigned int unused1, unsigned int unused2, unsigned int unused3) {
     if (checker->FUN_007995e0() && input->form->type == 0x1C) {
         valueD4 = input->value0C;
@@ -1048,6 +1061,8 @@ struct Values404 {
     float other;
     void FUN_007b7600(Reader404* reader);
 };
+// pdb: CombatTimer::LoadGame | CombatTimer.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apLoadGameBuffer
 void Values404::FUN_007b7600(Reader404* reader) {
     reader->FUN_006e0750(&value, 4);
     reader->FUN_006e0750(&other, 4);
@@ -1094,6 +1109,8 @@ struct FUN_007a91f0 {
     void FUN_007a8b50();
     FUN_007a91f0();
 };
+// pdb: NiTPrimitiveArray<CombatGroup *>::NiTPrimitiveArray<CombatGroup *> | CombatManager.obj | fnv360_0822_retail, uvref, medium
+// pdb params: uiMaxSize, uiGrowBy
 FUN_007a91f0::FUN_007a91f0() : limit(DAT_00db7260) {
     FUN_007a8b50();
 }
@@ -1116,6 +1133,8 @@ struct FUN_007a31c0 {
     Array465 entries;
     void Add(Argument465*);
 };
+// pdb: CombatGroup::AddSearchDoor | CombatGroup.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: apDoor
 void FUN_007a31c0::Add(Argument465* argument) {
     for(unsigned int i=0;i<entries.count;++i) {
         if(entries.data[i].first==argument || entries.data[i].second==argument) return;
@@ -1299,6 +1318,8 @@ struct ExplShell7b
     void FUN_007b6620(ExplProj7b* projectile, float length, float elapsed, float duration, float radius);
     void FUN_007b6ef0(ExplProj7b* projectile);
 };
+// pdb: CombatThreatMap::AddThreat | CombatThreatMap.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apProjectile
 void ExplShell7b::FUN_007b6ef0(ExplProj7b* projectile)
 {
     if (projectile->unkc0 & 1)
@@ -1698,6 +1719,8 @@ struct Owner {
 }
 using namespace f3m_007a2080;
 
+// pdb: CombatGroup::ClearReferencePointers | CombatGroup.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apRef
 void Owner::FUN_007a2080(Arg* a)
 {
     unsigned int n = count;
@@ -1748,6 +1771,8 @@ struct Owner18 {
     Tail18 tail70;
     void FUN_007aca20(Stream18*);
 };
+// pdb: CombatCoverLocation::SaveGame | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apSaveGameBuffer
 void Owner18::FUN_007aca20(Stream18* stream) {
     stream->FUN_006e1830(&flag01,1,0);
     stream->FUN_006e1830(&flag00,1,0);
@@ -1987,6 +2012,8 @@ struct DistanceSetting {
 extern DistanceSetting DAT_00f60adc;
 extern float FUN_007b7760(DistanceActor*, DistanceActor*);
 
+// pdb: CombatUtilities::GetDistanceBetweenFacingActors | CombatUtilities.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apAttacker, apTarget, abMeleeCombat
 float FUN_007b8c50(DistanceActor* first, DistanceActor* second, bool testVertical)
 {
     if (!second)
@@ -2112,6 +2139,8 @@ public:
     unsigned int unkF8;
 };
 
+// pdb: Explosion::LoadGame | Explosion.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apLoadGameBuffer
 void Explosion::FUN_007bcd10(BGSLoadFormBuffer* buffer)
 {
     FUN_00765a80(buffer);
@@ -2314,6 +2343,8 @@ int unk21C;
 int unk220;
 void FUN_007b3320(Reader*);
 };
+// pdb: CombatState::LoadGame | CombatState.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apLoadGameBuffer
 void Target::FUN_007b3320(Reader* r) {
 r->FUN_006e0750(&unk00,1);r->FUN_006e0750(&unk04,4);if(unk04==-1)unk04=0;
 TESObjectWEAP** weapon=weapons;int remaining=5;do{*weapon=dynamic_cast<TESObjectWEAP*>(TESForm_GetFormByNumericID(r->FUN_006e0670()));++weapon;}while(--remaining);
@@ -2444,6 +2475,8 @@ struct Own {
     void FUN_007a0e40(Strm* s);
 };
 
+// pdb: CombatGroup::SaveGame | CombatGroup.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apSaveGameBuffer
 void Own::FUN_007a0e40(Strm* s)
 {
     unsigned n = ((char*)this + 0x138 != 0) ? unk138.count : 0;
@@ -2538,6 +2571,8 @@ struct FUN_006019c0 {
     int FUN_007433b0();
     static void* operator new(unsigned int size) { return FUN_0089eb90(size); }
 };
+// pdb: NiPointer<PathingAvoidNodeArray>::operator= | Pathfind.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: pObject
 void* __stdcall FUN_007a4620(int p1, int p2, int p3, FUN_006019c0* container)
 {
     float a;
@@ -2790,6 +2825,8 @@ void CombatUtilities_ComputeFaceTargetLocation(PathPoint& result, PathActor* act
 PathingRequestManager* FUN_0044f4b0();
 extern const float DAT_00db38b8;
 
+// pdb: CombatState::QueuePathCheck | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiLocation
 bool PathingTask::FUN_007ae5e0(int newMode)
 {
     PathTarget* target = context->target;
@@ -3295,6 +3332,8 @@ struct QB7 {
     QEntry7* entries; int count;
     void FUN_007a6db0();
 };
+// pdb: CombatGroupStrategyAdvance::CanExecute | CombatGroupStrategy.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apGroup, apGroupData
 bool __stdcall FUN_007a6f60(QA7* a, QB7* b)
 {
     if (b->count < 2) return false;
@@ -3402,6 +3441,8 @@ struct Q {
     void FUN_007bcb40(Strm* s);
 };
 
+// pdb: Explosion::SaveGame | Explosion.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apSaveGameBuffer
 void Q::FUN_007bcb40(Strm* s)
 {
     FUN_00765960(s);
@@ -3591,6 +3632,7 @@ struct OwnX : f3m_007a0e40::Own
     void FUN_007a0ce0();
 };
 
+// pdb: CombatGroup::UpdateClusterCenters | CombatGroup.obj | fnv360_0822_retail, objrun, medium
 void OwnX::FUN_007a0ce0()
 {
     Point pos;
@@ -3640,6 +3682,7 @@ struct Heap {void* FUN_0086b930(unsigned);void FUN_0086ba60(void*);};extern Heap
 struct Allocated {static void* operator new(unsigned n){return DAT_01090a78.FUN_0086b930(n);}static void operator delete(void* p){DAT_01090a78.FUN_0086ba60(p);}};
 struct FUN_0079c5f0:Allocated {unsigned unk000;unsigned unk004;unsigned unk008;unsigned unk00c;unsigned unk010;unsigned unk014;unsigned unk018;FUN_0079c5f0();};struct FUN_007b7250:Allocated {unsigned unk000;unsigned unk004;unsigned unk008;unsigned unk00c;unsigned unk010;unsigned unk014;FUN_007b7250();};struct FUN_007b5d20:Allocated {unsigned unk000;unsigned unk004;unsigned unk008;unsigned unk00c;FUN_007b5d20();};
 void* __cdecl FUN_0089e810(unsigned);extern unsigned DAT_00e1a9f4,DAT_00e1aa9c;struct Table:Allocated {unsigned* vtable;unsigned count;void* data;unsigned used;Table(){vtable=&DAT_00e1a9f4;count=37;used=0;data=FUN_0089e810(148);memset(data,0,count*4);vtable=&DAT_00e1aa9c;}};
+// pdb: CombatManager::InitializeData | CombatManager.obj | fnv360_0822_retail, call_gap, medium
 struct Owner {unsigned unk000;unsigned unk004;unsigned unk008;unsigned unk00c;Table* table;FUN_007b7250* b;FUN_0079c5f0* a;FUN_007b5d20* c;void FUN_007a8b50();};void Owner::FUN_007a8b50(){a=new FUN_0079c5f0;b=new FUN_007b7250;c=new FUN_007b5d20;table=new Table;}
 }
 }   // namespace f3m_007a8b50
@@ -3668,6 +3711,8 @@ struct Obj {
     Tail tail;
     void FUN_007acab0(Stream* s);
 };
+// pdb: CombatCoverLocation::LoadGame | CombatState.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apLoadGameBuffer
 void Obj::FUN_007acab0(Stream* s)
 {
     s->FUN_006e0750(&unk01, 1);
@@ -3688,6 +3733,8 @@ extern int DAT_00f70588;
 namespace f3m_007b8900 {
 namespace n7b8900 {
 bool __cdecl FUN_007b8880(void* obj, char dir);
+// pdb: FindSlot | CombatUtilities.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aiSlots, acDesiredSlot
 char __cdecl FUN_007b8900(void* obj, char dir)
 {
     int half = DAT_00f70588 / 2;
@@ -3725,6 +3772,8 @@ struct Obj {
     Map* map;
     void FUN_007a8360(int unused, int key);
 };
+// pdb: BSSimpleArray<CombatMember,1024>::Add | CombatGroup.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aValue
 void Obj::FUN_007a8360(int unused, int key)
 {
     Value v;
@@ -3751,6 +3800,8 @@ struct Map {
     unsigned int m_uiCount;
     void FUN_007a7290(int key, Val val);
 };
+// pdb: NiTMapBase<DFALL<NiTMapItem<Actor *,__int64> >,Actor *,__int64>::SetAt | CombatManager.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: key, val
 void Map::FUN_007a7290(int key, Val val)
 {
     unsigned int index = KeyToHashIndex(key);
@@ -3781,6 +3832,7 @@ struct S86ba60
 };
 
 
+// pdb: CombatGroupStrategy::DeleteGroupStrategies | CombatGroupStrategy.obj | fnv360_0822_retail, call_seq, medium
 void FUN_007a66b0()
 {
     S86ba60* self = (S86ba60*)&DAT_01090a78;
@@ -3795,6 +3847,8 @@ struct Heap { void FUN_0086ba60(void* p); };
 extern Heap DAT_01090a78;
 }
 struct Obj7a8ae0 { int unk00, unk04, unk08, unk0c; };
+// pdb: NiTMap<Actor *,__int64>::DeleteItem | CombatManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkItem
 void __stdcall FUN_007a8ae0(Obj7a8ae0* p)
 {
     p->unk08 = 0;
@@ -3809,6 +3863,8 @@ struct Obj7a6d20 {
     unsigned int count;
     void CombatGroup_SetMemberGroupStrategyAssignment(unsigned int idx, int mode);
 };
+// pdb: CombatGroupStrategyAmbush::Execute | CombatGroupStrategy.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apGroup, apGroupData
 void __stdcall FUN_007a6d20(Obj7a6d20* o, int unused)
 {
     unsigned int half = o->count >> 1;
@@ -3846,6 +3902,7 @@ struct Obj7bbcb0 {
     float f80;
     void FUN_007bbcb0();
 };
+// pdb: BGSExplosion::GetRadiationRadiusBSUnits | Explosion.obj | fnv360_0822_retail, call_gap, low
 void Obj7bbcb0::FUN_007bbcb0()
 {
     float a = data->f98;
@@ -3867,6 +3924,8 @@ struct Obj7a6cf0 {
     unsigned int count;
     void CombatGroup_SetMemberGroupStrategyAssignment(unsigned int idx, int mode);
 };
+// pdb: CombatGroupStrategyFallBack::Execute | CombatGroupStrategy.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apGroup, apGroupData
 void __stdcall FUN_007a6cf0(Obj7a6cf0* o, int unused)
 {
     for (unsigned int i = 0; i < o->count; ++i)
@@ -3890,6 +3949,8 @@ struct Obj7a2e20 {
     Arr7a2e20 arr;
     void FUN_007a2e20(const S7a2e20& s, float f, int n);
 };
+// pdb: CombatGroup::AddSearchLocation | CombatGroup.obj | fnv360_0822_retail, caller, medium
+// pdb params: arLocation, afScore, aiTargetID
 void Obj7a2e20::FUN_007a2e20(const S7a2e20& s, float f, int n)
 {
     int idx = arr.FUN_005e0330();
@@ -3911,6 +3972,7 @@ struct Arr7a9440 {
     unsigned int count;
     void FUN_007a9440();
 };
+// pdb: CombatPlan::~CombatPlan | CombatPlan.obj | fnv360_0721_beta, call_seq, low, conflict (bridge: CombatController::ClearCombatPlan)
 void Arr7a9440::FUN_007a9440()
 {
     for (unsigned int i = 0; i < count; ++i)
@@ -3933,6 +3995,8 @@ public:
     void FUN_0079ec70(Elem7a1540* p, unsigned int count);
     void FUN_007a1540(unsigned int count, bool shrink);
 };
+// pdb: BSSimpleArray<CombatSearchLocation,1024>::SetSize | CombatGroup.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiNewSize, abFreeMemory
 void Array7a1540::FUN_007a1540(unsigned int count, bool shrink)
 {
     if (count == 0) {
@@ -3989,6 +4053,8 @@ struct Obj7ace20 {
     Pair7ace20 pairs[2];
     void FUN_007ace20(int key);
 };
+// pdb: CombatState::UsedCombatItem | CombatState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCombatItem
 void Obj7ace20::FUN_007ace20(int key)
 {
     for (unsigned int i = 0; i < 2; ++i) {
@@ -4050,6 +4116,8 @@ struct Obj7a1cc0 {
     unsigned int count;
     void FUN_007a1cc0(n7a1cc0::PtrArray* out);
 };
+// pdb: CombatGroup::FillTargetArray | CombatGroup.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apActorArray
 void Obj7a1cc0::FUN_007a1cc0(n7a1cc0::PtrArray* out)
 {
     out->SetSize(count, true);
@@ -4097,6 +4165,8 @@ struct Array {
     void FUN_007aeab0(unsigned int,bool);
 };
 // @fnv 0x0098ed80
+// pdb: BSSimpleArray<PathingCoverLocation,1024>::SetSize | CombatState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiNewSize, abFreeMemory
 void __thiscall Array::FUN_007aeab0(unsigned int auiCount, bool abShrink)
 {
     if (auiCount == 0)
@@ -4155,6 +4225,8 @@ struct S007aa020
     void FUN_007aa020();
 };
 
+// pdb: BSScrapArray<CombatPlanNode *,1024>::_Deallocate | CombatPlanner.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apBuffer
 void S007aa020::FUN_007aa020()
 {
     ((S007aa020*)unk10)->ScrapHeap_Deallocate();
@@ -4165,6 +4237,8 @@ void S007aa020::FUN_007aa020()
 namespace f3m_007ab530 {
 struct In_7ab530 { int FUN_00799990(); };
 struct O_7ab530 { int u0; In_7ab530* p; int FUN_007ab530(); };
+// pdb: CombatProcedure::SetMoveMode | CombatProcedure.obj | fnv360_0822_retail, caller, medium
+// pdb params: aiCombatMoveMode
 int O_7ab530::FUN_007ab530() { return p->FUN_00799990(); }
 }   // namespace f3m_007ab530
 
@@ -4172,6 +4246,7 @@ int O_7ab530::FUN_007ab530() { return p->FUN_00799990(); }
 namespace f3m_007ab540 {
 struct In_7ab540 { int FUN_00799340(); };
 struct O_7ab540 { int u0; In_7ab540* p; int FUN_007ab540(); };
+// pdb: CombatProcedure::ClearMoveMode | CombatProcedure.obj | fnv360_0822_retail, call_seq, medium
 int O_7ab540::FUN_007ab540() { return p->FUN_00799340(); }
 }   // namespace f3m_007ab540
 
@@ -4179,6 +4254,7 @@ int O_7ab540::FUN_007ab540() { return p->FUN_00799340(); }
 namespace f3m_007ab510 {
 struct In_7ab510 { char pad[0xbc]; int v; };
 struct O_7ab510 { int u0; In_7ab510* p; int FUN_007ab510(); };
+// pdb: CombatProcedure::GetAttacker | CombatProcedure.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: Actor::IsUnconscious)
 int O_7ab510::FUN_007ab510() { return p->v; }
 }   // namespace f3m_007ab510
 
@@ -4205,6 +4281,8 @@ struct Obj7ace80 {
     n7ace80::Proc* proc;
     void FUN_007ace80(void* item, int type);
 };
+// pdb: CombatState::ReachedDestination | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arDestination, aiLocation
 void Obj7ace80::FUN_007ace80(void* item, int type)
 {
     if (type == 0xf) proc->inner->FUN_007a0540(item);
@@ -4228,6 +4306,8 @@ struct Obj7bcf90 {
     void* b;
     void FUN_007bcf90(void* x);
 };
+// pdb: Explosion::CheckRefDeleted | Explosion.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apDeletedRef
 void Obj7bcf90::FUN_007bcf90(void* x)
 {
     if (a == x) a = 0;
@@ -4261,6 +4341,8 @@ struct FUN_007abd50 : FUN_005fc430 {
     unsigned char b4c,b4d,b4e,b4f,b50,b51,b52;
     FUN_007abd50(const FUN_007abd50&);
 };
+// pdb: PathingCoverLocation::PathingCoverLocation | CombatState.obj | fnv360_0721_retail, call_seq, medium
+// pdb params: __that
 FUN_007abd50::FUN_007abd50(const FUN_007abd50& other) : FUN_005fc430(other) {
     pt28=other.pt28;
     pt34=other.pt34;
@@ -4280,6 +4362,7 @@ FUN_007abd50::FUN_007abd50(const FUN_007abd50& other) : FUN_005fc430(other) {
 extern int DAT_00f6fe2c[];
 namespace f3m_007a65e0 {
 struct O_7a65e0 { int u0; int idx; int FUN_007a65e0(); };
+// pdb: CombatGroupStrategy::GetName | CombatGroupStrategy.obj | fnv360_0822_retail, call_gap_sim, low
 int O_7a65e0::FUN_007a65e0() { return DAT_00f6fe2c[idx]; }
 }   // namespace f3m_007a65e0
 
@@ -4302,6 +4385,8 @@ char WrapNeighbor(char a1, char a2)
 
 
 // @fnv 0x009a9800
+// pdb: IsSlotReserved | CombatUtilities.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiSlots, acSlot
 char __cdecl FUN_007b8880(unsigned int auiMask, char aiBit)
 {
     if (auiMask & (1 << aiBit))
@@ -4336,6 +4421,8 @@ struct Map0816
     MapEntry0816** buckets;
     void FUN_007a7320(MapEntry0816*& cursor, unsigned int* key, unsigned __int64* value);
 };
+// pdb: NiTMapBase<DFALL<NiTMapItem<Actor *,__int64> >,Actor *,__int64>::GetNext | CombatManager.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: pos, key, val
 void Map0816::FUN_007a7320(MapEntry0816*& cursor, unsigned int* key, unsigned __int64* value)
 {
     MapEntry0816* item = cursor;
@@ -4372,6 +4459,8 @@ inline char WrapIndex(char index,char offset) {
  return index;
 }
 // @fnv 0x009a9940
+// pdb: ReserveSlot | CombatUtilities.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aiSlots, acSlot
 int FUN_007b89d0(int flags, char index)
 {
     flags |= 1 << index;
@@ -4402,6 +4491,8 @@ struct Array {
  void FUN_007acb30(Entry**,Entry**,unsigned int);
  void FUN_007ad4b0(unsigned int,unsigned int);
 };
+// pdb: BSSimpleArray<UnreachableLocation,1024>::_ReallocateBuffer | CombatState.obj | fnv360_0822_retail, call_seq, low
+// pdb params: aiNewSize, aiCopyCount
 void Array::FUN_007ad4b0(unsigned int newCapacity,unsigned int preserveCount) {
  if(buffer) {
   if(preserveCount==capacity) buffer=Reallocate(buffer,newCapacity);
@@ -4426,6 +4517,8 @@ namespace task0828 {
 void* __cdecl FUN_00c01530(void*,const void*,unsigned int);
 struct FUN_007acb30_shell {void FUN_007acb30(void*,const void*,unsigned int);};
 // @fnv 0x006d0730
+// pdb: BSSimpleArray<CombatMember,1024>::_MoveItems | CombatGroup.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apDestAddr, apSrcAddr, aiCount
 void FUN_007acb30_shell::FUN_007acb30(void* pDest, void const* pSource, unsigned int count)
 {
     if (!(count > 0))
@@ -4458,6 +4551,8 @@ struct Target { void* FUN_0079fcd0(int kind); };
 struct Obj7a6840 {
     bool FUN_007a6840(n7a6840::Target* t);
 };
+// pdb: CombatGroupStrategyAmbush::Update | CombatGroupStrategy.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apGroup
 bool Obj7a6840::FUN_007a6840(n7a6840::Target* t)
 {
     return t->FUN_0079fcd0(3) ? true : false;
@@ -4484,6 +4579,8 @@ struct Arr7adff0 {
     void FUN_007ad430(n7adff0::Elem* p, unsigned int n);
     void FUN_007adff0(unsigned int n, bool shrink);
 };
+// pdb: BSSimpleArray<UnreachableCoverLocation,1024>::SetSize | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiNewSize, abFreeMemory
 void Arr7adff0::FUN_007adff0(unsigned int n, bool shrink)
 {
     if (n == 0) {
@@ -4542,6 +4639,7 @@ public:
     FUN_007a1800_Obj* __thiscall FUN_007a1800(unsigned char flags);
 };
 
+// pdb: BSSimpleArray<CombatSearchLocation,1024>::`scalar deleting destructor' | CombatGroup.obj | fnv360_0822_retail, vtable, medium
 FUN_007a1800_Obj* __thiscall FUN_007a1800_Obj::FUN_007a1800(unsigned char flags)
 {
     void* object = unk04;
@@ -4581,6 +4679,8 @@ struct State {
  void FUN_007ae430();
  void FUN_007aeba0(const State*);
 };
+// pdb: CombatCoverSearchInfo::Copy | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCopy
 void State::FUN_007aeba0(const State* source) {
  if(!source){FUN_007ae430();return;}
  first=source->first;
@@ -4702,6 +4802,8 @@ extern double DAT_00db7268;
 extern SettingF3 DAT_00f5f684;
 using namespace f3a1e40;
 
+// pdb: CombatGroup::CheckRemoveCombatTarget | CombatGroup.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCombatTarget
 bool Perception::FUN_007a1e40(TargetEntry* target)
 {
     if (!unk150 && unk14C) {
@@ -4806,6 +4908,7 @@ public:
     void *FUN_007bc2e0();
 };
 
+// pdb: Explosion::GetActorCause | Explosion.obj | fnv360_0822_retail, vtable, low
 void *Sub007bc2f0::FUN_007bc2e0() { return unkC8; }
 }   // namespace f3m_007bc2e0
 
@@ -5009,6 +5112,7 @@ unsigned int unkb0;
 unsigned int unkb4;
 unsigned int unkb8;
 Cache299 cache;void FUN_007bca40();};
+// pdb: Explosion::AttachLight | Explosion.obj | fnv360_0822_retail, call_gap, low
 void Owner299::FUN_007bca40(){if(Get()){Manager299*manager=link->manager;if(manager)cache.FUN_008e9650(manager->TESObjectLIGH_GenDynamic(this,Get(),0));}}
 }
 }   // namespace f3m_007bca40
@@ -5045,6 +5149,8 @@ struct Owner {
     Source* source;
     void FUN_007ab9e0(Source* s);
 };
+// pdb: CombatLocation::SetRef | CombatState.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apRef
 void Owner::FUN_007ab9e0(Source* s) {
     source = s;
     data = s->TESObjectREFR_GetWorldLocation();
@@ -5067,6 +5173,8 @@ struct Outer {
     Inner* inner;
 };
 
+// pdb: CombatPlanner::IsGoalNode | CombatPlanner.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apNode
 char __stdcall FUN_007a9c70(Outer* o) {
     return o->inner->unkDC == 0;
 }
@@ -5294,6 +5402,7 @@ unsigned int unk1b0;
 unsigned int unk1b4;
 unsigned int unk1b8;
 Link324*link;void CombatState_UpdateImmediateData();void FUN_007b3c70();void FUN_007b41e0();void FUN_007b5500();};
+// pdb: CombatState::Update | CombatState.obj | fnv360_0822_retail, caller_sim, medium
 void Owner324::FUN_007b5500(){if(!link->status->FUN_007650b0()){CombatState_UpdateImmediateData();FUN_007b3c70();}else FUN_007b41e0();}
 }
 }   // namespace f3m_007b5500
@@ -5332,6 +5441,7 @@ public:
     void FUN_007a73a0(int x);
     virtual ~FUN_007a7c60();
 };
+// pdb: CombatManager::~CombatManager | CombatManager.obj | fnv360_0822_retail, call_seq, medium
 FUN_007a7c60::~FUN_007a7c60()
 {
     FUN_007a73a0(0);
@@ -5350,6 +5460,8 @@ public:
     void FUN_007abcd0(int unused1, unsigned char value);
 };
 
+// pdb: CombatState::ReloadingWeapon | CombatState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apWeapon, abForced
 void C7abcd0::FUN_007abcd0(int unused1, unsigned char value)
 {
     if (value)
@@ -5370,6 +5482,7 @@ public:
     int FUN_007ab580();
 };
 
+// pdb: CombatProcedure::ClearLookAtTarget | CombatProcedure.obj | fnv360_0822_retail, call_seq, medium
 int C7ab580::FUN_007ab580()
 {
     return unk04->M2(unk04->M1(this));
@@ -5388,6 +5501,8 @@ struct Obj7ac700 {
     void* key;
     void FUN_007ac700(n7ac700::Item* it);
 };
+// pdb: CombatState::ReserveCoverLocation | CombatState.obj | fnv360_0822_retail, call_seq, low
+// pdb params: apCoverLocation
 void Obj7ac700::FUN_007ac700(n7ac700::Item* it)
 {
     if (it && !it->b1)
@@ -5398,6 +5513,7 @@ void Obj7ac700::FUN_007ac700(n7ac700::Item* it)
 namespace f3m_007bc280 {
 struct In_7bc280 { int u0, u4, u8; int sub; };
 struct O_7bc280 { char pad[0xd4]; In_7bc280* p; int* FUN_007bc280(); };
+// pdb: Explosion::GetMagicCaster | Explosion.obj | fnv360_0822_retail, vtable, medium
 int* O_7bc280::FUN_007bc280() { if (p) return &p->sub; return 0; }
 }   // namespace f3m_007bc280
 
@@ -5414,6 +5530,7 @@ struct FUN_007b2040_t {
     void FUN_007b0e00(int);
     void FUN_007b2040();
 };
+// pdb: CombatState::PlanUpdated | CombatState.obj | fnv360_0822_retail, caller_sim, low
 void FUN_007b2040_t::FUN_007b2040() {
     if (m_first && !m_first->done)
         FUN_007b0d80(0);
@@ -5443,6 +5560,8 @@ void __cdecl FUN_007a6690(){for(unsigned int i=0;i<4;++i)DAT_0108c904[i]=FUN_007
 // @f3 0x007a8320 (community match, verified in this file)
 namespace f3m_007a8320 {
 struct O_7a8320 { int FUN_007a7680(int a, int b); int FUN_007a8320(int a, int b); };
+// pdb: CombatManager::NotifyCombatGroupAddedTarget | CombatManager.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: apGroup, apTarget
 int O_7a8320::FUN_007a8320(int a, int b) { return FUN_007a7680(b, a); }
 }   // namespace f3m_007a8320
 
@@ -5458,6 +5577,8 @@ struct Tgt_7ab5c0 { int u; };
 struct Sub_7ab5c0 { int u; };
 struct X_7ab5c0 { void FUN_006e0750(Sub_7ab5c0* s, int n); };
 struct O_7ab5c0 { int u0, u4; Sub_7ab5c0 sub; void FUN_007ab5c0(X_7ab5c0* x); };
+// pdb: CombatProcedure::LoadGame | CombatProcedure.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apLoadGameBuffer
 void O_7ab5c0::FUN_007ab5c0(X_7ab5c0* x) { x->FUN_006e0750(&sub, 4); }
 }   // namespace f3m_007ab5c0
 
@@ -5502,6 +5623,8 @@ struct FUN_007ad380_t {
     char m38;
     void FUN_007ad380(n7ad380::Stream* s);
 };
+// pdb: CombatCoverSearchInfo::SaveGame | CombatState.obj | fnv360_0822_retail, call_gap_sim, low, conflict (bridge: PathingLOSGridCell::SaveGame)
+// pdb params: apSaveGameBuffer
 void FUN_007ad380_t::FUN_007ad380(n7ad380::Stream* s) {
     s->FUN_006e1830(pos, 0xc, 0);
     s->FUN_006e1830(rot, 0xc, 0);
@@ -5533,6 +5656,8 @@ struct FUN_007a45e0_t {
     void FUN_007a2de0(void* key, void* value);
     void FUN_007a45e0(n7a45e0::Actor* actor, n7a45e0::Event* ev);
 };
+// pdb: CombatGroup::NotifyMemberPlanFinished | CombatGroup.obj | fnv360_0721_beta, call_gap, low
+// pdb params: apCombatController, apGoal
 void FUN_007a45e0_t::FUN_007a45e0(n7a45e0::Actor* actor, n7a45e0::Event* ev) {
     if (!m28) return;
     void* key = actor->key;
@@ -5546,6 +5671,8 @@ void FUN_007a45e0_t::FUN_007a45e0(n7a45e0::Actor* actor, n7a45e0::Event* ev) {
 namespace f3m_007a1ca0 {
 struct Sub_7a1ca0 { int u; void FUN_007a1710(Sub_7a1ca0* o); };
 struct O_7a1ca0 { int u0, u4; Sub_7a1ca0 sub; void FUN_007a1ca0(O_7a1ca0* o); };
+// pdb: CombatGroup::CopyTargets | CombatGroup.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apGroup
 void O_7a1ca0::FUN_007a1ca0(O_7a1ca0* o) { o->sub.FUN_007a1710(&sub); }
 }   // namespace f3m_007a1ca0
 
@@ -5553,6 +5680,8 @@ void O_7a1ca0::FUN_007a1ca0(O_7a1ca0* o) { o->sub.FUN_007a1710(&sub); }
 namespace f3m_007a6820 {
 struct T_007a6820 { int FUN_0079fcd0(int k); };
 struct O_007a6820 { char FUN_007a6820(T_007a6820* t); };
+// pdb: CombatGroupStrategyFallBack::Update | CombatGroupStrategy.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apGroup
 char O_007a6820::FUN_007a6820(T_007a6820* t) { return t->FUN_0079fcd0(2) != 0; }
 }   // namespace f3m_007a6820
 
@@ -5560,6 +5689,8 @@ char O_007a6820::FUN_007a6820(T_007a6820* t) { return t->FUN_0079fcd0(2) != 0; }
 namespace f3m_007a6860 {
 struct T_007a6860 { int FUN_0079fcd0(int k); };
 struct O_007a6860 { char FUN_007a6860(T_007a6860* t); };
+// pdb: CombatGroupStrategyAdvance::Update | CombatGroupStrategy.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apGroup
 char O_007a6860::FUN_007a6860(T_007a6860* t) { return t->FUN_0079fcd0(4) != 0; }
 }   // namespace f3m_007a6860
 
@@ -5580,6 +5711,8 @@ struct Cache {
     void FUN_007a6880();
 };
 }
+// pdb: CombatGroupStrategyFlank::Execute | CombatGroupStrategy.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apGroup, apGroupData
 void __stdcall FUN_007a6bf0(n7a6bf0::Mgr* mgr, n7a6bf0::Cache* cache) {
     unsigned int n = cache->pendingCount;
     for (unsigned int i = 0; i < n; ++i)
@@ -5604,6 +5737,7 @@ namespace Cleanup357{
 extern int DAT_00e1ab80;extern void(__stdcall*DAT_00e1ab88)(void*);
 struct Heap{void FUN_0086ba60(void*);};extern Heap DAT_01090a78;
 struct Owner{void*vtable;void*data;unsigned int size,capacity;Owner*FUN_007aa0d0(unsigned int);};
+// pdb: BSSimpleArray<CombatPlanLink *,1024>::`scalar deleting destructor' | CombatPlanner.obj | fnv360_0822_retail, vtable, medium
 Owner*Owner::FUN_007aa0d0(unsigned int flags){vtable=&DAT_00e1ab80;if(data){DAT_00e1ab88(data);data=0;capacity=0;size=0;}if(flags&1)DAT_01090a78.FUN_0086ba60(this);return this;}
 }
 
@@ -5743,6 +5877,8 @@ struct Actor {
 };
 float __cdecl FUN_007b7b40(Actor* a, int flag);
 }
+// pdb: CombatUtilities::GetAttackerFiringLocationSimple | CombatUtilities.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apAttacker
 n7b7d20::Vec3 __cdecl FUN_007b7d20(n7b7d20::Actor* actor) {
     n7b7d20::Vec3 p = *actor->GetPos();
     p.z += n7b7d20::FUN_007b7b40(actor, 0);
@@ -5754,6 +5890,8 @@ n7b7d20::Vec3 __cdecl FUN_007b7d20(n7b7d20::Actor* actor) {
 namespace f3m_007a9d30 {
 struct P_7a9d30 { int v; };
 struct O_7a9d30 { int u0; P_7a9d30* p; char pad[0x58]; int arr[8]; void FUN_007a9d30(int a, int b); };
+// pdb: CombatPlannerData::SetCombatCoverLocation | CombatPlanner.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aiLocation, apCombatCoverLocation
 void O_7a9d30::FUN_007a9d30(int a, int b) { arr[a] = b; p->v = a; }
 }   // namespace f3m_007a9d30
 
@@ -5762,12 +5900,16 @@ namespace f3m_007ab5a0 {
 struct Sub_7ab5a0 { int u; };
 struct X_7ab5a0 { void FUN_006e1830(Sub_7ab5a0* s, int n, int z); };
 struct O_7ab5a0 { int u0, u4; Sub_7ab5a0 sub; void FUN_007ab5a0(X_7ab5a0* x); };
+// pdb: CombatProcedure::SaveGame | CombatProcedure.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apSaveGameBuffer
 void O_7ab5a0::FUN_007ab5a0(X_7ab5a0* x) { x->FUN_006e1830(&sub, 4, 0); }
 }   // namespace f3m_007ab5a0
 
 // @f3 0x007a9190 (community match, verified in this file)
 namespace f3m_007a9190 {
 struct O_7a9190 { void FUN_007a73a0(int a); void FUN_007a8b50(); void FUN_007a9190(int x); };
+// pdb: CombatManager::Revert | CombatManager.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apLoadGameBuffer
 void O_7a9190::FUN_007a9190(int x) { FUN_007a73a0(1); FUN_007a8b50(); }
 }   // namespace f3m_007a9190
 
@@ -5803,6 +5945,8 @@ struct Obj {
  bool f0,f1; unsigned char f2,f3; int f4; S12 f8; RetObj f14; unsigned int f68,f6c; S6 f70;
  void FUN_007aba60(const Obj*);
 };
+// pdb: CombatCoverLocation::Copy | CombatState.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apCopy
 void Obj::FUN_007aba60(const Obj* p) {
  f0=p->f0; f1=p->f1; f2=p->f2; f4=p->f4; f8=p->f8;
  f14.FUN_00601fa0(&p->f14);
@@ -5826,6 +5970,7 @@ struct FUN_007a1940_cls {
 
 // Ensures capacity by allocating or growing the buffer when full, then increments the count and returns the previous index.
 // @fnv 0x00a11ee0
+// pdb: BSSimpleArray<CombatTarget,1024>::AddUninitialized | CombatGroup.obj | fnv360_0822_retail, call_seq, medium
 unsigned int FUN_007a1940_cls::FUN_007a1940() {
     unsigned int unkC, tmp0, a0;
     unsigned int cap;
@@ -5864,6 +6009,7 @@ struct Array0881 {
     void FUN_007ad4b0(unsigned int newCapacity, unsigned int oldSize);
     unsigned int FUN_007ae1c0();
 };
+// pdb: BSSimpleArray<UnreachableLocation,1024>::AddUninitialized | CombatState.obj | fnv360_0822_retail, call_gap, low
 unsigned int Array0881::FUN_007ae1c0()
 {
     unsigned int cap;
@@ -5903,6 +6049,8 @@ struct FUN_007a1650_cls {
 
 // Ensures capacity by allocating or growing the buffer when full, then increments the count and returns the previous index.
 // @fnv 0x00a11ee0
+// pdb: BSSimpleArray<ParentSpaceNode,1024>::Add | Pathfind.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BSTSmartPointer<class SkyrimScript::DelayFunctor,struct BSTSmartPointerIntrusiveRefCount>::BSTSmartPointer<class SkyrimScript::DelayFunctor,struct BSTSmartPointerIntrusiveRefCount><class SkyrimScript::`anonymous namespace'::CastFunctor>)
+// pdb params: aValue
 unsigned int FUN_007a1650_cls::FUN_007a1650() {
     unsigned int unkC, tmp0, a0;
     unsigned int cap;
@@ -5932,6 +6080,8 @@ unsigned int FUN_007a1650_cls::FUN_007a1650() {
 // @f3 0x007ae220 (community match, verified in this file)
 namespace f3m_007ae220 {
 struct Heap_7ae220 { void FUN_0086bae0(void* p, unsigned int n); };
+// pdb: BSSimpleArray<UnreachableLocation,1024>::_Reallocate | CombatState.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apBuffer, aiNewSizeInItem
 void __stdcall FUN_007ae220(void* p, int n) { ((Heap_7ae220*)&DAT_01090a78)->FUN_0086bae0(p, n * 20); }
 }   // namespace f3m_007ae220
 
@@ -5979,6 +6129,7 @@ extern Table DAT_00e1ae90;
 struct MemoryManager {void FUN_0086ba60(void*);};
 extern MemoryManager DAT_01090a78;
 struct Object {Table* table;void* data;int size,capacity;Object* FUN_007ae2a0(unsigned char);};
+// pdb: BSSimpleArray<TESObjectWEAP *,1024>::`scalar deleting destructor' | CombatState.obj | fnv360_0822_retail, vtable, medium
 Object* Object::FUN_007ae2a0(unsigned char flags) {
  void* old=data;
  table=&DAT_00e1ae90;
@@ -6005,6 +6156,7 @@ struct SsArr {
  void* data;
  int a,b;
 };
+// pdb: BSSimpleArray<UnreachableLocation,1024>::`scalar deleting destructor' | CombatState.obj | fnv360_0822_retail, vtable, medium
 SsArr* __fastcall FUN_007ae340(SsArr* p,int,unsigned flags) {
  p->SsArr::~SsArr();
  if(flags&1) DAT_01090a78.FUN_0086ba60(p);
@@ -6029,6 +6181,7 @@ struct SsArr {
  void* data;
  int a,b;
 };
+// pdb: BSSimpleArray<CombatSearchDoor,1024>::`scalar deleting destructor' | CombatGroup.obj | fnv360_0822_retail, vtable, medium
 SsArr* __fastcall FUN_007a1850(SsArr* p,int,unsigned flags) {
  p->SsArr::~SsArr();
  if(flags&1) DAT_01090a78.FUN_0086ba60(p);
@@ -6048,6 +6201,7 @@ struct SsArr {
  int a,b;
  ~SsArr() { vtable=&DAT_00e1aec0; if(data) { DAT_00e1aec8(data); data=0; b=0; a=0; } }
 };
+// pdb: BSSimpleArray<UnreachableCoverLocation,1024>::`scalar deleting destructor' | CombatState.obj | fnv360_0822_retail, vtable, medium
 SsArr* __fastcall FUN_007ae2f0(SsArr* p, int, unsigned flags) {
  p->SsArr::~SsArr();
  if(flags & 1) DAT_01090a78.FUN_0086ba60(p);
@@ -6068,6 +6222,7 @@ struct Array {
   if(data){DAT_00e1ab60(data);data=0;capacity=0;size=0;}
  }
 };
+// pdb: BSSimpleArray<CombatPlanNode *,1024>::`scalar deleting destructor' | CombatPlanner.obj | fnv360_0822_retail, vtable, medium
 Array* __fastcall FUN_007aa060(Array* array,int,unsigned int flags) {
  array->Array::~Array();
  if(flags&1) DAT_01090a78.FUN_0086ba60(array);
@@ -6090,6 +6245,7 @@ struct Array939 {
     void* data;
     int a, b;
 };
+// pdb: BSSimpleArray<CombatGroupCluster *,1024>::`scalar deleting destructor' | CombatGroup.obj | fnv360_0822_retail, vtable, medium
 Array939* __fastcall FUN_007a18a0(Array939* p, int, unsigned int flags)
 {
     p->Array939::~Array939();
@@ -6115,6 +6271,7 @@ struct SsArr {
  void* data;
  int a,b;
 };
+// pdb: BSSimpleArray<CombatTarget,1024>::`scalar deleting destructor' | CombatGroup.obj | fnv360_0822_retail, vtable, medium
 SsArr* __fastcall FUN_007a1760(SsArr* p,int,unsigned flags) {
  p->SsArr::~SsArr();
  if(flags&1) DAT_01090a78.FUN_0086ba60(p);
@@ -6134,6 +6291,7 @@ struct SsArr {
  int a,b;
  ~SsArr() { vtable=&DAT_00e1a654; if(data) { DAT_00e1a65c(data); data=0; b=0; a=0; } }
 };
+// pdb: BSSimpleArray<CombatMember,1024>::`scalar deleting destructor' | CombatGroup.obj | fnv360_0822_retail, vtable, medium
 SsArr* __fastcall FUN_007a17b0(SsArr* p, int, unsigned flags) {
  p->SsArr::~SsArr();
  if(flags & 1) DAT_01090a78.FUN_0086ba60(p);
@@ -6148,6 +6306,7 @@ namespace task0958 {
 void* __cdecl FUN_0089e810(unsigned int);
 void* __cdecl FUN_00c00610(void*,int,unsigned int);
 struct Map {void* table;unsigned int capacity;void* entries;unsigned int count;Map* FUN_007b5d20();};
+// pdb: CombatTargetMap::CombatTargetMap | CombatTargetMap.obj | fnv360_0822_retail, callee_sim, low
 Map* Map::FUN_007b5d20(){table=&DAT_00e1afd8;capacity=37;count=0;entries=FUN_0089e810(capacity*sizeof(void*));FUN_00c00610(entries,0,capacity*sizeof(void*));table=&DAT_00e1b018;return this;}
 }
 }   // namespace f3m_007b5d20
@@ -6172,6 +6331,7 @@ struct SsArr0934 {
  unsigned int size;
  unsigned int capacity;
 };
+// pdb: BSSimpleArray<TESAmmo *,1024>::`scalar deleting destructor' | PlayerCharacter.obj | fnv360_0822_retail, vtable, medium
 SsArr0934* __fastcall FUN_007ae3e0(SsArr0934* object, int, unsigned int flags) {
  object->SsArr0934::~SsArr0934();
  if (flags & 1) task0934::DAT_01090a78.FUN_0086ba60(object);
@@ -6223,6 +6383,7 @@ struct Blocks {
  int state,unk04;char first[0x58],second[0x58],third[0x58];
  Blocks* FUN_007a9cd0();
 };
+// pdb: CombatPlannerData::CombatPlannerData | CombatPlanner.obj | fnv360_0822_retail, call_seq, medium
 Blocks* Blocks::FUN_007a9cd0() {
  state=0;
  FUN_00c00610(first,0,0x58);
@@ -6514,6 +6675,8 @@ struct FUN_007a4aa0_c {
     unsigned int count;
     bool FUN_007a4aa0(n7a4aa0::Ref* skip, n7a4aa0::VecArray* out);
 };
+// pdb: CombatGroup::CalculateSearchIgnoreLocations | CombatGroup.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apSearcher, apIgnoreLocations
 bool FUN_007a4aa0_c::FUN_007a4aa0(n7a4aa0::Ref* skip, n7a4aa0::VecArray* out)
 {
     unsigned int n = count;
@@ -6554,6 +6717,7 @@ struct Holder991 {
     Ref991* reference;
     void FUN_007aba20();
 };
+// pdb: CombatLocation::UpdateRefLocation | CombatState.obj | fnv360_0822_retail, call_gap_sim, low, conflict (bridge: CombatLocation::SetRef)
 void Holder991::FUN_007aba20()
 {
     if (reference) location = reference->TESObjectREFR_GetWorldLocation();
@@ -6634,6 +6798,8 @@ struct Path {
     bool FUN_007a6790();
 };
 }
+// pdb: CombatGroupStrategyFlank::CanExecute | CombatGroupStrategy.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apGroup, apGroupData
 bool __stdcall FUN_007a6e90(n7a6e90::Actor* a, n7a6e90::Path* p)
 {
     if (p->count < 3)
@@ -6667,6 +6833,8 @@ struct FUN_007a9f60 {
  }
  ~FUN_007a9f60();
 };
+// pdb: BSSimpleArray<CombatPlanNode *,1024>::_Reallocate | CombatPlanner.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apBuffer, aiNewSizeInItem
 FUN_007a9f60::~FUN_007a9f60() { Clear(true); }
 
 }   // namespace f3m_007a9f60
@@ -6716,6 +6884,7 @@ struct FUN_007aa320 : n7aa320::List {
     FUN_007aa320();
     virtual ~FUN_007aa320();
 };
+// pdb: BSScrapArray<CombatPlanNode *,1024>::BSScrapArray<CombatPlanNode *,1024> | CombatPlanner.obj | fnv360_0822_retail, caller_sim, low, conflict (bridge: AStarSearch<CombatPlanNode *,CombatPlanLink *>::AddStartNode)
 FUN_007aa320::FUN_007aa320()
 {
     m10 = n7aa320::DAT_01090a78.FUN_0086bcb0();
@@ -6735,6 +6904,8 @@ struct FUN_007a9ea0 {
     unsigned int size, capacity;
     ~FUN_007a9ea0();
 };
+// pdb: BSSimpleArray<CombatPlanNode *,1024>::_Allocate | CombatPlanner.obj | fnv360_0721_beta, objrun, medium
+// pdb params: aiSizeInItem
 FUN_007a9ea0::~FUN_007a9ea0()
 {
     if (data) {
@@ -6779,6 +6950,8 @@ struct FUN_007bb0b0_T {
     unsigned int values[1];
     bool FUN_007bb0b0(int idx, int v);
 };
+// pdb: CombatWorldStateArray::IsTrue | CombatWorldState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeWorldState, aiDesiredValue
 bool FUN_007bb0b0_T::FUN_007bb0b0(int idx, int v) {
     if (DAT_00f705b8[idx].isBits) { return (bool)((values[idx] & (1 << v)) != 0); }
     return values[idx] == (unsigned int)v;
@@ -6793,6 +6966,8 @@ struct FUN_007ae270 {
  void* data;
  int a,b;
 };
+// pdb: BSSimpleArray<TESAmmo *,1024>::DefaultEqualFunction<TESAmmo *> | CombatState.obj | fnv360_0822_debug, objrun, medium
+// pdb params: aOne, aTwo
 FUN_007ae270::~FUN_007ae270() {
  if(data) {
   DAT_00e1aeac(data);
@@ -6838,6 +7013,8 @@ struct Object {
  Cover* alternate;
  bool FUN_007ac790(Cover*);
 };
+// pdb: CombatState::IsCoverLocationValid | CombatState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCoverLocation
 bool Object::FUN_007ac790(Cover* p) {
  if(!p) return false;
  return p==current || p==alternate;
@@ -6863,6 +7040,8 @@ void Array::FUN_007a1510(){
 // @f3 0x007a14f0 (community match, verified in this file)
 namespace f3m_007a14f0 {
 struct Heap_7a14f0 { void* FUN_0086b930(unsigned int n); };
+// pdb: BSSimpleArray<CombatSearchLocation,1024>::_Allocate | CombatGroup.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiSizeInItem
 void* __stdcall FUN_007a14f0(int n) { return ((Heap_7a14f0*)&DAT_01090a78)->FUN_0086b930(n * 28); }
 }   // namespace f3m_007a14f0
 
@@ -6870,6 +7049,8 @@ void* __stdcall FUN_007a14f0(int n) { return ((Heap_7a14f0*)&DAT_01090a78)->FUN_
 namespace f3m_007b8840 {
 struct Rec_7b8840 { char pad[0xf4]; unsigned char b; };
 struct X_7b8840 { Rec_7b8840* FUN_006f6c90(); };
+// pdb: CombatUtilities::IsActorUsingRanged | CombatUtilities.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apActor
 char __cdecl FUN_007b8840(X_7b8840* x) { Rec_7b8840* r = x->FUN_006f6c90(); if (r && (unsigned char)(r->b - 3) <= 9) return 1; return 0; }
 }   // namespace f3m_007b8840
 
@@ -6877,6 +7058,8 @@ char __cdecl FUN_007b8840(X_7b8840* x) { Rec_7b8840* r = x->FUN_006f6c90(); if (
 namespace f3m_007b8860 {
 struct A_7b8860 { char FUN_004eb8f0(); };
 struct B_7b8860 { char FUN_004c0da0(); };
+// pdb: CombatUtilities::CanActorExistInSpace | CombatUtilities.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: apActor, arWorldLocation
 char __cdecl FUN_007b8860(A_7b8860* a, B_7b8860* b) { if (a->FUN_004eb8f0()) return 1; return b->FUN_004c0da0() != 0; }
 }   // namespace f3m_007b8860
 
@@ -6884,6 +7067,8 @@ char __cdecl FUN_007b8860(A_7b8860* a, B_7b8860* b) { if (a->FUN_004eb8f0()) ret
 namespace f3m_007a9d10 {
 struct P_7a9d10 { int v; };
 struct O_7a9d10 { int u0; P_7a9d10* p; int arr[2]; char pad[0xa8]; float farr[4]; void FUN_007a9d10(int a, int b, float f); };
+// pdb: CombatPlannerData::SetCombatLocation | CombatPlanner.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aiLocation, apCombatLocation, afCost
 void O_7a9d10::FUN_007a9d10(int a, int b, float f) { farr[a] = f; arr[a] = b; p->v = a; }
 }   // namespace f3m_007a9d10
 
@@ -6902,6 +7087,7 @@ public:
     void FUN_007ac860();
 };
 
+// pdb: CombatState::ClearLocationTarget | CombatState.obj | fnv360_0822_retail, call_gap, low
 void Owner4ac860::FUN_007ac860()
 {
     ((S86ba60*)&DAT_01090a78)->FUN_0086ba60((void*)this->unkBC);
@@ -6915,6 +7101,8 @@ struct Init1080 {
     int value00, value04, value08, value0c, value10, value14;
     Init1080* FUN_007a9420(int);
 };
+// pdb: CombatPlan::CombatPlan | CombatPlan.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCombatController
 Init1080* Init1080::FUN_007a9420(int arg)
 {
     value00 = 0;
@@ -6931,6 +7119,7 @@ Init1080* Init1080::FUN_007a9420(int arg)
 namespace f3m_007ac7c0 {
 struct Heap_7ac7c0 { void FUN_0086ba60(void* p); };
 struct O_7ac7c0 { char pad[0x184]; void* p; void FUN_007ac7c0(); };
+// pdb: CombatState::ClearCombatLocation | CombatState.obj | fnv360_0822_retail, call_gap_sim, low
 void O_7ac7c0::FUN_007ac7c0() { ((Heap_7ac7c0*)&DAT_01090a78)->FUN_0086ba60(p); p = 0; }
 }   // namespace f3m_007ac7c0
 
@@ -6942,6 +7131,8 @@ struct Map {
  bool FUN_00bea7b0(unsigned int,Targets*&) const;
  Targets* FUN_007b5b30(Actor*);
 };
+// pdb: CombatTargetMap::GetTargetAttackerArray | CombatTargetMap.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTarget
 Targets* Map::FUN_007b5b30(Actor* actor){
  Targets* array=0;
  if(FUN_00bea7b0((unsigned int)actor,array))return array;
@@ -6954,6 +7145,8 @@ Targets* Map::FUN_007b5b30(Actor* actor){
 namespace f3m_007ad0a0 {
 struct Heap_7ad0a0 { void FUN_0086ba60(void* p); };
 struct O_7ad0a0 { char pad[0x184]; void* p; void FUN_007ad0a0(void* np); };
+// pdb: CombatState::SetCombatLocation | CombatState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCombatLocation
 void O_7ad0a0::FUN_007ad0a0(void* np) { ((Heap_7ad0a0*)&DAT_01090a78)->FUN_0086ba60(p); p = np; }
 }   // namespace f3m_007ad0a0
 
@@ -6961,6 +7154,7 @@ void O_7ad0a0::FUN_007ad0a0(void* np) { ((Heap_7ad0a0*)&DAT_01090a78)->FUN_0086b
 namespace f3m_007ab940 {
 struct V3_7ab940 { int x, y, z; };
 struct O_7ab940 { V3_7ab940 v; int ac; int a10; void FUN_007ab940(const V3_7ab940* p, int w); };
+// pdb: CombatProcedure::GetName | CombatProcedure.obj | fnv360_0822_debug, objrun_open, low
 void O_7ab940::FUN_007ab940(const V3_7ab940* p, int w) { v = *p; ac = w; a10 = 0; }
 }   // namespace f3m_007ab940
 
@@ -6974,6 +7168,8 @@ struct Obj7b0d40 {
     void FUN_007ae4a0(n7b0d40::Query* q, int a, int b);
     void FUN_007b0d40(const n7b0d40::Vec3& pos, int arg, int a, int b);
 };
+// pdb: CombatState::CheckMovement | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arPoint, apSpace, abCheckLocationReachable, abIgnoreCombatAreaCheck
 void Obj7b0d40::FUN_007b0d40(const n7b0d40::Vec3& pos, int arg, int a, int b)
 {
     n7b0d40::Query q;
@@ -6999,6 +7195,8 @@ struct Obj {
     void CombatGroup_SetMemberGroupStrategyAssignment(unsigned int i, int f);
 };
 }
+// pdb: CombatGroupStrategyFlank::Update | CombatGroupStrategy.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apGroup
 bool __stdcall FUN_007a6e00(n7a6e00::Obj* o)
 {
     using namespace n7a6e00;
@@ -7044,6 +7242,7 @@ struct C7af5b0 {
     void FUN_007aec10();
     void FUN_007af5b0();
 };
+// pdb: CombatState::TargetChanged | CombatState.obj | fnv360_0822_retail, call_seq, medium
 void C7af5b0::FUN_007af5b0()
 {
     using namespace n7af5b0;
@@ -7067,6 +7266,8 @@ namespace f3m_007ac760 {
 struct Rec_7ac760 { char b0, b1; };
 struct Mgr_7ac760 { int FUN_0079c690(int a, Rec_7ac760* r); };
 struct O_7ac760 { char pad[0x1bc]; int v; void FUN_007ac760(Rec_7ac760* r); };
+// pdb: CombatState::UnreserveCoverLocation | CombatState.obj | fnv360_0822_retail, call_seq, low
+// pdb params: apCoverLocation
 void O_7ac760::FUN_007ac760(Rec_7ac760* r) { if (r && r->b1) ((Mgr_7ac760*)DAT_0108c988->unk18)->FUN_0079c690(v, r); }
 }   // namespace f3m_007ac760
 
@@ -7085,6 +7286,8 @@ struct Manager {
     Group* CombatManager_CreateCombatGroup();
     Controller* FUN_007a80d0(void*,void*);
 };
+// pdb: CombatManager::AddPretendCombatant | CombatManager.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor, apPackage
 Controller* Manager::FUN_007a80d0(void* arg1,void* arg2) {
     Group* group=CombatManager_CreateCombatGroup();
     group->FUN_007a3db0(arg1);
@@ -7357,6 +7560,8 @@ struct C7a82b0 {
     bool FUN_007a81f0(int a, void* item);
     bool FUN_007a82b0(int a, n7a82b0::Actor* actor);
 };
+// pdb: CombatManager::GetWantToHelpTarget | CombatManager.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: apActor, apAttacker
 bool C7a82b0::FUN_007a82b0(int a, n7a82b0::Actor* actor)
 {
     using namespace n7a82b0;
@@ -7377,6 +7582,8 @@ bool C7a82b0::FUN_007a82b0(int a, n7a82b0::Actor* actor)
 extern char DAT_00f705bc[];
 namespace f3m_007bb0f0 {
 struct O_7bb0f0 { int bits[1]; void FUN_007bb0f0(int idx, int bit); };
+// pdb: CombatWorldStateArray::ApplyWorldState | CombatWorldState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aeWorldState, aiDesiredValue
 void O_7bb0f0::FUN_007bb0f0(int idx, int bit) { if (DAT_00f705bc[idx * 8]) bits[idx] |= 1 << bit; else bits[idx] = bit; }
 }   // namespace f3m_007bb0f0
 
@@ -7415,6 +7622,7 @@ template<class T,unsigned int Growth> struct FUN_007aa390 : BSSimpleArray<T,Grow
  FUN_007aa390();
  virtual ~FUN_007aa390();
 };
+// pdb: BSScrapArray<CombatPlanLink *,1024>::BSScrapArray<CombatPlanLink *,1024> | CombatPlanner.obj | fnv360_0822_retail, caller_sim, low
 template<> FUN_007aa390<CombatPlanLink*,1024>::FUN_007aa390() { allocator=DAT_01090a78.FUN_0086bcb0();data=0;size=0;capacity=0; }
 }
 
@@ -7459,6 +7667,7 @@ namespace task7a9ed0 {
 struct Base { void* data; int unk08,unk0c; virtual void Slot0(); virtual void Slot1(); virtual void Release(void*); ~Base(); void Clear() {if(data){Release(data);data=0;unk0c=0;unk08=0;}} };
 struct FUN_007a9ed0: Base { virtual void Release(void*); ~FUN_007a9ed0(); };
 Base::~Base(){Clear();}
+// pdb: BSScrapArray<CombatPlanNode *,1024>::~BSScrapArray<CombatPlanNode *,1024> | CombatPlanner.obj | fnv360_0822_debug, call_seq, medium
 FUN_007a9ed0::~FUN_007a9ed0(){Clear();}
 }
 }   // namespace f3m_007a9ed0
@@ -7488,6 +7697,8 @@ struct C7a3d70 {
     }
     bool FUN_007a3d70(n7a3d70::Form* f);
 };
+// pdb: CombatGroup::CanAddMember | CombatGroup.obj | fnv360_0822_retail, call_seq, low, conflict (bridge: CombatGroup::IsTarget)
+// pdb params: apActor
 bool C7a3d70::FUN_007a3d70(n7a3d70::Form* f)
 {
     return Find(f) ? true : false;
@@ -7501,6 +7712,8 @@ struct Mgr_7ac730 { char FUN_0079ca80(int a, Rec_7ac730* r); };
 struct Glob_7ac730 { char pad[0x18]; Mgr_7ac730* m; };
 
 struct O_7ac730 { char pad[0x1bc]; int v; char FUN_007ac730(Rec_7ac730* r); };
+// pdb: CombatState::TryReserveCoverLocation | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCoverLocation
 char O_7ac730::FUN_007ac730(Rec_7ac730* r) { if (r && r->b1 == 0) { Mgr_7ac730* m = (Mgr_7ac730*)DAT_0108c988->unk18; int val = v; return m->FUN_0079ca80(val, r); } return 1; }
 }   // namespace f3m_007ac730
 
@@ -7508,6 +7721,8 @@ char O_7ac730::FUN_007ac730(Rec_7ac730* r) { if (r && r->b1 == 0) { Mgr_7ac730* 
 namespace f3m_007a7560 {
 struct It_7a7560 { int u0; int key; };
 struct O_7a7560 { int u0; It_7a7560** arr; char pad[2]; unsigned short n; It_7a7560* FUN_007a7560(int x); };
+// pdb: CombatManager::GetCombatGroup | CombatManager.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aiGroupID
 It_7a7560* O_7a7560::FUN_007a7560(int x) { for (unsigned int i = 0; i < n; ++i) { It_7a7560* p = arr[i]; if (p && p->key == x) return p; } return 0; }
 }   // namespace f3m_007a7560
 
@@ -7517,6 +7732,7 @@ namespace f3m_007ac8e0 {
 namespace task7ac8e0 {
 struct Data {int unk00,unk04,unk08,unk0c,unk10,unk14; float unk18,unk1c;};
 struct Owner {int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8; int unkac; int unkb0; int unkb4; int unkb8; Data* unkbc; bool FUN_007ac880(); float FUN_007ac8e0();};
+// pdb: CombatState::GetLocationTargetDistance | CombatState.obj | fnv360_0721_beta, caller, medium
 float Owner::FUN_007ac8e0() { bool flag=FUN_007ac880(); if(flag) return unkbc->unk1c; float result=unkbc ? (float)(unkbc->unk18*DAT_00e012a0) : 0.0f; return result; }
 }
 }   // namespace f3m_007ac8e0
@@ -7526,6 +7742,8 @@ namespace f3m_007a1710 {
 namespace task7a1710 {
 struct Item { int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; };
 struct Array {int unk00; Item* data; unsigned count; void FUN_007a1400(unsigned,int); void FUN_007a1710(Array*);};
+// pdb: BSSimpleArray<CombatTarget,1024>::CopyTo<1024> | CombatGroup.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aDestArray
 void Array::FUN_007a1710(Array* dst) {dst->FUN_007a1400(count,1); for(unsigned i=0;i<count;i++) dst->data[i]=data[i];}
 }
 }   // namespace f3m_007a1710
@@ -7666,6 +7884,8 @@ public:
     bool FUN_007a5120(CombatActor* actor);
 };
 
+// pdb: CombatGroup::AddTarget | CombatGroup.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apActor
 bool CombatGroup::FUN_007a5120(CombatActor* actor)
 {
     if (!actor)
@@ -7873,6 +8093,8 @@ struct TargetB00 {
     void FUN_007b0e00(unsigned char flag);
 };
 
+// pdb: CombatState::ClearSecondaryCoverLocation | CombatState.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: abInvalidateCover
 void TargetB00::FUN_007b0e00(unsigned char flag)
 {
     if (!unkE0)
@@ -7920,6 +8142,8 @@ __declspec(noinline) bool Map7b::FUN_00bea7b0(Key7b* key, Value7b** out)
     return GU7b != 0;
 }
 
+// pdb: CombatTargetMap::RemoveTarget | CombatTargetMap.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apTarget
 void Map7b::FUN_007b5e20(Key7b* key)
 {
     Value7b* value = 0;
@@ -8364,6 +8588,8 @@ struct Owner389b {
     float FUN_007a0910(Checker389* p);
 };
 
+// pdb: CombatGroup::GetMemberCombatStrength | CombatGroup.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apMember
 float Owner389b::FUN_007a0910(Checker389* p)
 {
     if (!p)
@@ -8403,6 +8629,8 @@ struct FUN_007a9480_cls {
     void __thiscall FUN_007a9480(unsigned int value);
 };
 
+// pdb: CombatPlan::AllocateSteps | CombatPlan.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiLength
 void __thiscall FUN_007a9480_cls::FUN_007a9480(unsigned int value)
 {
     count = value;
@@ -8715,6 +8943,7 @@ struct DtOwner
     ~DtOwner();
 };
 
+// pdb: CombatState::~CombatState | CombatState.obj | fnv360_0822_retail, call_gap, low
 DtOwner::~DtOwner()
 {
     memset(&unk0C, 0, 20);
@@ -9819,6 +10048,7 @@ struct ListNode7 { ListNode7* next; ListNode7* prev; Projectile7* item; };
 struct List7 { int count; ListNode7* FUN_00423640(); };
 extern List7 DAT_0106fe78;
 extern ListNode7* DAT_0106fe70; extern ListNode7* DAT_0106fe74; extern unsigned char DAT_0106fdd8;
+// pdb: Explosion::Initialize | Explosion.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: Explosion::CheckInit3D)
 void Projectile7::FUN_007bf770()
 {
  Context7 context;
@@ -10287,6 +10517,8 @@ struct Owner {
     bool Special(Aux*,Result*,unsigned);
     bool Mode(Result*,int);
 };
+// pdb: CombatState::FindCombatLocation | CombatState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiLocation
 bool Owner::FUN_007b5530(unsigned index)
 {
     Actor* actor = context->actor;
@@ -10424,6 +10656,7 @@ struct FUN_007a18f0 {
     int unk08;
     int unk0c;
     virtual ~FUN_007a18f0();
+    // pdb: BSSimpleArray<GroupMemberData,1024>::`scalar deleting destructor' | CombatGroup.obj | fnv360_0822_retail, vtable, medium
     static void operator delete(void* p) { DAT_01090a78.FUN_0086ba60(p); }
 };
 FUN_007a18f0::~FUN_007a18f0()
@@ -10446,6 +10679,7 @@ class FUN_007ae390 {
 public:
     virtual ~FUN_007ae390();
     void* p04; int a08; int a0c;
+    // pdb: BSSimpleArray<WeaponData,1024>::`scalar deleting destructor' | CombatState.obj | fnv360_0822_retail, vtable, medium
     static void operator delete(void* p) { DAT_01090a78.FUN_0086ba60(p); }
 };
 FUN_007ae390::~FUN_007ae390() {
@@ -10468,6 +10702,7 @@ struct FUN_007aa140 {
     int cap;
     virtual ~FUN_007aa140();
     static void* operator new(unsigned int n);
+    // pdb: BSSimpleArray<AStarNode<CombatPlanNode *,CombatPlanLink *> *,1024>::`scalar deleting destructor' | CombatPlanner.obj | fnv360_0822_retail, vtable, medium
     static void operator delete(void* p) { n7aa140::DAT_01090a78.FUN_0086ba60(p); }
 };
 FUN_007aa140::~FUN_007aa140()
@@ -10740,6 +10975,8 @@ unsigned unkBC;
 TESObjectREFR* pRefC8;TESObjectREFR* pRefCC;unsigned unkc8,unkcc,unkd0;CasterData* m_pEffectInstance;
 void FUN_00769a50(void*);bool IsReadyCheck(){return unk3C==0;}void FUN_007bbe10(void*);};
 // @fnv 0x009b25b0
+// pdb: Explosion::InitLoadGame | Explosion.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apLoadGameBuffer
 void Explosion::FUN_007bbe10(void* apBuffer)
 {
     FUN_00769a50(apBuffer);
@@ -10765,6 +11002,7 @@ namespace f3m_007a9e50 {
 struct Heap_7a9e50 { void FUN_0086ba60(void* p); };
 struct Sub_7a9e50 { char pad[0x14]; void* vt; };
 struct O_7a9e50 { char pad[8]; void* a[22]; Sub_7a9e50* b[22]; void FUN_007a9e50(); };
+// pdb: CombatPlannerData::~CombatPlannerData | CombatPlanner.obj | fnv360_0822_retail, call_seq, medium
 void O_7a9e50::FUN_007a9e50() {
     for (int i = 0; i < 22; ++i) {
         ((Heap_7a9e50*)&DAT_01090a78)->FUN_0086ba60(a[i]);
@@ -10781,6 +11019,8 @@ void O_7a9e50::FUN_007a9e50() {
 namespace f3m_007aeb50 {
 struct El_7aeb50 { char b[0x54]; void FUN_00601fa0(const El_7aeb50* src); };
 struct Arr_7aeb50 { int u0; char* data; unsigned int count; void FUN_007aeab0(unsigned int n, int z); void FUN_007aeb50(Arr_7aeb50* dst); };
+// pdb: BSSimpleArray<PathingCoverLocation,1024>::CopyTo<1024> | CombatState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aDestArray
 void Arr_7aeb50::FUN_007aeb50(Arr_7aeb50* dst) {
     dst->FUN_007aeab0(count, 1);
     unsigned int i = 0;
@@ -11098,6 +11338,8 @@ struct Node_7bb8c0 {
     void FUN_00421610(It_7bb8c0** p);
     void FUN_007bb8c0(int key);
 };
+// pdb: CombatWorldStateList::RemoveWorldState | CombatWorldState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeState
 void Node_7bb8c0::FUN_007bb8c0(int key) {
     if (this) {
         for (Node_7bb8c0* n = this; n; n = n->next) {
@@ -11186,6 +11428,8 @@ struct Cls_007bb870 {
 }
 using namespace f3m_007bb870;
 
+// pdb: CombatWorldStateList::AddWorldState | CombatWorldState.obj | fnv360_0822_retail, call_seq, low
+// pdb params: aeState, aiValue
 void Cls_007bb870::FUN_007bb870(int a, int b)
 {
     Add(new Pair_007bb870(a, b));
@@ -11200,6 +11444,7 @@ struct Rec { char pad[0x14]; int t; };
 struct Src { Rec* FUN_00599900(); };
 struct B { char pad[0x1c]; float f1c; };
 struct O { char pad[0xbc]; B* pbc; char pad2[0xfc]; Src* p1bc; float FUN_007ac960(); };
+// pdb: CombatState::GetLocationTargetCheckMovementDistance | CombatState.obj | fnv360_0822_retail, call_seq, medium
 float O::FUN_007ac960() {
     Rec* r = p1bc->FUN_00599900();
     if (r) {
@@ -11252,6 +11497,8 @@ int unk88;
 int unk8c;
 int unk90;
 unsigned unk94;int unk98;float unk9c;void FUN_007abc90(int);};
+// pdb: CombatState::FiredProjectile | CombatState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apProjectile
 void Timer::FUN_007abc90(int){FloatBits t;t.value=DAT_0108cba0;unk94=t.bits;if(unk9c == DAT_00db7268) unk9c=DAT_0108cba0;}
 }
 }   // namespace f3m_007abc90
@@ -11261,6 +11508,7 @@ extern float DAT_00f5f73c;
 namespace f3m_007ac920 {
 struct BlendData { unsigned char unk00,flag; unsigned short unk02; int unk04,unk08,unk0C,unk10,unk14; float low,high; };
 struct BlendOwner { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C; int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; BlendData* data; float FUN_007ac920(); };
+// pdb: CombatState::GetLocationTargetNearTargetDistance | CombatState.obj | fnv360_0822_retail, call_gap_sim, low
 float BlendOwner::FUN_007ac920() { if(data->flag) return data->high+DAT_00f5f73c; return (data->high-data->low)*0.75+data->low; }
 }   // namespace f3m_007ac920
 
@@ -11618,6 +11866,7 @@ int unk13c;
 int unk140;
 int unk144;
 unsigned active; unsigned yes; unsigned no; void FUN_007a0bf0(); };
+// pdb: CombatGroup::UpdateCounts | CombatGroup.obj | fnv360_0721_beta, call_seq, medium
 void Q7aOwner::FUN_007a0bf0() { unsigned n=count; active=0; yes=0; no=0; for(unsigned i=0;i<n;++i) { Q7aRef* r=records[i].ref; Q7aItem* p=r->table->get(r); if(p) { if(p->Active()) ++active; if(p->FUN_007995e0()) ++yes; else ++no; } } }
 }   // namespace f3m_007a0bf0
 
@@ -11646,6 +11895,8 @@ struct Vec {float x,y,z;};
 struct Object {int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24,unk28;Vec position;};
 Vec __cdecl FUN_007b7bf0(void*);float __cdecl FUN_007b7eb0(Object*,int,int);void __cdecl FUN_007b8070(Vec*,Object*);
 bool __cdecl FUN_007bac40(void*,Object*,void*,Vec,Vec,Vec,int,int,float);
+// pdb: CombatUtilities::CheckProjectileArc | CombatUtilities.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apAttacker, apTarget, apProjectile, apReleasePoint, arbHighArc, arTargetedPoint, afMinHitFraction
 bool __cdecl FUN_007baf20(void* mode,Object* object,void* third,Vec* direction,int fifth,int sixth,float seventh){if(!mode||!object)return false;Vec dir;if(direction)dir=*direction;else dir=FUN_007b7bf0(mode);Vec pos=object->position;pos.z+=FUN_007b7eb0(object,2,0);Vec other;FUN_007b8070(&other,object);return FUN_007bac40(mode,object,third,dir,pos,other,fifth,sixth,seventh);}
 }
 }   // namespace f3m_007baf20
@@ -11659,6 +11910,8 @@ struct Owner {unsigned int unk00,unk04,unk08,unk0c,unk10,unk14,unk18;Record* dat
  __forceinline Record* Find(Form* target){unsigned int id=target->formId;unsigned int size=count;unsigned int i=0;if(i<size){Record* cursor=data;do{if(cursor->object->formId==id)return cursor;++i;++cursor;}while(i<size);}return 0;}
  unsigned char FUN_007a1d60(Form* target);
 };
+// pdb: CombatGroup::CanAddTarget | CombatGroup.obj | fnv360_0721_beta, call_seq, low, conflict (bridge: CombatGroup::IsMember)
+// pdb params: apActor
 unsigned char Owner::FUN_007a1d60(Form* target){return Find(target)!=0;}
 }
 }   // namespace f3m_007a1d60
@@ -11730,6 +11983,8 @@ struct Vec4 {float x,y,z,w;Vec4(const Vec3&v,float t):x(v.x),y(v.y),z(v.z),w(t){
 struct Target {void**vtable;};
 struct Obj {};
 struct Owner {void**vtable;void FUN_007bbb40(Obj*,float);};
+// pdb: Explosion::PushActor | Explosion.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apTargetActor, afExplosionPower
 void Owner::FUN_007bbb40(Obj*obj,float t) {
  if(obj) {
   Target* target=*(Target**)((char*)obj+0x60);
@@ -11876,6 +12131,8 @@ int unk1b4;
 int unk1b8;
 Q7acdSub* sub;
 void FUN_007accf0(void*,int); void FUN_007acdf0(void*); };
+// pdb: CombatState::PreActivateReference | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apRef
 void Q7acdOwner::FUN_007acdf0(void* p) { if(entry && entry->value==p) sub->FUN_00799260(); FUN_007accf0(p,1); }
 }   // namespace f3m_007acdf0
 
@@ -11886,6 +12143,8 @@ extern "C" int __cdecl FUN_00c048fb(int);
 extern "C" int __cdecl FUN_00c01ef0(const char*, const char*);
 extern const char* FUN_00f6fe2c[4];
 extern int DAT_0108c904[4];
+// pdb: CombatGroupStrategy::GetCombatGroupStrategyByName | CombatGroupStrategy.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apName
 int FUN_007a66d0(const char* input) {
     char buffer[260];
     FUN_00c007fc(buffer, 260, input);
@@ -11909,6 +12168,7 @@ void __cdecl CombatUtilities_CalculateCoverPositions(Ownera000* owner,Objecta000
 
 // @f3 0x007a91b0 (community match, verified in this file)
 namespace f3m_007a91b0 {
+// pdb: CombatManager::Destroy | CombatManager.obj | fnv360_0822_retail, call_gap, low
 namespace Shutdown7a91 { extern void __cdecl FUN_00796470(); extern void __cdecl FUN_0079dea0(); extern void __cdecl FUN_007a66b0(); extern void __cdecl FUN_0079cba0(); struct Heap {void FUN_0086ba60(void*);}; extern Heap DAT_01090a78; struct Object {void FUN_007a7c60(); ~Object(){FUN_007a7c60();} static void operator delete(void* p){DAT_01090a78.FUN_0086ba60(p);} }; extern Object* DAT_0108c988; void __cdecl FUN_007a91b0(){FUN_00796470();FUN_0079dea0();FUN_007a66b0();FUN_0079cba0();delete DAT_0108c988;DAT_0108c988=0;} }
 }   // namespace f3m_007a91b0
 
@@ -11972,6 +12232,7 @@ int unkb8;
 int unkbc;
 int unkc0;
 int unkc4;
+// pdb: hkpFixedBufferCdPointCollector::hasHit | Explosion.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: BGSExplosion::UnClone3D)
 Ref* value;void FUN_007bc2a0(Ref*);};void Owner::FUN_007bc2a0(Ref* incoming){if(value!=incoming){if(value)value->FUN_005a22f0();value=incoming;if(incoming)InterlockedIncrement(&incoming->count);}}}
 }   // namespace f3m_007bc2a0
 
@@ -11981,6 +12242,8 @@ namespace workerA7bcb {
 struct Item {void*key;int unk04;int value;};
 struct Node {Item*item;Node*next;};
 struct Owner {void* FUN_007bcb00(void*);};
+// pdb: Explosion::GetAffectedLimbList | Explosion.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apTarget
 void* Owner::FUN_007bcb00(void*key) {
  void* result=0;
  Node* node=(Node*)((char*)this+0x9c);
@@ -12004,6 +12267,8 @@ namespace object_value_membership {
 struct Object {unsigned int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,value;};
 struct Record {Object* object;};
 struct Collection {Record** data;unsigned int size,capacity;bool FUN_007a95c0(unsigned int value);};
+// pdb: CombatPlan::ContainsAction | CombatPlan.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: AIProcess::GetRunOnceProcedureIndex)
+// pdb params: aiAction
 bool Collection::FUN_007a95c0(unsigned int value){for(unsigned int i=0;i<size;++i){if(data[i]->object->value==value)return true;}return false;}
 }
 }   // namespace f3m_007a95c0
@@ -12070,6 +12335,8 @@ struct Owner {
  unsigned count;
  void FUN_007a1da0(Array&) const;
 };
+// pdb: CombatGroup::FillMemberArray | CombatGroup.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apActorArray
 void Owner::FUN_007a1da0(Array& dest) const {
  dest.SetSize(count);
  for(unsigned i=0;i<count;++i) dest.m_pBuffer[i]=entries[i].value;
@@ -12082,12 +12349,16 @@ namespace f3m_007a7ba0 {
 namespace apply7a {
 struct Item {void FUN_007a1370(void*);};struct Other {void FUN_007b6970(void*);};
 struct Owner {int unk00;Item** items;unsigned short unk08;unsigned short count;int unk0C,unk10;Other* other;void FUN_007a7ba0(void*);};
+// pdb: CombatManager::FinishLoadGame | CombatManager.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apLoadGameBuffer
 void Owner::FUN_007a7ba0(void* value){for(unsigned int i=0;i<count;++i){Item* item=items[i];if(item)item->FUN_007a1370(value);}other->FUN_007b6970(value);}
 }
 }   // namespace f3m_007a7ba0
 
 // @f3 0x007bb2d0 (community match, verified in this file)
 namespace f3m_007bb2d0 {
+// pdb: CombatWorldStateList::GetWorldStateActionValue | CombatWorldState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeState, ariActionValue
 namespace Task7bb2{struct Data{int key;int value;};struct Node{Data*data;Node*next;bool FUN_007bb2d0(int,int*);};bool Node::FUN_007bb2d0(int key,int*out){Node*node=this;while(node){Data*data=node->data;if(data&&data->key==key){*out=data->value;return true;}node=node->next;}return false;}}
 }   // namespace f3m_007bb2d0
 
@@ -12099,6 +12370,8 @@ struct Flags { int unk00; int unk04; int unk08; int unk0c; int unk10; unsigned c
 struct Object { int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; float value,scale; Flags* FUN_004a4bc0(); };
 float FUN_00583840(float,float,float);
 struct Owner { void FUN_007b6620(int,float,float,float,float); void FUN_007b7070(int,Object*,float); };
+// pdb: CombatThreatMap::AddThreat | CombatThreatMap.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRef, apExplosion, afTime
 void Owner::FUN_007b7070(int first,Object* object,float third) {
  float value=object->value;
  if(value>=DAT_00f5f3a0) {
@@ -12240,6 +12513,7 @@ public:
     void __thiscall FUN_0086ba60(void* item);
 };
 
+// pdb: CombatState::CheckReferences | CombatState.obj | fnv360_0822_retail, call_gap, low
 void FUN_007abbe0_Obj::FUN_007abbe0()
 {
     FUN_007abbe0_Allocator* allocator =
@@ -12400,6 +12674,8 @@ virtual Point* v119(Point*);
 unsigned FUN_006f58b0();float FUN_006fb050(int);float FUN_006f5de0();
 bool IsFlagged(){return (FUN_006f58b0() & 0x400) && !(FUN_006f58b0() & 0x800);}
 };
+// pdb: CombatUtilities::GetAttackerFiringLocationSimple | CombatUtilities.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apAttacker
 float __cdecl FUN_007b7b40(Ref* object,int flag) {
  Point above,below;float value;
  if(object->v64()) {
@@ -12729,6 +13005,8 @@ float __cdecl FUN_005827d0(float value);
 }
 using namespace f3m_007b7810;
 
+// pdb: CombatUtilities::GetWeaponReach | CombatUtilities.obj | fnv360_0822_retail, call_seq, low, conflict (bridge: CombatProcedureAttackMelee::GetCurrentAttackReach)
+// pdb params: apAttacker, apWeapon
 float __cdecl FUN_007b7810(Actor_7810* actor, Weapon_7810* weapon)
 {
     float base = actor->FUN_004e6d80();
@@ -12745,6 +13023,8 @@ float __cdecl FUN_007b7810(Actor_7810* actor, Weapon_7810* weapon)
 namespace f3m_007a45a0 {
 namespace queried_result_wrapper {
 struct Owner {void FUN_007a3f10(int,unsigned int,int*,unsigned int*,bool*,unsigned int*);int FUN_007a45a0(unsigned int);};
+// pdb: CombatGroup::GetTargetDetectionLevel | CombatGroup.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTarget
 int Owner::FUN_007a45a0(unsigned int value){int result=-100;unsigned int other;bool found;FUN_007a3f10(0,value,&result,&other,&found,&value);return result;}
 }
 }   // namespace f3m_007a45a0
@@ -13160,6 +13440,8 @@ struct VtB7a {
     virtual void fn400();
 };
 
+// pdb: CombatManager::AddSpectatorForCombatGroup | CombatManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apSpectator, apCombatant
 void C7a8160::FUN_007a8160(void* a, void* b)
 {
     if (a == b) return;
@@ -13202,6 +13484,8 @@ public:
     void FUN_007ad2f0(bool flag);
 };
 
+// pdb: CombatState::UpdateCombatArea | CombatState.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: abForceUpdate
 void Self7b::FUN_007ad2f0(bool flag)
 {
     if (byte) {
@@ -13246,6 +13530,8 @@ struct OwnerA7a85 {
     void FUN_007a8500(Arg* arg);
 };
 
+// pdb: CombatManager::ClearReferencePointers | CombatManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRef
 void OwnerA7a85::FUN_007a8500(Arg* arg)
 {
     unsigned char b = (unsigned char)(DAT_01079858->unk244 >> 1);
@@ -13341,6 +13627,8 @@ struct Owner {unsigned int unk00,unk04,unk08;Record* data;unsigned int count,cap
  __forceinline Record* Find(Form* target){unsigned int id=target->id;unsigned int size=count;unsigned int i=0;Record* result=0;if(i<size){Record* cursor=data;do{if(cursor->object->id==id){result=cursor;break;}++i;++cursor;}while(i<size);}return result;}
  unsigned char FUN_007a2b40(Form*);
 };
+// pdb: CombatGroup::GetTargetMemberLOSCount | CombatGroup.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apTarget
 unsigned char Owner::FUN_007a2b40(Form* target){Record* found=Find(target);if(found)return found->flag;return 0;}
 }
 }   // namespace f3m_007a2b40
@@ -13380,6 +13668,8 @@ struct Owner {unsigned int unk00,unk04,unk08;Record* data;unsigned int count,cap
  __forceinline Record* Find(Form* target){unsigned int id=target->id;unsigned int size=count;unsigned int i=0;Record* result=0;if(i<size){Record* cursor=data;do{if(cursor->object->id==id){result=cursor;break;}++i;++cursor;}while(i<size);}return result;}
  void FUN_007a2040(Form*);
 };
+// pdb: CombatGroup::DecrementAttackerCount | CombatGroup.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTarget
 void Owner::FUN_007a2040(Form* target){Record* found=Find(target);if(found)--found->counter;}
 }
 }   // namespace f3m_007a2040
@@ -13393,6 +13683,8 @@ struct Owner {unsigned int unk00,unk04,unk08,unk0c,unk10,unk14,unk18;Record* dat
  __forceinline Record* Find(Form* target){unsigned int id=target->id;unsigned int size=count;unsigned int i=0;Record* result=0;if(i<size){Record* cursor=data;do{if(cursor->object->id==id){result=cursor;break;}++i;++cursor;}while(i<size);}return result;}
  unsigned int FUN_007a2da0(Form*);
 };
+// pdb: CombatGroup::GetMemberGroupStrategyAssignment | CombatGroup.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apMember
 unsigned int Owner::FUN_007a2da0(Form* target){Record* found=Find(target);if(found)return found->unk04;return 0;}
 }
 }   // namespace f3m_007a2da0
@@ -13406,6 +13698,8 @@ struct Owner {unsigned int unk00,unk04,unk08,unk0c,unk10,unk14,unk18;Record* dat
  __forceinline Record* Find(Form* target){unsigned int id=target->id;unsigned int size=count;unsigned int i=0;Record* result=0;if(i<size){Record* cursor=data;do{if(cursor->object->id==id){result=cursor;break;}++i;++cursor;}while(i<size);}return result;}
  unsigned int FUN_007a3360(Form*);
 };
+// pdb: CombatGroup::GetClusterForMember | CombatGroup.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apMember
 unsigned int Owner::FUN_007a3360(Form* target){Record* found=Find(target);if(found)return found->result;return 0;}
 }
 }   // namespace f3m_007a3360
@@ -13443,6 +13737,8 @@ struct Owner {unsigned int unk00,unk04,unk08;Record* data;unsigned int count,cap
  __forceinline Record* Find(Form* target){unsigned int id=target->id;unsigned int size=count;unsigned int i=0;Record* result=0;if(i<size){Record* cursor=data;do{if(cursor->object->id==id){result=cursor;break;}++i;++cursor;}while(i<size);}return result;}
  bool FUN_007a2ae0(Form*,Record::Output*);
 };
+// pdb: CombatGroup::GetTargetLastDetectedLocation | CombatGroup.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apTarget, arLastDetectedLocation
 bool Owner::FUN_007a2ae0(Form* target,Record::Output* out){Record* found=Find(target);if(found && found->output.w){*out=found->output;return true;}return false;}
 }
 }   // namespace f3m_007a2ae0
@@ -13452,6 +13748,8 @@ namespace f3m_007bb290 {
 namespace wildcard_pair_list {
 struct Record {unsigned int key;int value;};
 struct List {Record* data;List* next;bool FUN_007bb290(unsigned int,int);};
+// pdb: CombatWorldStateList::HasMatchingWorldState | CombatWorldState.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aeState, aiValue
 bool List::FUN_007bb290(unsigned int key,int value){for(List* item=this;item;item=item->next){Record* entry=item->data;if(entry && key==entry->key){int candidate=entry->value;if(value==candidate || value==-1 || candidate==-1)return true;}}return false;}
 }
 }   // namespace f3m_007bb290
@@ -13468,6 +13766,8 @@ struct Arr14Helper {
     void __thiscall FUN_007ad460(Item14* data, unsigned int count);
 };
 
+// pdb: BSSimpleArray<UnreachableLocation,1024>::SetSize | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiNewSize, abFreeMemory
 void Arr14::FUN_007ae0f0(unsigned int count, int flag)
 {
     Arr14Virtual* object = reinterpret_cast<Arr14Virtual*>(this);
@@ -13547,6 +13847,8 @@ struct FUN_007a9690_Obj {
 };
 
 
+// pdb: CombatPlan::LoadGame | CombatPlan.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apLoadGameBuffer
 void __thiscall FUN_007a9690_Obj::FUN_007a9690(FUN_007a9690_Serializer* serializer)
 {
     unsigned int* count = &this->unk04;
@@ -13645,6 +13947,8 @@ struct Obj7b1ff0
     void FUN_007b1ff0(float arg0, float arg1);
 };
 
+// pdb: CombatState::DamagedByAttacker | CombatState.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apAttacker, afDamage
 void Obj7b1ff0::FUN_007b1ff0(float arg0, float arg1)
 {
     float elapsed = DAT_0108cba0 - unk98;
@@ -13703,6 +14007,7 @@ public:
     void FUN_007a3270();
 };
 
+// pdb: CombatGroup::UpdateTargets | CombatGroup.obj | fnv360_0822_retail, call_gap, low
 void PathOwner::FUN_007a3270()
 {
     unsigned int count = unk10;
@@ -13808,6 +14113,8 @@ struct Array7a14 {
     void FUN_007a1400(unsigned int n, bool bTrim);
 };
 
+// pdb: BSSimpleArray<CombatTarget,1024>::SetSize | CombatGroup.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiNewSize, abFreeMemory
 void Array7a14::FUN_007a1400(unsigned int n, bool bTrim)
 {
     if (n == 0) {
@@ -13969,6 +14276,7 @@ struct FUN_007b5c50
     ~FUN_007b5c50();
 };
 
+// pdb: CombatTargetData::~CombatTargetData | CombatTargetMap.obj | fnv360_0822_retail, call_dedup, low
 FUN_007b5c50::~FUN_007b5c50()
 {
     if (m_ptr.m_pObject && m_ptr.m_pObject->unk18) {
@@ -14023,6 +14331,8 @@ struct Owner96 {
     void FUN_007a9600(Stream96* stream);
 };
 
+// pdb: CombatPlan::SaveGame | CombatPlan.obj | fnv360_0822_retail, call_seq, low, conflict (bridge: CombatController::SaveProcedure)
+// pdb params: apSaveGameBuffer
 void Owner96::FUN_007a9600(Stream96* stream)
 {
     stream->FUN_006e1830(&count, 4, 0);
@@ -14213,6 +14523,8 @@ struct Owner7abde0 {
     bool FUN_007abde0(Vector7abde0* out);
 };
 
+// pdb: CombatState::GetLastSeenTargetLocation | CombatState.obj | fnv360_0822_debug, objopen_prop, low
+// pdb params: arLastSeenLocation
 bool Owner7abde0::FUN_007abde0(Vector7abde0* out) {
     if (checker->activeC0) {
         float delta = DAT_0108cba0 - angle90;
@@ -14419,6 +14731,8 @@ unsigned int unk1ac;
 unsigned int unk1b0;
 unsigned int unk1b4;
 void*key;Related*related;bool FUN_007abb90(void*,void*);};
+// pdb: CombatState::CheckShouldUpdateDetection | CombatState.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apAttacker, apTarget
 bool Owner::FUN_007abb90(void*unused,void*value){if(value!=key)return true;bool allowed=true;if(count>0){Actor*actor=related->actor;if(actor&&actor->Kind()==7){int mode=actor->mode;if(mode!=3&&mode!=4)allowed=false;}}return allowed;}
 }
 }   // namespace f3m_007abb90
@@ -14459,6 +14773,7 @@ public:
     LookupRef7b refB0;              /* 0xb0 */
 };
 
+// pdb: Explosion::StartSounds | Explosion.obj | fnv360_0822_retail, uconst, low
 void FUN_007bc9b0_Obj::FUN_007bc9b0()
 {
     Explosion_StopSounds();
@@ -14516,6 +14831,7 @@ struct FUN_007a9b80_Owner
     unsigned int FUN_007a9b80();
 };
 
+// pdb: CombatPlanNode::GetKey | CombatPlanner.obj | fnv360_0822_retail, uconst, low
 unsigned int FUN_007a9b80_Owner::FUN_007a9b80()
 {
     if (unkE0 != 0xFFFFFFFF)
@@ -14555,6 +14871,8 @@ unsigned int unk44;
 unsigned int unk48;
 unsigned int unk4c;
 unsigned int unk50;
+// pdb: CombatGroup::ComputeMemberBoundingSphere | CombatGroup.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arCenter
 Vector second;};struct Owner{void FUN_0079f9a0(Bounds*,int);float FUN_007a2c00(Vector*);};float Owner::FUN_007a2c00(Vector*out){Bounds bounds;FUN_0079f9a0(&bounds,0);Vector sum=bounds.first+bounds.second;*out=sum*0.5;Vector delta=bounds.first-bounds.second;return delta.LengthSquared();}}
 
 
@@ -14562,6 +14880,8 @@ Vector second;};struct Owner{void FUN_0079f9a0(Bounds*,int);float FUN_007a2c00(V
 
 // @f3 0x007b67d0 (community match, verified in this file)
 namespace f3m_007b67d0 {
+// pdb: CombatThreatMap::LoadGame | CombatThreatMap.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apLoadGameBuffer
 namespace Deserialize419{struct Stream{unsigned int BGSLoadGameBuffer_LoadVariableSizedValue();void FUN_006e06d0(void**);void FUN_006e0750(void*,int);};struct Heap{void*FUN_0086b930(unsigned int);void FUN_0086ba60(void*);};extern Heap DAT_01090a78;struct Value{float value;void FUN_007b76a0(Stream*);};struct FUN_007b60d0{void*key;float first;Value second,third;float fourth;volatile unsigned int unk14;unsigned int unk18,unk1c,unk20,unk24,unk28;volatile float last;FUN_007b60d0(){key=0;first=0;second.value=0;third.value=0;fourth=0;unk14=0;last=0;}~FUN_007b60d0();static void*operator new(unsigned int size){return DAT_01090a78.FUN_0086b930(size);}static void operator delete(void*p){DAT_01090a78.FUN_0086ba60(p);}};struct Owner{void FUN_00880f70(void*,FUN_007b60d0*);void FUN_007b67d0(Stream*);};void Owner::FUN_007b67d0(Stream*stream){unsigned int size=stream->BGSLoadGameBuffer_LoadVariableSizedValue();if(size>0){unsigned int left=size;do{FUN_007b60d0*node=new FUN_007b60d0;void*key;stream->FUN_006e06d0(&key);node->key=key;stream->FUN_006e0750(&node->first,4);node->second.FUN_007b76a0(stream);node->third.FUN_007b76a0(stream);stream->FUN_006e0750(&node->fourth,4);if(key)FUN_00880f70(key,node);else delete node;}while(--left);}}}
 
 
@@ -14569,6 +14889,8 @@ namespace Deserialize419{struct Stream{unsigned int BGSLoadGameBuffer_LoadVariab
 
 // @f3 0x007a74a0 (community match, verified in this file)
 namespace f3m_007a74a0 {
+// pdb: CombatManager::Update | CombatManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abTimeStopped
 namespace Update421{extern __declspec(thread) int DAT_0117c298;extern float DAT_01090bac,DAT_0108cba0;struct Tag{int previous;Tag(){previous=DAT_0117c298;DAT_0117c298=43;}~Tag(){DAT_0117c298=previous;}};struct Item{bool FUN_0079e6f0();void FUN_007a6470();};struct Manager{void FUN_007b6e20();};struct Owner{unsigned int unk00;Item**data;unsigned short capacity,count;unsigned int unk0c,unk10;Manager*manager;void FUN_007a74a0(bool);};void Owner::FUN_007a74a0(bool skip){Tag tag;if(!skip){DAT_0108cba0+=DAT_01090bac;for(unsigned int i=0;i<count;++i){Item*item=data[i];if(item&&!item->FUN_0079e6f0())item->FUN_007a6470();}manager->FUN_007b6e20();}}}
 }   // namespace f3m_007a74a0
 
@@ -14593,6 +14915,7 @@ struct Obj8 {
     void FUN_007acba0();
 };
 static Rng8* Rn() { return FUN_0044a2d0(); }
+// pdb: CombatState::UpdateCombatPermissions | CombatState.obj | fnv360_0822_retail, call_gap, low
 void Obj8::FUN_007acba0()
 {
     if (g8_val - f1dc > f1e0) {
@@ -14798,6 +15121,8 @@ struct Owner {
  bool FUN_007abde0(Point&);
  bool FUN_007abe40(Point&);
 };
+// pdb: CombatState::GetLastSeenTargetFiringLocation | CombatState.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: arLastSeenFiringLocation
 bool Owner::FUN_007abe40(Point& point) {
  if (!FUN_007abde0(point)) return false;
  Actor* target=holder->GetTarget();
@@ -14817,6 +15142,8 @@ struct Angles {float x,y,z; Angles(){} Angles(const Angles& p):x(p.x),y(p.y),z(p
 struct Actor {float MobileObject_GetActualHeading();float FUN_00765430();};
 Angles CombatUtilities_GetAngleToProjectedPoint(Actor*,Point);
 float FUN_00475910(float); float GetAngleDelta(float,float,float*);
+// pdb: CombatUtilities::IsTargetWithinFiringArc | CombatUtilities.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apAttacker, arTargetLocation, afArcAngle, afLookingAngle
 bool FUN_007ba460(Actor* actor, Point* target, float afMaxHeadingDiff, float afMaxPitchDiff)
 {
     Angles angles4 = CombatUtilities_GetAngleToProjectedPoint(actor, *target);
@@ -14860,6 +15187,8 @@ struct Actor {
 };
 extern bool DAT_0108c928;
 extern Handler* DAT_0108c904[4];
+// pdb: CombatGroupStrategy::FindCombatGroupStrategy | CombatGroupStrategy.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apGroup
 Handler* __cdecl FUN_007a7190(Actor* actor) {
  if(DAT_0108c928) return 0;
  Context ctx(actor);
@@ -14887,6 +15216,8 @@ struct Scalar {float value;Scalar(float v):value(v){}};
 struct Entry {void* object;Scalar time;};
 struct Array {void* vtable;Entry* data;int count;unsigned int capacity;int FUN_006cb090();};
 struct Owner {unsigned int unk000;unsigned int unk004;unsigned int unk008;unsigned int unk00C;unsigned int unk010;unsigned int unk014;unsigned int unk018;unsigned int unk01C;unsigned int unk020;unsigned int unk024;unsigned int unk028;unsigned int unk02C;unsigned int unk030;unsigned int unk034;unsigned int unk038;unsigned int unk03C;unsigned int unk040;unsigned int unk044;unsigned int unk048;unsigned int unk04C;unsigned int unk050;unsigned int unk054;unsigned int unk058;unsigned int unk05C;unsigned int unk060;unsigned int unk064;unsigned int unk068;unsigned int unk06C;unsigned int unk070;unsigned int unk074;unsigned int unk078;unsigned int unk07C;unsigned int unk080;unsigned int unk084;unsigned int unk088;unsigned int unk08C;unsigned int unk090;unsigned int unk094;unsigned int unk098;unsigned int unk09C;unsigned int unk0A0;unsigned int unk0A4;unsigned int unk0A8;unsigned int unk0AC;unsigned int unk0B0;unsigned int unk0B4;unsigned int unk0B8;unsigned int unk0BC;unsigned int unk0C0;unsigned int unk0C4;unsigned int unk0C8;unsigned int unk0CC;unsigned int unk0D0;unsigned int unk0D4;unsigned int unk0D8;unsigned int unk0DC;unsigned int unk0E0;unsigned int unk0E4;unsigned int unk0E8;unsigned int unk0EC;unsigned int unk0F0;unsigned int unk0F4;unsigned int unk0F8;unsigned int unk0FC;unsigned int unk100;unsigned int unk104;unsigned int unk108;unsigned int unk10C;unsigned int unk110;unsigned int unk114;unsigned int unk118;unsigned int unk11C;unsigned int unk120;unsigned int unk124;unsigned int unk128;unsigned int unk12C;unsigned int unk130;unsigned int unk134;unsigned int unk138;unsigned int unk13C;unsigned int unk140;unsigned int unk144;unsigned int unk148;unsigned int unk14C;unsigned int unk150;unsigned int unk154;unsigned int unk158;Array entries;void FUN_007ae540(void*);};
+// pdb: CombatState::AddUnreachableCoverLocation | CombatState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiCoverKey
 void Owner::FUN_007ae540(void* value){if(value){int index=entries.FUN_006cb090();entries.data[index].object=value;entries.data[index].time=Scalar(DAT_0108cba0);}}
 }
 
@@ -14895,6 +15226,8 @@ struct Reader;
 struct CoverView { virtual ~CoverView(); virtual void Read(Reader*); int unk04; int unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24,unk28,unk2c,unk30,unk34,unk38,unk3c,unk40,unk44,unk48,unk4c,unk50; };
 struct CoversView { virtual void vf0(); CoverView* data; unsigned int size, capacity; void FUN_007aeab0(unsigned int,int); };
 struct BCView { int unk00[3]; int unk0c[3]; int unk18; Scalar unk1c; CoversView unk20; int unk30, unk34; unsigned char unk38; };
+// pdb: CombatCoverSearchInfo::LoadGame | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apLoadGameBuffer
 void Block3C::FUN_007b1060(Reader* r) {
     BCView* v = (BCView*)this;
     r->FUN_006e0750(v,12);
@@ -15085,6 +15418,7 @@ struct Obj {
     bool FUN_007ac9b0();
 };
 
+// pdb: CombatState::CheckShouldFlee | CombatState.obj | fnv360_0822_retail, caller_sim, low
 bool Obj::FUN_007ac9b0()
 {
     if (unk1BC->unkC0 == 0)
@@ -15116,6 +15450,8 @@ struct Table7a {
     bool FUN_007a9de0(Node7a** node, unsigned int* key, Node7a** out);
 };
 
+// pdb: BSSimpleArray<CombatPlanNode *,1024>::_ReallocateBuffer | CombatPlanner.obj | fnv360_0721_beta, objrun_sim, low
+// pdb params: aiNewSize, aiCopyCount
 bool Table7a::FUN_007a9de0(Node7a** node, unsigned int* key, Node7a** out)
 {
     Node7a* n = *node;
@@ -15144,6 +15480,8 @@ struct Box8 { V3 v[8]; };          // 96 bytes; v[0] at 0, v[7] at 0x54
 
 extern "C" void __stdcall FUN_0079fb00(Box8* box, int mode);
 
+// pdb: CombatGroup::ComputeTargetBoundingSphere | CombatGroup.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arCenter
 extern "C" float __stdcall FUN_007a2cd0(f3m_007a4620::Tmp4620* out)
 {
     Box8 box;
@@ -15206,6 +15544,7 @@ private:
     B m18;
     B m28;
 };
+// pdb: CombatGroupData::~CombatGroupData | CombatGroup.obj | fnv360_0822_retail, objrun, medium
 FUN_007a1b90::~FUN_007a1b90() {}
 }   // namespace f3m_007a1b90
 
@@ -15256,6 +15595,7 @@ inline Item8F6D0* FirstItem7b(Map8F6D0* self)
     return 0;
 }
 
+// pdb: CombatThreatMap::RemoveAllThreats | CombatThreatMap.obj | fnv360_0822_retail, caller_sim, low
 void Map8F6D0::FUN_007b65a0()
 {
     {
@@ -15291,6 +15631,8 @@ struct Owner7ae430 {
     void FUN_007ae430();
 };
 
+// pdb: BSSimpleArray<PathingCoverLocation,1024>::Clear | Pathfind.obj | fnv360_0822_retail, call_seq, low
+// pdb params: abFreeMemory
 void Owner7ae430::FUN_007ae430()
 {
     unk18 = 0.0f;
@@ -15589,6 +15931,8 @@ struct Self7a {
     void FUN_0079ef00(Vt7a* e);
     void FUN_007a1370(void* arg);
 };
+// pdb: CombatGroup::FinishLoadGame | CombatGroup.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apLoadGameBuffer
 void Self7a::FUN_007a1370(void* arg) {
     FUN_007a0c60();
     for (unsigned int i = 0; i < count; i++) {
@@ -15617,6 +15961,7 @@ struct Owner {
     void FUN_007a48d0();
     bool FUN_007a5d80();
 };
+// pdb: CombatGroup::UpdateSearchArea | CombatGroup.obj | fnv360_1110_retail, objrun, medium
 bool Owner::FUN_007a5d80()
 {
     FUN_007a2ea0();
@@ -15686,6 +16031,7 @@ struct PathTask7a {
 // 0x007ac880: __thiscall, returns char (al). True when the pathing task already
 // has a target close enough (or the context reports queued work), otherwise the
 // task's actor pointer must not be in state 2.
+// pdb: CombatState::CheckUseLocationTargetMaxDistance | CombatState.obj | fnv360_0721_beta, call_seq, low
 char PathTask7a::FUN_007ac880()
 {
     PathingContext* context = unk1bc;
@@ -15716,6 +16062,8 @@ struct Arg {
     void* FUN_006f6c90();
 };
 }
+// pdb: CombatUtilities::IsActorUsingMelee | CombatUtilities.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apActor
 bool FUN_007b87e0(n7b87e0::Arg* arg)
 {
     n7b87e0::Obj* a = arg->m_vt->m_41C(arg);
@@ -15732,6 +16080,8 @@ bool FUN_007b87e0(n7b87e0::Arg* arg)
 
 // @f3 0x007a6ef0 (community match, verified in this file)
 namespace f3m_007a6ef0 {
+// pdb: CombatGroupStrategyAmbush::CanExecute | CombatGroupStrategy.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apGroup, apGroupData
 bool __stdcall FUN_007a6ef0(f3m_007a6f60::f3m_007a6f60::QA7* a, f3m_007a6f60::f3m_007a6f60::QB7* b)
 {
     if (b->unk04 < 2) return false;
@@ -15759,6 +16109,7 @@ struct S_7bbf30 : public ExplSource7b
     float FUN_007bbf30();
 };
 
+// pdb: BGSExplosion::GetSoundLevelValue | BGSExplosion.obj | tesv_win, callee_sim, low
 float S_7bbf30::FUN_007bbf30()
 {
     return (FUN_004a4bc0()->flags14 & 1) ? unka0 : unka0 * DAT_00f61004.value;
@@ -15777,6 +16128,8 @@ public:
     void FUN_007abcf0(int unused);
 };
 
+// pdb: CombatState::PerformedMeleeAttack | CombatState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTarget
 void S7abcf0::FUN_007abcf0(int unused)
 {
     volatile float v = S7abcf0_data_0108cba0::DAT_0108cba0;
@@ -15802,6 +16155,8 @@ struct Context {
     Actor* actor;
 };
 void __cdecl FUN_007b8510(float,const Point3*,const PackedBounds*,Point3*,Point3*);
+// pdb: CombatUtilities::CalculateCoverPositions | CombatUtilities.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCombatController, apCoverLocation, apReservationInfo, apCoverPosition, apFirePosition
 void __cdecl FUN_007b96f0(Context* context,const Point3* position,const PackedBounds* bounds,Point3* minimum,Point3* maximum) {
     float radius=context->actor->FUN_006f9ec0();
     FUN_007b8510(radius,position,bounds,minimum,maximum);
@@ -15888,6 +16243,7 @@ public:
     Explosion();virtual ~Explosion();
 };
 typedef char ExplosionSize2041[(sizeof(Explosion)==0xfc)?1:-1];
+// pdb: Explosion::Explosion | Explosion.obj | fnv360_0822_retail, call_seq, high
 Explosion::Explosion() {
     value80=0;
     value84=0;
@@ -15957,6 +16313,7 @@ struct Provider {
 extern Provider* DAT_01071564;
 extern Vector3 DAT_01092a50;
 extern float DAT_0108cba8;
+// pdb: CombatDialogueManager::Create | CombatDialogueManager.obj | fnv360_0822_retail, call_gap_sim, low
 void FUN_007b8c10() {
     Vector3* value;
     Node* node;
@@ -15980,6 +16337,7 @@ struct Context {
 };
 struct Global {unsigned int unk00,unk04,unk08,unk0C,unk10,unk14;Context* context;};
 extern Global* DAT_0108c988;
+// pdb: CombatPlanner::CleanUp | CombatPlanner.obj | fnv360_0822_debug, call_seq, medium
 void __cdecl FUN_007a9c90(){while(DAT_0108c988->context->HasNext())DAT_0108c988->context->PopNext();}
 }
 
@@ -15990,6 +16348,7 @@ extern Actor* DAT_0107a104;
 struct Entry { int key; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; short unk48; short count; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; };
 struct Node { Actor* actor; int unk04; int unk08; int unk0c; int unk10; };
 struct Owner { int unk00; int unk04; int unk08; Entry* entries; unsigned entryCount; int unk14; int unk18; Node* nodes; unsigned nodeCount; void FUN_007a0c60(); };
+// pdb: CombatGroup::UpdateAttackerCounts | CombatGroup.obj | fnv360_0822_retail, callee_sim, low
 void Owner::FUN_007a0c60() {
  unsigned count=entryCount;
  unsigned n=nodeCount;
@@ -16047,6 +16406,8 @@ struct FUN_007bba00 : Base7bba00
 };
 }
 
+// pdb: bhkLiquidAction::bhkLiquidAction | Explosion.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arInfo
 n7bba00::FUN_007bba00::FUN_007bba00(int value)
 {
     unk14 = 0.0f;
@@ -16367,6 +16728,8 @@ struct Rel7a9280 {
 
 
 
+// pdb: CombatManager::UpdateMainThread | CombatManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: abTimeStopped
 void Obj7a9280::FUN_007a9280(bool a1)
 {
     unsigned int cnt = count;
@@ -16433,6 +16796,8 @@ struct FUN_007aa190_Node {
 
 extern "C" int __stdcall FUN_005cc130(FUN_007aa190_Node* node);
 
+// pdb: AStarQueue<CombatPlanNode *,CombatPlanLink *>::AddNode | CombatPlanner.obj | fnv360_0822_retail, call_seq, low
+// pdb params: apNode
 void __thiscall FUN_007aa190_Table::FUN_007aa190(FUN_007aa190_Node* node)
 {
     int index = FUN_005cc130(node);
@@ -16487,6 +16852,8 @@ public:
     void FUN_0089a5d0(MapItem7b69*& pos, unsigned int& key, void*& val);
     void FUN_007b6970(void* arg);
 };
+// pdb: CombatThreatMap::FinishLoadGame | CombatThreatMap.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apLoadGameBuffer
 void Map7b69::FUN_007b6970(void* arg)
 {
     MapItem7b69* pos = GetFirstPos();
@@ -16556,6 +16923,8 @@ public:
 }
 using namespace f3m_007b8070;
 
+// pdb: CombatUtilities::GetTargetVelocity | CombatUtilities.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apTarget
 Point __cdecl FUN_007b8070(Obj8070* object)
 {
     Point r = ::DAT_0108ec68;
@@ -16701,6 +17070,8 @@ struct Task79 {
     void FUN_007b2790(Out79* out);
 };
 
+// pdb: CombatState::BuildCoveredMoveRequest | CombatState.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apCoveredMoveRequest
 void Task79::FUN_007b2790(Out79* out)
 {
     Actor79* actor = context->actor;
@@ -16749,6 +17120,8 @@ struct Obj7ad { int unk00; Vec7ad pos; };
 
 extern "C" bool __cdecl FUN_005f2730(Obj7ad* obj, Vec7ad* v, int a, int b);
 
+// pdb: CombatState::CheckTargetsCoverLOS | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arCoverPathingLocation, apLocationsArray
 extern "C" bool __cdecl FUN_007ad680(Obj7ad* obj, Arr7ad* arr)
 {
     for (unsigned int i = 0; i < arr->count; i++) {
@@ -16928,6 +17301,8 @@ struct CombatGroup3db0
     bool FUN_007a3d70(Actor3db0* actor);
     bool FUN_007a3db0(Actor3db0* actor);
 };
+// pdb: CombatGroup::AddMember | CombatGroup.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apActor
 bool CombatGroup3db0::FUN_007a3db0(Actor3db0* actor)
 {
     if (!actor)
@@ -17578,6 +17953,8 @@ struct Manager5b0 {
 extern Manager5b0* DAT_0107a79c;
 bool __cdecl FUN_00724400();
 
+// pdb: Explosion::SpawnExplosion | Explosion.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apExplosionBase, apOwnerRef, apExplodedRef, apCell, aOrigin, aRotation
 Created5b0* __cdecl FUN_007bc5b0(Form5b0* a_pBase, Ref5b0* a_pRef, Parent5b0* a_pParent, int a_iArg, Point5b0 a_kPos, Matrix5b0 a_kRot) {
     Created5b0* pCreated = 0;
     if (a_pBase) {
@@ -17653,6 +18030,7 @@ struct Owner
     void FUN_007a4b50();
     void FUN_007a6470();
 };
+// pdb: CombatGroup::Update | CombatGroup.obj | fnv360_0822_retail, call_seq, medium
 void Owner::FUN_007a6470()
 {
     FUN_007a0bf0();
@@ -17798,6 +18176,8 @@ struct ZFUN {
     RecordQ* unk170;
     void FUN_007ae580(Bits* value);
 };
+// pdb: CombatState::AddUnreachableLocation | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arWorldLocation
 void ZFUN::FUN_007ae580(Bits* value) {
     int i = unk16c.FUN_007ae1c0();
     unk170[i].bits=*value;
@@ -18151,6 +18531,8 @@ float FUN_007b8c50(Actor*,Actor*,int);
 bool CombatUtilities_IsTargetWithinStrikeAngle(Actor*,Actor*,float*);
 extern Actor** DAT_0107c0a8; extern unsigned int DAT_0107c0c4; extern int DAT_0108d0a0; extern Actor* DAT_0107a104; extern float DAT_00e1b0e4;
 // @fnv 0x009a60e0
+// pdb: CombatUtilities::GetFacingTarget | CombatUtilities.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apAttacker, afRadius
 Actor* FUN_007b97b0(Actor* actor, float maxDist)
 {
     Actor* target7 = actor->GetSlot266() ? (Actor*)actor->GetSlot266()->FUN_004030b0() : 0;
@@ -18248,6 +18630,8 @@ struct Options7bb { float amount; bool first; bool second; bool third; bool four
 struct Result7bb { void __declspec(noinline) FUN_008264c0(Options7bb* o){ Sink7bb(o->amount, (int)o->first + (int)o->second + (int)o->third + (int)o->fourth + (int)o->fifth); } };
 struct Owner7bb; struct Table7bb { char pad[0x1d0]; Result7bb* (__thiscall* get)(Owner7bb*); };
 struct Owner7bb { Table7bb* table; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; Result7bb* Get(){return table->get(this);} void FUN_007bbdb0(int); };
+// pdb: Explosion::UpdateNonRenderSafeMovement | Explosion.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afDelta
 void Owner7bb::FUN_007bbdb0(int unused){if(!unk3c && Get()){Options7bb options(DAT_0106caf8);Get()->FUN_008264c0(&options);}}
 }   // namespace f3m_007bbdb0
 
@@ -18302,6 +18686,7 @@ __declspec(noinline) void FUN_007b5b80::FUN_0089a5d0(void*& pos, int& key, Item*
     pos = 0;
 }
 
+// pdb: CombatTargetMap::~CombatTargetMap | CombatTargetMap.obj | fnv360_0822_retail, call_seq, medium
 ItemMap::~ItemMap()
 {
     void* pos = GetFirstPos();
@@ -18335,6 +18720,8 @@ struct Record {
 };
 }
 
+// pdb: BSSimpleArray<UnreachableLocation,1024>::_ConstructItems | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apFirstAddr, aiCount
 void __stdcall FUN_007ad460(RecordRange2150::Record* current, unsigned count)
 {
     if (count > 0) {
@@ -18392,6 +18779,8 @@ unsigned int unk64;
     }
     return result;
 }};
+// pdb: CombatGroup::GetTargetLastDetectedTimeStamp | CombatGroup.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: apTarget
 Result Owner::FUN_007a2a90(Key*key){Record*record=Find(key);Result result;if(record)result=record->value;else result.value=DAT_00db7260;return result;}
 }
 
@@ -18408,6 +18797,7 @@ extern "C" __declspec(dllimport) Alloc* __stdcall TlsGetValue(unsigned long);
 class FUN_007bc060 {
 public:
     virtual ~FUN_007bc060();
+    // pdb: hkpFixedBufferCdPointCollector::`scalar deleting destructor' | Explosion.obj | fnv360_0822_retail, objrun, medium
     static void operator delete(void* p) {
         Alloc* a = TlsGetValue(DAT_010f3170);
         if (a->Full()) a->FUN_008f6890(3, p, 0x1f);
@@ -18520,6 +18910,8 @@ struct Mgr : Arr {
     int f34;
     void FUN_007a8900(Buffer* buf);
 };
+// pdb: CombatManager::LoadGame | CombatManager.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apLoadGameBuffer
 void Mgr::FUN_007a8900(Buffer* buf)
 {
     buf->FUN_006e0750(&f34, 4);
@@ -18571,6 +18963,8 @@ struct Owner {
     Request* request;
     void FUN_007ad1e0(const Location&,unsigned char,float,float);
 };
+// pdb: CombatState::SetLocationTargetLocation | CombatState.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: arLocation, aeType, afMin, afMax
 void Owner::FUN_007ad1e0(const Location& target,unsigned char kind,float a,float b) {
     DAT_01090a78.FUN_0086ba60(request);
     request=0;
@@ -18606,6 +19000,8 @@ struct Owner {
     Request* request;
     void FUN_007ad0d0(ReferenceOrRange,unsigned char,float,float);
 };
+// pdb: CombatState::SetLocationTargetRef | CombatState.obj | fnv360_0721_beta, objrun, low
+// pdb params: apRef, aeType, afMin, afMax
 void Owner::FUN_007ad0d0(ReferenceOrRange input,unsigned char kind,float a,float b) {
     Reference* target=input.reference;
     DAT_01090a78.FUN_0086ba60(request);
@@ -18768,6 +19164,8 @@ struct FUN_007b3110_Obj {
     void __thiscall FUN_007b3110(FUN_007b3110_Node* node);
 };
 
+// pdb: CombatState::SetSecondaryCoverLocation | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCombatCoverLocation
 void FUN_007b3110_Obj::FUN_007b3110(FUN_007b3110_Node* node)
 {
     FUN_007b3110_Node* current = unkE0;
@@ -18819,6 +19217,8 @@ struct T7b {
     S7b slot;
 };
 
+// pdb: Explosion::AddLimbTarget | Explosion.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTarget, aeLimb, afDistance
 void __stdcall FUN_007bd1e0(T7b* tree, int key, float value)
 {
     int count = 0;
@@ -18873,6 +19273,7 @@ struct FUN_007b7250 : FUN_007b69f0 {
     Member7250 member;
     FUN_007b7250();
 };
+// pdb: CombatThreatMap::CombatThreatMap | CombatThreatMap.obj | fnv360_0822_retail, callee_sim, low
 FUN_007b7250::FUN_007b7250()
 {
     table=&DAT_00e1b0a4;
@@ -19312,6 +19713,8 @@ public:
     bool FUN_007a5620(CombatGroup* other);
 };
 
+// pdb: CombatGroup::MergeGroup | CombatGroup.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apCombatGroup
 bool CombatGroup::FUN_007a5620(CombatGroup* other)
 {
     for (unsigned int i = 0; i < other->targets.size; ++i) {
@@ -19690,6 +20093,7 @@ int unk1b8;
 Owner* owner;
 void FUN_007b0fa0(bool);void FUN_007b3180();
 };
+// pdb: CombatState::UpdateThreatRatio | CombatState.obj | fnv360_0822_retail, call_gap, low
 void State::FUN_007b3180(){
 Actor* actor=owner->GetActor();
 if(mode!=1){
@@ -19748,6 +20152,8 @@ struct DebugTextFlags
     void FUN_007bb120(char* pBuffer, unsigned int size, int type);
 };
 
+// pdb: CombatWorldStateArray::GetDebugText | CombatWorldState.obj | fnv360_0822_debug, ustr, medium
+// pdb params: apDebugText, aiMaxLength, aeState
 void DebugTextFlags::FUN_007bb120(char* pBuffer, unsigned int size, int type)
 {
     unsigned int mask = GetMask(type);
@@ -19787,6 +20193,8 @@ extern float DAT_00f5f58c;
 extern float DAT_00f5f4b4;
 namespace f3m_007bac40 {
 extern "C" bool __cdecl CombatUtilities_CalculateProjectileLOS(void* from, VectorSettings7b* settings, float height, Vector7b start, Vector7b end, int flags, void** hit, float* distance);
+// pdb: CombatUtilities::CheckProjectileArc | CombatUtilities.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apAttacker, apTarget, apProjectile, aStartLocation, aTargetLocation, aTargetVelocity, arbHighArc, arTargetedPoint, afMinHitFraction
 extern "C" bool __cdecl FUN_007bac40(void* from, void* target, VectorSettings7b* settings, Vector7b direction, Vector7b first, Vector7b second,
                                      unsigned char* side, Vector7b* out, float range)
 {
@@ -20069,6 +20477,8 @@ private:
     float actorFactor;
 };
 
+// pdb: CombatThreat::GetAvoidNode | CombatThreatMap.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apActor
 Projection State::FUN_007b6300(ActorInput* actor)
 {
     Point direction = FUN_007b6160();
@@ -20446,6 +20856,7 @@ inline HkPhantom7bcff0* GetHkPhantom7bcff0(N7bcff0::bhkPhantom* phantom)
     return phantom ? (HkPhantom7bcff0*)phantom->hkPhantom : 0;
 }
 
+// pdb: Explosion::ApplyForces | Explosion.obj | fnv360_0822_retail, call_gap_sim, low
 void Explosion7bcff0::FUN_007bcff0()
 {
     using namespace N7bcff0;
@@ -20522,6 +20933,7 @@ struct FUN_007a9f90 : Base {
     virtual ~FUN_007a9f90();
     virtual void Free(void* p);
 };
+// pdb: BSScrapArray<CombatPlanLink *,1024>::~BSScrapArray<CombatPlanLink *,1024> | CombatPlanner.obj | fnv360_0822_debug, call_seq, medium
 FUN_007a9f90::~FUN_007a9f90() { Clear(); }
 }
 }   // namespace f3m_007a9f90
@@ -20549,6 +20961,7 @@ struct FUN_007aa270 : Base {
     virtual ~FUN_007aa270();
     virtual void Free(void* p);
 };
+// pdb: BSScrapArray<AStarNode<CombatPlanNode *,CombatPlanLink *> *,1024>::~BSScrapArray<AStarNode<CombatPlanNode *,CombatPlanLink *> *,1024> | CombatPlanner.obj | fnv360_0822_debug, call_seq, medium
 FUN_007aa270::~FUN_007aa270() { Clear(); }
 }
 }   // namespace f3m_007aa270
@@ -21169,6 +21582,8 @@ unsigned int unk150;
 unsigned int unk154;
 NodePtrDbg70 unk158;
 bool FUN_00724400(); void FUN_007a20e0(bool); };
+// pdb: CombatGroup::UpdateDebugGeometry | CombatGroup.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: abForceClear
 void DebugManager70::FUN_007a20e0(bool skip) {
  NodePtrDbg70& root=unk158;
  if(root.ptr && root.ptr->unk18) {
@@ -21297,6 +21712,7 @@ struct FUN_007bb300 : Data50 {
     Tail tail;
     FUN_007bb300();
 };
+// pdb: CombatWorldStateArray::CombatWorldStateArray | CombatWorldState.obj | fnv360_0822_retail, call_seq, medium
 FUN_007bb300::FUN_007bb300()
 {
 }
@@ -21393,6 +21809,7 @@ struct CombatGroup {
     void FUN_007a2ea0();
 };
 
+// pdb: CombatGroup::UpdateSearchLocations | CombatGroup.obj | fnv360_0822_retail, call_seq, medium
 void CombatGroup::FUN_007a2ea0()
 {
     for (unsigned int i = 0; i < searches.size; ++i) {
@@ -21498,6 +21915,8 @@ struct List {
     bool FUN_007a94d0(Host* host);
 };
 
+// pdb: CombatPlan::ExecuteNextAction | CombatPlan.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apCombatController
 bool List::FUN_007a94d0(Host* host)
 {
     while (index < count) {
@@ -21820,6 +22239,8 @@ struct Owner {
     virtual void v418();
     virtual Controller* GetController();
 };
+// pdb: CombatManager::AddGroupMember | CombatManager.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, apGroup
 Controller* __stdcall FUN_007a7590(Owner* owner, Group* group)
 {
     Tag tag;
@@ -21982,6 +22403,8 @@ struct Owner
     Context* CombatManager_CreateCombatGroup();
     Object* FUN_007a7fa0(Actor*, int, int, int);
 };
+// pdb: CombatManager::AddCombatant | CombatManager.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor, apTarget, aiPriority, abHighPriority
 Object* Owner::FUN_007a7fa0(Actor* actor, int request, int, int)
 {
     Tag tag;
@@ -22089,6 +22512,8 @@ struct FUN_007bd280_Owner : Base {
     Vec3 posEC;
     void FUN_007bd280(int p);
 };
+// pdb: Explosion::Revert | Explosion.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apLoadGameBuffer
 void FUN_007bd280_Owner::FUN_007bd280(int p)
 {
     Base::FUN_00766b90(p);
@@ -22917,6 +23342,7 @@ int unk210;
     void FUN_007aec10();
 };
 
+// pdb: CombatState::UpdateInventoryData | CombatState.obj | fnv360_0822_retail, uconst, low
 void Manager::FUN_007aec10()
 {
     AllocTagScope scope(0x2b);
@@ -23639,6 +24065,7 @@ struct Group
     void FUN_007a5e40();
 };
 
+// pdb: CombatGroup::UpdateSearch | CombatGroup.obj | fnv360_0822_retail, objrun, medium
 void Group::FUN_007a5e40()
 {
     if (capacity)
@@ -24096,6 +24523,7 @@ int unk218;
 Task* task;
 int state;
 bool HasFlag(int bit){return (*(volatile unsigned*)&flags>>bit)&1;}void FUN_007b3c70();void FUN_007aec10();void FUN_007b0540();void FUN_007b3180();bool FUN_007ae5e0(bool);void FUN_007acba0();bool FUN_007ac9b0();};
+// pdb: CombatState::UpdatePeriodicData | CombatState.obj | fnv360_0822_retail, caller_sim, low
 void State::FUN_007b3c70(){
 Actor* actor=owner->GetActor();Actor* target=owner->GetTarget();
 int count0=count;
@@ -24210,6 +24638,8 @@ struct Ref {
     int FUN_007a0bf0();
     int FUN_007a11c0(int unused);
 };
+// pdb: CombatGroup::InitLoadGame | CombatGroup.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apLoadGameBuffer
 int Ref::FUN_007a11c0(int unused)
 {
     unsigned int n = actors.count;
@@ -24256,6 +24686,8 @@ struct Obj7ac200 {
     n7ac200::Cfg* cfg;
     bool FUN_007ac200(n7ac200::Seg* seg, n7ac200::P3* from, n7ac200::P3* pos, void* ref);
 };
+// pdb: CombatState::CheckLedgeCoverAngle | CombatState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arCoverLocation, arCoverPoint, arTargetLocation, apTarget
 bool Obj7ac200::FUN_007ac200(n7ac200::Seg* seg, n7ac200::P3* from, n7ac200::P3* pos, void* ref)
 {
     float lo = n7ac200::Min(seg->p0.z, seg->p1.z);
@@ -24508,6 +24940,7 @@ struct Owner {
     void FUN_007bd960(int h, Ref* r, float dist);
     void FUN_007bdcd0();
 };
+// pdb: Explosion::FindTargets | Explosion.obj | fnv360_0822_retail, callee_sim, low
 void Owner::FUN_007bdcd0()
 {
     int playerHandle = FUN_007bd130(DAT_0107a104, 0, true);
@@ -24563,6 +24996,8 @@ extern const float DAT_00f5f388, DAT_00f61008, DAT_00f5f370, DAT_00f5f37c;
 float __cdecl FUN_007b7eb0(Target* target, int mode, int c);
 void __cdecl FUN_007b8070(Vector7b* out, Target* target);
 
+// pdb: CombatUtilities::GetProjectedPointForTarget | CombatUtilities.obj | fnv360_0822_retail, caller, medium
+// pdb params: apAttacker, apTarget, apReleasePoint, apProjectile, afProjectileSpeed, abHighArc
 extern "C" Vector7b* __cdecl FUN_007b9e10(Vector7b* out, ActorA* actor, Target* target, Vector7b* direction,
                                           Settings* settings, float amount, unsigned char flags)
 {
@@ -24621,6 +25056,8 @@ inline Root* root() { return (Root*)f3m_007bf770::DAT_0107a0d8; }
 inline Line* mk(float r, Col* c, int f) { return (Line*)f3m_007bf770::FUN_00479c00(r, (f3m_007bf770::Color7*)c, f); }
 }
 
+// pdb: CombatUtilities::AddLOSDebugGeomtry | CombatUtilities.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: arStartLocation, arEndLocation, apHitObj, afHitFraction, apLOSColor, apHitColor
 void __cdecl FUN_007b8a50(const Pt* from, const Pt* to, int arrow, float t, const Col* endColor, const Col* lineColor)
 {
   Col c1 = lineColor ? *lineColor : Col(1.0f, 0.0f, 0.0f, 1.0f);
@@ -24668,6 +25105,8 @@ struct OwnerList {
     ElList sub;
     void FUN_007a1c20(Arg7a1c20* a);
 };
+// pdb: CombatGroup::RemoveTarget | CombatGroup.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apActor
 void OwnerList::FUN_007a1c20(Arg7a1c20* a)
 {
     for (unsigned int i = 0; i < sub.count; i++) {
@@ -24711,6 +25150,8 @@ struct Self {
     void FUN_007a7760(NiPoint3 p, float r, float f, Actor* a, void** o0, void** o1, void** o2, void** o3);
     bool FUN_007a83a0(Actor* a, Ref* r, NiPoint3* p, float f);
 };
+// pdb: CombatManager::CheckExplosionAttack | CombatManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apAttacker, apExplosion, arTargetedPoint, afTime
 bool Self::FUN_007a83a0(Actor* a, Ref* ref, NiPoint3* p, float f)
 {
     Base4a4* t = ref->FUN_004a4bc0();
@@ -24794,6 +25235,8 @@ public:
     TimedList list15c;
     void FUN_007b0e80(PtrArray* out);
 };
+// pdb: CombatState::BuildUnreachableCoverLocationsArray | CombatState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apUnreachableCoverLocationsArray
 void Owner::FUN_007b0e80(PtrArray* out)
 {
     out->SetCapacity(list15c.count);
@@ -24926,6 +25369,8 @@ struct Tree {
     Tree* FUN_007a9a60(int a1, int a2, HashList* hashes, SrcList* src, int arg);
 };
 
+// pdb: CombatPlan::CombatPlan | CombatPlan.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apCombatController, apGoal, apPlanNodes, apPlanLinks, apWorldStateArray
 Tree* Tree::FUN_007a9a60(int a1, int a2, HashList* hashes, SrcList* src, int arg)
 {
     unk08 = 0;
@@ -25244,6 +25689,8 @@ struct Group {
     unsigned int count;
     Ref* FUN_007a0ac0(Ref* origin, Ref* favored, float radius);
 };
+// pdb: CombatGroup::FindClusterPartner | CombatGroup.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apMember, apCurrentPartner, afMaxDistance
 Ref* Group::FUN_007a0ac0(Ref* origin, Ref* favored, float radius)
 {
     float best = radius * radius;
@@ -25361,6 +25808,7 @@ struct FUN_007a6db0_cls {
     int maxValue;
     void FUN_007a6db0();
 };
+// pdb: CombatGroupData::ComputeMinMaxTargetDetection | CombatGroupStrategy.obj | fnv360_0822_retail, call_seq, low
 void FUN_007a6db0_cls::FUN_007a6db0()
 {
     unsigned int count = owner->count;
@@ -25576,6 +26024,8 @@ struct Owner {
     void FUN_007b0d80(int);
 };
 
+// pdb: CombatState::BoostConfidence | CombatState.obj | fnv360_0822_debug, caller, medium
+// pdb params: abChangeFleeStatus
 void Owner::FUN_007b0fa0(bool flag)
 {
     int index = attempts;
@@ -25903,6 +26353,8 @@ struct Obj {
     bool FUN_00710630(void* item, int a, int* out, int b);
 };
 inline int* ClearResult(int& out) { out = 0; return &out; }
+// pdb: CombatManager::GetWanttoHelpGroup | CombatManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apActor, apActorToHelp
 bool __stdcall FUN_007a81f0(Obj* self, Obj* other)
 {
     if (!self->FUN_007107b0(other))
@@ -26002,6 +26454,8 @@ extern Vector3 g_zeroVector;
 
 }
 
+// pdb: CombatState::BuildTargetLOSLocationsArray | CombatState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apLocationsArray
 void f3m_007b2790::Task79::FUN_007af650(void* argument)
 {
     f3rw_007af650::Array* out = (f3rw_007af650::Array*)argument;
@@ -26075,6 +26529,8 @@ public:
     void FUN_007ac7e0(int index, Form7ac* form, int value);
 };
 
+// pdb: CombatState::SetCombatItem | CombatState.obj | fnv360_0721_beta, call_gap_sim, low
+// pdb params: aiCombatItem, apRef, apBoundObject
 void Target7ac::FUN_007ac7e0(int index, Form7ac* form, int value)
 {
     reinterpret_cast<Heap7ac*>(&DAT_01090a78)->FUN_0086ba60(unk188[index]);
@@ -26100,6 +26556,8 @@ struct Obj7b : ::Target {
     void FUN_007b1730(int a, int b);
 };
 
+// pdb: CombatState::ChangeProcessLevel | CombatState.obj | fnv360_0822_debug, call_gap, low
+// pdb params: aeOldLevel, aeNewLevel
 void Obj7b::FUN_007b1730(int a, int b)
 {
     if (a == 0 && b != 0) {
@@ -26152,6 +26610,8 @@ struct Owner {
     }
     void FUN_007a2b80(int unused, Ref* ref);
 };
+// pdb: CombatGroup::NotifyMemberHit | CombatGroup.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apMember, apAttacker
 void Owner::FUN_007a2b80(int unused, Ref* ref)
 {
     if (!ref)
@@ -26282,6 +26742,8 @@ int unk1b0;
 int unk1b4;
 int unk1b8;
 void FUN_007accf0(int key,bool preserve);};
+// pdb: CombatState::ClearReferencePointer | CombatState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRef, abSelf
 void Ownercf0::FUN_007accf0(int key,bool preserve) {
 Linkcf0* old194=slots[3]; Linkcf0* old198=slots[4];
 Linkcf0** slot=slots; int count=5;
@@ -26306,6 +26768,8 @@ struct Scalar76a0 {
     void FUN_007b76a0(Reader76a0* reader);
 };
 
+// pdb: CombatTimeStamp::LoadGame | CombatTimer.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apLoadGameBuffer
 void Scalar76a0::FUN_007b76a0(Reader76a0* reader)
 {
     reader->FUN_006e0750(this, 4);
@@ -26348,6 +26812,7 @@ struct Map6e20 {
 };
 }
 namespace f3m_007b6e20 {
+// pdb: CombatThreatMap::UpdateThreats | CombatThreatMap.obj | fnv360_0822_retail, call_seq, medium
 void Map6e20::FUN_007b6e20()
 {
     Lock6e20* lock;
@@ -26425,6 +26890,8 @@ class PrjOwner7b {
     void FUN_007bd1e0(PrjSet7b* set, int key, float value);
 };
 
+// pdb: Explosion::CheckLimbTarget | Explosion.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apTarget, apTargetObject, afDistance
 void PrjOwner7b::FUN_007bd960(PrjSet7b* set, PrjLookup7b* lookup, float value)
 {
     if (!set) return;
@@ -26459,6 +26926,8 @@ struct Input { float x,y,z; }; struct Vector { __declspec(align(16)) float x; fl
 struct Sub { void** table; void Set(Vector* v) { ((void(__thiscall*)(Sub*,Vector*))table[20])(this,v); } };
 struct Body { int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8; int unkac; int unkb0; int unkb4; int unkb8; int unkbc; int unkc0; int unkc4; int unkc8; int unkcc; Sub sub; void FUN_0090b500(); };
 struct Owner { int unk00,unk04; Body* body; void FUN_00c24b70(); void FUN_007bbfd0(const Input*); };
+// pdb: bhkRigidBody::ApplyAngularImpulse | Explosion.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arImpulse
 void Owner::FUN_007bbfd0(const Input* input) {
  Vector v; v.x=input->x*DAT_00dbe7c0; v.y=input->y*DAT_00dbe7c0; v.z=input->z*DAT_00dbe7c0;
  if(this) { Body* target=body; if(target) { FUN_00c24b70(); target->FUN_0090b500(); target->sub.Set(&v); FUN_00c24b70(); } }
@@ -26569,6 +27038,8 @@ struct Outer
     void FUN_007bbf60(float* v);
 };
 
+// pdb: bhkRigidBody::ApplyLinearImpulse | Explosion.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arImpulse
 void Outer::FUN_007bbf60(float* v)
 {
     FNV_ALIGN(16) float s[3];
@@ -26997,6 +27468,8 @@ struct Combat {
     bool FUN_007ac200(Path* p, NiPoint3* to, NiPoint3* from, Actor* a);
     bool FUN_007aced0(Path* p, NiPoint3* to, Actor* a, bool facing);
 };
+// pdb: CombatState::CheckCoverSafe | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arCoverLocation, arCoverPoint, apTarget, abUseViewCone
 bool Combat::FUN_007aced0(Path* p, NiPoint3* to, Actor* a, bool facing)
 {
     NiPoint3 pos = *a->V1F4();
@@ -27046,6 +27519,8 @@ struct Vec3 {
 struct Obj { int m0; Vec3 pos; };
 char __cdecl FUN_005f2730(Obj* a, Vec3* b, int c, int d);
 }
+// pdb: CombatState::CheckCoverLOS | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arCoverPathingLocation, arTargetLocation, abSkipDistanceCheck
 bool __cdecl FUN_007ac160(n7ac160::Obj* a, n7ac160::Vec3* b, bool force)
 {
     using namespace n7ac160;
@@ -27105,6 +27580,8 @@ struct Map {
     void FUN_007b66f0(Buffer* buffer);
 };
 
+// pdb: CombatThreatMap::SaveGame | CombatThreatMap.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apSaveGameBuffer
 void Map::FUN_007b66f0(Buffer* output)
 {
     Buffer* const buffer = *reinterpret_cast<Buffer* volatile*>(&output);
@@ -27147,6 +27624,8 @@ void SetStart(double x,double y,double z,double w){start.x=(float)x;start.y=(flo
 struct FUN_007b76e0 {virtual ~FUN_007b76e0(){} int field04;int field08;int field0c;int field10;int field14;int field18;int field1c;int field20;int field24;int field28;int field2c;int field30;int field34;int field38;int field3c;int field40;int field44;int field48;int field4c;int field50;int field54;int field58;int field5c;int field60;int field64;int field68;int field6c;int field70;FUN_007b76e0(int,Filter*); };
 
 inline Filter* Prepare(Actor* a,Actor* b,Filter& f,Filter& tmp){a->FUN_00766b00(&f);if(b&&b->IsActor()){f=*b->FUN_00766b00(&tmp);}return &f;} struct Bundle {Query q;FUN_007b76e0 c;Bundle(Actor* a,Actor* b,int layer,Filter& f,Filter& tmp):q(),c(layer,Prepare(a,b,f,tmp)) {}};
+// pdb: CombatUtilities::CalculateLOS | CombatUtilities.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apAttacker, apTarget, arAttackerLocation, arTargetLocation, abIgnoreCrouch, aiCollisionLayer
 bool __cdecl FUN_007b9aa0(Actor* a, Actor* b, Vec3* from, Vec3* to, int unused, int mask)
 {
     int layer = 0x25;
@@ -27482,6 +27961,8 @@ struct Manager {
     Group* CombatManager_CreateCombatGroup();
     Group* FUN_007a7e30(Actor* actor);
 };
+// pdb: CombatManager::SplitPlayerCombatGroup | CombatManager.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apMember
 Group* Manager::FUN_007a7e30(Actor* actor)
 {
     Group* group = DAT_0107a104->GetGroup();
@@ -27552,6 +28033,8 @@ __declspec(noinline) bool Owner::FUN_00bea7b0(void* key, Array** out)
     }
     return false;
 }
+// pdb: CombatTargetMap::AddTargetAttacker | CombatTargetMap.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTarget, apAttacker
 void Owner::FUN_007b5f40(void* key,void* value)
 {
     Tag tag;
@@ -27878,6 +28361,7 @@ static __forceinline F3U32 NextId()
     return id;
 }
 
+// pdb: Explosion::InitHavok | Explosion.obj | fnv360_0822_retail, vtable, medium
 void Explosion::FUN_007bdb20()
 {
     if (unk98.m_pObject || !unk3C || !FormName(unk3C))
@@ -27930,6 +28414,8 @@ public:
     bool FUN_007ad760(int key);
 };
 
+// pdb: CombatState::IsCoverLocationUnreachable | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiCoverKey
 bool Target::FUN_007ad760(int key)
 {
     for (unsigned int i = 0; i < unk15C.count; ++i) {
@@ -28099,6 +28585,8 @@ struct Owner {
     bool FUN_007ad520(Obj* obj, Ref* skip);
 };
 
+// pdb: CombatState::CheckTargetsCoverLOS | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arCoverPathingLocation, apIgnoreTarget
 bool Owner::FUN_007ad520(Obj* obj, Ref* skip)
 {
     Arr* arr = inner->arr;
@@ -28171,6 +28659,8 @@ __forceinline MapEntry0816* GetFirstPos(Map0816* map)
     return 0;
 }
 
+// pdb: CombatManager::SaveGame | CombatManager.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apSaveGameBuffer
 void Owner::FUN_007a7a50(Save* s)
 {
     s->FUN_006e1830(&unk34, 4, 0);
@@ -28230,6 +28720,8 @@ inline float ASin(float f)
 }
 }
 using namespace n7b80e0;
+// pdb: CombatUtilities::GetAngleToProjectedPoint | CombatUtilities.obj | fnv360_0822_retail, caller, medium
+// pdb params: aStartLocation, aProjectedPoint
 Pt __cdecl FUN_007b80e0(Pt a, Pt b)
 {
     Pt d(b.x - a.x, b.y - a.y, b.z - a.z);
@@ -28777,6 +29269,8 @@ struct List7a {
 extern bool __cdecl FUN_007b87e0(Actor7a*);
 extern bool __cdecl FUN_007ba460(Actor7a*,int,float,float);
 extern bool __cdecl FUN_007b8860(Actor7a*,Loc7a*);
+// pdb: CombatGroup::GetBestTarget | CombatGroup.obj | fnv360_0822_retail, call_gap, low, conflict (bridge: CombatController::SetTarget)
+// pdb params: apMember
 Actor7a* List7a::FUN_007a51f0(Actor7a* who) {
  if (!unk010) return 0;
  float best; Scalar7a fallback; fallback.value=best=-3.4028234663852886e38f;
@@ -29147,6 +29641,7 @@ extern "C" bool __cdecl FUN_005827f0(void*,int);
 extern "C" void __cdecl FUN_008d7b90(Query32*,int,int,int,int);
 extern "C" void __cdecl FUN_0076ff40(int);
 struct Zero32 {float unk00;unsigned char b4,b5,b6,b7,b8;};
+// pdb: Explosion::ProcessTargets | Explosion.obj | fnv360_0822_retail, objrun_prop, low
 void Projectile32::FUN_007bf200()
 {
  ((unsigned char*)&unkCC)[2]=1;
@@ -29230,6 +29725,8 @@ public:
     FUN_007bb320_Class* FUN_007bb320(const Record672* source);
 };
 
+// pdb: CombatWorldStateArray::CombatWorldStateArray | CombatWorldState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apWorldStateArray
 FUN_007bb320_Class* FUN_007bb320_Class::FUN_007bb320(const Record672* source) {
     FUN_00bffa60(this, source, 0x50);
     this->first = source->first;
@@ -29273,6 +29770,8 @@ __declspec(noinline) bool Map::FUN_00bea7b0(unsigned id, Value** out)
     }
     return false;
 }
+// pdb: CombatThreatMap::RemoveThreat | CombatThreatMap.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apForm
 void Map::FUN_007b6530(Key* key)
 {
     lock.FUN_0086cc50();
@@ -29300,6 +29799,8 @@ struct Node {float cost,weight;Input* input;};struct NodeQueue {unsigned unknown
 struct Owner;struct FUN_007ab140 {unsigned unk000;unsigned unk004;unsigned unk008;unsigned unk00c;unsigned unk010;unsigned unk014;unsigned unk018;unsigned unk01c;unsigned unk020;unsigned unk024;unsigned unk028;unsigned unk02c;unsigned unk030;unsigned unk034;unsigned unk038;FUN_007ab140(Owner*,FUN_007a9a60*,ArrayA*);static void* operator new(unsigned n){return DAT_01090a78.FUN_0086b930(n);}static void operator delete(void* p){DAT_01090a78.FUN_0086ba60(p);}};
 struct Owner {unsigned unk000;unsigned unk004;unsigned unk008;unsigned unk00c;unsigned unk010;unsigned unk014;unsigned unk018;unsigned unk01c;unsigned unk020;unsigned unk024;unsigned unk028;unsigned unk02c;unsigned unk030;unsigned unk034;unsigned unk038;unsigned unk03c;unsigned unk040;unsigned unk044;unsigned unk048;unsigned unk04c;unsigned unk050;unsigned unk054;unsigned unk058;unsigned unk05c;unsigned unk060;unsigned unk064;unsigned unk068;unsigned unk06c;unsigned unk070;unsigned unk074;unsigned unk078;unsigned unk07c;unsigned unk080;unsigned unk084;unsigned unk088;unsigned unk08c;unsigned unk090;unsigned unk094;unsigned unk098;unsigned unk09c;unsigned unk0a0;unsigned unk0a4;unsigned unk0a8;unsigned unk0ac;unsigned unk0b0;unsigned unk0b4;unsigned unk0b8;unsigned unk0bc;unsigned unk0c0;unsigned unk0c4;unsigned unk0c8;unsigned unk0cc;unsigned unk0d0;unsigned unk0d4;unsigned unk0d8;unsigned unk0dc;unsigned unk0e0;unsigned unk0e4;unsigned unk0e8;unsigned unk0ec;unsigned unk0f0;unsigned unk0f4;unsigned unk0f8;unsigned unk0fc;unsigned unk100;unsigned unk104;unsigned unk108;unsigned unk10c;unsigned unk110;unsigned unk114;unsigned unk118;unsigned unk11c;unsigned unk120;unsigned unk124;unsigned unk128;unsigned unk12c;unsigned unk130;unsigned unk134;unsigned unk138;unsigned unk13c;unsigned unk140;unsigned unk144;unsigned unk148;unsigned unk14c;unsigned unk150;unsigned unk154;unsigned unk158;unsigned unk15c;unsigned unk160;unsigned unk164;unsigned unk168;unsigned unk16c;unsigned unk170;unsigned unk174;unsigned unk178;unsigned unk17c;unsigned unk180;unsigned unk184;unsigned unk188;unsigned unk18c;unsigned unk190;unsigned unk194;unsigned unk198;unsigned unk19c;unsigned unk1a0;unsigned unk1a4;unsigned unk1a8;unsigned unk1ac;unsigned unk1b0;unsigned unk1b4;unsigned unk1b8;unsigned unk1bc;unsigned unk1c0;unsigned unk1c4;unsigned unk1c8;unsigned unk1cc;unsigned unk1d0;unsigned unk1d4;unsigned unk1d8;unsigned unk1dc;unsigned unk1e0;unsigned unk1e4;unsigned unk1e8;unsigned unk1ec;unsigned unk1f0;unsigned unk1f4;unsigned unk1f8;unsigned unk1fc;unsigned unk200;unsigned unk204;unsigned unk208;unsigned unk20c;unsigned unk210;unsigned unk214;unsigned unk218;unsigned unk21c;unsigned unk220;unsigned unk224;unsigned unk228;unsigned unk22c;unsigned unk230;unsigned unk234;unsigned unk238;unsigned unk23c;unsigned unk240;unsigned unk244;unsigned unk248;unsigned unk24c;unsigned unk250;unsigned unk254;unsigned unk258;unsigned unk25c;unsigned unk260;unsigned unk264;unsigned unk268;unsigned unk26c;unsigned unk270;unsigned unk274;unsigned unk278;unsigned unk27c;unsigned unk280;unsigned unk284;unsigned unk288;unsigned unk28c;unsigned unk290;unsigned unk294;unsigned unk298;unsigned unk29c;unsigned unk2a0;unsigned unk2a4;unsigned unk2a8;unsigned unk2ac;unsigned unk2b0;unsigned unk2b4;unsigned unk2b8;unsigned unk2bc;unsigned unk2c0;unsigned unk2c4;unsigned unk2c8;unsigned unk2cc;unsigned unk2d0;unsigned unk2d4;unsigned unk2d8;unsigned unk2dc;unsigned unk2e0;unsigned unk2e4;unsigned unk2e8;unsigned unk2ec;unsigned unk2f0;unsigned unk2f4;unsigned unk2f8;unsigned unk2fc;unsigned unk300;unsigned unk304;unsigned unk308;unsigned unk30c;unsigned unk310;unsigned unk314;unsigned unk318;unsigned unk31c;unsigned unk320;unsigned unk324;unsigned unk328;unsigned unk32c;unsigned unk330;unsigned unk334;unsigned unk338;unsigned unk33c;unsigned unk340;unsigned unk344;unsigned unk348;unsigned unk34c;unsigned unk350;unsigned unk354;unsigned unk358;unsigned unk35c;unsigned unk360;unsigned unk364;unsigned unk368;unsigned unk36c;unsigned unk370;unsigned unk374;unsigned unk378;unsigned unk37c;unsigned unk380;unsigned unk384;unsigned unk388;unsigned unk38c;unsigned unk390;unsigned unk394;unsigned unk398;unsigned unk39c;unsigned unk3a0;unsigned unk3a4;unsigned unk3a8;unsigned unk3ac;unsigned unk3b0;unsigned unk3b4;unsigned unk3b8;unsigned unk3bc;unsigned unk3c0;unsigned unk3c4;unsigned unk3c8;unsigned unk3cc;unsigned unk3d0;unsigned unk3d4;unsigned unk3d8;unsigned unk3dc;unsigned unk3e0;unsigned unk3e4;unsigned unk3e8;unsigned unk3ec;unsigned unk3f0;unsigned unk3f4;unsigned unk3f8;unsigned unk3fc;unsigned unk400;unsigned unk404;unsigned unk408;unsigned unk40c;unsigned unk410;unsigned unk414;unsigned unk418;unsigned unk41c;unsigned unk420;unsigned unk424;unsigned unk428;unsigned unk42c;unsigned unk430;unsigned unk434;unsigned unk438;unsigned unk43c;unsigned unk440;unsigned unk444;unsigned unk448;unsigned unk44c;unsigned unk450;unsigned unk454;unsigned unk458;unsigned unk45c;unsigned unk460;unsigned unk464;unsigned unk468;unsigned unk46c;unsigned unk470;unsigned unk474;unsigned unk478;unsigned unk47c;unsigned unk480;unsigned unk484;unsigned unk488;unsigned unk48c;unsigned unk490;unsigned unk494;unsigned unk498;unsigned unk49c;unsigned unk4a0;unsigned unk4a4;unsigned unk4a8;unsigned unk4ac;unsigned unk4b0;unsigned unk4b4;unsigned unk4b8;unsigned unk4bc;unsigned unk4c0;unsigned unk4c4;unsigned unk4c8;unsigned unk4cc;unsigned unk4d0;unsigned unk4d4;unsigned unk4d8;unsigned unk4dc;unsigned unk4e0;unsigned unk4e4;unsigned unk4e8;unsigned unk4ec;unsigned unk4f0;unsigned unk4f4;unsigned unk4f8;unsigned unk4fc;unsigned unk500;unsigned unk504;unsigned unk508;unsigned unk50c;unsigned unk510;unsigned unk514;unsigned unk518;unsigned unk51c;unsigned unk520;unsigned unk524;unsigned unk528;unsigned unk52c;unsigned unk530;unsigned unk534;unsigned unk538;unsigned unk53c;unsigned unk540;unsigned unk544;unsigned unk548;unsigned unk54c;unsigned unk550;unsigned unk554;unsigned unk558;unsigned unk55c;unsigned unk560;unsigned unk564;unsigned unk568;unsigned unk56c;unsigned unk570;unsigned unk574;unsigned unk578;unsigned unk57c;unsigned unk580;unsigned unk584;unsigned unk588;unsigned unk58c;unsigned unk590;unsigned unk594;unsigned unk598;unsigned unk59c;unsigned unk5a0;unsigned unk5a4;unsigned unk5a8;unsigned unk5ac;unsigned unk5b0;unsigned unk5b4;unsigned unk5b8;unsigned unk5bc;unsigned unk5c0;unsigned unk5c4;unsigned unk5c8;unsigned unk5cc;unsigned unk5d0;unsigned unk5d4;unsigned unk5d8;unsigned unk5dc;unsigned unk5e0;unsigned unk5e4;unsigned unk5e8;unsigned unk5ec;unsigned unk5f0;unsigned unk5f4;unsigned unk5f8;unsigned unk5fc;unsigned unk600;unsigned unk604;unsigned unk608;unsigned unk60c;unsigned unk610;unsigned unk614;unsigned unk618;unsigned unk61c;unsigned unk620;unsigned unk624;unsigned unk628;unsigned unk62c;unsigned unk630;unsigned unk634;unsigned unk638;unsigned unk63c;unsigned unk640;unsigned unk644;unsigned unk648;unsigned unk64c;unsigned unk650;unsigned unk654;unsigned unk658;unsigned unk65c;unsigned unk660;unsigned unk664;unsigned unk668;unsigned unk66c;unsigned unk670;unsigned unk674;unsigned unk678;unsigned unk67c;unsigned unk680;unsigned unk684;unsigned unk688;unsigned unk68c;unsigned unk690;unsigned unk694;unsigned unk698;unsigned unk69c;unsigned unk6a0;unsigned unk6a4;unsigned unk6a8;unsigned unk6ac;unsigned unk6b0;unsigned unk6b4;unsigned unk6b8;unsigned unk6bc;unsigned unk6c0;unsigned unk6c4;unsigned unk6c8;unsigned unk6cc;unsigned unk6d0;unsigned unk6d4;unsigned unk6d8;unsigned unk6dc;unsigned unk6e0;unsigned unk6e4;unsigned unk6e8;unsigned unk6ec;unsigned unk6f0;unsigned unk6f4;unsigned unk6f8;unsigned unk6fc;unsigned unk700;unsigned unk704;unsigned unk708;unsigned unk70c;unsigned unk710;unsigned unk714;unsigned unk718;unsigned unk71c;unsigned unk720;unsigned unk724;unsigned unk728;unsigned unk72c;unsigned unk730;unsigned unk734;unsigned unk738;unsigned unk73c;unsigned unk740;unsigned unk744;unsigned unk748;unsigned unk74c;unsigned unk750;unsigned unk754;unsigned unk758;unsigned unk75c;unsigned unk760;unsigned unk764;unsigned unk768;unsigned unk76c;unsigned unk770;unsigned unk774;unsigned unk778;unsigned unk77c;unsigned unk780;unsigned unk784;unsigned unk788;unsigned unk78c;unsigned unk790;unsigned unk794;unsigned unk798;unsigned unk79c;unsigned unk7a0;unsigned unk7a4;unsigned unk7a8;unsigned unk7ac;unsigned unk7b0;unsigned unk7b4;unsigned unk7b8;unsigned unk7bc;unsigned unk7c0;unsigned unk7c4;unsigned unk7c8;unsigned unk7cc;unsigned unk7d0;unsigned unk7d4;unsigned unk7d8;unsigned unk7dc;unsigned unk7e0;unsigned unk7e4;unsigned unk7e8;unsigned unk7ec;unsigned unk7f0;unsigned unk7f4;unsigned unk7f8;unsigned unk7fc;unsigned unk800;unsigned unk804;unsigned unk808;unsigned unk80c;unsigned unk810;unsigned unk814;unsigned unk818;unsigned unk81c;unsigned unk820;unsigned unk824;unsigned unk828;unsigned unk82c;unsigned unk830;unsigned unk834;unsigned unk838;unsigned unk83c;unsigned unk840;unsigned unk844;unsigned unk848;unsigned unk84c;unsigned unk850;unsigned unk854;unsigned unk858;unsigned unk85c;unsigned unk860;unsigned unk864;unsigned unk868;unsigned unk86c;unsigned unk870;unsigned unk874;unsigned unk878;unsigned unk87c;unsigned unk880;unsigned unk884;unsigned unk888;unsigned unk88c;unsigned unk890;unsigned unk894;unsigned unk898;unsigned unk89c;unsigned unk8a0;unsigned unk8a4;unsigned unk8a8;unsigned unk8ac;unsigned unk8b0;unsigned unk8b4;unsigned unk8b8;unsigned unk8bc;unsigned unk8c0;unsigned unk8c4;unsigned unk8c8;unsigned unk8cc;unsigned unk8d0;unsigned unk8d4;unsigned unk8d8;unsigned unk8dc;unsigned unk8e0;unsigned unk8e4;unsigned unk8e8;unsigned unk8ec;unsigned unk8f0;unsigned unk8f4;unsigned unk8f8;unsigned unk8fc;unsigned unk900;unsigned unk904;unsigned unk908;unsigned unk90c;unsigned unk910;unsigned unk914;unsigned unk918;unsigned unk91c;unsigned unk920;unsigned unk924;unsigned unk928;unsigned unk92c;unsigned unk930;unsigned unk934;unsigned unk938;unsigned unk93c;unsigned unk940;unsigned unk944;unsigned unk948;unsigned unk94c;unsigned unk950;unsigned unk954;unsigned unk958;unsigned unk95c;unsigned unk960;unsigned unk964;unsigned unk968;unsigned unk96c;unsigned unk970;unsigned unk974;unsigned unk978;unsigned unk97c;unsigned unk980;unsigned unk984;unsigned unk988;unsigned unk98c;unsigned unk990;unsigned unk994;unsigned unk998;unsigned unk99c;unsigned unk9a0;unsigned unk9a4;unsigned unk9a8;unsigned unk9ac;unsigned unk9b0;unsigned unk9b4;unsigned unk9b8;unsigned unk9bc;unsigned unk9c0;unsigned unk9c4;unsigned unk9c8;unsigned unk9cc;unsigned unk9d0;unsigned unk9d4;unsigned unk9d8;unsigned unk9dc;unsigned unk9e0;unsigned unk9e4;unsigned unk9e8;unsigned unk9ec;unsigned unk9f0;unsigned unk9f4;unsigned unk9f8;unsigned unk9fc;unsigned unka00;unsigned unka04;unsigned unka08;unsigned unka0c;unsigned unka10;unsigned unka14;unsigned unka18;unsigned unka1c;unsigned unka20;unsigned unka24;unsigned unka28;unsigned unka2c;unsigned unka30;unsigned unka34;unsigned unka38;unsigned unka3c;unsigned unka40;unsigned unka44;unsigned unka48;unsigned unka4c;unsigned unka50;unsigned unka54;unsigned unka58;unsigned unka5c;unsigned unka60;unsigned unka64;unsigned unka68;unsigned unka6c;unsigned unka70;unsigned unka74;unsigned unka78;unsigned unka7c;unsigned unka80;unsigned unka84;unsigned unka88;unsigned unka8c;unsigned unka90;unsigned unka94;unsigned unka98;unsigned unka9c;unsigned unkaa0;unsigned unkaa4;unsigned unkaa8;unsigned unkaac;unsigned unkab0;unsigned unkab4;unsigned unkab8;unsigned unkabc;unsigned unkac0;unsigned unkac4;unsigned unkac8;unsigned unkacc;unsigned unkad0;unsigned unkad4;unsigned unkad8;unsigned unkadc;unsigned unkae0;unsigned unkae4;unsigned unkae8;unsigned unkaec;unsigned unkaf0;unsigned unkaf4;unsigned unkaf8;unsigned unkafc;unsigned unkb00;unsigned unkb04;unsigned unkb08;unsigned unkb0c;unsigned unkb10;unsigned unkb14;unsigned unkb18;unsigned unkb1c;unsigned unkb20;unsigned unkb24;unsigned unkb28;unsigned unkb2c;unsigned unkb30;unsigned unkb34;unsigned unkb38;unsigned unkb3c;unsigned unkb40;unsigned unkb44;unsigned unkb48;unsigned unkb4c;unsigned unkb50;unsigned unkb54;unsigned unkb58;unsigned unkb5c;unsigned unkb60;unsigned unkb64;unsigned unkb68;unsigned unkb6c;unsigned unkb70;unsigned unkb74;unsigned unkb78;unsigned unkb7c;unsigned unkb80;unsigned unkb84;unsigned unkb88;unsigned unkb8c;unsigned unkb90;unsigned unkb94;unsigned unkb98;unsigned unkb9c;unsigned unkba0;unsigned unkba4;unsigned unkba8;unsigned unkbac;unsigned unkbb0;unsigned unkbb4;unsigned unkbb8;unsigned unkbbc;unsigned unkbc0;unsigned unkbc4;unsigned unkbc8;unsigned unkbcc;unsigned unkbd0;unsigned unkbd4;unsigned unkbd8;unsigned unkbdc;unsigned unkbe0;unsigned unkbe4;unsigned unkbe8;unsigned unkbec;unsigned unkbf0;unsigned unkbf4;unsigned unkbf8;unsigned unkbfc;unsigned unkc00;unsigned unkc04;unsigned unkc08;unsigned unkc0c;unsigned unkc10;unsigned unkc14;unsigned unkc18;unsigned unkc1c;unsigned unkc20;unsigned unkc24;unsigned unkc28;unsigned unkc2c;unsigned unkc30;unsigned unkc34;unsigned unkc38;unsigned unkc3c;unsigned unkc40;unsigned unkc44;unsigned unkc48;unsigned unkc4c;unsigned unkc50;unsigned unkc54;unsigned unkc58;unsigned unkc5c;unsigned unkc60;unsigned unkc64;unsigned unkc68;unsigned unkc6c;unsigned unkc70;unsigned unkc74;unsigned unkc78;unsigned unkc7c;unsigned unkc80;unsigned unkc84;unsigned unkc88;unsigned unkc8c;unsigned unkc90;unsigned unkc94;unsigned unkc98;unsigned unkc9c;unsigned unkca0;unsigned unkca4;unsigned unkca8;unsigned unkcac;unsigned unkcb0;unsigned unkcb4;unsigned unkcb8;unsigned unkcbc;unsigned unkcc0;unsigned unkcc4;unsigned unkcc8;unsigned unkccc;unsigned unkcd0;unsigned unkcd4;unsigned unkcd8;unsigned unkcdc;unsigned unkce0;unsigned unkce4;unsigned unkce8;unsigned unkcec;unsigned unkcf0;unsigned unkcf4;unsigned unkcf8;unsigned unkcfc;unsigned unkd00;unsigned unkd04;unsigned unkd08;unsigned unkd0c;unsigned unkd10;unsigned unkd14;unsigned unkd18;unsigned unkd1c;unsigned unkd20;unsigned unkd24;unsigned unkd28;unsigned unkd2c;unsigned unkd30;unsigned unkd34;unsigned unkd38;unsigned unkd3c;unsigned unkd40;unsigned unkd44;unsigned unkd48;unsigned unkd4c;unsigned unkd50;unsigned unkd54;unsigned unkd58;unsigned unkd5c;unsigned unkd60;unsigned unkd64;unsigned unkd68;unsigned unkd6c;unsigned unkd70;unsigned unkd74;unsigned unkd78;unsigned unkd7c;unsigned unkd80;unsigned unkd84;unsigned unkd88;unsigned unkd8c;unsigned unkd90;unsigned unkd94;unsigned unkd98;unsigned unkd9c;unsigned unkda0;unsigned unkda4;unsigned unkda8;unsigned unkdac;unsigned unkdb0;unsigned unkdb4;unsigned unkdb8;unsigned unkdbc;unsigned unkdc0;unsigned unkdc4;unsigned unkdc8;unsigned unkdcc;unsigned unkdd0;unsigned unkdd4;unsigned unkdd8;unsigned unkddc;unsigned unkde0;unsigned unkde4;unsigned unkde8;unsigned unkdec;unsigned unkdf0;unsigned unkdf4;unsigned unkdf8;unsigned unkdfc;unsigned unke00;unsigned unke04;unsigned unke08;unsigned unke0c;unsigned unke10;unsigned unke14;unsigned unke18;unsigned unke1c;unsigned unke20;unsigned unke24;unsigned unke28;unsigned unke2c;unsigned unke30;unsigned unke34;unsigned unke38;unsigned unke3c;unsigned unke40;unsigned unke44;unsigned unke48;unsigned unke4c;unsigned unke50;unsigned unke54;unsigned unke58;unsigned unke5c;unsigned unke60;unsigned unke64;unsigned unke68;unsigned unke6c;unsigned unke70;unsigned unke74;unsigned unke78;unsigned unke7c;unsigned unke80;unsigned unke84;unsigned unke88;unsigned unke8c;unsigned unke90;unsigned unke94;unsigned unke98;unsigned unke9c;unsigned unkea0;unsigned unkea4;unsigned unkea8;unsigned unkeac;unsigned unkeb0;unsigned unkeb4;unsigned unkeb8;unsigned unkebc;unsigned unkec0;unsigned unkec4;unsigned unkec8;unsigned unkecc;unsigned unked0;unsigned unked4;unsigned unked8;unsigned unkedc;unsigned unkee0;unsigned unkee4;unsigned unkee8;unsigned unkeec;unsigned unkef0;unsigned unkef4;unsigned unkef8;unsigned unkefc;unsigned unkf00;unsigned unkf04;unsigned unkf08;unsigned unkf0c;unsigned unkf10;unsigned unkf14;unsigned unkf18;unsigned unkf1c;unsigned unkf20;unsigned unkf24;unsigned unkf28;unsigned unkf2c;unsigned unkf30;unsigned unkf34;unsigned unkf38;unsigned unkf3c;unsigned unkf40;unsigned unkf44;unsigned unkf48;unsigned unkf4c;unsigned unkf50;unsigned unkf54;unsigned unkf58;unsigned unkf5c;unsigned unkf60;unsigned unkf64;unsigned unkf68;unsigned unkf6c;unsigned unkf70;unsigned unkf74;unsigned unkf78;unsigned unkf7c;unsigned unkf80;unsigned unkf84;unsigned unkf88;unsigned unkf8c;unsigned unkf90;unsigned unkf94;unsigned unkf98;unsigned unkf9c;unsigned unkfa0;unsigned unkfa4;unsigned unkfa8;unsigned unkfac;unsigned unkfb0;unsigned unkfb4;unsigned unkfb8;unsigned unkfbc;unsigned unkfc0;unsigned unkfc4;unsigned unkfc8;unsigned unkfcc;unsigned unkfd0;unsigned unkfd4;unsigned unkfd8;unsigned unkfdc;unsigned unkfe0;unsigned unkfe4;unsigned unkfe8;unsigned unkfec;unsigned unkff0;unsigned unkff4;unsigned unkff8;unsigned unkffc;unsigned unk1000;unsigned unk1004;unsigned unk1008;unsigned unk100c;unsigned unk1010;unsigned unk1014;unsigned unk1018;unsigned unk101c;unsigned unk1020;unsigned unk1024;unsigned unk1028;unsigned unk102c;unsigned unk1030;unsigned unk1034;unsigned unk1038;unsigned unk103c;unsigned unk1040;unsigned unk1044;unsigned unk1048;unsigned unk104c;unsigned unk1050;unsigned unk1054;unsigned unk1058;unsigned unk105c;unsigned unk1060;unsigned unk1064;unsigned unk1068;unsigned unk106c;unsigned unk1070;unsigned unk1074;unsigned unk1078;unsigned unk107c;unsigned unk1080;unsigned unk1084;unsigned unk1088;unsigned unk108c;unsigned unk1090;unsigned unk1094;unsigned unk1098;unsigned unk109c;unsigned unk10a0;unsigned unk10a4;unsigned unk10a8;unsigned unk10ac;unsigned unk10b0;unsigned unk10b4;unsigned unk10b8;unsigned unk10bc;unsigned unk10c0;unsigned unk10c4;unsigned unk10c8;unsigned unk10cc;unsigned unk10d0;unsigned unk10d4;unsigned unk10d8;unsigned unk10dc;unsigned unk10e0;unsigned unk10e4;unsigned unk10e8;unsigned unk10ec;unsigned unk10f0;unsigned unk10f4;unsigned unk10f8;unsigned unk10fc;unsigned unk1100;unsigned unk1104;unsigned unk1108;unsigned unk110c;unsigned unk1110;unsigned unk1114;unsigned unk1118;unsigned unk111c;unsigned unk1120;unsigned unk1124;unsigned unk1128;unsigned unk112c;unsigned unk1130;unsigned unk1134;unsigned unk1138;unsigned unk113c;unsigned unk1140;unsigned unk1144;unsigned unk1148;unsigned unk114c;unsigned unk1150;unsigned unk1154;unsigned unk1158;unsigned unk115c;unsigned unk1160;unsigned unk1164;unsigned unk1168;unsigned unk116c;unsigned unk1170;unsigned unk1174;unsigned unk1178;unsigned unk117c;unsigned unk1180;unsigned unk1184;unsigned unk1188;unsigned unk118c;unsigned unk1190;unsigned unk1194;unsigned unk1198;unsigned unk119c;unsigned unk11a0;unsigned unk11a4;unsigned unk11a8;unsigned unk11ac;unsigned unk11b0;unsigned unk11b4;unsigned unk11b8;unsigned unk11bc;unsigned unk11c0;unsigned unk11c4;unsigned unk11c8;unsigned unk11cc;unsigned unk11d0;unsigned unk11d4;unsigned unk11d8;unsigned unk11dc;unsigned unk11e0;unsigned unk11e4;unsigned unk11e8;unsigned unk11ec;unsigned unk11f0;unsigned unk11f4;unsigned unk11f8;unsigned unk11fc;unsigned unk1200;unsigned unk1204;unsigned unk1208;unsigned unk120c;unsigned unk1210;unsigned unk1214;unsigned unk1218;unsigned unk121c;unsigned unk1220;unsigned unk1224;unsigned unk1228;unsigned unk122c;unsigned unk1230;unsigned unk1234;unsigned unk1238;unsigned unk123c;unsigned unk1240;unsigned unk1244;unsigned unk1248;unsigned unk124c;unsigned unk1250;unsigned unk1254;unsigned unk1258;unsigned unk125c;unsigned unk1260;unsigned unk1264;unsigned unk1268;unsigned unk126c;unsigned unk1270;unsigned unk1274;unsigned unk1278;unsigned unk127c;unsigned unk1280;unsigned unk1284;unsigned unk1288;unsigned unk128c;unsigned unk1290;unsigned unk1294;unsigned unk1298;unsigned unk129c;unsigned unk12a0;unsigned unk12a4;unsigned unk12a8;unsigned unk12ac;unsigned unk12b0;unsigned unk12b4;unsigned unk12b8;unsigned unk12bc;unsigned unk12c0;unsigned unk12c4;unsigned unk12c8;unsigned unk12cc;unsigned unk12d0;unsigned unk12d4;unsigned unk12d8;unsigned unk12dc;unsigned unk12e0;unsigned unk12e4;unsigned unk12e8;unsigned unk12ec;unsigned unk12f0;unsigned unk12f4;unsigned unk12f8;unsigned unk12fc;unsigned unk1300;unsigned unk1304;unsigned unk1308;unsigned unk130c;unsigned unk1310;unsigned unk1314;unsigned unk1318;unsigned unk131c;unsigned unk1320;unsigned unk1324;unsigned unk1328;unsigned unk132c;unsigned unk1330;unsigned unk1334;unsigned unk1338;unsigned unk133c;unsigned unk1340;unsigned unk1344;unsigned unk1348;unsigned unk134c;unsigned unk1350;unsigned unk1354;unsigned unk1358;unsigned unk135c;unsigned unk1360;unsigned unk1364;unsigned unk1368;unsigned unk136c;unsigned unk1370;unsigned unk1374;unsigned unk1378;unsigned unk137c;unsigned unk1380;unsigned unk1384;unsigned unk1388;unsigned unk138c;unsigned unk1390;unsigned unk1394;unsigned unk1398;unsigned unk139c;unsigned unk13a0;unsigned unk13a4;unsigned unk13a8;unsigned unk13ac;unsigned unk13b0;unsigned unk13b4;unsigned unk13b8;unsigned unk13bc;unsigned unk13c0;unsigned unk13c4;unsigned unk13c8;unsigned unk13cc;unsigned unk13d0;unsigned unk13d4;unsigned unk13d8;unsigned unk13dc;unsigned unk13e0;unsigned unk13e4;unsigned unk13e8;unsigned unk13ec;unsigned unk13f0;unsigned unk13f4;unsigned unk13f8;unsigned unk13fc;unsigned unk1400;unsigned unk1404;unsigned unk1408;unsigned unk140c;unsigned unk1410;unsigned unk1414;unsigned unk1418;unsigned unk141c;unsigned unk1420;unsigned unk1424;unsigned unk1428;unsigned unk142c;unsigned unk1430;unsigned unk1434;unsigned unk1438;unsigned unk143c;unsigned unk1440;unsigned unk1444;unsigned unk1448;unsigned unk144c;unsigned unk1450;unsigned unk1454;unsigned unk1458;unsigned unk145c;unsigned unk1460;unsigned unk1464;unsigned unk1468;unsigned unk146c;unsigned unk1470;unsigned unk1474;unsigned unk1478;unsigned unk147c;unsigned unk1480;unsigned unk1484;unsigned unk1488;unsigned unk148c;unsigned unk1490;unsigned unk1494;unsigned unk1498;unsigned unk149c;unsigned unk14a0;unsigned unk14a4;unsigned unk14a8;unsigned unk14ac;unsigned unk14b0;unsigned unk14b4;unsigned unk14b8;unsigned unk14bc;unsigned unk14c0;unsigned unk14c4;unsigned unk14c8;unsigned unk14cc;unsigned unk14d0;unsigned unk14d4;unsigned unk14d8;unsigned unk14dc;unsigned unk14e0;unsigned unk14e4;unsigned unk14e8;unsigned unk14ec;unsigned unk14f0;unsigned unk14f4;unsigned unk14f8;unsigned unk14fc;unsigned unk1500;unsigned unk1504;unsigned unk1508;unsigned unk150c;unsigned unk1510;unsigned unk1514;unsigned unk1518;unsigned unk151c;unsigned unk1520;unsigned unk1524;unsigned unk1528;unsigned unk152c;unsigned unk1530;unsigned unk1534;unsigned unk1538;unsigned unk153c;unsigned unk1540;unsigned unk1544;unsigned unk1548;unsigned unk154c;unsigned unk1550;unsigned unk1554;unsigned unk1558;unsigned unk155c;unsigned unk1560;unsigned unk1564;unsigned unk1568;unsigned unk156c;unsigned unk1570;unsigned unk1574;unsigned unk1578;unsigned unk157c;unsigned unk1580;unsigned unk1584;unsigned unk1588;unsigned unk158c;unsigned unk1590;unsigned unk1594;unsigned unk1598;unsigned unk159c;unsigned unk15a0;unsigned unk15a4;unsigned unk15a8;unsigned unk15ac;unsigned unk15b0;unsigned unk15b4;unsigned unk15b8;unsigned unk15bc;unsigned unk15c0;unsigned unk15c4;unsigned unk15c8;unsigned unk15cc;unsigned unk15d0;unsigned unk15d4;unsigned unk15d8;unsigned unk15dc;unsigned unk15e0;unsigned unk15e4;unsigned unk15e8;unsigned unk15ec;unsigned unk15f0;unsigned unk15f4;unsigned unk15f8;unsigned unk15fc;unsigned unk1600;unsigned unk1604;unsigned unk1608;unsigned unk160c;unsigned unk1610;unsigned unk1614;unsigned unk1618;unsigned unk161c;unsigned unk1620;unsigned unk1624;unsigned unk1628;unsigned unk162c;unsigned unk1630;unsigned unk1634;unsigned unk1638;unsigned unk163c;unsigned unk1640;unsigned unk1644;unsigned unk1648;unsigned unk164c;unsigned unk1650;unsigned unk1654;unsigned unk1658;unsigned unk165c;unsigned unk1660;unsigned unk1664;unsigned unk1668;unsigned unk166c;unsigned unk1670;unsigned unk1674;unsigned unk1678;unsigned unk167c;unsigned unk1680;unsigned unk1684;unsigned unk1688;unsigned unk168c;unsigned unk1690;unsigned unk1694;unsigned unk1698;unsigned unk169c;unsigned unk16a0;unsigned unk16a4;unsigned unk16a8;unsigned unk16ac;unsigned unk16b0;unsigned unk16b4;unsigned unk16b8;unsigned unk16bc;unsigned unk16c0;unsigned unk16c4;unsigned unk16c8;unsigned unk16cc;unsigned unk16d0;unsigned unk16d4;unsigned unk16d8;unsigned unk16dc;unsigned unk16e0;unsigned unk16e4;unsigned unk16e8;unsigned unk16ec;unsigned unk16f0;unsigned unk16f4;unsigned unk16f8;unsigned unk16fc;unsigned unk1700;unsigned unk1704;unsigned unk1708;unsigned unk170c;unsigned unk1710;unsigned unk1714;unsigned unk1718;unsigned unk171c;unsigned unk1720;unsigned unk1724;unsigned unk1728;unsigned unk172c;unsigned unk1730;unsigned unk1734;unsigned unk1738;unsigned unk173c;unsigned unk1740;unsigned unk1744;unsigned unk1748;unsigned unk174c;unsigned unk1750;unsigned unk1754;unsigned unk1758;unsigned unk175c;unsigned unk1760;unsigned unk1764;unsigned unk1768;unsigned unk176c;unsigned unk1770;unsigned unk1774;unsigned unk1778;unsigned unk177c;unsigned unk1780;unsigned unk1784;unsigned unk1788;unsigned unk178c;unsigned unk1790;unsigned unk1794;unsigned unk1798;unsigned unk179c;unsigned unk17a0;unsigned unk17a4;unsigned unk17a8;unsigned unk17ac;unsigned unk17b0;unsigned unk17b4;unsigned unk17b8;unsigned unk17bc;unsigned unk17c0;unsigned unk17c4;unsigned unk17c8;unsigned unk17cc;unsigned unk17d0;unsigned unk17d4;unsigned unk17d8;unsigned unk17dc;unsigned unk17e0;unsigned unk17e4;unsigned unk17e8;unsigned unk17ec;unsigned unk17f0;unsigned unk17f4;unsigned unk17f8;unsigned unk17fc;unsigned unk1800;unsigned unk1804;unsigned unk1808;unsigned unk180c;unsigned unk1810;unsigned unk1814;unsigned unk1818;unsigned unk181c;unsigned unk1820;unsigned unk1824;unsigned unk1828;unsigned unk182c;unsigned unk1830;unsigned unk1834;unsigned unk1838;unsigned unk183c;unsigned unk1840;unsigned unk1844;unsigned unk1848;unsigned unk184c;unsigned unk1850;unsigned unk1854;unsigned unk1858;unsigned unk185c;unsigned unk1860;unsigned unk1864;unsigned unk1868;unsigned unk186c;unsigned unk1870;unsigned unk1874;unsigned unk1878;unsigned unk187c;unsigned unk1880;unsigned unk1884;unsigned unk1888;unsigned unk188c;unsigned unk1890;unsigned unk1894;unsigned unk1898;unsigned unk189c;unsigned unk18a0;unsigned unk18a4;unsigned unk18a8;unsigned unk18ac;unsigned unk18b0;unsigned unk18b4;unsigned unk18b8;unsigned unk18bc;unsigned unk18c0;unsigned unk18c4;unsigned unk18c8;unsigned unk18cc;unsigned unk18d0;unsigned unk18d4;unsigned unk18d8;unsigned unk18dc;unsigned unk18e0;unsigned unk18e4;unsigned unk18e8;unsigned unk18ec;unsigned unk18f0;unsigned unk18f4;unsigned unk18f8;unsigned unk18fc;unsigned unk1900;unsigned unk1904;unsigned unk1908;unsigned unk190c;unsigned unk1910;unsigned unk1914;unsigned unk1918;unsigned unk191c;unsigned unk1920;unsigned unk1924;unsigned unk1928;unsigned unk192c;unsigned unk1930;unsigned unk1934;unsigned unk1938;unsigned unk193c;unsigned unk1940;unsigned unk1944;unsigned unk1948;unsigned unk194c;unsigned unk1950;unsigned unk1954;unsigned unk1958;unsigned unk195c;unsigned unk1960;unsigned unk1964;unsigned unk1968;unsigned unk196c;unsigned unk1970;unsigned unk1974;unsigned unk1978;unsigned unk197c;unsigned unk1980;unsigned unk1984;unsigned unk1988;unsigned unk198c;unsigned unk1990;unsigned unk1994;unsigned unk1998;unsigned unk199c;unsigned unk19a0;unsigned unk19a4;unsigned unk19a8;unsigned unk19ac;unsigned unk19b0;unsigned unk19b4;unsigned unk19b8;unsigned unk19bc;unsigned unk19c0;unsigned unk19c4;unsigned unk19c8;unsigned unk19cc;unsigned unk19d0;unsigned unk19d4;unsigned unk19d8;unsigned unk19dc;unsigned unk19e0;unsigned unk19e4;unsigned unk19e8;unsigned unk19ec;unsigned unk19f0;unsigned unk19f4;unsigned unk19f8;unsigned unk19fc;unsigned unk1a00;unsigned unk1a04;unsigned unk1a08;unsigned unk1a0c;unsigned unk1a10;unsigned unk1a14;unsigned unk1a18;unsigned unk1a1c;unsigned unk1a20;unsigned unk1a24;unsigned unk1a28;unsigned unk1a2c;unsigned unk1a30;unsigned unk1a34;unsigned unk1a38;unsigned unk1a3c;unsigned unk1a40;unsigned unk1a44;unsigned unk1a48;unsigned unk1a4c;unsigned unk1a50;unsigned unk1a54;unsigned unk1a58;unsigned unk1a5c;unsigned unk1a60;unsigned unk1a64;unsigned unk1a68;unsigned unk1a6c;unsigned unk1a70;unsigned unk1a74;unsigned unk1a78;unsigned unk1a7c;unsigned unk1a80;unsigned unk1a84;unsigned unk1a88;unsigned unk1a8c;unsigned unk1a90;unsigned unk1a94;unsigned unk1a98;unsigned unk1a9c;unsigned unk1aa0;unsigned unk1aa4;unsigned unk1aa8;unsigned unk1aac;unsigned unk1ab0;unsigned unk1ab4;unsigned unk1ab8;unsigned unk1abc;unsigned unk1ac0;unsigned unk1ac4;unsigned unk1ac8;unsigned unk1acc;unsigned unk1ad0;unsigned unk1ad4;unsigned unk1ad8;unsigned unk1adc;unsigned unk1ae0;unsigned unk1ae4;unsigned unk1ae8;unsigned unk1aec;unsigned unk1af0;unsigned unk1af4;unsigned unk1af8;unsigned unk1afc;unsigned unk1b00;unsigned unk1b04;unsigned unk1b08;unsigned unk1b0c;unsigned unk1b10;unsigned unk1b14;unsigned unk1b18;unsigned unk1b1c;unsigned unk1b20;unsigned unk1b24;unsigned unk1b28;unsigned unk1b2c;unsigned unk1b30;unsigned unk1b34;unsigned unk1b38;unsigned unk1b3c;unsigned unk1b40;unsigned unk1b44;unsigned unk1b48;unsigned unk1b4c;unsigned unk1b50;unsigned unk1b54;unsigned unk1b58;unsigned unk1b5c;unsigned unk1b60;unsigned unk1b64;unsigned unk1b68;unsigned unk1b6c;unsigned unk1b70;unsigned unk1b74;unsigned unk1b78;unsigned unk1b7c;unsigned unk1b80;unsigned unk1b84;unsigned unk1b88;unsigned unk1b8c;unsigned unk1b90;unsigned unk1b94;unsigned unk1b98;unsigned unk1b9c;unsigned unk1ba0;unsigned unk1ba4;unsigned unk1ba8;unsigned unk1bac;unsigned unk1bb0;unsigned unk1bb4;unsigned unk1bb8;unsigned unk1bbc;unsigned unk1bc0;unsigned unk1bc4;unsigned unk1bc8;unsigned unk1bcc;unsigned unk1bd0;unsigned unk1bd4;unsigned unk1bd8;unsigned unk1bdc;unsigned unk1be0;unsigned unk1be4;unsigned unk1be8;unsigned unk1bec;unsigned unk1bf0;unsigned unk1bf4;unsigned unk1bf8;unsigned unk1bfc;unsigned unk1c00;unsigned unk1c04;unsigned unk1c08;unsigned unk1c0c;unsigned unk1c10;unsigned unk1c14;unsigned unk1c18;unsigned unk1c1c;unsigned unk1c20;unsigned unk1c24;unsigned unk1c28;unsigned unk1c2c;unsigned unk1c30;unsigned unk1c34;unsigned unk1c38;unsigned unk1c3c;unsigned unk1c40;unsigned unk1c44;unsigned unk1c48;unsigned unk1c4c;unsigned unk1c50;unsigned unk1c54;unsigned unk1c58;unsigned unk1c5c;unsigned unk1c60;unsigned unk1c64;unsigned unk1c68;unsigned unk1c6c;unsigned unk1c70;unsigned unk1c74;unsigned unk1c78;unsigned unk1c7c;unsigned unk1c80;unsigned unk1c84;unsigned unk1c88;unsigned unk1c8c;unsigned unk1c90;unsigned unk1c94;unsigned unk1c98;unsigned unk1c9c;unsigned unk1ca0;unsigned unk1ca4;unsigned unk1ca8;unsigned unk1cac;unsigned unk1cb0;unsigned unk1cb4;unsigned unk1cb8;unsigned unk1cbc;unsigned unk1cc0;unsigned unk1cc4;unsigned unk1cc8;unsigned unk1ccc;unsigned unk1cd0;unsigned unk1cd4;unsigned unk1cd8;unsigned unk1cdc;unsigned unk1ce0;unsigned unk1ce4;unsigned unk1ce8;unsigned unk1cec;unsigned unk1cf0;unsigned unk1cf4;unsigned unk1cf8;unsigned unk1cfc;unsigned unk1d00;unsigned unk1d04;unsigned unk1d08;unsigned unk1d0c;unsigned unk1d10;unsigned unk1d14;unsigned unk1d18;unsigned unk1d1c;unsigned unk1d20;unsigned unk1d24;unsigned unk1d28;unsigned unk1d2c;unsigned unk1d30;unsigned unk1d34;unsigned unk1d38;unsigned unk1d3c;unsigned unk1d40;unsigned unk1d44;unsigned unk1d48;unsigned unk1d4c;unsigned unk1d50;unsigned unk1d54;unsigned unk1d58;unsigned unk1d5c;unsigned unk1d60;unsigned unk1d64;unsigned unk1d68;unsigned unk1d6c;unsigned unk1d70;unsigned unk1d74;unsigned unk1d78;unsigned unk1d7c;unsigned unk1d80;unsigned unk1d84;unsigned unk1d88;unsigned unk1d8c;unsigned unk1d90;unsigned unk1d94;unsigned unk1d98;unsigned unk1d9c;unsigned unk1da0;unsigned unk1da4;unsigned unk1da8;unsigned unk1dac;unsigned unk1db0;unsigned unk1db4;unsigned unk1db8;unsigned unk1dbc;unsigned unk1dc0;unsigned unk1dc4;unsigned unk1dc8;unsigned unk1dcc;unsigned unk1dd0;unsigned unk1dd4;unsigned unk1dd8;unsigned unk1ddc;unsigned unk1de0;unsigned unk1de4;unsigned unk1de8;unsigned unk1dec;unsigned unk1df0;unsigned unk1df4;unsigned unk1df8;unsigned unk1dfc;unsigned unk1e00;unsigned unk1e04;unsigned unk1e08;unsigned unk1e0c;unsigned unk1e10;unsigned unk1e14;unsigned unk1e18;unsigned unk1e1c;unsigned unk1e20;unsigned unk1e24;unsigned unk1e28;unsigned unk1e2c;unsigned unk1e30;unsigned unk1e34;unsigned unk1e38;unsigned unk1e3c;unsigned unk1e40;unsigned unk1e44;unsigned unk1e48;unsigned unk1e4c;unsigned unk1e50;unsigned unk1e54;unsigned unk1e58;unsigned unk1e5c;unsigned unk1e60;unsigned unk1e64;unsigned unk1e68;unsigned unk1e6c;unsigned unk1e70;unsigned unk1e74;unsigned unk1e78;unsigned unk1e7c;unsigned unk1e80;unsigned unk1e84;unsigned unk1e88;unsigned unk1e8c;unsigned unk1e90;unsigned unk1e94;unsigned unk1e98;unsigned unk1e9c;unsigned unk1ea0;unsigned unk1ea4;unsigned unk1ea8;unsigned unk1eac;unsigned unk1eb0;unsigned unk1eb4;unsigned unk1eb8;unsigned unk1ebc;unsigned unk1ec0;unsigned unk1ec4;unsigned unk1ec8;unsigned unk1ecc;unsigned unk1ed0;unsigned unk1ed4;unsigned unk1ed8;unsigned unk1edc;unsigned unk1ee0;unsigned unk1ee4;unsigned unk1ee8;unsigned unk1eec;unsigned unk1ef0;unsigned unk1ef4;unsigned unk1ef8;unsigned unk1efc;unsigned unk1f00;unsigned unk1f04;unsigned unk1f08;unsigned unk1f0c;unsigned unk1f10;unsigned unk1f14;unsigned unk1f18;unsigned unk1f1c;unsigned unk1f20;unsigned unk1f24;unsigned unk1f28;unsigned unk1f2c;unsigned unk1f30;unsigned unk1f34;unsigned unk1f38;unsigned unk1f3c;unsigned unk1f40;unsigned unk1f44;unsigned unk1f48;unsigned unk1f4c;unsigned unk1f50;unsigned unk1f54;unsigned unk1f58;unsigned unk1f5c;unsigned unk1f60;unsigned unk1f64;unsigned unk1f68;unsigned unk1f6c;unsigned unk1f70;unsigned unk1f74;unsigned unk1f78;unsigned unk1f7c;unsigned unk1f80;unsigned unk1f84;unsigned unk1f88;unsigned unk1f8c;unsigned unk1f90;unsigned unk1f94;unsigned unk1f98;unsigned unk1f9c;unsigned unk1fa0;unsigned unk1fa4;unsigned unk1fa8;unsigned unk1fac;unsigned unk1fb0;unsigned unk1fb4;unsigned unk1fb8;unsigned unk1fbc;unsigned unk1fc0;unsigned unk1fc4;unsigned unk1fc8;unsigned unk1fcc;unsigned unk1fd0;unsigned unk1fd4;unsigned unk1fd8;unsigned unk1fdc;unsigned unk1fe0;unsigned unk1fe4;unsigned unk1fe8;unsigned unk1fec;unsigned unk1ff0;NodeQueue nodes;unsigned unk1ff8;unsigned unk1ffc;unsigned unk2000;unsigned unk2004;unsigned unk2008;unsigned unk200c;unsigned unk2010;unsigned unk2014;unsigned unk2018;unsigned unk201c;unsigned unk2020;unsigned unk2024;unsigned unk2028;unsigned unk202c;unsigned unk2030;unsigned unk2034;unsigned unk2038;unsigned unk203c;unsigned unk2040;unsigned unk2044;unsigned unk2048;unsigned unk204c;Node* last;bool thread;char u2055,u2056,u2057;unsigned u2058,u205c;void FUN_005cc3c0() throw();int FUN_005dbc20(unsigned,float,Node**);__declspec(noinline) Node* FUN_005dbef0(unsigned,Input* const&,float);void* FUN_007aa400();void FUN_005dc150(void*,ArrayA*,ArrayB*);FUN_007a9a60* FUN_007ab1d0(unsigned,unsigned,Input*,bool);};
 __declspec(noinline) Node* Owner::FUN_005dbef0(unsigned hash,Input* const& value,float weight){Node* node;switch(FUN_005dbc20(hash,0.0f,&node)){case 0:node->weight=weight;node->input=value;nodes.FUN_007aa190(node);last=node;return node;case 1:return node;default:return 0;}}
+// pdb: CombatPlanner::CreatePlan | CombatPlanner.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCombatController, apGoal, apStartNode, abDebugPlan
 FUN_007a9a60* Owner::FUN_007ab1d0(unsigned a,unsigned b,Input* input,bool start){Input* source=input;if(!source->count)return 0;FUN_005cc3c0();FUN_005dbef0(source->FUN_007a9b80(),input,0.0f);ArrayA first;ArrayB second;Manager* mgr=FUN_00bce1f0();unsigned threadId=GetCurrentThreadId();thread=mgr->IsThread(threadId);void* current=FUN_007aa400();if(current)FUN_005dc150(current,&first,&second);FUN_007a9a60* result=0;if(second.count>0)result=new FUN_007a9a60(a,b,&first,&second,&u205c);if(start)new FUN_007ab140(this,result,&first);FUN_005cc3c0();return result;}
 }
 }   // namespace f3m_007ab1d0
@@ -29538,6 +30039,8 @@ struct Search {
  bool FUN_007b2080(Segment*,Destination*,Options*,Point*,void*,void*,int,Actor*,Actor*,float,float,int*,float*,bool);
 };
 // @fnv 0x0099c230
+// pdb: CombatState::CheckCoverLocation | CombatState.obj | fnv360_0721_beta, objrun, medium
+// pdb params: arCoverLocation, apRetLocation, apReservationInfo, arCoverSearchTargetLocation, aiCoverKey, aiCurrentCoverLocationKey, aiLocation, apAttacker, apTarget, afMinRange, afMaxRange, areCoverState, arfSquaredDistance, abHideCover
 bool Search::FUN_007b2080(Segment* segment, Destination* destination, Options* options, Point* target,
                                 void* first, void* second, int mode, Actor* actor, Actor* reference, float nearRange,
                                 float farRange, int* piReason, float* pfDistance, bool force)
@@ -30027,6 +30530,8 @@ struct S_007ab350
     int FUN_007ab1d0(Target* arg, Handler* h, Batch* batch, int arg2);
     int FUN_007ab350(Target* arg, int arg2);
 };
+// pdb: CombatPlanner::CreatePlan | CombatPlanner.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apCombatController, abDebugPlan
 int S_007ab350::FUN_007ab350(Target* arg, int arg2)
 {
     m_target = arg;
@@ -30230,6 +30735,8 @@ struct Owner7B {
     }
     bool FUN_007b4c50(Destination7B*,void*,void*,float,int);
 };
+// pdb: CombatState::FindCoveredMoveLocation | CombatState.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apCoverLocation, arDestination, aiLocation, afMinDistance, apPathingAvoidNodeArray
 bool Owner7B::FUN_007b4c50(Destination7B* destination,void* first,void* second,float speed,int flags)
 {
     Reset();
@@ -30898,6 +31405,7 @@ struct Mgr {
     void FUN_007a8c90();
 };
 
+// pdb: CombatManager::UpdateDebugGeometry | CombatManager.obj | fnv360_0822_retail, call_gap, low
 void Mgr::FUN_007a8c90()
 {
     for (unsigned int i = 0; i < count; ++i) {
@@ -31644,6 +32152,7 @@ struct GroupTracker7a
     bool FUN_007a8580();
 };
 
+// pdb: CombatManager::ShouldPlayCombatMusic | CombatManager.obj | fnv360_0822_retail, caller_sim, low
 bool GroupTracker7a::FUN_007a8580()
 {
     bool wasActive = IsActive();
@@ -32235,6 +32744,7 @@ struct Owner
 
 using namespace Avg7a0720;
 
+// pdb: CombatGroup::UpdateCombatStrength | CombatGroup.obj | fnv360_0822_retail, objrun, medium
 void Avg7a0720::Owner::FUN_007a0720()
 {
     unkc0 = 0.0f;
@@ -32495,6 +33005,8 @@ public:
     CombatPathHandle path;
 };
 
+// pdb: CombatState::CombatState | CombatState.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apCombatController, afTimerDelay
 CombatPathingState::CombatPathingState(CombatController* controller, float) :
     unk0(false),
     unk4(0),
@@ -33604,6 +34116,7 @@ struct Actor : RefBase {
     bool FUN_007be5c0();
 };
 
+// pdb: Explosion::TestExplosionUnderWater | Explosion.obj | fnv360_0822_retail, call_gap, medium
 bool Actor::FUN_007be5c0()
 {
     float k = DAT_00f61fe0;
@@ -33669,6 +34182,8 @@ struct FUN_007b8ef0_Owner
     float unkc8;
 };
 
+// pdb: CombatUtilities::FindAngleOfProjectile | CombatUtilities.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apProjectile, akToTarget, afSpeed, abHighArc
 float __cdecl FUN_007b8ef0(FUN_007b8ef0_Owner* object, Vector7b delta, float speed, int last)
 {
     float z = 0.0f;
@@ -34021,6 +34536,8 @@ namespace f3m_007b8fc0 {
 
 extern "C" float __cdecl FUN_007b7a70(float planar, float vertical, float speed, float gravity, unsigned char high);
 
+// pdb: CombatUtilities::ComputeProjectileTime | CombatUtilities.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apProjectile, aStartPoint, aTargetedPoint, abHighArc, afSpeed
 extern "C" float __cdecl FUN_007b8fc0(const VectorSettings7b* settings, Vector7b first, Vector7b second,
                                       unsigned char modifier, float amount)
 {
@@ -34760,6 +35277,7 @@ class FUN_007bd5f0 : public PrjMid
     S7bd5f0_Helper* unkD4;
 };
 
+// pdb: Explosion::~Explosion | Explosion.obj | fnv360_0822_retail, call_seq, medium
 FUN_007bd5f0::~FUN_007bd5f0()
 {
     if (Get3D() && Get3D()->vf0C() && FUN_004e8d80(Get3D()->vf0C()))
@@ -35321,6 +35839,7 @@ struct Own {
 
 using namespace f3m_007a0420;
 
+// pdb: CombatGroup::ClearSearch | CombatGroup.obj | fnv360_0822_retail, objrun, medium
 void Own::FUN_007a0420()
 {
     unkd4 = 0;
@@ -35344,6 +35863,8 @@ namespace batch14_05 {
 struct Details {unsigned unk000;unsigned unk004;unsigned unk008;unsigned unk00c;unsigned unk010;unsigned unk014;unsigned unk018;unsigned unk01c;unsigned unk020;unsigned unk024;unsigned unk028;unsigned unk02c;unsigned unk030;unsigned unk034;unsigned unk038;unsigned unk03c;unsigned unk040;unsigned unk044;unsigned unk048;unsigned unk04c;float a,b;unsigned unk058;unsigned unk05c;unsigned unk060;unsigned unk064;unsigned unk068;unsigned unk06c;unsigned unk070;unsigned unk074;unsigned unk078;unsigned unk07c;unsigned unk080;unsigned unk084;unsigned unk088;unsigned unk08c;unsigned unk090;unsigned unk094;unsigned unk098;unsigned unk09c;unsigned unk0a0;unsigned unk0a4;unsigned unk0a8;unsigned unk0ac;unsigned unk0b0;unsigned unk0b4;unsigned unk0b8;unsigned unk0bc;unsigned unk0c0;unsigned unk0c4;unsigned unk0c8;unsigned unk0cc;unsigned unk0d0;unsigned unk0d4;unsigned unk0d8;unsigned unk0dc;unsigned unk0e0;unsigned unk0e4;unsigned unk0e8;unsigned unk0ec;unsigned unk0f0;unsigned unk0f4;unsigned unk0f8;unsigned unk0fc;unsigned unk100;unsigned unk104;unsigned unk108;unsigned unk10c;unsigned unk110;unsigned unk114;unsigned unk118;unsigned unk11c;unsigned unk120;unsigned unk124;unsigned unk128;unsigned unk12c;unsigned unk130;unsigned unk134;unsigned unk138;unsigned unk13c;unsigned unk140;unsigned unk144;unsigned unk148;unsigned unk14c;unsigned unk150;unsigned unk154;unsigned unk158;unsigned unk15c;unsigned unk160;unsigned unk164;unsigned unk168;unsigned unk16c;unsigned unk170;unsigned unk174;unsigned unk178;unsigned unk17c;unsigned unk180;unsigned unk184;unsigned unk188;unsigned unk18c;unsigned unk190;unsigned unk194;unsigned unk198;unsigned unk19c;unsigned unk1a0;unsigned unk1a4;unsigned unk1a8;unsigned unk1ac;unsigned unk1b0;unsigned unk1b4;unsigned unk1b8;unsigned unk1bc;bool excluded;};struct Info {unsigned unk000;unsigned unk004;unsigned unk008;unsigned unk00c;unsigned unk010;unsigned unk014;unsigned unk018;unsigned unk01c;unsigned unk020;unsigned unk024;unsigned unk028;unsigned unk02c;unsigned unk030;unsigned unk034;unsigned unk038;unsigned unk03c;unsigned unk040;unsigned unk044;unsigned unk048;unsigned unk04c;unsigned unk050;unsigned unk054;unsigned unk058;unsigned unk05c;unsigned unk060;unsigned unk064;unsigned unk068;unsigned unk06c;unsigned unk070;unsigned unk074;unsigned unk078;unsigned unk07c;unsigned unk080;unsigned unk084;unsigned unk088;unsigned unk08c;unsigned unk090;unsigned unk094;unsigned unk098;Details* details;};struct Object {virtual void m0();virtual void m1();virtual void m2();virtual void m3();virtual void m4();virtual void m5();virtual void m6();virtual void m7();virtual void m8();virtual void m9();virtual void m10();virtual void m11();virtual void m12();virtual void m13();virtual void m14();virtual void m15();virtual void m16();virtual void m17();virtual void m18();virtual void m19();virtual void m20();virtual void m21();virtual void m22();virtual void m23();virtual void m24();virtual void m25();virtual void m26();virtual void m27();virtual void m28();virtual void m29();virtual void m30();virtual void m31();virtual void m32();virtual void m33();virtual void m34();virtual void m35();virtual void m36();virtual void m37();virtual void m38();virtual void m39();virtual void m40();virtual void m41();virtual void m42();virtual void m43();virtual void m44();virtual void m45();virtual void m46();virtual void m47();virtual void m48();virtual void m49();virtual void m50();virtual void m51();virtual void m52();virtual void m53();virtual void m54();virtual void m55();virtual void m56();virtual void m57();virtual void m58();virtual void m59();virtual void m60();virtual void m61();virtual void m62();virtual void m63();virtual void m64();virtual void m65();virtual void m66();virtual void m67();virtual void m68();virtual void m69();virtual void m70();virtual void m71();virtual void m72();virtual void m73();virtual void m74();virtual void m75();virtual void m76();virtual void m77();virtual void m78();virtual void m79();virtual void m80();virtual void m81();virtual void m82();virtual void m83();virtual void m84();virtual void m85();virtual void m86();virtual void m87();virtual void m88();virtual void m89();virtual void m90();virtual void m91();virtual void m92();virtual void m93();virtual void m94();virtual void m95();virtual void m96();virtual void m97();virtual void m98();virtual void m99();virtual void m100();virtual void m101();virtual void m102();virtual void m103();virtual void m104();virtual void m105();virtual void m106();virtual void m107();virtual void m108();virtual void m109();virtual void m110();virtual void m111();virtual void m112();virtual void m113();virtual void m114();virtual void m115();virtual void m116();virtual void m117();virtual void m118();virtual void m119();virtual void m120();virtual void m121();virtual void m122();virtual void m123();virtual void m124();virtual void m125();virtual void m126();virtual void m127();virtual void m128();virtual void m129();virtual void m130();virtual void m131();virtual void m132();virtual void m133();virtual void m134();virtual void m135();virtual void m136();virtual void m137();virtual void m138();virtual void m139();virtual void m140();virtual void m141();virtual void m142();virtual void m143();virtual void m144();virtual void m145();virtual void m146();virtual void m147();virtual void m148();virtual void m149();virtual void m150();virtual void m151();virtual void m152();virtual void m153();virtual void m154();virtual void m155();virtual void m156();virtual void m157();virtual void m158();virtual void m159();virtual void m160();virtual void m161();virtual void m162();virtual void m163();virtual void m164();virtual void m165();virtual void m166();virtual void m167();virtual void m168();virtual void m169();virtual void m170();virtual void m171();virtual void m172();virtual void m173();virtual void m174();virtual void m175();virtual void m176();virtual void m177();virtual void m178();virtual void m179();virtual void m180();virtual void m181();virtual void m182();virtual void m183();virtual void m184();virtual void m185();virtual void m186();virtual void m187();virtual void m188();virtual void m189();virtual void m190();virtual void m191();virtual void m192();virtual void m193();virtual void m194();virtual void m195();virtual void m196();virtual void m197();virtual void m198();virtual void m199();virtual void m200();virtual void m201();virtual void m202();virtual void m203();virtual void m204();virtual void m205();virtual void m206();virtual void m207();virtual void m208();virtual void m209();virtual void m210();virtual void m211();virtual void m212();virtual void m213();virtual void m214();virtual void m215();virtual void m216();virtual void m217();virtual void m218();virtual void m219();virtual void m220();virtual void m221();virtual void m222();virtual void m223();virtual void m224();virtual void m225();virtual void m226();virtual void m227();virtual void m228();virtual void m229();virtual void m230();virtual void m231();virtual void m232();virtual void m233();virtual void m234();virtual void m235();virtual void m236();virtual void m237();virtual void m238();virtual void m239();virtual void m240();virtual void m241();virtual void m242();virtual void m243();virtual void m244();virtual void m245();virtual void m246();virtual void m247();virtual void m248();virtual void m249();virtual void m250();virtual void m251();virtual void m252();virtual void m253();virtual void m254();virtual void m255();virtual void m256();virtual void m257();virtual void m258();virtual void m259();virtual void m260();virtual void m261();virtual void m262();virtual Info* GetInfo();};struct Record {Object* object;unsigned u04,u08,u0c,u10;};struct Input {unsigned unk000;unsigned unk004;unsigned unk008;unsigned unk00c;unsigned unk010;unsigned unk014;unsigned unk018;Record* records;unsigned count;};struct Entry {Object* object;unsigned index;};
 extern unsigned DAT_00e1a6b0;struct Array {unsigned* table;Entry* data;unsigned count,capacity;Array():table(&DAT_00e1a6b0),data(0),count(0),capacity(0){}~Array();unsigned FUN_006cb090();Entry* Alloc(unsigned& index){index=FUN_006cb090();return data;}};
 struct FUN_007a7070 {Input* input;unsigned count;int lowest,highest;unsigned mask;float weight;Array first,second;FUN_007a7070(Input*);};
+// pdb: CombatGroupData::CombatGroupData | CombatGroupStrategy.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apCombatGroup
 FUN_007a7070::FUN_007a7070(Input* p):input(p),count(0),lowest(-1),highest(0x7fffffff),mask(0x80000000),weight(0){unsigned n=p->count;for(unsigned i=0;i<n;++i){Object* object=p->records[i].object;Info* info=object->GetInfo();Details* d=info->details;if(!d->excluded){++count;Entry* data;unsigned index;if(d->a>d->b){data=second.Alloc(index);}else {data=first.Alloc(index);}data[index].object=object;data[index].index=i;}}}
 }
 
@@ -35420,6 +35941,7 @@ struct FUN_007a3a90 {
     void FUN_007a20e0(int flag);
 };
 
+// pdb: CombatGroup::~CombatGroup | CombatGroup.obj | fnv360_0721_beta, call_seq, medium
 FUN_007a3a90::~FUN_007a3a90()
 {
     unsigned int n = arr08.size;
@@ -35456,6 +35978,8 @@ struct Pt {
     float SqrLength() const { return x * x + y * y + z * z; }
 };
 Pt __cdecl FUN_007b80e0(Pt a, Pt b);
+// pdb: CombatUtilities::GetAngleToProjectedPoint | CombatUtilities.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aStartLocation, aPivotLocation, afPivotAngle, aProjectedPoint
 Pt __cdecl FUN_007b92a0(Pt a, Pt b, float unused, Pt c)
 {
     if (a.x == b.x && a.y == b.y)
@@ -35538,6 +36062,8 @@ struct FUN_007a19a0 {
     int unk158;
     FUN_007a19a0(void* owner);
 };
+// pdb: CombatGroup::CombatGroup | CombatGroup.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aiGroupID
 FUN_007a19a0::FUN_007a19a0(void* owner_) : unk00(0), owner(owner_), unk28(0), unk2c(false),
     unk40(0),
     unk44(0.0f),
@@ -35763,6 +36289,8 @@ namespace Write7b75a0 {
 extern double DAT_00dc2d78,DAT_00db7268;extern float DAT_0108cba0;
 struct Stream {void FUN_006e1830(void*,unsigned,int);};
 struct Object {float first;unsigned second;void FUN_007b75a0(Stream*);};
+// pdb: CombatTimer::SaveGame | CombatTimer.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apSaveGameBuffer
 void Object::FUN_007b75a0(Stream* stream){float value=first;if(first<DAT_00dc2d78&&first>DAT_00db7268)value-=DAT_0108cba0;stream->FUN_006e1830(&value,4,0);stream->FUN_006e1830(&second,4,0);}
 }
 
@@ -35772,6 +36300,7 @@ namespace Update7b5ab0 {
 struct Sub {virtual void a();virtual void b();virtual bool check(int);};struct Target {int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; int unk08c; int unk090; int unk094; int unk098; Sub sub;int FUN_007650b0();};struct Context {int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; int unk08c; int unk090; int unk094; int unk098; int unk09c; int unk0a0; int unk0a4; int unk0a8; int unk0ac; int unk0b0; int unk0b4; int unk0b8; Target* target;};bool FUN_00799680(Target*,int);
 struct Object {int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; char unk6c;bool flag;char unk6e,unk6f;int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; int unk08c; int unk090; int unk094; int unk098; int unk09c; int unk0a0; int unk0a4; int unk0a8; int unk0ac; int unk0b0; int unk0b4; int unk0b8; int unk0bc; bool first,second;char unkc2,unkc3;int unk0c4; int unk0c8; int unk0cc; int unk0d0; int unk0d4; int unk0d8; int unk0dc; int unk0e0; int unk0e4; int unk0e8; int unk0ec; int unk0f0; int unk0f4; int unk0f8; int unk0fc; int unk100; int unk104; int unk108; int unk10c; int unk110; int unk114; int unk118; int unk11c; int unk120; int unk124; int unk128; int unk12c; int unk130; int unk134; int unk138; int unk13c; int unk140; int unk144; int unk148; int unk14c; int unk150; int unk154; int unk158; int unk15c; int unk160; int unk164; int unk168; int unk16c; int unk170; int unk174; int unk178; int unk17c; int unk180; int unk184; int unk188; int unk18c; int unk190; int unk194; int unk198; int unk19c; int unk1a0; int unk1a4; int unk1a8; int unk1ac; int unk1b0; int unk1b4; int unk1b8; Context* context;char final;
 void FUN_007aec10();void CombatState_UpdateImmediateData();void FUN_007b3c70();void FUN_007b41e0();void FUN_007b5ab0();};
+// pdb: CombatState::DoInitialUpdate | CombatState.obj | fnv360_0822_retail, caller_sim, low
 void Object::FUN_007b5ab0(){Target* t=context->target;flag=FUN_00799680(t,0);FUN_007aec10();if(!context->target->FUN_007650b0()){CombatState_UpdateImmediateData();FUN_007b3c70();}else FUN_007b41e0();bool v=t->sub.check(1);first=v;second=v;final=0;}
 }
 }   // namespace f3m_007b5ab0
@@ -35791,6 +36320,8 @@ struct Path {
     float value14;
 };
 }
+// pdb: CombatGroupStrategyFallBack::CanExecute | CombatGroupStrategy.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apGroup, apGroupData
 bool __stdcall FUN_007a67c0(c7a67c0::Actor* a, c7a67c0::Path* p)
 {
     if (p->count < 2)
@@ -35888,6 +36419,8 @@ public:
     void FUN_007a73a0(bool flag);
 };
 
+// pdb: CombatManager::ClearData | CombatManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: abNotifyGroupMembers
 void Owner7a73a0::FUN_007a73a0(bool flag)
 {
     for (unsigned int i = 0; i < count0A; ++i) {
@@ -35958,6 +36491,8 @@ struct DistanceRef
     }
 };
 
+// pdb: CombatUtilities::GetAttackerTargetExtentSum | CombatUtilities.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apAttacker, apTarget
 float __cdecl FUN_007b7760(DistanceRef* first, DistanceRef* second)
 {
     float radius = first->GetRadius();
@@ -36242,6 +36777,7 @@ struct State {
     void FUN_007b41e0();
 };
 
+// pdb: CombatState::UpdateLow | CombatState.obj | fnv360_0822_retail, caller_sim, low
 void State::FUN_007b41e0()
 {
     if (owner->GetTarget()) {
@@ -36308,6 +36844,7 @@ void __cdecl FUN_007a6690();
 void __cdecl FUN_007b8c10();
 void __cdecl FUN_0079cb80();
 
+// pdb: CombatManager::Create | CombatManager.obj | fnv360_0822_retail, call_gap, medium
 void __cdecl FUN_007a9360()
 {
     if (!DAT_0108c988) {
@@ -36759,6 +37296,8 @@ struct Group
     float FUN_007a09d0(Actor* target);
 };
 
+// pdb: CombatGroup::GetAverageMemberDamagePerSecond | CombatGroup.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apMember
 float Group::FUN_007a09d0(Actor* target)
 {
     if (!target)
@@ -36807,6 +37346,8 @@ struct Vector {float x,y,z;};
 struct Settings;
 extern Vector DAT_0108ec68;
 Vector* __cdecl FUN_007b9440(Vector*,int,Vector,Vector,Vector*,Settings*,float,unsigned char);
+// pdb: CombatUtilities::GetProjectedPointForTarget | CombatUtilities.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apAttacker, aTargetLocation, apReleasePoint, apProjectile, afProjectileSpeed, abHighArc
 Vector* __cdecl FUN_007b9f90(Vector* out,int mode,const Vector* first,Vector* direction,Settings* settings,float amount,unsigned char flags){FUN_007b9440(out,mode,*first,DAT_0108ec68,direction,settings,amount,flags);return out;}
 }
 
@@ -36859,6 +37400,8 @@ public:
     void FUN_007b30a0(struct Extra7B3* value);       
 };
 
+// pdb: CombatState::SetCoverLocation | CombatState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCombatCoverLocation
 void Owner7B3::FUN_007b30a0(Extra7B3* value){
  if(held){
   if(held->flag01){ManagerB00* manager=DAT_0108c988->manager18;manager->FUN_0079c690(identifier1BC,held);}
@@ -37048,6 +37591,8 @@ struct Owner
     }
     void FUN_007b0d80(bool flag);
 };
+// pdb: CombatState::ClearCoverLocation | CombatState.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: abInvalidateCover
 void Owner::FUN_007b0d80(bool flag)
 {
     if (unkdc)
@@ -37068,6 +37613,8 @@ extern const double DAT_00dc2d78,DAT_00db7268;
 extern float DAT_0108cba0;
 struct Stream {void FUN_006e1830(void*,unsigned,int);};
 struct Value {float value;void FUN_007b7650(Stream*);};
+// pdb: CombatTimeStamp::SaveGame | CombatTimer.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apSaveGameBuffer
 void Value::FUN_007b7650(Stream* stream){
  float output=value;
  if(value < DAT_00dc2d78 && value > DAT_00db7268) output-=DAT_0108cba0;
@@ -37124,6 +37671,8 @@ struct Process
     void FUN_007bca90();
     void FUN_007bf140(int unused);
 };
+// pdb: Explosion::Update | Explosion.obj | fnv360_0822_retail, vtable, medium
+// pdb params: afDelta
 void Process::FUN_007bf140(int unused)
 {
     if (!unkdc)
@@ -37155,6 +37704,8 @@ struct Map {
  void FUN_00899cf0(unsigned);
  void FUN_007b68a0(unsigned);
 };
+// pdb: CombatThreatMap::InitLoadGame | CombatThreatMap.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apLoadGameBuffer
 void Map::FUN_007b68a0(unsigned unused){
  void* position=First();
  while(position){
@@ -37447,6 +37998,8 @@ struct Owner {
  unsigned unk00;Item** items;unsigned short capacity,count;
  unsigned FUN_007a7970(Form*,unsigned*);
 };
+// pdb: CombatManager::GetCombatantCount | CombatManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apActor, apNumLost
 unsigned Owner::FUN_007a7970(Form* form,unsigned* older){
  unsigned total=0;
  if(older)*older=0;
@@ -37494,6 +38047,8 @@ struct Owner {
  void FUN_00880f70(unsigned,Entry*);
  void FUN_007b6620(Projectile*,float,float,float,float);
 };
+// pdb: CombatThreatMap::AddThreat | CombatThreatMap.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apThreat, afRadius, afStartTime, afEndTime, afDamage
 void Owner::FUN_007b6620(Projectile* projectile,float length,float elapsed,float duration,float radius) {
  lock.FUN_0086cc50();
  projectile->FUN_004e6a90(true);
@@ -37617,6 +38172,8 @@ struct Per {
 }
 using namespace n7a0540;
 
+// pdb: CombatGroup::InvestigatedSearchLocation | CombatGroup.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: arLocation
 void Per::FUN_007a0540(V4* point)
 {
     float dist2=FUN_00f5f8c8*FUN_00f5f8c8;
@@ -37687,6 +38244,8 @@ struct Owner {
  List list;
  Entry* FUN_007bd130(void*,unsigned char,unsigned char);
 };
+// pdb: Explosion::AddTarget | Explosion.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apTargetRef, abWeakPoint, abMobile
 Entry* Owner::FUN_007bd130(void* wanted,unsigned char first,unsigned char second) {
  Entry* entry=list.find(wanted);
  if(entry) {
@@ -37718,6 +38277,7 @@ struct Owner {
     int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; void* source; int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; int unk08c; int unk090; float input; int unk098; int unk09c; int unk0a0; int unk0a4; int unk0a8; int unk0ac; int unk0b0; int unk0b4; int unk0b8; int unk0bc; Actor* actor; int unk0c4; int unk0c8; int unk0cc; int unk0d0; int unk0d4; Effect* effect; int unk0dc; int unk0e0; int unk0e4; int unk0e8; int unk0ec; int unk0f0; int unk0f4; float cached;
     float FUN_007bbba0();
 };
+// pdb: Explosion::GetDamage | Explosion.obj | fnv360_0822_retail, objrun, medium
 float Owner::FUN_007bbba0()
 {
     if (cached >= 0.0f)
@@ -37747,6 +38307,8 @@ struct Owner {
     Store* unk10;
     void FUN_007a7680(int key, const int* bit);
 };
+// pdb: CombatManager::TargetLocalActor | CombatManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apActor, apGroup
 void Owner::FUN_007a7680(int key, const int* bit)
 {
     unsigned __int64 flags = 0;
@@ -37773,6 +38335,8 @@ struct Owner {
     Store* unk10;
     void FUN_007a76f0(int key, const int* bit);
 };
+// pdb: CombatManager::AddLocalActor | CombatManager.obj | fnv360_0721_beta, caller_sim, low
+// pdb params: apActor
 void Owner::FUN_007a76f0(int key, const int* bit)
 {
     unsigned __int64 flags = 0;
@@ -38825,6 +39389,8 @@ extern Player* DAT_0107a104;
 float __cdecl FUN_007b7b40(Actor* a, int flag);
 inline bool IsValidType(unsigned char t) { return t >= 3 && t <= 12; }
 inline ByteArg MakeArg(unsigned char v) { ByteArg a; a.v = v; return a; }
+// pdb: CombatUtilities::GetAttackerFiringLocation | CombatUtilities.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apAttacker
 Point3 __cdecl FUN_007b7bf0(Actor* actor) {
     if (actor->IsActive()) {
         bool isPlayer = actor == DAT_0107a104;
@@ -38914,6 +39480,8 @@ public:
     void FUN_007a9000(int arg);
 };
 
+// pdb: CombatManager::InitLoadGame | CombatManager.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apLoadGameBuffer
 void Owner::FUN_007a9000(int arg)
 {
     ActorMap* old = map;
@@ -38979,6 +39547,7 @@ struct TESObjectREFR {
 struct Explosion : TESObjectREFR {
     bool FUN_007bbd40();
 };
+// pdb: Explosion::ChangeProcessLevel | Explosion.obj | fnv360_0822_retail, vtable, medium
 bool Explosion::FUN_007bbd40()
 {
     bool result = true;
@@ -39045,6 +39614,8 @@ struct FUN_007bd3e0_Less
     }
 };
 
+// pdb: hkAlgorithm::quickSortRecursive<hkpRootCdPoint,hkAlgorithm::less<hkpRootCdPoint> > | Explosion.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pArr, d, h, cmpLess
 void FUN_007bd3e0(FUN_007bd3e0_Rec* pArr, int d, int h, FUN_007bd3e0_Less cmpLess)
 {
     int i, j;
@@ -39490,6 +40061,8 @@ struct AllyPlanner
     bool FUN_007b02f0(AllyRequest* request, int);
 };
 
+// pdb: CombatState::FindLOSLocation | CombatState.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apRetLocation, aiLocation
 bool AllyPlanner::FUN_007b02f0(AllyRequest* request, int)
 {
     AllyGroup* group = controller->GetGroup();
@@ -40018,6 +40591,8 @@ struct Source {
 }
 using namespace f3m_007bc740;
 
+// pdb: Explosion::PushRigidBody | Explosion.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apRigidBody
 void Source::FUN_007bc740(Target* target)
 {
     if (target) {
@@ -40698,6 +41273,7 @@ bool FUN_007ae4a0(PickLoc*,int,int); void FUN_007ac7e0(int,PickRef*,void*);
 bool FUN_007b0540();
 };
 // @fnv 0x0099f6d0
+// pdb: CombatState::FindBetterWeapon | CombatState.obj | fnv360_0822_retail, objrun, medium
 bool WeaponSearch::FUN_007b0540()
 {
     PickActor* actor = controller->GetActor();
@@ -41611,6 +42187,8 @@ struct ExExplosion {
 }
 using namespace f3m_007bdea0;
 
+// pdb: Explosion::RunLOSPick | Explosion.obj | fnv360_0721_beta, ustr, medium
+// pdb params: aLocation, apTarget
 bool ExExplosion::FUN_007bdea0(ExPoint3 location, ExRef* target)
 {
     ExData* data = GetBaseForm()->FUN_004a4bc0();
@@ -41759,6 +42337,8 @@ inline float S7b9530_Max(float a, float b) { return a > b ? a : b; }
 
 
 
+// pdb: CombatUtilities::ComputeOptimalWeaponRanges | CombatUtilities.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCombatController, apEquippedWeapon, arfMinRange, arfMaxRange, arfAbsoluteMaxRange
 void __cdecl FUN_007b9530(S7b9530_Controller* c, S7b9530_Weapon* w, float& nearRange, float& middleRange, float& farRange)
 {
     S7b9530_Data* idx;
@@ -41876,6 +42456,8 @@ public:
     bool FUN_007ae4a0(Target7ae* target, bool allowRetry, bool flagB);
 };
 
+// pdb: CombatState::CheckMovement | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arWorldLocation, abCheckLocationReachable, abIgnoreCombatAreaCheck
 bool Owner7ae::FUN_007ae4a0(Target7ae* target, bool allowRetry, bool flagB)
 {
     bool check = false;
@@ -41919,6 +42501,8 @@ __forceinline Vector7b Aim(Vector7b dir, Vector7b pos, Vector7b other, float amo
     ::CombatUtilities_GetProjectedPointForTarget(&result,dir,pos,other,amount,factor,0);
     return result;
 }
+// pdb: CombatUtilities::GetAngleToProjectedTarget | CombatUtilities.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aStartLocation, apTarget, afSpeed, afGravity, aeTargetSegmentInView
 Pt91 __cdecl FUN_007b91a0(Vector7b dir, Target91* target, float amount, float factor, int mode)
 {
     if (!target)
@@ -41968,6 +42552,8 @@ extern Pt_7b8510 DAT_00f725b0;
 extern double DAT_00dd8f58;
 extern double DAT_00e1b0f8;
 
+// pdb: CombatUtilities::CalculateCoverPositions | CombatUtilities.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afActorRadius, apCoverLocation, apReservationInfo, apCoverPosition, apFirePosition
 void __cdecl FUN_007b8510(float scale, const Obj_7b8510* obj, const Data_7b8510* data, Pt_7b8510* outA, Pt_7b8510* outB)
 {
     if (!outA && !outB)
@@ -42037,6 +42623,8 @@ struct Actor {
 };
 }
 
+// pdb: CombatUtilities::GetBackProjectedAttackerFiringLocation | CombatUtilities.obj | fnv360_0721_beta, call_gap, low
+// pdb params: apAttacker
 extern "C" Vector7b* __cdecl FUN_007b7d60(Vector7b* out, n7b7d60::Actor* actor)
 {
     FUN_007b7bf0(out, (int)actor);
@@ -42106,6 +42694,8 @@ __declspec(noinline) bool Map7b5d70::FUN_00bea7b0(void* key, Value7b5d70** out)
     return false;
 }
 
+// pdb: CombatTargetMap::RemoveTargetAttacker | CombatTargetMap.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTarget, apAttacker
 void Map7b5d70::FUN_007b5d70(void* key, Item7b5d70* item)
 {
     Value7b5d70* value = 0;
@@ -42187,6 +42777,8 @@ struct Avoider {
  unsigned int count;
  PathingAvoidNodeArray* FUN_007a4730(Ref* ref, PathingAvoidNodeArray* nodes);
 };
+// pdb: CombatGroup::CreateFleeAvoidNodeArray | CombatGroup.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apActor, apExistingAvoidNodeArray
 PathingAvoidNodeArray* Avoider::FUN_007a4730(Ref* ref, PathingAvoidNodeArray* list) {
  PathingAvoidNodeArray* nodes = list;
  unsigned int n = count;
@@ -42443,6 +43035,8 @@ public:
     unsigned int count;
 };
 
+// pdb: CombatGroup::CreateMovementAvoidNodeArray | CombatGroup.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apActor, arDestination, afExtraRadius, apExistingAvoidNodeArray, apIgnoreActor
 PathingAvoidNodeArray* PathingCandidateSet::FUN_007a5910(TESObjectREFR* actor,
     const AvoidancePoint& destination, float radius, PathingAvoidNodeArray* result,
     TESObjectREFR* excluded)
@@ -42839,6 +43433,8 @@ struct S07ba040_Entry {
     bool flag;
 };
 
+// pdb: CombatUtilities::CalculateAttackerCombatPositions | CombatUtilities.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTarget, apAttacker
 bool __cdecl FUN_007ba040(S07ba040_Actor* target, S07ba040_Actor* actor)
 {
     bool found = false;
@@ -42982,6 +43578,7 @@ struct Cache7b6160 {
 };
 }
 
+// pdb: CombatThreat::GetThreatLinearVelocity | CombatThreatMap.obj | fnv360_0822_retail, caller, medium
 f3m_007b6300::ProjectileProjection::Point f3m_007b6300::ProjectileProjection::State::FUN_007b6160() {
     rw7b6160::Cache7b6160* self = (rw7b6160::Cache7b6160*)this;
     float elapsed = rw7b6160::DAT_0108cba0 - self->timestamp;
@@ -43467,6 +44064,8 @@ struct Owner {
 };
 struct ParamsCall {float FUN_007a2cd0(Vec*);float FUN_007a2c00(Vec*);};
 inline ParamsCall* Owner::Geometry(){return (ParamsCall*)unk1BC->unk80;}
+// pdb: CombatState::FindBestCoverLocation | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apWeapon, apCoverSearchInfo, apCombatCoverLocation, apRetLocation, aiLocation
 bool Owner::FUN_007b42e0(int a2,Output* out,Cache* cache,int a4,int mode){
  Sensor* sensor=GetSensor();
  float range=2048.0f;
@@ -43590,6 +44189,7 @@ struct Group {
     void FUN_007a5b70();
 };
 
+// pdb: CombatGroup::StartSearch | CombatGroup.obj | fnv360_0822_retail, caller_sim, low
 void Group::FUN_007a5b70()
 {
     unsigned int n = count;
@@ -43736,6 +44336,8 @@ struct ItemMap : f3m_007b5e70::FUN_007b5b80 {
 };
 }
 
+// pdb: CombatThreatMap::CreateAvoidNodeArray | CombatThreatMap.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arLocation, apActor, afTime
 void* S7b7300::ItemMap::FUN_007b7300(void* p1, S7b7300::Target* target, float time)
 {
     if (target->FUN_006f74c0()->Flag(4))
@@ -43921,6 +44523,8 @@ template <class T> __forceinline T* Resolve(T* id)
 {
     return id ? dynamic_cast<T*>(::TESForm_GetFormByNumericID((unsigned int)id)) : 0;
 }
+// pdb: CombatState::InitLoadGame | CombatState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apLoadGameBuffer
 void Target::FUN_007ae860(void*)
 {
     Extra20B* bc = unkBC;
@@ -44269,6 +44873,8 @@ struct Combat_7abe80 {
     bool FUN_007abe80(Out_7abe80* out, Mode_7abe80* mode, Ammo_7abe80* ammo);
 };
 
+// pdb: CombatState::FindGrenadeThrowLocation | CombatState.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: apRetLocation, arbHighArc, apGrenade
 bool Combat_7abe80::FUN_007abe80(Out_7abe80* out, Mode_7abe80* mode, Ammo_7abe80* ammo)
 {
     if (!ammo)
@@ -44577,6 +45183,8 @@ struct Owner
     __declspec(noalias) int FUN_005dbc20(unsigned int hash, float cost, Node** out);
     bool FUN_007aa5f0(Input* input, PtrArray* output);
 };
+// pdb: CombatPlanner::GetNodeConnections | CombatPlanner.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apNode, apRetNodes
 bool Owner::FUN_007aa5f0(Input* input, PtrArray* output)
 {
     float baseCost = input->cost;
@@ -44982,6 +45590,8 @@ struct Owner {
 
 }
 
+// pdb: CombatState::FindBestAdvanceLocation | CombatState.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCoverSearchInfo, apCombatCoverLocation, apRetLocation, aiLocation, arDestination, afMinDistance, apPathingAvoidNodeArray
 bool f3m_007b49e0::Owner::FUN_007b49e0(Out* out, Request* request, Result* result, int type, Point* target, float radius, Target* pathTarget)
 {
     Actor* actor = unk1BC->actor;
@@ -45143,6 +45753,7 @@ struct Owner {
 };
 FNV_STATIC_ASSERT(offsetof(Owner, position) == 0xf0);
 FNV_STATIC_ASSERT(offsetof(Owner, radius) == 0x10c);
+// pdb: CombatGroup::BuildSearchTeleportDoorArray | CombatGroup.obj | fnv360_0822_retail, call_seq, medium
 void Owner::FUN_007a48d0()
 {
     RefArray refs;
@@ -45241,6 +45852,8 @@ __declspec(noinline) void Map7b::FUN_0089a5d0(Node7b*& pos, unsigned int& key, I
 
 }
 
+// pdb: CombatThreatMap::ComputeThreatScore | CombatThreatMap.obj | fnv360_0822_retail, caller, medium
+// pdb params: aLocation, apActor, afTime, afAdditionalRadius, afSkipOlderThreats, afActorHealth
 float n7b7110::Map7b::FUN_007b7110(V3 v, Ref* r, float a, float b, float c, float d)
 {
     lock.FUN_0086cbf0();
@@ -45601,6 +46214,8 @@ struct NearbyActor {
 
 };
 
+// pdb: CombatManager::FindLocalActorsInRadius | CombatManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aLocation, afRadius, afTime, apAttackingActor, apOutNumSelf, apOutNumGroupMembers, apOutNumTargets, apOutNumNonTargets
 int FUN_007a7760_Owner::FUN_007a7760(NearbyPoint3 center, float radius, float a5, NearbyActor* obj0, int* a7, int* a8, int* a9, int* a10)
 {
 
@@ -46538,6 +47153,8 @@ struct S7a3f10_Owner {
     void FUN_007a3f10(S7a3f10_Actor* other, S7a3f10_Actor* target, int& outLevel, S7a3f10_Time& outTime, bool& outB1, bool& outB2);
 };
 
+// pdb: CombatGroup::GetTargetDetectionLevel | CombatGroup.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apAttacker, apTarget, ariDetectionLevel, arfLastTargetDetectedTimeStamp, arbTargetLineOfSight, arbTarget360LineOfSight
 void S7a3f10_Owner::FUN_007a3f10(S7a3f10_Actor* other, S7a3f10_Actor* target, int& outLevel, S7a3f10_Time& outTime, bool& outB1, bool& outB2)
 {
     outB1 = false;
@@ -47049,6 +47666,8 @@ struct Owner_7ac3a0 {    int unk000;
     bool FUN_007ac3a0(float a, float b, float minDist, float maxDist, Out_7ac3a0* out, bool check);
 };
 
+// pdb: CombatState::FindOptimalLocation | CombatState.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: afMinRange, afMaxRange, afAbsoluteMinRange, afAbsoluteMaxRange, apRetLocation, abCheckTargetLOS
 bool Owner_7ac3a0::FUN_007ac3a0(float a, float b, float minDist, float maxDist, Out_7ac3a0* out, bool check)
 {
     float half = (a + b) * 0.5;
@@ -47263,6 +47882,8 @@ bool __cdecl FUN_005f69c0(FUN_005fd570*, FUN_005fd570*, void*, float*, List*);
 int __cdecl FUN_005f9e70(Query*, ElemList*);
 void __cdecl FUN_007b8510(float, Elem*, Options*, Pt*, int);
 
+// pdb: CombatState::FindBestAdvanceLocation | CombatState.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apCoveredMoveRequest, afMinDistance, abBackgroundThread
 bool FUN_007af7b0(Owner* o, float r, bool locked)
 {
     float lim = 2048.0f;
@@ -47586,6 +48207,8 @@ struct Out7b {
     int extra[3];
 };
 
+// pdb: CombatWorldStateArray::Update | CombatWorldState.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apCombatController
 void Out7b::FUN_007bb350(A7b* a)
 {
     memset(this, 0, 0x50);
@@ -47876,6 +48499,8 @@ private:
     float actorFactor;
 };
 
+// pdb: CombatThreat::ComputeThreatScore | CombatThreatMap.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arLocation, apActor, afCompareTime, afAdditionalRadius, afActorHealth
 float S7b6aa0_State::FUN_007b6aa0(const Point* target, ActorInput* actor, float time, float extra, float defaultFactor)
 {
     float result = 0.0f;
@@ -48211,6 +48836,8 @@ public:
     bool FUN_007b28c0(PointTarget* out, unsigned int mask1, unsigned int mask2, float dist, float minDist);
 };
 
+// pdb: CombatState::FindBestDodgeLocation | CombatState.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRetLocation, aiDodgeDirections, aiDodgeDirectionLOSCheck, afDodgeDistance, afMinDodgeDistance
 bool CombatState::FUN_007b28c0(PointTarget* out, unsigned int mask1, unsigned int mask2, float dist, float minDist)
 {
     PathActor* actor = context->actor;

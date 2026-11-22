@@ -112,6 +112,7 @@ int unk17c;
 int textures[25];
 void FUN_00675030();
 };
+// pdb: SPECIALBookMenu::LoadButtonAndTextImages | SPECIALBookMenu.obj | fnv360_0822_retail, ustr, medium
 void Terminal::FUN_00675030() {
 char platform[5];
 char resolved[260];
@@ -278,6 +279,8 @@ class StartMenu
 
 extern StartMenu* DAT_010770ac;
 
+// pdb: StartMenu::ResetToDefaults | StartMenu.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apTile, apOption
 void __cdecl FUN_0067d3b0(int arg, StartMenu::Option* option)
 {
     StartMenu::UserOption* user = dynamic_cast<StartMenu::UserOption*>(option);
@@ -329,6 +332,7 @@ public:
 };
 extern ResetMenu* DAT_01076ee8;
 extern unsigned int DAT_01076eec;
+// pdb: RepairMenu::ResetMenu | RepairMenu.obj | fnv360_0822_retail, call_gap, low
 void FUN_00671bd0() {
     DAT_01076ee8->panel5C.Reset();
     DAT_01076eec = 0;
@@ -368,6 +372,7 @@ extern unsigned int DAT_00f6b1a4;
 extern unsigned int DAT_00f6b1a8;
 extern unsigned int DAT_01076cf0;
 
+// pdb: MessageMenu::ClearMessageQueue | MessageMenu.obj | fnv360_0822_retail, call_gap, medium
 void FUN_006686f0()
 {
     for (unsigned int i = 0; i < DAT_00f6b1a4; ++i) {
@@ -418,6 +423,8 @@ struct FUN_00661490_cls {
     Obj* FUN_00661490(int code);
 };
 
+// pdb: ListBox<TESObjectREFR *>::GetHighlightTarget | MapMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aeButton
 Obj* FUN_00661490_cls::FUN_00661490(int code)
 {
     Obj* found = 0;
@@ -670,6 +677,7 @@ extern int DAT_00f64ac4;
 extern int DAT_00e08010;
 extern float DAT_00e07428;
 
+// pdb: StartMenu::ActionMappingIdle | StartMenu.obj | fnv360_0721_retail, call_gap, low
 char FUN_0067ff10_cls::FUN_0067ff10()
 {
     unsigned char fl = (unsigned char)(unk1a0 >> 12);
@@ -779,6 +787,8 @@ struct ControlValues {
     void FUN_0066b050(ControlValues* other);
 };
 
+// pdb: RaceSexMenu::MenuOption::SetEnabled | RaceSexMenu.obj | fnv360_0822_retail, objrun, low
+// pdb params: abEnabled
 void ControlValues::FUN_0066b050(ControlValues* other)
 {
     previousValue = (unsigned int)other->control->FUN_00becf40(0x1004);
@@ -1207,6 +1217,7 @@ extern const char DAT_00e07f98[];
 extern const char DAT_00e07fa8[];
 extern const char DAT_00e07878[];
 extern const char DAT_00de2fa4[];
+// pdb: SPECIALBookMenu::InitBook | SPECIALBookMenu.obj | fnv360_0822_retail, ustr, medium
 void TerminalState::FUN_00676b70() {
  MenuControl* control0;
  MenuControl* control1;
@@ -1432,6 +1443,8 @@ struct Menu67c450 {
     bool FUN_0067c010(Tile67c450* t);
     bool FUN_0067c450(Tile67c450* t, int mode);
 };
+// pdb: ListBox<BGSSaveLoadFileEntry *>::DeselectAll | StartMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abUnfilteredOnly
 bool Menu67c450::FUN_0067c450(Tile67c450* t, int mode)
 {
     if (!FUN_0067ab40() || !t || !FUN_0067c010(t)) return false;
@@ -1466,6 +1479,8 @@ void __cdecl FUN_00668390();
 int __cdecl FUN_0061d5a0(int, int, int, int, int);
 void __cdecl FUN_00669700();
 
+// pdb: MessageMenu::DisableMessageMenu | MessageMenu.obj | fnv360_0822_retail, call_seq, low
+// pdb params: abDisable
 void __cdecl FUN_00669cc0(unsigned char param_1)
 {
     DAT_01076ce8 = param_1;
@@ -1535,6 +1550,7 @@ struct ArrayEntry {
     unsigned short unk06;
 };
 
+// pdb: BSSimpleArray<BSStringT<char>,1024>::~BSSimpleArray<BSStringT<char>,1024> | MapMenu.obj | fnv360_0822_debug, call_seq, low
 void __stdcall FUN_00663a30(ArrayEntry* entries, unsigned int count)
 {
     for (unsigned int i = 0; i < count; ++i) {
@@ -1573,6 +1589,8 @@ struct FUN_00721440_class
 };
 
 // @fnv 0x00721440
+// pdb: ListBox<StartMenu::Option *>::Highlight | StartMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apHighlightItem
 bool FUN_00721440_class::FUN_0067c9f0(SelectedObject* object)
 {
     if (FUN_0067a880() && (!object || (FUN_0067c010(object) && object->FUN_00becf80(FUN_00becd70(DAT_00e04758, -1)))))
@@ -1642,6 +1660,8 @@ struct Walk {
     int FUN_0066c970(int count, void* a2, int a3, int a4);
 };
 
+// pdb: RaceSexMenu::MenuOptionList::InsertMenuOption | RaceSexMenu.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiPos, apDisplayText, apTemplate, aiID
 int Walk::FUN_0066c970(int count, void* a2, int a3, int a4)
 {
     if (!a2 || !DAT_01076dd4 || !DAT_01076dd4->unk078 || !this->unk14) return 0;
@@ -1668,6 +1688,8 @@ struct Menu676{char pad[0x58];int max58;int FUN_00674df0();void FUN_006763b0();}
 struct Book676{char pad[0x24];int id;};
 extern Player676* DAT_0107a104;
 extern Audio676* DAT_011790c8;
+// pdb: SPECIALBookMenu::IncreaseActorValue | SPECIALBookMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apAVButton
 void __cdecl FUN_00676940(Book676* book){
     if(!DAT_01077040)return;
     int id=book->id;
@@ -1743,6 +1765,7 @@ struct PlayerView {
 };
 extern PlayerView* DAT_0107a104;
 
+// pdb: SPECIALBookMenu::GetTotalPointsUsed | SPECIALBookMenu.obj | fnv360_0822_retail, call_seq, high
 int __fastcall FUN_00674df0(void* apUnused)
 {
     return DAT_0107a104->avOwner.GetValue(5) + DAT_0107a104->avOwner.GetValue(6) + DAT_0107a104->avOwner.GetValue(7) +
@@ -1758,6 +1781,8 @@ struct Menu67b{char pad[0x1a0];unsigned int flags;};
 struct Arg67b{char pad[0x14];int m14;int m18;};
 namespace n67b{extern Menu67b* DAT_010770ac;extern bool DAT_01075aa8;}
 __forceinline unsigned char Bit67b(unsigned int f){return (unsigned char)(f>>5)&1;}
+// pdb: StartMenu::DeleteOption | StartMenu.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: apTile, apOption
 void __cdecl FUN_0067b150(Arg67b* a){
     if(n67b::DAT_010770ac&&Bit67b(n67b::DAT_010770ac->flags)){
         n67b::DAT_01075aa8=a->m14==1;
@@ -1868,6 +1893,7 @@ struct FUN_0066b820 : FUN_006999e0
 };
 
 // @fnv 0x007ac9f0
+// pdb: FORenderedMenuRaceSex::FORenderedMenuRaceSex | RaceSexMenu.obj | fnv360_0822_retail, objrun, medium
 FUN_0066b820::FUN_0066b820()
 {}
 
@@ -1900,6 +1926,8 @@ class B3CA0Menu
 };
 
 // @fnv 0x007b3ca0
+// pdb: RaceSexMenu::MenuOptionList::AddSliderOption | RaceSexMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apDisplayText, aeID, aiLowVal, aiHighVal, aiStartVal, afJumpPct
 B3CA0SliderOption* B3CA0Menu::FUN_0066c8c0(int m_uiSoundID, int iParent, int iLow, int iHigh, int iValue, float afFraction)
 {
     if (afFraction < 0.0)
@@ -1985,6 +2013,7 @@ struct FUN_006742f0 : FUN_00bfcfe0 {
     FUN_006742f0();
     virtual ~FUN_006742f0();
 };
+// pdb: RepairServicesMenu::RepairServicesMenu | RepairServicesMenu.obj | fnv360_0822_retail, ustr, medium
 FUN_006742f0::FUN_006742f0() {
     DAT_01076f58 = FUN_00bea9e0("_Title");
     DAT_01076f60 = FUN_00bea9e0("_Value");
@@ -2002,6 +2031,8 @@ namespace Task0385 {
 int __cdecl FUN_00becd70(const char* name, int defaultValue);
 struct Tile { bool FUN_00becf80(int trait); };
 struct Menu { bool FUN_0067a920(Tile* item); };
+// pdb: ListBox<StartMenu::Option *>::IsSelected | StartMenu.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apSelectItem
 bool Menu::FUN_0067a920(Tile* item)
 {
     static int selectedTrait = FUN_00becd70(DAT_00e04bc0, -1);
@@ -2051,6 +2082,7 @@ struct FUN_006728d0 : FUN_00bfcfe0 {
     FUN_006728d0();
     virtual ~FUN_006728d0();
 };
+// pdb: RepairMenu::RepairMenu | RepairMenu.obj | fnv360_0822_retail, ustr, medium
 FUN_006728d0::FUN_006728d0() {
     DAT_01076ed8 = FUN_00bea9e0("_Title");
     DAT_01076ee0 = FUN_00bea9e0("_Value");
@@ -2089,6 +2121,7 @@ extern Hud* DAT_01075974;
 }
 using namespace n674530;
 
+// pdb: SleepWaitMenu::Close | SleepWaitMenu.obj | fnv360_0822_retail, call_gap, low
 void FUN_00674530()
 {
     if (DAT_01076fd8) {
@@ -2113,6 +2146,7 @@ struct List {
     Tile* listTile;
     bool FUN_006608e0();
 };
+// pdb: ListBox<TESQuest *>::IsEnabled | MapMenu.obj | fnv360_0822_retail, caller, medium
 bool List::FUN_006608e0()
 {
     static int enabledTrait = FUN_00becd70("_enabled", -1);
@@ -2135,6 +2169,7 @@ struct ListBox {
     Tile* listTile;
     bool FUN_00661980();
 };
+// pdb: ListBox<BGSQuestObjective *>::IsEnabled | MapMenu.obj | fnv360_0822_retail, caller, medium
 bool ListBox::FUN_00661980()
 {
     static int enabledTrait = FUN_00becd70("_enabled", -1);
@@ -2156,6 +2191,8 @@ struct Obj {
 }
 using namespace n662f90;
 
+// pdb: ListBox<BGSNote *>::Sort | MapMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompareFn
 void Obj::FUN_00662f90(int v)
 {
     sub.FUN_0067cf50(v);
@@ -2173,6 +2210,7 @@ struct ListBox {
     Tile* listTile;
     bool FUN_006613f0();
 };
+// pdb: ListBox<TESObjectREFR *>::IsEnabled | MapMenu.obj | fnv360_0822_retail, caller, medium
 bool ListBox::FUN_006613f0()
 {
     static int enabledTrait = FUN_00becd70(DAT_00e04758, -1);
@@ -2190,6 +2228,7 @@ struct ListView {
  TileView* tile;
  bool FUN_0067a880();
 };
+// pdb: ListBox<StartMenu::Option *>::IsEnabled | StartMenu.obj | fnv360_0822_debug, call_seq, medium
 bool ListView::FUN_0067a880() {
  static int enabledTrait = FUN_00becd70("_enabled", -1);
  return tile != 0 && tile->FUN_00becf80(enabledTrait);
@@ -2209,6 +2248,7 @@ struct ListView {
     TileView* tile;
     bool FUN_0067ab40();
 };
+// pdb: ListBox<BGSSaveLoadFileEntry *>::IsEnabled | StartMenu.obj | fnv360_0721_retail, caller, medium
 bool ListView::FUN_0067ab40()
 {
     static int enabledTrait = FUN_00becd70("_enabled", -1);
@@ -2229,6 +2269,7 @@ struct ListView {
     TileView* tile;
     bool FUN_00660d20();
 };
+// pdb: ListBox<BGSNote *>::IsEnabled | MapMenu.obj | fnv360_0822_retail, caller, medium
 bool ListView::FUN_00660d20() {
     static int enabledTrait = FUN_00becd70("_enabled", -1);
     return tile != 0 && tile->FUN_00becf80(enabledTrait);
@@ -2269,6 +2310,8 @@ struct FUN_00674790_cls
 };
 
 // @fnv 0x007c04d0
+// pdb: SleepWaitMenu::DoGamepad | SleepWaitMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiButton, afValue
 bool FUN_00674790_cls::FUN_00674790(int a1, int aiUnused)
 {
     bool done = false;
@@ -2298,6 +2341,8 @@ struct Menu67aa {
     Tile67aa* tile;
     void FUN_0067aab0(unsigned char);
 };
+// pdb: ListBox<BGSSaveLoadFileEntry *>::SetEnabled | StartMenu.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: abVal
 void Menu67aa::FUN_0067aab0(unsigned char value)
 {
     static unsigned int enabled = FUN_00becd70("_enabled", -1);
@@ -2314,6 +2359,8 @@ struct State668b {
     int values[5];
     void FUN_00668b90(unsigned int, int);
 };
+// pdb: MessageMenu::AttachTileByID | MessageMenu.obj | fnv360_0721_beta, vtable, medium
+// pdb params: aiID, apTile
 void State668b::FUN_00668b90(unsigned int index, int value)
 {
     if (index <= 4)
@@ -2346,6 +2393,7 @@ struct FUN_00668bb0 : FUN_00bfd0f0 {
 FUN_0063dfc0 member3c;
 virtual ~FUN_00668bb0();
 };
+// pdb: MessageMenu::~MessageMenu | MessageMenu.obj | fnv360_0822_retail, call_seq, medium
 FUN_00668bb0::~FUN_00668bb0() {
 DAT_00f6a35c = true;
 DAT_01076cec = 0;
@@ -2361,12 +2409,16 @@ struct Guard66 { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk1
 namespace cons66 { extern Guard66* DAT_01076dd4; }
 extern const char DAT_00e072a4[], DAT_00e07298[];  int __cdecl FUN_00becd70(const char*,int);
 struct FUN_0066c6d0 { List66 list; int unk0C; int unk10; Tile66* unk14; float unk18; int unk1C; int unk20; FUN_0066c6d0(int,const char*); };
+// pdb: RaceSexMenu::MenuOptionList::MenuOptionList | RaceSexMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aiListID, apHeaderText
 FUN_0066c6d0::FUN_0066c6d0(int value,const char* text) { unk18=0.0f; unk10=20; unk0C=20; unk1C=0; unk14=cons66::DAT_01076dd4->Menu_RenderTemplate(cons66::DAT_01076dd4->unk78,DAT_00e072a4,0); unk14->FUN_00bee190(0x1004,(float)value,true); unk14->FUN_00bf11a0(0xfc4,text,true); unk14->FUN_00bee190(0xfaf,0.0f,true); int id=FUN_00becd70(DAT_00e07298,-1); unk14->FUN_00bee190(id,1.0f,true); unk14->FUN_00bf1eb0(0); unk20=0; }
 }   // namespace f3m_0066c6d0
 
 // @f3 0x0066a3a0 (community match, verified in this file)
 extern unsigned char DAT_01076d54;
 namespace f3m_0066a3a0 {
+// pdb: MessageMenu::SetPauseMenuMode | MessageMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abFlag
 void __cdecl FUN_0066a3a0(bool enabled) { if(enabled) { DAT_01076cf0=DAT_00f6b1a4; f3m_00669cc0::FUN_00668390(); DAT_01076d54=DAT_01076ce8; DAT_01076ce8=0; if(!DAT_01076cec && DAT_01076cf0<DAT_00f6b1a4 && DAT_00f6b1a0[DAT_01076cf0]) { if(DAT_0106cd30>1) f3m_00669cc0::FUN_0061d5a0(7,0,0,0,1); else f3m_00669cc0::FUN_00669700(); } } else { DAT_01076cf0=0; f3m_00669cc0::FUN_00669cc0(DAT_01076d54); } }
 }   // namespace f3m_0066a3a0
 
@@ -2402,6 +2454,7 @@ int unk58;
 FUN_00633cb0 member;
 virtual ~FUN_006729a0();
 };
+// pdb: RepairMenu::~RepairMenu | RepairMenu.obj | fnv360_0822_retail, call_seq, medium
 FUN_006729a0::~FUN_006729a0() { fadeControl->FUN_00bed770(0xfa9); DAT_01076ee8=0; }
 }
 
@@ -2416,6 +2469,8 @@ struct Menu67a7 {
     Tile67a7* tile;
     void FUN_0067a7f0(unsigned char);
 };
+// pdb: ListBox<StartMenu::Option *>::SetEnabled | StartMenu.obj | fnv360_0822_retail, call_seq, high
+// pdb params: abVal
 void Menu67a7::FUN_0067a7f0(unsigned char value)
 {
     static unsigned int enabled = FUN_00becd70("_enabled", -1);
@@ -2426,6 +2481,8 @@ void Menu67a7::FUN_0067a7f0(unsigned char value)
 // @f3 0x00674d50 (community match, verified in this file)
 namespace f3m_00674d50 {
 struct Slots74 { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; void* slots[8]; bool FUN_00674d50(int*); };
+// pdb: SPECIALBookMenu::IsWellFormedMenu | SPECIALBookMenu.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: ai
 bool Slots74::FUN_00674d50(int* index) {
  for(*index=0;*index<8;++*index) { if(!slots[*index]) return false; }
  return true;
@@ -2589,11 +2646,13 @@ struct Cache { void FUN_0078cf20(); }; extern Cache DAT_0107c0a0;
 struct Other { void FUN_005543b0(); }; extern Other* DAT_010721b8;
 void FUN_00c24b70(); void FUN_00619790();
 }
+// pdb: StartMenu::LoadDownloadedContent | StartMenu.obj | fnv360_0721_retail, call_gap, low
 void FUN_0067bf60() { using namespace SmallStartup; if(!DAT_010770b4) { FUN_00be78d0(1)->FUN_00be7910(); if(DAT_0106cdcc->FUN_00441f30()) { bool absent=!(DAT_01079858->flags&1); DAT_01079858->flags|=1; DAT_0106cdcc->TESDataHandler_CompileFiles(1); DAT_0106cdcc->FUN_0043cd30(); if(!absent) DAT_01079858->flags|=1; else DAT_01079858->flags&=~1; DAT_0107c0a0.FUN_0078cf20(); DAT_0106cdcc->FUN_0043bbe0(); } DAT_010721b8->FUN_005543b0(); FUN_00c24b70(); DAT_010770b4=true; } FUN_00619790(); }
 }   // namespace f3m_0067bf60
 
 // @f3 0x00672970 (community match, verified in this file)
 namespace f3m_00672970 {
+// pdb: RepairMenu::GetClass | RepairMenu.obj | fnv360_0822_retail, vtable, medium
 unsigned int __cdecl FUN_00672970() { return 0x40b; }
 }   // namespace f3m_00672970
 
@@ -2606,6 +2665,8 @@ struct State6743 {
     int values[16];
     void FUN_006743b0(unsigned int, int);
 };
+// pdb: RepairServicesMenu::AttachTileByID | RepairServicesMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTile
 void State6743::FUN_006743b0(unsigned int index, int value)
 {
     if (index <= 15)
@@ -2641,6 +2702,7 @@ struct Activation { int unk00; Target* target; Action* action; };
 struct Array { virtual ~Array(); virtual void* FUN_005d2de0(unsigned); virtual void FUN_005bb6e0(void*); Activation** data; unsigned size; unsigned capacity; void Clear() { if(data) { void* memory=data; FUN_005bb6e0(memory); data=0; capacity=0; size=0; } } };
 extern Array DAT_00f6b1ac; signed char FUN_00619750();
 }
+// pdb: MessageMenu::HandlePerkActivationResults | MessageMenu.obj | fnv360_0822_retail, caller_sim, medium
 void FUN_00668440() { using namespace N668440; int index=FUN_00619750(); if(index!=DAT_00f6b1ac.size-1) { Activation* activation=DAT_00f6b1ac.data[index]; activation->target->Script_Run(activation->action,0,0,0); } else { void* pointer=DAT_00f6b1ac.data[index]->action; int count=static_cast<Action*>(pointer)->counter.FUN_0040ac80(); DAT_00f6b1ac.data[index]->action->TESObjectREFR_Activate(N668440::DAT_0107a104,0,0,count); } DAT_00f6b1ac.Clear(); }
 
 
@@ -2677,6 +2739,8 @@ public:
     int FUN_00674df0();
     bool FUN_00676260(int, int);
 };
+// pdb: SPECIALBookMenu::DoGamepad | SPECIALBookMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiButton, afValue
 bool Menu::FUN_00676260(int action, int unused)
 {
     int value;
@@ -2793,6 +2857,8 @@ public:
     void FUN_0066aee0();
     bool FUN_0066b3b0(float delta, bool force);
 };
+// pdb: RaceSexMenu::ZoomPlayer | RaceSexMenu.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: afDelta, abForce
 bool Owner::FUN_0066b3b0(float delta, bool force)
 {
     float oldFraction = fractionD0;
@@ -2818,6 +2884,8 @@ namespace f3m_0066b580 {
 namespace SmallBounds {
 struct Value { void FUN_00bee190(int,float,int); float FUN_00becf40(int); };
 struct Owner { Value* value; void FUN_0066b4c0(int); void FUN_0066b580(int,int); };
+// pdb: RaceSexMenu::MenuOption::SetRange | RaceSexMenu.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: aiLow, aiHigh
 void Owner::FUN_0066b580(int lower,int upper) { if(value) { value->FUN_00bee190(0x1006,(float)lower,1); value->FUN_00bee190(0x1007,(float)upper,1); if((int)value->FUN_00becf40(0x1005)<lower) FUN_0066b4c0(lower); if((int)value->FUN_00becf40(0x1005)>upper) FUN_0066b4c0(upper); } }
 }
 }   // namespace f3m_0066b580
@@ -2830,6 +2898,8 @@ struct Owner {
     int unk00;int unk04;int unk08;Target* target;
     int FUN_0067abe0();
 };
+// pdb: ListBox<StartMenu::Option *>::Deselect | StartMenu.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: apSelectItem
 int Owner::FUN_0067abe0() {
     if(target && target->FUN_00beac40()) return 1;
     return 0;
@@ -2849,6 +2919,8 @@ struct Owner {
     Dispatch* table;
     bool FUN_00671ba0(int,int);
 };
+// pdb: RepairMenu::DoGamepadUpEvent | RepairMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiButton, afValue
 bool Owner::FUN_00671ba0(int event,int unused) {
     if(event==6 || event==10) {
         FUN_0061a730(3);
@@ -3111,6 +3183,8 @@ void __cdecl FUN_0067b940(Row* row) {
 // @f3 0x00666c80 (community match, verified in this file)
 namespace f3m_00666c80 {
 struct Values6c80 {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24; int values[18]; void FUN_00666c80(unsigned int,int); };
+// pdb: MapMenu::AttachTileByID | MapMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aiID, apTile
 void Values6c80::FUN_00666c80(unsigned int index,int value) { if(index<=17) values[index]=value; }
 }   // namespace f3m_00666c80
 
@@ -3126,6 +3200,7 @@ struct Owner {
  Node* Head(){return &head;}
  void FUN_0065f300(Tile*);void FUN_00661f20();void FUN_0065db10();void FUN_00663a80();
 };
+// pdb: ListBox<TESQuest *>::Synchronize | MapMenu.obj | fnv360_0822_retail, call_seq, medium
 void Owner::FUN_00663a80(){
  total=0.0f;count=0;
  for(Node* node=Head();node && node->data;node=node->next){
@@ -3250,6 +3325,7 @@ struct Owner {
  int unk19C;
  unsigned flags;void FUN_0067ed50(); };
 extern Owner* DAT_010770ac;
+// pdb: StartMenu::ChooseSave | StartMenu.obj | fnv360_0822_debug, objrun_open, low
 void FUN_0067f8a0() { if(DAT_010770ac) { DAT_010770ac->value->FUN_00bee190(0x1004,0.0f,1); DAT_010770ac->flags &= ~8; DAT_010770ac->FUN_0067ed50(); } }
 }
 
@@ -3285,6 +3361,8 @@ struct SmallIndexed {
  int unk24;
  int values[13];void FUN_00672980(unsigned,int);
 };
+// pdb: RepairMenu::AttachTileByID | RepairMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTile
 void SmallIndexed::FUN_00672980(unsigned index,int value) { if(index<=12) values[index]=value; }
 }   // namespace f3m_00672980
 
@@ -3293,6 +3371,7 @@ namespace f3m_0067aea0 {
 namespace SmallSingleton {
 struct Heap { void* FUN_0086b930(unsigned); };extern Heap DAT_01090a78;
 struct Object { int unk00;int unk04;Object() { unk04=0;unk00=0; } static void* operator new(unsigned n) throw() { return DAT_01090a78.FUN_0086b930(n); } };extern Object* DAT_010770b0;
+// pdb: StartMenu::IdleTimer::GetElapsedTime | StartMenu.obj | fnv360_0822_retail, call_gap, low
 Object* FUN_0067aea0() { if(!DAT_010770b0) DAT_010770b0=new Object;return DAT_010770b0; }
 }
 }   // namespace f3m_0067aea0
@@ -3302,6 +3381,8 @@ namespace f3m_006649a0 {
 namespace RefreshListA {
 struct List {void FUN_0067cf50(void*);};
 struct Owner {int unk00;List list;void FUN_00663a80();void FUN_006649a0(void*);};
+// pdb: ListBox<TESQuest *>::Sort | MapMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompareFn
 void Owner::FUN_006649a0(void* value){list.FUN_0067cf50(value);FUN_00663a80();}
 }
 }   // namespace f3m_006649a0
@@ -3482,6 +3563,8 @@ struct State66b0 {
     Payload66b0* payload;
 };
 namespace G66b0 { extern State66b0* DAT_01076dd4; }
+// pdb: RaceSexMenu::IsPlayerHeadPart | RaceSexMenu.obj | fnv360_0822_retail, objrun, low
+// pdb params: apOpt
 int FUN_0066b0f0(Item66b0* item) {
     if(item && G66b0::DAT_01076dd4 && G66b0::DAT_01076dd4->payload) {
         Payload66b0* p=G66b0::DAT_01076dd4->payload;
@@ -3611,6 +3694,7 @@ struct Owner {
     unsigned flags;
     void FUN_0067d800();
 };
+// pdb: StartMenu::ReturnToSaveLoad | StartMenu.obj | fnv360_0822_retail, objrun, medium
 void Owner::FUN_0067d800() {
     control.FUN_0067aab0(1);
     int value=control.Get();
@@ -3622,6 +3706,8 @@ void Owner::FUN_0067d800() {
 
 // @f3 0x006795e0 (community match, verified in this file)
 namespace f3m_006795e0 {
+// pdb: Controls::Remappable | XControls.obj | fnv360_0822_retail, call_gap, low
+// pdb params: eAction
 int __cdecl FUN_006795e0(int type) { if(type==0 || type==1 || type==2 || type==3 || type==4 || type==5 || type==6 || type==7 || type==8 || type==9 || type==10 || type==11 || type==12 || type==13 || type==14 || type==15 || type==25 || type==26 || type==16 || type==27) return 1; return 0; }
 }   // namespace f3m_006795e0
 
@@ -3734,6 +3820,8 @@ struct Owner {
  List items;
  void FUN_0067e360();void FUN_0067eca0(int,Tile*);
 };
+// pdb: StartMenu::DoLeave | StartMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Owner::FUN_0067eca0(int id,Tile* tile){
  bool special=id==100||id==101;
  if(tile&&special)tile->FUN_00bee190(0xff5,root->FUN_00becf40(0xff5),true);
@@ -3745,6 +3833,8 @@ void Owner::FUN_0067eca0(int id,Tile* tile){
 // @f3 0x00676010 (community match, verified in this file)
 namespace f3m_00676010 {
 namespace Dispatch6010 { struct Object; struct Table {void* unk000;void* unk004;void* unk008;void* unk00c;void* unk010;void* unk014;void* unk018;void* unk01c;void* unk020;void* unk024;void* unk028;void* unk02c;void* unk030;void* unk034;void* unk038;void* unk03c;void* unk040;void* unk044;void* unk048;void* unk04c;void* unk050;void* unk054;void* unk058;void* unk05c;void* unk060;void* unk064;void* unk068;void* unk06c;void* unk070;void* unk074;void* unk078;void* unk07c;void* unk080;void* unk084;void* unk088;void* unk08c;void* unk090;void* unk094;void* unk098;void* unk09c;void* unk0a0;void* unk0a4;void* unk0a8;void* unk0ac;void* unk0b0;void* unk0b4;void* unk0b8;void* unk0bc;void* unk0c0;void* unk0c4;void* unk0c8;void* unk0cc;void* unk0d0;void* unk0d4;void* unk0d8;void* unk0dc;void* unk0e0;void* unk0e4;void* unk0e8;void* unk0ec; int (__thiscall* invoke)(Object*,int,int,int); }; struct Object { Table* table; }; struct Arg { int unk00; int unk04; int unk08; Object* object; }; struct Global {int unk000;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;int unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;int unk080;int unk084;int unk088;int unk08c;int unk090;int unk094;int unk098;int unk09c;int unk0a0;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4;int unk0d8;int unk0dc;int unk0e0;int unk0e4;int unk0e8;int unk0ec;int unk0f0;int unk0f4;int unk0f8;int unk0fc;int unk100;int unk104;int unk108;int unk10c;int unk110;int unk114;int unk118;int unk11c;int unk120;int unk124;int unk128;int unk12c;int unk130;int unk134;int unk138;int unk13c;int unk140;int unk144;int unk148;int unk14c;int unk150;int unk154;int unk158;int unk15c;int unk160;int unk164;int unk168;int unk16c;int unk170;int unk174;int unk178;int unk17c;int unk180;int unk184;int unk188;int unk18c;int unk190;int unk194;int unk198;int unk19c;int unk1a0;int unk1a4;int unk1a8;int unk1ac;int unk1b0;int unk1b4;int unk1b8;int unk1bc; int value; }; extern Global* DAT_01077040;
+// pdb: SPECIALBookMenu::RefreshNextPageButton | SPECIALBookMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apButton
 int __cdecl FUN_00676010(Arg* arg) { return arg->object->table->invoke(arg->object,0,0,DAT_01077040->value); } }
 }   // namespace f3m_00676010
 
@@ -3754,6 +3844,8 @@ namespace f3m_00662bc0 {
 namespace AppendStringA {
 struct String {char* data;unsigned short length;unsigned short capacity;String():data(0),length(0),capacity(0){}void FUN_004a8ce0(const char*);};
 struct Owner {int unk00;String* buffer;unsigned int FUN_006cb090();unsigned int FUN_00662bc0(const char*);};
+// pdb: BSSimpleArray<BSStringT<char>,1024>::Add | MapMenu.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aValue
 unsigned int Owner::FUN_00662bc0(const char* value){unsigned int index=FUN_006cb090();new(buffer+index)String;buffer[index].FUN_004a8ce0(value);return index;}
 }
 }   // namespace f3m_00662bc0
@@ -3866,6 +3958,8 @@ namespace N67A7B0 { struct Global {
  int unk198;
  int unk19c;
 unsigned flags; };extern Global* DAT_010770ac; }
+// pdb: StartMenu::SysUtilSaveCompleteCallback | StartMenu.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: aeResult, apSaveDataFile
 void FUN_0067a7b0() { if(N67A7B0::DAT_010770ac) N67A7B0::DAT_010770ac->flags |= 0x800; }
 }   // namespace f3m_0067a7b0
 
@@ -3876,12 +3970,15 @@ void __cdecl FUN_0063d5f0(int);
 struct Tile {void FUN_00bee190(unsigned int,float,bool);};
 struct Menu {int unk00;Tile* root;void FUN_00bfc470();};
 extern Menu* DAT_01076f68;
+// pdb: RepairServicesMenu::Close | RepairServicesMenu.obj | fnv360_0822_retail, call_gap, low
 void __cdecl FUN_006731d0(){FUN_0063d5f0(FUN_00563cf0(5,5));DAT_01076f68->root->FUN_00bee190(0x1772,1.0f,true);DAT_01076f68->FUN_00bfc470();}
 }
 
 // @f3 0x0067f3a0 (community match, verified in this file)
 namespace f3m_0067f3a0 {
 namespace SmallAllocate { struct Heap {void* FUN_0086b930(unsigned);};extern Heap DAT_01090a78; }
+// pdb: BSSimpleArray<CombatSearchDoor,1024>::_Allocate | CombatGroup.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiSizeInItem
 void* __stdcall FUN_0067f3a0(unsigned count) { return SmallAllocate::DAT_01090a78.FUN_0086b930(count*12); }
 }   // namespace f3m_0067f3a0
 
@@ -3914,6 +4011,8 @@ struct Owner {
  int expected;int FUN_00674df0(); };extern Owner* DAT_01077040;void FUN_00676150();
 struct Result {int unk00;int unk04;int unk08;void FUN_00bd00c0();};
 struct Manager {Result FUN_00bcfcd0(const char*,int,int);};extern Manager* DAT_011790c8;extern char DAT_00e07898[];
+// pdb: SPECIALBookMenu::CloseCallback | SPECIALBookMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apButton
 void FUN_00676360() { if(DAT_01077040 && DAT_01077040->FUN_00674df0()==DAT_01077040->expected) {FUN_00676150();return;} DAT_011790c8->FUN_00bcfcd0(DAT_00e07898,0x121,0).FUN_00bd00c0(); }
 }
 }   // namespace f3m_00676360
@@ -3921,6 +4020,7 @@ void FUN_00676360() { if(DAT_01077040 && DAT_01077040->FUN_00674df0()==DAT_01077
 // @f3 0x0066aa00 (community match, verified in this file)
 namespace f3m_0066aa00 {
 namespace Showaa00 { struct Tile { void FUN_00bee190(int,float,int); }; struct Menu { int unk00; Tile* tile; void FUN_00bfcac0(); void FUN_00bfc470(); }; extern Menu* DAT_01076dc4; extern unsigned __cdecl FUN_0061a9a0();
+// pdb: QuantityMenu::Close | QuantityMenu.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_0066aa00() { if(DAT_01076dc4) { DAT_01076dc4->tile->FUN_00bee190(0x1772,1.0f,1); if(FUN_0061a9a0()) DAT_01076dc4->FUN_00bfcac0(); else DAT_01076dc4->FUN_00bfc470(); } } }
 }   // namespace f3m_0066aa00
 
@@ -3933,6 +4033,8 @@ struct Owner {
     int unk00;int unk04;int unk08;Tile* tile;
     void FUN_0067a9c0(unsigned char);
 };
+// pdb: ListBox<int>::SetEnabled | StartMenu.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: abVal
 void Owner::FUN_0067a9c0(unsigned char value) {
     static int enabled=FUN_00becd70("_enabled",-1);
     tile->FUN_00bee190(enabled,value,true);
@@ -4079,6 +4181,7 @@ class StartMenu
     int unk19c;
     unsigned int flags1a0;
 };
+// pdb: StartMenu::UserOption::`scalar deleting destructor' | StartMenu.obj | fnv360_0822_retail, vtable, medium
 void* StartMenu::UserOption::FUN_0067bee0(unsigned int flags){this->UserOption::~UserOption();if(flags&1)OptionHeapA::DAT_01090a78.FUN_0086ba60(this);return this;}
 
 }
@@ -4087,6 +4190,7 @@ void* StartMenu::UserOption::FUN_0067bee0(unsigned int flags){this->UserOption::
 // @f3 0x0066e480 (community match, verified in this file)
 namespace f3m_0066e480 {
 namespace Colore480 { struct Tile { float FUN_00becf40(int); }; struct Item { Tile* tile; int type; }; struct Node { Node* next; int unk04; Item* item; }; struct List { Node* head; }; struct Iterator { Node* node; Iterator(Node* p):node(p){} Item*& Next() { Item*& item=node->item; node=node->next; return item; } }; struct Target {int unk000;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;int unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;int unk080;int unk084;int unk088;int unk08c;int unk090;int unk094;int unk098;int unk09c;int unk0a0;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4;int unk0d8;int unk0dc;int unk0e0;int unk0e4;int unk0e8;int unk0ec;int unk0f0;int unk0f4;int unk0f8;int unk0fc;int unk100;int unk104;int unk108;int unk10c;int unk110;int unk114;int unk118;int unk11c;int unk120;int unk124;int unk128;int unk12c;int unk130;int unk134;int unk138;int unk13c;int unk140;int unk144;int unk148;int unk14c;int unk150;int unk154;int unk158;int unk15c;int unk160;int unk164;int unk168;int unk16c;int unk170;int unk174;int unk178;int unk17c;int unk180;int unk184;int unk188;int unk18c;int unk190;int unk194;int unk198;int unk19c;int unk1a0;int unk1a4;int unk1a8;int unk1ac;int unk1b0;int unk1b4; unsigned color; }; struct Owner {int unk000;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;List* unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;int unk080;int unk084;int unk088;int unk08c;int unk090;int unk094;int unk098;int unk09c;int unk0a0;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4; Target* target; void FUN_0066dda0(int); void FUN_0066e480(); };
+// pdb: RaceSexMenu::ChangeHairColor | RaceSexMenu.obj | fnv360_0822_retail, call_gap, low
 void Owner::FUN_0066e480() { int red=-1; int green=-1; int blue=-1; Iterator iterator(unk040->head); while(iterator.node) { Item* item=iterator.Next(); switch(item->type) { case 29: red=(int)item->tile->FUN_00becf40(0x1005); break; case 30: green=(int)item->tile->FUN_00becf40(0x1005); break; case 31: blue=(int)item->tile->FUN_00becf40(0x1005); break; } } unsigned short high=(unsigned char)green|((unsigned char)blue<<8); target->color=(high<<8)|(unsigned char)red; FUN_0066dda0(0); } }
 }   // namespace f3m_0066e480
 
@@ -4116,6 +4220,7 @@ struct Owner {
     void FUN_00bd12d0();
     void FUN_0066bc70();
 };
+// pdb: RaceSexMenu::MenuOptionList::Flush | RaceSexMenu.obj | fnv360_0822_retail, call_seq, medium
 void Owner::FUN_0066bc70() {
     Iterator it(head);
     while(it) {
@@ -4692,6 +4797,8 @@ struct Player {
 struct List {int unk00;int unk04;int unk08;int unk0c;int unk10;int index;int first;};
 extern Menu* DAT_010770ac;extern Player* DAT_0107a104;extern int DAT_0107bbc8;
 static __forceinline unsigned char Bit5(unsigned int f){return (unsigned char)(f>>5)&1;}
+// pdb: StartMenu::SetSaveOnRest | StartMenu.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apUOpt
 void __cdecl FUN_006799d0(List* list){
  if(DAT_010770ac&&Bit5(DAT_010770ac->flags)){int value=list->index;DAT_0107bbc8=value;DAT_0107a104->selection=value;}
  else{list->index=DAT_0107a104->selection;list->first=2;}
@@ -4709,6 +4816,8 @@ namespace f3m_0067f380 {
 namespace updatef38 {
 struct List { void FUN_0067cf50(void*); };
 struct Owner { int unk00; List list; void FUN_0067eac0(); void FUN_0067f380(void*); };
+// pdb: ListBox<StartMenu::Option *>::Sort | StartMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompareFn
 void Owner::FUN_0067f380(void* value) {list.FUN_0067cf50(value);FUN_0067eac0();}
 }
 }   // namespace f3m_0067f380
@@ -4832,6 +4941,7 @@ struct Owner {
     bool Flag(){return (flags>>12)&1;}
     int FUN_0067aee0();
 };
+// pdb: StartMenu::WaitingForControlRemapButtonPress | StartMenu.obj | fnv360_0822_retail, call_gap, medium
 int Owner::FUN_0067aee0() {
     if(FUN_0061c490(0x3f5) && Flag() && control.Check()) return 1;
     return 0;
@@ -4845,6 +4955,8 @@ struct Table6796 {
     unsigned int entries[29];
     int FUN_00679650(unsigned int);
 };
+// pdb: InterfaceManager::TutorialManager::Find | StartMenu.obj | fnv360_0822_debug, call_gap, low
+// pdb params: aeMenu
 int Table6796::FUN_00679650(unsigned int target)
 {
     int index=0;
@@ -4861,6 +4973,7 @@ struct Owner;
 struct Table { int unk00; int unk04; void (__thiscall *free)(Owner*,void*); }; extern Table DAT_00e0804c;
 struct Heap { void FUN_0086ba60(void*); }; extern Heap DAT_01090a78;
 struct Owner { Table* table; void* unk04; int unk08; int unk0C; void* FUN_0067ceb0(unsigned int); };
+// pdb: BSSimpleArray<StartMenu::Option *,1024>::`scalar deleting destructor' | StartMenu.obj | fnv360_0822_retail, vtable, medium
 void* Owner::FUN_0067ceb0(unsigned int flags) {
  table=&DAT_00e0804c;
  void* pointer=unk04;
@@ -4880,6 +4993,8 @@ void __cdecl FUN_00668660() { if(DAT_01076cf0<DAT_00f6b19c.count) { Record* sele
 // @f3 0x0067c040 (community match, verified in this file)
 namespace f3m_0067c040 {
 struct Entry67C040{void* value;unsigned key;};struct Node67C040{Entry67C040* data;Node67C040* next;};struct Owner67C040{int unk00;Node67C040 head;Node67C040* Head(){return &head;}void* FUN_0067c040(const unsigned*);};
+// pdb: ListBox<StartMenu::Option *>::GetTileFor | StartMenu.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: aData
 void* Owner67C040::FUN_0067c040(const unsigned* key){if(this)for(Node67C040* node=Head();node;node=node->next){if(!node->data)return 0;if(node->data->key==*key)return node->data->value;}return 0;}
 }   // namespace f3m_0067c040
 
@@ -4893,6 +5008,7 @@ struct Node {Node* next;Node* previous;Item* data;};
 static __forceinline Item*& Next(Node*& node){Item*& value=node->data;node=node->next;return value;}
 unsigned int __cdecl FUN_00becd70(const char*,int);
 struct Owner {Node* head;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;bool (__cdecl *callback)(Item*);void FUN_0066b600();};
+// pdb: RaceSexMenu::MenuOptionList::UpdateCurrentSelection | RaceSexMenu.obj | fnv360_0822_retail, call_gap, low, conflict (bridge: RaceSexMenu::Randomize)
 void Owner::FUN_0066b600(){
  if(callback){for(Node* node=head;node;){Item* item=Next(node);if(callback(item)){if(item->tile)item->tile->FUN_00bee190(FUN_00becd70(DAT_00e04bc0,-1),2.0f,true);}else{if(item->tile)item->tile->FUN_00bee190(FUN_00becd70(DAT_00e04bc0,-1),1.0f,true);}}}
 }
@@ -4919,6 +5035,7 @@ struct Array {
  unsigned capacity;
  Array* FUN_006684e0(unsigned flags);
 };
+// pdb: BSSimpleArray<MessageMenu::PerkActivation *,1024>::`scalar deleting destructor' | MessageMenu.obj | fnv360_0822_retail, vtable, medium
 Array* Array::FUN_006684e0(unsigned flags) {
  this->Array::~Array();
  if(flags & 1) DAT_01090a78.FUN_0086ba60(this);
@@ -5047,6 +5164,8 @@ struct Menu {
  void* data;
 };
 extern Menu* DAT_01077040;
+// pdb: SPECIALBookMenu::RefreshPreviousPageButton | SPECIALBookMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apButton
 void __cdecl FUN_00676040(Entry* entry){Object* object=entry->object;object->methods[0x3c](object,0,0,DAT_01077040->data);}
 }
 
@@ -5177,6 +5296,7 @@ void __cdecl FUN_0067b790(List* list){
 
 // @f3 0x00666c70 (community match, verified in this file)
 namespace f3m_00666c70 {
+// pdb: MapMenu::GetClass | MapMenu.obj | fnv360_0822_retail, vtable, medium
 int FUN_00666c70()
 {
     return 0x3FF;
@@ -5185,6 +5305,7 @@ int FUN_00666c70()
 
 // @f3 0x00668b80 (community match, verified in this file)
 namespace f3m_00668b80 {
+// pdb: MessageMenu::GetClass | MessageMenu.obj | fnv360_0822_retail, vtable, medium
 int FUN_00668b80()
 {
     return 0x3E9;
@@ -5193,6 +5314,7 @@ int FUN_00668b80()
 
 // @f3 0x0066cde0 (community match, verified in this file)
 namespace f3m_0066cde0 {
+// pdb: RaceSexMenu::GetClass | RaceSexMenu.obj | fnv360_0822_retail, vtable, medium
 int FUN_0066cde0()
 {
     return 0x40C;
@@ -5201,6 +5323,7 @@ int FUN_0066cde0()
 
 // @f3 0x006743a0 (community match, verified in this file)
 namespace f3m_006743a0 {
+// pdb: RepairServicesMenu::GetClass | RepairServicesMenu.obj | fnv360_0822_retail, vtable, medium
 int FUN_006743a0()
 {
     return 0x422;
@@ -5209,6 +5332,7 @@ int FUN_006743a0()
 
 // @f3 0x006744d0 (community match, verified in this file)
 namespace f3m_006744d0 {
+// pdb: SleepWaitMenu::GetClass | SleepWaitMenu.obj | fnv360_0822_retail, vtable, medium
 int FUN_006744d0()
 {
     return 0x3F4;
@@ -5217,6 +5341,7 @@ int FUN_006744d0()
 
 // @f3 0x0067f590 (community match, verified in this file)
 namespace f3m_0067f590 {
+// pdb: StartMenu::GetClass | StartMenu.obj | fnv360_0822_retail, vtable, medium
 int FUN_0067f590()
 {
     return 0x3F5;
@@ -5359,6 +5484,8 @@ struct Owner {
  }
  bool FUN_0067ea20(void* value);
 };
+// pdb: ListBox<BGSSaveLoadFileEntry *>::RemoveItem | StartMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apItem
 bool Owner::FUN_0067ea20(void* value){
  if(!value || head.Empty())return false;
  Node* previous;Node* node=Find(value,previous);
@@ -5372,12 +5499,14 @@ namespace SelectedEntry {
 extern unsigned int DAT_01076cf0;
 extern void** DAT_00f6b1a0;
 extern unsigned int DAT_00f6b1a4;
+// pdb: MessageMenu::GetQueueHead | MessageMenu.obj | fnv360_0822_retail, call_gap, medium
 void* __cdecl FUN_006683f0(){void* result=0;unsigned int index=DAT_01076cf0;if(index<DAT_00f6b1a4)result=DAT_00f6b1a0[index];return result;}
 }
 
 // @f3 0x00679590 (community match, verified in this file)
 namespace f3m_00679590 {
 void FUN_006794c0(int);
+// pdb: SPECIALBookMenu::Create | SPECIALBookMenu.obj | fnv360_0822_retail, caller_sim, medium
 void FUN_00679590(){FUN_006794c0(0x23);}
 }   // namespace f3m_00679590
 
@@ -5466,6 +5595,8 @@ struct Tile{void FUN_00bee190(unsigned,float,bool);};void FUN_006854e0();struct 
  int unknown1c;
  int unknown20;
  int state;Target* target;void FUN_0066a540(void*);};}
+// pdb: PlayerNameEntryMenu::Finish | PlayerNameEntryMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apName
 void N66A540::Owner::FUN_0066a540(void* item){if(item){target->list.FUN_004019c0(item,0);target->Update(0x20);FUN_006854e0();}tile->FUN_00bee190(0x1772,1.0f,true);state=2;}
 }   // namespace f3m_0066a540
 
@@ -5498,6 +5629,7 @@ namespace f3m_0066aff0 {
 namespace Count66af {
 struct Tile {float FUN_00becf40(int);};
 struct Owner {Tile* tile;unsigned FUN_0066aff0();};
+// pdb: RaceSexMenu::MenuOption::GetIncrement | RaceSexMenu.obj | fnv360_0822_retail, objrun, medium
 unsigned Owner::FUN_0066aff0() {
     if(tile) {
         float value=tile->FUN_00becf40(0x100a);
@@ -5512,6 +5644,7 @@ unsigned Owner::FUN_0066aff0() {
 // @f3 0x0067cf00 (community match, verified in this file)
 namespace f3m_0067cf00 {
 namespace Deletecf00 { struct Heap { void FUN_0086ba60(void*); }; extern Heap DAT_01090a78; struct Array; extern int DAT_00e08060; extern void (__thiscall* DAT_00e08068)(Array*,void*); struct Array { void* table; void* data; unsigned size; unsigned capacity; Array* FUN_0067cf00(unsigned); };
+// pdb: BSSimpleArray<StartMenu::UserOption *,1024>::`scalar deleting destructor' | StartMenu.obj | fnv360_0822_retail, vtable, medium
 Array* Array::FUN_0067cf00(unsigned mode) { table=&DAT_00e08060; if(data) { DAT_00e08068(this,data); data=0; capacity=0; size=0; } if(mode&1) DAT_01090a78.FUN_0086ba60(this); return this; } }
 }   // namespace f3m_0067cf00
 
@@ -7391,12 +7524,16 @@ unsigned unk4c;
 unsigned unk50;
 unsigned unk54;
 unsigned unk58;
+// pdb: RepairServicesMenu::DoLeave | RepairServicesMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 Tile*selected;void FUN_006732f0(unsigned,unsigned);};void Owner::FUN_006732f0(unsigned event,unsigned unused){if(event==17){selected->FUN_00bee190(0xfaf,1.0f,true);first->FUN_00bee190(0xfa3,0.0f,true);second->FUN_00bee190(0xfa3,0.0f,true);}}}
 }   // namespace f3m_006732f0
 
 // @f3 0x0066b0d0 (community match, verified in this file)
 namespace f3m_0066b0d0 {
 struct Nodeb0d0 { int unk00; void* value; };
+// pdb: NiTListBase<NiTPointerAllocator<unsigned int>,RaceSexMenu::MenuOption *>::GetNextPos | RaceSexMenu.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: kPos
 void* __stdcall FUN_0066b0d0(Nodeb0d0* node) { if(node) return node->value; return 0; }
 }   // namespace f3m_0066b0d0
 
@@ -7404,6 +7541,8 @@ void* __stdcall FUN_0066b0d0(Nodeb0d0* node) { if(node) return node->value; retu
 namespace f3m_00679690 {
 extern "C" __declspec(dllimport) unsigned long __stdcall GetTickCount();
 namespace N679690 {struct Timer{unsigned long start,end;unsigned long FUN_00679690();};}
+// pdb: HUDMainMenu::ToggleVisibilityFlag | StartMenu.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: aeFlag
 unsigned long N679690::Timer::FUN_00679690(){if(start>0){if(end>0)return end-start;return GetTickCount()-start;}return 0;}
 }   // namespace f3m_00679690
 
@@ -7413,6 +7552,8 @@ namespace HandleMenuEvent {
 struct Tile {void FUN_00bee190(unsigned int,float,bool);};
 struct List {unsigned int FUN_00629f00();};
 struct Menu {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;int unk3c;int unk40;int unk44;Tile* secondary;Tile* primary;int unk50;int unk54;int unk58; List list;void FUN_00672880(unsigned int,void*);};
+// pdb: RepairMenu::DoLeave | RepairMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Menu::FUN_00672880(unsigned int event,void*){if(event==14){primary->FUN_00bee190(0xfa3,0.0f,true);if(list.FUN_00629f00()>1)secondary->FUN_00bee190(0xfa3,0.0f,true);}}
 }
 }   // namespace f3m_00672880
@@ -7421,12 +7562,16 @@ void Menu::FUN_00672880(unsigned int event,void*){if(event==14){primary->FUN_00b
 namespace f3m_006796c0 {
 namespace delete96c {
 struct Object;struct Table {void (__thiscall *destroy)(Object*,int);};struct Object {Table* table;};
+// pdb: StartMenu::DeleteOption | StartMenu.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: apTile, apOption
 void __cdecl FUN_006796c0(int,Object* object) {if(object) object->table->destroy(object,1);}
 }
 }   // namespace f3m_006796c0
 
 // @f3 0x006633c0 (community match, verified in this file)
 namespace f3m_006633c0 {
+// pdb: ListBox<TESObjectREFR *>::Sort | MapMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompareFn
 namespace Update{struct Member{void FUN_0067cf50(void*);};struct Owner{unsigned unk00;Member member;void FUN_006620c0();void FUN_006633c0(void*);};void Owner::FUN_006633c0(void*value){member.FUN_0067cf50(value);FUN_006620c0();}}
 }   // namespace f3m_006633c0
 
@@ -7435,6 +7580,7 @@ namespace f3m_0067cdf0 {
 namespace SmallCountDifference {
 extern char DAT_00e03f78[];int FUN_00becd70(const char*,int);struct Control {double FUN_00becf40(int);};struct Node {void* item;Node* next;};struct List {Node head;Node* Head(){return &head;}};
 struct Owner {int unk00;List list;Control* control;unsigned FUN_0067cdf0();};
+// pdb: ListBox<BGSSaveLoadFileEntry *>::NumUnfiltered | StartMenu.obj | fnv360_0822_retail, call_gap, medium
 unsigned Owner::FUN_0067cdf0(){static int DAT_01077224=FUN_00becd70(DAT_00e03f78,-1);unsigned count=0;for(Node* node=list.Head();node;node=node->next)if(node->item)++count;return count-(unsigned)control->FUN_00becf40(DAT_01077224);}
 }
 }   // namespace f3m_0067cdf0
@@ -7566,6 +7712,8 @@ struct Iterator{Node* next;Node* current;int& Next(){int& result=next->value;cur
 struct List{Node* head;int FUN_00496910(Node**);int FUN_0066bcc0(const int*);
  Node* Find(const int& key){Iterator it;it.next=head;while(it.next){if(key==it.Next())return it.current;}return 0;}
 };
+// pdb: NiTPointerListBase<NiTPointerAllocator<unsigned int>,RaceSexMenu::MenuOption *>::Remove | RaceSexMenu.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: element
 int List::FUN_0066bcc0(const int* value){
  Node* found=Find(*value);
  if(found)return FUN_00496910(&found);
@@ -7579,6 +7727,8 @@ namespace f3m_006637f0 {
 namespace Update6637 {
 struct Member{void FUN_0067cf50(void*);};
 struct Object{int unk00;Member member;void FUN_00662140();void FUN_006637f0(void*);};
+// pdb: ListBox<BGSQuestObjective *>::Sort | MapMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompareFn
 void Object::FUN_006637f0(void* value){member.FUN_0067cf50(value);FUN_00662140();}
 }
 }   // namespace f3m_006637f0
@@ -7665,6 +7815,8 @@ struct BookControl6f5f80 {
     unsigned int unk20;
     int id;
 };
+// pdb: SPECIALBookMenu::RefreshRightAVButton | SPECIALBookMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apButton
 void __cdecl FUN_00675f80(MenuControl* control) {
     BookControl6f5f80* book = (BookControl6f5f80*)control;
     int id = book->id;
@@ -7801,6 +7953,7 @@ struct Owner {
  void* id;
  void FUN_00679740();
 };
+// pdb: StartMenu::UpdateCanLoadStatus | StartMenu.obj | fnv360_0822_retail, objrun, medium
 void Owner::FUN_00679740() {
  bool enabled=DAT_010799fc && DAT_010799fc->FUN_006d51a0();
  if(first) first->FUN_00bee190(id,(float)(int)enabled,1);
@@ -7880,6 +8033,7 @@ struct GlobalState {
  void FUN_0066d910(int,int,int);
  void FUN_0066bad0();
 };
+// pdb: RaceSexMenu::Randomize | RaceSexMenu.obj | fnv360_0822_retail, call_gap, low
 void FUN_0066e530() {
  if(((GlobalState*)DAT_01076dd4) && (FUN_00619750()==1 || ((unsigned char)(((GlobalState*)DAT_01076dd4)->flags>>7)&1))) {
   ((GlobalState*)DAT_01076dd4)->handler->FUN_0055a310(1,0,1);
@@ -7928,6 +8082,7 @@ struct FUN_00bfcfe0 {void** table;int unk004; int unk008; int unk00c; int unk010
 struct List {void FUN_0063d7e0();};
 struct State {int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; int unk08c; int unk090; int unk094; int unk098; int unk09c; int unk0a0; int unk0a4; int unk0a8; int unk0ac; int unk0b0; int unk0b4; int unk0b8; int unk0bc; int unk0c0; int unk0c4; int unk0c8; int unk0cc; int unk0d0; int unk0d4; int unk0d8; int unk0dc; int unk0e0; unsigned char state;};extern State* DAT_01075b24;
 struct FUN_00668b10:FUN_00bfcfe0 {List list;FUN_00668b10();};
+// pdb: MessageMenu::MessageMenu | MessageMenu.obj | fnv360_0822_retail, call_gap, medium
 FUN_00668b10::FUN_00668b10():FUN_00bfcfe0(){table=DAT_00e0706c;list.FUN_0063d7e0();DAT_01075b24->state=255;}
 }
 }   // namespace f3m_00668b10
@@ -7960,6 +8115,8 @@ int unk3c;
 List* list;
  void FUN_0066ba80(Color);
 };
+// pdb: RaceSexMenu::SetHairColorSliders | RaceSexMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiColor
 void Owner::FUN_0066ba80(Color color) {
  Iterator iterator={list->head};
  while(iterator.node) {
@@ -8035,6 +8192,8 @@ namespace N676880 {struct Handle{unsigned id;bool valid;unsigned state;Handle&op
  int unknown1c;
  int unknown20;
  int index;};}
+// pdb: SPECIALBookMenu::DecreaseActorValue | SPECIALBookMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apAVButton
 void FUN_00676880(N676880::Data*data){using namespace N676880;if(N676880::DAT_01077040){int index=data->index;if(index!=-1){int count=N676880::DAT_0107a104->values.Get(index);if(count>1){Handle handle={0xffffffff,false,0};Handle temp;handle=*N676880::DAT_011790c8->FUN_00bcfcd0(&temp,"OBJBookSpecialNumber",0x121);handle.FUN_00bd00c0(0);}int next=count-1;if(next<=1)next=1;N676880::DAT_0107a104->FUN_0076b7f0(index,next);}N676880::DAT_01077040->FUN_006763b0();}}
 }   // namespace f3m_00676880
 
@@ -8197,6 +8356,7 @@ struct Owner {
  Node* Head() {return &head;}
  void FUN_006620c0();
 };
+// pdb: ListBox<TESObjectREFR *>::Synchronize | MapMenu.obj | fnv360_0822_retail, call_seq, medium
 void Owner::FUN_006620c0() {
  total=0.0f;
  count=0;
@@ -8394,6 +8554,8 @@ bool __cdecl FUN_00477b00();
 struct ControllerState { unsigned packet, buttons, axes0, axes1; };
 int __stdcall FUN_007f3746(unsigned, ControllerState*);
 
+// pdb: StartMenu::PopulateOptionsListBox | StartMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aiModes
 void Menu::FUN_0067f920(unsigned mask)
 {
  list.Clear();
@@ -8457,6 +8619,7 @@ namespace display390 {
 struct Widget {void FUN_00bee190(int,float,int);};struct Menu {int unk00;Widget* widget;void FUN_00bfcac0();void FUN_00bfc470();};extern Menu* DAT_01076cec;
 struct State {int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; int unk08c; int unk090; int unk094; int unk098; int unk09c; int unk0a0; int unk0a4; int unk0a8; int unk0ac; int unk0b0; int unk0b4; int unk0b8; int unk0bc; int unk0c0; int unk0c4; int unk0c8; int unk0cc; int unk0d0; int unk0d4; int unk0d8; int unk0dc; int unk0e0; int unk0e4; int unk0e8; int unk0ec; int unk0f0; int unk0f4; int unk0f8; int unk0fc; int unk100; int unk104; int unk108; int unk10c; int unk110; int unk114; int unk118; int unk11c; int unk120; int unk124; int unk128; int unk12c; int unk130; int unk134; int unk138; int unk13c; int unk140; int unk144; int unk148; int unk14c; int unk150; int unk154; int unk158; int unk15c; int unk160; int unk164; int unk168; int unk16c; int unk170; int unk174; int unk178; int unk17c; int unk180; int unk184; int unk188; int unk18c; int unk190; int unk194; int unk198; int unk19c; unsigned flags;};extern State* DAT_010770ac;
 int __cdecl FUN_0061a9a0();bool __cdecl FUN_00619b80();void __cdecl FUN_00619ba0(int);
+// pdb: MessageMenu::Close | MessageMenu.obj | fnv360_0822_retail, call_gap, low
 void __cdecl FUN_00668390(){if(DAT_01076cec){DAT_01076cec->widget->FUN_00bee190(0x1772,1.0f,1);if(FUN_0061a9a0())DAT_01076cec->FUN_00bfcac0();else DAT_01076cec->FUN_00bfc470();if(FUN_00619b80() && (!DAT_010770ac || !(DAT_010770ac->flags&1)))FUN_00619ba0(0);}}
 }
 }   // namespace f3m_00668390
@@ -10377,6 +10540,8 @@ namespace f3m_00679710 {
 namespace ControlEvent {
 struct Control {void FUN_00bee190(int,float,int);};
 inline int IsHandled(int event) {if(event==100) return 1;if(event==101) return 1;return 0;}
+// pdb: StartMenu::DoDownClick | StartMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void __stdcall FUN_00679710(int event,Control* control) {
  if(control && IsHandled(event)) control->FUN_00bee190(0xff5,DAT_00db38b8,1);
 }
@@ -10502,12 +10667,15 @@ unsigned unk190;
 unsigned unk194;
 unsigned unk198;
 unsigned unk19c;
+// pdb: StartMenu::InitializeUserOptions | StartMenu.obj | fnv360_0822_retail, call_gap_sim, low
 unsigned flags;unsigned unk1a4,unk1a8,unk1ac;Option*selected;void FUN_0067bd60();};void Owner::FUN_0067bd60(){flags&=~0x20u;for(unsigned i=0;i<DAT_00f6b3bc.Size();++i){if(DAT_00f6b3bc.At(i)->callback)DAT_00f6b3bc.At(i)->callback(DAT_00f6b3bc.At(i));if(DAT_00f6b3bc.At(i)->callback==FUN_00679b80)selected=DAT_00f6b3bc.At(i);}flags|=0x20;}}
 }   // namespace f3m_0067bd60
 
 // @f3 0x00673210 (community match, verified in this file)
 namespace f3m_00673210 {
 namespace N673210 {extern unsigned DAT_01076f54;struct Tile{bool FUN_00becf80(unsigned);};struct Value{double FUN_0047cf30(int);bool ItemChange_GetWorn(int);};struct Record{Tile*tile;Value*value;};}
+// pdb: RepairServicesMenu::SortFunc | RepairServicesMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apItem1, apItem2
 int FUN_00673210(N673210::Record*a,N673210::Record*b){using namespace N673210;int result=0;bool left=!a->tile->FUN_00becf80(N673210::DAT_01076f54);bool right=!b->tile->FUN_00becf80(N673210::DAT_01076f54);if(left&&!right)result=1;else if(!left&&right)return-1;else{double value=a->value->FUN_0047cf30(0);if(b->value->FUN_0047cf30(0)>value)result=1;else{value=a->value->FUN_0047cf30(0);if(b->value->FUN_0047cf30(0)<value)result=-1;else if(a->value->ItemChange_GetWorn(0))result=-1;else if(b->value->ItemChange_GetWorn(0))result=1;}}if(left&&right)result=-result;return result;}
 }   // namespace f3m_00673210
 
@@ -10517,6 +10685,8 @@ namespace QueryMenuMultipleEntries {
 struct Node {void* data;Node* next;};
 struct Menu {int unk000;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;int unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;int unk080;int unk084;int unk088;int unk08c;int unk090;int unk094;int unk098;int unk09c;int unk0a0;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4;int unk0d8;int unk0dc;int unk0e0;int unk0e4;int unk0e8;int unk0ec;int unk0f0;int unk0f4;int unk0f8;int unk0fc;int unk100;int unk104;int unk108;int unk10c;int unk110;int unk114;int unk118;int unk11c;int unk120;int unk124;int unk128;int unk12c;int unk130;int unk134;int unk138;int unk13c;int unk140;int unk144;int unk148;int unk14c;int unk150;int unk154;int unk158;int unk15c;int unk160;int unk164;int unk168;int unk16c;Node list;int unk178;int unk17c;int unk180;int unk184;int unk188;int unk18c;int unk190;int unk194;int unk198;int unk19c; unsigned int flags;__forceinline Node* Head(){return &list;}};extern Menu* DAT_010770ac;
 static __forceinline unsigned char Bit3(unsigned int flags){return (unsigned char)(flags>>3)&1;}
+// pdb: StartMenu::SaveLoadFilterFn | StartMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apSaveGame
 unsigned int __cdecl FUN_0067d210(unsigned int mode){if(DAT_010770ac){if(Bit3(DAT_010770ac->flags)||mode)return 0;unsigned int count=0;for(Node* node=DAT_010770ac->Head();node;node=node->next)if(node->data)++count;if(count<=1)return 0;}return 1;}
 }
 }   // namespace f3m_0067d210
@@ -12470,6 +12640,8 @@ struct S {
     int values[21];
     void FUN_0067f5a0(unsigned int index, int value);
 };
+// pdb: StartMenu::AttachTileByID | StartMenu.obj | fnv360_0721_beta, vtable, medium
+// pdb params: aiID, apTile
 void S::FUN_0067f5a0(unsigned int index, int value) {
     if (index <= 20)
         values[index] = value;
@@ -12493,6 +12665,8 @@ struct Q67cb00
     bool __thiscall FUN_0067cb00(SelectedObject* object);
 };
 
+// pdb: ListBox<BGSSaveLoadFileEntry *>::Highlight | StartMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apHighlightItem
 bool Q67cb00::FUN_0067cb00(SelectedObject* object)
 {
     if (FUN_0067ab40()) {
@@ -12614,6 +12788,7 @@ bool __cdecl FUN_00619b80();
 void __cdecl FUN_00619ba0(int a);
 void __cdecl FUN_0061ab00(int a);
 
+// pdb: MessageMenu::Create | MessageMenu.obj | fnv360_0822_retail, ustr, medium
 bool __cdecl FUN_00669700()
 {
     Iface* iface = DAT_01075b24;
@@ -12651,6 +12826,7 @@ bool __cdecl FUN_00669700()
 // @f3 0x00679800 (community match, verified in this file)
 namespace f3m_00679800 {
 void __stdcall FUN_007f3752(int code);
+// pdb: TileImage::GetTileShaderProperty | StartMenu.obj | fnv360_1110_debug, objrun_open, low
 void FUN_00679800()
 {
     if (DAT_010770ac)
@@ -12848,6 +13024,8 @@ struct S {
   int unk1B4;
   bool FUN_0067d710(QEntry* e);
 };
+// pdb: StartMenu::SetSaveGameScreenshot | StartMenu.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apSaveGame
 bool S::FUN_0067d710(QEntry* e) {
   if (!e) {
     void* r;
@@ -12917,6 +13095,8 @@ struct F66Arg {
     int unk08;
 };
 
+// pdb: RaceSexMenu::IsPlayerRace | RaceSexMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apOpt
 int __cdecl FUN_0066adc0(F66Arg* a1)
 {
     if (a1 && a1->unk08 && DAT_01076dd4 && ((F66Mgr*)DAT_01076dd4)->unk0d8
@@ -13002,6 +13182,8 @@ struct Obj66ae40 {
     unsigned int unk008;
 };
 
+// pdb: RaceSexMenu::IsPlayerEyes | RaceSexMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apOpt
 bool __cdecl FUN_0066ae40(Obj66ae40* obj)
 {
     return obj != 0
@@ -13033,6 +13215,8 @@ struct Slots6744 {
     void FUN_006744e0(unsigned int index, int value);
 };
 
+// pdb: SleepWaitMenu::AttachTileByID | SleepWaitMenu.obj | fnv360_0721_beta, objrun, medium
+// pdb params: aiID, apTile
 void Slots6744::FUN_006744e0(unsigned int index, int value)
 {
     if (index <= 5)
@@ -13050,6 +13234,7 @@ struct Owner220 {
  void* vtable; void* data;unsigned int capacity,length;
  void* FUN_00668530(unsigned int flags);
 };
+// pdb: BSSimpleArray<MessageMenu::MessageMenuEntry *,1024>::`scalar deleting destructor' | MessageMenu.obj | fnv360_0822_retail, vtable, medium
 void* Owner220::FUN_00668530(unsigned int flags){
  vtable=&DAT_00e07054;
  if(data){DAT_00e0705c(data);data=0;length=0;capacity=0;}
@@ -13177,6 +13362,8 @@ void __cdecl FUN_0067b290(Value225* value){if(DAT_010770ac && DAT_010770ac->IsEn
 namespace f3m_0067ea80 {
 namespace F3_67ea80 {
 struct Embedded { void FUN_0067cf50(int); }; struct Owner { int x; Embedded e; void FUN_0067de20(); void FUN_0067ea80(int); };
+// pdb: ListBox<BGSSaveLoadFileEntry *>::Sort | StartMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompareFn
 void Owner::FUN_0067ea80(int n) { e.FUN_0067cf50(n); FUN_0067de20(); }
 }
 }   // namespace f3m_0067ea80
@@ -13191,6 +13378,8 @@ struct Candidate {
     int values[6];
     void FUN_0066cdf0(unsigned int, int);
 };
+// pdb: RaceSexMenu::AttachTileByID | RaceSexMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTile
 void Candidate::FUN_0066cdf0(unsigned int index, int value) {
     if (index <= 5) values[index] = value;
 }
@@ -13236,6 +13425,7 @@ struct Owner6763 {
     Group6763 groups[9];
     void FUN_006763b0();
 };
+// pdb: SPECIALBookMenu::RefreshPage | SPECIALBookMenu.obj | fnv360_0822_retail, callee_sim, low
 void Owner6763::FUN_006763b0() {
     if (index >= 9) return;
     for (unsigned int i = 0; i < groups[index].firstCount; i++) groups[index].first[i]->first(groups[index].first[i]);
@@ -13335,6 +13525,8 @@ struct Tile675 {
 };
 struct Arg675 { int unk00; Tile675* tile; };
 extern Menu675* DAT_01077040;
+// pdb: SPECIALBookMenu::RefreshTotalPointsText | SPECIALBookMenu.obj | fnv360_0721_beta, objrun, low
+// pdb params: apTextItem
 void __cdecl FUN_00675de0(Arg675* arg) {
     int diff = DAT_01077040->unk58 - DAT_01077040->FUN_00674df0();
     if (diff > 1) {
@@ -13378,6 +13570,7 @@ struct QList {
     void FUN_00661d80();
 };
 
+// pdb: ListBox<BGSQuestObjective *>::RemoveAll | MapMenu.obj | fnv360_0822_retail, vtable, medium
 void QList::FUN_00661d80()
 {
     while (unk08 && unk08->item) {
@@ -13667,6 +13860,7 @@ struct Q67a7d0 {
   void FUN_00657ab0();
   void FUN_0067a7d0();
 };
+// pdb: BSSimpleArray<NiFixedString,1024>::~BSSimpleArray<NiFixedString,1024> | CreditsMenu.obj | fnv360_0822_debug, call_gap_sim, low
 void Q67a7d0::FUN_0067a7d0() { if (!(*(unsigned char*)&unk1a0 & 1)) { unk1a0 |= 0x10; FUN_00657ab0(); } }
 }   // namespace f3m_0067a7d0
 
@@ -13725,6 +13919,8 @@ struct FUN_006745a0_cls {
     void FUN_006745a0(int event, void* data);
 };
 
+// pdb: SleepWaitMenu::DoClick | SleepWaitMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void FUN_006745a0_cls::FUN_006745a0(int event, void* data)
 {
     switch (event) {
@@ -14596,6 +14792,8 @@ struct FUN_0067f1b0_cls {
     Tile* FUN_0067f1b0(int value, int prop, int index, int id);
 };
 
+// pdb: ListBox<StartMenu::Option *>::AddItem | StartMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aAssociatedData, apcItemString, apCompareFn, apcTemplateName
 Tile* FUN_0067f1b0_cls::FUN_0067f1b0(int value, int prop, int index, int id)
 {
     Tile* parent = unk0c;
@@ -14682,6 +14880,7 @@ struct CtrlCls {
     void FUN_0066ad10();
 };
 
+// pdb: QuantityMenu::DoIdle | QuantityMenu.obj | fnv360_0822_retail, vtable, medium
 void CtrlCls::FUN_0066ad10()
 {
     float f = unk34->FUN_00becf40(0xfc4) - unk40;
@@ -14792,6 +14991,8 @@ struct Tile673 { bool FUN_00becf80(int value); };
 struct Menu673 { void FUN_006739e0(int arg); };
 extern int DAT_01076f54;
 extern Menu673* DAT_01076f68;
+// pdb: RepairServicesMenu::RepairAllFunc | RepairServicesMenu.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apTile, apItem
 void FUN_00673c10(Tile673* tile, int arg) {
     if (tile->FUN_00becf80(DAT_01076f54)) DAT_01076f68->FUN_006739e0(arg);
 }
@@ -14833,6 +15034,7 @@ struct Cls {
     void FUN_00662140();
 };
 
+// pdb: ListBox<BGSQuestObjective *>::Synchronize | MapMenu.obj | fnv360_0822_retail, call_seq, medium
 void Cls::FUN_00662140()
 {
     unk20 = 0.0f;
@@ -14976,6 +15178,7 @@ struct Obj_0066a690 : Base_0066a690 {
     void* FUN_0066a690(unsigned int flags);
 };
 
+// pdb: PlayerNameEntryMenu::`scalar deleting destructor' | PlayerNameEntryMenu.obj | fnv360_0822_retail, vtable, medium
 void* Obj_0066a690::FUN_0066a690(unsigned int flags) {
     this->Obj_0066a690::~Obj_0066a690();
     if (flags & 1)
@@ -15001,6 +15204,7 @@ struct FUN_006669b0 {
         }
     }
 };
+// pdb: BSSimpleArray<BSStringT<char>,1024>::~BSSimpleArray<BSStringT<char>,1024> | MapMenu.obj | fnv360_0822_retail, objrun, medium
 FUN_006669b0::~FUN_006669b0() {
     Clear();
 }
@@ -15016,6 +15220,7 @@ struct Item66a {
     Tile66a* tile;
     bool FUN_0066ad80();
 };
+// pdb: RaceSexMenu::MenuOption::IsSelected | RaceSexMenu.obj | fnv360_0822_retail, call_gap, low
 bool Item66a::FUN_0066ad80() {
     return tile && tile->FUN_00becf40(FUN_00becd70("_selected", -1)) == 2.0f;
 }
@@ -15027,6 +15232,8 @@ namespace f3m_0067c920 {
 
 int __stdcall FUN_0067c070(int);
 
+// pdb: StartMenu::OptionListBox::GetHighlightTarget | StartMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiButton
 int __stdcall FUN_0067c920(int a)
 {
     if (a == 0xf || a == 0x10)
@@ -15045,6 +15252,8 @@ struct Menu676b {
     void FUN_006763b0();
 };
 
+// pdb: SPECIALBookMenu::PreviousPage | SPECIALBookMenu.obj | fnv360_0822_retail, objrun, low
+// pdb params: apButton
 void __cdecl FUN_00676a50(MenuControl*)
 {
     if(!DAT_01077040)return;
@@ -15072,6 +15281,8 @@ struct SelMgr {
     void FUN_0067d9c0(bool b);
 };
 
+// pdb: ListBox<StartMenu::Option *>::DeselectAll | StartMenu.obj | fnv360_0822_retail, call_gap, low, conflict (bridge: StartMenu::HideOptionsContainer)
+// pdb params: abUnfilteredOnly
 void SelMgr::FUN_0067d9c0(bool b)
 {
     if (!this) return;
@@ -15161,6 +15372,8 @@ struct MenuState682 { void* FUN_00675660(); };
 
 void __cdecl FUN_006194f0();
 
+// pdb: SPECIALBookMenu::Create | SPECIALBookMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiTotalPoints
 void __cdecl FUN_006794c0(int arg)
 {
     Movie682* movie = ((Tile682*)DAT_01075b24->tile)->FUN_00bf37b0(DAT_00e07fc0);
@@ -15276,6 +15489,7 @@ struct Cls67c840 {
 
 void F_6796c0();
 
+// pdb: StartMenu::HideOptionsContainer | StartMenu.obj | fnv360_1110_retail, objrun, medium
 void Cls67c840::FUN_0067c840()
 {
     unk050->F_bee190(0xfa3, 0.0f, 1);
@@ -15316,6 +15530,8 @@ struct Cls {
     bool FUN_00661ec0(Obj* obj);
 };
 
+// pdb: ListBox<BGSQuestObjective *>::Highlight | MapMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apHighlightItem
 bool Cls::FUN_00661ec0(Obj* obj)
 {
     if (FUN_00661980() && (obj == 0 || (FUN_0067c010(obj) &&
@@ -15337,6 +15553,8 @@ namespace m67aa50 {
 void* __cdecl FUN_00becd70(const char*,int);
 struct Child { double FUN_00becf40(void*); };
 struct Obj { char p[12]; Child* child; unsigned FUN_0067aa50(); };
+// pdb: ListBox<BGSSaveLoadFileEntry *>::Traverse | StartMenu.obj | fnv360_0721_beta, call_gap, low
+// pdb params: apTraversalFn, aiStart, aiEnd
 unsigned Obj::FUN_0067aa50() { if(child) return (unsigned)child->FUN_00becf40(FUN_00becd70(DAT_00e03fac,-1)); return 0; }
 }
 }   // namespace f3m_0067aa50
@@ -15357,6 +15575,8 @@ struct Array660 {
     void FUN_00664660(unsigned int index, bool flag);
 };
 
+// pdb: BSSimpleArray<BSStringT<char>,1024>::Remove | MapMenu.obj | fnv360_0822_retail, objrun, low
+// pdb params: aiIndex, abShrink
 void Array660::FUN_00664660(unsigned int index, bool flag)
 {
     Array660* self = this;
@@ -15413,6 +15633,8 @@ struct QMenu
     bool FUN_00661860(QTile* t);
 };
 
+// pdb: ListBox<TESObjectREFR *>::Highlight | MapMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apHighlightItem
 bool QMenu::FUN_00661860(QTile* t)
 {
     if (FUN_006613f0()) {
@@ -15429,6 +15651,8 @@ bool QMenu::FUN_00661860(QTile* t)
 // @f3 0x00676a20 (community match, verified in this file)
 namespace f3m_00676a20 {
 struct Term676a20 : TerminalState { void FUN_00675a00(int); void FUN_006763b0(); };
+// pdb: SPECIALBookMenu::NextPage | SPECIALBookMenu.obj | fnv360_0822_retail, objrun, low
+// pdb params: apButton
 void __cdecl FUN_00676a20(MenuControl* control) {
     Term676a20* t = (Term676a20*)DAT_01077040;
     if (t && *(unsigned char*)&t->unk54) {
@@ -15444,6 +15668,8 @@ struct Q1 {
     bool FUN_0066d6c0(int a, int b, int c);
     void FUN_0066d8b0(int a);
 };
+// pdb: BSFaceGenManager::SetFaceCoordAttribute | BSFaceGenManager.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: apCoord, aeFanAttribute, aeFanType, afValue
 void Q1::FUN_0066d8b0(int a) {
     unsigned int i = 0;
     if (a == 0x21) {
@@ -15685,6 +15911,7 @@ struct QMenu {
 }
 extern f3m_00660680::QMenu* DAT_01076bb8;
 namespace f3m_00660680 {
+// pdb: MapMenu::ClearMapMemory | MapMenu.obj | fnv360_0822_retail, call_seq, medium
 void FUN_00660680() {
   if (DAT_01076bb8) {
     QNode* node = DAT_01076bb8->tile30->node;
@@ -15895,6 +16122,7 @@ struct List {
  int unk00; Item* head; Node* next; Tile* tile; int selection; int unk14; int unk18; unsigned short count; unsigned short unk1e; float value; int unk24; int unk28; unsigned short flags;
  void FUN_0065f6f0(); void FUN_0065ddb0(); void FUN_00661720();
 };
+// pdb: ListBox<TESObjectREFR *>::RemoveAll | MapMenu.obj | fnv360_0822_retail, vtable, medium
 void List::FUN_00661720() {
  if (next) {
   do {
@@ -15947,6 +16175,8 @@ struct BookMenu {
  virtual void v14(int,float);
  bool FUN_00674d80(int key);
 };
+// pdb: SPECIALBookMenu::DoKey | SPECIALBookMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiKey
 bool BookMenu::FUN_00674d80(int key) {
  bool handled=false;
  if(key==0x80000001 || key==0x80000002) {
@@ -16002,6 +16232,7 @@ struct FUN_006743d0 : FUN_00bfd0f0 {
     MenuMember member68;
     virtual ~FUN_006743d0();
 };
+// pdb: RepairServicesMenu::~RepairServicesMenu | RepairServicesMenu.obj | fnv360_0822_retail, call_seq, medium
 FUN_006743d0::~FUN_006743d0()
 {
     DAT_01076f68 = 0;
@@ -16025,6 +16256,7 @@ struct Array {
     void FUN_00663a30(void*, unsigned int);
     Array* FUN_006669f0(unsigned char flags);
 };
+// pdb: BSSimpleArray<BSStringT<char>,1024>::`scalar deleting destructor' | MapMenu.obj | fnv360_0822_retail, vtable, medium
 Array* Array::FUN_006669f0(unsigned char flags) {
     void* oldData = data;
     *reinterpret_cast<int**>(this) = &DAT_00e06ab8;
@@ -16050,6 +16282,8 @@ struct Owner {
     bool FUN_006608e0();bool FUN_0067c010(Object*);void FUN_0065db10();
     bool FUN_00660c10(Object*);
 };
+// pdb: ListBox<TESQuest *>::Highlight | MapMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apHighlightItem
 bool Owner::FUN_00660c10(Object* object) {
     if(FUN_006608e0() && (!object || (FUN_0067c010(object) && object->FUN_00becf80(FUN_00becd70(DAT_00e04758,-1))))) {
         selected=object;FUN_0065db10();return true;
@@ -16072,6 +16306,8 @@ struct Selection {
     void FUN_0065dc60();
     bool FUN_00661190(SelectedObject* object);
 };
+// pdb: ListBox<BGSNote *>::Highlight | MapMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apHighlightItem
 bool Selection::FUN_00661190(SelectedObject* object)
 {
     if (FUN_00660d20() && (!object || (FUN_0067c010(object) && object->FUN_00becf80(FUN_00becd70(DAT_00e04758, -1)))))
@@ -16207,6 +16443,8 @@ public:
     int FUN_006797d0(int arg);
 };
 
+// pdb: StartMenu::DoKey | StartMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiKey
 int StartMenu_006797d0::FUN_006797d0(int arg) {
     if (IsFlagSet(0x80000)) {
         if (DAT_010769ac != 0) {
@@ -16237,6 +16475,7 @@ struct Self67dd {
 int __cdecl FUN_00bea9e0(const char* name);
 float __cdecl FUN_00493010(float value);
 
+// pdb: ListBox<StartMenu::Option *>::SetTotalListHeight | StartMenu.obj | fnv360_0822_retail, call_dedup, medium
 void FUN_0067f1b0_cls::FUN_0067dd00()
 {
     Self67dd* self = (Self67dd*)this;
@@ -16308,6 +16547,8 @@ struct FUN_00663620_cls {
     Tile* FUN_00663620(int value, int prop, int index, int id);
 };
 
+// pdb: ListBox<BGSQuestObjective *>::AddItem | MapMenu.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: aAssociatedData, apcItemString, apCompareFn, apcTemplateName
 Tile* FUN_00663620_cls::FUN_00663620(int value, int prop, int index, int id)
 {
     Tile* parent = unk0c;
@@ -16376,6 +16617,8 @@ struct PageTerm {
 };
 
 
+// pdb: SPECIALBookMenu::TurnPage | SPECIALBookMenu.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: bForward
 bool PageTerm::FUN_00675a00(bool bForward)
 {
     f3m_00676880::N676880::Handle handle;
@@ -16834,6 +17077,7 @@ extern const NiPoint3B NiPoint3_ZERO;
 
 char __cdecl FUN_00619750();
 
+// pdb: MapMenu::SetPlayerMarkerCallback | MapMenu.obj | fnv360_0822_retail, objrun, medium
 void __cdecl FUN_00663b00()
 {
     char mode = FUN_00619750();
@@ -16868,6 +17112,7 @@ namespace f3m_0066af90 {
 namespace Task1087 {
 struct Target {float FUN_00becf40(int);};
 struct Owner {Target* target;int FUN_0066af90();};
+// pdb: RaceSexMenu::MenuOption::~MenuOption | RaceSexMenu.obj | fnv360_0822_debug, objrun_open, low
 int Owner::FUN_0066af90(){return (int)target->FUN_00becf40(0x1005);}
 }
 }   // namespace f3m_0066af90
@@ -16879,6 +17124,8 @@ int FUN_00becd70(const char*,int);
 struct SelectionTile {bool FUN_00becf80(int);void FUN_00bee190(int,float,bool);void FUN_00617a60(int id,int value){FUN_00bee190(id,(float)value,true);}};
 struct SelectionList {bool FUN_0067a880();bool FUN_0067c010(SelectionTile*);bool FUN_0067c300(SelectionTile*,int);};
 // @fnv 0x007d9000
+// pdb: ListBox<StartMenu::Option *>::SetSelection | StartMenu.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apSelectItem, aeMode
 bool SelectionList::FUN_0067c300(SelectionTile* item, int action)
 {
     if (FUN_0067a880() && item && FUN_0067c010(item))
@@ -16922,6 +17169,7 @@ extern Owner* DAT_01075bd4;extern Node* DAT_01075bd8;
 struct List {void* item;List* next;List():item(0),next(0){}~List();};
 // Observed RTTI ListBox<TESQuest*> layout and real list ownership at4.
 struct Owner {void** methods;List list;int unk0c,unk10,unk14,unk18;unsigned short state1c;float x,y,z;unsigned short mode;Owner();};
+// pdb: ListBox<TESQuest *>::ListBox<TESQuest *> | MapMenu.obj | fnv360_0822_retail, objrun, medium
 Owner::Owner(){methods=PTR_00e06960;z=0.0f;y=0.0f;unk14=0;x=0.0f;unk10=0;unk0c=0;unk18=0;state1c=0;mode=1;if(DAT_01075bd4){Node* node=new Node(DAT_01075bd4);node->next=DAT_01075bd8;DAT_01075bd8=node;}DAT_01075bd4=this;}
 }
 
@@ -17007,6 +17255,7 @@ extern const char* DAT_00f638ac;
 extern const char* DAT_00f63858;
 extern const char* DAT_00f63768;
 
+// pdb: MapMenu::UpdateMenu | MapMenu.obj | fnv360_0822_retail, ustr, medium
 void __cdecl FUN_006673f0()
 {
     if (!DAT_01076bb8 || !Interface_GetPipboy()->unk28)
@@ -17102,6 +17351,8 @@ struct Guard {
 };
 extern Guard* DAT_01076dd4;
 struct TestItem { int unk00; int unk04; void* unk08; };
+// pdb: RaceSexMenu::IsPlayerHair | RaceSexMenu.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apOpt
 int FUN_0066ae00(TestItem* item) { if (item) { void* value = item->unk08; if (value && DAT_01076dd4 && DAT_01076dd4->unk0d8) { if (DAT_01076dd4->unk0d8->FUN_00554d90() == value) return 1; } } return 0; }
 }   // namespace f3m_0066ae00
 
@@ -17128,6 +17379,7 @@ struct ReferenceList:ListBoxBase,BSSimpleList {
     float x;float y;float z;unsigned short flags;
     ReferenceList();
 };
+// pdb: ListBox<TESObjectREFR *>::ListBox<TESObjectREFR *> | MapMenu.obj | fnv360_0822_retail, objrun, medium
 ReferenceList::ReferenceList() {
     table=&DAT_00e069b0;
     x=y=z=0.0f;
@@ -17163,6 +17415,7 @@ struct CFoo : CBase_66c050 {
     ~CFoo();
 };
 
+// pdb: RaceSexMenu::MenuOptionList::`scalar deleting destructor' | RaceSexMenu.obj | fnv360_0822_debug, call_gap, low
 CFoo::~CFoo()
 {
     if (unk14) { delete unk14; }
@@ -17189,6 +17442,8 @@ struct Multi80 : FUN_00675c10 {
  int unk24;
  Multi80(::Callback, ::Callback, const char*, int, int, ...);
 };
+// pdb: SPECIALBookMenu::ActorValueButton::ActorValueButton | SPECIALBookMenu.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apButtonClick, apRefresh, apButtonName, aeActorValue, aiNumAffectedFields
 Multi80::Multi80(::Callback a, ::Callback b, const char* name, int value, int n, ...) : FUN_00675c10(a, b, name)
 {
  unk24 = value;
@@ -17220,6 +17475,7 @@ public:
  Q67ca50();
  virtual ~Q67ca50();
 };
+// pdb: ListBox<BGSSaveLoadFileEntry *>::ListBox<BGSSaveLoadFileEntry *> | StartMenu.obj | fnv360_0822_retail, call_seq, medium
 Q67ca50::Q67ca50() {
  unk20 = unk24 = unk28 = 0.0f;
  unk14 = 0; unk10 = 0; unk0c = 0; unk18 = 0; unk1c = 0; unk2c = 1;
@@ -17248,6 +17504,7 @@ public:
     void* FUN_00674500(unsigned int flags);
 };
 
+// pdb: SleepWaitMenu::`scalar deleting destructor' | SleepWaitMenu.obj | fnv360_0822_retail, vtable, medium
 void* SleepWaitMenu::FUN_00674500(unsigned int flags)
 {
     m_vtbl = (unsigned int)&DAT_00e076bc;
@@ -17270,6 +17527,8 @@ struct Item { unsigned unk00,unk04; ItemValues* data; bool FUN_00becf80(int); fl
 struct Data { float FUN_0047cf30(bool); bool ItemChange_GetWorn(bool); };
 struct SortEntry { Item* pItem; Data* pData; };
 // @fnv 0x007b5950
+// pdb: RepairMenu::SortFunc | RepairMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apItem1, apItem2
 int FUN_00671de0(SortEntry* apA, SortEntry* apB)
 {
     int iResult = 0;
@@ -17373,6 +17632,8 @@ struct FUN_0054a930_Obj {
     int FUN_0054a930();
 };
 
+// pdb: RaceSexMenu::IsPlayerSex | RaceSexMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apOpt
 int __cdecl FUN_0066ae80(int param_1) {
     if (!param_1 || !DAT_01076dd4 || !(*(int*)((int)DAT_01076dd4 + 0xd8))) {
         return 0;
@@ -17417,6 +17678,7 @@ struct QList {
     void FUN_00662c00();
 };
 
+// pdb: ListBox<TESQuest *>::RemoveAll | MapMenu.obj | fnv360_0822_retail, vtable, medium
 void QList::FUN_00662c00()
 {
     while (unk08 && unk08->item) {
@@ -17475,6 +17737,7 @@ extern Array DAT_00f6b19c; extern unsigned DAT_01076cf0;
 struct Owner { void FUN_00668e80(); }; extern Owner* DAT_01076cec;
 void FUN_00668390();
 }
+// pdb: MessageMenu::ClearMessageQueueHead | MessageMenu.obj | fnv360_0822_retail, call_seq, medium
 void FUN_00669690() {
  N669690::Item* item=N669690::DAT_00f6b19c.GetAt(N669690::DAT_01076cf0);
  if(item) { delete item; N669690::DAT_00f6b19c.RemoveAt(*(volatile unsigned*)&N669690::DAT_01076cf0); }
@@ -17486,6 +17749,7 @@ void FUN_00669690() {
 #include <string>
 namespace f3m_00668410 {
 struct String1419 {const char& FUN_00668410(unsigned int) const;};
+// pdb: std::vector<signed char,std::allocator<signed char> >::~vector<signed char,std::allocator<signed char> > | BSFaceGenModel.obj | fnv360_0822_retail, call_gap_sim, low
 const char& String1419::FUN_00668410(unsigned int i) const {return reinterpret_cast<const std::string*>(this)->operator[](i);}
 }   // namespace f3m_00668410
 
@@ -17531,6 +17795,7 @@ unsigned int unk88;
 unsigned int unk8c;
 String firstString,secondString;Point3 points[2];float unkB8;unsigned int unkBC,unkC0,unkC4;float unkC8,unkCC,unkD0;PtrState pointer;BSSimpleArray<TESNPC*,1024> npcs;unsigned int unkEC;FUN_00409c20 sounds[4];unsigned int unk120;FUN_004320f0 entries[4];RaceSexMenu();virtual ~RaceSexMenu();
 };
+// pdb: RaceSexMenu::RaceSexMenu | RaceSexMenu.obj | fnv360_0822_retail, ustr, medium
 RaceSexMenu::RaceSexMenu():pointer(0){
 memset(&unk78,0,0x18);memset(&unk28,0,0x50);
 unkB8=0.0f;unkBC=0;unkEC=3;unkC8=0.0f;unkD0=0.0f;unkCC=0.0f;
@@ -17569,6 +17834,7 @@ Selection selection;StringArray strings;unsigned int soundList;bool updatePendin
 List firstList,secondList;unsigned int unkd8,unkdc,unke0,unke4,unke8;Point3 playerPosition;unsigned int unkf8,unkfc;bool localMap;unsigned char unk101;unsigned short unk102;unsigned int unk104,unk108,unk10c,unk110,unk114,unk118;bool needsUpdate;unsigned char unk11d;unsigned short unk11e;
 FUN_00660830 firstTab;FUN_00660c70 secondTab;FUN_00661340 thirdTab;FUN_006618c0 fourthTab;TileArray tiles;
 MapMenu();virtual ~MapMenu();};
+// pdb: MapMenu::MapMenu | MapMenu.obj | fnv360_0822_retail, ustr, medium
 MapMenu::MapMenu(){
 DAT_01076ba4=FUN_00bea9e0("_Title");DAT_01076ba8=FUN_00bea9e0("_Value");DAT_01076bb0=FUN_00bea9e0("_CurrentTab");DAT_01076b98=FUN_00bea9e0("_selected");DAT_01076b94=FUN_00bea9e0("_TextAlpha");DAT_01076ba0=FUN_00bea9e0("_x");DAT_01076b9c=FUN_00bea9e0("_y");DAT_01076bac=FUN_00bea9e0("_Magnification");
 rotation=0.0f;active=true;soundList=0;updatePending=false;unk108=0;displayMode=32;playerPosition=DAT_0108ec68;unke8=0;unkf8=0;unk74=0;unkbc=0;unk80=0;unk10c=0;unkc4=0;unk84=0;savedMusicVolume=DAT_011790c8->FUN_00bcf770();unkc0=0;unk118=0;unk104=0;needsUpdate=true;unkfc=0;localMap=false;
@@ -17601,6 +17867,8 @@ struct FUN_0067a6c0 : Option67a6 {
     static void operator delete(void* memory){G67a6::DAT_01090a78.FUN_0086ba60(memory);}
     FUN_0067a6c0(int,void (__cdecl*)(FUN_0067a6c0*),int,int,unsigned int,int,...);
 };
+// pdb: StartMenu::UserOption::UserOption | StartMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apDisplayText, apCallBack, aiModes, aeType, aiNumSettings, aiArrowSpacing
 FUN_0067a6c0::FUN_0067a6c0(int a,void (__cdecl* change)(FUN_0067a6c0*),int b,int mode,unsigned int number,int other,...)
     : Option67a6(a,b)
 {
@@ -17634,6 +17902,7 @@ struct FUN_0067e7d0: FUN_006c8220 {
  virtual ~FUN_0067e7d0();
  void FUN_0067da00();
 };
+// pdb: ListBox<BGSSaveLoadFileEntry *>::~ListBox<BGSSaveLoadFileEntry *> | StartMenu.obj | fnv360_0822_debug, call_seq, medium
 FUN_0067e7d0::~FUN_0067e7d0(){
  FUN_0067da00();
  FUN_0067e7d0* self=this;
@@ -17654,6 +17923,7 @@ struct FUN_00663170 : FUN_006c8220 {
     void FUN_00661720();
     virtual ~FUN_00663170();
 };
+// pdb: ListBox<TESObjectREFR *>::~ListBox<TESObjectREFR *> | MapMenu.obj | fnv360_0822_debug, call_seq, medium
 FUN_00663170::~FUN_00663170() {
     FUN_00661720();
     FUN_00663170* value = this;
@@ -17674,6 +17944,7 @@ struct FUN_00662d40 : public FUN_006c8220 {
     virtual ~FUN_00662d40();
     void FUN_00661050();
 };
+// pdb: ListBox<BGSNote *>::~ListBox<BGSNote *> | MapMenu.obj | fnv360_0822_debug, call_seq, low
 FUN_00662d40::~FUN_00662d40()
 {
     FUN_00661050();
@@ -17692,6 +17963,7 @@ struct FUN_0067f130: FUN_006c8220 {
  virtual ~FUN_0067f130();
  void FUN_0067e690();
 };
+// pdb: StartMenu::OptionListBox::~OptionListBox | StartMenu.obj | fnv360_0822_debug, call_gap, low
 FUN_0067f130::~FUN_0067f130(){
  FUN_0067e690();
  FUN_0067f130* self=this;
@@ -17712,6 +17984,7 @@ struct FUN_006635a0 : public FUN_006c8220 {
     virtual ~FUN_006635a0();
     void FUN_00661d80();
 };
+// pdb: ListBox<BGSQuestObjective *>::~ListBox<BGSQuestObjective *> | MapMenu.obj | fnv360_0822_debug, call_seq, medium
 FUN_006635a0::~FUN_006635a0()
 {
     FUN_00661d80();
@@ -17726,6 +17999,8 @@ namespace w664750 {
 struct List { void FUN_00421610(void**); }; extern List DAT_01075bd4;
 struct FUN_006c8220 { void* head; void* tail; unsigned count; ~FUN_006c8220(); };
 struct FUN_00664750 : FUN_006c8220 { virtual ~FUN_00664750(); void FUN_00662c00(); };
+// pdb: BSSimpleArray<BSStringT<char>,1024>::Clear | MapMenu.obj | fnv360_0822_retail, objrun, low
+// pdb params: abFreeMemory
 FUN_00664750::~FUN_00664750() { FUN_00662c00(); void* self=this; DAT_01075bd4.FUN_00421610(&self); }
 }
 }   // namespace f3m_00664750
@@ -17757,6 +18032,7 @@ Selection selection;StringArray strings;unsigned int soundList;bool updatePendin
 List firstList,secondList;unsigned int unkd8,unkdc,unke0,unke4,unke8;Point3 playerPosition;unsigned int unkf8,unkfc;bool localMap;unsigned char unk101;unsigned short unk102;unsigned int unk104,unk108,unk10c,unk110,unk114,unk118;bool needsUpdate;unsigned char unk11d;unsigned short unk11e;
 FUN_00660830 firstTab;FUN_00660c70 secondTab;FUN_00661340 thirdTab;FUN_006618c0 fourthTab;TileArray tiles;
 MapMenu();virtual ~MapMenu();};
+// pdb: MapMenu::~MapMenu | MapMenu.obj | fnv360_0822_retail, call_seq, medium
 MapMenu::~MapMenu(){DAT_01076bb8=0;}
 }
 
@@ -17787,6 +18063,8 @@ struct Control67A5F0 {
  Tile67A5F0* tiles[1];
  void FUN_0067a5f0(int,bool,int,float);
 };
+// pdb: StartMenu::Fade | StartMenu.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aeIndex, abFadeIn, aiTrait, afFadeTime
 void Control67A5F0::FUN_0067a5f0(int index,bool show,int trait,float duration) {
  if (trait == (-2147483647-1)) trait=FUN_00becd70(&DAT_00e08010,-1);
  if (duration < 0.0f) duration=DAT_00dbea4c;
@@ -17817,6 +18095,7 @@ struct Menu {
  int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24,unk28,unk2c,unk30;
  Tile* tile;void FUN_00674820();
 };
+// pdb: SleepWaitMenu::SetTimeText | SleepWaitMenu.obj | fnv360_0822_retail, call_gap, low
 void Menu::FUN_00674820() {
  char text[260];int hour;
  {
@@ -17907,6 +18186,7 @@ struct MenuClass
 };
 
 // @fnv 0x007c0580
+// pdb: SleepWaitMenu::UpdateSleeping | SleepWaitMenu.obj | fnv360_0822_retail, call_seq, medium
 bool MenuClass::FUN_00674990()
 {
     if (DAT_0107a0d4->FUN_006e4eb0(15, 2)->FUN_00be97a0())
@@ -17961,6 +18241,7 @@ struct InterfaceMgr{void FUN_0061eb80(int);};extern InterfaceMgr* DAT_01075b24;
 struct Process{void FUN_00560c20();};struct Player{virtual void Slot000();virtual void Slot004();virtual void Slot008();virtual void Slot00C();virtual void Slot010();virtual void Slot014();virtual void Slot018();virtual void Slot01C();virtual void Slot020();virtual void Slot024();virtual void Slot028();virtual void Slot02C();virtual void Slot030();virtual void Slot034();virtual void Slot038();virtual void Slot03C();virtual void Slot040();virtual void Slot044();virtual void Slot048();virtual void Slot04C();virtual void Slot050();virtual void Slot054();virtual void Slot058();virtual void Slot05C();virtual void Slot060();virtual void Slot064();virtual void Slot068();virtual void Slot06C();virtual void Slot070();virtual void Slot074();virtual void Slot078();virtual void Slot07C();virtual void Slot080();virtual void Slot084();virtual void Slot088();virtual void Slot08C();virtual void Slot090();virtual void Slot094();virtual void Slot098();virtual void Slot09C();virtual void Slot0A0();virtual void Slot0A4();virtual void Slot0A8();virtual void Slot0AC();virtual void Slot0B0();virtual void Slot0B4();virtual void Slot0B8();virtual void Slot0BC();virtual void Slot0C0();virtual void Slot0C4();virtual void Slot0C8();virtual void Slot0CC();virtual void Slot0D0();virtual void Slot0D4();virtual void Slot0D8();virtual void Slot0DC();virtual void Slot0E0();virtual void Slot0E4();virtual void Slot0E8();virtual void Slot0EC();virtual void Slot0F0();virtual void Slot0F4();virtual void Slot0F8();virtual void Slot0FC();virtual void Slot100();virtual void Slot104();virtual void Slot108();virtual void Slot10C();virtual void Slot110();virtual void Slot114();virtual void Slot118();virtual void Slot11C();virtual void Slot120();virtual void Slot124();virtual void Slot128();virtual void Slot12C();virtual void Slot130();virtual void Slot134();virtual void Slot138();virtual void Slot13C();virtual void Slot140();virtual void Slot144();virtual void Slot148();virtual void Slot14C();virtual void Slot150();virtual void Slot154();virtual void Slot158();virtual void Slot15C();virtual void Slot160();virtual void Slot164();virtual void Slot168();virtual void Slot16C();virtual void Slot170();virtual void Slot174();virtual void Slot178();virtual void Slot17C();virtual void Slot180();virtual void Slot184();virtual void Slot188();virtual void Slot18C();virtual void Slot190();virtual void Slot194();virtual void Slot198();virtual void Slot19C();virtual void Slot1A0();virtual void Slot1A4();virtual void Slot1A8();virtual void Slot1AC();virtual void Slot1B0();virtual void Slot1B4();virtual void Slot1B8();virtual void Slot1BC();virtual void Slot1C0();virtual void Slot1C4();virtual void Slot1C8();virtual void Slot1CC();virtual void Slot1D0();virtual void Slot1D4();virtual void Slot1D8();virtual void Slot1DC();virtual void Slot1E0();virtual void Slot1E4();virtual void Slot1E8();virtual void Slot1EC();virtual void Slot1F0();virtual void Slot1F4();virtual void Slot1F8();virtual void Slot1FC();virtual void Slot200();virtual void Slot204();virtual void Slot208();virtual void Slot20C();virtual void Slot210();virtual void Slot214();virtual void Slot218();virtual void Slot21C();virtual void Slot220();virtual void Slot224();virtual void Slot228();virtual void Slot22C();virtual void Slot230();virtual void Slot234();virtual void Slot238();virtual void Slot23C();virtual void Slot240();virtual void Slot244();virtual void Slot248();virtual void Slot24C();virtual void Slot250();virtual void Slot254();virtual void Slot258();virtual void Slot25C();virtual void Slot260();virtual void Slot264();virtual void Slot268();virtual void Slot26C();virtual void Slot270();virtual void Slot274();virtual void Slot278();virtual void Slot27C();virtual void Slot280();virtual void Slot284();virtual void Slot288();virtual void Slot28C();virtual void Slot290();virtual void Slot294();virtual void Slot298();virtual void Slot29C();virtual void Slot2A0();virtual void Slot2A4();virtual void Slot2A8();virtual void Slot2AC();virtual void Slot2B0();virtual void Slot2B4();virtual void Slot2B8();virtual void Slot2BC();virtual void Slot2C0();virtual void Slot2C4();virtual void Slot2C8();virtual void Slot2CC();virtual void Slot2D0();virtual void Slot2D4();virtual void Slot2D8();virtual void Slot2DC();virtual void Slot2E0();virtual void Slot2E4();virtual void Slot2E8();virtual void Slot2EC();virtual void Slot2F0();virtual void Slot2F4();virtual void Slot2F8();virtual void Slot2FC();virtual void Slot300();virtual void Slot304();virtual void Slot308();virtual void Slot30C();virtual void Slot310();virtual void Slot314();virtual void Slot318();virtual void Slot31C();virtual void Slot320();virtual void Slot324();virtual void Slot328();virtual void Slot32C();virtual void Slot330();virtual void Slot334();virtual void Slot338();virtual void Slot33C();virtual void Slot340();virtual void Slot344();virtual void Slot348();virtual void Slot34C();virtual void Slot350();virtual void Slot354();virtual void Slot358();virtual void Slot35C();virtual void Slot360();virtual void Slot364();virtual void Slot368();virtual void Slot36C();virtual void Slot370();virtual void Slot374(); virtual Process* GetProcess();};extern Player* DAT_0107a104;
 struct Menu:BaseMenu{Item* items[20];unsigned int unk78,unk7C,unk80,unk84,unk88,unk8C;String8 firstString,secondString;float pointA0,pointA4,pointA8,pointAC,pointB0,pointB4,unkB8;unsigned int unkBC,unkC0,unkC4;float unkC8,unkCC,unkD0;Pointer8 pointer;Array16 npcs;unsigned int unkEC;Sound12 sounds[4];unsigned int unk120;Entry24 entries[4];virtual ~Menu();};
 typedef char MenuSize[(sizeof(Menu)==0x184)?1:-1];
+// pdb: RaceSexMenu::~RaceSexMenu | RaceSexMenu.obj | fnv360_0822_retail, call_seq, medium
 Menu::~Menu(){DAT_01075b24->FUN_0061eb80(0);DAT_0107a104->GetProcess()->FUN_00560c20();for(int i=0;i<20;++i)delete items[i];npcs.Clear();for(int j=0;j<4;++j){sounds[j].BSSoundHandle_Stop();sounds[j].BSSoundHandle_Release();}}
 }
 }   // namespace f3m_0066cc10
@@ -17984,6 +18265,7 @@ struct OwnerFE {
     unsigned int FUN_0065f9f0();
     void FUN_00661f20();
 };
+// pdb: ListBox<TESQuest *>::SetTotalListHeight | MapMenu.obj | fnv360_0822_retail, call_dedup, medium
 void OwnerFE::FUN_00661f20()
 {
     if (!primary) return;
@@ -18025,6 +18307,7 @@ struct OwnerFE {
     unsigned int FUN_0067cdf0();
     void FUN_0067d030();
 };
+// pdb: ListBox<BGSSaveLoadFileEntry *>::SetTotalListHeight | StartMenu.obj | fnv360_0822_retail, call_dedup, medium
 void OwnerFE::FUN_0067d030()
 {
     if (!primary) return;
@@ -18401,6 +18684,7 @@ void* __cdecl TESForm_GetFormByNumericID(int);
 void* __cdecl FUN_00c0050a(void*,int,const void*,const void*,int);
 void __cdecl TutorialMenu_Create(void*,int);
 struct MenuAction6798 { void FUN_00679820(); };
+// pdb: StartMenu::ChooseHelp | StartMenu.obj | fnv360_0822_debug, caller_sim, low
 void MenuAction6798::FUN_00679820()
 {
     N6798::DAT_010770ac->tile->FUN_00bee190(0xfa3,1.0f,1);
@@ -18753,6 +19037,7 @@ struct Menu
     void FUN_0067e0f0();
     void FUN_0067ed50();
 };
+// pdb: StartMenu::PrepSaveLoad | StartMenu.obj | fnv360_0822_retail, ustr, medium
 void Menu::FUN_0067ed50()
 {
     if(!list.third && !list.second)
@@ -18792,6 +19077,8 @@ struct List {virtual void Select(Tile*);virtual void v04();virtual void v08();vi
 int unk04,unk08;Tile* menu;int unk10;Tile* scroll;int unk18,unk1c,unk20;float pos,value;
 unsigned FUN_0065f450();void FUN_006611f0(bool);
 };
+// pdb: ListBox<BGSNote *>::RestoreListState | MapMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: abPlayFocusSound
 void List::FUN_006611f0(bool flag){
  Tile* tile=0;
  if(menu && scroll){
@@ -18845,6 +19132,7 @@ struct Entry {Widget* widget;};struct Node {Node* next;int unk04;Entry* item;};s
 struct Iterator { Node* node; Iterator(Node* p):node(p){} Entry*& Next() { Entry*& item=node->item; node=node->next; return item; } };
 extern char DAT_00e07210[];int __cdecl FUN_00becd70(const char*,int);void __cdecl FUN_00bf3580(int);
 struct Owner {int unk00;Widget* widget;int unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24;Bucket* lists[22];Widget* negative;Widget* positive;void FUN_0066b140();};
+// pdb: RaceSexMenu::UpdateScrollArrows | RaceSexMenu.obj | fnv360_0721_beta, call_seq, medium
 void Owner::FUN_0066b140(){unsigned index=(unsigned)widget->FUN_00becf40(0x1004);bool neg=false,pos=false;Iterator it(lists[index]->head);FUN_00bf3580(0);while(it.node && (!neg || !pos)){Entry* entry=it.Next();int value=(int)entry->widget->FUN_00becf40(FUN_00becd70(DAT_00e07210,-1));switch(value){case -1:neg=true;break;case 1:pos=true;break;}}negative->FUN_00bee190(0xfa3,(float)neg,1);positive->FUN_00bee190(0xfa3,(float)pos,1);}
 }
 }   // namespace f3m_0066b140
@@ -19076,6 +19364,8 @@ struct Control {
     Tile* tile;
     bool FUN_0066b4c0(int);
 };
+// pdb: RaceSexMenu::MenuOption::SetValue | RaceSexMenu.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiVal
 bool Control::FUN_0066b4c0(int value) {
     if (tile) {
         int old = (int)tile->FUN_00becf40(0x1005);
@@ -19135,6 +19425,7 @@ struct QMenu {
     void FUN_0066b140();
     void FUN_0066c9d0();
 };
+// pdb: RaceSexMenu::MakeHairStyleList | RaceSexMenu.obj | fnv360_0721_beta, call_seq, medium
 void QMenu::FUN_0066c9d0()
 {
     factory3c->FUN_0066bc70();
@@ -19165,6 +19456,7 @@ extern Owner* DAT_01075bd4;extern Node* DAT_01075bd8;
 struct List {void* item;List* next;List():item(0),next(0){}~List();};
 struct FUN_0067c940 {void** methods;List list;int unk0c,unk10,unk14,unk18;unsigned short state1c;float x,y,z;unsigned short mode;FUN_0067c940();};
 struct Owner : FUN_0067c940 {};
+// pdb: ListBox<StartMenu::Option *>::ListBox<StartMenu::Option *> | StartMenu.obj | fnv360_0822_retail, call_seq, medium
 FUN_0067c940::FUN_0067c940(){methods=PTR_00e08074;z=0.0f;y=0.0f;unk14=0;x=0.0f;unk10=0;unk0c=0;unk18=0;state1c=0;mode=1;if(DAT_01075bd4){Node* node=new Node((Owner*)DAT_01075bd4);node->next=DAT_01075bd8;DAT_01075bd8=node;}DAT_01075bd4=(Owner*)this;}
 }
 
@@ -19189,6 +19481,8 @@ struct ClsA {
     void FUN_0066b7b0(int a1);
 };
 
+// pdb: RaceSexMenu::MenuOptionList::ScrollBy | RaceSexMenu.obj | fnv360_0822_retail, caller, medium
+// pdb params: aiDelta
 void ClsA::FUN_0066b7b0(int a1)
 {
     if (unk18 <= 0.0f) return;
@@ -19213,6 +19507,7 @@ void FUN_00657f40();
 struct QMenu : Slot7SaveMenu::Menu { void FUN_0067eea0(); };
 }
 using namespace f3m_0067eea0;
+// pdb: StartMenu::PopulateSaveLoadListBox | StartMenu.obj | fnv360_0822_debug, caller_sim, low
 void QMenu::FUN_0067eea0()
 {
     if (f3m_0067eea0::DAT_010769ac)
@@ -19254,6 +19549,7 @@ struct QSelf {
 };
 }
 
+// pdb: ListBox<StartMenu::Option *>::RemoveAll | StartMenu.obj | fnv360_0822_retail, vtable, medium
 void Task1626::FUN_0067f130::FUN_0067e690()
 {
     t0067e690::QSelf* self = (t0067e690::QSelf*)this;
@@ -19310,6 +19606,7 @@ void Task1626::FUN_0067f130::FUN_0067e690()
 // @f3 0x00662040 (community match, verified in this file)
 namespace f3m_00662040 {
 struct Tile2040 { void FUN_00bee190(unsigned int,float,bool); }; struct Item2040 { Tile2040* tile; int unk04; bool disabled; }; struct Node2040 { Item2040* value; Node2040* next; }; struct Owner2040 { int unk00; Node2040 head; int unk0c; int unk10; int unk14; int unk18; unsigned short count; unsigned short unk1e; float total; Node2040* Head() { return &head; } void FUN_0065f300(Tile2040*); void FUN_0065f510(); void FUN_0065dc60();  void FUN_00662040(); };
+// pdb: ListBox<BGSNote *>::Synchronize | MapMenu.obj | fnv360_0822_retail, call_seq, medium
 void Owner2040::FUN_00662040()
 {
     total = 0.0f;
@@ -19377,6 +19674,8 @@ extern int DAT_00f65094;
 extern const char DAT_str_prop[];
 extern const char DAT_format[];
 
+// pdb: StartMenu::InitializeSaveLoadListItem | StartMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apTile, apSaveGame
 void __cdecl FUN_0067d860(TileX* tile, ObjX* obj)
 {
     if (!tile)
@@ -19696,6 +19995,8 @@ Control* controls[13];
  void FUN_00673050(unsigned int,Control*);
 };
 }
+// pdb: RepairMenu::DoClick | RepairMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Action673::Owner::FUN_00673050(unsigned int action,Control* control) {
  if(!control && action<=12) control=controls[action];
  switch(action) {
@@ -19886,6 +20187,7 @@ struct List7da0 {
     void FUN_0067da00();
 };
 
+// pdb: ListBox<BGSSaveLoadFileEntry *>::RemoveAll | StartMenu.obj | fnv360_0822_retail, vtable, medium
 void List7da0::FUN_0067da00() {
     while (pItems) {
         if (!pItems->pItem)
@@ -19961,6 +20263,8 @@ struct NavigationList : NavigationBase, NavigationNode
 };
 float __cdecl FUN_0047ca30(float value, float step);
 // @fnv 0x007214b0
+// pdb: ListBox<BGSQuestObjective *>::GetHighlightTarget | MapMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aeButton
 NavigationTile* NavigationList::FUN_00661af0(unsigned int action)
 {
     NavigationTile* result = 0;
@@ -21117,6 +21421,8 @@ unsigned unk11c;
 unsigned unk120;
 int faceData;
 void FUN_0066aee0();void FUN_0066d910(bool,bool,bool);};
+// pdb: RaceSexMenu::UpdatePlayerHead | RaceSexMenu.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: abChangeRace, abShape, abTone
 void Menu::FUN_0066d910(bool remove, bool shape, bool texture)
 {
     if (!DAT_0107a104->RootA(0) || !DAT_0107a104->RootB(0))
@@ -21239,6 +21545,7 @@ bool __cdecl FUN_0061c490(int);Pip* __cdecl Interface_GetPipboy();void __cdecl F
 void __fastcall FUN_0065e9f0(Menu*);void __fastcall FUN_00664aa0(Menu*);
 inline bool CursorUnavailable(){return DAT_01075b28 && !DAT_01075cac;}
 // @fnv 0x0079a130
+// pdb: MapMenu::DoIdle | MapMenu.obj | fnv360_0822_retail, vtable, medium
 void __fastcall FUN_00666e00(Menu* menu)
 {
     unsigned int i;
@@ -21586,6 +21893,8 @@ float Tile_GetMaximumDepth();
 void FUN_0063d340();
 int FUN_00404050(const char*,const char*);
 // @fnv 0x007b7570
+// pdb: RepairServicesMenu::Create | RepairServicesMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apVendor
 RSMTile* __cdecl FUN_00673790(RSMActor* apVendor)
 {
     RSMMenu* pOldMenu5;
@@ -21656,6 +21965,7 @@ struct Owner {
     char unk00[0x48]; View* view; char unk4C[0x8c]; int filter; char unkDC[0x10]; unsigned flags;
     void FUN_0066ca90();
 };
+// pdb: RaceSexMenu::MakeEyeColorList | RaceSexMenu.obj | fnv360_0721_beta, call_seq, medium
 void Owner::FUN_0066ca90()
 {
     view->FUN_0066bc70();
@@ -21681,6 +21991,7 @@ extern FUN_00660c70* DAT_01075bd4;extern Node* DAT_01075bd8;
 struct List {void* item;List* next;List():item(0),next(0){}~List();};
 
 struct FUN_00660c70 {void** methods;List list;int unk0c,unk10,unk14,unk18;unsigned short state1c;float x,y,z;unsigned short mode;FUN_00660c70();};
+// pdb: ListBox<BGSNote *>::ListBox<BGSNote *> | MapMenu.obj | fnv360_0822_retail, objrun, medium
 FUN_00660c70::FUN_00660c70(){methods=DAT_00e06988;z=0.0f;y=0.0f;unk14=0;x=0.0f;unk10=0;unk0c=0;unk18=0;state1c=0;mode=1;if(DAT_01075bd4){Node* node=new Node(DAT_01075bd4);node->next=DAT_01075bd8;DAT_01075bd8=node;}DAT_01075bd4=this;}
 }
 
@@ -21724,6 +22035,8 @@ struct NavigationList : NavigationBase, NavigationNode
 };
 float __cdecl FUN_0047ca30(float value, float step);
 // @fnv 0x007214b0
+// pdb: ListBox<TESQuest *>::GetHighlightTarget | MapMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aeButton
 NavigationTile* NavigationList::FUN_00660980(unsigned int action)
 {
     NavigationTile* result = 0;
@@ -21847,6 +22160,8 @@ struct NavigationList : NavigationBase, NavigationNode
 };
 float __cdecl FUN_0047ca30(float value, float step);
 // @fnv 0x007214b0
+// pdb: ListBox<BGSSaveLoadFileEntry *>::GetHighlightTarget | StartMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aeButton
 NavigationTile* NavigationList::FUN_0067cb60(unsigned int action)
 {
     NavigationTile* result = 0;
@@ -21979,6 +22294,8 @@ struct ListMenu {
     void FUN_0065f510();
     Tile* FUN_00662dc0(void* obj, const char* text, void* sort, const char* name);
 };
+// pdb: ListBox<BGSNote *>::AddItem | MapMenu.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: aAssociatedData, apcItemString, apCompareFn, apcTemplateName
 Tile* ListMenu::FUN_00662dc0(void* obj, const char* text, void* sort, const char* name)
 {
     if (!parent || (!tmpl && !name))
@@ -22101,6 +22418,8 @@ inline void __cdecl operator delete(void* p) {
     G67a6::DAT_01090a78.FUN_0086ba60(p);
 }
 
+// pdb: MessageMenu::AddMessageToQueue | MessageMenu.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: axText, apcIconFilename, apcTitle, apcSound, afpResult, aiFirstButtonResult, aiWarningContext, axFirst, axList, abModal, aiXPosOverride, aiYPosOverride, afSecondsVisible, afBackgroundTextureOpacityOverride, afMenuWidthOverride
 bool __cdecl FUN_006698e0(
     const char* pMessageText,
     const char* pIconFilename,
@@ -22271,6 +22590,8 @@ public:
     void FUN_0067c780(Option* option, MenuTile* tile);
 };
 
+// pdb: StartMenu::DisplayOption | StartMenu.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apOption, apTile
 void StartMenu::FUN_0067c780(Option* option, MenuTile* tile)
 {
     if (!option)
@@ -22916,6 +23237,7 @@ struct Menu {
  Ref* MapMenu_GetWorldMapTrackingRef(Ref*,Path*);void FUN_00660030(Ref*,Ref*,Path*,int);Point FUN_0065d600(Point,void*);
  void FUN_00662870();
 };
+// pdb: MapMenu::CreatePlayerMarker | MapMenu.obj | fnv360_0822_retail, ustr, medium
 void Menu::FUN_00662870(){
  Ref* reference=mode==29?MapMenu_GetWorldMapTrackingRef(DAT_0107a104->GetTarget(),DAT_0107a104->GetPath()):DAT_0107a104->GetFirst();
  if(reference){if(mode==29)FUN_00660030(first,reference,DAT_0107a104->GetPath(),26);}
@@ -23036,6 +23358,8 @@ struct Menu {
  void FUN_0067fd70(unsigned mask, int x, int y, unsigned width, bool visible);
 };
 
+// pdb: StartMenu::PopulateConfirmationListBox | StartMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiModes, aiRealX, aiRealY, aiWidth, abShowWarning
 void Menu::FUN_0067fd70(unsigned mask, int x, int y, unsigned width, bool visible)
 {
  list.Clear();
@@ -23110,6 +23434,8 @@ struct Owner6647 {
     Tile* FUN_006647d0(int value, int prop, int index, int id);
 };
 
+// pdb: ListBox<TESQuest *>::AddItem | MapMenu.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: aAssociatedData, apcItemString, apCompareFn, apcTemplateName
 Tile* Owner6647::FUN_006647d0(int value, int prop, int index, int id)
 {
     Tile* parent = unk0c;
@@ -23317,6 +23643,7 @@ struct Menu {
     Tile* f10;
     void FUN_0067ac00();
 };
+// pdb: ListBox<StartMenu::Option *>::UpdateHighlightBoxPos | StartMenu.obj | fnv360_0822_debug, call_seq, medium
 void Menu::FUN_0067ac00()
 {
     static unsigned int hx = FUN_00becd70(DAT_00e03f50, -1);
@@ -23408,6 +23735,7 @@ extern const float FUN_00dc5c94;
 int __cdecl FUN_00bea9e0(const char* name);
 void FUN_0065e9b0();
 
+// pdb: MapMenu::UpdateNotes | MapMenu.obj | fnv360_0721_beta, ustr_rel, medium
 void MapMenu::FUN_00664000()
 {
     if (!DAT_01076bb8)
@@ -23460,6 +23788,7 @@ struct Menu67de20 {
     void FUN_0067de20();
 };
 
+// pdb: ListBox<BGSSaveLoadFileEntry *>::Synchronize | StartMenu.obj | fnv360_0822_retail, call_seq, medium
 void Menu67de20::FUN_0067de20() {
     unk20 = 0.0f;
     unk1c = 0;
@@ -23669,6 +23998,7 @@ struct MenuView {
     void FUN_00664aa0();
 };
 
+// pdb: MapMenu::UpdatePlayingSounds | MapMenu.obj | fnv360_0721_beta, ustr_rel, medium
 void MenuView::FUN_00664aa0()
 {
     static unsigned int s_uiAdvanceTime = 0;
@@ -23889,6 +24219,7 @@ struct MapMenu {
 };
 }
 
+// pdb: MapMenu::UpdateQuests | MapMenu.obj | fnv360_0822_retail, ustr, medium
 void N664ea0::MapMenu::FUN_00664ea0()
 {
     quests.Clear();
@@ -23997,6 +24328,8 @@ struct Menu {
     void FUN_0065e350(Entry* e);
     void FUN_00663d00(int code, Tile* t);
 };
+// pdb: MapMenu::DoEnter | MapMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Menu::FUN_00663d00(int code, Tile* t)
 {
     int v = 0;
@@ -24531,6 +24864,7 @@ public:
     void FUN_0066bad0();
 };
 
+// pdb: RaceSexMenu::UpdatePlayerBody | RaceSexMenu.obj | fnv360_0822_retail, call_gap, medium
 void GlobalState::FUN_0066bad0()
 {
     void* argument = DAT_0107a104;
@@ -24627,6 +24961,7 @@ void __cdecl FUN_00673520();
 void __cdecl RepairServicesMenu_InitFunc();
 int __cdecl FUN_00673210();
 
+// pdb: RepairServicesMenu::Update | RepairServicesMenu.obj | fnv360_0822_retail, call_gap, low
 void Self::FUN_006735c0()
 {
     if (!DAT_01076f68) return;
@@ -24716,6 +25051,8 @@ extern const char DAT_00e03fac[];
 MenuV* __stdcall FUN_00beab90(TileV* parent, int id, int unk);
 int __cdecl FUN_00becd70(const char* name, int len);
 
+// pdb: ListBox<BGSSaveLoadFileEntry *>::AddItem | StartMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aAssociatedData, apcItemString, apCompareFn, apcTemplateName
 Tile* List::FUN_0067e850(int value, int prop, int index, const char* name)
 {
     Self* self = (Self*)this;
@@ -24771,6 +25108,8 @@ struct Str_00668760 : std::string {
         const Str_00668760& _Right, const size_type _Roff, size_type _Count);
 };
 
+// pdb: std::basic_string<char,std::char_traits<char>,std::allocator<char> >::replace | MessageMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: _Off, _N0, _Right, _Roff, _Count
 Str_00668760& Str_00668760::FUN_00668760(const size_type _Off, size_type _N0,
     const Str_00668760& _Right, const size_type _Roff, size_type _Count)
 {
@@ -24838,6 +25177,7 @@ struct FUN_0067d150_Obj {
     int FUN_0067d150();
 };
 
+// pdb: ListBox<StartMenu::Option *>::NumUnfiltered | StartMenu.obj | fnv360_0822_retail, call_gap_sim, low
 int FUN_0067d150_Obj::FUN_0067d150()
 {
     static int s_numFiltered = f3w1_0067d150::FUN_00becd70("_num_filtered", -1);
@@ -24878,6 +25218,7 @@ struct ListBox {
     void FUN_0067ad50();
 };
 
+// pdb: ListBox<BGSSaveLoadFileEntry *>::UpdateHighlightBoxPos | StartMenu.obj | fnv360_0822_debug, call_seq, medium
 void ListBox::FUN_0067ad50()
 {
     static unsigned int highlightY = FUN_00becd70("_highlight_y", -1);
@@ -25002,6 +25343,7 @@ extern const char DAT_00e07878[];
 Tile* __cdecl Tile_GetMenuByClass(int id);
 }
 
+// pdb: SPECIALBookMenu::Close | SPECIALBookMenu.obj | fnv360_0721_beta, caller, medium
 void FUN_00676150()
 {
     int i;
@@ -25139,6 +25481,7 @@ struct Entry2 {virtual ~Entry2();};
 extern BSSimpleArray<Entry1*> DAT_00f6b3a8;
 extern BSSimpleArray<Entry2*> DAT_00f6b3b8;
 extern BSSimpleArray<NamedEntry> DAT_00f6b3c8;
+// pdb: StartMenu::DestroyMenuElements | StartMenu.obj | fnv360_0721_beta, caller, medium
 void __cdecl FUN_0067f5c0(){
  for(unsigned int i=0;i<DAT_00f6b3a8.iSize;i++) delete DAT_00f6b3a8.pBuffer[i];
  DAT_00f6b3a8.Free();
@@ -25213,6 +25556,8 @@ struct Menu {
  void FUN_0067e360();
  void FUN_0067eb80(int unused,Tile* tile);
 };
+// pdb: StartMenu::DoEnter | StartMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Menu::FUN_0067eb80(int unused,Tile* tile){
  if(tile){
   Object* object=tile->object;
@@ -25271,6 +25616,8 @@ struct FUN_00663810_cls {
     void FUN_00663810(bool (__cdecl* filter)(int));
 };
 
+// pdb: ListBox<BGSQuestObjective *>::Filter | MapMenu.obj | fnv360_0721_beta, call_seq, high
+// pdb params: apFilterFn
 void FUN_00663810_cls::FUN_00663810(bool (__cdecl* filter)(int))
 {
     unsigned int numFiltered = 0;
@@ -25600,6 +25947,8 @@ struct Menu6741 {
  void FUN_006739e0(int a);
  void FUN_006741c0(unsigned id, f3m_006741c0::Tile* tile);
 };
+// pdb: RepairServicesMenu::DoClick | RepairServicesMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Menu6741::FUN_006741c0(unsigned id, f3m_006741c0::Tile* tile) {
  using namespace f3m_006741c0;
  if (!tile && id <= 15) tile = tiles[id];
@@ -26024,6 +26373,7 @@ extern int DAT_0116efbc;
 void __cdecl FUN_00aef280(void* a, int b, Scene* c);
 void __cdecl FUN_00aef470(void* a, RefObj* b, int c);
 }
+// pdb: SPECIALBookMenu::Draw3DElements | SPECIALBookMenu.obj | fnv360_0822_retail, objrun, medium
 void __cdecl FUN_006758c0() {
  using namespace f3m_006758c0;
  if (!f3m_006758c0::DAT_01077040 || !f3m_006758c0::DAT_01077090) return;
@@ -26654,6 +27004,7 @@ void __cdecl FUN_006854e0();
 int __cdecl FUN_00563cf0(int a, int b);
 void __cdecl FUN_0063d5f0(int a);
 }
+// pdb: RaceSexMenu::Close | RaceSexMenu.obj | fnv360_0822_retail, caller_sim, low
 void __cdecl FUN_0066c550() {
  using f3m_0066c550::DAT_01076dd4;
  using f3m_0066c550::DAT_01075b24;
@@ -26740,6 +27091,7 @@ extern int DAT_01076ee0;
 Menu* __cdecl Tile_GetMenuByClass(int id);
 float __cdecl Tile_GetMaximumDepth();
 
+// pdb: RepairMenu::Create | RepairMenu.obj | fnv360_0822_retail, ustr, medium
 Tile* __cdecl FUN_00671f40()
 {
     Iface* iface = DAT_01075b24;
@@ -26913,6 +27265,7 @@ struct FUN_00664140_cls {
     Menu menu;
     void FUN_00664140();
 };
+// pdb: MapMenu::UpdateRadioList | MapMenu.obj | fnv360_0822_retail, call_gap, low
 void FUN_00664140_cls::FUN_00664140()
 {
     List found;
@@ -27037,6 +27390,7 @@ struct StartFadeList {
     void FUN_0067c300(int, int);
 };
 
+// pdb: StartMenu::ChooseSettings | StartMenu.obj | fnv360_0822_retail, call_gap, low
 void __cdecl FUN_0067dff0() {
     if (!::DAT_010770ac) return;
     reinterpret_cast<StartFadeList*>((char*)::DAT_010770ac + 0xac)->FUN_0067a7f0(1);
@@ -27141,6 +27495,8 @@ float __cdecl Tile_GetMaximumDepth();
 inline int MaxInt(int a, int b) { return a > b ? a : b; }
 inline int MinInt(int a, int b) { return a < b ? a : b; }
 
+// pdb: QuantityMenu::Create | QuantityMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aiMaxAmount, afpCallback, aiStartAmount
 Tile* __cdecl FUN_0066a700(int max, void* callback, int initial)
 {
     Iface* iface = DAT_01075b24;
@@ -27210,6 +27566,8 @@ Row* Owner::FUN_0066bcc0(Row** value) {
  if(found) return FUN_00496910(&found);
  return *value;
 }
+// pdb: RaceSexMenu::MenuOptionList::RemoveMenuOption | RaceSexMenu.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiID
 void Owner::FUN_0066c0c0(int id) {
  Node* node=first;
  while(node) {
@@ -27282,6 +27640,8 @@ struct FUN_006631f0_cls {
     Tile* FUN_006631f0(int value, int prop, int index, int id);
 };
 
+// pdb: ListBox<TESObjectREFR *>::AddItem | MapMenu.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aAssociatedData, apcItemString, apCompareFn, apcTemplateName
 Tile* FUN_006631f0_cls::FUN_006631f0(int value, int prop, int index, int id)
 {
     Tile* parent = unk0c;
@@ -27360,6 +27720,8 @@ struct FUN_0067db40_cls {
     void FUN_0067db40(bool (__cdecl* filter)(int));
 };
 
+// pdb: ListBox<BGSSaveLoadFileEntry *>::Filter | StartMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apFilterFn
 void FUN_0067db40_cls::FUN_0067db40(bool (__cdecl* filter)(int))
 {
     unsigned int numFiltered = 0;
@@ -27437,6 +27799,8 @@ struct FUN_006633e0_cls {
     void FUN_006633e0(bool (__cdecl* filter)(int));
 };
 
+// pdb: ListBox<TESObjectREFR *>::Filter | MapMenu.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apFilterFn
 void FUN_006633e0_cls::FUN_006633e0(bool (__cdecl* filter)(int))
 {
     unsigned int numFiltered = 0;
@@ -27514,6 +27878,8 @@ struct FUN_00662fb0_cls {
     void FUN_00662fb0(bool (__cdecl* filter)(int));
 };
 
+// pdb: ListBox<BGSNote *>::Filter | MapMenu.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apFilterFn
 void FUN_00662fb0_cls::FUN_00662fb0(bool (__cdecl* filter)(int))
 {
     unsigned int numFiltered = 0;
@@ -27595,6 +27961,7 @@ struct g3_Menu {
     void FUN_00661050();
 };
 
+// pdb: ListBox<BGSNote *>::RemoveAll | MapMenu.obj | fnv360_0822_retail, vtable, medium
 void g3_Menu::FUN_00661050()
 {
     while (this->node) {
@@ -27682,6 +28049,8 @@ struct FUN_00675c10 {
     Child* child;
     FUN_00675c10(Callback a, Callback b, const char* name);
 };
+// pdb: SPECIALBookMenu::SpecialBookButton::SpecialBookButton | SPECIALBookMenu.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apButtonClick, apRefresh, apButtonName
 FUN_00675c10::FUN_00675c10(Callback a, Callback b, const char* name)
 {
     update = a;
@@ -27779,6 +28148,7 @@ void __cdecl FUN_0061d340(Tile* t, int a, int b, int c, int d, int e, int f, int
 int __cdecl FUN_00becd70(const char* name, int len);
 void __cdecl FUN_00660680();
 
+// pdb: MapMenu::Create | MapMenu.obj | fnv360_0822_retail, ustr, medium
 Tile* __cdecl FUN_006621c0()
 {
     Iface* iface = DAT_01075b24;
@@ -29806,6 +30176,7 @@ struct Menu {
     int unk1c4;
     void FUN_0067f6e0();
 };
+// pdb: StartMenu::PopulateControlsListBox | StartMenu.obj | fnv360_0822_retail, ustr_rel, medium
 void Menu::FUN_0067f6e0()
 {
     Sub10c* s = &unk10c;
@@ -30239,6 +30610,7 @@ struct Owner {
  int unk10c;
  void FUN_00665160();void FUN_0065ebf0(int,float);P FUN_0065d600(P,TESWorldSpace*);void MapMenu_AddMapIcons();
 };
+// pdb: MapMenu::UpdateWorldMap | MapMenu.obj | fnv360_0822_retail, ustr, medium
 void Owner::FUN_00665160() {
  MapData* data=world?world->FUN_00501210():0;
  if(!world || !data || !data->width || !data->height) {
@@ -30704,6 +31076,8 @@ struct Menu2120
 };
 
 // @fnv 0x007ae240
+// pdb: RaceSexMenu::DoStillDown | RaceSexMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Menu2120::FUN_00670830(int aiID, Tile2120* apTile)
 {
     float fDelta2 = GetInterfaceMgr7()->Clock() - fLastTime;
@@ -30933,6 +31307,7 @@ __declspec(dllimport) unsigned long __stdcall GetTickCount(void);
 inline bool HasBit18(unsigned int v) { return (v >> 18) & 1; }
 inline int Compare67e360(const char* a, const char* b) { return strcmp(a, b); }
 
+// pdb: StartMenu::UpdateHighlightedSaveGameInfo | StartMenu.obj | fnv360_0822_retail, ustr, medium
 void StartTargetMenu67e360::FUN_0067e360()
 {
     if (HasBit18(unk1a0)) {
@@ -31115,6 +31490,7 @@ struct RepairMenu {
     static void FUN_00672a20();
 };
 
+// pdb: RepairMenu::Update | RepairMenu.obj | fnv360_0822_retail, ustr, medium
 void RepairMenu::FUN_00672a20()
 {
     if (!pBrokenItem)
@@ -31817,6 +32193,8 @@ int TESObjectCELL_GetSeenValue(V3Maker*);void FUN_00403230(char*,unsigned,const 
 extern Position DAT_0108ec68;extern RenderColor DAT_01175128,DAT_00f73210;extern unsigned char DAT_01174e83;extern unsigned DAT_0108ed88;
 
 // @fnv 0x0079ffb0
+// pdb: MapMenu::RenderLocalMapGrid | MapMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abSaveToDisk
 void __cdecl FUN_00665b00(char param_1)
 {
     RenderColor savedColor1;
@@ -32175,6 +32553,8 @@ struct QTarget35 {
     void FUN_0066aee0();
     bool FUN_0066b230(float offset, bool force);
 };
+// pdb: RaceSexMenu::RotatePlayer | RaceSexMenu.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: afRadians, abForce
 bool QTarget35::FUN_0066b230(float offset, bool force)
 {
     QNode35* node = *(QNode35**)((char*)this + 0xd4);
@@ -32236,6 +32616,8 @@ static __forceinline bool S0067c5a0_Bit(unsigned int f, int n) { return (f >> n)
 }
 using namespace S0067c5a0_ns;
 
+// pdb: StartMenu::Close | StartMenu.obj | fnv360_0822_retail, call_dedup, low, conflict (bridge: ListBox<StartMenu::Option *>::DeselectAll)
+// pdb params: abDeleteOnFade
 void FUN_0067c5a0(unsigned char arg)
 {
     if (!::DAT_010770ac)
@@ -32318,6 +32700,8 @@ struct Menu {
     }
     bool FUN_0066ce10(int property);
 };
+// pdb: RaceSexMenu::SetActiveList | RaceSexMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aeList
 bool Menu::FUN_0066ce10(int property) {
     if(property<20) {
     root->FUN_00bee190(0x1004,static_cast<float>(property),1);
@@ -32429,6 +32813,7 @@ public:
     void FUN_0066c1e0();
 };
 
+// pdb: RaceSexMenu::MenuOptionList::SetActive | RaceSexMenu.obj | fnv360_0721_beta, call_seq, medium
 void Target::FUN_0066c1e0()
 {
     if (!DAT_01075b28)
@@ -32674,6 +33059,8 @@ int S676430_Menu::FUN_00675be0() {
     return -1;
 }
 
+// pdb: SPECIALBookMenu::DoClick | SPECIALBookMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void S676430_Menu::FUN_00676430(int action, int unused)
 {
     int act = *(volatile int*)&action;
@@ -32859,6 +33246,7 @@ struct FUN_0067f3f0 : S0067f3f0_Base
 extern FUN_0067f3f0* DAT_010770ac;
 static __forceinline unsigned char S0067f3f0_Bit6(unsigned int f) { return (unsigned char)(f >> 6) & 1; }
 
+// pdb: StartMenu::~StartMenu | StartMenu.obj | fnv360_0822_retail, call_seq, medium
 FUN_0067f3f0::~FUN_0067f3f0()
 {
     if (S0067f3f0_Bit6(flags1a0))
@@ -33044,6 +33432,8 @@ struct Owner {
     Selection* selected;
     void FUN_0067d260(int, Tile*);
 };
+// pdb: StartMenu::DoStillDown | StartMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Owner::FUN_0067d260(int event, Tile* tile) {
     if (event != 0x66) return;
     Selection* result=(Selection*)FUN_00c0050a(list.Find(),0,&DAT_00f6b3e8,&DAT_00f6b408,0);
@@ -33233,6 +33623,8 @@ struct Menu {
     void FUN_006723e0(unsigned int message, Tile* input);
 };
 
+// pdb: RepairMenu::DoEnter | RepairMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Menu::FUN_006723e0(unsigned int message, Tile* input)
 {
     char text[64];
@@ -33466,6 +33858,8 @@ extern char DAT_01075b28;                            // ORIG: cmp byte_1075B28,0
 extern char DAT_01075cac;                            // ORIG: cmp byte_1075CAC,0 ; jne tail - must be CLEAR ✓✓ prelude line 650 ✓✓ 
 extern struct Terminal675* DAT_01077040;             // ORIG: mov eax,dword_1077040 ✓✓ 'extern TerminalState* DAT_01077040;' at prelude line 1094 ✓✓ 
 
+// pdb: SPECIALBookMenu::RefreshLeftAVButton | SPECIALBookMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apButton
 void __cdecl FUN_00675f10(struct Argument675* argument) {
     void* subject = argument->subject;               // v2: cached in a named local because ORIG fetches [esi+24h] ONCE into EDI in the prologue ('push edi ; mov edi,[esi+24h]') and reuses that register for both
                                                      //     the dispatch argument and the later address comparison ✓✗→✓✓ My inline reloads made VC8 keep the value in EDX and never save EDI at all ✗✗→? (the same
@@ -33676,6 +34070,7 @@ struct Owner {
     void FUN_0066d8b0(int);
     void FUN_0066fce0();
 };
+// pdb: RaceSexMenu::SliderRelease | RaceSexMenu.obj | fnv360_0822_retail, call_gap, medium
 void Owner::FUN_0066fce0()
 {
     if((unsigned)root->FUN_00becf40(0x1004)==6) {
@@ -33756,6 +34151,7 @@ struct Menu6746b0 {
     void FUN_006746b0();
 };
 
+// pdb: SleepWaitMenu::DoIdle | SleepWaitMenu.obj | fnv360_0822_retail, vtable, medium
 void Menu6746b0::FUN_006746b0()
 {
     char buf[0x104];
@@ -33810,6 +34206,7 @@ void FUN_0061cfd0(int value);
 Interface* FUN_00be78d0();
 }
 
+// pdb: StartMenu::ChooseMainMenu | StartMenu.obj | fnv360_0721_retail, call_seq, medium
 void FUN_00679960()
 {
     delete c679960::DAT_010770ac;
@@ -33829,6 +34226,8 @@ namespace f3m_00673520 {
 namespace Eligible301 {
 struct Item {virtual void v000(); virtual void v004(); virtual void v008(); virtual void v00c(); virtual void v010(); virtual void v014(); virtual void v018(); virtual void v01c(); virtual void v020(); virtual void v024(); virtual void v028(); virtual void v02c(); virtual void v030(); virtual void v034(); virtual void v038(); virtual void v03c(); virtual void v040(); virtual void v044(); virtual void v048(); virtual void v04c(); virtual void v050(); virtual void v054(); virtual void v058(); virtual void v05c(); virtual void v060(); virtual void v064(); virtual void v068(); virtual void v06c(); virtual void v070(); virtual void v074(); virtual void v078(); virtual void v07c(); virtual void v080(); virtual void v084(); virtual void v088(); virtual void v08c(); virtual void v090();virtual bool blocked();unsigned char type;float FUN_0047cda0();};struct Check {bool FUN_00451d90();};Check* FUN_00451da0(Item*);bool TESContainer_IsGold(Item*);void* FUN_004566c0(Item*);
 struct Object {int unk00,unk04;Item* item;double FUN_0047cf30(int);};extern float DAT_00f6192c,DAT_00eaad58;extern double DAT_00dc2d10;
+// pdb: RepairServicesMenu::FilterFunc | RepairServicesMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apItem
 bool FUN_00673520(Object* object){Item* item=object->item;Check* check=FUN_00451da0(item);if(!item||(check&&!check->FUN_00451d90())||TESContainer_IsGold(item)||item->blocked()||!FUN_004566c0(item))return true;if(object->FUN_0047cf30(1)>=DAT_00f6192c*DAT_00dc2d10)return true;if(item->type==24&&item->FUN_0047cda0()<=0.0f)return true;return false;}
 }
 
@@ -33921,6 +34320,7 @@ struct MenuView6649e0 {
     void FUN_006649e0();
 };
 
+// pdb: MapMenu::StopNoteSound | MapMenu.obj | fnv360_0822_retail, ustr, medium
 void MenuView6649e0::FUN_006649e0()
 {
     if (m_pkCurrent && m_pkCurrent->kHandle.FUN_00bd0160())
@@ -33996,6 +34396,8 @@ struct Menu675e50 {
 
 namespace f3m_00675e50 {
 
+// pdb: SPECIALBookMenu::RefreshTotalPointsValue | SPECIALBookMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apTextItem
 void __cdecl FUN_00675e50(Arg675e50* arg)
 {
     if (!arg->obj04 || !arg->obj08)
@@ -34071,6 +34473,7 @@ struct InterfaceManager
 };
 extern InterfaceManager* DAT_01075b24;
 
+// pdb: RaceSexMenu::NiUpdatePlayer3D | RaceSexMenu.obj | fnv360_0822_retail, call_gap, medium
 void __cdecl FUN_0066aee0()
 {
     SceneRoot* root = DAT_0116efc4;
@@ -34295,6 +34698,8 @@ struct Target {
 struct Request {int unk00;Target* target;int unk08,unk0c,unk10;unsigned index;};
 extern Manager* DAT_0107a104;
 extern Lookup* DAT_01077040;
+// pdb: SPECIALBookMenu::RefreshActorValue | SPECIALBookMenu.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apTextItem
 void FUN_00675d90(Request* request) {
  unsigned index=DAT_0107a104->resolver.Resolve(request->index);
  request->target->Apply(0,0,DAT_01077040->values[index]);
@@ -34342,6 +34747,8 @@ struct Owner_669c30 {
     void FUN_00669c30(unsigned int id, int value);
 };
 
+// pdb: MessageMenu::DoClick | MessageMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Owner_669c30::FUN_00669c30(unsigned int id, int value)
 {
     if (!value && id <= 4)
@@ -34758,6 +35165,8 @@ struct Menu
     void FUN_0066b8f0(int message, Tile* tile);
 };
 
+// pdb: RaceSexMenu::DoDownClick | RaceSexMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Menu::FUN_0066b8f0(int message, Tile* tile)
 {
     switch (message)
@@ -34785,6 +35194,8 @@ namespace c3_00661a20 {
 
 typedef int (__cdecl* CompareFunc)(void* a, void* b);
 
+// pdb: BSSimpleList<ListBoxItem<BGSQuestObjective *> *>::ShellSort | MapMenu.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apArray, apCompareFn, aiCount
 void __stdcall FUN_00661a20(void** items, CompareFunc compare, int count)
 {
     int last = count - 1;
@@ -34841,6 +35252,8 @@ struct State { int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14;
 extern State* DAT_01077040;
 }
 
+// pdb: SPECIALBookMenu::SpecialBookTextItem::SpecialBookTextItem | SPECIALBookMenu.obj | fnv360_0822_retail, callee_sim, low, conflict (bridge: SPECIALBookMenu::SpecialBookButton::SpecialBookButton)
+// pdb params: apRefreshFieldCallback, apTextObjectName1, apTextObjectName2, aeActorValue
 FUN_00674eb0::FUN_00674eb0(Callback a, const char* name, const char* name2, int value)
 {
     using namespace f3m_00674eb0;
@@ -34872,6 +35285,7 @@ struct FUN_00674460 : FUN_00bfcfe0 {
  FUN_00674460();
  virtual ~FUN_00674460();
 };
+// pdb: SleepWaitMenu::SleepWaitMenu | SleepWaitMenu.obj | fnv360_0822_retail, udata, high
 FUN_00674460::FUN_00674460() : value40(0.0f), flag44(0), flag46(0), value48(0.0f) {
  DAT_01076fd0=FUN_00bea9e0(DAT_00e04748);
 }
@@ -34893,6 +35307,8 @@ struct Owner {
  Tile* tile48;Tile* tile4c;
  void FUN_00671b10(const char* text);
 };
+// pdb: RepairMenu::ShowErrorMessage | RepairMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: astrMessage
 void Owner::FUN_00671b10(const char* text){
  tile48->FUN_00bf11a0(0xfc4,text,true);
  tile4c->FUN_00bee190(0xfa3,0.0f,true);
@@ -34953,6 +35369,7 @@ struct Object {
     void FUN_0066fce0();
     void FUN_0066ff30();
 };
+// pdb: RaceSexMenu::ChooseDefaultPreset | RaceSexMenu.obj | fnv360_0822_retail, call_gap, medium
 void Object::FUN_0066ff30()
 {
     FUN_0066b9b0();
@@ -34980,6 +35397,7 @@ struct FUN_00668580 {
  ~FUN_00668580();
 };
 inline void FreeBuffer(void* memory) throw(){DAT_01090a78.FUN_0086ba60(memory);}
+// pdb: MessageMenu::MessageMenuEntry::~MessageMenuEntry | MessageMenu.obj | fnv360_0822_retail, call_gap, low
 FUN_00668580::~FUN_00668580(){FreeBuffer(buffer);buffer=0;}
 }
 
@@ -35026,6 +35444,8 @@ public:
     bool FUN_0067dea0(Node* node, Node* prev);
 };
 
+// pdb: ListBox<BGSSaveLoadFileEntry *>::Remove | StartMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkFirst, pkSecond
 bool Menu::FUN_0067dea0(Node* node, Node* prev)
 {
     if (node) {
@@ -35246,6 +35666,8 @@ inline void SetText(Tile* tile, const char* text) {
         tile->FUN_00bf11a0(0x1009, text, true);
 }
 
+// pdb: RaceSexMenu::OnHairColorSliderChange | RaceSexMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apChangedSlider
 void Owner::FUN_0066e610(Item* item) {
     if (!item)
         return;
@@ -35536,6 +35958,7 @@ struct Menu
     void FUN_0066fbe0();
 };
 
+// pdb: RaceSexMenu::ValidateHairAndEyes | RaceSexMenu.obj | fnv360_0822_retail, call_gap, low
 void Menu::FUN_0066fbe0()
 {
     if (!GetNpc()->FUN_00554d90()->FUN_00552510(GetNpc()))
@@ -35650,6 +36073,7 @@ struct RaceSexMenu {
     void FUN_0066b9b0();
 };
 
+// pdb: RaceSexMenu::MakePresetHeadList | RaceSexMenu.obj | fnv360_0822_retail, call_gap, low
 void RaceSexMenu::FUN_0066b9b0()
 {
     selection.Clear();
@@ -35712,6 +36136,8 @@ struct RaceSexMenu {
     int FUN_0066c7c0(const char* name, Option* option);
 };
 
+// pdb: RaceSexMenu::MenuOptionList::AddSubmenuOption | RaceSexMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apDisplayText, apLinkTo
 int RaceSexMenu::FUN_0066c7c0(const char* name, Option* option)
 {
     BSString text;
@@ -35805,6 +36231,7 @@ struct RaceSexMenu {
     void FUN_0066cb10();
 };
 
+// pdb: RaceSexMenu::ValidateHairOptionList | RaceSexMenu.obj | fnv360_0721_beta, call_seq, medium
 void RaceSexMenu::FUN_0066cb10()
 {
     bool exists = options->FindByColor(7) != 0;
@@ -35878,6 +36305,7 @@ struct NiCamera {
     void SetMaxFarNearRatio(float ratio) { maxFarNearRatio = ratio; }
 };
 
+// pdb: SPECIALBookMenu::InitCamera | SPECIALBookMenu.obj | fnv360_0822_retail, call_gap, low
 NiCamera* __cdecl FUN_00675660()
 {
     NiCamera* camera = new NiCamera;
@@ -35955,6 +36383,8 @@ struct MessageMenu {
     List buttons;
     bool FUN_006694d0(int key);
 };
+// pdb: MessageMenu::DoKey | MessageMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiKey
 bool MessageMenu::FUN_006694d0(int key)
 {
     using namespace f3m_006698e0;
@@ -36014,6 +36444,8 @@ struct List
     void FUN_0067cf50(CompareFunc compare);
 };
 
+// pdb: BSSimpleList<TESObjectREFR *>::Sort | ProcessLists.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCompareFn
 void List::FUN_0067cf50(CompareFunc compare)
 {
     int count = 0;
@@ -36513,6 +36945,7 @@ struct Menu {
     void FUN_0066aee0();
 };
 }
+// pdb: RaceSexMenu::UpdatePlayerEyes | RaceSexMenu.obj | fnv360_0822_retail, strset, low
 bool S66bd10::Menu::FUN_0066bd10()
 {
     Ptr<RefObj> head;
@@ -36736,6 +37169,7 @@ struct S662470_Menu {
 
 static inline bool S662470_Valid(S662470_QuestNode* node) { return DAT_0107ba98 && node && node->quest; }
 
+// pdb: MapMenu::AddQuestMarkers | MapMenu.obj | fnv360_0822_retail, ustr, medium
 void S662470_Menu::FUN_00662470()
 {
     S662470_Tile* child;
@@ -36934,6 +37368,7 @@ struct Owner {
     unsigned property;
     void FUN_0067e0f0();
 };
+// pdb: StartMenu::FinishPrepSaveLoad | StartMenu.obj | fnv360_0822_retail, ustr, medium
 void Owner::FUN_0067e0f0()
 {
     if(static_cast<unsigned char>(flags>>3)&1) {
@@ -36982,6 +37417,8 @@ struct Str_00668c30 : std::string {
         const char* _Ptr, size_type _Count);
 };
 
+// pdb: std::basic_string<char,std::char_traits<char>,std::allocator<char> >::replace | MessageMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: _Off, _N0, _Ptr, _Count
 Str_00668c30& Str_00668c30::FUN_00668c30(const size_type _Off, size_type _N0,
     const char* _Ptr, size_type _Count)
 {   // replace [_Off, _Off + _N0) with [_Ptr, _Ptr + _Count)
@@ -37110,6 +37547,7 @@ struct Menu {
     void FUN_00675470();
 };
 
+// pdb: SPECIALBookMenu::DoIdle | SPECIALBookMenu.obj | fnv360_0822_retail, vtable, medium
 void Menu::FUN_00675470()
 {
     if (!FUN_0061c490(0x424))
@@ -37246,6 +37684,8 @@ ListPos RowList::FUN_006e9670(Row* const& value)
     last=n;
     return n;
 }
+// pdb: RaceSexMenu::MenuOptionList::AddMenuOption | RaceSexMenu.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apDisplayText, apTemplate, aiID, apIter
 Row* Owner::FUN_0066c330(const char* text,const char* name,unsigned id,ListPos pos)
 {
     if(!text || !DAT_01076dd4 || !DAT_01076dd4->root || !tile)
@@ -37485,6 +37925,8 @@ struct PipMenuP {
     bool FUN_0066cf90(int key, float unused);
 };
 
+// pdb: RaceSexMenu::DoGamepad | RaceSexMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiButton, afValue
 bool PipMenuP::FUN_0066cf90(int key, float unused)
 {
     SoundP okSound;
@@ -37721,6 +38163,8 @@ static __forceinline void ApplyRepair(float ratio)
     }
 }
 
+// pdb: RepairMenu::RepairItem | RepairMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apSparePart
 void __stdcall FUN_006720c0(Entry* item)
 {
     float ratio = (float)(FUN_00584860(DAT_0107a104->values.FUN_005a29a0(39), DAT_01076eec->FUN_0047cf30(true), item->FUN_0047cf30(true), 0) / 100.0);
@@ -38389,6 +38833,8 @@ struct MenuInit {
     void FUN_00bfd010(int);
     void FUN_0066ffc0(int mode);
 };
+// pdb: RaceSexMenu::_Create | RaceSexMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aeContext
 void MenuInit::FUN_0066ffc0(int mode) {
     if (unk04->FUN_00becf40(0xfa7)==6006.0f || unk04->FUN_00becf40(0xfa7)==102.0)
         unk04->FUN_00bee190(0xfad,Tile_GetMaximumDepth(1));
@@ -38506,6 +38952,8 @@ struct QMenu66a {
     void FUN_0066aa40(int code, int unused);
 };
 
+// pdb: QuantityMenu::DoClick | QuantityMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void QMenu66a::FUN_0066aa40(int code, int unused)
 {
     float v = unk34->FUN_00becf40(0xfc4);
@@ -39043,6 +39491,8 @@ struct Host
     void FUN_0066aee0();
 };
 
+// pdb: RaceSexMenu::UpdatePlayerHair | RaceSexMenu.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: abSwapHairType
 bool Host::FUN_0066dda0(bool rebuild)
 {
     NodePtr empty(0);
@@ -39241,6 +39691,7 @@ struct FUN_0066a590 : FUN_00bfcfe0 {
 
 };
 
+// pdb: PlayerNameEntryMenu::PlayerNameEntryMenu | PlayerNameEntryMenu.obj | fnv360_0822_retail, objrun, medium
 FUN_0066a590::FUN_0066a590() {
 
     vtable = DAT_00e0716c;
@@ -39427,6 +39878,8 @@ extern double DAT_00dc2d10;
 extern double DAT_00dba730;
 extern float DAT_00dcb248;
 extern const char DAT_00db3b08[], DAT_00e0550c[];
+// pdb: RepairServicesMenu::DoEnter | RepairServicesMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Menu67::FUN_00673c40(unsigned int message,RepairTile67* sender) {
  if(message!=17) return;
  Item67* selected=unk06c.find(unk078);
@@ -39640,6 +40093,8 @@ struct MapMenu {
 
 using namespace N660030;
 
+// pdb: MapMenu::CreateWaypointPath | MapMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apStartRef, apTargetRef, apPathToTarget, aiID
 void MapMenu::FUN_00660030(Ref* start, Ref* end, Path* path, int id)
 {
     if (!start || !end || !path)
@@ -39832,6 +40287,8 @@ struct Menu673Local {
 };
 
 }
+// pdb: RepairServicesMenu::RepairItem | RepairServicesMenu.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apBrokenItem
 void R6739::Menu673Local::FUN_006739e0(RepEntry* entry)
 {
     using namespace R6739;
@@ -39928,6 +40385,8 @@ int __cdecl FUN_00671de0(SortEntry*,SortEntry*);
 void __cdecl FUN_0061b1f0(int a, int b, int c);
 void __cdecl FUN_00672d90(Entry* item);
 }
+// pdb: RepairMenu::InitRepairMenu | RepairMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apBrokenItem
 void __cdecl n672d90::FUN_00672d90(Entry* item)
 {
     if (!(*(Menu**)&DAT_01076ee8))
@@ -40112,6 +40571,8 @@ __forceinline const char* GetActionLabel(int kind) {
 
 void __cdecl FUN_00668440();
 
+// pdb: MessageMenu::AddMessageToQueue | MessageMenu.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apChoiceList, apActivationTarget
 bool __cdecl FUN_00669d30(ItemNode* node, TESObjectREFR* ref)
 {
     char buffer[260];
@@ -40545,6 +41006,8 @@ struct MapMenu {
     void FUN_00667730(int id, Tile* tile);
 };
 
+// pdb: MapMenu::DoClick | MapMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void MapMenu::FUN_00667730(int id, Tile* tile)
 {
     Point3 worldA, worldB;
@@ -40843,6 +41306,7 @@ inline Font668* FontMgr668() {return DAT_011796f8;}
 inline int MaxInt668(int a,int b) {return a>b?a:b;}
 inline float Max668(float a,float b) {return a>b?a:b;}
 inline float Min668(float a,float b) {return a<b?a:b;}
+// pdb: MessageMenu::LoadNextMessage | MessageMenu.obj | fnv360_0822_retail, ustr, medium
 void Owner668::FUN_00668e80() {
  if(DAT_01076cf0>=DAT_00f6b1a4)return;
  Record668* record=DAT_00f6b1a0[DAT_01076cf0];
@@ -40975,6 +41439,7 @@ public:
  }
  bool Flag(unsigned shift) {return (unsigned char)(flagsEC>>shift)&1;}
 };
+// pdb: RaceSexMenu::DoIdle | RaceSexMenu.obj | fnv360_0822_retail, vtable, medium
 void MenuUpdate::FUN_006711e0() {
  if(FUN_0061c490(v13())) {
   for(int i=0;i<4;++i)if(sounds[i].state==SoundPaused)sounds[i].FUN_00bd00c0(0);
@@ -41487,6 +41952,7 @@ struct FaceControls1523 {
     void FUN_0066bad0();
     void FUN_0066e7b0();
 };
+// pdb: RaceSexMenu::AddFaceSliders | RaceSexMenu.obj | fnv360_0822_retail, objrun_prop, low
 void FaceControls1523::FUN_0066e7b0() {
     SliderDefinition1523 shapes[55]={
         {12, DAT_00f64278, DAT_01076e44, DAT_01076e74}, // shape 0
@@ -41888,6 +42354,8 @@ struct Menu {
 };
 
 // A click on the menu: `id` is the button, `tile` the tile under it (looked up from the id for the six fixed ones).
+// pdb: RaceSexMenu::DoClick | RaceSexMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Menu::FUN_00670e40(int id, Tile* tile)
 {
     if (!tile && id < 6)
@@ -42223,6 +42691,8 @@ extern Player* DAT_0107a104;
 }
 
 
+// pdb: RaceSexMenu::Create | RaceSexMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aeContext
 void* __cdecl FUN_00670be0(int mode) {
     extern const char DAT_00e0744c[];
     S670be0_::Menu* existing = S670be0_::Tile_GetMenuByClass(0x40c);
@@ -42501,6 +42971,7 @@ extern int DAT_01076b9c;
 int TESObjectCELL_GetSeenValue(LMPoint3& kPos);
 int FUN_00becd70(const char* pcName, int iArg);
 
+// pdb: MapMenu::UpdateLocalMap | MapMenu.obj | fnv360_0822_retail, ustr, medium
 void LMMapView::FUN_006655a0()
 {
     LMWorld* b = DAT_0107a104->FUN_004e8880();
@@ -42599,6 +43070,8 @@ struct QuantityMenu {
     virtual bool FUN_0066acf0(int key, int unused);
 };
 
+// pdb: QuantityMenu::DoGamepadUpEvent | QuantityMenu.obj | fnv360_0721_beta, vtable, medium
+// pdb params: aiButton, afValue
 bool QuantityMenu::FUN_0066acf0(int key, int unused)
 {
     bool handled = false;
@@ -42642,6 +43115,8 @@ struct QuantityMenu {
     virtual bool FUN_0066ab70(int key, int unused);
     virtual bool FUN_0066acf0(int key, int unused);
 };
+// pdb: QuantityMenu::DoGamepad | QuantityMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiButton, afValue
 bool QuantityMenu::FUN_0066ab70(int key, int unused)
 {
     bool handled = false;
@@ -42758,6 +43233,8 @@ extern const char* DAT_00f64a94;
 
 inline unsigned char GetBinding67d(Input67d* in, int index, int mode) { return in->bindings[mode][index]; }
 
+// pdb: StartMenu::SetActionForDevice | StartMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apTile, apOption
 void __cdecl FUN_0067d410(Tile67d* tile, Item67d* item)
 {
     extern const char DAT_00e035c8[];
@@ -42882,6 +43359,7 @@ struct Obj {
     void FUN_0067f130();
     Obj* FUN_0067f3c0(unsigned flags);
 };
+// pdb: StartMenu::OptionListBox::`scalar deleting destructor' | StartMenu.obj | fnv360_0822_debug, caller_sim, low
 Obj* Obj::FUN_0067f3c0(unsigned flags) {
     FUN_0067f130();
     if (flags & 1) DAT_01090a78.FUN_0086ba60(this);
@@ -42912,6 +43390,8 @@ struct Manager {
     int FUN_00674df0();
 };
 extern Manager* DAT_01077040;
+// pdb: SPECIALBookMenu::RefreshAllDoneButton | SPECIALBookMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apButton
 void __cdecl FUN_00676070(Arg* arg) {
     int value = DAT_01077040->FUN_00674df0();
     if (value < DAT_01077040->unk58)
@@ -42953,6 +43433,8 @@ struct Obj {
     NiPointer<NiRefObject> unk08;
     ~Obj();
 };
+// pdb: BSSimpleArray<SPECIALBookMenu::SpecialBookTextItem *,1024>::_ReallocateBuffer | SPECIALBookMenu.obj | fnv360_0721_beta, objrun_sim, low
+// pdb params: aiNewSize, aiCopyCount
 Obj::~Obj() {
     unk08 = 0;
 }
@@ -42961,6 +43443,7 @@ Obj::~Obj() {
 
 // @f3 0x0067d6b0 (community match, verified in this file)
 namespace f3m_0067d6b0 {
+// pdb: StartMenu::ConfirmResetToDefaults | StartMenu.obj | fnv360_0721_beta, objrun, medium
 void __cdecl FUN_0067d6b0()
 {
     if (!::n67d410::DAT_010770ac || ::f3m_00668440::N668440::FUN_00619750() != 1)

@@ -580,6 +580,7 @@ inline void clear(hkUint32* bits, int i) {
     bits[idx] &= ~(1u << (i & 31));
 }
 // @f3 0x00991290 (community match, verified in this file)
+// pdb: hkp3AxisSweep::setBitsBasedOnXInterval | hkp3AxisSweep.obj | tesv_win, objrun_sim, low
 void S_00d112c0::FUN_00d112c0(int numNodes, int key, const S_00d112c0_Node* aabb, hkUint16 skip, hkUint32* bits)
 {
     unsigned minX = aabb->m_min0;
@@ -1678,6 +1679,7 @@ __forceinline S4ef0TempBitField::S4ef0TempBitField(int size) {
 __forceinline S4ef0TempBitField::~S4ef0TempBitField(){S4ef0Lifo* lifo=static_cast<S4ef0Lifo*>(DAT_00d9b080(DAT_010f3170));lifo->m_pTop=data;if(data==lifo->m_pBase)lifo->Free(data);}
 }
 
+// pdb: hkp3AxisSweep::querySingleAabb | hkp3AxisSweep.obj | tesv_win, caller_sim, low
 void S4ef0Owner::FUN_00d14ef0(const S4ef0Aabb& aabb, S4ef0Results& pairsOut) const {
     int size=m_kNodeCollection.m_iElementCount;
     n991ee0::S4ef0TempBitField storage(size);

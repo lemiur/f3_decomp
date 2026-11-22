@@ -24,6 +24,7 @@ void* ValueOwner::std_exception_what() {
 // @f3 0x00c17387 (community match, verified in this file)
 extern unsigned int DAT_0117a4a0;
 namespace f3m_00c17387 {
+// pdb: _initp_misc_rand_s | rand_s.obj | tesv_win, call_seq, medium
 void FUN_00c17387(unsigned int value) { DAT_0117a4a0 = value; }
 }   // namespace f3m_00c17387
 
@@ -41,6 +42,8 @@ struct Ptd {
 extern "C" Ptd* __cdecl FUN_00c0c229();
 }
 
+// pdb: srand | rand.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: seed
 void __cdecl FUN_00c04d8d(int value) {
     f3_00c04d8d::FUN_00c0c229()->field14 = value;
 }
@@ -65,6 +68,7 @@ FUN_00c09aa7::~FUN_00c09aa7() throw() {}
 namespace f3m_00c0c07b {
 extern "C" __declspec(dllimport) unsigned long __stdcall FUN_00d9b078();
 
+// pdb: __crtTlsAlloc | tidtable.obj | tesv_win, objrun, medium
 unsigned long __stdcall FUN_00c0c07b(void* unused) {
     return FUN_00d9b078();
 }
@@ -74,6 +78,7 @@ unsigned long __stdcall FUN_00c0c07b(void* unused) {
 namespace f3m_00c068e5 {
 namespace f3_00c068e5 {
 void __cdecl FUN_00c16549(int lockId);
+// pdb: _unlockexit | crt0dat.obj | tesv_win, call_seq, medium
 void __cdecl FUN_00c068e5()
 {
     FUN_00c16549(8);
@@ -84,12 +89,14 @@ void __cdecl FUN_00c068e5()
 // @f3 0x00c06b3e (community match, verified in this file)
 namespace f3m_00c06b3e {
 void __cdecl FUN_00c06a2b(int code,int quick,int returnToCaller);
+// pdb: _c_exit | crt0dat.obj | tesv_win, call_gap, low
 void __cdecl FUN_00c06b3e(){FUN_00c06a2b(0,1,1);}
 }   // namespace f3m_00c06b3e
 
 // @f3 0x00c0cafb (community match, verified in this file)
 extern void* DAT_0117a1d4;
 namespace f3m_00c0cafb {
+// pdb: _initp_misc_purevirt | inithelp.obj | tesv_win, call_seq, medium
 void __cdecl FUN_00c0cafb(void* value){DAT_0117a1d4=value;}
 }   // namespace f3m_00c0cafb
 
@@ -97,6 +104,8 @@ void __cdecl FUN_00c0cafb(void* value){DAT_0117a1d4=value;}
 extern void* DAT_01179af8;
 namespace f3m_00c01d61 {
 
+// pdb: _initp_misc_invarg | invarg.obj | fnv360_0822_retail, udata, high
+// pdb params: enull
 extern "C" void* __cdecl FUN_00c01d61(void* p) {
     return DAT_01179af8 = p;
 }
@@ -112,6 +121,7 @@ struct Obj {
     void FUN_00c01b49();
 };
 
+// pdb: std::bad_cast::~bad_cast | cerr.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
 void Obj::FUN_00c01b49() {
     vftable = &DAT_00eaab34;
     FUN_00c01af5();
@@ -123,6 +133,7 @@ void Obj::FUN_00c01b49() {
 namespace f3m_00c07ab0 {
 namespace f3m_00c07ab0 {
 extern "C" void __cdecl FUN_00c07983(int flag);
+// pdb: _flushall | fflush.obj | fnv360_0822_retail, caller_sim, medium
 extern "C" void __cdecl FUN_00c07ab0() {
     FUN_00c07983(1);
 }
@@ -139,6 +150,7 @@ struct Obj {
     void FUN_00c01bb5();
 };
 
+// pdb: std::__non_rtti_object::~__non_rtti_object | rtti.obj | fnv360_0721_beta, objrun_open, low
 void Obj::FUN_00c01bb5() {
     vftable = &DAT_00eaab40;
     FUN_00c01af5();
@@ -151,6 +163,7 @@ namespace f3m_00c17391 {
 namespace f3m_00c17391 {
 extern int DAT_0117a4a4;
 }
+// pdb: _initp_misc_initcrit | initcrit.obj | tesv_win, call_seq, medium
 void __cdecl FUN_00c17391(int value)
 {
     f3m_00c17391::DAT_0117a4a4 = value;
@@ -163,6 +176,7 @@ void __cdecl FUN_00c17391(int value)
 namespace f3m_00c0c004 {
 void __cdecl FUN_00c0bf96(int);
 
+// pdb: _encoded_null | tidtable.obj | tesv_win, call_seq, medium
 void FUN_00c0c004()
 {
     FUN_00c0bf96(0);
@@ -187,6 +201,7 @@ namespace f3m_00c159dd {
 namespace f3m_00c159dd {
 LONG WINAPI FUN_00c159a0(EXCEPTION_POINTERS* info);
 }
+// pdb: __CxxSetUnhandledExceptionFilter | unhandld.obj | tesv_win, objrun_open, low
 int __cdecl FUN_00c159dd()
 {
     SetUnhandledExceptionFilter(f3m_00c159dd::FUN_00c159a0);
@@ -199,6 +214,7 @@ namespace f3m_00c06b2f {
 namespace f3m_00c06b2f {
 void __cdecl FUN_00c06a2b(int code, int quick, int retcaller);
 }
+// pdb: _cexit | crt0dat.obj | fnv360_0822_debug, objrun_open, low
 void __cdecl FUN_00c06b2f()
 {
     f3m_00c06b2f::FUN_00c06a2b(0, 0, 1);
@@ -240,6 +256,7 @@ namespace f3m_00c05fcf {
 namespace f3m_00c05fcf {
 extern "C" void __cdecl FUN_00c16105(void);
 extern "C" int __cdecl FUN_00c05def(void);
+// pdb: WinMainCRTStartup | wincrt0.obj | tesv_win, caller_sim, low
 extern "C" int __cdecl FUN_00c05fcf(void)
 {
     FUN_00c16105();
@@ -253,6 +270,7 @@ extern "C" int DAT_0117a76c;
 namespace f3m_00c1be1e {
 namespace f3m_00c1be1e {
 extern "C" int __cdecl FUN_00c1bdbe(void);
+// pdb: __sse2_available_init | cpu_disp.obj | tesv_win, caller_sim, low
 extern "C" int __cdecl FUN_00c1be1e(void)
 {
     DAT_0117a76c = FUN_00c1bdbe();
@@ -272,6 +290,7 @@ struct type_info_ {
     void FUN_00c0019b();
 };
 extern "C" void __cdecl FUN_00c0c6d0(type_info_* ti);
+// pdb: type_info::~type_info | typinfo.obj | tesv_win, uvref, medium
 void type_info_::FUN_00c0019b()
 {
     vfptr = &DAT_00eaaa7c;

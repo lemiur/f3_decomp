@@ -29,6 +29,8 @@ struct Dispatcher
 };
 // Calls Notify(value) on every entry's listener, then calls Finish(1).
 // @fnv 0x00d443a0
+// pdb: hkpMultiSphereAgent::cleanup | hkpMultiSphereAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: info
 void Dispatcher::NotifyAll(unsigned int value)
 {
     for (int i = 0; i < count; ++i)
@@ -218,6 +220,8 @@ void FUN_00d445e0(void* b, void* a, void* c, S_00d44e20_Collector* collector);
 
 // Constructs a collector with the given filter and runs FUN_00d445e0 over b, a and c with it.
 // @fnv 0x00d44e20
+// pdb: hkpSymmetricAgentLinearCast<hkpMultiSphereAgent>::staticGetClosestPoints | hkpMultiSphereAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: bodyA, bodyB, input, collector
 void FUN_00d44e20(void* apFirst, void* apSecond, void* apThird, int filter)
 {
     S_00d44e20_Collector collector(filter);
@@ -247,6 +251,8 @@ struct S_00d44f50
 
 // Constructs a collector holding value and forwards it with the reordered arguments to ProcessSpheres.
 // @fnv 0x00d44f50
+// pdb: hkpSymmetricAgentLinearCast<hkpTransformAgent>::getPenetrations | hkpTransformAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void S_00d44f50::RunWithCollector(void* pFirst, void* pSecond, void* pThird, int value)
 {
     S_00d44f50_Collector collector(value);
@@ -271,6 +277,8 @@ struct FUN_00d44f90_Class
 
 // Builds a data record from value, DAT_0104da48 and DAT_010ce7fc, then calls GetPenetrations with second, first and third.
 // @fnv 0x00d44f90
+// pdb: hkpSymmetricAgentLinearCast<hkpMultiSphereAgent>::getClosestPoints | hkpMultiSphereAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void FUN_00d44f90_Class::FUN_00d44f90(void* first, void* second, void* third, unsigned int value)
 {
     FUN_00d44f90_Data data;
@@ -352,6 +360,8 @@ void __cdecl FUN_00d449f0(void* a, void* b, void* c, void* d);
 
 // Builds a temporary object holding a4 and a cleared flag, then calls FUN_00d449f0 with a2, a1, a3 and that object.
 // @fnv 0x00d44de0
+// pdb: hkpSymmetricAgentLinearCast<hkpTransformAgent>::staticGetPenetrations | hkpTransformAgent.obj | fnv360_0822_retail, objrun, high
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_00d44de0(void* apArg1, void* apArg2, void* apArg3, unsigned int a4)
 {
     FUN_00d44de0_tmp t;
@@ -790,6 +800,8 @@ struct SphereDispatch
     void ProcessSpheres(const hkpCdBody&, const hkpCdBody&, const CollisionAgentContext&, hkpCdBodyPairCollector&);
 };
 // @f3 0x009d2840 (community match, verified in this file)
+// pdb: hkpMultiSphereAgent::getPenetrations | hkpMultiSphereAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void SphereDispatch::ProcessSpheres(const hkpCdBody& aBody, const hkpCdBody& aOtherBody,
                                     const CollisionAgentContext& input, hkpCdBodyPairCollector& collector)
 {

@@ -4,6 +4,8 @@
 
 // Returns the smaller of the two float arguments.
 // @fnv 0x00e0c260
+// pdb: hkMonitorStreamAnalyzer::ThreadDrawInput::computePerThreadHeightToFit | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: textureHeight, numFrames, numThreads, frameGap, threadGap
 float __cdecl FUN_00e0c260(float a, float b)
 {
     return (a < b) ? a : b;
@@ -11,12 +13,14 @@ float __cdecl FUN_00e0c260(float a, float b)
 
 // Returns the larger of the two float arguments.
 // @fnv 0x00e0c290
+// pdb: hkRoundUpPow2 | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, objrun_open, low
 float MaxFloat(float a, float b)
 {
     return a > b ? a : b;
 }
 
 // @fnv 0x00e0c2c0
+// pdb: hkRoundUpPow2 | hkMonitorStreamAnalyzer.obj | fnv360_0822_debug, objrun_sim, low
 int FUN_00e0c2c0(int aiDividend, int aiDivisor, int c, int aiSubtrahend, int aiOffset, int aiUnused)
 {
     return (aiDividend / aiDivisor - aiSubtrahend) / c - aiOffset;
@@ -56,6 +60,7 @@ struct FUN_00e0c310_s
 };
 
 // @fnv 0x00e0c310
+// pdb: hkMonitorStreamAnalyzer::getStreamBegin | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, objrun_open, low
 int FUN_00e0c310_s::FUN_00e0c310()
 {
     if (*(int*)((char*)this + 0x10) == 0)
@@ -79,6 +84,8 @@ struct FUN_00cc01a0_class
     FUN_00cc01a0_class* __thiscall InvokeSubObject(int value);
 };
 // @fnv 0x00cc01a0
+// pdb: hkOstream::operator<< | hkOStream.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: c
 FUN_00cc01a0_class* __thiscall FUN_00cc01a0_class::InvokeSubObject(int value)
 {
     unk08->invoke(&value, 1);
@@ -113,6 +120,8 @@ struct Point
 };
 // Adds scaled start-to-end deltas into the weight/count bins at data's x and y indices, and sets value from start based on mode.
 // @fnv 0x00e0c5e0
+// pdb: hkMonitorStreamAnalyzer::extractStringMap | hkMonitorStreamAnalyzer.obj | fnv360_0822_debug, objrun, low
+// pdb params: frameStart, frameEnd, map
 void Bins::Accumulate(AxisData* pAxisData, Point* start, Point* end)
 {
     unsigned int x = pAxisData->xIndex;
@@ -157,6 +166,7 @@ struct Node
 };
 // Multiplies the value at index by factor, clears the matching flag, and recurses into all children.
 // @fnv 0x00e0c700
+// pdb: reduceMainTree | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: hkDefaultMemoryTracker::addTypeDefinition)
 void __cdecl FUN_00e0c700(Node* node, int index, float factor)
 {
     (&node->value0)[index] *= factor;
@@ -209,6 +219,8 @@ struct E0C860Node
 };
 
 // @fnv 0x00e0c860
+// pdb: hkMonitorStreamAnalyzer::findMaxTimerNameIndent | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: node, recursionDepth, spacing, displayPartialTree
 int __cdecl GetTreeWidth(E0C860Node* node, int depth, int indent, bool onlyExpanded)
 {
     int width = hkString_strLen(node->m_name) + depth * indent + 8;
@@ -392,6 +404,8 @@ __declspec(noinline) void __cdecl FUN_00a8c360(void* first, int index, float amo
 
 extern "C" void __cdecl FUN_00a8d1f0(void* first, void* second, int index, int limit, float amount);
 
+// pdb: hkMonitorStreamAnalyzer::mergeTreesForCombinedThreadSummary | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: mainTree, subTree, destTimerId, sourceTimerId, smoothingFactor
 void __cdecl FUN_00e0d280(void* first, void* second, int index, int limit, float amount)
 {
     FUN_00a8c360(first, index, amount);
@@ -486,6 +500,8 @@ struct E0C150Stream
 
 // Builds a 32-bit uncompressed TGA header from width and height, writes the header and pixel data to the stream, and returns true.
 // @fnv 0x00e0c150
+// pdb: saveToTGA | hkMonitorStreamAnalyzer.obj | fnv360_0822_debug, caller_sim, medium
+// pdb params: data, s, width, height
 bool __cdecl WriteTgaImage(const void* pixels, E0C150Stream* stream, int width, int height)
 {
     E0C150TgaHeader header;
@@ -515,6 +531,7 @@ class FUN_00e0c320_cls
 };
 
 // @fnv 0x00e0c320
+// pdb: hkMonitorStreamFrameInfo::hkMonitorStreamFrameInfo | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, objrun_prop, low
 FUN_00e0c320_cls* FUN_00e0c320_cls::InitHeading()
 {
     float one = 1.0f;
@@ -567,6 +584,8 @@ struct S_00e0c750_Node
 
 // Moves from node p through the tree according to the keys flags (up, down, collapse, expand) and returns the resulting node.
 // @fnv 0x00e0c750
+// pdb: hkMonitorStreamAnalyzer::navigateMonitors | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, objrun, medium
+// pdb params: keys, activeNodeIn
 S_00e0c750_Node* __cdecl NavigateTree(const S_00e0c750_Keys* keys, S_00e0c750_Node* pNode)
 {
     S_00e0c750_Node* parent;
@@ -666,6 +685,8 @@ E0CC40Node* __cdecl FUN_00e10820(E0CC40Node* node, double time, int axis);
 
 // Walks down from hint (or root if hint is null or its axis value plus base is below time) via FUN_00e10820 until no child is returned, then returns the node.
 // @fnv 0x00e0cc40
+// pdb: getNodeAtSample | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: currentNode, lastHit, sampleTime, absoluteTimeIndex
 E0CC40Node* __cdecl FindNodeAtTime(E0CC40Node* root, E0CC40Node* hint, double time, int axis)
 {
     E0CC40Node* node = hint;
@@ -712,6 +733,7 @@ struct Sink922710
     void FUN_00922710(unsigned int a, unsigned int b);
 };
 
+// pdb: hkMonitorStreamAnalyzer::reset | hkMonitorStreamAnalyzer.obj | fnv360_0822_debug, objrun, medium
 void __cdecl ProcessRecords(unsigned char* pRecords, unsigned char* end, Sink* sink)
 {
     unsigned char* lim = *(unsigned char* volatile*)&end;
@@ -853,6 +875,7 @@ struct __declspec(align(64)) LineBuf_e0c8e0
 
 // Writes the node name, maximum nonzero count, and scaled values to stream, then processes each child at depth + 1.
 // @f3 0x00a8c550 (community match, verified in this file)
+// pdb: hkWriteRec | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, call_gap, medium
 void __cdecl FUN_00e0c8e0(void* stream, Node_e0c8e0* item, int depth, float scale)
 {
     if (depth != 0)
@@ -1037,6 +1060,8 @@ __forceinline void FreeBuf(void* p, int bytes)
     ArenaB0582* a = (ArenaB0582*)TlsGetValue(DAT_010f3170);
     a->FreeArr(p, bytes, 0x17);
 }
+// pdb: hkMonitorStreamAnalyzer::drawThreadsToTga | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: input, outStream
 void Owner830::FUN_00e0f5e0(void* name, int argument)
 {
     TmpB0582 temp;
@@ -1308,6 +1333,8 @@ __forceinline bool isSmallTag(CommandWord* c, unsigned int tag, hkBool swap)
 }
 // Walks a command buffer, resolves command and object tags to names via map, and byte-swaps timing and value fields when needed.
 // @f3 0x00a8bf90 (community match, verified in this file)
+// pdb: hkMonitorStreamAnalyzer::Node::setTimers | hkMonitorStreamAnalyzer.obj | fnv360_0822_debug, objrun, low
+// pdb params: frameInfo, start, end
 void __cdecl FUN_00e0c350(char* apBuffer, const char* end, SomeMap* map, hkBool swapBytes)
 {
     if (apBuffer >= end)
@@ -1670,6 +1697,8 @@ struct FUN_00e0cc90_cls
 
 // Searches m_pEntries for a case-insensitive key match and returns its value, or m_iFallback if not found.
 // @f3 0x00a8c8b0 (community match, verified in this file)
+// pdb: hkMonitorStreamColorTable::findColor | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, objrun_sim, low, conflict (skyrim: hkxEnum::getValueOfName)
+// pdb params: color
 int FUN_00e0cc90_cls::FUN_00e0cc90(int key)
 {
     Entry*& entries = *reinterpret_cast<Entry**>(&unk00);
@@ -1827,6 +1856,8 @@ struct Ostream
 
 }
 
+// pdb: hkMonitorStreamAnalyzer::showCombinedThreadSummaryRec | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: os, node, recursionDepth, numThreads, numSpus, options
 void __cdecl FUN_00e0d2c0(PrintStream* stream, PrintNode* node, int depth, const int threads, const int spus,
                           PrintConfig* apConfig) throw()
 // Fake match: the empty exception specification on this definition stands in for the
@@ -2035,6 +2066,8 @@ static __forceinline float getOffset(const AnimationTimingInfo& i)
 extern double DAT_00e887b8; extern float DAT_00e887b0;
 void __cdecl FUN_00901e90(void* array, int capacity, int elementSize);
 extern float DAT_010660c0;
+// pdb: hkMonitorStreamAnalyzer::getTimerLimits | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, uconst, low
+// pdb params: nodeList, input, frameInfos, maxFrameTime, startTimes
 void __cdecl FUN_00e0dd30(const MonNodeList& threadNodes, const AnimationTimingInfo& input,
                           const FrameInfoArrays& frameInfos, float& maxFrameTime, FloatArray& startTimes)
 {
@@ -2138,6 +2171,8 @@ struct HkThreadMemoryF3
     void FUN_008f6f90(void* p);
 };
 
+// pdb: hkMonitorStreamAnalyzer::writeStatisticsDetailsToTga | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: hkDeepCopier::freeDeepCopy)
+// pdb params: nodeList, input, frameInfos, outStream, sampleInfo
 void __cdecl FUN_00e0e470(int a1, PixelSource* apPixelSource, int a3, E0C150Stream* apStream, int a5)
 {
     void* out1 = 0;
@@ -2976,6 +3011,7 @@ template <class T> struct FrameNodeArray
         ++m_iElementCount;
     }
 };
+// pdb: outputStatsForFrame | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 static __declspec(noinline) void FUN_00e0cec0(float start, float step, int axis, S00e0e4e0_Node* inputNode, int count, S00e0e4e0_PArr* output)
 {
     MonNode* node = reinterpret_cast<MonNode*>(inputNode);

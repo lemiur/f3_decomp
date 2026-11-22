@@ -161,6 +161,8 @@ extern const char DAT_00dbcb38[];
 extern const char DAT_00dbcae8[];
 extern const char DAT_00dbcaa0[];
 
+// pdb: ContainerObject::InitItem | TESContainer.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apOwner
 void FUN_0048b720_Cls::ResolveIngredient(FUN_00485b60_Cls* apArg)
 {
     unsigned int formID = (unsigned int)pIngredient;

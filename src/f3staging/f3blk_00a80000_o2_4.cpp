@@ -151,6 +151,8 @@ static __declspec(noinline) Node* FUN_00a8c800(Node* root, const char* name, con
     return 0;
 }
 
+// pdb: hkMonitorStreamAnalyzer::writeStatisticsDetails | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, ustr, medium
+// pdb params: outstream, nodes, numThreads, numSpus, reportLevel, nodeIdForFrameOverview, showMultithreadedSummary
 void __cdecl FUN_00a8e7b0(Stream& stream, NodeArray* pArray, int aiThreadCount, int aiSpuCount, int flags, const char* key, bool combineThreads)
 {
     FUN_00943960(stream, "Havok version: %s\n", "Havok-5.5.0-r1");

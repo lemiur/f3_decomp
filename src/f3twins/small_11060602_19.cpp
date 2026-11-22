@@ -6,6 +6,8 @@
 
 struct Ob_00b60430 { char pad[0x10]; int f10; void FUN_00b2c0b0(int, int, int, int, int, int, int, int); };
 struct C_00b60430 { char pad[0x48]; Ob_00b60430* o; void FUN_00b60430(int, bool, bool); };
+// pdb: BSShaderPPLightingProperty::AddConstAlphaPass_1x | BSShaderPPLightingProperty_Passes_1x.obj | fnv360_0822_retail, objrun_prop, low, conflict (bridge: BSShaderPPLightingProperty::AddLocalMapPass_2x)
+// pdb params: apGeom, abSkinned, abAlphaTest
 void C_00b60430::FUN_00b60430(int a, bool b, bool c)
 {
     if (o->f10 == 0) {
@@ -43,6 +45,7 @@ struct M_00b84f10 { void FUN_00b22530(); };
 struct Lst_00b84f10 { void FUN_005b3880(int, void*); };
 struct Q_00b84f10 { char pad[8]; M_00b84f10* f8; M_00b84f10* fc; int f10; int f14; };
 struct C_00b84f10 { char pad[0x28]; Lst_00b84f10 l; Q_00b84f10* q; char pad2[0x4c]; M_00b84f10 m7c; void FUN_00b84f10(); };
+// pdb: ImageSpaceEffectDepthOfField::ReturnTextures | ImageSpaceEffectDepthOfField.obj | fnv360_0822_retail, objrun_prop, medium
 void C_00b84f10::FUN_00b84f10()
 {
     int t;
@@ -90,6 +93,7 @@ struct D_00b855f0 : B_00b855f0
     E_00b855f0 arr[3];
     D_00b855f0();
 };
+// pdb: ImageSpaceEffectDepthOfField::ImageSpaceEffectDepthOfField | ImageSpaceEffectDepthOfField.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 D_00b855f0::D_00b855f0() : a(false), b(false), c(false), d(0)
 {
     ((S28_00b855f0*)((char*)this + 0x28))->FUN_00555790(6);
@@ -108,6 +112,7 @@ struct O_00d00660 { V2 a; int g; V2 b; V2 c; void FUN_00854f20(); };
 extern const float DAT_00dbe1e0;
 extern O_00d00660 DAT_00f747f8;
 
+// pdb: `dynamic initializer for 'NiTextureTransform::IDENTITY'' | NiTextureTransform.obj | fnv360_0822_retail, caller_sim, medium
 void FUN_00d00660()
 {
     V2 c(DAT_00dbe1e0, DAT_00dbe1e0);
@@ -243,6 +248,7 @@ extern "C" __declspec(dllimport) long __stdcall IMP_00d9b064(long*);
 struct R_00d982c0 { void** vt; long r; };
 extern R_00d982c0* DAT_0108ee14[10];
 
+// pdb: `dynamic atexit destructor for 'NiTexturingProperty::ms_akMapIDtoNames'' | NiTexturingProperty.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: `dynamic atexit destructor for 'NiTexture::RendererData::ms_aspReplacementData'')
 void FUN_00d982c0()
 {
     R_00d982c0** q = DAT_0108ee14 + 10;

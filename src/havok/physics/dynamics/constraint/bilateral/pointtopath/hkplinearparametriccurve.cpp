@@ -10,6 +10,7 @@ struct FUN_00e47c20_s
 };
 
 // @fnv 0x00e47c20
+// pdb: hkpLinearParametricCurve::getEnd | hkpLinearParametricCurve.obj | fnv360_0822_retail, objrun_open, low
 double FUN_00e47c20_s::FUN_00e47c20() const
 {
     return static_cast<double>(static_cast<int>(*(const int*)((const char*)this + 0x24)) - 1);
@@ -37,6 +38,8 @@ struct SingletonTarget
 };
 extern SingletonTarget* g_011f42c0;
 
+// pdb: BGSTextureSet::QueueTextureSet | BGSTextureSet.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aePriority, apParent, abNoSpecular
 void FUN_00e47e50_class::FUN_00e47e50(void const* data, void* a2, void* a3)
 {
     void** slot = reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 0x88);
@@ -72,6 +75,7 @@ struct FnvCpu_FUN_00e47400_CpuObject
     unsigned char* FUN_00e47400(unsigned char* output);
 };
 // @fnv 0x00e47400
+// pdb: hkpLinearParametricCurve::getStart | hkpLinearParametricCurve.obj | fnv360_0822_retail, objopen_prop, low, conflict (skyrim: hkpLinearParametricCurve::isClosedLoop)
 unsigned char* FnvCpu_FUN_00e47400_CpuObject::FUN_00e47400(unsigned char* output)
 {
     *output = value;
@@ -80,6 +84,7 @@ unsigned char* FnvCpu_FUN_00e47400_CpuObject::FUN_00e47400(unsigned char* output
 
 // Returns the constant float value 0.0f.
 // @fnv 0x00e47410
+// pdb: hkpLinearParametricCurve::getSmoothingFactor | hkpLinearParametricCurve.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkpLinearParametricCurve::getStart)
 float __cdecl GetZeroFloat()
 {
     return 0.0f;
@@ -93,6 +98,7 @@ class CurveSmoothingGetter : public hkpParametricCurve
 };
 
 // @fnv 0x00e47420
+// pdb: BSFaceGenKeyframe::GetTime | BSFaceGenKeyframe.obj | fnv360_0822_retail, vtable, medium
 float CurveSmoothingGetter::FUN_00e47420() const
 {
     return m_fSmoothingValue;
@@ -304,6 +310,8 @@ class FUN_00e47c30_cls
 
 // Linearly interpolates, or extrapolates past the ends, between entries of m_iSlotIds at t using the index from hkMath_hkFloatToInt.
 // @fnv 0x00e47c30
+// pdb: hkpLinearParametricCurve::getLengthFromStart | hkpLinearParametricCurve.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: t
 float FUN_00e47c30_cls::GetInterpolatedValue(float t) const
 {
     int i = hkMath_hkFloatToInt(t);
@@ -593,6 +601,8 @@ union hkVector4q
 
 // @f3twin 0x00a75290 of 0x00589a00
 struct F3Twin_00a75290 : public CurveSmoothingGetter { float F3_FUN_00a75290() const; };
+// pdb: hkpLinearParametricCurve::setSmoothingFactor | hkpLinearParametricCurve.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkpLinearParametricCurve::getSmoothingFactor)
+// pdb params: smooth
 float F3Twin_00a75290::F3_FUN_00a75290() const
 {
     return m_fSmoothingValue;

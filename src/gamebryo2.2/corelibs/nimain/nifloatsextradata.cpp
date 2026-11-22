@@ -18,6 +18,8 @@ struct NiFloatsExtraData
 };
 
 // @fnv 0x00a89000
+// pdb: NiFloatsExtraData::SetValue | NiFloatsExtraData.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: uiIndex, fValue
 bool __thiscall NiFloatsExtraData::SetValue(const unsigned int uiIndex, float fValue)
 {
     if (uiIndex < m_uiSize)
@@ -42,6 +44,8 @@ struct NiFloatsExtraData_shell : NiFloatsExtraData
 
 // Copies the base extra data, then allocates and copies the float array from this object into pDest, or clears pDest's array when empty.
 // @fnv 0x00a89040
+// pdb: NiFloatsExtraData::CopyMembers | NiFloatsExtraData.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pDest, kCloning
 void __thiscall NiFloatsExtraData_shell::CopyFloatsExtraData(NiFloatsExtraData* pDest, CloningProcess* pCloning)
 {
     FUN_00a7b330(pDest, pCloning);
@@ -72,6 +76,7 @@ struct FUN_00a891d0_shell
 };
 // Releases the float array, resets the vtable, runs base cleanup, and optionally frees the object when flags has bit 0 set.
 // @fnv 0x00a891d0
+// pdb: NiIntegersExtraData::`scalar deleting destructor' | BSWArray.obj | fnv360_0721_beta, vtable, high
 void* __thiscall FUN_00a891d0_shell::DestroyNiFloatsExtraData(unsigned int flags)
 {
     NiFloatsExtraData* p = (NiFloatsExtraData*)this;
@@ -92,6 +97,8 @@ struct FUN_00a89020_cls : NiFloatsExtraData
 };
 
 // @fnv 0x00a89020
+// pdb: NiFloatsExtraData::GetValue | NiFloatsExtraData.obj | fnv360_0822_retail, objrun, medium
+// pdb params: uiIndex
 float __thiscall FUN_00a89020_cls::GetValueAt(unsigned int uiIndex)
 {
     if (uiIndex < m_uiSize)
@@ -346,6 +353,8 @@ class A89210IntsExtraData : public A89210ExtraData
 // SaveBinary
 // Saves the base extra data, then writes m_uiSize and the m_uiSize ints from m_piValue to the stream.
 // @fnv 0x00a89210
+// pdb: NiFloatsExtraData::SaveBinary | NiFloatsExtraData.obj | fnv360_0822_retail, vtable, high
+// pdb params: kStream
 void A89210IntsExtraData::FUN_00a89210(A89210Stream& kStream)
 {
     A89210ExtraData::SaveBinary(kStream);
@@ -428,6 +437,8 @@ struct NiFloatsExtraDataStub : NiExtraDataStub
 
 // Appends the base viewer strings, the m_uiSize entry and one entry per element of m_pfValue to pkStrings.
 // @f3 0x00864850 (community match, verified in this file)
+// pdb: NiFloatsExtraData::GetViewerStrings | NiFloatsExtraData.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pStrings
 void NiFloatsExtraDataStub::FUN_00a89280(NiViewerStringsArray* pkStrings)
 {
     NiExtraDataStub::GetViewerStrings(pkStrings);
@@ -640,6 +651,8 @@ class FUN_00a99a90_IntsExtraData : public BA99A90ExtraData
 
 // Loads the base extra data, reads m_uiSize, then allocates and reads m_uiSize ints into m_piValue (or nulls it if size is 0).
 // @fnv 0x00a99a90
+// pdb: NiFloatsExtraData::LoadBinary | NiFloatsExtraData.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void FUN_00a99a90_IntsExtraData::LoadBinary(BA99A90Stream& kStream)
 {
     BA99A90ExtraData::LoadBinary(kStream);

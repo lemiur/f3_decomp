@@ -7,6 +7,8 @@
 // @f3 0x006453a0 (community match, verified in this file)
 namespace f3m_006453a0 {
 struct Tile6453A0 {void FUN_00bee190(unsigned,float,int);};
+// pdb: HUDMainMenu::SetBrightness | HUDMainMenu.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apTile, aeBrightness
 void FUN_006453a0(Tile6453A0* tile,unsigned mode){switch(mode){case 2:tile->FUN_00bee190(0xff5,255.0f,1);break;case 1:case 3:tile->FUN_00bee190(0xff5,175.0f,1);break;case 4:tile->FUN_00bee190(0xff5,44.0f,1);case 5:tile->FUN_00bee190(0xff5,100.0f,1);break;default:tile->FUN_00bee190(0xff5,255.0f,1);}}
 }   // namespace f3m_006453a0
 
@@ -162,6 +164,8 @@ public:
     bool FUN_00657580(int action, Tile* tile);
 };
 
+// pdb: LevelUpMenu::DoClick | LevelUpMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 bool Manager::FUN_00657580(int action, Tile* tile) {
     switch (action) {
     case 11: {

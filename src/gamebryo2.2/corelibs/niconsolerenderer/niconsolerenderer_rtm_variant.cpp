@@ -25658,6 +25658,7 @@ struct PresentationRenderer {
                       unsigned refresh, unsigned interval, PresentationParameters* out);
 };
 // @fnv 0x00e6bf50
+// pdb: NiDX9Renderer::InitializePresentParams | NiDX9Renderer.obj | tesv_win, ustr, medium
 bool PresentationRenderer::FUN_00e6bf50(void* window, unsigned width, unsigned height, unsigned flags, unsigned backCount,
     unsigned format, unsigned depthFormat, unsigned count, unsigned swap,
     unsigned refresh, unsigned interval, PresentationParameters* out)
@@ -26683,6 +26684,7 @@ struct ResetRenderer {
 };
 // @f3 0x00878700 (community match, verified in this file)
 // @fnv 0x00e736b0
+// pdb: NiDX9Renderer::Recreate | NiDX9Renderer.obj | tesv_win, ustr, medium
 bool ResetRenderer::FUN_00e736b0()
 {
  struct ResetCachedEntry : ResetObject {
@@ -26853,6 +26855,7 @@ struct Shader767 {
     void ConvertGeometryData(unsigned short,Geometry767*,SkinProcessor767*,Skin767*,ShaderStreamMapping*,unsigned,char*,Extra767);
 };
 // @fnv 0x00e76770
+// pdb: NiDX9ShaderDeclaration::PackUntransformedVB | NiDX9ShaderDeclaration.obj | tesv_win, caller_sim, low
 Buffer767* Shader767::FUN_00e76770(Geometry767* geometry, SkinProcessor767* skinInstance, Skin767* skin, unsigned mask, Buffer767* oldBuffer, unsigned stream, Inputs767_6 inputs6)
 {
     unsigned short vertexCount = skin ? skin->count : geometry->VertexCount();

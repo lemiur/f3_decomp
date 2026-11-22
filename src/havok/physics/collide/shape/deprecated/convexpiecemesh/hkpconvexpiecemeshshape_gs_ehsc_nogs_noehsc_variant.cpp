@@ -260,6 +260,8 @@ struct VecF49 {
 struct KeyEvaluatorE49 {
     hkBoolE49 FUN_00a76f80(const int* face, int edge) const;
 };
+// pdb: hkpConvexPieceMeshShape::getAabbImpl | hkpConvexPieceMeshShape.obj | fnv360_0822_debug, objrun, low, conflict (bridge: hkpConvexPieceMeshShape::getChildShape)
+// pdb params: localToWorld, tolerance, out
 FUN_00e607c0* PieceAgentE49::FUN_00e49120(unsigned int index, void* placement)
 {
     FUN_00e607c0* result = placement ? new (placement) FUN_00e607c0(m_fBoundRadius) : 0;

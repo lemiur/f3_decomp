@@ -11,6 +11,8 @@ struct hkpSweptTransformDisplayViewer
 
 // Calls FindEntryIndex on the viewer at this-0x20 with a; if the returned index is non-negative, calls RemoveWorldData with it.
 // @fnv 0x00d64950
+// pdb: hkpSweptTransformDisplayViewer::worldRemovedCallback | hkpSweptTransformDisplayViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void hkpSweptTransformDisplayViewer::FUN_00d64950(int a)
 {
     hkpSweptTransformDisplayViewer* p = (hkpSweptTransformDisplayViewer*)((char*)this - 0x20);
@@ -21,6 +23,8 @@ void hkpSweptTransformDisplayViewer::FUN_00d64950(int a)
 
 extern "C" void FUN_00d64650();
 // @fnv 0x00d647f0
+// pdb: hkpSweptTransformDisplayViewer::worldAddedCallback | hkpSweptTransformDisplayViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void __fastcall FUN_00d647f0(void* self)
 {
     ((void(__thiscall*)(void*))FUN_00d64650)((char*)self - 0x20);
@@ -29,6 +33,7 @@ void __fastcall FUN_00d647f0(void* self)
 extern "C" int g_ptr_0x1268fd0;
 
 // @fnv 0x00d64970
+// pdb: BGSMoviePlayer::GetScreenHeight | BGSMoviePlayer.obj | fnv360_0822_retail, objrun, medium
 int __cdecl FUN_00d64970()
 {
     return g_ptr_0x1268fd0;
@@ -61,6 +66,8 @@ struct D63FF0Container
 
 // Scans m_entries for an entry whose m_key equals key and returns its index, or -1 if none matches.
 // @fnv 0x00d63ff0
+// pdb: hkpSweptTransformDisplayViewer::findWorld | hkpSweptTransformDisplayViewer.obj | fnv360_0822_retail, objrun, low, conflict (bridge: hkpShapeDisplayBuilder::hkpShapeDisplayBuilderEnvironment::hkpShapeDisplayBuilderEnvironment)
+// pdb params: world
 int D63FF0Container::FindEntryIndex(void* key) const
 {
     for (int i = 0; i < m_iNumberOfEntries; i++)
@@ -115,6 +122,8 @@ extern "C" int g_ptr_0x1268fd0;
 // @f3 0x009f0b60 (community match, verified in this file)
 extern int DAT_011697ec;
 
+// pdb: hkpSweptTransformDisplayViewer::entityRemovedCallback | hkpSweptTransformDisplayViewer.obj | fnv360_0822_retail, objrun, medium
+// pdb params: entity
 void SweptTransformItem::FUN_00d64120(SweptArg* a1)
 {
     if (*(int*)&a1->m_10 == 0)
@@ -238,6 +247,7 @@ struct FUN_00d647b0_cls
 };
 
 // @fnv 0x00d647b0
+// pdb: hkpSweptTransformDisplayViewer::init | hkpSweptTransformDisplayViewer.obj | fnv360_0822_retail, vtable, medium
 void FUN_00d647b0_cls::NotifyItems()
 {
     if (m_kNodePool != 0)

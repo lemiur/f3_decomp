@@ -444,6 +444,7 @@ struct MapA8 {
 };
 struct ObjA8 { int u0, u4, u8, uc; MapA8 m_map; void FUN_00a80110(); };
 void __fastcall FUN_00922680(MapA8*);
+// pdb: hkpToiCountViewer::reset | hkpToiCountViewer.obj | fnv360_0822_debug, caller_sim, low, conflict (skyrim: hkPackfileData::callDestructors)
 void ObjA8::FUN_00a80110() {
     int i = m_map.getIterator();
     while (m_map.isValid(i)) {

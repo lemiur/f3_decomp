@@ -22,6 +22,8 @@ struct FUN_00e49100_t
 };
 
 // @fnv 0x00e49100
+// pdb: hkpConvexPieceMeshShape::getNextKey | hkpConvexPieceMeshShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: oldKey
 int FUN_00e49100_t::GetNextKey(int key)
 {
     void* shape = *(void**)((char*)this + 8);
@@ -103,6 +105,7 @@ int FUN_00e49290_Class::hkpConvexPieceMeshShape_getCollisionFilterInfo(unsigned 
 }
 
 // @fnv 0x00e49030
+// pdb: hkpConvexPieceShape::getFirstKey | hkpConvexPieceShape.obj | fnv360_0822_retail, objrun_open, low
 int FUN_00e49030()
 {
     return 0;

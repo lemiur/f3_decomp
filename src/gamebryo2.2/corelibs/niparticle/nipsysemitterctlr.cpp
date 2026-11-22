@@ -6,6 +6,8 @@
 #include <new>
 
 // @fnv 0x00c1bdf0
+// pdb: BSMultiBoundNode::LoadBinary | BSMultiBoundNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 void NiPSysEmitterCtlr::LoadBinary(NiStream& stream)
 {
     NiPSysModifierCtlr::LoadBinary(stream);
@@ -14,6 +16,8 @@ void NiPSysEmitterCtlr::LoadBinary(NiStream& stream)
 
 // Calls the base ProcessClone, then clones the interpolator stored in the member if it is non-null.
 // @fnv 0x00c1bdc0
+// pdb: NiPSysEmitterCtlr::ProcessClone | NiPSysEmitterCtlr.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kCloning
 void NiPSysEmitterCtlr::ProcessClone(CloningProcess& process)
 {
     NiPSysModifierCtlr::ProcessClone(process);
@@ -23,6 +27,8 @@ void NiPSysEmitterCtlr::ProcessClone(CloningProcess& process)
 }
 
 // @fnv 0x00c1bd30
+// pdb: NiPSysEmitterCtlr::CopyMembers | NiPSysEmitterCtlr.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pkDest, kCloning
 void NiPSysEmitterCtlr::CopyMemberData(NiPSysEmitterCtlr* destination, CloningProcess& arProcess)
 {
     NiPSysModifierCtlr::CopyMemberData(destination, arProcess);
@@ -48,6 +54,8 @@ void NiPSysEmitterCtlr::CopyMemberData(NiPSysEmitterCtlr* destination, CloningPr
 }
 
 // @fnv 0x00c1c0e0
+// pdb: NiPSysEmitterCtlr::LinkObject | NiPSysEmitterCtlr.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kStream
 void NiPSysEmitterCtlr::LinkObject(NiStream& stream)
 {
     NiPSysModifierCtlr::LinkObject(stream);
@@ -118,6 +126,7 @@ struct FUN_00a38e00 : NiSingleInterpControllerBase
     FUN_00a38e00();
 };
 // @fnv 0x00a38e00
+// pdb: NiSingleInterpController::NiSingleInterpController | NiSingleInterpController.obj | fnv360_0822_retail, call_seq, medium, conflict (bridge: NiInterpController::NiInterpController)
 FUN_00a38e00::FUN_00a38e00()
 {
     m34 = 0;
@@ -127,6 +136,7 @@ struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_011f4054;
 // Returns the address of the global object g_011f4054.
 // @fnv 0x00a537e0
+// pdb: NiBoolData::GetRTTI | NiPSysEmitterCtlr.obj | fnv360_0822_retail, objopen_prop, low
 void* __cdecl FUN_00a537e0()
 {
     return &g_011f4054;
@@ -195,6 +205,7 @@ struct NiBoolData
     void* Destroy(unsigned int);
 };
 // @fnv 0x00a53a10
+// pdb: NiBoolData::`scalar deleting destructor' | NiBoolData.obj | tesv_win, vtable_prefix, medium
 void* NiBoolData::Destroy(unsigned int auiFlags)
 {
     void* keys = m_pKeyArray;
@@ -211,6 +222,8 @@ extern "C" int __cdecl NiStricmp(const char*, const char*);
 extern const unsigned short DAT_NiInterpController_INVALID_INDEX;
 // Compares pcID against two strings and returns 0, 1, or DAT_NiInterpController_INVALID_INDEX when neither matches.
 // @fnv 0x00c1ba80
+// pdb: NiPSysEmitterCtlr::GetInterpolatorIndex | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable, high
+// pdb params: pcID
 unsigned short __stdcall GetInterpControllerIndex(const char* pcControllerID)
 {
     if (NiStricmp(pcControllerID, (const char*)DAT_011ae754) == 0)
@@ -233,6 +246,8 @@ struct S2
     void* FUN_00a532d0(int);
 };
 // @fnv 0x00c1bad0
+// pdb: NiPSysEmitterCtlr::CreatePoseInterpolator | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable, high
+// pdb params: usIndex
 NiInterpolator* __stdcall CreateInterpolatorByIndex(unsigned short usInterpolatorIndex)
 {
     if (usInterpolatorIndex == 0)
@@ -270,6 +285,7 @@ struct S_00c1bb90
 };
 // Returns the cached float at offset 0x20 when the flag at 0xE is 1 and a matches the byte at 0xF, otherwise the float from the array at 0x14 indexed by a.
 // @fnv 0x00c1bb90
+// pdb: NiBlendInterpolator::GetTime | NiPSysEmitterCtlr.obj | tesv_win, hash, low
 float S_00c1bb90::GetValueForIndex(unsigned char a)
 {
     if (unk0E == 1 && a == unk0F)
@@ -283,6 +299,8 @@ struct ThisStruct : NiPSysEmitterCtlr
 };
 // Returns the NiInterpolator pointer stored at offset 0x34 for index 0, at 0x40 for index 1, otherwise null.
 // @fnv 0x00c1bc90
+// pdb: NiPSysEmitterCtlr::GetInterpolator | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable, high
+// pdb params: usIndex
 NiInterpolator* ThisStruct::GetInterpolatorByIndex(unsigned short usIndex)
 {
     if (usIndex == 0)
@@ -324,6 +342,8 @@ struct FUN_00c1be10_shell : NiPSysEmitterCtlr
 };
 // Calls FUN_00a57780, then if the interpolator at offset 0x40 is non-null, registers its streamables with kStream; returns true.
 // @fnv 0x00c1be10
+// pdb: NiPSysEmitterCtlr::RegisterStreamables | NiPSysEmitterCtlr.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kStream
 bool FUN_00c1be10_shell::RegisterEmitterInterpolatorStreamables(NiStream& kStream)
 {
     if (!FUN_00a57780(kStream))
@@ -359,6 +379,8 @@ struct S_00c1be40 : NiPSysEmitterCtlr
     void FUN_00c1be40(NiStream&);
 };
 // @fnv 0x00c1be40
+// pdb: NiPSysEmitterCtlr::SaveBinary | NiPSysEmitterCtlr.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kStream
 void S_00c1be40::FUN_00c1be40(NiStream& kStream)
 {
     ((BaseHack*)this)->FUN_00a57130(kStream);
@@ -376,6 +398,8 @@ struct S_00c1beb0
 };
 // Reallocates m_pBase to hold uiNewMax floats, copies the existing m_uiSize elements, frees the old buffer and updates m_uiMaxSize.
 // @fnv 0x00c1beb0
+// pdb: NiTSet<float,NiTMallocInterface<float> >::Realloc | BSPSysMultiTargetEmitterCtlr.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: uiNewSize
 void S_00c1beb0::FUN_00c1beb0(unsigned int uiNewCapacity)
 {
     if (uiNewCapacity == m_uiMaxSize)
@@ -426,6 +450,7 @@ struct H00c1bff0
 };
 // Checks NiSingleInterpController_TargetIsRequiredType, resolves a modifier via _b->FUN_00c1b0f0(&_d), then scans its RTTI chain for g_01202500_arg1 and returns whether it is found.
 // @fnv 0x00c1bff0
+// pdb: NiPSysEmitterCtlr::TargetIsRequiredType | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable, medium
 bool H00c1bff0::FUN_00c1bff0()
 {
     if (!((A00c1bff0*)this)->NiSingleInterpController_TargetIsRequiredType())
@@ -452,6 +477,8 @@ struct S240
 };
 // Grows the buffer via FUN_00c1beb0 when full, then stores x at m0[m8] and increments m8.
 // @fnv 0x00c1c240
+// pdb: NiTSet<float,NiTMallocInterface<float> >::Add | BSPSysMultiTargetEmitterCtlr.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: element
 void S240::PushBack(float const& afValue)
 {
     if (m8 == m4)
@@ -473,6 +500,7 @@ struct Host : NiPSysEmitterCtlr
 };
 // Frees the pointer at offset 0x50, decrements the ref count of the object at 0x40, calls FUN_00c312a0, and deletes this if flag bit 0 is set.
 // @fnv 0x00c1c340
+// pdb: NiPSysEmitterCtlr::`scalar deleting destructor' | NiPSysEmitterCtlr.obj | fnv360_0822_retail, objrun, high
 void* Host::ReleaseAndMaybeDelete(unsigned int flag)
 {
     _NiFreeAlias(m_kParticleAges.m_pBase);
@@ -512,6 +540,8 @@ struct Holder00c2b7d0 : NiPSysEmitterCtlr
 };
 // Checks the target via IsTargetParticleSystem, resolves a modifier from this+0x38, then walks its RTTI base chain looking for g_01202500_arg1.
 // @fnv 0x00c2b7d0
+// pdb: NiPSysEmitterCtlr::InterpTargetIsCorrectType | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkTarget
 bool Holder00c2b7d0::FUN_00c2b7d0(void* pkTarget)
 {
     void* pkModifier;
@@ -848,6 +878,7 @@ extern GlobalObjectO2_00a7b610 DAT_011f407c;
 // @f3 0x00abbd40 (community match, verified in this file)
 C1BF90Result* __cdecl FUN_00424d50(const void* objectType, C1BF90Target* target);
 
+// pdb: NiPSysEmitterCtlr::GetEmitterActiveInterpolator | NiPSysEmitterCtlr.obj | fnv360_0822_retail, caller_sim, high
 int C1BF90Owner::GetObjectValueByKey()
 {
     int iVf54Result = this->unk40->vf54();
@@ -1031,6 +1062,7 @@ class NiTimeControllerC1B
 };
 
 // @fnv 0x00c1bc10
+// pdb: NiPSysEmitterCtlr::ResetTimeExtrema | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable, high
 void NiTimeControllerC1B::UpdateKeyTimeRange()
 {
     if (GetManagerControlled())
@@ -1196,6 +1228,8 @@ struct EmitCtlr : NiPSysEmitterCtlr
                                  float fEmissionRate);
 };
 // @fnv 0x00c1c3c0
+// pdb: NiPSysEmitterCtlr::EmitParticles | NiPSysEmitterCtlr.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fTime, fCurTime, fLastTime, fEmitStart, fEmitStop, fBirthRate
 void EmitCtlr::EmitParticlesInInterval(float fTime, float fCurTime, float fLastTime, float fEmitStart, float fEmitStop,
                                        float fEmissionRate)
 {
@@ -1248,6 +1282,7 @@ struct FUN_00a368f0_cls
 
 // Returns fixedIndex if fixed is 1, otherwise scans entries for the highest weight and returns its index, or 0xff if none exceed zero.
 // @fnv 0x00a368f0
+// pdb: NiBlendInterpolator::GetHighestWeightedIndex | NiBlendInterpolator.obj | fnv360_0822_retail, call_gap, high
 unsigned char nsa::FUN_00a368f0_cls::FindHighestWeightIndex()
 {
     if (fixed == 1)
@@ -1342,6 +1377,7 @@ struct FUN_00c1c390 : EmitCtlrBase
 };
 
 // @fnv 0x00c1c390
+// pdb: NiPSysEmitterCtlr::NiPSysEmitterCtlr | NiPSysEmitterCtlr.obj | fnv360_0822_retail, call_seq, medium, conflict (bridge: NiPSysModifierCtlr::NiPSysModifierCtlr)
 FUN_00c1c390::FUN_00c1c390() : m_fLastScaledTime(kNegInfinity), m_bLastActive(false)
 {}
 
@@ -1404,6 +1440,8 @@ class NiPSysEmitterCtlrC1C5 : public FUN_00c31260
 
 // Allocates a new NiPSysEmitterCtlrC1C5, calls FUN_00c1bd30 with it and kCloning, then returns it.
 // @fnv 0x00c1c570
+// pdb: NiPSysEmitterCtlr::CreateClone | NiPSysEmitterCtlr.obj | fnv360_0822_retail, objrun, medium
+// pdb params: kCloning
 NiPSysEmitterCtlrC1C5* NiPSysEmitterCtlrC1C5::FUN_00c1c570(CloningProcessC1C5& kCloning)
 {
     NiPSysEmitterCtlrC1C5* pkClone = new NiPSysEmitterCtlrC1C5;
@@ -1413,6 +1451,7 @@ NiPSysEmitterCtlrC1C5* NiPSysEmitterCtlrC1C5::FUN_00c1c570(CloningProcessC1C5& k
 
 // Allocates and returns a new NiPSysEmitterCtlrC1C5 object on the heap.
 // @fnv 0x00c1c5e0
+// pdb: NiPSysEmitterCtlr::CreateObject | NiPSysEmitterCtlr.obj | fnv360_0822_retail, objrun, low, conflict (bridge: NiTransformController::CreateObject)
 NiPSysEmitterCtlrC1C5* __cdecl CreateNiPSysEmitterCtlrC1C5()
 {
     return new NiPSysEmitterCtlrC1C5;

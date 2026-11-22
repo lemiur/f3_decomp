@@ -210,6 +210,7 @@ static __declspec(noinline) void FUN_00989760(hkArr* arr) {
   }
  }
 }
+// pdb: hkpPhantom::firePhantomRemoved | hkpPhantom.obj | tesv_win, call_gap, low
 void Fun_cls::FUN_00d07b50() {
  for(int i=((Task1503::View*)this)->listeners.m_iElementCount-1;i>=0;--i) {
   void** slot=&((Task1503::View*)this)->listeners.m_data[i];

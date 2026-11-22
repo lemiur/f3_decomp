@@ -19,6 +19,8 @@ struct FUN_00dacc70_vt
 
 // Assigns four function pointers to the object's vtable slots and clears its two byte fields.
 // @fnv 0x00dacc70
+// pdb: hkpGskfAgent::initAgentFunc | hkpGskfAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: af
 void __cdecl InitVtable(FUN_00dacc70_vt* p)
 {
     p->m_pVirtualFunction0 = (void (*)())FUN_00dacc00;
@@ -48,6 +50,8 @@ struct FUN_00dacaf0
 
 // Calls ReleaseAllEntries with field30, field8 and arg, then invokes the virtual destructor on this with flag 1.
 // @fnv 0x00dacaf0
+// pdb: hkpGskfAgent::cleanup | hkpGskfAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: constraintOwner
 void FUN_00dacaf0::cleanup(void* arg)
 {
     ReleaseAllEntries(&field30[0], field8, arg);
@@ -101,6 +105,8 @@ struct FUN_00dacb60_class
 };
 
 // @fnv 0x00dacb60
+// pdb: hkpGskfAgent::commitPotential | hkpGskfAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: idToCommit
 void __thiscall FUN_00dacb60_class::AddPotential(unsigned short value)
 {
     int count = m_uiItemCount;
@@ -135,6 +141,8 @@ struct FUN_00dacbd0 : FUN_00dabf10
 
 // Initializes the derived object: sets its vtable pointer to DAT_010d5224 and clears m_i0 after the base constructor runs.
 // @fnv 0x00dacbd0
+// pdb: hkpGskfAgent::hkpGskfAgent | hkpGskfAgent.obj | fnv360_0822_retail, call_gap, high
+// pdb params: bodyA, bodyB, mgr
 FUN_00dacbd0::FUN_00dacbd0(int a, int b, int c) : FUN_00dabf10(a, b, c)
 {
     m_pVtbl = &DAT_010d5224;
@@ -163,6 +171,8 @@ class hkObjDACB
 };
 
 // @fnv 0x00dacba0
+// pdb: hkpGskfAgent::createZombie | hkpGskfAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: idTobecomeZombie
 void hkObjDACB::ClearSlotById(short id)
 {
     for (int i = 0; i < m_numSlots; i++)

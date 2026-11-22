@@ -18,6 +18,8 @@ struct FUN_00bb39e0_shell
 };
 
 // @fnv 0x00bb39e0
+// pdb: STLSPData::SetLeafMaps | SpeedTreeLeafShaderProperty.obj | fnv360_0822_retail, call_seq, low, conflict (bridge: CSpeedTreeRT::SGeometry::~SGeometry)
+// pdb params: apLeafMaps, aiCount
 void FUN_00bb39e0_shell::FUN_00bb39e0(const void* src, unsigned int count)
 {
     if (src && m_08)

@@ -38,6 +38,8 @@ extern bool __cdecl TESObjectCELL_IsFormTypeCellChild(unsigned char type);
 extern Interface4F* __cdecl FUN_00c0050a(
     Tag4F* tag, int zero, const char* kind, const char* name, int flags);
 
+// pdb: TESObjectREFR::SavesBefore | TESObjectREFR.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apForm
 bool Owner4F::FUN_004f1620(Tag4F* tag)
 {
     bool result = false;

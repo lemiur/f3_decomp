@@ -5,6 +5,8 @@
 char __stdcall FUN_00a50b10(char);
 
 // @fnv 0x00a51210
+// pdb: NiXenonPersistentSrcTextureRendererData::RegisterStreamables | NiXenonPersistentSrcTextureRendererData.obj | fnv360_0822_retail, objopen_prop, low, conflict (skyrim: NiDX9PersistentSrcTextureRendererData::RegisterStreamables)
+// pdb params: kStream
 char __stdcall FUN_00a51210(char acValue)
 {
     char r = FUN_00a50b10(acValue);
@@ -23,6 +25,8 @@ struct NiBSplineColorInterpolator
 };
 
 // @fnv 0x00a51a60
+// pdb: NiBSplineColorInterpolator::CopyMembers | NiBSplineColorInterpolator.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pkDest, kCloning
 void NiBSplineColorInterpolator::CopyTo(FUN_00a50110_obj* apTarget, CloningProcess& proc)
 {
     ((FUN_00a50110_obj*)this)->NiBSplineInterpolator_CopyMembers(apTarget, proc);
@@ -80,6 +84,8 @@ struct NiBSplineCompColorInterpolator
 };
 // Calls the base save routine, then writes the two interpolator values (8 bytes) to the stream.
 // @fnv 0x00a51970
+// pdb: NiBSplineCompColorInterpolator::SaveBinary | NiBSplineCompColorInterpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void NiBSplineCompColorInterpolator::SaveToStream(NiStream& aStream)
 {
     ((BaseCall*)this)->NiBSplineColorInterpolator_SaveBinary(aStream);
@@ -102,6 +108,8 @@ struct NiBSplineCompColorInterpolator
     bool IsEqual(NiObject* pkObject);
 };
 // @fnv 0x00a51730
+// pdb: NiBSplineCompColorInterpolator::IsEqual | NiBSplineCompColorInterpolator.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pkObject
 bool NiBSplineCompColorInterpolator::IsEqual(NiObject* pkObject)
 {
     NiBSplineCompColorInterpolator* pkDest;
@@ -142,6 +150,8 @@ struct NiBSplineCompColorInterpolator
 };
 // Calls the base holder's stream loader, then reads 8 bytes into m_data through the stream's binary reader.
 // @fnv 0x00a51930
+// pdb: NiBSplineCompColorInterpolator::LoadBinary | NiBSplineCompColorInterpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void NiBSplineCompColorInterpolator::LoadFromStream(NiStream& stream)
 {
     ((BaseHolder*)this)->NiBSplineColorInterpolator_LoadBinary(stream);
@@ -209,6 +219,7 @@ struct NiBSplineCompColorInterpolator51 : FUN_00a51ab0
 };
 // Allocates and returns a new NiBSplineCompColorInterpolator51 with default scalar values.
 // @fnv 0x00a518f0
+// pdb: NiBSplineCompColorInterpolator::CreateObject | NiBSplineCompColorInterpolator.obj | fnv360_0822_retail, objrun, high
 void* CreateSplineCompColorInterpolator()
 {
     return new NiBSplineCompColorInterpolator51;
@@ -241,6 +252,8 @@ struct CompColorInterpolator
 };
 // Samples the spline color at the normalized time when the index is valid, caches it, and writes the cached color to output.
 // @fnv 0x00a517a0
+// pdb: NiBSplineCompColorInterpolator::Update | NiBSplineCompColorInterpolator.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fTime, pkInterpTarget, kValue
 char CompColorInterpolator::EvaluateColor(float time, void*, RgbaColor* output)
 {
     if (lastTime == time)

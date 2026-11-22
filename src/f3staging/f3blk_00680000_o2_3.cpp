@@ -209,6 +209,8 @@ struct StatsMenu {
         slots[i].GetTile()->FUN_00bf11a0(0xfc4,label.text,true);
     }
 };
+// pdb: StatsMenu::UpdateActorValue | StatsMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aeWhich
 void StatsMenu::FUN_006875c0(int value) {
     MenuString formatted;
     int tileIndex, valueIndex;

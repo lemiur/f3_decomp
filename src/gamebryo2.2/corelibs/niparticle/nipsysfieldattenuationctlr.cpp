@@ -27,6 +27,8 @@ struct NiPSysFieldAttenuationCtlr : BaseStandIn
 };
 // Calls the base check on pkTarget, resolves a NiPSysModifier from this+0x38, and returns true if its RTTI chain contains g_01202688_arg1.
 // @fnv 0x00c2b290
+// pdb: NiPSysFieldAttenuationCtlr::InterpTargetIsCorrectType | NiPSysFieldAttenuationCtlr.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: pkTarget
 bool NiPSysFieldAttenuationCtlr::FUN_00c2b290(NiObjectNET* pkTarget)
 {
     if (!BaseStandIn::IsTargetParticleSystem(pkTarget))
@@ -89,6 +91,8 @@ struct Owner
 
 // Allocates and constructs an AttenCtlr, passes it with pArg to FUN_00c32de0, and returns it as a NiPSysFieldAttenuationCtlr.
 // @fnv 0x00c2b240
+// pdb: NiPSysFieldAttenuationCtlr::CreateClone | NiPSysFieldAttenuationCtlr.obj | fnv360_0721_retail, objopen_prop, low
+// pdb params: kCloning
 NiPSysFieldAttenuationCtlr* Owner::CreateFieldAttenuationController(NiObjectNET* pArg)
 {
     AttenCtlr* pCtlr = (AttenCtlr*)NiMemAlloc(sizeof(AttenCtlr));

@@ -48,6 +48,8 @@ struct FUN_00a816a0 : NiTriShapeData
 };
 // Constructs the base NiTriShapeData from the given arguments, then stores p1, p8 and p8*3 into unk08, unk40 and unk44 and p10/p11 into unk58/unk5a.
 // @fnv 0x00a816a0
+// pdb: NiTriShapeDynamicData::NiTriShapeDynamicData | NiTriShapeDynamicData.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: usVertices, pkVertex, pkNormal, pkColor, pkTexture, usNumTextureSets, eNBTMethod, usTriangles, pusTriList, usActiveVertices, usActiveTriangles
 FUN_00a816a0::FUN_00a816a0(unsigned short p1, NiPoint3* p2, NiPoint3* p3, RgbaColor* p4, NiPoint2* p5,
                            unsigned short p6, NiGeometryData__DataFlags aeDataFlags, unsigned short p8,
                            unsigned short* p9, unsigned short p10, unsigned short p11)
@@ -802,6 +804,8 @@ ObjR* __stdcall FUN_00b585c0(void* v, FnvOwner** out);
 
 // Passes Vec4 values assembled from a5 and a6 to the located object, then inserts key when absent from its KeyedList.
 // @fnv 0x00b59ae0
+// pdb: DistantLODShaderProperty::AddDistantLOD | DistantLODShaderProperty.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiCellChunk, aiCellKey, apDistantLODNode, apDistantLODParam, apPositions, afColors, aiNumPositions
 void __cdecl FUN_00b59ae0(void* a1, unsigned int key, Obj3* apObj3, ObjA4* apObjA4, Vec3* apPoints, float* a6,
                           unsigned short count)
 {
@@ -2452,6 +2456,8 @@ struct TreeShader : NiProperty {
 };
 extern "C" void* __cdecl FUN_00bffa60(void*, const void*, unsigned int);
 extern "C" int __cdecl FUN_00403230(char*, unsigned int, const char*, ...);
+// pdb: DistantLODShaderProperty::GetCachedGeometry | DistantLODShaderProperty.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apDistantLODParam
 Resource* __cdecl FUN_00b587c0(Input* input)
 {
 

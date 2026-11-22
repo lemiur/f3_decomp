@@ -7,6 +7,7 @@
 // FUN_00e3c610: stores zero byte through first stdcall argument and returns it.
 
 // @fnv 0x00e3c610
+// pdb: hkArray<hkpSimpleMeshShape::Triangle,hkContainerHeapAllocator>::hkArray<hkpSimpleMeshShape::Triangle,hkContainerHeapAllocator> | hkpSimpleMeshShape.obj | fnv360_0822_debug, objrun_open, low
 unsigned char* __stdcall FUN_00e3c610(unsigned char* out, int a1, int a2)
 {
     *out = 0;
@@ -14,6 +15,8 @@ unsigned char* __stdcall FUN_00e3c610(unsigned char* out, int a1, int a2)
 }
 
 // @fnv 0x00e3c600
+// pdb: hkpKeyframedRigidMotion::applyForce | hkpKeyframedRigidMotion.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: deltaTime, force, p
 void __stdcall FUN_00e3c600(int a1, int a2, int a3)
 {}
 

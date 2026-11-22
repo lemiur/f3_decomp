@@ -28,6 +28,7 @@ struct State
 void __cdecl FUN_00d8aac0(void* owner, void* current, int eventCode, int flags);
 // Optionally resets currentA/currentB to their reset values, zeroes the float range up to end, and notifies callbacks when current differs from desired.
 // @fnv 0x00d88340
+// pdb: hkpConstraintSolverSetup::subSolve | hkpConstraintSolverSetup.obj | tesv_win, call_gap, low
 void __cdecl FUN_00d88340(State* state, int reset)
 {
     if (reset == 0)
@@ -156,6 +157,8 @@ struct TotalsElementView
     int unk24;
     D88470Sub* sub;
 };
+// pdb: hkpConstraintSolverSetup::internalIsMemoryOkForNewJacobianSchemas | hkpConstraintSolverSetup.obj | fnv360_0822_debug, objrun_sim, low
+// pdb params: s, constraints, numConstraints
 D88310Bool __cdecl CheckTotalsWithinLimits(D88470Obj* obj, D88470Elem** begin, int count)
 {
     unsigned int totals[2];
@@ -890,6 +893,8 @@ inline void CopyNativeVector(hkVector4D886& dst,const hkVector4D886& src) {
  dst.m_vComponents.m128_f32[3]=src.m_vComponents.m128_f32[3];
 }
 inline void ZeroNativeVector(hkVector4D886& dst) {dst.m_vComponents.m128_f32[0]=dst.m_vComponents.m128_f32[1]=dst.m_vComponents.m128_f32[2]=dst.m_vComponents.m128_f32[3]=0.0f;}
+// pdb: hkpConstraintSolverSetup::internalAddJacobianSchemas | hkpConstraintSolverSetup.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: s, constraints, numConstraints, constraintStatus
 void __cdecl FUN_00d88760(S88_Resources& packS, S88_Instance** packConstraints, int numConstraints, S88_Array& packStatus)
 {
     NC88_Resources& s = reinterpret_cast<NC88_Resources&>(packS);
@@ -1109,6 +1114,7 @@ struct Accumulator537 {
         Vector537 zero;zero.Zero();matrix[0]=zero;matrix[1]=zero;matrix[2]=zero;
     }
 };
+// pdb: hkConstraintSolverSetup_integrate2 | hkpConstraintSolverSetup.obj | fnv360_0822_debug, objrun, low, conflict (skyrim: hkpConstraintSolverSetup::calcBufferOffsetsForSolve)
 int __cdecl FUN_00d883c0(const S883_Island& island,char* buffer,int bufferSize,S883_TaskHeader& header) {
     header.m_buffer=buffer;
     int count=island.GetEntities().GetLogicalSize();

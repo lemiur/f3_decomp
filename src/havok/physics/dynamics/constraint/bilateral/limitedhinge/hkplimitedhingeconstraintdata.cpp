@@ -12,6 +12,8 @@ struct FUN_00cb8af0_cls
 // @f3 0x0043bce0 (community match, verified in this file)
 extern void* __cdecl FUN_00564400(int arg, void* member, int mode);
 
+// pdb: TESDataHandler::AddTopic | TESDataHandler.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pNewTopic
 void* FUN_00cb8af0_cls::FUN_00cb8af0(int arg)
 {
     return FUN_00564400(arg, (char*)this + 0xcc, 1);
@@ -24,6 +26,7 @@ struct FUN_00cb8b10Class
 };
 
 // @fnv 0x00cb8b10
+// pdb: hkpLimitedHingeConstraintData::getInertiaStabilizationFactor | hkpLimitedHingeConstraintData.obj | tesv_win, objrun_open, low
 void __thiscall FUN_00cb8b10Class::FUN_00cb8b10(int* apUnused, int* a2)
 {
     a2[1] = 8;
@@ -32,6 +35,8 @@ void __thiscall FUN_00cb8b10Class::FUN_00cb8b10(int* apUnused, int* a2)
 
 // Stores b at self+0xa2 and its negation at self+0xb6; if a is non-null, zeroes four floats at a->0x30->0x1c.
 // @f3 0x0092b6d0 (community match, verified in this file)
+// pdb: hkpLimitedHingeConstraintData::setMotorActive | hkpLimitedHingeConstraintData.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: instance, toBeEnabled
 void __fastcall FUN_00cb8fe0(char* self, int, int a, bool b)
 {
     self[0xa2] = b;
@@ -55,6 +60,7 @@ void __fastcall FUN_00cb8fe0(char* self, int, int a, bool b)
 
 
 // @fnv 0x00cb8b30
+// pdb: hkpLimitedHingeConstraintData::getNotifiedBodyIndex | hkpLimitedHingeConstraintData.obj | fnv360_0822_retail, objrun_open, low
 int __cdecl FUN_00cb8b30()
 {
     return 2;
@@ -96,6 +102,7 @@ class hkObjCB90
 };
 
 // @fnv 0x00cb9020
+// pdb: hkpLimitedHingeConstraintData::isValid | hkpLimitedHingeConstraintData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: hkpHingeConstraintData::isValid)
 hkBoolCB90 hkObjCB90::FUN_00cb9020() const
 {
     return m_kPointA.IsOrthonormal(1e-3f) && m_kPointB.IsOrthonormal(1e-3f) && (!m_hasC || m_cValid);
@@ -120,6 +127,7 @@ struct FUN_00cb9ce0_cls
 };
 
 // @fnv 0x00cb9ce0
+// pdb: BSSimpleArray<unsigned short,1024>::AddUninitialized | NavMesh.obj | fnv360_0721_beta, call_seq, low, conflict (bridge: BSSimpleArray<unsigned short,1024>::SetSize)
 void FUN_00cb9ce0_cls::FUN_00cb9ce0(int a, int b)
 {
     if (m_004)

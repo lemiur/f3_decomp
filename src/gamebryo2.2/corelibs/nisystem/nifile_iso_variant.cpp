@@ -47,6 +47,8 @@ struct FileConstructor
 };
 
 // @fnv 0x00aa1b60
+// pdb: NiFile::DefaultFileCreateFunc | NiFile.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pcName, eMode, uiSize
 extern "C" NiFile* __cdecl FUN_00aa1b60(const char* filename, NiFile::OpenMode mode, unsigned int bufferSize)
 {
     void* storage = DAT_011f6238.FUN_00aa3e40(0x30);
@@ -83,6 +85,7 @@ struct ProgramCacheDirectoryState
 };
 
 // @fnv 0x00ee8d20
+// pdb: NiGPUProgramCache::ValidateDirectory | NiGPUProgramCache.obj | fnv360_0822_retail, call_seq, medium
 extern "C" bool __fastcall FUN_00ee8d20(ProgramCacheDirectoryState* cache, int)
 {
     if (cache->workingDirectory != reinterpret_cast<const char*>(EmptyFS))
@@ -113,6 +116,8 @@ struct FileAccessObject : NiFile
     bool good;
 };
 // @fnv 0x00aa1a40
+// pdb: NiFile::DefaultFileAccessFunc | NiFile.obj | fnv360_0822_retail, objrun, high
+// pdb params: pcName, eMode
 extern "C" bool __cdecl FUN_00aa1a40(const char* name, NiFile::OpenMode mode)
 {
     FileAccessObject file(name, mode, 0);
@@ -123,6 +128,8 @@ extern bool(__cdecl* DAT_011ac228)(const char*, ::NiFile::OpenMode);
 bool __cdecl FUN_00aa1a40(const char*, ::NiFile::OpenMode);
 
 // @fnv 0x00aa1a70
+// pdb: NiFile::SetFileAccessFunc | NiFile.obj | fnv360_0822_retail, udata, high
+// pdb params: pfnFunc
 extern "C" void __cdecl FUN_00aa1a70(bool(__cdecl* handler)(const char*, ::NiFile::OpenMode))
 {
     DAT_011ac228 = FUN_00aa1a40;
@@ -149,6 +156,8 @@ class RelativeSeekFile : public NiFile
 };
 
 // @fnv 0x00aa1a90
+// pdb: NiFile::Seek | NiFile.obj | fnv360_0822_retail, objrun, medium
+// pdb params: iNumBytes
 void RelativeSeekFile::FUN_00aa1a90(int distance)
 {
     SeekFrom(distance, DAT_010a2484);
@@ -163,6 +172,8 @@ extern bool(__cdecl* DAT_011ac22c)(const char*);
 void __cdecl fnv_StandardizeFilePath(char*);
 
 // @fnv 0x00aa1bb0
+// pdb: NiFile::CreateDirectoryRecursive | NiFile.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pcFullPath
 bool __cdecl FUN_00aa1bb0(const char* pcPath)
 {
     if (DAT_011ac230(pcPath))
@@ -205,6 +216,7 @@ bool __cdecl FUN_00aa1bb0(const char* pcPath)
 namespace fnv_00aa1a30 {
 extern void(__cdecl* DAT_011ac228)(const char*, NiFile::OpenMode);
 // @fnv 0x00aa1a30
+// pdb: BSShaderManager::GetUseRefractionShader | TESScriptFunctions.obj | tesv_win, call_gap_sim, low
 void __cdecl FUN_00aa1a30(const char* name, NiFile::OpenMode mode)
 {
     DAT_011ac228(name, mode);

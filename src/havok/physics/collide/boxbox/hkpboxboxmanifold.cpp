@@ -18,6 +18,8 @@ struct FUN_00db0920
 };
 // Scans entries backwards for one whose key0 and key1 match the two key bytes, writing 1 to result if found and 0 otherwise.
 // @fnv 0x00db09b0
+// pdb: hkpBoxBoxManifold::findInManifold | hkpBoxBoxManifold.obj | fnv360_0822_retail, call_gap, low
+// pdb params: fcp
 unsigned char* FUN_00db0920::ContainsKey(unsigned char* result, const unsigned char* key)
 {
     for (int i = count - 1; i >= 0; --i)
@@ -50,6 +52,7 @@ struct FUN_00db0920_cls
 
 // Zeroes all entry values, count, and flag fields, then returns this.
 // @fnv 0x00db0920
+// pdb: hkpBoxBoxManifold::hkpBoxBoxManifold | hkpBoxBoxManifold.obj | fnv360_0822_retail, call_seq, high
 FUN_00db0920_cls* FUN_00db0920_cls::FUN_00db0920()
 {
     unsigned short* pEntryValues = &entries[0].value;

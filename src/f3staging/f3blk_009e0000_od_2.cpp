@@ -83,6 +83,7 @@ struct hkpTransformShape
     hkVector4* FUN_009ed8b0(hkVector4* out) const;
 };
 
+// pdb: hkpConvexTransformShape::getCollisionSpheresImpl | hkpConvexTransformShape.obj | tesv_win, objrun_open, low
 hkVector4* hkpTransformShape::FUN_009ed8b0(hkVector4* out) const
 {
     const hkVector4* in = m_childShape->v28(out);
@@ -165,6 +166,7 @@ protected:
     hkVector4 m_pos; // the w part is the radius
 };
 
+// pdb: makeSphere | hkGeometryUtility.obj | tesv_win, call_gap_sim, low
 static hkSphere FUN_009ea460(const hkVector4& p0, const hkVector4& p1, hkReal extraRadius)
 {
     hkVector4 diff;
@@ -393,6 +395,7 @@ static __forceinline hkResult buildJacobianFromConeLimitAtom(const hkpConeLimitC
     return HK_SUCCESS;
 }
 
+// pdb: buildJacobianFromStabilizedConeLimitAtom | hkpBuildJacobianFromAtoms.obj | fnv360_0822_retail, objrun, medium
 static hkResult FUN_009fa490(const hkpConeLimitConstraintAtom& atom, const hkpConstraintQueryIn& in,
                              const hkTransform& baseA, const hkTransform& baseB,
                              hkp1dAngularLimitInfo& info, hkpConstraintQueryOut& out)
@@ -521,6 +524,7 @@ namespace hkVector4Util
     }
 }
 
+// pdb: setLocalTransform | hkpBuildJacobianFromAtoms.obj | fnv360_0721_beta, objopen_prop, low
 static void FUN_009f7fb0(const hkTransform& a, const hkTransform& b, hkTransform& out)
 {
     hkVector4Util::rotatePoints(a.getRotation(), &b.getColumn(0), 4, &out.getColumn(0));
@@ -603,6 +607,7 @@ struct S009f9eb0_Info
     hkReal m_tau;
 };
 
+// pdb: buildJacobianFromAngLimitAtom | hkpBuildJacobianFromAtoms.obj | fnv360_0822_retail, objrun, medium
 static __declspec(noinline) int FUN_009f9eb0(const S009f9eb0_Atom* pAtom, const S009f9eb0_QueryIn* pIn,
     const S009f9eb0_Rotation* pA, const S009f9eb0_Rotation* pB, S009f9eb0_Info* pInfo)
 {
@@ -789,6 +794,7 @@ struct hkLocalVecBuffer {
     hkVector4& operator[](int i) { return m_data[i]; }
 };
 
+// pdb: getIsBoxGeometry | hkGeometryUtility.obj | tesv_win, uconst, low
 bool FUN_009eb8c0(const hkVecArray& points, hkVector4& halfExtents, hkTransform& out, float tolerance)
 {
     hkVector4 sphere;

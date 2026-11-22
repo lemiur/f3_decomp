@@ -43,6 +43,8 @@ struct WorldCBFDF3
 {
     void FUN_00985220(FlagCBFD flag);
 };
+// pdb: hkpAgentRegisterUtil::registerAllAgents | hkpAgentRegisterUtil.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: dis
 void __cdecl InitializeWorld(WorldCBFD* pkWorld)
 {
     WorldCBFDF3* w = (WorldCBFDF3*)pkWorld;

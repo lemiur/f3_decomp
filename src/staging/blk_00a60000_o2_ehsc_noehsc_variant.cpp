@@ -1533,6 +1533,8 @@ class FUN_007613f0
 };
 
 // @fnv 0x00a63ae0
+// pdb: NiTNewInterface<NiFixedString>::Allocate | NiD3DGPUProgramCache.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: uiNumElements
 void* FUN_00a63ae0(unsigned int ItemUpdateArray)
 {
     return new FUN_007613f0[ItemUpdateArray];

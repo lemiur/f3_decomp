@@ -48,6 +48,8 @@ struct Wrapper
 };
 // Calls inner->Invoke with the two arguments swapped, then copies inner->state into this wrapper's state and returns it.
 // @fnv 0x00da7150
+// pdb: hkpMoppAabbCastVirtualMachineQueryInt::operator= | hkpMoppAabbCastVirtualMachine.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: hkpSymmetricAgentFlipBodyCollector::addCdBodyPair)
+// pdb params: __that
 unsigned char Wrapper::ForwardAndSyncState(void* first, void* second)
 {
     inner->Invoke(second, first);

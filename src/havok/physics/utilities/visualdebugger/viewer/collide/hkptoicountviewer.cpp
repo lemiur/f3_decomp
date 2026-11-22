@@ -3,6 +3,8 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 // @fnv 0x00d60b90
+// pdb: hkpWorldViewerBase::getConsumableCommands | hkpWeldingViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: commands, numCommands
 void __stdcall ClearTwoInts(int* piFirst, int* piSecond)
 {
     *piFirst = 0;
@@ -12,6 +14,7 @@ void __stdcall ClearTwoInts(int* piFirst, int* piSecond)
 extern int g_D67960Value;
 
 // @fnv 0x00d67960
+// pdb: ShadowSceneLight::GetFrustumPlanes | ShadowLightShader.obj | fnv360_0822_debug, objrun_open, low
 int __cdecl FUN_00d67960()
 {
     return g_D67960Value;
@@ -208,6 +211,7 @@ extern S_00d67e10_Registry* g_00d67e10_registry;
 extern int g_00d67e10_toiCounterId;
 
 // @fnv 0x00d67e10
+// pdb: hkpActiveContactPointViewer::registerViewer | hkpActiveContactPointViewer.obj | fnv360_0822_debug, udata, high
 void RegisterToiCounter()
 {
     g_00d67e10_toiCounterId = g_00d67e10_registry->Register("TOI counter", AllocateToiCountViewer);
@@ -282,6 +286,7 @@ struct FUN_00d67bf0_cls
 
 // Iterates the node's items up to its count, passing each to m_visitor.v1, stopping early if the node becomes null.
 // @fnv 0x00d67bf0
+// pdb: hkpToiContactPointViewer::init | hkpToiContactPointViewer.obj | fnv360_0822_retail, vtable, medium
 void FUN_00d67bf0_cls::VisitItems()
 {
     int i = 0;
@@ -534,6 +539,8 @@ struct Registry {
 };
 }
 
+// pdb: hkVtableClassRegistry::merge | hkVtableClassRegistry.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: mergeFrom
 void FUN_00d67da0_cls::FUN_00d67da0(void* other)
 {
     f3m_009b03a0::Registry* self = (f3m_009b03a0::Registry*)this;

@@ -22,6 +22,7 @@ class ObjectA36810 : public FUN_00a38e00
 };
 
 // @fnv 0x00a36810
+// pdb: NiTransformController::CreateObject | NiTransformController.obj | fnv360_0822_retail, objopen_prop, low
 NiObject* __cdecl FUN_00a36810()
 {
     return new ObjectA36810;
@@ -33,6 +34,8 @@ NiObject* __cdecl FUN_00a36810()
 extern "C" unsigned char __stdcall Helper00a39030(void* pObject);
 
 // @fnv 0x00a360b0
+// pdb: NiSourceCubeMap::RegisterStreamables | NiSourceCubeMap.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 bool __stdcall FUN_00a360b0(void* pObject)
 {
     return Helper00a39030(pObject);
@@ -105,6 +108,8 @@ struct FUN_00a361c0_cls : public NiSingleInterpController
 };
 
 // @fnv 0x00a361c0
+// pdb: NiTransformController::LinkObject | NiTransformController.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void FUN_00a361c0_cls::FUN_00a361c0(NiStream& kStream)
 {
     NiSingleInterpController::LinkObject(kStream);

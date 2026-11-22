@@ -17,6 +17,8 @@ struct NiVectorExtraData : NiObject
 };
 
 // @fnv 0x00a92020
+// pdb: NiVectorExtraData::IsEqual | NiVectorExtraData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pObject
 bool NiVectorExtraData::FUN_00a92020(NiObject* pObject)
 {
     if (pObject)
@@ -73,6 +75,8 @@ struct FUN_00a92290_shell : NiVectorExtraData
 };
 
 // @f3 0x0085e0f0 (community match, verified in this file)
+// pdb: NiVectorExtraData::GetViewerStrings | NiVectorExtraData.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pStrings
 void FUN_00a92290_shell::FUN_00a92290(StrArr* pStringArray)
 {
     reinterpret_cast<A89C70Base*>(this)->GetViewerStrings(pStringArray);
@@ -284,6 +288,8 @@ class FUN_00a921f0_cls : public NiVectorExtraData
 };
 
 // @fnv 0x00a921f0
+// pdb: NiVectorExtraData::SaveBinary | NiVectorExtraData.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void FUN_00a921f0_cls::SaveToStream(S_00a921f0_Stream& aStream)
 {
     Callee7b2c0(aStream);
@@ -322,6 +328,8 @@ class FUN_00a92110_cls : public NiVectorExtraData
 };
 
 // @fnv 0x00a92110
+// pdb: NiVectorExtraData::LoadBinary | NiVectorExtraData.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void FUN_00a92110_cls::FUN_00a92110(S_00a921f0_Stream* s)
 {
     FUN_00a7b4a0(s);

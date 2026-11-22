@@ -14,6 +14,7 @@ struct FUN_00d69a80
 
 // Destructs the four hkDisplayGeometry members embedded at offsets 0x280, 0x1f0, 0x160 and 0xd0 of this object.
 // @fnv 0x00d69a80
+// pdb: hkpRagdollDrawer::~hkpRagdollDrawer | hkpConstraintViewer.obj | fnv360_0822_retail, call_gap, medium
 FUN_00d69a80::~FUN_00d69a80()
 {
     ((hkDisplayGeometry*)((char*)this + 0x280))->~hkDisplayGeometry();
@@ -95,6 +96,8 @@ class FUN_00d698b0 : public D698B0Base, public D698B0Listener
 
 // Base constructor then, if a world is set, registers this listener with every island in that world.
 // @fnv 0x00d698b0
+// pdb: hkpConstraintViewer::hkpConstraintViewer | hkpConstraintViewer.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: contexts
 FUN_00d698b0::FUN_00d698b0(void* info) : D698B0Base(info)
 {
     if (m_pOwningWorld)
@@ -112,6 +115,7 @@ extern hkProcessFactory* FUN_00dd9380;
 extern void* DAT_0126901c;
 void FUN_00d699c0();
 // @fnv 0x00d69a00
+// pdb: hkpBroadphaseViewer::registerViewer | hkpBroadphaseViewer.obj | fnv360_0822_retail, udata, high
 void RegisterConstraintsProcessFactory()
 {
     DAT_0126901c = FUN_00dd9380->FUN_00dd9380("Constraints", (void*)&FUN_00d699c0);
@@ -208,6 +212,8 @@ struct FUN_00d69200_cls
 
 // Passes a pointer derived from this (this+8, or null when this-0x20 is null) to target->FUN_00c93920.
 // @fnv 0x00d69200
+// pdb: hkpMidphaseViewer::worldAddedCallback | hkpMidphaseViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void FUN_00d69200_cls::FUN_00d69200(SpawnedTarget* target)
 {
     target->FUN_00c93920(((char*)this - 0x20) != 0 ? (char*)this + 8 : 0);
@@ -234,6 +240,8 @@ struct FUN_00d69230_cls
 
 // Calls apTarget->ClearValue with a pointer to this+8, or null if this-0x20 is null.
 // @fnv 0x00d69230
+// pdb: hkpMidphaseViewer::worldRemovedCallback | hkpMidphaseViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void FUN_00d69230_cls::InvokeTargetWithSelfOffset(Target* apTarget)
 {
     apTarget->ClearValue(((char*)this - 0x20) != 0 ? (char*)this + 8 : 0);
@@ -363,6 +371,7 @@ struct FUN_00d69a40
 
 // Constructs the bundle by default-constructing its base, three cone members and one plane member.
 // @fnv 0x00d69a40
+// pdb: hkpRagdollDrawer::hkpRagdollDrawer | hkpConstraintViewer.obj | fnv360_0822_retail, call_gap, medium
 FUN_00d69a40::FUN_00d69a40() : m00(), m0d0(), m160(), m1f0(), m280()
 {}
 
@@ -371,6 +380,7 @@ extern "C"
 {
     extern unsigned32 g_0126901c;
 // @fnv 0x00d69ab0
+    // pdb: GFxSpriteDef::GetFrameRate | GFxSprite.obj | tesv_win, objrun_open, low
     unsigned32 FUN_00d69ab0(void)
     {
         return g_0126901c;
@@ -719,6 +729,8 @@ struct F3ViewerOps
     void FUN_009f5c10(int constraint, int operationType);
 };
 
+// pdb: hkpConstraintViewer::postSimulationCallback | hkpConstraintViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void ConstraintViewer::FUN_00d69730(World* world)
 {
     int second_i;

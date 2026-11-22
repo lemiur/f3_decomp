@@ -18,6 +18,8 @@ struct DashBaseCall7
 {
     void FUN_00979e40(int entityA, int entityB, int name);
 };
+// pdb: hkpDashpotAction::hkpDashpotAction | hkpDashpotAction.obj | fnv360_0822_retail, call_seq, high
+// pdb params: entityA, entityB, userData
 FUN_00d4d980_Class* FUN_00d4d980_Class::FUN_00d4d980(int entityA, int entityB, int name)
 {
     reinterpret_cast<DashBaseCall7*>(this)->FUN_00979e40(entityA, entityB, name);

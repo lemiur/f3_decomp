@@ -178,6 +178,8 @@ struct S00dfa940_Solver
 
 // Loops building simplex entries until FUN_00df9fe0/FUN_00df9c90 give a result; on result 3 retries up to 0x14 times, adding an offset to m_30; returns status.
 // @f3 0x00a7f4f0 (community match, verified in this file)
+// pdb: hkpConvexPenetrationUtil::calculatePenetrationDepth | hkpConvexPenetrationUtil.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: output
 int S00dfa940_Solver::FUN_00dfa940(int a1)
 {
     S00dfa940_Simplex simplex;
@@ -361,6 +363,8 @@ __forceinline S_00dfaac0_Penetration::S_00dfaac0_Penetration(int a, int b, const
     unk6C = g;
 }
 
+// pdb: hkCalculatePenetrationDepth | hkpConvexPenetrationUtil.obj | fnv360_0822_retail, ustr, high
+// pdb params: shapeA, shapeB, btoa, epsTol, pointsAinA, pointsBinB, simplex, simplexSize, output
 int __cdecl TestPenetration(int a, int b, const S_00dfaac0_Transform& t, float f, int c, int d, int e, int g, int out)
 {
     S_00dfaac0_MonitorStream::GetMonitorStream().timer("TtPenetration");

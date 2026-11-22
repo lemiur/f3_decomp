@@ -196,6 +196,7 @@ inline float scalarFabs(float r)
     return (float)fabs(r);
 }
 
+// pdb: findClosestTriangleBackup | hkpGsk.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: hkLineSegmentUtil::closestLineSegLineSeg)
 int FUN_00d22e40(const hkVector4& A, const hkVector4& dA, const hkVector4& B, const hkVector4& dB,
                  VectorPairResult& result)
 {

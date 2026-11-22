@@ -236,6 +236,8 @@ class FUN_00ae6f50 : public BaseObj_b5112
 };
 
 // @f3 0x00bd1060 (community match, verified in this file)
+// pdb: AudioLoadTask::AudioLoadTask | BSAudioManager.obj | fnv360_0721_retail, call_seq, low
+// pdb params: apSound
 FUN_00ae6f50::FUN_00ae6f50(int aValue) : BaseObj_b5112(0)
 {
     m_30 = aValue;

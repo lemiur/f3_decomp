@@ -43,6 +43,7 @@ struct FUN_00c2a9c0_Holder
 };
 // Calls FUN_00c31750, then deletes this with size 0x48 when bit 0 of a1 is set, and returns this.
 // @fnv 0x00c2a9c0
+// pdb: NiD3DHLSLPixelShader::`scalar deleting destructor' | NiD3DShaderProgramCreatorHLSL.obj | fnv360_0721_beta, objopen_prop, low, conflict (bridge: NiD3DHLSLVertexShader::`scalar deleting destructor')
 void* FUN_00c2a9c0_Holder::DestroyIfFlagged(unsigned int auiFlags)
 {
     FUN_00c31750();
@@ -81,6 +82,8 @@ struct CloneHelper
     NiObject* Clone(CloningProcess&);
 };
 // @fnv 0x00c2ac50
+// pdb: NiPSysDragFieldModifier::CreateClone | NiPSysDragFieldModifier.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiPSysGravityFieldModifier::CreateClone)
+// pdb params: kCloning
 NiObject* CloneHelper::Clone(CloningProcess& kCloning)
 {
     NiPSysGravityFieldModifier* pkObject;
@@ -140,6 +143,7 @@ struct S_00c26db0_Obj : S_00c26db0_Base
     char FUN_00c26db0(S_00c26db0_Obj* other);
 };
 // @fnv 0x00c26db0
+// pdb: NiPSysVortexFieldModifier::IsEqual | NiPSysVortexFieldModifier.obj | tesv_win, hash, low
 char S_00c26db0_Obj::FUN_00c26db0(S_00c26db0_Obj* other)
 {
     if (!FUN_00c32060(other))
@@ -167,6 +171,7 @@ struct GravityFieldLayout
 };
 
 // @fnv 0x00c2a9e0
+// pdb: NiPSysDragFieldModifier::NiPSysDragFieldModifier | NiPSysDragFieldModifier.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiPSysGravityFieldModifier::NiPSysGravityFieldModifier)
 NiPSysGravityFieldModifier* CtorHelper::Ctor()
 {
     reinterpret_cast<GravityBaseCtor*>(this)->FUN_00c31ff0();
@@ -201,6 +206,7 @@ struct FUN_00c2aa70_Class : NiPSysGravityFieldModifier
 
 // Loads the base modifier and a NiPoint3 from the stream, copies the point to offset 0x3c and calls FUN_004a0c10 on it.
 // @fnv 0x00c2aa70
+// pdb: NiPSysGravityFieldModifier::LoadBinary | NiPSysGravityFieldModifier.obj | tesv_win, caller_sim, low
 void FUN_00c2aa70_Class::FUN_00c2aa70(NiStream& aStream)
 {
     ((FUN_00c2aa70_Base*)this)->LoadBinary(aStream);
@@ -367,6 +373,7 @@ struct GravityFieldStub
 };
 
 // @fnv 0x00c2aac0
+// pdb: NiPSysGravityFieldModifier::UpdateNoAttenuationNoDist | NiPSysGravityFieldModifier.obj | tesv_win, caller_sim, low
 void GravityFieldStub::ApplyGravityToParticles(float fTime, NiPSysDataStub* pkData)
 {
     NiTransform kField = m_pkFieldObject->m_kWorldSpaceTransform;
@@ -552,6 +559,7 @@ struct Field141
 float FUN_00404010(float, float);
 // Applies a directional force to particles within the field, scaling by strength, time delta, and optional distance attenuation or volume radius.
 // @fnv 0x00c2acb0
+// pdb: NiPSysGravityFieldModifier::Update | NiPSysGravityFieldModifier.obj | tesv_win, caller_sim, low
 void Field141::ApplyForceToParticles(float time, Data141* data)
 {
     if (strength == 0 || data->count == 0 || !field)

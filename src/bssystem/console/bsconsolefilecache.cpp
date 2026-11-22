@@ -25,6 +25,8 @@ struct Unk00b023f0
 };
 // Calls three methods on p in sequence, then terminates the calling thread with ExitThread(0).
 // @f3 0x00bcf260 (community match, verified in this file)
+// pdb: BSXenonTaskletManager::ThreadProc | BSXenonTaskletManager.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: apThis
 void __stdcall FUN_00b023f0(Unk00b023f0* pTarget)
 {
     pTarget->CallVfn1OnAllEntries();

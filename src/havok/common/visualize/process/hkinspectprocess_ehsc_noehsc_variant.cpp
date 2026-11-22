@@ -866,6 +866,8 @@ extern const A63Class DAT_0116a994;
 
 }
 
+// pdb: hkInspectProcess::consumeCommand | hkInspectProcess.obj | fnv360_0822_retail, vtable, medium
+// pdb params: command
 void InspectConsumer::FUN_00ddbae0(unsigned char command)
 {
     using namespace f3m_00a638a0;

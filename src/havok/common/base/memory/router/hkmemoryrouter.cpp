@@ -20,6 +20,8 @@ class F3MemHeap
     void FUN_008f7010(char* data);
 };
 
+// pdb: hkStringPtr::hkStringPtr | hkStringPtr.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: s, len
 void F3MemHeap::FUN_008f7010(char* data)
 {
     if (!data)
@@ -53,6 +55,8 @@ class F3MemHeap
     void FUN_008f6f90(char* data);
 };
 
+// pdb: hkMemoryRouter::easyFree | hkMemoryRouter.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: b, p
 void F3MemHeap::FUN_008f6f90(char* data)
 {
     if (!data)
@@ -74,6 +78,7 @@ namespace fnv_00c85760 {
 extern DWORD g_dwTlsIndex;
 
 // @fnv 0x00c85760
+// pdb: `dynamic atexit destructor for 'BSFaceGenManager::bUseFaceGenPreprocessedHeads'' | BSFaceGenManager.obj | tesv_win, objrun_open, low
 void* FUN_00c85760()
 {
     return TlsGetValue(g_dwTlsIndex);

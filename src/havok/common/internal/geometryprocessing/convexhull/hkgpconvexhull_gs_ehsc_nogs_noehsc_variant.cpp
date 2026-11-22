@@ -368,6 +368,8 @@ struct FUN_00cc02d0_cls {
 };
 
 // @fnv 0x00cc02d0
+// pdb: hkOstream::operator<< | hkOStream.obj | fnv360_0822_debug, objrun, high
+// pdb params: u
 FUN_00cc02d0_cls* FUN_00cc02d0_cls::FUN_00cc02d0(int arg) {
     char buf[0x2728];
     Vsnprintf(buf, 0x2728, str_010c1a98, arg);

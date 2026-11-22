@@ -32,6 +32,7 @@ struct FUN_00cb0a70
 extern int DAT_010c9314;
 
 // @fnv 0x00e02780
+// pdb: finishLoadedObjecthkpPhysicsData | hkpPhysicsDataClass.obj | fnv360_0822_retail, objrun_open, low
 void FUN_00e02780(void* apObject)
 {
     if (apObject)
@@ -42,6 +43,7 @@ void FUN_00e02780(void* apObject)
 }
 
 // @fnv 0x00e04a60
+// pdb: `anonymous namespace'::updatePointerCharToCString | hkClassUpdate.obj | tesv_win, hash, low
 void FUN_00e04a60(void* pData)
 {
     if (*(char*)((char*)pData + 0xc) == 0x14 && *(char*)((char*)pData + 0xd) == 2)
@@ -55,6 +57,7 @@ void FUN_00e04a60(void* pData)
 // @f3 0x00464d40 (community match, verified in this file)
 #include <math.h>
 
+// pdb: TESWaterForm::GetNoiseTextureName | TESWaterForm.obj | fnv360_0721_beta, call_gap, low, conflict (bridge: TESObjectTREE::GetLeafDimming)
 int __cdecl FUN_00e10740(float a, float b, float c)
 {
     return fabsf(a - b) <= c;
@@ -189,6 +192,7 @@ struct Manager1080 {
     Queue1080* queue70;
 };
 extern Manager1080* DAT_01076138;
+// pdb: DialogMenu::DebugResetSaidOnceFlags | DialogMenu.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_00e00c90(void* unused, int unused2) {
     if (DAT_01076138) {
         Queue1080* queue = DAT_01076138->queue70;
@@ -227,6 +231,8 @@ struct FUN_00e027b0_cls
 
 // Applies two relocation tables to a base address: adds base to each first-table entry's offset, and writes second-table values directly.
 // @f3 0x009b2eb0 (community match, verified in this file)
+// pdb: hkRelocationInfo::applyLocalAndGlobal | hkRelocationInfo.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: buffer
 void FUN_00e027b0_cls::ApplyRelocations(int base)
 {
     int i = 0;
@@ -292,6 +298,8 @@ class FUN_00e0bf30_full
     } storage;
 };
 
+// pdb: TESObjectCELL::SetCellOwnership | TESObjectCELL.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: PlayerCharacter::SetCanFastTravel)
+// pdb params: pform
 FUN_00e0bf30_s* __thiscall FUN_00e0bf30_s::FUN_00e0bf30(int v)
 {
     FUN_00e0bf30_full* f = (FUN_00e0bf30_full*)this;
@@ -1199,6 +1207,7 @@ void __cdecl ReverseBytesInGroupsOfFour(unsigned char* p);
 
 // Swaps bytes at offsets 0x18/0x1b and 0x19/0x1a of p, then calls ReverseBytesInGroupsOfFour on p+0x20.
 // @fnv 0x00e05e20
+// pdb: hkpSaveContactPointsEndianUtil::swapEndianType | hkpSaveContactPointsEndianUtil.obj | tesv_win, hash, low
 void __cdecl SwapHeaderBytesAndAdvance(unsigned char* pBuffer)
 {
     volatile unsigned char* vp = (volatile unsigned char*)pBuffer;
@@ -1228,6 +1237,8 @@ void __cdecl ReverseBytesInGroupsOfFour(unsigned char* p);
 
 // Swaps byte pairs within three 4-byte groups of p, then calls ReverseBytesInGroupsOfFour on p + 16.
 // @fnv 0x00e05e50
+// pdb: hkpSaveContactPointsEndianUtil::swapEndianType | hkpSaveContactPointsEndianUtil.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: entry
 void __cdecl SwapQuadBytes(unsigned char* pData)
 {
     std::swap(pData[4], pData[7]);
@@ -1266,6 +1277,8 @@ struct E05F60Header
 
 // Byte-swaps the three shorts, three ints and two trailing ints of the header to reverse endianness.
 // @fnv 0x00e05f60
+// pdb: hkpSaveContactPointsEndianUtil::swapEndianType | hkpSaveContactPointsEndianUtil.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: cache
 void __cdecl SwapHeaderEndianness(E05F60Header* pkHeader)
 {
     int i = 0;
@@ -1279,6 +1292,7 @@ void __cdecl SwapHeaderEndianness(E05F60Header* pkHeader)
 }
 
 // @fnv 0x00e05fe0
+// pdb: hkpSaveContactPointsEndianUtil::swapEndianType | hkpSaveContactPointsEndianUtil.obj | tesv_win, call_dedup, low
 void __cdecl FUN_00e05fe0(unsigned char* pBuffer)
 {
     for (int i = 0; i < 4; i++)
@@ -1291,6 +1305,8 @@ void __cdecl FUN_00e05fe0(unsigned char* pBuffer)
 }
 
 // @fnv 0x00e06010
+// pdb: hkpSaveContactPointsEndianUtil::swapEndianType | hkpSaveContactPointsEndianUtil.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: manifold
 void __cdecl FUN_00e06010(unsigned char* pucBuffer)
 {
     int i;
@@ -1332,6 +1348,7 @@ void __cdecl FUN_00e06010(unsigned char* pucBuffer)
 }
 
 // @fnv 0x00e09620
+// pdb: hkpMalleableConstraintData::getStrength | hkpMalleableConstraintData.obj | fnv360_0822_retail, objrun_open, low
 int __cdecl FUN_00e09620()
 {
     return 13;
@@ -1358,6 +1375,8 @@ struct SearchContainer
 };
 
 // @fnv 0x00e10820
+// pdb: findChildNode | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: currentNode, sampleTime, absoluteTimeIndex
 SearchItem* FUN_00e10820(SearchContainer* c, double key, int aiFieldIndex)
 {
     int lo = 0;
@@ -1561,6 +1580,8 @@ public:
     ~LocalHandlerMap() throw();
 };
 void FUN_009b2df0(BE04D90Object* object, LocalHandlerMap* map, int argument) throw();
+// pdb: hkClass::updateMetadataInplace | hkClassUpdate.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: c, sourceVersion
 void ProcessObjectArray(BE04D90Object** objects, int argument) {
     LocalHandlerMap map;
     for (int i = 0; objects[i]; ++i)
@@ -3079,6 +3100,8 @@ extern void __cdecl FUN_00a857d0(Payload*);
 extern void __cdecl FUN_00a85850(Payload*);
 extern void __cdecl FUN_00a85880(Payload*);
 extern void __cdecl FUN_00a85a30(Context**, void*);
+// pdb: hkpSaveContactPointsEndianUtil::swapEndianTypeInEntry | hkpSaveContactPointsEndianUtil.obj | fnv360_0822_retail, call_seq, high
+// pdb params: input, entry, serializedTrack, isNnEntry, sizeOfThisEntryOut, trackUsedOut
 void ProcessInput(Context** context, Input* input, void* argument, bool reverse, int* type, bool* changed)
 {
     *changed = false;
@@ -3151,6 +3174,8 @@ void __cdecl ProcessInput(int a1, char* pos, ListEntryE061* cur, FlagE061 flag, 
 
 // Iterates each block's payload, advancing a cursor entry and calling ProcessInput per chunk until the block end.
 // @fnv 0x00e061c0
+// pdb: hkpSaveContactPointsEndianUtil::swapEndianTypeIn1nTrack | hkpSaveContactPointsEndianUtil.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: input, serializedTrack
 void __cdecl ProcessListBlocks(int a1, ListE061* list)
 {
     ListEntryE061* cur;
@@ -3972,6 +3997,8 @@ struct TimedEntryCollection
 };
 // Scans entries from the end and clears each whose time is below threshold, decrementing count and recording the last removed entry.
 // @fnv 0x00e097a0
+// pdb: hkpMoppDefaultSplitter::hkpMoppMaxList::removeElementsLessThan | hkpMoppDefaultSplitter.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: position
 void TimedEntryCollection::RemoveExpiredEntries(float threshold)
 {
     float limit = threshold;
@@ -4034,6 +4061,7 @@ void TimedEntryCollection::RemoveExpiredEntries(float threshold)
 
 // Reverses the byte order of each 4-byte group in the 16-byte buffer pointed to by pucData.
 // @fnv 0x00e05de0
+// pdb: hkpSaveContactPointsEndianUtil::swapEndianType | hkpSaveContactPointsEndianUtil.obj | tesv_win, hash, low
 void ReverseBytesInGroupsOfFour(unsigned char* pucData)
 {
     for (int i = 0; i < 16; i += 4)
@@ -4121,6 +4149,8 @@ struct hkHeaderE05E
 };
 
 // @fnv 0x00e05ef0
+// pdb: hkpSaveContactPointsEndianUtil::swapEndianType | hkpSaveContactPointsEndianUtil.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: manifold
 void __cdecl SwapHkHeaderE05E(hkHeaderE05E* apHeader)
 {
     for (int i = 0; i < apHeader->m_iNumberOfEntries; i++)

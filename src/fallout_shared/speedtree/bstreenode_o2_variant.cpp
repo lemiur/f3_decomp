@@ -66,6 +66,8 @@ struct S_00c8c390
     bool FUN_00c8c390(NiStream*);
 };
 // @fnv 0x00c8c390
+// pdb: bhkTransformShape::RegisterStreamables | bhkTransformShape.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: arStream
 bool S_00c8c390::FUN_00c8c390(NiStream* arStream)
 {
     if (this)
@@ -113,6 +115,8 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(long volati
 extern "C" __declspec(dllimport) long __stdcall FUN_00d9b068(long*);
 extern "C" __declspec(dllimport) long __stdcall FUN_00d9b064(long*);
 typedef void (__thiscall* Release8f)(S_00c8c810_A*);
+// pdb: bhkTransformShape::Link | bhkTransformShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: abAttach
 void __thiscall H_00c8c810::FUN_00c8c810(bool b)
 {
     if (b)
@@ -285,6 +289,8 @@ struct BSFadeNode
     }
 };
 // @fnv 0x00c87fc0
+// pdb: bhkSPCollisionObject::CreateClone | bhkSPCollisionObject.obj | fnv360_0721_beta, objrun, low, conflict (bridge: bhkSPCollisionObject::CreateObject)
+// pdb params: arCloneData
 BSFadeNode* FUN_00c87fc0()
 {
     return new BSFadeNode;
@@ -326,6 +332,8 @@ struct This
     void FUN_00c84e20(unsigned int* output);
 };
 // @fnv 0x00c84e20
+// pdb: bhkShape::CopyCinfo | bhkShape.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: arInfo
 void This::FUN_00c84e20(unsigned int* output)
 {
     *output = (this != 0 && middle != 0) ? middle->value : 0;
@@ -346,6 +354,8 @@ struct LegacyLinker : NiCollisionObject
     void FUN_00c87f80(NiStream*);
 };
 // @fnv 0x00c87f80
+// pdb: bhkPCollisionObject::LinkObject | bhkPCollisionObject.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void LegacyLinker::FUN_00c87f80(NiStream* stream)
 {
     if (stream->version >= 0x15)
@@ -426,6 +436,8 @@ struct C8C330Owner
 };
 
 // @f3 0x008fde90 (community match, verified in this file)
+// pdb: bhkTransformShape::LinkObject | bhkTransformShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arStream
 void C8C330Owner::FUN_00c8c330(C8C330Node* pkNode)
 {
     bool bCreated;
@@ -637,6 +649,7 @@ struct FUN_00cb78b0 : S_00cb78b0_Base
 };
 
 // @fnv 0x00cb78b0
+// pdb: bhkRigidBodyT::`scalar deleting destructor' | bhkRigidBodyT.obj | fnv360_0822_retail, caller_sim, medium
 FUN_00cb78b0::~FUN_00cb78b0()
 {
     FUN_00c876a0();
@@ -841,6 +854,8 @@ struct Vector3
     float z;
 };
 // @fnv 0x00cf0930
+// pdb: bhkStream::SwapHKArray | bhkStream.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCInfo, aiSize, apArray
 void __cdecl FUN_00cf0930(void* buffer, int bytes, Vector3* vector)
 {
     int words = bytes / 4;
@@ -1171,6 +1186,8 @@ struct FUN_00caaea0_shell
 struct CapsuleVector4 {float x,y,z,w; void Mul(float s){x*=s;y*=s;z*=s;w*=s;} };
 struct CapsuleGeometry {float unknown00;float radius;float unknown08,unknown0c;CapsuleVector4 vertexA,vertexB;};
 
+// pdb: bhkCapsuleShape::CopyMembers | bhkCapsuleShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apDest, arCloneData
 void FUN_00caaea0_shell::FUN_00caaea0(void* context, SourceObject* source)
 {
     bool flag;
@@ -1733,6 +1750,8 @@ struct Allocation524 {
 };
 struct Pending524 {Allocation524* pointer;__forceinline Pending524(Allocation524* value):pointer(value){_ReadWriteBarrier();}__forceinline ~Pending524(){if(pointer)delete pointer;}};
 struct Ref524 {virtual void Destroy(int);short size,references;};
+// pdb: bhkCapsuleShape::Init | bhkCapsuleShape.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arTop, arBottom, afRad
 void Owner::FUN_00cab0e0(int a,int b,float c) {
     Heap524* heap=Globals524::DAT_00d9b080(Globals524::DAT_010f3170);
     Allocation524* allocation=static_cast<Allocation524*>(heap->FUN_008f6d30(64,39));
@@ -2234,6 +2253,7 @@ struct StateStub
 
 extern StateStub DAT_010f2c40;
 
+// pdb: bhkSPCollisionObject::NitohkTransform | bhkSPCollisionObject.obj | fnv360_0822_retail, caller_sim, medium
 void FUN_00cb7790_class::FUN_00cb7790()
 {
     ReceiverStub* pReceiver = (ReceiverStub*)receiver;
@@ -2307,6 +2327,7 @@ struct Guard
 void* __cdecl opnew(unsigned int);
 
 // @fnv 0x00cb7920
+// pdb: bhkMultiSphereShape::CreateObject | bhkMultiSphereShape.obj | fnv360_0822_retail, objrun, medium
 Node* FUN_00cb7920()
 {
     Node* p = (Node*)opnew(0x14);
@@ -2391,6 +2412,8 @@ void FUN_00cf0930(int* a, int b, int* c);
 void FUN_00cf0f40(Pass* pass, int* b);
 
 // @f3 0x0092a140 (community match, verified in this file)
+// pdb: bhkMultiSphereShape::LoadBinary | bhkMultiSphereShape.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: bhkListShape::RegisterStreamables)
+// pdb params: arStream
 void Shader::FUN_00cb7b20(Pass* pass)
 {
     FUN_00c84d00(pass);
@@ -3221,6 +3244,8 @@ struct TmpGuard2
     }
 };
 
+// pdb: bhkMultiSphereShape::SaveBinary | bhkMultiSphereShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: arStream
 void __thiscall FUN_00cb8010_cls::FUN_00cb8010(A1Owner* a1)
 {
     unsigned int flagSlot;
@@ -3451,6 +3476,8 @@ bool __thiscall CObj::FUN_00c8c3d0(int value)
 
 extern "C" unsigned long __cdecl _byteswap_ulong(unsigned long);
 // @fnv 0x00c8c020
+// pdb: bhkStream::Endian | bhkTransformShape.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arTrans
 void __cdecl FUN_00c8c020(unsigned int* apData)
 {
     *(volatile unsigned int*)&apData[0] = _byteswap_ulong(*(volatile unsigned int*)&apData[0]);
@@ -3980,6 +4007,8 @@ struct FUN_00c84d50_cls
 {
     void bhkShape_SaveBinary(void* p);
 };
+// pdb: bhkTransformShape::SaveBinary | bhkTransformShape.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void C8C260Shader::FUN_00c8c260(C8C260Renderer* pkRenderer)
 {
     pkRenderer->SetTarget(C8C260GetTarget(this));
@@ -4470,6 +4499,8 @@ struct LegacyCollisionLoader : CollisionStreamLoader
 };
 
 // @fnv 0x00c87f60
+// pdb: bhkPCollisionObject::LoadBinary | bhkPCollisionObject.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void __thiscall LegacyCollisionLoader::FUN_00c87f60(NiStream& stream)
 {
     if (stream.version >= 0x15)

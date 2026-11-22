@@ -17,6 +17,8 @@ struct FUN_00d2b1f0
 };
 
 // @fnv 0x00d2b1f0
+// pdb: hkpUnaryAction::entityRemovedCallback | hkpUnaryAction.obj | fnv360_0822_retail, vtable, high
+// pdb params: entity
 void FUN_00d2b1f0::EntityRemovedCallback(int)
 {
     if (m1)
@@ -73,6 +75,7 @@ struct FUN_00433530_mgr
 
 extern FUN_00433530_mgr* DAT_0107a0d8;
 
+// pdb: TESObjectCELL::ForceLODFadeInLoadedCells | TESObjectCELL.obj | fnv360_0822_retail, caller_sim, low
 void FUN_00d2b2b0_class::FUN_00d2b2b0()
 {
     for (unsigned int i = 0; i < DAT_0107a0d8->FUN_00433530(); i++)
@@ -109,6 +112,8 @@ class UnaryActionHelper : public hkpUnaryAction
 };
 
 // @fnv 0x00d2b210
+// pdb: hkpBinaryAction::setEntityA | hkpBinaryAction.obj | fnv360_0822_retail, objrun, high
+// pdb params: entityA
 void UnaryActionHelper::SetEntity(hkpEntity* entity)
 {
     if (m_pEntity)

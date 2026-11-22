@@ -72,6 +72,8 @@ struct SearchObject
 };
 // Calls FUN_00e44eb0 on this object and returns its result as an int.
 // @fnv 0x00e44f50
+// pdb: ActorPackage::Revert | ActorPackage.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apLoadGameBuffer
 int SearchObject::GetCallResult(unsigned int auiUnused)
 {
     unsigned int callResult0 = (unsigned int)((CallTarget_00e44eb0*)this)->FUN_00e44eb0();

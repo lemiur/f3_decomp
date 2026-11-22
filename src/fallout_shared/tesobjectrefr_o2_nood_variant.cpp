@@ -264,6 +264,8 @@ struct FUN_00c9f830_Pair {
     __m128 v1;
 };
 
+// pdb: bhkAabbPhantom::CopyCinfo | bhkAabbPhantom.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arInfo
 void Obj_00c9f830::FUN_00c9f830(Arg_00c9f830* arg)
 {
     reinterpret_cast<FUN_008f9940_Stand*>(this)->FUN_008f9940(arg);

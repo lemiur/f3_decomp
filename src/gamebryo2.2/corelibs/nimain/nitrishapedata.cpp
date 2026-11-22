@@ -12,6 +12,7 @@ class NiMemObject
 
 // Calls FUN_00a7b8c0 on pThis, then frees pThis with NiMemObject::operator delete when flags has bit 1 set, and returns pThis.
 // @fnv 0x00a7b920
+// pdb: NiPSysVolumeEmitter::`scalar deleting destructor' | NiPSysVolumeEmitter.obj | fnv360_0822_retail, objrun, medium
 void* __fastcall FUN_00a7b920(void* pThis, int, unsigned int flags)
 {
     FUN_00a7b8c0(pThis);
@@ -32,6 +33,8 @@ struct FUN_00a7b6c0_T
 
 // Frees the previous c buffer if it differs from the new one, stores a and c, and sets b to a times 3.
 // @fnv 0x00a7b6c0
+// pdb: NiTriShapeData::Replace | NiTriShapeData.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: usTriangles, pusTriList
 void __fastcall FUN_00a7b6c0(FUN_00a7b6c0_T* self, int, unsigned short ausValue, unsigned short* apusBuffer)
 {
     if (apusBuffer != self->c && self->c)
@@ -50,6 +53,8 @@ struct FUN_00a7b700_T
 };
 
 // @fnv 0x00a7b700
+// pdb: NiTriShapeData::SetData | NiTriShapeData.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: usTriangles, pusTriList
 void __fastcall FUN_00a7b700(FUN_00a7b700_T* self, int, unsigned short ausValue, unsigned int auiValue)
 {
     self->a = ausValue;
@@ -65,6 +70,8 @@ struct FUN_00a7b720_T
 
 // Reads three consecutive unsigned shorts from self->c at offset i*3 and writes them to the three output pointers.
 // @fnv 0x00a7b720
+// pdb: NiTriShapeData::GetTriangleIndices | NiTriShapeData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: i, i0, i1, i2
 void __fastcall FUN_00a7b720(FUN_00a7b720_T* self, int, unsigned short i, unsigned short* i0, unsigned short* i1,
                              unsigned short* i2)
 {
@@ -83,6 +90,8 @@ struct FUN_00a7b760_T
 };
 
 // @fnv 0x00a7b760
+// pdb: NiTriShapeData::GetTriangleIndices | NiTriShapeData.obj | fnv360_0822_retail, objrun_open, low, conflict (bridge: NiTriShapeData::GetStripData)
+// pdb params: i, i0, i1, i2
 void __fastcall FUN_00a7b760(FUN_00a7b760_T* self, int, unsigned short* p1, unsigned int* p2, unsigned short** p3,
                              unsigned int* p4)
 {
@@ -134,6 +143,7 @@ struct MemoryManagerDeallocR
     Blk* Deallocate(void*);
 };
 
+// pdb: NiTriShapeData::SNAMemBlock::`scalar deleting destructor' | NiTriShapeData.obj | fnv360_0822_retail, objrun_prop, low, conflict (bridge: NiTriShapeData::~NiTriShapeData)
 Blk* Blk::FreeBlock()
 {
     _NiFreeAlias(data);
@@ -241,6 +251,8 @@ struct Obj : Base1
 
 // Appends the base entry, a formatted m_uiTriListLength value and a formatted m_pusTriList pointer to the StrArr.
 // @fnv 0x00a7bd60
+// pdb: NiTriShapeData::GetViewerStrings | NiTriShapeData.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void Obj::AppendTriListInfo(StrArr* pStrArr)
 {
     AppendTrianglesInfo(pStrArr);
@@ -538,6 +550,8 @@ class FUN_00a7b630 : public A7B630TriBasedGeomData
 
 // Constructs the base geometry data, sets the triangle list length to 3*m_usTriangles, stores pusTriList and zeroes three members.
 // @fnv 0x00a7b630
+// pdb: NiTriShapeData::NiTriShapeData | NiTriShapeData.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: usVertices, pkVertex, pkNormal, pkColor, pkTexture, usNumTextureSets, eNBTMethod, usTriangles, pusTriList
 FUN_00a7b630::FUN_00a7b630(unsigned short usVertices, A7B630Point3* pkVertex, A7B630Point3* pkNormal,
                            A7B630ColorA* pkColor, A7B630Point2* pkTexture, unsigned short usNumTextureSets,
                            int eNBTMethod, unsigned short usTriangles, unsigned short* pusTriList)
@@ -571,6 +585,7 @@ struct FUN_00a7b690 : Base_a7b
 
 // Initializes the object's pointer fields and the unsigned short field to zero.
 // @fnv 0x00a7b690
+// pdb: NiTriShapeData::NiTriShapeData | NiTriShapeData.obj | fnv360_0822_retail, call_seq, high
 FUN_00a7b690::FUN_00a7b690() : m_p44(0), m_p48(0), m_p4c(0), m_us50(0), m_p54(0)
 {}
 
@@ -689,6 +704,7 @@ class FUN_00ba3d30
 
 // Frees each non-null element of m_holder38 via DAT_011f6238, clears it, then releases m_holder48.
 // @fnv 0x00ba3d30
+// pdb: ImageSpaceEffect::~ImageSpaceEffect | ImageSpaceEffect.obj | fnv360_0822_retail, call_seq, medium
 FUN_00ba3d30::~FUN_00ba3d30()
 {
 
@@ -730,6 +746,7 @@ struct FnvCpu_FUN_00a7b850_CpuObject
     int FUN_00a7b850();
 };
 // @fnv 0x00a7b850
+// pdb: LowProcess::GetSecondGenericLocation | HighProcess.obj | fnv360_0721_retail, vtable, low, conflict (skyrim: NiTriShapeData::GetTriList)
 int FnvCpu_FUN_00a7b850_CpuObject::FUN_00a7b850()
 {
     return value;

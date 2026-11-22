@@ -213,6 +213,7 @@ struct D00370Array
 
 // Iterates cleanupArray backwards and removes every null element via removeAtAndCopy.
 // @f3 0x00988440 (community match, verified in this file)
+// pdb: worldCallbackUtil_cleanupNullPointers | hkpWorldCallbackUtil.obj | fnv360_0822_retail, call_seq, high
 static __declspec(noinline) void FUN_00d00370(D00370Array& array)
 {
     for (int index = array.m_iElementCount - 1; index >= 0; --index)
@@ -3259,6 +3260,7 @@ struct S_00908a00
     void FUN_00908a00();
 };
 
+// pdb: hkpMultiThreadedSimulation::addToiEventWithCriticalSectionLock | hkpMultithreadedSimulation.obj | tesv_win, call_gap, low
 void S_00908a00::FUN_00908a00()
 {
     if (DAT_00d9b108(this) == 0)
@@ -3518,6 +3520,8 @@ __declspec(noinline) static void FUN_00988440(D00370Array& cleanupArray)
         }
     }
 }
+// pdb: hkpWorldCallbackUtil::fireContactPointAdded | hkpWorldCallbackUtil.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: world, event
 void __cdecl FUN_00d01850(S00d01850_Owner* pOwner, S00d01850_Out* pOut)
 {
     volatile DWORD t1;

@@ -7,6 +7,7 @@ struct GlobalObjectO2_00a7b610;
 extern char const* const g_011dfe40_arg1;
 
 // @fnv 0x00a6d280
+// pdb: NiNode::GetRTTI | NiNode.obj | tesv_win, objrun_open, low
 char const* const& __cdecl FUN_00a6d280()
 {
     return g_011dfe40_arg1;
@@ -51,6 +52,8 @@ struct FUN_00c27160_cls
 
 // Allocates a 0x34-byte object, runs its base constructor, zeroes m_14/m_18, sets its vtable, then passes it to FUN_00a6cfe0 with a1 and returns it.
 // @fnv 0x00c27160
+// pdb: NiPSysUpdateCtlr::CreateClone | NiPSysUpdateCtlr.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: kCloning
 void* FUN_00c27160_cls::FUN_00c27160(unsigned int a1)
 {
     FUN_00c27160_cls* p = (FUN_00c27160_cls*)FUN_00aa13e0(0x34);
@@ -129,6 +132,8 @@ struct FnvNode
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile* addend);
 
 // @fnv 0x00c27290
+// pdb: NiPSysUpdateCtlr::SetTarget | NiPSysUpdateCtlr.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkTarget
 void FnvNode::FUN_00c27290(FnvNode* pTarget)
 {
     ((FnvTarget*)this)->SetTarget(pTarget);
@@ -208,6 +213,7 @@ struct S_a6d590 : S_a6d590_Base
 
 // Runs the destructor, then frees the object with _delete when bit 0 of uiFlags is set, and returns this.
 // @fnv 0x00a6d590
+// pdb: NiTimeController::`scalar deleting destructor' | NiTimeController.obj | fnv360_0721_beta, objrun, medium
 S_a6d590* S_a6d590::DestroyAndFree(unsigned int uiFlags)
 {
     this->S_a6d590::~S_a6d590();
@@ -282,6 +288,7 @@ class FUN_00a6d220 : public FUN_00a5d3a0
 
 // Initializes the frequency, phase, and time fields, then updates the flags with (old flags & 0xff6c) | 0x4c.
 // @fnv 0x00a6d220
+// pdb: NiTimeController::NiTimeController | NiTimeController.obj | fnv360_0822_retail, call_seq, medium, conflict (bridge: bhkForceController::bhkForceController)
 FUN_00a6d220::FUN_00a6d220() throw()
     : m_uiObjectFlags(0), m_fFrequency(1.0f), m_fPhase(0.0f), m_fLoKeyTime(a6d2::DAT_0109c820),
       m_fHiKeyTime(a6d2::DAT_01015f5c), m_fStartTime(a6d2::DAT_01015f5c), m_fLastTime(a6d2::DAT_01015f5c),
@@ -466,6 +473,8 @@ __forceinline bool StaticIsKindOf(const KindRtti* rtti, SpawnedItem* obj)
 }
 
 // @fnv 0x00c271c0
+// pdb: NiPSysUpdateCtlr::Update | NiPSysUpdateCtlr.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: UpdateData
 void SpawnedController::FUN_00c271c0(const float* apPosition)
 {
     unsigned short flags = m_08;

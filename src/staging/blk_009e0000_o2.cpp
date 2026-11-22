@@ -41,6 +41,8 @@ struct SpectatorPackage
 };
 
 // @fnv 0x009f9d10
+// pdb: BSStringT<char>::operator= | BGSTerminal.obj | fnv360_0822_debug, call_gap, low, conflict (skyrim: ConcreteObjectFormFactory<class BGSTalkingActivator,26,33,0>::~ConcreteObjectFormFactory<class BGSTalkingActivator,26,33,0>)
+// pdb params: arString
 SpectatorPackage* SpectatorPackage::FUN_009f9d10(const SpectatorPackage& aPackage)
 {
     IsComplete(aPackage);
@@ -263,6 +265,7 @@ struct FUN_009fdeb0_class
 };
 
 // @fnv 0x009fdeb0
+// pdb: hkProcessContext::`scalar deleting destructor' | hkpPhysicsContext.obj | fnv360_0822_retail, vtable, medium
 int __thiscall FUN_009fdeb0_class::FUN_009fdeb0(int flag)
 {
     FUN_009fdc10(this);
@@ -1543,6 +1546,8 @@ class FUN_009fb250 : public C9FB250BaseObject, public C9FB250Unknown
 
 // DECLARE_IUNKNOWN
 // @fnv 0x009fb250
+// pdb: NiTMapBase<NiTPointerAllocator<unsigned int>,unsigned int,BSSoundHandle *>::KeyToHashIndex | FalloutAudio.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: key
 unsigned long __stdcall FUN_009fb250::AddRef()
 {
     return m_pUnknown->AddRef();
@@ -2509,6 +2514,7 @@ void __cdecl FUN_009fead0()
 extern void(__cdecl* DAT_011a6250)(void);
 
 // @fnv 0x009feae2
+// pdb: BSShaderManager::GetVSTarget | BSShaderManager.obj | tesv_win, call_gap_sim, low
 void __cdecl FUN_009feae2()
 {
     DAT_011a6250();
@@ -2690,6 +2696,7 @@ struct FnvCpu_FUN_009fd0f0_CpuObject
     int FUN_009fd0f0();
 };
 // @fnv 0x009fd0f0
+// pdb: DoorTeleportData::GetLinkedDoor | TeleportData.obj | fnv360_0822_retail, call_seq, high
 int FnvCpu_FUN_009fd0f0_CpuObject::FUN_009fd0f0()
 {
     return value;
@@ -2776,6 +2783,7 @@ class S009f9d50_Value
 };
 
 // @fnv 0x009f9d50
+// pdb: BipedAnim::~BipedAnim | BipedAnim.obj | fnv360_0822_retail, call_seq, low
 S009f9d50_Value& S009f9d50_Value::FUN_009f9d50(const S009f9d50_Value& kOther)
 {
     return FUN_009f9c80(kOther);
@@ -5236,6 +5244,7 @@ int FUN_009fdf20_cls::FUN_009fdf20()
 extern "C" void __cdecl FUN_009fd320();
 
 // @fnv 0x009fdfd0
+// pdb: RaceSexMenu::GetClassStatic | RaceSexMenu.obj | fnv360_0822_debug, callee_sim, low
 void __cdecl FUN_009fdfd0()
 {
     FUN_009fd320();

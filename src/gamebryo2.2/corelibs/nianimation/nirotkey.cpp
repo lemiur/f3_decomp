@@ -8,6 +8,8 @@
     reinterpret_cast<const TimedRotationKey*>(reinterpret_cast<const char*>(keys) + (index) * (size))
 
 // @fnv 0x00a28740
+// pdb: NiRotKey::GenInterp | NiRotKey.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: fTime, pkKeys, eType, uiNumKeys, uiLastIdx, ucSize
 NiQuaternion __cdecl TimedRotationKey::InterpolatePosition(float fTime, TimedRotationKey* pkKeys,
                                                            AnimationKey::KeyType eType, unsigned int uiNumKeys,
                                                            unsigned int& ruiLastIndex, unsigned char ucKeySize)
@@ -59,6 +61,8 @@ NiQuaternion __cdecl TimedRotationKey::InterpolatePosition(float fTime, TimedRot
 
 // Compares the four floats of pThis with those of q and returns 1 only if all four are exactly equal.
 // @fnv 0x00a92660
+// pdb: NiColorA::operator== | BGSPrimitive.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: c
 int __fastcall FUN_00a92660(const float* pThis, int, const float* q)
 {
     return pThis[0] == q[0] && pThis[1] == q[1] && pThis[2] == q[2] && pThis[3] == q[3];
@@ -69,6 +73,7 @@ void __cdecl FUN_00a57010();
 extern void* _DAT_011f3740;
 
 // @fnv 0x00a3ca40
+// pdb: BSMultiBoundOBB::GetRTTI | BGSPrimitive.obj | fnv360_0822_retail, vtable, medium
 void* __cdecl FUN_00a3ca40()
 {
     return &_DAT_011f3740;
@@ -104,6 +109,7 @@ void* __cdecl FUN_00aa1070(unsigned int n);
 
 // If m_24 is negative, allocates a float array sized from m_18->m_08, fills running sums via NiPathInterpolator_PathLength, stores the last value in m_24, and returns m_24.
 // @fnv 0x00a3e9a0
+// pdb: NiPathInterpolator::GetTotalPathLength | NiPathInterpolator.obj | fnv360_0822_retail, call_seq, high
 float FUN_00a3e9a0_cls::GetAccumulatedValue()
 {
     if (m_24 < 0.0f)

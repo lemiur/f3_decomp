@@ -42,6 +42,8 @@ struct LocalObj
 };
 
 // @fnv 0x00c812d0
+// pdb: bhkUtilFunctions::FindCollisionObjectBFS | bhkUtilFunctions.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObject, auiMaxLevel
 int __cdecl FUN_00c812d0(void* a1, void* a2)
 {
     LocalObj local;

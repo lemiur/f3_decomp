@@ -5,6 +5,7 @@
 #include "nid3dshader_decls.h"
 
 // @fnv 0x00e81100
+// pdb: NiD3DShader::_SDMInit | NiD3DShader.obj | fnv360_0822_retail, ustr, low, conflict (bridge: NiStaticDataManager::AddLibrary)
 void NiD3DShader::InitializePoint3()
 {
     char* oldString = DAT_0126f750;
@@ -23,6 +24,7 @@ void NiD3DShader::InitializePoint3()
 
 #include "nid3dshader_depth.h"
 // @fnv 0x00e7d9d0
+// pdb: NiDX9AdditionalDepthStencilBufferData::Create | NiDX92DBufferData.obj | tesv_win, ustr, medium
 NiDX9AdditionalDepthStencilBufferData* NiDX9AdditionalDepthStencilBufferData::Create(DepthDevice* device,
                                                                                      Ni2DBuffer** buffer,
                                                                                      const NiPixelFormat* pixelFormat,
@@ -136,6 +138,8 @@ struct FUN_00e81880_shell : public NiD3DShader
 extern "C" void __cdecl BindShaderConstants(NiD3DShader*, NiGeometry*);
 
 // @fnv 0x00e81880
+// pdb: NiD3DShader::SetupGeometry | NiD3DShader.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkGeometry
 bool FUN_00e81880_shell::FUN_00e81880(NiGeometry* pkGeometry)
 {
     BindShaderConstants(this, pkGeometry);
@@ -149,6 +153,8 @@ struct FakeRenderer008
     virtual unsigned int V8(void*, void*, void*, void*, void*, void*, void*, int);
 };
 // @fnv 0x00e805b0
+// pdb: NiD3DShader::PreProcessPipeline | NiD3DShader.obj | fnv360_0721_beta, objopen_prop, low, conflict (bridge: NiD3DShader::SetupRenderingPass)
+// pdb params: pkGeometry, pkSkin, pkRendererData, pkState, pkEffects, kWorld, kWorldBound
 unsigned int __stdcall FUN_00e805b0(void* a1, void* a2, void* a3, void* a4, void* a5, void* a6, void* a7)
 {
     return ((FakeRenderer008*)DAT_0126f74c)->V8(a1, a2, a3, a4, a5, a6, a7, 0);
@@ -173,6 +179,8 @@ struct ShaderStandIn
     unsigned int FUN_00e81170(void*, void*, void*, void*, void*, void*, void*);
 };
 // @fnv 0x00e81170
+// pdb: NiD3DPass::SetupRenderingPass | NiD3DPass.obj | fnv360_0721_beta, objrun_prop, low, conflict (bridge: NiD3DShader::PreProcessPipeline)
+// pdb params: pkGeometry, pkSkin, pkBuffData, pkState, pkEffects, kWorld, kWorldBound, uiPass
 unsigned int ShaderStandIn::FUN_00e81170(void* a1, void* a2, void* a3, void* a4, void* a5, void* a6, void* a7)
 {
     if (!*(bool*)((char*)this + 0x10))
@@ -202,6 +210,7 @@ struct FUN_00e818a0_t
     void* FUN_00e818a0();
 };
 // @fnv 0x00e818a0
+// pdb: NiD3DShaderInterface::NiD3DShaderInterface | NiD3DShaderInterface.obj | fnv360_0822_retail, call_seq, medium
 void* FUN_00e818a0_t::FUN_00e818a0()
 {
     ((Helper00a8f440*)this)->FUN_00a8f440();
@@ -307,6 +316,7 @@ struct FUN_00e81470_class
     void FUN_00e81470();
 };
 // @fnv 0x00e81470
+// pdb: NiD3DShader::NextPass | NiD3DShader.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void FUN_00e81470_class::FUN_00e81470()
 {
     NiD3DPass* pkPass;
@@ -424,6 +434,7 @@ struct UnkShader
     void FUN_00e814b0();
 };
 // @fnv 0x00e814b0
+// pdb: NiD3DShader::RecreateRendererData | NiD3DShader.obj | fnv360_0822_retail, objrun_prop, low
 void UnkShader::FUN_00e814b0()
 {
     if (i18)
@@ -454,6 +465,7 @@ struct FUN_00e805f0_shell
 };
 
 // @fnv 0x00e805f0
+// pdb: NiD3DShader::FirstPass | NiD3DShader.obj | fnv360_0721_beta, objrun_prop, low, conflict (bridge: NiD3DShader::PostProcessPipeline)
 unsigned int FUN_00e805f0_shell::FUN_00e805f0(void* a1, void* a2, void* a3, void* a4, void* a5, void* a6, void* a7)
 {
     void* decl = *(void**)((char*)this + 0x2c);
@@ -496,6 +508,8 @@ struct FUN_00e80590_cls
 };
 
 // @fnv 0x00e80590
+// pdb: NiD3DShader::SetupRenderingPass | NiD3DShader.obj | fnv360_0822_retail, objrun_sim, low, conflict (bridge: NiD3DShader::FirstPass)
+// pdb params: pkGeometry, pkSkin, pkRendererData, pkState, pkEffects, kWorld, kWorldBound
 unsigned int FUN_00e80590_cls::FUN_00e80590()
 {
     GlobalDispatchTarget* pTarget = *reinterpret_cast<GlobalDispatchTarget**>(&DAT_0126f74c);
@@ -530,6 +544,8 @@ class FUN_00e80640_cls
 };
 
 // @fnv 0x00e80640
+// pdb: NiSCMExtraData::AddEntry | NiD3DShader.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: uiConstantIndex, uiPass, eType, pkExtraData, bGlobal
 void FUN_00e80640_cls::AddEntry(unsigned int uiKeyLow, unsigned int uiKeyHigh, unsigned int uiArrayIndex,
                                 unsigned int uiValue, bool flag)
 {
@@ -625,6 +641,7 @@ struct FUN_00e806c0 : public ShaderIfaceBase
 };
 
 // @fnv 0x00e806c0
+// pdb: NiD3DShader::~NiD3DShader | NiD3DShader.obj | fnv360_0721_beta, call_seq, medium
 FUN_00e806c0::~FUN_00e806c0() throw()
 {
     if (m_kName.Exists() && m_kName.GetLength() != 0)
@@ -673,6 +690,8 @@ struct FUN_00e807d0_shell
                      void* unusedSixth, void* context, void* unusedEighth);
 };
 // @fnv 0x00e807d0
+// pdb: NiD3DShader::SetupTransformations | NiD3DShader.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pkGeometry, pkSkin, pkPartition, pkRendererData, pkState, pkEffects, kWorld, kWorldBound
 int FUN_00e807d0_shell::FUN_00e807d0(void* unusedFirst, void* geometry, void* info, void* unusedFourth,
                                      void* unusedFifth, void* unusedSixth, void* context, void* unusedEighth)
 {
@@ -943,6 +962,7 @@ unsigned int ShaderE811d0::FUN_00e811d0(NiAVObjectStub* apObject, void* a2, void
 }  // namespace fnv_00e811d0
 
 // @fnv 0x00e814f0
+// pdb: NiD3DShader::GetVSPresentAllPasses | NiD3DShader.obj | fnv360_0822_retail, objrun, low
 char __cdecl FUN_00e814f0(void)
 {
     return *(int*)(DAT_0126f74c + 0x5c) != 0;
@@ -957,6 +977,7 @@ struct RendererState008
 };
 
 // @fnv 0x00e81500
+// pdb: NiD3DShader::GetPSPresentAllPasses | NiD3DShader.obj | fnv360_0822_retail, objrun, low
 unsigned char FUN_00e81500()
 {
     RendererState008* pState = reinterpret_cast<RendererState008*>(DAT_0126f74c);
@@ -1791,6 +1812,8 @@ struct PassConstants
 };
 void* __cdecl FUN_00aa13e0(unsigned int);
 // @fnv 0x00e81510
+// pdb: NiD3DShader::SetupSCMExtraData | NiD3DShader.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: pkD3DShader, pkGeometry
 extern "C" void __cdecl BindShaderConstants(NiD3DShader* shader, NiGeometry* geometry)
 {
     GeometryAccess* pGeometryAccess = reinterpret_cast<GeometryAccess*>(geometry);
@@ -1913,6 +1936,8 @@ extern "C" void __cdecl BindShaderConstants(NiD3DShader* shader, NiGeometry* geo
 extern "C" void __cdecl FUN_00e81a90();
 
 // @fnv 0x00e80570
+// pdb: bhkSPCollisionObject::SaveBinary | bhkSPCollisionObject.obj | fnv360_0721_beta, objrun, medium
+// pdb params: arStream
 void __cdecl FUN_00e80570()
 {
     FUN_00e81a90();
@@ -2421,6 +2446,8 @@ struct ShaderPrepQ : public NiD3DShader
 };
 
 // @fnv 0x00e812f0
+// pdb: NiD3DShader::PrepareGeometryForRendering | NiD3DShader.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkGeometry, pkPartition, pkRendererData, pkState
 GeomBufferDataQ* ShaderPrepQ::PrepareShaderAndStreams(GeometryQ* pkGeometry, SkinPartitionQ* pkPartition,
                                                       GeomBufferDataQ* pkBufferData, void* pkState)
 {

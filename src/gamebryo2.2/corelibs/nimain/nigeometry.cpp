@@ -3,6 +3,7 @@
 #include "nigeometry_decls.h"
 
 // @fnv 0x00a89ab0
+// pdb: NiPropertyState::NiPropertyState | NiPropertyState.obj | fnv360_0822_debug, call_seq, medium
 NiGeometry* NiGeometry::CopyMemberData()
 {
     unsigned int* fields = (unsigned int*)this;
@@ -18,12 +19,16 @@ NiGeometry* NiGeometry::CopyMemberData()
 }
 
 // @fnv 0x00a7fd90
+// pdb: NiGeometry::OnVisible | NiGeometry.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: kCuller
 void NiGeometry::OnVisible(NiCullingProcess& process)
 {
     process.Append(this);
 }
 
 // @fnv 0x00a80b50
+// pdb: NiGeometry::LinkObject | NiGeometry.obj | fnv360_0721_beta, objrun_prop, high
+// pdb params: kStream
 void NiGeometry::LinkObject(NiStream& stream)
 {
     NiAVObject::LinkObject(stream);
@@ -32,6 +37,8 @@ void NiGeometry::LinkObject(NiStream& stream)
 }
 
 // @fnv 0x00a80680
+// pdb: NiGeometry::SetModelData | NiGeometry.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: pkModelData
 void NiGeometry::ReplaceModelData(NiGeometryData* data)
 {
     if (data)
@@ -64,6 +71,8 @@ void NiGeometry::ReplaceModelData(NiGeometryData* data)
 extern "C" __declspec(dllimport) long __stdcall InterlockedCompareExchange(long volatile*, long, long);
 extern long DAT_0108ede0;
 extern long DAT_0108ede4;
+// pdb: NiGeometry::UpdatePropertiesDownward | NiGeometry.obj | fnv360_0822_debug, vtable, medium
+// pdb params: pkParentState
 void NiGeometry::UpdatePropertiesDownwardPass(NiPropertyState* state)
 {
     NiAVObject::UpdatePropertiesDownwardPass(state);
@@ -100,6 +109,7 @@ void NiAVObject::FUN_00a5ac90(NiAVObject* dest, CloningProcess& process)
 
 // Copies the previous world bound, and if flags 19/13 conditions or a zero radius apply, allocates or updates m_kWorldBound and refreshes the flag bit 22.
 // @fnv 0x00a80710
+// pdb: NiGeometry::UpdateWorldBound | NiGeometry.obj | fnv360_0822_debug, vtable, medium
 void NiGeometry::UpdateWorldBound()
 {
     NiBound* world = m_kWorldBound;
@@ -146,6 +156,8 @@ void NiGeometry::UpdateWorldBound()
 extern NiRTTI DAT_01090708;
 extern "C" __declspec(dllimport) long __stdcall InterlockedCompareExchange(long volatile*, long, long);
 
+// pdb: NiGeometry::ProcessClone | NiGeometry.obj | fnv360_0822_debug, vtable, medium
+// pdb params: kCloning
 void NiGeometry::ProcessClone(CloningProcess& process)
 {
     NiAVObject::ProcessClone(process);
@@ -296,6 +308,8 @@ struct DummyController
 
 // Stores a pointer to this object's offset 0x9c into the renderer and, if the controller at this+0xc exists, runs its pre-display iterate.
 // @fnv 0x00a80610
+// pdb: NiGeometry::RenderImmediate | NiGeometry.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: pkRenderer
 void FUN_00a80610_shell::FUN_00a80610(NiRenderer* pkRenderer)
 {
     pkRenderer->m_pkCurrProp = &m_PropertyState;
@@ -356,6 +370,8 @@ struct FUN_00a5a450_helper
 
 // Calls NiAVObject_SetSelectiveUpdateFlags, then if the field at offset 0xbc is nonzero sets flags 4 and 2 at 0x30, sets *bSelectiveUpdate true and *bRigid false.
 // @fnv 0x00a808f0
+// pdb: NiGeometry::SetSelectiveUpdateFlags | NiGeometry.obj | fnv360_0822_debug, vtable, high
+// pdb params: bSelectiveUpdate, bSelectiveUpdateTransforms, bRigid
 void FUN_00a808f0_shell::UpdateSelectiveUpdateFlags(bool* bSelectiveUpdate, bool bSelectiveUpdateTransforms,
                                                     bool* bRigid)
 {
@@ -636,6 +652,8 @@ struct FUN_00a80430_Holder : public NiGeometry
 };
 // Calls FUN_00a59f00 on kStream, then invokes vReg on the RegObj at offset 0xb8 and, if present, the one at 0xbc; returns false if the first call fails.
 // @fnv 0x00a80430
+// pdb: NiGeometry::RegisterStreamables | NiGeometry.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 bool FUN_00a80430_Holder::FUN_00a80430(NiStream& kStream)
 {
     if (!FUN_00a59f00(kStream))
@@ -654,6 +672,7 @@ struct FUN_00a80530_shell : public NiGeometry
 extern const char* const g_011f4a48_arg1;
 
 // @fnv 0x00a80530
+// pdb: NiCamera::GetRTTI | NiCamera.obj | fnv360_0822_retail, objrun_open, low
 void* FUN_00a80530_shell::FUN_00a80530()
 {
     return (void*)&g_011f4a48_arg1;
@@ -913,6 +932,8 @@ struct ViewerGeometry : NiGeometry
     void FUN_00a80e70(ViewerStrings*);
 };
 // @fnv 0x00a80e70
+// pdb: NiGeometry::GetViewerStrings | NiGeometry.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void ViewerGeometry::FUN_00a80e70(ViewerStrings* strings)
 {
     FUN_00a5ad00(strings);
@@ -1135,6 +1156,8 @@ struct FUN_00a80bf0_shell : public NiGeometry
 };
 
 // @fnv 0x00a80bf0
+// pdb: NiGeometry::LoadBinary | NiGeometry.obj | fnv360_0822_retail, uconst, low
+// pdb params: kStream
 void FUN_00a80bf0_shell::FUN_00a80bf0(GeomStream& kStream)
 {
     NiAVObject::LoadBinary((NiStream&)kStream);
@@ -1417,6 +1440,8 @@ template <class T> void LoadStreamValue(StreamStub& stream, T& value)
     reader->m_uiPosition += reader->m_pRead(reader, &value, uiElem, &uiElem, 1);
 }
 // @fnv 0x00a80db0
+// pdb: NiGeometry::SaveBinary | NiGeometry.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void GeometryStub::FUN_00a80db0(StreamStub& stream)
 {
     SaveBinary(stream);
@@ -1513,6 +1538,8 @@ class FUN_00a804e0 : public GeometryBase804e0
 
 // Constructor that stores the NiGeometryData pointer, increments its reference count if non-null, and nulls m_skinInstance and m_spShader.
 // @fnv 0x00a804e0
+// pdb: NiGeometry::NiGeometry | NiGeometry.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkModelData
 FUN_00a804e0::FUN_00a804e0(NiGeometryData* apModelData) : m_modelData(apModelData)
 {
     if (apModelData)

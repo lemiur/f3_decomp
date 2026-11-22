@@ -614,6 +614,8 @@ found:
 }
 }
 
+// pdb: hkStreamStatisticsCollector::makeTree | hkStreamStatisticsCollector.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: m_nodesOut, stringTable
 void MonitorTreeBuilder::FUN_00ddf740(MonitorNodeArray* roots, MonitorStrings* strings)
 {
     using namespace na651b0;

@@ -42,6 +42,8 @@ struct FUN_00d67020_class {
 };
 
 // @fnv 0x00d67020
+// pdb: hkpRigidBodyInertiaViewer::addWorld | hkpRigidBodyInertiaViewer.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: world
 void FUN_00d67020_class::VisitSubObjects(Arg* arg) {
     arg->FUN_00c93820(this ? &field28 : 0);
     arg->FUN_00c93920(this ? &field2c : 0);
@@ -85,6 +87,7 @@ struct Owner {
 };
 // Iterates the collection's items and passes each to VisitSubObjects on the Handler at this-8, if the collection exists.
 // @fnv 0x00d67110
+// pdb: hkpRigidBodyInertiaViewer::init | hkpRigidBodyInertiaViewer.obj | fnv360_0822_retail, vtable, medium
 void __thiscall Owner::ProcessCollectionItems() {
     if (collection != 0) {
         int n = collection->count;
@@ -110,6 +113,8 @@ struct CompleteObject : Prefix32, SecondaryBase {
 };
 // Adjusts this to the enclosing CompleteObject and calls its VisitSubObjects method.
 // @fnv 0x00d67160
+// pdb: hkpRigidBodyCentreOfMassViewer::worldRemovedCallback | hkpRigidBodyCentreOfMassViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void SecondaryBase::FUN_00d67160() {
     CompleteObject* pCompleteObject = reinterpret_cast<CompleteObject*>(reinterpret_cast<char*>(this) - sizeof(Prefix32));
     pCompleteObject->VisitSubObjects();
@@ -217,6 +222,8 @@ struct FUN_00d66f30_cls {
 };
 
 // @fnv 0x00d66f30
+// pdb: hkpRigidBodyInertiaViewer::removeWorld | hkpRigidBodyInertiaViewer.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: world
 void FUN_00d66f30_cls::FUN_00d66f30(FUN_00d66f30_params* apParams)
 {
     apParams->FUN_00c917a0(this != 0 ? &m_kInner : 0);
@@ -253,6 +260,8 @@ struct TargetClass {
 };
 
 // @fnv 0x00d67150
+// pdb: hkpPhantomDisplayViewer::worldAddedCallback | hkpPhantomDisplayViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void TargetClass::FUN_00d67150(void* arg) {
     ((Outer*)((char*)this - 0x20))->FUN_00d66f30(arg);
 }
@@ -352,6 +361,8 @@ public:
 
 // Constructor that forwards info to the D671F0Base base constructor and initializes the two listener arrays.
 // @fnv 0x00d671f0
+// pdb: hkpRigidBodyInertiaViewer::hkpRigidBodyInertiaViewer | hkpRigidBodyInertiaViewer.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: contexts
 FUN_00d671f0::FUN_00d671f0(void* info) : D671F0Base(info)
 {
 }
@@ -948,6 +959,8 @@ __forceinline void reservePointers(LocalArray<DisplayShape*>& array, int request
 }
 }
 
+// pdb: hkpRigidBodyInertiaViewer::postSimulationCallback | hkpRigidBodyInertiaViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void ViewerPart::FUN_00d67340(float unused) {
     recordEvent(DAT_00e80f58);
     recordEvent(DAT_00e80f4c);

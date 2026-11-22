@@ -5,6 +5,7 @@
 extern "C" __declspec(dllimport) unsigned long __stdcall WaitForSingleObject(void* h, unsigned long ms);
 
 // @fnv 0x00d04380
+// pdb: hkSemaphore::acquire | hkWin32Semaphore.obj | tesv_win, objopen_prop, low
 int __fastcall FUN_00d04380(void* h, int)
 {
     return WaitForSingleObject(*(void**)h, (unsigned long)-1);
@@ -17,6 +18,7 @@ struct FUN_00d04390
     unsigned long wait(unsigned long amount);
 };
 // @fnv 0x00d04390
+// pdb: hkSemaphore::release | hkWin32Semaphore.obj | tesv_win, objrun_open, low
 unsigned long FUN_00d04390::wait(unsigned long amount)
 {
     return (unsigned long)ReleaseSemaphore(*(void**)this, (long)amount, 0);
@@ -30,6 +32,8 @@ struct FUN_00d04350_cls
 };
 
 // @fnv 0x00d04350
+// pdb: hkSemaphore::hkSemaphore | hkWin32Semaphore.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: initialCount, maxCount
 FUN_00d04350_cls* FUN_00d04350_cls::Create(long initialCount, long maximumCount)
 {
     handle = CreateSemaphoreA(0, initialCount, maximumCount, 0);

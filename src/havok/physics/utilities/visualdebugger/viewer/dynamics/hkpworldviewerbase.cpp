@@ -3,6 +3,7 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 // @fnv 0x00ddcdd0
+// pdb: hkpMeshWeldingUtility::modifyCombinedEdgesBitcode | hkpMeshWeldingUtility.obj | tesv_win, hash, low
 unsigned int FUN_00ddcdd0(unsigned int auiValue, unsigned int auiIndex, unsigned int auiFieldValue)
 {
     return (auiValue & ~(0x1f << (auiIndex * 5))) | (auiFieldValue << (auiIndex * 5));
@@ -108,6 +109,8 @@ class FUN_00ddccb0_cls : public BDDCCB0ReferencedObject, public BDDCCB0Process, 
 };
 
 // @f3 0x00a648d0 (community match, verified in this file)
+// pdb: hkpWorldViewerBase::hkpWorldViewerBase | hkpWorldViewerBase.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: contexts
 FUN_00ddccb0_cls::FUN_00ddccb0_cls(const BDDCCB0Array<BDDCCB0ProcessContext*>& kContexts) throw()
     : BDDCCB0Process(true), m_pkContext(0)
 {
@@ -145,6 +148,7 @@ struct Flag
 
 // Compares unk08 of two Item objects and returns a Flag holding whether the first is less than the second.
 // @f3 0x00a58ad0 (community match, verified in this file)
+// pdb: weightedNeighbourLess | hkGeomConvexHullBuilder.obj | tesv_win, hash, low
 Flag __cdecl FUN_00ddcda0(Item* left, Item* right) {
     bool result;
     if (*(float*)&left->unk04 < *(float*)&right->unk04)

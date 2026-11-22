@@ -12,6 +12,8 @@ struct Owner
 };
 // Passes a pointer to this+8 (or null when this equals 0x20) to container->ClearValue and returns its result.
 // @fnv 0x00d6a910
+// pdb: hkpContactPointViewer::worldRemovedCallback | hkpContactPointViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: w
 int Owner::FUN_00d6a910(Container* container)
 {
     void* value;
@@ -48,6 +50,8 @@ struct FUN_00d6a8e0_cls
 
 // Passes a pointer derived from this (this+8, or null when this-0x20 is null) to apTarget's FUN_00c93920.
 // @fnv 0x00d6a8e0
+// pdb: hkpContactPointViewer::worldAddedCallback | hkpContactPointViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: w
 void FUN_00d6a8e0_cls::CallTargetWithSelfOffset(Target* apTarget)
 {
     apTarget->FUN_00c93920(((char*)this - 0x20) != 0 ? (char*)this + 8 : 0);
@@ -194,6 +198,8 @@ struct FUN_00d6a940 : WorldViewerBase, PostSimListener
 };
 
 // @fnv 0x00d6a940
+// pdb: hkpBroadphaseViewer::hkpBroadphaseViewer | hkpBroadphaseViewer.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: contexts
 FUN_00d6a940::FUN_00d6a940(void* a) : WorldViewerBase(a)
 {
     // The three flags are written through a pointer: that gives the stores an

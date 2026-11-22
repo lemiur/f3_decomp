@@ -22,6 +22,7 @@ struct CB2FC0Object
 
 // Builds a CB2FC0Snapshot from this object and passes it to FUN_00cb2d90.
 // @fnv 0x00cb2fc0
+// pdb: hkRotation::renormalize | hkRotation.obj | tesv_win, hash, low
 void CB2FC0Object::FUN_00cb2fc0()
 {
     CB2FC0Snapshot snapshot(this);
@@ -46,6 +47,8 @@ class FUN_00cb2e30_cls
 
 // Builds a SpawnedSnap from value and scale, then passes it to FUN_00cb2d90 on this object.
 // @fnv 0x00cb2e30
+// pdb: hkRotation::setAxisAngle | hkRotation.obj | fnv360_0822_debug, objrun_prop, low
+// pdb params: axis, angle
 void FUN_00cb2e30_cls::SpawnSnap(int value, float scale)
 {
     SpawnedSnap snap(value, scale);
@@ -71,6 +74,7 @@ class FUN_00cb2ff0 : public FUN_00cb2ff0_base
 
 // Calls unk08 on this object, then decrements the global counter DAT_012683c0.
 // @fnv 0x00cb2ff0
+// pdb: bhkTriSampledHeightFieldBvTreeShape::~bhkTriSampledHeightFieldBvTreeShape | bhkTriSampledHeightFieldBvTreeShape.obj | fnv360_0822_retail, call_seq, high
 FUN_00cb2ff0::~FUN_00cb2ff0()
 {
     this->unk08();

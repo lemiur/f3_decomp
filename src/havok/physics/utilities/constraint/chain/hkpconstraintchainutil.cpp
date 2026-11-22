@@ -283,6 +283,8 @@ struct __declspec(align(16)) S_00a91590_Pair
 
 int hkpConstraintUtils_getConstraintPivots(S_00a91590_Key* a, S_00a91590_Vec* lo, S_00a91590_Vec* hi);
 
+// pdb: hkpConstraintChainUtil::addConstraintToChain | hkpConstraintChainUtil.obj | fnv360_0721_beta, objrun, medium
+// pdb params: newChildInstance, chainInstance, chainData
 int FUN_00e5b8f0(KeyOwnerA* a1, ListB* a2, OwnerC* a3, ...)
 {
     S_00a91590_Vec lo;

@@ -17,6 +17,8 @@ struct FUN_00e0a070
 
 // Links node into one of two singly-linked lists on this, chosen by the byte at node+4, incrementing the matching count.
 // @fnv 0x00e0a070
+// pdb: hkpMoppDefaultSplitter::releaseNode | hkpMoppDefaultSplitter.obj | fnv360_0822_retail, vtable, high
+// pdb params: nodeToRelease
 void FUN_00e0a070::VisitNode(void* node)
 {
     if (node)
@@ -55,6 +57,7 @@ struct FUN_00e09ba0
 
 // Initializes the object: sets m_06 to 1, points m_00 at DAT_010ea610, and zeroes m_10, m_14, m_18, m_1c, m_08 and m_0c.
 // @fnv 0x00e09ba0
+// pdb: hkpMoppDefaultSplitter::hkpMoppDefaultSplitter | hkpMoppDefaultSplitter.obj | fnv360_0822_retail, uvref, high
 FUN_00e09ba0::FUN_00e09ba0()
 {
     m_06 = 1;
@@ -69,6 +72,7 @@ FUN_00e09ba0::FUN_00e09ba0()
 
 extern int DAT_0102e388;
 // @fnv 0x00e09bd0
+// pdb: TESAttributes::~TESAttributes | TESAttributes.obj | fnv360_0721_beta, call_seq, medium
 void __fastcall FUN_00e09bd0(void* p, int)
 {
     *reinterpret_cast<void**>(p) = &DAT_0102e388;
@@ -185,6 +189,8 @@ class FUN_00e09f80_class
 
 // Pops a free node from the free list, resets its flags and range fields, links it to the owner, and registers its three key ranges with the axis handler.
 // @fnv 0x00e09f80
+// pdb: hkpMoppDefaultSplitter::createTerminal | hkpMoppDefaultSplitter.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: parentNode, params
 hkNodeE09F* FUN_00e09f80_class::AllocateNode(int iOwner, hkRangeE09F* pkRange) throw()
 {
     hkNodeE09F* pkNode = m_kFreeListEntries;
@@ -229,6 +235,7 @@ struct FNVResponse
     float ComputeResponse(FNVRange* range);
 };
 // @fnv 0x00e0a750
+// pdb: hkpMoppCostFunction::costUnbalancedPlaneRight | hkpMoppDefaultSplitter.obj | tesv_win, hash, low
 float FNVResponse::ComputeResponse(FNVRange* range)
 {
     float displacement = range->value - static_cast<float>((range->upper + range->lower) * DAT_01011588);
@@ -284,6 +291,8 @@ template <typename T> inline void swapE0AB(T& kA, T& kB)
 
 // Sorts the range [iD, iH] of pArr in place by m_key using a Hoare-style quicksort with a middle pivot, recursing on the left part and looping on the right.
 // @fnv 0x00e0ab60
+// pdb: hkAlgorithm::quickSortRecursive<hkpMoppCompilerPrimitive,hkAlgorithm::less<hkpMoppCompilerPrimitive> > | hkpMoppDefaultSplitter.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pArr, d, h, cmpLess
 void __cdecl QuickSortElements(SortElemE0AB* pElements, int iLow, int iHigh, SortLessE0AB kCmpLess)
 {
 setRecursion:
@@ -495,6 +504,7 @@ class NodePoolE0A
 
 // Pops a NodeE0A from the free list, resets its flags, indices, distances, and counts to defaults, and returns the node.
 // @fnv 0x00e0a020
+// pdb: hkpMoppDefaultSplitter::createNode | hkpMoppDefaultSplitter.obj | fnv360_0822_retail, objrun, high
 NodeE0A* NodePoolE0A::PopNode()
 {
     NodeE0A* node = m_kFreeListEntries;
@@ -778,6 +788,8 @@ class SplitBuilder
 
 // Recursively builds a split tree node by classifying and sorting items against candidate planes, then splitting the list into left and right children.
 // @fnv 0x00e0a270
+// pdb: hkpMoppDefaultSplitter::split | hkpMoppDefaultSplitter.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: parentNode, params, side, depth
 SplitNode* SplitBuilder::FUN_00e0a270(SplitNode* parent, SplitList* list, int side, int depth)
 {
     if (list->m_iElementCount == 1)
@@ -1108,6 +1120,8 @@ struct FUN_00e0a6c0_Class
 
 // Scales |m_14 - m_34| by m_1c, adjusts it by m_00 < m_04 (returning 0 if negative), takes the 4th power and returns it times m_10.
 // @fnv 0x00e0a6c0
+// pdb: hkpMoppCostFunction::costUnbalancedPlaneRight | hkpMoppDefaultSplitter.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: hkpMoppCostFunction::costNumUnBalanced)
+// pdb params: p
 float FUN_00e0a6c0_Class::FUN_00e0a6c0(const FUN_00e0a6c0_Parameters* parameters)
 {
     int difference = parameters->m_14 - parameters->m_34;
@@ -1919,6 +1933,7 @@ struct FnvCurve
 };
 // Returns 0 if scale*phase is positive, otherwise an even polynomial in scale*phase times coefficient, with scale from p's bounds and threshold.
 // @fnv 0x00e0a850
+// pdb: hkpMoppCostFunction::costUnbalancedPlaneLeft | hkpMoppDefaultSplitter.obj | tesv_win, hash, low
 float FnvCurve::FUN_00e0a850(FnParams* apParams)
 {
     float phase = apParams->displacement - (float)((apParams->upper + apParams->lower) * DAT_01011588);

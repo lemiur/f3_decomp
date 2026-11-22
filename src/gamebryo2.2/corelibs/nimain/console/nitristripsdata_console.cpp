@@ -61,6 +61,7 @@ class S_00a8ab40_NiTriStripsData
 };
 
 // @fnv 0x00a8ab40
+// pdb: NiTriStripsData::CalculateNormals | NiTriStripsData_Xenon.obj | fnv360_0822_retail, caller_sim, high
 void S_00a8ab40_NiTriStripsData::GenerateNormals()
 {
     EnsureNormals(1);

@@ -61,6 +61,8 @@ class hkClassEnumItem
 };
 int __cdecl hkString_strLen(const char*);
 // @fnv 0x00db7600
+// pdb: hkClassEnum::writeSignature | hkClassEnum.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: w
 void hkClassEnum::FUN_00db7600(hkStreamWriter* writer) const
 {
     hkOArchive archive(writer, false);

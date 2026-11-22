@@ -25,6 +25,7 @@ struct FUN_00c29fb0_cls
 
 // Allocates a 0x40-byte object, runs its base constructor, sets its vtable, passes it to FUN_00c32de0 with a1, and returns it.
 // @fnv 0x00c29fb0
+// pdb: NiPSysInitialRotSpeedCtlr::CreateClone | NiPSysInitialRotSpeedCtlr.obj | tesv_win, caller_sim, low
 void* FUN_00c29fb0_cls::FUN_00c29fb0(unsigned int a1)
 {
     FUN_00c29fb0_cls* p = (FUN_00c29fb0_cls*)FUN_00aa13e0(0x40);

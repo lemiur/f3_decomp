@@ -77,6 +77,7 @@ struct Cls_0048bad0 {
     void* ptr0c;
     void FUN_0048bad0();
 };
+// pdb: LipSynchAnim::~LipSynchAnim | LipSynchAnim.obj | fnv360_0822_retail, call_gap, low, conflict (bridge: MobileObject::DialogueConversationCallBack)
 void Cls_0048bad0::FUN_0048bad0() {
     DAT_011f6238.Deallocate(*ptr08);
     DAT_011f6238.Deallocate(ptr08);
@@ -999,6 +1000,8 @@ extern char str_00e06064[];
 extern char str_00e06070[];
 extern "C" int __cdecl FUN_00bea9e0(const char*);
 
+// pdb: LevelUpMenu::PerkUpdateFunc | LevelUpMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apTile, aeIndex
 void __cdecl FUN_00786240(LevelValue* apTile, int aiMatchValue)
 {
     Tile_00655570* T = (Tile_00655570*)apTile;

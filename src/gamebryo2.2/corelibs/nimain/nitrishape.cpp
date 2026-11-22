@@ -19,6 +19,7 @@ struct FUN_00a74530_DelHelper : NiMemObject
 
 // Calls FUN_00a89760 on pThis, frees pThis with operator delete when flags has bit 0 set, and returns pThis.
 // @fnv 0x00a74530
+// pdb: NiTriStrips::`vector deleting destructor' | NiTriStrips.obj | tesv_win, vtable_prefix, medium
 void* __fastcall DestroyNiTriShape(void* pThis, int, unsigned int flags)
 {
     FUN_00a89760(pThis);
@@ -64,6 +65,8 @@ void FUN_00a80610();
 
 // Calls FUN_00a80610 on this, then if the renderer's state at offset 0x200 is 1 or 2 and byte 0x208 is 1, invokes renderer vtable slot 0x1b4 with this.
 // @fnv 0x00a74600
+// pdb: NiTriShape::OnlyRenderImmediate | NiTriShape.obj | fnv360_0822_debug, vtable, medium
+// pdb params: apkRenderer
 void FUN_00a74600_shell::FUN_00a74600(NiRenderer* apkRenderer)
 {
     ((void(__thiscall*)(NiTriShape*, NiRenderer*))FUN_00a80610)(this, apkRenderer);
@@ -233,6 +236,8 @@ struct FUN_00a74640
     NiTriStrips* Clone(CloningProcess& kCloning);
 };
 // @fnv 0x00a74640
+// pdb: NiTriShape::CreateClone | NiTriShape.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: kCloning
 NiTriStrips* FUN_00a74640::Clone(CloningProcess& kCloning)
 {
     NiTriStrips* pkClone = new NiTriShapeX;
@@ -252,6 +257,8 @@ struct FUN_00a89720 : FUN_00a804e0
     virtual ~FUN_00a89720();
 };
 // @fnv 0x00a89720
+// pdb: NiTriStrips::NiTriStrips | NiTriStrips.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: pkModelData
 FUN_00a89720::FUN_00a89720(void* a) : FUN_00a804e0(a)
 {}
 
@@ -265,6 +272,8 @@ struct FUN_00a745c0_This
 };
 // Calls FUN_00a80610 on the renderer, then if renderer state at 0x200 is 1 or 2 and byte at 0x208 is 1, invokes vtable slot 107 with this.
 // @fnv 0x00a745c0
+// pdb: NiTriShape::RenderImmediate | NiTriShape.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apkRenderer
 void __thiscall FUN_00a745c0_This::FUN_00a745c0(void* apkRenderer)
 {
     NiRenderer* pkRenderer = (NiRenderer*)apkRenderer;
@@ -300,6 +309,8 @@ struct FUN_00a74690_shell : BaseA
 };
 // Calls the base handler, resolves g_011f5b34_arg1 to a string, grows pkStrings if its index reached the size, then stores the string at that index.
 // @fnv 0x00a74690
+// pdb: NiLightDimmerController::GetViewerStrings | NiLightDimmerController.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pkStrings
 void FUN_00a74690_shell::FUN_00a74690(StrArr* pkStrings)
 {
     FUN_00a897c0(pkStrings);
@@ -315,6 +326,8 @@ extern void __cdecl FUN_00a9b140();
 
 void FUN_00a9b190();
 // @fnv 0x00a74500
+// pdb: MagicModelHitEffect::InitLoadGame | MagicModelHitEffect.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apLoadGameBuffer
 void FUN_00a74500()
 {
     FUN_00a9b190();
@@ -325,6 +338,8 @@ class NiStream;
 void FUN_00a74780(NiStream& stream);
 
 // @fnv 0x00a98eb0
+// pdb: PlayerCharacter::CastAbility | PlayerCharacter.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apSpell, abLoadCast
 void FUN_00a98eb0(NiStream& stream)
 {
     FUN_00a74780(stream);

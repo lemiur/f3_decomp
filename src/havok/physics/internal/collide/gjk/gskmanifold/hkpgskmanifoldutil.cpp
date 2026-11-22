@@ -29,6 +29,8 @@ struct S_00dad640_Target
 };
 
 // @fnv 0x00dad640
+// pdb: hkGskManifold_cleanup | hkpGskManifoldUtil.obj | fnv360_0822_retail, call_seq, high
+// pdb params: manifold, mgr, constraintOwner
 void ReleaseAllEntries(S_00dad640_Set* set, S_00dad640_Target* target, void* arg)
 {
     for (unsigned int i = 0; i < set->count; i++)
@@ -76,6 +78,8 @@ struct S_00dad4d0_Set
 };
 
 // @fnv 0x00dad4d0
+// pdb: hkGskManifold_doesPointExistAndResort | hkpGskManifoldUtil.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: manifold, newPoint
 bool FindAndPromoteEntry(S_00dad4d0_Set* set, S_00dad4d0_Key* key)
 {
     unsigned i;
@@ -125,6 +129,8 @@ bool FindAndPromoteEntry(S_00dad4d0_Set* set, S_00dad4d0_Key* key)
 void __fastcall FUN_00dae220(int unused, S_00dad640_Set* set);
 
 // @fnv 0x00dae340
+// pdb: hkGskManifold_removePoint | hkpGskManifoldUtil.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: manifold, index
 void __cdecl FUN_00dae340(S_00dad640_Set* set, unsigned int index)
 {
     unsigned int n = set->count;

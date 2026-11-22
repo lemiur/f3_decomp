@@ -1387,6 +1387,8 @@ static __declspec(noinline) void FormatPrimitive93(int t, Text93* text, int exte
  if (!extent) text->FUN_00d61c10(DAT_011b6ab4[t].name);
  else FUN_009236d0(text,str_010d3a74,DAT_011b6ab4[t].name,extent);
 }
+// pdb: hkClassMember::getTypeName | hkClassMember.obj | fnv360_0822_retail, ustr, high
+// pdb params: buf, bufLen
 extern "C" int __fastcall FUN_00d86ec0(MemberD86* self, void*, char* output, int capacity) {
     TypeNameD86* cls = self->classType;
     int t = self->type;

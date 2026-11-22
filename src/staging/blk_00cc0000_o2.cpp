@@ -28,6 +28,7 @@ struct FUN_00cc1710_Class {
 
 // Calls FUN_00cc1520, then if bit 0 of a is set frees this with _delete, and returns this.
 // @fnv 0x00cc1710
+// pdb: bhkAabbPhantom::`scalar deleting destructor' | TESObjectREFR.obj | fnv360_0822_retail, vtable_prefix, high
 FUN_00cc1710_Class* __thiscall FUN_00cc1710_Class::FUN_00cc1710(int aiFlags)
 {
     FUN_00cc1520();
@@ -42,6 +43,8 @@ struct FUN_00cc1970 : NiExtraData {
     void LoadBinary(NiStream& stream);
 };
 // @fnv 0x00cc1970
+// pdb: NiPSysEmitterCtlr::LoadBinary | NiPSysEmitterCtlr.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kStream
 void FUN_00cc1970::LoadBinary(NiStream& stream)
 {
     NiExtraData::LoadBinary(stream);
@@ -61,6 +64,8 @@ struct FUN_00cc1990_class : FUN_00a7b290_shell
 };
 
 // @fnv 0x00cc1990
+// pdb: bhkExtraData::RegisterStreamables | bhkExtraData.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: arStream
 bool FUN_00cc1990_class::FUN_00cc1990(NiStream* apStream)
 {
     bool bResult = FUN_00a7b290(apStream);
@@ -91,6 +96,7 @@ struct FUN_00cc1f60_Class {
 
 // Calls FUN_00cc1e40, then deletes this (size 0x24) when flag bit 0 is set, and returns this.
 // @fnv 0x00cc1f60
+// pdb: NiShaderFactory::`scalar deleting destructor' | NiShaderFactory.obj | fnv360_0822_retail, caller_sim, low
 void* __thiscall FUN_00cc1f60_Class::FUN_00cc1f60(bool flag)
 {
     FUN_00cc1e40();
@@ -106,6 +112,7 @@ struct FUN_00cc2b40_class {
 };
 // Calls FUN_00cc2ac0, frees this with operator delete when flag bit 0 is set, and returns this.
 // @fnv 0x00cc2b40
+// pdb: NiSkinPartition::`scalar deleting destructor' | NiSkinPartition.obj | fnv360_0822_retail, objrun, high
 FUN_00cc2b40_class* __thiscall FUN_00cc2b40_class::FUN_00cc2b40(int flag)
 {
     FUN_00cc2ac0();
@@ -128,6 +135,7 @@ struct GSGeometry
 
 // Calls FUN_00cc39b0, deletes this with size 0x10 when flags has bit 0 set, and returns this.
 // @fnv 0x00cc3a30
+// pdb: bhkStiffSpringConstraint::`scalar deleting destructor' | bhkUtilFunctions.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: BSTObjectArena<struct `anonymous namespace'::ShapeShrinkInfo,struct BSTObjectArenaScrapAlloc,32>::~BSTObjectArena<struct `anonymous namespace'::ShapeShrinkInfo,struct BSTObjectArenaScrapAlloc,32>)
 GSGeometry* GSGeometry::FUN_00cc3a30(int flags)
 {
     FUN_00cc39b0();
@@ -169,6 +177,7 @@ struct FUN_00cc74e0_Class {
 
 // Calls FUN_00cc7450, then deletes this with size 16 when flags has bit 0 set, and returns this.
 // @fnv 0x00cc74e0
+// pdb: bhkBallAndSocketConstraint::`scalar deleting destructor' | bhkRagdollTemplate.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void* __thiscall FUN_00cc74e0_Class::FUN_00cc74e0(int flags)
 {
     FUN_00cc7450();
@@ -244,6 +253,7 @@ struct FUN_00cc8da0_Class {
 };
 // Calls FUN_00cc8ce0, then deletes this object with size 16 when b has bit 0 set, and returns this.
 // @fnv 0x00cc8da0
+// pdb: hkBreakableConstraintCinfo::SetWrappedConstraintData | bhkBreakableConstraint.obj | tesv_win, objrun_open, low
 FUN_00cc8da0_Class* FUN_00cc8da0_Class::FUN_00cc8da0(bool b)
 {
     FUN_00cc8ce0();
@@ -265,6 +275,7 @@ struct FUN_00ccc420_class {
 
 // Calls FUN_00ccbc00, then if bit 0 of a is set frees this with size 0x18, and returns this.
 // @fnv 0x00ccc420
+// pdb: bhkSimpleShapePhantom::`scalar deleting destructor' | TESObjectREFR.obj | fnv360_0822_retail, vtable_prefix, high
 void* __thiscall FUN_00ccc420_class::FUN_00ccc420(int aiFlags)
 {
     FUN_00ccbc00();
@@ -300,6 +311,7 @@ struct FUN_00ccd150_cls {
 
 // Calls FUN_00ccd080, then frees this with operator delete when flags has bit 0 set, and returns this.
 // @fnv 0x00ccd150
+// pdb: bhkSphereShape::`scalar deleting destructor' | TESObjectREFR.obj | fnv360_0822_retail, vtable_prefix, high
 FUN_00ccd150_cls* __thiscall FUN_00ccd150_cls::FUN_00ccd150(int flags)
 {
     FUN_00ccd080();
@@ -316,6 +328,7 @@ struct FUN_00ccf870_class {
 };
 
 // @fnv 0x00ccf870
+// pdb: bhkTriSampledHeightFieldBvTreeShape::`scalar deleting destructor' | CellMopp.obj | fnv360_0822_retail, vtable_prefix, high
 int FUN_00ccf870_class::FUN_00ccf870(int flags)
 {
     FUN_00ccf740();
@@ -337,6 +350,7 @@ struct FUN_00cd7f30_class {
 
 // Calls FUN_00ccdbc0, then frees this with _delete when bit 0 of flags is set, and returns this.
 // @fnv 0x00cd7f30
+// pdb: bhkMultiSphereShape::`scalar deleting destructor' | BSTreeNode.obj | fnv360_0822_retail, vtable_prefix, high
 FUN_00cd7f30_class* __thiscall FUN_00cd7f30_class::FUN_00cd7f30(unsigned char flags)
 {
     FUN_00ccdbc0();
@@ -351,6 +365,8 @@ struct FUN_00cdea00_cls {
 };
 
 // @fnv 0x00cdea00
+// pdb: hkpRagdollConstraintData::setConeLimitStabilization | hkpRagdollConstraintData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: enable
 void __thiscall FUN_00cdea00_cls::FUN_00cdea00(char param_2)
 {
     ((char*)this)[0x116] = (param_2 != 0) * 0x38;
@@ -362,6 +378,8 @@ struct FUN_00cdf250_class {
 };
 
 // @fnv 0x00cdf250
+// pdb: hkpRagdollConstraintData::setTarget | hkpRagdollConstraintData.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: hkpRagdollConstraintData::setTargetRelativeOrientationOfBodies)
+// pdb params: target_cbRca
 void __thiscall FUN_00cdf250_class::FUN_00cdf250(int a)
 {
     ((FUN_00cdf250_class*)((char*)this + 0xb0))->FUN_00cd55b0((int*)a, (int)((char*)this + 0x20));
@@ -396,6 +414,7 @@ struct FUN_00cc23c0_class {
 };
 // Calls Initialize, sets the vtable and clears data fields and a flag, incrementing four global counters along the way.
 // @fnv 0x00cc23c0
+// pdb: bhkCachingShapePhantom::bhkCachingShapePhantom | bhkCachingShapePhantom.obj | fnv360_0822_retail, objrun, medium
 bhkRefObject* __thiscall FUN_00cc23c0_class::InitializeRefObject()
 {
     bhkRefObject* self = (bhkRefObject*)this;
@@ -425,6 +444,8 @@ struct FUN_00cc3d30_class {
 
 // If flag is set, deallocates the block preceding m_pData and clears m_pData.
 // @fnv 0x00cc3d30
+// pdb: bhkBoxShape::KillCinfo | bhkBoxShape.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: hkpCharacterRigidBody::entityRemovedCallback)
+// pdb params: abCreated
 void __thiscall FUN_00cc3d30_class::FreeDataIfRequested(bool abFree)
 {
     if (abFree) {
@@ -461,6 +482,8 @@ struct FUN_00cca950_class {
     FUN_00cca950_class* FUN_00cca950();
 };
 // @fnv 0x00cca950
+// pdb: hkMemoryAllocator::_bufAlloc<hkVector4> | bhkCapsuleShape.obj | fnv360_0822_retail, objrun, low, conflict (bridge: bhkCapsuleShape::bhkCapsuleShape)
+// pdb params: reqNumInOut
 FUN_00cca950_class* FUN_00cca950_class::FUN_00cca950()
 {
     ((bhkRefObject*)this)->Initialize();
@@ -503,6 +526,7 @@ struct bhkRefObject {
 };
 // Calls Initialize, zeroes m_iUnk2 and m_iUnk3, assigns four successive vtables and increments four counters, then returns this.
 // @fnv 0x00ccd100
+// pdb: bhkTriangleShape::bhkTriangleShape | bhkTriangleShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 bhkRefObject* __thiscall bhkRefObject::FUN_00ccd100()
 {
     Initialize();
@@ -541,6 +565,7 @@ struct FUN_00cce990_shell : bhkRefObject {
     bhkRefObject* FUN_00cce990();
 };
 // @fnv 0x00cce990
+// pdb: bhkConvexVerticesShape::bhkConvexVerticesShape | bhkConvexVerticesShape.obj | fnv360_0822_retail, objopen_prop, low
 bhkRefObject* FUN_00cce990_shell::FUN_00cce990()
 {
     Initialize();
@@ -580,6 +605,7 @@ struct FUN_00ccf7c0_class : bhkRefObject {
 };
 // Calls Initialize, zeroes m_iUnk2 and m_iUnk3, sets m_pVtable through four vtable assignments and increments four counters, then returns this.
 // @fnv 0x00ccf7c0
+// pdb: bhkConvexTransformShape::bhkConvexTransformShape | bhkConvexTransformShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 FUN_00ccf7c0_class* FUN_00ccf7c0_class::FUN_00ccf7c0()
 {
     Initialize();
@@ -605,6 +631,8 @@ struct FUN_00ccfe20_class {
 };
 // Calls IncRefCountAllEntries when a is true, otherwise ReleaseAllNodes, then forwards a to FUN_00c84e50 on this.
 // @fnv 0x00ccfe20
+// pdb: bhkConvexListShape::Link | bhkConvexListShape.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: abAttach
 void __thiscall FUN_00ccfe20_class::FUN_00ccfe20(bool a)
 {
     if (a)
@@ -623,6 +651,7 @@ void __fastcall hkpRagdollConstraintData_setMaxFrictionTorque(void* self, int, f
 
 void __stdcall SetContactNormal(int a, int b);
 // @fnv 0x00cdea70
+// pdb: hkpRagdollConstraintData::setPlaneMotor | hkpRagdollConstraintData.obj | tesv_win, call_seq, medium
 void __stdcall FUN_00cdea70(int param_1)
 {
     SetContactNormal(0, param_1);
@@ -630,6 +659,7 @@ void __stdcall FUN_00cdea70(int param_1)
 
 void __stdcall SetContactNormal(int a, int b);
 // @fnv 0x00cdea90
+// pdb: hkpRagdollConstraintData::setTwistMotor | hkpRagdollConstraintData.obj | tesv_win, callee_sim, low
 void __stdcall FUN_00cdea90(int param_1)
 {
     SetContactNormal(2, param_1);
@@ -669,6 +699,7 @@ struct BSFadeNode {
 };
 // Allocates and returns a new FUN_00cce990 object via its operator new.
 // @fnv 0x00ccea70
+// pdb: bhkConvexTransformShape::CreateObject | bhkConvexTransformShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 FUN_00cce990* __stdcall FUN_00ccea70()
 {
     return new FUN_00cce990;
@@ -721,6 +752,7 @@ struct FUN_00cc4180_Class {
     void* __thiscall FUN_00cc4200(int flag);
 };
 // @fnv 0x00cc4200
+// pdb: WeaponObject::~WeaponObject | WeaponObject.obj | tesv_win, objrun_open, low
 void* FUN_00cc4180_Class::FUN_00cc4200(int flag)
 {
     FUN_00cc4180();
@@ -735,6 +767,7 @@ struct FUN_00cc47f0_t {
 };
 // Calls FUN_00cc47f0, then deletes this with size 0x10 when bit 0 of a is set, and returns this.
 // @fnv 0x00cc48e0
+// pdb: bhkBinaryAction::`scalar deleting destructor' | bhkSpringAction.obj | fnv360_0822_retail, caller_sim, low
 FUN_00cc47f0_t* __thiscall FUN_00cc47f0_t::FUN_00cc48e0(int aiFlags)
 {
     FUN_00cc47f0();
@@ -777,6 +810,7 @@ struct Derived5130 : S_00cb79d0_Base {
 
 // Allocates and constructs a Derived5130 object, returning the new instance.
 // @fnv 0x00cc5130
+// pdb: bhkWheelConstraint::`scalar deleting destructor' | bhkWheelConstraint.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void* CreateDerived5130()
 {
     return new Derived5130;
@@ -834,6 +868,7 @@ FUN_cc60b0_object::FUN_cc60b0_object()
 
 // Allocates and constructs a new FUN_cc60b0_object, returning its pointer.
 // @fnv 0x00cc60b0
+// pdb: bhkRagdollLimitsConstraint::CreateObject | bhkRagdollLimitsConstraint.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void* __cdecl FUN_00cc60b0()
 {
     return new FUN_cc60b0_object;
@@ -956,6 +991,7 @@ struct Object_00cc8520 : S_00cb79d0_Base {
 
 // Allocates and constructs a new Object_00cc8520 instance, returning its pointer.
 // @fnv 0x00cc8520
+// pdb: bhkHingeLimitsConstraint::`scalar deleting destructor' | bhkHingeLimitsConstraint.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void* FUN_00cc8520()
 {
     return new Object_00cc8520;
@@ -970,6 +1006,7 @@ struct FUN_00cc9540_Class : FUN_00cc94b0_Class {
 };
 
 // @fnv 0x00cc9540
+// pdb: ExtraMapMarker::`scalar deleting destructor' | ExtraDataObjects.obj | fnv360_0822_debug, vtable, high
 FUN_00cc9540_Class* FUN_00cc9540_Class::FUN_00cc9540(char flag)
 {
     FUN_00cc94b0_Class::FreeSpawnedStorage();
@@ -1025,6 +1062,7 @@ struct bhkBvTreeShape : S_00cb79d0_Base {
 
 // Allocates and constructs a new bhkBvTreeShape, returning the pointer.
 // @fnv 0x00cc9e60
+// pdb: bhkMoppBvTreeShape::CreateObject | bhkMoppBvTreeShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 bhkBvTreeShape* CreateBhkBvTreeShape()
 {
     return new bhkBvTreeShape;
@@ -1040,6 +1078,7 @@ struct FUN_00cca9a0_class : FUN_00cca8d0_shell {
 };
 
 // @fnv 0x00cca9a0
+// pdb: bhkConvexShape::`scalar deleting destructor' | TESObjectREFR.obj | fnv360_0822_retail, vtable_prefix, high
 FUN_00cca8d0_shell* FUN_00cca9a0_class::DestroyOrDelete(int flags)
 {
     FUN_00cca8d0();
@@ -1049,6 +1088,8 @@ FUN_00cca8d0_shell* FUN_00cca9a0_class::DestroyOrDelete(int flags)
 }
 
 // @fnv 0x00ccba20
+// pdb: bhkExtendedMeshShapeData::IsEqual | bhkExtendedMeshShape.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: apObject
 bool __fastcall FUN_00ccba20(char* p, int, char* q)
 {
     return q == p;
@@ -1144,6 +1185,7 @@ struct FUN_00ccf5b0_shell {
 
 // Calls FUN_00ccf4f0, then frees this with _delete when flag bit 0 is set, and returns this.
 // @fnv 0x00ccf5b0
+// pdb: bhkBvTreeShape::`scalar deleting destructor' | CellMopp.obj | fnv360_0822_retail, vtable_prefix, high
 FUN_00ccf5b0_shell* __thiscall FUN_00ccf5b0_shell::FUN_00ccf5b0(bool abFree)
 {
     FUN_00ccf4f0();
@@ -1191,6 +1233,7 @@ struct FUN_00cd44c0_cls {
     FUN_00cd44c0_cls* FUN_00cd44c0();
 };
 // @fnv 0x00cd44c0
+// pdb: bhkCharacterStateSwimming::bhkCharacterStateSwimming | bhkCharacterStateSwimming.obj | fnv360_0822_retail, call_gap_sim, low
 FUN_00cd44c0_cls* FUN_00cd44c0_cls::FUN_00cd44c0()
 {
     m_kPointB = 1;
@@ -1207,6 +1250,7 @@ struct FUN_00cd47e0_t {
     FUN_00cd47e0_t();
 };
 // @fnv 0x00cd47e0
+// pdb: bhkCharacterStateOnGround::bhkCharacterStateOnGround | bhkCharacterStateOnGround.obj | fnv360_0822_retail, callee_sim, low
 FUN_00cd47e0_t::FUN_00cd47e0_t()
 {
     *(unsigned short*)((char*)this + 6) = 1;
@@ -1215,6 +1259,8 @@ FUN_00cd47e0_t::FUN_00cd47e0_t()
 }
 
 // @fnv 0x00cdeab0
+// pdb: hkpRagdollConstraintData::setPlaneMotor | hkpRagdollConstraintData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: hkpRagdollConstraintData::setConeMotor)
+// pdb params: motor
 void __stdcall FUN_00cdeab0(int a)
 {
     SetContactNormal(1, a);
@@ -1433,6 +1479,8 @@ public:
 // SaveBinary
 // Saves the base extra data, writes m_uiCount, then saves a link ID for each non-null object in m_ppkObjects.
 // @fnv 0x00cc1ad0
+// pdb: bhkRagdollTemplate::SaveBinary | bhkRagdollTemplate.obj | fnv360_0822_retail, caller_sim, low, conflict (bridge: bhkExtraData::SaveBinary)
+// pdb params: arStream
 void CC1AD0ListExtra::FUN_00cc1ad0(CC1AD0Stream& kStream) {
     CC1AD0ExtraData::SaveBinary(kStream);
     unsigned int ItemUpdateArray = m_uiCount;
@@ -1478,6 +1526,8 @@ struct ReferenceArray {
 };
 // Resizes the reference array to n slots: releases entries past n, reallocates storage, copies live entries and default-initialises the rest.
 // @fnv 0x00cc1b40
+// pdb: NiTLargeArray<NiPointer<NiTimeController>,NiTMallocInterface<NiPointer<NiTimeController> > >::SetSize | bhkExtraData.obj | fnv360_0822_retail, call_seq, high
+// pdb params: uiMaxSize
 void ReferenceArray::Resize(unsigned uiCapacity) {
     if (uiCapacity != capacity) {
         if (uiCapacity < used) {
@@ -1820,6 +1870,7 @@ struct RefObject24_b9018 {
 
 // Allocates and constructs a RefObject24_b9018 via its operator new and returns the pointer.
 // @fnv 0x00cc2410
+// pdb: bhkCachingShapePhantom::CreateObject | bhkCachingShapePhantom.obj | fnv360_0822_retail, objrun, medium
 RefObject24_b9018* CreateRefObject24() {
     return new RefObject24_b9018();
 }
@@ -2227,6 +2278,7 @@ extern FUN_00cc2a00_alloc DAT_011f6238;
 extern int DAT_012685b0;
 
 // @fnv 0x00cc2b30
+// pdb: bhkBallAndSocketConstraint::GetRTTI | bhkRagdollTemplate.obj | fnv360_0822_retail, objrun_open, low
 void* __cdecl FUN_00cc2b30()
 {
     return &DAT_012685b0;
@@ -2402,6 +2454,7 @@ void* __cdecl bhkRagdollConstraint_GetRTTI()
 }
 
 // @fnv 0x00cc32f0
+// pdb: BGSSaveLoadManager::GetMajorVersion | BGSSaveLoadManager.obj | fnv360_0822_retail, call_gap_sim, low
 int __cdecl FUN_00cc32f0() {
     return 0x30;
 }
@@ -2413,6 +2466,7 @@ struct S_00cc3300 {
     S_00cc3300* FUN_00cc3300(unsigned int flags);
 };
 // @fnv 0x00cc3300
+// pdb: BSAnimNotes::`scalar deleting destructor' | BSAnimNote.obj | fnv360_0822_retail, objrun, high
 S_00cc3300* S_00cc3300::FUN_00cc3300(unsigned int flags)
 {
     FUN_00cc3270();
@@ -2518,6 +2572,8 @@ struct PhysicsElement {
 
 // Allocates and constructs a new PhysicsElement, returning the pointer.
 // @fnv 0x00cc33a0
+// pdb: bhkMotorAction::CopyCinfo | bhkMotorAction.obj | fnv360_0721_beta, objrun, medium
+// pdb params: arInfo
 PhysicsElement* __cdecl CreatePhysicsElement() {
     return new PhysicsElement();
 }
@@ -2815,6 +2871,7 @@ struct DerivedStandin2 : A51BF0Base, S_00cb79d0_Base {
 
 // Allocates and constructs a DerivedStandin2 object, returning its pointer.
 // @fnv 0x00cc3b30
+// pdb: bhkDashpotAction::CreateObject | bhkDashpotAction.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void* CreateDerivedStandin2() {
     return new DerivedStandin2();
 }
@@ -3106,6 +3163,8 @@ extern "C" float DAT_012683b0[4];
 
 // Calls WriteScriptTargetInfo, then copies m_f34, the four floats at m_f20 and m_f30 from m_p into the output, using defaults when m_p is null.
 // @fnv 0x00cc4220
+// pdb: bhkAngularDashpotAction::CopyCinfo | bhkAngularDashpotAction.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: arInfo
 void __thiscall FUN_00cc4220_class::FUN_00cc4220(void* apOutput)
 {
     FUN_00cc4220_output* out = static_cast<FUN_00cc4220_output*>(apOutput);
@@ -3190,6 +3249,7 @@ extern "C" float DAT_012683b0;
 extern int g_012685e0;
 
 // @fnv 0x00cc4860
+// pdb: hkVersionUtil::getCurrentVersion | hkVersionUtil.obj | fnv360_0822_retail, objrun_open, low
 int* __cdecl FUN_00cc4860()
 {
     return &g_012685e0;
@@ -3739,6 +3799,8 @@ public:
 
 // Calls FUN_00c8a280, passes m_04->m_18 to FUN_00cf4bc0, then reads 4 bytes into m_04->unk20 and 1 byte into m_04->unk24 from the stream at a1+0x250.
 // @fnv 0x00cc4e90
+// pdb: hkBreakableConstraintCinfo::SaveBinary | bhkBreakableConstraint.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: arStream
 void FUN_00cc4e90_cls::LoadSubData(int a1)
 {
     FUN_00c8a280(a1);
@@ -3893,6 +3955,7 @@ public:
 
 // Calls unk08 on this object and decrements the global counter DAT_012685f4.
 // @fnv 0x00cc58c0
+// pdb: bhkStiffSpringConstraint::~bhkStiffSpringConstraint | bhkStiffSpringConstraint.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 FUN_00cc58c0::~FUN_00cc58c0()
 {
     this->unk08();
@@ -3998,6 +4061,7 @@ struct FUN_00cc5ee0_class
 };
 
 // @fnv 0x00cc5ee0
+// pdb: bhkRagdollLimitsConstraint::bhkRagdollLimitsConstraint | bhkRagdollLimitsConstraint.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void __thiscall FUN_00cc5ee0_class::ClearInterface(char abClear)
 {
     if (abClear != 0)
@@ -4328,6 +4392,7 @@ FUN_00cc7450::~FUN_00cc7450()
 extern int DAT_0126861c;
 
 // @fnv 0x00cc74c0
+// pdb: bhkSpringAction::GetRTTI | bhkSpringAction.obj | fnv360_1110_retail, objopen_prop, low
 void* __cdecl FUN_00cc74c0()
 {
     return &DAT_0126861c;
@@ -4413,6 +4478,8 @@ public:
 };
 
 // @fnv 0x00cc75b0
+// pdb: bhkPrismaticConstraint::Init | bhkPrismaticConstraint.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: arInfo
 void FUN_00cc75b0_cls::FUN_00cc75b0(int aiArg) {
     FUN_00cc75b0_F* f = 0;
     Call(aiArg);
@@ -4544,6 +4611,7 @@ int* __cdecl bhkMotorAction_GetRTTI()
 }
 
 // @fnv 0x00cc7d80
+// pdb: bhkListShape::QCinfoSize | bhkCharacterController.obj | fnv360_0721_beta, objrun_open, low
 int __cdecl FUN_00cc7d80()
 {
     return 28;
@@ -4552,6 +4620,7 @@ int __cdecl FUN_00cc7d80()
 struct CpuOpaque;
 extern CpuOpaque DAT_01268f78;
 // @fnv 0x00cc7d90
+// pdb: bhkDashpotAction::GetRTTI | bhkDashpotAction.obj | fnv360_0822_retail, objopen_prop, low
 CpuOpaque* __cdecl FUN_00cc7d90()
 {
     return &DAT_01268f78;
@@ -4620,6 +4689,7 @@ FUN_00cc8480::~FUN_00cc8480()
 extern int g_unk01268634;
 
 // @fnv 0x00cc84f0
+// pdb: bhkAngularDashpotAction::GetRTTI | bhkAngularDashpotAction.obj | fnv360_0822_retail, objrun_open, low
 void* __cdecl FUN_00cc84f0()
 {
     return &g_unk01268634;
@@ -4704,6 +4774,7 @@ int* __cdecl bhkBreakableConstraint_GetRTTI()
 }
 
 // @fnv 0x00cc8d60
+// pdb: bhkBallSocketConstraintChain::QCinfoSize | bhkBallSocketConstraintChain.obj | fnv360_0822_retail, objrun_open, low
 int __cdecl FUN_00cc8d60()
 {
     return 44;
@@ -4762,6 +4833,7 @@ struct SpawnedObject : public ChainB_cls {
 
 // Allocates and constructs a new SpawnedObject via its operator new and returns the pointer.
 // @fnv 0x00cc8dc0
+// pdb: bhkBallSocketConstraintChain::CreateObject | bhkBallSocketConstraintChain.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 SpawnedObject* FUN_00cc8dc0() {
     return new SpawnedObject();
 }
@@ -4824,6 +4896,8 @@ struct FUN_00cc8f60_cls {
 };
 
 // @fnv 0x00cc8f60
+// pdb: hkBallSocketChainCinfo::SaveBinary | bhkBallSocketConstraintChain.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: arStream
 void FUN_00cc8f60_cls::FUN_00cc8f60(NiStreamImpl& stream)
 {
     HavokData_cc8* pkData = m_pUserData;
@@ -5090,6 +5164,7 @@ public:
 
 // Destructor that calls Shutdown and decrements the static instance counter ms_uiInstances.
 // @fnv 0x00cc9c60
+// pdb: bhkBallAndSocketConstraint::~bhkBallAndSocketConstraint | bhkBallAndSocketConstraint.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 bhkBallAndSocketConstraint::~bhkBallAndSocketConstraint()
 {
     Shutdown();
@@ -5136,6 +5211,7 @@ void* __cdecl bhkRagdollLimitsConstraint_GetRTTI()
 }
 
 // @fnv 0x00cc9dc0
+// pdb: UseWeaponActorPackageData::GetPackageType | PackageDataUseWeapon.obj | fnv360_0822_retail, vtable, medium
 int __cdecl FUN_00cc9dc0() { return 16; }
 
 struct S_00cc9df0_Val {
@@ -5351,6 +5427,7 @@ public:
 
 // Allocates and constructs a new CCAA80Object, returning the pointer.
 // @fnv 0x00ccaa80
+// pdb: bhkTriangleShape::CreateObject | bhkTriangleShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 CCAA80Object* __cdecl CreateCCAA80Object()
 {
     return new CCAA80Object;
@@ -5810,6 +5887,7 @@ void* __cdecl bhkGenericConstraint_GetRTTI() {
 }
 
 // @fnv 0x00ccb140
+// pdb: bhkTriangleShape::QCinfoSize | bhkTriangleShape.obj | fnv360_0721_beta, objrun_open, low
 int __cdecl FUN_00ccb140()
 {
     return 64;
@@ -5818,6 +5896,7 @@ int __cdecl FUN_00ccb140()
 extern int g_unk01268f90;
 
 // @fnv 0x00ccb150
+// pdb: bhkGenericConstraint::QCinfoSize | bhkFixedConstraint.obj | fnv360_0822_debug, objrun_open, low
 void* FUN_00ccb150()
 {
     return &g_unk01268f90;
@@ -5859,6 +5938,8 @@ struct TargetObject : AllocationBase, S_00c87c30_Base {
 
 // Allocates and constructs a TargetObject, returning the new instance.
 // @fnv 0x00ccb200
+// pdb: bhkPlaneShape::CopyCinfo | bhkPlaneShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arInfo
 TargetObject* __cdecl CreateTargetObject() {
     return new TargetObject();
 }
@@ -6183,6 +6264,7 @@ struct FunObj_b9645 : public FunObjBase_b9645 {
 
 // Allocates and constructs a new FunObj_b9645, returning the new object.
 // @fnv 0x00ccb9a0
+// pdb: bhkExtendedMeshSubPart::`vector deleting destructor' | bhkExtendedMeshShape.obj | fnv360_0822_retail, objopen_prop, low
 FunObj_b9645* CreateFunObj() {
     return new FunObj_b9645();
 }
@@ -6261,6 +6343,8 @@ struct FUN_00ccba50_cls
 };
 
 // @fnv 0x00ccba50
+// pdb: bhkExtendedMeshShape::IsEqual | bhkExtendedMeshShape.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apObject
 char FUN_00ccba50_cls::Equals(FUN_00ccba50_cls* apOther)
 {
     char r = FUN_00c84dc0(apOther);
@@ -6306,6 +6390,7 @@ struct FUN_00ccbaa0 {
 
 // Constructs the holder with a null pointer and stores the given RefObjCC in the smart pointer, incrementing its reference count.
 // @fnv 0x00ccbaa0
+// pdb: hkExtendedMeshShapeCinfo::~hkExtendedMeshShapeCinfo | bhkExtendedMeshShape.obj | fnv360_0822_retail, objrun_open, low
 FUN_00ccbaa0::FUN_00ccbaa0(RefObjCC* apObject)
     : m_p0(0), m_sp(0)
 {
@@ -6321,6 +6406,7 @@ int __cdecl bhkConstraintChain_GetRTTI() {
 }
 
 // @fnv 0x00ccbb40
+// pdb: bhkConvexVerticesShape::QCinfoSize | bhkConvexVerticesShape.obj | fnv360_0721_beta, objrun_open, low
 int __cdecl FUN_00ccbb40()
 {
     return 0x20;
@@ -6786,6 +6872,8 @@ struct FUN_00ccd100 {
 };
 // Allocates and constructs a new FUN_00ccd100 object, returning its pointer.
 // @fnv 0x00ccd250
+// pdb: bhkCylinderShape::CreateClone | bhkCylinderShape.obj | fnv360_1110_retail, objrun_prop, low, conflict (bridge: bhkExtendedMeshShape::CreateObject)
+// pdb params: arCloneData
 FUN_00ccd100* __cdecl FUN_00ccd250() {
     return new FUN_00ccd100;
 }
@@ -7402,6 +7490,7 @@ public:
 
 // Constructs a CDC40LevelD object and increments the global CDC40 level D instance counter.
 // @fnv 0x00ccdc40
+// pdb: bhkCylinderShape::bhkCylinderShape | bhkCylinderShape.obj | fnv360_1110_retail, objrun, medium
 FUN_00ccdc40::FUN_00ccdc40()
 {
     ++g_iCDC40LevelDCount;
@@ -7417,6 +7506,8 @@ struct RefObject20_b9084 {
 
 // Allocates and constructs a RefObject20_b9084 via its operator new and returns the new object.
 // @fnv 0x00ccdd00
+// pdb: hkConvexVerticesShapeCinfo::Scale | bhkConvexVerticesShape.obj | fnv360_0822_retail, objopen_prop, low, conflict (bridge: bhkConvexVerticesShape::CreateObject)
+// pdb params: afScale
 RefObject20_b9084* CreateRefObject20() {
     return new RefObject20_b9084();
 }
@@ -7511,12 +7602,14 @@ struct AudioScopeGuard {
 extern int DAT_012686b0;
 
 // @fnv 0x00cce970
+// pdb: bhkTriangleShape::GetRTTI | bhkTriangleShape.obj | fnv360_0822_retail, objrun_open, low
 int* __cdecl FUN_00cce970()
 {
     return &DAT_012686b0;
 }
 
 // @fnv 0x00cce980
+// pdb: bhkTransformShape::QCinfoSize | BSTreeNode.obj | fnv360_0721_beta, objrun, medium
 int __cdecl FUN_00cce980()
 {
     return 0x50;
@@ -7533,6 +7626,7 @@ struct FUN_00cce9e0_cls {
 };
 
 // @fnv 0x00cce9e0
+// pdb: bhkBoxShape::`scalar deleting destructor' | TESObjectREFR.obj | fnv360_0822_retail, vtable_prefix, high
 FUN_00cce9e0_cls* FUN_00cce9e0_cls::FUN_00cce9e0(unsigned char acFlags)
 {
     BaseCleanup();
@@ -7594,6 +7688,8 @@ struct FUN_00cced20_cls {
 
 // Walks this->m_08->m_18->m_08 and, if non-null, calls its v54 with a1, then calls FUN_00aa0ad0(a1).
 // @fnv 0x00cced20
+// pdb: bhkConvexTransformShape::RegisterStreamables | bhkConvexTransformShape.obj | fnv360_0721_retail, objrun, medium
+// pdb params: arStream
 void FUN_00cced20_cls::ForwardToNestedVtable(int aiValue)
 {
     if (this != 0) {
@@ -7988,6 +8084,8 @@ struct bhkConvexSweepShape : public bhkConvexShape {
 };
 
 // @fnv 0x00ccf560
+// pdb: bhkConvexSweepShape::Init | bhkConvexSweepShape.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: CreateNS_bhkConvexSweepShape::Create)
+// pdb params: arInfo
 void __thiscall bhkConvexSweepShape::FUN_00ccf560(int arg) {
     v0BC(arg);
 }
@@ -8028,6 +8126,7 @@ struct PackedObj {
 
 // Allocates and constructs a PackedObj, returning the new object pointer.
 // @fnv 0x00ccf5d0
+// pdb: bhkConvexSweepShape::CreateObject | bhkConvexSweepShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void* __cdecl CreatePackedObj() {
     PackedObj* p = new PackedObj();
     return p;
@@ -8215,6 +8314,8 @@ struct FNVNotificationOwner {
 
 // Calls Notify(context) on each non-null receiver in the collection's entries, then calls FUN_00aa0ad0(context).
 // @fnv 0x00ccf990
+// pdb: bhkConvexListShape::RegisterStreamables | bhkConvexListShape.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: arStream
 void FNVNotificationOwner::NotifyAllReceivers(int context)
 {
     unsigned int count;
@@ -8276,6 +8377,7 @@ public:
 
 // If the holder's data is valid, iterates its entries and increments the reference count of each entry's referenced object.
 // @fnv 0x00ccfa00
+// pdb: bhkConvexListShape::RembhkShapeRef | bhkConvexListShape.obj | fnv360_0721_beta, objrun_prop, low, conflict (bridge: bhkConvexListShape::AddbhkShapeRef)
 void CCFA00Holder::IncRefCountAllEntries()
 {
     CCFA00Data* pkData;
@@ -8978,6 +9080,7 @@ void __stdcall FUN_00cd3b00(int a, int b, int c, int d) {
 
 // FUN_00cd3c80: constant return 6
 // @fnv 0x00cd3c80
+// pdb: CombatProcedureMove::GetType | CombatProcedureMove.obj | fnv360_0822_retail, vtable, high
 int __cdecl FUN_00cd3c80()
 {
     return 6;
@@ -8995,6 +9098,7 @@ struct FUN_00cd3c90_cls
 };
 
 // @fnv 0x00cd3c90
+// pdb: bhkCharacterStateProjectile::bhkCharacterStateProjectile | bhkCharacterStateProjectile.obj | fnv360_0822_retail, call_gap, low
 void* FUN_00cd3c90_cls::FUN_00cd3c90()
 {
     m_uiUnk = 1;
@@ -9025,6 +9129,7 @@ struct bhkCharacterStateInAir : SpawnedObjectBase // src: F3_EXE vtable 0x00e7c6
 };
 
 // @fnv 0x00cd3f90
+// pdb: bhkCharacterStateInAir::bhkCharacterStateInAir | bhkCharacterStateInAir.obj | fnv360_0822_retail, callee_sim, low
 bhkCharacterStateInAir::bhkCharacterStateInAir()
 {
 }
@@ -9040,6 +9145,7 @@ struct FUN_00cd4260_cls {
 };
 
 // @fnv 0x00cd4260
+// pdb: bhkCharacterStateJumping::bhkCharacterStateJumping | bhkCharacterStateJumping.obj | fnv360_0822_retail, call_gap_sim, low
 FUN_00cd4260_cls* FUN_00cd4260_cls::FUN_00cd4260()
 {
     m_w06 = 1;
@@ -9254,6 +9360,8 @@ struct FUN_00cd7e80 : public ChainD_cls {
 
 // Runs CreateShapeAndApplyParam with a, then increments DAT_0126869c.
 // @fnv 0x00cd7e80
+// pdb: bhkCharControllerShape::bhkCharControllerShape | bhkCharControllerShape.obj | fnv360_0822_debug, objopen_prop, low
+// pdb params: arInfo
 FUN_00cd7e80::FUN_00cd7e80(unsigned int auiValue) {
     CreateShapeAndApplyParam(auiValue);
     DAT_0126869c += 1;
@@ -9280,6 +9388,8 @@ extern "C" unsigned int DAT_01267e3c;
 // FUN_00cd9ed0 : sets a byte flag through its first argument.
 //   mov eax,[esp+4] / mov byte ptr [eax],1 / ret 8
 // @fnv 0x00cd9ed0
+// pdb: ahkpWorld::setUserData | bhkWorld.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: bhkWorld::QInitGroupDuringAdd)
+// pdb params: apData
 void __stdcall FUN_00cd9ed0(unsigned char* flag, int unused) {
     *flag = 1;
 }
@@ -9477,6 +9587,7 @@ struct FUN_00cdea80_cls {
 };
 
 // @fnv 0x00cdea80
+// pdb: MiddleHighProcess::GetRunOnceProcedureIndex | HighProcess.obj | fnv360_0822_retail, objrun_open, low
 int FUN_00cdea80_cls::FUN_00cdea80() {
     return m_e8;
 }
@@ -9544,6 +9655,7 @@ public:
     unsigned int FUN_00cdeaa0();
 };
 // @fnv 0x00cdeaa0
+// pdb: BSTreeNode::GetModel | BSTreeNode.obj | fnv360_0822_retail, vtable, medium
 unsigned int FUN_00cdeaa0_cls::FUN_00cdeaa0() { return m_iE4; }
 
 struct FUN_00cdeac0_cls {
@@ -9594,6 +9706,8 @@ struct FUN_00cdeac0_cls {
 };
 
 // @fnv 0x00cdeac0
+// pdb: hkpRagdollConstraintData::getConstraintFrameA | hkpRagdollConstraintData.obj | fnv360_0822_debug, objrun_sim, low
+// pdb params: constraintFrameA
 unsigned char* FUN_00cdeac0_cls::FUN_00cdeac0(unsigned char* pOut)
 {
     *pOut = m_bA2;
@@ -9629,6 +9743,8 @@ public:
 
 // Initializes the range bounds to -1000000 and 1000000, enables the range flag, and sets factor, scale and exponent defaults.
 // @fnv 0x00cdf560
+// pdb: hkpPositionConstraintMotor::hkpPositionConstraintMotor | hkpPositionConstraintMotor.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: currentPosition
 FUN_00cdf560::FUN_00cdf560(int iUnused)
 {
     m_fMinimum = -1000000.0f;
@@ -10129,6 +10245,8 @@ struct FUN_00cc61f0_class : CC61F0ConstraintBase {
 
 // Loads the base constraint data, reads two rotations (byte-swapping them if the stream is not little-endian) and five floats into the constraint data.
 // @fnv 0x00cc61f0
+// pdb: hkRagdollLimitsConstraintCinfo::LoadBinary | bhkRagdollLimitsConstraint.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: arStream
 void FUN_00cc61f0_class::FUN_00cc61f0(CC61F0Stream& kStream)
 {
     LoadBinaryBase(kStream);
@@ -10404,6 +10522,8 @@ struct FUN_00cc7bc0_shell {
     void FUN_00cc7bc0(NiStreamView& kStream);
 };
 // @fnv 0x00cc7bc0
+// pdb: hkPrismaticConstraintCinfo::SaveBinary | bhkPrismaticConstraint.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: arStream
 void FUN_00cc7bc0_shell::FUN_00cc7bc0(NiStreamView& kStream) {
     FUN_00c8a280(kStream);
     SaveData* pData = m_pData;
@@ -11222,6 +11342,8 @@ public:
 
 // Writes m_uiCount to the stream, then calls SaveBinary on each of the m_uiCount elements in the array.
 // @fnv 0x00ccc920
+// pdb: bhkExtendedMeshShapeData::SaveBinary | bhkExtendedMeshShape.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: arStream
 void CCC920Array::FUN_00ccc920(CCC920Stream& kStream)
 {
     CCC920SaveBinary(kStream, m_uiCount);
@@ -12099,6 +12221,7 @@ public:
 };
 
 // @fnv 0x00cc0100
+// pdb: hkOstream::isOk | hkOStream.obj | tesv_win, objrun_open, low
 void* hkObjCC01::DispatchToTarget(void* pv)
 {
     m_target->handle(pv);
@@ -12146,6 +12269,8 @@ struct FUN_00cc04d0_Class {
 };
 
 // @fnv 0x00cc04d0
+// pdb: hkOstream::hkOstream | hkOStream.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: filename
 FUN_00cc04d0_Class* __thiscall FUN_00cc04d0_Class::FUN_00cc04d0(void* owner)
 {
     m_iUnk = 1;
@@ -12157,6 +12282,7 @@ FUN_00cc04d0_Class* __thiscall FUN_00cc04d0_Class::FUN_00cc04d0(void* owner)
 struct CpuOpaque;
 extern CpuOpaque DAT_01268590;
 // @fnv 0x00cc1280
+// pdb: bhkForceController::GetRTTI | bhkForceController.obj | fnv360_0822_retail, objrun, medium
 CpuOpaque* __cdecl FUN_00cc1280()
 {
     return &DAT_01268590;
@@ -12173,6 +12299,8 @@ struct FUN_00cc1310_class : FUN_00a5d2f0_shell {
     bool FUN_00cc1310(void* apStream);
 };
 // @fnv 0x00cc1310
+// pdb: bhkPoseArray::RegisterStreamables | bhkPoseArray.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: arStream
 bool FUN_00cc1310_class::FUN_00cc1310(void* apStream)
 {
     bool b = NiObject_RegisterStreamables(apStream);
@@ -12209,6 +12337,8 @@ struct Obj {
 void __cdecl FUN_00a5d430(void);
 
 // @fnv 0x00cc1960
+// pdb: NiPSysModifierBoolCtlr::RegisterStreamables | NiPSysModifierBoolCtlr.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void __cdecl FUN_00cc1960(void)
 {
     FUN_00a5d430();
@@ -12266,6 +12396,8 @@ struct OwnerC {
 
 // If pkObject is non-null, appends it to m_kArray.
 // @fnv 0x00cc2080
+// pdb: bhkExtraData::PrependController | bhkExtraData.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apController
 void OwnerC::AddRefObject(RefObjC* pkObject)
 {
     if (pkObject)
@@ -12275,6 +12407,8 @@ void OwnerC::AddRefObject(RefObjC* pkObject)
 void __cdecl FUN_00c8a560();
 
 // @fnv 0x00cc5080
+// pdb: NiBoolInterpController::SaveBinary | NiBoolInterpController.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void __cdecl FUN_00cc5080() {
     FUN_00c8a560();
 }
@@ -12318,6 +12452,8 @@ struct CC7970_Allocator { void* __thiscall FUN_00aa3e40(unsigned int); };
 void FUN_00d50000();
 
 // @fnv 0x00cc7ce0
+// pdb: NiPSysModifierCtlr::LinkObject | NiPSysModifierCtlr.obj | fnv360_0822_retail, call_gap, high
+// pdb params: kStream
 void FUN_00cc7ce0() {
     FUN_00d50000();
 }
@@ -12325,6 +12461,8 @@ void FUN_00cc7ce0() {
 void __cdecl FUN_00d50010();
 
 // @fnv 0x00cc7cf0
+// pdb: NiBoolInterpController::CopyMembers | NiBoolInterpController.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pkDest, kCloning
 void __cdecl FUN_00cc7cf0()
 {
     FUN_00d50010();
@@ -12377,12 +12515,16 @@ void __cdecl FUN_00ca4f40();
 
 // Tail call wrapper - jumps to FUN_00ca4f40
 // @fnv 0x00cc9ce0
+// pdb: bhkCollisionObject::CopyMembers | bhkCollisionObject.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apDest, arCloneData
 void __cdecl FUN_00cc9ce0() {
     FUN_00ca4f40();
 }
 
 void __cdecl FUN_00c8bf40();
 // @fnv 0x00cc9cf0
+// pdb: bhkCollisionObject::LoadBinary | bhkCollisionObject.obj | fnv360_0721_beta, objrun, medium
+// pdb params: arStream
 void __cdecl FUN_00cc9cf0()
 {
     FUN_00c8bf40();
@@ -12417,6 +12559,7 @@ struct FUN_00cce5e0_class {
     FUN_00cce5e0_class* __thiscall Construct();
 };
 // @fnv 0x00cce5e0
+// pdb: hkGeometry::hkGeometry | bhkConvexVerticesShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 FUN_00cce5e0_class* __thiscall FUN_00cce5e0_class::Construct()
 {
     m_pVtable = 0;
@@ -12434,6 +12577,8 @@ struct Cls00ccf5a0 {
 };
 
 // @fnv 0x00ccf5a0
+// pdb: bhkCollisionObject::LinkObject | bhkCollisionObject.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void Cls00ccf5a0::FUN_00ccf5a0(int a) {
     FUN_00c84cc0(a);
 }
@@ -12495,6 +12640,8 @@ struct FnvCpu_FUN_00cd0cf0_CpuObject {
     void FUN_00cd0cf0(unsigned char arg0);
 };
 // @fnv 0x00cd0cf0
+// pdb: TESLeveledList::SetChanceNone | TESLeveledList.obj | fnv360_0822_retail, call_gap, low
+// pdb params: acChance
 void FnvCpu_FUN_00cd0cf0_CpuObject::FUN_00cd0cf0(unsigned char arg0)
 {
     value = arg0;
@@ -12708,6 +12855,7 @@ struct CC0280Writer : hkOstream {
 
 // Writes the string "true" or "false" to the underlying stream based on the input boolean value and returns this.
 // @fnv 0x00cc0170
+// pdb: hkOstream::operator<< | hkOStream.obj | tesv_win, hash, low
 CC0280Writer* CC0280Writer::WriteBool(bool abValue)
 {
     FUN_00cc0080((CC0280Stream*)m_pSharedOwner, abValue ? "true" : "false");
@@ -12742,6 +12890,8 @@ struct FUN_00cc01e0_class {
 
 // Formats the short parameter v as a decimal integer into a local buffer and writes it to m_obj via FUN_00cc0080, returning this.
 // @fnv 0x00cc01e0
+// pdb: hkOstream::operator<< | hkOStream.obj | fnv360_0822_retail, objrun, medium
+// pdb params: s
 FUN_00cc01e0_class* FUN_00cc01e0_class::WriteShort(short asValue)
 {
     int buf[2506];
@@ -12936,6 +13086,8 @@ namespace fnv_00cc8cd0 {
 extern void FUN_00cc5080();
 
 // @fnv 0x00cc8cd0
+// pdb: NiPSysModifierCtlr::RegisterStreamables | NiPSysModifierCtlr.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kStream
 void FUN_00cc8cd0()
 {
     FUN_00cc5080();
@@ -13209,6 +13361,7 @@ public:
 
 // Sets the twelve float fields to fixed constants and returns this.
 // @fnv 0x00cdb360
+// pdb: hkaKeyFrameHierarchyUtility::ControlData::ControlData | hkbRagdollDriver.obj | tesv_win, hash, low
 FUN_00cdb360_cls* FUN_00cdb360_cls::FUN_00cdb360()
 {
     m_00 = 0.17f;
@@ -13245,6 +13398,8 @@ struct Cc0230Self {
 
 // Formats w into a buffer and writes it to the stream in unk08, returning this.
 // @fnv 0x00cc0230
+// pdb: hkOstream::operator<< | hkOStream.obj | fnv360_0822_retail, objrun, medium
+// pdb params: s
 Cc0230Self* Cc0230Self::WriteUInt16(unsigned short w)
 {
 	CcScratchBuf buffer;
@@ -13264,6 +13419,8 @@ struct FloatArgStream {
 };
 
 // @fnv 0x00cc0320
+// pdb: hkOstream::operator<< | hkOStream.obj | fnv360_0822_debug, objrun, medium
+// pdb params: f
 FloatArgStream* FloatArgStream::WriteFloat(float value) {
     int buf[2506];
     Vsnprintf((char*)buf, 0x2728, str_01094cf0, value);
@@ -13303,6 +13460,7 @@ struct CC1290Object {
 
 // Allocates and returns a new CC1290Object instance via its operator new.
 // @fnv 0x00cc1290
+// pdb: bhkPoseArray::CreateObject | bhkPoseArray.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 CC1290Object* __cdecl CreateCC1290Object()
 {
     return new CC1290Object;
@@ -13633,6 +13791,7 @@ struct CC42A0Object : CC42A0Base
 };
 // Allocates and returns a new CC42A0Object instance via its operator new.
 // @fnv 0x00cc42a0
+// pdb: bhkAngularDashpotAction::CreateObject | bhkAngularDashpotAction.obj | fnv360_0822_retail, objopen_prop, low
 CC42A0Object* CreateCC42A0Object()
 {
     return new CC42A0Object;
@@ -14090,6 +14249,7 @@ struct FUN_00cdb290 {
 };
 
 // @fnv 0x00cdb0a0
+// pdb: WaterShader::ReloadShaders | WaterShader.obj | fnv360_0822_debug, caller_sim, low
 StateResetPart* FUN_00cdb290::FUN_00cdb0a0()
 {
     FUN_00cda690();
@@ -14242,6 +14402,7 @@ struct bhkExtraData : FUN_00a7b2e0 { // src: F3_EXE vtable 0x00e7a35c (old: FUN_
 };
 // Constructs the object and calls AssignFixedString with a name reference built from the string at str_010c9488.
 // @fnv 0x00cc1d80
+// pdb: bhkExtraData::bhkExtraData | bhkExtraData.obj | fnv360_0721_beta, caller_sim, low
 bhkExtraData::bhkExtraData() {
 
  AssignFixedString(&NameRef(&str_010c9488));
@@ -16257,6 +16418,7 @@ int F3Twin_0095a000::hkpRagdollConstraintData_getConeMotor()
 }
 
 // @f3twin 0x00a28310 of 0x008d3560
+// pdb: hkpDefaultToiResourceMgr::shouldHandleGivenToi | hkpDefaultToiResourceMgr.obj | tesv_win, objrun, medium
 void __stdcall F3_FUN_00a28310(unsigned char* flag, int unused) {
     *flag = 1;
 }

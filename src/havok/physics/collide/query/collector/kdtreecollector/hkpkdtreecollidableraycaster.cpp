@@ -50,6 +50,7 @@ struct FUN_00d979f0_cls : SpawnedBase
 };
 
 // @fnv 0x00d979f0
+// pdb: TESModelList::TESModelList | TESModelList.obj | fnv360_0822_retail, call_seq, medium
 FUN_00d979f0_cls* FUN_00d979f0_cls::ResetFields() throw()
 {
     this->SpawnedBase::~SpawnedBase();

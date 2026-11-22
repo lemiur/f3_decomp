@@ -10,6 +10,7 @@ struct FUN_00d60bb0
     FUN_00d60bb0(unsigned char);
 };
 // @fnv 0x00d60bb0
+// pdb: hkpSaveContactPointsUtil::EntitySelector::`scalar deleting destructor' | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, vtable, high
 FUN_00d60bb0::FUN_00d60bb0(unsigned char p)
 {
     m_p = &DAT_010d1508;
@@ -20,6 +21,8 @@ FUN_00d60bb0::FUN_00d60bb0(unsigned char p)
 extern "C" void* DAT_011b5d38;
 
 // @fnv 0x00d60bf0
+// pdb: hkServerProcessHandler::getConsumableCommands | hkServerProcessHandler.obj | fnv360_0822_retail, vtable, medium
+// pdb params: commands, numCommands
 void __stdcall FUN_00d60bf0(void** ppOut, void** b)
 {
     *ppOut = &DAT_011b5d38;
@@ -48,6 +51,8 @@ struct FUN_00d60ca0_s
 };
 int __cdecl hkString_strLen(int);
 // @fnv 0x00d60ca0
+// pdb: hkServerProcessHandler::registerProcess | hkServerProcessHandler.obj | fnv360_0822_retail, vtable, medium
+// pdb params: name, id
 int FUN_00d60ca0_s::FUN_00d60ca0(int a, int b)
 {
     int iClamped = hkString_strLen(a);
@@ -75,6 +80,8 @@ struct FUN_00d60d10_Class
     int FUN_00d60d10(unsigned int a);
 };
 // @fnv 0x00d60d10
+// pdb: hkServerProcessHandler::selectProcess | hkServerProcessHandler.obj | fnv360_0822_retail, vtable, medium
+// pdb params: id
 int FUN_00d60d10_Class::FUN_00d60d10(unsigned int a)
 {
     ((FUN_00d60940_Class*)(*(int**)((char*)this + 0x10)))->WriteInt(5);
@@ -114,6 +121,8 @@ struct FUN_00d60c10_s
 };
 
 // @fnv 0x00d60c10
+// pdb: hkServerProcessHandler::consumeCommand | hkServerProcessHandler.obj | fnv360_0822_retail, vtable, medium
+// pdb params: command
 void FUN_00d60c10_s::HandleCommand(unsigned char ucCommand)
 {
     switch (ucCommand)
@@ -164,6 +173,8 @@ struct FUN_00d60d40_Class
     int FUN_00d60d40(int value);
 };
 
+// pdb: hkServerProcessHandler::findProcessByTag | hkServerProcessHandler.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: tag
 int FUN_00d60d40_Class::FUN_00d60d40(int value)
 {
     int count = m_uiItemCount;
@@ -183,6 +194,8 @@ struct FUN_00dd9270_Class
     void FindEntry();
 };
 // @fnv 0x00d61240
+// pdb: TESForm::SaveGameDataOLD | TESForm.obj | fnv360_0721_beta, call_dedup, low
+// pdb params: apData, aiSize
 void __cdecl FUN_00d61240()
 {
     ((FUN_00dd9270_Class*)DAT_01269cd0)->FindEntry();
@@ -191,6 +204,7 @@ void __cdecl FUN_00d61240()
 extern int DAT_01268fb8;
 
 // @fnv 0x00d61210
+// pdb: BSFaceGenManager::QFaceGenLockCount | BSFaceGenManager.obj | fnv360_0721_beta, objrun, medium
 int __cdecl FUN_00d61210()
 {
     return DAT_01268fb8;
@@ -267,6 +281,7 @@ struct hkEntry20D
     int unk10;
 };
 
+// pdb: hkServerProcessHandler::registerAllAvailableProcesss | hkServerProcessHandler.obj | fnv360_0822_retail, call_gap_sim, low
 int hkObjD60D::VisitEntryNames()
 {
     hkEntryArrayD60D& entries = reinterpret_cast<hkRegistryD60D*>(DAT_0116c490)->m_entries;
@@ -313,6 +328,8 @@ struct FUN_00d60dd0_Class
 
 // Calls FUN_00d60dd0_v6(f) on each element in unk2c in reverse order, then passes f and unk08 to unk18.ReadCommands if unk08 is set.
 // @fnv 0x00d60dd0
+// pdb: hkServerProcessHandler::step | hkServerProcessHandler.obj | fnv360_0822_retail, vtable, medium
+// pdb params: frameTimeInMs
 void FUN_00d60dd0_Class::ApplyToElements(float afValue)
 {
     for (int i = unk30 - 1; i >= 0; i--)
@@ -449,6 +466,7 @@ class hkObjD611
 
 // Returns 1 if m_inner is non-null and its ForwardValueToObject() returns true, otherwise 0.
 // @fnv 0x00d611e0
+// pdb: hkProcess::isOk | hkServerProcessHandler.obj | fnv360_0822_retail, vtable, medium
 int hkObjD611::FUN_00d611e0() const throw()
 {
     if (m_inner && m_inner->ForwardValueToObject())
@@ -461,6 +479,8 @@ struct FUN_00dd9240_Class
     void FUN_00dd9240();
 };
 // @fnv 0x00d61250
+// pdb: TESForm::LoadGameDataOLD | TESForm.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apData, apData, apData, apData, aiSize, aiSize, aiSize, aiSize
 void __cdecl FUN_00d61250()
 {
     ((FUN_00dd9240_Class*)DAT_01269cd0)->FUN_00dd9240();
@@ -653,6 +673,8 @@ struct StubEntryListD60E
 };
 extern int DAT_0116c490;
 void __cdecl FUN_00901f10(void* pArray, int iSizeElem);
+// pdb: hkServerProcessHandler::createProcess | hkServerProcessHandler.obj | fnv360_0822_retail, vtable, medium
+// pdb params: id
 int OwnerD60E::FUN_00d60e80(int aiSoundId)
 {
     int aiId = aiSoundId;
@@ -748,6 +770,8 @@ struct Part_d60eF3
     Item_d60eF3** m_pItems;
     int m_iCount;
 };
+// pdb: hkServerProcessHandler::deleteProcess | hkServerProcessHandler.obj | fnv360_0822_retail, vtable, medium
+// pdb params: id
 int Part_d60e::FUN_00d60e20(void* key)
 {
     Part_d60eF3* self = (Part_d60eF3*)this;

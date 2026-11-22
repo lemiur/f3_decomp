@@ -59,6 +59,7 @@ extern const char* const g_011f3f88_arg1;
 extern unsigned int DAT_011f404c;
 
 // @fnv 0x00a532c0
+// pdb: NiTask::GetRTTI | BSTECreateTask.obj | fnv360_0822_retail, vtable, medium
 unsigned int* __cdecl FUN_00a532c0()
 {
     return &DAT_011f404c;
@@ -80,6 +81,8 @@ struct S_00a53280_Foo
 extern void(__stdcall* FUN_00fdf1c0)(void*);
 
 // @fnv 0x00a53280
+// pdb: NiBoolInterpolator::NiBoolInterpolator | NiBoolInterpolator.obj | fnv360_0822_retail, call_gap, high
+// pdb params: pkBoolData
 void* S_00a53280_Foo::FUN_00a53280(void* arg)
 {
     FUN_00a3ca10();

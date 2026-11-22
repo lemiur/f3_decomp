@@ -39,6 +39,8 @@ void AddObjectToPalette(NiAVObject* object, NiDefaultAVObjectPalette* palette)
 
 // Loads the scene object and a count-prefixed list of name/object pairs from the stream, registering each pair in the palette.
 // @fnv 0x00a6ea40
+// pdb: NiDefaultAVObjectPalette::LoadBinary | NiDefaultAVObjectPalette.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: stream
 void NiDefaultAVObjectPalette::LoadBinary(NiStream& stream)
 {
     ((NiInterpolator*)this)->NiInterpolator::LoadBinary(stream);
@@ -76,6 +78,7 @@ struct FUN_00a6e960_shell : public NiDefaultAVObjectPalette
 };
 
 // @fnv 0x00a6e960
+// pdb: NiDefaultAVObjectPalette::ResetAndFillFromScenegraph | NiDefaultAVObjectPalette.obj | fnv360_0822_retail, call_gap, medium
 void FUN_00a6e960_shell::FUN_00a6e960()
 {
     if (m_pkScene)
@@ -175,6 +178,8 @@ struct NodeChildrenView_cls
 };
 
 // @fnv 0x00a6e870
+// pdb: RecurseAndAddObjectsToPalette | NiDefaultAVObjectPalette.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apObj3D, apPalette
 void __cdecl AddObjectToPaletteRecursive(NiAVObject* apObject, NiDefaultAVObjectPalette* apPalette)
 {
     if (apObject == 0)
@@ -249,6 +254,8 @@ struct S_00a6e8e0_Palette
 };
 
 // @fnv 0x00a6e8e0
+// pdb: RecurseAndRemoveObjectsFromPalette | NiDefaultAVObjectPalette.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObj3D, apPalette
 void __cdecl FUN_00a6e8e0(S_00a6e8e0_Object* object, S_00a6e8e0_Palette* palette)
 {
     if (object == 0)
@@ -315,6 +322,8 @@ struct PaletteOwner
 };
 // Allocates a PaletteObject, initializes it via FUN_00aa1000 with argument, and returns it.
 // @fnv 0x00a6ef70
+// pdb: NiDefaultAVObjectPalette::CreateClone | NiDefaultAVObjectPalette.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCloning
 PaletteObject* PaletteOwner::CreatePalette(void* argument)
 {
     PaletteObject* palette = new PaletteObject;
@@ -434,6 +443,7 @@ class FUN_00c1f550_cls : public BC1F550Emitter
 };
 
 // @fnv 0x00c1f550
+// pdb: NiPSysMeshEmitter::NiPSysMeshEmitter | NiPSysMeshEmitter.obj | fnv360_0822_retail, call_gap, high
 FUN_00c1f550_cls::FUN_00c1f550_cls() throw()
     : m_kGeometryEmitters(1, 2), m_kEmitterTypes(0, 1), m_eInitVelocityType(0), m_eEmissionType(0),
       m_kEmitterPoint(g_kC1F550Zero)
@@ -472,6 +482,8 @@ struct PaletteShell : public NiDefaultAVObjectPalette
 };
 
 // @fnv 0x00a6e5b0
+// pdb: NiDefaultAVObjectPalette::ProcessClone | NiDefaultAVObjectPalette.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCloning
 void PaletteShell::FUN_00a6e5b0(CloningProcess& kCloning)
 {
     ((NiObjectCloneBase*)this)->ProcessClone(kCloning);
@@ -622,6 +634,8 @@ template <class T> void WriteBinaryArray(NiBinaryStream& kOstr, const T* pValue,
 }
 
 // @fnv 0x00a6e6c0
+// pdb: NiDefaultAVObjectPalette::SaveBinary | NiDefaultAVObjectPalette.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: stream
 void PaletteSaveShell::FUN_00a6e6c0(NiStream& kStream)
 {
     FUN_00a724d0(kStream);
@@ -653,6 +667,7 @@ void PaletteSaveShell::FUN_00a6e6c0(NiStream& kStream)
 
 void __cdecl CreateVertexBufferSet();
 // @fnv 0x00aa1000
+// pdb: TESLeveledList::ClearDataComponent | TESLeveledList.obj | fnv360_0822_retail, vtable, medium
 void __cdecl FUN_00aa1000()
 {
     CreateVertexBufferSet();
@@ -743,6 +758,8 @@ struct NiDefaultAVObjectPaletteViewer : public NiDefaultAVObjectPalette
 };
 // Adds a formatted scene-name line and object-map keys to pkStrings, decrementing non-sentinel key handles.
 // @fnv 0x00a6ed90
+// pdb: NiDefaultAVObjectPalette::GetViewerStrings | NiDefaultAVObjectPalette.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pStrings
 void NiDefaultAVObjectPaletteViewer::FUN_00a6ed90(ViewerStrings* pkStrings)
 {
     ((PaletteBaseViewer*)this)->GetViewerStrings(pkStrings);
@@ -962,6 +979,8 @@ public:
     void FUN_00838930(void*&,Key&,V&);
     void FUN_0085b720(const Key&,V);
 };
+// pdb: NiDefaultAVObjectPalette::LinkObject | NiDefaultAVObjectPalette.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: stream
 void Palette::FUN_00a6eb60(void* apDest)
 {
     CloneBase(apDest);

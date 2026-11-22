@@ -234,6 +234,8 @@ struct S_00bb6050
 };
 
 // @fnv 0x00bb6050
+// pdb: BSDistantTreeShader::GetShaderDecl | BSDistantTreeShader.obj | fnv360_0721_beta, objrun, low
+// pdb params: apGeometry, apProperty
 int __thiscall S_00bb6050::FUN_00bb6050(int arg0, int arg1)
 {
     return this->unk80;

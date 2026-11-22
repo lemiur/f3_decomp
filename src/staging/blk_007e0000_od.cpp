@@ -50,6 +50,8 @@ struct FUN_007ffe00_Class {
     FUN_00cbc810_cls m_map;
     void FUN_007ffe00(void* p);
 };
+// pdb: TESContainer::RemoveContainerObject | TESContainer.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCObj
 void FUN_007ffe00_Class::FUN_007ffe00(void* p) {
     Node_452cd0* node = (Node_452cd0*)p;
     if (node) {

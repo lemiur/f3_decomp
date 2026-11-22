@@ -9,6 +9,7 @@ struct NiSearchPath
 };
 
 // @fnv 0x00aa2500
+// pdb: ActorPackage::NullInstanceData | ActorPackage.obj | fnv360_0822_retail, vtable, medium
 void NiSearchPath::FUN_00aa2500()
 {
     *reinterpret_cast<unsigned int*>(reinterpret_cast<unsigned char*>(this) + 4) = 0;
@@ -26,6 +27,8 @@ struct NiSearchPath
 
 // Copies pcFilePath into the buffer at offset 8 and standardizes it, or clears that buffer when pcFilePath is null or empty.
 // @fnv 0x00aa2540
+// pdb: NiSearchPath::SetFilePath | NiSearchPath.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: pcFilePath
 void NiSearchPath::SetPath(const char* pcFilePath)
 {
     if (pcFilePath && *pcFilePath)
@@ -79,6 +82,8 @@ struct NiSearchPathS
 };
 // Builds a full path from the stored path and search-path mode, writes it to pcPath, standardizes it, and advances the mode counter.
 // @f3 0x0089fd20 (community match, verified in this file)
+// pdb: NiSearchPath::GetNextSearchPath | NiSearchPath.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: pcPath, uiStringLen
 bool NiSearchPathS::ResolveSearchPath(char* pcOutPath, unsigned int uiOutLen)
 {
     FileNameComponents kFullPath(m_acFilePathBuffer);
@@ -126,6 +131,7 @@ extern MemoryManager g_memoryManager;
 struct FUN_00aa2510
 {
     virtual ~FUN_00aa2510();
+    // pdb: LockFreeMap<AnimIdle *,NiPointer<QueuedAnimIdle> >::LockFreeMapIterator::`scalar deleting destructor' | ModelLoader.obj | fnv360_0822_retail, vtable, medium
     void operator delete(void* p)
     {
         g_memoryManager.Deallocate(p);

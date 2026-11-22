@@ -5,6 +5,8 @@
 extern "C" unsigned int __stdcall WriteSwapped(void*, int, int);
 
 // @fnv 0x00d609c0
+// pdb: hkOArchive::writeFloat32 | hkOArchive.obj | fnv360_0822_debug, objrun, high
+// pdb params: f
 unsigned int __stdcall HashUInt(unsigned int auiValue)
 {
     return WriteSwapped(&auiValue, 4, 1);
@@ -70,6 +72,8 @@ struct FUN_00d60aa0_class
 };
 
 // @fnv 0x00d60aa0
+// pdb: hkOArchive::writeArray32u | hkOArchive.obj | fnv360_0822_retail, objrun, medium
+// pdb params: array, nelem
 void FUN_00d60aa0_class::FUN_00d60aa0(const void* data, int count)
 {
     WriteSwapped(data, 4, count);
@@ -82,6 +86,8 @@ struct hkOArchive
     void WriteArray(const void* data, unsigned int elementCount);
 };
 // @fnv 0x00d60ac0
+// pdb: hkOArchive::writeArray64 | hkOArchive.obj | fnv360_0822_retail, objrun, high
+// pdb params: array, nelem
 void hkOArchive::WriteArray(const void* data, unsigned int elementCount)
 {
     WriteSwapped(data, 8, elementCount);
@@ -105,6 +111,8 @@ struct hkOArchive_2
     void WriteInt(int val);
 };
 // @fnv 0x00d60940
+// pdb: hkOArchive::write32 | hkOArchive.obj | fnv360_0822_retail, call_seq, high
+// pdb params: i
 void hkOArchive_2::WriteInt(int aiValue)
 {
     WriteBinaryData(&aiValue, 4, 1);
@@ -205,6 +213,7 @@ struct FUN_00d607e0_class
 };
 
 // @fnv 0x00d607e0
+// pdb: hkSubStreamWriter::isOk | hkBinaryPackfileWriter.obj | fnv360_0822_retail, vtable, high
 int __thiscall FUN_00d607e0_class::ForwardValueToObject(int value)
 {
     m_8->FUN_00d607e0_virtual3(value);
@@ -217,6 +226,8 @@ struct FUN_00d60a00_class : public hkOArchive
 };
 
 // @fnv 0x00d60a00
+// pdb: hkOArchive::writeArray8 | hkOArchive.obj | fnv360_0822_debug, objrun, high
+// pdb params: array, nelem
 void FUN_00d60a00_class::WriteData(const void* data, unsigned int size)
 {
     WriteBinaryData((void*)data, 1, size);
@@ -238,6 +249,8 @@ struct FUN_00d60b00_class
 };
 
 // @fnv 0x00d60b00
+// pdb: hkOArchive::writeArrayFloat32 | hkOArchive.obj | fnv360_0822_retail, call_seq, high
+// pdb params: array, nelem
 void __thiscall FUN_00d60b00_class::WriteFloatArray(const float* data, unsigned int count)
 {
     ((hkOArchive*)this)->WriteBinaryData((void*)data, 4, (int)count);
@@ -322,6 +335,8 @@ inline void swapBytes(unsigned char& a, unsigned char& b)
 }
 
 // @fnv 0x00d60600
+// pdb: hkOArchive::writeArrayGeneric | hkOArchive.obj | fnv360_0822_retail, call_seq, high
+// pdb params: ptr, elemSize, arraySize
 void Archive::WriteSwapped(const void* data, int elementSize, int count)
 {
     if (!m_byteswap)
@@ -413,6 +428,7 @@ struct FUN_00d60800_class
     void* FUN_00d60800();
 };
 // @fnv 0x00d60800
+// pdb: hkClassMember::getEnumType | hkClassMember.obj | fnv360_0822_retail, objrun_open, low
 void* FUN_00d60800_class::FUN_00d60800()
 {
     return m_8;

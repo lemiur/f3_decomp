@@ -18,6 +18,7 @@ struct NiSCMExtraData
     void* Destroy(unsigned int);
 };
 // @fnv 0x00ee89b0
+// pdb: NiSCMExtraData::`scalar deleting destructor' | NiSCMExtraData.obj | fnv360_0822_retail, objrun_open, low
 void* NiSCMExtraData::Destroy(unsigned int auiFlags)
 {
     void* tmp = m_24;
@@ -58,6 +59,7 @@ struct FUN_00ee8910_obj
 };
 
 // @fnv 0x00ee8910
+// pdb: bhkExtraData::bhkExtraData | bhkExtraData.obj | fnv360_0822_retail, caller_sim, low, conflict (bridge: NiSCMExtraData::NiSCMExtraData)
 FUN_00ee8910_obj* FUN_00ee8910_obj::FUN_00ee8910(int a, int aiCountA, int aiCountB)
 {
     ((FUN_00a7b2e0_shell*)this)->FUN_00a7b2e0();

@@ -28,6 +28,7 @@ struct NiDepthStencilBuffer
 };
 // Sets the vftable, calls FUN_00a8f1c0, and if flag bit 0 is set frees this with size 0x14, returning this.
 // @fnv 0x00a9fe60
+// pdb: NiDepthStencilBuffer::`scalar deleting destructor' | NiDepthStencilBuffer.obj | fnv360_0822_retail, objopen_prop, low
 void* NiDepthStencilBuffer::Destroy(unsigned int auiFlags)
 {
     *(void**)this = (void*)&vftable_NiDepthStencilBuffer;

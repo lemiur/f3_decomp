@@ -10,6 +10,7 @@ struct Matrix
 
 // Checks the 12 matrix values (skipping indices 3 and 11) for infinite/NaN exponents and writes the result to output.
 // @fnv 0x00ce50e0
+// pdb: hkQsTransform::isOk | hkQsTransform.obj | fnv360_0822_retail, objrun_open, low
 bool* Matrix::HasFiniteValues(bool* pbFinite)
 {
     for (int index = 0; index < 12; ++index)
@@ -48,6 +49,8 @@ class FUN_00ce50b0_cls
 };
 
 // @f3 0x00964420 (community match, verified in this file)
+// pdb: hkQsTransform::copyToTransformNoScale | hkQsTransform.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: transformOut
 void FUN_00ce50b0_cls::FUN_00ce50b0(CB2FC0Object* target)
 {
     Matrix* self = (Matrix*)this;

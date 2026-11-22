@@ -14,6 +14,8 @@ struct FUN_00a57030_shell : public NiInterpolator
 };
 
 // @fnv 0x00a57030
+// pdb: NiInterpolator::GetActiveTimeRange | NiInterpolator.obj | fnv360_0822_retail, objrun, high
+// pdb params: fBeginKeyTime, fEndKeyTime
 void FUN_00a57030_shell::GetKeyTimeRange(float* fBeginKeyTime, float* fEndKeyTime)
 {
     *fBeginKeyTime = 0.0f;
@@ -107,6 +109,8 @@ NiAnimTarget* __stdcall FUN_00a57050(int a, int b)
 }
 
 // @fnv 0x00a57020
+// pdb: MagicTarget::CheckAbsorb | MagicTarget.obj | fnv360_0721_beta, objrun_sim, low
+// pdb params: apCaster, apSpell, apActiveEffect, abReducedChance
 char __stdcall FUN_00a57020(int a, int b, int c)
 {
     return 0;

@@ -23,6 +23,7 @@ struct FUN_00e02ef0 : hkReferencedObject
 };
 
 // @fnv 0x00e02ef0
+// pdb: hkOffsetOnlyStreamWriter::hkOffsetOnlyStreamWriter | hkOffsetOnlyStreamWriter.obj | fnv360_0822_retail, uvref, high
 FUN_00e02ef0::FUN_00e02ef0()
 {
     m_kPointA = 0;
@@ -61,6 +62,8 @@ class FUN_00e02e90_cls
 
 // Applies value to m_08 according to mode (set, add, or subtract from m_0c), then stores the larger of m_08 and m_0c into m_0c and returns 0.
 // @fnv 0x00e02e90
+// pdb: hkOffsetOnlyStreamWriter::seek | hkOffsetOnlyStreamWriter.obj | fnv360_0822_retail, vtable, high
+// pdb params: offset, whence
 int FUN_00e02e90_cls::ApplyValue(int value, int mode)
 {
     switch (mode)
@@ -89,12 +92,14 @@ int FUN_00e02e90_cls::ApplyValue(int value, int mode)
 }
 
 // @fnv 0x00e02f10
+// pdb: hkpSimpleContactConstraintData::isValid | hkpSimpleContactConstraintData.obj | tesv_win, objrun_open, low
 void __stdcall FUN_00e02f10(unsigned char* output)
 {
     *output = 1;
 }
 
 // @fnv 0x00e02f20
+// pdb: hkCrc32StreamWriter::isOk | hkCrc32StreamWriter.obj | fnv360_0822_retail, vtable, medium
 void __stdcall FUN_00e02f20(unsigned char* output)
 {
     *output = 1;
@@ -110,6 +115,7 @@ struct FUN_00e02ee0_cls
 };
 
 // @fnv 0x00e02ee0
+// pdb: hkIArchive::getStreamReader | hkIArchive.obj | fnv360_0822_retail, objrun, medium
 int FUN_00e02ee0_cls::FUN_00e02ee0()
 {
     return unk08;

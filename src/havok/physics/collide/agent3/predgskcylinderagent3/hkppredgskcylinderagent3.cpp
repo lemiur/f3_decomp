@@ -28,6 +28,8 @@ struct FNVFlags
 };
 // @f3 0x009cb230 (community match, verified in this file)
 int FUN_009cc0e0(FNVPair*,int,FNVFlags*);
+// pdb: hkPredGskCylinderAgent3::create | hkpPredGskCylinderAgent3.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: input, entry, agentData
 int __cdecl ConvertPairFlags(FNVPair* pair, int mode, FNVFlags* result)
 {
     int converted = FUN_009cc0e0(pair, mode, result);
@@ -193,6 +195,7 @@ struct LocalSource70
     int unk6c;
 };
 
+// pdb: separatingDistanceUsingCapsuleRepresentations | hkpPredGskCylinderAgent3.obj | fnv360_0822_retail, caller_sim, high
 float __cdecl ComputeExtendedResult(LocalSource* source, void* apArg, FNVFlags* apFlags)
 {
     LocalSource70 local_source;

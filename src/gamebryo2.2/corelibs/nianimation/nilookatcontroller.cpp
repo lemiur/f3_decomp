@@ -18,6 +18,7 @@ extern "C" __declspec(noinline) void __cdecl _delete(void* p, unsigned int flags
 
 // Calls FUN_00a6d290, then frees this with _delete when flags has bit 0 set, and returns this.
 // @fnv 0x00a4cd40
+// pdb: MagicModelHitEffect::`scalar deleting destructor' | MagicModelHitEffect.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: bhkEntity::RemoveContactListener)
 void* __thiscall NiLookAtController::FUN_00a4cd40(unsigned int flags)
 {
     FUN_00a6d290();
@@ -52,6 +53,7 @@ struct NiLookAtController : NiTimeController
 };
 
 // @fnv 0x00a4c840
+// pdb: NiLookAtController::LinkObject | NiLookAtController.obj | tesv_win, hash, low
 void NiLookAtController::FUN_00a4c840(NiStream& stream)
 {
     NiTimeController::LinkObject(stream);
@@ -99,6 +101,7 @@ struct S00a4c860
     bool __thiscall FUN_00a4c860(NiStream&);
 };
 // @fnv 0x00a4c860
+// pdb: NiLookAtController::RegisterStreamables | NiLookAtController.obj | tesv_win, objrun, medium
 bool __thiscall S00a4c860::FUN_00a4c860(NiStream& s)
 {
     if (!((TCReg*)this)->FUN_00a6d0f0(s))
@@ -320,6 +323,8 @@ struct BinaryInputRead : BinaryInput
     }
 };
 
+// pdb: NiLookAtController::LoadBinary | NiLookAtController.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void LookAt::FUN_00a4ce20(NiStream& stream)
 {
     reinterpret_cast<FnvBaseLoadStd*>(this)->FUN_008381d0(stream);
@@ -386,6 +391,8 @@ class FUN_00a4ccd0_cls
 
 // Calls FUN_00a6d0c0, looks up this in the item's map, and if m_38 is set resolves it via GetAt and stores the result on the looked-up item.
 // @fnv 0x00a4ccd0
+// pdb: NiLookAtController::ProcessClone | NiLookAtController.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCloning
 void FUN_00a4ccd0_cls::LookupAndLinkItem(void* apItem)
 {
     void* local;
@@ -627,6 +634,8 @@ struct Ctl : Base44
 };
 
 // @fnv 0x00a4cea0
+// pdb: NiLookAtController::SaveBinary | NiLookAtController.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: kStream
 void Ctl::FUN_00a4cea0(StreamObj* stream)
 {
     Base44::FUN_00a6d730(stream);
@@ -711,6 +720,7 @@ struct Clone_a4c : public FUN_00a6d220
 
 // Allocates a Clone_a4c, copies the base data via FUN_00a6cfe0, then copies m_34, bit 1, field 6 and m_38, and returns the clone.
 // @fnv 0x00a4cd60
+// pdb: NiLookAtController::CreateClone | NiLookAtController.obj | tesv_win, caller_sim, low
 Clone_a4c* Clone_a4c::FUN_00a4cd60(void* pkCloning)
 {
     Clone_a4c* pkClone = new Clone_a4c;
@@ -796,6 +806,8 @@ struct Eq4c
 
 // Compares this object with other via FUN_00a6cc80, checks m_spObj presence matches, and delegates to m_spObj->IsEqual.
 // @fnv 0x00a4c890
+// pdb: NiLookAtController::IsEqual | NiLookAtController.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: pkObject
 bool Eq4c::FUN_00a4c890(Eq4c* other)
 {
     if (!FUN_00a6cc80(other))
@@ -944,6 +956,8 @@ extern S00a4c8e0_Pt DAT_011a9484;
 
 // Rotates the controlled node to face the target node by building a look-at matrix from their world positions and applying the parent transform.
 // @fnv 0x00a4c8e0
+// pdb: NiLookAtController::Update | NiLookAtController.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: UpdateData
 void S00a4c8e0_Ctl::Update(float time)
 {
     if (!target || !IsActive())

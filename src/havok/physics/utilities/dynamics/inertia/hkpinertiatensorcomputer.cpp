@@ -8,6 +8,7 @@ struct Object
 void __cdecl FUN_00cebdf0(float* source, float value, Object* destination);
 // Multiplies the float at source by scale and passes the result to FUN_00cebdf0 along with source and destination.
 // @fnv 0x00cebe50
+// pdb: hkpInertiaTensorComputer::setAndScaleToDensity | hkpInertiaTensorComputer.obj | tesv_win, hash, low
 void __cdecl FUN_00cebe50(float* source, float scale, Object* destination)
 {
     float result = *source * scale;
@@ -23,6 +24,8 @@ struct FUN_00cebe80_Struct
 
 // Subtracts fParam2 times products of pThis's components from the diagonal of pOut and adds the off-diagonal products to its symmetric entries.
 // @fnv 0x00cebe80
+// pdb: hkpInertiaTensorComputer::shiftInertiaToCom | hkpInertiaTensorComputer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: hkInertiaTensorComputer::shiftInertiaToCom)
+// pdb params: shift, mass, inertia
 void __cdecl FUN_00cebe80(FUN_00cebe80_Struct* pThis, float fScale, float* pMatrix)
 {
     float fValue;
@@ -50,6 +53,7 @@ void __cdecl FUN_00cebe80(FUN_00cebe80_Struct* pThis, float fScale, float* pMatr
 }
 
 // @fnv 0x00cebf30
+// pdb: hkInertiaTensorComputer::shiftInertiaFromCom | hkInertiaTensorComputer.obj | tesv_win, hash, low
 void __cdecl AddInertiaTensor(float* param_1, float fScale, float* pMatrix)
 {
     float fOffDiag;
@@ -109,6 +113,8 @@ struct FUN_00cec6b0_cls
 };
 
 // @fnv 0x00cec6b0
+// pdb: InternalInertiaTensorComputer::computeInertialTensorInternal | hkpInertiaTensorComputer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: mass, density, r, J
 void FUN_00cec6b0_cls::FUN_00cec6b0(float a1, float afScale, float* p, float* pMatrix)
 {
     p[0] = m_68 / m_64;
@@ -160,6 +166,7 @@ struct CECCD0Value
 };
 
 // @fnv 0x00ceccd0
+// pdb: hkpMassProperties::scaleToDensity | hkInertiaTensorComputer.obj | tesv_win, hash, low
 void CECCD0Value::ScaleValue(float scale)
 {
     set(m_uiFilterValue * scale);
@@ -208,6 +215,7 @@ static inline float S_MaxLT(float x, float y)
     return (x < y) ? y : x;
 }
 // @fnv 0x00ced230
+// pdb: hkpInertiaTensorComputer::clipInertia | hkpInertiaTensorComputer.obj | tesv_win, hash, low
 void __cdecl FUN_00ced230(float afDivisor, S_00ced230_T* pData)
 {
     float a = pData->unk50;
@@ -306,6 +314,7 @@ void S00cec3d0_Base::FUN_00cec000(const float* v)
 
 // Calls FUN_00cec000, then fills Fa, Fb, Fc and the m_fVertex fields from verts, normal n and the base fields using polynomials in 1/n[C].
 // @fnv 0x00cec3d0
+// pdb: InternalInertiaTensorComputer::compFaceIntegrals | hkInertiaTensorComputer.obj | tesv_win, hash, low
 void S00cec3d0_Face::FUN_00cec3d0(const float* verts, const float* apNormal)
 {
     FUN_00cec000(verts);
@@ -507,6 +516,7 @@ struct MatrixOps
     void __thiscall FUN_0096cca0(const S00ceccf0_Mat* source);
 };
 
+// pdb: hkInertiaTensorComputer::computeSphereSurfaceMassProperties | hkInertiaTensorComputer.obj | tesv_win, caller_sim, low
 int __cdecl FUN_00ceccf0(float start, float span, float t, S00ceccf0_Out* out)
 {
     if (span <= 0.0f)
@@ -1206,6 +1216,8 @@ __forceinline void SetSize568(S00cf0f40_Arr* arr,int size){
     }
     arr->m_iElementCount=size;
 }
+// pdb: bhkStream::LoadBinary | bhkStream.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arStream, arArray
 unsigned int __cdecl FUN_00cf0f40(S00cf0f40_Owner* owner,S00cf0f40_Arr* arr) {
     unsigned int count=0;
     S00cf0f40_Load(*owner->m_stream,&count,1);
@@ -1289,6 +1301,8 @@ struct __declspec(align(16)) Scalar469 {
     float x,y,z,value;
     Scalar469(float v):value(v){}
 };
+// pdb: hkpInertiaTensorComputer::shiftInertiaToCom | hkpInertiaTensorComputer.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: hkInertiaTensorComputer::computeSphereVolumeMassProperties)
+// pdb params: shift, mass, inertia
 int __cdecl FUN_00ceba60(float a,float b,Target* target) {
     if(b<=0.0f) return 1;
     if(a<=0.0f) return 1;
@@ -1329,6 +1343,7 @@ struct VertexComponentData
 
 // Accumulates polynomial integrals over three segments of verts and stores the scaled results in P1, Pa, Pb and m_fComponent0 through m_fComponent6.
 // @fnv 0x00cec000
+// pdb: InternalInertiaTensorComputer::compProjectionIntegrals | hkInertiaTensorComputer.obj | tesv_win, uconst, low
 void VertexComponentData::FUN_00cec000(const float* verts)
 {
     float a0, a1, da;
@@ -1617,6 +1632,8 @@ struct MassProperties
 // @f3 0x00971440 (community match, verified in this file)
 extern double FUN_00dd2798;
 
+// pdb: InternalInertiaTensorComputer::computeInertialTensorInternal | hkpInertiaTensorComputer.obj | fnv360_0822_retail, objrun_sim, low, conflict (skyrim: hkInertiaTensorComputer::computeBoxVolumeMassProperties)
+// pdb params: mass, density, r, J
 int __cdecl FUN_00cebaf0(const V4& halfExtents, float mass, MassProperties& result)
 {
     if (mass <= 0.0f)

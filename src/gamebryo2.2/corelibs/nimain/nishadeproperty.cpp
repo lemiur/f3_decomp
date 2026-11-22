@@ -740,6 +740,8 @@ inline void* __cdecl operator new(unsigned int, void* p)
     return p;
 }
 // @fnv 0x00a81480
+// pdb: NiShadeProperty::CreateClone | NiShadeProperty.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: kCloning
 NiObject* NiShadeProperty::FUN_00a81480(CloningProcess& kCloning)
 {
     NiShadeProperty* pkObject = (NiShadeProperty*)BSFadeNode::operator new(32);
@@ -784,6 +786,8 @@ struct NiShadeProperty : BaseSave
 };
 // Calls the base save routine, then writes the 2-byte m_us value to the stream and advances its position by the bytes written.
 // @fnv 0x00a815c0
+// pdb: NiCullingProperty::SaveBinary | NiCullingProperty.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kStream
 void NiShadeProperty::SaveToStream(NiStream& kStream)
 {
     FUN_00a5d7b0(kStream);
@@ -827,6 +831,8 @@ struct NiShadeProperty : NiProperty
     void FUN_00a95190(NiStream&);
 };
 // @fnv 0x00a95190
+// pdb: NiDitherProperty::LoadBinary | NiDitherProperty.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kStream
 void NiShadeProperty::FUN_00a95190(NiStream& kStream)
 {
     ((NiPropertyHelper*)this)->LoadBinary(kStream);
@@ -856,6 +862,8 @@ struct NiShadeProperty : EqBase
     bool FUN_00a9a5b0(NiObject*);
 };
 // @fnv 0x00a9a5b0
+// pdb: NiBinaryStreamSaveEnum<enum NiSortAdjustNode::SortingMode> | NiSortAdjustNode.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: os, value
 bool NiShadeProperty::FUN_00a9a5b0(NiObject* pkObject)
 {
     if (!EqBase::FUN_00a62140(pkObject))
@@ -956,6 +964,7 @@ extern S_00a81590_Obj* DAT_011f5ae8;
 
 // If the global object pointer is set, decrements its reference count and clears the pointer.
 // @fnv 0x00a81590
+// pdb: Main::FreeMenuRootNode3D | Main.obj | fnv360_0822_retail, call_gap, low
 void FUN_00a81590()
 {
     if (DAT_011f5ae8)
@@ -996,6 +1005,8 @@ struct FUN_00a81600_cls
 };
 // Appends the DAT_011f5ae0 value and a "m_bSmooth" bool built from bit 0 of m_18 to the NiArr after calling AppendString.
 // @fnv 0x00a81600
+// pdb: NiSpecularProperty::GetViewerStrings | NiSpecularProperty.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FUN_00a81600_cls::WriteToArray(NiArr* a)
 {
     AppendString(a);

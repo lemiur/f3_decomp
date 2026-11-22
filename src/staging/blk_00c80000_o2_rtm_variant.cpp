@@ -6922,6 +6922,8 @@ static __forceinline EndpointF3* getSecond(GraphicsF3* p)
     return link ? link->body : 0;
 }
 
+// pdb: bhkUtilFunctions::ReplaceConstraints | bhkUtilFunctions.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObject, aeType
 void __cdecl FUN_00c80ce0(SceneObjectLocal* owner, int notification)
 {
     if (!owner || notification != 8)
@@ -7322,6 +7324,8 @@ static __forceinline bool IsKindOf(const F3RTTI* pkRTTI, const F3RTTI* pkClass)
     return false;
 }
 
+// pdb: bhkBlendCollisionObject::SetMotionType | bhkBlendCollisionObject.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aeType, apObject, abAllowActivate
 void BlendCollObj::FUN_00c823b0(int iMotion, DynCastHelper* pkObj, bool bFlag)
 {
     WorldObj* pkBody = pkObj == 0 ? 0
@@ -7613,6 +7617,8 @@ struct BodyRef892 {
     BodyRef892(SharedBody* value) : body(value) { if (body != 0) { volatile long* p = &body->references; InterlockedIncrement(p); } }
     ~BodyRef892() { if (body) { if (InterlockedDecrement(&body->references) == 0) body->release(); } }
 };
+// pdb: WeaponObject::Init | WeaponObject.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: aOwnerFilter, apOwner3d, apObject, apReplaceObject, abDefaultKeyframed
 void Shape892::FUN_00c892c0(int arg1,int arg2,int arg3,Shape892* other,int arg5)
 {
     if (!arg2 || !arg3 || !other) return;

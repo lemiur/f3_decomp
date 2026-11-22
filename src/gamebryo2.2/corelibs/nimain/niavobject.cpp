@@ -30,6 +30,8 @@ struct FUN_00a5a030_shell : NiAVObject
 };
 
 // @fnv 0x00a5a030
+// pdb: NiAVObject::UpdateControllers | NiAVObject.obj | fnv360_0822_retail, objrun, medium
+// pdb params: UpdateData
 void __thiscall FUN_00a5a030_shell::FUN_00a5a030(NiUpdateData& data)
 {
     NiAVObject::UpdateTimeControllers(data, true);
@@ -47,6 +49,7 @@ char const* const* __cdecl BSFadeNodeCuller_GetRTTI()
 extern const void* DAT_011f9140;
 
 // @fnv 0x00b4e1d0
+// pdb: NiDitherProperty::GetRTTI | NiDitherProperty.obj | fnv360_0822_retail, udata, medium, conflict (skyrim: NiColorExtraData::GetRTTI)
 const void* __cdecl FUN_00b4e1d0()
 {
     return &DAT_011f9140;
@@ -65,6 +68,8 @@ struct FUN_00a59dc0_shell
 };
 
 // @fnv 0x00a59dc0
+// pdb: NiAVObject::SetBound | NiAVObject.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apBound
 void __thiscall FUN_00a59dc0_shell::SetBoundObject(void* apBound)
 {
     unsigned char* pThis = reinterpret_cast<unsigned char*>(this);
@@ -89,6 +94,8 @@ struct FUN_00a59c90_shell
 };
 // Calls the object's vtable slot 42 with the update data, then, if the object at offset 0x18 exists, calls its vtable slot 63.
 // @fnv 0x00a59c90
+// pdb: NiAVObject::UpdateSelected | NiAVObject.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: UpdateData
 void __thiscall FUN_00a59c90_shell::FUN_00a59c90(NiUpdateData& aUpdateData)
 {
     ((void(__thiscall*)(void*, void*, int))(*(int**)this)[42])(this, &aUpdateData, 0);
@@ -103,6 +110,8 @@ struct FUN_00a59d00_shell
 };
 typedef void(__thiscall* FUN_00a59d00_Fn)(NiNode*, void*);
 // @fnv 0x00a59d00
+// pdb: NiAVObject::AttachParent | NiAVObject.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pkParent
 void __thiscall FUN_00a59d00_shell::SetParent(NiNode* pkParent)
 {
     NiNode* pkOldParent = *(NiNode**)((char*)this + 0x18);
@@ -257,6 +266,8 @@ struct S59ec0
     void __thiscall FUN_00a59ec0(CloningProcess& b);
 };
 // @fnv 0x00a59ec0
+// pdb: NiAVObject::ProcessClone | NiAVObject.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kCloning
 void __thiscall S59ec0::FUN_00a59ec0(CloningProcess& kCloning)
 {
     ((NiObjectNET*)(void*)this)->NiObjectNET::ProcessClone(kCloning);
@@ -330,6 +341,8 @@ struct FUN_00a59f90_holder
     void __thiscall FUN_00a59f90(NiUpdateData&, unsigned int);
 };
 // @fnv 0x00a59f90
+// pdb: NiAVObject::UpdateDownwardPass | NiAVObject.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: UpdateData, uFlags
 void __thiscall FUN_00a59f90_holder::FUN_00a59f90(NiUpdateData& kData, unsigned int uiFlags)
 {
     if (kData.m_bUpdateEnabled)
@@ -419,6 +432,7 @@ struct S_00a5a110
 };
 // Walks the linked list from head and returns true if any node's DataA has a non-zero v, otherwise false.
 // @fnv 0x00a5a110
+// pdb: NiAVObject::HasPropertyController | NiAVObject.obj | fnv360_0822_retail, call_seq, medium
 bool __thiscall S_00a5a110::HasNodeWithNonZeroValue()
 {
     NodeA* pNode = head;
@@ -441,6 +455,7 @@ struct FUN_00a5aa90_shell
 };
 // Calls FUN_00a5a390 on this, frees this with _delete when bit 0 of a1 is set, and returns this.
 // @fnv 0x00a5aa90
+// pdb: NiAVObject::`scalar deleting destructor' | NiAVObject.obj | tesv_win, vtable_prefix, medium
 void* __thiscall FUN_00a5aa90_shell::FUN_00a5aa90(unsigned int auiFlags)
 {
     FUN_00a5a390(this);
@@ -500,6 +515,8 @@ struct Holder00a59cc0
 };
 // Sets m_parent to pEventualParent, calls Target(UpdateData, false), then clears m_parent.
 // @fnv 0x00a59cc0
+// pdb: NiAVObject::PreAttachUpdate | NiAVObject.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pEventualParent, UpdateData
 void __thiscall Holder00a59cc0::UpdateWithParent(NiNode* pEventualParent, NiUpdateData& UpdateData)
 {
     m_parent = pEventualParent;
@@ -515,6 +532,8 @@ struct FUN_00a59db0_shell
 };
 
 // @fnv 0x00a59db0
+// pdb: NiAVObject::PreAttachUpdateEffects | NiAVObject.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pEventualParent
 void __thiscall FUN_00a59db0_shell::FUN_00a59db0(int arg)
 {
     _field_0x18 = 0;
@@ -530,6 +549,8 @@ struct NiAVObject
 };
 
 // @fnv 0x00a59e20
+// pdb: NiAVObject::GetObjectByName | NiAVObject.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kName
 int NiAVObject::FUN_00a59e20(int param)
 {
     int handle = *reinterpret_cast<int*>(param);
@@ -552,6 +573,8 @@ struct NiAVObject
 };
 
 // @fnv 0x00a5a430
+// pdb: NiAVObject::PreAttachUpdateProperties | NiAVObject.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pEventualParent
 void NiAVObject::SetEventualParent(NiNode* pEventualParent)
 {
     this->m_pEventualParent = pEventualParent;
@@ -644,6 +667,7 @@ class A59CF0Holder
 };
 
 // @fnv 0x00a59cf0
+// pdb: NiAVObject::PostAttachUpdate | NiAVObject.obj | fnv360_0822_retail, vtable, medium
 void A59CF0Holder::FUN_00a59cf0()
 {
     m_pkNode->UpdateSceneObject();
@@ -716,6 +740,8 @@ struct FUN_00a59d80_cls
 
 // If bit 2 of m_flags is set, calls v46 with pArg and then v47.
 // @fnv 0x00a59d80
+// pdb: NiAVObject::UpdateTransformAndBounds | NiAVObject.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: UpdateData
 void __thiscall FUN_00a59d80_cls::FUN_00a59d80(void* pArg)
 {
     unsigned char flags = (unsigned char)(m_flags >> 2);
@@ -836,6 +862,8 @@ inline ItemBase* const& GetNext(ListNode*& pos)
 }
 
 // @fnv 0x00a59e70
+// pdb: NiAVObject::ProcessPropertyClones | NiAVObject.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: NiAVObject::UpdateDownwardPass)
+// pdb params: pkList, kCloning
 void __stdcall FUN_00a59e70(ListOwner* owner, Holder* holder)
 {
     ListNode* node = owner->m_04;
@@ -916,6 +944,8 @@ struct FUN_00a59f00_cls
 
 // Calls FUN_00a5c180(p); if it succeeds, invokes v21(p) on each node's m_obj and on m_1c, then returns true.
 // @fnv 0x00a59f00
+// pdb: NiAVObject::RegisterStreamables | NiAVObject.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kStream
 bool FUN_00a59f00_cls::FUN_00a59f00(void* apArg)
 {
     if (!FUN_00a5c180(apArg))
@@ -957,6 +987,8 @@ inline DataA* const& GetNextData(NodeA*& pos)
 }
 
 // @fnv 0x00a5a140
+// pdb: NiAVObject::UpdatePropertiesDownward | NiAVObject.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkParentState
 void __thiscall FUN_00a5a140_cls::FUN_00a5a140(int unused)
 {
     NodeA* pos = m_pFirstNode;
@@ -1219,6 +1251,8 @@ struct Obj00a5a900 : Base00a5c5b0
 
 // Writes the base data, unk30, unk58, unk34, unk64, the object count and each linked object's link ID, then saves the link ID of unk1c.
 // @fnv 0x00a5a900
+// pdb: NiAVObject::SaveBinary | NiAVObject.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kStream
 void Obj00a5a900::FUN_00a5a900(NiStream& kStream)
 {
     SaveNiObjectLinks(kStream);
@@ -1289,6 +1323,7 @@ struct FUN_00a5aa20_cls : ObjBase
 };
 
 // @fnv 0x00a5aa20
+// pdb: NiAVObject::NiAVObject | NiAVObject.obj | fnv360_0822_retail, call_seq, medium
 FUN_00a5aa20_cls::FUN_00a5aa20_cls()
 {
     m_1c = 0;
@@ -1321,6 +1356,8 @@ struct FUN_00a71b70_cls
 };
 
 // @fnv 0x00a71b70
+// pdb: NiD3DGeometryGroupManager::SetHWSkinning | NiD3DGeometryGroupManager.obj | fnv360_0822_retail, call_seq, high
+// pdb params: bHWSkinning
 FUN_00a71b70_cls* FUN_00a71b70_cls::FUN_00a71b70(unsigned char v)
 {
     m_18 = v;
@@ -1408,6 +1445,7 @@ class FUN_00b4e150 : public B4E150SortAdjustNode
 };
 
 // @fnv 0x00b4e150
+// pdb: BSFadeNode::BSFadeNode | BSFadeNode.obj | fnv360_0822_retail, call_seq, medium
 FUN_00b4e150::FUN_00b4e150() : B4E150SortAdjustNode(0)
 {
     m_fNearPlane = 3.402823466e+38f;
@@ -1502,6 +1540,7 @@ struct FUN_00a5a040_Class
 // @f3 0x008268a0 (community match, verified in this file)
 __declspec(dllimport) long __stdcall InterlockedCompareExchange(volatile long*, long, long);
 
+// pdb: NiAVObject::UpdateProperties | NiAVObject.obj | fnv360_0822_retail, call_seq, medium
 void FUN_00a5a040_Class::FUN_00a5a040()
 {
     NiPropertyState* ps = 0;
@@ -1676,6 +1715,8 @@ struct LoadedNode
 };
 // Reads a child count from the stream and loads each child into children, then loads the controller for newer versions.
 // @fnv 0x00a5a7f0
+// pdb: NiAVObject::LinkObject | NiAVObject.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kStream
 void LoadedNode::ReadFromStream(LoadedStream* stream)
 {
     FUN_00a5c0e0(stream);
@@ -1803,6 +1844,8 @@ struct FUN_00a5ad00_shell
     void FUN_00a5ad00(Stream* stream);
 };
 // @fnv 0x00a5ad00
+// pdb: NiAVObject::GetViewerStrings | NiAVObject.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FUN_00a5ad00_shell::FUN_00a5ad00(Stream* stream)
 {
     FUN_00a5ca80(stream);
@@ -1982,6 +2025,8 @@ class AV59f
 };
 
 // @fnv 0x00a59fd0
+// pdb: NiAVObject::UpdateSelectedDownwardPass | NiAVObject.obj | fnv360_0822_retail, objrun_prop, low, conflict (bridge: NiAVObject::UpdateDownwardPass)
+// pdb params: UpdateData, uFlags
 void AV59f::UpdateDownwardPassIfSelective(NiUpdateData& kData, unsigned int uiUnused)
 {
     bool m_bUpdateEnabled = kData.m_bUpdateEnabled;
@@ -1998,6 +2043,8 @@ void AV59f::UpdateDownwardPassIfSelective(NiUpdateData& kData, unsigned int uiUn
 
 // 0x00c6c760  ret 0xc
 // @fnv 0x00c6c760
+// pdb: MagicHitEffect::FinishInitLoadGame | MagicHitEffect.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apEffect, apTarget, apData
 void __stdcall FUN_00c6c760(int, int, int)
 {}
 
@@ -2081,6 +2128,8 @@ class FUN_00a59d30_C
 
 // Iterates m_kList and returns the first item whose GetType matches iType, or null if iType is 7 or greater or no match is found.
 // @fnv 0x00a59d30
+// pdb: NiAVObject::GetProperty | NiAVObject.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: iType
 ItemA59D* FUN_00a59d30_C::FUN_00a59d30(int iType)
 {
     if (iType >= 7)
@@ -2713,6 +2762,8 @@ struct LoadObject : LoadBase
 };
 // Reads flags, translation, rotation, and scale, then handles legacy collision data and version-dependent flag updates.
 // @fnv 0x00a5a510
+// pdb: NiAVObject::LoadBinary | NiAVObject.obj | fnv360_0822_retail, uconst, low
+// pdb params: kStream
 void LoadObject::FUN_00a5a510(LoadStream& stream)
 {
     FUN_00a5c080(stream);
@@ -2848,6 +2899,7 @@ struct WorkerProperties
 };
 // Assigns six global WorkerProperty pointers to the corresponding WorkerPointer members.
 // @fnv 0x00a89960
+// pdb: NiPropertyState::Reset | NiPropertyState.obj | fnv360_0822_retail, call_seq, medium
 void WorkerProperties::FUN_00a89960()
 {
     alpha = DAT_011f4410;

@@ -2451,6 +2451,7 @@ struct This_cd60 {
 };
 
 // @fnv 0x00e8cd60
+// pdb: NiDX9VertexBufferManager::DestroyDefaultBuffers | NiDX9VBManager.obj | tesv_win, call_gap_sim, low
 void This_cd60::FUN_00e8cd60()
 {
     Map_cd60* map = &this->map;
@@ -2712,6 +2713,7 @@ public:
 };
 
 }
+// pdb: NiDX9VertexBufferManager::~NiDX9VertexBufferManager | NiDX9VBManager.obj | tesv_win, objrun, medium
 void ShaderManagerRelease093::FUN_00e8ceb0()
 {
     reinterpret_cast<f3m_00885e80::NiDX9VertexBufferManager*>(this)->ShutDown();
@@ -2773,6 +2775,7 @@ void __cdecl FUN_00e91c80()
 }
 
 // @fnv 0x00e94290
+// pdb: NiVBSet::DeleteBlocks | NiVBSet.obj | fnv360_0822_retail, objrun_prop, low
 void __cdecl FUN_00e94290()
 {
     FreeNodeList();

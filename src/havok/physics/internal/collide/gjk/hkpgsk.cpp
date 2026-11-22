@@ -30,6 +30,8 @@ struct ThisClass
 };
 
 // @fnv 0x00da9790
+// pdb: hkpGskBaseAgent::calcSeparatingNormal | hkpGskBaseAgent.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: hkpGsk::exitAndExportCacheImpl)
+// pdb params: bodyA, bodyB, earlyOutTolerance, gsk, separatingNormalOut
 void ThisClass::FUN_00da9790(Dest* pDest)
 {
     pDest->count1 = (unsigned char)this->count1;

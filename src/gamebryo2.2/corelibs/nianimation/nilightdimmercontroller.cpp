@@ -22,6 +22,8 @@ struct NiLightDimmerController
 };
 
 // @fnv 0x00a4cf70
+// pdb: NiLightDimmerController::GetTargetFloatValue | NiLightDimmerController.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: fValue
 void NiLightDimmerController::GetLightDimmer(float& fValue)
 {
     NiLight* apTargetLight = *reinterpret_cast<NiLight**>(reinterpret_cast<char*>(this) + 0x2c);
@@ -45,6 +47,7 @@ inline void* __cdecl operator new(unsigned int, void* p)
     return p;
 }
 // @fnv 0x00a4d0d0
+// pdb: NiLightDimmerController::CreateObject | NiLightDimmerController.obj | fnv360_0822_retail, objopen_prop, low
 void* FUN_00a4d0d0()
 {
     void* p = BSFadeNode::operator new(0x38);
@@ -80,6 +83,8 @@ struct FloatInterpOwner
 };
 
 // @fnv 0x00a4d080
+// pdb: NiLightDimmerController::CreateClone | NiLightDimmerController.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: kCloning
 void* FloatInterpOwner::CreateFloatInterpController(int arg)
 {
     NiFloatInterpController* obj = (NiFloatInterpController*)FUN_00aa13e0(0x38);
@@ -195,6 +200,8 @@ class NiLightDimmerControllerW
 // @f3 0x008c6ee0 (community match, verified in this file)
 extern int DAT_0108f41c;
 void* __cdecl FUN_00424d50(const void* pkType, void* pkObject);
+// pdb: NiLightDimmerController::Update | NiLightDimmerController.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: UpdateData
 void NiLightDimmerControllerW::UpdateDimmer(const float& fTime)
 {
     if (GetManagerControlled())
@@ -225,6 +232,7 @@ void NiLightDimmerControllerW::UpdateDimmer(const float& fTime)
 extern void FUN_00a57c70();
 
 // @fnv 0x00a4cf40
+// pdb: BGSTerrainManager::ShowMinimumDetail | BGSTerrainManager.obj | fnv360_0822_retail, call_gap, low
 void FUN_00a4cf40()
 {
     FUN_00a57c70();
@@ -265,6 +273,7 @@ struct FUN_00a4d030_cls
 
 // Decrements m_pCounted's reference count and calls Release at zero, then runs BaseCleanup and calls FUN_00aa1460 when bit 0 is set.
 // @fnv 0x00a4d030
+// pdb: NiLightDimmerController::`scalar deleting destructor' | NiLightDimmerController.obj | fnv360_0822_retail, objopen_prop, low
 FUN_00a4d030_cls* FUN_00a4d030_cls::FUN_00a4d030(unsigned char acFlags)
 {
     *(volatile int*)&m_vptr = (int)&DAT_01098ccc;

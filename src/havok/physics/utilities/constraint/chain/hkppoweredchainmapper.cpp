@@ -100,6 +100,8 @@ class hkSetE3A5
 // @f3 0x00a6fa50 (community match, verified in this file)
 extern "C" void __cdecl FUN_00901f10(void*, int);
 
+// pdb: hkpPoweredChainMapper::getMotors | hkpPoweredChainMapper.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: linkIndex, coordinateIndex, motorsOut
 void hkSetE3A5::CollectSlotValues(int range, int slot, hkArrayE3A5<int>& out)
 {
     const hkRangeE3A5& r = m_ranges[range];
@@ -508,6 +510,8 @@ template <class A> inline void setSizeTo(A* a, int n, int elemSize) throw()
     }
     a->size = n;
 }
+// pdb: hkpPoweredChainMapper::buildChainMapper | hkpPoweredChainMapper.obj | fnv360_0822_retail, ustr, high
+// pdb params: config, allConstraints, pairs, unusedConstraints
 FnMapper* __cdecl BuildPoweredChainMapper(FnFlags flags, hkArray<int>* linkIds, hkArray<FnNodePair>* pairs, hkArray<int>* unlinked) throw()
 {
     FnMapper* mapper = (FnMapper*)new FnMapperNew;

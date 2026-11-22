@@ -18,6 +18,8 @@ int __thiscall FUN_00cb7460_class::hkpAgentNnTrack_getSectorSize(int value)
 
 // If the slot index at p+0x22 is not 0xffff, clears the entry in the array at thisPtr+0x40 and resets the index to 0xffff.
 // @fnv 0x00cb3fd0
+// pdb: hkpWorldOperationUtil::removeIslandFromDirtyList | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: world, island
 void ClearSlotReference(int* thisPtr, int* p)
 {
     unsigned short* s = (unsigned short*)((char*)p + 0x22);
@@ -393,6 +395,8 @@ struct CleanupList
 };
 // Calls FUN_00d070b0 on every object in firstObjects and secondObjects in reverse order, then on finalObject.
 // @fnv 0x00cb3e90
+// pdb: hkpWorldOperationUtil::validateWorld | hkpWorldOperationUtil.obj | fnv360_0822_retail, objrun, low
+// pdb params: world
 void __cdecl FUN_00cb3e90(CleanupList* apCleanupList)
 {
     int i = apCleanupList->firstCount - 1;
@@ -748,6 +752,8 @@ struct Stats
 
 // If the holder has a box, updates maxv and the three sums from s, adds s[1..3] into the box fields, and raises maxv to the box's a.
 // @f3 0x00929b70 (community match, verified in this file)
+// pdb: hkpConstraintOwner::addConstraintInfo | hkpWorldOperationUtil.obj | fnv360_0822_retail, caller, high
+// pdb params: constraint, delta
 void Stats::AccumulateStats(Holder* apHolder, const int* aiStats)
 {
     Box*& box = *reinterpret_cast<Box**>(apHolder->pad + 0x28);
@@ -791,6 +797,8 @@ typedef S_00dd7d00_Bool(__cdecl* S_00dd7d00_Less)(S_00dd7d00_Item* a, S_00dd7d00
 
 // Sorts the range [d, h] of pArr in place with a Hoare-style quicksort using cmpLess, recursing on the left part and looping on the right.
 // @fnv 0x00dd7d00
+// pdb: hkAlgorithm::quickSortRecursive<hkpSimulationIsland *,hkBool (__cdecl*)(hkpSimulationIsland const *,hkpSimulationIsland const *)> | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: pArr, d, h, cmpLess
 void FUN_00dd7d00(S_00dd7d00_Item** apItems, int aiLow, int aiHigh, S_00dd7d00_Less apfnLess)
 {
     int i, j;
@@ -1287,6 +1295,8 @@ void ClearSlotReference(int* thisPtr, int* p);
 
 // Removes item from one of the owner's two lists by swapping in the last element, fixes its index, decrements the count, then calls ClearSlotReference.
 // @fnv 0x00cb4000
+// pdb: hkpWorldOperationUtil::removeIsland | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_seq, high
+// pdb params: world, island
 void RemoveListItem(ListOwner* self, ListItem* volatile item)
 {
     ListItem* pItem = item;
@@ -3376,6 +3386,8 @@ int unk2f4;
 int capacity;
 void FUN_00902570(F3_Deferred*) throw();void FUN_00902550() throw();
 };
+// pdb: hkpWorldOperationUtil::updateEntityBP | hkpWorldOperationUtil.obj | fnv360_0822_retail, objrun, medium
+// pdb params: world, entity
 void __cdecl Cb5750_Owner::AddCollisionShape(Cb5750_Param* param) throw()
 {
     F3_Owner* self=(F3_Owner*)this;
@@ -4138,6 +4150,8 @@ void __cdecl hkpWorldOperationUtil_splitSimulationIsland(IslandNode* data, Objec
 void __cdecl AddItemToContainer(Object* object, IslandNode* item);
 // Picks a list by the node's low state, runs hkpWorldOperationUtil_splitSimulationIsland, then for each new item copies that state, sets its index, and may call AddItemToContainer.
 // @fnv 0x00cb6e70
+// pdb: hkpWorldOperationUtil::splitSimulationIsland | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_seq, high
+// pdb params: world, currentIsland
 void __cdecl PropagateStateToChildren(Object* object, int* apNode)
 {
     IslandNode* node = (IslandNode*)apNode;
@@ -4588,6 +4602,8 @@ struct List { Elem** m_data; int m_iElementCount; };
 template <class T> __forceinline T max2(T a, T b) { return a > b ? a : b; }
 }
 
+// pdb: hkpWorldOperationUtil::removeAttachedActionsFromFixedIsland | hkpWorldOperationUtil.obj | fnv360_0822_debug, objopen_prop, low
+// pdb params: world, entity, actionsToBeMoved
 static __declspec(noinline) void RemapElements(const Cb4890_ElemArray& remapArg, Cb4890_RemapTable* listArg,
                                                Cb4890_Owner* ownerArg, Cb4890_IntArray* src, Cb4890_CharArray* out)
 {
@@ -5643,6 +5659,7 @@ template <class T> __forceinline T greater4120(T a, T b)
 
 // Iterates entries, marks active groups when motion frames are 5 or fewer, and accumulates per-group size counts.
 // @f3 0x00926a50 (community match, verified in this file)
+// pdb: findInactiveGroupsAndEstimateSolverSize | hkpWorldOperationUtil.obj | fnv360_0822_retail, objrun_open, low
 static __declspec(noinline) void UpdateGroupActivity(const Groups4120& map, const View4120<Entry4120*>& entries,
                                                      int unusedGroups, View4120<int>& active, View4120<int>& sizes,
                                                      unsigned char* flags)
@@ -6881,6 +6898,7 @@ static __forceinline void tallyAll(int& remap_, Cb4890_ElemArray* list, int n,
 
 }
 using namespace ns_00927640;
+// pdb: identifyDeactivatedSubgroups | hkpWorldOperationUtil.obj | fnv360_0822_debug, objrun_open, low
 void FUN_00cb49e0(MergeWorld* ownerArg, int remap_, MergeListArg listArg, Cb4890_IntArray* src, Cb4890_CharArray* out)
 {
     // Guess (kept from the stored drafts): a dead address-take of listArg. It keeps the list parameter in its home slot

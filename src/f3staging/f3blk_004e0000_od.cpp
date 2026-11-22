@@ -401,6 +401,8 @@ unsigned unk170;
 unsigned unk174;
 unsigned unk178;
 void FUN_00454410(Input*); void TESForm_SetInitialized(int); unsigned FUN_00454fe0(); void TESForm_LoadData(Input*,void*,unsigned); bool FUN_004fed60(Input*); };
+// pdb: TESWaterForm::Load | TESWaterForm.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Obj::FUN_004fed60(Input* file) {
  if(file->TESFile_GetTESForm()!=0x4e) return false;
  FUN_00454410(file); TESForm_SetInitialized(0);
@@ -594,6 +596,8 @@ Mat* FUN_004e7c10(Mat*);
 bool FUN_004ec240(V*,bool,bool,Entry*,int*,bool);
 };
 
+// pdb: TESObjectREFR::GetClosestFreeMarker | TESObjectREFR.obj | fnv360_0822_debug, caller, medium
+// pdb params: aLocation, abSitOK, abSleepOK, aOutMarker, aiOutMarkerIndex, abIgnoreReservations
 bool Obj::FUN_004ec240(V* point,bool a,bool b,Entry* out,int* index,bool mode) {
  bool result=false;
  if(base->type==0x27) {
@@ -672,6 +676,8 @@ struct f3_004ffdb0_Sub98 { void FUN_00b10fe0(); };
 void FUN_00458210(void*,f3m_004fed60::Input*);
 void TESForm_AddCompileIndex(f3_004ffdb0_Pair*,f3m_004fed60::Input*);
 struct f3_004ffdb0_Rec : f3m_004fed60::Obj { __declspec(noinline) unsigned char FUN_004ffdb0(f3m_004fed60::Input*); };
+// pdb: TESWeather::Load | TESWeather.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 unsigned char f3_004ffdb0_Rec::FUN_004ffdb0(f3m_004fed60::Input* s)
 {
     if (s->TESFile_GetTESForm() != 0x35)

@@ -44,6 +44,7 @@ void* __cdecl FUN_00e92eb0();
 void __fastcall FUN_00e93cc0(void* pThis);
 
 // @fnv 0x00e91fa0
+// pdb: NiD3DShaderFactory::RemoveAllProgramDirectories | NiD3DShaderFactory.obj | fnv360_0822_retail, caller_sim, low
 void FUN_00e91fa0_shell::FUN_00e91fa0()
 {
     void* pkFactory = FUN_00e92eb0();
@@ -62,6 +63,7 @@ struct FUN_00e91ea0_cls
     NiConsoleRendererStub* renderer;
 };
 // @fnv 0x00e91ea0
+// pdb: NiD3DShaderFactory::PurgeAllShaderRendererData | NiD3DShaderFactory.obj | fnv360_0822_retail, objrun_open, low
 void __fastcall FUN_00e91ea0(FUN_00e91ea0_cls* self, int)
 {
     if (self->renderer)
@@ -69,18 +71,24 @@ void __fastcall FUN_00e91ea0(FUN_00e91ea0_cls* self, int)
 }
 
 // @fnv 0x00e91eb0
+// pdb: NiD3DShaderFactory::CreatePixelShaderVersion | NiD3DShaderFactory.obj | fnv360_0822_retail, objrun_open, low, conflict (bridge: NiD3DShaderFactory::GetMinorPixelShaderVersion)
+// pdb params: uiMajorVersion, uiMinorVersion
 unsigned int __stdcall FUN_00e91eb0(unsigned int uiVersion)
 {
     return uiVersion & 0xFF;
 }
 
 // @fnv 0x00e91ec0
+// pdb: NiD3DShaderFactory::GetMajorPixelShaderVersion | NiD3DShaderFactory.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: uiVersion
 unsigned int __stdcall MakeVersionCode(unsigned int uiMajor, unsigned int uiMinor)
 {
     return ((0xFFFFFF00 | uiMajor) << 8) | uiMinor;
 }
 
 // @fnv 0x00e91ee0
+// pdb: NiD3DShaderFactory::CreateVertexShaderVersion | NiD3DShaderFactory.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: uiMajorVersion, uiMinorVersion
 unsigned int __stdcall FUN_00e91ee0(unsigned int uiVersion)
 {
     return (uiVersion >> 8) & 0xFF;
@@ -164,6 +172,8 @@ struct NiD3DShaderFactory_shell
 
 // Builds a name from pcName and uiImplementation and removes the matching entry from the map at offset 0x28 if present.
 // @fnv 0x00e923f0
+// pdb: NiD3DShaderFactory::RemoveShader | NiD3DShaderFactory.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pcName, uiImplementation
 void __thiscall NiD3DShaderFactory_shell::FUN_00e923f0(const char* pcName, unsigned int uiImplementation)
 {
     char acFullName[260];
@@ -184,6 +194,7 @@ struct FUN_00e92460_cls
     NiTMapBaseStub* map;
 };
 // @fnv 0x00e92460
+// pdb: NiD3DShaderFactory::RemoveAllShaders | NiD3DShaderFactory.obj | fnv360_0822_retail, objrun, medium
 void __fastcall FUN_00e92460(FUN_00e92460_cls* self, int)
 {
     if (self->map)
@@ -191,6 +202,8 @@ void __fastcall FUN_00e92460(FUN_00e92460_cls* self, int)
 }
 
 // @fnv 0x00e92590
+// pdb: NiTMapBase<DFALL<NiTMapItem<unsigned int,CombatThreat *> >,unsigned int,CombatThreat *>::IsKeysEqual | CombatThreatMap.obj | fnv360_0822_retail, vtable, medium
+// pdb params: key1, key2
 unsigned int __stdcall FUN_00e92590(unsigned int auiLeft, unsigned int auiRight)
 {
     return auiLeft == auiRight;
@@ -201,6 +214,7 @@ struct Obj_00e92690
     void Destroy();
 };
 // @fnv 0x00e92690
+// pdb: ExtraFollowerSwimBreadcrumbs::`scalar deleting destructor' | ExtraDataObjects.obj | fnv360_0822_retail, vtable, high
 Obj_00e92690* __fastcall FUN_00e92690(Obj_00e92690* self, int, unsigned int flags)
 {
     self->Destroy();
@@ -215,6 +229,7 @@ struct Obj_00e92cd0
 };
 // Calls the object's cleanup method, frees it via g_memoryManager when flags has bit 0 set, and returns the object pointer.
 // @fnv 0x00e92cd0
+// pdb: NiTMap<WaterZone *,int>::`scalar deleting destructor' | ExtraDataObjects.obj | fnv360_0822_debug, vtable, medium
 Obj_00e92cd0* __fastcall FUN_00e92cd0(Obj_00e92cd0* self, int, unsigned int flags)
 {
     self->FUN_00e925a0();
@@ -244,6 +259,7 @@ struct FUN_00e92520_shell
 };
 
 // @fnv 0x00e92520
+// pdb: NiTStringTemplateMap<NiTPointerMap<char const *,NiD3DShaderProgramCreator *>,NiD3DShaderProgramCreator *>::~NiTStringTemplateMap<NiTPointerMap<char const *,NiD3DShaderProgramCreator *>,NiD3DShaderProgramCreator *> | NiD3DShaderProgramFactory.obj | fnv360_0721_beta, objopen_prop, low
 void FUN_00e92520_shell::Destroy()
 {
     m_vtbl = &DAT_010f0c00;
@@ -301,6 +317,7 @@ struct FUN_00e926b0_shell : NiTMapBaseStub
 };
 // Resets the vftable, removes all entries, frees the field pointer, and optionally deallocates this object.
 // @fnv 0x00e926b0
+// pdb: NiTMapBase<DFALL<NiTMapItem<TESObjectREFR *,NiNode *> >,TESObjectREFR *,NiNode *>::`scalar deleting destructor' | TESObjectCELL.obj | fnv360_0822_retail, vtable, medium
 void* FUN_00e926b0_shell::FUN_00e926b0(bool abFree)
 {
     vftable = &DAT_010f0c20;
@@ -338,6 +355,7 @@ struct FUN_00e92e30_shell : public NiD3DShaderFactory
 
 // Calls FUN_00e92dc0, frees this with operator delete when flags has bit 0 set, and returns this.
 // @fnv 0x00e92e30
+// pdb: DistantLODShader::`scalar deleting destructor' | DistantLODShader.obj | fnv360_0822_retail, objrun, medium
 void* __thiscall FUN_00e92e30_shell::DestroyShaderFactory(unsigned int flags)
 {
     FUN_00e92dc0();
@@ -383,6 +401,8 @@ struct FakeFactory374
     virtual ShaderConstantInterface* GetPixelShaderConstantInterface();
 };
 // @fnv 0x00e91e60
+// pdb: NiD3DShaderFactory::SetRenderer | NiD3DShaderFactory.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pkRenderer
 void FUN_00e91e60_shell::FUN_00e91e60(GraphicsRenderer* pkRenderer)
 {
     ShaderConstantInterface* pkLibrary;
@@ -418,6 +438,8 @@ struct FUN_00e921d0_shell
 };
 // Builds a name from pcName and uiImplementation, looks it up in the shader map at this+0x28, and returns the found NiShader or null.
 // @fnv 0x00e921d0
+// pdb: NiD3DShaderFactory::FindShader | NiD3DShaderFactory.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pcName, uiImplementation
 NiShader* FUN_00e921d0_shell::GetShaderByNameAndImplementation(const char* pcName, unsigned int uiImplementation)
 {
     if (!*(NiTStringPointerMap_00e93020**)((char*)this + 0x28))
@@ -488,6 +510,8 @@ struct Tbl00b57f20
 };
 typedef unsigned int(__thiscall* VF00b57f20)(void*, int);
 // @fnv 0x00b57f20
+// pdb: NiTMapBase<DFALL<NiTMapItem<unsigned int,CombatThreat *> >,unsigned int,CombatThreat *>::GetNext | CombatThreatMap.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: NiDX9Renderer::PurgeTexture)
+// pdb params: pos, key, val
 void Tbl00b57f20::AdvanceToNextEntry(Ent00b57f20** ppEntry, int* piFirst, int* piSecond)
 {
     Ent00b57f20* a = *ppEntry;
@@ -540,6 +564,8 @@ struct FUN_00e6e630_cls
 
 // Advances the hash-map iterator to the next node, copying its key and ref-counting the value, or clears the iterator when no further node exists.
 // @fnv 0x00e6e630
+// pdb: NiTMapBase<DFALL<NiTMapItem<unsigned int,NiPointer<ReferenceObstacleArray> > >,unsigned int,NiPointer<ReferenceObstacleArray> >::GetNext | NavMeshObstacleManager.obj | fnv360_0822_retail, call_seq, medium, conflict (bridge: NiD3DShaderFactory::GetNextLibrary)
+// pdb params: pos, key, val
 void FUN_00e6e630_cls::AdvanceIterator(MapItemNode** apIter, unsigned int* key, MapValueObject** val)
 {
     MapItemNode* pNode = *apIter;
@@ -673,6 +699,8 @@ class E92270Library
 
 // Checks pcName is non-empty and resolves a program by name/ID, then scans the library's entries under the critical section for a matching entry.
 // @fnv 0x00e92270
+// pdb: NiD3DShaderFactory::ReleaseShaderFromLibrary | NiD3DShaderFactory.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pcName, uiImplementation
 bool E92270Library::HasEntry(const char* pcName, unsigned int uiID)
 {
     if (!pcName || !*pcName)
@@ -860,6 +888,7 @@ struct ShaderMap89b770 {
 };
 }
 using namespace f3m_0089b770;
+// pdb: NiD3DShaderFactory::RestoreAllShaderRendererData | NiD3DShaderFactory.obj | fnv360_0822_retail, caller_sim, low
 void ShaderFactoryShell::FUN_00e92470()
 {
     if (!m_pOwnerShader)
@@ -957,6 +986,7 @@ class FUN_00e92910_cls
 };
 
 // @fnv 0x00e92910
+// pdb: NiTStringTemplateMap<class NiTPointerMap<char const *,class NiPointer<class NiSequence> >,class NiPointer<class NiSequence> >::SetValue | NiKeyframeManager.obj | tesv_win, vtable, medium
 void FUN_00e92910_cls::SetEntryNameAndObject(BE92910Entry* pkEntry, const char* pcName,
                                              BE92910Pointer<BE92910RefObject> spRetainedObject) throw()
 {
@@ -996,6 +1026,7 @@ struct FUN_00e92c40_shell : NiD3DShaderFactory
     void FUN_00e92c40();
 };
 // @fnv 0x00e92c40
+// pdb: NiD3DShaderFactory::RemoveAllLibraries | NiD3DShaderFactory.obj | fnv360_0822_retail, call_seq, medium
 void FUN_00e92c40_shell::FUN_00e92c40()
 {
     if (!m_pShaderLibraryStorage)
@@ -1036,6 +1067,7 @@ struct ShaderFactoryShutdown : NiD3DShaderFactory
 };
 
 // @fnv 0x00e92dc0
+// pdb: NiD3DShaderFactory::~NiD3DShaderFactory | NiD3DShaderFactory.obj | fnv360_0822_retail, caller_sim, medium
 void ShaderFactoryShutdown::FUN_00e92dc0()
 {
     ShaderMap* shaderMap = static_cast<ShaderMap*>(m_pShaderMapStorage);
@@ -1142,6 +1174,7 @@ class FUN_00e925a0 : public PointerMap305
     virtual ~FUN_00e925a0();
 };
 // @fnv 0x00e925a0
+// pdb: NiTStringTemplateMap<NiTPointerMap<char const *,NiShader *>,NiShader *>::~NiTStringTemplateMap<NiTPointerMap<char const *,NiShader *>,NiShader *> | NiD3DShaderFactory.obj | fnv360_0721_beta, objrun_open, low
 FUN_00e925a0::~FUN_00e925a0()
 {
     if (ownsKeys)
@@ -1204,6 +1237,8 @@ struct ShaderTaskMapF3
 {
     __declspec(noalias) bool FUN_005c8b00(const char* pcName, ShaderRefObject*& rpObject) throw();
 };
+// pdb: NiD3DShaderFactory::FindLibrary | NiD3DShaderFactory.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pcName
 ShaderRefObject* ShaderFactoryView::GetShaderRefObject(const char* pcName) throw()
 {
     ShaderRefObject* spRetainedObject = 0;
@@ -1285,6 +1320,8 @@ class OwnerE92A
 
 // Looks up pcName in m_pTaskMap; if found with refcount 2, removes it and decrements the reference, otherwise just decrements the reference.
 // @fnv 0x00e92ae0
+// pdb: NiD3DShaderFactory::RemoveLibrary | NiD3DShaderFactory.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pcName
 void OwnerE92A::FUN_00e92ae0(const char* pcName)
 {
     NiRefObjE92A* pkVal = 0;
@@ -1374,6 +1411,7 @@ class ShaderFactoryView
 };
 // Resets the iterator to the first map position, advances it once, releases the returned object's reference, and returns that pointer.
 // @fnv 0x00e92b50
+// pdb: NiD3DShaderFactory::GetNextLibrary | NiD3DShaderFactory.obj | fnv360_0822_retail, caller_sim, low, conflict (bridge: NiD3DShaderFactory::GetFirstLibrary)
 ShaderRefObject* ShaderFactoryView::FUN_00e92b50()
 {
     ShaderStringPointerMap* map = m_pShaderLibraryStorage;
@@ -1435,6 +1473,8 @@ void S_00e92be0_Ref::f1()
 
 // Calls unk30->AdvanceIterator to fetch the next S_00e92be0_Ref, decrements its reference count, and returns the object or null.
 // @fnv 0x00e92be0
+// pdb: NiTStringTemplateMap<NiTPointerMap<char const *,NiPointer<NiShaderLibrary> >,NiPointer<NiShaderLibrary> >::NiTStringTemplateMap<NiTPointerMap<char const *,NiPointer<NiShaderLibrary> >,NiPointer<NiShaderLibrary> > | NiD3DShaderFactory.obj | fnv360_0822_retail, objrun, medium
+// pdb params: uiHashSize, bCopy
 S_00e92be0_Ref* S_00e92be0_Factory::FUN_00e92be0()
 {
     S_00e92be0_Callee* callee = unk30;
@@ -1627,6 +1667,8 @@ class ShaderFactory
 };
 // Acquires a ShaderLibrary by name, creating and registering it via producer interfaces if not already present, and optionally logs a failure.
 // @fnv 0x00e920a0
+// pdb: NiD3DShaderFactory::RetrieveShader | NiD3DShaderFactory.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pcName, uiImplementation, bReportNotFound
 ShaderLibrary* ShaderFactory::FUN_00e920a0(const char* pcName, unsigned int uiImplementation, bool bReportFailure)
 {
     if (!m_pOwnerShader)
@@ -1721,6 +1763,8 @@ typedef FUN_00e92330_item*(__thiscall* FUN_00e92330_match)(FUN_00e92330_cls*, un
 
 // Checks whether the collection contains the item identified by a1, using a virtual Match lookup and a Test predicate under a critical section.
 // @fnv 0x00e92330
+// pdb: NiD3DShaderFactory::ReleaseShaderFromLibrary | NiD3DShaderFactory.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkShader
 bool FUN_00e92330_cls::FUN_00e92330(unsigned int apItem)
 {
     if (apItem == 0)

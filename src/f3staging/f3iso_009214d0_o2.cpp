@@ -144,6 +144,7 @@ class hkpCharacterProxy
     void FUN_009214d0(const hkStepInfo& stepInfo, const hkVector4& worldGravity);
 };
 
+// pdb: hkpCharacterProxy::integrate | hkpCharacterProxy.obj | tesv_win, caller_sim, low
 void hkpCharacterProxy::FUN_009214d0(const hkStepInfo& stepInfo, const hkVector4& worldGravity)
 {
     hkpAllCdPointCollector castCollector;

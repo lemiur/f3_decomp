@@ -1851,6 +1851,8 @@ __forceinline void SetPlane(Vec4& plane,float x,float y,float z,float w)
     plane.w = w;
 }
 
+// pdb: hkpUserConvexRadiusBuilder::registerUserConvexRadiusDisplayBuilder | hkpConvexRadiusBuilder.obj | fnv360_0822_debug, objrun, low, conflict (bridge: _addBoundingPlanes)
+// pdb params: f, type
 static __declspec(noinline) void FUN_00a68e30(Shape* shape,Array<Vec4>* planes,float tolerance)
 {
     Aabb bounds;

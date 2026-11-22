@@ -61,6 +61,8 @@ class NiBoxCapsuleIntersector : public BEB3890Base // src: F3_EXE vtable 0x00e20
 };
 
 // @fnv 0x00eb3890
+// pdb: NiBoxCapsuleIntersector::NiBoxCapsuleIntersector | NiBoxCapsuleIntersector.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: kBox, kCapsule, fMaxTime, fDerivativeTimeStep, fPseudodistanceThreshold, iMaxIterations
 NiBoxCapsuleIntersector::NiBoxCapsuleIntersector(BEB3890Body* pkBodyA, BEB3890Body* pkBodyB, float fA, float fB, float fC, int iD)
     : BEB3890Base(fA, fB, fC, iD), m_pkBodyA(pkBodyA), m_pkBodyB(pkBodyB)
 {

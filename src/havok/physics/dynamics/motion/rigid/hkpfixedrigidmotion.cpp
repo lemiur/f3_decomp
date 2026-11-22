@@ -15,6 +15,8 @@ struct FUN_00d1e160_t
 };
 // Calls FUN_00d1dfa0, sets vtbl to &DAT_010c6cdc, writes 5 to byte offset 8, and returns this.
 // @fnv 0x00d1e160
+// pdb: hkpFixedRigidMotion::hkpFixedRigidMotion | hkpFixedRigidMotion.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: position, rotation
 void* FUN_00d1e160_t::InitFixedRigidMotion(int a, int b)
 {
     FUN_00d1dfa0(a, b);
@@ -28,6 +30,8 @@ void __stdcall FUN_00d1e130(int, int)
 {}
 
 // @fnv 0x00d1e140
+// pdb: hkEnum<enum hkpSampledHeightFieldShape::HeightFieldType,unsigned char>::hkEnum<enum hkpSampledHeightFieldShape::HeightFieldType,unsigned char> | hkpSampledHeightFieldShape.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: hkpSampledHeightFieldShape::getCinfo)
+// pdb params: e
 void __stdcall FUN_00d1e140(void* a)
 {}
 
@@ -39,6 +43,8 @@ struct C00d1e150
 };
 
 // @fnv 0x00d1e150
+// pdb: hkpExtendedMeshShape::assertTrianglesSubpartValidity | hkpExtendedMeshShape.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: part
 void C00d1e150::FUN_00d1e150(int arg)
 {}
 

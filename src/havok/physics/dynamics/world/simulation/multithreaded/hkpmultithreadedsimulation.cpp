@@ -12,6 +12,7 @@ struct FUN_00d04300
 };
 
 // @fnv 0x00d04300
+// pdb: hkpConstraintListener::`scalar deleting destructor' | hkpPhysicsContext.obj | fnv360_0822_retail, objrun, medium
 FUN_00d04300::FUN_00d04300(bool del)
 {
     m_p = &DAT_010c63bc;
@@ -104,6 +105,7 @@ struct CompareObject
 };
 // Sets result to whether the key of left's referenced value is less than the key of right's referenced value.
 // @f3 0x00981ac0 (community match, verified in this file)
+// pdb: less_hkSimulationIslandPtr | hkpMultithreadedSimulation.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl CompareObjectKeys(bool* result, CompareObject* left, CompareObject* right)
 {
     *result = left->reference->value->unkC0 < right->reference->value->unkC0;
@@ -251,6 +253,8 @@ struct FUN_00d026e0_cls
 // @f3 0x00981c30 (community match, verified in this file)
 void __cdecl FUN_00901f10(PairArray* arr, int elemSize);
 void __cdecl hkpWorldAgentUtil_addAgent(char* a, char* b, char* c);
+// pdb: hkpMultiThreadedSimulation::MtEntityEntityBroadPhaseListener::addCollisionPair | hkpMultithreadedSimulation.obj | fnv360_0822_retail, vtable, high
+// pdb params: pair
 void FUN_00d026e0_cls::ProcessPair(int* aiPair)
 {
     int a = aiPair[0];
@@ -686,6 +690,8 @@ typedef bool(__cdecl* SortPairLess)(const SortPair8* lhs, const SortPair8* rhs);
 
 // Sorts arr[lo..hi] in place with a Hoare-style quicksort using cmp, recursing on the left part and looping on the right.
 // @fnv 0x00d04200
+// pdb: hkAlgorithm::quickSortRecursive<hkpTypedBroadPhaseHandlePair,bool (__cdecl*)(hkpTypedBroadPhaseHandlePair const &,hkpTypedBroadPhaseHandlePair const &)> | hkpMultithreadedSimulation.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pArr, d, h, cmpLess
 void __cdecl QuickSortPairs(SortPair8* apPairs, int lo, int hi, SortPairLess apLess)
 {
     int i;
@@ -832,6 +838,8 @@ struct PairD020
 
 // Unless both collidables have type 3, calls v07 on the phantom of each type-3 collidable with the other collidable's owner.
 // @fnv 0x00d02080
+// pdb: hkpMultiThreadedSimulation::MtBroadPhaseBorderListener::addCollisionPair | hkpMultithreadedSimulation.obj | fnv360_0822_retail, vtable, high
+// pdb params: pair
 void __stdcall NotifyPhantomCollision(PairD020* pkPair)
 {
     if (pkPair->m_pkA->m_cType == 3 && pkPair->m_pkB->m_cType == 3)

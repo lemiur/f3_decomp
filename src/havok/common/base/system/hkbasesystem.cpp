@@ -5,6 +5,7 @@
 extern "C" unsigned char DAT_01268414;
 
 // @fnv 0x00cbb950
+// pdb: hkBaseSystem::isInitialized | hkBaseSystem.obj | tesv_win, objrun_sim, low
 void __cdecl FUN_00cbb950(unsigned char* out)
 {
     *out = DAT_01268414;
@@ -16,6 +17,8 @@ extern "C" void __cdecl SetThreadLocalValue(void* value);
 extern "C" void __cdecl FUN_00cb0db0();
 
 // @fnv 0x00cbb930
+// pdb: hkBaseSystem::initThread | hkBaseSystem.obj | fnv360_0822_debug, callee_sim, low
+// pdb params: memoryRouter
 int __cdecl FUN_00cbb930(void* value)
 {
     SetThreadLocalValue(value);
@@ -32,6 +35,8 @@ namespace impl {
 extern "C" void* DAT_011b3dbc;
 typedef void(__cdecl* Callback)(int, int);
 // @fnv 0x00cbbd20
+// pdb: hkNativeFileSystem::listDirectory | hkBaseSystem.obj | fnv360_0822_retail, vtable, medium
+// pdb params: basePath, listingOut
 void __stdcall InvokeCallback(int first, int second)
 {
     ((Callback)DAT_011b3dbc)(first, second);
@@ -149,6 +154,8 @@ struct FUN_00cbc810_cls
 };
 
 // @fnv 0x00cbc810
+// pdb: BSSimpleList<VATS_COMMAND *>::Remove | VATS.obj | fnv360_0822_retail, caller, medium
+// pdb params: item
 void FUN_00cbc810_cls::RemoveKey(unsigned int* puiKey)
 {
     unsigned int key = *puiKey;

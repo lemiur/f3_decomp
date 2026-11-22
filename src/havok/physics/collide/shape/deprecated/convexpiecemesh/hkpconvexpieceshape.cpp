@@ -12,6 +12,8 @@ struct FUN_00e60680_class {
     int __thiscall GetNextIndex(int index);
 };
 // @fnv 0x00e60680
+// pdb: hkpConvexPieceShape::getNextKey | hkpConvexPieceShape.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: oldKey
 int __thiscall FUN_00e60680_class::GetNextIndex(int index) {
     int next = index + 1;
     if (next < capacity) return next;
@@ -25,6 +27,8 @@ struct Dispatch { int x0,x4,x8,xc; InnerDispatch inner; };
 struct FUN_00e60690_owner { int unk00; int unk04; int unk08; Dispatch* unk0c; int* unk10; void DispatchToInner(int index,int value); };
 // Calls run on the inner dispatcher with the value from unk10 at index and the given value.
 // @fnv 0x00e60690
+// pdb: hkpConvexPieceShape::getChildShape | hkpConvexPieceShape.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: key, buffer
 void FUN_00e60690_owner::DispatchToInner(int index,int value) { unk0c->inner.run(unk10[index],value); }
 
 extern int DAT_010c6fb0;
@@ -43,6 +47,7 @@ struct FUN_00e60c30_cls {
 };
 
 // @fnv 0x00e60670
+// pdb: BSFileCache::GetCachedFilesCount | DebugTextXenonFileCache.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: __init_collate)
 int FUN_00e60670()
 {
     return 0;
@@ -100,6 +105,8 @@ struct FUN_00e60730_cls {
 };
 
 // @f3 0x00a978b0 (community match, verified in this file)
+// pdb: hkpConvexPieceShape::convertVertexIdsToVerticesImpl | hkpConvexPieceShape.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: ids, numIds, verticesOut
 void FUN_00e60730_cls::FUN_00e60730(const unsigned short* apIndices, int aiCount, Vec4* apOut)
 {
     Scratch scratch;
@@ -238,6 +245,8 @@ struct S_00e609c0_ConvexPieceShape : S_00e609c0_Shape {
 
 // Ray-casts each child shape whose filter allows it and, if any hit, sets results' key to the last hit index; returns whether any child was hit.
 // @fnv 0x00e609c0
+// pdb: hkpConvexPieceShape::castRayImpl | hkpConvexPieceShape.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: input, results
 S_00e609c0_Bool S_00e609c0_ConvexPieceShape::FUN_00e609c0(const S_00e609c0_RayInput& input, S_00e609c0_RayOutput& results) const
 {
     int hitIndex;
@@ -425,6 +434,8 @@ struct S_00a97e20_Child {
     virtual void func24(const BodyA* bodyA, const S_00a97e20_CdBody* bodyB, void* input);
 };
 
+// pdb: hkpConvexPieceShape::castRayWithCollectorImpl | hkpConvexPieceShape.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: input, cdBody, collector
 void FUN_00e60b00_cls::ProcessCollisionShapes(const BodyA* bodyA, const BodyB* bodyB, void* input) {
     S_00a97e20_Cursor::GetMonitorStream().timerBegin("TtrcConvxPiece");
 

@@ -16,6 +16,7 @@ struct NiUnsharedGeometryGroup
 
 // Restores the vtable, clears the global pointer if it refers to this object, calls FUN_00e98710, and optionally deletes the object.
 // @fnv 0x00e94d30
+// pdb: NiUnsharedGeometryGroup::`vector deleting destructor' | NiUnsharedGeometryGroup.obj | tesv_win, objrun_prop, low
 void* __thiscall NiUnsharedGeometryGroup::Destroy(unsigned int flags)
 {
     NiUnsharedGeometryGroup* pThis = this;
@@ -92,6 +93,8 @@ struct Deleter
 };
 // Removes pkData's buffer data from the group, clears its buffer array, deletes it, and nulls the pointer.
 // @fnv 0x00e950f0
+// pdb: NiDynamicGeometryGroup::RemoveObject | NiDynamicGeometryGroup.obj | fnv360_0822_retail, objrun_open, low, conflict (bridge: NiVBDynamicSet::SetD3DDevice)
+// pdb params: pkData
 void NiDynamicGeometryGroup::FUN_00e950f0(NiGeometryData* pkData)
 {
     NiGeometryBufferData* pkBuffData = *(NiGeometryBufferData**)((char*)pkData + 0x34);
@@ -133,6 +136,8 @@ struct NiDynamicGeometryGroup : NiGeometryGroup
 };
 // Removes the geometry buffer data stored at offset 0x28 of pkData, clears its chip array, deletes it and nulls the pointer.
 // @fnv 0x00e95140
+// pdb: NiDynamicGeometryGroup::RemoveObject | NiDynamicGeometryGroup.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pkPartition
 void NiDynamicGeometryGroup::FUN_00e95140(NiGeometryData* pkData)
 {
     NiGeometryBufferData* pkBuffData = *(NiGeometryBufferData**)((char*)pkData + 0x28);
@@ -162,6 +167,8 @@ struct DeleteHelper
     virtual ~DeleteHelper();
 };
 // @fnv 0x00e95190
+// pdb: NiDynamicGeometryGroup::RemoveObject | NiDynamicGeometryGroup.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pkScreenTexture
 void NiDynamicGeometryGroup::FUN_00e95190(NiGeometryData* pkData)
 {
     NiGeometryBufferData* pkBuffData = *(NiGeometryBufferData**)((char*)pkData + 0x1c);

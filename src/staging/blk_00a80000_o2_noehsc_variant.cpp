@@ -443,6 +443,7 @@ class FUN_00a911d0 : public S911d0_Base
 };
 
 // @fnv 0x00a911d0
+// pdb: NiScreenGeometryData::~NiScreenGeometryData | NiOldScreenSpace.obj | fnv360_0721_beta, objrun, medium
 FUN_00a911d0::~FUN_00a911d0()
 {
     for (unsigned int i = 0; i < m_kEntries.GetSize(); i++)
@@ -632,6 +633,7 @@ struct BmpReader
     NiPixelData* FUN_00a8e810(BmpStream& stream, NiPixelData* optional);
 };
 // @fnv 0x00a8e810
+// pdb: NiBMPReader::ReadFile | NiBMPReader.obj | tesv_win, vtable, medium
 NiPixelData* BmpReader::FUN_00a8e810(BmpStream& stream, NiPixelData* optional)
 {
     bool mipmap;

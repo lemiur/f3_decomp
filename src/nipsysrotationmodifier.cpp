@@ -6,6 +6,8 @@
 
 // Calls the base NiPSysModifier copy and copies the rotation modifier's fields from this object into destination.
 // @fnv 0x00c205e0
+// pdb: NiPSysRotationModifier::CopyMembers | NiPSysRotationModifier.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: BSPSysLODModifier::CopyMembers)
+// pdb params: pkDest, kCloning
 void NiPSysRotationModifier::CopyMemberData(NiPSysRotationModifier* destination, CloningProcess& arProcess)
 {
     NiPSysModifier::CopyMemberData(destination, arProcess);
@@ -19,6 +21,8 @@ void NiPSysRotationModifier::CopyMemberData(NiPSysRotationModifier* destination,
 }
 
 // @fnv 0x00c20f00
+// pdb: NiPSysMeshUpdateModifier::LoadBinary | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void NiPSysMeshUpdateModifier::LoadBinary(NiStream& stream)
 {
     NiPSysModifier::LoadBinary(stream);
@@ -63,6 +67,8 @@ struct Call_439090_tgt
 };
 
 // @fnv 0x00c20a60
+// pdb: NiPSysRotationModifier::IsEqual | NiPSysRotationModifier.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkObject
 bool FUN_00c20a60_shell::FUN_00c20a60(NiObject* object)
 {
     NiPSysRotationModifier* pkDest = static_cast<NiPSysRotationModifier*>(object);
@@ -107,6 +113,7 @@ inline void* __cdecl operator new(unsigned int, void* p)
 }
 // Allocates and constructs a NiPSysPositionModifier, sets its vtable, zeroes four floats, copies three globals and initializes two flags.
 // @fnv 0x00c20640
+// pdb: NiPSysRotationModifier::CreateObject | NiPSysRotationModifier.obj | fnv360_0822_retail, objrun, medium
 NiPSysPositionModifier* FUN_00c20640()
 {
     NiPSysPositionModifier* pModifier = (NiPSysPositionModifier*)BSFadeNode::operator new(56);
@@ -168,6 +175,8 @@ extern const char DAT_00e8c8f0[];
 extern const char DAT_00e8c8dc[];
 extern const char DAT_00e8c8cc[];
 
+// pdb: NiPSysRotationModifier::GetViewerStrings | NiPSysRotationModifier.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FUN_00c20d00_shell::AddRotationStrings(void* ptr)
 {
     StrArr* strings = reinterpret_cast<StrArr*>(ptr);
@@ -605,6 +614,8 @@ struct NiPSysData
 
 // For each particle, adds (fTime minus m_fZValue) times its rotation speed to its angle, resetting it to 0 if above 10 pi, else reducing it to at most 2 pi.
 // @fnv 0x00c206b0
+// pdb: NiPSysRotationModifier::Update | NiPSysRotationModifier.obj | fnv360_0822_retail, uconst, high
+// pdb params: fTime, pkData
 void __stdcall UpdateRotationAngles(float fTime, NiPSysData* pkData)
 {
     float* pfRotationAngles = pkData->m_pfRotationAngles;
@@ -681,6 +692,8 @@ struct C20980_Owner
 };
 // Allocates and constructs a C20980_Modifier, passes it and arg to FUN_00c205e0, and returns it.
 // @fnv 0x00c20980
+// pdb: NiPSysRotationModifier::CreateClone | NiPSysRotationModifier.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: NiPSysRotationModifier::CreateObject)
+// pdb params: kCloning
 C20980_Modifier* C20980_Owner::CreateModifier(int arg)
 {
     C20980_Modifier* modifier = new C20980_Modifier;
@@ -758,6 +771,8 @@ struct FUN_00c207a0_shell : public NiPSysRotationModifier
 
 // Sets the rotation axis and initial rotation angle/speed for a new particle, using random values or the modifier's configured defaults.
 // @fnv 0x00c207a0
+// pdb: NiPSysRotationModifier::Initialize | NiPSysRotationModifier.obj | fnv360_0822_retail, objrun, high
+// pdb params: pkData, usNewParticle
 void FUN_00c207a0_shell::UpdateParticleRotation(NiPSysData* pkSysData, unsigned short usNewParticle)
 {
     RotationPSysData* pkData = (RotationPSysData*)pkSysData;

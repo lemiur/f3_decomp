@@ -21,6 +21,7 @@ struct Unknown
     void FUN_00a360d0();
 };
 // @fnv 0x00a360d0
+// pdb: NiFloatInterpController::~NiFloatInterpController | BSFrustumFOVController.obj | tesv_win, hash, low
 void Unknown::FUN_00a360d0()
 {
     RefObj* p = *(RefObj**)((char*)this + 0x34);
@@ -37,6 +38,8 @@ struct FakeTransformController : NiSingleInterpController
     void FUN_00a36190(NiStream&);
 };
 // @fnv 0x00a36190
+// pdb: NiTransformController::LoadBinary | NiTransformController.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void FakeTransformController::FUN_00a36190(NiStream& kStream)
 {
     NiSingleInterpController::LoadBinary(kStream);
@@ -47,6 +50,7 @@ void FakeTransformController::FUN_00a36190(NiStream& kStream)
 extern int g_011f371c;
 
 // @fnv 0x00a36480
+// pdb: BSAnimGroupSequence::GetRTTI | Animation.obj | fnv360_0822_retail, vtable, medium
 int* __cdecl FUN_00a36480()
 {
     return &g_011f371c;
@@ -59,6 +63,7 @@ struct S_00a36490
     void* __thiscall FUN_00a36490(unsigned int);
 };
 // @fnv 0x00a36490
+// pdb: NiBlendAccumTransformInterpolator::`scalar deleting destructor' | NiTransformController.obj | fnv360_0822_retail, objrun_prop, low
 void* __thiscall S_00a36490::FUN_00a36490(unsigned int flag)
 {
     FUN_00a39290(this);
@@ -70,6 +75,7 @@ void* __thiscall S_00a36490::FUN_00a36490(unsigned int flag)
 extern "C" void* g_011f36ec;
 
 // @fnv 0x00a36580
+// pdb: NiStencilProperty::GetRTTI | BGSAutoWater.obj | fnv360_0822_retail, vtable, medium
 void* __cdecl FUN_00a36580()
 {
     return &g_011f36ec;
@@ -90,6 +96,8 @@ void __stdcall FUN_00a390a0(StrArr*);
 char* __cdecl FUN_00a7d330(const char*);
 extern const char* g_011f36ec;
 // @fnv 0x00a36840
+// pdb: NiDirectionalLight::GetViewerStrings | NiDirectionalLight.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: pStrings
 void __stdcall FUN_00a36840(StrArr* pkStrings)
 {
     FUN_00a390a0(pkStrings);
@@ -194,6 +202,7 @@ struct S_00a36560
     void* FUN_00a36560();
 };
 // @fnv 0x00a36560
+// pdb: TESBoundAnimObject::TESBoundAnimObject | TESObject.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
 void* S_00a36560::FUN_00a36560()
 {
     ((NiTimeController_Call*)this)->SetControllerActive();
@@ -232,6 +241,8 @@ struct FUN_00a36070 : NiSingleInterpControllerBase
     FUN_00a36070(int a1, int a2);
 };
 // @fnv 0x00a36070
+// pdb: BSMultiTargetTreadTransfController::BSMultiTargetTreadTransfController | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: ausCount, ausLinkCount
 FUN_00a36070::FUN_00a36070(int a1, int a2)
 {
     m_spControllerInterpolator = 0;
@@ -281,6 +292,8 @@ struct FUN_00a364b0_cls
 };
 
 // @fnv 0x00a364b0
+// pdb: NiTransformInterpolator::SetPoseValue | NiTransformController.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: kPoseValue
 void FUN_00a364b0_cls::FUN_00a364b0(V3 aT0, V4 aR0, float fScale)
 {
     if (aR0.f1 != DAT_010241b0)

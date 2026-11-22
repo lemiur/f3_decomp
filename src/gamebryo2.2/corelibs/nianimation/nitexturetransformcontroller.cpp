@@ -5,6 +5,7 @@
 
 // Builds and caches a controller ID string from the transform member, formatting it as "%d-%d-<member>".
 // @fnv 0x00a46300
+// pdb: NiTextureTransformController::GetCtlrID | NiTextureTransformController.obj | fnv360_0822_retail, ustr, medium
 const char* NiTextureTransformController::GetControllerID()
 {
     char* pCachedID = m_pcCtlrID;
@@ -94,6 +95,8 @@ NiTextureTransformController::NiTextureTransformController(NiObjectNET* property
 }
 
 // @fnv 0x00a46490
+// pdb: NiTextureTransformController::Update | NiTextureTransformController.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: UpdateData
 void NiTextureTransformController::Update(NiUpdateData* data) throw()
 {
     if (((unsigned char)(m_uFlags >> 5)) & 1)
@@ -192,6 +195,8 @@ struct FUN_00a461a0_shell : public NiTextureTransformController
 };
 
 // @fnv 0x00a461a0
+// pdb: NiTextureTransformController::SetTarget | NiTextureTransformController.obj | fnv360_0721_beta, objopen_prop, low
+// pdb params: pkTarget
 void __thiscall FUN_00a461a0_shell::FUN_00a461a0(NiObjectNET* target)
 {
     if (m_pkTarget != target)
@@ -206,6 +211,8 @@ struct FUN_00a461e0_shell : public NiTextureTransformController
 };
 // Returns true if pkObject passes FUN_00a57c10 and its four fields match the expected values.
 // @fnv 0x00a461e0
+// pdb: NiTextureTransformController::IsEqual | NiTextureTransformController.obj | fnv360_0822_retail, objrun_open, low, conflict (bridge: NiFlipController::IsEqual)
+// pdb params: pkObject
 bool FUN_00a461e0_shell::FUN_00a461e0(NiObject* pkObject)
 {
     NiTextureTransformController* pkCtrl = (NiTextureTransformController*)pkObject;
@@ -226,6 +233,8 @@ struct S00a46220
 };
 // Sets m_flag if it was already set or the two floats differ from p[0] and p[1], then copies both floats from p into m_f0 and m_f1.
 // @fnv 0x00a46220
+// pdb: NiTextureTransform::SetTranslate | NiTextureTransformController.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: kTranslate
 void S00a46220::UpdateFromPair(float* afPair)
 {
     m_flag = (m_flag || m_f0 != afPair[0] || m_f1 != afPair[1]);
@@ -248,6 +257,8 @@ struct C462b0
 };
 // Sets m_1c if the stored m_0c differs from p, then copies p into m_0c.
 // @fnv 0x00a462b0
+// pdb: NiTextureTransform::SetScale | NiTextureTransformController.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: kScale
 void __thiscall C462b0::FUN_00a462b0(S462b0* p)
 {
     m_1c = m_1c || m_0c.x != p->x || m_0c.y != p->y;
@@ -297,6 +308,8 @@ struct FUN_00a468f0_shell : NiTextureTransformController
     NiTextureTransformController* __thiscall Clone(CloningProcess& kCloning);
 };
 // @fnv 0x00a468f0
+// pdb: NiTextKeyExtraData::CreateClone | NiTextKeyExtraData.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: kCloning
 NiTextureTransformController* __thiscall FUN_00a468f0_shell::Clone(CloningProcess& kCloning)
 {
     NiTextureTransformController* pkObject;
@@ -363,6 +376,8 @@ struct NiNIFImageReader
 };
 // Copies two fields each from s, t and u, stores f and d, calls UpdateMatrix on this, and returns this.
 // @fnv 0x00a88eb0
+// pdb: NiTextureTransform::NiTextureTransform | NiTextureTransform.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kTranslate, fRotate, kScale, kCenter, eMethod
 NiNIFImageReader* NiNIFImageReader::InitFromInputs(const NiNIFImageReader* apSource, float afValue,
                                                    const NiNIFImageReader* apSecond, const NiNIFImageReader* apThird,
                                                    NiNIFImageReader* d)
@@ -489,6 +504,8 @@ struct FUN_00a46a30_Cls
 };
 
 // @fnv 0x00a46a30
+// pdb: NiTextureTransformController::SaveBinary | NiTextureTransformController.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: kStream
 void __thiscall FUN_00a46a30_Cls::WriteToStream(NiStreamStandInW* pkStream)
 {
     FUN_00a57c00(pkStream);
@@ -527,6 +544,7 @@ struct TextureTransformOwner : InterpolationControllerBase
 
 // Destroys the object and, if the first bit of flags is set, frees its memory with FUN_00aa1460.
 // @fnv 0x00a46890
+// pdb: bhkBlendController::`scalar deleting destructor' | bhkBlendController.obj | fnv360_0822_retail, caller_sim, low
 void* TextureTransformOwner::FUN_00a46890(unsigned int flags)
 {
     this->TextureTransformOwner::~TextureTransformOwner();
@@ -541,6 +559,7 @@ struct S7 : NiTextureTransformController
 };
 // Returns true if m_pkMap is set, otherwise resolves it from the target TexturePropertyLayout and returns whether it was found.
 // @fnv 0x00a46420
+// pdb: NiTextureTransformController::SetInternalMap | NiTextureTransformController.obj | fnv360_0822_retail, call_gap, medium
 bool S7::GetTaskMap()
 {
     if (m_pkMap)
@@ -742,6 +761,8 @@ struct S00a46970_Ctlr : public NiTextureTransformController
     void FUN_00a46970(S00a46970_Stream& kStream);
 };
 // @fnv 0x00a46970
+// pdb: NiTextureTransformController::LoadBinary | NiTextureTransformController.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void S00a46970_Ctlr::FUN_00a46970(S00a46970_Stream& kStream)
 {
     reinterpret_cast<S00a46970_Base*>(this)->FUN_00a57c70(kStream);

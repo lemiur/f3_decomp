@@ -111,6 +111,7 @@ extern const char DAT_010eec38[];
 
 // Returns false if count is zero or any entry or its resource is null; otherwise returns true.
 // @fnv 0x00e8eeb0
+// pdb: NiGeometryBufferData::RemoveIB | NiGeometryBufferData.obj | fnv360_0822_retail, callee_sim, low, conflict (skyrim: NiGeometryBufferData::IsVBChipValid)
 bool GraphicsRenderer::HasPendingPackets() {
  unsigned int n = count;
  if (!n) return false;
@@ -127,6 +128,7 @@ namespace Task1585 {
 struct Lock {unsigned value,depth;void FUN_00409a80(const char*);};extern Lock DAT_0106e5a0;
 extern PoolAllocatorBase<unsigned>::LinkedListEntry* DAT_0106e588;
 }
+// pdb: NiTPointerListBase<NiTPointerAllocator<unsigned int>,RaceSexMenu::MenuOption *>::RemoveTail | RaceSexMenu.obj | fnv360_0822_retail, call_gap, low
 template<> char* NiTPointerListBase<NiTPointerAllocator<unsigned>,char*>::RemoveTail(){
  Node* node=tail;tail=node->prev;if(tail)tail->next=0;else head=0;
  char* result=node->data;node->data=0;
@@ -144,6 +146,7 @@ extern const char DAT_00e29210[];
 extern const char DAT_00e291d0[];
 NiObject* FUN_0088cba0();
 
+// pdb: NiDX9Renderer::Create | NiDX9Renderer.obj | tesv_win, ustr, medium
 GraphicsRenderer* GraphicsRenderer::Create(unsigned int auiArg1, unsigned int auiArg2, unsigned int auiArg3,
     unsigned int auiArg4, unsigned int auiArg5, unsigned int auiArg6, unsigned int auiArg7, unsigned int auiArg8,
     unsigned int auiArg9, unsigned int auiArg10, unsigned int auiArg11, unsigned int auiArg12, unsigned int auiArg13,
@@ -173,6 +176,7 @@ GraphicsRenderer* GraphicsRenderer::Create(unsigned int auiArg1, unsigned int au
 
 
 // @fnv 0x00e7a9a0
+// pdb: NiDX9SystemDesc::GetD3D9FormatString | NiDX9SystemDesc.obj | tesv_win, hash, low
 const char* GraphicsRenderer::GetD3DFormatName(_D3DFORMAT format) {
  switch (format) {
  case 0x14: return DAT_010eec38;
@@ -250,12 +254,14 @@ void* __cdecl BSPlayerDistanceCheckController_GetRTTI()
 extern "C" int g_011f443c;
 
 // @fnv 0x00a5f4f0
+// pdb: bhkLiquidAction::GetRTTI | Explosion.obj | fnv360_0822_retail, vtable, medium
 int __cdecl FUN_00a5f4f0()
 {
     return (int)&g_011f443c;
 }
 
 // @fnv 0x00a5f500
+// pdb: CombatProcedureUseCombatItem::GetType | CombatProcedureUseCombatItem.obj | fnv360_0822_retail, vtable, medium
 int __cdecl FUN_00a5f500()
 {
     return 0xb;
@@ -318,6 +324,7 @@ void FUN_00e69900_shell::SetTwoValues(unsigned int uiFirst, unsigned int uiSecon
 
 // Copies path into the global file path buffer (max 0xff chars) when path is non-null, otherwise clears the first byte.
 // @fnv 0x00e69ad0
+// pdb: NiRenderer::SetLastErrorString | NiDX9Renderer.obj | tesv_win, hash, low
 void FUN_00e69ad0(const char* path)
 {
     if (path)
@@ -339,6 +346,7 @@ struct FUN_00e69b40_shell {
 };
 
 // @fnv 0x00e69b40
+// pdb: NiGeometryBufferData::GetVBChip | BSParticleShaderGeometry.obj | tesv_win, call_gap, low
 unsigned int FUN_00e69b40_shell::GetEntry(unsigned int index)
 {
     if (index < count)
@@ -348,6 +356,7 @@ unsigned int FUN_00e69b40_shell::GetEntry(unsigned int index)
 
 // Maps an index to a constant value via a switch, returning 0 for unmapped or default cases.
 // @fnv 0x00e69c90
+// pdb: NiDX9Renderer::GetCompatibleAdapterFormat | NiDX9Renderer.obj | tesv_win, hash, low
 unsigned int GetValueForIndex(unsigned int uiIndex)
 {
     switch (uiIndex) {
@@ -391,6 +400,8 @@ struct NiWorldToSkin {
 };
 
 // @fnv 0x00e6b8f0
+// pdb: NiD3DUtility::GetD3DTransposeFromNi | NiXenonRenderer.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: kD3D, kNiRot, kNiTrans, fNiScale
 void __cdecl BuildWorldToSkinTransform(NiWorldToSkin* out, const NiTransform* kWorldToRootParent, const NiPoint3* apTranslation, float fScale) {
     out->r00 = kWorldToRootParent->m_kOrientation.m[0][0] * fScale;
     out->r10 = kWorldToRootParent->m_kOrientation.m[0][1] * fScale;
@@ -413,6 +424,7 @@ void __cdecl BuildWorldToSkinTransform(NiWorldToSkin* out, const NiTransform* kW
 extern int DAT_0126efc0;
 
 // @fnv 0x00e6c760
+// pdb: NiXenonRenderer::GetLeftRightSwap | NiXenonRenderer.obj | fnv360_0822_retail, objrun_open, low, conflict (bridge: NiXenonRenderer::SetMipmapSkipLevel)
 bool __stdcall FUN_00e6c760(int value)
 {
     DAT_0126efc0 = value;
@@ -423,6 +435,7 @@ namespace fnv_00e6c770 {
 extern unsigned int DAT_0126efc0;
 
 // @fnv 0x00e6c770
+// pdb: hkpMousePickingViewer::getProcessTag | hkpMousePickingViewer.obj | fnv360_0822_retail, vtable, medium
 unsigned int __cdecl FUN_00e6c770()
 {
     return DAT_0126efc0;
@@ -433,6 +446,8 @@ void __cdecl FUN_00aa1110(void*);
 
 struct Param_00e6d740 { unsigned char unk00[0x24]; void* unk24; void* unk28; };
 // @fnv 0x00e6d740
+// pdb: NiXenonRenderer::FindClosestPixelFormat | NiXenonRenderer.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: kFmtPrefs
 void __stdcall FUN_00e6d740(void* apObject)
 {
     Param_00e6d740* pkObject = (Param_00e6d740*)apObject;
@@ -519,6 +534,7 @@ struct FUN_00e757c0_shell {
 };
 
 // @fnv 0x00e757c0
+// pdb: NiXenonRenderer::GetWidescreen | NiXenonRenderer.obj | fnv360_0822_retail, objrun_open, low
 unsigned char __thiscall FUN_00e757c0_shell::FUN_00e757c0()
 {
     return unkAD0;
@@ -530,6 +546,8 @@ struct NiDX9Renderer : GraphicsRenderer {
 };
 
 // @fnv 0x00e757d0
+// pdb: NiXenonRenderer::SetStencilClear | NiXenonRenderer.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: uiClear
 unsigned int NiDX9Renderer::FUN_00e757d0()
 {
     return unk5EC;
@@ -542,6 +560,7 @@ struct NiDX9Renderer {
 };
 
 // @fnv 0x00e75810
+// pdb: NiXenonRenderer::GetFlags | NiXenonRenderer.obj | fnv360_0822_retail, objrun_open, low
 void* __thiscall NiDX9Renderer::FUN_00e75810()
 {
     return *(void**)(this + 0x888);
@@ -565,6 +584,7 @@ struct FUN_00e75830_shell : GraphicsRenderer {
 };
 
 // @fnv 0x00e75830
+// pdb: NiXenonRenderer::GetMaxBuffersPerRenderTargetGroup | NiXenonRenderer.obj | fnv360_0822_retail, objrun_open, low
 float FUN_00e75830_shell::GetSomeFloat()
 {
     return unk5E4;
@@ -673,6 +693,7 @@ struct NiDX9Renderer : GraphicsRenderer {
 };
 
 // @fnv 0x00e75a30
+// pdb: NiXenonRenderer::GetIndependentBufferBitDepths | NiXenonRenderer.obj | fnv360_0822_retail, objrun_open, low
 unsigned int NiDX9Renderer::FUN_00e75a30()
 {
     return unk5E8;
@@ -707,6 +728,7 @@ extern int DAT_0126f580[];
 
 // If param2 is non-zero and its entry in DAT_0126f580 is set, calls the object's vtable slot 0x25 with (param1, param2, 0) and clears the entry.
 // @fnv 0x00e7cc50
+// pdb: NiDX92DBufferData::ClearRenderTarget | NiDX92DBufferData.obj | tesv_win, hash, low
 void __cdecl FUN_00e7cc50(int* pObject, int iIndex)
 {
     if (iIndex != 0 && DAT_0126f580[iIndex] != 0)
@@ -789,6 +811,8 @@ struct FUN_00e69660_shell
 };
 // If f6fc is zero, calls dev->EndScene() and returns false when it fails, otherwise calls h8bc->FUN_00e8bf80(); returns true.
 // @fnv 0x00e69660
+// pdb: NiXenonRenderer::FreeVertexBufferMemory | NiXenonRenderer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiDX9Renderer::Do_EndFrame)
+// pdb params: pvBuffer
 bool __thiscall FUN_00e69660_shell::EndSceneIfNeeded()
 {
     if (f6fc == 0) {
@@ -908,6 +932,8 @@ void FUN_00e698d0_shell::DispatchToVTableSlot82(unsigned int auiArg1, unsigned i
 
 struct FUN_00e69970_shell { char unk000[0x8b8]; void* unk8B8; void ClearShader(void* pkShader); };
 // @fnv 0x00e69970
+// pdb: NiXenonRenderer::PurgePixelShader | NiXenonRenderer.obj | fnv360_0721_beta, objopen_prop, low, conflict (bridge: NiXenonRenderer::PurgeVertexShader)
+// pdb params: pkShader
 void FUN_00e69970_shell::ClearShader(void* pkShader)
 {
 	typedef void (__thiscall *MgrFn)(void*, int, int);
@@ -929,6 +955,8 @@ struct NiTexture { unsigned char unk00[0x24]; void* m_pkRendererData; };  // src
 struct StandIn_e6dc40 { unsigned char unk000[0x180]; unsigned char unk180[0x18]; bool FUN_00e6dc40(void*); };
 // Locks the critical section at this+0x180, reads the int at a1+0x24, computes it via FUN_00e68ef0 if zero, unlocks, and returns it.
 // @fnv 0x00e6dc40
+// pdb: NiXenonRenderer::CreateSourceTextureRendererData | NiXenonRenderer.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiDX9Renderer::CreateSourceTextureRendererData)
+// pdb params: pkTexture
 bool StandIn_e6dc40::FUN_00e6dc40(void* a1)
 {
 	EnterCriticalSection(unk180);
@@ -944,6 +972,7 @@ int __cdecl CreateRenderedTextureData(void*, void*, unsigned int);
 struct Param_00e6dc80 { unsigned int pad[9]; unsigned int flag; };
 struct Stand_00e6dc80 { char pad[0x8cc]; NiVBSet vb; bool CreateVertexBufferIfNeeded(Param_00e6dc80*, unsigned int); };
 // @fnv 0x00e6dc80
+// pdb: NiDX9Renderer::CreateRenderedTextureRendererData | NiDX9Renderer.obj | tesv_win, caller_sim, low
 bool Stand_00e6dc80::CreateVertexBufferIfNeeded(Param_00e6dc80* pParam, unsigned int a2)
 {
     if (pParam->flag == 0) {
@@ -961,6 +990,8 @@ int __cdecl FUN_00e8abf0(void*, void*);
 struct FUN_00e6dcc0_shell { unsigned char unk000[0x180]; unsigned char unk180[0x18]; bool __thiscall FUN_00e6dcc0(void*); };
 // Locks the critical section at this+0x180, returns true if a1+0x24 is nonzero, otherwise calls FUN_00e8abf0(a1, this) and unlocks before returning its result.
 // @fnv 0x00e6dcc0
+// pdb: NiXenonRenderer::CreateSourceCubeMapRendererData | NiXenonRenderer.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiDX9Renderer::CreateSourceCubeMapRendererData)
+// pdb params: pkCubeMap
 bool __thiscall FUN_00e6dcc0_shell::FUN_00e6dcc0(void* a1)
 {
 	EnterCriticalSection(unk180);
@@ -976,6 +1007,7 @@ struct NiVBSet { void Create(unsigned int, void*); };
 void* __cdecl FUN_00e901a0(void*, void*);
 struct ProxyRenderer { unsigned char unk000[0x8dc]; NiVBSet unk8DC; bool __thiscall EnsureVertexBufferSet(void*); };
 // @fnv 0x00e6dd00
+// pdb: NiDX9Renderer::CreateRenderedCubeMapRendererData | NiDX9Renderer.obj | tesv_win, caller_sim, low
 bool __thiscall ProxyRenderer::EnsureVertexBufferSet(void* a1)
 {
     if (((NiTexture*)a1)->m_pkRendererData == 0) {
@@ -1006,6 +1038,8 @@ void* __cdecl CreateDynamicTexture(Prm*);
 struct FUN_00e6dd40_shell { char pad[0x8ec]; NiVBSet vb; bool __thiscall EnsureVertexBufferReady(Prm*); };
 // Checks whether the Prm's Inner is ready; if not, obtains a buffer via CreateDynamicTexture and creates the vertex buffer set from it, returning success.
 // @fnv 0x00e6dd40
+// pdb: NiXenonRenderer::CreateDynamicTextureRendererData | NiXenonRenderer.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: pkTexture
 bool __thiscall FUN_00e6dd40_shell::EnsureVertexBufferReady(Prm* pPrm)
 {
  Inner* b = pPrm->ptr;
@@ -1030,6 +1064,7 @@ struct S_00e6e8f0 {
 };
 // Initializes f00 to DAT_010eda24, clears the map, frees f08, and deallocates this when flag bit 0 is set.
 // @fnv 0x00e6e8f0
+// pdb: NiTMapBase<NiTPointerAllocator<unsigned int>,NiObject *,NiObject *>::`scalar deleting destructor' | BipedAnim.obj | fnv360_0822_retail, vtable, medium
 S_00e6e8f0* __thiscall S_00e6e8f0::FUN_00e6e8f0(unsigned int uiFlags)
 {
     f00 = (void*)&DAT_010eda24;
@@ -1065,6 +1100,7 @@ struct NiTMapBaseStub { void* unk00; unsigned int m_uiHashSize; void* m_ppkHashT
 extern int DAT_010eda44;
 extern MemoryManager g_memoryManager;
 // @fnv 0x00e6e970
+// pdb: NiTMapBase<NiTPointerAllocator<unsigned int>,NiObject *,bool>::`scalar deleting destructor' | BipedAnim.obj | fnv360_0822_retail, vtable, medium
 void* __thiscall NiTMapBaseStub::DestroyAndFree(unsigned int auiFlags)
 {
 	*(void**)this = (void*)&DAT_010eda44;
@@ -1106,6 +1142,7 @@ extern int DAT_010eda64;
 struct NiTMapBaseStub { void* unk00; unsigned int m_uiHashSize; void* m_ppkHashTable; void RemoveAll(); void* FUN_00e6e9f0(unsigned int); };
 extern MemoryManager g_memoryManager;
 // @fnv 0x00e6e9f0
+// pdb: NiTMapBase<DFALL<NiTMapItem<unsigned int,VertexDist> >,unsigned int,VertexDist>::`scalar deleting destructor' | GlobalFunc.obj | fnv360_0822_retail, vtable, medium
 void* NiTMapBaseStub::FUN_00e6e9f0(unsigned int auiFlags)
 {
 	*(void**)this = (void*)&DAT_010eda64;
@@ -1173,6 +1210,7 @@ struct FUN_00e6eba0_holder {
  void* FUN_00e6eba0(unsigned int);
 };
 // @fnv 0x00e6eba0
+// pdb: NiTMapBase<NiTPointerAllocator<unsigned int>,TESObjectREFR *,TESObjectREFR *>::`scalar deleting destructor' | TESWater.obj | fnv360_0822_retail, vtable, medium
 void* FUN_00e6eba0_holder::FUN_00e6eba0(unsigned int auiFlags)
 {
  v0 = (int)&DAT_010edac4;
@@ -1253,6 +1291,8 @@ struct NiConsoleRenderer_shellEx : GraphicsRenderer {
     void __thiscall FUN_00e75310(NiD3DShaderInterface* shader);
 };
 // @fnv 0x00e75310
+// pdb: NiXenonRenderer::ReleaseD3DShader | NiXenonRenderer.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: NiRenderer::PrepareForRendering)
+// pdb params: pkD3DShader
 void __thiscall NiConsoleRenderer_shellEx::FUN_00e75310(NiD3DShaderInterface* shader)
 {
     shader->SetShaderObject(0);
@@ -1263,6 +1303,7 @@ void _delete(void*, unsigned int);
 struct S { void __thiscall FUN_00e75a70(); void* __thiscall FUN_00e762f0(unsigned int); };
 // Calls FUN_00e75a70, then if bit 0 of flags is set frees this with size 0xb80, and returns this.
 // @fnv 0x00e762f0
+// pdb: NiDX9Renderer::`scalar deleting destructor' | NiDX9Renderer.obj | tesv_win, caller_sim, low
 void* __thiscall S::FUN_00e762f0(unsigned int flags)
 {
     FUN_00e75a70();
@@ -1283,6 +1324,7 @@ struct FUN_00e76320
     FUN_00e76320();
 };
 // @fnv 0x00e76320
+// pdb: NiD3DShaderDeclaration::ShaderRegisterEntry::ShaderRegisterEntry | NiXenonShaderDeclaration.obj | fnv360_0822_retail, call_dedup, low
 FUN_00e76320::FUN_00e76320()
 {
     f0 = 0;
@@ -1308,6 +1350,7 @@ struct NiDX9ShaderDeclaration
 };
 // Writes V45() to *a and the dword at this+0x20 to *b, returning whether *a is non-zero.
 // @fnv 0x00e76630
+// pdb: NiDX9ShaderDeclaration::GenerateVertexParameters | NiDX9ShaderDeclaration.obj | tesv_win, objrun_open, low
 bool NiDX9ShaderDeclaration::FUN_00e76630(unsigned int* a, unsigned int* b)
 {
  *a = V45();
@@ -1320,6 +1363,7 @@ extern void* DAT_0126f550;
 extern const void* DAT_010ee898;
 void __cdecl FUN_00e7a760();
 // @fnv 0x00e7a860
+// pdb: NiD3DShaderDeclaration::_SDMInit | NiD3DShaderDeclaration.obj | fnv360_0721_beta, objrun_open, low
 void __cdecl FUN_00e7a860()
 {
     void* p = ((P03MM*)&g_memoryManager)->Allocate(0x10);
@@ -1388,6 +1432,8 @@ struct FakeRenderer {
 };
 // Clears the manager, releases the shader's handle if present, then purges the shader.
 // @fnv 0x00e699c0
+// pdb: NiXenonRenderer::PurgeVertexShader | NiXenonRenderer.obj | fnv360_0721_beta, objopen_prop, low
+// pdb params: pkShader
 void FakeRenderer::PurgeShader(FakeShader* pkShader)
 {
 	mgr->Clear(0, 0);
@@ -1412,6 +1458,8 @@ struct S_00e69a20
 };
 // Returns false if the buffer is null, otherwise creates a depth-stencil buffer via NiDX9AdditionalDepthStencilBufferData::Create using dev.
 // @fnv 0x00e69a20
+// pdb: BSGetTrackedPages::CreateInstance | DebugTextManager.obj | fnv360_0721_beta, objrun_open, low, conflict (skyrim: NiDX9Renderer::CreateDepthStencilRendererData)
+// pdb params: apCommand
 bool __thiscall S_00e69a20::CreateDepthStencilBuffer(Ni2DBuffer* apBuffer, NiPixelFormat const* apPixelFormat, unsigned int c)
 {
 	if (!apBuffer)
@@ -1429,6 +1477,8 @@ struct FUN_00e69c00_shell {
 };
 // Builds a string in result from flags bits, appending PURE, MT, HWVP, MIXVP and SWVP tags, and returns it.
 // @fnv 0x00e69c00
+// pdb: DebugTextManager::OutputDebugPageNames | DebugTextManager.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: apfOutput
 const char* __thiscall FUN_00e69c00_shell::GetVertexProcessingFlagsString()
 {
     result[0] = 0;
@@ -1476,6 +1526,8 @@ struct FUN_00e6df80_shell {
 };
 
 // @fnv 0x00e6df80
+// pdb: NiXenonRenderer::RemoveRenderedTextureData | NiXenonRenderer.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkTexture
 void FUN_00e6df80_shell::RemoveKeyAndClearField(const char* key)
 {
     ((NiTexture*)key)->m_pkRendererData = 0;
@@ -1496,6 +1548,8 @@ struct NiTMapBase_00e6dfa0_shell {
     bool __thiscall FUN_00e6dfa0(NiTMapBase* map);
 };
 // @fnv 0x00e6dfa0
+// pdb: NiXenonRenderer::RemoveDynamicTextureData | NiXenonRenderer.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkTexture
 bool __thiscall NiTMapBase_00e6dfa0_shell::FUN_00e6dfa0(NiTMapBase* map)
 {
     map->count = 0;
@@ -1520,6 +1574,7 @@ struct FUN_00e6e6e0_shell
 	void AssignRefObject(RefObject* pkObj);
 };
 // @fnv 0x00e6e6e0
+// pdb: NiXenonErrorShader::NiXenonErrorShader | NiXenonErrorShader.obj | fnv360_0822_retail, call_gap, low
 void FUN_00e6e6e0_shell::AssignRefObject(RefObject* pkObj)
 {
 	if (pkObj)
@@ -1616,6 +1671,8 @@ struct Group765 : VBase765 {
 };
 // Returns entries[index].r when index is below count, otherwise returns 0; calls Touch() before the lookup.
 // @fnv 0x00e765e0
+// pdb: NiXenonShaderDeclaration::GenerateVertexParameters | NiXenonShaderDeclaration.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiDX9ShaderDeclaration::GetVertexStride)
+// pdb params: pkDeclaration, uiNumStreams
 void* Group765::FUN_00e765e0(unsigned int index)
 {
 	if (index >= count)
@@ -1643,6 +1700,7 @@ struct ICom78510 { virtual int __stdcall Q(); virtual int __stdcall A(); virtual
 struct H78510 { void __thiscall FUN_00e78be0(); };
 struct S78510 { char pad[0x2c]; void* p1; ICom78510* p2; char tail[4]; void* __thiscall FUN_00e78510(unsigned int); };
 // @fnv 0x00e78510
+// pdb: NiXenonShaderDeclaration::`scalar deleting destructor' | NiXenonShaderDeclaration.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: NiDX9ShaderDeclaration::`vector deleting destructor')
 void* __thiscall S78510::FUN_00e78510(unsigned int auiFlags)
 {
     void* v1 = p1;
@@ -1672,6 +1730,7 @@ struct FUN_00e78840_shell {
 
 // Calls FUN_00ee88b0, zeroes the pad array and flag, sets the vtable to DAT_010ee7cc, and returns this.
 // @fnv 0x00e78840
+// pdb: NiD3DShaderDeclaration::NiD3DShaderDeclaration | NiD3DShaderDeclaration.obj | fnv360_0822_retail, call_seq, medium
 FUN_00e78840_shell* __thiscall FUN_00e78840_shell::Construct()
 {
     FUN_00ee88b0();
@@ -1775,6 +1834,7 @@ struct FUN_00e76c30_Info {
 };
 
 // @fnv 0x00e76c30
+// pdb: NiD3DShaderDeclaration::Pack_FloatToShort | NiDX9ShaderDeclaration.obj | tesv_win, objopen_prop, low
 unsigned int FUN_00e76c30(FUN_00e76c30_Info* pkInfo)
 {
     unsigned int uiTotal = 0;
@@ -1899,6 +1959,7 @@ struct FUN_00e78bd0_shell {
 };
 
 // @fnv 0x00e78bd0
+// pdb: NiD3DShaderDeclaration::ShaderRegisterStream::ShaderRegisterStream | NiD3DShaderDeclaration.obj | tesv_win, objrun_open, low
 FUN_00e78bd0_shell::FUN_00e78bd0_shell()
 {
     flag = false;
@@ -2007,6 +2068,8 @@ struct PoolLockF3
 extern PoolLockF3 DAT_0106e5a0;
 extern void* DAT_0106e588;
 
+// pdb: NiTPointerListBase<NiTPointerAllocator<unsigned int>,NiPointer<NiProperty> >::DeleteItem | BSFaceGenManager.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: NiTPointerMap<char const *,class NiPointer<class NiSequence> >::DeleteItem)
+// pdb params: pkItem
 void __stdcall ReleaseRefCountedNode(void* param_1)
 {
     void** p = (void**)param_1;
@@ -2049,6 +2112,8 @@ struct FUN_00e76500_shell
 };
 
 // @fnv 0x00e76500
+// pdb: NiXenonShaderDeclaration::ClearAllEntries | NiXenonShaderDeclaration.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: NiDX9ShaderDeclaration::RemoveEntry)
+// pdb params: uiStream
 bool FUN_00e76500_shell::FUN_00e76500(unsigned int a, unsigned int b)
 {
     if (a >= f1c)
@@ -2087,6 +2152,8 @@ extern AA1110MemManager* g_pkAA1110MemManager;
 
 // NiFree
 // @fnv 0x00aa1110
+// pdb: _NiAlignedFree | NiMemoryDefines.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pvMem
 void FUN_00aa1110(void* pvMem)
 {
     if (pvMem)
@@ -2675,6 +2742,8 @@ class FUN_00e69640_cls
 };
 
 // @fnv 0x00e69640
+// pdb: NiXenonRenderer::FindClosestDepthStencilFormat | NiXenonRenderer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pkFrontBufferFormat, uiDepthBPP, uiStencilBPP
 void FUN_00e69640_cls::FUN_00e69640(int a)
 {
     m_8c4->Forward(a);
@@ -2685,6 +2754,7 @@ struct VertexDeclarationDevice : Dev { virtual long __stdcall DrawPrimitiveUP();
 struct RendererDeclarationOwner { unsigned int m_rendererFields[0xa0]; void* m_vertexDeclaration; unsigned int m_declarationState; VertexDeclarationDevice* m_device; void* __thiscall FUN_00e696a0(); };
 // Creates the vertex declaration from a fixed element array on first use and returns it, or null if creation fails.
 // @fnv 0x00e696a0
+// pdb: NiDX9Renderer::GetDecl_Particles | NiDX9Renderer.obj | tesv_win, call_seq, medium
 void* RendererDeclarationOwner::FUN_00e696a0() {
  if (!m_vertexDeclaration) {
     VertexDeclarationElement elements[5] = { {0,0,2,0,0,0}, {0,12,2,0,3,0}, {0,24,4,0,10,0}, {0,28,1,0,5,0}, {255,0,17,0,0,0} };
@@ -3328,6 +3398,7 @@ extern "C" __declspec(dllimport) void* __stdcall LoadLibraryA(const char* name);
 extern "C" __declspec(dllimport) void* __stdcall GetProcAddress(void* module, const char* name);
 extern void* g_hE6EC20Module;
 
+// pdb: NiDX9Renderer::GetSystemDesc | NiDX9Renderer.obj | tesv_win, call_gap, low
 void* __cdecl FUN_00e69a60()
 {
     if (g_0126f0e8 != 0) {
@@ -3892,6 +3963,7 @@ struct Holder {
 };
 // Picks the first non-null source per slot in a fixed order, allocates a 4x4 NiPixelData filled with 0xff, and returns false if slot 0 is empty.
 // @fnv 0x00e6c550
+// pdb: NiDX9Renderer::GenerateDefaultTextureData | NiDX9Renderer.obj | tesv_win, call_gap, low
 bool Holder::InitFormats() {
     unsigned int auiPriorityOrder[6] = { 1, 0, 2, 4, 3, 5 };
     for (unsigned int i = 0; i < 4; i++) {
@@ -4134,6 +4206,7 @@ struct E6D310Renderer {
 
 // For each strip, computes the primitive count and issues a DrawIndexedPrimitive call, advancing the index start offset.
 // @fnv 0x00e6d310
+// pdb: NiDX9Renderer::RenderBSMultiStreamInstanceTriShape | NiDX9Renderer.obj | tesv_win, objrun_sim, low
 void E6D310Renderer::FUN_00e6d310(E6D310StripSet* stripSet, E6D310Geometry* geometry, int unused)
 {
     unsigned int start = 0;
@@ -4204,6 +4277,8 @@ public:
 };
 
 // @fnv 0x00e6d760
+// pdb: D3DDevice_SetVertexDeclaration | shader.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: NiDX9Renderer::GetD3DDeclarationFromIndex)
+// pdb params: pDevice, pDeclaration
 int __stdcall GetPacketSlot45(int index)
 {
     if (index == 0) {
@@ -4412,6 +4487,8 @@ struct Renderer_e6da60
 
 // Fills pkPacket's stream count and values from pkGeom or by packing pkModel/pkData, sets flags, creates streams and releases them on failure.
 // @fnv 0x00e6da60
+// pdb: NiXenonRenderer::ReservePrepackedBufferSpace | NiXenonRenderer.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiDX9Renderer::ReservePrepackedBufferSpace)
+// pdb params: pkBuffData, pkData, pkPartition, pkShaderDecl
 bool Renderer_e6da60::BuildPacket(Packet_e6da60* pkPacket, Model_e6da60* pkModel,
     Data_e6da60* pkData, GeomData_e6da60* pkGeom)
 {
@@ -4609,6 +4686,8 @@ struct Renderer {
 };
 // Locks the manager's render source texture (discard or regular based on a flag) and returns its bits, storing the pitch; logs on failure.
 // @fnv 0x00e6dd90
+// pdb: NiXenonRenderer::LockDynamicTexture | NiXenonRenderer.obj | fnv360_0822_retail, objrun, low, conflict (F3 string "NiDX9Renderer::LockDynamicTexture Failed> LockRect - %s")
+// pdb params: pkRData, iPitch
 void* Renderer::LockRenderSource(SourceManager* manager, int* piPitch)
 {
     *piPitch = 0;
@@ -4680,6 +4759,8 @@ const char* __cdecl GetHResultName(int code);
 void __cdecl FUN_00a29680(const char* fmt, const char* text);
 
 // @fnv 0x00e6de70
+// pdb: NiXenonRenderer::UnLockDynamicTexture | NiXenonRenderer.obj | fnv360_0822_retail, objrun, low, conflict (F3 string "NiDX9Renderer::UnLockDynamicTexture Failed> UnlockRect - %s")
+// pdb params: pkRData
 bool __thiscall FUN_00e6de70_cls::FUN_00e6de70(FUN_00e6de70_A* a1)
 {
     if (a1 == 0) {
@@ -4742,6 +4823,8 @@ struct RendererResourceMap : NiDX9Renderer {
 };
 
 // @fnv 0x00e6df60
+// pdb: NiXenonRenderer::RemoveRenderedCubeMapData | NiXenonRenderer.obj | fnv360_0822_retail, objrun, low, conflict (bridge: NiXenonRenderer::RemoveDynamicTextureData)
+// pdb params: pkCubeMap
 bool RendererResourceMap::RemoveResource(Param_00e6dc80* resource)
 {
     resource->flag = 0;
@@ -5463,6 +5546,7 @@ struct S_00e6e730_Cls {
 };
 // Removes all elements from both arrays a and b.
 // @fnv 0x00e6e730
+// pdb: NiTMapBase<NiTPointerAllocator<unsigned int>,NiRenderedTexture *,NiXenonRenderedTextureData *>::RemoveAll | NiXenonRenderer.obj | fnv360_0721_beta, objrun_open, low, conflict (skyrim: NiDX9Renderer::RemoveAllResetNotificationFuncs)
 void S_00e6e730_Cls::ClearArrays() {
     a.RemoveAll();
     b.RemoveAll();
@@ -5486,6 +5570,7 @@ struct RendererPool {
 struct RendererPoolView : GraphicsRenderer { void ResetPools(); };
 // Resets the two RendererPool objects located at offset 0xaf8 from this.
 // @fnv 0x00e6e7b0
+// pdb: NiTMapBase<NiTPointerAllocator<unsigned int>,NiRenderedCubeMap *,NiXenonRenderedCubeMapData *>::RemoveAll | NiXenonRenderer.obj | fnv360_0721_beta, objrun_open, low, conflict (skyrim: NiDX9Renderer::RemoveAllLostDeviceNotificationFuncs)
 void RendererPoolView::ResetPools()
 {
     RendererPool* pools =
@@ -5554,6 +5639,7 @@ extern E6EC20List g_kE6EC20List;
 
 // Releases the E6EC20 device, deletes the cache, frees the module, clears the create function pointer and empties the list.
 // @fnv 0x00e6ec20
+// pdb: NiDX9Renderer::_SDMShutdown | NiDX9Renderer.obj | tesv_win, udata, high
 void ShutdownE6EC20()
 {
     if (g_pkE6EC20Device) {
@@ -5606,6 +5692,8 @@ struct RendererBridge {
 };
 // Configures four renderer states, builds a render resource from the source descriptor, writes pixel data by format, and swaps the selected target resource.
 // @fnv 0x00e6ec90
+// pdb: NiXenonRenderState::Create | NiXenonRenderState.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiDX9Renderer::InitializeTextureDefaults)
+// pdb params: pkRenderer, bZBuffer
 bool RendererBridge::InitializeRendererResources() {
     CreateFormats(State(0), 0, 3);
     CreateFormats(State(1), 1, 3);
@@ -6686,6 +6774,8 @@ struct FUN_00e744b0_cls {
 extern char DAT_011f4288[16];
 
 // @fnv 0x00e744b0
+// pdb: NiXenonRenderer::Do_RenderShape | NiXenonRenderer.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: BSBatchRenderer::RenderPassImmediately_Skinned)
+// pdb params: pkTriShape
 void FUN_00e744b0_cls::ProcessVObj(FUN_00e744b0_Src* apSrc)
 {
     if (m_6fc == 0) {
@@ -7917,6 +8007,8 @@ struct Renderer {
 };
 // If not active and input has content, builds default properties when missing, sets state/mode, passes input to manager, renders it, then restores state and mode.
 // @fnv 0x00e750e0
+// pdb: NiXenonRenderer::Do_RenderScreenTexture | NiXenonRenderer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pkScreenTexture
 void Renderer::RenderInput(Input* input) {
  if(active) return;
  if(!input || !input->content) return;
@@ -8607,6 +8699,7 @@ struct ConsoleRendererShaders {
 // @f3 0x0087a230 (community match, verified in this file)
 void __fastcall FUN_005878f0(ShaderList* pkList);
 
+// pdb: NiXenonRenderer::PurgeAllD3DShaders | NiXenonRenderer.obj | fnv360_0822_retail, objopen_prop, medium
 void ConsoleRendererShaders::FUN_00e75380() {
     if (m_kShaderList.count != 0) {
         ShaderList* pkList = &m_kShaderList;
@@ -10416,6 +10509,7 @@ struct FUN_00e75a40_cls
 };
 
 // @fnv 0x00e75a40
+// pdb: NiXenonRenderer::GetDefaultDepthStencilBuffer | NiXenonRenderer.obj | fnv360_0822_retail, objrun_open, low
 void FUN_00e75a40_cls::FUN_00e75a40()
 {
     m_8b8->Tail();
@@ -10513,6 +10607,7 @@ struct FUN_00e75a50_owner :
 };
 
 // @fnv 0x00e75a50
+// pdb: NiXenonRenderer::GetDefaultBackBuffer | NiXenonRenderer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void __thiscall FUN_00e75a50_owner::FUN_00e75a50(float value)
 {
     unk8b8->f16(value);
@@ -10565,6 +10660,8 @@ public:
 
 // If index is below m_20, resets each of m_1c entries in the item at m_24+index, sets m_28, and calls vtable slot 2 on m_30 before clearing it.
 // @fnv 0x00e76570
+// pdb: NiXenonShaderDeclaration::ClearAllEntries | NiXenonShaderDeclaration.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiDX9ShaderDeclaration::ClearAllEntries)
+// pdb params: uiStream
 bool FUN_00e76570_cls::FUN_00e76570(unsigned int index)
 {
     if (index >= m_20) {
@@ -10662,6 +10759,7 @@ struct FUN_00e76660_Declaration {
 
 // Stores flags and descriptor fields into the next entry, advances the entry index, and returns a table value indexed by f0c unless f0c is at least 0x12.
 // @fnv 0x00e76660
+// pdb: NiDX9ShaderDeclaration::AddDeclarationEntry | NiDX9ShaderDeclaration.obj | tesv_win, objrun_open, low
 int FUN_00e76660_Declaration::AddEntry(FUN_00e76660_Descriptor* pDescriptor, unsigned short flags)
 {
     m_entries[m_uiItemCount].f00 = flags;
@@ -10830,6 +10928,8 @@ public:
 
 // Rebuilds the D3D vertex declaration from the stream entries, counting active elements, reallocating the element array, and calling CreateVertexDeclaration.
 // @fnv 0x00e76a80
+// pdb: NiD3DShaderDeclaration::Pack_FloatToShort | NiXenonShaderDeclaration.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiDX9ShaderDeclaration::GetD3DDeclaration)
+// pdb params: kParams
 ShaderVertexDecl* NiDX9ShaderDeclStub::BuildVertexDeclaration()
 {
     unsigned int ItemUpdateArray = 0;
@@ -10935,6 +11035,8 @@ struct StreamCopyInfo {
 void* __cdecl _fnv_zlib_memset(void*, int, unsigned int);
 
 // @fnv 0x00e77010
+// pdb: NiD3DShaderDeclaration::Pack_LongToShort | NiXenonShaderDeclaration.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: NiD3DShaderDeclaration::Pack_UnsignedLongToShort)
+// pdb params: kParams
 unsigned int __cdecl CopyVertexStream(StreamCopyInfo* stream)
 {
     unsigned int bytesWritten = 0;
@@ -11165,6 +11267,8 @@ struct FUN_00e77950_Info {
 };
 
 // @fnv 0x00e77950
+// pdb: NiD3DShaderDeclaration::Pack_FloatToUnsignedByte | NiXenonShaderDeclaration.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: kParams
 unsigned int FUN_00e77950(FUN_00e77950_Info* pkInfo)
 {
     unsigned int uiTotal = 0;
@@ -11240,6 +11344,8 @@ struct FUN_00e77eb0_Info {
 };
 
 // @fnv 0x00e77eb0
+// pdb: NiD3DShaderDeclaration::Pack_ShortToUnsignedByte | NiXenonShaderDeclaration.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: kParams
 unsigned int FUN_00e77eb0(FUN_00e77eb0_Info* pkInfo)
 {
     unsigned int uiSize = 0;
@@ -11297,6 +11403,8 @@ unsigned int FUN_00e77eb0(FUN_00e77eb0_Info* pkInfo)
 }
 
 // @f3 0x008803f0 (community match, verified in this file)
+// pdb: NiD3DShaderDeclaration::Pack_ByteToUnsignedByte | NiXenonShaderDeclaration.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: kParams
 int __cdecl CopyStreamElements(FUN_00e79f40_Stream* pkInfo)
 {
     int totalSize = 0;
@@ -11396,6 +11504,8 @@ static inline unsigned int PackColor_e78910(const short* v, unsigned short comps
 }
 
 // @fnv 0x00e78910
+// pdb: NiD3DShaderDeclaration::Pack_ShortToUByteColor | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun, high
+// pdb params: kParams
 int PackVertexColors(Stream_e78910* aStream)
 {
     unsigned short* indices = aStream->indices;
@@ -11451,6 +11561,7 @@ struct FUN_00e78be0_cls {
 
 // Sets the vtable, frees each 16-byte array element's 0x1c-byte payload and the array, releases m_p10 via its vtable slot 2, then calls BaseTeardown.
 // @fnv 0x00e78be0
+// pdb: NiD3DShaderDeclaration::~NiD3DShaderDeclaration | NiD3DShaderDeclaration.obj | fnv360_0721_beta, objrun, high
 void FUN_00e78be0_cls::FUN_00e78be0() throw()
 {
     m_vptr00 = (void*)DAT_010ee7cc;
@@ -11691,6 +11802,7 @@ inline E7A6A0Array<E7A6A0Bucket*>* E7A6A0GetBuckets()
 
 // Deletes every bucket in the global bucket array, clears the array, then deletes the array itself.
 // @fnv 0x00e7a6a0
+// pdb: NiD3DShaderDeclaration::_SDMShutdown | NiD3DShaderDeclaration.obj | tesv_win, objrun_open, low
 void __cdecl DestroyBucketTable()
 {
     for (unsigned int i = 0; i < E7A6A0GetBuckets()->GetSize(); i++) {
@@ -11731,6 +11843,7 @@ extern "C" __declspec(dllimport) void __stdcall InitializeCriticalSection(void*)
 extern FUN_00a62af0_cls* DAT_011f4748;
 
 // @fnv 0x00a62af0
+// pdb: NiRenderer::NiRenderer | NiRenderer.obj | fnv360_0822_retail, objrun, high
 FUN_00a62af0_cls::FUN_00a62af0_cls() throw()
 {
     unsigned int zero = 0;
@@ -12005,6 +12118,7 @@ struct FUN_00e69790_shell {
 };
 // Creates the vertex declaration from a fixed element array via device->CreateVertexDeclaration if not yet created, and returns it.
 // @fnv 0x00e69790
+// pdb: NiDX9Renderer::GetDecl_ParticlesSubTexture | NiDX9Renderer.obj | tesv_win, call_seq, medium
 Declaration_e69790* FUN_00e69790_shell::FUN_00e69790() {
     if (!declaration) {
         VertexElement_e69790 elements[6] = {
@@ -12079,6 +12193,7 @@ float* __stdcall WriteVertex(float* pVertexBuffer, const PointE69& kPos, const P
 
 // Maps a code to a small index via a switch, returning 0 for code 0 and any unmapped code.
 // @fnv 0x00e69d00
+// pdb: NiXenonRenderer::InitializeTextureDefaults | NiXenonRenderer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiDX9Renderer::GetNiFBFormat)
 unsigned int __cdecl MapCodeToIndex(unsigned int code)
 {
     switch (code) {
@@ -12204,6 +12319,8 @@ struct PackingRenderer : Renderer_e6da60 {
 struct NativePacketApi { bool FUN_00889050(); void FUN_008890b0(unsigned); void FUN_00889080(); };
 struct NativeVertexManagerApi { unsigned FUN_00885850(Model_e6da60*,void*,PackingData*,unsigned short,void*,unsigned); };
 struct NativeIndexManagerApi { void* FUN_00889420(void*,unsigned,unsigned,void*,void**,unsigned,unsigned); };
+// pdb: NiXenonRenderer::PackSkinnedGeometryBuffer | NiXenonRenderer.obj | fnv360_0822_retail, callee_sim, low, conflict (skyrim: NiDX9Renderer::PackSkinnedGeometryBuffer)
+// pdb params: pkBuffData, pkData, pkSkin, pkPartition, pkShaderDecl, bForce
 bool PackingRenderer::UpdatePackingPacket(PackingPacket* packet, Model_e6da60* model,
     void* geometryData, PackingData* data, PackingGeometry* geometry, bool force)
 {
@@ -13114,6 +13231,7 @@ struct ObjList_e6e
     virtual Node_e6e* GetFirst();
 };
 
+// pdb: NiDX9Renderer::FindClosestDepthStencilFormat | NiDX9Renderer.obj | tesv_win, caller_sim, low
 void* FUN_00e6ee00_cls::GetOrCreateFormatEntry(int iFormat, int iB, int iC)
 {
     Src_e6e* pSrc = (Src_e6e*)m_884->v050(0);
@@ -14304,6 +14422,8 @@ struct Renderer {
 };
 
 // @fnv 0x00e74840
+// pdb: NiXenonRenderer::AddToBatch | NiXenonRenderer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: pkGeometry
 void Renderer::DrawGeometry(Geom* geom)
 {
     if (m_bDeviceLost)
@@ -15078,6 +15198,7 @@ struct ResolveRenderer {
 };
 // For each bound in the collection, copies surface data to the device and adds cache-enabled bounds to the cache list, then clears the collection.
 // @fnv 0x00e74dc0
+// pdb: NiDX9Renderer::Do_EndUsingRenderTargetGroup | NiDX9Renderer.obj | tesv_win, caller_sim, low
 bool ResolveRenderer::FUN_00e74dc0() {
  if(!disabled) {
   for(unsigned int uiIndex=0;uiIndex<collection->Count();++uiIndex) {
@@ -15297,6 +15418,8 @@ struct FUN_00e77b50_Info {
 };
 
 // @fnv 0x00e77b50
+// pdb: NiD3DShaderDeclaration::Pack_LongToUnsignedByte | NiXenonShaderDeclaration.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: kParams
 unsigned int FUN_00e77b50(FUN_00e77b50_Info* pkInfo)
 {
     unsigned int uiTotal = 0;
@@ -15369,6 +15492,8 @@ struct PackByteInfo {
     unsigned char* dest;
 };
 // @fnv 0x00e77d00
+// pdb: NiD3DShaderDeclaration::Pack_UnsignedLongToUnsignedByte | NiXenonShaderDeclaration.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: kParams
 unsigned int __cdecl PackByteElements(PackByteInfo* pInfo) {
     unsigned int size=0;
     unsigned int* src=pInfo->source;
@@ -15421,6 +15546,8 @@ struct ByteFloatStream {
 };
 // Converts each vertex's signed-byte components to floats divided by 127 (clamped at -1), zero-fills the rest, and returns the total bytes written.
 // @fnv 0x00e79920
+// pdb: NiD3DShaderDeclaration::Pack_ByteToFloat | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun, high
+// pdb params: kParams
 unsigned __cdecl ConvertByteFloatStream(ByteFloatStream* pStream) {
  unsigned total = 0;
  signed char* source = pStream->source;
@@ -15485,6 +15612,8 @@ struct ColorStream {
 void* _fnv_zlib_memset(void*, int, unsigned int);
 
 // @fnv 0x00e7a0a0
+// pdb: NiD3DShaderDeclaration::Pack_UnsignedByteToUByteColor | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun, high
+// pdb params: kParams
 unsigned int ConvertColorStream(ColorStream* pStream) {
     unsigned char* src = pStream->src;
     unsigned short* indices = pStream->indices;
@@ -15680,6 +15809,8 @@ struct StandIn_Renderer {
 
 // Builds view, screen and projection matrices and a viewport from pkRect (or the full render target), then applies them to the device and sets the camera range.
 // @fnv 0x00e6cf40
+// pdb: NiXenonRenderer::Do_SetScreenSpaceCameraData | NiXenonRenderer.obj | fnv360_0822_retail, uconst, low, conflict (skyrim: NiDX9Renderer::Do_SetScreenSpaceCameraData)
+// pdb params: pkPort
 void StandIn_Renderer::SetScreenRect(const NiRect_Custom* pkRect)
 {
     if (m_bDeviceLost)
@@ -16044,6 +16175,8 @@ struct Node {
 
 // For each of p->unk08 items, removes nodes referencing it from m_map under critical sections, then calls m_target->Invoke(p).
 // @fnv 0x00e71e40
+// pdb: NiXenonRenderer::CreateVBChipForAGD | NiXenonRenderer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: pkAGD, pkSkin, pkPartition
 void E71E40::RemoveItemsFromMap(FUN_00e744b0_Src* p) {
 
     if (!p) return;
@@ -16884,6 +17017,7 @@ struct FUN_00e754a0 : RendererBase {
  FUN_00e754a0() throw();
 };
 // @fnv 0x00e754a0
+// pdb: NiDX9Renderer::NiDX9Renderer | NiDX9Renderer.obj | tesv_win, call_seq, medium
 FUN_00e754a0::FUN_00e754a0() throw() : unk630(0), mapb14(7) {
  FUN_00e6b990();
 }
@@ -17282,6 +17416,8 @@ void FUN_00e759c0_cls::FUN_00e759c0(float* out) {
 }
 
 // @fnv 0x00e79540
+// pdb: NiD3DShaderDeclaration::Pack_ShortToFloat | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun, high
+// pdb params: kParams
 unsigned int __cdecl ConvertNormalizedShortsToFloats(NormalizedStream* pStream)
 {
     unsigned int uiBytesWritten = 0;
@@ -18078,6 +18214,8 @@ struct PacketObj {
 
 // @f3 0x00874bf0 (community match, verified in this file)
 bool __cdecl FUN_00424d20(const NiRTTI*,NiAVObject*);
+// pdb: NiXenonRenderer::FreeGeometricData | NiXenonRenderer.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: NiDX9Renderer::FreeGeometricData)
+// pdb params: pkData, pkSkin, pkPartition
 void __stdcall ApplyPacketUpdate(PacketObj* pPacketObj, PacketTarget* target, int bRelease)
 {
     if (!pPacketObj || (pPacketObj->unk0e & 0x7000) != 0x4000)
@@ -18239,6 +18377,8 @@ struct GeomGroupOwner {
 
 // Removes every group entry referencing pkGeom from the group map under both locks, then calls the listener's Release on pkGeom.
 // @fnv 0x00e71cf0
+// pdb: NiXenonRenderer::PurgePixelShader | NiXenonRenderer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: pkShader
 void GeomGroupOwner::RemoveGeomFromGroups(GeomData* pkGeom)
 {
     if (!pkGeom)
@@ -18934,6 +19074,8 @@ struct VB108X { unsigned int FUN_00896ce0(); void* FUN_00885210(NiAVObject*,Geo1
 struct IB108X { void* FUN_00889420(void*,unsigned int,unsigned int,void*,unsigned int*,bool,unsigned int); };
 bool __cdecl FUN_00424d20(const NiRTTI*,NiAVObject*);
 
+// pdb: NiXenonRenderer::PackGeometryBuffer | NiXenonRenderer.obj | fnv360_0721_beta, caller, low, conflict (skyrim: NiDX9Renderer::PackGeometryBuffer)
+// pdb params: pkBuffData, pkData, pkSkinInstance, pkShaderDecl, bForce
 bool Renderer108::PrepareGeometryPacket(Packet108* packet, NiAVObject* source, Geo108* geometry, NiAVObject* shader, bool force)
 {
  if (!packet || !source) return false;
@@ -19025,6 +19167,8 @@ bool Renderer108::PrepareGeometryPacket(Packet108* packet, NiAVObject* source, G
 __declspec(noreturn) void __cdecl AddGeometryToBatch();
 
 // @fnv 0x00e752a0
+// pdb: bhkSPCollisionObject::RegisterStreamables | bhkSPCollisionObject.obj | fnv360_0721_beta, objrun, medium
+// pdb params: arStream
 void __cdecl FUN_00e752a0() {
     AddGeometryToBatch();
 }
@@ -19098,6 +19242,7 @@ unsigned int CopyIndexedRows(StridedDataTransfer* pkData)
 
 // Returns true unconditionally, ignoring all three pointer arguments.
 // @fnv 0x00e78870
+// pdb: NiD3DShaderDeclaration::GetD3DDeclaration | NiD3DShaderDeclaration.obj | fnv360_0721_beta, objrun_sim, low
 bool __stdcall IsAlwaysTrue(void* a1, void* a2, void* a3)
 {
     return true;
@@ -19161,6 +19306,7 @@ public:
     bool FUN_00e6eea0(TargetX* pkTarget, unsigned int uiClearMode);
 };
 // @fnv 0x00e6eea0
+// pdb: NiDX9Renderer::Do_BeginUsingRenderTargetGroup | NiDX9Renderer.obj | tesv_win, ustr, medium
 bool RendX::FUN_00e6eea0(TargetX* pkTarget, unsigned int uiClearMode)
 {
     if (!m_bDeviceLost) {
@@ -20129,6 +20275,7 @@ public:
 
 // Calls callbacks for entries in the list, masks object flags, releases the shader, and clears the list.
 // @fnv 0x00e711e0
+// pdb: NiXenonRenderer::Do_EndBatch | NiXenonRenderer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void S00e711e0_Owner::FUN_00e711e0()
 {
     S00e711e0_Entry* head = m_620;
@@ -21028,6 +21175,8 @@ unsigned int unk8b0;
 unsigned int unk8b4; State* unk8b8; void DrawMesh(Mesh*,unsigned int,unsigned int,void*,void*,Batch*); };
 // Draws a mesh by iterating shader steps and submitting indexed or plain batches via unk288, handling skinned geometry per strip.
 // @fnv 0x00e715a0
+// pdb: NiXenonRenderer::DrawPrimitive | NiXenonRenderer.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: pkGeometry, pkData, pkSkinInstance, kWorld, kWorldBound, pkBuffData
 void DrawOwner715::DrawMesh(Mesh* mesh,unsigned int b,unsigned int c,void* B,void* A,Batch* batch) {
  Shader* shader=0;
  if(mesh) shader=mesh->unkc0;
@@ -21091,6 +21240,7 @@ public:
 };
 // Inserts or updates a key/value pair in the hash map, managing reference counts on the stored object.
 // @fnv 0x00e72cf0
+// pdb: NiTMapBase<class NiTPointerAllocator<unsigned int>,struct HWND__ *,class NiPointer<class NiRenderTargetGroup> >::SetAt | NiDX9Renderer.obj | tesv_win, call_gap, low
 void RendererPacketMap::FUN_00e72cf0(unsigned int key, ReferencePtr value) {
     unsigned int bucket = Bucket(key);
     MapEntry* entry = entries[bucket];
@@ -21213,6 +21363,8 @@ struct S00e76450_Obj {
 };
 
 // @fnv 0x00e76450
+// pdb: NiXenonShaderDeclaration::SetEntry | NiXenonShaderDeclaration.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: NiDX9ShaderDeclaration::SetEntry)
+// pdb params: uiStream, uiEntry, uiRegister, eInput, eType, eUsage, uiIndex, eTess
 bool S00e76450_Obj::FUN_00e76450(unsigned int x, unsigned int y, int aiUnused, int b, int c, int d, int e, int f)
 {
     if (y >= count) return false;
@@ -21475,6 +21627,7 @@ public:
 
 // Searches m_kBuffers for a matching key, adjusts the bit-count arguments under conditions, and returns FindBestFullscreenFormat's result.
 // @fnv 0x00e7b0f0
+// pdb: NiDX9DeviceDesc::GetNearestDepthStencilFormat | NiDX9SystemDesc.obj | tesv_win, call_seq, medium
 void* RendererE7B::FUN_00e7b0f0(unsigned int uiBufferKey, unsigned int uiFormat, unsigned int uiDepthBits,
     unsigned int uiStencilBits)
 {
@@ -22105,6 +22258,7 @@ void FUN_00e69610_Obj::FUN_00e69610()
 }
 
 // @fnv 0x00e69e50
+// pdb: NiDX9Renderer::GetPresentInterval | NiDX9Renderer.obj | tesv_win, hash, low
 unsigned int FUN_00e69e50(int format)
 {
     switch (format)
@@ -22175,6 +22329,7 @@ struct MeshGenerator {
 };
 
 // @fnv 0x00e6d3a0
+// pdb: NiDX9Renderer::PackParticleStrips | NiDX9Renderer.obj | tesv_win, call_seq, medium
 void MeshGenerator::FUN_00e6d3a0(float* pDest, unsigned short* pIndex, SrcObj* pSrc, unsigned int* puiVerts, unsigned int* puiIndices)
 {
     const unsigned char* pAlpha = pSrc->alphas;
@@ -23666,6 +23821,8 @@ struct StripTarget {
 };
 // Renders mesh data across shader passes, skips inactive visibility entries, and issues indexed primitive draws.
 // @fnv 0x00e718a0
+// pdb: NiXenonRenderer::DrawSkinnedPrimitive | NiXenonRenderer.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: pkGeometry, pkData, pkSkinInstance, kWorld, kWorldBound
 void StripTarget::DrawStrip(Geometry* geometry,Flags* flags,Shape* shape,void* context,Color* color) {
  if(!shape)return;
  Block* block=shape->block;StripMesh* meshes=block->meshes;int type=meshes->strip ? 5:4;
@@ -24523,6 +24680,8 @@ __forceinline int BeginQuads(QuadInput* input,unsigned short flags,unsigned shor
  return nindices;
 }
 }
+// pdb: NiXenonRenderer::PackScreenTextureBuffers | NiXenonRenderer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pkScreenTexture, usDirtyFlags
 void QuadRenderer::UploadQuads(QuadInput* input,unsigned short flags)
 {
  unsigned short count;
@@ -24699,6 +24858,7 @@ struct S72_Renderer : Renderer_e6da60
 
 // Builds a packet from the model and geometry data, then allocates and registers a node for each item in the packet's item array.
 // @fnv 0x00e72980
+// pdb: NiDX9Renderer::PrePackGeometryBuffer | NiDX9Renderer.obj | tesv_win, caller_sim, low
 bool S72_Renderer::BuildAndRegisterNodes(unsigned int uiUnused, S72_Model* pkModel, unsigned short usTriangleCount, unsigned short usTriangleCount2,
     unsigned int uiTriangleLengths, unsigned int uiIndexCount, unsigned short usStripCount, void* pvGeomData)
 {
@@ -24761,6 +24921,8 @@ struct PackingPacketStub
     bool FUN_00889050();
     void FUN_008890b0(unsigned int);
 };
+// pdb: NiXenonRenderer::PackScreenTextureGeomBuffer | NiXenonRenderer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pkScreenTexture
 void PackingManager_cc0::FUN_00e74cc0(PackingEntry_cc0* entry)
 {
     PackingEntry_cc0* volatile* ev = (PackingEntry_cc0* volatile*)&entry;
@@ -24918,6 +25080,8 @@ struct S00e75340_Renderer {
 
 // Calls PrepareForRemoval and FUN_00e818d0(0), then passes the address of the group parameter to the function at offset 0x90c.
 // @fnv 0x00e75340
+// pdb: NiXenonRenderer::PurgeD3DShader | NiXenonRenderer.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: pkD3DShader
 void S00e75340_Renderer::FUN_00e75340(S00e75340_Group* volatile group)
 {
     S00e75340_Group* g = group;
@@ -24936,6 +25100,8 @@ struct ShaderDeclStandIn
 
 // Maps eInput to usage/index values and passes them to SetEntryFull.
 // @fnv 0x00e76350
+// pdb: NiXenonShaderDeclaration::SetEntry | NiXenonShaderDeclaration.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: NiDX9ShaderDeclaration::SetEntry)
+// pdb params: uiEntry, uiRegister, eInput, eType, uiStream
 bool ShaderDeclStandIn::SetEntry(unsigned int uiEntry, unsigned int uiRegister, unsigned int eInput, unsigned int eType, unsigned int uiStream)
 {
     unsigned int usage;
@@ -24967,6 +25133,8 @@ void* _fnv_zlib_memset(void*, int, unsigned int);
 
 // Copies component data into pucDest, zero-fills remaining components, and returns the accumulated destination size.
 // @f3 0x0087f440 (community match, verified in this file)
+// pdb: NiD3DShaderDeclaration::Pack_UnsignedLongToShort | NiXenonShaderDeclaration.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: NiD3DShaderDeclaration::Pack_ShortToShort)
+// pdb params: kParams
 unsigned int CopyPackedVerts(PackShortInfo* pkInfo)
 {
     unsigned int uiTotal = 0;
@@ -25185,6 +25353,8 @@ unsigned int NiD3DShaderDeclaration_Pack_Float_ExtraOutsToZero(Stream78* pkInfo)
 extern void* __cdecl FUN_00c00610(void*,int,unsigned int);
 static const double DAT_00dc2748 = 4.656612873077393e-10;
 // @fnv 0x00e79160
+// pdb: NiD3DShaderDeclaration::Pack_LongToFloat | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun, high
+// pdb params: kParams
 unsigned int __cdecl DecodeVertexData(NormalizedStream* apStream)
 {
     unsigned int bytes = 0;
@@ -25284,6 +25454,8 @@ struct NiGeometryData {
 // Fills an E7Context from geometry, skin and descriptor, then runs the matching E7Converter to convert the data into the destination buffer.
 // @f3 0x0087df80 (community match, verified in this file)
 extern "C" void _ReadWriteBarrier();
+// pdb: NiD3DShaderDeclaration::PackEntry | NiD3DShaderDeclaration.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: usCount, pkData, pkSkin, pkPartition, pkEntry, uiStride, pucData
 unsigned int __stdcall ConvertGeometryData(unsigned short count, NiGeometryData* geometry, unsigned int unused, E7Skin* skin, E7Descriptor* desc, unsigned int destStride, void* dest, bool flag, unsigned int extra)
 {
     E7Context info;
@@ -25368,6 +25540,7 @@ convert:
 
 // Maps key to two output values, writing each through its pointer and setting both to zero for unrecognized keys.
 // @fnv 0x00e7a8b0
+// pdb: NiDX9DeviceDesc::DisplayFormatInfo::GetDepthStencilBPPFromFormat | NiDX9SystemDesc.obj | tesv_win, hash, low
 void FUN_00e7a8b0(int key, int* outA, int* outB)
 {
     switch (key)
@@ -26164,6 +26337,7 @@ public:
 
 // Queries device caps, validates multi-texture support, stores capability flags and shader versions, then initializes sampler globals.
 // @fnv 0x00e6c240
+// pdb: NiDX9Renderer::InitializeDeviceCaps | NiDX9Renderer.obj | tesv_win, ustr, medium
 bool Renderer_e6c240::FUN_00e6c240(void* pkDevice)
 {
     if (m_pDirect3DDevice->GetDeviceCaps(&m_kDeviceCapabilities) < 0)
@@ -28011,6 +28185,7 @@ unsigned int unk60c;
 
 // Iterates over pkArg3 entries, builds packets via BuildPacket, and inserts resulting stream objects into map keyed by stream key.
 // @fnv 0x00e72aa0
+// pdb: NiDX9Renderer::PrePackSkinnedGeometryBuffer | NiDX9Renderer.obj | tesv_win, caller_sim, low
 bool __thiscall ThisObj::BuildPacketEntries(void* a1, void* pkModel, Arg3* pkArg3, void* pkGeom, void* a5, void* a6)
 {
     Entry* pkEntries = pkArg3->inner->entries;
@@ -29332,6 +29507,8 @@ struct InitRenderer {
  bool FUN_00e72e60(unsigned width,unsigned height,unsigned options,unsigned deviceWindow,unsigned focusWindow,unsigned adapterIndex,unsigned deviceChoice,unsigned p8,unsigned p9,unsigned p10,unsigned p11,unsigned p12,unsigned p13,unsigned p14);
 };
 // @f3 0x00877f90 (community match, verified in this file)
+// pdb: NiXenonRenderer::Create | NiXenonRenderer.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: NiDX9Renderer::Initialize)
+// pdb params: uiWidth, uiHeight, uiUseFlags, eBackBufferFormat, eDepthStencilBufferFormat, eFrontBufferFormat, ePresentationInterval, uiFBMode
 bool InitRenderer::FUN_00e72e60(unsigned width,unsigned height,unsigned options,unsigned deviceWindow,unsigned focusWindow,unsigned adapterIndex,unsigned deviceChoice,unsigned p8,unsigned p9,unsigned p10,unsigned p11,unsigned p12,unsigned aiBackBufferCountOut,unsigned p14)
 {
  fielda98=width; fielda9c=height; fieldaa0=options; fieldaa4=deviceWindow; fieldaa8=focusWindow; fieldaac=adapterIndex;
@@ -29469,6 +29646,7 @@ struct CallbackRegistry { int unk00; CallbackBucket** buckets; };
 extern void* DAT_0126f550;
 // Selects a callback by type and mode, then stores it in the CallbackRegistry bucket for that type.
 // @fnv 0x00e78560
+// pdb: NiD3DShaderDeclaration::SetDefaultPackingFunction | NiDX9ShaderDeclaration.obj | tesv_win, objopen_prop, low
 void __cdecl FUN_00e78560(unsigned int type, unsigned int mode) {
  CallbackBucket* bucket = static_cast<CallbackRegistry*>(DAT_0126f550)->buckets[type];
  int callback = 0;
@@ -29548,6 +29726,8 @@ struct StreamE788 {
 };
 // Copies one 32-bit value per element, using optional indices or writing -1 when the source is null; returns an accumulated count.
 // @fnv 0x00e78880
+// pdb: NiD3DShaderDeclaration::Pack_LongToUByteColor | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun, high
+// pdb params: kParams
 int __cdecl FUN_00e78880(StreamE788* pkStream)
 {
     char* pcDst = pkStream->m_pcDst;
@@ -29738,6 +29918,7 @@ struct ParticleRenderer {
     );
 };
 // @fnv 0x00e6ab40
+// pdb: NiDX9Renderer::PackPointsSubTexture | NiDX9Renderer.obj | tesv_win, call_gap, low
 void ParticleRenderer::FUN_00e6ab40(
     ParticleVertex* pDestVertices,
     const ParticlePoint* pPositions,
@@ -29979,6 +30160,7 @@ static __forceinline S00e69ea0_Pt AddLast(const S00e69ea0_Pt& p,const S00e69ea0_
 
 static __forceinline void WriteQuadVertex(S00e69ea0_Vtx* v, const S00e69ea0_Pt& p, const S00e69ea0_Pt& n, unsigned int c, const float& u, const float& w) { v->kPos=p; v->uiColor=c; v->kNormal=n; v->fTextureCoordinateU=u; v->fV=w; }
 // @fnv 0x00e69ea0
+// pdb: NiDX9Renderer::PackPoints | NiDX9Renderer.obj | tesv_win, call_gap, low
 void S00e69ea0_Rnd::FUN_00e69ea0(S00e69ea0_Vtx* pkVerts, const S00e69ea0_Pt* pkCenters,
     const S00e69ea0_Color* pkColors, const float* pfWidths,
     const float* pfHeights, const float* pfAngles, unsigned short m_usPassCountLocal)
@@ -31077,6 +31259,8 @@ struct RetryBuilder : StripRenderer { __forceinline bool Fill(StripIndexBuffer* 
             }
 } };
 
+// pdb: NiXenonRenderer::Do_RenderParticleStrips | NiXenonRenderer.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: NiDX9Renderer::Do_RenderParticleStrips)
+// pdb params: pkParticles
 void StripRenderer::FUN_00e70720(StripGeometry* geometry)
 {
     if (disabled) return;
@@ -31970,6 +32154,8 @@ struct LineStreamAccess {
     void FUN_00884fd0(LineBufferData*, unsigned int);
     float* FUN_00885020(void*, unsigned int, unsigned int, unsigned int);
 };
+// pdb: NiXenonRenderer::Do_RenderLines | NiXenonRenderer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiDX9Renderer::Do_RenderLines)
+// pdb params: pkLines
 void LineRenderer::FUN_00e70be0(LineGeometry* pkLines)
 {
     if (m_bDeviceLost)
@@ -33015,6 +33201,7 @@ struct Se745_StandinRenderer {
 
 // Draws geometry strips or primitives via m_pDirectInputDevice, selecting indexed or non-indexed paths based on animation state and buffer flags.
 // @fnv 0x00e745a0
+// pdb: NiXenonRenderer::Do_EndBatch | NiXenonRenderer.obj | fnv360_0822_retail, objrun_open, low
 void Se745_StandinRenderer::FUN_00e745a0(Se745_Src* apSrc) {
     if (this->m_6fc)
         return;
@@ -33142,6 +33329,7 @@ void FUN_00e6b990();};
 
 // Resets selected renderer fields, clears four state, counter, and ref entries, sets the matrix to identity, and writes values to DAT_0126efd8.
 // @fnv 0x00e6b990
+// pdb: NiXenonRenderer::InitToDefault | NiXenonRenderer.obj | fnv360_0822_retail, uconst, low, conflict (skyrim: NiDX9Renderer::InitToDefault)
 void Renderer::FUN_00e6b990(){unk288=0;FUN_00ec61c0(&unk28c,0,0x130);
 
 
@@ -33657,6 +33845,8 @@ struct BoneHost : NiDX9Renderer {
 };
 // Updates the matrix buffer from per-bone transforms and reports whether a non-unit scale was detected.
 // @fnv 0x00e6fe30
+// pdb: NiXenonRenderer::CalculateBoneMatrices | NiXenonRenderer.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: NiDX9Renderer::CalculateBoneMatrices)
+// pdb params: pkSkinInstance, kWorld, bTranspose, uiBoneMatrixRegisters, bPalettizedBones
 void BoneHost::FUN_00e6fe30(SkinMatrixBlock* block, Xf* parent, bool transpose, unsigned int rows, bool skipExtra) {
     const char* cur = block->entry;
     if (cur == unk8bc->GetEntryPoint() && rows == block->rowsStored)
@@ -34620,6 +34810,8 @@ static __forceinline bool FillIndices(ParticleGeometry* a, IndexBuffer* data, un
 
 // Draws particle geometry by setting up vertex/index buffers, applying material and transform, then issuing DrawIndexedPrimitive calls per overlay command.
 // @f3 0x00875290 (community match, verified in this file)
+// pdb: NiXenonRenderer::Do_RenderPoints | NiXenonRenderer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiDX9Renderer::Do_RenderPoints)
+// pdb params: pkParticles
 void RendererE70140::FUN_00e70140(SceneArg* apSceneArg)
 {
     if ((unsigned char)disabled) return;

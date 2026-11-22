@@ -30,6 +30,8 @@ virtual bool Apply(void*);
 bool FUN_00455330(Message146*);
 bool FUN_00563c10(Message146*);
 };
+// pdb: TESTopicInfo::SavesBefore | TESTopicInfo.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apGroupFORM
 bool Owner146::FUN_00563c10(Message146* message){
  bool result=false;
  if(message&&message->tag==DAT_00f4a768){

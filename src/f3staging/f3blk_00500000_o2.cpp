@@ -15,6 +15,7 @@ public:
     void FUN_005004a0();
 };
 
+// pdb: TESWeather::ClearData | TESWeather.obj | fnv360_0822_retail, vtable, medium
 void FUN_005004a0_owner::FUN_005004a0()
 {
     reinterpret_cast<FUN_004ffce0_owner*>(reinterpret_cast<char*>(this) + 0x180)->FUN_004ffce0();
@@ -93,6 +94,8 @@ struct Expression {
  void FUN_0050d470(int);
  int FUN_0050d490(char**, char*, int*, bool, int*);
 };
+// pdb: CExpression::GetNextToken | Expression.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: appInput, apToken, aeOperator, abEndian, apScriptData
 int Expression::FUN_0050d490(char** cursor,char* output,int* type,bool countSpace,int* count) {
  char* p=*cursor; char* out=output; bool operand=true; *type=16;
  while(*p && *p<33) {++p;if(countSpace && count)++*count;}
@@ -147,6 +150,7 @@ struct FUN_00515bd0_Obj {
     void FUN_00454860();
     void FUN_00515bd0();
 };
+// pdb: TESGlobal::Save | TESGlobal.obj | fnv360_0822_retail, vtable, medium
 void FUN_00515bd0_Obj::FUN_00515bd0()
 {
     FUN_004547d0();
@@ -160,6 +164,8 @@ struct Entry262 {
     unsigned int unk00;
     unsigned int value;
 };
+// pdb: TESWeatherList::SortCompare | TESWeatherList.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: p1, p2
 int __cdecl FUN_005007f0(const Entry262* first, const Entry262* second) {
     if (first->value > second->value) return -1;
     return first->value < second->value;
@@ -176,6 +182,7 @@ struct Node358 {
     void FUN_006c8220();
     void FUN_00500aa0();
 };
+// pdb: TESWeatherList::FlushList | TESWeatherList.obj | fnv360_0822_retail, call_seq, medium
 void Node358::FUN_00500aa0() {
     for (Node358* node = this; node; node = node->next)
         Heap358::DAT_01090a78.FUN_0086ba60(node->item);
@@ -202,6 +209,8 @@ struct Owner753 {
     Target753* target;
     void FUN_00502010(void* item);
 };
+// pdb: TESWorldSpace::RemovePersistentRef | TESWorldSpace.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: apRef
 void Owner753::FUN_00502010(void* item)
 {
     if (item) {
@@ -674,6 +683,7 @@ struct FUN_00507b80 : BaseA_507b80, BaseB_507b80, BaseD_507b80 {
     FUN_00507b80();
 };
 
+// pdb: BGSCameraShot::BGSCameraShot | BGSCameraShot.obj | fnv360_0822_retail, call_gap, medium
 FUN_00507b80::FUN_00507b80()
 {
     int (__stdcall* rel)(int*) = FUN_00d9b064;
@@ -749,6 +759,7 @@ struct FUN_00519df0 {
     FUN_00519df0();
 };
 
+// pdb: ScriptCompileData::ScriptCompileData | TESScriptCompiler.obj | fnv360_0822_retail, call_gap, low
 FUN_00519df0::FUN_00519df0() : m_sub(), unk3C(0), unk40(0), unk44(0), unk48(0), unk50(0), unk54(0)
 {
     unk1C = 0;
@@ -773,114 +784,142 @@ FUN_00519df0::FUN_00519df0() : m_sub(), unk3C(0), unk40(0), unk44(0), unk48(0), 
 namespace f3m_00500f00 {
 inline void Swap32_1312(unsigned int& v){v=_byteswap_ulong(v);}inline void Swap16_1312(unsigned short& v){v=_byteswap_ushort(v);}
 struct Record1312{unsigned int value00,value04;unsigned short value08,value0A,value0C,value0E;void FUN_00500f00();};
+// pdb: TESFile::GetChunkData | TESFile.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: apData
 void Record1312::FUN_00500f00(){Swap32_1312(value00);Swap32_1312(value04);Swap16_1312(value08);Swap16_1312(value0A);Swap16_1312(value0C);Swap16_1312(value0E);}
 }   // namespace f3m_00500f00
 
 // @f3 0x005010d0 (community match, verified in this file)
 namespace f3m_005010d0 {
 struct WorldSpace1313{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned int unk4C;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;unsigned int unk68;unsigned int unk6C;unsigned int unk70;unsigned int unk74;unsigned int unk78;unsigned int unk7C;unsigned int unk80;unsigned int unk84;unsigned int unk88;unsigned int unk8C;unsigned int unk90;unsigned int unk94;unsigned int unk98;unsigned int unk9C;unsigned int unkA0;unsigned int unkA4;unsigned int unkA8;unsigned int unkAC;unsigned int unkB0;unsigned int unkB4;unsigned int unkB8;unsigned int unkBC;unsigned int unkC0;unsigned int unkC4;float valueC8;float FUN_005010d0();};
+// pdb: TESWorldSpace::GetDefaultLandHeight | TESWorldSpace.obj | fnv360_0822_retail, objrun, medium
 float WorldSpace1313::FUN_005010d0(){return valueC8;}
 }   // namespace f3m_005010d0
 
 // @f3 0x005010e0 (community match, verified in this file)
 namespace f3m_005010e0 {
 struct WorldSpace1314{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned int unk4C;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;unsigned int unk68;unsigned int unk6C;unsigned int unk70;unsigned int unk74;unsigned int unk78;unsigned int unk7C;unsigned int unk80;unsigned int unk84;unsigned int unk88;unsigned int unk8C;unsigned int unk90;unsigned int unk94;unsigned int unk98;unsigned int unk9C;unsigned int unkA0;unsigned int unkA4;unsigned int unkA8;unsigned int unkAC;unsigned int unkB0;unsigned int unkB4;unsigned int unkB8;unsigned int unkBC;unsigned int unkC0;unsigned int unkC4;unsigned int unkC8;float valueCC;float FUN_005010e0();};
+// pdb: TESWorldSpace::GetDefaultWaterHeight | TESWorldSpace.obj | fnv360_0822_retail, call_seq, medium
 float WorldSpace1314::FUN_005010e0(){return valueCC;}
 }   // namespace f3m_005010e0
 
 // @f3 0x00501100 (community match, verified in this file)
 namespace f3m_00501100 {
 struct WorldSpace1315{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned char flags4C;unsigned char FUN_00501100();};
+// pdb: TESWorldSpace::GetSmallWorld | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low
 unsigned char WorldSpace1315::FUN_00501100(){unsigned char value=flags4C;value &= 1;return value;}
 }   // namespace f3m_00501100
 
 // @f3 0x00501110 (community match, verified in this file)
 namespace f3m_00501110 {
 struct WorldSpace1316{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned char flags4C;unsigned char FUN_00501110();};
+// pdb: TESWorldSpace::CantTravelFrom | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low
 unsigned char WorldSpace1316::FUN_00501110(){unsigned char value=flags4C;value >>= 1;value &= 1;return value;}
 }   // namespace f3m_00501110
 
 // @f3 0x00501120 (community match, verified in this file)
 namespace f3m_00501120 {
 struct WorldSpace1317{unsigned int unk00;unsigned int unk04;unsigned int flags08;unsigned char FUN_00501120();};
+// pdb: TESActorBase::GetStartsDead | TESActorBase.obj | fnv360_0822_retail, vtable, medium
 unsigned char WorldSpace1317::FUN_00501120(){unsigned char value=flags08 >> 19;value &= 1;return value;}
 }   // namespace f3m_00501120
 
 // @f3 0x00501130 (community match, verified in this file)
 namespace f3m_00501130 {
 struct WorldSpace1318{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned char flags4C;unsigned char FUN_00501130();};
+// pdb: TESWorldSpace::GetHasBorderRegion | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low
 unsigned char WorldSpace1318::FUN_00501130(){unsigned char value=flags4C;value >>= 3;value &= 1;return value;}
 }   // namespace f3m_00501130
 
 // @f3 0x00501140 (community match, verified in this file)
 namespace f3m_00501140 {
 struct WorldSpace1319{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned char flags4C;void FUN_00501140(bool);};
+// pdb: TESWorldSpace::SetHasBorderRegion | TESWorldSpace.obj | fnv360_0822_retail, call_seq, low
+// pdb params: abVal
 void WorldSpace1319::FUN_00501140(bool enabled){if(enabled)flags4C|=8;else flags4C&=~8;}
 }   // namespace f3m_00501140
 
 // @f3 0x00501160 (community match, verified in this file)
 namespace f3m_00501160 {
 struct WorldSpace1320{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned char flags4C;unsigned char FUN_00501160();};
+// pdb: TESWorldSpace::GetNoLODWater | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: TESWeather::GetWeatherDataFlag)
 unsigned char WorldSpace1320::FUN_00501160(){unsigned char value=flags4C;value >>= 4;value &= 1;return value;}
 }   // namespace f3m_00501160
 
 // @f3 0x00501170 (community match, verified in this file)
 namespace f3m_00501170 {
 struct WorldSpace1321{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned char flags4C;unsigned char FUN_00501170();};
+// pdb: TESWorldSpace::GetNoLODNoise | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: TESWeather::GetWeatherDataRaw)
 unsigned char WorldSpace1321::FUN_00501170(){unsigned char value=flags4C;value >>= 5;value &= 1;return value;}
 }   // namespace f3m_00501170
 
 // @f3 0x00501180 (community match, verified in this file)
 namespace f3m_00501180 {
 struct WorldSpace1322{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned char flags4C;unsigned char FUN_00501180();};
+// pdb: TESWorldSpace::GetWaterAdjustment | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low
 unsigned char WorldSpace1322::FUN_00501180(){unsigned char value=flags4C;value >>= 7;return value;}
 }   // namespace f3m_00501180
 
 // @f3 0x00501190 (community match, verified in this file)
 namespace f3m_00501190 {
 struct WorldSpace1323{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned char flags4C;unsigned char unk4D;unsigned char parentFlags4E;unsigned char unk4F;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;unsigned int unk68;unsigned int unk6C;WorldSpace1323* parent70;unsigned int unk74,unk78,unk7C;float origin80,origin84;bool HasParentFlag(unsigned int type){if(type>5)return true;unsigned char bit=1;bit<<=type;return (parentFlags4E&bit)!=0;}WorldSpace1323* Parent(unsigned int type){WorldSpace1323* parent=parent70;if(parent && type<=5){unsigned char bit=1;bit<<=type;if(!(parentFlags4E&bit))return 0;}return parent;}unsigned char FUN_00501190();};
+// pdb: TESWorldSpace::AllowsNPCFallDamage | TESWorldSpace.obj | fnv360_0822_retail, call_gap_sim, low
 unsigned char WorldSpace1323::FUN_00501190(){unsigned char value=flags4C;value>>=6;value=~value;value&=1;return value;}
 }   // namespace f3m_00501190
 
 // @f3 0x00501240 (community match, verified in this file)
 namespace f3m_00501240 {
+// pdb: TESWorldSpace::GetKeyForCellCoord | TESWorldSpace.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: TESObjectCELL::GetHoursToRespawnCellCleared)
+// pdb params: asX, asY
 unsigned int __cdecl FUN_00501240(short x,short y){return (x<<16)|(unsigned short)y;}
 }   // namespace f3m_00501240
 
 // @f3 0x005011a0 (community match, verified in this file)
 namespace f3m_005011a0 {
 struct WorldSpace1324{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned char flags4C;unsigned char unk4D;unsigned char parentFlags4E;unsigned char unk4F;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;unsigned int unk68;unsigned int unk6C;WorldSpace1324* parent70;unsigned int unk74,unk78,unk7C;float origin80,origin84;bool HasParentFlag(unsigned int type){if(type<=5){unsigned char bit=(unsigned char)(1 << type);return (parentFlags4E&bit)!=0;}return true;}WorldSpace1324* Parent(unsigned int type){WorldSpace1324* parent=parent70;if(parent && type<=5){unsigned char bit=1;bit<<=type;if(!(parentFlags4E&bit))return 0;}return parent;}bool FUN_005011a0(unsigned int);};
+// pdb: TESWorldSpace::GetParentUseFlag | TESWorldSpace.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: tmpWeatherEntry::tmpWeatherEntry)
+// pdb params: aeFlag
 bool WorldSpace1324::FUN_005011a0(unsigned int type){return HasParentFlag(type);}
 }   // namespace f3m_005011a0
 
 // @f3 0x005011d0 (community match, verified in this file)
 namespace f3m_005011d0 {
 struct WorldSpace1325{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned char flags4C;unsigned char unk4D;unsigned char parentFlags4E;unsigned char unk4F;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;unsigned int unk68;unsigned int unk6C;WorldSpace1325* parent70;unsigned int unk74,unk78,unk7C;float origin80,origin84;bool HasParentFlag(unsigned int type){if(type<=5){unsigned char bit=(unsigned char)(1 << type);return (parentFlags4E&bit)!=0;}return true;}WorldSpace1325* Parent(unsigned int type){WorldSpace1325* parent=parent70;if(parent && type<=5){unsigned char bit=(unsigned char)(1 << type);if(!(parentFlags4E&bit))return 0;}return parent;}WorldSpace1325* FUN_005011d0(unsigned int);};
+// pdb: TESWorldSpace::GetParentWorld | TESWorldSpace.obj | fnv360_0822_retail, call_dedup, low, conflict (skyrim: TESObjectLAND::SetLandRemapped)
+// pdb params: aeFlags
 WorldSpace1325* WorldSpace1325::FUN_005011d0(unsigned int type){return Parent(type);}
 }   // namespace f3m_005011d0
 
 // @f3 0x00501330 (community match, verified in this file)
 namespace f3m_00501330 {
+// pdb: TESWorldSpace::GetCellCoordForKey | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: BSTHashMap<unsigned int,class BSPointerHandle<class Actor,class BSUntypedPointerHandle<16,10> >,struct BSTDefaultScatterTable>::BSTHashMap<unsigned int,class BSPointerHandle<class Actor,class BSUntypedPointerHandle<16,10> >,struct BSTDefaultScatterTable>)
+// pdb params: aiKey, asOutX, asOutY
 void __cdecl FUN_00501330(unsigned int key,short* x,short* y){*x=(short)(key>>16);*y=(short)key;}
 }   // namespace f3m_00501330
 
 // @f3 0x00501350 (community match, verified in this file)
 namespace f3m_00501350 {
+// pdb: TESWorldSpace::IsFixedRef | TESWorldSpace.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apRef
 struct Form1329{unsigned int unk00;unsigned char type04;};struct Reference1329{unsigned int unk00,unk04,unk08,unk0C,unk10,unk14,unk18;Form1329* base1C;};bool __cdecl FUN_00501350(Reference1329* reference){bool result=false;if(reference && reference->base1C){switch((unsigned int)reference->base1C->type04){case 13:case 21:case 27:case 28:case 32:case 33:case 37:case 38:case 39:case 44:case 45:result=true;break;}}return result;}
 }   // namespace f3m_00501350
 
 // @f3 0x005013b0 (community match, verified in this file)
 namespace f3m_005013b0 {
+// pdb: TESWorldSpace::CreatePersistentCell | TESWorldSpace.obj | fnv360_0721_beta, call_seq, medium
 struct Heap1330{void* FUN_0086b930(unsigned int);};struct FUN_004e0580{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned int unk4C;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;unsigned int unk68;unsigned int unk6C;unsigned int unk70;unsigned int unk74;unsigned int unk78;unsigned int unk7C;unsigned int unk80;unsigned int unk84;unsigned int unk88;unsigned int unk8C;unsigned int unk90;unsigned int unk94;unsigned int unk98;unsigned int unk9C;unsigned int unkA0;unsigned int unkA4;unsigned int unkA8;unsigned int unkAC;unsigned int unkB0;unsigned int unkB4;unsigned int unkB8;unsigned int unkBC;unsigned int unkC0;unsigned int unkC4;unsigned int unkC8;unsigned int unkCC;unsigned int unkD0;unsigned int unkD4;unsigned int unkD8;unsigned int unkDC;FUN_004e0580();static void* operator new(unsigned int n){return reinterpret_cast<Heap1330&>(DAT_01090a78).FUN_0086b930(n);}static void operator delete(void*);void FUN_004d3bc0(int);void FUN_004d33b0();};struct Owner1330{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;FUN_004e0580* cell34;FUN_004e0580* FUN_005013b0();};FUN_004e0580* Owner1330::FUN_005013b0(){if(!cell34){cell34=new FUN_004e0580;cell34->FUN_004d3bc0(1);cell34->FUN_004d33b0();}return cell34;}
 }   // namespace f3m_005013b0
 
 // @f3 0x00501440 (community match, verified in this file)
 namespace f3m_00501440 {
+// pdb: TESWorldSpace::BuildTeleportDoorList | TESWorldSpace.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: arOutArray
 struct Cell1331{void FUN_004e1b30(void*);};struct Owner1331{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;Cell1331* cell34;void FUN_00501440(void*);};void Owner1331::FUN_00501440(void* value){if(cell34)cell34->FUN_004e1b30(value);}
 }   // namespace f3m_00501440
 
 // @f3 0x00501720 (community match, verified in this file)
 namespace f3m_00501720 {
+// pdb: TESWorldSpace::GetFormEditorID | TESWorldSpace.obj | fnv360_0822_retail, vtable, medium
 extern const char DAT_00db3438[];struct Owner1334{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned int unk4C;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;unsigned int unk68;unsigned int unk6C;unsigned int unk70;unsigned int unk74;unsigned int unk78;unsigned int unk7C;unsigned int unk80;unsigned int unk84;unsigned int unk88;unsigned int unk8C;unsigned int unk90;unsigned int unk94;unsigned int unk98;unsigned int unk9C;unsigned int unkA0;unsigned int unkA4;unsigned int unkA8;unsigned int unkAC;unsigned int unkB0;unsigned int unkB4;unsigned int unkB8;unsigned int unkBC;const char* nameC0;const char* FUN_00501720();};const char* Owner1334::FUN_00501720(){return nameC0?nameC0:DAT_00db3438;}
 }   // namespace f3m_00501720
 
@@ -892,30 +931,36 @@ struct Cell1341;struct Map1341{bool FUN_00bea7b0(unsigned int,Cell1341**);};exte
 
 // @f3 0x00501d90 (community match, verified in this file)
 namespace f3m_00501d90 {
+// pdb: TESWorldSpace::GetCellFromKey | TESWorldSpace.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiKey
 struct Cell1342;struct Map1342{bool FUN_00bea7b0(unsigned int,Cell1342**);};struct WorldSpace1342{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;Map1342* map30;Cell1342* FUN_00501d90(unsigned int);};Cell1342* WorldSpace1342::FUN_00501d90(unsigned int key){Cell1342* result=0;return map30->FUN_00bea7b0(key,&result)?result:0;}
 }   // namespace f3m_00501d90
 
 // @f3 0x00501210 (community match, verified in this file)
 namespace f3m_00501210 {
 struct WorldSpace1326{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned char flags4C;unsigned char unk4D;unsigned char parentFlags4E;unsigned char unk4F;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;unsigned int unk68;unsigned int unk6C;WorldSpace1326* parent70;unsigned int unk74,unk78,unk7C;float origin80,origin84;bool HasParentFlag(unsigned int type){if(type<=5){unsigned char bit=(unsigned char)(1 << type);return (parentFlags4E&bit)!=0;}return true;}WorldSpace1326* Parent(unsigned int type){WorldSpace1326* parent=parent70;if(parent && !HasParentFlag(type))parent=0;return parent;}WorldSpace1326* OtherParent(unsigned int type){WorldSpace1326* parent=parent70;if(parent && !((*reinterpret_cast<const unsigned short*>(&parentFlags4E)) & (unsigned char)(1 << type)))parent=0;return parent;}float* FUN_00501210();};
+// pdb: TESWorldSpace::GetWorldMapData | TESWorldSpace.obj | fnv360_0822_retail, call_seq, medium
 float* WorldSpace1326::FUN_00501210(){WorldSpace1326* node=this;while(node->Parent(2)){if(!node->parent70)break;node=node->OtherParent(2);}return &node->origin80;}
 }   // namespace f3m_00501210
 
 // @f3 0x00501c00 (community match, verified in this file)
 namespace f3m_00501c00 {
 struct WorldSpace1335{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;void* value40;unsigned int unk44;unsigned int unk48;unsigned char flags4C;unsigned char unk4D;unsigned char parentFlags4E;unsigned char unk4F;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;unsigned int unk68;unsigned int unk6C;WorldSpace1335* parent70;unsigned int unk74,unk78,unk7C;float origin80,origin84;bool HasParentFlag(unsigned int type){if(type<=5){unsigned char bit=(unsigned char)(1 << type);return (parentFlags4E&bit)!=0;}return true;}WorldSpace1335* Parent(unsigned int type){WorldSpace1335* parent=parent70;if(parent && !HasParentFlag(type))parent=0;return parent;}WorldSpace1335* OtherParent(unsigned int type){WorldSpace1335* parent=parent70;if(parent && !((*reinterpret_cast<const unsigned short*>(&parentFlags4E)) & (unsigned char)(1 << type)))parent=0;return parent;}void* FUN_00501c00();};
+// pdb: TESWorldSpace::GetClimate | TESWorldSpace.obj | fnv360_0822_retail, call_seq, medium
 void* WorldSpace1335::FUN_00501c00(){WorldSpace1335* node=this;while(node->Parent(4)){if(!node->parent70)break;node=node->OtherParent(4);}return node->value40;}
 }   // namespace f3m_00501c00
 
 // @f3 0x00501c60 (community match, verified in this file)
 namespace f3m_00501c60 {
 extern void* DAT_01071858;struct WorldSpace1337{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned char flags4C;unsigned char unk4D;unsigned char parentFlags4E;unsigned char unk4F;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;unsigned int unk68;unsigned int unk6C;WorldSpace1337* parent70;void* value74;unsigned int unk78,unk7C;float origin80,origin84;bool HasParentFlag(unsigned int type){if(type<=5){unsigned char bit=(unsigned char)(1 << type);return (parentFlags4E&bit)!=0;}return true;}WorldSpace1337* Parent(unsigned int type){WorldSpace1337* parent=parent70;if(parent && !HasParentFlag(type))parent=0;return parent;}WorldSpace1337* OtherParent(unsigned int type){WorldSpace1337* parent=parent70;if(parent && !((*reinterpret_cast<const unsigned short*>(&parentFlags4E)) & (unsigned char)(1 << type)))parent=0;return parent;}void* FUN_00501c60();};
+// pdb: TESWorldSpace::GetWaterType | TESWorldSpace.obj | fnv360_0822_retail, call_seq, medium
 void* WorldSpace1337::FUN_00501c60(){WorldSpace1337* node=this;while(node->Parent(3)){if(!node->parent70)break;node=node->OtherParent(3);}void* result=node->value74;return result?result:DAT_01071858;}
 }   // namespace f3m_00501c60
 
 // @f3 0x00501c90 (community match, verified in this file)
 namespace f3m_00501c90 {
 extern void* DAT_01071858;struct WorldSpace1338{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned char flags4C;unsigned char unk4D;unsigned char parentFlags4E;unsigned char unk4F;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;unsigned int unk68;unsigned int unk6C;WorldSpace1338* parent70;unsigned int unk74;void* value78;unsigned int unk7C;float origin80,origin84;bool HasParentFlag(unsigned int type){if(type<=5){unsigned char bit=(unsigned char)(1 << type);return (parentFlags4E&bit)!=0;}return true;}WorldSpace1338* Parent(unsigned int type){WorldSpace1338* parent=parent70;if(parent && !HasParentFlag(type))parent=0;return parent;}WorldSpace1338* OtherParent(unsigned int type){WorldSpace1338* parent=parent70;if(parent && !((*reinterpret_cast<const unsigned short*>(&parentFlags4E)) & (unsigned char)(1 << type)))parent=0;return parent;}void* FUN_00501c90();};
+// pdb: TESWorldSpace::GetLODWaterType | TESWorldSpace.obj | fnv360_0822_retail, call_seq, medium
 void* WorldSpace1338::FUN_00501c90(){WorldSpace1338* node=this;while(node->Parent(1)){if(!node->parent70)break;node=node->OtherParent(1);}void* result=node->value78;return result?result:DAT_01071858;}
 }   // namespace f3m_00501c90
 
@@ -927,26 +972,36 @@ void* WorldSpace1339::FUN_00501cc0(){WorldSpace1339* node=this;while(node->Paren
 
 // @f3 0x00501e90 (community match, verified in this file)
 namespace f3m_00501e90 {
+// pdb: TESWorldSpace::ReleaseCell | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCell
 struct Cell1344{virtual void v0();virtual void v1();virtual void v2();virtual void v3();virtual void v4(int);virtual void v5();virtual void v6();virtual void v7();virtual void v8();virtual void v9();virtual void v10();virtual void v11();virtual void v12();virtual void v13();virtual void v14();virtual void v15();virtual void v16();virtual void v17();virtual void v18();virtual void v19();virtual void v20();virtual void v21();virtual void v22();virtual void v23();virtual void v24();virtual void v25();virtual void v26();virtual void v27();virtual void v28();virtual void v29();virtual void v30();virtual void v31();virtual void v32();virtual void v33();virtual void v34();virtual void v35();virtual void v36();virtual void v37();virtual void v38();virtual void v39();virtual void v40();virtual void v41();virtual void v42();virtual void v43();virtual void v44();virtual void v45();virtual void v46();virtual void v47();virtual void v48();virtual void v49();virtual void v50();virtual void v51();virtual void v52();virtual void v53();virtual void v54();virtual void v55();virtual void v56();virtual void v57();virtual void v58();virtual void v59();virtual void v60();virtual void v61();virtual void v62();virtual void v63();virtual void v64();virtual void v65();virtual void v66();virtual void v67();virtual void v68();virtual void v69();virtual void v70();virtual void v71();virtual void v72();virtual void v73();virtual void v74();virtual void v75();virtual const char* Name();unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned char flags24;unsigned char unk25,unk26,unk27;int TESObjectCELL_GetDataX();int TESObjectCELL_GetDataY();bool FUN_004e6b10();void FUN_004d3790(void*);void TESObjectCELL_AddReference(void*,int);};struct Map1344{void* vtable;unsigned int count04;void** buckets08;bool FUN_00bea7b0(unsigned int,Cell1344**);void FUN_00880f70(unsigned int,Cell1344*);void FUN_00899cf0(unsigned int);void FUN_0089a5d0(void*&,unsigned int&,Cell1344*&);void FUN_006bd950();void* First(){for(unsigned int i=0;i<count04;++i)if(buckets08[i])return buckets08[i];return 0;}};struct World1344{unsigned int unk00,unk04,flags08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;Map1344* map30;Cell1344* cell34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned int unk4C;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;Map1344* map68;void FUN_00501e90(Cell1344*);};void World1344::FUN_00501e90(Cell1344* cell){if(cell && !(cell->flags24&1)){unsigned short y=(unsigned short)cell->TESObjectCELL_GetDataY();short x=(short)cell->TESObjectCELL_GetDataX();unsigned int key=(x<<16)|y;Cell1344* previous;if(map30->FUN_00bea7b0(key,&previous) && cell==previous){map30->FUN_00899cf0(key);cell->FUN_004d3790(0);}}}
 }   // namespace f3m_00501e90
 
 // @f3 0x00501fe0 (community match, verified in this file)
 namespace f3m_00501fe0 {
+// pdb: TESWorldSpace::AddPersistentRef | TESWorldSpace.obj | fnv360_0822_retail, call_dedup, low, conflict (skyrim: TESWorldSpace::AddMapMarkersToList)
+// pdb params: apRef
 struct Reference1347{unsigned int unk00,unk04,flags08;};struct Cell1347{virtual void v0();virtual void v1();virtual void v2();virtual void v3();virtual void v4(int);virtual void v5();virtual void v6();virtual void v7();virtual void v8();virtual void v9();virtual void v10();virtual void v11();virtual void v12();virtual void v13();virtual void v14();virtual void v15();virtual void v16();virtual void v17();virtual void v18();virtual void v19();virtual void v20();virtual void v21();virtual void v22();virtual void v23();virtual void v24();virtual void v25();virtual void v26();virtual void v27();virtual void v28();virtual void v29();virtual void v30();virtual void v31();virtual void v32();virtual void v33();virtual void v34();virtual void v35();virtual void v36();virtual void v37();virtual void v38();virtual void v39();virtual void v40();virtual void v41();virtual void v42();virtual void v43();virtual void v44();virtual void v45();virtual void v46();virtual void v47();virtual void v48();virtual void v49();virtual void v50();virtual void v51();virtual void v52();virtual void v53();virtual void v54();virtual void v55();virtual void v56();virtual void v57();virtual void v58();virtual void v59();virtual void v60();virtual void v61();virtual void v62();virtual void v63();virtual void v64();virtual void v65();virtual void v66();virtual void v67();virtual void v68();virtual void v69();virtual void v70();virtual void v71();virtual void v72();virtual void v73();virtual void v74();virtual void v75();virtual const char* Name();unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned char flags24;unsigned char unk25,unk26,unk27;int TESObjectCELL_GetDataX();int TESObjectCELL_GetDataY();bool FUN_004e6b10();void FUN_004d3790(void*);void TESObjectCELL_AddReference(void*,int);};struct Map1347{void* vtable;unsigned int count04;void** buckets08;bool FUN_00bea7b0(unsigned int,Cell1347**);void FUN_00880f70(unsigned int,Cell1347*);void FUN_00899cf0(unsigned int);void FUN_0089a5d0(void*&,unsigned int&,Cell1347*&);void FUN_006bd950();void* First(){for(unsigned int i=0;i<count04;++i)if(buckets08[i])return buckets08[i];return 0;}};struct World1347{unsigned int unk00,unk04,flags08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;Map1347* map30;Cell1347* cell34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned int unk4C;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;Map1347* map68;Cell1347* FUN_005013b0();void FUN_00501fe0(Reference1347*);};void World1347::FUN_00501fe0(Reference1347* reference){if(reference){unsigned char state=(unsigned char)(reference->flags08>>14);state&=1;if(!state){Cell1347* cell=FUN_005013b0();cell->TESObjectCELL_AddReference(reference,0);}}}
 }   // namespace f3m_00501fe0
 
 // @f3 0x005028b0 (community match, verified in this file)
 namespace f3m_005028b0 {
+// pdb: TESWorldSpace::IsFormTypeChild | TESWorldSpace.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: TESObjectCELL::IsFormTypeChild)
+// pdb params: aeType
 bool __cdecl TESObjectCELL_IsFormTypeCellChild(unsigned int);struct Form1351{bool FUN_005028b0(unsigned int);};bool Form1351::FUN_005028b0(unsigned int type){if((unsigned char)type==57)return true;if((unsigned char)type==68)return true;return TESObjectCELL_IsFormTypeCellChild(type);}
 }   // namespace f3m_005028b0
 
 // @f3 0x00502d40 (community match, verified in this file)
 namespace f3m_00502d40 {
+// pdb: TESWorldSpace::SetFormEditorID | TESWorldSpace.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apEditorID
 struct String1356{int FUN_004019c0(const char*,unsigned int);};struct World1356{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned int unk4C;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;unsigned int unk68;unsigned int unk6C;unsigned int unk70;unsigned int unk74;unsigned int unk78;unsigned int unk7C;unsigned int unk80;unsigned int unk84;unsigned int unk88;unsigned int unk8C;unsigned int unk90;unsigned int unk94;unsigned int unk98;unsigned int unk9C;unsigned int unkA0;unsigned int unkA4;unsigned int unkA8;unsigned int unkAC;unsigned int unkB0;unsigned int unkB4;unsigned int unkB8;unsigned int unkBC;String1356 nameC0;bool FUN_00502d40(const char*);};bool World1356::FUN_00502d40(const char* text){nameC0.FUN_004019c0(text,0);return true;}
 }   // namespace f3m_00502d40
 
 // @f3 0x005032b0 (community match, verified in this file)
 namespace f3m_005032b0 {
+// pdb: TESWorldSpace::GetIndexForCellCoord | TESWorldSpace.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apFile, aiX, aiY
 struct Bounds1357{void* data00;float minX04,minY08,maxX0C,maxY10;void* data14;};struct World1357{Bounds1357* TESWorldSpace_GetOffsetData(void*);int FUN_005032b0(void*,int,int);};int World1357::FUN_005032b0(void* source,int x,int y){Bounds1357* bounds=TESWorldSpace_GetOffsetData(source);if(!bounds)return -1;int minX=((int)bounds->minX04)>>12;int minY=((int)bounds->minY08)>>12;int maxX=((int)bounds->maxX0C)>>12;if(x>maxX || x<minX)return -1;int maxY=((int)bounds->maxY10)>>12;if(y>maxY || y<minY)return -1;return (maxX-minX+1)*(y-minY)-minX+x;}
 }   // namespace f3m_005032b0
 
@@ -985,6 +1040,8 @@ struct FUN_00518f20_owner {
     void FUN_00518f20(int a2);
 };
 
+// pdb: ScriptLocals::Revert | TESScript.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apLoadGameBuffer
 void FUN_00518f20_owner::FUN_00518f20(int a2)
 {
     FUN_00518230();
@@ -1013,11 +1070,14 @@ struct Source1352{Source1352* FUN_00447200();};struct Map1352{bool FUN_00bea7b0(
 
 // @f3 0x005029f0 (community match, verified in this file)
 namespace f3m_005029f0 {
+// pdb: TESWorldSpace::FreeOffsetData | TESWorldSpace.obj | fnv360_0721_beta, objrun, low
 struct Heap1354{void* FUN_0086b930(unsigned int);void FUN_0086ba60(void*);};struct Bounds1354{void* data00;float minX04,minY08,maxX0C,maxY10;void* data14;};struct Source1354{Source1354* FUN_00447200();};struct Map1354{void* vtable;unsigned int count04;void** buckets08;unsigned int items0C;bool FUN_00bea7b0(Source1354*,Bounds1354**);void FUN_00880f70(Source1354*,Bounds1354*);void FUN_0089a5d0(void*&,unsigned int&,Bounds1354*&);void FUN_006bd950();void* First(){for(unsigned int i=0;i<count04;++i)if(buckets08[i])return buckets08[i];return 0;}};struct World1354{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned int unk4C;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;unsigned int unk68;unsigned int unk6C;unsigned int unk70;unsigned int unk74;unsigned int unk78;unsigned int unk7C;unsigned int unk80;unsigned int unk84;unsigned int unk88;unsigned int unk8C;unsigned int unk90;unsigned int unk94;unsigned int unk98;unsigned int unk9C;unsigned int unkA0;unsigned int unkA4;unsigned int unkA8;unsigned int unkAC;Map1354 mapB0;void FUN_005029f0();};void World1354::FUN_005029f0(){{void* position=mapB0.First();while(position){Bounds1354* record=0;unsigned int key;mapB0.FUN_0089a5d0(position,key,record);Bounds1354* current=*reinterpret_cast<Bounds1354* volatile*>(&record);reinterpret_cast<Heap1354&>(DAT_01090a78).FUN_0086ba60(current->data00);reinterpret_cast<Heap1354&>(DAT_01090a78).FUN_0086ba60(current);}}mapB0.FUN_006bd950();}
 }   // namespace f3m_005029f0
 
 // @f3 0x00503ba0 (community match, verified in this file)
 namespace f3m_00503ba0 {
+// pdb: TESWorldSpace::AdjustCellOffsets | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apFile, aiDelta
 struct Bounds1358{int* values00;float minX04,minY08,maxX0C,maxY10;void* data14;};struct World1358{Bounds1358* TESWorldSpace_GetOffsetData(void*);int FUN_005032b0(void*,int,int);void FUN_00503ba0(void*,int);};void World1358::FUN_00503ba0(void* source,int delta){Bounds1358* bounds=TESWorldSpace_GetOffsetData(source);if(bounds && bounds->values00 && delta){int minY=((int)bounds->minY08)>>12;int maxX=((int)bounds->maxX0C)>>12;int maxY=((int)bounds->maxY10)>>12;for(int x=((int)bounds->minX04)>>12;x<=maxX;++x){for(int y=minY;y<=maxY;++y){int index=FUN_005032b0(source,x,y);if(index>=0 && bounds->values00[index])bounds->values00[index]+=delta;}}}}
 }   // namespace f3m_00503ba0
 
@@ -1029,51 +1089,65 @@ namespace G1359{extern unsigned char DAT_00f4aa54;}struct Source1359{unsigned in
 
 // @f3 0x00501f00 (community match, verified in this file)
 namespace f3m_00501f00 {
+// pdb: TESWorldSpace::ClearCellMap | TESWorldSpace.obj | fnv360_0721_beta, objrun, low
 struct Cell1345{virtual void v0();virtual void v1();virtual void v2();virtual void v3();virtual void v4(int);virtual void v5();virtual void v6();virtual void v7();virtual void v8();virtual void v9();virtual void v10();virtual void v11();virtual void v12();virtual void v13();virtual void v14();virtual void v15();virtual void v16();virtual void v17();virtual void v18();virtual void v19();virtual void v20();virtual void v21();virtual void v22();virtual void v23();virtual void v24();virtual void v25();virtual void v26();virtual void v27();virtual void v28();virtual void v29();virtual void v30();virtual void v31();virtual void v32();virtual void v33();virtual void v34();virtual void v35();virtual void v36();virtual void v37();virtual void v38();virtual void v39();virtual void v40();virtual void v41();virtual void v42();virtual void v43();virtual void v44();virtual void v45();virtual void v46();virtual void v47();virtual void v48();virtual void v49();virtual void v50();virtual void v51();virtual void v52();virtual void v53();virtual void v54();virtual void v55();virtual void v56();virtual void v57();virtual void v58();virtual void v59();virtual void v60();virtual void v61();virtual void v62();virtual void v63();virtual void v64();virtual void v65();virtual void v66();virtual void v67();virtual void v68();virtual void v69();virtual void v70();virtual void v71();virtual void v72();virtual void v73();virtual void v74();virtual void v75();virtual const char* Name();unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned char flags24;unsigned char unk25,unk26,unk27;int TESObjectCELL_GetDataX();int TESObjectCELL_GetDataY();bool FUN_004e6b10();void FUN_004d3790(void*);void TESObjectCELL_AddReference(void*,int);};struct Map1345{void* vtable;unsigned int count04;void** buckets08;bool FUN_00bea7b0(unsigned int,Cell1345**);void FUN_00880f70(unsigned int,Cell1345*);void FUN_00899cf0(unsigned int);void FUN_0089a5d0(void*&,unsigned int&,Cell1345*&);void FUN_006bd950();void* First(){for(unsigned int i=0;i<count04;++i)if(buckets08[i])return buckets08[i];return 0;}};struct World1345{unsigned int unk00,unk04,flags08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;Map1345* map30;Cell1345* cell34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned int unk4C;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;Map1345* map68;void FUN_00501f00();};void World1345::FUN_00501f00(){unsigned char state=(unsigned char)(flags08>>14);state&=1;if(!state){void* position=map30->First();while(position){Cell1345* cell=0;unsigned int key;map30->FUN_0089a5d0(position,key,cell);if(cell)cell->v4(1);}}map30->FUN_006bd950();}
 }   // namespace f3m_00501f00
 
 // @f3 0x00505ff0 (community match, verified in this file)
 namespace f3m_00505ff0 {
+// pdb: BGSAcousticSpace::InitializeData | BGSAcousticSpace.obj | fnv360_0822_retail, vtable, medium
 struct Record1366{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;void* value30;void* value34;unsigned int value38;void FUN_00505ff0();};void Record1366::FUN_00505ff0(){value30=0;value34=0;value38=1;}
 }   // namespace f3m_00505ff0
 
 // @f3 0x00506280 (community match, verified in this file)
 namespace f3m_00506280 {
+// pdb: BGSAcousticSpace::Copy | BGSAcousticSpace.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCopy
 class BGSAcousticSpace:public TESForm{public:unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;void* sound30;void* region34;unsigned int value38;void FUN_00454480(TESForm*);void FUN_00506280(TESForm*);};void BGSAcousticSpace::FUN_00506280(TESForm* form){BGSAcousticSpace* source=dynamic_cast<BGSAcousticSpace*>(form);if(source){sound30=source->sound30;region34=source->region34;value38=source->value38;FUN_00454480(source);}}
 }   // namespace f3m_00506280
 
 // @f3 0x005021e0 (community match, verified in this file)
 namespace f3m_005021e0 {
+// pdb: TESWorldSpace::GetCellByEditorID | TESWorldSpace.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apEditorID
 struct Heap1350{void* FUN_0086b930(unsigned int);};int __cdecl FUN_00c009eb(const char*,const char*);struct Cell1350{virtual void v0();virtual void v1();virtual void v2();virtual void v3();virtual void v4();virtual void v5();virtual void v6();virtual void v7();virtual void v8();virtual void v9();virtual void v10();virtual void v11();virtual void v12();virtual void v13();virtual void v14();virtual void v15();virtual void v16();virtual void v17();virtual void v18();virtual void v19();virtual void v20();virtual void v21();virtual void v22();virtual void v23();virtual void v24();virtual void v25();virtual void v26();virtual void v27();virtual void v28();virtual void v29();virtual void v30();virtual void v31();virtual void v32();virtual void v33();virtual void v34();virtual void v35();virtual void v36();virtual void v37();virtual void v38();virtual void v39();virtual void v40();virtual void v41();virtual void v42();virtual void v43();virtual void v44();virtual void v45();virtual void v46();virtual void v47();virtual void v48();virtual void v49();virtual void v50();virtual void v51();virtual void v52();virtual void v53();virtual void v54();virtual void v55();virtual void v56();virtual void v57();virtual void v58();virtual void v59();virtual void v60();virtual void v61();virtual void v62();virtual void v63();virtual void v64();virtual void v65();virtual void v66();virtual void v67();virtual void v68();virtual void v69();virtual void v70();virtual void v71();virtual void v72();virtual void v73();virtual void v74();virtual void v75();virtual const char* Name();};struct Node1350{void* item;Node1350* next;bool Empty()const{return !next&&!item;}Node1350():item(0),next(0){}static void* operator new(unsigned int size){return reinterpret_cast<Heap1350&>(DAT_01090a78).FUN_0086b930(size);}};struct Map1350{void* vtable;unsigned int count04;void** buckets08;unsigned int items0C;bool FUN_00bea7b0(unsigned int,Node1350**);void FUN_0089a5d0(void*&,unsigned int&,Cell1350*&);void* First(){for(unsigned int i=0;i<count04;++i)if(buckets08[i])return buckets08[i];return 0;}};struct World1350{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;Map1350* map30;Cell1350* FUN_005021e0(const char*);};Cell1350* World1350::FUN_005021e0(const char* name){Cell1350* result=0;if(name){void* position=map30->First();while(position && !result){Cell1350* cell=0;unsigned int key;map30->FUN_0089a5d0(position,key,cell);Cell1350* current=*reinterpret_cast<Cell1350* volatile*>(&cell);if(current){const char* cellName=current->Name();if(!FUN_00c009eb(cellName,*reinterpret_cast<const char* volatile*>(&name)))result=current;}}}return result;}
 }   // namespace f3m_005021e0
 
 // @f3 0x005062c0 (community match, verified in this file)
 namespace f3m_005062c0 {
+// pdb: TESObjectIMOD::Compare | TESObjectIMOD.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: apCompare
 class BGSAcousticSpace:public TESForm{public:unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;void* sound30;void* region34;unsigned int value38;bool FUN_00454550(TESForm*);bool FUN_005062c0(TESForm*);};bool BGSAcousticSpace::FUN_005062c0(TESForm* form){BGSAcousticSpace* other=dynamic_cast<BGSAcousticSpace*>(form);if(!other)return true;if(FUN_00454550(other))return true;if(sound30!=other->sound30)return true;if(region34!=other->region34)return true;if(value38!=other->value38)return true;return false;}
 }   // namespace f3m_005062c0
 
 // @f3 0x00506380 (community match, verified in this file)
 namespace f3m_00506380 {
+// pdb: BGSCameraPath::InitializeData | BGSCameraPath.obj | fnv360_0822_retail, vtable, medium
 struct Record1372{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned char value28,unk29,unk2A,unk2B;unsigned int unk2C;void* value30;void* value34;void FUN_00506380();};void Record1372::FUN_00506380(){value28=0;value30=0;value34=0;}
 }   // namespace f3m_00506380
 
 // @f3 0x005063a0 (community match, verified in this file)
 namespace f3m_005063a0 {
+// pdb: BGSAcousticSpace::SetRegion | BGSAcousticSpace.obj | fnv360_0822_debug, objopen_prop, low
+// pdb params: apRegion
 struct Record1373{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned char flags28;unsigned char Flag0(){unsigned char value=flags28;value&=1;return value;}unsigned char Flag1(){unsigned char value=flags28;value>>=1;value&=1;return value;}bool FUN_005063a0();};bool Record1373::FUN_005063a0(){if(!Flag0()){if(!Flag1())return true;}return false;}
 }   // namespace f3m_005063a0
 
 // @f3 0x005063b0 (community match, verified in this file)
 namespace f3m_005063b0 {
+// pdb: BGSCameraPath::GetZoomDisable | BGSCameraPath.obj | fnv360_0822_retail, call_gap, low
 struct Record1374{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned char flags28;unsigned char FUN_005063b0();};unsigned char Record1374::FUN_005063b0(){unsigned char value=flags28;value &= 1;return value;}
 }   // namespace f3m_005063b0
 
 // @f3 0x005063c0 (community match, verified in this file)
 namespace f3m_005063c0 {
+// pdb: BGSCameraPath::GetZoomShotList | BGSCameraPath.obj | fnv360_0822_retail, call_gap, low
 struct Record1375{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned char flags28;unsigned char FUN_005063c0();};unsigned char Record1375::FUN_005063c0(){unsigned char value=flags28;value >>= 1;value &= 1;return value;}
 }   // namespace f3m_005063c0
 
 // @f3 0x005063d0 (community match, verified in this file)
 namespace f3m_005063d0 {
+// pdb: BGSCameraPath::ClearData | BGSCameraPath.obj | fnv360_0822_retail, vtable, medium
 struct Component1376{unsigned int unk00,unk04;void FUN_005ae160();};struct Node1376{void* item;Node1376* next;void FUN_006c8220();};struct Record1376{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;Component1376 component18;Node1376 list20;void FUN_005063d0();};void Record1376::FUN_005063d0(){component18.FUN_005ae160();list20.FUN_006c8220();}
 }   // namespace f3m_005063d0
 
@@ -1085,18 +1159,23 @@ int __cdecl FUN_0051e120(){return 901;}
 // @f3 0x0050c070 (community match, verified in this file)
 namespace f3m_0050c070 {
 struct Routine_0050c070{unsigned int unk000;unsigned int unk004;unsigned int unk008;unsigned int unk00C;unsigned int unk010;unsigned int unk014;unsigned int value018;unsigned int value01C;void FUN_0050c070();};
+// pdb: BGSRadiationStage::InitializeData | BGSRadiation.obj | fnv360_0822_retail, vtable, medium
 void Routine_0050c070::FUN_0050c070(){value018=0;value01C=0;}
 }   // namespace f3m_0050c070
 
 // @f3 0x005063f0 (community match, verified in this file)
 #include <string.h>
 namespace f3m_005063f0 {
+// pdb: BGSCameraPath::Compare | BGSCameraPath.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompare
 struct Component1377{unsigned int unk00,unk04;bool TESCondition_Compare(const Component1377*);};struct Node1377{void* item;Node1377* next;bool FUN_00645c20()const;};class BGSCameraPath:public TESForm{public:unsigned int unk10,unk14;Component1377 component18;Node1377 list20;unsigned char flags28;bool FUN_00454550(TESForm*);bool FUN_005063f0(TESForm*);};bool BGSCameraPath::FUN_005063f0(TESForm* form){BGSCameraPath* other=dynamic_cast<BGSCameraPath*>(form);if(!other)return true;if(FUN_00454550(other))return true;if(component18.TESCondition_Compare(&other->component18))return true;if(memcmp(&flags28,&other->flags28,1))return true;Node1377* mine=&list20;Node1377* theirs=&other->list20;while(theirs && !theirs->FUN_00645c20()){if(!mine || mine->item!=theirs->item)return true;theirs=theirs->next;mine=mine->next;}if(mine && !mine->FUN_00645c20())return true;return false;}
 }   // namespace f3m_005063f0
 
 // @f3 0x0051db50 (community match, verified in this file)
 namespace f3m_0051db50 {
 extern int __cdecl FUN_00dedf10(int a1, int a2, int a3, int a4, int a5, int a6);
+// pdb: ScriptCompiler::MessageBoxCompile | TESScriptCompiler.obj | fnv360_0822_retail, objrun, medium
+// pdb params: asParamCount, apParameters, apScriptLine, apCompileData
 int __cdecl FUN_0051db50(int a1, int a2, int a3, int a4) { return FUN_00dedf10(a1, a2, a3, a4, 1, 0); }
 }   // namespace f3m_0051db50
 
@@ -1135,6 +1214,7 @@ public:
     static void operator delete(void* p);
 };
 extern BGSDefaultObjectManager* DAT_01071a10;
+// pdb: BGSDefaultObjectManager::Instance | BGSDefaultObjectManager.obj | fnv360_0822_retail, call_gap, low
 BGSDefaultObjectManager* FUN_00508dc0() {
     if (!DAT_01071a10) DAT_01071a10 = new BGSDefaultObjectManager;
     return DAT_01071a10;
@@ -1170,6 +1250,7 @@ public:
     void FUN_0050b870();
 };
 
+// pdb: BGSMessage::ClearButtonList | BGSMessage.obj | fnv360_0822_retail, call_seq, medium
 void Owner_0050b870::FUN_0050b870()
 {
     while (unk34 || unk30) {
@@ -1330,6 +1411,7 @@ public:
     void FUN_005167e0();
 };
 
+// pdb: ScriptLocals::ClearActionFlags | TESScript.obj | fnv360_0822_retail, call_gap, low
 void Owner5167e0::FUN_005167e0()
 {
     Link5167e0* p = head;
@@ -1348,6 +1430,8 @@ void Owner5167e0::FUN_005167e0()
 namespace f3m_0051f6f0 {
 extern void __cdecl FUN_00619570(int value);
 
+// pdb: Script::ToggleSafeZoneFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051f6f0()
 {
     FUN_00619570(2);
@@ -1385,6 +1469,8 @@ public:
     char FUN_00454550(BGSTextureSet* other);
 };
 
+// pdb: BGSTextureSet::Compare | BGSTextureSet.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompare
 bool BGSTextureSet::FUN_0050c7b0(TESForm* other)
 {
     BGSTextureSet* tex = dynamic_cast<BGSTextureSet*>(other);
@@ -1402,6 +1488,8 @@ bool BGSTextureSet::FUN_0050c7b0(TESForm* other)
 
 // @f3 0x00516790 (community match, verified in this file)
 namespace f3m_00516790 {
+// pdb: Script::PutNumericIDInDouble | TESScript.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiID, adVal
 void FUN_00516790(int* source, int* destination)
 {
     *destination = *source;
@@ -1505,6 +1593,8 @@ public:
     void FUN_0050d2a0(const Data36* src);
 };
 
+// pdb: DecalData::Copy | DecalData.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCopy
 void Blob::FUN_0050d2a0(const Data36* src)
 {
     if (src)
@@ -1534,6 +1624,7 @@ struct FUN_0050a930 : Base {
     ~FUN_0050a930();
 };
 
+// pdb: BGSListForm::~BGSListForm | BGSListForm.obj | fnv360_0822_debug, objopen_prop, low
 FUN_0050a930::~FUN_0050a930()
 {
     m_18.FUN_006c8220();
@@ -1557,6 +1648,7 @@ bool __cdecl Script_GetPCInFactionConditionFunction(void* arg1, void* arg2, void
 // @f3 0x0050b050 (community match, verified in this file)
 namespace f3m_0050b050 {
 struct Routine_0050b050{unsigned int unk000;unsigned int unk004;unsigned int unk008;unsigned int unk00C;unsigned int unk010;unsigned int unk014;unsigned int unk018;unsigned int unk01C;unsigned int unk020;unsigned int unk024;unsigned int unk028;unsigned int value02C;unsigned int unk030;unsigned int unk034;unsigned int value038;unsigned int value03C;void FUN_0050b050();};
+// pdb: BGSMessage::InitializeData | BGSMessage.obj | fnv360_0822_retail, vtable, medium
 void Routine_0050b050::FUN_0050b050(){value02C=0;value038=1;value03C=2;}
 }   // namespace f3m_0050b050
 
@@ -1572,6 +1664,7 @@ struct Camera1408;
 struct CameraNode1408 { TESForm* item;CameraNode1408* next;bool Empty()const{if(next)return false;if(item)return false;return true;} };
 struct FormPair1408 {unsigned int first,second;};
 struct Camera1408:TESForm {unsigned int unk10,unk14;CameraComponent1408 component18;CameraNode1408 list20;unsigned char flags28;unsigned char unk29,unk2A,unk2B;void* unk2C;TESForm* form30;Camera1408* parent34;void FUN_004547d0();void FUN_00454860();void FUN_00454ab0(const void*,unsigned int);void FUN_005064a0();bool HasParentFlag()const{unsigned char state=(unsigned char)(unk08>>5);state&=1;return state!=0;} };
+// pdb: BGSCameraPath::Save | BGSCameraPath.obj | fnv360_0822_retail, vtable, medium
 void Camera1408::FUN_005064a0(){FUN_004547d0();component18.FUN_005addd0();FormPair1408 ids;memset(&ids,0,sizeof(ids));if(form30)ids.first=form30->unk0c;if(!HasParentFlag()){Camera1408* node=parent34;while(node && node->HasParentFlag())node=node->parent34;if(node)ids.second=node->unk0c;}if(DAT_0106dd0e){ids.first=_byteswap_ulong(ids.first);ids.second=_byteswap_ulong(ids.second);}TESForm___AddChunkData(0x4d414e41,&ids,8);if(DAT_0106dd0e){ids.first=_byteswap_ulong(ids.first);ids.second=_byteswap_ulong(ids.second);}FUN_00454ab0(&flags28,1);CameraNode1408* node=&list20;while(node && !node->Empty()){TESForm* item=node->item;node=node->next;FUN_00454890(0x4d414e53,item->unk0c);}FUN_00454860();}
 }   // namespace f3m_005064a0
 
@@ -1588,11 +1681,15 @@ void __cdecl FUN_0051e270() {
 namespace f3m_00506930 {
 struct CameraArray1411{void* vtable;TESForm** data04;unsigned int unk08,count0C,live10,unk14;TESForm* FUN_0048c780(unsigned int);void FUN_0043eb00();void Remove(unsigned int index){if(index<count0C){TESForm* previous=data04[index];data04[index]=0;if(previous)--live10;if(index==count0C-1)--count0C;}}};
 class BGSCameraPath:public TESForm{public:unsigned int unk10,unk14,unk18,unk1C,unk20,unk24,unk28;CameraArray1411* array2C;BGSCameraPath* form30;BGSCameraPath* parent34;void FUN_00506930(unsigned int);BGSCameraPath* Get(unsigned int index){BGSCameraPath* result=0;if(array2C)result=dynamic_cast<BGSCameraPath*>(array2C->FUN_0048c780(index));return result;}};
+// pdb: BGSCameraPath::RemoveChildAtIndex | BGSCameraPath.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiIndex
 void BGSCameraPath::FUN_00506930(unsigned int index){if(array2C){BGSCameraPath* after=Get(index+1);BGSCameraPath* before=Get(index-1);if(after)after->parent34=before;array2C->Remove(index);array2C->FUN_0043eb00();}}
 }   // namespace f3m_00506930
 
 // @f3 0x0051ea20 (community match, verified in this file)
 namespace f3m_0051ea20 {
+// pdb: Script::ShowRenderPasses | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 extern bool DAT_0116fd48;bool __cdecl FUN_0051ea20(){DAT_0116fd48=true;return true;}
 }   // namespace f3m_0051ea20
 
@@ -1763,21 +1860,27 @@ bool Script_IsInDangerousWaterConditionFunction(Obj512a20* object,void* unused1,
 
 // @f3 0x0050c980 (community match, verified in this file)
 namespace f3m_0050c980 {
+// pdb: BGSTextureSet::GetAsShaderTextureSet | BGSTextureSet.obj | fnv360_0822_retail, caller, medium
 struct Owner1422{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int value30;unsigned int* FUN_0050c980();};unsigned int* Owner1422::FUN_0050c980(){if(this)return &value30;return 0;}
 }   // namespace f3m_0050c980
 
 // @f3 0x00512350 (community match, verified in this file)
 namespace f3m_00512350 {
+// pdb: Script::IsTorchOutConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00512350(unsigned int a,unsigned int b,unsigned int c,double* result){*result=0.0;return true;}
 }   // namespace f3m_00512350
 
 // @f3 0x0050b8d0 (community match, verified in this file)
 namespace f3m_0050b8d0 {
+// pdb: BGSMessage::ClearData | BGSMessage.obj | fnv360_0822_retail, vtable, medium
 struct Owner1427{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;void* value2C;void FUN_0050b870();void FUN_0050b8d0();};void Owner1427::FUN_0050b8d0(){value2C=0;FUN_0050b870();}
 }   // namespace f3m_0050b8d0
 
 // @f3 0x005167a0 (community match, verified in this file)
 namespace f3m_005167a0 {
+// pdb: Script::GetNumericIDFromDouble | TESScript.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: TESQuest::GetPriority)
+// pdb params: aiID, adVal
 void __cdecl FUN_005167a0(unsigned int* output,const unsigned int* input){*output=*input;}
 }   // namespace f3m_005167a0
 
@@ -1922,6 +2025,8 @@ struct Owner512950 {VTableOwner512950* vtable;
  int unk5C;
  Link512950* link;
 };
+// pdb: Script::GetIdleDoneOnceConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool FUN_00512950(Owner512950* object,void* a,void* b,double* result) {
  *result=0.0;
  if(object && object->vtable->check(object)) { Link512950* link=object->link; if(link && link->vtable->check(link)) *result=1.0; }
@@ -1935,6 +2040,7 @@ namespace f3m_00508b90 {
 struct Entry8B90 { int unk00; int unk04; int unk08; int value; };
 extern void __cdecl FUN_00455b30(unsigned, int*, int);
 struct Obj8B90 { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; Entry8B90* entries[21]; void FUN_004547d0(); void FUN_00454860(); void FUN_00508b90(); };
+// pdb: BGSDefaultObjectManager::Save | BGSDefaultObjectManager.obj | fnv360_0822_retail, vtable, medium
 void Obj8B90::FUN_00508b90() { int values[21]; FUN_004547d0(); for(int i=0;i<21;++i) { if(entries[i]) values[i]=entries[i]->value; else values[i]=0; } FUN_00455b30('ATAD',values,21); FUN_00454860(); }
 }   // namespace f3m_00508b90
 
@@ -1978,6 +2084,7 @@ struct SaveBinaryOwner {
     SaveBinaryData unk38;
     bool FUN_00507a70();
 };
+// pdb: BGSCameraShot::Save | BGSCameraShot.obj | fnv360_0822_debug, objrun_open, low
 bool SaveBinaryOwner::FUN_00507a70()
 {
     FUN_004547d0();
@@ -2043,6 +2150,8 @@ namespace Command1446
     struct Manager { void FUN_00433910(); };
     extern Manager* DAT_0107a0d8;
 }
+// pdb: Script::TogglePrimitivesFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051f6e0()
 {
     Command1446::DAT_0107a0d8->FUN_00433910();
@@ -2058,6 +2167,8 @@ struct Owner1451
     const char* text10;
     const char* FUN_00515fc0(unsigned int,unsigned int);
 };
+// pdb: TESLoadScreen::GetDescription | TESLoadScreen.obj | fnv360_0822_retail, vtable, low
+// pdb params: apForm, aeChunk
 const char* Owner1451::FUN_00515fc0(unsigned int unused1,unsigned int unused2)
 {
     if(text10) return text10;
@@ -2070,6 +2181,7 @@ namespace f3m_0050d130 {
 namespace match50d130 {
 void FUN_0089ec10(void*,unsigned);
 struct Object50d130 {void FUN_0050cfe0();Object50d130* FUN_0050d130(unsigned);};
+// pdb: BGSTextureSet::`scalar deleting destructor' | BGSTextureSet.obj | fnv360_0822_retail, vtable, high
 Object50d130* Object50d130::FUN_0050d130(unsigned flags) {
  FUN_0050cfe0();
  if(flags&1) FUN_0089ec10(this,0xa0);
@@ -2140,6 +2252,7 @@ struct Owner1458
     Data1458 data;
     void FUN_00508b70();
 };
+// pdb: BGSDefaultObjectManager::InitializeData | BGSDefaultObjectManager.obj | fnv360_0822_retail, vtable, medium
 void Owner1458::FUN_00508b70()
 {
     FUN_00c00610(&data,0,sizeof(data));
@@ -2176,6 +2289,7 @@ struct Owner1459
     Data1459 data;
     void FUN_00509820();
 };
+// pdb: BGSImpactDataSet::InitializeData | BGSImpactDataSet.obj | fnv360_0822_retail, vtable, medium
 void Owner1459::FUN_00509820()
 {
     FUN_00c00610(&data,0,sizeof(data));
@@ -2188,6 +2302,8 @@ namespace Command1465
     struct Manager { void FUN_006cfef0(unsigned int,unsigned int); };
     extern Manager* DAT_01079858;
 }
+// pdb: Script::RevertWorld | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051ed70()
 {
     Command1465::DAT_01079858->FUN_006cfef0(0,0);
@@ -2219,6 +2335,8 @@ struct CodexList19C {
     CodexNode19C* Head() { return &head; }
     void* FUN_00519cc0(unsigned);
 };
+// pdb: ScriptCompileData::GetReferencedObject | TESScriptCompiler.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: aiIndex
 void* CodexList19C::FUN_00519cc0(unsigned index) {
     if(!index) return 0;
     if(index > unk2C) return 0;
@@ -2269,6 +2387,7 @@ struct Object5084e0 {
  unsigned int Length() { if(length==0xffff) return strlen(text); return length; }
  bool FUN_005084e0();
 };
+// pdb: BGSCameraShot::IsInitialized | BGSCameraShot.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: BGSDefaultObjectManager::GetDefaultObjectForUniqueID)
 bool Object5084e0::FUN_005084e0() {
  if(unk38==3) return false;
  if(Length()==0) return true;
@@ -2291,6 +2410,8 @@ int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int
 Extras extras; Extras* GetExtras() { return &extras; }
 };
 extern bool __cdecl FUN_00517950(unsigned,unsigned,unsigned,Ref*,unsigned,unsigned,unsigned,unsigned*,unsigned*);
+// pdb: Script::DuplicateAllItemsFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0051e4a0(unsigned a,unsigned b,Ref* c,unsigned d,unsigned e,unsigned f,unsigned g,unsigned h) { unsigned value=0; unsigned unused=0; if(!FUN_00517950(a,b,h,c,d,e,f,&value,&unused)) return false; if(c) { Extras* list=c->GetExtras(); if(list) { Handler* handler=list->FUN_0040ab00(); if(handler) handler->FUN_00484d10(c,value); } } return true; }
 }
 }   // namespace f3m_0051e4a0
@@ -2309,6 +2430,8 @@ struct Owner1477
     Component1477 component;
     bool FUN_00515dd0(void* value);
 };
+// pdb: TESGlobal::SetFormEditorID | TESGlobal.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apEditorID
 bool Owner1477::FUN_00515dd0(void* value)
 {
     component.FUN_004019c0(value,0);
@@ -2319,10 +2442,14 @@ bool Owner1477::FUN_00515dd0(void* value)
 // @f3 0x0051e160 (community match, verified in this file)
 struct EntryE160 { int unk00; int unk04; int unk08; int unk0C; };
 extern EntryE160 DAT_01066a98[];
+// pdb: CombatManager::NotifyCombatGroupAddedMember | CombatManager.obj | fnv360_0822_retail, call_seq, low
+// pdb params: apGroup, apMember
 EntryE160* FUN_0051e160(unsigned index) { return &DAT_01066a98[index%10]; }
 
 // @f3 0x00512a00 (community match, verified in this file)
 namespace f3m_00512a00 {
+// pdb: Script::IsActorRidingHorseConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 unsigned char FUN_00512a00(void* a, int, int, double* out)
 {
     *out = 0.0;
@@ -2342,6 +2469,7 @@ struct Owner1488
     void* value30;
     int FUN_00516120();
 };
+// pdb: TESLoadScreen::IsDefaultLoadScreen | TESLoadScreen.obj | fnv360_0822_retail, call_gap_sim, low
 int Owner1488::FUN_00516120()
 {
     if(!value30 && !value2C) return 1;
@@ -2353,6 +2481,8 @@ int Owner1488::FUN_00516120()
 extern bool DAT_0108c3f1;
 namespace f3m_0051e9d0 {
 bool __cdecl FUN_00517950(int,int,int,int,int,int,int,int*);
+// pdb: Script::ToggleDialogSubtitle | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051e9d0(int a,int b,int c,int d,int e,int f,int unused,int h) {
     int value=0;
     if (!FUN_00517950(a,b,h,c,d,e,f,&value)) return false;
@@ -2380,6 +2510,8 @@ struct Fields508 { int unk30; int unk34; int unk38; int unk3C; int unk40; int un
  int unk48;
  int unk4C;
  int unk50;
+ // pdb: BGSImpactData::Copy | BGSImpactData.obj | fnv360_0822_retail, vtable, medium
+ // pdb params: apCopy
  Member508 member; void FUN_00454480(Copy508*); void FUN_00508fc0(void*); }; void Copy508::FUN_00508fc0(void* other) { Copy508* source=(Copy508*)FUN_00c0050a(other,0,DAT_00f46078,DAT_00f498dc,0); if(source) { FUN_00454480(source); values=source->values; member.FUN_0050d2a0(&source->member); unk48=source->unk48; unk4C=source->unk4C; unk50=source->unk50; } }
 
 }   // namespace f3m_00508fc0
@@ -2680,6 +2812,8 @@ unsigned int* Owner1496::FUN_0051dfe0(unsigned int first)
 // @f3 0x005129e0 (community match, verified in this file)
 extern int DAT_00f6a358;
 namespace f3m_005129e0 {
+// pdb: Script::GetWhichServiceConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_005129e0(unsigned int unused1,unsigned int unused2,unsigned int unused3,double* result)
 {
     *result=-1.0;
@@ -2692,6 +2826,8 @@ bool __cdecl FUN_005129e0(unsigned int unused1,unsigned int unused2,unsigned int
 namespace f3m_00514470 {
 namespace Command1502 { extern void* DAT_0107a104; }
 bool __cdecl Script_SameSexConditionFunction(void*,void*,void*,double*);
+// pdb: Script::SameSexAsPCConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00514470(void* first,void* unused2,void* unused3,double* result)
 {
     return Script_SameSexConditionFunction(first,Command1502::DAT_0107a104,0,result);
@@ -2702,6 +2838,8 @@ bool __cdecl FUN_00514470(void* first,void* unused2,void* unused3,double* result
 namespace f3m_00515bb0 {
 namespace Command1503 { extern void* DAT_0107a104; }
 bool __cdecl Script_SameFactionConditionFunction(void*,void*,void*,double*);
+// pdb: Script::SameFactionAsPCConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00515bb0(void* first,void* unused2,void* unused3,double* result)
 {
     return Script_SameFactionConditionFunction(first,Command1503::DAT_0107a104,0,result);
@@ -2711,6 +2849,8 @@ bool __cdecl FUN_00515bb0(void* first,void* unused2,void* unused3,double* result
 // @f3 0x0051de80 (community match, verified in this file)
 extern unsigned int DAT_0116efc8;
 namespace f3m_0051de80 {
+// pdb: Renderer::SetDoCanopyShadowPass | TESScriptFunctions.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: abVal
 void __cdecl FUN_0051de80(bool enabled)
 {
     if(enabled) DAT_0116efc8|=0x10;
@@ -2724,6 +2864,8 @@ struct State509c50 { int unk00; int unk04; int unk08; int unk0C; int unk10; int 
 extern State509c50* DAT_01071a28;
 extern void __cdecl FUN_006c4470(int,const char*);
 extern void __cdecl FUN_006c4ea0();
+// pdb: BGSImpactDataSet::ApplyImpactSwap | BGSImpactDataSet.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apSwap
 void __cdecl FUN_00509c50(State509c50* state) {
  DAT_01071a28=state;
  for(int i=0;i<10;++i) { if(state) FUN_006c4470(i,state->entries[i].name[0] ? state->entries[i].name : 0); else FUN_006c4470(i,0); }
@@ -2762,6 +2904,7 @@ struct CodexSixReset {
     unsigned unk9C;
     void FUN_0050c630();
 };
+// pdb: BGSTextureSet::InitializeData | BGSTextureSet.obj | fnv360_0822_retail, vtable, medium
 void CodexSixReset::FUN_0050c630() {
     CodexResetElement* element=elements;
     unsigned remaining=6;
@@ -2785,6 +2928,8 @@ void CodexSixReset::FUN_0050c630() {
 namespace f3m_00508bf0 {
 struct Stream508b {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C; int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; int unkBC; int unkC0; int unkC4; int unkC8; int unkCC; int unkD0; int unkD4; int unkD8; int unkDC; int unkE0; int unkE4; int unkE8; int unkEC; int unkF0; int unkF4; int unkF8; int unkFC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; int unk128; int unk12C; int unk130; int unk134; int unk138; int unk13C; int unk140; int unk144; int unk148; int unk14C; int unk150; int unk154; int unk158; int unk15C; int unk160; int unk164; int unk168; int unk16C; int unk170; int unk174; int unk178; int unk17C; int unk180; int unk184; int unk188; int unk18C; int unk190; int unk194; int unk198; int unk19C; int unk1A0; int unk1A4; int unk1A8; int unk1AC; int unk1B0; int unk1B4; int unk1B8; int unk1BC; int unk1C0; int unk1C4; int unk1C8; int unk1CC; int unk1D0; int unk1D4; int unk1D8; int unk1DC; int unk1E0; int unk1E4; int unk1E8; int unk1EC; int unk1F0; int unk1F4; int unk1F8; int unk1FC; int unk200; int unk204; int unk208; int unk20C; int unk210; int unk214; int unk218; int unk21C; int unk220; int unk224; int unk228; int unk22C; int unk230; int unk234; int unk238; int unk23C; int unk240; int unk244; int unk248; int unk24C; int unk250; int unk254; int unk258; int unk25C; int unk260; int unk264; int unk268; int unk26C; int unk270; int unk274; int unk278; int unk27C; int unk280; int unk284; int unk288; int unk28C; int unk290; int unk294; unsigned char unk298,unk299;unsigned char TESFile_GetTESForm();unsigned TESFile_GetTESChunk();void FUN_00447d60(void*,unsigned);bool TESFile_NextChunk();};
 struct Owner508b {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; unsigned data[21];void FUN_00454410(Stream508b*);void TESForm_SetInitialized(int);bool FUN_00508bf0(Stream508b*);};
+// pdb: BGSDefaultObjectManager::Load | BGSDefaultObjectManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Owner508b::FUN_00508bf0(Stream508b* stream){if(stream->TESFile_GetTESForm()!=100)return false;FUN_00454410(stream);TESForm_SetInitialized(0);unsigned tag=stream->TESFile_GetTESChunk();while(tag){if(tag=='ATAD'){stream->FUN_00447d60(data,sizeof(data));if(stream->unk299){unsigned* p=data;for(unsigned n=21;n;++p,--n)*p=_byteswap_ulong(*p);}}if(!stream->TESFile_NextChunk())break;tag=stream->TESFile_GetTESChunk();}TESForm_SetInitialized(0);return true;}
 
 }   // namespace f3m_00508bf0
@@ -2798,6 +2943,7 @@ struct Obj_86c4b0 {
     int __thiscall FUN_0086c4b0(int a);
 };
 
+// pdb: NiUnitRandom | Precipitation.obj | fnv360_0822_retail, call_gap, low
 float FUN_0051e000() {
     int u = FUN_0044a2d0();
     Obj_86c4b0* p = (Obj_86c4b0*)u;
@@ -2851,6 +2997,7 @@ struct FUN_00515df0 : Base515df0 {
     void FUN_00c24b70();
 };
 
+// pdb: TESGlobal::~TESGlobal | TESGlobal.obj | fnv360_0822_debug, objopen_prop, low
 FUN_00515df0::~FUN_00515df0() {
     FUN_00c24b70();
 }
@@ -2859,6 +3006,8 @@ FUN_00515df0::~FUN_00515df0() {
 namespace f3m_0051dbb0 {
 int __cdecl ScriptCompiler_MessageBoxCompile(int a1, int a2, int a3, int a4, int a5, int a6);
 
+// pdb: ScriptCompiler::OldMessageCompile | TESScriptCompiler.obj | fnv360_0822_retail, objrun, medium
+// pdb params: asParamCount, apParameters, apScriptLine, apCompileData
 int __cdecl FUN_0051dbb0(int a1, int a2, int a3, int a4) {
     return ScriptCompiler_MessageBoxCompile(a1, a2, a3, a4, 0, 1);
 }
@@ -2902,6 +3051,7 @@ struct Owner507b30 {
  Info507b30* info;
  void* FUN_00507b30(unsigned int*,unsigned int*,unsigned char*);
 };
+// pdb: NiTransformInterpolator::GetRotData | BGSCameraShot.obj | tesv_win, call_seq, medium
 void* Owner507b30::FUN_00507b30(unsigned int* a,unsigned int* b,unsigned char* c) {
  Info507b30* data=info;
  if(data) {*a=data->unk08;*b=data->unk10;*c=data->unk1C;return data->unk20;}
@@ -3537,6 +3687,7 @@ __forceinline void Swap508E(unsigned long& value) { value=_byteswap_ulong(value)
  unsigned long unk2C;
  unsigned long unk30;
  unsigned long unk34;
+ // pdb: BGSImpactData::OLD_IMPACT_DATA_DATA::Endian | BGSImpactData.obj | fnv360_0822_retail, call_gap_sim, low
  void FUN_00508e60(); }; void Record508E::FUN_00508e60() { Swap508E(unk00); Swap508E(unk14); Swap508E(unk1C); Swap508E(unk20); Swap508E(unk04); Swap508E(unk08); Swap508E(unk0C); Swap508E(unk18); Swap508E(unk24); Swap508E(unk28); Swap508E(unk2C); Swap508E(unk30); Swap508E(unk34); }
 
 }   // namespace f3m_00508e60
@@ -3560,6 +3711,8 @@ struct CodexGlobalCommand { void FUN_00634f80(int,int); };
 extern CodexGlobalCommand DAT_0107c0a0;
 extern char DAT_00dd5d54[];
 void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::PrintAILists | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051e9a0() {
     DAT_0107c0a0.FUN_00634f80(0,-1);
     FUN_006195d0(DAT_00dd5d54);
@@ -3584,6 +3737,8 @@ extern const char DAT_00dbab78[];
 namespace f3m_0050d470 {
 void __cdecl FUN_00c24b70(const char*,const char*);
 struct Object50d470 {unsigned int index;void FUN_0050d470(unsigned int);};
+// pdb: ProgramFlow | EffectSettingCollection.obj | fnv360_0721_beta, call_gap, low
+// pdb params: apMessage
 void Object50d470::FUN_0050d470(unsigned int n) {
  index=n;
  FUN_00c24b70(DAT_00dbab78,DAT_00f50acc[n]);
@@ -3653,6 +3808,8 @@ void Owner5074f0::FUN_005074f0() {
 #include <string.h>
 namespace f3m_00509840 {
 struct Data5098 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; };struct Owner5098 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; Data5098 unk1C;void FUN_00454480(Owner5098*);void FUN_00509840(void*);};extern int DAT_00f498bc,DAT_00f46078;extern Owner5098* __cdecl FUN_00c0050a(void*,int,void*,void*,int);
+// pdb: BGSImpactDataSet::Copy | BGSImpactDataSet.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCopy
 void Owner5098::FUN_00509840(void* input){Owner5098* source=FUN_00c0050a(input,0,&DAT_00f46078,&DAT_00f498bc,0);if(source){FUN_00454480(source);memmove(&unk1C,&source->unk1C,sizeof(unk1C));}}
 }   // namespace f3m_00509840
 
@@ -3685,6 +3842,8 @@ public:
     bool FUN_005077c0(TESForm* form);
 };
 
+// pdb: BGSCameraShot::Compare | BGSCameraShot.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompare
 bool FUN_005077c0_owner::FUN_005077c0(TESForm* form) {
     BGSCameraShot* shot = dynamic_cast<BGSCameraShot*>(form);
     if (!shot) return true;
@@ -3695,6 +3854,7 @@ bool FUN_005077c0_owner::FUN_005077c0(TESForm* form) {
 
 // @f3 0x0050d7d0 (community match, verified in this file)
 namespace f3m_0050d7d0 {
+// pdb: CExpression::CExpression | Expression.obj | fnv360_0822_retail, call_gap, high
 struct State50D7 { int unk000; int unk004; int unk008; int unk00C; int unk010; int unk014; int unk018; int unk01C; int unk020; int unk024; int unk028; int unk02C; int unk030; int unk034; int unk038; int unk03C; int unk040; int unk044; int unk048; int unk04C; int unk050; int unk054; int unk058; int unk05C; int unk060; int unk064; int unk068; int unk06C; int unk070; int unk074; int unk078; int unk07C; int unk080; int unk084; int unk088; int unk08C; int unk090; int unk094; int unk098; int unk09C; int unk0A0; int unk0A4; int unk0A8; int unk0AC; int unk0B0; int unk0B4; int unk0B8; int unk0BC; int unk0C0; int unk0C4; int unk0C8; int unk0CC; int unk0D0; int unk0D4; int unk0D8; int unk0DC; int unk0E0; int unk0E4; int unk0E8; int unk0EC; int unk0F0; int unk0F4; int unk0F8; int unk0FC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; int unk128; int unk12C; int unk130; int unk134; int unk138; int unk13C; int unk140; int unk144; int unk148; int unk14C; int unk150; int unk154; int unk158; int unk15C; int unk160; int unk164; int unk168; int unk16C; int unk170; int unk174; int unk178; int unk17C; int unk180; int unk184; int unk188; int unk18C; int unk190; int unk194; int unk198; int unk19C; int unk1A0; int unk1A4; int unk1A8; int unk1AC; int unk1B0; int unk1B4; int unk1B8; int unk1BC; int unk1C0; int unk1C4; int unk1C8; int unk1CC; int unk1D0; int unk1D4; int unk1D8; int unk1DC; int unk1E0; int unk1E4; int unk1E8; int unk1EC; int unk1F0; int unk1F4; int unk1F8; int unk1FC; int unk200; int unk204; int unk208; int unk20C; int unk210; int unk214; int unk218; int unk21C; int unk220; int unk224; int unk228; int unk22C; int unk230; int unk234; int unk238; int unk23C; int unk240; int unk244; int unk248; int unk24C; int unk250; int unk254; int unk258; int unk25C; int unk260; int unk264; int unk268; int unk26C; int unk270; int unk274; int unk278; int unk27C; int unk280; int unk284; int unk288; int unk28C; int unk290; int unk294; int unk298; int unk29C; int unk2A0; int unk2A4; int unk2A8; int unk2AC; int unk2B0; int unk2B4; int unk2B8; int unk2BC; int unk2C0; int unk2C4; int unk2C8; int unk2CC; int unk2D0; int unk2D4; int unk2D8; int unk2DC; int unk2E0; int unk2E4; int unk2E8; int unk2EC; int unk2F0; int unk2F4; int unk2F8; int unk2FC; int unk300; int unk304; int unk308; int unk30C; int unk310; int unk314; int unk318; int unk31C; int unk320; int unk324; int unk328; int unk32C; int unk330; int unk334; int unk338; int unk33C; int unk340; int unk344; int unk348; int unk34C; int unk350; int unk354; int unk358; int unk35C; int unk360; int unk364; int unk368; int unk36C; int unk370; int unk374; int unk378; int unk37C; int unk380; int unk384; int unk388; int unk38C; int unk390; int unk394; int unk398; int unk39C; int unk3A0; int unk3A4; int unk3A8; int unk3AC; int unk3B0; int unk3B4; int unk3B8; int unk3BC; int unk3C0; int unk3C4; int unk3C8; int unk3CC; int unk3D0; int unk3D4; int unk3D8; int unk3DC; int unk3E0; int unk3E4; int unk3E8; int unk3EC; int unk3F0; int unk3F4; int unk3F8; int unk3FC; int unk400; int unk404; int unk408; int unk40C; int unk410; int unk414; int unk418; int unk41C; int unk420; int unk424; int unk428; int unk42C; int unk430; int unk434; int unk438; int unk43C; int unk440; int unk444; int unk448; int unk44C; int unk450; int unk454; int unk458; int unk45C; int unk460; int unk464; int unk468; int unk46C; int unk470; int unk474; int unk478; int unk47C; int unk480; int unk484; int unk488; int unk48C; int unk490; int unk494; int unk498; int unk49C; int unk4A0; int unk4A4; int unk4A8; int unk4AC; int unk4B0; int unk4B4; int unk4B8; int unk4BC; int unk4C0; int unk4C4; int unk4C8; int unk4CC; int unk4D0; int unk4D4; int unk4D8; int unk4DC; int unk4E0; int unk4E4; int unk4E8; int unk4EC; int unk4F0; int unk4F4; int unk4F8; int unk4FC; int unk500; int unk504; int unk508; int unk50C; int unk510; int unk514; int unk518; int unk51C; int unk520; int unk524; int unk528; int unk52C; int unk530; int unk534; int unk538; int unk53C; int unk540; int unk544; int unk548; int unk54C; int unk550; int unk554; int unk558; int unk55C; int unk560; int unk564; int unk568; int unk56C; int unk570; int unk574; int unk578; int unk57C; int unk580; int unk584; int unk588; int unk58C; int unk590; int unk594; int unk598; int unk59C; int unk5A0; int unk5A4; int unk5A8; int unk5AC; int unk5B0; int unk5B4; int unk5B8; int unk5BC; int unk5C0; int unk5C4; int unk5C8; int unk5CC; int unk5D0; int unk5D4; int unk5D8; int unk5DC; int unk5E0; int unk5E4; int unk5E8; int unk5EC; int unk5F0; int unk5F4; int unk5F8; int unk5FC; int unk600; int unk604; int unk608; int unk60C; int unk610; int unk614; int unk618; int unk61C; int unk620; int unk624; int unk628; int unk62C; int unk630; int unk634; int unk638; int unk63C; int unk640; int unk644; int unk648; int unk64C; int unk650; int unk654; int unk658; int unk65C; int unk660; int unk664; int unk668; int unk66C; int unk670; int unk674; int unk678; int unk67C; int unk680; int unk684; int unk688; int unk68C; int unk690; int unk694; int unk698; int unk69C; int unk6A0; int unk6A4; int unk6A8; int unk6AC; int unk6B0; int unk6B4; int unk6B8; int unk6BC; int unk6C0; int unk6C4; int unk6C8; int unk6CC; int unk6D0; int unk6D4; int unk6D8; int unk6DC; int unk6E0; int unk6E4; int unk6E8; int unk6EC; int unk6F0; int unk6F4; int unk6F8; int unk6FC; int unk700; int unk704; int unk708; State50D7* FUN_0050d7d0(); }; State50D7* State50D7::FUN_0050d7d0() { unk504=-1; unk708=-1; unk000=0; return this; }
 }   // namespace f3m_0050d7d0
 
@@ -3720,6 +3880,8 @@ bool __cdecl Script_SetImageSpace(void* a1,void* a2,void* a3,void* a4,void* a5,v
 // @f3 0x00518430 (community match, verified in this file)
 namespace f3m_00518430 {
 struct Entry5184 {unsigned unk00,unk04;};struct Node5184 {Entry5184* unk00;Node5184* unk04;};struct Owner5184 {int unk00,unk04;Node5184* unk08;void FUN_005182b0(unsigned);bool FUN_00518430(unsigned,unsigned);};
+// pdb: ScriptLocals::CheckActionFlag | TESScript.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::CheckFlagFunction)
+// pdb params: apActionForm, aiFlag
 bool Owner5184::FUN_00518430(unsigned key,unsigned mask){Entry5184* found=0;for(Node5184* node=unk08;node;node=node->unk04){Entry5184* entry=node->unk00;if(!entry)break;if(entry->unk00==key){found=entry;break;}}if(!found)FUN_005182b0(key);else if(found->unk04&mask)return true;return false;}
 }   // namespace f3m_00518430
 
@@ -3739,6 +3901,8 @@ public:
     Item50d790 FUN_0050d790();
 };
 
+// pdb: Stack<ExpressionOperand,32>::push | Expression.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: c
 Item50d790 List50d790::FUN_0050d790()
 {
     unsigned i = count;
@@ -3778,6 +3942,8 @@ public:
     void FUN_0050a9b0(TESForm* form);
 };
 
+// pdb: BGSListForm::Copy | BGSListForm.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCopy
 void BGSListForm::FUN_0050a9b0(TESForm* form)
 {
     BGSListForm* list = dynamic_cast<BGSListForm*>(form);
@@ -3799,6 +3965,8 @@ namespace f3m_0051e6c0 {
 struct Ref51e6c0 { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; void* form; };
 struct Actor51e6c0 { void** table; };
 struct Player51e6c0 { void PlayerCharacter_CheckForQuestTargetUpdate(Ref51e6c0*); };
+// pdb: Script::DropMeFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051e6c0(int a,int b,Ref51e6c0* ref,Actor51e6c0* actor) {
  if(ref && actor) {
   ((void (__thiscall *)(Actor51e6c0*,void*,int,int,int,int,int,int,int,int,int))actor->table[95])(actor,ref->form,0,1,0,1,0,0,0,1,0);
@@ -4081,6 +4249,8 @@ struct VTable515720 {
  Value515720* (__thiscall *get)(Object515720*);
 };
 struct Object515720 {VTable515720* vtable;};
+// pdb: Script::GetGroupMemberCountConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::DoesNotExistConditionFunction)
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool FUN_00515720(Object515720* object,void* a,void* b,double* result) {
  *result=0.0;
  if(object && object->vtable->check(object)) {Value515720* value=object->vtable->get(object);if(value)*result=value->value;}
@@ -4099,6 +4269,8 @@ int OwnerA840::FUN_0050a840(void* value) { return head.Find(value); }
 // @f3 0x00515d40 (community match, verified in this file)
 namespace f3m_00515d40 {
 struct Owner515d {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; unsigned char unk20,unk21;unsigned short unk22;float unk24;bool FUN_00454550(Owner515d*);bool FUN_00515d40(void*);};extern int DAT_00f46e20,DAT_00f46078;extern Owner515d* __cdecl FUN_00c0050a(void*,int,void*,void*,int);
+// pdb: TESGlobal::Compare | TESGlobal.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompare
 bool Owner515d::FUN_00515d40(void* input){Owner515d* other=FUN_00c0050a(input,0,&DAT_00f46078,&DAT_00f46e20,0);if(!other)return true;if(FUN_00454550(other))return true;if(unk20!=other->unk20)return true;if(unk24!=other->unk24)return true;return false;}
 }   // namespace f3m_00515d40
 
@@ -4109,6 +4281,7 @@ struct Node518ed0 { Item518ed0* item; Node518ed0* next; };
 struct Root518ed0 { int FUN_00518b20(); };
 struct Heap518ed0 { void FUN_0086ba60(void*); };
 struct Owner518ed0 { Root518ed0* root; int unk04; Node518ed0* list; int unk0C; void* buffer; void FUN_00518230(); void FUN_00518ed0(); };
+// pdb: ScriptLocals::Revert | TESScript.obj | fnv360_0721_beta, call_seq, medium
 void Owner518ed0::FUN_00518ed0() {
  FUN_00518230();
  for(Node518ed0* node=list;node;) { Item518ed0* item=node->item; if(!item) break; node=node->next; item->unk04=0; }
@@ -4190,6 +4363,8 @@ struct Vt513100 {
  bool (__thiscall* valid)(Obj513100*);
 };
 struct Obj513100 {Vt513100* vtable;unsigned int FUN_006f58b0();};
+// pdb: Script::GetIsMovingConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00513100(Obj513100* object,int,int,double* out) {
  *out=0.0;
  if(object && object->vtable->valid(object)) {
@@ -4219,6 +4394,8 @@ public:
     void FUN_00454480(TESForm*);
     void FUN_00515d00(TESForm*);
 };
+// pdb: TESGlobal::Copy | TESGlobal.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCopy
 void TESGlobal::FUN_00515d00(TESForm* form) {
     TESGlobal* source=dynamic_cast<TESGlobal*>(form);
     if (source) {
@@ -4232,6 +4409,7 @@ void TESGlobal::FUN_00515d00(TESForm* form) {
 // @f3 0x005094c0 (community match, verified in this file)
 namespace f3m_005094c0 {
 extern int DAT_00f5e2fc,DAT_00f5e308,DAT_00f5e314;struct Owner5094 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int FUN_005094c0();};
+// pdb: BGSImpactData::GetSoundLevelValue | BGSImpactData.obj | fnv360_0822_retail, call_gap, low
 int Owner5094::FUN_005094c0(){int result=0;switch(unk40){case 0:result=DAT_00f5e314;break;case 1:result=DAT_00f5e308;break;case 2:result=DAT_00f5e2fc;break;}return result;}
 }   // namespace f3m_005094c0
 
@@ -4332,6 +4510,8 @@ struct Foo {
     unsigned char FUN_0050af70(void*);
 };
 
+// pdb: BGSMenuIcon::Compare | BGSMenuIcon.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompare
 unsigned char Foo::FUN_0050af70(void* p) {
     BGSMenuIcon* r = dynamic_cast<BGSMenuIcon*>((TESForm*)p);
     if (!r) {
@@ -4349,6 +4529,8 @@ void __cdecl FUN_006ef100(State51ed30* state);
 struct Manager51ed30 { void FUN_00437420(int a, int b); };
 extern Manager51ed30* DAT_0107a0d8;
 
+// pdb: Script::PurgeCellBuffers | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: Script::SaveIniFiles)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051ed30() {
     State51ed30 state;
     FUN_006ef0a0(&state, 1, 1);
@@ -4361,6 +4543,8 @@ bool __cdecl FUN_0051ed30() {
 // @f3 0x0051f410 (community match, verified in this file)
 namespace f3m_0051f410 {
 extern bool __cdecl FUN_00517950(int,int,int,int,int,int,int,int*);
+// pdb: Script::ToggleMaterialGeometryFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0051f410(int a,int b,int c,int d,int e,int f,int g,int h){int value=0;if(FUN_00517950(a,b,h,c,d,e,f,&value))return true;return false;}
 }   // namespace f3m_0051f410
 
@@ -4434,6 +4618,8 @@ struct Record
     void FUN_0050d360(unsigned int tag);
 };
 
+// pdb: DecalData::Save | DecalData.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeChunk
 void Record::FUN_0050d360(unsigned int tag)
 {
     if (DAT_0106dd0e)
@@ -4469,6 +4655,7 @@ extern char DAT_00f49898[]; extern char DAT_00f46078[];
 namespace f3m_0051dec0 {
 
 extern void* __cdecl FUN_00c0050a(void*,int,const void*,const void*,int);
+// pdb: TESImageSpaceModifier::GetGetHit | TESScriptFunctions.obj | fnv360_0822_retail, call_gap, medium
 void* __cdecl FUN_0051dec0(){
  if(!DAT_00f4ef39) return 0;
  if(!DAT_01070c00) DAT_01070c00=FUN_00c0050a(TESForm_GetFormByNumericID(0x162),0,DAT_00f46078,DAT_00f49898,0);
@@ -4498,6 +4685,8 @@ struct Manager {
 
 Manager* FUN_00540230();
 
+// pdb: Script::InitActionList | TESScript.obj | fnv360_0822_retail, call_gap, low
+// pdb params: ownerObject, apExtra
 void __cdecl FUN_005166a0(void* arg1, Source* source)
 {
     if (source && source->FUN_0040ad00()) {
@@ -4544,6 +4733,8 @@ struct Owner507770 {
  int unk34;
  Block507770 block;void FUN_00454480(Owner507770*);void FUN_00507770(void*);
 };
+// pdb: BGSCameraShot::Copy | BGSCameraShot.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCopy
 void Owner507770::FUN_00507770(void* input) {Owner507770* source=FUN_00c0050a(input,0,&DAT_00f46078,&DAT_00f498f8,0);if(source){FUN_00454480(source);memmove(&block,&source->block,sizeof(block));}}
 }
 }   // namespace f3m_00507770
@@ -4649,6 +4840,7 @@ extern bool DAT_01073c88;
 namespace f3m_0051df70 {
 namespace match51df70 {
 struct Manager51df70 {int unk00;int unk04;int unk08;int unk0C;int unk10;int unk14;bool flag18,flag19;};Manager51df70* FUN_0059baa0(int);
+// pdb: BSTreeManager::AreLeavesVisible | TESScriptFunctions.obj | fnv360_0822_retail, call_seq, medium
 int FUN_0051df70() {if(DAT_01073c88 && FUN_0059baa0(1)->flag18 && FUN_0059baa0(1)->flag19)return 1;return 0;}
 }
 }   // namespace f3m_0051df70
@@ -4658,6 +4850,7 @@ namespace f3m_00516660 {
 bool __cdecl TESForm___AddChunkData(unsigned int,const void*,unsigned int);
 struct Header516660 {int unk00;int unk04;int unk08;int unk0C;int unk10;void FUN_00409db0();};
 struct Owner516660 {int unk00;int unk04;int unk08;int unk0C;int unk10;int unk14;Header516660 header;void FUN_00516660();};
+// pdb: Script::SaveResultScript | TESScript.obj | fnv360_0822_retail, call_seq, medium
 void Owner516660::FUN_00516660() {
  if(DAT_0106dd0e) header.FUN_00409db0();
  TESForm___AddChunkData('RHCS',&header,sizeof(Header516660));
@@ -4670,6 +4863,7 @@ namespace f3m_0050aca0 {
 struct Node50aca0 { void* item; Node50aca0* next; void FUN_006c8220(); };
 struct Heap50aca0 { void FUN_0086ba60(void*); };
 struct Owner50aca0 { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; Node50aca0 head; unsigned count; void FUN_0050aca0(); };
+// pdb: BGSListForm::RemoveAllScriptAddedForms | BGSListForm.obj | fnv360_0822_retail, call_seq, medium
 void Owner50aca0::FUN_0050aca0() {
  while(count) { Node50aca0* node=head.next; if(node) { head.next=node->next; head.item=node->item; node->next=0; node->FUN_006c8220(); ((Heap50aca0*)&DAT_01090a78)->FUN_0086ba60(node); } else head.item=0; --count; }
 }
@@ -4683,6 +4877,8 @@ struct Extra51e520 { Target51e520* FUN_0040ab00(); };
 struct Ref51e520 { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; Extra51e520 extra; };
 struct Player51e520 { void PlayerCharacter_CheckForQuestTargetUpdate(Ref51e520*); };
 extern bool __cdecl FUN_00517950(int,int,int,Ref51e520*,int,int,int,void**,int*,int*);
+// pdb: Script::RemoveAllItemsFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051e520(int a,int b,Ref51e520* ref,int d,int e,int f,int g,int h) {
  void* value=0; int first=0; int second=0;
  if(!FUN_00517950(a,b,h,ref,d,e,f,&value,&first,&second)) return false;
@@ -4695,6 +4891,8 @@ bool __cdecl FUN_0051e520(int a,int b,Ref51e520* ref,int d,int e,int f,int g,int
 
 // @f3 0x00513200 (community match, verified in this file)
 namespace f3m_00513200 {
+// pdb: Script::ExistsConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00513200(void* first,void* second,int unused,double* result) {
     if (first && first!=second) *result=1.0;
     else *result=0.0;
@@ -4713,6 +4911,7 @@ struct Sub5093d0 { void FUN_0050d360(unsigned); };
 extern void __cdecl FUN_00454890(unsigned,unsigned);
 struct Owner5093d0 { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; Model5093d0 model; Words5093d0 words; unsigned flags; Form5093d0* a; Form5093d0* b; Form5093d0* c; Sub5093d0 sub;
  void FUN_004547d0(); void FUN_00454ab0(void*,unsigned); void FUN_00454860(); void FUN_005093d0(); };
+// pdb: BGSImpactData::Save | BGSImpactData.obj | fnv360_0822_retail, vtable, medium
 void Owner5093d0::FUN_005093d0() {
  FUN_004547d0(); model.FUN_00457d90('LDOM','TDOM');
  if(DAT_0106dd0e) words.Swap();
@@ -4728,6 +4927,8 @@ void Owner5093d0::FUN_005093d0() {
 // @f3 0x0050baa0 (community match, verified in this file)
 namespace f3m_0050baa0 {
 struct Owner50ba {void FUN_00454480(Owner50ba*);void FUN_0050baa0(void*);};extern int DAT_00f47b10,DAT_00f46078;extern Owner50ba* __cdecl FUN_00c0050a(void*,int,void*,void*,int);
+// pdb: BGSMusicType::Copy | BGSMusicType.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCopy
 void Owner50ba::FUN_0050baa0(void* input){Owner50ba* source=FUN_00c0050a(input,0,&DAT_00f46078,&DAT_00f47b10,0);if(source)FUN_00454480(source);}
 }   // namespace f3m_0050baa0
 
@@ -4737,6 +4938,8 @@ extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(_RTL_CRITIC
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(_RTL_CRITICAL_SECTION*);
 namespace Contains7110 {
 struct Node { void* item; Node* next; }; extern Node DAT_01071bf0; extern _RTL_CRITICAL_SECTION DAT_01071c00;
+// pdb: Script::IsPendingFadeDisabledReference | TESScript.obj | fnv360_0721_beta, objrun, low, conflict (skyrim: BGSRefAlias::HasKeyword)
+// pdb params: apRef
 bool FUN_00517110(void* value) { bool found=false; EnterCriticalSection(&DAT_01071c00); if(value) { for(Node* node=&DAT_01071bf0;node;node=node->next) if(node->item==value) { found=true; break; } } LeaveCriticalSection(&DAT_01071c00); return found; }
 }
 }   // namespace f3m_00517110
@@ -4779,6 +4982,7 @@ struct CodexSaveSix {
     void FUN_00454860();
     void FUN_0050c860();
 };
+// pdb: BGSTextureSet::Save | BGSTextureSet.obj | fnv360_0822_retail, vtable, medium
 void CodexSaveSix::FUN_0050c860() {
     FUN_004547d0();
     for (int i=0;i<6;++i) sections[i].FUN_0045b8e0(DAT_00f50a78[i]);
@@ -4857,6 +5061,7 @@ struct Owner50aba0 { void** table; int unk04; unsigned flags; int unk0C; int unk
  bool Done() { return (flags>>3)&1; } Node50aba0* Head() { return &head; }
  const char* Name() { return ((const char* (__thiscall *)(Owner50aba0*))table[76])(this); } int TESForm_GetFile(int); void TESForm_SetInitialized(int); void FUN_0050aba0();
 };
+// pdb: BGSListForm::InitItem | BGSListForm.obj | fnv360_0822_retail, vtable, medium
 void Owner50aba0::FUN_0050aba0() {
  if(Done()) return;
  Node50aba0* previous=0;
@@ -4898,6 +5103,8 @@ bool __cdecl Script_RemoveImageSpaceModifier(int a1, int a2, int a3, int a4, int
 extern void* DAT_0107a104;extern int DAT_00f62124;
 namespace f3m_00513000 {
 struct Ref5130 {void** table;bool IsActor(){return ((bool(__thiscall*)(Ref5130*))table[64])(this);}int Query(void* player,int mode){return ((int(__thiscall*)(Ref5130*,void*,int))table[209])(this,player,mode);}};
+// pdb: Script::HasFriendDispositionConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00513000(Ref5130* reference,void* second,void* third,double* result){*result=0.0;if(reference&&reference->IsActor()&&reference->Query(DAT_0107a104,0)>=DAT_00f62124)*result=1.0;return true;}
 }   // namespace f3m_00513000
 
@@ -4934,6 +5141,7 @@ struct FUN_0050cfe0 : FUN_004b2db0, FUN_00825830 {
     void BGSTextureSet_ClearData();
 };
 
+// pdb: BGSTextureSet::~BGSTextureSet | BGSTextureSet.obj | fnv360_0822_retail, call_seq, high
 FUN_0050cfe0::~FUN_0050cfe0() {
     BGSTextureSet_ClearData();
 }
@@ -5002,6 +5210,8 @@ struct Owner {
     void FUN_00507600(void* value);
 };
 
+// pdb: TESIdleManager::AddLoadedIdle | TESIdleManager.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apIdle
 void Owner::FUN_00507600(void* value)
 {
     if (!value) return;
@@ -5068,6 +5278,8 @@ public:
     void FUN_0050acf0(Reader50acf0* reader);
 };
 
+// pdb: BGSListForm::LoadGame | BGSListForm.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apLoadGameBuffer
 void FormList50acf0::FUN_0050acf0(Reader50acf0* reader)
 {
     FUN_00454390(reader);
@@ -5141,6 +5353,8 @@ extern void* __cdecl TESForm_GetFormByEditorID(const char*);
 extern int __cdecl FUN_00c007fc(char*,unsigned,const char*);
 struct Context519d00 { char text[512]; int unk200; int unk204; int unk208; int unk20C; int unk210; void FUN_00519a20(); };
 extern bool __cdecl ScriptCompiler_GetFunction(Context519d00*);
+// pdb: ScriptCompiler::IsValidVariableName | TESScriptCompiler.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apVarName
 unsigned char __cdecl FUN_00519d00(const char* input) {
  Context519d00 ctx;
  if(input && *input && !TESForm_GetFormByEditorID(input)) { ctx.FUN_00519a20(); FUN_00c007fc(ctx.text,512,input); return !ScriptCompiler_GetFunction(&ctx); }
@@ -5308,6 +5522,8 @@ struct Ref {
 }
 void __cdecl FUN_00b2b200(void* node);
 
+// pdb: Script::ToggleMotionBlur | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0051ff10(void* paramInfo, void* scriptData, R51ff10::Ref* thisObj) {
     if (thisObj) {
         void* node = thisObj->Get3D();
@@ -5323,6 +5539,7 @@ bool FUN_0051ff10(void* paramInfo, void* scriptData, R51ff10::Ref* thisObj) {
 namespace f3m_0050ba80 {
 struct Member50BA {void FUN_0045a860();};
 struct Owner50BA {int unk00;int unk04;int unk08;int unk0C;int unk10;int unk14;Member50BA member;void FUN_004547d0();void FUN_00454860();void FUN_0050ba80();};
+// pdb: BGSMusicType::Save | BGSMusicType.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void Owner50BA::FUN_0050ba80(){FUN_004547d0();member.FUN_0045a860();FUN_00454860();}
 }   // namespace f3m_0050ba80
 
@@ -5339,6 +5556,8 @@ namespace match50bad0 {
 extern const char DAT_00f47b10,DAT_00f46078;
 void* FUN_00c0050a(void*,int,const void*,const void*,int);
 struct Owner {unsigned char FUN_00454550(void*);bool FUN_0050bad0(void*);};
+// pdb: BGSMusicType::Compare | BGSMusicType.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompare
 bool Owner::FUN_0050bad0(void* object){
  void* casted=FUN_00c0050a(object,0,&DAT_00f46078,&DAT_00f47b10,0);
  if(!casted)return true;
@@ -5349,6 +5568,8 @@ bool Owner::FUN_0050bad0(void* object){
 // @f3 0x0050d070 (community match, verified in this file)
 namespace f3m_0050d070 {
 struct Owner50d0 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; };struct Part50d0 {void FUN_004019c0(void*,int);};struct Receiver50d0 {void FUN_0050d070(int,void*);};
+// pdb: BGSTextureSet::SetBGSTextureFilename | BGSTextureSet.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeType, apFilename
 void Receiver50d0::FUN_0050d070(int index,void* value){if(index<6)((Part50d0*)((char*)this+(index*3+15)*4))->FUN_004019c0(value,0);}
 }   // namespace f3m_0050d070
 
@@ -5361,6 +5582,7 @@ struct FUN_00509be0_Obj {
     unsigned int* __thiscall FUN_00509be0(unsigned char flag);
 };
 
+// pdb: BSMapBase<BGSImpactData *,BGSImpactData *>::`scalar deleting destructor' | BGSImpactDataSet.obj | fnv360_0822_retail, vtable, medium
 unsigned int* FUN_00509be0_Obj::FUN_00509be0(unsigned char flag) {
     this->unk00 = 0xdd1338;
     if (this->unk08 != 0) {
@@ -5378,6 +5600,8 @@ namespace f3m_0051e5d0 {
 namespace Player51e {struct Player {int unk00;int unk04;int unk08;int unk0C;int unk10;int unk14;int unk18;int base;};extern Player* DAT_0107a104;}
 bool __cdecl FUN_00517950(int,int,int,int,int,int,int,int*);
 void __cdecl FUN_00515110(void*,int,int,double*);
+// pdb: Script::GetOwnershipFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::GetVelocityFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051e5d0(int a1,int a2,void*object,int a4,int a5,int a6,double*out,int a8){*out=0;int value=0;if(!FUN_00517950(a1,a2,a8,(int)object,a4,a5,a6,&value))return false;if(!value)value=Player51e::DAT_0107a104->base;FUN_00515110(object,value,0,out);return true;}
 }   // namespace f3m_0051e5d0
 
@@ -5411,6 +5635,7 @@ struct Owner518230 {
     List518230* list; // +0x0c
     void FUN_00518230();
 };
+// pdb: ScriptLocals::ClearVariableList | TESScript.obj | fnv360_0822_retail, call_gap, low
 void Owner518230::FUN_00518230() {
     if (list) {
         while (list->item) {
@@ -5426,6 +5651,8 @@ namespace f3m_0051f060 {
 namespace match51f060 {
 struct Object {void FUN_004d36c0(unsigned);};
 bool FUN_00517950(void*,void*,void*,void*,void*,void*,void*,Object**,unsigned*);
+// pdb: Script::SetCellImageSpace | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0051f060(void* a1,void* a2,void* a3,void* a4,void* a5,void* a6,void* a7,void* a8){
  unsigned index=0;Object* object=0;
  if(!FUN_00517950(a1,a2,a8,a3,a4,a5,a6,&object,&index))return false;
@@ -5625,6 +5852,8 @@ struct ImageSettings {
  void FUN_0050a4b0(unsigned,unsigned,unsigned);
  void FUN_0050a580(InputRecord* file);
 };
+// pdb: ImpactSwap::Load | BGSImpactDataSet.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apFile
 void ImageSettings::FUN_0050a580(InputRecord* file) {
  switch(file->TESFile_GetTESChunk()) {
  case 0x46504d49: file->FUN_00447d60(imageParameters,300);break;
@@ -5721,6 +5950,7 @@ class BGSTextureSet
 };
 
 // @fnv 0x00592d20
+// pdb: BGSTextureSet::CreateShaderTextureSet | BGSTextureSet.obj | fnv360_0822_retail, call_seq, medium
 FUN_004bb570* BGSTextureSet::FUN_0050d160()
 {
     FUN_004bb570* result = new FUN_004bb570;
@@ -5754,6 +5984,8 @@ extern "C" void* __cdecl __RTDynamicCast(void*,long,void*,void*,int); extern cha
 struct Heap { void* FUN_0086b930(unsigned); }; extern Heap DAT_01090a78;
 struct Node { void* item; Node* next; Node(void* value):item(value),next(0) {} static void* operator new(unsigned n) { return DAT_01090a78.FUN_0086b930(n); } Node* Head() { return this; } __forceinline void Append(void* const& value) { Node* tail=this; while(tail->next) tail=tail->next; if(tail->item) tail->next=new Node(value); else tail->item=value; } };
 struct Owner { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; Node head; void FUN_00515fd0(); void FUN_00454480(Owner*); void FUN_00516310(void*); };
+// pdb: TESLoadScreen::Copy | TESLoadScreen.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCopy
 void Owner::FUN_00516310(void* input) { Owner* source=(Owner*)__RTDynamicCast(input,0,&DAT_00f46078,&DAT_00f49840,0); if(source) { FUN_00515fd0(); Node* node=source->head.Head(); Node* destination=&head; for(;node;node=node->next) { if(!node->next && !node->item) break; if(node->item) destination->Append(node->item); if(destination->next) destination=destination->next; } FUN_00454480(source); } }
 }
 }   // namespace f3m_00516310
@@ -6093,6 +6325,8 @@ namespace Match0AF {
 extern int DAT_00f49964;extern int DAT_00f46078;
 void* __cdecl FUN_00c0050a(void*,int,void*,void*,int);
 struct Owner {void FUN_00454480(void*);void FUN_0050af40(void*);};
+// pdb: BGSMenuIcon::Copy | BGSMenuIcon.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCopy
 void Owner::FUN_0050af40(void* value){void* casted=FUN_00c0050a(value,0,&DAT_00f46078,&DAT_00f49964,0);if(casted)FUN_00454480(casted);}
 }
 
@@ -6117,6 +6351,8 @@ namespace f3m_00516710 {
 struct Owner5167;struct Result5167 {void FUN_00541130();};
 Result5167* __stdcall FUN_00540230(Owner5167*,int,int,int,int,int,int,float);
 struct Owner5167 {void FUN_00516710(int,int);};
+// pdb: Script::RunScriptEffectFinish | TESScript.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTargetRef, apEffectLocals
 void Owner5167::FUN_00516710(int a1,int a2){FUN_00540230(this,a1,a2,0,0,0,1,0.0f)->FUN_00541130();}
 }   // namespace f3m_00516710
 
@@ -6261,6 +6497,8 @@ unsigned int unk48;
 Node92 entries;
 void* FUN_005174c0(unsigned int key);
 };
+// pdb: Script::GetVariableName | TESScript.obj | fnv360_0822_retail, ustr, medium
+// pdb params: auiID
 void* Owner92::FUN_005174c0(unsigned int key){
  Node92* node=&entries;
  while(node){Entry92* item=node->item;if(!item)break;node=node->next;if(item->key==key)return item->value;}
@@ -6305,6 +6543,8 @@ namespace Query128{
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,...);
 void __cdecl FUN_0046fbd0(float*,float*,int,int);
 void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::TestCode | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051f380(void* param,void* data,void* actor,void* container,void* script,void* events,double*,void* offset){
  float value=0.0f;if(!FUN_00517950(param,data,offset,actor,container,script,events,&value))return false;
  float second=0.0f,first=0.0f;FUN_0046fbd0(&second,&first,1,0);
@@ -6324,6 +6564,8 @@ struct Owner144{
  void* data;
  void FUN_00517160(unsigned int,const void*);
 };
+// pdb: Script::SetCompileData | TESScript.obj | fnv360_0822_retail, call_gap, low
+// pdb params: auiDataSize, apCompileData
 void Owner144::FUN_00517160(unsigned int length,const void* source){
  DAT_01090a78.FUN_0086ba60(data);data=0;size=length;
  if(length){void* allocation=DAT_01090a78.FUN_0086b930(length);memset(allocation,0,length);data=allocation;memcpy(allocation,source,size);}
@@ -6339,6 +6581,8 @@ struct Owner158{
  unsigned int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20;
  unsigned char FUN_0050d2c0(const Owner158*);
 };
+// pdb: DecalData::Compare | DecalData.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCompare
 unsigned char Owner158::FUN_0050d2c0(const Owner158* other){if(!other)return true;return memcmp(this,other,36)!=0;}
 
 
@@ -6355,6 +6599,7 @@ struct Owner162{
  Node162 entries;
  void* TESForm_GetFile(int);void TESForm_SetInitialized(int);void FUN_00515ea0();
 };
+// pdb: TESLoadScreen::InitItem | TESLoadScreen.obj | fnv360_0822_retail, vtable, medium
 void Owner162::FUN_00515ea0(){
  if(!(static_cast<unsigned char>(flags>>3)&1)){
   Node162* node=&entries;
@@ -6704,6 +6949,8 @@ public:
     virtual void Unk0FB();
     virtual Info515770* GetInfo();
 };
+// pdb: Script::GetGroupTargetCountConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::GetGroupMemberCountConditionFunction)
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool FUN_00515770(Ref515770* thisObj, void* arg1, void* arg2, double* result) {
     *result = 0.0;
     if (thisObj && thisObj->IsActor()) {
@@ -6739,6 +6986,7 @@ public:
     char body[0x12c];
     FUN_00509b60();
 };
+// pdb: ImpactSwap::ImpactSwap | BGSImpactDataSet.obj | fnv360_0822_retail, call_gap_sim, low
 FUN_00509b60::FUN_00509b60() {
     memset(header, 0, sizeof(header));
     memset(body, 0, sizeof(body));
@@ -6756,6 +7004,8 @@ namespace f3m_005166e0 {
 struct Result5166 {void FUN_00541130();};
 extern Result5166* __stdcall FUN_00540230(void*,void*,void*,int,int,int,int,float);
 struct Owner5166 {void FUN_005166e0(void*,void*);};
+// pdb: Script::RunScriptEffectStart | TESScript.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTargetRef, apEffectLocals
 void Owner5166::FUN_005166e0(void* first,void* second){FUN_00540230(this,first,second,0,0,1,0,0.0f)->FUN_00541130();}
 }   // namespace f3m_005166e0
 
@@ -6890,6 +7140,7 @@ int unk1E8;
 int unk1EC;
 Vector position;Vector FUN_0051e080();
 };
+// pdb: BGSMessage::GetIsMessageBox | TESScriptFunctions.obj | tesv_win, objrun_open, low
 Vector Owner::FUN_0051e080(){return position;}
 }
 }   // namespace f3m_0051e080
@@ -6905,6 +7156,7 @@ struct DeletingRecord {
  void** table18;
  void FUN_00455a70();DeletingRecord* FUN_00509c20(unsigned);
 };
+// pdb: BGSImpactDataSet::`scalar deleting destructor' | BGSImpactDataSet.obj | fnv360_0822_retail, vtable, medium
 DeletingRecord* DeletingRecord::FUN_00509c20(unsigned flags) {
  table=DAT_00dd11ac;table18=DAT_00dd1190;
  FUN_00455a70();
@@ -6917,6 +7169,8 @@ DeletingRecord* DeletingRecord::FUN_00509c20(unsigned flags) {
 // @f3 0x00513280 (community match, verified in this file)
 namespace f3m_00513280 {
 struct Object5132{void**table;};namespace Global5132{struct Manager{unsigned char FUN_0078d6b0(Object5132*);};extern Manager DAT_0107c0a0;}
+// pdb: Script::IsActorTalkingThroughActivatorConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00513280(Object5132*object,int,int,double*out){*out=0;if(object&&((bool(__thiscall*)(Object5132*))object->table[64])(object))*out=Global5132::DAT_0107c0a0.FUN_0078d6b0(object);return true;}
 }   // namespace f3m_00513280
 
@@ -6928,6 +7182,7 @@ void __cdecl FUN_00454890(unsigned,unsigned);void __cdecl FUN_00455560(unsigned,
 struct Part18 {int unk00;int unk04;int unk08;void FUN_00456390();};struct Part24 {int unk00;int unk04;void TESDescription_Save();};
 struct Form {int unk00;int unk04;int unk08;unsigned id;};struct Part8 {void FUN_005addd0();};struct Data {char* text;int unk04;Part8 part;};struct Node {Data* data;Node* next;};
 struct Owner {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;Part18 part18;Part24 part24;Form* form;Node head;unsigned flags;unsigned value;Node* Head(){return &head;}void FUN_004547d0();void FUN_00454860();void FUN_0050b1d0();};
+// pdb: BGSMessage::Save | BGSMessage.obj | fnv360_0822_retail, vtable, medium
 void Owner::FUN_0050b1d0(){FUN_004547d0();part24.TESDescription_Save();part18.FUN_00456390();FUN_00454890(0x4d414e49,form?form->id:0);FUN_00454890(0x4d414e44,flags);if(!(flags&1))FUN_00454890(0x4d414e54,value);for(Node* node=Head();node&&(node->next||node->data);){Data* item=node->data;node=node->next;if(item->text)FUN_00455560(0x54585449,item->text,(unsigned)strlen(item->text)+1);else FUN_00455710(0x54585449,0);item->part.FUN_005addd0();}FUN_00454860();}
 }
 }   // namespace f3m_0050b1d0
@@ -6936,6 +7191,8 @@ void Owner::FUN_0050b1d0(){FUN_004547d0();part24.TESDescription_Save();part18.FU
 extern bool DAT_0116ef70;
 extern int DAT_0116efb0;
 namespace f3m_0051dea0 {
+// pdb: Script::ToggleGrassUpdateFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 int FUN_0051dea0() {
     if (DAT_0116ef70 && DAT_0116efb0 >= 2) {
         return 1;
@@ -6956,11 +7213,14 @@ bool __cdecl Script_HasLoaded3DConditionFunction(Object50ef60* object,void* b,vo
 namespace f3m_005076f0 {
 inline void Swap5076f0(unsigned long& word){word=_byteswap_ulong(word);}
 struct Owner5076f0 {unsigned long unk00;unsigned long unk04;unsigned long unk08;unsigned long unk0C;unsigned long unk10;unsigned long unk14;unsigned long unk18;unsigned long unk1C;unsigned long unk20;unsigned long unk24;void FUN_005076f0();};
+// pdb: BGSCameraShot::InitializeData | BGSCameraShot.obj | tesv_win, objrun_open, low
 void Owner5076f0::FUN_005076f0(){Swap5076f0(unk10);Swap5076f0(unk14);Swap5076f0(unk18);Swap5076f0(unk00);Swap5076f0(unk04);Swap5076f0(unk08);Swap5076f0(unk0C);Swap5076f0(unk1C);Swap5076f0(unk20);Swap5076f0(unk24);}
 }   // namespace f3m_005076f0
 
 // @f3 0x00512ec0 (community match, verified in this file)
 namespace f3m_00512ec0 {
+// pdb: Script::IsPC1stPersonConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 struct State512E {int unk000;int unk004;int unk008;int unk00C;int unk010;int unk014;int unk018;int unk01C;int unk020;int unk024;int unk028;int unk02C;int unk030;int unk034;int unk038;int unk03C;int unk040;int unk044;int unk048;int unk04C;int unk050;int unk054;int unk058;int unk05C;int unk060;int unk064;int unk068;int unk06C;int unk070;int unk074;int unk078;int unk07C;int unk080;int unk084;int unk088;int unk08C;int unk090;int unk094;int unk098;int unk09C;int unk0A0;int unk0A4;int unk0A8;int unk0AC;int unk0B0;int unk0B4;int unk0B8;int unk0BC;int unk0C0;int unk0C4;int unk0C8;int unk0CC;int unk0D0;int unk0D4;int unk0D8;int unk0DC;int unk0E0;int unk0E4;int unk0E8;int unk0EC;int unk0F0;int unk0F4;int unk0F8;int unk0FC;int unk100;int unk104;int unk108;int unk10C;int unk110;int unk114;int unk118;int unk11C;int unk120;int unk124;int unk128;int unk12C;int unk130;int unk134;int unk138;int unk13C;int unk140;int unk144;int unk148;int unk14C;int unk150;int unk154;int unk158;int unk15C;int unk160;int unk164;int unk168;int unk16C;int unk170;int unk174;int unk178;int unk17C;int unk180;int unk184;int unk188;int unk18C;int unk190;int unk194;int unk198;int unk19C;int unk1A0;int unk1A4;int unk1A8;int unk1AC;int unk1B0;int unk1B4;int unk1B8;int unk1BC;int unk1C0;int unk1C4;int unk1C8;int unk1CC;int unk1D0;int unk1D4;int unk1D8;int unk1DC;int unk1E0;int unk1E4;int unk1E8;int unk1EC;int unk1F0;int unk1F4;int unk1F8;int unk1FC;int unk200;int unk204;int unk208;int unk20C;int unk210;int unk214;int unk218;int unk21C;int unk220;int unk224;int unk228;int unk22C;int unk230;int unk234;int unk238;int unk23C;int unk240;int unk244;int unk248;int unk24C;int unk250;int unk254;int unk258;int unk25C;int unk260;int unk264;int unk268;int unk26C;int unk270;int unk274;int unk278;int unk27C;int unk280;int unk284;int unk288;int unk28C;int unk290;int unk294;int unk298;int unk29C;int unk2A0;int unk2A4;int unk2A8;int unk2AC;int unk2B0;int unk2B4;int unk2B8;int unk2BC;int unk2C0;int unk2C4;int unk2C8;int unk2CC;int unk2D0;int unk2D4;int unk2D8;int unk2DC;int unk2E0;int unk2E4;int unk2E8;int unk2EC;int unk2F0;int unk2F4;int unk2F8;int unk2FC;int unk300;int unk304;int unk308;int unk30C;int unk310;int unk314;int unk318;int unk31C;int unk320;int unk324;int unk328;int unk32C;int unk330;int unk334;int unk338;int unk33C;int unk340;int unk344;int unk348;int unk34C;int unk350;int unk354;int unk358;int unk35C;int unk360;int unk364;int unk368;int unk36C;int unk370;int unk374;int unk378;int unk37C;int unk380;int unk384;int unk388;int unk38C;int unk390;int unk394;int unk398;int unk39C;int unk3A0;int unk3A4;int unk3A8;int unk3AC;int unk3B0;int unk3B4;int unk3B8;int unk3BC;int unk3C0;int unk3C4;int unk3C8;int unk3CC;int unk3D0;int unk3D4;int unk3D8;int unk3DC;int unk3E0;int unk3E4;int unk3E8;int unk3EC;int unk3F0;int unk3F4;int unk3F8;int unk3FC;int unk400;int unk404;int unk408;int unk40C;int unk410;int unk414;int unk418;int unk41C;int unk420;int unk424;int unk428;int unk42C;int unk430;int unk434;int unk438;int unk43C;int unk440;int unk444;int unk448;int unk44C;int unk450;int unk454;int unk458;int unk45C;int unk460;int unk464;int unk468;int unk46C;int unk470;int unk474;int unk478;int unk47C;int unk480;int unk484;int unk488;int unk48C;int unk490;int unk494;int unk498;int unk49C;int unk4A0;int unk4A4;int unk4A8;int unk4AC;int unk4B0;int unk4B4;int unk4B8;int unk4BC;int unk4C0;int unk4C4;int unk4C8;int unk4CC;int unk4D0;int unk4D4;int unk4D8;int unk4DC;int unk4E0;int unk4E4;int unk4E8;int unk4EC;int unk4F0;int unk4F4;int unk4F8;int unk4FC;int unk500;int unk504;int unk508;int unk50C;int unk510;int unk514;int unk518;int unk51C;int unk520;int unk524;int unk528;int unk52C;int unk530;int unk534;int unk538;int unk53C;int unk540;int unk544;int unk548;int unk54C;int unk550;int unk554;int unk558;int unk55C;int unk560;int unk564;int unk568;int unk56C;int unk570;int unk574;int unk578;int unk57C;int unk580;int unk584;int unk588;int unk58C;int unk590;int unk594;int unk598;int unk59C;int unk5A0;int unk5A4;bool active;};extern State512E* DAT_0107a104;bool __cdecl FUN_00512ec0(void*,void*,void*,double* output){*output=0.0;if(!DAT_0107a104->active)*output=1.0;return true;}
 }   // namespace f3m_00512ec0
 
@@ -6969,12 +7229,14 @@ namespace f3m_00519930 {
 namespace Match5199 {
 struct Pool5199 {void FUN_0086ba60(void*);};extern Pool5199 DAT_01090a78;
 struct Owner5199 {int unk00,unk04,unk08,unk0C,unk10,unk14,unk18,unk1C,unk20,unk24,unk28;void* unk2C;void* unk30;void FUN_00519660();void FUN_005196e0();void FUN_00519930();};
+// pdb: Script::ClearData | TESScript.obj | fnv360_0822_retail, vtable, medium
 void Owner5199::FUN_00519930(){DAT_01090a78.FUN_0086ba60(unk30);DAT_01090a78.FUN_0086ba60(unk2C);FUN_00519660();FUN_005196e0();}
 }
 }   // namespace f3m_00519930
 
 // @f3 0x00515fd0 (community match, verified in this file)
 namespace f3m_00515fd0 {
+// pdb: TESLoadScreen::ClearLoadFormList | TESLoadScreen.obj | fnv360_0822_retail, call_seq, medium
 namespace N515F {struct Heap{void FUN_0086ba60(void*);};extern Heap DAT_01090a78;struct Node{void* data;Node* next;};struct List{Node head;__forceinline Node* Head(){return &head;}void FUN_006c8220();};struct Owner{int unk00;int unk04;int unk08;int unk0C;int unk10;int unk14;int unk18;int unk1C;int unk20;int unk24;int unk28;List list;void FUN_00515fd0();};void Owner::FUN_00515fd0(){Node* node=list.Head();while(node){if(!node->next && !node->data)break;DAT_01090a78.FUN_0086ba60(node->data);node=node->next;}list.FUN_006c8220();}}
 }   // namespace f3m_00515fd0
 
@@ -6984,6 +7246,8 @@ struct DataHandler { void FUN_004338f0(); };
 extern DataHandler* DAT_0107a0d8;
 extern bool DAT_010f3178;
 }
+// pdb: Script::ToggleCollisionGeometryFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0051f4f0(void* paramInfo, void* scriptData, void* thisObj, void* containingObj, void* script, void* eventList, double* result, unsigned int* opcodeOffset) {
     N51f4f0::DAT_010f3178 = true;
     N51f4f0::DAT_0107a0d8->FUN_004338f0();
@@ -6995,6 +7259,7 @@ bool FUN_0051f4f0(void* paramInfo, void* scriptData, void* thisObj, void* contai
 namespace f3m_00508e40 {
 struct Owner08E {int unk00;int unk04;unsigned flags;int unk0c;int unk10;int unk14;void* entries[1];bool Enabled(){return ((flags>>3)&1)!=0;}};
 Owner08E* __cdecl FUN_00508dc0();
+// pdb: AlchemyItem::GetAddictionItem | AlchemyItem.obj | fnv360_0822_debug, call_gap, low
 void* __cdecl FUN_00508e40(unsigned index){if(!FUN_00508dc0()->Enabled())return 0;return FUN_00508dc0()->entries[index];}
 }   // namespace f3m_00508e40
 
@@ -7030,6 +7295,7 @@ struct FUN_0050c5b0 : TESForm_0050c5b0 {
     virtual ~FUN_0050c5b0();
 };
 
+// pdb: BGSRadiationStage::`scalar deleting destructor' | BGSRadiation.obj | fnv360_0822_retail, caller_sim, low
 FUN_0050c5b0::~FUN_0050c5b0()
 {
     FUN_0050c3d0(this);
@@ -7042,6 +7308,8 @@ namespace Match169 {
 struct Data {int unk00;int unk04;int unk08;unsigned id;};struct Node {Data* data;Node* next;};
 struct ListOwner {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;int unk3c;int unk40;Node head;Node* Head(){return &head;}};
 struct Owner {ListOwner* owner;bool FUN_005169f0(unsigned);};
+// pdb: ScriptLocals::IsReferenceVariable | TESScript.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: auiID
 bool Owner::FUN_005169f0(unsigned id){if(owner){for(Node* node=owner->Head();node;node=node->next){Data* item=node->data;if(!item)return false;if(item->id==id)return true;}}return false;}
 }
 }   // namespace f3m_005169f0
@@ -7199,6 +7467,8 @@ namespace Match515f {
 struct Node515f {void* item;Node515f* next;unsigned Count()const {unsigned count=0;const Node515f* node=this;while(node){if(node->item)++count;node=node->next;}return count;}bool Empty()const {return !next&&!item;}bool Contains(void* value)const {const Node515f* node=this;while(node){if(node->item==value)return true;node=node->next;}return false;}};
 extern const char DAT_00f49840[],DAT_00f46078[];extern void* __cdecl FUN_00c0050a(void*,int,const void*,const void*,int);
 struct Owner515f {int unk00,unk04,unk08,unk0C,unk10,unk14,unk18,unk1C,unk20,unk24,unk28;Node515f unk2C;unsigned char FUN_00454550(Owner515f*);bool FUN_00515f10(void*);};
+// pdb: TESLoadScreen::Compare | TESLoadScreen.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompare
 bool Owner515f::FUN_00515f10(void* source){Owner515f* other=(Owner515f*)FUN_00c0050a(source,0,DAT_00f46078,DAT_00f49840,0);if(!other)return true;Node515f* otherList=&other->unk2C;if(unk2C.Count()!=otherList->Count())return true;Node515f* node=otherList;while(node&&!node->Empty()){if(!unk2C.Contains(node->item))return true;node=node->next;}if(FUN_00454550(other))return true;return false;}
 }
 }   // namespace f3m_00515f10
@@ -7206,6 +7476,7 @@ bool Owner515f::FUN_00515f10(void* source){Owner515f* other=(Owner515f*)FUN_00c0
 // @f3 0x00507740 (community match, verified in this file)
 namespace f3m_00507740 {
 struct Owner507740 {int unk00;int unk04;int unk08;int unk0C;int unk10;int unk14;int unk18;int unk1C;int unk20;int unk24;int unk28;int unk2C;int unk30;int unk34; int unk38;int unk3C;int unk40;int unk44;float unk48;float unk4C;float unk50;float unk54;float unk58;float unk5C;void FUN_00507740();};
+// pdb: BGSCameraShot::InitializeData | BGSCameraShot.obj | fnv360_0822_retail, vtable, medium
 void Owner507740::FUN_00507740(){unk50=1.0f;unk38=2;unk3C=2;unk48=0.0f;unk40=0;unk4C=0.0f;unk44=3;unk54=0.0f;unk58=0.0f;unk5C=0.0f;}
 }   // namespace f3m_00507740
 
@@ -7217,6 +7488,7 @@ struct __declspec(novtable) BaseA508f {int unk04,unk08,unk0C,unk10,unk14;void FU
 struct __declspec(novtable) BaseB508f {int unk04;int unk08;int unk0C;int unk10;int unk14;int unk18;int unk1C;int unk20;int unk24;int unk28;int unk2C;int unk30;int unk34;int unk38;void FUN_00458160();virtual ~BaseB508f(){FUN_00458160();}};
 struct Member508f {void FUN_00c24b70();~Member508f(){FUN_00c24b70();}};
 struct FUN_00508f00:BaseA508f,BaseB508f {Member508f unk54;~FUN_00508f00();};
+// pdb: BGSImpactData::~BGSImpactData | BGSImpactData.obj | fnv360_0822_debug, objopen_prop, low
 FUN_00508f00::~FUN_00508f00(){}
 }
 }   // namespace f3m_00508f00
@@ -7557,6 +7829,8 @@ void* node;
 extern Player* DAT_0107a104;
 extern const char DAT_00dd5f28[],DAT_00dd5f08[];
 void TESObjectCELL_RenderTestCell(void*,int,int);void FUN_006195d0(const char*,...);
+// pdb: Script::RenderTestHereFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0051ef20(){void* node=DAT_0107a104->node;if(node){TESObjectCELL_RenderTestCell(node,0,0);FUN_006195d0(DAT_00dd5f28);return true;}FUN_006195d0(DAT_00dd5f08);return true;}
 }
 
@@ -7568,6 +7842,8 @@ struct Temporary {Script* FUN_0047d2d0();void FUN_0047fd30();};
 struct Provider {Temporary* FUN_004e8ab0(void*,unsigned);};struct Wrapper {Provider* FUN_0040bd70();};
 struct Form {unsigned unk00;unsigned char type,unk05,unk06,unk07;unsigned unk08,id,unk10,unk14,unk18;void* owner;unsigned unk20,unk24,unk28,unk2c,unk30,unk34,unk38,unk3c;Wrapper wrapper;unsigned unk44,unk48,unk4c,unk50,unk54,unk58;Script* script;Script* FUN_004e6d70();};
 struct Heap {void FUN_0086ba60(void*);};extern Heap DAT_01090a78;
+// pdb: Script::GetScriptVariableConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_005147e0(void* a,Form* form,void* context,double* result){*result=0;if(form){int type=form->type;if(type>=58){Script* script;
  if(type>64){if(type!=71)goto done;script=form->script;}
  else {if(form->wrapper.FUN_0040bd70()){Provider* provider=form->wrapper.FUN_0040bd70();unsigned id=form->id;form=(Form*)form->owner;Temporary* temp=provider->FUN_004e8ab0(form,id);if(!temp)goto done;script=temp->FUN_0047d2d0();temp->FUN_0047fd30();DAT_01090a78.FUN_0086ba60(temp);}else script=form->FUN_004e6d70();}
@@ -7590,6 +7866,7 @@ namespace f3m_00516610 {
 void __cdecl TESForm___AddChunkData(unsigned,const void*,unsigned);
 struct SavedHeader {unsigned a,b,c,d,e;void FUN_00409db0();};
 struct HeaderOwner {unsigned unk00,unk04,unk08,unk0C,unk10,unk14;SavedHeader header;void FUN_004547d0();void FUN_00454860();void FUN_00516610();};
+// pdb: Script::Save | TESScript.obj | fnv360_0822_retail, vtable, medium
 void HeaderOwner::FUN_00516610() {
  FUN_004547d0();
  if(DAT_0106dd0e)header.FUN_00409db0();
@@ -7667,6 +7944,7 @@ void* unk0f4;
 void* unk0f8;
 void* unk0fc;
 bool (__thiscall* Valid)(Object2670*);};struct Object2670 {Ops2670* ops;};
+// pdb: Script::IsActorUsingATorchConditionFunction | TESConditionFunctions.obj | tesv_win, objrun_prop, low
 bool __cdecl FUN_00512670(Object2670* object,void* b,void* c,double* result){if(object)object->ops->Valid(object);*result=0;return true;}
 }   // namespace f3m_00512670
 
@@ -7719,6 +7997,8 @@ __declspec(noinline) void LinkNode_519260::FUN_0061c430(FUN_00518e30** p)
     }
 }
 
+// pdb: Script::CopyReferencedObjectList | TESScript.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: pCopyFromList, pCopyToList, apOwner
 void FUN_00519260(Node_519260* node, LinkNode_519260* container)
 {
     if (!container) return;
@@ -7739,6 +8019,8 @@ extern char DAT_00dd5ea4[];
 namespace f3m_0051ed90 {
 extern "C" void __cdecl FUN_006195d0(const char* format, ...);
 
+// pdb: Script::ToggleVerboseFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0051ed90()
 {
     bool verbose = !DAT_0108c66c;
@@ -7927,6 +8209,8 @@ public:
     bool FUN_00509890(TESForm* form);
 };
 
+// pdb: BGSImpactDataSet::Compare | BGSImpactDataSet.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompare
 bool BGSImpactDataSet::FUN_00509890(TESForm* form)
 {
     BGSImpactDataSet* other = dynamic_cast<BGSImpactDataSet*>(form);
@@ -7963,6 +8247,7 @@ public:
     bool FUN_0050af20();
 };
 
+// pdb: BGSMenuIcon::Save | BGSMenuIcon.obj | fnv360_0822_retail, vtable, medium
 bool Shader447::FUN_0050af20()
 {
     FUN_00b874f0();
@@ -7996,6 +8281,8 @@ struct Ad90Item {
     int unk2c;
 };
 
+// pdb: BGSListForm::Revert | BGSListForm.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apLoadGameBuffer
 void Ad90Owner::FUN_0050ad90(Ad90Item* item)
 {
     FUN_0078c030(item);
@@ -8018,6 +8305,7 @@ struct ParseLineInit {
     ParseLineInit* FUN_00519a60();
 };
 
+// pdb: SCRIPT_LINE::SCRIPT_LINE | TESScriptCompiler.obj | fnv360_0822_retail, call_gap, high
 ParseLineInit* ParseLineInit::FUN_00519a60()
 {
     line = 0;
@@ -8049,6 +8337,7 @@ bool __cdecl Script_GetInZoneFunction(void* a0, void* a1, void* a2, void* a3, vo
 // @f3 0x00508d20 (community match, verified in this file)
 #include <cstring>
 namespace f3m_00508d20 {
+// pdb: BGSDefaultObjectManager::BGSDefaultObjectManager | BGSDefaultObjectManager.obj | fnv360_0822_retail, call_seq, medium
 namespace N508D {extern int DAT_00dd0d5c;struct FUN_00456190 {void* vtable;unsigned char type;unsigned char unk05,unk06,unk07;unsigned unk08,unk0C,unk10,unk14;FUN_00456190();void FUN_00455a70();~FUN_00456190(){FUN_00455a70();}void FUN_00455e90(unsigned,bool);};struct FUN_00508d20:FUN_00456190{void* defaults[21];FUN_00508d20();};FUN_00508d20::FUN_00508d20(){vtable=&DAT_00dd0d5c;type=100;FUN_00455e90(0x31,true);memset(defaults,0,sizeof(defaults));}}
 }   // namespace f3m_00508d20
 
@@ -8094,6 +8383,8 @@ __forceinline Entry5183c0* Container5183c0::Find(int key)
     return found;
 }
 
+// pdb: ScriptLocals::SetActionFlag | TESScript.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apActionForm, aiFlag
 bool Container5183c0::FUN_005183c0(int key, unsigned int flags)
 {
     bool result = false;
@@ -8438,6 +8729,8 @@ int unk58;
 int unk5C;
 Process* process;
 };
+// pdb: Script::GetPlantedExplosiveConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool FUN_00513230(Actor* actor,void* a2,void* a3,double* result){
  *result=0;
  if(actor&&actor->vtable->valid(actor)){Process* process=actor->process;if(process)*result=process->vtable->query(process);}
@@ -8459,6 +8752,8 @@ struct FUN_00516740_Obj {
     void FUN_00516740(int a, int b, float value);
 };
 
+// pdb: Script::RunScriptEffectUpdate | TESScript.obj | fnv360_0721_retail, call_seq, medium
+// pdb params: apTargetRef, apEffectLocals, afSecondsElapsed
 void FUN_00516740_Obj::FUN_00516740(int a, int b, float value)
 {
     FUN_00540230(this, a, b, 0, 0, 0, 0, value)->FUN_00541130();
@@ -8679,6 +8974,7 @@ public:
     void FUN_00518ea0();
 };
 
+// pdb: ScriptLocals::~ScriptLocals | TESScript.obj | fnv360_0822_retail, call_seq, low
 void FUN_00518ea0_owner::FUN_00518ea0()
 {
     FUN_005181b0();
@@ -8700,6 +8996,7 @@ public:
     void FUN_00509b90();
 };
 
+// pdb: ImpactSwap::~ImpactSwap | BGSImpactDataSet.obj | fnv360_0822_retail, call_seq, low
 void FUN_00509b90_owner::FUN_00509b90()
 {
     for (int i = 0; i < 12; ++i) {
@@ -8711,6 +9008,7 @@ void FUN_00509b90_owner::FUN_00509b90()
 
 // @f3 0x00508b50 (community match, verified in this file)
 namespace f3m_00508b50 {
+// pdb: BGSDefaultObjectManager::ReleaseInstance | BGSDefaultObjectManager.obj | fnv360_0822_retail, call_gap, low
 void FUN_00508b50()
 {
     if (DAT_01071a10) {
@@ -8935,6 +9233,8 @@ bool __cdecl Script_OutputArchiveProfile(
 // @f3 0x0051f480 (community match, verified in this file)
     extern const char DAT_00dd5fcc[];
 namespace f3m_0051f480 {
+// pdb: Script::ToggleFullHelp | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051f480()
 {
     extern void __cdecl FUN_00619380();
@@ -9000,6 +9300,7 @@ struct ImpactForm {
  void* decal; void* primarySound; void* secondarySound;
  void FUN_00508f80();
 };
+// pdb: BGSImpactData::InitializeData | BGSImpactData.obj | fnv360_0822_retail, vtable, medium
 void ImpactForm::FUN_00508f80() {
  memset(&data,0,sizeof(data));
  data.duration=0.25f;
@@ -9100,6 +9401,8 @@ bool __cdecl Script_GetNoRumorsConditionFunction(Reference* reference, void* arg
 
 // @f3 0x00513840 (community match, verified in this file)
 namespace f3m_00513840 {
+// pdb: Script::IsPlayerGrabbedRefConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00513840(void* unused, void* object, void* param, double* out)
 {
     *out = 0.0;
@@ -9135,6 +9438,7 @@ struct FUN_0050c510 : Base50c510 {
     virtual ~FUN_0050c510();
 };
 
+// pdb: BGSRadiationStage::BGSRadiationStage | BGSRadiation.obj | fnv360_0822_retail, objrun, medium
 FUN_0050c510::FUN_0050c510() {
     typeID = 0x5a;
     unk18.Init();
@@ -9144,6 +9448,8 @@ FUN_0050c510::FUN_0050c510() {
 // @f3 0x00519c90 (community match, verified in this file)
 namespace f3m_00519c90 {
 // @fnv 0x005b1b60
+// pdb: ScriptCompiler::CheckQuotes | TESScriptCompiler.obj | fnv360_0822_retail, call_dedup, low, conflict (skyrim: ScriptCompiler::SkipWhiteSpace)
+// pdb params: apExpLine, auiLineOffset
 void __cdecl FUN_00519c90(const char* apExpLine, int* apOffset)
 {
     for (;;)
@@ -9237,6 +9543,7 @@ struct Shader447 {
 
 extern "C" void __cdecl FUN_00455b30(unsigned tag, void* buf, int count);
 
+// pdb: BGSImpactDataSet::Save | BGSImpactDataSet.obj | fnv360_0822_retail, vtable, medium
 void Shader447::FUN_00509a50() {
     FUN_00b874f0();
     int arr[12];
@@ -9269,6 +9576,7 @@ struct F00506390 {
     bool FUN_00506390();
 };
 
+// pdb: BGSCameraPath::GetAllowNoShots | BGSCameraPath.obj | fnv360_0822_retail, call_seq, low
 bool F00506390::FUN_00506390() {
     return flag28;
 }
@@ -9404,6 +9712,8 @@ public:
     Item_00507440* FUN_00507440(Param_00507440* apFirst, Param_00507440* apSecond);
 };
 
+// pdb: BGSCameraPathManager::GetCameraPathToPlay | BGSCameraPathManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apActionRef, apTargetRef
 Item_00507440* Owner_00507440::FUN_00507440(Param_00507440* apFirst, Param_00507440* apSecond)
 {
     Item_00507440* result = 0;
@@ -9470,6 +9780,8 @@ struct QScript {
     bool FUN_0051a3a0(QToken* token, unsigned a, unsigned b);
     bool FUN_0051a6b0(QToken* token);
 };
+// pdb: ScriptCompileData::GetVariable | TESScriptCompiler.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: apCurrentWord
 bool QScript::FUN_0051a6b0(QToken* token)
 {
     unsigned len = strlen(token->text);
@@ -9549,6 +9861,7 @@ struct FUN_005163e0 : FUN_00456190, FUN_0045bca0, FUN_00453910 {
     FUN_005163e0(); virtual ~FUN_005163e0();
     QData163e0 data;
 };
+// pdb: TESLoadScreen::TESLoadScreen | TESLoadScreen.obj | fnv360_0822_retail, call_gap, medium
 FUN_005163e0::FUN_005163e0()
 {
     type = 0x4b;
@@ -9592,6 +9905,8 @@ struct QImageSettings {
     void FUN_0050a4b0(unsigned, unsigned, unsigned);
     void FUN_0050a610(const QImageSettings* other);
 };
+// pdb: ImpactSwap::Copy | BGSImpactDataSet.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apSwap
 void QImageSettings::FUN_0050a610(const QImageSettings* other) {
     for (int i = 0; i < 12; i++) {
         if (maps[i]) delete maps[i];
@@ -9622,6 +9937,8 @@ struct CodexEventForm {
     unsigned id;
     bool IsTemporary() const { return (flags >> 14) & 1; }
 };
+// pdb: Script::GetButtonPressedFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051e280(int a, int b, CodexEventForm* form, int d, CodexEventForm* fallback, int f, double* result) {
     if ((form && !form->IsTemporary()) || (form = fallback) != 0) {
 signed char tmp = *(volatile signed char*)&DAT_00f50b78;
@@ -9663,6 +9980,7 @@ struct FUN_0050afb0 : BaseA {
     FUN_0050afb0();
 };
 
+// pdb: BGSMenuIcon::BGSMenuIcon | BGSMenuIcon.obj | fnv360_0822_retail, call_gap, medium
 FUN_0050afb0::FUN_0050afb0()
 {
     char buf[8]; (void)buf;
@@ -9705,6 +10023,7 @@ struct Owner506b30 { void** table; int unk04; unsigned flags; int unk0C; int unk
  }
  int TESForm_GetFile(int); void TESForm_SetInitialized(int); void FUN_00506b30();
 };
+// pdb: BGSCameraPath::InitItem | BGSCameraPath.obj | fnv360_0822_retail, vtable, medium
 void Owner506b30::FUN_00506b30() {
  if(Done()) return;
  conditions.FUN_005ade00(this);
@@ -9965,6 +10284,8 @@ extern QManager* DAT_0107a0d8;
 extern unsigned DAT_0106e9cc;
 extern float DAT_00db99c8;
 
+// pdb: Script::TestSeenData | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051f140()
 {
     NiNode* node = new NiNode(0);
@@ -10202,6 +10523,8 @@ struct CameraArray {
     void FUN_00564a60(unsigned int index, BGSCameraPath* path);
 };
 
+// pdb: BGSCameraPath::FixNextPaths | BGSCameraPath.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apArray
 void BGSCameraPath::FUN_00506c90(CameraArray* array)
 {
     unsigned int i = 0;
@@ -10437,6 +10760,8 @@ struct TextureSet1127 {
     void FUN_00454480(void*);
     void FUN_0050c690(void*);
 };
+// pdb: BGSTextureSet::Copy | BGSTextureSet.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCopy
 void TextureSet1127::FUN_0050c690(void* form) {
     TextureSet1127* source = (TextureSet1127*)FUN_00c0050a(form,0,DAT_00f46078,DAT_00f4aeb8,0);
     if(!source) return;
@@ -10501,6 +10826,8 @@ class FUN_00585e00_cls
 };
 
 // @fnv 0x00585e00
+// pdb: TESWorldSpace::UnLoadCell | TESWorldSpace.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apCell
 void FUN_00585e00_cls::FUN_00504120(int pProbe)
 {
     LinkProbe* probe;
@@ -10545,6 +10872,8 @@ struct FUN_006ef370 {
 };
 struct Writer {int FUN_006a0250(FUN_006ef370*,int);};
 extern Writer DAT_01090a78;
+// pdb: Script::OutputMemStatsFullWalk | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0051ea80(const ScriptParameter* parameters,const char* data,Ref* object,Ref* container,Script* script,Locals* locals,double& result,unsigned int& offset) {
  char fileName[0x200];
  fileName[0]=0;
@@ -10611,6 +10940,7 @@ public:
     void FUN_0051a5b0();
     void FUN_0051a630();
 };
+// pdb: ScriptCompileData::~ScriptCompileData | TESScriptCompiler.obj | fnv360_0822_retail, call_gap, low
 FUN_0051ce00::~FUN_0051ce00()
 {
     FUN_00519d90();
@@ -10624,6 +10954,7 @@ FUN_0051ce00::~FUN_0051ce00()
 namespace f3m_00500bc0 {
 struct BaseList1309{void* item;BaseList1309* next;BaseList1309():item(0),next(0){}~BaseList1309();void FUN_006c8220();};
 struct OwnedList1309:public BaseList1309{OwnedList1309();~OwnedList1309();void Clear(){for(BaseList1309* node=this;node;node=node->next)Heap358::DAT_01090a78.FUN_0086ba60(node->item);FUN_006c8220();}};
+// pdb: TESWeatherList::TESWeatherList | TESWeatherList.obj | fnv360_0822_retail, call_gap, medium
 OwnedList1309::OwnedList1309(){Clear();}
 }   // namespace f3m_00500bc0
 
@@ -10631,6 +10962,7 @@ OwnedList1309::OwnedList1309(){Clear();}
 namespace f3m_00500c30 {
 struct BaseList1310{void* item;BaseList1310* next;BaseList1310():item(0),next(0){}~BaseList1310();void FUN_006c8220();};
 struct OwnedList1310:public BaseList1310{OwnedList1310();~OwnedList1310();void Clear(){for(BaseList1310* node=this;node;node=node->next)Heap358::DAT_01090a78.FUN_0086ba60(node->item);FUN_006c8220();}};
+// pdb: TESWeatherList::~TESWeatherList | TESWeatherList.obj | fnv360_0822_retail, call_gap, medium
 OwnedList1310::~OwnedList1310(){Clear();}
 }   // namespace f3m_00500c30
 
@@ -10669,11 +11001,13 @@ extern char DAT_00dcfca8,DAT_00dd01c8;void* __cdecl FUN_0089e810(unsigned int);v
 
 // @f3 0x00506320 (community match, verified in this file)
 namespace f3m_00506320 {
+// pdb: BGSAcousticSpace::BGSAcousticSpace | BGSAcousticSpace.obj | fnv360_0822_retail, call_gap, high
 extern char DAT_00dd03ac;struct BaseBound1370{void* vtable;unsigned char type04,unk05,unk06,unk07;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;BaseBound1370();};struct Acoustic1370:BaseBound1370{void* sound30;void* region34;unsigned int value38;Acoustic1370();};Acoustic1370::Acoustic1370():sound30(0),region34(0){vtable=&DAT_00dd03ac;type04=14;value38=1;}
 }   // namespace f3m_00506320
 
 // @f3 0x00506350 (community match, verified in this file)
 namespace f3m_00506350 {
+// pdb: BGSAcousticSpace::`scalar deleting destructor' | BGSAcousticSpace.obj | fnv360_0822_retail, vtable, medium
 struct Heap1371{void FUN_0086ba60(void*);};struct BaseBound1371{virtual ~BaseBound1371();unsigned char type04,unk05,unk06,unk07;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;};class FUN_00506350:public BaseBound1371{public:void* sound30;void* region34;unsigned int value38;virtual ~FUN_00506350();static void operator delete(void* p){reinterpret_cast<Heap1371&>(DAT_01090a78).FUN_0086ba60(p);}};FUN_00506350::~FUN_00506350(){}
 }   // namespace f3m_00506350
 
@@ -10903,6 +11237,8 @@ extern "C" void __cdecl FUN_006195d0(const char* format, ...);
 struct TlsBlock { unsigned char pad[0x250]; unsigned char flag; };
 extern __declspec(thread) TlsBlock g_tlsBlock;
 
+// pdb: Script::GetDispositionConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00510960(Ref* actor, Ref* target, int unused, double* out)
 {
     *out = 0.0;
@@ -11535,6 +11871,7 @@ namespace f3m_00506590 {
 struct CameraBase1409{virtual void v0();unsigned char type04,unk05,unk06,unk07;unsigned int unk08,unk0C,unk10,unk14;CameraBase1409();~CameraBase1409();};
 struct CameraComponent1409{unsigned int unk00,unk04;CameraComponent1409();~CameraComponent1409();};
 struct Camera1409:CameraBase1409{CameraComponent1409 component18;void* item20;void* next24;unsigned char flags28;unsigned char unk29,unk2A,unk2B;void* array2C;void* form30;void* parent34;Camera1409();};
+// pdb: BGSCameraPath::BGSCameraPath | BGSCameraPath.obj | fnv360_0822_retail, call_seq, high
 Camera1409::Camera1409(){item20=0;next24=0;type04=0x5c;array2C=0;flags28=0;form30=0;parent34=0;}
 }   // namespace f3m_00506590
 
@@ -11653,6 +11990,8 @@ struct CodexActor {
 };
 __declspec(thread) bool DAT_0117c250 = false;
 void __cdecl FUN_006195d0(const char*, const char*);
+// pdb: Script::GetConcussedConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00513b90(CodexActor* actor, int unused1, int unused2, double* result) {
     *result = 0.0;
     if (actor && actor->table->test(actor) && DAT_0107801c) {
@@ -12114,6 +12453,8 @@ struct Tls510b20 {
  bool enabled;
 };
 __declspec(thread) Tls510b20 tls510b20={0};
+// pdb: Script::GetArmorRatingConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00510b20(Obj510b20* object,int,int,double* out) {
  *out=0.0;
  if(object && object->vtable->predicate(object)) {
@@ -12682,6 +13023,8 @@ template<class K,class V> class BSMap: public BSMapBase<K,V> {
 public:
  void FUN_006bd950();
  virtual __forceinline ~BSMap() { FUN_006bd950(); }
+ // pdb: BSMap<BGSImpactData *,BGSImpactData *>::BSMap<BGSImpactData *,BGSImpactData *> | BGSImpactDataSet.obj | fnv360_0822_retail, objrun, low
+ // pdb params: uiHashSize
  void FUN_0050a020() { this->BSMap::~BSMap(); }
 };
 template void BSMap<BGSImpactData*,BGSImpactData*>::FUN_0050a020();
@@ -13123,6 +13466,8 @@ struct Form510230 {
 };
 struct Ref510230 {int unk00;int unk04;int unk08;int unk0C;int unk10;int unk14;int unk18;Form510230* base;};
 extern const char DAT_00dd2414[];void FUN_006195d0(const char*,...);
+// pdb: Script::GetIsClassConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool FUN_00510230(Ref510230* input,Form510230* other,void* unused,double* result) {
  *result=0.0;
  Form510230* actor=0;
@@ -13147,6 +13492,8 @@ extern double DAT_00dc0438;
 __declspec(thread) bool DAT_0117c250=false;
 extern char DAT_00dd2814[];
 extern void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::GetTrespassWarningLevelConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr_rel, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_005118f0(Ref5118f0* ref,int b,int c,double* out) {
  *out=DAT_00dc0438;
  if(ref && ((bool (__thiscall *)(Ref5118f0*))ref->unk00[64])(ref)) {
@@ -13242,6 +13589,8 @@ struct Input5126;typedef bool (__thiscall *Active5126)(Input5126*);struct Table5
 struct Form5126 {int unk00;unsigned char unk04;bool FUN_004b4f80();};
 struct Node5126 {int unk00,unk04;Form5126* unk08;void FUN_0047fd30();};struct Collection5126 {Node5126* FUN_00483eb0(int,int);};extern Collection5126* __cdecl FUN_0047e090(Input5126*);
 extern const double DAT_00db75d0;extern __declspec(thread) bool DAT_0117c250;extern char DAT_00dd2ce4[];extern void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::GetArmorRatingUpperConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool FUN_005126f0(Input5126* input,int a,int b,double* result){Input5126* valid=0;if(input&&input->unk00->unk100(input))valid=input;*result=0.0;if(valid){Collection5126* collection=FUN_0047e090(input);if(collection){Node5126* node=collection->FUN_00483eb0(2,0);if(node){Form5126* form=node->unk08;if(form&&form->unk04==0x18){if(!form->FUN_004b4f80())*result=1.0;else *result=DAT_00db75d0;}node->FUN_0047fd30();Heap358::DAT_01090a78.FUN_0086ba60(node);}}}if(DAT_0117c250)FUN_006195d0(DAT_00dd2ce4,*result);return true;}
 }   // namespace f3m_005126f0
 
@@ -13406,6 +13755,8 @@ struct Manager51f830 {int unk00;int unk04;int unk08;int unk0C;int unk10;int unk1
 Manager51f830* FUN_0059baa0(int);
 void FUN_006195d0(const char*,...);
 inline int Enabled51f830() {if(DAT_01073c88 && FUN_0059baa0(1)->flag18 && FUN_0059baa0(1)->flag19) return 1;return 0;}
+// pdb: Script::ToggleLeavesFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0051f830() {
  unsigned char enabled=(unsigned char)Enabled51f830();
  FUN_0059baa0(1)->flag19=!enabled;
@@ -14084,6 +14435,7 @@ __declspec(thread) int DAT_0117c254=0;
 __declspec(thread) int DAT_0117c26c=0;
 __declspec(thread) int DAT_0117c268=-1;
 __declspec(thread) int DAT_0117c264=0;
+// pdb: Script::ClearOptimizations | TESScript.obj | fnv360_0822_retail, call_gap, low
 void __cdecl FUN_005167b0() {
  DAT_0117c254=0;
  DAT_0117c26c=0;
@@ -14818,6 +15170,8 @@ struct VTable512360 {
 };
 struct Player512360 {VTable512360* vtable;};
 extern Player512360* DAT_0107a104;extern const char DAT_00dd2bbc[];void FUN_006195d0(const char*,...);
+// pdb: Script::GetSandmanConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: Script::GetVampireFeedConditionFunction)
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool FUN_00512360(Player512360* object,void* a,void* b,double* result) {
  *result=0.0;
  if(object==DAT_0107a104) *result=DAT_0107a104->vtable->value(DAT_0107a104);
@@ -14830,6 +15184,8 @@ bool FUN_00512360(Player512360* object,void* a,void* b,double* result) {
 // @f3 0x0050f570 (community match, verified in this file)
 namespace f3m_0050f570 {
 struct Actor50f5;typedef bool (__thiscall *Active50f5)(Actor50f5*);struct Table50f5 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C; int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; int unkBC; int unkC0; int unkC4; int unkC8; int unkCC; int unkD0; int unkD4; int unkD8; int unkDC; int unkE0; int unkE4; int unkE8; int unkEC; int unkF0; int unkF4; int unkF8; int unkFC; Active50f5 unk100;};struct Actor50f5 {Table50f5* unk00;bool FUN_008257f0();};extern __declspec(thread) bool DAT_0117c250;extern char DAT_00dd21bc[];extern void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::GetVampireConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool FUN_0050f570(Actor50f5* actor,int a,int b,double* result){*result=0.0;if(actor&&actor->unk00->unk100(actor)&&actor->FUN_008257f0())*result=1.0;if(DAT_0117c250)FUN_006195d0(DAT_00dd21bc,*result);return true;}
 }   // namespace f3m_0050f570
 
@@ -15127,6 +15483,8 @@ namespace f3m_00512aa0 {
 bool __cdecl FUN_00477b00();
 __declspec(thread) bool DAT_0117c250 = false;
 void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::IsXboxConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00512aa0(int a,int b,int c,double* result) {
     *result=0.0;
     float value=FUN_00477b00() ? 1.0f : 0.0f;
@@ -15711,6 +16069,8 @@ extern Actor5137c0* DAT_0107a104;
 __declspec(thread) bool DAT_0117c250=false;
 extern char DAT_00dd2fa4[];
 extern void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::GetMajorCrimeCountConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_005137c0(Actor5137c0* actor,int b,int c,double* out) {
  *out=0.0;
  if(actor && ((bool (__thiscall *)(Actor5137c0*))actor->table[64])(actor)) {
@@ -15926,6 +16286,8 @@ bool __cdecl Script_GetDialogueEmotionValueConditionFunction(Ref_00513390* ref, 
 // @f3 0x00515110 (community match, verified in this file)
 namespace f3m_00515110 {
 struct Part5151 {void* FUN_0040abc0();};struct Actor5151 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; Part5151 unk40;};namespace Player5151 {struct Player {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; void* unk1C;};extern Player* DAT_0107a104;}struct Name5151 {int unk00;const char* unk04;};extern int DAT_00f46134,DAT_00f46078;extern Name5151* __cdecl FUN_00c0050a(void*,int,void*,void*,int);extern char DAT_00db3438[],DAT_00dd354c[],DAT_00dd3538[];extern __declspec(thread) bool DAT_0117c250;extern void __cdecl FUN_006195d0(const char*,...);inline const char* NameOf5151(void* object){Name5151* name=FUN_00c0050a(object,0,&DAT_00f46078,&DAT_00f46134,0);if(name&&name->unk04)return name->unk04;return DAT_00db3438;}
+// pdb: Script::GetOwnershipConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::GetVelocityConditionFunction)
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool FUN_00515110(Actor5151* actor,void* form,int unused,double* result){if(!form)form=Player5151::DAT_0107a104->unk1C;if(actor&&form&&actor->unk40.FUN_0040abc0()==form)*result=1.0;if(DAT_0117c250){if(*result!=0.0){FUN_006195d0(DAT_00dd354c,NameOf5151(form));return true;}FUN_006195d0(DAT_00dd3538,NameOf5151(form));}return true;}
 }   // namespace f3m_00515110
 
@@ -15961,6 +16323,8 @@ struct Table { void* unk000; void* unk004; void* unk008; void* unk00C; void* unk
 struct Object { Table* table; void FUN_0070b780(void*,bool*); };
 extern void* DAT_0107a104; extern const char DAT_00dd2f44[]; extern const char DAT_00dd2f00[]; extern void __cdecl FUN_006195d0(const char*,...);
 struct Tls { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C; int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; int unkBC; int unkC0; int unkC4; int unkC8; int unkCC; int unkD0; int unkD4; int unkD8; int unkDC; int unkE0; int unkE4; int unkE8; int unkEC; int unkF0; int unkF4; int unkF8; int unkFC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; int unk128; int unk12C; int unk130; int unk134; int unk138; int unk13C; int unk140; int unk144; int unk148; int unk14C; int unk150; int unk154; int unk158; int unk15C; int unk160; int unk164; int unk168; int unk16C; int unk170; int unk174; int unk178; int unk17C; int unk180; int unk184; int unk188; int unk18C; int unk190; int unk194; int unk198; int unk19C; int unk1A0; int unk1A4; int unk1A8; int unk1AC; int unk1B0; int unk1B4; int unk1B8; int unk1BC; int unk1C0; int unk1C4; int unk1C8; int unk1CC; int unk1D0; int unk1D4; int unk1D8; int unk1DC; int unk1E0; int unk1E4; int unk1E8; int unk1EC; int unk1F0; int unk1F4; int unk1F8; int unk1FC; int unk200; int unk204; int unk208; int unk20C; int unk210; int unk214; int unk218; int unk21C; int unk220; int unk224; int unk228; int unk22C; int unk230; int unk234; int unk238; int unk23C; int unk240; int unk244; int unk248; int unk24C; int unk250; }; __declspec(thread) Tls tls={0};
+// pdb: Script::GetActorFactionPlayerEnemyConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool FUN_005136b0(Object* object,unsigned a,unsigned b,double* result) { *result=0; if(object && object->table->IsActor(object)) { bool value=false; object->FUN_0070b780(DAT_0107a104,&value); if(value) *result=1; if(*(unsigned char*)&tls.unk250) { if(*result!=0) FUN_006195d0(DAT_00dd2f44); else FUN_006195d0(DAT_00dd2f00); } } return true; }
 }
 }   // namespace f3m_005136b0
@@ -16040,6 +16404,8 @@ struct Owner50a750 { int unk00; int unk04; int unk08; int unk0C; int unk10; int 
  unsigned char FUN_00454550(Owner50a750*); unsigned char FUN_0050a750(void*);
 };
 __forceinline unsigned Count50a750(Node50a750* node) { unsigned count=0; for(;node;node=node->next) if(node->item) ++count; return count; }
+// pdb: BGSListForm::Compare | BGSListForm.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompare
 unsigned char Owner50a750::FUN_0050a750(void* input) {
  Owner50a750* other=(Owner50a750*)FUN_00c0050a(input,0,&DAT_00f46078,&DAT_00f49948,0);
  if(!other) return true;
@@ -16897,6 +17263,8 @@ struct Owner517510 {
  __forceinline Node517510* At(unsigned index){unsigned n=1;Node517510* node=Head();while(node){if((!node->next && !node->data)||n>=index)return node;node=node->next;++n;}return 0;}
  Item517510* FUN_00517510(unsigned,Context517510*);
 };
+// pdb: Script::GetReferencedObject | TESScript.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiIndex, apScriptLocals
 Item517510* Owner517510::FUN_00517510(unsigned index,Context517510* context) {
  if(!index)return 0;
  if(index>count)return 0;
@@ -17786,6 +18154,8 @@ namespace f3m_0051f570 {
 struct Manager51f570 {void FUN_00437500(const char*);};
 extern Manager51f570* DAT_0107a0d8;
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,char*);
+// pdb: Script::SaveWorldFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051f570(void* a,void* b,void* c,void* d,void* e,void* f,void* unused,void* h) {
  char text[512];
  if(!FUN_00517950(a,b,h,c,d,e,f,text)) return false;
@@ -17948,6 +18318,8 @@ int unk24C;
 bool enabled;};
 __declspec(thread) Tls5143 tls5143={0};
 struct Object5143 {void**table;const char* FUN_004e9a10();};void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::GetIgnoreCrimeConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00514320(Object5143*object,int,int,double*out){*out=0;if(object&&((bool(__thiscall*)(Object5143*))object->table[64])(object)&&((bool(__thiscall*)(Object5143*))object->table[200])(object))*out=1;if(tls5143.enabled){if(*out>0)FUN_006195d0("%s is ignoring crime",object->FUN_004e9a10());else FUN_006195d0("%s is not ignoring crime",object->FUN_004e9a10());}return true;}
 }   // namespace f3m_00514320
 
@@ -18059,6 +18431,8 @@ public:
     VarNode516810* vars; // +0x0c
     double FUN_00516810(unsigned int id, Form516810* script);
 };
+// pdb: ScriptLocals::GetVariable | TESScript.obj | fnv360_0822_debug, caller, medium
+// pdb params: auiID, apScript
 double EventList516810::FUN_00516810(unsigned int id, Form516810* script) {
     ScriptVar516810* var = 0;
     if (g_varCache516810.list != this || g_varCache516810.id != id || !(var = g_varCache516810.var)) {
@@ -18704,6 +19078,8 @@ struct Owner121{
  bool Script_Run(Actor121*,void*,int,bool);
  void FUN_00518d30(Events121*,int,Actor121*);
 };
+// pdb: Script::CompileAndRun | TESScript.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: compiler, compilerIndex, ownerObject
 void Owner121::FUN_00518d30(Events121* events,int mode,Actor121* actor){
  Scope121 scope;
  if(events->FUN_0051dd00(this,actor,mode,0)&&count){
@@ -18721,6 +19097,8 @@ namespace f3m_0050b2a0 {
 struct Text127{char* data;unsigned short length,capacity;Text127(){data=0;length=0;capacity=0;}~Text127();};
 struct FUN_0059acd0{FUN_0059acd0();};
 struct Owner127{Text127 text;FUN_0059acd0 state;Owner127();};
+// pdb: BSSimpleList<MESSAGEBOX_BUTTON *>::AddTail | BGSMessage.obj | fnv360_0721_beta, objrun, medium
+// pdb params: item
 Owner127::Owner127(){}
 }   // namespace f3m_0050b2a0
 
@@ -19041,6 +19419,8 @@ struct Context51eee0 {int unk00;int unk04;int unk08;int unk0C;int unk10;int unk1
 extern Context51eee0* DAT_0107a104;
 void __cdecl TESObjectCELL_RenderTestCell(void*,int,int);
 void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::RenderTestCellFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051eee0(){void* cell=DAT_0107a104->cell;if(cell){TESObjectCELL_RenderTestCell(cell,0,1);FUN_006195d0("RenderTestCell complete. Check warnings file for more info.");}else FUN_006195d0("RenderTestCell failed: no cell");return true;}
 }   // namespace f3m_0051eee0
 
@@ -19050,6 +19430,8 @@ extern const char DAT_00dd2198[];
 namespace f3m_0050f530 {
 namespace Query187{
 void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::GetDiseaseConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: `anonymous namespace'::OutputInfoStream::DoWrite)
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_0050f530(int,int,int,double* result){*result=0.0;if(DAT_0117c250)FUN_006195d0(DAT_00dd2198,*result);return true;}
 }
 }   // namespace f3m_0050f530
@@ -19673,6 +20055,8 @@ namespace f3m_00510e50 {
 __declspec(thread) bool DAT_0117c250=false;
 struct Actor510e50 {void** table;bool FUN_006f6c70();};
 void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::IsWeaponOutConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: Script::GetIsWeaponOutConditionFunction)
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00510e50(Actor510e50* actor,void* unused1,void* unused2,double* result){*result=0.0;if(actor && ((bool(__thiscall*)(Actor510e50*))actor->table[64])(actor) && actor->FUN_006f6c70())*result=1.0;if(DAT_0117c250)FUN_006195d0("Is Weapon Out >> %0.2f",*result);return true;}
 }   // namespace f3m_00510e50
 
@@ -19684,6 +20068,8 @@ struct Player { char pad000[0x5dc]; char disabledControls; };
 extern Player* DAT_0107a104;
 extern const char* DAT_00f50b00[7];
 }
+// pdb: Script::GetPlayerControlsDisabledConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool FUN_00510c60(void* thisObj, unsigned char mask, void* arg2, double* result) {
     *result = 0.0;
     if (N510c60::DAT_0107a104->disabledControls & mask) {
@@ -20153,6 +20539,8 @@ namespace Match107 {
 struct Tls {int unk000;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;int unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;int unk080;int unk084;int unk088;int unk08c;int unk090;int unk094;int unk098;int unk09c;int unk0a0;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4;int unk0d8;int unk0dc;int unk0e0;int unk0e4;int unk0e8;int unk0ec;int unk0f0;int unk0f4;int unk0f8;int unk0fc;int unk100;int unk104;int unk108;int unk10c;int unk110;int unk114;int unk118;int unk11c;int unk120;int unk124;int unk128;int unk12c;int unk130;int unk134;int unk138;int unk13c;int unk140;int unk144;int unk148;int unk14c;int unk150;int unk154;int unk158;int unk15c;int unk160;int unk164;int unk168;int unk16c;int unk170;int unk174;int unk178;int unk17c;int unk180;int unk184;int unk188;int unk18c;int unk190;int unk194;int unk198;int unk19c;int unk1a0;int unk1a4;int unk1a8;int unk1ac;int unk1b0;int unk1b4;int unk1b8;int unk1bc;int unk1c0;int unk1c4;int unk1c8;int unk1cc;int unk1d0;int unk1d4;int unk1d8;int unk1dc;int unk1e0;int unk1e4;int unk1e8;int unk1ec;int unk1f0;int unk1f4;int unk1f8;int unk1fc;int unk200;int unk204;int unk208;int unk20c;int unk210;int unk214;int unk218;int unk21c;int unk220;int unk224;int unk228;int unk22c;int unk230;int unk234;int unk238;int unk23c;int unk240;int unk244;int unk248;int unk24c;bool enabled;};__declspec(thread) Tls tls={0};
 extern char DAT_00dd24fc[];void __cdecl FUN_006195d0(const char*,...);
 int __cdecl FUN_005539c0();
+// pdb: Script::GetUsedItemLevelConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00510770(void*,int,int,double* out){*out=FUN_005539c0();if(tls.enabled)FUN_006195d0(DAT_00dd24fc,*out);return true;}
 }
 }   // namespace f3m_00510770
@@ -20994,6 +21382,8 @@ struct IntegerOperations {
  bool (__thiscall* valid)(IntegerRef*);
 };
 struct IntegerRef {IntegerOperations* operations;int FUN_006f7610(IntegerRef*);const char* FUN_004e9a10();};
+// pdb: Script::GetDetectionLevelConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00511e00(IntegerRef* reference,IntegerRef* target,void*,double* result) {
  *result=0.0;
  if(reference) {
@@ -22001,6 +22391,7 @@ int unk254;
 void* owner;unsigned index;void* context;
 };
 __declspec(thread) Tls tls={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0xffffffff,0};
+// pdb: ScriptLocals::ClearOptimizations | TESScript.obj | fnv360_0822_retail, call_gap, low
 void FUN_00516580(){tls.context=0;tls.index=0xffffffff;tls.owner=0;}
 }
 }   // namespace f3m_00516580
@@ -23024,6 +23415,8 @@ struct FUN_0050fa70_Ref {
     FUN_0050fa70_Process* process;
 };
 
+// pdb: Script::GetFurnitureMarkerIDConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_0050fa70(FUN_0050fa70_Ref* thisObj, void* arg1, void* arg2, double* result)
 {
     *result = 0.0;
@@ -23103,6 +23496,8 @@ __declspec(thread) char g_GetIsUsedItemActivateDebug;
 unsigned char __cdecl FUN_00c03340(void);
 extern "C" int __cdecl FUN_006195d0(const char*, ...);
 
+// pdb: Script::GetUsedItemActivateConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_005107c0(int arg1, int arg2, int arg3, double* result)
 {
     *result = 0.0;
@@ -23129,6 +23524,7 @@ public:
     void FUN_00518160();
 };
 
+// pdb: Script::ClearLocalVariableRefObjects | TESScript.obj | fnv360_0822_retail, call_dedup, low
 void F3Owner::FUN_00518160()
 {
     if (g_tls.unk254 == this) g_tls.unk254 = 0;
@@ -23229,6 +23625,8 @@ extern Stand1096 DAT_0107c0a0;
 
 extern "C" void __cdecl FUN_006195d0(const char* format, ...);
 
+// pdb: Script::ShowWhoDetectsPlayer | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0051e980()
 {
     DAT_0107c0a0.FUN_00d070a0(1, -1);
@@ -23279,6 +23677,8 @@ namespace f3m_00514450 {
 extern TESObjectREFR* DAT_0107a104;
 extern bool __cdecl Script_SameRaceConditionFunction(TESObjectREFR* ref, TESObjectREFR* target, int op, double* result);
 
+// pdb: Script::SameRaceAsPCConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00514450(TESObjectREFR* ref, TESObjectREFR* target, int op, double* result)
 {
     return Script_SameRaceConditionFunction(ref, DAT_0107a104, 0, result);
@@ -23306,6 +23706,8 @@ struct OwnerRef {
 
 extern void __cdecl FUN_006195d0(const char* fmt, const char* text);
 
+// pdb: Script::GetCellOwnershipConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool FUN_005151d0(int unused, OwnerRef* ref, TESForm* form, double* out)
 {
     if (ref->TESObjectCELL_GetOwner() == form)
@@ -23398,6 +23800,8 @@ extern void __cdecl FUN_006195d0(const char*, ...);
 
 __declspec(thread) char g_debugFlag;
 
+// pdb: Script::GetFatiguePercentageConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: Script::GetStaminaPercentageConditionFunction)
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_0050f130(RefObj* obj, void* arg1, void* arg2, double& out)
 {
     if (!obj) return true;
@@ -23420,6 +23824,8 @@ extern char DAT_01071b0c;
 struct TlsBlock0050ee80 { unsigned char pad[0x250]; unsigned char flag; };
 extern __declspec(thread) TlsBlock0050ee80 g_tlsBlock0050ee80;
 
+// pdb: Script::GetMenuModeConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_0050ee80(int unused1, int mode, int unused3, double* result)
 {
     *result = 0.0;
@@ -23721,6 +24127,7 @@ struct TileRect : Tile {
     void Detach();          // 0x00bef620
 };
 
+// pdb: TileRect::`scalar deleting destructor' | Interface.obj | fnv360_0822_retail, caller_sim, low
 TileRect::~TileRect()
 {
     unsigned int flags = m_flags30 >> 13;
@@ -24138,6 +24545,8 @@ extern __declspec(thread) bool DAT_0117c250;
 extern char DAT_00dd2d08[];
 extern void __cdecl FUN_006195d0(const char*, ...);
 
+// pdb: Script::GetPCMiscStatConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_005127a0(void*, unsigned index, void*, double* result)
 {
     double value = DAT_0106f2f8[index]->unk04;
@@ -24279,6 +24688,8 @@ struct PosNode0050ee00 {
     virtual void v91(float* out);
 };
 
+// pdb: Script::GetStartingAngleConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool FUN_0050ee00(PosNode0050ee00* node, int axis, int flags, double* out)
 {
     if (node) {
@@ -24556,6 +24967,8 @@ namespace f3m_0050c080 {
 extern char DAT_00f4977c, DAT_00f46078;
 void* __cdecl FUN_00c0050a(void*, int, void*, void*, int);
 struct CopyC0 { int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; void FUN_00454480(CopyC0*); void FUN_0050c080(void*); };
+// pdb: BGSRadiationStage::Copy | BGSRadiation.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCopy
 void CopyC0::FUN_0050c080(void* p) { CopyC0* src=(CopyC0*)FUN_00c0050a(p,0,&DAT_00f46078,&DAT_00f4977c,0); if(src) { FUN_00454480(src); unk18=src->unk18; unk1c=src->unk1c; } }
 }   // namespace f3m_0050c080
 
@@ -24587,6 +25000,7 @@ public:
     char unk1c[0x30];
 };
 
+// pdb: BGSImpactDataSet::BGSImpactDataSet | BGSImpactDataSet.obj | fnv360_0822_retail, objrun, medium
 BGSImpactDataSet::BGSImpactDataSet()
 {
     type = 0x5f;
@@ -27115,6 +27529,8 @@ struct Tester51e{
 };
 extern Tester51e* DAT_0107a0d8;
 __forceinline void Report51e(const char* state){FUN_006195d0("TestAllCells %s",state);}
+// pdb: Script::TestAllCellsFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051ee40(void* paramInfo, void* scriptData, void* thisObj, void* containingObj, void* script, void* eventList, double* result, unsigned int* opcodeOffset){
     int count=0;bool r;
     if(!FUN_00517950(paramInfo,scriptData,opcodeOffset,thisObj,containingObj,script,eventList,&count))return false;
@@ -27154,6 +27570,8 @@ struct Ref513{
 };
 namespace n513 { extern void* DAT_01071694; }
 void __cdecl FUN_006195d0(const char* format, ...);
+// pdb: Script::GetWeaponHealthPercConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00513d60(Ref513* thisObj, void* a2, void* a3, double* result){
     Proc513* p;
     if(thisObj&&thisObj->IsActor()&&(p=thisObj->process)!=0){
@@ -27324,6 +27742,7 @@ public:
     ~BGSMessage();
 };
 
+// pdb: BGSMessage::~BGSMessage | BGSMessage.obj | fnv360_0822_retail, call_seq, medium
 BGSMessage::~BGSMessage()
 {
     unk2C = 0;
@@ -27700,6 +28119,8 @@ public:
     unsigned FUN_006f57f0();
 };
 void __cdecl FUN_006195d0(const char*, ...);
+// pdb: Script::GetBarterGoldConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: Script::IsXboxConditionFunction)
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00512600(Ref512600* ref, int a2, int a3, double* result)
 {
     if (ref && ref->v64()) {
@@ -27734,6 +28155,7 @@ struct BGSListForm8c0 : FUN_00456190 {
     BGSListForm8c0();
     void FUN_00c24b70();
 };
+// pdb: BGSListForm::BGSListForm | BGSListForm.obj | fnv360_0822_retail, call_gap, high
 BGSListForm8c0::BGSListForm8c0() {
     FUN_00c24b70();
     type = 0x55;
@@ -27789,6 +28211,7 @@ struct Owner96e0 {
     Node96e0 list;
     void FUN_005196e0();
 };
+// pdb: Script::ClearAllReferenceObjects | TESScript.obj | fnv360_0822_retail, call_seq, medium
 void Owner96e0::FUN_005196e0() {
     if (tlsOwner254 == this) tlsOwner254 = 0;
     Node96e0* l = &list;
@@ -27985,6 +28408,7 @@ struct QGlobal515 : FUN_00456190 {
     QGlobal515();
     virtual ~QGlobal515();
 };
+// pdb: TESGlobal::TESGlobal | TESGlobal.obj | fnv360_0822_retail, call_gap, low
 QGlobal515::QGlobal515() { value = 0.0f; format = 's'; type = 6; }
 }
 }   // namespace f3m_00515da0
@@ -28481,6 +28905,8 @@ class ActorV
 int FUN_0044f380(float);
 // Checks if the actor's alignment actor value matches the requested alignment index and logs the result in debug mode.
 // @fnv 0x005a4dd0
+// pdb: Script::GetIsAlignmentConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool FUN_005139c0(ActorV* apActor, void* aiAlignment, void* apUnused, double& result)
 {
     result = 0;
@@ -28765,6 +29191,7 @@ SoundList sounds;
  virtual void slot0();
  ~FUN_00500730();
 };
+// pdb: TESWeather::~TESWeather | TESWeather.obj | fnv360_0822_retail, call_seq, medium
 FUN_00500730::~FUN_00500730(){sounds.FUN_004ffce0();}
 }
 }   // namespace f3m_00500730
@@ -28794,6 +29221,7 @@ struct FUN_0050c9f0:Bound,TextureBase {
  void FUN_0050c630();
  FUN_0050c9f0();
 };
+// pdb: BGSTextureSet::BGSTextureSet | BGSTextureSet.obj | fnv360_0822_retail, uvref, low
 FUN_0050c9f0::FUN_0050c9f0() {FUN_0050c630();type=4;}
 }
 }   // namespace f3m_0050c9f0
@@ -28835,6 +29263,7 @@ struct FUN_00509500 : FUN_00456190,FUN_004580f0 {
   data.soundLevel=1;
  }
 };
+// pdb: BGSImpactData::BGSImpactData | BGSImpactData.obj | fnv360_0822_retail, call_gap, low
 FUN_00509500::FUN_00509500() { type=94; Reset(); }
 }
 }   // namespace f3m_00509500
@@ -28846,6 +29275,8 @@ extern const char DAT_00f4977c,DAT_00f46078;
 void* FUN_00c0050a(void*,int,const void*,const void*,int);
 struct Data {unsigned int first,second;};
 struct Owner {int unk00;int unk04;int unk08;int unk0C;int unk10;int unk14;Data data;bool FUN_00454550(Owner*);bool FUN_0050c0c0(void*);};
+// pdb: BGSRadiationStage::Compare | BGSRadiation.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompare
 bool Owner::FUN_0050c0c0(void* input){Owner* other=(Owner*)FUN_00c0050a(input,0,&DAT_00f46078,&DAT_00f4977c,0);if(!other)return true;if(FUN_00454550(other))return true;bool different=memcmp(&data,&other->data,8)!=0;return different;}
 }
 
@@ -28923,6 +29354,8 @@ struct CamPath_506ef0 {
     CamPath_506ef0* FUN_00506ef0(bool a1, Map_506ef0* a2);
 };
 
+// pdb: BGSCameraPath::CreateDuplicateForm | BGSCameraPath.obj | fnv360_0822_retail, vtable, medium
+// pdb params: abCreateEditorID, apCopyMap
 CamPath_506ef0* CamPath_506ef0::FUN_00506ef0(bool a1, Map_506ef0* a2) {
     CamPath_506ef0* copy = reinterpret_cast<CamPath_506ef0*>(dynamic_cast<BGSCameraPath*>(FUN_00455ef0(a1, a2)));
     void* mapped = 0;
@@ -29229,6 +29662,7 @@ struct Owner507590 {
  NiTArray<BGSCameraPath*,NiTMallocInterface<BGSCameraPath*> > paths;
  ~Owner507590();
 };
+// pdb: BGSCameraPathManager::~BGSCameraPathManager | BGSCameraPathManager.obj | fnv360_0822_retail, call_dedup, low
 Owner507590::~Owner507590() {}
 
 // @f3 0x00515350 (community match, verified in this file)
@@ -29254,6 +29688,7 @@ struct Owner5 {
     Node358* next;
     void FUN_0050bbe0();
 };
+// pdb: BGSMusicType::ClearData | BGSMusicType.obj | fnv360_0822_retail, vtable, medium
 void Owner5::FUN_0050bbe0() {
     while (next || item) {
         Node358* node = *(Node358* volatile*)&next;
@@ -29438,6 +29873,8 @@ void __declspec(noinline) Node504ab0::FUN_00421610(Ref504ab0** slot)
 {
     DAT_01090a7c = (unsigned int)FUN_00504ac8(*slot);
 }
+// pdb: TESWorldSpace::RemoveFromPersistentRefData | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apRef
 void World504ab0::FUN_00504ab0(Ref504ab0* reference)
 {
     Ref504ab0* current = reference;
@@ -29486,6 +29923,7 @@ struct Foo {
     void FUN_005165b0();
 };
 
+// pdb: Script::InitializeData | TESScript.obj | fnv360_0822_retail, vtable, medium
 void Foo::FUN_005165b0() {
     unsigned int tlsIndex = DAT_01179af4;
     unk18 = 0;
@@ -29880,6 +30318,8 @@ inline float Min(float a,float b){return a<b?a:b;}
 inline float Max(float a,float b){return a>b?a:b;}
 
 }
+// pdb: Script::SetTargetRefraction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051f980(const void* parameters,const char* data,TESObjectREFR* reference,TESObjectREFR* container,void* script,void* locals,double& result,unsigned& offset) {
  using namespace task1763;
  if(DAT_0116ef70 && DAT_0116efb0>=2) {
@@ -29913,6 +30353,8 @@ struct ConditionNode
     ConditionNode* next;
     bool FUN_00500970(ConditionNode* other);
 };
+// pdb: TESWeatherList::CompareComponent | TESWeatherList.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCompareWL
 bool ConditionNode::FUN_00500970(ConditionNode* other)
 {
     if (!other)
@@ -30458,6 +30900,8 @@ Data data;void* texture;void* sound1;void* sound2;Decal decal;
 bool FUN_00454550(Impact*);bool FUN_00509040(void*);
 const Data* GetData()const{return &data;}
 };
+// pdb: BGSImpactData::Compare | BGSImpactData.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompare
 bool Impact::FUN_00509040(void* form){
  Impact* other=(Impact*)FUN_00c0050a(form,0,&DAT_00f46078,&DAT_00f498dc,0);
  if(!other)return true;
@@ -30478,6 +30922,7 @@ __forceinline void SwapWord50c190(unsigned int& word){word=_byteswap_ulong(word)
 struct Link50c190 {int unk00;int unk04;int unk08;unsigned int id;};
 struct SaveData50c190 { unsigned int value;union {Link50c190* link;unsigned int formId;}; __forceinline void Swap(){SwapWord50c190(value);SwapWord50c190(formId);} };
 struct Owner50c190 {int unk00;int unk04;int unk08;int unk0C;int unk10;int unk14;SaveData50c190 data;void FUN_004547d0();void FUN_00454ab0(void*,unsigned);void FUN_00454860();void FUN_0050c190();};
+// pdb: BGSRadiationStage::Save | BGSRadiation.obj | fnv360_0822_retail, vtable, medium
 void Owner50c190::FUN_0050c190(){FUN_004547d0();Link50c190*old=data.link;data.formId=(old?old->id:0);if(DAT_0106dd0e){data.Swap();}FUN_00454ab0(&data,8);if(DAT_0106dd0e){data.Swap();}data.link=old;FUN_00454860();}
 
 }   // namespace f3m_0050c190
@@ -30526,6 +30971,7 @@ void Node51a630::RemoveFirst()
     }
 }
 
+// pdb: ScriptCompileData::ClearAllVariables | TESScriptCompiler.obj | fnv360_0822_retail, call_seq, medium
 void FUN_0051ce00::FUN_0051a630()
 {
     Node51a630* l = reinterpret_cast<Node51a630*>(reinterpret_cast<char*>(this) + 0x3C);
@@ -30540,6 +30986,8 @@ void FUN_0051ce00::FUN_0051a630()
 
 // @f3 0x00501f90 (community match, verified in this file)
 namespace f3m_00501f90 {
+// pdb: TESWorldSpace::GetOverlappedMultiBoundRefs | TESWorldSpace.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apCell
 struct Cell1346{virtual void v0();virtual void v1();virtual void v2();virtual void v3();virtual void v4(int);virtual void v5();virtual void v6();virtual void v7();virtual void v8();virtual void v9();virtual void v10();virtual void v11();virtual void v12();virtual void v13();virtual void v14();virtual void v15();virtual void v16();virtual void v17();virtual void v18();virtual void v19();virtual void v20();virtual void v21();virtual void v22();virtual void v23();virtual void v24();virtual void v25();virtual void v26();virtual void v27();virtual void v28();virtual void v29();virtual void v30();virtual void v31();virtual void v32();virtual void v33();virtual void v34();virtual void v35();virtual void v36();virtual void v37();virtual void v38();virtual void v39();virtual void v40();virtual void v41();virtual void v42();virtual void v43();virtual void v44();virtual void v45();virtual void v46();virtual void v47();virtual void v48();virtual void v49();virtual void v50();virtual void v51();virtual void v52();virtual void v53();virtual void v54();virtual void v55();virtual void v56();virtual void v57();virtual void v58();virtual void v59();virtual void v60();virtual void v61();virtual void v62();virtual void v63();virtual void v64();virtual void v65();virtual void v66();virtual void v67();virtual void v68();virtual void v69();virtual void v70();virtual void v71();virtual void v72();virtual void v73();virtual void v74();virtual void v75();virtual const char* Name();unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned char flags24;unsigned char unk25,unk26,unk27;int TESObjectCELL_GetDataX();int TESObjectCELL_GetDataY();bool FUN_004e6b10();void FUN_004d3790(void*);void TESObjectCELL_AddReference(void*,int);};struct Map1346{void* vtable;unsigned int count04;void** buckets08;bool FUN_00bea7b0(unsigned int,Cell1346**);void FUN_00880f70(unsigned int,Cell1346*);void FUN_00899cf0(unsigned int);void FUN_0089a5d0(void*&,unsigned int&,Cell1346*&);void FUN_006bd950();void* First(){for(unsigned int i=0;i<count04;++i)if(buckets08[i])return buckets08[i];return 0;}};struct World1346{unsigned int unk00,unk04,flags08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;Map1346* map30;Cell1346* cell34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned int unk4C;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;Map1346* map68;Cell1346* FUN_00501f90(Cell1346*);};Cell1346* World1346::FUN_00501f90(Cell1346* cell){Cell1346* result=0;if(map68){unsigned short y=(unsigned short)cell->TESObjectCELL_GetDataY();int x=(short)cell->TESObjectCELL_GetDataX()<<16;map68->FUN_00bea7b0(x|y,&result);}return result;}
 
 }   // namespace f3m_00501f90
@@ -30583,6 +31031,8 @@ public:
     void FUN_0050ab40(int);
 };
 
+// pdb: BGSListForm::AddScriptAddedForm | BGSListForm.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apAddedForm
 void FUN_0050ab40_owner::FUN_0050ab40(int param) {
     if (param == 0) return;
     FUN_0049fac0_owner* p = &node;
@@ -30612,6 +31062,7 @@ struct FUN_0050be40 : BaseA, BaseB {
     void FUN_0050bbe0();
     ~FUN_0050be40();
 };
+// pdb: BGSMusicType::`scalar deleting destructor' | BGSMusicType.obj | fnv360_0822_retail, caller_sim, medium
 FUN_0050be40::~FUN_0050be40() { FUN_0050bbe0(); }
 }
 }   // namespace f3m_0050be40
@@ -30710,6 +31161,7 @@ public:
     void Warn(unsigned int id) { FUN_00887da0("MASTERFILE: Unable to find impact data (%08X) on impact data set %s (%08X).", id, GetName(), GetFormID()); }
     void FUN_00509ab0();
 };
+// pdb: BGSImpactDataSet::InitItem | BGSImpactDataSet.obj | fnv360_0822_retail, vtable, medium
 void ImpactDataSet509ab0::FUN_00509ab0() {
     if (IsDeleted()) {
         return;
@@ -30736,12 +31188,15 @@ namespace CameraHeap1410{struct Heap{void* FUN_0086b930(unsigned int);};extern H
 struct CameraNode1410{void* item;CameraNode1410* next;CameraNode1410(void* value):item(value),next(0){}static void* operator new(unsigned int n){return CameraHeap1410::DAT_01090a78.FUN_0086b930(n);}static void operator delete(void*);bool Empty()const{if(next)return false;if(item)return false;return true;}void FUN_006c8220();__forceinline void Append(void* const& value){CameraNode1410* tail=this;while(tail->next)tail=tail->next;if(tail->item)tail->next=new CameraNode1410(value);else tail->item=value;}};
 struct CameraComponent1410{unsigned int unk00,unk04;void TESCondition_Copy(const CameraComponent1410*,int);};
 class CameraPath1410:public TESForm{public:unsigned int unk10,unk14;CameraComponent1410 component18;CameraNode1410 list20;unsigned char flags28;void FUN_00454480(TESForm*);void FUN_00506600(TESForm*);};
+// pdb: BGSCameraPath::Copy | BGSCameraPath.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCopy
 void CameraPath1410::FUN_00506600(TESForm* form){CameraPath1410* other=(CameraPath1410*)__RTDynamicCast(form,0,&DAT_00f46078,&DAT_00f50750,0);if(other){FUN_00454480(other);component18.TESCondition_Copy(&other->component18,0);flags28=other->flags28;list20.FUN_006c8220();CameraNode1410* node=&other->list20;while(node && !node->Empty()){void* value=node->item;node=node->next;if(value)list20.Append(value);}}}
 }
 
 // @f3 0x005015a0 (community match, verified in this file)
 namespace f3m_005015a0 {
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile*);
+// pdb: TESWorldSpace::ClearData | TESWorldSpace.obj | fnv360_0822_retail, vtable, medium
 struct Heap1332{void FUN_0086ba60(void*);};struct Reference1332{virtual void v0();virtual void Destroy();long references04;};struct Link1332{~Link1332();void FUN_00509b90();static void operator delete(void* p){reinterpret_cast<Heap1332&>(DAT_01090a78).FUN_0086ba60(p);}};struct Owner1332{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;Link1332* link48;unsigned int unk4C;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;unsigned int unk68;Reference1332* reference6C;void FUN_005015a0();};void Owner1332::FUN_005015a0(){if(reference6C){Reference1332* previous=reference6C;if(!InterlockedDecrement(&previous->references04))previous->Destroy();reference6C=0;}Link1332* previous=link48;if(previous){previous->FUN_00509b90();reinterpret_cast<Heap1332&>(DAT_01090a78).FUN_0086ba60(previous);}link48=0;}
 }   // namespace f3m_005015a0
 
@@ -30761,6 +31216,7 @@ struct Owner {
  void* source; int unk04,unk08; AmountLink* amounts; void* extra;
  unsigned short FUN_00516a20();
 };
+// pdb: ScriptLocals::GetSaveSize | TESScript.obj | fnv360_0822_retail, call_seq, low
 unsigned short Owner::FUN_00516a20() {
  int total=0;
  if(DAT_01079ca4->TESSaveLoadGame_UseSaveGameBlocks()) total=6;
@@ -30921,6 +31377,7 @@ struct FUN_0050b700 : FUN_00456190, Base18, FUN_00453910 {
     FUN_0050b700();
     virtual ~FUN_0050b700();
 };
+// pdb: BGSMessage::BGSMessage | BGSMessage.obj | fnv360_0822_retail, call_gap, high
 FUN_0050b700::FUN_0050b700() {
     unk30 = 0; unk34 = 0; type = 0x62; unk2C = 0; unk38 = 1; unk3C = 2;
 }
@@ -31130,6 +31587,7 @@ struct CodexInitCommand {
     void FUN_00456190();
     CodexInitCommand* FUN_00517010();
 };
+// pdb: Script::Script | TESScript.obj | fnv360_0822_retail, call_gap, low
 CodexInitCommand* CodexInitCommand::FUN_00517010() {
     FUN_00456190();
     table=DAT_00dd3d0c;
@@ -31292,6 +31750,8 @@ struct Owner7a0 {
     unsigned char FUN_00454550(Owner7a0*);
     bool FUN_0050b7a0(Owner7a0* other);
 };
+// pdb: BGSMessage::Compare | BGSMessage.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompare
 bool Owner7a0::FUN_0050b7a0(Owner7a0* other)
 {
     if (!other) return true;
@@ -31364,6 +31824,7 @@ struct World:Form,FullName,Texture {
     Texture canopy,leaf;
     virtual void v0();World();void FUN_00504f60();
 };
+// pdb: TESWorldSpace::TESWorldSpace | TESWorldSpace.obj | fnv360_0822_retail, call_gap, medium
 World::World():secondTree(37),fourth(0),offsets(37){
     type=0x41;thirdTree=0;
     navInfo=new Map<TagC>(37);
@@ -31459,6 +31920,8 @@ struct Task1933World
     bool FUN_005036e0(TESForm*);
 };
 // @fnv 0x00585250
+// pdb: TESWorldSpace::Compare | TESWorldSpace.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompare
 bool Task1933World::FUN_005036e0(TESForm* form)
 {
     Task1933World* other = (Task1933World*)dynamic_cast< ::TESWorldSpace*>(form);
@@ -31707,6 +32170,8 @@ struct ThreadFile
     FileReader* TESFile_GetThreadSafeFile();
 };
 // @fnv 0x00503ea0
+// pdb: TESWorldSpace::LoadCell | TESWorldSpace.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aiX, aiY
 CellOperations* WorldCellLoader::FUN_00503ea0(int x, int y)
 {
     AutoMemHelper j(26, true, DAT_01031f18, 1942);
@@ -31808,6 +32273,8 @@ struct FUN_00507640 : FormArray {
     FUN_00507640();
 };
 
+// pdb: NiTPrimitiveArray<BGSCameraPath *>::NiTPrimitiveArray<BGSCameraPath *> | BGSCameraPathManager.obj | fnv360_0822_retail, uvref, high
+// pdb params: uiMaxSize, uiGrowBy
 FUN_00507640::FUN_00507640() : paths(0, 1) {}
 }
 }   // namespace f3m_00507640
@@ -31854,6 +32321,8 @@ struct Owner {
     Str s0C; Str s18; Str s24; Str s30; Str s3C; Str s48;
     const char* FUN_0050cd90(int which);
 };
+// pdb: BGSTextureSet::GetTextureFilename | BGSTextureSet.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiType
 const char* Owner::FUN_0050cd90(int which) {
     const char* result = 0;
     switch (which) {
@@ -31896,6 +32365,7 @@ struct Node {
     }
     void* FUN_00501c30();
 };
+// pdb: TESWorldSpace::GetUsableImageSpace | TESWorldSpace.obj | fnv360_0822_retail, call_dedup, low
 void* Node::FUN_00501c30()
 {
     void* r = unk44;
@@ -31970,6 +32440,8 @@ struct Thing {
     }
     void FUN_00518520(Buffer* buf);
 };
+// pdb: ScriptLocals::SaveGame | TESScript.obj | fnv360_0822_retail, call_seq, high
+// pdb params: apSaveGameBuffer
 void Thing::FUN_00518520(Buffer* buf)
 {
     int count = 0;
@@ -32056,6 +32528,8 @@ struct CompileHost {
 };
 __forceinline const char* NameFor(unsigned mode) { return DAT_00f5100c[mode]; }
 __forceinline unsigned Len(const char* s) { return (unsigned)strlen(s); }
+// pdb: ScriptCompiler::CompilePartialScript | TESScriptCompiler.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apScript, apOwnerObject, index, abOnLoad
 bool CompileHost::FUN_0051dd00(ScriptForm* script, TESObjectREFR* ref, unsigned mode, int unused)
 {
     FUN_0051ce00 buffer;
@@ -32486,6 +32960,8 @@ TESForm* __cdecl TESForm_GetFormByNumericID(unsigned int);
 void __cdecl FUN_00887da0(const char*,...);
 struct SomeClass {Map* m_pData[12];void FUN_00509e00(FormView*);};
 // @fnv 0x0058f210
+// pdb: ImpactSwap::InitItem | BGSImpactDataSet.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apOwner
 void SomeClass::FUN_00509e00(FormView* apForm)
 {
     int i6;
@@ -32635,6 +33111,8 @@ struct Owner_518470 {
     void FUN_00518470(Owner_518470* src);
 };
 
+// pdb: ScriptLocals::CopyActionList | TESScript.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pCopy
 void Owner_518470::FUN_00518470(Owner_518470* src)
 {
     if (head08)
@@ -32720,6 +33198,7 @@ struct FUN_00516480 : w16480::FUN_00456190, w16480::FUN_0045bca0, w16480::FUN_00
     ~FUN_00516480();
 };
 
+// pdb: TESLoadScreen::~TESLoadScreen | TESLoadScreen.obj | fnv360_0822_retail, call_seq, medium
 FUN_00516480::~FUN_00516480()
 {
     FUN_00515fd0();
@@ -32776,6 +33255,8 @@ public:
     Node* head;
     void FUN_005182b0(void* key);
 };
+// pdb: ScriptLocals::AddActionObject | TESScript.obj | fnv360_0822_retail, objrun, low
+// pdb params: apActionForm
 void Owner::FUN_005182b0(void* key)
 {
     MemoryContext context(0x15);
@@ -32835,6 +33316,8 @@ struct Cls_5081d0 {
     void FUN_005081d0(Node_5081d0* ref);
 };
 
+// pdb: BGSCameraShot::SetCameraTarget | BGSCameraShot.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apTarget
 void Cls_5081d0::FUN_005081d0(Node_5081d0* ref)
 {
     if (ref == 0) {
@@ -33094,6 +33577,8 @@ public:
     bool FUN_00503cd0(const char* name, int* outX, int* outY);
 };
 
+// pdb: TESWorldSpace::GetExtCellDataFromFileByEditorID | TESWorldSpace.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: apCellID, aiOutX, aiOutY
 bool WSpace_3cd0::FUN_00503cd0(const char* name, int* outX, int* outY)
 {
     unsigned int count = GetSourceFileCount();
@@ -33291,6 +33776,8 @@ bool FUN_00452690(int);
 bool Script_GetValue(double*, const char*, unsigned int*, TESObjectREFR*, TESObjectREFR*, ExtractScript*, ScriptLocals*, bool);
 void __cdecl FUN_00887da0(const char*, ...);
 // FNV tesscript.cpp FUN_005accb0 (ExtractArgs)
+// pdb: Script::ParseParameters | TESScript.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, auiOffset, apRefObject, apContainer, apScript, apScriptLocals
 bool __cdecl FUN_00517950(const ExtractParameter* parameters, const char* data, unsigned int* offset,
                           TESObjectREFR* reference, TESObjectREFR* container, ExtractScript* script,
                           ScriptLocals* locals, ...)
@@ -33983,6 +34470,8 @@ struct Self {
     void FUN_00454480(Self* src);
     void FUN_0050b530(Self* src);
 };
+// pdb: BGSMessage::Copy | BGSMessage.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCopy
 void Self::FUN_0050b530(Self* src)
 {
     V18();
@@ -34243,6 +34732,8 @@ struct CStringArgument {
     bool FUN_0051a3a0(ScriptToken* token, bool variable, bool allowUnknown);
 };
 
+// pdb: ScriptCompileData::GetReferencedObject | TESScriptCompiler.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apCurrentWord, abAddRefVariable, abAllowUnknownRef
 bool CStringArgument::FUN_0051a3a0(ScriptToken* token, bool variable, bool allowUnknown)
 {
     bool result = false;
@@ -34624,6 +35115,8 @@ struct TextureSet {
  void TESForm_SetInitialized(bool);
  bool FUN_0050caf0(File*);
 };
+// pdb: BGSTextureSet::Load | BGSTextureSet.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool TextureSet::FUN_0050caf0(File* file)
 {
     FUN_00454410(file);
@@ -34711,6 +35204,8 @@ struct Container {
  unsigned char data[300];
  char FUN_0050a300(Container* other);
 };
+// pdb: ImpactSwap::Compare | BGSImpactDataSet.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apSwap
 char Container::FUN_0050a300(Container* other) {
  if (!other) return true;
  int i=0;
@@ -34751,6 +35246,8 @@ void* __cdecl TESForm_GetFormByNumericID(int);
 const char* __cdecl TESFullName_GetFullName(void*);
 void* __cdecl FUN_00c0050a(void*,int,void*,void*,int);
 void __cdecl FUN_00887da0(const char*,...);
+// pdb: ScriptLocals::SetVariable | TESScript.obj | fnv360_0822_retail, ustr, medium
+// pdb params: auiID, value
 void State::FUN_005168c0(void* key, double value) {
     Link* n=list;
     while(n && n->record) {
@@ -34887,6 +35384,8 @@ struct BGSMessage300 : TESForm300, TESFullName300, TESDescription300 {
     bool FUN_0050b300(TESFile300* file);
 };
 
+// pdb: BGSMessage::Load | BGSMessage.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool BGSMessage300::FUN_0050b300(TESFile300* file)
 {
     file->TESFile_GetTESForm();
@@ -34999,6 +35498,7 @@ struct Owner {
     void FUN_0051a5b0();
 };
 }
+// pdb: ScriptCompileData::ClearAllReferenceObjects | TESScriptCompiler.obj | fnv360_0822_retail, call_seq, medium
 void n51a5b0::Owner::FUN_0051a5b0()
 {
     n51a5b0::DeleteAll(&m44);
@@ -35138,6 +35638,7 @@ class MusicFileBuilder : public TESFormBase, public TESSoundFile
     void FUN_0050bc40();
 };
 
+// pdb: BGSMusicType::BuildFileList | BGSMusicType.obj | fnv360_0822_retail, call_gap, low
 void MusicFileBuilder::FUN_0050bc40()
 {
     AutoMemHelper memContext(11);
@@ -35205,6 +35706,7 @@ struct FUN_00519960 : Base {
     void FUN_00519660();
     void FUN_005196e0();
 };
+// pdb: Script::~Script | TESScript.obj | fnv360_0822_retail, call_seq, medium
 FUN_00519960::~FUN_00519960() {
     Free(unk30);
     Free(unk2c);
@@ -35230,6 +35732,8 @@ struct Owner {
     float scale, offsetX,offsetY,unk9c, minX,minY,maxX,maxY;
     void FUN_00501450(Vec3* p, bool inverse);
 };
+// pdb: TESWorldSpace::AdjustMapMarkerCoord | TESWorldSpace.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aMapCoord, abInverse
 void Owner::FUN_00501450(Vec3* p, bool inverse) {
     if (inverse) { p->x -= offsetX; p->y -= offsetY; }
     if (scale != 1.0f && scale != 0.0f) {
@@ -35391,6 +35895,7 @@ struct QImageSettings509 {
     unsigned char imageParameters[300];
     void FUN_00509c90();
 };
+// pdb: ImpactSwap::Save | BGSImpactDataSet.obj | fnv360_0822_retail, call_dedup, low
 void QImageSettings509::FUN_00509c90() {
     Record509 rec;
     for (int i = 0; i < 12; i++) {
@@ -35431,6 +35936,7 @@ struct Attachment508410 { int unk00; int unk04; int unk08; int unk0C; int unk10;
 struct Owner508410 { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; float unk5C; int unk60; Position508410* unk64; int unk68; Attachment508410* unk6C; int unk70; unsigned char unk74;
  Vec508410 FUN_00508410();
 };
+// pdb: BGSCameraShot::GetTargetPos | BGSCameraShot.obj | fnv360_0822_retail, call_gap, medium
 Vec508410 Owner508410::FUN_00508410() {
  Vec508410 out=DAT_0108ec68;
  if(unk5C>0.0f) { float value=unk5C; out=DAT_0108d098.FUN_007cf9b0(value); }
@@ -35496,6 +36002,8 @@ struct WeatherList500d20 {
     static void __cdecl FUN_00500d20(WeatherList500d20* list, N500d20::File* file, TESForm* form);
 };
 
+// pdb: TESWeatherList::LoadWeatherListChunk | TESWeatherList.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apWeatherList, apFile, pForm
 void __cdecl WeatherList500d20::FUN_00500d20(WeatherList500d20* list, N500d20::File* file, TESForm* form)
 {
     if (!file || !list || !form)
@@ -35547,6 +36055,8 @@ struct Node {
     unsigned int Count() { unsigned int c = 0; for (Node* n = this; n; n = n->next) if (n->item) ++c; return c; }
 };
 
+// pdb: TESWeatherList::Save | TESWeatherList.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeChunkID
 void Node::FUN_00500810(unsigned int tag)
 {
     unsigned int count = Count();
@@ -35689,6 +36199,8 @@ public:
     void FUN_005080b0(Node* node);
 };
 
+// pdb: BGSCameraShot::SetCameraLocation | BGSCameraShot.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apLocation
 void Owner::FUN_005080b0(Node* node)
 {
     if (unk44 & 1) {
@@ -35749,6 +36261,8 @@ struct World {
     World* FUN_00503340(int a, int b);
 };
 
+// pdb: TESWorldSpace::CreateDuplicateForm | TESWorldSpace.obj | fnv360_0822_retail, vtable, medium
+// pdb params: abCreateEditorID, apCopyMap
 World* World::FUN_00503340(int a, int b)
 {
     World* result = (World*)FUN_00c0050a(FUN_00455ef0(a, b), 0, DAT_00f46078, DAT_00f47a58, 0);
@@ -35808,6 +36322,7 @@ public:
     ~BGSCameraShot();
 };
 
+// pdb: BGSCameraShot::~BGSCameraShot | BGSCameraShot.obj | fnv360_0822_retail, call_seq, medium
 BGSCameraShot::~BGSCameraShot() { BGSCameraShot_FreeCamera(); }
 }   // namespace f3m_00508520
 
@@ -35865,6 +36380,8 @@ struct TESWeather {
     void FUN_00454480(TESWeather* other);
     void FUN_005002b0(void* form);
 };
+// pdb: TESWeather::Copy | TESWeather.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCopy
 void TESWeather::FUN_005002b0(void* form)
 {
     TESWeather* src = FUN_00c0050a(form, 0, DAT_00f46078, DAT_00f4987c, 0);
@@ -36306,6 +36823,7 @@ struct BGSCameraPath : TESForm {
     void FUN_00506930(int idx);
     BGSCameraPath* Get(unsigned int index) { BGSCameraPath* result = 0; if (array) result = static_cast<BGSCameraPath*>(__RTDynamicCast(array->FUN_0048c780(index), 0, &DAT_00f46078, &DAT_00f50750, 0)); return result; }
 };
+// pdb: BGSCameraPath::~BGSCameraPath | BGSCameraPath.obj | fnv360_0822_retail, call_seq, medium
 BGSCameraPath::~BGSCameraPath()
 {
     comp.FUN_005ae160();
@@ -36435,6 +36953,7 @@ struct Event {
     void FUN_00516af0();
 };
 
+// pdb: ScriptLocals::SaveGame | TESScript.obj | fnv360_0822_retail, call_seq, high
 void Event::FUN_00516af0()
 {
     unsigned int blockSize = 0;
@@ -36835,6 +37354,8 @@ struct Owner {
     bool FUN_00516010(Form* form);
 };
 
+// pdb: TESLoadScreen::CanDisplayForForm | TESLoadScreen.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apLoadingForm
 bool Owner::FUN_00516010(Form* form) {
     volatile bool result = false;
     unsigned int formID;
@@ -37039,6 +37560,8 @@ __forceinline float Min(float a, float b) { return a < b ? a : b; }
 __forceinline float Max(float a, float b) { return a > b ? a : b; }
 inline bool IsConsoleMode() { return ::DAT_0117c250; }
 
+// pdb: Script::SetTargetRefractionFire | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051fb20(ParamInfo* paramInfo, void* scriptData, TESObjectREFR* thisObj,
     TESObjectREFR* containingObj, Script* scriptObj, ScriptEventList* eventList, double* result,
     unsigned int* opcodeOffsetPtr)
@@ -37096,6 +37619,8 @@ struct List {
     __forceinline void Append(Variable* item) { FUN_0061c430(item); }
 };
 
+// pdb: Script::CopyVariableList | TESScript.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: pCopyFromList, pCopyToList, apOwner
 void __cdecl FUN_00518a80(const Node* source, List* destination)
 {
     if (!destination)
@@ -37194,6 +37719,8 @@ Cell* WorldSpace::TESWorldSpace_GetCellFromCellCoord(int x, int y)
     return 0;
 }
 
+// pdb: TESWorldSpace::EnumReferencesCloseToPoint | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aPoint1, afRadius1, aPoint2, afRadius2, apfnEnumFunc, aiEnumData
 void WorldSpace::FUN_00502290(const NiPoint3* point, float distance,
                               const NiPoint3* otherPoint, float otherDistance,
                               int options, unsigned int context)
@@ -37292,6 +37819,7 @@ struct FUN_005181b0_cls {
     void FUN_005181b0();
 };
 
+// pdb: ScriptLocals::ClearActionList | TESScript.obj | fnv360_0822_retail, call_dedup, low
 void FUN_005181b0_cls::FUN_005181b0()
 {
     if (head == 0)
@@ -37370,6 +37898,7 @@ struct Owner {
     Ref78* FUN_005015f0();
 };
 
+// pdb: TESWorldSpace::CreatePortalGraph | TESWorldSpace.obj | fnv360_1110_retail, objrun, medium
 Ref78* Owner::FUN_005015f0()
 {
     if (reference6C == 0)
@@ -37428,6 +37957,7 @@ public:
     void FUN_00519d90();
 };
 
+// pdb: ScriptCompileData::ClearAllScriptLines | TESScriptCompiler.obj | fnv360_0822_retail, call_seq, medium
 void FUN_00519d90_owner::FUN_00519d90() {
     FreeAll519d90(&unk50);
 }
@@ -37469,6 +37999,7 @@ struct FUN_00518b20_cls {
     Node_b0182* FUN_00518b20();
 };
 
+// pdb: Script::CreateLocalList | TESScript.obj | fnv360_0721_retail, call_seq, medium
 Node_b0182* FUN_00518b20_cls::FUN_00518b20()
 {
     Guard_b0182 g;
@@ -37501,11 +38032,14 @@ struct Override1308{int unk00,unk04,unk08,unk0C,unk10,unk14,unk18,unk1C,unk20;fl
 struct Entry1308{void* value;unsigned int weight04;Override1308* dynamic08;unsigned int Weight()const{return dynamic08?(unsigned int)dynamic08->weight24:weight04;}};
 struct Random1308{unsigned int FUN_0086c4b0(int);};Random1308* __cdecl FUN_0044a2d0();
 struct Node1308{Entry1308* item;Node1308* next;void* FUN_00500ad0();};
+// pdb: TESWeatherList::GetRandomWeather | TESWeatherList.obj | fnv360_0822_retail, call_seq, medium
 void* Node1308::FUN_00500ad0(){unsigned int total=0;for(Node1308* node=this;node;node=node->next)if(node->item){Entry1308* item=node->item;if(item->dynamic08)total+=(unsigned int)item->dynamic08->weight24;else total+=item->weight04;}if(total){Random1308* random=FUN_0044a2d0();unsigned int roll=random->FUN_0086c4b0(-1)%total;unsigned int begin=0,end=~0u;Entry1308* entry=0;for(Node1308* node=this;node;node=node->next){entry=node->item;if(entry){unsigned int weight=entry->Weight();if(weight){end+=weight;if(begin<=roll&&roll<=end)break;begin+=weight;}}}if(entry)return entry->value;}return 0;}
 }   // namespace f3m_00500ad0
 
 // @f3 0x00502a90 (community match, verified in this file)
 namespace f3m_00502a90 {
+// pdb: TESWorldSpace::IsPointInBorderRegion | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arPoint
 struct __declspec(align(8)) Point1355{float x,y;void FUN_004a22c0(float,float);};struct Shape1355{bool FUN_004a2a70(const Point1355*);};struct ShapeNode1355{Shape1355* item;ShapeNode1355* next;};struct World1355;struct Area1355{unsigned int unk00,unk04,flags08,unk0C,unk10,unk14,unk18;ShapeNode1355* shapes1C;World1355* world20;unsigned char Enabled(){unsigned char value=(unsigned char)(flags08>>6);value&=1;return value;}unsigned char Disabled(){unsigned char value=(unsigned char)(flags08>>5);value&=1;return value;}};struct AreaLink1355{Area1355* item;AreaLink1355* next;};struct AreaNode1355{AreaNode1355* previous00;AreaLink1355 link04;AreaNode1355* Next(){return link04.next?(AreaNode1355*)((char*)link04.next-4):0;}};struct Manager1355{unsigned int unk000;unsigned int unk004;unsigned int unk008;unsigned int unk00C;unsigned int unk010;unsigned int unk014;unsigned int unk018;unsigned int unk01C;unsigned int unk020;unsigned int unk024;unsigned int unk028;unsigned int unk02C;unsigned int unk030;unsigned int unk034;unsigned int unk038;unsigned int unk03C;unsigned int unk040;unsigned int unk044;unsigned int unk048;unsigned int unk04C;unsigned int unk050;unsigned int unk054;unsigned int unk058;unsigned int unk05C;unsigned int unk060;unsigned int unk064;unsigned int unk068;unsigned int unk06C;unsigned int unk070;unsigned int unk074;unsigned int unk078;unsigned int unk07C;unsigned int unk080;unsigned int unk084;unsigned int unk088;unsigned int unk08C;unsigned int unk090;unsigned int unk094;unsigned int unk098;unsigned int unk09C;unsigned int unk0A0;unsigned int unk0A4;unsigned int unk0A8;unsigned int unk0AC;unsigned int unk0B0;unsigned int unk0B4;unsigned int unk0B8;unsigned int unk0BC;unsigned int unk0C0;unsigned int unk0C4;unsigned int unk0C8;unsigned int unk0CC;unsigned int unk0D0;unsigned int unk0D4;unsigned int unk0D8;unsigned int unk0DC;unsigned int unk0E0;unsigned int unk0E4;unsigned int unk0E8;unsigned int unk0EC;unsigned int unk0F0;unsigned int unk0F4;unsigned int unk0F8;unsigned int unk0FC;unsigned int unk100;unsigned int unk104;unsigned int unk108;unsigned int unk10C;unsigned int unk110;unsigned int unk114;unsigned int unk118;unsigned int unk11C;unsigned int unk120;unsigned int unk124;unsigned int unk128;unsigned int unk12C;unsigned int unk130;unsigned int unk134;unsigned int unk138;unsigned int unk13C;unsigned int unk140;unsigned int unk144;unsigned int unk148;unsigned int unk14C;unsigned int unk150;unsigned int unk154;unsigned int unk158;unsigned int unk15C;unsigned int unk160;AreaNode1355* regions164;};namespace G1355{extern Manager1355* DAT_0106cdcc;}struct World1355{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned char flags4C;bool FUN_00502a90(const Point1355*);};bool World1355::FUN_00502a90(const Point1355* position){if(!(flags4C&8))return true;Point1355 point;point.FUN_004a22c0(position->x,position->y);bool found=false;for(AreaNode1355* node=G1355::DAT_0106cdcc->regions164;node && node->link04.item;node=node->Next()){Area1355* area=node->link04.item;if(area->Enabled() && !area->Disabled() && area->world20==this){for(ShapeNode1355* shape=area->shapes1C;shape;shape=shape->next){if(!shape->item)break;if(shape->item->FUN_004a2a70(&point))found=true;}}}return found;}
 }   // namespace f3m_00502a90
 
@@ -37519,6 +38053,8 @@ struct File { int unk000; int unk004; int unk008; int unk00C; int unk010; int un
 struct Owner;
 struct Table { void* unk000; void* unk004; void* unk008; void* unk00C; void* unk010; void* unk014; void* unk018; void* unk01C; void* unk020; void* unk024; void* unk028; void* unk02C; void* unk030; void* unk034; void* unk038; void* unk03C; void* unk040; void* unk044; void* unk048; void* unk04C; void* unk050; void* unk054; void* unk058; void* unk05C; void* unk060; void* unk064; void* unk068; void* unk06C; void* unk070; void* unk074; void* unk078; void* unk07C; void* unk080; void* unk084; void* unk088; void* unk08C; void* unk090; void* unk094; void* unk098; void* unk09C; void* unk0A0; void* unk0A4; void* unk0A8; void* unk0AC; void* unk0B0; void* unk0B4; void* unk0B8; void* unk0BC; void* unk0C0; void* unk0C4; void* unk0C8; void* unk0CC; void* unk0D0; void* unk0D4; void* unk0D8; void* unk0DC; void (__thiscall *LoadBounds)(Owner*,File*); void* unk0E4; void* unk0E8; void* unk0EC; void* unk0F0; void* unk0F4; void* unk0F8; void* unk0FC; void* unk100; void* unk104; void* unk108; void* unk10C; void* unk110; void* unk114; void* unk118; void* unk11C; void* unk120; void* unk124; void* unk128; void* unk12C; void* unk130; void (__thiscall *SetEditor)(Owner*,const char*); };
 struct Owner { Table* table; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; unsigned payload[12]; void FUN_00454410(File*); bool FUN_00509960(File*); };
+// pdb: BGSImpactDataSet::Load | BGSImpactDataSet.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Owner::FUN_00509960(File* file) { if(file->TESFile_GetTESForm()!=95) return false; FUN_00454410(file); unsigned tag=file->TESFile_GetTESChunk(); while(tag) { switch(tag) { case 'DNBO': table->LoadBounds(this,file); break; case 'DIDE': { char* text=(char*)_alloca(file->chunkSize); file->FUN_00447d60(text,512); table->SetEditor(this,text); break; } case 'ATAD': { file->FUN_00447d60(payload,48); if(file->swap) { unsigned* p=payload; for(unsigned remaining=12;remaining;++p,--remaining) *p=_byteswap_ulong(*p); } break; } } if(!file->TESFile_NextChunk()) break; tag=file->TESFile_GetTESChunk(); } return true; }
 }
 }   // namespace f3m_00509960
@@ -37540,6 +38076,8 @@ struct Locals {
  void Clear(){Node* n=events;do {Event* e=n->item;if(!e)break;n=n->next;e->state=0;}while(n);}
  void FUN_00518670(Buffer*);
 };
+// pdb: ScriptLocals::LoadGame | TESScript.obj | fnv360_0721_retail, call_seq, medium
+// pdb params: apLoadGameBuffer
 void Locals::FUN_00518670(Buffer* b){
  bool hasEffect; bool onLoad;
  {unsigned count=b->BGSLoadGameBuffer_LoadVariableSizedValue();for(unsigned i=0;i<count;i++){
@@ -37821,6 +38359,8 @@ void FUN_00454410(File*);void TESForm_LoadData(File*,void*,unsigned);
 struct Model { int u00,u04,u08,u0c,u10,u14,u18;unsigned modifier; };
 void __cdecl FUN_00458210(Model*,File*);
 struct Camera : Base,Model { Data data; bool FUN_00507890(File*); };
+// pdb: BGSCameraShot::Load | BGSCameraShot.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Camera::FUN_00507890(File* file) {
 if(file->TESFile_GetTESForm()!=0x5b)return false;
 FUN_00454410(file);
@@ -38050,6 +38590,8 @@ unsigned int unk04,unk08;FormId formId;unsigned int unk10,unk14;Icon icon;Record
  void FUN_00454410(Stream*);void TESForm_SetInitialized(int);bool FUN_00516150(Stream*);
 };
 }
+// pdb: TESLoadScreen::Load | TESLoadScreen.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Load516::Owner::FUN_00516150(Stream* stream) {
  FUN_00454410(stream);TESForm_SetInitialized(0);
  int code=stream->TESFile_GetTESChunk();
@@ -38083,6 +38625,8 @@ namespace task1597 {
 inline void Swap(unsigned long& v){v=_byteswap_ulong(v);}
 struct File{int unk0;int unk4;int unk8;int unkc;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;int unk3c;int unk40;int unk44;int unk48;int unk4c;int unk50;int unk54;int unk58;int unk5c;int unk60;int unk64;int unk68;int unk6c;int unk70;int unk74;int unk78;int unk7c;int unk80;int unk84;int unk88;int unk8c;int unk90;int unk94;int unk98;int unk9c;int unka0;int unka4;int unka8;int unkac;int unkb0;int unkb4;int unkb8;int unkbc;int unkc0;int unkc4;int unkc8;int unkcc;int unkd0;int unkd4;int unkd8;int unkdc;int unke0;int unke4;int unke8;int unkec;int unkf0;int unkf4;int unkf8;int unkfc;int unk100;int unk104;int unk108;int unk10c;int unk110;int unk114;int unk118;int unk11c;int unk120;int unk124;int unk128;int unk12c;int unk130;int unk134;int unk138;int unk13c;int unk140;int unk144;int unk148;int unk14c;int unk150;int unk154;int unk158;int unk15c;int unk160;int unk164;int unk168;int unk16c;int unk170;int unk174;int unk178;int unk17c;int unk180;int unk184;int unk188;int unk18c;int unk190;int unk194;int unk198;int unk19c;int unk1a0;int unk1a4;int unk1a8;int unk1ac;int unk1b0;int unk1b4;int unk1b8;int unk1bc;int unk1c0;int unk1c4;int unk1c8;int unk1cc;int unk1d0;int unk1d4;int unk1d8;int unk1dc;int unk1e0;int unk1e4;int unk1e8;int unk1ec;int unk1f0;int unk1f4;int unk1f8;int unk1fc;int unk200;int unk204;int unk208;int unk20c;int unk210;int unk214;int unk218;int unk21c;int unk220;int unk224;int unk228;int unk22c;int unk230;int unk234;int unk238;int unk23c;int unk240;int unk244;int unk248;int unk24c;int unk250;int unk254;int unk258;unsigned chunkSize;int unk260;int unk264;int unk268;int unk26c;int unk270;int unk274;int unk278;int unk27c;int unk280;int unk284;int unk288;int unk28c;int unk290;int unk294;char unk298;bool endian;unsigned char TESFile_GetTESForm();unsigned TESFile_GetTESChunk();void FUN_00447d60(void*,unsigned);bool TESFile_NextChunk();};
 struct Owner{virtual void v0();virtual void v4();virtual void v8();virtual void vc();virtual void v10();virtual void v14();virtual void Reset();virtual void v1c();virtual void v20();virtual void v24();virtual void v28();virtual void v2c();virtual void v30();virtual void v34();virtual void v38();virtual void v3c();virtual void v40();virtual void v44();virtual void v48();virtual void v4c();virtual void v50();virtual void v54();virtual void v58();virtual void v5c();virtual void v60();virtual void v64();virtual void v68();virtual void v6c();virtual void v70();virtual void v74();virtual void v78();virtual void v7c();virtual void v80();virtual void v84();virtual void v88();virtual void v8c();virtual void v90();virtual void v94();virtual void v98();virtual void v9c();virtual void va0();virtual void va4();virtual void va8();virtual void vac();virtual void vb0();virtual void vb4();virtual void vb8();virtual void vbc();virtual void vc0();virtual void vc4();virtual void vc8();virtual void vcc();virtual void vd0();virtual void vd4();virtual void vd8();virtual void vdc();virtual void Bounds(File*);virtual void ve4();virtual void ve8();virtual void vec();virtual void vf0();virtual void vf4();virtual void vf8();virtual void vfc();virtual void v100();virtual void v104();virtual void v108();virtual void v10c();virtual void v110();virtual void v114();virtual void v118();virtual void v11c();virtual void v120();virtual void v124();virtual void v128();virtual void v12c();virtual void v130();virtual void Editor(char*);int unk4;int unk8;int unkc;int unk10;int unk14;unsigned long data0,data1;void FUN_00454410(File*);void TESForm_SetInitialized(bool);void TESForm_LoadData(File*,void*,int);bool FUN_0050c200(File*);};
+// pdb: BGSRadiationStage::Load | BGSRadiation.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Owner::FUN_0050c200(File* file){if(file->TESFile_GetTESForm()!=0x5a)return false;Reset();FUN_00454410(file);TESForm_SetInitialized(false);unsigned chunk;while((chunk=file->TESFile_GetTESChunk())!=0){switch(chunk){case 0x44494445:{char* buffer=(char*)_alloca(file->chunkSize);file->FUN_00447d60(buffer,0x200);Editor(buffer);break;}case 0x444e424f:Bounds(file);break;case 0x41544144:{unsigned long* data=&data0;TESForm_LoadData(file,data,8);if(file->endian){Swap(data[0]);Swap(data[1]);}break;}}if(!file->TESFile_NextChunk())break;}return true;}
 }
 }   // namespace f3m_0050c200
@@ -38140,6 +38684,8 @@ static __forceinline void WriteLookupValue(unsigned* const volatile& output, uns
     *output = value;
 }
 
+// pdb: Script::FindVariable | TESScript.obj | fnv360_0822_debug, caller, medium
+// pdb params: varName, auiID
 char VariableOwner::FUN_00517600(const char* text, unsigned* output) {
     VariableLink* node = &head;
     if (node) {
@@ -38209,6 +38755,8 @@ struct Script {
 
 };
 
+// pdb: Script::CompareResultScripts | TESScript.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apCompare
 bool Script::FUN_00517360(const Script* other)
 
 {
@@ -38311,6 +38859,7 @@ struct Owner506e60
     Array506e60* FUN_00506e60();
 };
 
+// pdb: BGSCameraPath::CreateChildArray | BGSCameraPath.obj | fnv360_0822_retail, call_seq, medium
 Array506e60* Owner506e60::FUN_00506e60()
 {
     Array506e60* result = children;
@@ -38446,6 +38995,7 @@ public:
     void FUN_0050b070();
 };
 
+// pdb: BGSMessage::InitItem | BGSMessage.obj | fnv360_0822_retail, vtable, medium
 void Terminal::FUN_0050b070()
 {
     if ((unsigned char)(flags >> 3) & 1)
@@ -38604,6 +39154,7 @@ struct WS {
     }
 };
 
+// pdb: BGSImpactData::InitItem | BGSImpactData.obj | fnv360_0822_retail, vtable, medium
 void WS::FUN_005095d0()
 {
     if ((unsigned char)(unk08 >> 3) & 1) return;
@@ -38651,6 +39202,8 @@ struct Script5171 {
     const char* Name(){typedef const char*(__thiscall*F)(Script5171*);return ((F)table[0x130/4])(this);}
     bool FUN_005171c0(Other5171* other);
 };
+// pdb: Script::NeedsUpdate | TESScript.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCompileData
 bool Script5171::FUN_005171c0(Other5171* other)
 {
     if(!DAT_0106cf3c) {
@@ -38946,6 +39499,8 @@ struct Record506100 {
  void TESForm_SetInitialized(bool);
  bool FUN_00506100(File506100*);
 };
+// pdb: BGSAcousticSpace::Load | BGSAcousticSpace.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Record506100::FUN_00506100(File506100* file) {
  unsigned value=0;
  FUN_00454410(file);
@@ -40414,6 +40969,8 @@ struct Owner {
 };
 inline float Min(float oldValue, float newValue) { return oldValue < newValue ? oldValue : newValue; }
 inline float Max(float oldValue, float newValue) { return oldValue > newValue ? oldValue : newValue; }
+// pdb: TESWorldSpace::LoadPartial | TESWorldSpace.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Owner::FUN_00502d60(Reader* reader) {
     unsigned int type = reader->TESFile_GetTESChunk();
     if (type) {
@@ -40958,6 +41515,8 @@ class TESWorldSpace : public TESForm, public TESFullName, public TESTexture
     bool FUN_00505020(TESFile* file);
 };
 
+// pdb: TESWorldSpace::Load | TESWorldSpace.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool TESWorldSpace::FUN_00505020(TESFile* file)
 {
     int chunk;
@@ -41187,6 +41746,8 @@ struct Lookup51e3 {unsigned InventoryChanges_WearingObject(Form51e3*,int);};
 extern Lookup51e3* __cdecl FUN_0047e090(Ref51e3*);
 struct Manager51e3 {void PlayerCharacter_CheckForQuestTargetUpdate(Ref51e3*);};extern Manager51e3* DAT_0107a104;
 extern void __cdecl Interface_UpdateInventory();
+// pdb: Script::RemoveMeFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0051e3b0(int a,int b,Ref51e3* first,Ref51e3* second,int e,int f,int g,int h){unsigned value=0;if(FUN_00517950(a,b,h,first,second,e,f,&value)){if(!first||!second)return true;Cast51e3* cast=(Cast51e3*)FUN_00c0050a(second,0,DAT_00f47aa8,DAT_00f47ac4,0);unsigned found=0;if(cast&&cast->FUN_004e84e0(first->GetBaseObject())){Lookup51e3* lookup=FUN_0047e090(second);if(lookup)found=lookup->InventoryChanges_WearingObject(first->GetBaseObject(),0);}second->unk00->unk17C(second,first->GetBaseObject(),found,1,0,0,value,0,0,1,0);DAT_0107a104->PlayerCharacter_CheckForQuestTargetUpdate(first);if(second==(Ref51e3*)DAT_0107a104)Interface_UpdateInventory();}return false;}
 }
 
@@ -41206,6 +41767,8 @@ __forceinline Stage** Allocate(unsigned int count){
  for(unsigned int i=0;i<count;++i)slots[i]=0;
  return slots;
 }
+// pdb: BGSRadiationStage::RemoveStage | BGSRadiation.obj | fnv360_0822_retail, call_seq, low
+// pdb params: apNewStage
 void __cdecl FUN_0050c3d0(Stage* item){
  unsigned int size=DAT_01071a3c;
  if(!size)return;
@@ -41231,6 +41794,8 @@ void __cdecl FUN_0050c3d0(Stage* item){
 // @f3 0x005041b0 (community match, verified in this file)
 namespace f3m_005041b0 {
 struct Actor1361{unsigned int unk000;unsigned int unk004;unsigned int unk008;unsigned int unk00C;unsigned int unk010;unsigned int unk014;unsigned int unk018;unsigned int unk01C;unsigned int unk020;unsigned int unk024;unsigned int unk028;unsigned int unk02C;unsigned int unk030;unsigned int unk034;unsigned int unk038;unsigned int unk03C;unsigned int unk040;unsigned int unk044;unsigned int unk048;unsigned int unk04C;unsigned int unk050;unsigned int unk054;unsigned int unk058;unsigned int unk05C;unsigned int unk060;unsigned int unk064;unsigned int unk068;unsigned int unk06C;unsigned int unk070;unsigned int unk074;unsigned int unk078;unsigned int unk07C;unsigned int unk080;unsigned int unk084;unsigned int unk088;unsigned int unk08C;unsigned int unk090;unsigned int unk094;unsigned int unk098;unsigned int unk09C;unsigned int unk0A0;unsigned int unk0A4;unsigned int unk0A8;unsigned int unk0AC;unsigned int unk0B0;unsigned int unk0B4;unsigned int unk0B8;unsigned int unk0BC;unsigned int unk0C0;unsigned int unk0C4;unsigned int unk0C8;unsigned int unk0CC;unsigned int unk0D0;unsigned int unk0D4;unsigned int unk0D8;unsigned int unk0DC;unsigned int unk0E0;unsigned int unk0E4;unsigned int unk0E8;unsigned int unk0EC;unsigned int unk0F0;unsigned int unk0F4;unsigned int unk0F8;unsigned int unk0FC;unsigned int unk100;unsigned int unk104;unsigned int unk108;unsigned int unk10C;unsigned int unk110;unsigned int unk114;unsigned int unk118;unsigned int unk11C;unsigned int unk120;unsigned int unk124;unsigned int unk128;unsigned int unk12C;unsigned int unk130;unsigned int unk134;unsigned int unk138;unsigned int unk13C;unsigned int unk140;unsigned int unk144;unsigned int unk148;unsigned int unk14C;unsigned int unk150;unsigned int unk154;unsigned int unk158;unsigned int unk15C;unsigned int unk160;unsigned int unk164;unsigned int unk168;unsigned int unk16C;unsigned int unk170;unsigned int unk174;unsigned int unk178;unsigned int unk17C;unsigned int unk180;unsigned int unk184;unsigned int unk188;unsigned int unk18C;unsigned int unk190;unsigned int unk194;unsigned int unk198;unsigned int unk19C;unsigned int unk1A0;unsigned int unk1A4;unsigned int unk1A8;unsigned int unk1AC;unsigned int unk1B0;unsigned int unk1B4;unsigned int unk1B8;unsigned int unk1BC;unsigned int unk1C0;unsigned int unk1C4;unsigned int unk1C8;unsigned int unk1CC;unsigned int unk1D0;unsigned int unk1D4;unsigned int unk1D8;unsigned int unk1DC;unsigned int unk1E0;unsigned int unk1E4;unsigned int unk1E8;unsigned int unk1EC;unsigned int unk1F0;unsigned int unk1F4;unsigned int unk1F8;unsigned int unk1FC;unsigned int unk200;unsigned int unk204;unsigned int unk208;unsigned int unk20C;unsigned int unk210;unsigned int unk214;unsigned int unk218;unsigned int unk21C;unsigned int unk220;unsigned int unk224;unsigned int unk228;unsigned int unk22C;unsigned int unk230;unsigned int unk234;unsigned int unk238;unsigned int unk23C;unsigned int unk240;unsigned int unk244;unsigned int unk248;unsigned int unk24C;unsigned int unk250;unsigned int unk254;unsigned int unk258;unsigned int unk25C;unsigned int unk260;unsigned int value264;};struct Source1361{Actor1361* TESFile_GetThreadSafeFile();};struct Node1361{void* item;Node1361* next;};bool __cdecl TESObjectCELL_FindLandDataInFile(Actor1361*);struct World1361{unsigned int unk00,unk04,unk08,unk0C;Node1361 list10;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned int unk24;unsigned int unk28;unsigned int unk2C;unsigned int unk30;unsigned int unk34;unsigned int unk38;unsigned int unk3C;unsigned int unk40;unsigned int unk44;unsigned int unk48;unsigned char flags4C,unk4D,parentFlags4E,unk4F;unsigned int unk50;unsigned int unk54;unsigned int unk58;unsigned int unk5C;unsigned int unk60;unsigned int unk64;unsigned int unk68;unsigned int unk6C;World1361* parent70;World1361* Parent(){World1361* parent=parent70;if(parent && !(parentFlags4E&1))parent=0;return parent;}World1361* OtherParent(){World1361* parent=parent70;if(parent && !(*reinterpret_cast<const unsigned short*>(&parentFlags4E)&1))parent=0;return parent;}Source1361* TESForm_GetFile(int);bool TESWorldSpace_FindCellInFile(Actor1361*,void*,void*);bool FUN_005041b0(void*,void*,Actor1361**,unsigned int*);};struct ParentView1361{bool FUN_005041b0(void*,void*,Actor1361**,unsigned int*);};
+// pdb: TESWorldSpace::FindLandDataInFile | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiX, aiY, apOutFile, aiOutOffset
 bool World1361::FUN_005041b0(void* arg1,void* arg2,Actor1361** outActor,unsigned int* outValue)
 {
     *outActor=0; *outValue=0;
@@ -42165,6 +42730,8 @@ struct TexOwner {
 }
 using namespace f3m_0050cdf0;
 
+// pdb: BGSTextureSet::GetTexture | BGSTextureSet.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiType, aspTexture
 void TexOwner::FUN_0050cdf0(int index, NiPointer<TexRefObj>& out) {
     NiPointer<TexRefObj> spTexture;
     const char* name = GetTextureName(index);
@@ -42567,6 +43134,7 @@ void FUN_00502f20();
 
 };
 
+// pdb: TESWorldSpace::Save | TESWorldSpace.obj | fnv360_0822_retail, vtable, medium
 void World::FUN_00502f20() {
 
  FUN_004547d0(); name.FUN_00456390();
@@ -42708,6 +43276,7 @@ struct FUN_00504d60 : FUN_00455a70, S504d60_FullName, S504d60_Texture {
 
 extern FUN_00504d60* DAT_0106cde4;
 
+// pdb: TESWorldSpace::~TESWorldSpace | TESWorldSpace.obj | fnv360_0822_retail, call_seq, medium
 FUN_00504d60::~FUN_00504d60()
 {
     if (DAT_0106cde4 == this)
@@ -43057,6 +43626,8 @@ struct Player514260 {
     Sub514260 unk9c;
     unsigned short Actor_GetLevel();
 };
+// pdb: Script::GetXPForNextLevelConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00514260(void* unused1, unsigned int unused2, unsigned int unused3, double* result)
 {
     *result = 0.0;
@@ -43088,6 +43659,8 @@ class F3Clock_512d10
     int FUN_007730f0();
 };
 
+// pdb: Script::GetLastPlayerActionConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00512d10(int iA, int iB, int iC, double* pStamp)
 {
     *pStamp = 0.0;
@@ -43103,6 +43676,7 @@ namespace f3m_0051de60 {
 // Advances a wrap-around counter and resets it to ten once it folds back to zero.
 
 
+// pdb: BGSExplosion::IsFlagSet | EffectSetting.obj | tesv_win, callee_sim, low
 unsigned int FUN_0051de60()
 {
     unsigned int value = (FUN_00f79e58 + 1) & 0xffff;
@@ -43239,6 +43813,7 @@ struct World504b80 {
     void FUN_00504b80();
 };
 
+// pdb: TESWorldSpace::ClearPersistentRefData | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low
 void World504b80::FUN_00504b80()
 {
     DAT_00d9b09c(&DAT_010718f8);
@@ -43455,6 +44030,7 @@ struct Owner6d0 {
     void FUN_005016d0();
 };
 
+// pdb: TESWorldSpace::ClearPortalGraph | TESWorldSpace.obj | fnv360_0822_retail, call_gap_sim, low
 void Owner6d0::FUN_005016d0()
 {
     Ref6d0* ref = reference6C;
@@ -43504,6 +44080,8 @@ extern const char DAT_00dd2f80[];
 void __cdecl FUN_006195d0(const char* fmt, ...);
 }
 
+// pdb: Script::GetMinorCrimeCountConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 extern "C" bool __cdecl FUN_00513740(f3m_513740::Actor* actor, int a2, int a3, double* out)
 {
     *out = 0.0;
@@ -43687,6 +44265,8 @@ struct Owner50 {
 
 void __cdecl FUN_00458210(void* pModel, File50* pFile);
 
+// pdb: BGSImpactData::Load | BGSImpactData.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Owner50::FUN_00509150(File50* pFile)
 {
     if (pFile->TESFile_GetTESForm() != 0x5E)
@@ -44142,6 +44722,8 @@ class Owner50a : public Pre50a { public: char padTo18[0x18];   // +0x00 through 
                     void FUN_0050a870(struct Buffer50a* buffer); };   // ORIG: four registers saved, one stack parameter read via EBP and 'retn
                                                   //     4' cleaning it ✗✓ so cdecl-or-thiscall taking exactly one argument alongside that frame - their build keeps this in EBX and the caller-supplied buffer in EBP ✓ (the register CHOICE is the part I cannot steer: pass one put them in ESI and
                                                      //     EBP respectively ✓✗→ noted as inert rather than hidden, and it also decides which base register those two sub-object addresses are computed from ✗✓ which is why I attack the addressing ORDER instead of the names ✓ ) 
+// pdb: BGSListForm::SaveGame | BGSListForm.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apSaveGameBuffer
 void Owner50a::FUN_0050a870(struct Buffer50a* buffer) {                   
     this->FUN_00454370(buffer);                       // ORIG: that pre-call happens BEFORE any test and unconditionally ✓✗→✓ so whatever it
                                        //     does runs whether or not anything is serialised afterwards ✓ which is why it stays ahead of the guard ✓ 
@@ -44188,6 +44770,7 @@ protected:
     unsigned long word20C;                                              
     unsigned long word210;                                              
 };                                                                      
+// pdb: SCRIPT_WORD::SCRIPT_WORD | TESScriptCompiler.obj | fnv360_0822_retail, call_gap_sim, low
 struct Owner519* Owner519::FUN_00519a20() {                              
     word200=0;
     word20C=0;
@@ -44443,6 +45026,8 @@ struct Owner
     FUN_00ad2a40* FUN_0050c8c0(int unused);
 };
 
+// pdb: BGSIdleMarker::Clone3D | BGSIdleMarker.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apRequester
 FUN_00ad2a40* Owner::FUN_0050c8c0(int unused)
 {
     FUN_00ad2a40* node = new FUN_00ad2a40;
@@ -44711,6 +45296,8 @@ struct World {
     List global;
     void FUN_005049e0(Reference* reference);
 };
+// pdb: TESWorldSpace::AddToPersistentRefData | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apRef
 void World::FUN_005049e0(Reference* reference) {
     if(!reference || (reference->SkipMask()&1)) return;
     EnterCriticalSection(&DAT_010718f8);
@@ -45243,6 +45830,7 @@ struct Owner
     void FUN_0050c540();
 };
 void __cdecl BGSRadiationStage_AddStage(Owner*);
+// pdb: BGSRadiationStage::InitItem | BGSRadiation.obj | fnv360_0822_retail, vtable, medium
 void Owner::FUN_0050c540()
 {
     Child* value;
@@ -45268,6 +45856,7 @@ struct Heap {void FUN_0086ba60(void*);};extern Heap DAT_01090a78;
 struct Item {unsigned unk00,unk04,unk08,unk0c,unk10,unk14;char* data;unsigned short size,capacity;};
 struct Node {Item* item;Node* next;bool FUN_00645c20();void FUN_006c8220();};
 struct Owner {int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; Node head;void FUN_00519660();};
+// pdb: Script::ClearVariableList | TESScript.obj | fnv360_0822_retail, call_seq, medium
 void Owner::FUN_00519660(){Node* node=&head;while(node&&!node->FUN_00645c20()){Item* item=node->item;if(item){if(item->data)DAT_01090a78.FUN_0086ba60(item->data);item->data=0;item->capacity=0;item->size=0;DAT_01090a78.FUN_0086ba60(item);}Node* next=node->next;if(next){node->next=next->next;node->item=next->item;next->next=0;next->FUN_006c8220();DAT_01090a78.FUN_0086ba60(next);}else node->item=0;}}
 }
 
@@ -45330,6 +45919,8 @@ struct Manager
 };
 extern Manager* DAT_0107a104;
 bool __cdecl FUN_00517950(int a0, int a1, int a7, Target* a2, int a3, int a4, int a5, int* out);
+// pdb: Script::SetOwnershipFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0051e640(int a0, int a1, Target* a2, int a3, int a4, int a5, int a6, int a7)
 {
     int value = 0;
@@ -45404,6 +45995,8 @@ Values values;
 extern char DAT_00dd2070[];
 extern "C" int __cdecl ActorValue_GetActorValueScriptName(void*);
 extern "C" void __cdecl FUN_006195d0(const char*,int,double);
+// pdb: Script::GetActorValueConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_0050ef90(Actor* actor,void* id,void* unused,volatile double* output){
  if(actor && actor->IsActor()){
   Values* values;
@@ -45420,6 +46013,8 @@ bool __cdecl FUN_0050ef90(Actor* actor,void* id,void* unused,volatile double* ou
 namespace f3m_005127f0 {
 namespace Query314 {
 struct Actor {virtual void v000(); virtual void v004(); virtual void v008(); virtual void v00c(); virtual void v010(); virtual void v014(); virtual void v018(); virtual void v01c(); virtual void v020(); virtual void v024(); virtual void v028(); virtual void v02c(); virtual void v030(); virtual void v034(); virtual void v038(); virtual void v03c(); virtual void v040(); virtual void v044(); virtual void v048(); virtual void v04c(); virtual void v050(); virtual void v054(); virtual void v058(); virtual void v05c(); virtual void v060(); virtual void v064(); virtual void v068(); virtual void v06c(); virtual void v070(); virtual void v074(); virtual void v078(); virtual void v07c(); virtual void v080(); virtual void v084(); virtual void v088(); virtual void v08c(); virtual void v090(); virtual void v094(); virtual void v098(); virtual void v09c(); virtual void v0a0(); virtual void v0a4(); virtual void v0a8(); virtual void v0ac(); virtual void v0b0(); virtual void v0b4(); virtual void v0b8(); virtual void v0bc(); virtual void v0c0(); virtual void v0c4(); virtual void v0c8(); virtual void v0cc(); virtual void v0d0(); virtual void v0d4(); virtual void v0d8(); virtual void v0dc(); virtual void v0e0(); virtual void v0e4(); virtual void v0e8(); virtual void v0ec(); virtual void v0f0(); virtual void v0f4(); virtual void v0f8(); virtual void v0fc();virtual bool valid();bool FUN_004f2760();const char* FUN_004e9a10();};extern char DAT_00dd2d3c[],DAT_00dd2d28[];void FUN_006195d0(const char*,...);
+// pdb: Script::IsActorEvilConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: Script::GetPairedAnimationConditionFunction)
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool FUN_005127f0(Actor* input, int, int, double* out)
 {
     Actor* actor = 0;
@@ -46000,6 +46595,7 @@ extern List_5190a0<Form_5190a0> DAT_01071bf0;
 extern List_5190a0<Deletable_5190a0> DAT_01071bc8;
 extern bool DAT_01067af0;
 
+// pdb: Script::RunDelayedScriptActionsOnReferences | TESScript.obj | fnv360_0721_beta, call_seq, medium
 void __cdecl FUN_005190a0()
 {
     DAT_00d9b09c(&DAT_01071c00);
@@ -46089,6 +46685,8 @@ struct ImpactSwap
     ImpactMap* maps[12];
     void FUN_0050a4b0(int material, BGSImpactData* oldImpact, BGSImpactData* newImpact);
 };
+// pdb: ImpactSwap::AddSwappedImpactData | BGSImpactDataSet.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aeType, apOrigImpactData, apNewImpactData
 void ImpactSwap::FUN_0050a4b0(int material, BGSImpactData* oldImpact, BGSImpactData* newImpact)
 {
     if (oldImpact == newImpact)
@@ -46189,6 +46787,7 @@ struct MapObj930 {
     unsigned int items0C;
 };
 
+// pdb: TESWorldSpace::ClearMultiBoundRefs | TESWorldSpace.obj | fnv360_0721_beta, objrun, medium
 void FUN_00504d60::FUN_00504930()
 {
     if (!unk68)
@@ -46415,6 +47014,8 @@ struct Actor00513c30
     ActorProcess* GetCurrentProcess() const { return process; }
 };
 
+// pdb: Script::GetRadiationLevelConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: Script::IsCarryableConditionFunction)
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_00513c30(Actor00513c30* reference, void* arg1, void* arg2, double& result)
 {
     result = 0.0;
@@ -46481,6 +47082,8 @@ public:
     CameraPath506860* FUN_00506860(int a1, int a2);
 };
 
+// pdb: BGSCameraPath::GetCameraPathToPlay | BGSCameraPath.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apActionRef, apTargetRef
 CameraPath506860* CameraPath506860::FUN_00506860(int a1, int a2)
 {
     CameraPath506860* result = 0;
@@ -46749,6 +47352,7 @@ class BGSMusicType : public TESFormBase, public TESSoundFile
     void FUN_0050bee0();
 };
 
+// pdb: BGSMusicType::InitItem | BGSMusicType.obj | fnv360_0822_retail, vtable, medium
 void BGSMusicType::FUN_0050bee0()
 {
     if (IsFormInitialized())
@@ -46840,6 +47444,8 @@ struct BGSImpactDataSet : TESForm, BGSPreloadable {
     }
     void FUN_0050a240(int priority, QueuedFile* file);
 };
+// pdb: BGSImpactDataSet::QueueFiles | BGSImpactDataSet.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BGSImpactDataSet::QueueModelsImpl)
+// pdb params: aePriority, apParent
 void BGSImpactDataSet::FUN_0050a240(int priority, QueuedFile* file)
 {
     for (int i = 0; i < 12; ++i) {
@@ -46864,6 +47470,7 @@ struct Object50c530
     void FUN_0050c530();
 };
 
+// pdb: BGSRadiationStage::ClearData | BGSRadiation.obj | fnv360_0822_retail, vtable, medium
 void Object50c530::FUN_0050c530()
 {
     FUN_0050c3d0(this);
@@ -46948,6 +47555,7 @@ struct PathArray {
 struct Root { PathArray* FUN_00aa2340(); };
 extern Root* DAT_0107195c;
 
+// pdb: BGSCameraPath::InitParents | BGSCameraPath.obj | fnv360_0822_retail, ustr, medium
 bool Path::FUN_00507020()
 {
     bool result = true;
@@ -47050,6 +47658,8 @@ struct MapMethods2110 : public WorldSpace2110 {
     List2110* FUN_00502110(bool onlyThis);
 };
 
+// pdb: TESWorldSpace::BuildMapMarkerList | TESWorldSpace.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: abLocalOnly
 List2110* MapMethods2110::FUN_00502110(bool onlyThis) {
     List2110* result = 0;
     if (GetParentWorld2(2) && !onlyThis) {
@@ -47140,6 +47750,8 @@ struct Owner5187a0 {
     void FUN_005187a0(Owner5187a0* source);
 };
 
+// pdb: Script::InitItem | TESScript.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apOwner
 void Owner5187a0::FUN_005187a0(Owner5187a0* source)
 {
     if ((unsigned char)(flags08 >> 3) & 1) return;
@@ -47222,6 +47834,7 @@ struct S_00501200 {
     int m;
     int FUN_00501200();
 };
+// pdb: TESWorldSpace::GetParentWorldSimple | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low
 int S_00501200::FUN_00501200()
 {
     return m;
@@ -47302,6 +47915,7 @@ struct WorldSpace1340 {
     const char* FUN_00501cf0();
 };
 
+// pdb: TESWorldSpace::GetWorldMapTextureName | TESWorldSpace.obj | fnv360_0822_retail, call_gap, low
 const char* WorldSpace1340::FUN_00501cf0() {
     unsigned char bit = (unsigned char)(1 << 2);
     if (Parent(2) && parent70)
@@ -47417,6 +48031,7 @@ class MusicType : public FormBase, public SoundFile
     const char* FUN_0050bb10();
 };
 
+// pdb: BGSMusicType::GetRandomEntry | BGSMusicType.obj | fnv360_0822_retail, caller_sim, low
 const char* MusicType::FUN_0050bb10()
 {
     unsigned int count = m_kMusicFiles.ItemsInList();
@@ -47522,6 +48137,7 @@ struct FUN_00500680 : FUN_00456190, Base18
     void FUN_004ff3e0();
 };
 
+// pdb: TESWeather::TESWeather | TESWeather.obj | fnv360_0822_retail, call_gap, high
 FUN_00500680::FUN_00500680()
 {
     type = 0x35;
@@ -47821,6 +48437,8 @@ public:
     void FUN_00503480(void* form);
 };
 
+// pdb: TESWorldSpace::Copy | TESWorldSpace.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCopy
 void WorldCopy::FUN_00503480(void* form)
 {
     WorldCopy* source = (WorldCopy*)FUN_00c0050a(form, 0, DAT_00f46078, DAT_00f47a58, 0);
@@ -48016,6 +48634,8 @@ struct World
 };
 
 
+// pdb: TESWorldSpace::CreateOffsetData | TESWorldSpace.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apFile
 OffsetData* World::FUN_00502930(File* file)
 {
     OffsetData* data = 0;
@@ -48817,6 +49437,8 @@ __declspec(noinline) int Expr50d7f0::FUN_0050d490(char** cursor,char* output,int
  *out=0;*cursor=p;return out-output;
 }
 
+// pdb: CExpression::InfixToPostfix | Expression.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apInfix, auiSize
 char* Expr50d7f0::FUN_0050d7f0(const char* src, int* length)
 {
     error = 0;
@@ -49026,6 +49648,8 @@ struct S505Owner {
     bool FUN_00505c40(S505Str& out, float x, float y, float z);
 };
 
+// pdb: TESWorldSpace::GetMapNameForLocation | TESWorldSpace.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aMapName, aWorldLoc
 bool S505Owner::FUN_00505c40(S505Str& out, float x, float y, float z)
 {
     if (!(DAT_01071944 & 1)) {
@@ -49171,6 +49795,8 @@ float __cdecl FUN_007b8c50(void* a, void* b, int c);
 bool __cdecl FUN_00619620();
 void __cdecl FUN_006195d0(const char* fmt, ...);
 
+// pdb: FOScriptFunctions::GetVATSValueConditionFunction | FOScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apRefObject, apParam1, apParam2, afReturnValue
 bool __cdecl FUN_0050e650(void* a1, void* indexParam, Ref50e6* ref, double* result)
 {
     int index = (int)indexParam;
@@ -49524,6 +50150,8 @@ struct WorldSpace {
     Cell* TESWorldSpace_GetCellFromCellCoord(int x, int y);
     Cell* FUN_005048f0(const Point3* position);
 };
+// pdb: TESWorldSpace::GetCellFromWorldCoord | TESWorldSpace.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aCoord
 Cell* WorldSpace::FUN_005048f0(const Point3* position)
 {
     int x = fnv_FloatToInt(position->x) >> 12;
@@ -49576,6 +50204,8 @@ struct ChildCell {
     virtual Cell* GetCell();
 };
 
+// pdb: TESWorldSpace::SavesBefore | TESWorldSpace.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apForm
 bool World::FUN_00500f40(Form* form)
 {
     bool result = false;
@@ -49705,6 +50335,8 @@ public:
     double FUN_0050db30(const char*, TESObjectREFR*, TESObjectREFR*, Script*, ScriptLocals*, int, bool);
 };
 
+// pdb: CExpression::Eval | Expression.obj | fnv360_0822_retail, ustr, medium
+// pdb params: sptr, apFunctionOwner, apContainer, script, scriptLocals, postfixSize, abEndian
 double CExpression::FUN_0050db30(const char* sptr, TESObjectREFR* apFunctionOwner, TESObjectREFR* apContainer, Script* script,
                          ScriptLocals* scriptLocals, int postfixSize, bool abEndian)
 {
@@ -50249,6 +50881,7 @@ struct WeatherState {
     float m_fieldcc;
     void FUN_005042a0();
 };
+// pdb: TESWorldSpace::ClearSharableData | TESWorldSpace.obj | fnv360_0822_retail, call_seq, medium
 void WeatherState::FUN_005042a0() {
     m_field40 = 0;
     m_field7c = 0.0f;
@@ -50267,6 +50900,8 @@ namespace f3m_0050e9a0 {
 namespace fn_0050e9a0 {
 bool __cdecl EvalConditionArgs(unsigned int a0, unsigned int a1, unsigned int a7, void* ref, unsigned int a3, unsigned int a4, unsigned int a5, void** outB, void** outA);
 bool __cdecl RunPackageCheck(void* ref, void* outB, void* outA, double* result);
+// pdb: FOScriptFunctions::GetVATSValueFunction | FOScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0050e9a0(unsigned int a0, unsigned int a1, void* ref, unsigned int a3, unsigned int a4, unsigned int a5, double* result, unsigned int a7) {
     void* outB = 0;
     void* outA = 0;
@@ -50298,6 +50933,8 @@ struct LocationMatcher {
     bool MatchDirect(LocationSpec* spec);
     bool FUN_00501010(LocationSpec* spec);
 };
+// pdb: TESWorldSpace::SavesBefore | TESWorldSpace.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apGroupFORM
 bool LocationMatcher::FUN_00501010(LocationSpec* spec) {
     bool matched = false;
     if (spec && spec->m_typeToken == g_locTypeToken_00501010) {
@@ -50576,6 +51213,8 @@ struct WorldSpace {
     void FUN_00504300(Point2, Point2, GrassParams*, unsigned);
 };
 
+// pdb: TESWorldSpace::GetGrassForLocation | TESWorldSpace.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aMinWorldLoc, aMaxWorldLoc, apGrassParams, aiNumGrassParams
 void WorldSpace::FUN_00504300(Point2 minLoc, Point2 maxLoc, GrassParams* results, unsigned count)
 {
     GenGrass* genGrass = 0;
@@ -50730,6 +51369,8 @@ struct ImpactDataSet {
     void* m_impactData[12];
     void* FUN_0050a0f0(unsigned int material);
 };
+// pdb: BGSImpactDataSet::GetImpactData | BGSImpactDataSet.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aeType
 void* ImpactDataSet::FUN_0050a0f0(unsigned int material) {
     if (g_impactSwap_0050a0f0) {
         return ((ImpactSwap*)g_impactSwap_0050a0f0)->GetSwappedImpactData(material, m_impactData[material]);
@@ -50747,6 +51388,8 @@ struct Record {
     unsigned int type;
 };
 
+// pdb: FOScriptFunctions::GetParamIsTESForm | FOScriptFunctions.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apFuncData, aiParam
 bool __cdecl FUN_0050e610(const Record* record, int mode)
 {
     bool accepted = false;

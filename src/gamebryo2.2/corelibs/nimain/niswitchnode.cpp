@@ -78,6 +78,8 @@ struct NiSwitchNode : public NiObject
 };
 // Calls FUN_00a5e600, then returns true only if m_iIndex matches and the low bit of m_uFlags matches the other object's.
 // @fnv 0x00a94000
+// pdb: NiSortAdjustNode::IsEqual | NiSortAdjustNode.obj | fnv360_0822_retail, caller_sim, low, conflict (bridge: NiSwitchNode::IsEqual)
+// pdb params: pObject
 bool __thiscall NiSwitchNode::FUN_00a94000(NiObject* other)
 {
     if (!FUN_00a5e600(other) || m_iIndex != other->m_iIndex || (m_uFlags ^ other->m_uFlags) & 1)
@@ -97,6 +99,8 @@ struct NiObjectNET
 };
 // Locks DAT_011f4380, deletes the extra data at index a1 if it is below the count at offset 0x14, and returns whether it was removed.
 // @fnv 0x00a5bf50
+// pdb: NiObjectNET::RemoveExtraDataAt | NiObjectNET.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: usExtraDataIndex
 bool __thiscall NiObjectNET::FUN_00a5bf50(unsigned short ausIndex)
 {
     EnterCriticalSection(&DAT_011f4380);
@@ -122,6 +126,8 @@ struct FUN_00a93c00_shell : NiSwitchNode
     void __thiscall FUN_00a93c00(NiSwitchNode*, CloningProcess&);
 };
 // @fnv 0x00a93c00
+// pdb: NiSwitchNode::CopyMembers | NiSwitchNode.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: pkDest, kCloning
 void __thiscall FUN_00a93c00_shell::FUN_00a93c00(NiSwitchNode* pkDest, CloningProcess& kCloning)
 {
     ((NiNode_Helper*)this)->CopyMemberData(pkDest, kCloning);
@@ -184,6 +190,8 @@ struct SwitchHack : public NiObject
     void FUN_00a94300(NiUpdateData&);
 };
 // @fnv 0x00a94300
+// pdb: NiSwitchNode::UpdateControllers | NiSwitchNode.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: UpdateData
 void SwitchHack::FUN_00a94300(NiUpdateData& data)
 {
     if (m_uFlags & 1)
@@ -217,6 +225,8 @@ struct FUN_00a94400_shell : NiSwitchNode
 };
 // Sets the string at offset 0xbc, frees the pointer at 0xc0, calls FUN_00a5e930, and deletes this with size 0xcc when flags has bit 0 set.
 // @fnv 0x00a94400
+// pdb: NiSwitchNode::CopyMembers | NiSwitchNode.obj | fnv360_0822_debug, objrun, low, conflict (skyrim: NiSwitchNode::`scalar deleting destructor')
+// pdb params: pkDest, kCloning
 void* __thiscall FUN_00a94400_shell::DestroyWithFlags(unsigned int flags)
 {
     void* tmp = m_kChildRevID.m_pBase;
@@ -249,6 +259,8 @@ struct FUN_00a94500_Holder : NiSwitchNode
     NiObject* __thiscall CloneSwitchNode(CloningProcess&);
 };
 // @fnv 0x00a94500
+// pdb: NiSwitchNode::LinkObject | NiSwitchNode.obj | fnv360_0822_debug, objrun, low, conflict (skyrim: NiSwitchNode::CreateObject)
+// pdb params: kStream
 NiObject* __thiscall FUN_00a94500_Holder::CloneSwitchNode(CloningProcess& kCloning)
 {
     NiSwitchNode* pkObject;
@@ -291,6 +303,8 @@ struct FUN_00a944a0_shell : public NiSwitchNode
     void __thiscall SetChildAtIndex(unsigned int, NiAVObject*, NiPointer&);
 };
 // @fnv 0x00a944a0
+// pdb: NiSwitchNode::LoadBinary | NiSwitchNode.obj | fnv360_0822_debug, objrun, low, conflict (bridge: NiSwitchNode::SetAt)
+// pdb params: kStream
 void FUN_00a944a0_shell::SetChildAtIndex(unsigned int uiIndex, NiAVObject* pkChild, NiPointer& spobject)
 {
     StrArr* arr = (StrArr*)&m_kChildRevID;
@@ -349,6 +363,8 @@ struct Target : NiObject
     void __thiscall FUN_00a93ca0(RefObj*, RefPtr&);
 };
 // @fnv 0x00a93ca0
+// pdb: NiSwitchNode::DetachChild | NiSwitchNode.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkChild, aspAVObject
 void Target::FUN_00a93ca0(RefObj* child, RefPtr& out)
 {
     unkB8 = 1;
@@ -504,6 +520,8 @@ struct FUN_00a93ef0_cls : public NiSwitchNode
 };
 
 // @fnv 0x00a93ef0
+// pdb: NiSwitchNode::OnVisible | NiSwitchNode.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCuller
 void __thiscall FUN_00a93ef0_cls::UpdateSwitchChild(unsigned int arg)
 {
     int idx = (int)m_iIndex;
@@ -547,6 +565,7 @@ struct FUN_00a93f90_cls : public NiSwitchNode
 
 // If the switch flag is set, copies the active child's m_020 vector into m_020 (or zeroes w when there is no child); otherwise calls UpdateWorldBoundFromChildren.
 // @fnv 0x00a93f90
+// pdb: NiSwitchNode::UpdateWorldBound | NiSwitchNode.obj | fnv360_0822_retail, caller_sim, low
 void FUN_00a93f90_cls::UpdateFromActiveChild()
 {
     if ((m_uFlags & 1) != 0)
@@ -622,6 +641,8 @@ struct FUN_00a94040_shell : NiSwitchNode
 };
 // Updates the switch node's active state and time, notifies the selected child, and copies its color, or delegates to FUN_00a5dd70 when inactive.
 // @fnv 0x00a94040
+// pdb: NiSwitchNode::UpdateDownwardPass | NiSwitchNode.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: UpdateData, uFlags
 void FUN_00a94040_shell::UpdateSwitchState(FNV_UpdateFlags* update, unsigned int flags)
 {
     unsigned short& state = *reinterpret_cast<unsigned short*>(&m_uFlags);
@@ -805,6 +826,8 @@ class FUN_00a94130_cls
 };
 
 // @fnv 0x00a94130
+// pdb: NiSwitchNode::UpdateSelectedDownwardPass | NiSwitchNode.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: UpdateData, uFlags
 void FUN_00a94130_cls::FUN_00a94130(NiUpdateData& upd, bool flag)
 {
     unsigned char* pUpdBytes = (unsigned char*)&upd;
@@ -960,6 +983,7 @@ class FUN_00a94360 : public A94360Node
 };
 
 // @fnv 0x00a94360
+// pdb: NiBSPNode::NiBSPNode | NiBSPNode.obj | fnv360_0721_beta, call_seq, low, conflict (skyrim: NiSwitchNode::NiSwitchNode)
 FUN_00a94360::FUN_00a94360()
     : A94360Node(0), m_usFlags(0), m_iIndex(-1), m_fValue(0.0f), m_iArrayLength(1), m_kChildList(1, 1)
 {
@@ -998,6 +1022,7 @@ struct Node_a94440
 
 // Calls FUN_00a5ed10 with the given arguments, sets m_b8 to 1, and appends a null entry to m_kArrBC.
 // @fnv 0x00a94440
+// pdb: NiSwitchNode::CreateObject | NiSwitchNode.obj | fnv360_0822_debug, objrun, low, conflict (bridge: NiSwitchNode::AttachChild)
 void Node_a94440::FUN_00a94440(void* a1, int a2)
 {
     FUN_00a5ed10(a1, a2);
@@ -1013,6 +1038,8 @@ struct SwitchNode_a94550
 };
 
 // @fnv 0x00a94550
+// pdb: NiSwitchNode::RegisterStreamables | NiSwitchNode.obj | fnv360_0822_debug, objrun, low, conflict (bridge: NiSwitchNode::CreateObject)
+// pdb params: kStream
 SwitchNode_a94550* __cdecl CreateSwitchNode()
 {
     SwitchNode_a94550* p = (SwitchNode_a94550*)FUN_00aa13e0(0xcc);
@@ -1275,6 +1302,8 @@ class FUN_00a94570_Node : public BA94570Node
 };
 
 // @fnv 0x00a94570
+// pdb: NiSwitchNode::SaveBinary | NiSwitchNode.obj | fnv360_0822_debug, objrun, low, conflict (bridge: NiSwitchNode::LoadBinary)
+// pdb params: kStream
 void FUN_00a94570_Node::FUN_00a94570(BA94570Stream& kStream)
 {
     BA94570Node::LoadBinary(kStream);
@@ -1326,6 +1355,8 @@ struct FUN_00a94680_shell : public NiSwitchNode
 
 // Appends the base class strings plus the node's index and update-only-active flag to pkStrings.
 // @fnv 0x00a94680
+// pdb: NiSwitchNode::GetViewerStrings | NiSwitchNode.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FUN_00a94680_shell::AppendDebugStrings(StrArr* pkStrings)
 {
     reinterpret_cast<FUN_00a5ea70_Obj*>(this)->FUN_00a5ea70(pkStrings);
@@ -1464,6 +1495,8 @@ class SwitchNodeUpdate : public SwitchNodeBase
 };
 
 // @fnv 0x00a94220
+// pdb: NiSwitchNode::UpdateRigidDownwardPass | NiSwitchNode.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: UpdateData, uFlags
 void SwitchNodeUpdate::FUN_00a94220(FNV_UpdateFlags* apData, unsigned int auiFlags)
 {
     m_fSwitchValue = apData->time;
@@ -1756,6 +1789,8 @@ class NiSwitchNodeA946 : public NiNodeA946
 
 // Saves the base node, then writes m_usFlags and m_iIndex to the stream.
 // @fnv 0x00a94610
+// pdb: NiSwitchNode::IsEqual | NiSwitchNode.obj | fnv360_0822_debug, objrun, low, conflict (skyrim: BSRangeNode::SaveBinary)
+// pdb params: pkObject
 void NiSwitchNodeA946::FUN_00a94610(NiStreamA946& kStream)
 {
     NiNodeA946::SaveBinary(kStream);

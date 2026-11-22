@@ -10,6 +10,8 @@ extern float DAT_0126fa78;
 
 // Stores f and the three components of p into globals and returns a pointer to DAT_0126fa68.
 // @fnv 0x00e9c7d0
+// pdb: NiHalfSpaceBV::operator!= | NiHalfSpaceBV.obj | fnv360_0822_debug, objrun_open, low, conflict (bridge: NiCollisionConvert::ConvertToSphereBV_Fast)
+// pdb params: kABV
 int* __cdecl FUN_00e9c7d0(float afValue, int* apComponents)
 {
     DAT_0126fa78 = afValue;
@@ -35,6 +37,7 @@ struct Obj
     Obj* InitFromParams(float, int*);
 };
 // @fnv 0x00e9c800
+// pdb: NiHalfSpaceBV::Clone | NiHalfSpaceBV.obj | fnv360_0822_debug, objrun_open, low, conflict (bridge: NiCollisionConvert::ConvertToSphereBV_Safe)
 Obj* FUN_00e9c800(float afValue, int* p)
 {
     void* pMemory = g_memoryManager.Allocate(20);
@@ -120,6 +123,8 @@ struct ItemOwner
 bool __cdecl FUN_00e9c490(int a1, int a2, SpawnParam* p, int item);
 
 // @fnv 0x00e9c680
+// pdb: NiCollisionTraversals::FindIntersectionsSwitchNode | NiCollisionTraversals.obj | fnv360_0721_beta, caller, medium
+// pdb params: kOrigin, kDir, kPick, pkSwitch
 bool __cdecl FUN_00e9c680(int a1, int a2, SpawnParam* p, ItemOwner* owner)
 {
     bool result = false;
@@ -237,6 +242,8 @@ bool __cdecl FUN_00e9c490(int a1, int a2, SpawnParam* p, int item);
 bool __cdecl FUN_00e9c680(int a1, int a2, SpawnParam* p, ItemOwner* owner);
 
 // @fnv 0x00e9c6f0
+// pdb: NiCollisionTraversals::FindIntersectionsNode | NiCollisionTraversals.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: kOrigin, kDir, kPick, pkNode
 bool __cdecl FUN_00e9c6f0(int a1, int a2, SpawnParam* pSpawnParam, ItemOwner* owner)
 {
     if (pSpawnParam->unk08 == 0 && pSpawnParam->m_iType == 1)
@@ -388,6 +395,8 @@ bool __cdecl RaycastShape(S_00e9c490_Pt* p1, S_00e9c490_Pt* p2, S_00e9c490_Ctx* 
 bool __cdecl FUN_0043b300(const void* rtti, S_00e9c490_Node* node);
 
 // @fnv 0x00e9c490
+// pdb: NiCollisionTraversals::FindIntersections | NiCollisionTraversals.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: kOrigin, kDir, kPick, pkRoot
 bool __cdecl FUN_00e9c490(S_00e9c490_Pt* pPoint1, S_00e9c490_Pt* pPoint2, S_00e9c490_Ctx* pContext,
                           S_00e9c490_Node* node)
 {
@@ -801,6 +810,8 @@ struct RayOriginMatrix : Matrix
     }
 };
 
+// pdb: NiCollisionTraversals::FindIntersectionsTriShapeFastPath | NiCollisionTraversals.obj | fnv360_0822_retail, objrun, high
+// pdb params: kOrigin, kDir, kPick, pkTBG
 bool __cdecl RaycastGeometry(const P3* origin, const P3* direction, Pick* pick, Geometry* geometry)
 {
     Transform& worldTransform = geometry->world;
@@ -1047,6 +1058,8 @@ struct OrientedBoxBound
 };
 // Computes the box center, axes, and extents from points, with an axis-aligned fallback for degenerate dimensions.
 // @fnv 0x00eadf30
+// pdb: NiBox::CreateFromData | NiBox.obj | fnv360_0822_retail, udata, high
+// pdb params: usQuantity, pkVertex
 void OrientedBoxBound::ComputeFromPoints(unsigned short count, const NiPoint3* apPoints)
 {
     const NiPoint3* points = apPoints;
@@ -2124,6 +2137,8 @@ __forceinline NiPoint3 ZLocalStart(const NiPoint3& start,const Transform& xform,
 }
 } // namespace w324
 
+// pdb: NiCollisionTraversals::FindIntersectionsTriBasedGeom | NiCollisionTraversals.obj | fnv360_0822_retail, objrun, medium
+// pdb params: kOrigin, kDir, kPick, pkTBG
 bool __cdecl ::fnv_00e9b4f0::RaycastShape(const ::fnv_00e9b4f0::NiPoint3* startArg,const ::fnv_00e9b4f0::NiPoint3* dirArg,::fnv_00e9b4f0::Options* optArg,::fnv_00e9b4f0::Shape* shapeArg)
 {
     const w324::NiPoint3* rayStart = reinterpret_cast<const w324::NiPoint3*>(startArg);
@@ -2379,6 +2394,8 @@ struct Helper
 };
 // Builds temporary bounds from code and point, allocates a NiBoundingVolume, then copies the bounds into it.
 // @fnv 0x00e9c850
+// pdb: NiCollisionConvert::ConvertToBoxBV | NiCollision.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: usQuantity, pkVertex
 NiBoundingVolume* __cdecl FUN_00e9c850(unsigned int code, int* point)
 {
     if ((unsigned short)code == 0 || point == 0)

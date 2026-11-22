@@ -406,6 +406,8 @@ struct Self16c
 
 } // namespace f3m_0043ec40
 
+// pdb: TESDataHandler::GetInteriorCellByIndex | TESDataHandler.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: aiIndex
 unsigned int __fastcall FUN_004a3f70(char* self, Flt f)
 {
     ((f3m_0043ec40::Sub168*)(self + 0x168))->Reset();

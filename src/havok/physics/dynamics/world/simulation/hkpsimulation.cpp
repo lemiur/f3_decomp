@@ -11,6 +11,8 @@ struct FUN_00cf87a0_Class {
 };
 
 // @fnv 0x00cf87a0
+// pdb: hkpSimulation::processAgentResetCollisionInformation | hkpSimulation.obj | fnv360_0822_retail, objrun, high
+// pdb params: entry, processInput, processOutput
 void __thiscall FUN_00cf87a0_Class::ForwardToGlobal(int aiArg1, int aiArg2, int aiUnused)
 {
     FUN_00cfdbe0(aiArg1, aiArg2);
@@ -183,6 +185,7 @@ struct FUN_00cfa400_Obj {
 
 // Forwards the four arguments to FUN_00cf9480, passing CollectLinearCast as the callback.
 // @fnv 0x00cfa400
+// pdb: hkpWorld::internal_executePendingOperations | hkpWorld.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: hkpSimulation::collideEntitiesNarrowPhaseDiscrete)
 void __thiscall FUN_00cfa400_Obj::FUN_00cfa400(int a1, int a2, int a3, int a4) {
     FUN_00cf9480(a1, a2, a3, CollectLinearCast, a4);
 }
@@ -753,6 +756,8 @@ extern int DAT_01269200;
 struct CastBool {char value; };struct CastManager;struct CastMethods {void* unk00; void* unk04; void* unk08; void* unk0C; void* unk10; void* unk14; void* unk18; void* unk1C; void* unk20; void* unk24; void* unk28; void* unk2C; void* unk30; void* unk34; void* unk38; void* unk3C; void* unk40; void* unk44; void* unk48; void* unk4C; void* unk50; void* unk54; void* unk58; void* unk5C; CastBool* (__thiscall* query)(CastManager*,CastBool*,int);};struct CastManager {CastMethods* table;int state;};
 namespace CastGlobals {extern CastManager* DAT_010f3400;}
 extern float DAT_00de6e60;void __cdecl FUN_00999610(hkpLinearCastInputCF9*,hkpCollisionInputCF9*,hkpCdPointCollectorCF9*,hkpAgentCF9*);
+// pdb: hkpSimulation::processAgentCollideDiscrete | hkpSimulation.obj | fnv360_0822_retail, objrun, high
+// pdb params: entry, processInput, processOutput
 void __stdcall CollectLinearCast(hkpLinearCastInputCF9* linear,hkpCollisionInputCF9* input,hkpCdPointCollectorCF9* collector){collector->m_fEarlyOutDistance=DAT_00de6e60;collector->m_hitCount=0;collector->m_data=collector->m_kStorage;hkpDispatcherCF9* dispatcher=input->m_pCollisionDispatcher;input->m_aiContactPointIds=dispatcher->m_pAgents[0].m_aiContactPointIds;*(void**)((char*)input+0x10)=dispatcher->m_pAgents[linear->m_iType].m_pCreateFunc;FUN_00999610(linear,input,collector,linear->m_pCollisionAgent);CastManager* manager=CastGlobals::DAT_010f3400;CastBool flag;if(!manager->table->query(manager,&flag,0)->value)(CastGlobals::DAT_010f3400)->state=1;if((CastGlobals::DAT_010f3400)->state!=1&&collector->m_data!=collector->m_kStorage)linear->m_pCollisionAgent->getPenetrations(linear->m_pBodyA,linear->m_pBodyB,input,collector);}
 
 
@@ -1043,6 +1048,7 @@ struct Sim : hkpSimulation {
 };
 
 // @fnv 0x00cf89c0
+// pdb: hkpSimulation::snapSimulateTimeAndGetTimeToAdvanceTo | hkpSimulation.obj | fnv360_0822_retail, call_seq, high
 float Sim::GetClampedSimulationTime() {
     if (m_fFrameMarkerTime != -1.0f) {
         if (fabsf(m_fFrameMarkerTime - m_fSimulationTime) < m_fFrameMarkerPsiSnap) {
@@ -1083,6 +1089,7 @@ struct S00cf8bc0_Sim : hkpSimulation_Derived {
 };
 // If m_uiSimulationType is non-zero, returns FUN_00cf8820(); else calls step by m_fStepDeltaTime, returning 2 if DAT_01269200 is 1, otherwise 0.
 // @f3 0x0097f630 (community match, verified in this file)
+// pdb: hkpSimulation::collide | hkpSimulation.obj | fnv360_0822_retail, vtable, medium
 int S00cf8bc0_Sim::FUN_00cf8bc0()
 {
     hkReal startTime;
@@ -2700,6 +2707,8 @@ __forceinline void NativeDone(W* w) {
 // Collide step of the simulation: stores the step info in the world and its collision input, runs the
 // broad phase over every active island, then the narrow phase and the post-collide listeners per island.
 // Stops early, releasing the lock, when the memory system reports it is out of memory.
+// pdb: hkpSimulation::collideInternal | hkpSimulation.obj | fnv360_0822_retail, vtable, medium
+// pdb params: stepInfoIn
 void S00cfa080_Obj::FUN_00cfa080(hkVector4* p) {
  stampN(DAT_00e7d3e4);
  memcpy(&m_pOwningWorld->unk190, p, sizeof(hkVector4));

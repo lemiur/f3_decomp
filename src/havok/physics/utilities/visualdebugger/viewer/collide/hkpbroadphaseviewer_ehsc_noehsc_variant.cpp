@@ -541,6 +541,8 @@ __forceinline void GObject::Run(GCtx* a1)
 
 } // namespace f3m_009f76f0
 
+// pdb: hkpBroadphaseViewer::postSimulationCallback | hkpBroadphaseViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void S00d6a9b0_Obj::FUN_00d6a9b0(S00d6a9b0_Ctx* ctx)
 {
     reinterpret_cast<f3m_009f76f0::GObject*>(this)->Run(reinterpret_cast<f3m_009f76f0::GCtx*>(ctx));

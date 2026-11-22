@@ -23,6 +23,7 @@ void __cdecl FUN_009f05f0();
 void __cdecl hkpWorldMemoryViewer_registerViewer();
 void __cdecl FUN_009ef4e0();
 
+// pdb: hkpPhysicsContext::registerAllPhysicsProcesses | hkpPhysicsContext.obj | fnv360_0822_retail, call_gap_sim, low
 void __cdecl FUN_00cd1ed0()
 {
     FUN_00d6ad40();
@@ -54,6 +55,8 @@ struct FUN_00cd1f60_cls
     void FUN_00cd1f60(int);
 };
 // @fnv 0x00cd1f60
+// pdb: hkpPhysicsContext::entityRemovedCallback | hkpPhysicsContext.obj | fnv360_0822_debug, objrun, medium
+// pdb params: entity
 void FUN_00cd1f60_cls::FUN_00cd1f60(int value)
 {
     Owner* owner = *(Owner**)((char*)this - 0x50);
@@ -104,6 +107,8 @@ struct CD1FA0Object : CD1FA0Primary, CD1FA0Listener
 };
 
 // @fnv 0x00cd1fa0
+// pdb: hkpPhysicsContext::phantomRemovedCallback | hkpPhysicsContext.obj | fnv360_0822_retail, vtable, medium
+// pdb params: phantom
 void CD1FA0Object::FUN_00cd1fa0(int value)
 {
     if (m_target)
@@ -190,6 +195,8 @@ struct FUN_00cd2040_Class
 };
 // Reads a pointer stored at this-0x5c and, if non-null, forwards value to its UntrackObject method.
 // @fnv 0x00cd2040
+// pdb: hkpPhysicsContext::actionRemovedCallback | hkpPhysicsContext.obj | fnv360_0822_retail, vtable, medium
+// pdb params: action
 void FUN_00cd2040_Class::ForwardToTarget(int value)
 {
     FUN_00cd10a0_Class* target = *(FUN_00cd10a0_Class**)((char*)this - 0x5c);
@@ -232,6 +239,8 @@ struct FUN_00cd2460_class : Prefix, Secondary
 {
 };
 // @fnv 0x00cd2460
+// pdb: hkpPhysicsContext::worldDeletedCallback | hkpPhysicsContext.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: world
 int __thiscall Secondary::FUN_00cd2460(int value)
 {
     return reinterpret_cast<Prefix*>(reinterpret_cast<char*>(this) - sizeof(Prefix))->FUN_00cd2260(value);
@@ -384,6 +393,8 @@ struct ConstraintCollectionSlot4
     void FUN_00953550(CD1FB0Stats* stats, const char* parent, const char* name);
 };
 const char g_CD1FB0ConstraintsName[] = "Constraints";
+// pdb: hkpPhysicsContext::constraintAddedCallback | hkpPhysicsContext.obj | fnv360_0822_retail, ustr_rel, high
+// pdb params: constraint
 void CD1FB0World::CollectConstraints(CD1FB0Stats* stats)
 {
     if (m_ppConstraints)
@@ -696,6 +707,8 @@ struct ListenerWorldView
     CD2210Array<CD2210Listener*> m_kListeners;
 
 };
+// pdb: hkpPhysicsContext::removeWorldAddedListener | hkpPhysicsContext.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: cb
 void CD2210World::RemoveListener(CD2210Listener* listener)
 {
     ListenerWorldView* world = reinterpret_cast<ListenerWorldView*>(this);
@@ -812,6 +825,8 @@ class WorldView954 : public CD2260Primary, public CD2260Interface
     void FUN_00cd2260(CD2260Object* object);
 };
 
+// pdb: hkpPhysicsContext::removeWorld | hkpPhysicsContext.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: oldWorld
 void CD2260World::FUN_00cd2260(CD2260Object* object)
 {
     WorldView954* view = reinterpret_cast<WorldView954*>(this);
@@ -928,6 +943,8 @@ struct RefTable
     short refs;
 };
 
+// pdb: hkpPhysicsContext::addForInspection | hkpPhysicsContext.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: w
 void CD22Object::RegisterWithRegistry(CD22Registry* reg)
 {
     if (m_0c == 0)
@@ -1001,6 +1018,8 @@ struct FUN_00cd24d0_cls
 
 // If m_04 was set, calls FUN_00cd2080 on each of m_68 entries in m_64, stores value in m_04, then calls RegisterWithRegistry on each entry when value is nonzero.
 // @fnv 0x00cd24d0
+// pdb: hkpPhysicsContext::setOwner | hkpPhysicsContext.obj | fnv360_0822_retail, vtable, medium
+// pdb params: vdb
 void FUN_00cd24d0_cls::FUN_00cd24d0(int value)
 {
     if (m_04 != 0)
@@ -1088,6 +1107,8 @@ struct RItem
 };
 void __cdecl FUN_00901f10(void* array, int elementSize);
 
+// pdb: hkpPhysicsContext::addWorld | hkpPhysicsContext.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: newWorld
 void FUN_00cd2530_cls::AddItem(int pItem)
 {
     RCls* self = (RCls*)this;
@@ -1147,6 +1168,7 @@ struct FUN_00cd2870_cls
 };
 
 // @fnv 0x00cd2870
+// pdb: CTreeEngine::`scalar deleting destructor' | TreeEngine.obj | fnv360_0822_retail, vtable, medium
 FUN_00cd2870_cls* FUN_00cd2870_cls::FUN_00cd2870(unsigned int aFlags)
 {
     BaseRelease();
@@ -1305,6 +1327,7 @@ struct FUN_00cd25d0 : hkReferencedObject,
 
 // Constructs the object; the base classes and member arrays are initialized by their own constructors.
 // @f3 0x00954890 (community match, verified in this file)
+// pdb: hkpPhysicsContext::hkpPhysicsContext | hkpPhysicsContext.obj | fnv360_0822_debug, objrun_open, low
 FUN_00cd25d0::FUN_00cd25d0() : m_84(m_84)
 {}
 

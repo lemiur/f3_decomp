@@ -676,6 +676,8 @@ struct Reader285
     Reader285* FUN_00dcc4a0(bool* value);
 };
 // @fnv 0x00dcc4a0
+// pdb: hkIstream::operator>> | hkIStream.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: b
 Reader285* Reader285::FUN_00dcc4a0(bool* value)
 {
     SkipWhitespace285(stream);

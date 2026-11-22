@@ -19,6 +19,7 @@ struct FUN_00e7cdf0_shell
     int _p6;
 };
 // @fnv 0x00e7cdf0
+// pdb: NiDX9DepthStencilBufferData::HasValidDepthBuffer | NiDX92DBufferData.obj | tesv_win, hash, low
 unsigned char FUN_00e7cdf0_shell::FUN_00e7cdf0()
 {
     if (_p4 && _p6)
@@ -37,6 +38,7 @@ struct FUN_00e7d230_cls
 
 // Calls FUN_00e7d1b0, then deletes this (size 0x24) when bit 0 of a is set, and returns this.
 // @fnv 0x00e7d230
+// pdb: NiDX9TextureBufferData::`vector deleting destructor' | NiDX92DBufferData.obj | tesv_win, objrun, medium
 FUN_00e7d230_cls* __thiscall FUN_00e7d230_cls::DestroyIfFlagged(int aiFlags)
 {
     FUN_00e7d1b0();
@@ -59,6 +61,7 @@ struct FUN_00e7f790_Class
 };
 
 // @fnv 0x00e7f790
+// pdb: NiTPoolContainer<NiD3DRenderStateGroup,NiTNewInterface<NiD3DRenderStateGroup> >::~NiTPoolContainer<NiD3DRenderStateGroup,NiTNewInterface<NiD3DRenderStateGroup> > | NiD3DRenderStateGroup.obj | fnv360_0822_retail, caller_sim, medium
 void __thiscall FUN_00e7f790_Class::DestroyList()
 {
     DestroyArrayElements(*(void**)this);
@@ -77,6 +80,7 @@ struct FUN_00e67fd0_cls
 
 // Zeroes the first int of each of two arrays of entries, using the counts at offsets 0x10 and 8 and strides 0x50 and 0x40.
 // @fnv 0x00e67fd0
+// pdb: hkpWingedEdge::resetTriangleAndVertexStates | hkpWingedEdge.obj | fnv360_0822_retail, call_seq, high
 void __thiscall FUN_00e67fd0_cls::ClearEntries()
 {
     int count = 0;
@@ -175,6 +179,8 @@ struct FUN_00e7efc0_List
 };
 // Unlinks node from the doubly linked list, fixes neighbours and head, decrements count, clears node's links and returns it.
 // @fnv 0x00e7efc0
+// pdb: NiD3DRenderStateGroup::RemoveRSEntryFromSavedList | NiD3DRenderStateGroup.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkEntry
 FUN_00e7efc0_Node* __thiscall FUN_00e7efc0_List::FUN_00e7efc0(FUN_00e7efc0_Node* node)
 {
     FUN_00e7efc0_Node* prev = node->prev;
@@ -366,6 +372,8 @@ struct NiDX9SourceCubeMapData_S
 
 // Reads each mip level of the given D3D texture, cube or volume texture, records dimensions and pixel format, and accumulates m_uiSize.
 // @fnv 0x00e68530
+// pdb: NiXenonSourceTextureData::InitializeFromD3DTexture | NiXenonSourceTextureData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiDX9SourceTextureData::InitializeFromD3DTexture)
+// pdb params: pkD3DTexture
 bool NiDX9SourceCubeMapData_S::FUN_00e68530(DX9BaseTexture_00e68530* pkD3DTexture)
 {
     m_uiTextureFormat = pkD3DTexture->GetLevelCount();
@@ -499,6 +507,7 @@ struct FUN_00e7afc0_Class : NiTMapBaseStub
 };
 // Sets the vtable, removes all entries, frees the buffer at _08, and deallocates this object when ai has bit 0 set.
 // @fnv 0x00e7afc0
+// pdb: NiTMapBase<NiTPointerAllocator<unsigned int>,TESWaterForm *,bool>::`scalar deleting destructor' | TESWater.obj | fnv360_0822_retail, vtable, medium
 FUN_00e7afc0_Class* FUN_00e7afc0_Class::FUN_00e7afc0(int aiFlags)
 {
     vtbl = (int)&DAT_010eec54;
@@ -528,6 +537,7 @@ extern char DAT_010eec7c[];
 
 // Restores two vtables, calls RemoveAll on each, frees _08, and deallocates this when deleting has bit 0 set.
 // @fnv 0x00e7b000
+// pdb: NiTMapBase<NiTPointerAllocator<unsigned int>,unsigned int,NiXenonIndexBufferManager::NiXenonIBInfo *>::`scalar deleting destructor' | NiXenonIBManager.obj | fnv360_0721_beta, objrun_open, low
 FUN_00e7b000_Class* __thiscall FUN_00e7b000_Class::FUN_00e7b000(int deleting)
 {
     vtbl = DAT_010eec7c;
@@ -619,6 +629,7 @@ struct NiD3DShader
 };
 
 // @fnv 0x00e7c540
+// pdb: NiD3DDefaultShader::~NiD3DDefaultShader | NiD3DDefaultShader.obj | fnv360_0822_retail, call_gap, low
 void __thiscall NiD3DShader::FUN_00e7c540()
 {
     vtbl = DAT_010eecac;
@@ -630,6 +641,7 @@ extern int DAT_0126f590;
 
 // If DAT_0126f590 is set, calls the virtual function at offset 0x9c on p with 0 and clears DAT_0126f590 on success; returns 1 or 0.
 // @fnv 0x00e7cca0
+// pdb: NiDX9DepthStencilBufferData::SetNULLDepthStencilTarget | NiDX92DBufferData.obj | tesv_win, hash, low
 unsigned char __cdecl FUN_00e7cca0(int* pObject)
 {
     if (DAT_0126f590)
@@ -668,6 +680,7 @@ struct FUN_00e7d1b0_Class
 };
 
 // @fnv 0x00e7d1b0
+// pdb: NiDX9TextureBufferData::~NiDX9TextureBufferData | NiDX92DBufferData.obj | tesv_win, objrun, medium
 void FUN_00e7d1b0_Class::FUN_00e7d1b0()
 {
     void* p = *(void**)((char*)this + 0x20);
@@ -705,6 +718,7 @@ struct FUN_00e7d690_Class
 
 // Calls FUN_00e7d4e0, frees this with operator delete when flags has bit 1 set, and returns this.
 // @fnv 0x00e7d690
+// pdb: NiPSysSphereEmitter::`scalar deleting destructor' | NiPSysSphereEmitter.obj | fnv360_0822_retail, objrun, medium
 FUN_00e7d690_Class* FUN_00e7d690_Class::FUN_00e7d690(int flags)
 {
     FUN_00e7d4e0();
@@ -779,6 +793,8 @@ struct FUN_00e7ef80_List
 };
 // Unlinks node from the doubly linked list, fixing neighbours and head, decrements count, clears the node's links and returns it.
 // @fnv 0x00e7ef80
+// pdb: NiD3DRenderStateGroup::RemoveRSEntryFromNoSaveList | NiD3DRenderStateGroup.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkEntry
 FUN_00e7ef80_Node* FUN_00e7ef80_List::FUN_00e7ef80(FUN_00e7ef80_Node* node)
 {
     FUN_00e7ef80_Node* prev = node->next;
@@ -804,6 +820,8 @@ class D3DRenderStateGroup
 void __cdecl _FUN_00aa1490(void* p, int size);
 
 // @fnv 0x00e7f750
+// pdb: NiTNewInterface<NiD3DRenderStateGroup>::Deallocate | NiD3DRenderStateGroup.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: pArray
 void __cdecl DestroyArrayElements(void* p)
 {
     if (p)
@@ -847,6 +865,7 @@ struct E65000Entry
 
 // File-static helper with a compiler-chosen register convention.
 // @fnv 0x00e65000
+// pdb: doubleCut | hkpMoppKDopGeometriesVirtualMachine.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: shiftDopLow)
 static __declspec(noinline) float FUN_00e65000(E65000Entry* pkEntries, int iIndex, float fValue)
 {
     float fOld = pkEntries[iIndex].m_fValue;
@@ -1874,6 +1893,8 @@ const char* __cdecl GetHResultName(long);
 void __cdecl FUN_00a29680(const char*, ...);
 // Locks a surface level, copies pixel rows from the source buffer (clamped to the surface height and pitch), then unlocks the surface.
 // @fnv 0x00e68150
+// pdb: D3DCubeTexture_GetCubeMapSurface | texture.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: NiDX9SourceTextureData::CopyDataToSurfaceLevel)
+// pdb params: pTexture, Face, Level
 void __cdecl FUN_00e68150(CopyPixels* pSourcePixels, unsigned level, CopySurface* surface, unsigned face)
 {
     CopyDesc desc;
@@ -2296,6 +2317,8 @@ class E68760Pass
 
 // Stores the program's ID and pointer, returning true if either the ID or the pointer changed.
 // @fnv 0x00e68760
+// pdb: XGSetCubeTextureHeader | header.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: NiDX9SourceTextureData::UpdatePalette)
+// pdb params: EdgeLength, Levels, Usage, Format, Pool, BaseOffset, MipOffset, pCubeTexture, pBaseSize, pMipSize
 bool E68760Pass::SetProgram(E68760Program* pkProgram)
 {
     bool bChanged = false;
@@ -2414,6 +2437,8 @@ class FUN_00e68830 : public E68830Base
 
 // Destructor for FUN_00e68830; the body is empty and the compiler-generated member cleanup handles the NiPointer member.
 // @fnv 0x00e68830
+// pdb: NiXenonRenderState::ClearTexture | NiXenonSourceTextureData.obj | fnv360_1110_retail, objrun_open, low, conflict (skyrim: NiDX9SourceTextureData::~NiDX9SourceTextureData)
+// pdb params: pkTexture
 FUN_00e68830::~FUN_00e68830() throw()
 {}
 
@@ -2512,6 +2537,7 @@ struct FUN_00e68870_cls
     void __thiscall FUN_00e68870(FUN_00e68870_arg* a1);
 };
 // @fnv 0x00e68870
+// pdb: NiDX9SourceTextureData::CopyDataToSurface | NiDX9SourceTextureData.obj | tesv_win, ustr, medium
 void FUN_00e68870_cls::FUN_00e68870(FUN_00e68870_arg* apSourceData)
 {
     int out;
@@ -2616,6 +2642,8 @@ struct FUN_00e68920_cls
 };
 // Copies renderer data into each surface level of m_pTex from m_78 up to unk68, skipping null or type 4/5 textures and logging failed GetSurfaceLevel calls.
 // @fnv 0x00e68920
+// pdb: fread2D | NiXenonSourceTextureData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiDX9SourceTextureData::CopyRendererDataToSurface)
+// pdb params: apDest, apSrc, aiDestStride, aiSrcLength, aiDestX, aiDestY, aiDestWidth
 void __thiscall FUN_00e68920_cls::FUN_00e68920(int a1)
 {
     if (m_pTex == 0)
@@ -2734,6 +2762,7 @@ struct TextureUpdate_00e689d0 : public NiDX9SourceCubeMapData_S
     void UpdateTexture();
 };
 // @fnv 0x00e689d0
+// pdb: NiDX9SourceTextureData::Update | NiDX9SourceTextureData.obj | tesv_win, caller_sim, low
 void TextureUpdate_00e689d0::UpdateTexture()
 {
     if (m_b6c)
@@ -2824,6 +2853,7 @@ struct FUN_00e68ea0_cls
 };
 
 // @fnv 0x00e68ea0
+// pdb: NiXenonDirect3DTextureData::`scalar deleting destructor' | NiXenonDirect3DTextureData.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: NiDX9SourceTextureData::`vector deleting destructor')
 FUN_00e68ea0_cls* FUN_00e68ea0_cls::FUN_00e68ea0(unsigned char acFlags)
 {
     *(void* volatile*)&m_vptr = DAT_010ed37c;
@@ -2965,6 +2995,7 @@ struct Owner
 };
 // Scans the entry array for an item matching group, identifier and subIdentifier, accumulates its value and returns the last match.
 // @fnv 0x00e7b190
+// pdb: NiDX9AdapterDesc::ValidateFullscreenMode | NiDX9SystemDesc.obj | tesv_win, call_seq, medium
 Entry* Owner::FUN_00e7b190(unsigned int group, unsigned int identifier, unsigned int subIdentifier,
                            unsigned int* puiAccumulated)
 {
@@ -3073,6 +3104,7 @@ struct ListNode_b9541
 };
 
 // @fnv 0x00e7b550
+// pdb: NiDX9DeviceDesc::~NiDX9DeviceDesc | NiDX9SystemDesc.obj | tesv_win, call_gap, low
 void __thiscall FUN_00e7b550_cls::DeleteAllItems()
 {
     ListNode_b9541* node = *(ListNode_b9541**)((char*)this + 0x134);
@@ -3442,6 +3474,7 @@ class FUN_00e7bbf0_cls
 
 // Stores the source's count and fills the array with a new item for each index, passing the source and context.
 // @fnv 0x00e7bbf0
+// pdb: NiDX9SystemDesc::FillAdapterInformation | NiDX9SystemDesc.obj | tesv_win, call_seq, medium
 void FUN_00e7bbf0_cls::BuildItemsFromSource(BE7BBF0Source* pkSource, void* pvContext)
 {
     m_uiCount = pkSource->GetCount();
@@ -3488,6 +3521,7 @@ struct FUN_00e7bc90 : Base_e7bc90
 
 // Initializes the count to zero, constructs the array with max size 0 and grow-by 1, then calls BuildItemsFromSource with the two arguments.
 // @fnv 0x00e7bc90
+// pdb: NiDX9SystemDesc::NiDX9SystemDesc | NiDX9SystemDesc.obj | tesv_win, call_seq, medium
 FUN_00e7bc90::FUN_00e7bc90(int a, int b) throw() : m_aiIndexedValues(0, 1)
 {
     m_uiCount = 0;
@@ -3513,6 +3547,7 @@ struct FUN_00e7bcd0_cls
 };
 
 // @f3 0x00881e90 (community match, verified in this file)
+// pdb: NiDX9SystemDesc::~NiDX9SystemDesc | NiDX9SystemDesc.obj | tesv_win, call_seq, medium
 void FUN_00e7bcd0_cls::DestroyItems()
 {
     for (unsigned int i = 0; i < m_uiItemCount; i++)
@@ -3566,6 +3601,7 @@ struct S_00e7c610_Object
 };
 
 // @fnv 0x00e7c610
+// pdb: NiD3DDefaultShader::`scalar deleting destructor' | NiD3DDefaultShader.obj | fnv360_0822_retail, objrun, medium
 void __stdcall FUN_00e7c610(float* afMatrix, S_00e7c610_Object* pObject)
 {
     pObject->unk5e = 1;
@@ -3626,6 +3662,7 @@ class FUN_00e7cc90_cls
 };
 
 // @fnv 0x00e7cc90
+// pdb: NiDX92DBufferData::Shutdown | NiDX92DBufferData.obj | tesv_win, objrun, medium
 bool FUN_00e7cc90_cls::FUN_00e7cc90()
 {
     v26();
@@ -3686,6 +3723,7 @@ class E7CCD0Renderer
 };
 
 // @fnv 0x00e7ccd0
+// pdb: NiDX9ImplicitBufferData::DisplayFrame | NiDX92DBufferData.obj | tesv_win, hash, low
 bool E7CCD0Renderer::PresentFrame()
 {
     return m_pD3DDevice->Present(0, 0, 0, 0) >= 0;
@@ -3761,6 +3799,7 @@ struct FnvBufferData
 extern int g_nLastId;
 
 // @fnv 0x00e7cdb0
+// pdb: NiDX9DepthStencilBufferData::SetDepthTarget | NiDX92DBufferData.obj | tesv_win, hash, low
 unsigned char FnvBufferData::FUN_00e7cdb0(FnvRendererData* pRenderer)
 {
     if (m_nId == 0)
@@ -3828,6 +3867,7 @@ struct FNV_Frame
 };
 
 // @fnv 0x00e7ce30
+// pdb: NiDX9ImplicitDepthStencilBufferData::Recreate | NiDX92DBufferData.obj | tesv_win, caller_sim, low
 unsigned char FUN_00e7ce30_cls::FUN_00e7ce30(void* a1)
 {
     FNV_Frame frame;
@@ -3874,6 +3914,7 @@ class FUN_00e7d180_cls
 
 // Calls v02 on m_14 and clears it, then deallocates m_0c via DAT_011f6238 and clears it.
 // @fnv 0x00e7d180
+// pdb: NiDX92DBufferData::ReleaseReferences | NiDX92DBufferData.obj | tesv_win, objrun, medium
 void FUN_00e7d180_cls::FUN_00e7d180()
 {
     if (m_14 != 0)
@@ -4007,6 +4048,7 @@ class Ni2DBufferStub
 
 // Creates a NiDX9TextureBufferData wrapping the texture's level-0 surface, sets sample count from eMSAAPref, and attaches it to pkBuffer.
 // @fnv 0x00e7d250
+// pdb: NiDX9TextureBufferData::Create | NiDX92DBufferData.obj | tesv_win, call_seq, medium
 NiDX9TextureBufferData* __cdecl NiDX9TextureBufferData::FUN_00e7d250(D3DTexture_e7d250* pkD3DTexture,
                                                                      Ni2DBufferStub*& pkBuffer, int eMSAAPref,
                                                                      int iUnk18)
@@ -4242,6 +4284,8 @@ struct BlockAllocatedStringArray
 };
 // Allocates a Block of count elements, appends each element pointer to the array (growing it as needed), and links the block into the blocks list.
 // @fnv 0x00e7eb50
+// pdb: NiTPool<NiD3DPass,NiTNewInterface<NiD3DPass> >::CreateNewObjects | NiD3DPass.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: uiSize
 void BlockAllocatedStringArray::AppendBlock(unsigned int count)
 {
     Block* pBlock = (Block*)DAT_011f6238.FUN_00aa3e40(sizeof(Block));
@@ -4293,6 +4337,7 @@ struct FUN_00e7ec60_cls
 
 // Releases m_00 with mode 3, then recursively destroys and deallocates the m_08 child via DAT_011f6238.
 // @fnv 0x00e7ec60
+// pdb: NiXenonErrorShader::Initialize | NiXenonErrorShader.obj | fnv360_0822_debug, objrun_open, low
 void __thiscall FUN_00e7ec60_cls::FUN_00e7ec60()
 {
     if (m_00 != 0)
@@ -4411,6 +4456,7 @@ struct FUN_00e7f210_cls
 
 // Allocates a node holding n items, appends each item pointer to m_pItems (growing as needed), then pushes the node onto m_pHead.
 // @fnv 0x00e7f210
+// pdb: NiTPool<NiD3DRenderStateGroup::NiD3DRSEntry,NiTNewInterface<NiD3DRenderStateGroup::NiD3DRSEntry> >::GetFreeObject | NiD3DRenderStateGroup.obj | fnv360_0822_retail, call_seq, medium
 void FUN_00e7f210_cls::AppendItems(unsigned int n)
 {
     void* mem = DAT_011f6238.Alloc(0xc);
@@ -4473,6 +4519,7 @@ struct Owner
 };
 // Adds each item from the first and second linked lists to DAT_0126f71c uniquely, then clears both list heads.
 // @fnv 0x00e7f320
+// pdb: NiD3DRenderStateGroup::~NiD3DRenderStateGroup | NiD3DRenderStateGroup.obj | fnv360_0822_retail, caller_sim, medium
 void Owner::MoveItemsToGlobalSet()
 {
     Item* pNextItem;
@@ -4563,6 +4610,7 @@ extern BE7F610Queue<BE7F610Buffer>* g_pkE7F610BufferQueue;
 
 // Deletes the global worker queue and buffer queue objects.
 // @fnv 0x00e7f610
+// pdb: NiD3DRenderStateGroup::ShutdownPools | NiD3DRenderStateGroup.obj | fnv360_0822_retail, caller_sim, low
 void __cdecl DestroyGlobalQueues()
 {
     delete g_pkE7F610WorkerQueue;
@@ -4572,6 +4620,7 @@ void __cdecl DestroyGlobalQueues()
 extern int DAT_0126f728;
 
 // @fnv 0x00e7f7c0
+// pdb: hkpRigidBodyInertiaViewer::getProcessTag | hkpRigidBodyInertiaViewer.obj | fnv360_0822_retail, vtable, medium
 int __cdecl FUN_00e7f7c0()
 {
     return DAT_0126f728;
@@ -4609,6 +4658,7 @@ struct FUN_00e687a0 : Mid_00e687a0
 };
 // Constructs the object by forwarding p1 and p2 to the base constructor and leaving the Q74 member default-initialized.
 // @fnv 0x00e687a0
+// pdb: NiDX9SourceTextureData::NiDX9SourceTextureData | NiDX9SourceTextureData.obj | tesv_win, call_gap_sim, low
 FUN_00e687a0::FUN_00e687a0(int p1, int p2) : Mid_00e687a0(p1, p2)
 {}
 
@@ -4772,6 +4822,8 @@ struct FUN_00e74a40_shell : E74Accumulator
     void AddGeometryToBatch(E74Geometry* pkGeom);
 };
 // @fnv 0x00e74a40
+// pdb: NiXenonRenderer::AddToBatch | NiXenonRenderer.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkGeometry
 void FUN_00e74a40_shell::AddGeometryToBatch(E74Geometry* pkGeom)
 {
     E74GeomData* pkData = pkGeom->m_spGeometryData;
@@ -5546,6 +5598,7 @@ struct FUN_00e74c00_stub {
     bool FUN_00878700();
 };
 
+// pdb: NiDX9Renderer::LostDeviceRestore | NiDX9Renderer.obj | tesv_win, ustr, medium
 bool FUN_00e74c00_cls::HandleDeviceLost()
 {
     void* obj = m_p288;
@@ -5715,6 +5768,7 @@ class TexFormatList
 };
 
 // @fnv 0x00e7aed0
+// pdb: NiDX9DeviceDesc::GetNearestFrameBufferFormat | NiDX9SystemDesc.obj | tesv_win, call_seq, medium
 int __thiscall TexFormatList::FindFormatValue(unsigned char abUseFlag4, int key)
 {
     Node* node = m_pFirstNode;
@@ -5819,6 +5873,8 @@ extern const PixelTemplate DAT_011ab2a8;
 extern const PixelTemplate DAT_011ab2f0;
 // Selects a PixelTemplate by format code, copies it into output, sets field0c to format and field10 to 0, and returns output.
 // @fnv 0x00e7c1e0
+// pdb: NiXenonPixelFormat::InitFromD3DFormat | NiXenonPixelFormat.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: NiDX9PixelFormat::InitFromD3DFormat)
+// pdb params: eD3DFmt, kFormat
 PixelTemplate& __cdecl GetPixelTemplateForFormat(int format, PixelTemplate& output)
 {
     const PixelTemplate* pTemplate;
@@ -6023,6 +6079,8 @@ void __cdecl CE7C500ConvertFormat(int eFormat, CE7C500PixelFormat* pkFormat);
 
 // Allocates a CE7C500PixelFormat, converts the given format into it, and returns the new object.
 // @fnv 0x00e7c500
+// pdb: NiXenonPixelFormat::CreateFromD3DFormat | NiXenonPixelFormat.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: NiDX9PixelFormat::CreateFromD3DFormat)
+// pdb params: eD3DFmt
 CE7C500PixelFormat* __cdecl CreatePixelFormat(int eFormat)
 {
     CE7C500PixelFormat* pkFormat = new CE7C500PixelFormat;
@@ -6060,6 +6118,7 @@ class AdditionalDepthData : public NiDX92DBufferDataStub
 extern char DAT_010ef028;
 // Creates AdditionalDepthData, acquires a depth surface from the device, queries its description, and creates or reuses the Ni2DBufferStub.
 // @fnv 0x00e7d390
+// pdb: NiDX9TextureBufferData::CreateCubeFace | NiDX92DBufferData.obj | tesv_win, call_seq, medium
 AdditionalDepthData* __cdecl CreateDepthBufferData(AdditionalDepthDevice* device, void* surfaceSource, int, int,
                                                    Ni2DBufferStub** buffer)
 {
@@ -6215,6 +6274,7 @@ struct FnvCpu_FUN_00e687f0_CpuObject
     int FUN_00e687f0();
 };
 // @fnv 0x00e687f0
+// pdb: MiddleHighProcess::GetSavedAcquireObject | HighProcess.obj | fnv360_0822_retail, call_gap, low
 int FnvCpu_FUN_00e687f0_CpuObject::FUN_00e687f0()
 {
     return value;
@@ -6251,6 +6311,7 @@ struct FnvCpu_FUN_00e68800_CpuObject
     int FUN_00e68800();
 };
 // @fnv 0x00e68800
+// pdb: DetailedActorPathHandler::GetCurrentNodeIndex | DetailedActorPathHandler.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: NiDX9SourceTextureData::GetPalette)
 int FnvCpu_FUN_00e68800_CpuObject::FUN_00e68800()
 {
     return value;
@@ -6276,6 +6337,7 @@ struct FUN_00e76620_cls
 };
 
 // @fnv 0x00e76620
+// pdb: QueuedFileLoad::GetFileIndex | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 unsigned char FUN_00e76620_cls::FUN_00e76620()
 {
     return unk34;
@@ -6338,6 +6400,7 @@ int g_cn = 5;
 int g_c2 = 7;
 
 // @fnv 0x00e64fe0
+// pdb: doubleCut | hkpMoppKDopGeometriesVirtualMachine.obj | tesv_win, hash, low
 static __declspec(noinline) void SwapFloatPair(float* apFloats, int aiIndex, float* apOutSecond, float afFirst,
                                                float afSecond, unsigned __int64 outA)
 {
@@ -6367,6 +6430,7 @@ struct E65020Entry
 };
 
 // @fnv 0x00e65020
+// pdb: shiftDopHigh | hkpMoppKDopGeometriesVirtualMachine.obj | fnv360_0822_retail, objrun_open, low
 __declspec(noinline) static float FUN_00e65020(E65020Entry* pkEntries, int iIndex, float fValue)
 {
     float f = pkEntries[iIndex].m_fValue;
@@ -7020,6 +7084,8 @@ struct FUN_00e69620_cls
 };
 
 // @fnv 0x00e69620
+// pdb: NiXenonRenderer::FindClosestPixelFormat | NiXenonRenderer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: eFormat, eUsage
 void FUN_00e69620_cls::FUN_00e69620()
 {
     unk884->vfB0(0);
@@ -7261,6 +7327,7 @@ struct PoolLock
     }
 };
 extern PoolLock DAT_0106e5a0;
+// pdb: NiDX9DeviceDesc::NiDX9DeviceDesc | NiDX9SystemDesc.obj | tesv_win, call_gap, low
 FUN_00e7b590::FUN_00e7b590(S00e7b590_D3D* dev, int aiAdapter, D3DDEVTYPE aiDeviceType, D3DFORMAT a4,
                            OuterNode** appFormats)
     : m_iOwnerObjectOffset(aiDeviceType)
@@ -7364,6 +7431,7 @@ struct FUN_00e7ce10_cls
 };
 
 // @fnv 0x00e7ce10
+// pdb: NiDX9DepthStencilBufferData::HasValidStencilBuffer | NiDX92DBufferData.obj | tesv_win, hash, low
 unsigned char FUN_00e7ce10_cls::FUN_00e7ce10()
 {
     if (!m_0c || !m_14)
@@ -7442,6 +7510,7 @@ extern NiTListE7CF<ItemE7CF*> DAT_0126f5c8;
 
 // Locks DAT_0126f600, calls vf58(pArg) on every item in DAT_0126f5c8, then unlocks.
 // @fnv 0x00e7cf00
+// pdb: NiDX9AdditionalDepthStencilBufferData::RecreateAll | NiDX92DBufferData.obj | tesv_win, call_gap_sim, low
 void __cdecl FUN_00e7cf00(void* pArg)
 {
     EnterCriticalSection(&DAT_0126f600);
@@ -7565,6 +7634,7 @@ class RT
 };
 // Releases the current swap chain and surface, adopts a new swap chain, fetches its backbuffer, and updates the texture size and pixel format.
 // @fnv 0x00e7d0a0
+// pdb: NiDX9ImplicitBufferData::Recreate | NiDX92DBufferData.obj | tesv_win, ustr, medium
 bool RT::FUN_00e7d0a0(Swap* pkSwap)
 {
     if (m_pkSurf)
@@ -8169,6 +8239,7 @@ class DepthStencilSearch
 };
 // Returns the DAT_011bf140 value of the enabled fullscreen entry whose two values from FUN_00e7a8b0 are closest to p2 and p3, or 0.
 // @fnv 0x00e7ade0
+// pdb: NiDX9DeviceDesc::DisplayFormatInfo::FindClosestDepthStencil | NiDX9SystemDesc.obj | tesv_win, hash, low
 int DepthStencilSearch::FindBestFullscreenFormat(unsigned int p1, int aiDepth, int aiStencil)
 {
     NiDX9RenderTargetInfo* pRenderTargetInfo = 0;
@@ -8219,6 +8290,7 @@ struct ClosestList
 };
 // Returns the later list value closer to target than the first element, the closest such one, else 0; also returns 0 when target is 0.
 // @fnv 0x00e7af60
+// pdb: NiDX9AdapterDesc::ModeDesc::GetClosestRefreshRate | NiDX9SystemDesc.obj | tesv_win, hash, low
 int ClosestList::FUN_00e7af60(int target)
 {
     if (!target)
@@ -8241,6 +8313,7 @@ int ClosestList::FUN_00e7af60(int target)
 
 // Maps index 0, 1, 2 and 3 to 0, 2, 4 and 8; any other index returns 0.
 // @f3 0x008827c0 (community match, verified in this file)
+// pdb: NiDX92DBufferData::GetMSSATypeFromMSAAPref | NiDX92DBufferData.obj | tesv_win, hash, low
 int FUN_00e7ccf0(unsigned int index)
 {
     switch (index)
@@ -8269,6 +8342,7 @@ class FUN_00e7a5e0_Object
 
     void* m_pResource;
 
+    // pdb: NiTArray<void (__cdecl*)(class NiStream &,class NiObject *),class NiTMallocInterface<void (__cdecl*)(class NiStream &,class NiObject *)> >::`vector deleting destructor' | NiStream.obj | tesv_win, vtable, medium
     static void operator delete(void* p)
     {
         g_memoryManager.Deallocate(p);
@@ -8296,6 +8370,7 @@ namespace texture_format_entry {
 // format code, or -1 for an unknown format.
 // Maps a format code to 0, 8, 16, 24, 32, 64 or 128, or to -1 when the code is not listed.
 // @fnv 0x00e7acb0
+// pdb: NiDX9SystemDesc::GetBPPFromFormat | NiDX9SystemDesc.obj | tesv_win, hash, low
 int __cdecl FUN_00e7acb0(int aiFormat)
 {
     switch (aiFormat)
@@ -8740,6 +8815,7 @@ long __stdcall FUN_00c20868(void* pkDevice, const void* pvSrc, unsigned int uiSi
 extern unsigned int DAT_0109172c;
 extern unsigned int DAT_01091730;
 
+// pdb: NiDX9SourceTextureData::LoadTextureFile | NiDX9SourceTextureData.obj | tesv_win, uconst, low
 bool NiDX9SourceTextureDataQ::LoadFromFilename(const char* pcFilename, NiDX9RendererQ* pkRenderer,
                                                const FormatPrefsQ& kPrefs, NiFileQ* fileArgument)
 {
@@ -9578,6 +9654,7 @@ struct ModeEntry
 
 };
 
+// pdb: NiDX9AdapterDesc::NiDX9AdapterDesc | NiDX9SystemDesc.obj | tesv_win, call_gap, low
 FUN_00e7b7d0::FUN_00e7b7d0(AdapterApi* apAdapter, int handle, FormatList& names) : m_handle(handle), m_entries(32, 16)
 
 {
@@ -9697,6 +9774,7 @@ struct FUN_00e60660_Cls
 };
 
 // @fnv 0x00e60660
+// pdb: hkpConvexListShape::getContainer | hkpConvexListShape.obj | fnv360_0822_retail, objrun_sim, low
 int* FUN_00e60660_Cls::FUN_00e60660()
 {
     return this ? &unk14 : 0;
@@ -10028,6 +10106,8 @@ struct TextureAccessor
 };
 // Copies one mip level of the given face from source into a locked surface, row by row when the source row size differs from the surface pitch.
 // @fnv 0x00e683d0
+// pdb: D3DDevice_CreateTexture | texture.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: NiDX9SourceTextureData::CopyRendererDataToSurfaceLevel)
+// pdb params: Width, Height, Depth, Levels, Usage, D3DFormat, Pool, D3DType
 void __cdecl FUN_00e683d0(TextureAccessor* source, unsigned int level, CopySurface* surface, unsigned int face)
 {
     CopyDesc desc;
@@ -10132,6 +10212,7 @@ struct ModeItemInit
 // @f3 0x00881460 (community match, verified in this file)
 extern int DAT_00e29b14;
 extern int DAT_010edb5c;
+// pdb: NiDX9DeviceDesc::DisplayFormatInfo::DisplayFormatInfo | NiDX9SystemDesc.obj | tesv_win, udata, high
 FUN_00e7b260* ModeItemInit::FUN_00e7b260(S00e7b590_D3D* apD3D, int aiAdapter, D3DDEVTYPE eDeviceType,
                                          D3DFORMAT eAdapterFormat, bool bFullscreen, bool bWindowed)
 {
@@ -10232,6 +10313,7 @@ FUN_00e7b260* ModeItemInit::FUN_00e7b260(S00e7b590_D3D* apD3D, int aiAdapter, D3
 
 // Locks DAT_0126f600, iterates DAT_0126f5c8 calling vf54 on each ItemE7CF, then unlocks.
 // @fnv 0x00e7cec0
+// pdb: NiDX9AdditionalDepthStencilBufferData::ShutdownAll | NiDX92DBufferData.obj | tesv_win, call_gap, low
 void __cdecl FUN_00e7cec0()
 {
     EnterCriticalSection(&DAT_0126f600);
@@ -10382,6 +10464,7 @@ class SwapChainBufferData : public NiDX92DBufferDataStub
 
 // Creates a SwapChainBufferData from pkDevice and pkParams, queries the render target and pixel format, and attaches it to the Ni2DBufferStub in ppkBuffer.
 // @fnv 0x00e7d6b0
+// pdb: NiDX9ImplicitBufferData::Create | NiDX92DBufferData.obj | tesv_win, ustr, medium
 SwapChainBufferData* __cdecl FUN_00e7d6b0(DeviceE7D6B0* pkDevice, PresentParamsE7D6B0* pkParams,
                                           Ni2DBufferStub** ppkBuffer)
 {
@@ -10618,6 +10701,7 @@ class NiDX9AdditionalDepthStencilBufferData : public NiDX92DBufferDataStub
 
 // Creates NiDX9AdditionalDepthStencilBufferData, retrieves the device depth-stencil surface, and attaches it to the provided or newly created 2D buffer.
 // @fnv 0x00e7d850
+// pdb: NiDX9ImplicitDepthStencilBufferData::Create | NiDX92DBufferData.obj | tesv_win, call_gap, low
 NiDX9AdditionalDepthStencilBufferData* __cdecl FUN_00e7d850(D3DDevice_e7d850* pkD3DDevice, Ni2DBufferStub*& pkBuffer)
 {
     NiDX9AdditionalDepthStencilBufferData* pkData = new NiDX9AdditionalDepthStencilBufferData();

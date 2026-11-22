@@ -208,6 +208,7 @@ FNV_STATIC_ASSERT(offsetof(ISMStandIn, pOutroSound) == 0xac);
 extern char DAT_00f49948, DAT_00f460fc, DAT_00f46078;
 void* __cdecl FUN_00c0050a(void*, int, const void*, const void*, int);
 
+// pdb: BGSConstructibleObject::InitItem | BGSConstructibleObject.obj | fnv360_0822_retail, vtable, medium
 void TESImageSpaceModifier::InitItem()
 {
     if (IsFormInitialized())

@@ -56,6 +56,7 @@ struct FUN_00e3b7d0_object
 
 // Clears a two-bit field at the given bit position in the byte at index within a 48-byte-strided block and sets it to 2.
 // @f3 0x00a71560 (community match, verified in this file)
+// pdb: hkpPoweredChainData::disableMotor | hkpPoweredChainData.obj | tesv_win, objrun_open, low
 void FUN_00e3b7d0(FUN_00e3b7d0_object* object, int index, int bit)
 {
     int count = object->first->count;
@@ -136,6 +137,7 @@ class FUN_00e3b8f0 : public hkBaseE3B8
 
 // Initializes the float members to default values and calls m_link.FUN_00d21ce0 with this as owner.
 // @fnv 0x00e3b8f0
+// pdb: hkpPoweredChainData::hkpPoweredChainData | hkpPoweredChainData.obj | fnv360_0822_retail, call_gap, high
 FUN_00e3b8f0::FUN_00e3b8f0() throw()
 {
     m_24 = 0.6f;
@@ -262,6 +264,7 @@ struct S00e3b810_Dst
 };
 
 // @fnv 0x00e3b810
+// pdb: hk1dAngularVelocityMotorCommitJacobianInMotorInfo | hkpPoweredChainData.obj | tesv_win, hash, low
 static __declspec(noinline) void FUN_00e3b810(const S00e3b810_Src* src, S00e3b810_Dst* d, S00e3b810_Out* out,
                                               const float* s)
 {

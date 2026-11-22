@@ -1288,6 +1288,7 @@ struct SimplexSolverInfo
     hkpSimplexSolverInput* m_input;
 };
 
+// pdb: hkSimplexSolverSolve1d | hkpSimplexSolver.obj | tesv_win, call_dedup, low
 static __declspec(noinline) void FUN_009a4830(const SimplexSolverInfo& info, const hkpSurfaceConstraintInfo& sci,
                                               const hkVector4& velocityIn, hkVector4& velocityOut)
 {
@@ -5560,6 +5561,7 @@ static void FUN_009a4830( const hkSimplexSolverInfo& info, const hkpSurfaceConst
 	}
 	velocityOut.setAdd4( relativeVelocity, groundVelocity );
 }
+// pdb: hkSimplexSolverSolve2d | hkpSimplexSolver.obj | tesv_win, call_dedup, low
 static void FUN_009a4d00( hkSimplexSolverInfo& info, const hkpSurfaceConstraintInfo& sci0, const hkpSurfaceConstraintInfo& sci1, const hkVector4& velocityIn, hkVector4& velocityOut )
 {
 	hkVector4 axis; axis.setCross( sci0.m_plane, sci1.m_plane );

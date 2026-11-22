@@ -15672,6 +15672,7 @@ void* FUN_00aa13e0(unsigned int size);
 void FUN_00e78560(unsigned int a, unsigned int b);
 
 // @fnv 0x00e7a760
+// pdb: NiD3DShaderDeclaration::InitializePackingFunctions | NiD3DShaderDeclaration.obj | tesv_win, objrun_open, low
 bool FUN_00e7a760() {
     if (reinterpret_cast<FnvSlotTable*>(DAT_0126f550)->u0a == 0x12) {
         return true;

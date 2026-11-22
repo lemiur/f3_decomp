@@ -65,6 +65,8 @@ struct __declspec(align(16)) E5CF70Solver
 
 // Constructs an E5CF70Solver on the stack and forwards the three arguments to its solve method.
 // @fnv 0x00e5cf70
+// pdb: hkMoppKDopGeometriesVirtualMachine_query | hkpMoppMachine.obj | fnv360_0822_retail, objrun, medium
+// pdb params: code, query, kDopGeometries
 void __cdecl SolveWithSolver(void* a, void* b, void* c)
 {
     E5CF70Solver solver;
@@ -113,6 +115,8 @@ struct Cls
 };
 // Writes the flag, optional value, current block and flag byte into the entry at cursor, then advances cursor.
 // @fnv 0x00e65040
+// pdb: hkpMoppKDopGeometriesVirtualMachine::pushKDop | hkpMoppKDopGeometriesVirtualMachine.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: isTerminal, id
 void Cls::FUN_00e65040(Flag aFlag, int b)
 {
     Entry* e = cursor;
@@ -187,6 +191,7 @@ struct S_00e65e70
 };
 
 // @fnv 0x00e65e70
+// pdb: hkpMoppKDopGeometriesVirtualMachine::hkpMoppKDopGeometriesVirtualMachine | hkpMoppKDopGeometriesVirtualMachine.obj | fnv360_0822_retail, objrun_prop, low
 S_00e65e70* S_00e65e70::Reset()
 {
     unk34 = 0;
@@ -340,6 +345,8 @@ struct StandIn_00a9b5b0
     void FUN_00a9b5b0(FlagArg flag, void* item);
 };
 
+// pdb: hkpMoppKDopGeometriesVirtualMachine::addHit | hkpMoppKDopGeometriesVirtualMachine.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: id, properties
 void FUN_00e65080_cls::FUN_00e65080(void* item, unsigned int unused)
 {
     ListW130* list = reinterpret_cast<ListW130*>(&m_34);
@@ -449,6 +456,8 @@ struct E65Solver
     void FUN_00e65d90(E65Input* in, E65Key* key, int param);
 };
 // @f3 0x00a9c360 (community match, verified in this file)
+// pdb: hkpMoppKDopGeometriesVirtualMachine::queryMopp | hkpMoppKDopGeometriesVirtualMachine.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: code, queryInput, kDopGeometries
 void E65Solver::FUN_00e65d90(E65Input* apInput, E65Key* key, int aiDataBlock)
 {
     m_kIntegerDataBlock = aiDataBlock;
@@ -556,6 +565,8 @@ struct hkpMoppFindAllVirtualMachine
 // Interprets a MOPP bytecode stream, updating primitiveOffset and properties, and appends decoded primitive indices to results.
 // @f3 0x00a9c450 (community match, verified in this file)
 void __cdecl FUN_00901f10(void*, unsigned int);
+// pdb: hkpMoppFindAllVirtualMachine::queryOnTree | hkpMoppFindAllVirtualMachine.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: query, PC
 void hkpMoppFindAllVirtualMachine::FUN_00e65ee0(const MoppState* state, const unsigned char* code)
 
 {
@@ -1014,6 +1025,8 @@ struct S_00e65140_VM
 
 // Executes a Mopp byte-code stream, updating the DOP bounds and recording primitive hits via FUN_00e65080.
 // @f3 0x00a9b6a0 (community match, verified in this file)
+// pdb: hkpMoppKDopGeometriesVirtualMachine::queryMoppKDopGeometriesRecurse | hkpMoppKDopGeometriesVirtualMachine.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: query, PC
 void S_00e65140_VM::FUN_00e65140(const S_00e65140_Query* query, const unsigned char* PC)
 {
     S_00e65140_Query scaledQuery;

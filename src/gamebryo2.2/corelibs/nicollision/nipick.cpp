@@ -3,6 +3,7 @@
 #include "nipick_decls.h"
 
 // @fnv 0x00e98b40
+// pdb: NiPick::Results::SortResults | NiPick.obj | fnv360_0822_retail, objrun_prop, medium
 void NiPick::Results::InvokeCallbacks()
 {
     for (unsigned int i = 0; i < m_uiValidCount; ++i)
@@ -22,6 +23,8 @@ void NiPick::Results::InvokeCallbacks()
 }
 
 // @fnv 0x00e98e20
+// pdb: NiPick::PickObjects | NiPick.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: kOrigin, kDir, bAppend
 bool NiPick::PerformPick(const NiPoint3& origin, const NiPoint3& direction, bool append)
 {
     if (!append)
@@ -40,6 +43,7 @@ bool NiPick::PerformPick(const NiPoint3& origin, const NiPoint3& direction, bool
 
 // Destructor for NiPick that calls Clear on the object's member.
 // @fnv 0x00e98fa0
+// pdb: NiPick::~NiPick | NiPick.obj | fnv360_0822_retail, call_gap, medium
 NiPick::~NiPick()
 {
     m_kResults.Clear();
@@ -47,6 +51,7 @@ NiPick::~NiPick()
 
 // Releases each record's two referenced objects, deallocates the records, then frees the base array.
 // @fnv 0x00e98e90
+// pdb: NiPick::Results::~Results | NiPick.obj | fnv360_0822_retail, call_seq, high
 void NiPick::Results::Clear() throw()
 {
     m_ppVirtualMethodTable = DAT_010f16ec;
@@ -141,6 +146,7 @@ extern PFN DAT_0126faa8;
 extern PFN DAT_0126faac;
 
 // @fnv 0x00e98ff0
+// pdb: NiCollisionSDM::Init | NiCollisionSDM.obj | fnv360_0822_retail, caller_sim, medium
 void __cdecl InitNiStreamCallbacks()
 {
     if (DAT_0126fa5c)
@@ -262,6 +268,7 @@ struct NiStreamUnreg
 // @f3 0x007fbe40 (community match, verified in this file)
 // 0x007fbe40: shutdown of the collision-data stream callbacks: unregisters the loader once, clears the
 // callback pointers and frees the four callback tables.
+// pdb: NiCollisionSDM::Shutdown | NiCollisionSDM.obj | fnv360_0822_retail, caller_sim, medium
 void __cdecl FUN_00e99260()
 {
     if (DAT_0126fa5c)
@@ -345,6 +352,7 @@ class FUN_00e98be0_queue : public NiTArray<ImageSpaceEffectParam*, NiTMallocInte
 
 // Finds the element with the lowest fPriority, swaps it with the first element, and sets m_uiCount to 1.
 // @fnv 0x00e98be0
+// pdb: NiPick::Results::FindClosest | NiPick.obj | fnv360_0822_retail, objrun_prop, medium
 void FUN_00e98be0_queue::MoveLowestPriorityToFront()
 {
     if (m_uiCount)
@@ -430,6 +438,8 @@ class TexturePoolE993
 
 // Returns the next ImageSpaceTextureE993 from the pool, reusing an existing slot or allocating a new one when the pool is exhausted.
 // @fnv 0x00e99330
+// pdb: NiPick::Results::AddNew | NiCollisionTraversals.obj | fnv360_0721_beta, caller, medium
+// pdb params: pObject
 ImageSpaceTextureE993* TexturePoolE993::GetTexture(int iParam)
 {
     if (m_uiNext < m_usSize)
@@ -461,6 +471,7 @@ struct StreamLibSDM
     void* FUN_007fbee0();
 };
 
+// pdb: NiParticleSDM::NiParticleSDM | NiParticleSDM.obj | tesv_win, objopen_prop, low
 void* StreamLibSDM::FUN_007fbee0()
 {
     if (DAT_0108ebe8++ == 0)

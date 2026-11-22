@@ -24,6 +24,7 @@ struct FUN_00e114c0_Class {
 };
 // Releases the subobject held in unkE4 with flag 1 if present, then clears the pointer.
 // @f3 0x005870e0 (community match, verified in this file)
+// pdb: BSFaceGenAnimationData::ClearExpressionTarget | BSFaceGenAnimationData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void FUN_00e114c0_Class::ReleaseSubobject() {
     if (unk0c)
         ((Subobject*)unk0c)->Release(1);
@@ -973,6 +974,8 @@ struct FUN_736dc0_cls
     S_736dc0_Rec* FUN_00736dc0(int oldValue, int newValue);
 };
 
+// pdb: HighProcess::GetDetectionState | HighProcess.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apActor, abWhichList
 S_736dc0_Rec* FUN_736dc0_cls::FUN_00736dc0(int oldValue, int newValue)
 {
     S_736dc0_Rec* found = 0;
@@ -1957,6 +1960,8 @@ public:
 
 // Formats iValue as a decimal string into a stack buffer and writes it to the stream via CC0280WriteString, returning *this.
 // @fnv 0x00cc0280
+// pdb: hkOstream::operator<< | hkOStream.obj | fnv360_0822_retail, call_seq, high
+// pdb params: i
 CC0280Writer& CC0280Writer::WriteInt(int iValue)
 {
     // Word-typed scratch buffer (this Havok code was built without /GS, so no cookie on the stack buffer).

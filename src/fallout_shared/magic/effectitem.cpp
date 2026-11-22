@@ -191,6 +191,7 @@ struct FUN_006f7fa0_obj
     unsigned char unk0e5;
 };
 
+// pdb: Actor::FlushReloadTargetQueque | Actor.obj | fnv360_0822_retail, call_gap, low
 bool EffectItem::IsHostile()
 {
     FUN_006f7fa0_obj* pObject = (FUN_006f7fa0_obj*)this;

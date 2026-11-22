@@ -1662,6 +1662,8 @@ __forceinline hkpSphereTriangleAgent::ClosestPointResult hkpSphereTriangleAgent:
 }  // namespace f3m_009c7730
 
 // hkpSphereTriangleAgent::staticGetClosestPoints, under the name and parameter types the unit declares for it
+// pdb: hkpSphereTriangleAgent::staticGetClosestPoints | hkpSphereTriangleAgent.obj | fnv360_1110_retail, objrun, medium
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_00d386c0(const S00d386c0_CdBody& bodyA, const S00d386c0_CdBody& bodyB, const S00d386c0_CollisionInput& input, S00d386c0_CdPointCollector& collector)
 {
     namespace hk = f3m_009c7730;

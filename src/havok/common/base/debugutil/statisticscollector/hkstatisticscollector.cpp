@@ -13,6 +13,7 @@ struct FUN_00d06f70_s
 };
 
 // @fnv 0x00d06f70
+// pdb: hkpMoppShapeMediator::~hkpMoppShapeMediator | hkpMoppShapeMediator.obj | fnv360_0822_retail, call_seq, high
 void FUN_00d06f70_s::FUN_00d06f70()
 {
     y = 0;
@@ -209,6 +210,8 @@ struct Cls_00569bf0 {
     void FUN_00c24b70();
     void FUN_00569bf0(int a);
 };
+// pdb: bhkShapePhantom::GetPenetrations | DecalCaster.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arCollector
 void Cls_00569bf0::FUN_00569bf0(int a) {
     if (this) {
         Inner_569bf0* p = inner08;

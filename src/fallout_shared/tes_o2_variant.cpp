@@ -691,6 +691,8 @@ struct TallGrassShaderProperty
     static NiTStringPointerMap_00e93060* __cdecl GetCacheDataMap();
 };
 // @fnv 0x00b617b0
+// pdb: TallGrassShaderProperty::ContainsChunk | TallGrassShaderProperty.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: aiGrassID, alTerrainChunkSeed
 bool __cdecl FUN_00b617b0(char const* a, char const* b)
 {
     ShaderBufferRecord* pn = 0;
@@ -834,6 +836,7 @@ struct FUN_00b631d0_cls
 };
 
 // @fnv 0x00b631d0
+// pdb: BSShaderAccumulator::ClearAllQueries | BSShaderAccumulator.obj | fnv360_0822_retail, call_gap, low
 void FUN_00b631d0_cls::FUN_00b631d0()
 {
     unsigned int state;
@@ -1039,6 +1042,8 @@ struct NativeItemManager {
     int unknown64, unknown68;
     NativePendingList pending;
 };
+// pdb: BSTextureManager::ReturnRenderedTexture | BSTextureManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTexToReturn
 void Manager::FUN_00b6da10(Item* item)
 {
     NativeItemManager& native = *reinterpret_cast<NativeItemManager*>(this);

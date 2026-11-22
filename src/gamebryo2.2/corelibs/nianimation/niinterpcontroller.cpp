@@ -2,6 +2,8 @@
 #include "f3_common.h"
 #include "niinterpcontroller_decls.h"
 // @fnv 0x00a2f910
+// pdb: NiInterpController::LoadBinary | NiInterpController.obj | fnv360_0822_retail, call_gap, low
+// pdb params: kStream
 void NiInterpController::LoadBinary(NiStream& stream)
 {
     NiTimeController::LoadBinary(stream);
@@ -32,6 +34,7 @@ class NiInterpControllerFlagCheck : public NiInterpController
 };
 
 // @fnv 0x00a2f8f0
+// pdb: NiInterpController::ResetTimeExtrema | NiInterpController.obj | fnv360_0822_retail, objrun_prop, medium
 void NiInterpControllerFlagCheck::ResetIfFlagClear()
 {
     unsigned char value = *(unsigned char*)((char*)this + 8);
@@ -71,6 +74,8 @@ struct BaseWrap : BaseCall
 };
 // Calls the base writer, then appends a string and an "IsManagerControlled" entry derived from bit 5 of flags to the stream.
 // @fnv 0x00a2f980
+// pdb: NiInterpController::GetViewerStrings | NiInterpController.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void BaseWrap::WriteManagerControlledFlag(StrArr* stream)
 {
     FUN_00a6d830(stream);

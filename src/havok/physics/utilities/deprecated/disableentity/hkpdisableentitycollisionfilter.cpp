@@ -17,6 +17,8 @@ void __stdcall FUN_00e46780(unsigned char* flag, int p2, int p3, int p4, int p5,
 }
 
 // @fnv 0x00e46790
+// pdb: hkpNullCollisionFilter::isCollisionEnabled | hkpWorld.obj | fnv360_0721_beta, vtable, high
+// pdb params: aInput, bShape, bContainer, bKey
 void __stdcall FUN_00e46790(char* flag, int a, int b, int c, int d)
 {
     *flag = 1;
@@ -95,6 +97,8 @@ class hkpProjectileGunE467
 
 // Returns false if either collidable is found among the rigid bodies' collidables in the array, otherwise true.
 // @fnv 0x00e467d0
+// pdb: hkpDisableEntityCollisionFilter::isCollisionEnabled | hkpDisableEntityCollisionFilter.obj | fnv360_0822_retail, vtable, high
+// pdb params: a, b
 hkBoolE467 hkpProjectileGunE467::FUN_00e467d0(const hkpCollidableE467& kA, const hkpCollidableE467& kB) const
 {
     for (int i = 0; i < m_kRigidBodies.GetLogicalSize(); i++)
@@ -402,6 +406,7 @@ struct FUN_00a74070 : Base_a74070, Listener_a74070
     virtual ~FUN_00a74070();
 };
 
+// pdb: hkpDisableEntityCollisionFilter::hkpDisableEntityCollisionFilter | hkpDisableEntityCollisionFilter.obj | fnv360_0822_retail, objrun, medium
 FUN_00a74070::FUN_00a74070()
 {
 }

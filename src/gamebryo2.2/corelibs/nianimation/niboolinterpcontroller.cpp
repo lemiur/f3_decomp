@@ -9,6 +9,8 @@ struct BSFadeNode
 struct NiBlendInterpolator;
 NiBlendInterpolator* __fastcall ConstructBlendInterpolator(NiBlendInterpolator*, int, int, float, int);
 // @fnv 0x00a57750
+// pdb: NiPSysModifierBoolCtlr::CreateBlendInterpolator | NiPSysModifierBoolCtlr.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: usIndex, bManagerControlled, bAccumulateAnimations, fWeightThreshold, ucArraySize
 NiBlendInterpolator* __stdcall FUN_00a57750(int aiUnused, int aiArg, int aiUnused2, float a4, int a5)
 {
     void* pMemory = BSFadeNode::operator new(0x34);
@@ -27,6 +29,8 @@ void __stdcall FUN_00a390a0(StrArr*);
 char* __cdecl FUN_00a7d330(const char*);
 // Appends the string returned by FUN_00a7d330(g_011f3f08_arg1) to the StrArr at index e, growing it by the value at offset 14 plus e when e >= c.
 // @fnv 0x00a57800
+// pdb: NiRenderer::GetViewerStrings | NiRenderer.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pkStrings
 void __stdcall FUN_00a57800(StrArr* apStrings)
 {
     FUN_00a390a0(apStrings);
@@ -128,6 +132,8 @@ class NiBoolInterpControllerShim : public NiBoolInterpController
     NiInterpolator* FUN_00a57710(int unused);
 };
 // @fnv 0x00a57710
+// pdb: NiPSysModifierBoolCtlr::CreatePoseInterpolator | NiPSysModifierBoolCtlr.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: usIndex
 NiInterpolator* NiBoolInterpControllerShim::FUN_00a57710(int unused)
 {
     union BoolWord
@@ -154,6 +160,7 @@ struct StandIn
 };
 
 // @fnv 0x00a57c10
+// pdb: Interface::DrawSurgeryMenu3D | Interface.obj | fnv360_0822_retail, objrun, low
 int __thiscall StandIn::FUN_00a57c10(FUN_00a57c10_This* this_, int param_2)
 {
     return IsCompatibleWith(this_, param_2);

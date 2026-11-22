@@ -35,6 +35,8 @@ struct FUN_00a3dae0_shell : NiPathInterpolator
 
 // Returns the pointer stored at offset 8 of the object at this+0x18 for idx 0 or this+0x1c for idx 1, or null if absent.
 // @fnv 0x00a3dae0
+// pdb: NiPathInterpolator::GetKeyCount | NiPathInterpolator.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: usChannel
 void* __thiscall FUN_00a3dae0_shell::FUN_00a3dae0(short idx)
 {
     if (idx == 0)
@@ -59,6 +61,8 @@ struct FUN_00a3db10_shell : NiPathInterpolator
 
 // Returns the int at offset 0x10 of the pointer stored at this+0x18 for arg 0 or this+0x1c for arg 1, or 0 if that pointer is null or arg is other.
 // @fnv 0x00a3db10
+// pdb: NiPathInterpolator::GetKeyType | NiPathInterpolator.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: usChannel
 int __thiscall FUN_00a3db10_shell::GetValueByIndex(short aiIndex)
 {
     if (aiIndex == 0)
@@ -83,6 +87,8 @@ struct FUN_00a3db40_shell
 
 // Returns the int at offset 0xC of the object stored at this+0x18 when arg is 0, or at this+0x1C when arg is 1; otherwise returns 0.
 // @fnv 0x00a3db40
+// pdb: NiPathInterpolator::GetKeyArray | NiPathInterpolator.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: usChannel
 int __thiscall FUN_00a3db40_shell::FUN_00a3db40(short aiSlot)
 {
     if (aiSlot == 0)
@@ -107,6 +113,8 @@ struct FUN_00a3db70_shell : NiPathInterpolator
 
 // Returns byte at offset 0x14 of the object stored at this+0x18 for arg 0 or this+0x1c for arg 1, otherwise 0.
 // @fnv 0x00a3db70
+// pdb: NiPathInterpolator::GetKeyStride | NiPathInterpolator.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: usChannel
 char __thiscall FUN_00a3db70_shell::FUN_00a3db70(unsigned short ausIndex)
 {
     if (ausIndex == 0)
@@ -127,6 +135,7 @@ char __thiscall FUN_00a3db70_shell::FUN_00a3db70(unsigned short ausIndex)
 extern "C" void* g_011f3e48;
 
 // @fnv 0x00a3dde0
+// pdb: bhkAction::GetRTTI | GlobalFunc.obj | fnv360_0822_retail, objrun, medium
 void* __cdecl FUN_00a3dde0()
 {
     return &g_011f3e48;
@@ -140,6 +149,7 @@ struct FloatDataHelper
 
 // Forwards the two float arguments to the FloatDataHelper stored at offset 0x1c, if that pointer is non-null.
 // @fnv 0x00a3dc50
+// pdb: NiPathInterpolator::GuaranteeTimeRange | NiPathInterpolator.obj | tesv_win, objrun_open, low
 void __thiscall NiPathInterpolator::FUN_00a3dc50(float m_fStartTime, float m_fMaximumDistance)
 {
     FloatDataHelper* p = (FloatDataHelper*)m_spPctData;
@@ -151,6 +161,8 @@ void __thiscall NiPathInterpolator::FUN_00a3dc50(float m_fStartTime, float m_fMa
 
 // Maps channel 0 to 1, channel 1 to 0, and any other channel to 6.
 // @fnv 0x00a3da80
+// pdb: NiPathInterpolator::GetKeyContent | NiPathInterpolator.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: usChannel
 int __stdcall GetChannelIndex(unsigned short usChannel)
 {
     if (usChannel == 0)
@@ -168,6 +180,7 @@ struct FUN_00a3dac0_shell
 
 // Calls FUN_00a48fb0, then deletes this with size 24 when idx has bit 0 set, and returns this.
 // @fnv 0x00a3dac0
+// pdb: BGSAddonNodeSoundHandleExtra::`scalar deleting destructor' | BGSAddonNode.obj | fnv360_0822_debug, vtable, high
 void* __thiscall FUN_00a3dac0_shell::DestroyIfOdd(short idx)
 {
     FUN_00a48fb0();
@@ -215,6 +228,7 @@ struct FUN_00a3e980_shell
 };
 
 // @fnv 0x00a3e980
+// pdb: NiTriShapeDynamicData::`scalar deleting destructor' | NiTriShapeDynamicData.obj | tesv_win, vtable_prefix, medium
 void* __thiscall FUN_00a3e980_shell::Destroy(unsigned int flags)
 {
     FUN_00a3dd40();
@@ -246,6 +260,8 @@ struct TargetHolder : FUN_00a3cbf0_shell
 };
 // Appends the string returned by _FUN_00a7d330(_g_011f3e48) to pkStrings, growing the array if the size limit is reached.
 // @fnv 0x00a3f4d0
+// pdb: NiParticles::GetViewerStrings | NiParticles.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pStrings
 void __thiscall TargetHolder::AppendString(StrArr* pkStrings)
 {
     FUN_00a3cbf0(pkStrings);
@@ -308,6 +324,8 @@ struct FUN_00a3dc80_shell
 };
 // Calls ProcessClone on this object and on the path and percentage objects if they are set.
 // @fnv 0x00a3dc80
+// pdb: NiMeshPSysData::ProcessClone | NiMeshPSysData.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiPathInterpolator::ProcessClone)
+// pdb params: kCloning
 void __thiscall FUN_00a3dc80_shell::FUN_00a3dc80(CloningProcess& kCloning)
 {
     ((NiObject*)this)->NiObject::ProcessClone(kCloning);
@@ -356,6 +374,8 @@ struct FUN_00a3dcc0_cls
     bool __thiscall FUN_00a3dcc0(void*);
 };
 // @fnv 0x00a3dcc0
+// pdb: bhkPackedNiTriStripsShape::RegisterStreamables | bhkPackedNiTriStripsShape.obj | fnv360_0822_retail, objopen_prop, low, conflict (skyrim: NiPathInterpolator::RegisterStreamables)
+// pdb params: arStream
 bool FUN_00a3dcc0_cls::FUN_00a3dcc0(void* pkStream)
 {
     if (!((HC1Base*)this)->FUN_00aa0ad0(pkStream))
@@ -510,6 +530,8 @@ struct FUN_00a3dba0_Class2 : FUN_00a3dba0_Class
 };
 
 // @fnv 0x00a3dba0
+// pdb: NiPathInterpolator::GetActiveTimeRange | NiPathInterpolator.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: fBeginKeyTime, fEndKeyTime
 void __thiscall FUN_00a3dba0_Class::GetRange(float* pfMin, float* pfMax)
 {
     *pfMin = DAT_01097170;
@@ -571,6 +593,8 @@ struct PathData
 };
 // Reads channel, value38, value28, value2c and channel30 from the source's stream, accumulating bytesRead, then calls NiStream_ReadLinkID twice.
 // @fnv 0x00a3ed90
+// pdb: NiPathInterpolator::LoadBinary | NiPathInterpolator.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void PathData::ReadFromStream(Source* source)
 {
     FUN_00aa0ac0(source);
@@ -805,6 +829,8 @@ static __forceinline void FNV_WriteField(FNV_WriteStream* pWriter, void* pData, 
 
 // Writes unk0c, unk38, unk28, unk2c and unk30 to the stream's writer, then calls f12 with unk18 and unk1c after FUN_00a95ca0.
 // @fnv 0x00a3ef70
+// pdb: NiPathInterpolator::SaveBinary | NiPathInterpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void FNV_Writer::WriteToStream(FNV_NiStream* pStream)
 {
     FUN_00a95ca0(pStream);
@@ -942,6 +968,8 @@ class NiPathInterp : public NiInterpolatorBase
 };
 
 // @fnv 0x00a3f2f0
+// pdb: NiPathInterpolator::CopyMembers | NiPathInterpolator.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkDest, kCloning
 void NiPathInterp::FUN_00a3f2f0(NiPathInterp* pDest, CloningProcess& kCloning)
 {
     NiInterpolatorBase::CopyMemberData(pDest, kCloning);
@@ -1026,6 +1054,8 @@ struct PathInterpExt : public NiPathInterp
 };
 
 // @fnv 0x00a3ec30
+// pdb: NiPathInterpolator::GetLoc | NiPathInterpolator.obj | fnv360_0822_retail, call_seq, high
+// pdb params: fTime, uiI1, uiI2, fNormTime
 void PathInterpExt::FindKeyPair(float fTime, unsigned int& ruiKey0, unsigned int& ruiKey1, float& rfNormTime)
 {
     if (GetBit(0x10))
@@ -1162,6 +1192,8 @@ class FUN_00a3f060 : public NiKeyBasedInterpolator
     float m_fLast;
 };
 // @fnv 0x00a3f060
+// pdb: NiPathInterpolator::NiPathInterpolator | NiPathInterpolator.obj | fnv360_0822_retail, call_gap, high
+// pdb params: pkPathData, pkPctData
 FUN_00a3f060::FUN_00a3f060(NiPosData* pkPathData, NiFloatData* pkPctData)
     : m_pPathObject(pkPathData), m_pPathInterp(pkPctData), m_kRotationMatrix(DAT_011f4208), m_kPathOffset(DAT_011a9424)
 {
@@ -1300,6 +1332,8 @@ struct PathInterpLink : public NiPathInterp
 };
 // Reads path data from a stream, updates constant-velocity state, and computes curvature from the path object's position keys.
 // @fnv 0x00a3ee80
+// pdb: NiPathInterpolator::LinkObject | NiPathInterpolator.obj | fnv360_0822_retail, objrun, medium
+// pdb params: kStream
 void PathInterpLink::FUN_00a3ee80(NiStream& stream)
 {
     FUN_00a95ca0(stream);
@@ -1440,6 +1474,8 @@ class NiPathInterpQ
 
 // Computes the path position and optional rotation at fTime, writes them into kValue, and returns whether the transform was updated.
 // @fnv 0x00a3f120
+// pdb: NiPathInterpolator::Update | NiPathInterpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: fTime, pkInterpTarget, kValue
 bool NiPathInterpQ::UpdateTransform(float fTime, NiObjectNETQ* pkTarget, NiQuatTransformQ& kValue)
 {
     if (!TimeHasChanged(fTime))
@@ -1780,6 +1816,8 @@ __declspec(noinline) FV3 PathBasis::FUN_0053d1a0(const FV3& v) const
 
 // Computes the path basis matrix at a given time by interpolating position, tangent, and curvature, applying smoothing, axis, and bank adjustments.
 // @fnv 0x00a3de50
+// pdb: NiPathInterpolator::CalcRefFrame | NiPathInterpolator.obj | fnv360_0822_retail, call_seq, high
+// pdb params: ui1, ui2, fNormTime, kRefFrame
 void __thiscall PathMotion::EvaluateBasis(unsigned int aiFirstKey, unsigned int aiSecondKey, float time, FM3* out)
 {
     FM3 transform;

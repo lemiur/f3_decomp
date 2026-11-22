@@ -262,6 +262,8 @@ inline bool A46IsExactKindOf(const NiRTTI* pkRTTI, const A46ExtraData* pkObject)
 }
 
 // @fnv 0x00a46c20
+// pdb: NiTextKeyExtraData::CopyMembers | NiTextKeyExtraData.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pDest, kCloning
 void A46TextKeyExtraData::FUN_00a46c20(A46TextKeyExtraData* pkDest, CloningProcess* kCloning)
 {
     A46ExtraData::FUN_00a7b330(pkDest, kCloning);
@@ -485,6 +487,8 @@ struct NiStream
 };
 
 // @fnv 0x00a46e00
+// pdb: NiTextKeyExtraData::LoadBinary | NiTextKeyExtraData.obj | fnv360_0822_retail, objrun, medium
+// pdb params: stream
 void __thiscall NiTextKeyExtraDataStub::FUN_00a46e00(NiStream& stream)
 {
     LoadBinaryBase(stream);

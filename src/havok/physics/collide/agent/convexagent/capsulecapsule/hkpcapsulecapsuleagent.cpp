@@ -25,6 +25,8 @@ struct FUN_00d3b3d0_Class
 
 // Calls invoke on unk08 for each of the three IDs at unk0C unless it is 0xffff, then releases the object.
 // @fnv 0x00d3b3d0
+// pdb: hkpCapsuleCapsuleAgent::cleanup | hkpCapsuleCapsuleAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: constraintOwner
 void FUN_00d3b3d0_Class::InvokeCallbacksAndRelease(int value)
 {
     unsigned short* id = &unk0C;
@@ -62,6 +64,8 @@ struct Registry {
 
 // Fills a HandlerSet with four handler functions and zeroed flags, then registers it with the registry using 5 and 5.
 // @f3 0x009c5720 (community match, verified in this file)
+// pdb: hkpCapsuleCapsuleAgent::registerAgent | hkpCapsuleCapsuleAgent.obj | fnv360_0721_beta, objrun, medium
+// pdb params: dispatcher
 void RegisterHandlers(Registry* registry) {
     void hkpCapsuleCapsuleAgent_createCapsuleCapsuleAgent();
     void hkpCapsuleCapsuleAgent_staticGetPenetrations();
@@ -85,6 +89,8 @@ struct D3B6D0Agent {
 };
 
 // @fnv 0x00d3b6d0
+// pdb: hkpCapsuleCapsuleAgent::getPenetrations | hkpCapsuleCapsuleAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void D3B6D0Agent::ForwardToHandler(const void* apArg1, const void* apArg2, const void* apArg3, void* apArg4)
 {
     FUN_00d3b420(apArg1, apArg2, apArg3, apArg4);

@@ -62,6 +62,8 @@ CC0D30Result __cdecl FUN_00cc0bc0(const void* data, const CC0D30Registry& regist
                                   int flags);
 
 // @fnv 0x00cc0d30
+// pdb: hkpHavokSnapshot::save | hkpHavokSnapshot.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: data, writer, binaryFormat, targetLayout
 CC0D30Result __cdecl FUN_00cc0d30(const void* data, const void* pClassInfo, void* out, int flags)
 {
     return FUN_00cc0bc0(data, g_CC0D30DefaultRegistry, pClassInfo, out, flags);
@@ -87,6 +89,8 @@ struct S_00cc0d60_A
 };
 S_00cc0d60_R* FUN_00cc0d30(void** pa, S_00cc0d60_A* a, void* b, int c, int d);
 // @fnv 0x00cc0d60
+// pdb: hkpHavokSnapshot::save | hkpHavokSnapshot.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: world, writer, binaryFormat, targetLayout, saveContactPoints
 S_00cc0d60_R FUN_00cc0d60(void* a2, void* a3, int a4, int a5, int a6)
 {
     S_00cc0d60_R res;

@@ -533,6 +533,8 @@ struct Owner775310 {
     bool FUN_00775310(Arg775310* arg);
 };
 
+// pdb: PlayerCharacter::RemoveSpell | PlayerCharacter.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apSpellIn
 bool Owner775310::FUN_00775310(Arg775310* arg)
 {
     bool res = FUN_00723400(arg);

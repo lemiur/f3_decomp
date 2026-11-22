@@ -3,6 +3,8 @@
 #include "nipsysmodifier_decls.h"
 
 // @fnv 0x00C318B0
+// pdb: NiPSysModifier::LoadBinary | NiPSysModifier.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kStream
 void NiPSysModifier::LoadBinary(NiStream& kStream)
 {
     NiObject::LoadBinary(kStream);
@@ -19,6 +21,8 @@ void NiPSysModifier::LoadBinary(NiStream& kStream)
 }
 
 // @fnv 0x00C31780
+// pdb: NiPSysModifier::CopyMembers | NiPSysModifier.obj | fnv360_0822_retail, call_seq, medium, conflict (bridge: NiPSysBombModifier::NiPSysBombModifier)
+// pdb params: pkDest, kCloning
 void NiPSysModifier::CopyMemberData(NiPSysModifier* pkDest, CloningProcess& kCloning)
 {
     NiObject::CreateVertexBufferSet(pkDest, kCloning);
@@ -37,6 +41,8 @@ void NiPSysModifier::CopyMemberData(NiPSysModifier* pkDest, CloningProcess& kClo
 }
 
 // @fnv 0x00C317E0
+// pdb: NiPSysModifier::ProcessClone | NiPSysModifier.obj | fnv360_0822_retail, vtable, high
+// pdb params: kCloning
 void NiPSysModifier::ProcessClone(CloningProcess& kCloning)
 {
     NiObject::ProcessClone(kCloning);
@@ -48,6 +54,8 @@ void NiPSysModifier::ProcessClone(CloningProcess& kCloning)
 }
 
 // @fnv 0x00C31650
+// pdb: NiPSysModifier::LinkObject | NiPSysModifier.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kStream
 void NiPSysModifier::LinkObject(NiStream& kStream)
 {
     NiObject::LinkObject(kStream);
@@ -60,6 +68,8 @@ struct NiPSysModifier_shell : NiPSysModifier
 };
 
 // @fnv 0x00c31640
+// pdb: BaseProcess::SetCurrentProcedureIndex | BaseProcess.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiNewIndex
 void NiPSysModifier_shell::FUN_00c31640(NiParticleSystem* pkTarget)
 {
     m_pkTarget = pkTarget;
@@ -72,6 +82,8 @@ struct MyIsEqual : NiPSysModifier
 };
 // Compares this object with a NiPSysModifier: checks IsSameAs, then fields at offsets 8, 0xc and 0x14 for equality.
 // @fnv 0x00c31830
+// pdb: NiPSysModifier::IsEqual | NiPSysModifier.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkObject
 bool MyIsEqual::FUN_00c31830(NiObject* pkObject)
 {
     NiPSysModifier* pkDest = (NiPSysModifier*)pkObject;
@@ -103,6 +115,8 @@ struct X : NiPSysModifier
 };
 // Registers streamables via NiObjectBase::RegisterStreamables and, on success, calls vf8 on the stream with this+8.
 // @fnv 0x00c31670
+// pdb: NiPSysModifier::RegisterStreamables | NiPSysModifier.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kStream
 bool X::FUN_00c31670(NiStream& kStream)
 {
     if (!((NiObjectBase*)this)->RegisterStreamables(kStream))
@@ -226,6 +240,8 @@ extern const char DAT_00e8b13c[],DAT_00e8b128[];
 char* __cdecl FUN_00847b50(const char*);
 char* __cdecl FUN_00847e20(const char*,const char*);
 char* __cdecl FUN_00847ce0(const char*,unsigned int);
+// pdb: BSPSysMultiTargetEmitterCtlr::GetViewerStrings | BSPSysMultiTargetEmitterCtlr.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkStrings
 void FUN_00c319e0_cls::FUN_00c319e0(StrArr* strings) {
     reinterpret_cast<Base482*>(this)->FUN_00abcb40(strings);
     Array482* array=reinterpret_cast<Array482*>(strings);
@@ -280,6 +296,7 @@ class NamedC318 : public FUN_00a5d3d0
 
 // Releases the NamedC318 object, calling its destructor and freeing memory when uiFlags has bit 0 set, then returns this.
 // @fnv 0x00c31870
+// pdb: NiPSysModifier::`scalar deleting destructor' | NiPSysModifier.obj | fnv360_0822_retail, objrun, high
 NamedC318* NamedC318::FUN_00c31870(unsigned int uiFlags)
 {
     this->NamedC318::~NamedC318();

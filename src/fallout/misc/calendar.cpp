@@ -15,6 +15,7 @@ public:
 extern MemoryManager g_memoryManager;
 extern int DAT_00dbb62c;
 
+// pdb: BGSIdleCollection::~BGSIdleCollection | BGSIdleCollection.obj | fnv360_0822_retail, call_seq, medium
 DAYS_OF_THE_WEEK Calendar::GetGameDayOfWeek()
 {
     *(void**)this = (void*)&DAT_00dbb62c;

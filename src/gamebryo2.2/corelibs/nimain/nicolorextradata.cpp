@@ -8,6 +8,8 @@ struct FUN_00a893b0_shell
 };
 
 // @fnv 0x00a893b0
+// pdb: NiColorExtraData::SetValue | NiColorExtraData.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: kColorA
 void __thiscall FUN_00a893b0_shell::SetValues(int aiValue0, int aiValue1, int aiValue2, int aiValue3)
 {
     *(int*)(this + 0xc) = aiValue0;
@@ -43,6 +45,8 @@ struct NiColorExtraData : NiExtraData
 };
 
 // @fnv 0x00a893d0
+// pdb: NiColorExtraData::SaveBinary | NiColorExtraData.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void NiColorExtraData::FUN_00a893d0(NiStream& kStream)
 {
     NiExtraData::SaveBinary(kStream);
@@ -77,6 +81,8 @@ struct FUN_00a894f0_shell : NiColorExtraData
 };
 
 // @fnv 0x00a894f0
+// pdb: NiColorExtraData::LoadBinary | NiColorExtraData.obj | fnv360_0721_beta, objrun, medium
+// pdb params: kStream
 void FUN_00a894f0_shell::FUN_00a894f0(NiStream& kStream)
 {
     ((NiExtraData_LoadBinary_helper*)this)->LoadBinary(kStream);
@@ -175,6 +181,7 @@ struct S_00a89590
 };
 
 // @fnv 0x00a89590
+// pdb: NiColorExtraData::IsEqual | NiColorExtraData.obj | tesv_win, hash, low
 bool S_00a89590::FUN_00a89590(S_00a89590* other)
 {
     if (!other)

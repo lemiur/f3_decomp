@@ -39,6 +39,8 @@ class ScratchOwner
 };
 
 // @fnv 0x00da7020
+// pdb: hkBvTreeAgent3::registerAgent3 | hkpBvTreeAgent3.obj | fnv360_0822_retail, objrun, medium
+// pdb params: dispatcher
 void __cdecl FUN_00da7020(ScratchOwner* owner)
 {
     __declspec(align(16)) ScratchBlock s;
@@ -123,6 +125,7 @@ public:
     {}
 };
 
+// pdb: getVtablehkpSerializedAgentNnEntry | hkpUtilitiesReflections.obj | tesv_win, objrun_prop, low
 const void* __cdecl FUN_00da0780()
 {
     FinishingFlag flag;

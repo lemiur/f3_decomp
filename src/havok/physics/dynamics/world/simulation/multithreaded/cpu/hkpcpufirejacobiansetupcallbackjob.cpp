@@ -351,6 +351,8 @@ extern DWORD DAT_010f3170;
 extern void __cdecl hkSimpleContactConstraintData_fireCallbacks(S_00d94c40_Data* data, S_00d94c40_Input* input, S_00d94c40_Node* node);
 extern void __cdecl FUN_00e0811c();
 
+// pdb: hkpSingleThreadedJobsOnIsland::cpuFireJacobianSetupCallbackJob | hkpCpuFireJacobianSetupCallbackJob.obj | fnv360_0822_retail, ustr, high
+// pdb params: tl, jobQueue, jobInOut
 void __cdecl ExecuteConstraintCallbacks(S_00d94c40_Context* context, S_00d94c40_JobQueue* jobQueue, S_00d94c40_Job* job)
 {
     S_00d94c40_Input* input = (S_00d94c40_Input*)((char*)context + 0x80);

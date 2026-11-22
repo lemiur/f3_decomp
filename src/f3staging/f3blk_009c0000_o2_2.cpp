@@ -134,6 +134,8 @@ struct __declspec(align(16)) Base_e9f0
     int m_count;
 };
 void __cdecl FUN_009f90f0(const Plane_e9f0* plane, void* out, int arg);
+// pdb: hkpGenericConstraintData::setConeLimitW | hkpGenericConstraintData.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: currentCommand, currentData, scheme, vars, in, out
 void __stdcall FUN_009de9f0(const int** pIdx, const Vec4_e9f0** pSrc, int unused, Base_e9f0* base, void* out, int arg)
 {
     Plane_e9f0 p;
@@ -820,6 +822,8 @@ public:
 // setupPointTriangleDistanceCache: precomputes the triangle's edge and normal lengths
 void __cdecl FUN_0096fd30(const hkVector4* triVertices, hkpCollideTriangleUtil::PointTriangleDistanceCache& cache);
 
+// pdb: hkpCapsuleTriangleAgent::staticGetClosestPoints | hkpCapsuleTriangleAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_009c3590(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const hkpCollisionInput& input, hkpCdPointCollector& collector)
 {
     {

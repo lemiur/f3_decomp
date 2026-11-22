@@ -759,6 +759,8 @@ class A438D0Interpolator : public A438D0Base
 };
 
 // @fnv 0x00a438d0
+// pdb: BSTreadTransfInterpolator::LoadBinary | BSTreadTransfInterpolator.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arStream
 void A438D0Interpolator::FUN_00a438d0(A438D0Stream& kStream)
 {
     A438D0Base::LoadBinary(kStream);

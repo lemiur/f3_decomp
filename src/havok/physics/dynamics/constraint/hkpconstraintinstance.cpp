@@ -49,6 +49,8 @@ struct FUN_00cf3040_class
 };
 // Scans two pointers at this+0x14 and, when one matches the pointer at arg+0x24, calls removeReference on it and clears that slot.
 // @fnv 0x00cf3040
+// pdb: hkpConstraintInstance::setFixedRigidBodyPointersToZero | hkpConstraintInstance.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: world
 void FUN_00cf3040_class::RemoveReferenceFromSlots(void* arg)
 {
     for (int i = 0; i < 2; ++i)
@@ -79,6 +81,7 @@ struct FUN_00cf3e60_class : public hkReferencedObject
 };
 
 // @fnv 0x00cf3e60
+// pdb: hkpConstraintInstance::pointNullsToFixedRigidBody | hkpConstraintInstance.obj | fnv360_0822_retail, call_gap, medium
 void FUN_00cf3e60_class::FUN_00cf3e60()
 {
     for (int i = 0; i < 2; ++i)
@@ -356,6 +359,8 @@ struct hkpModifierConstraintAtom
 
 // Walks the modifier atom chain of a constraint instance and returns the first atom whose m_type equals type, or null if none matches.
 // @fnv 0x00d277c0
+// pdb: hkpWorldConstraintUtil::findModifier | hkpWorldConstraintUtil.obj | fnv360_0822_retail, call_seq, high
+// pdb params: instance, type
 hkpModifierConstraintAtom* __cdecl FindModifierConstraintAtom(hkpConstraintInstance* aConstraintInstance,
                                                               unsigned int type)
 {
@@ -602,6 +607,7 @@ struct TESWaterForm
     void FUN_004fed10();
 };
 
+// pdb: TESWaterForm::InitializeData | TESWaterForm.obj | fnv360_0822_retail, vtable, medium
 void TESWaterForm::FUN_004fed10()
 {
     m_ucOpacity = 0x4B;

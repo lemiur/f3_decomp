@@ -25,6 +25,8 @@ class AccumWIP : public BSShaderAccumulator
 };
 
 // @fnv 0x00b639e0
+// pdb: BSShaderAccumulator::RenderGeometryGroup | BSShaderAccumulator.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: auiGeometryGroup, abAlphaPass
 void AccumWIP::SetShaderPassEnabled(unsigned int uiGroupIndex, bool bFlag)
 {
     GroupView* pkGroup = reinterpret_cast<BRView*>(m_pGroupRenderer[0])->m_pGeometryGroups[uiGroupIndex];
@@ -54,6 +56,7 @@ FNV_STATIC_ASSERT(offsetof(BSShaderAccumulatorPassIndexList, m_item) == 0);
 FNV_STATIC_ASSERT(offsetof(BSShaderAccumulatorPassIndexList, m_pkNext) == 4);
 
 // @fnv 0x00b64ec0
+// pdb: BSSimpleList<unsigned short>::RemoveAll | BSShaderAccumulator.obj | fnv360_0822_retail, call_seq, high
 template <> void BSSimpleList<unsigned short>::RemoveAll()
 {
     while (m_pkNext)
@@ -73,6 +76,7 @@ template <> void BSSimpleList<unsigned short>::RemoveAll()
 
 // Iterates over the active passes and calls RemoveAll on each pass's list.
 // @fnv 0x00b65580
+// pdb: BSShaderAccumulator::ClearBloodSplatter | BSShaderAccumulator.obj | fnv360_0822_debug, objopen_prop, low
 void BSShaderAccumulator::ClearActivePasses()
 {
     for (unsigned int i = 0; i < m_uiRendererCount; ++i)
@@ -127,6 +131,8 @@ struct BatchRendererDummy
 };
 
 // @f3 0x00ae6dc0 (community match, verified in this file)
+// pdb: BSShaderAccumulator::StartGroupingAlphas | BSShaderAccumulator.obj | fnv360_0721_beta, call_gap_sim, medium
+// pdb params: aBound, abZPrePass
 void FUN_00b63500_shell::RenderBound(void* aBound, bool abZPrePass)
 {
     unsigned int uiIndex = *(unsigned int*)&tls_data[0x2a4] % *(unsigned int*)((char*)this + 0x18c);
@@ -144,6 +150,7 @@ extern int DAT_011ff9e4;
 extern float DAT_01200458;
 
 // @fnv 0x00b64e30
+// pdb: BSShaderAccumulator::RenderDecals | BSShaderAccumulator.obj | fnv360_0822_retail, call_gap_sim, medium
 void __fastcall FUN_00b64e30(AccumWIP* pAccumWIP)
 {
     if (*reinterpret_cast<unsigned char*>(reinterpret_cast<char*>(pAccumWIP) + 0x16C) &&
@@ -212,6 +219,8 @@ struct BSBatchRendererView
 };
 
 // @fnv 0x00b64f20
+// pdb: BSBatchRenderer::ClearAlphaLists | BSShaderAccumulator.obj | fnv360_0822_retail, caller, medium
+// pdb params: aiSide
 void __fastcall FUN_00b64f20(BSBatchRendererView* pThis, int, unsigned int uiIndex)
 {
     pThis->pAlphaGroups[uiIndex]->ClearPassTextureSlots();
@@ -261,6 +270,7 @@ struct Self_00b655b0
 // @f3 0x00ae87d0 (community match, verified in this file)
 extern unsigned int DAT_0106e5a4;
 extern long (__stdcall* DAT_00d9b06c)(long volatile*, long, long);
+// pdb: BSShaderAccumulator::ClearAllBoundVolumes | BSShaderAccumulator.obj | fnv360_0822_retail, call_gap, low
 void __fastcall FUN_00b655b0(Self_00b655b0* self)
 {
     while (self->count != 0)
@@ -451,6 +461,8 @@ struct BSRenderStateManager
 };
 
 // @fnv 0x00b65e80
+// pdb: BSShaderAccumulator::FinishAccumulating_Interface | BSShaderAccumulator.obj | fnv360_1110_retail, caller_sim, medium
+// pdb params: apAccumulator
 void __cdecl FUN_00b65e80(void* pObject)
 {
     if (*(int*)((unsigned char*)pObject + 8))
@@ -500,6 +512,7 @@ struct AccumStub
 };
 extern __declspec(thread) unsigned int g_threadIndex;
 // @fnv 0x00b63090
+// pdb: BSShaderAccumulator::StopGroupingAlphas | BSShaderAccumulator.obj | fnv360_0822_retail, call_gap_sim, low
 void FUN_00b63090_shell::DispatchBatchRenderer()
 {
     AccumStub* a = reinterpret_cast<AccumStub*>(this);
@@ -528,6 +541,7 @@ struct AccumStub
 };
 // For each of the three entries, queries the stub, releases and deallocates it, clears the pointer and flag, then clears m_b40.
 // @fnv 0x00b63620
+// pdb: BSFileCache::ForceResumeFileCaching | Main.obj | fnv360_0822_debug, call_gap, low
 void __fastcall FUN_00b63620(AccumStub* self)
 {
     for (int i = 0; i < 3; ++i)
@@ -593,6 +607,8 @@ void __fastcall FUN_00c4ed40(void*);
 
 // Looks up a volume by id in the accumulator's list, optionally runs its query, and returns/caches the volume's boolean state.
 // @fnv 0x00b63680
+// pdb: BSShaderAccumulator::IsBoundVolumeOccluded | BSShaderAccumulator.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: auiReferenceID, abRunTest
 bool FUN_00b63680_shell::CheckVolumeState(unsigned int uiVolumeId, bool abRunQuery)
 {
     AccumView* v = reinterpret_cast<AccumView*>(this);
@@ -674,6 +690,7 @@ struct AccumStub
 };
 // Calls FUN_00b99a10 on each of the m_uiCount batch renderers, passing m_i8 and m_c31.
 // @fnv 0x00b63a50
+// pdb: BSShaderAccumulator::SortAlphaPasses | BSShaderAccumulator.obj | fnv360_0822_retail, call_gap_sim, medium
 void __fastcall FUN_00b63a50(AccumStub* pAccum)
 {
     for (unsigned int i = 0; i < pAccum->m_uiCount; ++i)
@@ -687,6 +704,7 @@ struct BSShaderLightingProperty
     void ClearLights();
 };
 // @fnv 0x00b65570
+// pdb: NiTPointerMap<unsigned int,ChangeData *>::NewItem | TESSaveLoadGame.obj | fnv360_0822_retail, vtable, medium
 void __fastcall FUN_00b65570(char* self, int unused)
 {
     reinterpret_cast<BSShaderLightingProperty*>(self + 0xc)->ClearLights();
@@ -705,6 +723,8 @@ GlobalObjectO2_00a7b610* __cdecl NiCullingProperty_GetRTTI()
 void __cdecl FUN_00b65ae0(void*);
 void __cdecl FUN_00b65c60(void*);
 // @fnv 0x00b665a0
+// pdb: BSShaderAccumulator::FinishAccumulating_Standard | BSShaderAccumulator.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apAccumulator
 void __cdecl FUN_00b665a0(void* p)
 {
     FUN_00b65ae0(p);
@@ -1025,6 +1045,8 @@ extern BSRenderedTexture* DAT_011f943c;
 extern NiRenderer* DAT_011f9508;
 
 // @fnv 0x00b65c60
+// pdb: BSShaderAccumulator::FinishAccumulating_Standard_PostResolveDepth | BSShaderAccumulator.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apAccumulator
 void FUN_00b65c60(AccumWIP* apAccum)
 {
     if (*((unsigned char*)apAccum + 0x38) && ((AccumStub*)apAccum)->FUN_00b63120(0x288, 0x2ce))
@@ -1077,6 +1099,8 @@ struct AccumView
 };
 
 // @fnv 0x00b65ae0
+// pdb: BSShaderAccumulator::FinishAccumulating_Standard_PreResolveDepth | BSShaderAccumulator.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apAccumulator
 void __cdecl FUN_00b65ae0(AccumWIP* pAccum)
 {
     if (pAccum->m_pkAccumulationCamera)
@@ -1182,6 +1206,7 @@ struct NiFixedString
 
 // Creates a NiNode named "RenderPasses", initializes a NiUpdateData with zeroed flags, updates the node, and returns it.
 // @fnv 0x00b63420
+// pdb: BSShaderAccumulator::CreateRenderPassTree | BSShaderAccumulator.obj | fnv360_0822_retail, ustr, high
 NiNode* __cdecl CreateRenderPassesNode()
 {
     NiUpdateData UpdateData;
@@ -1265,6 +1290,8 @@ struct Candidate : BSShaderAccumulator
     void RenderGeometryPass(void* geometry, unsigned int index, void* camera);
 };
 // @fnv 0x00b64bf0
+// pdb: BSShaderAccumulator::DoSunOcclusionQueury | BSShaderAccumulator.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apSunGeometry, aiTestNumber, apCamera
 void Candidate::RenderGeometryPass(void* geometry, unsigned int index, void* camera)
 {
     if (m_bSkipGeometryPass || index >= 3 || m_akRenderQueryStates[index].m_bQueryPending)
@@ -1365,6 +1392,8 @@ struct RenderAccumulator : BSShaderAccumulator
 };
 // Runs each renderer's passes in priority order, choosing the next pass by pass id, sub-index and flag, then finalizes the groups.
 // @fnv 0x00b63770
+// pdb: BSShaderAccumulator::RenderBatches | BSShaderAccumulator.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aePass, aePassEnd, abAlphaPass, aeGroup
 void RenderAccumulator::FUN_00b63770(unsigned int uiFirstPass, unsigned int last, bool flag, int group)
 {
     RenderBatch* renderers[2];
@@ -1475,6 +1504,8 @@ struct ViewX
 };
 // Runs both passes while either returns a value above the float minimum, then finalizes each active pass.
 // @fnv 0x00b650c0
+// pdb: BSShaderAccumulator::RenderAlphaGeometry | BSShaderAccumulator.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: aeSide
 void ViewX::UpdatePasses(void* p)
 {
     FUN_00b988e0();
@@ -1557,6 +1588,8 @@ class RefVolAccum : public BSShaderAccumulator
 };
 
 // @fnv 0x00b65f60
+// pdb: BSShaderAccumulator::AddAndUpdateBoundVolume | BSShaderAccumulator.obj | fnv360_0721_beta, call_gap_sim, low
+// pdb params: auiReferenceID, aBound, abRunTest
 void RefVolAccum::UpdateOrAddItem(unsigned int key, const RefVolSrc* src, bool flag)
 {
     RefVolList* list = (RefVolList*)&m_kReferenceVolumeList;
@@ -1972,6 +2005,8 @@ struct FUN_00b64a00_Pass
 
 // Sets a white background, configures the accumulation camera, and issues pass commands, optionally using pkOther's frustum.
 // @fnv 0x00b64a00
+// pdb: BSShaderAccumulator::RenderDepth | BSShaderAccumulator.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apWorldCamera, ap1stPersonCamera
 void FUN_00b64a00_Pass::FUN_00b64a00(ShCamera* pkCamera, ShCamera* pkOther)
 {
     ShRenderer* pkRenderer = g_pShRenderer;
@@ -2567,6 +2602,7 @@ class QueryOwner_b64d
 
 // Processes pending query entries, aggregates visibility and pixel counts, and resets entries when no queries are waiting.
 // @fnv 0x00b64d60
+// pdb: BSShaderAccumulator::ResetSunOcclusion | BSShaderAccumulator.obj | fnv360_0822_retail, call_seq, medium
 void QueryOwner_b64d::UpdateQueries()
 {
     float fMaxVisibility = 0.0f;
@@ -2677,6 +2713,8 @@ struct VtblSlot41
 
 // Renders accumulation render passes for acc, toggling UpdatePasses based on a byte at offset 0x167 and disabling the depth buffer for a second pass group.
 // @fnv 0x00b65dc0
+// pdb: BSShaderAccumulator::FinishAccumulating_FirstPerson | BSShaderAccumulator.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apAccumulator
 void __cdecl RenderAccumulationPasses(AccumWIP2* apAccumWIP)
 {
     if (!apAccumWIP->m_pkAccumulationCamera)
@@ -2836,6 +2874,8 @@ class S00b66050_cls
 
 // Finds the entry with the given key in the linked list, frees its object and the entry itself, then removes the node from the list.
 // @fnv 0x00b66050
+// pdb: BSShaderAccumulator::RemoveBoundVolume | BSShaderAccumulator.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: auiReferenceID
 void S00b66050_cls::RemoveEntry(unsigned int key)
 {
     S00b66050_node* node = m_kNode.m_pFirstNode;
@@ -2884,6 +2924,8 @@ class SunQueryAccum : public BSShaderAccumulator
 };
 // Polls a pending render query, stores its value when status is 1, and releases it for other nonzero statuses.
 // @fnv 0x00b63540
+// pdb: BSShaderAccumulator::EvaluateSunOcclusionResults | BSShaderAccumulator.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiTestNumber
 void SunQueryAccum::PollQuery(unsigned int uiSlot)
 {
     if (uiSlot >= 3)
@@ -3377,6 +3419,8 @@ struct DepthAccumulator : BSShaderAccumulator
 };
 // Processes geometry groups using a depth surface and may update a lighting shader texture; restores the saved rectangle and camera.
 // @fnv 0x00b64570
+// pdb: BSShaderAccumulator::RenderNormals | BSShaderAccumulator.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apCamera, apCurRenderTarget
 bool DepthAccumulator::FUN_00b64570(NiCamera* camera, TextureView* target)
 {
     if (!target)

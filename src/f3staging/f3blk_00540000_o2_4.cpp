@@ -40,6 +40,8 @@ public:
 extern void FUN_00456560(void* path, TESFile* file);
 extern void FUN_00458210(void* target, TESFile* file);
 
+// pdb: BGSHeadPart::Load | BGSHeadPart.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool TESModel::FUN_005447c0(TESFile* file)
 {
     if (file->GetChunkType() != 9)
@@ -241,6 +243,8 @@ public:
     bool FUN_00550f10(Reader* reader);
 };
 
+// pdb: TESEyes::Load | TESEyes.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Target::FUN_00550f10(Reader* reader)
 {
     if (reader->TESFile_GetTESForm() != 0xb)
@@ -539,6 +543,8 @@ public:
     unsigned char data;
     bool FUN_00552310(RecordFile*);
 };
+// pdb: TESHair::Load | TESHair.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool FormIterWrapper::FUN_00552310(RecordFile* file)
 {
     if (file->TESFile_GetTESForm() != 10) return false;

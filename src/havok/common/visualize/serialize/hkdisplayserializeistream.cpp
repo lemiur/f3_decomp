@@ -23,6 +23,8 @@ struct FUN_00ddabe0 : DdabeBase
 };
 
 // @fnv 0x00ddabe0
+// pdb: hkDisplaySerializeIStream::hkDisplaySerializeIStream | hkDisplaySerializeIStream.obj | fnv360_0822_retail, uvref, medium
+// pdb params: reader
 FUN_00ddabe0::FUN_00ddabe0(int a) : DdabeBase(a, DdabeTag())
 {}
 
@@ -37,6 +39,8 @@ struct FUN_00ddac60_Obj
 void __stdcall FUN_00dd8fe0(FUN_00ddac60_Obj* obj, int a, int b);
 
 // @fnv 0x00ddac60
+// pdb: hkDisplaySerializeIStream::readQuadVector4 | hkDisplaySerializeIStream.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: `anonymous namespace'::Reader::readFloat)
+// pdb params: v
 void __stdcall FUN_00ddac60(FUN_00ddac60_Obj* obj)
 {
     FUN_00dd8fe0(obj, 4, 3);
@@ -64,6 +68,8 @@ struct FUN_00ddacd0_shell
 // @f3 0x00a62a00 (community match, verified in this file)
 extern "C" void __cdecl FUN_00901e90(void*,int,int);
 struct F3ArrayReader {void FUN_00a62980(void*); void FUN_00a62920(void*);};
+// pdb: hkDisplaySerializeIStream::readGeometry | hkDisplaySerializeIStream.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: `anonymous namespace'::Reader::readBitfield)
+// pdb params: g
 void __thiscall FUN_00ddacd0_shell::FUN_00ddacd0(ArrayPair* arrays)
 {
     ArrayPair* originalArrays;
@@ -170,6 +176,8 @@ struct FUN_008cd6a0_View
     float w;
 };
 
+// pdb: hkDisplaySerializeIStream::readTransform | hkDisplaySerializeIStream.obj | fnv360_0822_retail, objrun, medium
+// pdb params: t
 void hkDisplaySerializeIStream::FUN_00ddac80(FUN_008cd6a0_Class* target)
 {
     Vec4 source;

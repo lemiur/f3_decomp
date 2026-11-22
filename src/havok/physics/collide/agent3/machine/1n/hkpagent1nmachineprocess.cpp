@@ -26,6 +26,7 @@ struct Updater
 
 // Copies src into dest, calling self->update and other->update for each changed component and storing results in out1 and out2.
 // @fnv 0x00da4a50
+// pdb: extractChildShapes | hkpAgent1nMachineProcess.obj | fnv360_0822_retail, objrun_open, low
 static __declspec(noinline) void FUN_00da4a50(Updater* self, int flag, Pair* dest, Pair* src, Updater* other, int y,
                                               Out* out2, Out* out1)
 {
@@ -154,6 +155,7 @@ struct Recv {
 };
 void* __cdecl hkSweptTransformUtil_lerp2(void*, float, void*);
 }
+// pdb: hkpProcessCollisionData::ToiInfo::flip | hkpBvTreeStreamAgent.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: hkAgent1nMachine_initInputAtTime)
 static __declspec(noinline) void FUN_00da49b0(DaDest* dest, DaSource* source_, void* p)
 {
     using namespace wa2b820;

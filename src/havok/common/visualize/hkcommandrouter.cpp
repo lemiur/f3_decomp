@@ -23,6 +23,8 @@ struct FUN_00dd95b0_Outer
 };
 // Gets a byte buffer and count from source and feeds each byte to output.FUN_00cb1fb0.
 // @fnv 0x00dd95b0
+// pdb: hkCommandRouter::unregisterProcess | hkCommandRouter.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: handler
 void FUN_00dd95b0_Outer::FUN_00dd95b0(FUN_00dd95b0_Source* source)
 {
     int count;
@@ -58,6 +60,8 @@ struct FUN_00922710_Sink
     void __thiscall FUN_00922710(int value, InputProvider* source);
 };
 
+// pdb: hkCommandRouter::registerProcess | hkCommandRouter.obj | fnv360_0822_retail, call_gap_sim, low, conflict (bridge: hkMapBase<unsigned long,unsigned long,hkMapOperations<unsigned long> >::reserve)
+// pdb params: handler
 void MessageProcessor::ProcessInputData(InputProvider* source)
 {
     unsigned char* bytes = 0;

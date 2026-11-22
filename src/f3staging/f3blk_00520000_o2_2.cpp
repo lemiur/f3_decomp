@@ -13,6 +13,8 @@ bool __cdecl FUN_00517950(ParamInfo*,void*,unsigned int*,TESObjectREFR*,TESObjec
 struct Form52b2e0 {};
 struct Obj52b2e0 {void FUN_004d35a0(Form52b2e0*);};
 namespace player52b2e0 {struct Player {int unk00;int unk04;int unk08;int unk0C;int unk10;int unk14;int unk18;Form52b2e0* base;};extern Player* DAT_0107a104;}
+// pdb: Script::SetCellOwnershipFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: Script::SetCanPCFastTravelFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052b2e0(ParamInfo* a1,void* a2,TESObjectREFR* a3,TESObjectREFR* a4,Script* a5,ScriptEventList* a6,double*,unsigned int* a8) {
  Obj52b2e0* first;Form52b2e0* second;second=0;first=0;
  if(!FUN_00517950(a1,a2,a8,a3,a4,a5,a6,&first,&second)) return false;
@@ -106,6 +108,8 @@ namespace f3_0310 {
 struct ScriptAddedFormHelper { void FUN_0050ab40(TESForm*); };
 bool __cdecl FUN_00517950(const ScriptParameter*, const char*, unsigned int*, TESObjectREFR*, TESObjectREFR*, Script*, ScriptLocals*, ...);
 // @fnv 0x005de600
+// pdb: Script::AddFormToFormListFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005306c0(const ScriptParameter* parameters, const char* scriptData, TESObjectREFR* thisObject,
                   TESObjectREFR* container, Script* script, ScriptLocals* locals, double& result,
                   unsigned int& opcodeOffset)
@@ -773,6 +777,8 @@ inline unsigned int NextPickId()
     return DAT_00f79e58;
 }
 
+// pdb: Script::AttachAshPileFunction | TESScriptFunctions.obj | fnv360_0822_retail, uconst, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0053d570(void* paramInfo, void* scriptData, Ref* thisObj, Ref* containingObj, void* scriptObj,
                           void* eventList, double* result, unsigned int* opcodeOffsetPtr)
 {

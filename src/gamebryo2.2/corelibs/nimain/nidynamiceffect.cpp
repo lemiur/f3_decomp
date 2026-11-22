@@ -3,6 +3,8 @@
 #include "nidynamiceffect_decls.h"
 
 // @fnv 0x00a68ea0
+// pdb: NiDynamicEffect::LoadBinary | NiDynamicEffect.obj | fnv360_0822_retail, uconst, low
+// pdb params: kStream
 void NiDynamicEffect::LoadBinary(NiStream& stream)
 {
     NiAVObject::LoadBinary(stream);
@@ -27,6 +29,7 @@ void NiDynamicEffect::LoadBinary(NiStream& stream)
 }
 
 // @fnv 0x00a69320
+// pdb: NiDynamicEffect::NiDynamicEffect | NiDynamicEffect.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: NiAVObject::NiAVObject)
 NiDynamicEffect::NiDynamicEffect()
     : m_bEffectEnabled(true), m_ucEffectCategory(0xff), m_uiEffectPushCount(0), m_uiRevID(1)
 {
@@ -49,6 +52,7 @@ struct FUN_00a69390_shell : public NiDynamicEffect
 };
 
 // @fnv 0x00a69390
+// pdb: NiDynamicEffect::`scalar deleting destructor' | NiDynamicEffect.obj | fnv360_0822_retail, caller_sim, low
 void* __thiscall FUN_00a69390_shell::DestroyNiDynamicEffect(unsigned int flags)
 {
     *reinterpret_cast<void**>(this) = &vftable_NiDynamicEffect;
@@ -147,6 +151,8 @@ struct Zx3Effect : public NiAVObject
 };
 
 // @fnv 0x00a69140
+// pdb: NiDynamicEffect::GetViewerStrings | NiDynamicEffect.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void Zx3Effect::FUN_00a69140(StrArr* pkStrings)
 {
     ((FUN_00a5ea70_t*)this)->FUN_00a5ad00(pkStrings);
@@ -193,6 +199,8 @@ static __forceinline void WriteLinkedObject(NiStream* stream, NiNode*& object)
     ((SaveLinkedObject*)stream->m_ppVirtualMethodTable)[12](stream, object);
 }
 // @fnv 0x00a68f80
+// pdb: NiDynamicEffect::SaveBinary | NiDynamicEffect.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiAVObject::SaveBinary)
+// pdb params: kStream
 void __thiscall EffectObject::SaveToStream(NiStream* stream)
 {
     FUN_00a5a900(stream);
@@ -228,6 +236,8 @@ class FNVEffect : public NiDynamicEffect
 };
 // Returns false if counts differ or paired entries differ in nullness; otherwise returns true if NiAVObject_IsEqual succeeds.
 // @fnv 0x00a68d80
+// pdb: NiDynamicEffect::IsEqual | NiDynamicEffect.obj | fnv360_0822_retail, objrun, low
+// pdb params: pkObject
 bool __thiscall FNVEffect::FUN_00a68d80(FNVEffect* other)
 {
     if (!NiAVObject_IsEqual(other))

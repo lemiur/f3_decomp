@@ -4,6 +4,8 @@
 #include "shadowscenenode_local.h"
 
 // @fnv 0x00b5eeb0
+// pdb: ShadowSceneNode::AddObject | ShadowSceneNode.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObject
 void ShadowSceneNode::AddObject(NiAVObject* apObject)
 {
     if (!apObject)
@@ -15,6 +17,7 @@ void ShadowSceneNode::AddObject(NiAVObject* apObject)
 
 // Releases each shadow light's texture, clears the shadow light list, and resets the shadow counts to zero.
 // @fnv 0x00b5c3c0
+// pdb: ShadowSceneNode::RemoveAllShadowLights | ShadowSceneNode.obj | fnv360_0822_retail, call_seq, high
 void ShadowSceneNode::UpdateShadowLights()
 {
     ShadowListItem* item = shadowLights.head;
@@ -41,6 +44,8 @@ void ShadowSceneNode::UpdateShadowLights()
 }
 
 // @fnv 0x00b5b4d0
+// pdb: ShadowSceneNode::GetLuminanceAtPoint | ShadowSceneNode.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apPoint, inumberlights, afAmbientLum, afDirectionalLum, apIgnore
 float ShadowSceneNode::CalculateLightingAtPoint(NiPoint3 point, int& count, float& ambient, float& diffuse,
                                                 NiLight* ignore)
 {
@@ -98,6 +103,7 @@ struct List_00b5ac20
 
 // Returns the item at the given index from the list at pThis+0xb4, or null if the index is out of range.
 // @fnv 0x00b5ac20
+// pdb: AIProcess::GetDoNoDamage | AIProcess_MiddleHigh.obj | tesv_win, objrun_open, low
 void* __fastcall GetListItemAt(char* pThis, int, unsigned int index)
 {
     List_00b5ac20* list = (List_00b5ac20*)(pThis + 0xb4);
@@ -134,6 +140,8 @@ void __fastcall AssignRefObject(char* pThis, int, NiRefObject* pObj)
 
 // Assigns pObj to the reference-counted pointer at pThis+0x128, releasing the old object and retaining the new one.
 // @fnv 0x00b5af30
+// pdb: ShadowSceneLight::SetShadowScene | ShadowSceneNode.obj | fnv360_0721_beta, call_gap_sim, low
+// pdb params: apAVObj
 void __fastcall FUN_00b5af30(char* pThis, int, NiRefObject* pObj)
 {
     NiRefObject*& pRef = *(NiRefObject**)(pThis + 0x128);
@@ -166,6 +174,7 @@ static inline char*& GetNextLight(ShadowLightNode*& pkIter)
 }
 
 // @fnv 0x00b5b060
+// pdb: ShadowSceneNode::DisableAllShadowLights | ShadowSceneNode.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: Actor::UpdateSceneGraph)
 void __fastcall FUN_00b5b060(char* pThis, int)
 {
     ShadowLightNode* pkIter = *(ShadowLightNode**)(pThis + 0xC0);
@@ -204,6 +213,8 @@ void __cdecl FUN_00b5b0e0(void* pObj);
 
 // Iterates the children of pNode, calling FUN_00b5b0e0 on geometry children and recursing into node children.
 // @fnv 0x00b5b150
+// pdb: ShadowSceneNode::RemoveObjectRecurse | ShadowSceneNode.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: AIProcess::SetWardState)
+// pdb params: apNode
 void __fastcall ProcessNodeChildren(void* pThis, int, void* pNode)
 {
     for (unsigned int i = 0; i < *reinterpret_cast<unsigned short*>(reinterpret_cast<char*>(pNode) + 0xa6); ++i)
@@ -245,6 +256,7 @@ struct ArrayLike
 
 // Grows the array's capacity if it is full, then increments m_uiSize and returns the index of the newly appended slot.
 // @fnv 0x00b5c360
+// pdb: BSSimpleArray<PathSmootherPOVLink,1024>::AddUninitialized | PathSmootherPOV.obj | fnv360_0822_retail, call_seq, low
 unsigned int __fastcall FUN_00b5c360(ArrayLike* pThis)
 {
     if (pThis->m_uiSize == pThis->m_uiCapacity)
@@ -304,6 +316,7 @@ struct FUN_00b5ac60_self
 
 // Walks the linked list from self->head and counts nodes whose item is non-null and whose id is not 0xff.
 // @fnv 0x00b5ac60
+// pdb: ShadowSceneNode::GetActiveLightCount | ShadowSceneNode.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: AIProcess::GetBleedoutRate)
 int __fastcall FUN_00b5ac60(FUN_00b5ac60_self* self, int unused)
 {
     int count = 0;
@@ -334,6 +347,8 @@ struct FUN_00b5ade0_arr
 };
 // Removes the element at index, shifting the tail down, or reallocates a smaller buffer when shrinking and the count is low enough.
 // @fnv 0x00b5ade0
+// pdb: BSSimpleArray<ItemChange *,1024>::Remove | PlayerCharacter.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiIndex, abShrink
 void __fastcall FUN_00b5ade0(FUN_00b5ade0_arr* self, int, unsigned index, bool shrink)
 {
     if (shrink)
@@ -378,6 +393,8 @@ struct FUN_00b5aea0_self
 
 // Copies up to n elements from the end of the buffer into the gap at start, then reduces count by n.
 // @fnv 0x00b5aea0
+// pdb: BSSimpleArray<Actor *,1024>::RemoveFast | CombatTargetMap.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiIndex, aiHowMany
 void FUN_00b5aea0_self::RemoveRange(unsigned int start, unsigned int n)
 {
     unsigned int m = count - start - n;
@@ -402,6 +419,8 @@ struct FUN_00b5b150_Struct
 
 // If apObject is non-null, gets its node via vfunc3 and, when that node exists, passes it to ProcessNodeChildren on thisptr.
 // @fnv 0x00b5b1c0
+// pdb: ShadowSceneNode::RemoveObject | ShadowSceneNode.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: Actor::SetWardState)
+// pdb params: apObject
 void __fastcall FUN_00b5b1c0(ShadowSceneNode* thisptr, int, NiAVObject* apObject)
 {
     if (apObject)
@@ -431,6 +450,8 @@ struct FUN_00b5b4a0_self
 
 // Walks the linked list from self->head and returns the first item whose key equals key, or null if none matches.
 // @fnv 0x00b5b4a0
+// pdb: ShadowSceneNode::GetLight | ShadowSceneNode.obj | fnv360_0721_retail, call_seq, medium
+// pdb params: apLight
 FUN_00b5b4a0_item* __fastcall FUN_00b5b4a0(FUN_00b5b4a0_self* self, int unused, int key)
 {
     FUN_00b5b4a0_node* n = self->head;
@@ -465,6 +486,8 @@ struct FUN_00b5c450_self
 
 // Walks the linked list from self->head and, for the first item whose key matches, calls SetShadowEnabled with flag.
 // @fnv 0x00b5c450
+// pdb: ShadowSceneNode::SetLightCastShadows | ShadowSceneNode.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: Actor::CanAddActiveEffect)
+// pdb params: apLight, abCastShadows
 void __fastcall CallItemMethodByKey(FUN_00b5c450_self* self, int unused, int key, int flag)
 {
     FUN_00b5c450_node* n = self->head;
@@ -517,6 +540,8 @@ struct PosD
     bool _Call_439090(const V3D*);
 };
 // @fnv 0x00b5d930
+// pdb: ShadowSceneNode::UpdateQueuedDynamicLight | ShadowSceneNode.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: Actor::CheckAreaEffectAgainstWard)
+// pdb params: apSSLight
 void __fastcall FUN_00b5d930(OwnerD* self, int, LightD* l)
 {
     if (l->f_f4 && l->f_fc && !l->f_ec)
@@ -553,6 +578,8 @@ struct FUN_00b5ddb0_self
 };
 
 // @fnv 0x00b5ddb0
+// pdb: ShadowSceneNode::UpdateLighting | ShadowSceneNode.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: CastPowerItem::SaveGame)
+// pdb params: abForceFull, abAddLights
 void FUN_00b5ddb0_self::FUN_00b5ddb0(bool a, bool b)
 {
     if (a)
@@ -586,6 +613,8 @@ GlobalObjectO2_00a7b610* NiBSPNode_GetRTTI()
 
 void* __cdecl FUN_00ec7230(void*, const void*, unsigned int);
 // @fnv 0x00cb9930
+// pdb: BSSimpleArray<BGSBodyPart *,1024>::_MoveItems | HitData.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apDestAddr, apSrcAddr, aiCount
 void __fastcall FUN_00cb9930(void* self, int, unsigned* dst, unsigned* src, unsigned count)
 {
     if (count > 0)
@@ -653,6 +682,8 @@ struct GlobalObjectO2_00b9fda0 : public BSFadeNode
 extern NiColor DAT_011f4998;
 
 // @fnv 0x00b5aac0
+// pdb: ShadowSceneNode::SetSunLight | ShadowSceneNode.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apLight
 void FUN_00b5aac0_shell::FUN_00b5aac0(NiDirectionalLight* apLight)
 {
     if (*(GlobalObjectO2_00b9fda0**)((char*)this + 0xe0))
@@ -749,6 +780,8 @@ struct FUN_00b5ac90_t
     void FUN_00b5ac90(SSCamera* pkCamera);
 };
 // @fnv 0x00b5ac90
+// pdb: ShadowSceneNode::UpdateOcclusionPlaneVisibility | ShadowSceneNode.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apCamera
 void FUN_00b5ac90_t::FUN_00b5ac90(SSCamera* pkCamera)
 {
     if (pOwner)
@@ -892,6 +925,8 @@ extern char DAT_0109054c;
 void* __cdecl FUN_00424d50(const void* apType, void* apObj);
 bool FUN_00ae1c90(AV5* apObject, void* apArg1, void* apArg2, bool c);
 
+// pdb: ShadowSceneNode::UpdateQueuedObjectLightingList | ShadowSceneNode.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apObject, apSceneNode, apLightList, abActiveLightsOnly
 bool CheckBoundAndChildren(AV5* apObject, void* apArg1, void* apArg2, bool c)
 {
     if (!apObject)
@@ -1012,6 +1047,8 @@ struct ShadowSceneNodeS : FUN_00c51570_Class
 };
 
 // @fnv 0x00b5c7d0
+// pdb: ShadowSceneNode::GetViewerStrings | ShadowSceneNode.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apStrings
 void ShadowSceneNodeS::AppendLightStats(StrArr* pkStrings)
 {
     FUN_00c51570_Class::FUN_00a5ea70(pkStrings);
@@ -1117,6 +1154,8 @@ struct AutoMemContextFixed
     }
 };
 
+// pdb: ShadowSceneLight::SetCastShadow | ShadowSceneLight.obj | fnv360_0822_retail, call_seq, high
+// pdb params: abCastShadow
 void FUN_00b9dcb0_Class::SetShadowEnabled(bool bEnable)
 {
     AutoMemContextFixed memContext(0x20);
@@ -1200,6 +1239,8 @@ struct FUN_00b9dda0_Class
 };
 
 // @fnv 0x00b9dda0
+// pdb: ShadowSceneLight::SetLight | ShadowSceneLight.obj | fnv360_0822_retail, call_gap, low, conflict (bridge: NiDirectionalLight::NiDirectionalLight)
+// pdb params: apLight
 void FUN_00b9dda0_Class::FUN_00b9dda0(NiLight* apLight)
 {
     m_spLight = apLight;
@@ -1234,6 +1275,8 @@ class FUN_00b5a930_cls
 
 // Scans m_ppItems from start to m_uiCount, returning the first index whose item satisfies pred, or -1 if none match.
 // @fnv 0x00b5a930
+// pdb: BSSimpleArray<BGSBodyPart *,1024>::Find<BGSBodyPart *> | HitData.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: CombatGroup::IsTarget)
+// pdb params: aValue, aiStartIndex, apFunc
 int FUN_00b5a930_cls::FindFirstMatch(void* apContext, unsigned int start, FUN_00b5a930_pred apPredicate)
 {
     if (start < m_uiCount)
@@ -1382,6 +1425,7 @@ struct S_Cls
     S_Item* FUN_00b5afc0();
 };
 // @fnv 0x00b5afc0
+// pdb: ShadowSceneNode::GetFirstShadowLight | ShadowSceneNode.obj | fnv360_0822_retail, call_gap, low
 S_Item* S_Cls::FUN_00b5afc0()
 {
     S_Node* node = m_pHead;
@@ -1535,6 +1579,7 @@ class FUN_00b5b010_cls
 };
 // Pops nodes from the m_pHead list and returns the first item whose m_uiF8 is nonzero, or the last popped item.
 // @fnv 0x00b5b010
+// pdb: ShadowSceneNode::GetNextShadowLight | ShadowSceneNode.obj | fnv360_0822_retail, caller, medium
 FUN_00b5b010_item* FUN_00b5b010_cls::FUN_00b5b010()
 {
     FUN_00b5b010_item* item = 0;
@@ -1576,6 +1621,7 @@ static inline ShadowSceneLight*& GetNextLightStandIn(LightNodeStandIn*& pkIter)
 }
 
 // @fnv 0x00b5b1f0
+// pdb: ShadowSceneNode::ReleaseAllShadowMaps | ShadowSceneNode.obj | fnv360_0822_retail, call_gap, low
 void __fastcall FUN_00b5b1f0(ShadowSceneNode* pThis, int)
 {
     LightNodeStandIn* pLightNode = (LightNodeStandIn*)pThis->shadowLights.head;
@@ -1625,6 +1671,8 @@ struct ShadowProcessor
 };
 typedef unsigned char(__thiscall* TestCallback)(void*, char*);
 // @f3 0x00ae2490 (community match, verified in this file)
+// pdb: ShadowSceneNode::UpdateMultiboundVisibility | ShadowSceneNode.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apMultibound, akViewPoint, akCuller
 void ShadowProcessor::ProcessTargetIfEligible(SearchObject* source, ProcessArgs args, char* target)
 {
     char* subobject = *(char**)((char*)source + 0xac);
@@ -1804,6 +1852,8 @@ struct SSN_b5
 };
 
 // @f3 0x00ae32a0 (community match, verified in this file)
+// pdb: ShadowSceneNode::AddAllLightsFromNode_Recurse | ShadowSceneNode.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apNode, afDefaultRadius
 int SSN_b5::FUN_00b5ca70(Node_b5* node, float time)
 {
     int count = 0;
@@ -2416,6 +2466,8 @@ struct SPShader
 };
 
 // @fnv 0x00b5ba80
+// pdb: ShadowSceneNode::BuildSharedCompoundFrustum | ShadowSceneNode.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apCamera, apPortal
 void SPShader::FUN_00b5ba80(int aiPass, SPPass* apPass)
 {
     SPRenderer* pRenderer = apPass->pOwner->pRenderer;
@@ -2627,6 +2679,8 @@ struct GlobalLockF3
     }
 };
 extern GlobalLockF3 DAT_0116fc80;
+// pdb: ShadowSceneNode::RemoveLight | ShadowSceneNode.obj | fnv360_0822_retail, caller, medium
+// pdb params: apSSLight
 void BoundOwner_t::AddBound(BoundRef_t* pkBound)
 {
     if (!pkBound->m_pObject)
@@ -2871,6 +2925,7 @@ class MultiBoundManagerB5D
 // @f3 0x00ae39b0 (community match, verified in this file)
 typedef long (__stdcall * CompareExchangeFn)(long volatile*, long, long);
 extern void* DAT_00d9b06c;
+// pdb: ShadowSceneNode::RemoveAllLights | ShadowSceneNode.obj | fnv360_0822_retail, call_gap, low
 void MultiBoundManagerB5D::FUN_00b5d180()
 {
     NiTListItemB5D<NiPointerB5D<BSMultiBoundB5D> >* pkPos = m_kBounds.m_pkHead;
@@ -3094,6 +3149,8 @@ struct Shell_b5d270
 
 // If pObj is non-null, appends it to m_kList via FUN_00a5a310.
 // @fnv 0x00b5d270
+// pdb: ShadowSceneNode::UpdateLight | ShadowSceneNode.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BGSSaveGameBuffer::SaveFormID)
+// pdb params: apSSLight
 void Shell_b5d270::FUN_00b5d270(Obj_b5d270* pObj)
 {
     if (pObj)
@@ -3612,6 +3669,7 @@ struct FUN_00b5e0f0 : Base
     FUN_00b5e0f0();
 };
 // @fnv 0x00b5e0f0
+// pdb: ShadowSceneNode::ShadowSceneNode | ShadowSceneNode.obj | fnv360_0822_retail, ustr, high
 FUN_00b5e0f0::FUN_00b5e0f0() : Base(0)
 {
     AssignFixedString(Fixed("shadow scene node"));
@@ -3848,6 +3906,8 @@ class MultiBoundManagerB5E
 
 // Scans m_kBounds for a bound whose m_pvOwner equals pvOwner and removes the first match via RemoveBound.
 // @fnv 0x00b5edf0
+// pdb: ShadowSceneNode::RemoveShadowLight | ShadowSceneNode.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apObject
 void MultiBoundManagerB5E::RemoveBoundByOwner(void* pvOwner)
 {
     if (!pvOwner)
@@ -3987,6 +4047,8 @@ struct DrainOwner {
  NullableCandidate candidate;
  __forceinline DrainCandidate* Candidate(){DrainCandidate* value=candidate.Get();if(!value)value=candidate.value;unsigned valid=ValidCandidate(value);return valid?value:0;}
 };
+// pdb: ShadowSceneNode::RemoveGeometryFromPropertyLights | ShadowSceneNode.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apGeom
 void __cdecl FUN_00b5b0e0(void* argument) {
  DrainOwner* owner=static_cast<DrainOwner*>(argument);
  if(owner) {
@@ -4497,6 +4559,8 @@ struct NodeTarget
 };
 
 // @fnv 0x00b5d040
+// pdb: ShadowSceneNode::RemoveQueuedLight | ShadowSceneNode.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apSSLight, akIter
 void NodeTarget::RemoveLightFromNode(void** object, void* apLight)
 {
 
@@ -4552,6 +4616,8 @@ void NodeTarget::RemoveLightFromNode(void** object, void* apLight)
 void FUN_00e74d40();
 
 // @fnv 0x00b5c7c0
+// pdb: NiSequenceStreamHelper::LoadBinary | NiSequenceStreamHelper.obj | fnv360_0822_retail, call_gap, low
+// pdb params: stream
 void FUN_00b5c7c0()
 {
     FUN_00e74d40();
@@ -5988,6 +6054,8 @@ class S5c6e0_Owner
 };
 
 // @fnv 0x00b5c6e0
+// pdb: BSPortalGraph::AddRoomToAccumList | ShadowSceneNode.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apRoom
 void S5c6e0_Owner::FUN_00b5c6e0(NiRefObject* pkObject)
 {
     if (!m_kList.FindPos(pkObject))
@@ -6600,6 +6668,8 @@ class S00b5cd00_Owner
 };
 
 // @fnv 0x00b5cd00
+// pdb: ShadowSceneNode::AddQueuedShadowLight | ShadowSceneNode.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apLight
 S00b5cd00_Param* S00b5cd00_Owner::FUN_00b5cd00(S00b5cd00_Param* param)
 {
     reinterpret_cast<unsigned char*>(param)[0xFC] = 1;
@@ -7002,6 +7072,8 @@ struct List2844 {
   ++alloc.count; tail=node;
  }
 };
+// pdb: ShadowSceneNode::UpdateObjectLighting | ShadowSceneNode.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObject, abActiveLightsOnly
 void S00b5d9f0_Owner::FUN_00b5d9f0(S00b5d9f0_Obj* obj,unsigned char flag) {
  if(!obj) return;
  DAT_0116fca0.FUN_00409a80(0);
@@ -8598,6 +8670,8 @@ struct S00b5eca0_Node : public ShadowSceneNode
 extern void* DAT_0116ef98;
 extern void* DAT_0116f2f8;
 
+// pdb: ShadowSceneNode::AddQueuedLight | ShadowSceneNode.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apLight
 ShadowSceneLight* S00b5eca0_Node::FUN_00b5eca0(ShadowSceneLight* pkLight)
 {
     S00b5eca0_Light* pkL = (S00b5eca0_Light*)pkLight;
@@ -9117,6 +9191,8 @@ struct SceneCull
 };
 // Culls scene objects and lights by iterating group lists and calling Cull on visible entries, using a saved flags buffer to track state changes.
 // @fnv 0x00b5f9b0
+// pdb: ShadowSceneNode::OnVisible | ShadowSceneNode.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: arCuller
 void SceneCull::FUN_00b5f9b0(CullProcess* process)
 {
     FUN_00b5e870(process);
@@ -9493,6 +9569,8 @@ struct FUN_00b9dae0_cls
 };
 // Uses defLight when l is null, returns true for matching RTTI, otherwise compares an adjusted distance with l->radius.
 // @fnv 0x00b9dae0
+// pdb: ShadowSceneLight::BoundWithinLightRadius | ShadowSceneLight.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apBound, apLight, afRadiusScale
 bool FUN_00b9dae0_cls::FUN_00b9dae0(NiPoint3* apPoint, LightObj* apLight, float scale)
 {
     if (!apLight)
@@ -10044,6 +10122,8 @@ extern OwnerD* DAT_011f91c8;
 
 // Updates p's arrays using entries from m_1e0 or m_a0, adding or removing entries based on virtual checks.
 // @fnv 0x00b5d300
+// pdb: ShadowSceneNode::UpdateQueuedLight | ShadowSceneNode.obj | fnv360_0822_retail, caller, low, conflict (skyrim: Actor::CheckWardPower)
+// pdb params: apSSLight
 void OwnerD::FUN_00b5d300(LightD* apLight)
 {
     LightData* ld = apLight->m_f8;
@@ -10509,6 +10589,8 @@ __declspec(noinline) BlendLight* BlendOwner::GetListItemAt(unsigned index)
 }
 // Computes a blended light position from point and normal, storing the result and returning whether any lights were used.
 // @fnv 0x00b5bca0
+// pdb: ShadowSceneNode::GetAverageLightPos | ShadowSceneNode.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aTargetCenter, aTargetDir, aLoc
 unsigned BlendOwner::FUN_00b5bca0(const NiPoint3& point, const NiPoint3& normal, NiPoint3& result)
 {
     BlendData* mainData = mainLight->data;
@@ -10901,6 +10983,7 @@ FNV_STATIC_ASSERT(offsetof(FUN_00b5e5a0, unk1E0) == 0x1e0);
 
 // Destroys the shadow scene object, clearing its node, light, texture, and list references.
 // @fnv 0x00b5e5a0
+// pdb: ShadowSceneNode::~ShadowSceneNode | ShadowSceneNode.obj | fnv360_0822_retail, caller_sim, medium
 FUN_00b5e5a0::~FUN_00b5e5a0()
 {
     ShadowSceneNode* node = ((ShadowSceneNode**)&DAT_011f91c8)[unk120];

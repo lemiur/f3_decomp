@@ -48,6 +48,7 @@ struct S5a
 extern int FUN_00f5a440;
 extern int FUN_00f54b58;
 extern "C" void __cdecl FUN_00c24b70(const char*);
+// pdb: ScriptCompiler::ScriptCompiler | TESScriptCompiler.obj | fnv360_0822_retail, ustr, high
 S5a* S5a::ValidateScriptNameTables()
 {
     if (FUN_00f5a440 != 0x1238)

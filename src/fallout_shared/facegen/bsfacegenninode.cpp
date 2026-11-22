@@ -1511,6 +1511,7 @@ struct Obj6b9 {
 
 using namespace f3m_006b9260;
 
+// pdb: ReanimateEffect::Copy | ReanimateEffect.obj | fnv360_0721_retail, vtable, medium
 Obj6b9* Obj6b9::FUN_006b9260() {
     Obj6b9* obj = (Obj6b9*)new FUN_006b91e0(u28, u8, uc);
     vf44(obj);

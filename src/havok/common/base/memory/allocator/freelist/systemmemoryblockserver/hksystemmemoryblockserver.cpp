@@ -45,6 +45,7 @@ struct FUN_00d60490_cls
 };
 
 // @fnv 0x00d60490
+// pdb: hkpToiCountViewer::getName | hkpToiCountViewer.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: hkPackfileData::setContentsWithName)
 int FUN_00d60490_cls::FUN_00d60490()
 {
     return unk0C;

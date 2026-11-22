@@ -9,6 +9,8 @@
 void __cdecl InitBlockPool(void*);
 
 // @fnv 0x00da6fa0
+// pdb: hkListAgent3::create | hkpListAgent3.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: input, entry, agentData
 void* __cdecl InitAndReturnTail(void* apUnused1, void* apUnused2, void* apStruct)
 {
     if (apStruct)
@@ -22,6 +24,7 @@ void* __cdecl InitAndReturnTail(void* apUnused1, void* apUnused2, void* apStruct
 }
 
 // @fnv 0x00da08c0
+// pdb: cleanupLoadedObjecthkpRagdollLimitsData | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00da08c0(void** a)
 {
     (**(void(__thiscall**)(void*, int))(*a))(a, 0);
@@ -39,6 +42,8 @@ struct FUN_00db7ab0_class
 };
 
 // @fnv 0x00db7ab0
+// pdb: hkStaticClassNameRegistry::hkStaticClassNameRegistry | hkStaticClassNameRegistry.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: classes, classVersion, name
 void* __thiscall FUN_00db7ab0_class::FUN_00db7ab0(void* a, void* b, void* c)
 {
     *(short*)((char*)this + 6) = 1;
@@ -51,6 +56,7 @@ void* __thiscall FUN_00db7ab0_class::FUN_00db7ab0(void* a, void* b, void* c)
 }
 
 // @fnv 0x00db7790
+// pdb: hkCrcStreamWriter<unsigned int,3988292384>::calcPermute | hkClass.obj | tesv_win, hash, low
 int __cdecl Crc32ShiftRight8(unsigned int uiValue)
 {
     if (uiValue & 1)
@@ -98,6 +104,8 @@ void* __cdecl FUN_00da6e10(void* a, void* b, void* c);
 
 // Fills the object at p with function pointers at fixed offsets, zeroes several pointer slots and sets the byte at offset 0x30 to 1.
 // @fnv 0x00da6fd0
+// pdb: hkListAgent3::initAgentFunc | hkpListAgent3.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: hkpCollectionAgent3::initAgentFunc)
+// pdb params: f
 void __cdecl FUN_00da6fd0(void* apObject)
 {
     char* b = (char*)apObject;
@@ -121,6 +129,7 @@ struct FUN_00da0740_vt
     virtual void v0(int);
 };
 // @fnv 0x00da0740
+// pdb: cleanupLoadedObjecthkpPoweredChainMapper | hkpUtilitiesReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00da0740(FUN_00da0740_vt* p)
 {
     p->v0(0);
@@ -164,6 +173,7 @@ struct FUN_00da0720_Class
 };
 
 // @fnv 0x00da0720
+// pdb: cleanupLoadedObjecthkpPoweredChainMapper | hkpPoweredChainMapperClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00da0720(FUN_00da0720_Class* param_1)
 {
     param_1->vf00(0);
@@ -172,6 +182,7 @@ void __cdecl FUN_00da0720(FUN_00da0720_Class* param_1)
 struct CpuOpaque;
 extern CpuOpaque DAT_0126967c;
 // @fnv 0x00da0730
+// pdb: hkpEntity::staticClass | hkpDynamicsReflections.obj | tesv_win, objopen_prop, low
 CpuOpaque* __cdecl FUN_00da0730()
 {
     return &DAT_0126967c;
@@ -216,6 +227,7 @@ int* __cdecl FUN_00da08b0()
 extern int DAT_01269754;
 
 // @fnv 0x00da08d0
+// pdb: hkpKeyframedRigidMotion::staticClass | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void* __cdecl FUN_00da08d0(void)
 {
     return &DAT_01269754;
@@ -224,6 +236,7 @@ void* __cdecl FUN_00da08d0(void)
 extern int DAT_010c6bec;
 
 // @fnv 0x00da0910
+// pdb: getVtablehkpDefaultWorldMemoryWatchDog | hkpDynamicsReflections.obj | tesv_win, objopen_prop, low
 void* __cdecl FUN_00da0910(void)
 {
     return &DAT_010c6bec;
@@ -424,6 +437,7 @@ void* __cdecl FUN_00da0950()
 extern int DAT_0126979c;
 
 // @fnv 0x00da0970
+// pdb: finishLoadedObjecthkpWorld | hkpDynamicsReflections.obj | tesv_win, objopen_prop, low
 void* __cdecl FUN_00da0970()
 {
     return &DAT_0126979c;
@@ -432,6 +446,7 @@ void* __cdecl FUN_00da0970()
 extern void* DAT_012697cc;
 
 // @fnv 0x00da09a0
+// pdb: getVtablehkpSimulation | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void* FUN_00da09a0()
 {
     return &DAT_012697cc;
@@ -472,6 +487,7 @@ void* __cdecl FUN_00da0a20()
 // FUN_00da0a40 : a one-line function - getter
 extern int g_target_00da0a40;
 // @fnv 0x00da0a40
+// pdb: getVtablehkpLinearParametricCurve | hkpLinearParametricCurveClass.obj | fnv360_0822_retail, objrun_open, low
 void* FUN_00da0a40()
 {
     return &g_target_00da0a40;
@@ -524,6 +540,7 @@ struct FUN_00da0af0_Class
 };
 
 // @fnv 0x00da0af0
+// pdb: cleanupLoadedObjecthkpStiffSpringChainData | hkpDynamicsReflections.obj | tesv_win, objrun, medium
 void __cdecl FUN_00da0af0(FUN_00da0af0_Class* param_1)
 {
     param_1->vf00(0);
@@ -569,6 +586,8 @@ class DB7570Map
 
 // Searches m_data for an entry whose m_key equals key; on a match stores its value in valueOut and returns DB7570_SUCCESS, otherwise DB7570_FAILURE.
 // @fnv 0x00db7570
+// pdb: hkClassEnum::getNameOfValue | hkClassEnum.obj | fnv360_0822_retail, call_gap, high
+// pdb params: val, name
 DB7570Result DB7570Map::Lookup(unsigned int key, unsigned int& valueOut) const
 {
     for (int i = 0; i < m_iElementCount; i++)
@@ -635,6 +654,7 @@ class FUN_00db78a0_cls
 };
 
 // @fnv 0x00db78a0
+// pdb: hkVtableClassRegistry::registerList | hkVtableClassRegistry.obj | tesv_win, call_seq, medium
 void FUN_00db78a0_cls::FUN_00db78a0(FUN_00db78a0_item** apItems, void** apValues)
 {
     FUN_00db78a0_item** p = apItems;
@@ -924,6 +944,7 @@ void __cdecl hkAgent1nMachine_VisitAllAgents(int a, int b, void* pvCallback);
 void __cdecl ProcessCollisionEntry();
 
 // @fnv 0x00da4900
+// pdb: hkAgentNmMachine_UpdateShapeCollectionFilter | hkpAgent1nMachine.obj | tesv_win, caller_sim, low
 void __cdecl FUN_00da4900(int a, int b)
 {
     hkAgent1nMachine_VisitAllAgents(a, b, reinterpret_cast<void*>(&ProcessCollisionEntry));
@@ -931,6 +952,8 @@ void __cdecl FUN_00da4900(int a, int b)
 
 void* __cdecl hkAgent1nMachine_InvalidateTim(void*, void*);
 // @fnv 0x00da6e10
+// pdb: hkListAgent3::invalidateTim | hkpListAgent3.obj | fnv360_0822_retail, objrun, medium
+// pdb params: entry, agentData, input
 void* __cdecl FUN_00da6e10(void* apUnused, void* b, void* c)
 {
     return hkAgent1nMachine_InvalidateTim(b, c);
@@ -989,6 +1012,7 @@ struct FUN_00db7c00_obj
 };
 
 // @fnv 0x00db7c00
+// pdb: cleanupLoadedObjecthkpConstraintChainInstance | hkpDynamicsReflections.obj | tesv_win, objopen_prop, low
 void __cdecl FUN_00db7c00(FUN_00db7c00_obj* p)
 {
     p->vslot00(0);
@@ -998,6 +1022,7 @@ void __cdecl FUN_00db7c00(FUN_00db7c00_obj* p)
 extern int DAT_01269b28;
 
 // @fnv 0x00db7c10
+// pdb: getVtablehkpTriangleShape | hkpCollideReflections.obj | tesv_win, objrun_open, low
 int* FUN_00db7c10()
 {
     return &DAT_01269b28;
@@ -1154,6 +1179,7 @@ __forceinline SweepPair* collideOneT<false>(const SweepBounds* bounds, const Swe
 }
 
 // @fnv 0x00db09f0
+// pdb: getNormalSignFromFeatureBitSet | hkpBoxBoxCollisionDetection.obj | tesv_win, objrun_open, low
 static __declspec(noinline) float FUN_00db09f0(unsigned short arg)
 {
     union
@@ -1184,6 +1210,7 @@ struct FUN_00db7c80_class
 };
 
 // @fnv 0x00db7c80
+// pdb: NiMaterialResource::GetSemantic | NiMaterialResource.obj | fnv360_0822_retail, call_gap_sim, medium
 int* FUN_00db7c80_class::FUN_00db7c80()
 {
     return &m_0c;
@@ -1199,6 +1226,7 @@ void __cdecl hkAgent1nMachine_Destroy(void* a, void* b, void* c, void* d);
 
 // Calls hkAgent1nMachine_Destroy with arg2, arg5, arg3 and arg4; arg1 is unused.
 // @fnv 0x00da6dc0
+// pdb: hkListAgent3::destroy | hkpListAgent3.obj | tesv_win, caller_sim, low
 void __cdecl FUN_00da6dc0(void* aUnused, void* arg2, void* arg3, void* arg4, void* arg5)
 {
     hkAgent1nMachine_Destroy(arg2, arg5, arg3, arg4);
@@ -1268,6 +1296,7 @@ struct DBBCBC0Target
 };
 
 // @fnv 0x00dbbc00
+// pdb: NavMesh::GetParentCell | NavMesh.obj | fnv360_0822_retail, call_seq, medium
 int DBBCBC0Target::FUN_00dbbc00()
 {
     return unk24;

@@ -19,6 +19,8 @@ struct NiBSPNode : NiNode
 };
 
 // @fnv 0x00a9a710
+// pdb: NiBSPNode::LoadBinary | NiBSPNode.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: stream
 void NiBSPNode::FUN_00a9a710(NiStream& stream)
 {
     NiNode::LoadBinary(stream);
@@ -40,6 +42,8 @@ struct NiBSPNode : NiAVObject
 };
 
 // @fnv 0x00a9a840
+// pdb: LightEffect::Revert | LightEffect.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apActor, apLoadGameBuffer
 void __thiscall NiBSPNode::FUN_00a9a840(NiUpdateData& aUpdateData)
 {
     NiAVObject::UpdateWorldData(aUpdateData);
@@ -58,6 +62,7 @@ struct FUN_00a9add0_shell
 };
 // Calls FUN_00a5e930 on this, deletes this with size 0xCC when bit 0 of a1 is set, and returns this.
 // @fnv 0x00a9add0
+// pdb: NiBSPNode::`scalar deleting destructor' | NiBSPNode.obj | tesv_win, vtable_prefix, medium
 void* FUN_00a9add0_shell::DestroyIfFlagged(unsigned int auiFlags)
 {
     ((Unk_00a5e930*)this)->FUN_00a5e930();
@@ -220,6 +225,7 @@ struct FUN_00a9ac10_shell
 };
 
 // @fnv 0x00a9ac10
+// pdb: NiBSPNode::OnVisible | NiBSPNode.obj | tesv_win, caller_sim, low
 void FUN_00a9ac10_shell::LoadFromStream(NiStream& stream)
 {
     BinaryDataRecord* data = stream.unk0c;
@@ -330,6 +336,7 @@ class A9ACB0Node : public A9ACB0Base
 
 // Returns true if IsEqual(pkObject) holds and this node's m_kBound equals the other node's m_kBound; otherwise false.
 // @fnv 0x00a9acb0
+// pdb: NiBSPNode::IsEqual | NiBSPNode.obj | tesv_win, caller_sim, low
 bool A9ACB0Node::IsEqualWithBound(A9ACB0Object* pkObject)
 {
     if (!IsEqual(pkObject))
@@ -369,6 +376,7 @@ struct NodeOwner
     void* FUN_00a9ae00(void* arg);
 };
 // @fnv 0x00a9ae00
+// pdb: NiRenderer::NiRenderer | NiRenderer.obj | fnv360_0822_debug, objopen_prop, low, conflict (skyrim: NiBSPNode::CreateObject)
 void* NodeOwner::FUN_00a9ae00(void* arg)
 {
     char* memory = (char*)FUN_00aa13e0(0xcc);
@@ -395,6 +403,8 @@ void* NodeOwner::FUN_00a9ae00(void* arg)
 __declspec(noreturn) void __cdecl ReadChildListFromStream();
 
 // @fnv 0x00a9a730
+// pdb: PlayerCharacter::AddTarget | PlayerCharacter.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCaster, apSpell, apActiveEffect, abAreaTarget
 void __cdecl FUN_00a9a730()
 {
     ReadChildListFromStream();
@@ -402,6 +412,8 @@ void __cdecl FUN_00a9a730()
 
 void __cdecl RegisterChildStreamables();
 // @fnv 0x00a93c40
+// pdb: Creature::Set3D | Creature.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: apObject, abTestProcessLevel
 void __cdecl FUN_00a93c40()
 {
     RegisterChildStreamables();
@@ -675,6 +687,8 @@ struct BSPNodeX
 
 // Applies the supplied matrix and translation to the node's model plane and passes them to each non-null child.
 // @fnv 0x00a9a860
+// pdb: NiBSPNode::ApplyTransform | NiBSPNode.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: mat, trn, bOnLeft
 void BSPNodeX::FUN_00a9a860(const ThreeByThreeMatrix& kMat, const NiPoint3& kTrn, bool bOnLeft)
 {
     if (bOnLeft)

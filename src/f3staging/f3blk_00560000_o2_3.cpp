@@ -665,6 +665,8 @@ struct Precip
     NiTriShape* FUN_00578350(NiParticleSystem* pkPSys, const NiMatrix3& kRotate, unsigned char ucSnow);
 };
 
+// pdb: Precipitation::CreateShaderGeometry | Precipitation.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apParticleSystem, akWorldTransform, abSnow
 NiTriShape* Precip::FUN_00578350(NiParticleSystem* pkPSys, const NiMatrix3& kRotate, unsigned char ucSnow)
 {
     NiObject* pkMeshUpdate;

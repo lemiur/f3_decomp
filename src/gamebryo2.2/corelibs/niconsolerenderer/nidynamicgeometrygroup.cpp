@@ -3,6 +3,7 @@
 #include "nidynamicgeometrygroup_decls.h"
 // Constructs a NiDynamicGeometryGroup and initializes nextIndex to 0.
 // @fnv 0x00e957b0
+// pdb: NiDynamicGeometryGroup::NiDynamicGeometryGroup | NiDynamicGeometryGroup.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 NiDynamicGeometryGroup::NiDynamicGeometryGroup() : nextIndex(0)
 {}
 
@@ -25,6 +26,8 @@ struct NiGeometryBufferData
     NiVBChip** m_ppkVertexBuffers;
 };
 // @fnv 0x00e951e0
+// pdb: NiDynamicGeometryGroup::ReleaseChip | NiDynamicGeometryGroup.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pkBuffData, uiStream
 void __stdcall FUN_00e951e0(NiGeometryBufferData* pkBuffData, unsigned int uiStream)
 {
     if (uiStream < pkBuffData->m_uiRegisterStreamCount)
@@ -53,6 +56,7 @@ extern void* DAT_010f1008;
 
 // Returns the cached NiGeometryGroup singleton, constructing it with BSFadeNode::operator new and initialising it if DAT_0126fa34 is null.
 // @fnv 0x00e94d70
+// pdb: NiUnsharedGeometryGroup::Create | NiUnsharedGeometryGroup.obj | tesv_win, caller_sim, low
 NiGeometryGroup* __cdecl GetGeometryGroup()
 {
     NiGeometryGroup* pkGroup = DAT_0126fa34;
@@ -107,6 +111,7 @@ struct FUN_00e95b40_shell
 };
 // Calls FUN_00e95880, then deletes this with size 0x50 when bit 0 of uiFlags is set, and returns this.
 // @fnv 0x00e95b40
+// pdb: NiCollisionData::`scalar deleting destructor' | NiCollisionData.obj | fnv360_0822_retail, caller_sim, low
 void* __thiscall FUN_00e95b40_shell::DestroyIfFlagged(unsigned int uiFlags)
 {
     FUN_00e95880();
@@ -167,6 +172,8 @@ struct SomeClass
 
 // Clears the element at uiIndex, decrements firstFree if it was non-null, shrinks size when removing the last slot, and returns the removed pointer.
 // @fnv 0x00a93c50
+// pdb: NiTArray<BGSAddonNode *,NiTMallocInterface<BGSAddonNode *> >::RemoveAt | TESDataHandler.obj | fnv360_0822_retail, call_seq, high
+// pdb params: uiIndex
 void* SomeClass::FUN_00a93c50(unsigned int uiIndex)
 {
     if (uiIndex >= size)
@@ -208,6 +215,7 @@ struct S_00e95300
 };
 
 // @fnv 0x00e95300
+// pdb: NiTMapBase<NiTPointerAllocator<unsigned int>,char const *,NiPointer<NiShaderLibrary> >::`scalar deleting destructor' | NiD3DShaderFactory.obj | fnv360_0721_retail, objrun_open, low, conflict (skyrim: NiTPointerMap<char const *,class NiPointer<class NiSequence> >::`scalar deleting destructor')
 S_00e95300* __thiscall S_00e95300::FUN_00e95300(int aiFlags)
 {
     m_vftable = &DAT_010f107c;
@@ -331,6 +339,8 @@ struct UnsharedGroupStub
 };
 
 // @fnv 0x00e953c0
+// pdb: NiDynamicGeometryGroup::AddObject | NiDynamicGeometryGroup.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pkData, pkSkinInstance, pkPartition
 void UnsharedGroupStub::CreateBufferData(GeomDataStub* pkData, bool abUnused, PartitionStub* pkPartition)
 {
     BuffDataStub* pkBuffData;
@@ -435,6 +445,8 @@ struct Group
     Chip* GetOrCreateChip(Data*, unsigned int);
 };
 // @fnv 0x00e95550
+// pdb: NiDynamicGeometryGroup::CreateChip | NiDynamicGeometryGroup.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkBuffData, uiStream
 Chip* Group::GetOrCreateChip(Data* data, unsigned int stream)
 {
     Chip* chip = 0;
@@ -523,6 +535,7 @@ extern NiGeometryGroup* DAT_0126fa38;
 
 // Creates the NiDynamicGeometryGroup singleton on first use and returns it.
 // @fnv 0x00e95b10
+// pdb: NiDynamicGeometryGroup::Create | NiDynamicGeometryGroup.obj | tesv_win, caller_sim, low
 NiGeometryGroup* __cdecl GetNiGeometryGroup() throw()
 {
     if (!DAT_0126fa38)
@@ -571,6 +584,8 @@ struct BufferSetData
 };
 
 // @fnv 0x00e95230
+// pdb: NiVBDynamicSet::Create | NiDynamicGeometryGroup.obj | fnv360_0822_retail, call_gap, high
+// pdb params: uiBlockSize, pkD3DDevice, uiFVF, uiIndex
 MemoryAllocationProvider* __cdecl CreateBufferSetData(unsigned int size, void* buffer, unsigned int flags,
                                                       unsigned int kind)
 {
@@ -603,6 +618,7 @@ struct FUN_00e952c0 : NiTMapBaseStub
     int m_04;
     void* m_08;
     virtual ~FUN_00e952c0();
+    // pdb: NiTMapBase<NiTPointerAllocator<unsigned int>,TESObjectREFR *,bool>::`scalar deleting destructor' | TESObjectREFR.obj | fnv360_0822_retail, vtable, medium
     static void operator delete(void* p)
     {
         g_memoryManager.Deallocate(p);
@@ -633,6 +649,7 @@ struct FUN_00e95340
     int _04;
     void* _08;
     virtual ~FUN_00e95340();
+    // pdb: NiTMapBase<NiTPointerAllocator<unsigned int>,unsigned int,BSSimpleList<TESObjectREFR *> *>::`scalar deleting destructor' | TESWorldSpace.obj | fnv360_0822_retail, vtable, high
     void operator delete(void* p)
     {
         g_memoryManager.Deallocate(p);
@@ -674,6 +691,8 @@ struct S_00e987c0_Class
 
 // Updates the stream size and allocation as needed, advances or resets the offset, sets flags, and returns the stream pointer.
 // @fnv 0x00e987c0
+// pdb: NiVBDynamicSet::AllocateBufferSpace | NiVBDynamicSet_Xenon.obj | fnv360_0822_retail, call_gap, high
+// pdb params: uiSize, uiOffset, uiFlags, bForceDiscard, bSoftwareVP
 S_00e987c0_Stream* __thiscall S_00e987c0_Class::AllocateStream(unsigned int uiStream, unsigned int* lpOffset,
                                                                unsigned int* lpFlags, unsigned char bForceFallback,
                                                                unsigned char bUseSpecialFlags)

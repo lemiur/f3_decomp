@@ -3,6 +3,8 @@
 #include "nipsyscollider_decls.h"
 
 // @fnv 0x00C32840
+// pdb: NiPSysCollider::LoadBinary | NiPSysCollider.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kStream
 void NiPSysCollider::LoadBinary(NiStream& stream)
 {
     NiObject::LoadBinary(stream);
@@ -19,6 +21,8 @@ void NiPSysCollider::LoadBinary(NiStream& stream)
 }
 
 // @fnv 0x00C32580
+// pdb: NiPSysCollider::ProcessClone | NiPSysCollider.obj | fnv360_0721_beta, objrun, medium
+// pdb params: kCloning
 void NiPSysCollider::ProcessClone(CloningProcess& cloning)
 {
     NiObject::ProcessClone(cloning);
@@ -45,6 +49,8 @@ void NiPSysCollider::ProcessClone(CloningProcess& cloning)
 }
 
 // @fnv 0x00C32610
+// pdb: NiPSysCollider::LinkObject | NiPSysCollider.obj | fnv360_0822_retail, objrun, high
+// pdb params: kStream
 void NiPSysCollider::LinkObject(NiStream& stream)
 {
     NiObject::LinkObject(stream);
@@ -168,6 +174,8 @@ struct FUN_00c329c0_object
 // @f3 0x00ad2220 (community match, verified in this file)
 extern int DAT_0126b708;
 
+// pdb: NiPSysCollider::GetViewerStrings | NiPSysCollider.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FUN_00c329c0_object::AppendProperties(StrArr* arr)
 {
     char* value;
@@ -276,6 +284,8 @@ struct FUN_00c32450_shell : public NiPSysCollider
 
 // Forwards the four arguments to the collider's m_pObject target and returns its result, or 0 if there is no target or it returns 0.
 // @fnv 0x00c32450
+// pdb: NiPSysCollider::Resolve | NiPSysCollider.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: fInitialTime, fCollisionTime, pkData, usCurParticle
 unsigned int FUN_00c32450_shell::FUN_00c32450(float param1, unsigned int param2, unsigned int param3,
                                               unsigned int param4)
 {
@@ -549,6 +559,7 @@ struct FUN_00c327f0_cls
 };
 
 // @fnv 0x00c327f0
+// pdb: NiPSysCollider::`scalar deleting destructor' | NiPSysCollider.obj | fnv360_0822_retail, objrun, medium
 FUN_00c327f0_cls* FUN_00c327f0_cls::FUN_00c327f0(unsigned char acFlags)
 {
     c327f0_Counted* pCounted = *(c327f0_Counted* volatile*)&m_pCounted;
@@ -843,6 +854,8 @@ class FUN_00c32780 : public FUN_00a5d3a0
 };
 
 // @fnv 0x00c32780
+// pdb: NiPSysCollider::NiPSysCollider | NiPSysCollider.obj | fnv360_0822_retail, call_seq, high
+// pdb params: fBounce, bSpawnOnCollide, bDieOnCollide, pkSpawnModifier
 FUN_00c32780::FUN_00c32780(float bounce, bool spawn, bool die, NiPSysSpawnModifier* spawnMod)
     : m_fBounceFactor(bounce), m_bSpawnOnCollision(spawn), m_bDieOnCollision(die), m_pSpawnModifier(spawnMod),
       m_kCollisionPosition(NiPoint3::ZERO), m_fSpawnRate(0.0f), m_pColliderManager(0)

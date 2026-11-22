@@ -6,6 +6,8 @@
 #include "imagespacemanager_globals.h"
 
 // @fnv 0x00b8b000
+// pdb: ImageSpaceManager::ApplyRadialBlurParamModifier | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afStrength, afRampup, afStart, afRampDown, afDownStart, aCenter
 void ImageSpaceManager::SetRadialBlurParameters(float strength, float rampUp, float start, float rampDown,
                                                 float downStart, const NiPoint2& arCenter)
 {
@@ -22,6 +24,8 @@ void ImageSpaceManager::SetRadialBlurParameters(float strength, float rampUp, fl
 
 // If strength exceeds the stored maximum, records the new strength, mode, distance, range and mask constant for depth of field.
 // @fnv 0x00b8b0d0
+// pdb: ImageSpaceManager::ApplyDepthOfFieldParamModifier | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afStrength, auiMode, afMaskConst, afDistance, afRange
 void ImageSpaceManager::SetDepthOfFieldParameters(float strength, unsigned int mode, float maskConst, float distance,
                                                   float range)
 {
@@ -47,6 +51,7 @@ extern ImageSpaceManager* DAT_011f91ac;
 
 // Creates a NiScreenElementsData and NiScreenElements, configures its data, names it "Imagespace Effect Geometry", and updates it with zero time.
 // @fnv 0x00b8c170
+// pdb: ImageSpaceManager::InitGeometry | ImageSpaceManager.obj | fnv360_0822_retail, ustr, high
 void ImageSpaceManager::CreateMenuBackgroundGeometry()
 {
     m_pMenuBackgroundScreenElementsData = new NiScreenElementsData(false, false, 1, 1, 1, 4, 1, 2, 1);
@@ -68,12 +73,16 @@ void ImageSpaceManager::CreateMenuBackgroundGeometry()
 }
 
 // @fnv 0x00b8b200
+// pdb: ImageSpaceManager::EnableSunbeams | ImageSpaceManager.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: abEnable
 void __stdcall FUN_00b8b200(bool value)
 {
     DAT_012023f0 = value;
 }
 
 // @fnv 0x00b8b130
+// pdb: ImageSpaceManager::ApplyDepthOfFieldParamModifierWeather | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afStrength, auiMode, afMaskConst, afDistance, afRange
 void ImageSpaceManager::ApplyDepthOfFieldParamModifierWeather(float strength, unsigned int mode, float maskConst,
                                                               float distance, float range)
 {
@@ -87,6 +96,8 @@ void ImageSpaceManager::ApplyDepthOfFieldParamModifierWeather(float strength, un
 
 // Adds the r, g, b and a components of color to the tint color stored in the manager.
 // @fnv 0x00b8b5c0
+// pdb: ImageSpaceManager::ApplyTintColorParamModifierWeather | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: akColor
 void ImageSpaceManager::ApplyTintColorParamModifierWeather(RgbaColor& color)
 {
     RgbaColor& tint = m_kPartialRenderColor;
@@ -98,6 +109,8 @@ void ImageSpaceManager::ApplyTintColorParamModifierWeather(RgbaColor& color)
 
 // Adds the r, g, b and a components of color to the fade color stored in the manager.
 // @fnv 0x00b8b690
+// pdb: ImageSpaceManager::ApplyFadeColorParamModifierWeather | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: akColor
 void ImageSpaceManager::ApplyFadeColorParamModifierWeather(RgbaColor& color)
 {
     RgbaColor* fade = &m_kWeatherFadeColor;
@@ -109,6 +122,8 @@ void ImageSpaceManager::ApplyFadeColorParamModifierWeather(RgbaColor& color)
 
 // Accumulates the alpha-weighted RGB of color into a running tint sum and tracks the maximum alpha seen.
 // @fnv 0x00b8b540
+// pdb: ImageSpaceManager::ApplyTintColorParamModifier | ImageSpaceManager.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: akColor
 void ImageSpaceManager::ApplyTintColorParamModifier(RgbaColor& color)
 {
     if (color.a > m_fPartialRenderBlend)
@@ -125,6 +140,8 @@ void ImageSpaceManager::ApplyTintColorParamModifier(RgbaColor& color)
 
 // Tracks the maximum alpha seen and adds the alpha-premultiplied color into the accumulator, scaling r, g and b by a.
 // @fnv 0x00b8b610
+// pdb: ImageSpaceManager::ApplyFadeColorParamModifier | ImageSpaceManager.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: akColor
 void ImageSpaceManager::SetFadeColorParamModifier(RgbaColor& color)
 {
     if (color.a > m_fFadeColorAlpha)
@@ -141,6 +158,8 @@ void ImageSpaceManager::SetFadeColorParamModifier(RgbaColor& color)
 
 // Adds the given radial blur parameters and center offset into the manager's accumulated weather values.
 // @fnv 0x00b8b6e0
+// pdb: ImageSpaceManager::ApplyRadialBlurParamModifierWeather | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, low, conflict (bridge: ImageSpaceManager::GetDepthOfFieldParamsFromWorldBound)
+// pdb params: afStrength, afRampup, afStart, afRampDown, afDownStart, aCenter
 void ImageSpaceManager::ApplyRadialBlurParamModifierWeather(float strength, float rampUp, float start, float rampDown,
                                                             float downStart, const NiPoint2& center)
 {
@@ -156,6 +175,8 @@ void ImageSpaceManager::ApplyRadialBlurParamModifierWeather(float strength, floa
 
 // Iterates the effect list up to EFFECT_TOP_LEVEL_END and calls Setup(this, 0) on each non-null ImageSpaceEffect.
 // @fnv 0x00b8b360
+// pdb: NiColorA::operator/= | ImageSpaceManager.obj | fnv360_0822_debug, objrun_open, low, conflict (bridge: ImageSpaceManager::SetupEffects)
+// pdb params: fScalar
 void ImageSpaceManager::SetupEffects()
 {
     for (int i = 0; i < ImageSpaceManager__ImageSpaceEffectEnum_EFFECT_TOP_LEVEL_END; i++)
@@ -167,6 +188,8 @@ void ImageSpaceManager::SetupEffects()
 }
 
 // @fnv 0x00b8b390
+// pdb: ImageSpaceManager::IsEffectActive | ImageSpaceManager.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aiEffect
 bool ImageSpaceManager::IsEffectActive(ImageSpaceManager__ImageSpaceEffectEnum index)
 {
     ImageSpaceEffect* effect = pEffectList.m_pBase[index];
@@ -177,6 +200,7 @@ bool ImageSpaceManager::IsEffectActive(ImageSpaceManager__ImageSpaceEffectEnum i
 
 // Scans the effect list up to EFFECT_ENDOFFRAME_END, counts active effects and records the last active effect's enum index.
 // @fnv 0x00b8b3f0
+// pdb: ImageSpaceManager::PrepareEndOfFrameEffects | ImageSpaceManager.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: ImageSpaceManager::SetupEffects)
 void ImageSpaceManager::PrepareEndOfFrameEffects()
 {
     m_eEndOfFrameEffect = ImageSpaceManager__ImageSpaceEffectEnum_EFFECT_NONE;
@@ -199,6 +223,8 @@ void ImageSpaceManager::PrepareEndOfFrameEffects()
 #include "imagespacemanager_array.h"
 
 // @fnv 0x00b8b270
+// pdb: NiTArray<bool,NiTMallocInterface<bool> >::SetAt | ImageSpaceManager.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: uiIndex, element
 void NiTArray<bool, NiTMallocInterface<bool> >::SetAt(unsigned int index, const bool& value)
 {
     if (index >= m_usSize)
@@ -223,6 +249,7 @@ void NiTArray<bool, NiTMallocInterface<bool> >::SetAt(unsigned int index, const 
 extern "C" void* __cdecl fnv_zlib_memset(void*, int, unsigned int);
 
 // @fnv 0x00b8b9a0
+// pdb: ImageSpaceManager::BeginParamModifiers | ImageSpaceManager.obj | fnv360_0822_retail, objrun, medium
 void ImageSpaceManager::BeginParamModifiers()
 {
     float alpha = m_kBlendedParameterData.m_afColorAndAlphaParameters[7];
@@ -299,6 +326,8 @@ struct FUN_00b8af10_shell : public ImageSpaceManager
 
 // If afBlurRadius exceeds the stored highest blur value at offset 0x25c, it stores afBlurRadius there.
 // @fnv 0x00b8af10
+// pdb: ImageSpaceManager::ApplyBlurRadiusParamModifier | ImageSpaceManager.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: afBlurRadius
 void FUN_00b8af10_shell::RaiseHighestBlurRadius(float afBlurRadius)
 {
     float& fHighestBlur = *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x25c);
@@ -312,6 +341,8 @@ struct FUN_00b8af40_shell : public ImageSpaceManager
 };
 
 // @fnv 0x00b8af40
+// pdb: ImageSpaceManager::ApplyBlurRadiusParamModifierWeather | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afBlurRadius
 void FUN_00b8af40_shell::FUN_00b8af40(float afBlurRadius)
 {
     m_fWeatherBlurRadius += afBlurRadius;
@@ -324,6 +355,8 @@ struct FUN_00b8af60_shell : public ImageSpaceManager
 
 // Raises the float at offset 0x2f0 to afBlurRadius if afBlurRadius is greater than its current value.
 // @fnv 0x00b8af60
+// pdb: ImageSpaceManager::ApplyMotionBlurStrengthParamModifier | ImageSpaceManager.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: afBlurRadius
 void FUN_00b8af60_shell::RaiseBlurRadius(float afBlurRadius)
 {
     float& val = *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x2f0);
@@ -350,6 +383,8 @@ struct FUN_00b8afb0_shell : public ImageSpaceManager
 
 // Raises the stored double-vision value to afDoubleVision when the new value is greater.
 // @fnv 0x00b8afb0
+// pdb: ImageSpaceManager::ApplyDoubleVisionParamModifier | ImageSpaceManager.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: afDoubleVision
 void FUN_00b8afb0_shell::FUN_00b8afb0(float afDoubleVision)
 {
     if (afDoubleVision > m_fWeatherDoubleVisionStrength)
@@ -362,6 +397,8 @@ struct FUN_00b8afe0_shell : public ImageSpaceManager
 };
 
 // @fnv 0x00b8afe0
+// pdb: ImageSpaceManager::ApplyDoubleVisionParamModifierWeather | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afDoubleVision
 void FUN_00b8afe0_shell::AddDoubleVision(float afDoubleVision)
 {
     *(float*)((char*)this + 0x268) += afDoubleVision;
@@ -446,6 +483,7 @@ void __fastcall ImageSpaceManager_ApplyCurrentParameterData(char* pThis, int, bo
 
 // Sets the first three entries of the bool array at self+0x58 to true and the fourth to false.
 // @fnv 0x00b8bc20
+// pdb: ImageSpaceEffectDepthOfField::DoStandard | ImageSpaceManager.obj | fnv360_0822_retail, objrun_open, medium
 void __fastcall FUN_00b8bc20(char* self, int)
 {
     NiTArray<bool, NiTMallocInterface<bool> >* arr =
@@ -470,6 +508,7 @@ class D3DRenderStateGroup
 
 // Ensures the render state object exists, then sets render states 0x34, 0x38, 0x39 and 0x37 to 1, 7, 0x80 and 1.
 // @fnv 0x00b8bfe0
+// pdb: ImageSpaceShaderSunbeams::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, low
 void __fastcall FUN_00b8bfe0(char* pThis, int)
 {
     char* pPass = *(char**)(pThis + 0x5c);
@@ -518,6 +557,7 @@ static const char* const unused_str_order_00b8c0e0 = "TV";
 
 // Fills vertex and pixel shader init blocks with the TV shader paths, calls the vtable init with "TV", "vs_1_1", "ps_2_0", then the vtable finalize.
 // @fnv 0x00b8c0e0
+// pdb: ImageSpaceShaderTV::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void __fastcall InitTVShader(Obj_00b8c0e0* pObj, int)
 {
     ShaderInitBlock_00b8c0e0 vsBlock;
@@ -534,6 +574,8 @@ void __fastcall InitTVShader(Obj_00b8c0e0* pObj, int)
 
 int __cdecl FUN_00b59d30(int, int, int*);
 // @fnv 0x00b8b1c0
+// pdb: ImageSpaceManager::GetRadialBlurCenterFromWorldBound | ImageSpaceManager.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aWorldBound, aCenter
 int __stdcall FUN_00b8b1c0(int a, int b)
 {
     return FUN_00b59d30(a, b, &b);
@@ -542,6 +584,8 @@ int __stdcall FUN_00b8b1c0(int a, int b)
 extern float DAT_012023f4;
 extern float DAT_012023f8;
 // @fnv 0x00b8b1e0
+// pdb: ImageSpaceManager::SetSunPosition | ImageSpaceManager.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aSunPos
 void __stdcall FUN_00b8b1e0(const int* aiValues)
 {
     *reinterpret_cast<int*>(&DAT_012023f4) = aiValues[0];
@@ -561,6 +605,7 @@ extern float _DAT_01202400;
 
 // Copies 0x98 bytes from the object's source pointer at 0xb0 or 0xac into offset 0x14, falling back to DAT_011ff940, then zeroes two floats.
 // @fnv 0x00b8b500
+// pdb: ImageSpaceManager::ResetToBaseParameterData | ImageSpaceManager.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: ImageSpaceManager::SetOverrideBaseData)
 void __fastcall FUN_00b8b500(void* thisPtr, int aiUnused)
 {
     char* pSource = *(char**)((char*)thisPtr + 0xb0);
@@ -591,6 +636,7 @@ struct FUN_00b8bc80_shell
 };
 // Sets the bool array at offset 0x58: index 0, 1 and 3 to true and index 2 to false.
 // @fnv 0x00b8bc80
+// pdb: ImageSpaceEffectDepthOfField::DoStandardMask | ImageSpaceManager.obj | fnv360_0822_retail, objrun_open, medium
 void __thiscall FUN_00b8bc80_shell::FUN_00b8bc80()
 {
     NiTArray<bool, NiTMallocInterface<bool> >* p = (NiTArray<bool, NiTMallocInterface<bool> >*)((char*)this + 0x58);
@@ -635,6 +681,7 @@ FUN_00b8bce0::FUN_00b8bce0()
 extern const char g_011fed88_arg1[];
 // Returns the address of the string g_011fed88_arg1.
 // @fnv 0x00b8bd90
+// pdb: NiD3DDefaultShader::GetRTTI | ImageSpaceManager.obj | fnv360_0822_retail, objrun_open, low
 const char* __cdecl GetArg1String()
 {
     return g_011fed88_arg1;
@@ -687,6 +734,7 @@ struct FUN_00b8bf10_Obj
 };
 // Registers the Sunbeams shader with vertex shader base.v.hlsl and pixel shader sunbeams.p.hlsl, then finalizes it.
 // @fnv 0x00b8bf10
+// pdb: ImageSpaceShaderSunbeams::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void __fastcall RegisterSunbeamsShader(FUN_00b8bf10_Obj* self, int unused)
 {
     FUN_00b8bf10_Desc a;
@@ -724,6 +772,7 @@ struct FUN_00b8c070 : ImageSpaceEffectShader
 };
 
 // @fnv 0x00b8c070
+// pdb: ImageSpaceShaderSunbeams::SetState | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b8c070::FUN_00b8c070()
 {
     *(int**)this = &DAT_010b0338;
@@ -865,6 +914,7 @@ struct UnkClass
 };
 // Resets two vtable pointers, calls FUN_00c03a20, and deletes this with size 0xd0 when flag bit 0 is set, returning this.
 // @fnv 0x00b8bfa0
+// pdb: ImageSpaceShaderSunbeams::SetState | ImageSpaceManager.obj | fnv360_0822_debug, objrun, medium
 void* UnkClass::DestroyIfFlagged(unsigned int auiFlags)
 {
     *(int**)this = &DAT_010b0198;
@@ -922,6 +972,7 @@ class B8AD00Header
 
 // Swap the header from big-endian.
 // @fnv 0x00b8ad00
+// pdb: ImageSpaceParameterData::Endian | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, medium
 void B8AD00Header::SwapEndian()
 {
     for (int i = 0; i < 15; i++)
@@ -1182,6 +1233,8 @@ class B8B060Request
 
 // If fPriority exceeds the stored priority, stores the priority, type, four float parameters and the pair.
 // @fnv 0x00b8b060
+// pdb: ImageSpaceManager::ApplyDepthRadialBlurParamModifier | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afStrength, auiMode, afDistance, afRange, afRampup, afStart, aCenter
 void B8B060Request::SetIfHigherPriority(float fPriority, int iType, float fA, float fB, float fC, float fD,
                                         const B8B060Pair& kPair)
 {
@@ -1256,6 +1309,8 @@ struct FUN_00b8b7d0_cls
 };
 
 // @fnv 0x00b8b7d0
+// pdb: ImageSpaceManager::ApplyDepthRadialBlurParamModifier | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afStrength, auiMode, afRampup, afStart, aBound
 void FUN_00b8b7d0_cls::FUN_00b8b7d0(float afParam0, int aiParam1, float afParam2, float afParam3,
                                     Vec3_b8b7d0* pPosition)
 {
@@ -1415,6 +1470,7 @@ struct FUN_00b8bdb0_cls
 
 // Sets up the IFVATSSCANBLEND shader with its vertex/pixel sources and configures three pass core entries on m_5c.
 // @fnv 0x00b8bdb0
+// pdb: ImageSpaceShaderVATSScanlinesBlend::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b8bdb0_cls::InitScanBlendPass()
 {
     unsigned int f[0x26];
@@ -1509,6 +1565,7 @@ void __cdecl ClearOtherCachedMap();
 
 // Clears another cached map, then walks the cached entry map releasing each entry's pointers and data, and removes all entries.
 // @fnv 0x00b59940
+// pdb: DistantLODShaderProperty::ClearStaticMaps | DistantLODShaderProperty.obj | fnv360_0721_beta, objrun, medium
 void __cdecl ClearCachedEntryMap()
 {
     ClearOtherCachedMap();
@@ -1557,6 +1614,7 @@ struct ImageSpaceManager_b8b
 
 // Shuts down and destroys each effect in m_kEffects, clears the array entries, and resets its size counters to zero.
 // @fnv 0x00b8b2e0
+// pdb: ImageSpaceManager::ShutdownEffects | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, high
 void ImageSpaceManager_b8b::ShutdownAllEffects()
 {
     for (int i = 0; i < ImageSpaceManager__ImageSpaceEffectEnum_EFFECT_COUNT; i++)
@@ -1615,6 +1673,7 @@ extern int DAT_011f4748;
 
 // Initializes shaders, textures, effects, params and a rendered texture once, guarded by a TLS alloc-state guard and a one-time flag.
 // @fnv 0x00b977d0
+// pdb: ImageSpaceManager::Initialize | ImageSpaceManager.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void ImageSpaceManagerHelper::FUN_00b977d0()
 {
     TlsAllocStateGuard kGuard(0x27);
@@ -1648,6 +1707,7 @@ struct C00b8bda0
 };
 
 // @fnv 0x00b8bda0
+// pdb: TESAIForm::GetAggression | TESAIForm.obj | fnv360_0822_debug, call_seq, low
 unsigned char C00b8bda0::FUN_00b8bda0()
 {
     return m4;
@@ -2216,6 +2276,8 @@ struct Camera
 extern Camera* DAT_011f9684;
 // Transforms a 3D position with the camera matrix, maps it through the viewport, and computes a capped radius from the input r offset.
 // @fnv 0x00b59d30
+// pdb: ImageSpaceEffectRadialBlur::GetBoundParams | ImageSpaceEffectRadialBlur.obj | fnv360_0822_retail, caller, medium
+// pdb params: aBound, aCenter, afStartBias
 NiPoint2* FUN_00b59d30(Vec4* apPoint, NiPoint2* apScreenPos, float* radius)
 {
     Camera* camera = DAT_011f9684;
@@ -2293,6 +2355,8 @@ class FUN_00b8b760_cls
 };
 // Calls FUN_00b59d30 with a6 and local, then passes a3 and a5 adjusted by a6's float bits to FUN_00b8b000.
 // @fnv 0x00b8b760
+// pdb: ImageSpaceManager::ApplyRadialBlurParamModifier | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afStrength, afRampup, afStart, afRampDown, afDownStart, aBound
 void FUN_00b8b760_cls::FUN_00b8b760(float a1, float a2, float a3, float a4, float a5, int a6)
 {
     int local[2];
@@ -2317,6 +2381,8 @@ struct ImageSpaceDistanceEffect
 };
 // Computes the distance from the position at DAT_011f917c + 0x8c and passes it as both bounds to FUN_00b8b0d0.
 // @fnv 0x00b8b8d0
+// pdb: ImageSpaceManager::ApplyDepthOfFieldParamModifier | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afStrength, auiMode, afMaskConst, aBound
 void ImageSpaceDistanceEffect::SetDistanceEffect(float strength, int mode, float duration, const Point3* position)
 {
     const Point3 worldPosition = *reinterpret_cast<const Point3*>(DAT_011f917c + 0x8c);
@@ -2391,6 +2457,8 @@ static __forceinline float Dot(NiPoint3 a, NiPoint3 b)
 
 // Computes the distance between the camera position and a given point, storing the result in both elements of the output array.
 // @fnv 0x00b8bb70
+// pdb: ImageSpaceManager::GetDepthOfFieldParamsFromWorldBound | ImageSpaceManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aWorldBound, aParams
 void __stdcall FUN_00b8bb70(NiPoint3* apPoint, float* out)
 {
     NiPoint3 g = DAT_011f917c->pos;
@@ -2412,6 +2480,8 @@ class FUN_00b8cb30_cls
 
 // Sets BSAudioThreadContext to 0x27, selects a float by mode, applies two operations from arr and blends toward the result using w, then restores the context.
 // @fnv 0x00b8cb30
+// pdb: ImageSpaceManager::ApplyParamModifier | ImageSpaceManager.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aeEffect, uiParam, afValue, afStrength
 void FUN_00b8cb30_cls::FUN_00b8cb30(int mode, int aiIndex, float* apValues, float afWeight)
 {
     int iSavedContext = BSAudioThreadContext;

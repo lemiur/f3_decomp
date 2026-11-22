@@ -223,6 +223,8 @@ struct MorphLoad : LoadBase
     void FUN_00a3b150(MorphStream& stream);
 };
 // @fnv 0x00a3b150
+// pdb: NiGeomMorpherController::LoadBinary | NiGeomMorpherController.obj | fnv360_0822_retail, uconst, low
+// pdb params: kStream
 void MorphLoad::FUN_00a3b150(MorphStream& stream)
 {
     LoadBase::LoadBinary(stream);

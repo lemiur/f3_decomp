@@ -5,12 +5,16 @@
 #include "havok/hkpCapsuleShape.h"
 
 // @fnv 0x00d22350
+// pdb: hkpRigidBody::setFriction | hkpRigidBody.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: newFriction, newRollingFriction
 int __cdecl FUN_00d22350()
 {
     return 2;
 }
 
 // @fnv 0x00d22d60
+// pdb: hkpCapsuleShape::calcSizeForSpu | hkpCapsuleShape.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: input, spuBufferSizeLeft
 int __stdcall FUN_00d22d60(int a, int b)
 {
     return 0x40;

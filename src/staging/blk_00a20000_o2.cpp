@@ -5,6 +5,8 @@
 #include "../../include/layout_support.h"
 
 // @fnv 0x00a26f80
+// pdb: NiBezFloatKey::Copy | NiBezFloatKey.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pkNewKey, pkOrigKey
 void FUN_00a26f80(float* afDest, const float* afSrc)
 {
     afDest[0] = afSrc[0];
@@ -18,6 +20,8 @@ extern "C" unsigned int DAT_011f4270;
 extern "C" unsigned int DAT_011f4274;
 
 // @fnv 0x00a27470
+// pdb: NiLinPosKey::Copy | NiLinPosKey.obj | fnv360_1110_retail, objrun_open, low
+// pdb params: pkNewKey, pkOrigKey
 void __cdecl FUN_00a27470(int a, int b, int c, int* pOut)
 {
     pOut[0] = _NiPoint3_ZERO;
@@ -29,6 +33,7 @@ extern "C" void __cdecl ReadBlockEntries(void*, void*);
 
 // Calls ReadBlockEntries for each of c elements, passing a and successive 0x48-byte records starting at b.
 // @fnv 0x00a2a0e0
+// pdb: NiEulerRotKey::SaveToStream | NiEulerRotKey.obj | tesv_win, hash, low
 void __cdecl FUN_00a2a0e0(void* a, void* b, unsigned int c)
 {
     for (unsigned int i = 0; i < c; ++i)
@@ -41,6 +46,8 @@ struct MemoryManager {
 extern MemoryManager g_memoryManager;
 
 // @fnv 0x00a2a600
+// pdb: NiBezFloatKey::Copy | NiBezFloatKey.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pkNewKey, pkOrigKey
 void FUN_00a2a600(void* p)
 {
     if (p)
@@ -51,6 +58,7 @@ extern "C" void __cdecl SaveKey(int, int);
 
 // Calls SaveKey(a, b) count times, advancing b by 0x4c each iteration.
 // @fnv 0x00a2bb60
+// pdb: NiTCBPosKey::SaveToStream | NiTCBPosKey.obj | tesv_win, hash, low
 void __cdecl FUN_00a2bb60(int aiArg, int aiBase, unsigned int count)
 {
     if (count > 0)
@@ -76,6 +84,8 @@ void __cdecl FUN_00a2cc10(FUN_00a2cc10_T* dst, const FUN_00a2cc10_T* src)
 }
 
 // @fnv 0x00a2d1e0
+// pdb: NiLinFloatKey::Copy | NiLinFloatKey.obj | fnv360_0721_beta, objopen_prop, low
+// pdb params: pkNewKey, pkOrigKey
 void CopyFloat2(float* dst, const float* src)
 {
     *dst = *src;
@@ -85,6 +95,7 @@ void CopyFloat2(float* dst, const float* src)
 extern int DAT_011f49e0;
 void __stdcall FUN_00a312d0(int, int, int, int, int);
 // @fnv 0x00a31680
+// pdb: NiPointer<BSAnimNote>::`default constructor closure' | NiControllerSequence.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: NiControllerSequence::IDTag::`default constructor closure')
 void __cdecl FUN_00a31680()
 {
     FUN_00a312d0((int)&DAT_011f49e0, (int)&DAT_011f49e0, (int)&DAT_011f49e0, (int)&DAT_011f49e0, (int)&DAT_011f49e0);
@@ -97,6 +108,7 @@ struct FUN_00a3ea40_cls {
 };
 
 // @fnv 0x00a3ea40
+// pdb: NiPathInterpolator::SetConstantVelocityData | NiPathInterpolator.obj | fnv360_0822_retail, call_gap, medium
 void FUN_00a3ea40_cls::UpdateIfFlagged()
 {
     if ((*(unsigned short*)((char*)this + 0xc) & 1) != 0)
@@ -126,6 +138,7 @@ void FUN_00a420e0(float p0, float t0, float* tan0, float p1, float t1, float* ta
 void ComputeTCBKeyTangents(TCBKeyS* keys, unsigned int count, unsigned int stride);
 
 // @fnv 0x00a282a0
+// pdb: NiBezPosKey::Insert | NiBezPosKey.obj | tesv_win, caller_sim, low
 bool FUN_00a282a0(float afTime, TCBKeyS** pKeys, unsigned int* pCount)
 {
     TCBKeyS* old = *pKeys;
@@ -176,6 +189,8 @@ bool FUN_00a282a0(float afTime, TCBKeyS** pKeys, unsigned int* pCount)
 
 extern "C" unsigned char DAT_011f367d;
 // @fnv 0x00a291d0
+// pdb: NiBoolKey::Interpolate | NiBoolKey.obj | fnv360_0822_retail, objrun_prop, high
+// pdb params: __formal, __formal, __formal, pResult
 void StoreGlobalByte(int a, int b, int c, unsigned char* pDest)
 {
     *pDest = DAT_011f367d;
@@ -185,6 +200,8 @@ struct Inner_00a6db50 { void Set(float, float, float, float); };
 
 // Copies seven consecutive floats from src to dst.
 // @fnv 0x00a2c5d0
+// pdb: NiTCBFloatKey::Copy | NiTCBFloatKey.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: pkNewKey, pkOrigKey
 void CopyFloat7(float* dst, const float* src)
 {
     dst[0] = src[0];
@@ -211,6 +228,7 @@ struct NiTMapBase_StandIn {
 };
 // Iterates the pp1 array up to usSize2, calls ReleaseItems and zeroes offset 0x40 on each entry, then calls FUN_00a2e620 and RemoveAll on the embedded holders.
 // @fnv 0x00a2e9a0
+// pdb: NiControllerManager::RemoveAllSequences | NiControllerManager.obj | fnv360_0822_retail, call_gap_sim, low
 void NiTMapBase_StandIn::ClearEntries()
 {
     unsigned int i = 0;
@@ -229,6 +247,8 @@ void NiTMapBase_StandIn::ClearEntries()
 }
 
 // @fnv 0x00a2ae10
+// pdb: NiTCBPosKey::Interpolate | NiTCBPosKey.obj | fnv360_0822_retail, objrun_open, low, conflict (bridge: NiTCBPosKey::Copy)
+// pdb params: fTime, pKey0, pKey1, pResult
 void CopyFloatBlock(float* afDest, const float* afSource)
 {
     *afDest = *afSource;
@@ -264,6 +284,8 @@ struct FUN_00a29a70 : public Inner_00a6db50 {
     FUN_00a29a70();
 };
 // @fnv 0x00a29a70
+// pdb: NiColorKey::Interpolate | NiColorKey.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: NiEulerRotKey::NiEulerRotKey)
+// pdb params: fTime, pKey0, pKey1, pResult
 FUN_00a29a70::FUN_00a29a70()
 {
     ((Inner_00a6db50*)((char*)this + 4))->Set(0.0f, 0.0f, 0.0f, 0.0f);
@@ -316,6 +338,7 @@ struct FUN_00a31260_StandIn {
 };
 // Releases p0 and p1 via an interlocked decrement and virtual destructor when the count reaches zero, then clears p2 and sets b3/b4.
 // @fnv 0x00a31260
+// pdb: NiControllerSequence::DetachInterpolators | NiControllerSequence.obj | fnv360_0822_debug, objrun_open, low
 void FUN_00a31260_StandIn::FUN_00a31260()
 {
     FnInterlockedDecrement pfnDecrement = DAT_00fdf1c4;
@@ -344,6 +367,7 @@ struct FUN_00a30700_T {
 };
 
 // @fnv 0x00a30700
+// pdb: NiControllerSequence::InterpArrayItem::~InterpArrayItem | NiControllerSequence.obj | tesv_win, hash, low
 void FUN_00a30700_T::ReleaseRefs()
 {
     FnInterlockedDecrement fn = DAT_00fdf1c4;
@@ -385,6 +409,8 @@ struct FUN_00a27430_T : Base_00a26eb0 {
     void FUN_00a27430(NiStream& stream);
 };
 // @fnv 0x00a27430
+// pdb: NiBoxBV::LoadBinary | NiBoxBV.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: kStream
 void FUN_00a27430_T::FUN_00a27430(NiStream& stream)
 {
     Base_00a26eb0::AccumulateAnimSink(stream);
@@ -406,6 +432,7 @@ extern int DAT_011f3780;
 extern int DAT_011f3810;
 
 // @fnv 0x00a28620
+// pdb: NiBezPosKey::RegisterSupportedFunctions | NiBezPosKey.obj | tesv_win, call_seq, medium
 void FUN_00a28620(int param_1, int param_2)
 {
     int iVar1 = (param_2 + param_1 * 6) * 4;
@@ -422,6 +449,8 @@ struct Helper { unsigned int a; char b; };
 bool AreFloatsEqual(const Helper* x, const Helper* y);
 // Returns false if AreFloatsEqual fails for the two Helpers, otherwise returns whether their b fields are equal.
 // @fnv 0x00a291a0
+// pdb: NiBoolKey::Equal | NiBoolKey.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: key0, key1
 bool FUN_00a291a0(const Helper* apFirst, const Helper* apSecond)
 {
     if (!AreFloatsEqual(apFirst, apSecond)) return false;
@@ -442,6 +471,8 @@ struct FUN_00a29640_T : Base_00a26eb0 {
     void FUN_00a29640(NiStream& stream);
 };
 // @fnv 0x00a29640
+// pdb: NiBoxBV::SaveBinary | NiBoxBV.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void FUN_00a29640_T::FUN_00a29640(NiStream& stream)
 {
     AccumulateAnimSink(stream);
@@ -485,6 +516,7 @@ struct FUN_00a2e790_StandIn : public NiTFixedStringMap_NiAVObject___ {
 };
 
 // @fnv 0x00a2e790
+// pdb: NiTMapBase<DFALL<NiTMapItem<TESObjectREFR *,bool> >,TESObjectREFR *,bool>::`scalar deleting destructor' | ExtraDataList.obj | fnv360_0822_retail, vtable, medium
 void* FUN_00a2e790_StandIn::DestroyFixedStringMap(unsigned char deleting)
 {
     *(void**)this = (void*)&DAT_01096114;
@@ -502,6 +534,8 @@ struct FUN_00a39120_cls {
 
 // Multiplies x, y, z and w by s, stores the result in out via Set, and returns out.
 // @fnv 0x00a39120
+// pdb: NiQuaternion::operator* | NiTCBRotKey.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: q
 Inner_00a6db50* FUN_00a39120_cls::FUN_00a39120(Inner_00a6db50* out, float afScale)
 {
     out->Set(x * afScale, y * afScale, z * afScale, w * afScale);
@@ -518,6 +552,8 @@ bool AreFloatsEqual(FloatRecord_b5532* a, FloatRecord_b5532* b);
 
 // Returns true if AreFloatsEqual(a, b) succeeds and the two records' m_04 floats are equal.
 // @fnv 0x00a26b00
+// pdb: NiFloatKey::Equal | NiFloatKey.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: key0, key1
 bool AreRecordsEqual(FloatRecord_b5532* apRecordA, FloatRecord_b5532* apRecordB)
 {
     if (!AreFloatsEqual(apRecordA, apRecordB))
@@ -548,6 +584,8 @@ struct TempArrayElement
 
 // Allocates an array of TempArrayElement of the given count using the memory manager's operator new[].
 // @fnv 0x00a27040
+// pdb: NiBezFloatKey::Interpolate | NiBezFloatKey.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: fTime, pKey0, pKey1, pResult
 TempArrayElement* __cdecl AllocateTempArray(unsigned int count)
 {
     return new TempArrayElement[count];
@@ -574,6 +612,7 @@ void FUN_00a420e0(float p0, float t0, float* tan0, float p1, float t1, float* ta
 
 // Inserts a new BezFloatKey at fTime into the key array, reallocating it, interpolating the value, and recomputing tangents for neighbouring keys.
 // @fnv 0x00a27080
+// pdb: NiBezFloatKey::Insert | NiBezFloatKey.obj | tesv_win, caller_sim, low
 bool FUN_00a27080(float fTime, BezFloatKey*& pkKeys, unsigned int& uiNumKeys)
 {
     unsigned int uiInsertIndex;
@@ -692,6 +731,8 @@ public:
 
 // Allocates an array of uiNumKeys float keys, loads each key via LoadBinary plus its two extra floats from kStream, and returns the array.
 // @fnv 0x00a27250
+// pdb: NiBezFloatKey::CreateFromStream | NiBezFloatKey.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: stream, uiNumKeys
 A27250FloatKey* LoadFloatKeys(A27250Stream& kStream, unsigned int uiNumKeys)
 {
     A27250FloatKey* pkKeys = new A27250FloatKey[uiNumKeys];
@@ -720,6 +761,8 @@ void __cdecl CallAnimCallback(int a, void* b);
 
 // Calls CallAnimCallback with a and b, then applies animation node in b using a.
 // @fnv 0x00a27450
+// pdb: NiPosKey::SaveBinary | NiPosKey.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: stream, pkKey
 void __cdecl ApplyAnimToTarget(int a, AnimTarget* apTarget)
 {
     CallAnimCallback(a, apTarget);
@@ -750,6 +793,8 @@ struct FUN_00a27b60_rec {
 
 // Copies a 0x40-byte record from src to dst field by field, including a trailing three-word block.
 // @fnv 0x00a27b60
+// pdb: NiBezPosKey::Interpolate | NiBezPosKey.obj | fnv360_0822_retail, objrun_open, low, conflict (bridge: NiBezPosKey::Copy)
+// pdb params: fTime, pKey0, pKey1, pResult
 void __cdecl FUN_00a27b60(FUN_00a27b60_rec* apDest, const FUN_00a27b60_rec* apSource)
 {
     apDest->m_f00 = apSource->m_f00;
@@ -798,6 +843,8 @@ struct A27BD0BezKey : A27BD0Key {
 
 // Compares two BezKey records: base key fields, value, in/out tangents and TCB point, returning true only if all are equal.
 // @fnv 0x00a27bd0
+// pdb: NiBezPosKey::CreateArray | NiBezPosKey.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiBezPosKey::Equal)
+// pdb params: uiNumKeys
 bool BezKeyEqual(const A27BD0BezKey& kA, const A27BD0BezKey& kB)
 {
     if (!A27BD0KeyEqual(kA, kB))
@@ -838,6 +885,8 @@ struct Elem64 {
 
 // Allocates an array of Elem64 elements using the custom allocator and returns the block pointer.
 // @fnv 0x00a27c40
+// pdb: NiPosKey::Interpolate | NiPosKey.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: NiBezPosKey::Copy)
+// pdb params: __formal, __formal, __formal, pResult
 void* AllocateElem64Array(unsigned int count)
 {
     return new Elem64[count];
@@ -864,6 +913,7 @@ struct A27C80CubicKey {
 };
 
 // @fnv 0x00a27c80
+// pdb: NiBezPosKey::Interpolate | NiBezPosKey.obj | tesv_win, objrun, medium
 void EvaluateCubicKey(float fTime, const A27C80CubicKey& kKey, unsigned int uiUnused, A27C80Point3& kResult) {
     kResult = kKey.m_kValue + (kKey.m_kB + (kKey.m_kC + kKey.m_kCubicCoefficient * fTime) * fTime) * fTime;
 }
@@ -872,6 +922,7 @@ extern double DAT_01021928;
 extern double DAT_01011590;
 // Scales the key's extra components by t and two constants, sums them into a direction, offsets it by t, adds key->out and stores the result.
 // @fnv 0x00a27d60
+// pdb: NiBezPosKey::InterpolateD1 | NiBezPosKey.obj | tesv_win, objrun, medium
 void __cdecl FUN_00a27d60(float afTime, TCBKeyS* key, unsigned int type, Vec3S* result)
 {
     const float scaled = static_cast<float>(DAT_01021928 * afTime);
@@ -890,6 +941,7 @@ extern "C" const double DAT_01034208;
 extern "C" const double DAT_01011590;
 struct Vec3Output { float x,y,z; };
 // @fnv 0x00a27e40
+// pdb: NiBezPosKey::InterpolateD2 | NiBezPosKey.obj | tesv_win, objrun, medium
 extern "C" void __cdecl FUN_00a27e40(float radians, const float* transform, unsigned int mode, Vec3Output* output) {
     radians = (float)(radians * DAT_01034208);
     Vec3Output offset;
@@ -942,6 +994,8 @@ public:
 };
 
 // @fnv 0x00a281e0
+// pdb: NiBezPosKey::CreateFromStream | NiBezPosKey.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: stream, uiNumKeys
 A281E0BezPosKey* LoadBezPosKeys(A281E0Stream& kStream, unsigned int uiNumKeys)
 {
     A281E0BezPosKey* pkKeys = new A281E0BezPosKey[uiNumKeys];
@@ -983,6 +1037,8 @@ void __cdecl ApplyAnimToTarget(NiStream& kStream, A28260Key* pkKey);
 
 // For each of uiNumKeys keys, saves the key via ApplyAnimToTarget and then saves its two colors to kStream.
 // @fnv 0x00a28260
+// pdb: NiBezPosKey::SaveToStream | NiBezPosKey.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: stream, pkKeys, uiNumKeys
 void __cdecl SaveKeyArray(NiStream& kStream, A28260Key* pkKeys, unsigned int uiNumKeys)
 {
     for (unsigned int ui = 0; ui < uiNumKeys; ui++)
@@ -1011,6 +1067,8 @@ struct Inner_b5508 {
 
 // Calls Set with (1,0,0,0) and copies the returned Vec4 into out.
 // @fnv 0x00a286e0
+// pdb: NiPosKey::InterpolateD1 | NiPosKey.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: NiRotKey::Interpolate)
+// pdb params: __formal, __formal, __formal, pResult
 void FUN_00a286e0(unsigned int auiUnused0, unsigned int auiUnused1, unsigned int auiUnused2, Vec4_b5508* out)
 {
     Inner_b5508 holder;
@@ -1026,6 +1084,8 @@ void __cdecl CallAnimCallback(void* a, void* b);
 
 // Calls CallAnimCallback with a and b, then invokes NiQuaternion_SaveBinary on the object at b+4 passing a.
 // @fnv 0x00a28720
+// pdb: NiRotKey::SaveBinary | NiRotKey.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: stream, pkKey
 void __cdecl FUN_00a28720(void* a, void* b) {
     CallAnimCallback(a, b);
     reinterpret_cast<FUN_00a28720_target*>(
@@ -1043,6 +1103,8 @@ struct FUN_00a289b0_Vec4 {
 };
 
 // @fnv 0x00a289b0
+// pdb: NiRotKey::GenInterpDefault | NiRotKey.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: fTime, pkKeys, eType, uiNumKeys, ucSize
 FUN_00a289b0_Vec4* __cdecl SampleKeyedVec4(FUN_00a289b0_Vec4* out, float fTime, char* keys, void* arg4, unsigned int count, unsigned char stride)
 {
     if (count != 0) {
@@ -1094,6 +1156,8 @@ struct Blk36 {
 };
 // Copies the m_00 float and the m_04 and m_14 blocks from src into dst.
 // @fnv 0x00a28d40
+// pdb: NiBezRotKey::Copy | NiBezRotKey.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: pkNewKey, pkOrigKey
 void CopyBlk36(Blk36* dst, const Blk36* src) {
     dst->m_00 = src->m_00;
     dst->m_04 = src->m_04;
@@ -1107,6 +1171,8 @@ struct SpawnTarget
 
 // Calls Callee on z, passing a and pointers into the buffers x and y at offsets 4 and 0x14.
 // @fnv 0x00a28d90
+// pdb: NiBezRotKey::Interpolate | NiBezRotKey.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: fTime, pKey0, pKey1, pResult
 void __cdecl CallSpawnTarget(float afValue, char* pBufferX, char* pBufferY, SpawnTarget* pTarget)
 {
     pTarget->Callee(afValue, pBufferX + 4, pBufferX + 0x14, pBufferY + 0x14, pBufferY + 4);
@@ -1201,6 +1267,8 @@ void __cdecl FUN_00a28720(void* base, void* elem);
 
 // Calls FUN_00a28720 on each 0x24-byte element in the array, iterating count times.
 // @fnv 0x00a28ed0
+// pdb: NiBezRotKey::SaveToStream | NiBezRotKey.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: stream, pkKeys, uiNumKeys
 void __cdecl FUN_00a28ed0(void* base, char* elems, unsigned int count)
 {
     unsigned int n = count;
@@ -1236,6 +1304,8 @@ extern A291F0Func g_akA291F0Cubic[6][6];
 
 // Fills the per-content/per-type slots of seven curve operation tables with the given function pointers, clearing the cubic slot.
 // @fnv 0x00a291f0
+// pdb: NiBoolKey::RegisterSupportedFunctions | NiBoolKey.obj | fnv360_0822_retail, objrun, medium
+// pdb params: eContent, eType
 void __cdecl RegisterCurveOps(int eContent, int eType)
 {
     g_akA291F0FillDerived[eContent][eType] = FUN_00a291e0;
@@ -1319,6 +1389,7 @@ extern "C" void __stdcall FNV_array_ctor_iterator(void* base, unsigned int size,
 extern "C" void __cdecl FNV_element_ctor(void* self);
 
 // @fnv 0x00a29e40
+// pdb: NiEulerRotKey::Insert | NiEulerRotKey.obj | tesv_win, udata, high
 bool UpdateArrayElements(float t, void** pOut, int* piFlag)
 {
     if (*piFlag == 0) {
@@ -1552,6 +1623,8 @@ public:
 };
 
 // @fnv 0x00a29f00
+// pdb: NiEulerRotKey::LoadBinary | NiEulerRotKey.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: stream
 void A29F00KeyData::LoadKeyData(A29F00Stream& kStream)
 {
     if (kStream.m_uiFileVersion < 0x0A010068) {
@@ -1757,6 +1830,8 @@ extern A29FE0LoadFunc g_apfnA29FE0Load[];
 
 // Reads three count/type pairs from the stream and, for each nonzero count, reads its type and calls the matching loader with the data pointer.
 // @fnv 0x00a29fe0
+// pdb: NiEulerRotKey::SaveToStream | NiEulerRotKey.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: NiEulerRotKey::SaveBinary)
+// pdb params: stream, pkKeys, uiNumKeys
 void ReadBlockEntries(A29FE0Context* pkContext, A29FE0Block* pkBlock) {
     unsigned int* puiCount = pkBlock->m_auiCount;
     for (int i = 0; i < 3; i++, puiCount++) {
@@ -1795,6 +1870,7 @@ struct QuaternionKey {
 };
 // Linearly interpolates between two quaternion keys by the given factor and writes the blended quaternion to output.
 // @fnv 0x00a2a200
+// pdb: NiLinColorKey::Interpolate | NiLinColorKey.obj | tesv_win, hash, low
 void __cdecl InterpolateQuaternion(float interpolation, const QuaternionKey* first, const QuaternionKey* second, Quaternion* output)
 {
     float inverse = 1.0f - interpolation;
@@ -1814,6 +1890,8 @@ struct Pt3 {
 float __cdecl FUN_00a42050(float a, float b, float c);
 
 // @fnv 0x00a2a560
+// pdb: NiLinFloatKey::Interpolate | NiLinFloatKey.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: fTime, pKey0, pKey1, pResult
 void __cdecl FUN_00a2a560(float s, const Pt3* apPointA, const Pt3* apPointB, float* pfResult) {
     float by = apPointB->y;
     float ay = apPointA->y;
@@ -1832,6 +1910,8 @@ struct Elem {
 };
 // Allocates an array of n Elem objects and calls Init(x) on each element, returning the array.
 // @fnv 0x00a2a5a0
+// pdb: NiLinFloatKey::CreateFromStream | NiLinFloatKey.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: stream, uiNumKeys
 Elem* CreateInitializedElems(int x, unsigned auiCount)
 {
     Elem* r = new Elem[auiCount];
@@ -1875,6 +1955,8 @@ struct A2A890Key {
 
 // Stores into kResult the difference of kKey1.m_kValue and kKey0.m_kValue; fTime is unused.
 // @fnv 0x00a2a890
+// pdb: NiLinPosKey::InterpolateD1 | NiLinPosKey.obj | fnv360_1110_retail, objrun_open, low
+// pdb params: fTime, pKey0, pKey1, pResult
 void FUN_00a2a890(float fTime, const A2A890Key& kKey0, const A2A890Key& kKey1, A2A890Point3& kResult) {
     kResult = kKey1.m_kValue - kKey0.m_kValue;
 }
@@ -1886,6 +1968,8 @@ struct VertexRecord {
     static void* operator new[](unsigned int size) { return ((P03MM*)&g_memoryManager)->Allocate(size); }
 };
 // @fnv 0x00a2a8e0
+// pdb: NiLinPosKey::CreateFromStream | NiLinPosKey.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: stream, uiNumKeys
 VertexRecord* __cdecl CreateVertexRecords(int v, unsigned int count)
 {
     VertexRecord* items = new VertexRecord[count];
@@ -1915,6 +1999,7 @@ struct LinPosKey : AnimKeyBase {
 // Inserts a new linear position key at time t (value sampled from the existing curve).
 // Inserts a new LinPosKey at time t into the sorted key array, shifting existing keys and evaluating the position via GetKeyPosAtTime.
 // @fnv 0x00a2a940
+// pdb: NiLinPosKey::Insert | NiLinPosKey.obj | tesv_win, objrun_open, low
 bool InsertLinPosKey(float t, LinPosKey** pKeys, unsigned int* pCount)
 {
     LinPosKey* keys = *pKeys;
@@ -1944,6 +2029,7 @@ struct FUN_00a6e330_StandIn {
 
 // Calls FUN_00a6e330 on result with value and the two pointers advanced by 4 bytes.
 // @fnv 0x00a2ab90
+// pdb: NiLinRotKey::Interpolate | NiLinRotKey.obj | tesv_win, hash, low
 void __cdecl FUN_00a2ab90(
     float value,
     const void* first,
@@ -1984,6 +2070,8 @@ bool __cdecl A2AE90BaseIsEqual(A2AE90Light* pkA, A2AE90Light* pkB);
 
 // Compares two lights: first the base fields, then dimmer, two floats and the ambient, diffuse, specular and remaining point values.
 // @fnv 0x00a2ae90
+// pdb: NiTCBPosKey::Equal | NiTCBPosKey.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: key0, key1
 bool __cdecl IsLightEqual(A2AE90Light* pkA, A2AE90Light* pkB)
 {
     if (!A2AE90BaseIsEqual(pkA, pkB))
@@ -2016,6 +2104,8 @@ struct BezierKeyS {
 
 // Allocates an array of count BezierKeyS objects using the memory manager and returns the pointer.
 // @fnv 0x00a2af30
+// pdb: NiTCBPosKey::CreateArray | NiTCBPosKey.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiTCBPosKey::Copy)
+// pdb params: uiNumKeys
 BezierKeyS* __cdecl AllocateBezierKeys(unsigned int count) {
     return new BezierKeyS[count];
 }
@@ -2038,6 +2128,8 @@ static __forceinline S_00a2af70_V Add(const S_00a2af70_V& a, const S_00a2af70_V&
 }
 
 // @fnv 0x00a2af70
+// pdb: NiTCBPosKey::Interpolate | NiTCBPosKey.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: fTime, pKey0, pKey1, pResult
 void __cdecl FUN_00a2af70(float t, S_00a2af70_P* p, int unused, S_00a2af70_V* out)
 {
     *out = Add(p->c1, Scale(Add(p->c2, Scale(Add(p->c3, Scale(p->c4, t)), t)), t));
@@ -2067,6 +2159,8 @@ struct S_00a2b050_Obj {
 };
 // Computes o->pos plus (velA*2 + velB*3*t)*t and stores the result in out, returning out.
 // @fnv 0x00a2b050
+// pdb: NiTCBPosKey::InterpolateD1 | NiTCBPosKey.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: fTime, pKey0, pKey1, pResult
 S_00a2b050_V3* __cdecl ComputeInterpolatedPosition(float t, S_00a2b050_Obj* pObj, int unused, S_00a2b050_V3* out)
 {
     S_00a2b050_V3 r = pObj->pos + (pObj->velA * 2.0f + pObj->velB * (3.0f * t)) * t;
@@ -2102,6 +2196,8 @@ struct Vector3 {
 };
 // Scales amount by DAT_01034208, then writes the sum of two Vector3s read from transform offsets 13 and 16, weighted by DAT_01011590 and amount, into result.
 // @fnv 0x00a2b130
+// pdb: NiTCBPosKey::InterpolateD2 | NiTCBPosKey.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: fTime, pKey0, pKey1, pResult
 void __cdecl FUN_00a2b130(float amount, const float* transform, unsigned int unused, Vector3* result)
 {
     amount *= DAT_01034208;
@@ -2362,6 +2458,8 @@ struct BA2BA10Key {
 void __cdecl ApplyAnimToTarget(BA2BA10Stream& kStream, BA2BA10Key* pkKey);
 
 // @fnv 0x00a2ba10
+// pdb: NiTCBPosKey::SaveToStream | NiTCBPosKey.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiTCBPosKey::SaveBinary)
+// pdb params: stream, pkKeys, uiNumKeys
 void __cdecl SaveKey(BA2BA10Stream& kStream, BA2BA10Key* pkKey)
 {
     ApplyAnimToTarget(kStream, pkKey);
@@ -2405,6 +2503,8 @@ struct Element76 {
 
 // Allocates an array of Element76 objects and calls Init(a1) on each element.
 // @fnv 0x00a2bb00
+// pdb: NiTCBPosKey::CreateFromStream | NiTCBPosKey.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: stream, uiNumKeys
 void* __cdecl AllocateElement76Array(int a1, unsigned int auiCount)
 {
     Element76* items = new Element76[auiCount];
@@ -2438,6 +2538,8 @@ struct A2BBF0Record {
 };
 
 // @fnv 0x00a2bbf0
+// pdb: NiTCBRotKey::RegisterSupportedFunctions | NiTCBRotKey.obj | fnv360_0721_beta, objrun_open, low, conflict (skyrim: NiTCBRotKey::Copy)
+// pdb params: eContent, eType
 void FUN_00a2bbf0(A2BBF0Record* pkDst, const A2BBF0Record* pkSrc) {
     pkDst->m_fTime = pkSrc->m_fTime;
     pkDst->m_kControlPoint = pkSrc->m_kControlPoint;
@@ -2456,6 +2558,7 @@ struct SpawnTarget
 
 // Calls SpawnTarget::Callee with a and offsets into x and y.
 // @fnv 0x00a2bc60
+// pdb: NiTCBRotKey::Interpolate | NiTCBRotKey.obj | tesv_win, hash, low
 void __cdecl InvokeSpawnTarget(float afValue, char* pFirst, char* pSecond, SpawnTarget* pTarget)
 {
     pTarget->Callee(afValue, pFirst + 4, pFirst + 0x20, pSecond + 0x30, pSecond + 4);
@@ -2491,6 +2594,8 @@ struct A2BDE0BezRotKey : A2BDE0Key {
 
 // Compares two rotation keys: base key equality, three floats, and the in/out quaternions.
 // @fnv 0x00a2bde0
+// pdb: NiTCBRotKey::Equal | NiTCBRotKey.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: key0, key1
 bool BezRotKeyEqual(const A2BDE0BezRotKey& kA, const A2BDE0BezRotKey& kB)
 {
     if (!A2BDE0KeyEqual(kA, kB))
@@ -2523,6 +2628,8 @@ struct TCBRotKey {
 };
 
 // @fnv 0x00a2beb0
+// pdb: NiTCBRotKey::CalculateDVals | NiTCBRotKey.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pPrev, pNext
 void TCBRotKey::ComputeTangents(const TCBRotKey& prev, const TCBRotKey& next)
 {
     TQuat qLogPrev = TQuat::Log(Conj(prev.m_kRotationValue).Mul(m_kRotationValue));
@@ -2569,6 +2676,7 @@ struct Quad64
 void __cdecl FUN_00a28ab0(void* a, unsigned int count, void* c);
 
 // @fnv 0x00a2c130
+// pdb: NiTCBRotKey::FillDerivedVals | NiTCBRotKey.obj | tesv_win, hash, low
 void __cdecl FUN_00a2c130(Quad64* apQuads, unsigned int count, void* c)
 {
     if (count < 2)
@@ -2767,6 +2875,8 @@ struct S_a2c300_Obj {
 };
 // Calls FUN_00a29640, then serializes the 4-byte fields unk14, unk18 and unk1c to the stream via S_a2c300_Save.
 // @fnv 0x00a2c300
+// pdb: NiTCBRotKey::LoadBinary | NiTCBRotKey.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: stream
 void S_a2c300_Obj::SaveExtraFields(S_a2c300_Stream* pStream) {
     FUN_00a29640(pStream);
     S_a2c300_Save(pStream, &unk14, 4);
@@ -2951,6 +3061,8 @@ struct S_a2c390_Obj {
 };
 // Calls FUN_00a28720 on s and o, then loads o->unk14, o->unk18 and o->unk1c from the stream.
 // @fnv 0x00a2c390
+// pdb: NiTCBRotKey::SaveToStream | NiTCBRotKey.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiTCBRotKey::SaveBinary)
+// pdb params: stream, pkKeys, uiNumKeys
 void __cdecl LoadObjFields(S_a2c390_Stream* pStream, S_a2c390_Obj* pObj) {
     FUN_00a28720(pStream, pObj);
     S_a2c390_Load(pStream, pObj->unk14);
@@ -2982,6 +3094,7 @@ struct Entry64 {
 // Walk an array of 0x40-byte entries, passing each one to the helper.
 // Calls LoadObjFields with ctx and each entry in the array, advancing through count entries.
 // @fnv 0x00a2c490
+// pdb: NiTCBRotKey::SaveToStream | NiTCBRotKey.obj | tesv_win, hash, low
 void __cdecl FUN_00a2c490(void* pContext, Entry64* entries, unsigned int count)
 {
     for (unsigned int i = 0; i < count; i++) {
@@ -3002,6 +3115,8 @@ struct ShapeValues {
 extern "C" float __cdecl func_0x00a42070(float input, float leftStart, float leftExtent, float rightStart, float rightEnd);
 
 // @fnv 0x00a2c610
+// pdb: NiTCBFloatKey::Interpolate | NiTCBFloatKey.obj | fnv360_0721_beta, objopen_prop, low
+// pdb params: fTime, pKey0, pKey1, pResult
 void __cdecl FUN_00a2c610(float input, const ShapeValues* left, const ShapeValues* right, float* apfResult) {
     const float rightStart = right->start;
     const float leftStart = left->start;
@@ -3032,6 +3147,8 @@ struct Elem28 {
 
 // Allocates an array of count Elem28 objects using the custom allocator and returns the block pointer.
 // @fnv 0x00a2c660
+// pdb: NiTCBFloatKey::CreateArray | NiTCBFloatKey.obj | fnv360_0721_beta, objopen_prop, low, conflict (bridge: NiTCBFloatKey::Interpolate)
+// pdb params: uiNumKeys
 void* AllocateElem28Array(unsigned int count)
 {
     return new Elem28[count];
@@ -3054,6 +3171,7 @@ __declspec(noinline) void __cdecl FUN_00a2c6a0(Key* k, float a, float b, float c
 }
 
 // @fnv 0x00a2c7a0
+// pdb: NiTCBFloatKey::FillDerivedVals | NiTCBFloatKey.obj | tesv_win, hash, low
 void __cdecl FUN_00a2c7a0(Key* keys, unsigned int count) {
     if (count < 2) {
         return;
@@ -3290,6 +3408,8 @@ void __cdecl WriteFloatToStream(NiStreamStandInW* pkStream, FUN_00a2ca60_Obj* pk
 
 // Calls WriteFloatToStream, then writes the object's m_08, m_0c and m_10 fields to the stream.
 // @fnv 0x00a2ca60
+// pdb: NiTCBFloatKey::RegisterSupportedFunctions | NiTCBFloatKey.obj | fnv360_0822_retail, objrun, medium, conflict (skyrim: NiTCBFloatKey::SaveBinary)
+// pdb params: eContent, eType
 void __cdecl FUN_00a2ca60(NiStreamStandInW* pkStream, FUN_00a2ca60_Obj* pkObj)
 {
     WriteFloatToStream(pkStream, pkObj);
@@ -3313,6 +3433,8 @@ struct KeyframeElement {
     }
 };
 // @fnv 0x00a2caf0
+// pdb: NiTCBFloatKey::CreateFromStream | NiTCBFloatKey.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: stream, uiNumKeys
 KeyframeElement* __cdecl AllocateKeyframeElements(void* context, unsigned int count) {
     KeyframeElement* elements = new KeyframeElement[count];
     if (count > 0) {
@@ -3330,6 +3452,7 @@ extern "C" void __cdecl FUN_00a2ca60(void* a1, void* a2);
 
 // Calls FUN_00a2ca60 for each of count elements, advancing a2 by 0x1c bytes per iteration.
 // @fnv 0x00a2cb50
+// pdb: NiTCBFloatKey::SaveToStream | NiTCBFloatKey.obj | tesv_win, hash, low
 void __cdecl FUN_00a2cb50(void* a1, void* a2, unsigned int count)
 {
     unsigned int n = count;
@@ -3349,6 +3472,8 @@ struct FUN_00a2cc40_S
 };
 
 // @fnv 0x00a2cc40
+// pdb: NiStepBoolKey::Interpolate | NiStepBoolKey.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: fTime, pKey0, pKey1, pResult
 void SelectByteByThreshold(float afThreshold, FUN_00a2cc40_S* apFirst, FUN_00a2cc40_S* apSecond, unsigned char* apResult)
 {
     unsigned char* src = &apSecond->m_04;
@@ -3370,6 +3495,8 @@ void WriteEnabledFlag(A2CC60Stream* pkStream, A2CC60Entry* pkEntry);
 
 // Calls WriteEnabledFlag for each of the given number of entries, passing the stream and a pointer to each entry.
 // @fnv 0x00a2cc60
+// pdb: NiLinFloatKey::SaveToStream | NiLinFloatKey.obj | fnv360_0822_retail, objrun_open, high
+// pdb params: stream, pkKeys, uiNumKeys
 void FUN_00a2cc60(A2CC60Stream* pkStream, A2CC60Entry* pkEntries, unsigned int ItemUpdateArray) {
     for (unsigned int i = 0; i < ItemUpdateArray; i++)
         WriteEnabledFlag(pkStream, &pkEntries[i]);
@@ -3409,6 +3536,8 @@ struct FUN_00a2cf20_Value
 
 // Copies the payload of a into out when f is below 1.0, otherwise copies the payload of b.
 // @fnv 0x00a2cf20
+// pdb: NiLinColorKey::Copy | NiLinColorKey.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiStepRotKey::Interpolate)
+// pdb params: pkNewKey, pkOrigKey
 void SelectPayloadByThreshold(float afThreshold, FUN_00a2cf20_Value* apValueA, FUN_00a2cf20_Value* apValueB, FUN_00a2cf20_Payload* apResult)
 {
     if (afThreshold < 1.0f)
@@ -3429,6 +3558,7 @@ struct FUN_00a2d200_arg
 
 // Writes a->m_04 to *out when t is below 1.0, otherwise writes b->m_04.
 // @fnv 0x00a2d200
+// pdb: NiStepFloatKey::Interpolate | NiStepFloatKey.obj | tesv_win, hash, low
 void FUN_00a2d200(float t, FUN_00a2d200_arg* a, FUN_00a2d200_arg* b, float* apResult)
 {
     if (t < 1.0f)
@@ -3464,6 +3594,7 @@ float GetValueAtTime(float t, TCBKeyS* keys, int type, unsigned int count, unsig
 void* _memmove(void* d, const void* s, unsigned int n);
 
 // @fnv 0x00a2d260
+// pdb: NiStepFloatKey::Insert | NiStepFloatKey.obj | tesv_win, objrun_open, low
 bool InsertKeyPair(float afTime, KeyPair8** pKeys, unsigned int* pCount)
 {
     unsigned int idx;
@@ -3514,6 +3645,8 @@ struct KeyOut {
 };
 
 // @fnv 0x00a2d3f0
+// pdb: NiLinPosKey::InterpolateD1 | NiLinPosKey.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: NiStepPosKey::Interpolate)
+// pdb params: fTime, pKey0, pKey1, pResult
 void __cdecl SelectKeyVec(float afBlendWeight, const KeyData* pA, const KeyData* pB, KeyOut* pOut)
 {
     if (afBlendWeight < 1.0f) {
@@ -3532,6 +3665,8 @@ void __cdecl FUN_00a28720(void*, void*);
 
 // Calls FUN_00a28720 for each of count elements, advancing b by 0x14 bytes per iteration; returns early when count is 0.
 // @fnv 0x00a2d690
+// pdb: NiLinRotKey::SaveToStream | NiLinRotKey.obj | fnv360_0822_retail, objopen_prop, high
+// pdb params: stream, pkKeys, uiNumKeys
 void __cdecl FUN_00a2d690(void* a, void* b, unsigned int count)
 {
     if (count <= 0)
@@ -3560,6 +3695,7 @@ struct FNVHolder {
     void FUN_00a2dd10();
 };
 // @fnv 0x00a2dd10
+// pdb: NiActorManager::TimelineData::~TimelineData | NiAnimationSDM.obj | tesv_win, callee_sim, low
 void FNVHolder::FUN_00a2dd10() {
     FnInterlockedDecrement decrement = DAT_00fdf1c4;
     FNVRefObject* held = object;
@@ -3581,6 +3717,8 @@ struct FUN_00a351d0_cls {
 
 // Forwards the five arguments to self->CrossFadeTo.
 // @fnv 0x00a2e1b0
+// pdb: NiControllerManager::Morph | NiControllerManager.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: pkSourceSequence, pkDestSequence, fDuration, iPriority, fSourceWeight, fDestWeight
 void __stdcall CallFUN_00a351d0(FUN_00a351d0_cls* self, int aiArg1, float afArg2, int aiArg3, float afArg4, float afArg5)
 {
     self->CrossFadeTo(aiArg1, afArg2, aiArg3, afArg4, afArg5);
@@ -3615,6 +3753,8 @@ struct ArrA00a2 {
 };
 
 // @fnv 0x00a2e680
+// pdb: NiTArray<NiPointer<NiAVObject>,NiTNewInterface<NiPointer<NiAVObject> > >::SetAt | BipedAnim.obj | fnv360_0822_retail, call_seq, high
+// pdb params: uiIndex, element
 void ArrA00a2::FUN_00a2e680(unsigned int uiIndex, PtrA00a2& aPtr)
 {
     if (!(DAT_011f36a8 & 1)) {
@@ -3744,6 +3884,8 @@ struct FUN_00a305e0_cls {
 
 // Returns true if the stored string pointer matches other, or if both are non-null and strcmp reports them equal.
 // @fnv 0x00a305e0
+// pdb: operator== | LoadingMenu.obj | fnv360_0721_retail, call_gap, low
+// pdb params: s1, s2
 bool FUN_00a305e0_cls::Equals(const char* other)
 {
     if (m_00 == other) {
@@ -3834,6 +3976,8 @@ struct Object : Base {
 };
 // Calls FUN_00a370b0, sets the vtable and several fields from globals, and allocates an array of FUN_00a362f0 sized by count into unk50.
 // @fnv 0x00a363b0
+// pdb: NiBlendAccumTransformInterpolator::NiBlendAccumTransformInterpolator | NiTransformController.obj | fnv360_0822_retail, call_seq, high
+// pdb params: bManagerControlled, fWeightThreshold, ucArraySize
 Object* Object::InitObject(int aiArg, float afArg, int aiArg2) {
   FUN_00a370b0(aiArg,afArg,aiArg2);
   vtable = &DAT_01096784;
@@ -3873,6 +4017,8 @@ struct S_00a385d0_T {
 };
 
 // @fnv 0x00a385d0
+// pdb: NiQuatTransform::Invert | NiQuatTransform.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: kDest
 void S_00a385d0_T::InvertTransform(S_00a385d0_T* out) {
     if (scale == DAT_010241b0) out->scale = DAT_01096b8c;
     else out->scale = 1.0f / scale;
@@ -3976,6 +4122,8 @@ inline void* __cdecl operator new(unsigned int, void* memory) throw() {
 }
 // Allocates a NiFloatInterpolator via NiMemObject::operator new and placement-constructs it, returning null on allocation failure.
 // @fnv 0x00a3c570
+// pdb: NiFloatInterpolator::GuaranteeTimeRange | NiFloatInterpolator.obj | fnv360_0721_beta, objrun, medium
+// pdb params: fStartTime, fEndTime
 NiFloatInterpolator* __cdecl CreateNiFloatInterpolator() {
     void* memory = NiMemObject::operator new(sizeof(NiFloatInterpolator));
     if (memory)
@@ -3984,6 +4132,8 @@ NiFloatInterpolator* __cdecl CreateNiFloatInterpolator() {
 }
 
 // @fnv 0x00a3d520
+// pdb: NiAnimationKey::Equal | NiAnimationKey.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: key0, key1
 int __cdecl AreFloatsEqual(const float* pfA, const float* pfB)
 {
     if (*pfA == *pfB)
@@ -4007,6 +4157,8 @@ public:
 
 // Calls the sink's callback with count 4 and adds its return value to the sink's m_04 counter.
 // @fnv 0x00a3da20
+// pdb: NiAnimationKey::LoadBinary | NiAnimationKey.obj | fnv360_0822_retail, call_seq, high
+// pdb params: stream
 void FUN_00a3da20_cls::AccumulateAnimSink(int a1)
 {
     AnimSink* sink = *(AnimSink**)((char*)a1 + 0x24c);
@@ -4175,6 +4327,8 @@ struct FUN_00a3da50_Owner {
 };
 
 // @fnv 0x00a3da50
+// pdb: NiAnimationKey::SaveBinary | NiAnimationKey.obj | fnv360_0822_retail, call_seq, high
+// pdb params: stream, pkKey
 int __cdecl CallAnimCallback(FUN_00a3da50_Owner *pOwner, int iIndex)
 {
     int iOut;
@@ -4226,6 +4380,7 @@ struct FUN_00a3dd40 : FUN_00a3ca30 {
 };
 
 // @fnv 0x00a3dd40
+// pdb: NiPathInterpolator::~NiPathInterpolator | NiPathInterpolator.obj | fnv360_0822_retail, caller_sim, low, conflict (bridge: NiMeshPSysData::~NiMeshPSysData)
 FUN_00a3dd40::~FUN_00a3dd40() throw()
 {
     m_kPointA = 0;
@@ -4236,6 +4391,7 @@ FUN_00a3dd40::~FUN_00a3dd40() throw()
 extern "C" float __cdecl func_0x00a42070(float input, float leftStart, float leftExtent, float rightStart, float rightEnd);
 
 // @fnv 0x00a26fe0
+// pdb: NiBezFloatKey::Interpolate | NiBezFloatKey.obj | tesv_win, hash, low
 void __cdecl FUN_00a26fe0(float a, const float* b, const float* c, float* pfResult)
 {
     float c2 = c[2];
@@ -4252,6 +4408,8 @@ extern "C" FUN_00a29e00_Callback DAT_011f3780[];
 
 // For each of 3 entries, if the target is nonzero, calls the callback from DAT_011f3780 indexed by slot with target, value and flag.
 // @fnv 0x00a29e00
+// pdb: NiEulerRotKey::FillDerivedVals | NiEulerRotKey.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: NiEulerRotKey::CreateArray)
+// pdb params: pkKeys, uiNumKeys, ucSize
 void __cdecl DispatchEntryCallbacks(void* pData)
 {
     unsigned int index = 0;
@@ -4287,6 +4445,7 @@ void __cdecl FUN_00ec44d0(void* dst, const void* src, unsigned int count);
 float __cdecl GetValueAtTime(float t, TCBKeyS* keys, int type, unsigned int count, unsigned int stride);
 
 // @fnv 0x00a2a620
+// pdb: NiLinFloatKey::Insert | NiLinFloatKey.obj | tesv_win, objopen_prop, low
 bool __cdecl FUN_00a2a620(float t, TCBKeyS** pKeys, unsigned int* puiCount)
 {
     TCBKeyS* old = *pKeys;
@@ -4326,6 +4485,7 @@ struct FUN_00a2ab10_T {
 
 // Copies the float and the four-word tail from src into dst.
 // @fnv 0x00a2ab10
+// pdb: NiStepColorKey::Copy | NiStepColorKey.obj | tesv_win, hash, low
 void __cdecl FUN_00a2ab10(FUN_00a2ab10_T* dst, const FUN_00a2ab10_T* src) {
     dst->f00 = src->f00;
     dst->tail = src->tail;
@@ -4346,6 +4506,8 @@ struct BezPosKey {
 void BezSortKeys(BezPosKey* keys, unsigned int count, unsigned int stride);
 
 // @fnv 0x00a2b850
+// pdb: NiTCBPosKey::Insert | NiTCBPosKey.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: fTime, pkKeys, uiNumKeys
 bool InsertBezPosKey(float t, BezPosKey** pKeys, unsigned int* puiCount) {
     BezPosKey* oldKeys = *pKeys;
     unsigned int idx;
@@ -4384,6 +4546,7 @@ Vec3R GetKeyPosAtTime(float, InsertPositionKey*, int, unsigned int, unsigned int
 void* FUN_00ec44d0(void*, const void*, unsigned int);
 
 // @fnv 0x00a2d4a0
+// pdb: NiStepPosKey::Insert | NiStepPosKey.obj | tesv_win, objopen_prop, low
 bool FUN_00a2d4a0(float time, InsertPositionKey*& keys, unsigned int& count) {
     InsertPositionKey* old = keys;
     unsigned int index;
@@ -4425,6 +4588,8 @@ public:
 
 // Scans the keys for the first whose time is not less than fTime, storing its index in uiIndex and returning false on an exact time match.
 // @fnv 0x00a3d5d0
+// pdb: NiAnimationKey::OkayToInsert | NiAnimationKey.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fTime, pkKeys, uiNumKeys, uiInsertAt, ucSize
 bool NiAnimationKeyA3D::FindKeyIndex(float fTime, NiAnimationKeyA3D* pkKeys, unsigned int uiNumKeys,
     unsigned int& uiIndex, unsigned char ucKeySize)
 {
@@ -4445,6 +4610,7 @@ extern "C" double DAT_01021928;
 
 // For each key after the first, computes two Vec3S tangent values from neighbouring positions scaled by DAT_01011590 and DAT_01021928 and stores them in the key.
 // @fnv 0x00a27ee0
+// pdb: NiBezPosKey::FillDerivedVals | NiBezPosKey.obj | tesv_win, call_seq, medium
 void ComputeTCBKeyTangents(TCBKeyS* keys, unsigned int count, unsigned int stride)
 {
     int remaining = (int)count + -1;
@@ -4513,6 +4679,7 @@ struct Dtor00a2dd70 {
 };
 
 // @fnv 0x00a2dd70
+// pdb: NiActorManager::TimelineData::~TimelineData | NiAnimationSDM.obj | fnv360_0822_retail, callee_sim, low, conflict (skyrim: NiTAbstractPoolAllocator<class NiActorManager::TimelineData>::AllocNode::`vector deleting destructor')
 Dtor00a2dd70* Dtor00a2dd70::FUN_00a2dd70(unsigned char acFlags)
 {
     if (acFlags & 2) {
@@ -4560,6 +4727,8 @@ extern A29CF0CopyFn DAT_011f39c0[];
 
 // Copies three key arrays from pvSrc to pvDest, allocating each via the create function and copying elements with the copy function.
 // @fnv 0x00a29cf0
+// pdb: NiEulerRotKey::Copy | NiEulerRotKey.obj | fnv360_0822_retail, objrun_open, high
+// pdb params: pkNewKey, pkOrigKey
 void __cdecl CopyKeyData(void* pvDest, void* pvSrc)
 {
     A29F00KeyData* pkDest = (A29F00KeyData*)pvDest;
@@ -4601,6 +4770,8 @@ struct A2C550Key {
 bool AreRecordsEqual(const A2C550Key& kA, const A2C550Key& kB);
 // Returns true if AreRecordsEqual accepts the pair and the remaining five float fields of kA and kB are all equal.
 // @fnv 0x00a2c550
+// pdb: NiTCBFloatKey::Equal | NiTCBFloatKey.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: key0, key1
 bool FUN_00a2c550(const A2C550Key& kA, const A2C550Key& kB)
 {
     if (!AreRecordsEqual(kA, kB))
@@ -4611,6 +4782,8 @@ bool FUN_00a2c550(const A2C550Key& kA, const A2C550Key& kB)
 
 void __cdecl NiColorKey_SaveBinary(void* dst, const void* src);
 // @fnv 0x00a2cfd0
+// pdb: NiLinColorKey::SaveToStream | NiLinColorKey.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: stream, pkKeys, uiNumKeys
 void __cdecl FUN_00a2cfd0(void* target, const unsigned char* source, unsigned int count) { for (unsigned int remaining = count; remaining > 0; --remaining) { NiColorKey_SaveBinary(target, source); source += 20; } }
 
 namespace fnv_00a2d1d0 {
@@ -4618,6 +4791,8 @@ struct FloatRecord_b5532;
 bool __cdecl AreRecordsEqual(FloatRecord_b5532* a, FloatRecord_b5532* b);
 
 // @fnv 0x00a2d1d0
+// pdb: BSAnimGroupSequence::CreateClone | BSAnimGroupSequence.obj | fnv360_0822_retail, vtable, low
+// pdb params: arCloneData
 bool __cdecl FUN_00a2d1d0(FloatRecord_b5532* a, FloatRecord_b5532* b)
 {
     return AreRecordsEqual(a, b);
@@ -4635,6 +4810,7 @@ struct Point415 {
 struct Key415 { float time; Point415 value; };
 // Subtracts the value of key b from key a and stores the resulting Point415 in result.
 // @fnv 0x00a2d420
+// pdb: NiStepPosKey::InterpolateD1 | NiStepPosKey.obj | tesv_win, objrun_open, low
 void FUN_00a2d420(float unused,const Key415& a,const Key415& b,Point415& result) {
  result = a.value - b.value;
 }
@@ -4649,6 +4825,8 @@ bool FUN_00a28a80(UHelper* a, UHelper* b);
 extern "C" bool __cdecl AreDataEqual(void* a, void* b);
 
 // @fnv 0x00a2a7e0
+// pdb: NiLinPosKey::Equal | NiLinPosKey.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: key0, key1
 bool __cdecl FUN_00a2a7e0(void* a, void* b) {
     return AreDataEqual(a, b);
 }
@@ -4670,6 +4848,7 @@ struct NiKeyB { static void __cdecl FUN_00a27470(); };
 struct NiKeyC { static void __cdecl FUN_00a27470(); };
 // Stores six function pointers and a null into the KeyTables arrays at [eContent][eType].
 // @fnv 0x00a27aa0
+// pdb: NiPosKey::RegisterSupportedFunctions | NiPosKey.obj | tesv_win, call_seq, medium
 void __cdecl FUN_00a27aa0(int eContent, int eType)
 {
     KeyTables::DAT_011f3d20[eContent][eType] = (void*)&FUN_00a291e0;
@@ -4705,6 +4884,8 @@ public:
 };
 // Negates rotation quaternions whose dot product with the previous key is negative, then clamps each key's X component to [-1, 1].
 // @fnv 0x00a28ab0
+// pdb: NiRotKey::FillDerivedVals | NiRotKey.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pkKeys, uiNumKeys, ucSize
 void __cdecl FUN_00a28ab0(TimedRotationKey* pkKeys, unsigned int uiNumKeys, unsigned char ucKeySize)
 {
     unsigned int ui;
@@ -4728,6 +4909,8 @@ extern "C" unsigned char __cdecl InterpolateBooleanKey(float, const void*, int, 
 
 // Returns the value at the first or last key when fTime is out of range, otherwise calls InterpolateBooleanKey to interpolate between keys.
 // @fnv 0x00a29470
+// pdb: NiBoolKey::GenInterpDefault | NiBoolKey.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: fTime, pkKeys, eType, uiNumKeys, ucSize
 extern "C" unsigned char __cdecl FUN_00a29470(float fTime, const void* pkKeys, int uiType, unsigned int uiNumKeys, unsigned char ucSize) {
     if (uiNumKeys) {
         if (fTime < *(const float*)pkKeys)
@@ -4827,6 +5010,8 @@ struct CompareBlock {
 
 // Returns true only when the three groups match in m_cnt, m_idx and the byte array, and each m_idx's g_compareTable function accepts all m_cnt value pairs.
 // @fnv 0x00a29c20
+// pdb: NiEulerRotKey::Equal | NiEulerRotKey.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: key0, key1
 bool FUN_00a29c20(const void* left, const CompareBlock* apRight)
 {
     const CompareBlock* a = static_cast<const CompareBlock*>(left);
@@ -4868,6 +5053,8 @@ struct S_00a2a7f0_Key {
 
 // Computes a linear interpolation between two keyframe vectors using factor t and stores the result in out.
 // @fnv 0x00a2a7f0
+// pdb: NiLinFloatKey::RegisterSupportedFunctions | NiLinFloatKey.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: eContent, eType
 void __cdecl FUN_00a2a7f0(float t, const S_00a2a7f0_Key* apFrom, const S_00a2a7f0_Key* apTo, S_00a2a7f0_V3* out)
 {
     const S_00a2a7f0_Key* pFrom = apFrom;
@@ -4893,6 +5080,8 @@ struct A2B1D0Key {
     void FUN_00a2b1d0(const A2B1D0Vec& previous, const A2B1D0Vec& next, float before, float after);
 };
 // @fnv 0x00a2b1d0
+// pdb: NiTCBPosKey::CalculateDVals | NiTCBPosKey.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: ptSub1, ptPlus1, fPreLen, fNextLen
 void A2B1D0Key::FUN_00a2b1d0(const A2B1D0Vec& previous, const A2B1D0Vec& next, float before, float after) {
     A2B1D0Vec vDeltaPrev = value - previous;
     A2B1D0Vec vDeltaNext = next - value;
@@ -4943,6 +5132,8 @@ inline void Calc(PositionSplineKey& p, PositionSplineKey& c, PositionSplineKey& 
 
 // Computes forward, backward, outgoing, and incoming tangents for each PositionSplineKey in a TCB spline of uiNumKeys keys.
 // @fnv 0x00a2b410
+// pdb: NiTCBPosKey::FillDerivedVals | NiTCBPosKey.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pkKeys, uiNumKeys, ucSize
 void __cdecl FUN_00a2b410(PositionSplineKey* pkTCB, unsigned int uiNumKeys)
 {
     unsigned int uiNumKeysM1 = uiNumKeys - 1;
@@ -5008,6 +5199,8 @@ void __cdecl ApplyAnimToTarget(int a, FUN_00a2d470_Entry* e);
 
 // Iterates over an array of FUN_00a2d470_Entry records and calls ApplyAnimToTarget for each one against the given target.
 // @fnv 0x00a2d470
+// pdb: NiLinPosKey::SaveToStream | NiLinPosKey.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: stream, pkKeys, uiNumKeys
 void __cdecl FUN_00a2d470(int aiTarget, FUN_00a2d470_Entry* entries, unsigned int count)
 {
     for (unsigned int i = 0; i < count; i++) {
@@ -5020,6 +5213,8 @@ struct CloneableObj {
     void FUN_00a6cfe0(CloneableObj* pObject, void* pData);
 };
 // @fnv 0x00a2f8a0
+// pdb: BGSTerminal::SaveGame | BGSTerminal.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BGSTalkingActivator::`vector deleting destructor'`adjustor{80}')
+// pdb params: apSaveGameBuffer
 void CloneableObj::FUN_00a2f8a0(CloneableObj* pObject, void* pData)
 {
     FUN_00a6cfe0(pObject, pData);
@@ -5066,6 +5261,7 @@ struct Controller : ControllerBase {
 
 // Allocates and returns a new Controller object.
 // @fnv 0x00a359d0
+// pdb: BSMultiTargetTreadTransfController::CreateObject | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, objrun, medium
 ControllerBase* FUN_00a359d0()
 {
     return new Controller;
@@ -5081,6 +5277,7 @@ typedef void (__cdecl *ConverterFn)(float,unsigned int,unsigned int,float*);
 extern ConverterFn DAT_011f3c18[];
 // Calls the codec's converter (by converterIndex) with value and offsets derived from x and y, and returns the length of the resulting 3-float vector.
 // @fnv 0x00a3e5f0
+// pdb: NiPathInterpolator::PathSpeed | NiPathInterpolator.obj | tesv_win, call_seq, medium
 float TexelSampler::SampleLength(unsigned int x,unsigned int y,float value) {
   unsigned int rgb=0, type;
   TextureCodec* pCodec=codec;
@@ -5109,6 +5306,8 @@ struct FUN_00a2c6a0_Key {
 
 // Computes the ds and dd tangent components for a keyframe from its bias, tension, continuity and neighbouring values.
 // @fnv 0x00a2c6a0
+// pdb: NiTCBFloatKey::CreateArray | NiTCBFloatKey.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiTCBFloatKey::CalculateDVals)
+// pdb params: uiNumKeys
 void __cdecl FUN_00a2c6a0(FUN_00a2c6a0_Key* key, float prev, float next, float prevLen, float nextLen)
 {
     float fDeltaPrev = key->value - prev;
@@ -5133,6 +5332,7 @@ void __cdecl InsertLinPosKey();
 
 // Stores function pointers into KeyTables arrays indexed by content and type.
 // @fnv 0x00a2aa50
+// pdb: NiLinPosKey::RegisterSupportedFunctions | NiLinPosKey.obj | tesv_win, call_seq, medium
 void FUN_00a2aa50(int content, int type)
 {
     KeyTables::DAT_011f3d20[content][type] = (void*)&FUN_00a291e0;
@@ -5167,6 +5367,8 @@ extern "C" void* __fastcall FUN_0052d160(void* element);
 
 // Allocates a block of NiColorKey_K elements via g_memoryManager and constructs them with FUN_0052d160.
 // @fnv 0x00a2a1b0
+// pdb: NiTNewInterface<NiScreenGeometryData::ScreenElement>::Allocate | NiOldScreenSpace.obj | fnv360_0721_beta, call_seq, high
+// pdb params: uiNumElements
 NiColorKey_K* FUN_00a2a1b0(unsigned int count)
 {
     unsigned int requested;
@@ -5190,6 +5392,8 @@ struct A2CC30_Shell {
 };
 
 // @fnv 0x00a2cc30
+// pdb: BGSDecalNode::AttachChild | BGSDecalNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apAVObj, bFirstAvail
 bool __cdecl FUN_00a2cc30(int param_1, int param_2)
 {
     return A2CC30_Shell::FUN_00a291a0(reinterpret_cast<const Helper*>(param_1),

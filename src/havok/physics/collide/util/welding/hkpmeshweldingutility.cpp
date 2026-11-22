@@ -34,6 +34,7 @@ extern double DAT_0101ff40;
 float FUN_00ddd7e0(int a1, int* pOut, float* pF);
 
 // @fnv 0x00dddc40
+// pdb: hkpMeshWeldingUtility::calcEdgeAngleBitcode | hkpMeshWeldingUtility.obj | tesv_win, call_gap, low
 int GetIndexForValue(int aiArg)
 {
     int n;
@@ -252,6 +253,8 @@ __declspec(noinline) char* hkpMeshWeldingUtility_calcBitcodeForTriangleEdge(char
     return out;
 }
 
+// pdb: hkpMeshWeldingUtility::isTriangleWindingValid | hkpMeshWeldingUtility.obj | fnv360_0822_retail, uconst, high
+// pdb params: shapeKey, bvTreeShape
 bool* CheckSubQueries(bool* result, void* key, Iface* self)
 {
     QueryBuffer queryBuf;
@@ -817,6 +820,7 @@ struct Outer {
 };
 char* __cdecl FUN_00a564b0(char* out, const Vec4* a, const Vec4* b, const Vec4* c, float tol);
 char* __cdecl hkpMeshWeldingUtility_calcBitcodeForTriangleEdge(char* out, Outer* outer, Triangle* tri, void* key, int i, int* result, void* p3);
+// pdb: hkpMeshWeldingUtility::calcWeldingInfoForTriangle | hkpMeshWeldingUtility.obj | tesv_win, caller_sim, low
 short __cdecl FUN_00a560b0(void* key, Outer* outer, void* p3)
 {
     ShapeBuffer buffer;

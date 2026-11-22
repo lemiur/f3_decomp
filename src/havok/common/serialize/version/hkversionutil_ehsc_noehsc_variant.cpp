@@ -416,6 +416,7 @@ struct F3Writer
 
 extern "C" void __cdecl FUN_009234e0(char* dst, const char* src, int size);
 
+// pdb: `anonymous namespace'::copySomeObjects | hkVersionUtil.obj | fnv360_0822_retail, caller_sim, low
 static __declspec(noinline) char* FUN_00dc12c0(IndexArray* indices, ObjectInput objectInput, OffsetInput offsetInput,
                                                CopyListener* listener)
 {

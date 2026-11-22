@@ -6,6 +6,8 @@ extern const float DAT_00f79c90;
 extern float DAT_010f2ed4;
 extern float DAT_010f2ed8;
 
+// pdb: bhkWindListener::SetWind | bhkWindListener.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: bhkUtilFunctions::SetCallbackIsStairs)
+// pdb params: afSpeed, afAngle
 void FUN_008f15a0(float x, float y)
 {
     DAT_010f2ed4 = DAT_00f79c90 * x;
@@ -17,6 +19,7 @@ void FUN_008f15a0(float x, float y)
 extern char DAT_00e3385c;
 
 struct C_008f1780 { void* vt; int f4; char b8; int fc; int f10; void* FUN_008f1780(); };
+// pdb: bhkWindListener::bhkWindListener | bhkWindListener.obj | fnv360_0822_retail, call_gap, low
 void* C_008f1780::FUN_008f1780()
 {
     fc = 0;
@@ -73,6 +76,7 @@ int __cdecl hkString_strCmp(const char* a, const char* b)
 extern char DAT_00e36c54;
 
 struct S_00929c70 { void* v; int a; char b; int c; int d; void* __thiscall FUN_00929c70(void); };
+// pdb: bhkWaterListener::bhkWaterListener | bhkWaterListener.obj | fnv360_0822_retail, call_gap, low
 void* S_00929c70::FUN_00929c70(void)
 {
     c = 0;
@@ -104,6 +108,8 @@ struct NiObject;
 struct NiStream { NiObject* FUN_0082a280(); unsigned int FUN_0082a2b0(); };
 struct C { void FUN_00845ad0(NiStream*); void FUN_00945640(NiObject*); void FUN_00945740(NiStream*); };
 }
+// pdb: bhkRagdollTemplate::LinkObject | bhkRagdollTemplate.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 __declspec(noinline) void n_00945740::C::FUN_00945740(n_00945740::NiStream* s)
 {
     FUN_00845ad0(s);
@@ -120,6 +126,7 @@ __declspec(noinline) void n_00945740::C::FUN_00945740(n_00945740::NiStream* s)
 
 
 
+// pdb: hkpBreakableConstraintData::isBuildJacobianCallbackRequired | bhkBreakableConstraint.obj | fnv360_0721_beta, objrun_open, low, conflict (bridge: bhkHingeConstraint::QCinfoSize)
 int FUN_009479b0()
 {
     return 0x14;
@@ -129,6 +136,7 @@ int FUN_009479b0()
 
 
 
+// pdb: CombatProcedureEvade::GetType | CombatProcedureEvade.obj | fnv360_0822_retail, vtable, high
 int FUN_0096ae50()
 {
     return 4;
@@ -160,6 +168,7 @@ __declspec(noinline) void __fastcall FUN_009b0420(char* p)
 extern "C" __declspec(dllimport) int __stdcall IMP_00d9b0a4(int);
 
 struct S_009b4a30 { int v; int __thiscall FUN_009b4a30(void); };
+// pdb: hkSemaphore::~hkSemaphore | hkWin32Semaphore.obj | tesv_win, objrun_open, low
 int S_009b4a30::FUN_009b4a30(void)
 {
     return IMP_00d9b0a4(v);
@@ -169,6 +178,7 @@ int S_009b4a30::FUN_009b4a30(void)
 
 extern char DAT_01061950;
 
+// pdb: hkpBvTreeAgent::getUseAabbCaching | hkpBvTreeAgent.obj | tesv_win, objrun, medium
 void FUN_009b7e40(char* p)
 {
     *p = DAT_01061950;
@@ -189,6 +199,8 @@ void __cdecl FUN_009bc900(void);
 void __cdecl FUN_009bc920(void);
 void __cdecl hkConvexListAgent3_destroy(void);
 
+// pdb: hkConvexListAgent3::initAgentFunc | hkpConvexListAgent3.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: f
 void FUN_009bcf00(void* p)
 {
     *(void**)((char*)p + 0x0) = (void*)FUN_009bc950;

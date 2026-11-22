@@ -18,6 +18,8 @@ struct FUN_00a09310 {
     Triple477 tail;
     FUN_00a09310* Assign(const FUN_00a09310&);
 };
+// pdb: hkpPrismaticConstraintData::Atoms::operator= | hkpConstraintDataCloningUtil.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: __that
 FUN_00a09310* FUN_00a09310::Assign(const FUN_00a09310& source) {
     type=source.type;
     first.FUN_008fda60(source.first);
@@ -85,6 +87,8 @@ struct FUN_00a093d0 {
     FUN_00a093d0* Assign(const FUN_00a093d0& source);
 };
 
+// pdb: hkpRagdollConstraintData::Atoms::operator= | hkpConstraintDataCloningUtil.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: __that
 FUN_00a093d0* FUN_00a093d0::Assign(const FUN_00a093d0& source) {
     type = source.type;
     first.FUN_008fda60(source.first);
@@ -579,6 +583,8 @@ struct Record {
     Vec4 linear, angular;
     unsigned int unk60, unk64, unk68, unk6c, unk70, unk74, unk78, unk7c;
 };
+// pdb: hkSolveApplyGravityByTheSteps | hkpSolver.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: info, accumulators, accumulatorsEnd
 void __cdecl FUN_00a0d5e0(const Context* context, Record* begin, Record* end)
 {
     Vec4 offset = context->offset;
@@ -644,6 +650,7 @@ void FUN_00a08ee0(S_a08ee0* p)
 namespace f3m_00a06b40 {
 struct Flag_a06b40 { int value; };
 struct Owner_a06b40 { void FUN_00a06b80(Flag_a06b40 flag); };
+// pdb: finishLoadedObjecthkpBallGun | hkpUtilitiesReflections.obj | tesv_win, objopen_prop, low
 void __cdecl FUN_00a06b40(Owner_a06b40* p) {
     Flag_a06b40 one = { 1 };
     if (p) p->FUN_00a06b80(one);
@@ -654,6 +661,7 @@ void __cdecl FUN_00a06b40(Owner_a06b40* p) {
 namespace f3m_00a06d30 {
 struct Flag_a06d30 { int value; };
 struct Owner_a06d30 { void FUN_00a70c30(Flag_a06d30 flag); };
+// pdb: getVtablehkpStiffSpringChainData | hkpStiffSpringChainDataClass.obj | fnv360_0822_debug, caller_sim, low, conflict (skyrim: finishLoadedObjecthkpStiffSpringChainData)
 void __cdecl FUN_00a06d30(Owner_a06d30* p) {
     Flag_a06d30 one = { 1 };
     if (p) p->FUN_00a70c30(one);
@@ -681,6 +689,7 @@ struct A08e50Object {
     int __thiscall FUN_00a08e50(unsigned char flag);
 };
 
+// pdb: hkpConvexVerticesConnectivity::`scalar deleting destructor' | hkpConvexVerticesConnectivityClass.obj | fnv360_0822_retail, vtable, high
 int __thiscall A08e50Object::FUN_00a08e50(unsigned char flag)
 {
     FUN_00a08de0();
@@ -728,6 +737,7 @@ struct A08B30Object {
     void __thiscall FUN_00943410();
 };
 
+// pdb: hkpNullCollisionFilter::hkpNullCollisionFilter | hkpWorld.obj | fnv360_0822_retail, caller_sim, low
 void __cdecl FUN_00a08b30(unsigned int* param_1)
 {
     if (param_1 != 0) {
@@ -753,6 +763,7 @@ struct A08200 {
 
 extern void __cdecl FUN_00a74870();
 
+// pdb: hkpPointToPathConstraintData::`scalar deleting destructor' | hkpPointToPathConstraintData.obj | fnv360_0822_retail, vtable_prefix, medium
 A08200* A08200::FUN_00a08200(int flag) {
     FUN_00a74870();
 
@@ -889,6 +900,7 @@ struct A07d40Class {
     int FUN_00a07d40(unsigned char flag);
 };
 
+// pdb: hkpDisableEntityCollisionFilter::`scalar deleting destructor' | hkpDisableEntityCollisionFilterClass.obj | fnv360_0822_retail, vtable, high
 int A07d40Class::FUN_00a07d40(unsigned char flag)
 {
     FUN_00a740c0();
@@ -928,6 +940,7 @@ struct FUN_00a07a20_Object {
 
 void FUN_00e83a0c();
 
+// pdb: finishLoadedObjecthkpSerializedDisplayMarker | hkpSerializedDisplayMarkerClass.obj | fnv360_0721_beta, objrun_open, low
 void __cdecl FUN_00a07a20(unsigned int* param_1) {
     if (param_1 != 0) {
         FUN_00a07a20_Object* object = (FUN_00a07a20_Object*)param_1;
@@ -947,6 +960,7 @@ struct FUN_00a068f0_Obj {
     FUN_00a068f0_Obj* FUN_00a068f0(unsigned char flag);
 };
 
+// pdb: hkpSerializedAgentNnEntry::`scalar deleting destructor' | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, vtable, high
 FUN_00a068f0_Obj* FUN_00a068f0_Obj::FUN_00a068f0(unsigned char flag)
 {
     FUN_00a6f800();
@@ -1025,6 +1039,8 @@ struct Cls_00a00cf0 {
     Cls_00a00cf0* FUN_00a00cf0(const Cls_00a00cf0* pSrc);
 };
 
+// pdb: hkpVelocityAccumulator::operator= | hkpConstraintSolverSetup.obj | fnv360_0822_debug, call_gap, low
+// pdb params: __that
 Cls_00a00cf0* Cls_00a00cf0::FUN_00a00cf0(const Cls_00a00cf0* pSrc)
 {
     m_ucFlag00 = pSrc->m_ucFlag00;
@@ -1128,6 +1144,7 @@ struct Owner {
     void FUN_00a0a2f0(void* item);
 };
 
+// pdb: hkMapBase<void *,int,struct hkMapOperations<void *> >::remove | hkTempDetectAllocator.obj | tesv_win, caller_sim, low
 void Owner::FUN_00a0a2f0(void* item)
 {
     int index = items.FUN_00922790(item);
@@ -1296,6 +1313,7 @@ namespace f3m_00a070c0 {
 namespace f3m_00a070c0 {
 struct hkFinishLoadedObjectFlag { int m_finishing; };
 struct Obj { int unk00; void FUN_00a71730(hkFinishLoadedObjectFlag flag); };
+// pdb: getVtablehkpPoweredChainData | hkpPoweredChainDataClass.obj | fnv360_0822_debug, caller_sim, low, conflict (skyrim: finishLoadedObjecthkpPoweredChainData)
 void __cdecl FUN_00a070c0(Obj* obj)
 {
     hkFinishLoadedObjectFlag flag;
@@ -1356,6 +1374,7 @@ struct Container : hkBaseObject {
     hkArray<hkReferencedObject*> objects;
     virtual ~Container() throw();
 };
+// pdb: hkpSerializedDisplayMarkerList::~hkpSerializedDisplayMarkerList | hkpSerializedDisplayMarkerListClass.obj | fnv360_0822_retail, call_seq, high
 Container::~Container() throw()
 {
     for (int i = 0; i < objects.size; i++)
@@ -1374,6 +1393,7 @@ struct FUN_00a077e0_Obj {
     unsigned short unk06;
 };
 
+// pdb: finishLoadedObjecthkpConvexPieceStreamData | hkpConvexPieceStreamDataClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00a077e0(FUN_00a077e0_Obj* p)
 {
     if (p) {
@@ -1394,6 +1414,7 @@ struct FinishLoaded {
 };
 }
 
+// pdb: finishLoadedObjecthkpSerializedDisplayRbTransforms | hkpSerializedDisplayRbTransformsClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00a06940(f3m_00a06940::FinishLoaded* p)
 {
     if (p) {
@@ -1414,6 +1435,7 @@ struct FinishLoaded {
 };
 }
 
+// pdb: finishLoadedObjecthkpPoweredChainMapper | hkpPoweredChainMapperClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00a06ac0(f3m_00a06ac0::FinishLoaded* p)
 {
     if (p) {
@@ -1634,6 +1656,7 @@ struct FinishLoaded {
 };
 }
 
+// pdb: finishLoadedObjecthkpSerializedDisplayMarkerList | hkpSerializedDisplayMarkerListClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00a07930(f3m_00a07930::FinishLoaded* p)
 {
     if (p) {
@@ -1774,6 +1797,7 @@ struct FinishLoaded {
 };
 }
 
+// pdb: cleanupLoadedObjecthkpKeyframedRigidMotion | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00a08020(f3m_00a08020::FinishLoaded* p)
 {
     if (p) {
@@ -1794,6 +1818,7 @@ struct FinishLoaded {
 };
 }
 
+// pdb: finishLoadedObjecthkpDefaultWorldMemoryWatchDog | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00a08060(f3m_00a08060::FinishLoaded* p)
 {
     if (p) {
@@ -1854,6 +1879,7 @@ struct FinishLoaded {
 };
 }
 
+// pdb: finishLoadedObjecthkpSimulation | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00a08120(f3m_00a08120::FinishLoaded* p)
 {
     if (p) {
@@ -1934,6 +1960,7 @@ struct FinishLoaded {
 };
 }
 
+// pdb: finishLoadedObjecthkpLinearParametricCurve | hkpLinearParametricCurveClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00a08350(f3m_00a08350::FinishLoaded* p)
 {
     if (p) {
@@ -2054,6 +2081,7 @@ struct FinishLoaded {
 };
 }
 
+// pdb: finishLoadedObjecthkpConvexVerticesConnectivity | hkpConvexVerticesConnectivityClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00a08db0(f3m_00a08db0::FinishLoaded* p)
 {
     if (p) {
@@ -2197,6 +2225,7 @@ struct FUN_0090ab60 {
     V00a07f20Vec unk10[12];
     FUN_0090ab60(V00a07f20Flag flag) throw();
 };
+// pdb: getVtablehkpRigidBody | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void* FUN_00a07f20()
 {
     V00a07f20Flag flag;
@@ -2260,6 +2289,7 @@ struct FUN_00a08830 {
     V00a08810Vec unk10[12];
     FUN_00a08830(V00a08810Flag flag) throw();
 };
+// pdb: getVtablehkpGroupFilter | hkpCollideReflections.obj | tesv_win, objrun_open, low
 void* FUN_00a08810()
 {
     V00a08810Flag flag;
@@ -2286,6 +2316,8 @@ struct A0754Obj : A0754Base {
     A0754Obj() { unk0c = 0x17; }
     virtual ~A0754Obj();
 };
+// pdb: hkpMultiRayShape::hkpMultiRayShape | hkpMultiRayShapeClass.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: flag
 void FUN_00a07540(void* p)
 {
     new (p) A0754Obj();
@@ -2302,6 +2334,7 @@ struct FUN_00a50ae0 {
     int unk00;
     FUN_00a50ae0(F00a072b0Flag flag) throw();
 };
+// pdb: finishLoadedObjecthkpGenericConstraintDataScheme | hkpDynamicsReflections.obj | tesv_win, caller_sim, low
 void FUN_00a072b0(void* p)
 {
     F00a072b0Flag flag;
@@ -2320,6 +2353,7 @@ struct FUN_0097db40 {
     int unk00;
     FUN_0097db40(F00a07600Flag flag) throw();
 };
+// pdb: finishLoadedObjecthkpListShape | hkpCollideReflections.obj | tesv_win, objrun_prop, low
 void FUN_00a07600(void* p)
 {
     F00a07600Flag flag;
@@ -2346,6 +2380,7 @@ struct FUN_00a08570_Class {
     int __thiscall FUN_00a08570(unsigned char flag);
 };
 
+// pdb: hkpConstraintChainInstanceAction::`scalar deleting destructor' | hkpConstraintChainInstance.obj | fnv360_0822_retail, vtable, high
 int FUN_00a08570_Class::FUN_00a08570(unsigned char flag)
 {
     FUN_00a08570_Obj* self = (FUN_00a08570_Obj*)this;
@@ -2371,6 +2406,7 @@ struct D00a06970 {
     void FUN_00a6f8c0();
     D00a06970* FUN_00a06970(unsigned int flags);
 };
+// pdb: hkpSerializedDisplayRbTransforms::`scalar deleting destructor' | hkpSerializedDisplayRbTransformsClass.obj | fnv360_0822_retail, vtable, high
 D00a06970* D00a06970::FUN_00a06970(unsigned int flags)
 {
     FUN_00a6f8c0();
@@ -2394,6 +2430,7 @@ struct D00a07a50 {
     unsigned short referenceCount;
     D00a07a50* FUN_00a07a50(unsigned int flags);
 };
+// pdb: hkpSerializedDisplayMarker::`scalar deleting destructor' | hkpSerializedDisplayMarkerClass.obj | fnv360_0721_beta, vtable, medium
 D00a07a50* D00a07a50::FUN_00a07a50(unsigned int flags)
 {
     vtable = DAT_00dcc494;
@@ -2440,6 +2477,7 @@ struct D00a074e0 {
     void FUN_00a07430();
     D00a074e0* FUN_00a074e0(unsigned int flags);
 };
+// pdb: hkpSimpleMeshShape::`scalar deleting destructor' | hkpSimpleMeshShapeClass.obj | fnv360_0822_retail, vtable_prefix, high
 D00a074e0* D00a074e0::FUN_00a074e0(unsigned int flags)
 {
     FUN_00a07430();
@@ -2463,6 +2501,7 @@ struct D00a078b0 {
     void FUN_00a07810();
     D00a078b0* FUN_00a078b0(unsigned int flags);
 };
+// pdb: hkpConvexPieceStreamData::`scalar deleting destructor' | hkpConvexPieceStreamDataClass.obj | fnv360_0822_retail, vtable, high
 D00a078b0* D00a078b0::FUN_00a078b0(unsigned int flags)
 {
     FUN_00a07810();
@@ -2486,6 +2525,7 @@ struct D00a079e0 {
     void FUN_00a07960();
     D00a079e0* FUN_00a079e0(unsigned int flags);
 };
+// pdb: hkpSerializedDisplayMarkerList::`scalar deleting destructor' | hkpSerializedDisplayMarkerListClass.obj | fnv360_0822_retail, vtable, high
 D00a079e0* D00a079e0::FUN_00a079e0(unsigned int flags)
 {
     FUN_00a07960();
@@ -2509,6 +2549,7 @@ struct D00a07e80 {
     void FUN_00a742c0();
     D00a07e80* FUN_00a07e80(unsigned int flags);
 };
+// pdb: hkpConstrainedSystemFilter::`scalar deleting destructor' | hkpConstrainedSystemFilterClass.obj | fnv360_0822_retail, vtable, high
 D00a07e80* D00a07e80::FUN_00a07e80(unsigned int flags)
 {
     FUN_00a742c0();
@@ -2532,6 +2573,7 @@ struct D00a083f0 {
     void FUN_00a08380();
     D00a083f0* FUN_00a083f0(unsigned int flags);
 };
+// pdb: hkpLinearParametricCurve::`scalar deleting destructor' | hkpLinearParametricCurveClass.obj | fnv360_0822_retail, vtable_prefix, high
 D00a083f0* D00a083f0::FUN_00a083f0(unsigned int flags)
 {
     FUN_00a08380();
@@ -2555,6 +2597,7 @@ struct D00a085f0 {
     void FUN_00a50c50();
     D00a085f0* FUN_00a085f0(unsigned int flags);
 };
+// pdb: hkpConstraintChainInstance::`scalar deleting destructor' | hkpConstraintChainInstance.obj | fnv360_0822_retail, vtable, high
 D00a085f0* D00a085f0::FUN_00a085f0(unsigned int flags)
 {
     FUN_00a50c50();
@@ -2578,6 +2621,7 @@ struct D00a08ab0 {
     void FUN_00a767b0();
     D00a08ab0* FUN_00a08ab0(unsigned int flags);
 };
+// pdb: hkpRemoveTerminalsMoppModifier::`scalar deleting destructor' | hkpRemoveTerminalsMoppModifierClass.obj | fnv360_0822_retail, vtable, high
 D00a08ab0* D00a08ab0::FUN_00a08ab0(unsigned int flags)
 {
     FUN_00a767b0();
@@ -2601,6 +2645,7 @@ struct D00a08c80 {
     void FUN_00a76aa0();
     D00a08c80* FUN_00a08c80(unsigned int flags);
 };
+// pdb: hkpGroupFilter::`scalar deleting destructor' | hkpGroupFilterClass.obj | fnv360_0822_retail, vtable, high
 D00a08c80* D00a08c80::FUN_00a08c80(unsigned int flags)
 {
     FUN_00a76aa0();
@@ -2624,6 +2669,7 @@ struct D00a090b0 {
     void FUN_00a77940();
     D00a090b0* FUN_00a090b0(unsigned int flags);
 };
+// pdb: hkpCollisionFilterList::`scalar deleting destructor' | hkpCollisionFilterListClass.obj | fnv360_0822_retail, vtable, high
 D00a090b0* D00a090b0::FUN_00a090b0(unsigned int flags)
 {
     FUN_00a77940();
@@ -2644,6 +2690,7 @@ struct S00dfb400_Object {
     S00dfb400_Object(FinishingFlag flag) throw();
 };
 
+// pdb: getVtablehkpMalleableConstraintData | hkpMalleableConstraintDataClass.obj | fnv360_0822_debug, caller_sim, low, conflict (skyrim: finishLoadedObjecthkpMalleableConstraintData)
 void __cdecl FUN_00a08300(S00dfb400_Object* object) throw()
 {
     FinishingFlag flag;
@@ -2685,6 +2732,7 @@ struct FUN_0090ab60 {
     int unk00;
     FUN_0090ab60(P00a07ef0Flag flag) throw();
 };
+// pdb: finishLoadedObjecthkpRigidBody | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void FUN_00a07ef0(void* p)
 {
     P00a07ef0Flag flag;
@@ -2703,6 +2751,7 @@ struct FUN_00a086f0 {
     int unk00;
     FUN_00a086f0(P00a086b0Flag flag) throw();
 };
+// pdb: hkpPointToPlaneConstraintData::staticClass | hkpDynamicsReflections.obj | tesv_win, objopen_prop, low
 void FUN_00a086b0(void* p)
 {
     P00a086b0Flag flag;
@@ -2725,6 +2774,8 @@ struct FUN_00a097a0 {
     FUN_00a097a0(float a, float b, float c);
 };
 
+// pdb: hkpSpringDamperConstraintMotor::hkpSpringDamperConstraintMotor | hkpSpringDamperConstraintMotor.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: springConstant, springDamping, maxForce
 FUN_00a097a0::FUN_00a097a0(float a, float b, float c) {
     unk06 = 1;
     *(volatile unsigned char*)&unk08 = 0;
@@ -2746,6 +2797,7 @@ struct FUN_009dad20 {
     int unk00;
     FUN_009dad20(P00a08760Flag flag) throw();
 };
+// pdb: getVtablehkpBreakableConstraintData | hkpBreakableConstraintDataClass.obj | fnv360_0822_debug, caller_sim, low, conflict (skyrim: finishLoadedObjecthkpBreakableConstraintData)
 void FUN_00a08760(void* p)
 {
     P00a08760Flag flag;
@@ -2764,6 +2816,7 @@ struct FUN_00a08830 {
     int unk00;
     FUN_00a08830(P00a087f0Flag flag) throw();
 };
+// pdb: finishLoadedObjecthkpGroupFilter | hkpCollideReflections.obj | tesv_win, objrun_open, low
 void FUN_00a087f0(void* p)
 {
     P00a087f0Flag flag;
@@ -2782,6 +2835,7 @@ struct FUN_009e5f30 {
     int unk00;
     FUN_009e5f30(P00a08d60Flag flag) throw();
 };
+// pdb: finishLoadedObjecthkpCylinderShape | hkpCollideReflections.obj | tesv_win, caller_sim, low
 void FUN_00a08d60(void* p)
 {
     P00a08d60Flag flag;
@@ -2804,6 +2858,8 @@ struct Info {
     Vec4 a, b, c;
     Info& FUN_00a00c20(const Info& o);
 };
+// pdb: hkpVelocityAccumulator::hkpVelocityAccumulator | hkpBuildJacobianFromAtoms.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: __that
 Info& Info::FUN_00a00c20(const Info& o)
 {
     type = o.type;
@@ -2984,6 +3040,7 @@ public:
     f3m_00a07810::Array<void*> third;
 };
 
+// pdb: hkpConvexPieceStreamData::~hkpConvexPieceStreamData | hkpConvexPieceStreamDataClass.obj | fnv360_0822_retail, call_seq, high
 FUN_00a07810::~FUN_00a07810()
 {
 }
@@ -3007,6 +3064,7 @@ struct A0689Obj : A0689Base {
     A0689Obj(A0689Flag flag) throw() : unk20(flag) {}
     virtual ~A0689Obj();
 };
+// pdb: getVtablehkpSerializedAgentNnEntry | hkpSerializedAgentNnEntryClass.obj | fnv360_0822_retail, objopen_prop, low, conflict (skyrim: finishLoadedObjecthkpSerializedAgentNnEntry)
 void FUN_00a06890(void* p)
 {
     new (p) A0689Obj(A0689MakeFlag(1));
@@ -3149,6 +3207,7 @@ public:
 };
 }
 
+// pdb: hkpRemoveTerminalsMoppModifier::staticClass | hkpRemoveTerminalsMoppModifierClass.obj | fnv360_1110_retail, objrun, low
 void __cdecl FUN_00a08a60(void* p)
 {
     f3m_00a08a60::FinishFlag flag;
@@ -3487,6 +3546,7 @@ struct A0838Obj {
     A0838Array<int> unk2c;
     void FUN_00a08380();
 };
+// pdb: hkpLinearParametricCurve::~hkpLinearParametricCurve | hkpLinearParametricCurveClass.obj | fnv360_0822_retail, call_seq, high
 void A0838Obj::FUN_00a08380()
 {
     unk2c.Free();
@@ -3508,6 +3568,7 @@ struct Entry2370
     const void* embeddedVtable;
 };
 
+// pdb: finishLoadedObjecthkpTransformShape | hkpCollideReflections.obj | tesv_win, objrun_open, low
 Entry2370* __cdecl FUN_00a089b0(Entry2370* entry)
 {
     if (entry)
@@ -3593,6 +3654,7 @@ public:
 };
 
 
+// pdb: hkpBallGun::hkpBallGun | hkpBallGun.obj | tesv_win, objopen_prop, low
 FUN_00a06b80::FUN_00a06b80(int unused) {}
 
 }   // namespace f3m_00a06b80
@@ -3825,6 +3887,7 @@ struct FUN_00904560 {
     unsigned int unk188;
     FUN_00904560(FinishFlag) throw();
 };
+// pdb: hkpRigidBody::staticClass | hkpDynamicsReflections.obj | tesv_win, objopen_prop, low
 void __cdecl FUN_00a07f40(void* memory) {
     FinishFlag flag;
     new (memory) FUN_00904560(flag);
@@ -3843,6 +3906,7 @@ struct FinishingFlag {
 struct FUN_009ddec0 {
     FUN_009ddec0(FinishingFlag) throw();
 };
+// pdb: getVtablehkpGenericConstraintData | hkpGenericConstraintDataClass.obj | fnv360_0822_debug, caller_sim, low, conflict (skyrim: finishLoadedObjecthkpGenericConstraintData)
 void __cdecl FUN_00a08430(void* memory) {
     FinishingFlag flag;
     new (memory) FUN_009ddec0(flag);
@@ -3929,6 +3993,7 @@ struct Owner2377
     int FUN_00a09970();
 };
 
+// pdb: hkPointToPathConstraintCinfo::CreateData | bhkPointToPathConstraint.obj | fnv360_0721_beta, caller_sim, low
 int Owner2377::FUN_00a09970()
 {
     if (!payload)
@@ -3963,6 +4028,7 @@ const void* __cdecl FUN_00a07b60()
 extern int DAT_01268cbc;
 namespace f3m_00a06ec0 {
 
+// pdb: finishLoadedObjecthkpRotationalConstraintData | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void FUN_00a06ec0(void* apObject)
 {
     if (apObject)
@@ -4011,6 +4077,8 @@ struct FUN_00a09230 {
     unsigned short unkc4;
     FUN_00a09230* Assign(const FUN_00a09230& source);
 };
+// pdb: hkpLimitedHingeConstraintData::Atoms::operator= | hkpConstraintDataCloningUtil.obj | fnv360_0721_beta, call_gap, high
+// pdb params: __that
 FUN_00a09230* FUN_00a09230::Assign(const FUN_00a09230& source) {
     type = source.type;
     first.FUN_008fda60(source.first);
@@ -4094,6 +4162,7 @@ struct Pool { void FUN_008f6d90(void*, unsigned int, int); };
 extern unsigned long DAT_010f3170;
 extern "C" Pool* (__stdcall* const DAT_00d9b080)(unsigned long);
 void* __cdecl FUN_00a0a680(void*, unsigned int, unsigned int, Scratch*);
+// pdb: hkpConstraintSolverSetup::calcBufferSize | hkpConstraintSolverSetup.obj | tesv_win, callee_sim, low
 void* __cdecl FUN_00a0af50(void* input) {
     __declspec(align(16)) Scratch s;
     s.unk0C=1; s.unk10=1; s.unk14=0; s.unk18=0;
@@ -4132,6 +4201,7 @@ struct FUN_00a07570_obj {
     FUN_00a07570_obj* FUN_00a07570(unsigned int flags);
 };
 
+// pdb: hkpMultiRayShape::`scalar deleting destructor' | hkpMultiRayShapeClass.obj | fnv360_0721_beta, vtable_prefix, medium
 FUN_00a07570_obj* FUN_00a07570_obj::FUN_00a07570(unsigned int flags) {
     AllocFn07570 allocator = FUN_00d9b080;
 
@@ -4212,6 +4282,7 @@ struct Init8cc0 {
     Init8cc0* __thiscall FUN_00a45d60(Flag8cc0 flag);
 };
 
+// pdb: finishLoadedObjecthkpFastMeshShape | hkpCollidehkpMeshShapeReflections.obj | tesv_win, caller_sim, low
 void FUN_00a08cc0(Init8cc0* p)
 {
     if (!p)
@@ -4397,6 +4468,7 @@ static __forceinline void ReleaseA05810(KeyA05810* p)
     }
 }
 
+// pdb: _SharedShapeData::~_SharedShapeData | hkpTransformCollapseUtil.obj | fnv360_0822_retail, call_seq, medium
 void OwnerA05810::FUN_00a05810()
 {
     for (int i = 0; i < size; i++) {
@@ -4518,6 +4590,7 @@ struct A08f80 {
 
 extern void __cdecl FUN_00a77010();
 
+// pdb: hkpConvexPieceMeshShape::`scalar deleting destructor' | hkpConvexPieceMeshShapeClass.obj | fnv360_0822_retail, vtable_prefix, high
 A08f80* A08f80::FUN_00a08f80(unsigned char flag)
 {
     FUN_00a77010();
@@ -4576,6 +4649,7 @@ struct Object72f0 {
     int FUN_009e1680(int a_Arg);
 };
 
+// pdb: getVtablehkpBallSocketChainData | hkpBallSocketChainDataClass.obj | fnv360_0822_debug, caller_sim, low, conflict (skyrim: finishLoadedObjecthkpBallSocketChainData)
 int __cdecl FUN_00a072f0(Object72f0* a_pObject) {
     int bResult = 1;
     if (a_pObject)
@@ -4606,6 +4680,7 @@ struct PooledObject {
     PooledObject* FUN_00a084f0(int deleteFlag);
 };
 
+// pdb: hkpConstraintChainInstanceAction::~hkpConstraintChainInstanceAction | hkpConstraintChainInstance.obj | fnv360_0822_debug, objrun_open, low
 PooledObject* PooledObject::FUN_00a084f0(int deleteFlag)
 {
     m_ppVtbl = &FUN_00dcc494;
@@ -4643,6 +4718,7 @@ struct A08de0Object {
     unsigned int byteCapacity;  // +0x1c
 };
 
+// pdb: hkpConvexVerticesConnectivity::~hkpConvexVerticesConnectivity | hkpConvexVerticesConnectivityClass.obj | fnv360_0822_retail, call_seq, high
 void __fastcall FUN_00a08de0(A08de0Object* self)
 {
     if ((self->byteCapacity & 0x80000000u) == 0) {
@@ -4668,6 +4744,8 @@ struct FUN_00a029e0_Input {
     f3m_00a09ae0::CC63E0_Context** items;
 };
 
+// pdb: hkaKeyFrameHierarchyUtility::initialize | hkaKeyFrameHierarchyUtility.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: bodies, internalReferencePose
 void FUN_00a029e0(FUN_00a029e0_Input* in, float* out) {
     int i=0;
     if(in->count<=i) return;
@@ -4872,6 +4950,7 @@ struct Obj07430 {
 
 inline Sub07430* GetSub07430(Obj07430* owner) { return owner ? reinterpret_cast<Sub07430*>(&owner->vt10) : 0; }
 
+// pdb: hkpSimpleMeshShape::~hkpSimpleMeshShape | hkpSimpleMeshShapeClass.obj | fnv360_0822_retail, call_seq, high
 void Obj07430::FUN_00a07430()
 {
     void* (__stdcall* tls)(unsigned long) = DAT_00d9b080;
@@ -5145,6 +5224,8 @@ struct S00a05900_Decomposition
 	S00a05900_hkRotation m_basis;
 };
 
+// pdb: hkMathUtil::decompose4x4ColTransform | hkMathUtil.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: matrixIn, decompOut
 void FUN_00a05900(const hkReal* matrixIn, S00a05900_Decomposition& decomposition)
 {
 	const hkReal eps = 1.192092896e-07f;
@@ -5721,6 +5802,8 @@ struct Ctx
 
 SrcElem* hkRigidMotionUtilApplyForcesAndBuildAccumulators(void* owner, Item** items, unsigned int count, unsigned int bytes, SrcElem* cur);
 
+// pdb: hkpConstraintSolverSetup::initializeSolverState | hkpConstraintSolverSetup.obj | fnv360_0822_debug, objrun, low, conflict (skyrim: hkpConstraintSolverSetup::internalAddAccumulators)
+// pdb params: stepInfo, solverInfo, constraintQueryIn, buffer, bufferSize, s
 void FUN_00a0a770(Ctx* ctx, Item** items, unsigned int count)
 {
     if (count == 0)
@@ -5833,6 +5916,7 @@ struct Parameters
 };
 
 
+// pdb: updateSumVelocities | hkpSolver.obj | fnv360_0822_debug, objrun, medium
 static __declspec(noinline) void FUN_00a0b790(const Parameters* parameters, bool flag, const Vector* bias, const Vector* weights, State* state)
 {
     Vector first, second;
@@ -6383,6 +6467,8 @@ class hkpCharacterMovementUtil
 		};
 		static void __cdecl FUN_00a062a0(const hkpMovementUtilInput& input, hkVector4& velocityOut);
 };
+// pdb: hkpCharacterMovementUtil::calculateMovement | hkpCharacterMovementUtil.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: input, velocityOut
 void __cdecl hkpCharacterMovementUtil::FUN_00a062a0( const hkpMovementUtilInput& input, hkVector4& velocityOut )
 {
 	hkRotation surfaceFrame;
@@ -6812,6 +6898,8 @@ __forceinline void convertToUint16(const hkVector4& in, const hkVector4& offset,
 }
 }
 
+// pdb: hkpSampledHeightFieldShape::hkpSampledHeightFieldShape | hkpSampledHeightFieldShape.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: ci, hfType
 float __cdecl FUN_00a09ce0()
 {
     using namespace hkA09CE0;
@@ -6944,6 +7032,8 @@ struct FloatArray { float* data; FloatArray(float* p):data(p){} float& operator[
 
 static __forceinline void mulLanes(S0a0b990_Vec& v, const S0a0b990_Vec& m, float s) { v.x = m.x * s; v.y = m.y * s; v.z = m.z * s; v.w = m.w * s; }
 
+// pdb: hkSolver_solveStiffSpringChain | hkpSolver.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: hkSolver_solveBallAndSocketChain)
+// pdb params: info, temp, accums, chain, sr
 void FUN_00a0b990(S0a0b990_Info* info, void* unused, char* accums, S0a0b990_Chain* chain, float* impulses)
 {
     S0a0b990_Jac* jacs = chain->jacs;

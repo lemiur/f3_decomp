@@ -65,6 +65,7 @@ struct __declspec(align(16)) Delta48 {
     }
 };
 
+// pdb: hkpWingedEdge::addTetrahedron | hkpWingedEdge.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: hkWingedEdge::addTetrahedron)
 void Hull::FUN_00e2d440() {
     faceCount = 4;
     const InitEntry* init = (const InitEntry*)0x00e88e68;

@@ -151,6 +151,8 @@ struct S00a35270_hkpGskBaseAgent
     S00a35270_hkBool FUN_00a35270(const S00a35270_hkCdBody& bodyA, const S00a35270_hkCdBody& bodyB, const S00a35270_hkpCollisionInput& input, S00a35270_hkpExtendedGskOut& output);
 };
 
+// pdb: hkpGskBaseAgent::getClosestPoint | hkpGskBaseAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: bodyA, bodyB, input, output
 S00a35270_hkBool S00a35270_hkpGskBaseAgent::FUN_00a35270(const S00a35270_hkCdBody& bodyA, const S00a35270_hkCdBody& bodyB, const S00a35270_hkpCollisionInput& input, S00a35270_hkpExtendedGskOut& output)
 {
     const S00a35270_hkpConvexShape* shapeA = bodyA.m_shape;
@@ -750,6 +752,8 @@ struct S00a2f9e0_ClosestLineSegLineSegResult
 
 int FUN_0096f780(const S00a2f9e0_hkVector4& A, const S00a2f9e0_hkVector4& dA, const S00a2f9e0_hkVector4& B, const S00a2f9e0_hkVector4& dB, S00a2f9e0_ClosestLineSegLineSegResult& result);
 
+// pdb: hkGskRecalcContactInternal | hkpGsk.obj | fnv360_0822_debug, objrun_prop, low
+// pdb params: verticesA, verticesB, dimA, dimB, masterNormal, pointA, support
 void __cdecl FUN_00a2f9e0(const S00a2f9e0_hkVector4* verticesA, const S00a2f9e0_hkVector4* verticesB, int dimA, int dimB,
                           const S00a2f9e0_hkVector4& lastNormal, S00a2f9e0_hkVector4& pointOut, S00a2f9e0_hkVector4& normalOut)
 {
@@ -3569,6 +3573,8 @@ __forceinline hkBool hkJobQueue::allQueuesEmpty( DynamicData* data )
 	return numJobs == 0;
 }
 
+// pdb: hkJobQueue::finishJobAndGetNextJob | hkJobQueue.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: oldJob, jobOut, waitStatus
 hkJobQueue::JobStatus hkJobQueue::FUN_00a21830( ThreadType threadType, const JobQueueEntry* oldJob, JobQueueEntry& jobOut, void* params, WaitStatus waitStatus )
 {
 	// HK_TIME_CODE_BLOCK( "GetNextJob", HK_NULL ): HK_TIMER_BEGIN, then a helper whose destructor ends the timer
@@ -5417,6 +5423,8 @@ void __cdecl hkBoxBoxUtils::rsqrtAll3( hkVector4& v )
 	v(3) = 0.0f;
 }
 
+// pdb: hkpBoxBoxCollisionDetection::checkIntersection | hkpBoxBoxCollisionDetection.obj | fnv360_0822_retail, objrun, medium
+// pdb params: tolerance
 hkResult hkpBoxBoxCollisionDetection::FUN_00a3bc00( const hkVector4& tolerance ) const
 {
 	const hkReal HK_EDGE_IGNORE_TOLERANCE = 1.0f / 0.001f;
@@ -6334,6 +6342,8 @@ __forceinline void hkGskManifold_moveVertexIds( const hkpGskManifold& manifold, 
 	}
 }
 
+// pdb: hk4dGskCollideCalcToi | hkpContinuousGsk.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: hkGskManifold_verifyAndGetPoints)
+// pdb params: in3, allowedPenetrationDepth, minSeparation, toiSeparation, gskCache, separatingNormal, out
 void FUN_00a38200( hkpGskManifold& manifold, const hkpGskManifoldWork& work, int firstPointIndex, hkpProcessCollisionOutput& processOut, hkpContactMgr* contactMgr )
 {
 	unsigned int oldNumVertices = manifold.m_numContactPoints;
@@ -7262,6 +7272,8 @@ hkResult hkpBoxBoxCollisionDetection::addPoint( hkpBoxBoxManifold& manifold, con
 	return HK_SUCCESS;
 }
 
+// pdb: hkpBoxBoxCollisionDetection::addAdditionalEdgeHelper | hkpBoxBoxCollisionDetection.obj | fnv360_0822_retail, objrun, medium
+// pdb params: manifold, fcp, closestPointDist
 void hkpBoxBoxCollisionDetection::FUN_00a3d0e0( hkpBoxBoxManifold& manifold, hkpFeatureContactPoint& fcp, hkReal closestPointDist ) const
 {
 	if ( !manifold.findInManifold( fcp ) )

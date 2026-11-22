@@ -12,6 +12,7 @@ public:
 };
 
 // @fnv 0x00d1ff10
+// pdb: hkpTriangleShape::getNumCollisionSpheresImpl | hkpTriangleShape.obj | fnv360_0822_retail, objrun_open, low
 int FUN_00d1ff10_cls::FUN_00d1ff10()
 {
     return (m_ucWeldingPadding + 1) * 3;
@@ -19,6 +20,7 @@ int FUN_00d1ff10_cls::FUN_00d1ff10()
 
 // edge is a triangle edge index (0, 1, or 2).
 // @fnv 0x00d1fef0
+// pdb: getSingleEdgeBitcode | hkpTriangleShape.obj | fnv360_0822_retail, objrun_open, low
 static __declspec(noinline) int __cdecl FUN_00d1fef0(unsigned short weldingInfo, int edge)
 {
     char shift = edge * 5;

@@ -161,6 +161,8 @@ struct S_5fcac0
     void PathingLocation_SetupData(unsigned short, int, int);
 };
 
+// pdb: PathingLocation::PathingLocation | PathingLocation.obj | fnv360_0822_debug, objrun, medium
+// pdb params: aLocation, apCell
 int S006997b0::FUN_006997b0(unsigned short a, int b)
 {
     *(void**)this = (void*)&DAT_00dc4dc0;

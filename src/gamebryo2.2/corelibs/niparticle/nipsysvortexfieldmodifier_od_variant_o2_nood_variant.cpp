@@ -168,6 +168,8 @@ struct TFieldModifier
 };
 
 // @fnv 0x00c26de0
+// pdb: NiPSysVortexFieldModifier::Update | NiPSysVortexFieldModifier.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fTime, pkData
 void TFieldModifier::FUN_00c26de0(float fTime, TPSysData* pkData)
 {
     if (m_fInfluence == 0.0f)

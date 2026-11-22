@@ -3,6 +3,8 @@
 #include "nilines_decls.h"
 // Sets the geometry data on dest from model, then calls NiAVObject::FUN_00a5ac90 with dest and process.
 // @fnv 0x00a80400
+// pdb: NiGeometry::CopyMembers | NiGeometry.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pkDest, kCloning
 void NiLines::CopyMemberData(NiLines* dest, CloningProcess& process)
 {
     dest->SetGeometryData(model);
@@ -25,6 +27,7 @@ struct NiRenderer
 typedef void(__thiscall* RendererFn)(NiRenderer*, NiLinesSelf*);
 // Calls self's render method, then if the renderer's mode is 1 or 2 and its flag is set, invokes the renderer's virtual function at offset 0x1c4.
 // @fnv 0x00a747a0
+// pdb: NiLines::`scalar deleting destructor' | NiLines.obj | fnv360_0721_beta, objrun, medium
 void __fastcall FUN_00a747a0(NiLinesSelf* self, int, NiRenderer* apkRenderer)
 {
     self->FUN_00a80610(apkRenderer);
@@ -53,6 +56,8 @@ extern GlobalObjectO2_00a7b610* g_011f4a48;
 void __stdcall FUN_00a80e70(NiCombatArray*);
 ActorCombatGroup* __cdecl FUN_00a7d330(GlobalObjectO2_00a7b610*);
 // @fnv 0x00a74830
+// pdb: NiLightColorController::GetViewerStrings | NiLightColorController.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: pkStrings
 void __stdcall FUN_00a74830(NiCombatArray* pkStrings)
 {
     FUN_00a80e70(pkStrings);
@@ -161,6 +166,8 @@ struct FUN_00a9b190 : FUN_00a80430_Holder
     bool FUN_00a9b190_Impl(NiStream&);
 };
 // @fnv 0x00a9b190
+// pdb: ContinuousBeamProjectile::Revert | ContinuousBeamProjectile.obj | fnv360_0822_retail, vtable, low
+// pdb params: apLoadGameBuffer
 bool FUN_00a9b190::FUN_00a9b190_Impl(NiStream& s)
 {
     return FUN_00a80430_Holder::FUN_00a80430(s);
@@ -168,6 +175,8 @@ bool FUN_00a9b190::FUN_00a9b190_Impl(NiStream& s)
 
 void FUN_00a80db0();
 // @fnv 0x00a9b1a0
+// pdb: TESForm::AddChunkArray | TESForm.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeChunkID, apData, aiSize
 void __cdecl FUN_00a9b1a0()
 {
     FUN_00a80db0();
@@ -208,6 +217,8 @@ struct LinesCloneSource : NiLines
 
 // Allocates a LinesCloneObject, calls FUN_00a80400 with it and process, and returns it as NiLines.
 // @fnv 0x00a747e0
+// pdb: NiLines::CreateClone | NiLines.obj | fnv360_0721_beta, objrun, medium
+// pdb params: kCloning
 NiLines* LinesCloneSource::FUN_00a747e0(CloningProcess& process)
 {
     NiLines* result = new LinesCloneObject;

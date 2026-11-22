@@ -373,6 +373,7 @@ class __declspec(align(16)) S00d4b1a0_Object
 
 // Havok getVtable helper: build the object with the finish-loading flag and read its vtable pointer.
 // @fnv 0x00d4b1a0
+// pdb: hkpStorageMeshShape::staticClass | hkpStorageMeshShapeClass.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: getVtablehkpStorageMeshShape)
 const void* __cdecl FUN_00d4b1a0()
 {
     FinishingFlag flag;
@@ -405,6 +406,8 @@ struct __declspec(align(16)) S_00d49c40
 };
 
 // @fnv 0x00d4b200
+// pdb: hkpStiffSpringChainData::hkpStiffSpringChainData | hkpStiffSpringChainData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: getVtablehkpStiffSpringChainData)
+// pdb params: f
 int FUN_00d4b200()
 {
     S_00d49c40 obj;
@@ -525,6 +528,8 @@ class __declspec(align(16)) S00d4be60_Object
 };
 
 // @fnv 0x00d4be60
+// pdb: hkpStorageExtendedMeshShape::MeshSubpartStorage::operator delete | hkpStorageExtendedMeshShape.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: getVtablehkpStorageExtendedMeshShapeMeshSubpartStorage)
+// pdb params: p
 const void* __cdecl FUN_00d4be60()
 {
     FinishingFlag flag;
@@ -576,6 +581,7 @@ class __declspec(align(16)) S00d4bec0_Object
 
 // Havok getVtable helper: build the object with the finish-loading flag and read its vtable pointer.
 // @fnv 0x00d4bec0
+// pdb: getVtablehkpListShape | hkpCollideReflections.obj | tesv_win, objrun_prop, low
 const void* __cdecl FUN_00d4bec0()
 {
     FinishingFlag flag;
@@ -623,6 +629,7 @@ class __declspec(align(16)) S00d4bf40_Object
 
 // Havok getVtable helper: build the object with the finish-loading flag and read its vtable pointer.
 // @fnv 0x00d4bf40
+// pdb: hkpMeshShape::staticClass | hkpMeshShapeClass.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: getVtablehkpMeshShape)
 const void* __cdecl FUN_00d4bf40()
 {
     FinishingFlag flag;

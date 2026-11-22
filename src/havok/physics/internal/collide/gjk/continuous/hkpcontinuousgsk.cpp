@@ -254,6 +254,7 @@ struct MyOut {
 extern int DAT_010f3170;
 extern "C" void* (__stdcall* const DAT_00fdf044)(unsigned long);
 
+// pdb: hk4dGskCollPInputInitialize | hkpContinuousGsk.obj | tesv_win, objrun, medium
 static __declspec(noinline) void FUN_00db53f0(In* in, Out* out)
 {
     ns_00a42140::MyIn* mi = (ns_00a42140::MyIn*)in;

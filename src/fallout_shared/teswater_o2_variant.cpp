@@ -194,6 +194,8 @@ class B9F30Owner
 };
 
 // @fnv 0x00b69f30
+// pdb: WaterShaderProperty::GetWaterPass | WaterShaderProperty.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apGeometry
 B9F30Property* B9F30Owner::FUN_00b69f30(B9F30Geometry* pkGeometry)
 {
     if (!m_pkProperty)

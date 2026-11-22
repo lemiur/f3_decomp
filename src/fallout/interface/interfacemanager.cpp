@@ -161,6 +161,8 @@ struct S4
 };
 // Calls FUN_004ebbc0 with 0xf and a, then calls SetByteAtOffset60 on the returned object.
 // @f3 0x00637810 (community match, verified in this file)
+// pdb: NiTPointerListBase<NiTPointerAllocator<unsigned int>,unsigned int>::AddHead | HackingMenu.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: element
 S4* S4::FUN_007123a0(unsigned int value)              // ORIG entry at 0x00637810, twenty-eight bytes ✓⚠',
 {                                                           //     their unit declares TWO overloads of this ⚗✓',
     FUN_004019c0(value, 0);                            //     name - mine is the unsigned int one at line ✗⚠',

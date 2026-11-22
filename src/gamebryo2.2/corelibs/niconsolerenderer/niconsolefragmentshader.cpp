@@ -83,6 +83,8 @@ struct NiTPointerListBase_00e8b5f0
 
 // Allocates a node from the pool at this+8, links it before the current head, updates the tail when the list was empty, increments the count and returns the node.
 // @fnv 0x00e8b5f0
+// pdb: NiTPointerListBase<NiTPointerAllocator<unsigned int>,unsigned int>::AddHead | HackingMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: element
 void* __thiscall NiTPointerListBase_00e8b5f0::InsertHead(void* arg)
 {
     NodePoolView* pool = (NodePoolView*)((char*)this + 8);
@@ -106,6 +108,8 @@ void* __thiscall NiTPointerListBase_00e8b5f0::InsertHead(void* arg)
 
 void __cdecl FUN_00e81470();
 // @fnv 0x00e8d340
+// pdb: bhkBallAndSocketConstraint::LoadBinary | bhkBallAndSocketConstraint.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: arStream
 void __cdecl FUN_00e8d340()
 {
     return FUN_00e81470();
@@ -127,6 +131,8 @@ struct NiConsoleShaderDeclaration_shellEx
 };
 
 // @fnv 0x00e8d410
+// pdb: NiXenonFragmentShader::CreateShaderDeclaration | NiXenonFragmentShader.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: uiMaxStreamEntryCount, uiStreamCount
 NiD3DVertexDeclaration* __thiscall NiConsoleShaderDeclaration_shellEx::FUN_00e8d410(unsigned int a, unsigned int b)
 {
     NiD3DVertexDeclaration* p = NiD3DVertexDeclaration::Create(NiRenderer::ms_pRenderer, a, b);
@@ -241,6 +247,7 @@ struct S_00e8d590_Obj
 };
 void __cdecl FUN_00e804d0(S_00e8d590_Obj** out);
 // @fnv 0x00e8d590
+// pdb: SpeedTreeBranchShader::LoadStagesAndPasses | SpeedTreeBranchShader_Preset.obj | fnv360_0721_beta, objrun_prop, low
 bool __stdcall FUN_00e8d590(int* out)
 {
     S_00e8d590_Obj* obj = 0;
@@ -300,6 +307,8 @@ struct FieldsMid_e8db90
 
 void __cdecl FUN_00e811d0();
 // @fnv 0x00e8d2e0
+// pdb: bhkCharacterProxy::IsEqual | bhkCharacterProxy.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: apObject
 void __cdecl FUN_00e8d2e0()
 {
     FUN_00e811d0();
@@ -308,6 +317,8 @@ void __cdecl FUN_00e8d2e0()
 extern int __cdecl PrepareShaderAndStreams();
 
 // @fnv 0x00e8d2f0
+// pdb: bhkOrientHingedBodyAction::CopyMembers | bhkOrientHingedBodyAction.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: apDest, arCloneData
 int __cdecl FUN_00e8d2f0()
 {
     return PrepareShaderAndStreams();
@@ -315,6 +326,8 @@ int __cdecl FUN_00e8d2f0()
 
 extern "C" void __cdecl FUN_00a8f3f0();
 // @fnv 0x00e8d300
+// pdb: bhkRagdollTemplate::CopyMembers | bhkRagdollTemplate.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pDest, arCloneData
 void __cdecl FUN_00e8d300()
 {
     FUN_00a8f3f0();
@@ -396,6 +409,8 @@ extern void* g_pD3DRenderer;
 
 // Returns the pass's vertex or pixel constant map for shader type 0, creating and registering it if absent.
 // @fnv 0x00e8dca0
+// pdb: NiXenonFragmentShader::CreateShaderConstantMap | NiXenonFragmentShader.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: uiPassId, uiProgramId
 NiD3DShaderConstantMap* __stdcall GetOrCreateShaderConstantMap(unsigned int auiShaderType, int eMapType)
 {
     if (auiShaderType >= 1)
@@ -470,6 +485,8 @@ BloodMap* __stdcall FUN_00e7f5d0(void);
 
 // Sets blood splatter node values and passes indexed array values to the view; returns false for an unsupported type or missing view.
 // @fnv 0x00e8d450
+// pdb: NiXenonFragmentShader::SetAlphaOverride | NiXenonFragmentShader.obj | fnv360_0822_retail, caller_sim, low, conflict (bridge: NiD3DDefaultShader::OpenNewPass)
+// pdb params: uiPassId, bAlphaBlend, bUsePreviousSrcBlendMode, eSrcBlendMode, bUsePreviousDestBlendMode, eDestBlendMode
 bool __stdcall SetBloodSplatter(unsigned int auiShaderType, bool abEnabled, bool bParam3, int aiIndex, bool bParam5,
                                 int aiSecondIndex)
 {
@@ -711,6 +728,7 @@ struct ShaderView : ShaderBaseView
 
 // Iterates the global list, calls BindShaderInput for nonnull entries, then invokes the base class routine.
 // @fnv 0x00e8dc30
+// pdb: NiFragmentShaderInstanceDescriptor::`scalar deleting destructor' | NiXenonFragmentShader.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void ShaderView::FUN_00e8dc30(void* a, void* b, void* c, ShaderGeometry* geometry, void* e, void* f, void* g)
 {
     ShaderConstantList* pConstantList = reinterpret_cast<ShaderConstantList*>(DAT_0126f74c);

@@ -40,6 +40,8 @@ struct ParticleOwner
 };
 // Allocates a 0x110-byte ParticleSystem, initialises it and its vtable, passes it to FUN_00c1b6f0 with flags, and returns it.
 // @fnv 0x00c257d0
+// pdb: BSStripParticleSystem::CreateClone | BSStripParticleSystem.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: kCloning
 ParticleSystem* ParticleOwner::CreateParticleSystem(unsigned int flags)
 {
     ParticleSystem* object = static_cast<ParticleSystem*>(FUN_00aa13e0(0x110));
@@ -84,6 +86,8 @@ void __thiscall FUN_00c256f0_cls::FUN_00c256f0(NiCullingProcess& a)
 
 void __cdecl FUN_00c1b3a0();
 // @fnv 0x00c25700
+// pdb: NiParticleMeshes::LoadBinary | NiParticleMeshes.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void __cdecl FUN_00c25700()
 {
     FUN_00c1b3a0();
@@ -91,6 +95,8 @@ void __cdecl FUN_00c25700()
 
 extern "C" void __cdecl LoadModifiers();
 // @fnv 0x00c25710
+// pdb: NiParticleMeshes::SaveBinary | NiParticleMeshes.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void __cdecl FUN_00c25710()
 {
     LoadModifiers();
@@ -98,6 +104,8 @@ void __cdecl FUN_00c25710()
 
 void __cdecl FUN_00c1b400();
 // @fnv 0x00c25720
+// pdb: NiParticleMeshes::IsEqual | NiParticleMeshes.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pkObject
 void __cdecl FUN_00c25720()
 {
     FUN_00c1b400();

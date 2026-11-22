@@ -147,6 +147,7 @@ Entry* entries;
 unsigned count;
 void FUN_007a6880();
 };
+// pdb: CombatGroupData::SortRangedMembers | CombatGroupStrategy.obj | fnv360_0822_retail, call_seq, medium
 void Owner::FUN_007a6880() {
 unsigned n=count;
 Vec* points=(Vec*)_alloca(n*sizeof(Vec));
@@ -658,6 +659,7 @@ FNV_STATIC_ASSERT(offsetof(Proj, editorName) == 0x34);
 FNV_STATIC_ASSERT(offsetof(Proj, gridPosition) == 0x74);
 FNV_STATIC_ASSERT(offsetof(Obj, unk1e) == 0x1e);
 FNV_STATIC_ASSERT(offsetof(Obj, children) == 0xa0);
+// pdb: Explosion::Init3D | Explosion.obj | fnv360_0822_retail, ustr, medium
 void Explosion::FUN_007be880()
 {
     GenerateNiNode(false);
@@ -1816,6 +1818,7 @@ class Obj
     }
 };
 
+// pdb: Explosion::ApplyImpactDecals | Explosion.obj | fnv360_0822_retail, call_seq, medium
 void Obj::FUN_007bfe30()
 {
     if (unk98 == 0)

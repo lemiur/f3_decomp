@@ -26,6 +26,7 @@ struct FUN_00cbd4e0_shell
 };
 
 // @fnv 0x00cbd4e0
+// pdb: ExtraLastFinishedSequence::`scalar deleting destructor' | ExtraDataObjects.obj | fnv360_0822_debug, vtable, high
 void* FUN_00cbd4e0_shell::FUN_00cbd4e0(unsigned char flag)
 {
     FUN_00cbc740();
@@ -182,6 +183,8 @@ struct MemoryManagerGlobal
 };
 extern MemoryManagerGlobal DAT_01090a78;
 
+// pdb: bhkLiquidAction::CreateCinfo | bhkLiquidAction.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCreated
 SmallAlignedState* StateOwner::FUN_00cbcad0(bool* created)
 {
     if (unk0c == 0)

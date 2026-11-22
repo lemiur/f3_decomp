@@ -12,6 +12,7 @@ class hkpShapeCollection_L
 };
 
 // @fnv 0x00d213d0
+// pdb: hkpShapeCollection::getContainer | hkpShapeCollection.obj | fnv360_0822_retail, objrun_open, low
 int hkpShapeCollection_L::FUN_00d213d0()
 {
     if (this != 0)
@@ -27,6 +28,8 @@ void __stdcall hkpMoppShapeMediator_setSplittingPlaneDirections(int, int)
 {}
 
 // @fnv 0x00d21400
+// pdb: hkpExtendedMeshShape::assertShapesSubpartValidity | hkpExtendedMeshShape.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: part
 void __stdcall FUN_00d21400(int a1)
 {}
 

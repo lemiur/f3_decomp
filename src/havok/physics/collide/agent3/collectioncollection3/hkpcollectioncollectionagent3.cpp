@@ -49,6 +49,8 @@ void __cdecl hkAgent1nMachine_WarpTime(void*, float, float, void*);
 
 // Calls hkAgent1nMachine_WarpTime with b, c, d and e, ignoring a.
 // @fnv 0x00d34d80
+// pdb: hkListAgent3::warpTime | hkpListAgent3.obj | fnv360_0822_retail, objrun, medium
+// pdb params: entry, agentData, oldTime, newTime, input
 void __cdecl FUN_00d34d80(void* apUnused, void* b, float afValue1, float afValue2, void* e)
 {
     hkAgent1nMachine_WarpTime(b, afValue1, afValue2, e);
@@ -76,6 +78,7 @@ struct D362Script {
     void AddEntry(D36270Data*, int row, int column);
 };
 // @f3 0x009d1070 (community match, verified in this file)
+// pdb: hkpCollectionCollectionAgent3::registerAgent3 | hkpCollectionCollectionAgent3.obj | tesv_win, caller_sim, low
 void FUN_00d362c0(D362Script* script)
 {
     D36270Data data;
@@ -133,6 +136,7 @@ struct Local7 {
     void* f0; void* f1; void* f2; void* f3; void* f4; void* f5; void* f6; void* f7;
 };
 extern "C" void __cdecl FUN_00da4900(void*, void*);
+// pdb: hkpCollectionCollectionAgent3::updateFilter | hkpCollectionCollectionAgent3.obj | tesv_win, caller_sim, low
 void __cdecl FUN_00d34db0(void* apUnused, void* a2, void* apFirstObj, void* apSecondObj, void* a5, void* a6, void* a7)
 {
     Local7 s;
@@ -350,6 +354,8 @@ __forceinline void hkSwap(T& x, T& y)
 
 // Sorts pArr[d..h] in place with quicksort, using the middle element as pivot and the cmpLess comparator.
 // @fnv 0x00d36360
+// pdb: hkAlgorithm::quickSortRecursive<hk1AxisSweep::AabbInt,hkAlgorithm::less<hk1AxisSweep::AabbInt> > | hkpCollectionCollectionAgent3.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: pArr, d, h, cmpLess
 void __cdecl FUN_00d36360(SortEntry* pArr, int aiLow, int aiHigh, SortEntryLess cmpLess)
 {
     int i, j;

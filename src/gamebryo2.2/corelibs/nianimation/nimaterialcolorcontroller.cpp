@@ -32,6 +32,8 @@ char* __cdecl FUN_00a7d330(char const*);
 
 // Appends the string returned by FUN_00a7d330(g_011f3f88.m_str) to pkStrings, growing it when the length reaches the count.
 // @fnv 0x00a4b880
+// pdb: NiParticleMeshes::GetViewerStrings | NiParticleMeshes.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkStrings
 void __stdcall FUN_00a4b880(StrArr* pkStrings)
 {
     FUN_00a57d10(pkStrings);
@@ -49,6 +51,7 @@ void __stdcall FUN_00a4b880(StrArr* pkStrings)
 extern "C" void* g_01201f74;
 
 // @fnv 0x00bc29d0
+// pdb: NiInterpController::GetRTTI | NiInterpController.obj | fnv360_0822_retail, objrun_open, low
 void* __cdecl FUN_00bc29d0()
 {
     return &g_01201f74;
@@ -161,6 +164,7 @@ struct ColorControllerView8c5410
 };
 }
 
+// pdb: NiMaterialColorController::GetCtlrID | NiMaterialColorController.obj | fnv360_0822_retail, ustr, medium
 const char* NiMaterialColorController::GetChannelName()
 {
     unsigned char flags = reinterpret_cast<f3m_008c5410::ColorControllerView8c5410*>(this)->channelFlags;
@@ -284,6 +288,8 @@ struct NiMaterialColorController
 
 // Returns true if pkObject passes FUN_00a57c10 and its mFlags[0x38] low 3 bits match this object's mFlags[0x38] low 3 bits.
 // @fnv 0x00a4b540
+// pdb: NiMaterialColorController::IsEqual | NiMaterialColorController.obj | fnv360_0822_retail, objrun, low
+// pdb params: pkObject
 bool __thiscall NiMaterialColorController::FUN_00a4b540(NiObject* pkObject)
 {
     if (!FUN_00a57c10(pkObject))
@@ -446,6 +452,8 @@ class NiMaterialColorControllerA4B5
 
 // Sets controller time for manager-controlled updates, then may evaluate the interpolator and update a material color channel.
 // @f3 0x008c5520 (community match, verified in this file)
+// pdb: NiMaterialColorController::Update | NiMaterialColorController.obj | fnv360_0721_retail, objrun, medium
+// pdb params: UpdateData
 void NiMaterialColorControllerA4B5::FUN_00a4b580(NiUpdateDataA4B5& kUpdateData)
 {
     if (GetManagerControlled())
@@ -537,6 +545,8 @@ struct S0082b560_Stream
 };
 void __stdcall FUN_008d1870(NiStream*);
 typedef unsigned int (__cdecl* ReadProcRef)(StreamRecord*, void*, unsigned int, const unsigned int&, unsigned int);
+// pdb: NiMaterialColorController::LoadBinary | NiMaterialColorController.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: kStream
 void Stand840::Load(NiStream* stream)
 {
     FUN_008d1870(stream);
@@ -572,6 +582,7 @@ struct FUN_00bc2980 : NiNode
 };
 // Constructs a NiNode-derived object, sets m_b4 to 100.0f, m_b0 to DAT_010ba600, m_ad and m_ac to 0, and sets the vtable pointer to DAT_010ba608.
 // @fnv 0x00bc2980
+// pdb: BSClearZNode::BSClearZNode | BSClearZNode.obj | fnv360_0822_retail, call_gap_sim, high
 FUN_00bc2980::FUN_00bc2980() : NiNode(0)
 {
     m_b4 = 100.0f;
@@ -584,6 +595,8 @@ FUN_00bc2980::FUN_00bc2980() : NiNode(0)
 void __cdecl FUN_00a5ea70();
 
 // @fnv 0x00bc29c0
+// pdb: BSStripPSysData::RegisterStreamables | BSStripPSysData.obj | fnv360_0721_retail, objrun_prop, high
+// pdb params: kStream
 void __cdecl FUN_00bc29c0()
 {
     FUN_00a5ea70();
@@ -603,6 +616,7 @@ extern void* DAT_010ba608;
 
 // Initializes NiMaterialColorController fields, calls FUN_00a5e930, and optionally calls __Dummy_00b6fef0 if arg bit 0 is set.
 // @fnv 0x00bc29e0
+// pdb: BSClearZNode::`scalar deleting destructor' | BSClearZNode.obj | fnv360_0822_retail, objrun, medium
 NiMaterialColorController* __thiscall NiMaterialColorController::FUN_00bc29e0(int aiFlags)
 {
     ((float*)this)[0x2d] = 100.0f;

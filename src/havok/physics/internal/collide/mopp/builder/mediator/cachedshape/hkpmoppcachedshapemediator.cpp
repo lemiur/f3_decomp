@@ -3,6 +3,8 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 // @fnv 0x00dd55d0
+// pdb: hkpMoppCachedShapeMediator::getPrimitiveProperties | hkpMoppCachedShapeMediator.obj | fnv360_0822_retail, vtable, high
+// pdb params: primitiveIn, cid
 int __stdcall InitIntToZero(int, int* piValue)
 {
     *piValue = 0;
@@ -11,6 +13,8 @@ int __stdcall InitIntToZero(int, int* piValue)
 
 // Copies five pointer-sized values from src to dst at offsets 0, 4, 8, 0xc and 0x10.
 // @fnv 0x00dd5630
+// pdb: hkpMoppCachedShapeMediator::splitPrimitive | hkpMoppCachedShapeMediator.obj | fnv360_0822_retail, vtable, high
+// pdb params: primitiveIn, direction, planeOffset, depth, primitiveOut
 void __stdcall CopyFivePointers(const void* apSource, void* apUnused1, void* apUnused2, void* apUnused3, void* apDest)
 {
     *(void**)apDest = *(void**)apSource;
@@ -209,6 +213,8 @@ class FUN_00dd5cd0_cls
 // Iterates count items from m_pMgr starting at m, calling ComputeAxisRanges on each item whose v14() is nonzero, advancing m via v0c.
 // @f3 0x00a55900 (community match, verified in this file)
 struct Item463 { unsigned int unk00,unk04,unk08; int kind; };
+// pdb: hkpMoppCachedShapeMediator::setSplittingPlaneDirections | hkpMoppCachedShapeMediator.obj | fnv360_0822_retail, vtable, high
+// pdb params: directions, numDirections
 void FUN_00dd5cd0_cls::ProcessItems(int first,int second) {
     __declspec(align(16)) int slots[127];
     int count=m_pMgr->v04();
@@ -268,6 +274,8 @@ class hkpMoppCachedShapeMediator : public DD5D50ReferencedObject // src: F3_EXE 
 };
 
 // @fnv 0x00dd5d50
+// pdb: hkpMoppCachedShapeMediator::hkpMoppCachedShapeMediator | hkpMoppCachedShapeMediator.obj | fnv360_0822_retail, call_seq, high
+// pdb params: shapeArray
 hkpMoppCachedShapeMediator::hkpMoppCachedShapeMediator(DD5D50Source* source) : m_pObservedSource(source)
 {
     m_uiItemCount = source->getCount();

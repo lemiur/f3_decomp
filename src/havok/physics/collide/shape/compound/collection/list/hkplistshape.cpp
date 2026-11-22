@@ -9,6 +9,8 @@ struct hkPListShape
     void __thiscall SetChildShape(int index, void* shape);
 };
 // @fnv 0x00cf50a0
+// pdb: hkpListShape::setCollisionFilterInfo | hkpListShape.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: index, filterInfo
 void __thiscall hkPListShape::SetChildShape(int index, void* shape)
 {
     *(void**)((char*)*(int*)((char*)this + 0x18) + (index << 4) + 4) = shape;
@@ -20,6 +22,8 @@ struct FUN_00cf5070_class
 };
 
 // @fnv 0x00cf5070
+// pdb: hkpListShape::getCollisionFilterInfo | hkpListShape.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkpListShape::getChildShape)
+// pdb params: key
 void* FUN_00cf5070_class::GetShapeAt(int index, void* buffer)
 {
     void** shapes = *(void***)((char*)this + 8);
@@ -32,6 +36,7 @@ struct hkPListShape2
 };
 
 // @fnv 0x00cf5080
+// pdb: hkpListShape::getCollisionFilterInfo | hkpListShape.obj | tesv_win, objrun_open, low
 int hkPListShape2::GetElementAt(int index)
 {
     return *(int*)(*(int*)((char*)this + 8) + (index << 4) + 4);
@@ -139,6 +144,8 @@ class Collector {
 };
 }
 
+// pdb: hkpListShape::getAabbImpl | hkpListShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: localToWorld, tolerance, out
 void hkObjCF54::AddChildObjectsToCollector(hkStatisticsCollectorCF54* pkCollector) const throw()
 {
     n97da20::Collector* c = (n97da20::Collector*)pkCollector;
@@ -249,6 +256,7 @@ struct Triple {unsigned unk00,unk04,unk08,unk0c;Object* first;Object* second;Obj
 struct Node {Triple* item;Node* next;};
 extern Node DAT_01075804;
 }
+// pdb: BGSTerrainChunk::ResetMultiBoundResults | BGSTerrainChunk.obj | fnv360_0822_retail, call_seq, low
 void __cdecl FUN_006139a0(){
  using namespace Clear98;
  for(Node* node=&DAT_01075804;node;node=node->next){
@@ -624,6 +632,8 @@ struct S00cf5140_ContainerVtbl
     virtual unsigned int isChildEnabled(unsigned int index) const;
 };
 
+// pdb: hkpListShape::castRayWithCollectorImpl | hkpListShape.obj | fnv360_0822_retail, objrun, low
+// pdb params: input, cdBody, collector
 S00cf5140_Bool S00cf5140_Obj::FUN_00cf5140(const S00cf5140_Input& input, S00cf5140_Output& results) const
 {
     ((S00cf5140_Stream*)TlsGetValue(DAT_0126835c))->timerBegin("TtrcList");

@@ -504,6 +504,7 @@ extern int (__stdcall* DAT_01169374)(void*, unsigned __int64, unsigned int*, Sou
 extern void* (__stdcall* DAT_00d9b258)();
 extern int __cdecl FUN_00c04534(char*,unsigned int,const char*,...);
 
+// pdb: hkStackTracer::dumpStackTrace | hkStackTracer.obj | tesv_win, callee_sim, low
 void StackTracer::FUN_00da2990(unsigned int* addresses,int count,void(__cdecl* output)(const char*,void*),void* context)
 
 {

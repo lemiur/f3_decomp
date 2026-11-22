@@ -564,6 +564,8 @@ struct __declspec(align(16)) FUN_00900d70
     }
 };
 
+// pdb: NiPointer<bhkRigidBody>::operator= | TESLand.obj | fnv360_0721_beta, call_dedup, low
+// pdb params: pObject
 NiNode* __cdecl FUN_00c81380(float a, float b)
 {
     NiNode* result = 0;

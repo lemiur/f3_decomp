@@ -23,6 +23,8 @@ struct FUN_00423f80_Base {
 struct FUN_00423f80_Owner : FUN_00423f80_Base {
     void FUN_00423f80();
 };
+// pdb: TESTopic::SaveEdit | TESTopic.obj | fnv360_0822_retail, vtable, low
+// pdb params: apFile
 void FUN_00423f80_Owner::FUN_00423f80() {
     v10();
 }
@@ -136,6 +138,7 @@ struct FUN_00424320_Owner {
     int unk1a0;
     int FUN_00424320();
 };
+// pdb: Character::GetBiped | ModelLoader.obj | fnv360_0721_beta, objrun_open, low
 int FUN_00424320_Owner::FUN_00424320() {
     return unk1a0;
 }
@@ -158,6 +161,7 @@ struct FUN_00424410_cls
     virtual void unk30();
     void FUN_00424410();
 };
+// pdb: QueuedTreeBillboard::PostProcess | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void FUN_00424410_cls::FUN_00424410()
 {
     unk30();
@@ -185,6 +189,7 @@ struct FUN_004280f0_Base {
 struct FUN_004280f0_Owner : FUN_004280f0_Base {
     void FUN_004280f0();
 };
+// pdb: QueuedReference::PostProcess | ModelLoader.obj | fnv360_0822_retail, vtable, low
 void FUN_004280f0_Owner::FUN_004280f0() {
     v15();
 }
@@ -241,6 +246,7 @@ struct FUN_004343d0_cls
     int unkB8;
     int FUN_004343d0();
 };
+// pdb: TES::QPlaceableWaterCount | TES.obj | fnv360_0822_retail, call_gap, low
 int FUN_004343d0_cls::FUN_004343d0()
 {
     return unkB8;
@@ -383,6 +389,8 @@ public:
     void FUN_00423cb0(FUN_00423cb0_Target* target);
 };
 
+// pdb: DoorTeleportData::SaveGame | TeleportData.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apSaveGameBuffer
 void FUN_00423cb0_Owner::FUN_00423cb0(FUN_00423cb0_Target* target) {
     target->FUN_006e1830(&unk04, 12, 0);
     target->FUN_006e1830(&unk10, 12, 0);
@@ -416,6 +424,7 @@ public:
     virtual int vf04();
 };
 
+// pdb: NiObject::IsFinalKindOf | BSFlattenedBoneTree.obj | tesv_win, hash, low
 bool __cdecl FUN_004343e0(int param_1, FUN_004343e0_Base* param_2) {
     if (param_2 == 0) {
         return false;
@@ -476,6 +485,7 @@ struct FUN_004343b0_Owner {
     void FUN_004343b0();
 };
 
+// pdb: TES::IncrementPlaceableWaterCount | TES.obj | fnv360_0822_retail, call_gap, low
 void FUN_004343b0_Owner::FUN_004343b0() {
     ++unkB8;
 }
@@ -532,6 +542,7 @@ struct FUN_004343c0_Owner {
     void FUN_004343c0();
 };
 
+// pdb: TES::DecrementPlaceableWaterCount | TES.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BSFlattenedBoneTree::FlattenedBone::FlattenedBone)
 void FUN_004343c0_Owner::FUN_004343c0() {
     --unkB8;
 }
@@ -635,6 +646,7 @@ struct FUN_0043c5f0_Owner {
     unsigned int FUN_0043c5f0() const;
 };
 
+// pdb: TESDataHandler::GetInteriorCellCount | TESDataHandler.obj | fnv360_0822_retail, call_dedup, low
 unsigned int FUN_0043c5f0_Owner::FUN_0043c5f0() const {
     return unk174;
 }
@@ -649,6 +661,7 @@ struct FUN_00422840_Owner {
     unsigned char FUN_00422840() const;
 };
 
+// pdb: MapMarkerData::GetTravelLoc | MapMarkerData.obj | fnv360_0822_retail, call_seq, medium
 unsigned char FUN_00422840_Owner::FUN_00422840() const {
     return unk0C_b1;
 }
@@ -682,6 +695,7 @@ struct FUN_004248e0_Owner {
     void FUN_004248e0();
 };
 
+// pdb: ModelLoader::SetExiting | ModelLoader.obj | fnv360_0822_retail, objrun_open, low
 void FUN_004248e0_Owner::FUN_004248e0() {
     unk28->unk24 = 1;
 }
@@ -700,6 +714,8 @@ struct MemMgr {
 
 extern MemMgr g_memoryManager;
 
+// pdb: FreeActivateList | ExtraDataObjects.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apList
 void __cdecl FUN_00420370(Node* node) {
     if (!node) return;
     if (node->isEmpty()) return;
@@ -733,6 +749,8 @@ struct Target {
     void method(const char* msg);
 };
 
+// pdb: TES::SaveWorld | TES.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apFileName
 void __stdcall FUN_00437500(const char* path) {
     char buf[0x104];
     if (!path) return;
@@ -776,6 +794,8 @@ public:
     virtual ~FUN_00421330();
     FUN_00421330(int value);
 };
+// pdb: ExtraSayTopicInfoOnceADay::ExtraSayTopicInfoOnceADay | ExtraDataObjects.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apInfo
 FUN_00421330::FUN_00421330(int value)
 {
     list = new ExtraList42;
@@ -799,6 +819,8 @@ public:
     Singleton43();
 };
 extern Singleton43* DAT_010727b8;
+// pdb: bhkWorld::AddContactListener | TESObjectCELL.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: BSTempNode::UpdateTime)
+// pdb params: apListener
 Singleton43* __cdecl FUN_00432f70()
 {
     if (DAT_010727b8) return DAT_010727b8;
@@ -810,6 +832,8 @@ Singleton43* __cdecl FUN_00432f70()
 // @f3 0x00424870 (community match, verified in this file)
 void __cdecl FUN_00bc7e30(int a, int b, int c, int d);
 
+// pdb: ModelLoader::BuildFileList | ModelLoader.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: IOTask::GetNextOffset)
+// pdb params: apSearchName, apBaseFilename, apFileList
 void __stdcall FUN_00424870(int a, int b, int c)
 {
     FUN_00bc7e30(a, b, 1, c);
@@ -824,6 +848,7 @@ struct Cls_00422810
     bool FUN_00422810() const;
 };
 
+// pdb: MapMarkerData::GetVisible | MapMarkerData.obj | fnv360_0822_retail, call_seq, medium
 bool Cls_00422810::FUN_00422810() const
 {
     return m_flag;
@@ -838,6 +863,8 @@ public:
 class TESSound : public TESForm {};
 TESForm* __cdecl TESForm_GetFormByNumericID(unsigned int id);
 
+// pdb: TESDataHandler::GetSound | TESDataHandler.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiSearchID
 TESSound* __stdcall FUN_0043bc60(unsigned int id)
 {
     return dynamic_cast<TESSound*>(TESForm_GetFormByNumericID(id));
@@ -857,6 +884,7 @@ struct F3Value_00422080 {
     unsigned int unk00,unk04,unk08,unk0c,unk10; void* value;
     void FUN_00421010(); void* FUN_00422080();
 };
+// pdb: ExtraFriendHits::GetHitCount | ExtraDataObjects.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void* F3Value_00422080::FUN_00422080(){ FUN_00421010(); return value; }
 
 // @f3 0x004227d0 (community match, verified in this file)
@@ -895,6 +923,7 @@ public:
     CenterTarget* cached;
     void* FUN_0043b770(unsigned int value);
 };
+// pdb: Actor::RequestLOS | Actor.obj | tesv_win, call_gap_sim, low
 void* CenterTargetOwner::FUN_0043b770(unsigned int value)
 {
     CenterTarget* target = cached;
@@ -1040,6 +1069,8 @@ public:
     void FUN_0043c590(EntryStandIn_43c590* entry);
 };
 
+// pdb: TESDataHandler::RemoveAddonNode | TESDataHandler.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: apAddonNode
 void TableStandIn_43c590::FUN_0043c590(EntryStandIn_43c590* entry)
 {
     if (entry)
@@ -1090,6 +1121,8 @@ struct DerivedObj44 : BaseObj44 {
     void FUN_004244c0(int state, int arg);
 };
 
+// pdb: QueuedTreeModel::Cancel | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aePreviousState, apTaskOwner
 void DerivedObj44::FUN_004244c0(int state, int arg)
 {
     SetState(state, arg);
@@ -1117,6 +1150,7 @@ public:
     virtual ~FUN_00421b50();
     void FUN_00420960();
 };
+// pdb: ExtraDecalRefs::~ExtraDecalRefs | ExtraDataObjects.obj | fnv360_0822_debug, call_seq, low
 FUN_00421b50::~FUN_00421b50()
 {
     FUN_00420960();
@@ -1131,6 +1165,7 @@ struct Stub00422870 {
     unsigned char FUN_00422870();
 };
 
+// pdb: MapMarkerData::GetHidden | MapMarkerData.obj | fnv360_0822_retail, call_seq, medium
 unsigned char Stub00422870::FUN_00422870() {
     unsigned char r = (unsigned char)((unk0c >> 2) & 1);
     return r;
@@ -1222,6 +1257,7 @@ struct Owner3c {
     void FUN_0043cd30();
 };
 
+// pdb: TESDataHandler::FixAllScriptIDs | TESDataHandler.obj | fnv360_0822_retail, call_gap_sim, low
 void Owner3c::FUN_0043cd30()
 {
     for (ListNode3c* node = &items; node && node->item; node = node->next)
@@ -1237,6 +1273,7 @@ struct Vec3K {
     Vec3K FUN_004229a0(const Vec3K& o) const;
 };
 
+// pdb: Tile::UpdateClipwindows | Tile.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: D3DXVECTOR3::operator-=)
 Vec3K Vec3K::FUN_004229a0(const Vec3K& o) const
 {
     Vec3K r;
@@ -1337,6 +1374,8 @@ struct Controller74 {
     void FUN_00437420(bool a, bool b);
 };
 
+// pdb: TES::ClearAllCells | TES.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: abBufferedonly, abDoNotSetInterior
 void Controller74::FUN_00437420(bool a, bool b)
 {
     pending.Clear();
@@ -1390,6 +1429,7 @@ struct Point3K {
     void FUN_004236a0() const;
 };
 
+// pdb: MultiBoundMarkerData::Save | MultiBoundMarkerData.obj | fnv360_0721_beta, call_gap_sim, low
 void Point3K::FUN_004236a0() const
 {
     if (x != ZEROK.x || y != ZEROK.y || z != ZEROK.z)
@@ -1521,6 +1561,7 @@ struct Owner43c390 {
     void FUN_0043c390();
 };
 
+// pdb: TESDataHandler::CloseAllTES | TESDataHandler.obj | fnv360_0822_retail, call_gap, medium
 void Owner43c390::FUN_0043c390()
 {
     for (Node43c390* n = list.Head(); n && n->item; n = n->next)
@@ -1575,6 +1616,8 @@ struct QueuedHeadM : QueuedTaskM
     void SetupM(int param);
 };
 
+// pdb: ModelLoader::QueueHead | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apNPC, aspQueuedHead, aePriority, apParent
 void __stdcall FUN_00429410(int data, NiPointer<QueuedHeadM>* out, int owner, int param)
 {
     NiPointer<QueuedHeadM> head = new QueuedHeadM(data, owner);
@@ -1602,6 +1645,7 @@ struct Host38d0 {
     void FUN_004338d0();
 };
 
+// pdb: TES::RunAnimations | TES.obj | fnv360_0822_retail, call_gap_sim, low
 void Host38d0::FUN_004338d0() {
     g_flag38d0 = 0;
     if (child)
@@ -1642,6 +1686,7 @@ struct Flags2c90 {
     void FUN_00432c90(bool set);
 };
 
+// pdb: BSFadeNode::SetFadeOutMultiplier | TES.obj | tesv_win, objrun_open, low
 void Flags2c90::FUN_00432c90(bool set) {
     if (set)
         flags |= 1;
@@ -1658,6 +1703,7 @@ struct SharedString422950 {
 	void FUN_00422950();
 };
 
+// pdb: NiPointer<NiTexture>::operator NiTexture * | ModelLoader.obj | fnv360_0822_debug, call_gap, low
 void SharedString422950::FUN_00422950()
 {
 	if (m_pData != g_emptyString422950)
@@ -1680,6 +1726,7 @@ class FUN_00424a40_Holder
     void FUN_00424a40();
 };
 
+// pdb: KFModel::IncRefCount | ModelLoader.obj | fnv360_1110_debug, objrun_open, low
 void FUN_00424a40_Holder::FUN_00424a40()
 {
     if (m_pObj)
@@ -1704,6 +1751,7 @@ struct FUN_00422b50 : Base824e90 {
     virtual void Vfn00();
 };
 
+// pdb: NiAlphaProperty::NiAlphaProperty | MultiBoundMarkerData.obj | fnv360_0822_retail, objrun, medium
 FUN_00422b50::FUN_00422b50() {
     unk18 = 0xec;
     unk1A = 0;
@@ -1728,6 +1776,8 @@ public:
     void FUN_00433790(RSlotItemStandIn4337* apItem);
 };
 
+// pdb: TES::MoveToEndOfExteriorBuffer | TES.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCell
 void RSlotOwnerStandIn4337::FUN_00433790(RSlotItemStandIn4337* apItem)
 {
     if (!apItem)
@@ -1770,6 +1820,7 @@ public:
     void FUN_004384b0();
 };
 
+// pdb: TES::HideFarLandNormalMaps | TES.obj | fnv360_0822_retail, call_gap, medium
 void GridOwnerV::FUN_004384b0()
 {
     if (g_gridModeV == 5) {
@@ -1826,6 +1877,8 @@ public:
     SharedEntryV* FUN_0042a530(unsigned int key);
 };
 
+// pdb: ModelLoader::GetQueuedTextureFromMap | ModelLoader.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: apFileEntry
 SharedEntryV* EntryOwnerV::FUN_0042a530(unsigned int key)
 {
     SharedPtrV<SharedEntryV> entry;
@@ -1897,6 +1950,8 @@ public:
     OwnedObjectU434* unkBC;
 };
 
+// pdb: TES::SetNavMeshInfoMap | TES.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: `anonymous namespace'::FillMessageString)
+// pdb params: apNavMeshInfoMap
 void HolderU434::FUN_00434080(OwnedObjectU434* obj)
 {
     if (unkBC)
@@ -1968,6 +2023,8 @@ struct FUN_004258e0 : Base4258e0 {
     virtual ~FUN_004258e0();
 };
 
+// pdb: QueuedTexture::QueuedTexture | ModelLoader.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apTexture, aePriority
 FUN_004258e0::FUN_004258e0(RefObj4258e0* object, int arg) : Base4258e0(arg), unk30(), unk34(false)
 {
     unk30 = object;
@@ -1994,6 +2051,7 @@ struct RefHandleU423 {
     void FUN_00423c80();
 };
 
+// pdb: DoorTeleportData::InitLoadGame | TeleportData.obj | fnv360_0822_retail, call_gap_sim, low
 void RefHandleU423::FUN_00423c80()
 {
     if (ref)
@@ -2112,6 +2170,7 @@ struct Owner_ccd0 {
     void FUN_0043ccd0();
 };
 
+// pdb: TESDataHandler::RunAllPersistentRefScripts | TESDataHandler.obj | fnv360_0822_retail, call_seq, medium
 void Owner_ccd0::FUN_0043ccd0()
 {
     int n = count;
@@ -2139,6 +2198,7 @@ struct Vec3Add42 {
     Vec3Add42 FUN_00422970(const Vec3Add42& o) const;
 };
 
+// pdb: D3DXVECTOR3::operator+= | BSLightingShader.obj | tesv_win, call_dedup, low
 Vec3Add42 Vec3Add42::FUN_00422970(const Vec3Add42& o) const
 {
     return Vec3Add42(x + o.x, y + o.y, z + o.z);
@@ -2156,6 +2216,7 @@ struct Cell435750
     void* FUN_00435750();
 };
 
+// pdb: TES::GetCurrentCell | TES.obj | fnv360_0822_retail, call_gap, low
 void* Cell435750::FUN_00435750()
 {
     if (unk34)
@@ -2196,6 +2257,7 @@ struct AeHolder33510
     void FUN_00433510();
 };
 
+// pdb: TES::UpdateDeferredCellAnimationTransforms | TES.obj | fnv360_0822_retail, call_gap_sim, low
 void AeHolder33510::FUN_00433510()
 {
     if (obj34)
@@ -2295,6 +2357,7 @@ public:
     void FUN_004243d0();
 };
 
+// pdb: QueuedModel::QueueMe | ModelLoader.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: ActorPackage::GetServicesEnabled)
 void AeForm243d0::FUN_004243d0()
 {
     AeMember0C* p = 0;
@@ -2340,6 +2403,7 @@ class FUN_00432e30_Host
     bool FUN_00432e30(unsigned int uiMask) const;
 };
 
+// pdb: NiGeometryData::GetConsistency | TES.obj | tesv_win, objrun_open, low
 bool FUN_00432e30_Host::FUN_00432e30(unsigned int uiMask) const
 {
     if (unk5C)
@@ -2366,6 +2430,8 @@ struct AFSharedRef {
     AFSharedRef& FUN_00424a60(AFShared* other);
 };
 
+// pdb: NiPointer<KFModel>::operator= | ModelLoader.obj | fnv360_0822_retail, caller, low
+// pdb params: pObject
 AFSharedRef& AFSharedRef::FUN_00424a60(AFShared* other)
 {
     if (object != other) {
@@ -2429,6 +2495,8 @@ struct RefPtr424a00 {
     RefPtr424a00& FUN_00424a00(RefObj424a00* pObj);
 };
 
+// pdb: NiPointer<Model>::operator= | ModelLoader.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: pObject
 RefPtr424a00& RefPtr424a00::FUN_00424a00(RefObj424a00* pObj)
 {
     if (m_pObj != pObj) {
@@ -2448,6 +2516,7 @@ public:
     int FUN_00bc7d50(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4);
 };
 extern OptionalManager* DAT_011785d0;
+// pdb: Sky::GetFog | TES.obj | tesv_win, objrun_open, low
 int FUN_00432ea0(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4)
 {
     if (DAT_011785d0)
@@ -2465,6 +2534,7 @@ public:
     void FUN_00425c20();
     void FUN_0042f6c0();
 };
+// pdb: QueuedTreeBillboard::Finish | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void ManagedUpdate::FUN_0042f6c0()
 {
     FUN_00425c20();
@@ -2496,6 +2566,7 @@ public:
     NiPointer<RefObject> object;
     ~FUN_00424d90();
 };
+// pdb: AttachDistant3DTask::~AttachDistant3DTask | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_00424d90::~FUN_00424d90() {}
 
 // @f3 0x00423890 (community match, verified in this file)
@@ -2524,6 +2595,7 @@ struct HkVec434400 {
     HkVec434400 FUN_00434400() const;
 };
 
+// pdb: BSTScatterTableEntry<class BSFixedString,int,struct BSTScatterTableDefaultKVStorage>::BSTScatterTableEntry<class BSFixedString,int,struct BSTScatterTableDefaultKVStorage> | BSFlattenedBoneTree.obj | tesv_win, objrun_open, low
 HkVec434400 HkVec434400::FUN_00434400() const
 {
     HkVec434400 result;
@@ -2559,6 +2631,7 @@ public:
     virtual ~FUN_00431f10();
 };
 
+// pdb: LockFreeStringMap<KFModel *>::`scalar deleting destructor' | ModelLoader.obj | fnv360_0822_retail, uvref, medium
 FUN_00431f10::~FUN_00431f10()
 {
     FUN_004312c0(true);
@@ -2580,6 +2653,8 @@ struct HolderAL_423 {
     void FUN_00423820(const Point3AL_423& point);
 };
 
+// pdb: DoorTeleportData::SetTeleportRotation | TeleportData.obj | fnv360_0822_retail, call_dedup, low, conflict (bridge: BGSWorldLocation::GetModifiedDistanceSquared)
+// pdb params: aTeleportRot
 void HolderAL_423::FUN_00423820(const Point3AL_423& point)
 {
     m_point = point;
@@ -2619,6 +2694,8 @@ struct Grid_4880 {
     Cell_4880* FUN_00434880(float x, float y, float z);
 };
 
+// pdb: TES::GetCellForPoint | TES.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aLocation
 Cell_4880* Grid_4880::FUN_00434880(float x, float y, float z)
 {
     if (unk34)
@@ -2659,6 +2736,7 @@ struct OwnerAO4214 {
     void FUN_004214b0();
 };
 
+// pdb: ExtraFollowerSwimBreadcrumbs::RemoveFirstCrumb | ExtraDataObjects.obj | fnv360_0721_beta, objrun, medium
 void OwnerAO4214::FUN_004214b0()
 {
     if (head.item)
@@ -2682,6 +2760,7 @@ struct SingletonTarget {
 };
 extern SingletonTarget* g_011f42c0;
 
+// pdb: ModelLoader::UpdateSecondaryQueueCallback | ModelLoader.obj | fnv360_0822_retail, caller_sim, low
 int __cdecl FUN_004315a0() {
     unsigned char first = g_011f42c0->FUN_00430cd0();
     unsigned char second = g_011f42c0->FUN_00430df0();
@@ -2697,6 +2776,8 @@ public:
     unsigned int first, second, third;
     void FUN_00422a90(const WordTriple* source);
 };
+// pdb: MultiBoundMarkerData::Copy | MultiBoundMarkerData.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apCopy
 void WordTriple::FUN_00422a90(const WordTriple* source) {
     if (source) {
         first = source->first;
@@ -2829,6 +2910,7 @@ unsigned int GrowingArray::FUN_0043eac0(unsigned int index, void* value) {
 // @f3 0x00424110 (community match, verified in this file)
 extern int DAT_0108edc8;
 
+// pdb: NiAVObject::GetWorldBound | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 int __fastcall FUN_00424110(void* ecx)
 {
     int eax = *(int*)((char*)ecx + 0x20);
@@ -2859,6 +2941,7 @@ struct FUN_00420960_Allocator {
 };
 
 
+// pdb: ExtraDecalRefs::ClearDecalData | ExtraDataObjects.obj | fnv360_0822_retail, call_dedup, low
 void FUN_00420960_Object::FUN_00420960() {
     while (unk10 != 0 || unk0C != 0) {
         FUN_00420960_Node* node = *(FUN_00420960_Node* volatile*)&unk10;
@@ -2880,11 +2963,15 @@ void FUN_00420960_Object::FUN_00420960() {
 }
 
 // @f3 0x0042b4f0 (community match, verified in this file)
+// pdb: LockFreeMap<MobileObject *,NiPointer<LipTask> >::IsKeyGreaterOrEqual | LipSyncBackgroundManager.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: LockFreeMap<__int64,class NiPointer<class BSTask> >::CopyKey)
+// pdb params: aKey1, aKey2
 int __stdcall FUN_0042b4f0(unsigned int a, unsigned int b) {
     return a >= b;
 }
 
 // @f3 0x0042b9f0 (community match, verified in this file)
+// pdb: LockFreeMap<MobileObject *,NiPointer<LipTask> >::CopyKeyDirect | LipSyncBackgroundManager.obj | fnv360_0822_retail, vtable, low
+// pdb params: aKey, arCopiedKey
 void __stdcall FUN_0042b9f0(int value, int* dst)
 {
     *dst = value;
@@ -2994,6 +3081,8 @@ struct FUN_00424890_Obj {
     int unkA0;
 };
 
+// pdb: ModelLoader::IsFileQueuedForCell | ModelLoader.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apCell
 unsigned char __stdcall FUN_00424890(FUN_00424890_Obj* param_1) {
     if (param_1 != 0 && param_1->unkA0 > 0) {
         return 1;
@@ -3021,6 +3110,8 @@ struct FUN_004245b0_cls {
     void sub_aa5a60(int a, int b);
     int FUN_004245b0(int arg0, int arg1);
 };
+// pdb: QueuedHelmet::Cancel | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aePreviousState, apTaskOwner
 int FUN_004245b0_cls::FUN_004245b0(int arg0, int arg1) {
     sub_aa5a60(arg0, arg1);
     Obj245* o = DAT_0106ca70->obj;
@@ -3054,6 +3145,7 @@ public:
     virtual ~FUN_00431690();
 };
 
+// pdb: LockFreeQueue<NiPointer<AttachDistant3DTask> >::~LockFreeQueue<NiPointer<AttachDistant3DTask> > | ModelLoader.obj | fnv360_0822_debug, call_seq, high
 FUN_00431690::~FUN_00431690()
 {
     FUN_00aa4df0(1);
@@ -3076,6 +3168,7 @@ struct SmartPtr {
     ~SmartPtr();
 };
 
+// pdb: NavMesh::GetParentCell | NavMesh.obj | tesv_win, call_gap, low
 SmartPtr __cdecl FUN_0043c2d0(RefCounted* src)
 {
     return SmartPtr(src);
@@ -3122,6 +3215,7 @@ extern unsigned int DAT_0106e5a4;
 extern int (__stdcall *DAT_00d9b06c)(volatile int*, int, int);
 void FUN_00422ab0();
 
+// pdb: NiTPointerAllocator<unsigned int>::Allocate | MultiBoundMarkerData.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: NiTPointerListBase<class NiTPointerAllocator<unsigned int>,class NiDX9AdditionalDepthStencilBufferData *>::AddHead)
 Link* __cdecl FUN_00423640()
 {
     reinterpret_cast<QueueLockCalls*>(&DAT_0106e5a0)->FUN_00409a80(0);
@@ -3218,6 +3312,7 @@ struct FUN_00425c20_Obj {
     Flags425c20 flags34;
     void FUN_00425c20();
 };
+// pdb: QueuedTexture::Finish | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void FUN_00425c20_Obj::FUN_00425c20()
 {
     if (!flags34.Has(1) && unk30) {
@@ -3351,6 +3446,8 @@ struct FUN_0043cc80_Owner {
 
 extern int __cdecl FUN_00c009eb(int* object, int* value);
 
+// pdb: TESDataHandler::GetListFile | TESDataHandler.obj | fnv360_0721_beta, caller, low
+// pdb params: pname
 int* FUN_0043cc80_Owner::FUN_0043cc80(int* object)
 {
     FUN_0043cc80_Node* node = &unk19C;
@@ -3400,6 +3497,8 @@ struct FUN_00425c80_Obj {
     void FUN_00aa5a60(int a, int b);
     void FUN_00425c80(int a, int b);
 };
+// pdb: QueuedTexture::Cancel | ModelLoader.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: ModelLoader::IsFileQueuedForCell)
+// pdb params: aePreviousState, apTaskOwner
 void FUN_00425c80_Obj::FUN_00425c80(int a, int b)
 {
     FUN_00aa5a60(a, b);
@@ -3418,6 +3517,7 @@ public:
     int FUN_004241e0();
 };
 
+// pdb: Setting::Int | MagicItem.obj | fnv360_0822_debug, call_gap, low, conflict (skyrim: Actor::SetDeadFlag)
 int FUN_004241e0_Owner::FUN_004241e0() {
     if (this != 0) {
         return reinterpret_cast<int>(this) + 4;
@@ -3456,6 +3556,7 @@ struct FUN_004334a0_Obj {
     bool FUN_00619b80();
     void FUN_004334a0();
 };
+// pdb: TES::UpdateCellMainThread | TES.obj | fnv360_0822_retail, call_gap, low
 void FUN_004334a0_Obj::FUN_004334a0()
 {
     float time = FUN_00619b80() ? DAT_0106de64 * DAT_01090bac : DAT_0107a0f8;
@@ -3486,6 +3587,7 @@ struct FUN_00420ce0 : Base420ce0 {
     List420ce0 list;
     virtual ~FUN_00420ce0();
 };
+// pdb: ExtraReflectorRefs::~ExtraReflectorRefs | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, medium
 FUN_00420ce0::~FUN_00420ce0()
 {
     for (List420ce0* node = &list; node && !node->IsEmpty(); node = node->next)
@@ -3561,6 +3663,8 @@ unsigned char __cdecl FUN_0052a5e0();
 void __cdecl FUN_0059ace0(int value);
 void __cdecl FUN_008294a0();
 
+// pdb: TES::CleanUpUnusedTextures | TES.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abWaitForCompletion
 void __thiscall FUN_00433420_This::FUN_00433420(unsigned char flag)
 {
     if (DAT_0106f621 != 0) {
@@ -3604,6 +3708,7 @@ struct Value580{
     int unk38;    unsigned int value;
 };
 struct Owner580{Value580* data;unsigned int FUN_00423840();};
+// pdb: DoorTeleportData::GetTeleportCell | TeleportData.obj | fnv360_0822_retail, call_gap, medium
 unsigned int Owner580::FUN_00423840(){return data?data->value:0;}
 
 // @f3 0x00433fe0 (community match, verified in this file)
@@ -3655,11 +3760,14 @@ struct Owner581{
     int unkb0;    unsigned char unkB4,value;
     void FUN_00433fe0(unsigned char);
 };
+// pdb: TES::SetAllowUnusedPurge | TES.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abAllow
 void Owner581::FUN_00433fe0(unsigned char input){value=input;}
 
 // @f3 0x00423880 (community match, verified in this file)
 struct Target587{int FUN_004e8810();};
 struct Owner587{Target587* target;int FUN_00423880();};
+// pdb: DoorTeleportData::GetTeleportSpace | TeleportData.obj | fnv360_0822_retail, call_gap, low
 int Owner587::FUN_00423880(){return target?target->FUN_004e8810():0;}
 
 // @f3 0x0043be40 (community match, verified in this file)
@@ -4035,12 +4143,14 @@ struct Owner602{
     int unk5ac;
     int unk5b0;    Target602* target;void FUN_0043c1c0();
 };
+// pdb: TESDataHandler::ClearBarterContainer | TESDataHandler.obj | fnv360_0822_retail, call_gap, low
 void Owner602::FUN_0043c1c0(){if(target)target->FUN_00486750();}
 
 // @f3 0x00424390 (community match, verified in this file)
 namespace f3m_00424390 {
 namespace Imports608{extern long (__stdcall* const DAT_00d9b064)(volatile long*);}
 struct Owner608{int unk00,unk04,unk08,unk0c;long references;void FUN_00424390();};
+// pdb: KFModel::DecManualRefCount | ModelLoader.obj | fnv360_0822_retail, call_gap, medium
 void Owner608::FUN_00424390(){if(references>0)Imports608::DAT_00d9b064(&references);}
 
 }   // namespace f3m_00424390
@@ -4383,6 +4493,7 @@ struct FUN_00425990 : Base {
     RefPtr unk30;
     virtual ~FUN_00425990();
 };
+// pdb: QueuedTexture::~QueuedTexture | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_00425990::~FUN_00425990() {}
 }   // namespace f3m_00425990
 
@@ -4427,6 +4538,7 @@ struct FUN_00426370 {
     ~FUN_00426370();
 };
 
+// pdb: QueuedHead::~QueuedHead | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_00426370::~FUN_00426370()
 {
 }
@@ -4445,6 +4557,8 @@ public:
     Part part;
     void FUN_0042b5e0(int value);
 };
+// pdb: SettingCollectionList<Setting>::Remove | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apSetting
 void Owner::FUN_0042b5e0(int value) {
     part.FUN_00421610(&value);
 }
@@ -4479,6 +4593,8 @@ struct FUN_004282f0 : Mid {
     virtual ~FUN_004282f0();
 };
 
+// pdb: QueuedTree::QueuedTree | ModelLoader.obj | fnv360_0822_retail, uvref, high
+// pdb params: apRef, aePriority
 FUN_004282f0::FUN_004282f0(int a, int b)
     : Mid(a, b)
 {
@@ -4506,6 +4622,7 @@ struct FUN_00431880 : Base431880 {
     void FUN_004312c0(int mode);
     virtual ~FUN_00431880();
 };
+// pdb: LockFreeMap<char const *,Model *>::~LockFreeMap<char const *,Model *> | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_00431880::~FUN_00431880()
 {
     FUN_004312c0(1);
@@ -4524,6 +4641,8 @@ void __cdecl FUN_00435d30(Item435e70* item);
 struct Owner435e70 {
     Item435e70* FUN_008257a0(int key);
 };
+// pdb: TES::CreateDeepCopySameTextures | TES.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObject, arCloneData
 Item435e70* __stdcall FUN_00435e70(Owner435e70* owner, int key)
 {
     Item435e70* item = 0;
@@ -4570,6 +4689,8 @@ struct Owner_42cb60 {
                       int a7, int a8);
 };
 
+// pdb: ModelLoader::QueueModel | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apModelFileName, apTextureList, aePriority, apParent, aeLODFadeMult, abPrepareAfterLoad, abAddRefCount, abFaceGenModel
 void Owner_42cb60::FUN_0042cb60(int a1, int a2, int a3, int a4, int a5, int a6,
                                 int a7, int a8)
 {
@@ -4609,6 +4730,7 @@ struct Owner677 {
     Child677* child;
     void FUN_004338f0();
 };
+// pdb: TES::ToggleCollisionGeometry | TES.obj | fnv360_0822_retail, caller_sim, low
 void Owner677::FUN_004338f0()
 {
     Child677* target = child;
@@ -4709,6 +4831,7 @@ public:
     unsigned char FUN_0042b6a0();
 };
 
+// pdb: SettingCollectionList<Setting>::WriteSettings | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 unsigned char FUN_0042b6a0_Owner::FUN_0042b6a0() {
     unsigned char result = unk104 != 0;
 
@@ -4736,6 +4859,8 @@ struct Owner690 {
     void FUN_00436190();
     void FUN_004365b0(void* unused);
 };
+// pdb: TES::Revert | TES.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apLoadGameBuffer
 void Owner690::FUN_004365b0(void*)
 {
     FUN_00436190();
@@ -4768,6 +4893,8 @@ struct Owner698 {
     Point698 position;
     void FUN_00423800(const Point698* supplied);
 };
+// pdb: DoorTeleportData::SetTeleportPosition | TeleportData.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aTeleportPos
 void Owner698::FUN_00423800(const Point698* supplied)
 {
     position = *supplied;
@@ -4778,6 +4905,8 @@ void Owner698::FUN_00423800(const Point698* supplied)
 extern bool DAT_0107a0f3;
 extern bool DAT_0107a0f1;
 namespace f3m_00424300 {
+// pdb: QueuedModel::SetForceLoad | ModelLoader.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: abValue
 bool FUN_00424300()
 {
     if (DAT_0107a0f3 || DAT_0107a0f1)
@@ -4799,6 +4928,8 @@ struct Owner700 {
     Target700* target;
     void FUN_00424850(int first, int second);
 };
+// pdb: ModelLoader::AddModel | ModelLoader.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: QueuedModel::PostProcess)
+// pdb params: apModelFileName, apModel
 void Owner700::FUN_00424850(int first, int second)
 {
     target->slot10(first, &second, 0);
@@ -4819,6 +4950,7 @@ struct Owner {
     }
     float FUN_00432b20();
 };
+// pdb: Setting::operator float | TES.obj | fnv360_0822_debug, call_dedup, low
 float Owner::FUN_00432b20()
 {
     return GetValue();
@@ -4850,6 +4982,7 @@ struct Owner702 {
     int unk4c;
     void FUN_00433030();
 };
+// pdb: TES::InitVars | TES.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: TES::ClearWorldSpace)
 void Owner702::FUN_00433030()
 {
     unk24 = 0x7fffffff;
@@ -4868,6 +5001,7 @@ void FUN_00593380();
 void FUN_005978a0();
 void BGSAddonNodeSoundHandleExtra_InitSDM();
 void FUN_004917c0();
+// pdb: TES::InitSDM | TES.obj | fnv360_0822_retail, call_gap_sim, low
 void FUN_004340c0()
 {
     BSFaceGenAnimationData_InitSDM();
@@ -4885,6 +5019,7 @@ void FUN_00593d70();
 void FUN_00597b50();
 void FUN_004a3ab0();
 void FUN_004918b0();
+// pdb: TES::KillSDM | TES.obj | fnv360_0822_retail, call_gap_sim, low
 void FUN_004340e0()
 {
     FUN_00587500();
@@ -4929,6 +5064,7 @@ struct Root {
     Data* data;
 };
 extern Root* DAT_0106ca70;
+// pdb: ModelLoader::GetExternalCountCallback | ModelLoader.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: QueuedModel::DoRequestHandles)
 int FUN_00424780()
 {
     Data* data = DAT_0106ca70->data;
@@ -4939,6 +5075,8 @@ int FUN_00424780()
 // @f3 0x00422b80 (community match, verified in this file)
 namespace f3m_00422b80 {
 char __stdcall FUN_00914770(void* item);
+// pdb: MultiBoundMarkerData::Compare | MultiBoundMarkerData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: apCompare
 bool __stdcall FUN_00422b80(void* item)
 {
     if (!item) return true;
@@ -4953,6 +5091,8 @@ struct Last { void FUN_008257f0(); };
 extern First DAT_00f6df88;
 extern Last* DAT_01079ca4;
 void FUN_006bf3a0();
+// pdb: ModelLoader::LoadQueuedPriorityCallback | ModelLoader.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: QueuedModel::RequestBaseModel)
+// pdb params: afPercent
 void FUN_00424760()
 {
     DAT_00f6df88.FUN_0078c030(0);
@@ -4965,6 +5105,8 @@ void FUN_00424760()
 namespace f3m_0043bcc0 {
 struct Form757 { int unk00; unsigned char type; };
 Form757* TESForm_GetFormByEditorID(const char* name);
+// pdb: TESDataHandler::GetSound | TESDataHandler.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: soundID
 Form757* __stdcall FUN_0043bcc0(const char* name)
 {
     Form757* form = TESForm_GetFormByEditorID(name);
@@ -5000,6 +5142,8 @@ struct FUN_00430f70_cls {
     void FUN_00430f70(int a1, int a2, int a3, int a4);
 };
 
+// pdb: LockFreeMap<MobileObject *,NiPointer<LipTask> >::SetAt | LipSyncBackgroundManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiBucket, aKey, aData, abReplaceExisting
 void FUN_00430f70_cls::FUN_00430f70(int a1, int a2, int a3, int a4) {
     TlsManager* mgr = unk14;
     ThreadData* data = (ThreadData*)TlsGetValue(mgr->index04);
@@ -5012,6 +5156,8 @@ void FUN_00430f70_cls::FUN_00430f70(int a1, int a2, int a3, int a4) {
 
 // @f3 0x00431f70 (community match, verified in this file)
 namespace f3m_00431f70 {
+// pdb: LockFreeStringMap<Model *>::CopyKeyDirect | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apKey, arpCopiedKey
 int __stdcall FUN_00431f70(const char* source, char** destination)
 {
     return strcpy_s(*destination, 0x100, source);
@@ -5024,6 +5170,7 @@ struct Owner787 {
     Owner787* FUN_00422a10();
 };
 extern const Owner787 DAT_00f48758;
+// pdb: MultiBoundMarkerData::MultiBoundMarkerData | MultiBoundMarkerData.obj | fnv360_0822_retail, call_gap, medium
 Owner787* Owner787::FUN_00422a10()
 {
     *this = DAT_00f48758;
@@ -5039,6 +5186,8 @@ struct Owner796 {
     Target796* target;
     void FUN_00423f10(Output796* output);
 };
+// pdb: DoorTeleportData::GetTeleportCellMapName | TeleportData.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aOutMapName
 void Owner796::FUN_00423f10(Output796* output)
 {
     Target796* current = target;
@@ -5159,6 +5308,8 @@ struct Owner797 {
     void* entries[255];
     void* FUN_0043bd10(int index);
 };
+// pdb: TESDataHandler::GetCompiledFile | TESDataHandler.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: index
 void* Owner797::FUN_0043bd10(int index)
 {
     if (index >= 0 && static_cast<unsigned int>(index) <= 0xfe)
@@ -5194,6 +5345,8 @@ struct OwnerCd60 {
     ListNodeCd60 items;
     void FUN_0043cd60(void* arg);
 };
+// pdb: TESDataHandler::SetMasterFileLargeBuffer | TESDataHandler.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiLargeBuffer
 void OwnerCd60::FUN_0043cd60(void* arg)
 {
     for (ListNodeCd60* node = &items; node; node = node->next) {
@@ -5225,6 +5378,8 @@ struct Owner803 {
     void FUN_00434ff0(Item803* item);
     void FUN_004374e0(Item803* item);
 };
+// pdb: ExteriorCellLoader::AttachLoadedCell | ExteriorCellLoader.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apCell
 void Owner803::FUN_004374e0(Item803* item)
 {
     if (item) {
@@ -5420,6 +5575,8 @@ struct Owner814 {
     unsigned short capacity180, count182;
     Entry814* FUN_0043c570(unsigned int index);
 };
+// pdb: TESDataHandler::GetAddonNode | TESDataHandler.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiIndex
 Entry814* Owner814::FUN_0043c570(unsigned int index) {
     if (index >= count182) return 0;
     return entries17C[index];
@@ -5455,6 +5612,8 @@ struct FUN_004223a0_Owner {
     FormArray_4223a0 forms;
     void FUN_004223a0(FormRef_4223a0* ref);
 };
+// pdb: ExtraGuardedRefData::AddGuard | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apActor
 void FUN_004223a0_Owner::FUN_004223a0(FormRef_4223a0* ref)
 {
     FormArray_4223a0* arr = &forms;
@@ -5472,6 +5631,7 @@ struct Vec847 {
     float x, y, z;
     Vec847* FUN_00432b40(Vec847* output, float scale);
 };
+// pdb: NiColor::operator*= | Sky.obj | tesv_win, call_dedup, low
 Vec847* Vec847::FUN_00432b40(Vec847* output, float scale) {
     output->x = x * scale;
     output->y = y * scale;
@@ -5534,6 +5694,7 @@ struct FUN_00426fc0 : FUN_00426fc0_Base {
     FUN_00426fc0_Counted* unk3C;
     ~FUN_00426fc0();
 };
+// pdb: QueuedFaceGenFile::~QueuedFaceGenFile | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_00426fc0::~FUN_00426fc0()
 {
     if (unk3C)
@@ -5560,6 +5721,7 @@ struct Owner854 {
     Second854* second3C;
     void FUN_00428060();
 };
+// pdb: QueuedReplacementKF::PostProcess | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Owner854::FUN_00428060() {
     if (state0C != 6) {
         first38->FUN_0045f320(value30);
@@ -5587,6 +5749,7 @@ struct F3Obj421010 {
     void FUN_00421010();
 };
 
+// pdb: ExtraFriendHits::RemoveOldHits | ExtraDataObjects.obj | fnv360_0822_retail, call_gap, low
 void F3Obj421010::FUN_00421010()
 {
     for (unsigned int i = 0; i < arr.size; i++) {
@@ -5626,6 +5789,8 @@ struct FNV_004333c0_Obj {
     unsigned int unk08;
 };
 
+// pdb: TES::CanAttach3D | TES.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apRef
 int __stdcall FUN_004333c0(int param_1) {
     FNV_004333c0_Obj* object = (FNV_004333c0_Obj*)param_1;
     unsigned int flags = object->unk08;
@@ -5644,6 +5809,8 @@ struct Owner862 {
     Target862* FUN_00435c00(int argument);
     int FUN_00435d00(int argument);
 };
+// pdb: TES::GetLandMaterialType | TES.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aCoord
 int Owner862::FUN_00435d00(int argument) {
     int result = 2;
     Target862* target = FUN_00435c00(argument);
@@ -5660,6 +5827,7 @@ struct Owner879 {
     void FUN_00c01af5();
     Owner879* FUN_00424bd0(unsigned int flags);
 };
+// pdb: std::bad_alloc::`scalar deleting destructor' | lastError.obj | tesv_win, vtable, medium
 Owner879* Owner879::FUN_00424bd0(unsigned int flags) {
     vtable00 = &DAT_00db774c;
     FUN_00c01af5();
@@ -5788,6 +5956,8 @@ struct FUN_0043c690_cls
     TESObjectCELL* FUN_0043c690(int x, int y, TESWorldSpace* ws, bool create);
 };
 
+// pdb: TESDataHandler::GetCellFromCellCoord | TESDataHandler.obj | fnv360_0822_debug, caller, medium
+// pdb params: aiX, aiY, apWorldSpace, abCreateCell
 TESObjectCELL* FUN_0043c690_cls::FUN_0043c690(int x, int y, TESWorldSpace* ws, bool create)
 {
     if (!ws) {
@@ -5812,6 +5982,8 @@ TESObjectCELL* FUN_0043c690_cls::FUN_0043c690(int x, int y, TESWorldSpace* ws, b
 extern const char DAT_00f46078[], DAT_00f494d0[];
 namespace f3m_0043bc30 {
 void* __cdecl FUN_00c0050a(void* object, int unused, const void* baseType, const void* targetType, int flags);
+// pdb: TESDataHandler::GetClass | TESDataHandler.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiSearchID
 void* __stdcall FUN_0043bc30(unsigned int id) {
     return FUN_00c0050a(TESForm_GetFormByNumericID(id), 0, DAT_00f46078, DAT_00f494d0, 0);
 }
@@ -5821,6 +5993,8 @@ void* __stdcall FUN_0043bc30(unsigned int id) {
 extern const char DAT_00f46078[], DAT_00f47bf4[];
 namespace f3m_0043bc90 {
 void* __cdecl FUN_00c0050a(void* object, int unused, const void* baseType, const void* targetType, int flags);
+// pdb: TESDataHandler::GetTopic | TESDataHandler.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiSearchID
 void* __stdcall FUN_0043bc90(unsigned int id) {
     return FUN_00c0050a(TESForm_GetFormByNumericID(id), 0, DAT_00f46078, DAT_00f47bf4, 0);
 }
@@ -5855,6 +6029,8 @@ struct FUN_00428330_Owner {
     FUN_00428330_Owner* __thiscall FUN_00428330(int value1, int value2);
 };
 
+// pdb: QueuedCharacter::QueuedCharacter | ModelLoader.obj | fnv360_0822_retail, uvref, high
+// pdb params: apRef, aePriority
 FUN_00428330_Owner* __thiscall FUN_00428330_Owner::FUN_00428330(int value1, int value2) {
     reinterpret_cast<FUN_00aa5160_Owner*>(this)->FUN_00aa5160(value2);
 
@@ -5890,6 +6066,8 @@ struct Owner910 {
     void FUN_00aa5160(int argument);
     Owner910* FUN_00424120(void* value, int argument);
 };
+// pdb: QueuedReplacementKFList::QueuedReplacementKFList | ModelLoader.obj | fnv360_0822_retail, uvref, medium
+// pdb params: apAnim, aePriority
 Owner910* Owner910::FUN_00424120(void* value, int argument) {
     FUN_00aa5160(argument);
     value2C = 0;
@@ -5919,6 +6097,8 @@ struct Owner911 {
     void FUN_00aa5160(int argument);
     Owner911* FUN_00426340(void* value, int argument);
 };
+// pdb: QueuedHead::QueuedHead | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apNPC, aePriority
 Owner911* Owner911::FUN_00426340(void* value, int argument) {
     FUN_00aa5160(argument);
     vtable00 = &DAT_00db7c98;
@@ -5937,6 +6117,8 @@ struct Owner921 {
     char* text00;
     Owner921* FUN_00422920(const char* text);
 };
+// pdb: NiFixedString::NiFixedString | ExtraDataObjects.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: pcString
 Owner921* Owner921::FUN_00422920(const char* text) {
     if (!text) {
         text00 = DAT_00e207a8;
@@ -5972,6 +6154,8 @@ struct FUN_00423b90_Obj
     unsigned char unk1C;
     void FUN_00423b90(const Data423b90* source);
 };
+// pdb: DoorTeleportData::Copy | TeleportData.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apCopy
 void FUN_00423b90_Obj::FUN_00423b90(const Data423b90* source)
 {
     unk00 = source->unk00;
@@ -6004,6 +6188,8 @@ inline bool IsKindOf424d50(RTTI424d50* rtti, Obj424d50* obj)
     }
     return false;
 }
+// pdb: BSFaceGenMorphData::DynamicCast | BSFaceGenManager.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pkRTTI, pkObject
 Obj424d50* FUN_00424d50(RTTI424d50* rtti, Obj424d50* obj)
 {
     if (!obj)
@@ -6042,6 +6228,7 @@ struct FUN_004371d0 {
     Elem* m_pElems;
     ~FUN_004371d0();
 };
+// pdb: TES::ParticleObjectCache::~ParticleObjectCache | TES.obj | fnv360_0822_retail, call_seq, medium
 FUN_004371d0::~FUN_004371d0()
 {
     m_spObj = 0;
@@ -6073,6 +6260,8 @@ struct Obj_6290 : Base_6290 {
     void* unk3c;
     void FUN_00426290(int a, int b);
 };
+// pdb: QueuedAnimIdle::Cancel | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aePreviousState, apTaskOwner
 void Obj_6290::FUN_00426290(int a, int b)
 {
     FUN_00aa5a60(a, b);
@@ -6091,6 +6280,7 @@ struct FUN_00432bd0_Owner {
 };
 
 
+// pdb: bhkCharacterProxy::GethkWorldRw | bhkCharacterProxy.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: NiPoint3::Length)
 float FUN_00432bd0_Owner::FUN_00432bd0() {
     return sqrt(unk04 * unk04 + unk00 * unk00 + unk08 * unk08);
 }
@@ -6157,6 +6347,8 @@ public:
     virtual void v00();
 };
 
+// pdb: QueuedCreature::QueuedCreature | ModelLoader.obj | fnv360_0822_retail, uvref, medium
+// pdb params: apRef, aePriority
 FUN_00428580::FUN_00428580(int a, int b) : FUN_00428580_Mid(a, b) {
 }
 }   // namespace f3m_00428580
@@ -6180,6 +6372,8 @@ struct Owner968 {
     void FUN_00aa5160(int value);
     Owner968* FUN_004280c0(int first, int second);
 };
+// pdb: QueuedReference::QueuedReference | ModelLoader.obj | fnv360_0822_retail, uvref, low
+// pdb params: apRef, aePriority
 Owner968* Owner968::FUN_004280c0(int first, int second) {
     FUN_00aa5160(second);
     vtable00 = &DAT_00db7dfc;
@@ -6243,6 +6437,7 @@ __forceinline void* ResolveM(SingletonM* s, unsigned int id)
     return s->mgr04->Get(id, &r) ? r : 0;
 }
 
+// pdb: QueuedKF::Finish | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void FUN_00426150_Owner::FUN_00426150()
 {
     if (ref30.ptr && !(flags34 & 1))
@@ -6377,6 +6572,7 @@ struct Owner {
 }
 using namespace f3m_0043cc40;
 
+// pdb: TESDataHandler::CreateThreadSafeFiles | TESDataHandler.obj | fnv360_0822_retail, callee_sim, low
 void Owner::FUN_0043cc40()
 {
     for (Node* n = &list; n; n = n->next) {
@@ -6417,6 +6613,8 @@ struct FUN_0042c320 : ThreadBase {
     FUN_0042c320(int a);
     virtual ~FUN_0042c320();
 };
+// pdb: BackgroundCloneThread::BackgroundCloneThread | ModelLoader.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aiMaxThreads
 FUN_0042c320::FUN_0042c320(int a) : ThreadBase(3, "BackgroundCloneThread")
 {
     unk24 = false;
@@ -6425,6 +6623,7 @@ FUN_0042c320::FUN_0042c320(int a) : ThreadBase(3, "BackgroundCloneThread")
 
 // @f3 0x0043b7a0 (community match, verified in this file)
 namespace f3m_0043b7a0 {
+// pdb: BSFileCache::QInstance | BSFileCache_Xenon.obj | fnv360_0822_retail, call_gap, low
 RendererSettingCollection* __cdecl FUN_0043b7a0()
 {
     if (!DAT_0117957c)
@@ -6460,6 +6659,7 @@ public:
     virtual ~FUN_00425f00();
 };
 
+// pdb: QueuedTreeBillboard::~QueuedTreeBillboard | ModelLoader.obj | fnv360_0822_debug, call_seq, low
 FUN_00425f00::~FUN_00425f00()
 {
     if (m_p) delete m_p;
@@ -6496,6 +6696,8 @@ public:
 };
 extern Singleton430* DAT_0116d6f4;
 
+// pdb: SettingCollectionMap<Setting>::GetPtr | XGameSetting.obj | fnv360_0822_debug, call_gap, low
+// pdb params: apID
 Singleton430* __cdecl FUN_004302c0()
 {
     if (!DAT_0116d6f4)
@@ -6540,6 +6742,7 @@ struct Owner993 {
     int first04, second08, third0C;
     Snapshot993 FUN_00423dd0();
 };
+// pdb: DoorTeleportData::GetTeleportWorldLocation | TeleportData.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: bhkCharacterRigidBody::GethkWorld)
 Snapshot993 Owner993::FUN_00423dd0() {
     unsigned int ref = ref00 ? ref00->FUN_004e8810() : 0;
     Snapshot993 result;
@@ -6579,6 +6782,7 @@ struct FUN_00433ff0_cls {
     Child* FUN_00433ff0();
 };
 
+// pdb: TES::GetNavMeshInfoMap | TES.obj | fnv360_0822_retail, call_seq, medium
 Child* FUN_00433ff0_cls::FUN_00433ff0()
 {
     if (!child && DAT_0106cdcc && !DAT_0106cdcc->flag5a6)
@@ -6737,6 +6941,8 @@ struct Owner995 {
     Node995 items144;
     Item995* FUN_0043ea90(int key, unsigned int occurrence);
 };
+// pdb: TESDataHandler::GetAnimObject | TESDataHandler.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apIdle, aiIndex
 Item995* Owner995::FUN_0043ea90(int key, unsigned int occurrence) {
     Node995* node = &items144;
     while (node) {
@@ -6785,6 +6991,7 @@ struct Grid_004336d0 {
     f3m_004336d0::Cell* GetCell(unsigned int i) { if (i < DAT_0106cb70 - 1) return cells[i]; return 0; }
     void FUN_004336d0();
 };
+// pdb: TES::SortExteriorBuffer | TES.obj | fnv360_0822_retail, call_seq, medium
 void Grid_004336d0::FUN_004336d0()
 {
     if (unk24 == unk2C)
@@ -6831,6 +7038,8 @@ struct FUN_00426050 : Base426050, VtStore {
     Sub34 unk34;
     FUN_00426050(int a, int b);
 };
+// pdb: QueuedKF::QueuedKF | ModelLoader.obj | fnv360_0721_retail, call_gap, low
+// pdb params: apFileName, aePriority
 FUN_00426050::FUN_00426050(int a, int b) : Base426050(b), VtStore(this) {
     SetArg(a);
     Reset(0);
@@ -6866,6 +7075,8 @@ public:
     FUN_004285b0(int param);
     virtual ~FUN_004285b0();
 };
+// pdb: QueuedPlayer::QueuedPlayer | ModelLoader.obj | fnv360_0822_retail, uvref, high
+// pdb params: aePriority
 FUN_004285b0::FUN_004285b0(int param) : QueuedFileM(param, DAT_0107a104)
 {
 }
@@ -6957,6 +7168,7 @@ struct Owner4345e0 {
     void FUN_004345e0(RefObj4345e0* p);
 };
 
+// pdb: OwnedController::SetAttachRootOverride | ReferenceEffectControllers.obj | tesv_win, call_gap, low
 void Owner4345e0::FUN_004345e0(RefObj4345e0* p)
 {
     unk14 = p;
@@ -6974,6 +7186,7 @@ struct FUN_00431d70 : f3m_00431d70::Base_431880 {
     void FUN_004312c0(int flag);
     virtual ~FUN_00431d70();
 };
+// pdb: LockFreeStringMap<Model *>::`scalar deleting destructor' | ModelLoader.obj | fnv360_0822_retail, uvref, low
 FUN_00431d70::~FUN_00431d70()
 {
     FUN_004312c0(1);
@@ -7015,6 +7228,8 @@ struct FUN_00427050 : Base
     FUN_00427050(RefA* a, RefB* b);
     virtual ~FUN_00427050();
 };
+// pdb: QueuedFaceGenFile::QueuedFaceGenFile | ModelLoader.obj | fnv360_0721_beta, call_gap, low
+// pdb params: apModel, apMeshData
 FUN_00427050::FUN_00427050(RefA* a, RefB* b) : Base(0, 5)
 {
     m_a = a;
@@ -7040,6 +7255,7 @@ struct Owner_4249c0 {
     Item_4249c0** items;
     void FUN_004249c0();
 };
+// pdb: NiPointer<ExteriorCellLoaderTask>::~NiPointer<ExteriorCellLoaderTask> | ExteriorCellLoader.obj | fnv360_0721_retail, objrun_prop, low
 void Owner_4249c0::FUN_004249c0()
 {
     for (unsigned int i = 0; i < count; i++)
@@ -7073,6 +7289,7 @@ struct FUN_00432e50_cls {
     FUN_00432e50_cls* FUN_00432e50();
 };
 
+// pdb: PLAYER_TARGET_LOC::PLAYER_TARGET_LOC | TES.obj | fnv360_0822_debug, call_gap, low
 FUN_00432e50_cls* FUN_00432e50_cls::FUN_00432e50()
 {
     unk00 = 0;
@@ -7223,6 +7440,8 @@ struct Owner43bc0 {
     Target43bc0* target;
 };
 
+// pdb: TES::GetMapNameForLocation | TES.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: TES::`vector deleting destructor')
+// pdb params: aMapName, aWorldLoc, apWorldSpace
 bool __fastcall FUN_00433bc0(Owner43bc0* self, void* /*dummy*/, void* p1, Point43bc0 pt, Target43bc0* apTarget)
 {
     Target43bc0* t = apTarget ? apTarget : ((Owner43bc0*)self)->target;
@@ -7268,6 +7487,7 @@ public:
     virtual ~FUN_00431900();
 };
 
+// pdb: LockFreeMap<char const *,KFModel *>::~LockFreeMap<char const *,KFModel *> | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_00431900::~FUN_00431900()
 {
     FUN_004312c0(1);
@@ -7376,6 +7596,8 @@ public:
     void FUN_00436ff0(unsigned int x, unsigned int y, bool alarmed);
 };
 
+// pdb: TES::SetHideLandBlendPassForGridCell | TES.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiGridX, aiGridY, abFlag
 void C436Owner::FUN_00436ff0(unsigned int x, unsigned int y, bool alarmed)
 {
     CenterTarget** slot = lookup->FUN_0047b220(x, y);
@@ -7425,6 +7647,8 @@ struct FUN_0042f0d0_Owner
     void FUN_0042f0d0();
 };
 
+// pdb: std::vector<char,std::allocator<char> >::vector<char,std::allocator<char> > | TriFileIO.obj | fnv360_1110_debug, call_gap_sim, low
+// pdb params: _Count
 void FUN_0042f0d0_Owner::FUN_0042f0d0()
 {
     if (unk04)
@@ -7452,6 +7676,8 @@ struct FUN_00424200_cls
     void FUN_00424200(unsigned int index, bool value);
 };
 
+// pdb: BSShaderProperty::SetFlag | ModelLoader.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aiFlag, abSetFlag
 void FUN_00424200_cls::FUN_00424200(unsigned int index, bool value)
 {
     unsigned int group = index >> 5;
@@ -7496,6 +7722,7 @@ struct FUN_004203e0 : FUN_004203e0_Base {
     virtual ~FUN_004203e0();
 };
 
+// pdb: ExtraActivateRefChildren::~ExtraActivateRefChildren | ExtraDataObjects.obj | fnv360_0822_debug, call_seq, high
 FUN_004203e0::~FUN_004203e0() {
     FUN_00420370(&unk0C);
 }
@@ -7522,6 +7749,7 @@ public:
 
 extern FUN_00423c30_Target* DAT_01269cd0;
 
+// pdb: DoorTeleportData::LoadGame | TeleportData.obj | fnv360_0822_retail, call_gap, medium
 void FUN_00423c30_Owner::FUN_00423c30()
 {
     DAT_01269cd0->FUN_006db490(&unk04, 12);
@@ -7553,6 +7781,7 @@ class FUN_00425030 {
     ~FUN_00425030();
 };
 
+// pdb: Model::~Model | ModelLoader.obj | fnv360_0822_retail, call_gap, low
 FUN_00425030::~FUN_00425030()
 {
     m_spObject = 0;
@@ -7582,6 +7811,7 @@ public:
     virtual ~FUN_00421090();
 };
 
+// pdb: ExtraFactionChanges::~ExtraFactionChanges | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, high
 FUN_00421090::~FUN_00421090()
 {
     factionChanges->~FactionChangesList();
@@ -7653,6 +7883,8 @@ struct Camera {
     Vec3 FUN_00437150();
 };
 
+// pdb: bhkPickData::GetTo | TES.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arTo
 Vec3 Camera::FUN_00437150()
 {
     if (FUN_00432d10()) {
@@ -7698,6 +7930,8 @@ public:
     FUN_00425cc0(const char* name, int a, int b, bool f1, bool f2);
     virtual ~FUN_00425cc0();
 };
+// pdb: QueuedModel::QueuedModel | ModelLoader.obj | fnv360_0822_retail, caller, medium
+// pdb params: apFileName, aePriority, aeLODFadeMult, abPrepareAfterLoad, bAddRefCount
 FUN_00425cc0::FUN_00425cc0(const char* name, int a, int b, bool f1, bool f2)
     : QBase(a), unk34(0), unk38(b), flags(0)
 {
@@ -7739,6 +7973,8 @@ public:
     FUN_00425870(void* shader, int arg);
     virtual ~FUN_00425870();
 };
+// pdb: QueuedTexture::QueuedTexture | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apFileEntry, aePriority
 FUN_00425870::FUN_00425870(void* shader, int arg) : ShaderBase_425870(arg)
 {
     unk34 = false;
@@ -7770,6 +8006,8 @@ public:
     void FUN_0042a700(bool built, unsigned int newSize);
 };
 
+// pdb: NiPointer<BSFaceGenModelMeshData>::operator= | ModelLoader.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::_Tidy)
+// pdb params: pObject
 void GameString::FUN_0042a700(bool built, unsigned int newSize)
 {
     if (built && res >= 16)
@@ -7807,6 +8045,7 @@ struct Owner1051 {
     Mode1051* mode34;
     void FUN_00433910();
 };
+// pdb: TES::TogglePrimitives | TES.obj | fnv360_0822_retail, objrun, low
 void Owner1051::FUN_00433910() {
     Mode1051* mode = mode34;
     Flag1051 flag;
@@ -7836,6 +8075,7 @@ public:
     virtual ~FUN_00420eb0_cls();
 };
 
+// pdb: ExtraLitWaterRefs::~ExtraLitWaterRefs | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, high
 FUN_00420eb0_cls::~FUN_00420eb0_cls()
 {
     member.~Member_eb0();
@@ -7849,6 +8089,8 @@ struct FUN_0043bd30_cls {
     void FUN_0043bd30(unsigned int v);
 };
 
+// pdb: TESDataHandler::RemoveIDFromDataHandler | TESDataHandler.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiID
 void FUN_0043bd30_cls::FUN_0043bd30(unsigned int v)
 {
     unsigned char* self = (unsigned char*)this;
@@ -7925,6 +8167,7 @@ typedef long (__stdcall *Atomic1094)(volatile long* value);
 extern Atomic1094 DAT_00d9b068, DAT_00d9b064;
 extern char* DAT_00e207a8;
 struct Owner1094 { char* text00; Owner1094* FUN_00423f90(const Owner1094& source); };
+// pdb: BSStringT<char,260,class FixedLengthMemoryManagementPol>::SetLength | ModelLoader.obj | tesv_win, objrun_open, low
 Owner1094* Owner1094::FUN_00423f90(const Owner1094& source) {
     char* value = source.text00;
     if (text00 != value) {
@@ -8050,6 +8293,8 @@ struct FUN_004260f0 : Base0325 {
     virtual void vf1();
 };
 
+// pdb: QueuedKF::QueuedKF | ModelLoader.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apKFModel, aePriority
 FUN_004260f0::FUN_004260f0(char* b, int a) : Base0325(a)
 {
     unk30 = 0;
@@ -8106,6 +8351,7 @@ public:
     virtual ~FUN_00420f60();
 };
 
+// pdb: ExtraDroppedItemList::~ExtraDroppedItemList | ExtraDataObjects.obj | fnv360_0822_debug, call_seq, high
 FUN_00420f60::~FUN_00420f60()
 {
     member.~FUN_006c8220();
@@ -8116,6 +8362,8 @@ FUN_00420f60::~FUN_00420f60()
 namespace f3m_004321f0 {
 int __cdecl FUN_00c00b52(int value);
 struct Owner1116 { int unk00, unk04; unsigned int buckets08; unsigned int FUN_004321f0(const char* text); };
+// pdb: LockFreeCaseInsensitiveStringMap<Model *>::GetBucketForKey | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apKey
 unsigned int Owner1116::FUN_004321f0(const char* text) {
     unsigned int hash = 0;
     const char* cursor = text;
@@ -8262,6 +8510,8 @@ struct Owner {
     Item* FUN_0043c510(int p);
 };
 
+// pdb: TESDataHandler::GetGlobal | TESDataHandler.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apGlobalID
 Item* Owner::FUN_0043c510(int p) {
     ListNode* node = &m_list;
     if (m_list.next != 0 || m_list.data != 0) {
@@ -8298,6 +8548,7 @@ public:
     virtual ~FUN_00420a30();
 };
 
+// pdb: ExtraReflectedRefs::~ExtraReflectedRefs | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, medium
 FUN_00420a30::~FUN_00420a30()
 {
     ListNode* p = (ListNode*)&head;
@@ -8507,6 +8758,8 @@ struct Obj433340 {
     void FUN_0054a990(int a);
 };
 
+// pdb: TES::CleanTemp3D | TES.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apRef
 void __stdcall FUN_00433340(Obj433340* p)
 {
     if (!p->FUN_004e6ad0())
@@ -8549,6 +8802,8 @@ inline bool Contains1133(Obj424fe0* obj) {
   if(n==&DAT_01092a48)return true;
  return false;
 }
+// pdb: bhkCollisionObject::GetbhkCollisionObject | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObject
 Obj424fe0* FUN_00424fe0(Holder424fe0* holder) {
  Obj424fe0* obj=holder->unk1C;
  if(!obj)return 0;
@@ -8570,6 +8825,8 @@ struct FUN_00424020_cls {
     float* FUN_00424020(float* d, const float* b);
 };
 
+// pdb: NiMatrix3::operator* | ModelLoader.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: mat
 float* FUN_00424020_cls::FUN_00424020(float* d, const float* b)
 {
     d[0] = b[0] * m00 + b[3] * m01 + b[6] * m02;
@@ -8598,6 +8855,8 @@ struct FUN_004315d0_cls {
 void* __cdecl FUN_00424af0(unsigned int n, int hint);
 __declspec(noreturn) void __cdecl FUN_005943a0(void);
 
+// pdb: std::vector<unsigned long,std::allocator<unsigned long> >::_Buy | TriFileIO.obj | fnv360_0822_retail, call_gap, low
+// pdb params: _Capacity
 bool FUN_004315d0_cls::FUN_004315d0(unsigned int n)
 {
     m04 = 0;
@@ -8626,6 +8885,8 @@ struct Result1164 {
 struct Target1164 { Result1164* FUN_00824a50(void*); };
 struct Form1164 { int unk00,unk04; unsigned int flags08; bool Flag7() const { return (flags08>>7)&1; } };
 struct Owner1164 { void FUN_0042a370(Target1164*); void FUN_0042db50(Form1164*,Target1164*); };
+// pdb: ModelLoader::LoadAddonNodes | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRef, apNode
 void Owner1164::FUN_0042db50(Form1164* form,Target1164* target) {
  if(target) {
   Result1164* found=target->FUN_00824a50(DAT_0116d6e0);
@@ -8675,6 +8936,7 @@ public:
     void FUN_0043bbe0();
 };
 
+// pdb: TESDataHandler::UpdateAutoCalcNPCs | TESDataHandler.obj | fnv360_0822_debug, caller, medium
 void FUN_0043bbe0_ThisClass::FUN_0043bbe0() {
     int iVar1 = unk00->FUN_007270f0();
 
@@ -8706,6 +8968,8 @@ typedef void (__stdcall *CriticalFn1204)(Critical1204*);
 extern CriticalFn1204 DAT_00d9b094,DAT_00d9b09c,DAT_00d9b0a0;
 void __cdecl FUN_00d86c20();
 extern "C" int __cdecl atexit(void (__cdecl*)());
+// pdb: TES::LockHavokUpdateMT | TES.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: abLock
 void __stdcall FUN_00434cf0(bool enter) {
  if(!(DAT_0106cd78&1)) { DAT_0106cd78|=1;DAT_00d9b094(&DAT_0106cd60);atexit(FUN_00d86c20); }
  if(DAT_0106cd30!=1) { if(enter)DAT_00d9b09c(&DAT_0106cd60);else DAT_00d9b0a0(&DAT_0106cd60); }
@@ -8738,6 +9002,8 @@ struct RefHolderStandIn
     void FUN_00427860(RefObjectStandIn* value);
 };
 
+// pdb: QueuedFile::SetParent | ModelLoader.obj | fnv360_0721_beta, call_gap, low
+// pdb params: apParent
 void RefHolderStandIn::FUN_00427860(RefObjectStandIn* value)
 {
     
@@ -8780,6 +9046,8 @@ struct Table {
     volatile long count;
     bool FUN_00424b70(Entry* entry);
 };
+// pdb: BSTaskManager<__int64>::RemoveTask | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTask
 bool Table::FUN_00424b70(Entry* entry)
 {
     unsigned int low=*(volatile unsigned int*)&entry->keyLow;
@@ -8831,6 +9099,8 @@ public:
     bool FUN_004304c0(int index, void* arg, CPtr* pOut);
 };
 
+// pdb: LockFreeMap<MobileObject *,NiPointer<LipTask> >::LockFreeMapInterface::GetAt | LipSyncBackgroundManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiBucket, aKey, arData
 bool COwner::FUN_004304c0(int index, void* arg, CPtr* pOut)
 {
     bool bOk = FUN_0042f440(index, arg);
@@ -9041,6 +9311,8 @@ struct Outer42
     void FUN_00427280(ObjP42* p, int arg);
 };
 
+// pdb: ModelLoader::TryAndRemoveModel | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apModel, apModelFileName
 void Outer42::FUN_00427280(ObjP42* p, int arg)
 {
     if (p->unk08 + p->unk04 != 0) return;
@@ -9063,6 +9335,7 @@ extern unsigned char DAT_0106cafd;
 extern unsigned char DAT_010f2c7c;
 namespace f3m_004375a0 {
 
+// pdb: TES::ToggleCollision | TES.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_004375a0()
 {
     bool b = (DAT_0106cafd == 0);
@@ -9106,6 +9379,7 @@ public:
     void* unk18;
 };
 
+// pdb: LockFreeMap<AnimIdle *,NiPointer<QueuedAnimIdle> >::~LockFreeMap<AnimIdle *,NiPointer<QueuedAnimIdle> > | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_00431700::~FUN_00431700()
 {
     FUN_00431400(true);
@@ -9253,6 +9527,8 @@ struct Owner33df0 {
     void FUN_00433df0(NiAVObject* target, float duration);
 };
 
+// pdb: TES::AddTempDebugObject | TES.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObject, afTime
 void Owner33df0::FUN_00433df0(NiAVObject* target, float duration) {
     if (target) {
         BSTempNode* p = new BSTempNode(duration);
@@ -9284,6 +9560,8 @@ public:
     void FUN_00433950(unsigned char v);
 };
 
+// pdb: TES::ShowLandBorders | TES.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: abShow
 void Host39950::FUN_00433950(unsigned char v)
 {
     if (unk60 != v) {
@@ -9323,6 +9601,7 @@ struct FUN_00424c00 : FUN_00424c00_Base {
     FUN_00424c00(unsigned char b);
 };
 
+// pdb: TESObjectREFR::GetMultiBound | TESObjectREFR.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: IOTask::IOTask)
 FUN_00424c00::FUN_00424c00(unsigned char b) : FUN_00424c00_Base()
 {
     vtable=&DAT_00db78b0;
@@ -9417,6 +9696,8 @@ struct FUN_004370a0_cls {
     void FUN_004370a0(unsigned int a, unsigned int b, bool flag);
 };
 
+// pdb: TES::SetHideLandNormalMapForGridCell | TES.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiGridX, aiGridY, abFlag
 void FUN_004370a0_cls::FUN_004370a0(unsigned int a, unsigned int b, bool flag)
 {
     F370_O** ptr = unk08->FUN_0047b220(a, b);
@@ -9468,6 +9749,8 @@ extern long(__stdcall* DAT_00d9b064)(long*);extern long(__stdcall* DAT_00d9b068)
 struct Ref1281{virtual void Destroy(unsigned int);int unk04;long count08;void Inc(){DAT_00d9b068(&count08);}void Dec(){if(DAT_00d9b064(&count08)==0)Destroy(1);}};
 struct Smart1281{Ref1281* value;Smart1281(const Smart1281& other):value(other.value){if(value)value->Inc();}~Smart1281(){if(value)value->Dec();}};
 struct Owner1281{virtual void Slot00();virtual void Slot04();virtual void Slot08();virtual void Slot0C();virtual void Slot10();virtual void Slot14();virtual bool Match(unsigned int,Smart1281);int unk04;unsigned int count08;bool FUN_0042acd0(Smart1281);};
+// pdb: LockFreeMap<MobileObject *,NiPointer<LipTask> >::Remove | LipSyncBackgroundManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aData
 bool Owner1281::FUN_0042acd0(Smart1281 value){bool found=false;for(unsigned int i=0;i<count08&&!found;++i)found=Match(i,value);return found;}
 }   // namespace f3m_0042acd0
 
@@ -9484,6 +9767,8 @@ struct LinkArray
     void FUN_0043c1d0(unsigned int index, const unsigned int& value);
 };
 
+// pdb: NiTLargeArray<unsigned int,NiTMallocInterface<unsigned int> >::SetAt | TESSaveLoadGame.obj | fnv360_0822_retail, call_seq, high
+// pdb params: uiIndex, element
 void LinkArray::FUN_0043c1d0(unsigned int index, const unsigned int& value)
 {
     if (index >= size)
@@ -9516,6 +9801,7 @@ struct Owner922 {
     }
     int* FUN_00424270(int* output);
 };
+// pdb: bhkWorldObject::GetShape | BipedAnim.obj | fnv360_0822_retail, call_dedup, low
 int* Owner922::FUN_00424270(int* output) {
     int value;
     Member922* member = GetMember();
@@ -9546,6 +9832,7 @@ public:
     virtual ~FUN_00431780();
 };
 
+// pdb: LockFreeMap<Animation *,NiPointer<QueuedReplacementKFList> >::~LockFreeMap<Animation *,NiPointer<QueuedReplacementKFList> > | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_00431780::~FUN_00431780()
 {
     FUN_00431400(1);
@@ -9599,6 +9886,7 @@ public:
     FUN_00421810();
 };
 
+// pdb: ExtraDismemberedLimbs::ExtraDismemberedLimbs | ExtraDataObjects.obj | fnv360_0721_beta, call_seq, medium
 FUN_00421810::FUN_00421810() : BSExtraData(0x5f)
 {
     unk0C = 0;
@@ -9637,6 +9925,8 @@ struct FUN_00421100_Obj {
     void FUN_00421100(int key);
 };
 
+// pdb: ExtraFactionChanges::ExpelFromFaction | ExtraDataObjects.obj | fnv360_0822_debug, call_gap, low, conflict (bridge: ExtraFactionChanges::AddToFaction)
+// pdb params: apFaction
 void FUN_00421100_Obj::FUN_00421100(int key)
 {
 
@@ -9667,6 +9957,7 @@ public:
     n420270::FUN_006c8220 member;
     virtual ~FUN_00420270();
 };
+// pdb: ExtraEnableStateChildren::~ExtraEnableStateChildren | ExtraDataObjects.obj | fnv360_0822_debug, call_seq, high
 FUN_00420270::~FUN_00420270()
 {
     member.~FUN_006c8220();
@@ -9694,6 +9985,7 @@ public:
     Arr422010 arr;
     virtual ~FUN_00422010();
 };
+// pdb: ExtraFriendHits::~ExtraFriendHits | ExtraDataObjects.obj | fnv360_0822_debug, call_seq, medium
 FUN_00422010::~FUN_00422010()
 {
 }
@@ -9741,6 +10033,7 @@ class FUN_0042c0f0 : public FUN_00aa51a0
 };
 
 // @fnv 0x0043f080
+// pdb: QueuedHelmet::~QueuedHelmet | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_0042c0f0::~FUN_0042c0f0()
 {}
 
@@ -9766,6 +10059,7 @@ public:
     virtual ~FUN_00432050();
 };
 
+// pdb: LockFreeMap<TESObjectREFR *,NiPointer<QueuedReference> >::~LockFreeMap<TESObjectREFR *,NiPointer<QueuedReference> > | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_00432050::~FUN_00432050()
 {
     FUN_00431400(1);
@@ -9789,6 +10083,7 @@ struct Q31b0Owner {
     Q31b0Lookup* lookup;
     Q31b0Cell** FUN_004331b0();
 };
+// pdb: TES::FindFirstGridCellWithWater | TES.obj | fnv360_0822_retail, call_seq, medium
 Q31b0Cell** Q31b0Owner::FUN_004331b0()
 {
     Q31b0Cell** result = 0;
@@ -9846,6 +10141,8 @@ struct Owner_42cc90 {
     void FUN_00429220(int a1, Handle_42cc90<Obj_42cc90>* out, int a2, int a3, int a4);
     void FUN_0042cc90(int a1, int a2, int a3, int a4);
 };
+// pdb: ModelLoader::QueueBoundObject | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apBoundObject, aePriority, apParent, apQueuedForRef
 void Owner_42cc90::FUN_0042cc90(int a1, int a2, int a3, int a4)
 {
     Handle_42cc90<Obj_42cc90> sp;
@@ -9914,6 +10211,7 @@ struct FUN_00430df0_cls {
     QMgr* unk0c;
     bool FUN_00430df0();
 };
+// pdb: ModelLoader::UpdateReferencesToQueue | ModelLoader.obj | fnv360_0822_retail, caller_sim, low
 bool FUN_00430df0_cls::FUN_00430df0()
 {
     QTimer tm;
@@ -9977,6 +10275,7 @@ struct FUN_004213c0 : Base4213c0 {
     FUN_006c8220* list;
     virtual ~FUN_004213c0();
 };
+// pdb: ExtraSayTopicInfoOnceADay::~ExtraSayTopicInfoOnceADay | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, high
 FUN_004213c0::~FUN_004213c0()
 {
     FUN_006c8220* head = list;
@@ -10738,6 +11037,8 @@ struct Mgr
     void FUN_004348e0(Ref* ref, Cell* cell, Obj3* obj3, bool skip);
 };
 
+// pdb: TES::AttachModel | TES.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRef, apCell, apQueuedReference, abMoved
 void Mgr::FUN_004348e0(Ref* ref, Cell* cell, Obj3* obj3, bool skip)
 {
     if (!ref)
@@ -10888,6 +11189,8 @@ __declspec(noinline) ReflectorEntry* ExtraReflectorRefs::FUN_0041f440(int key)
     return result;
 }
 
+// pdb: ExtraReflectorRefs::Compare | ExtraDataObjects.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompare
 bool ExtraReflectorRefs::FUN_00420d70(BSExtraData* other)
 {
     ExtraReflectorRefs* o = dynamic_cast<ExtraReflectorRefs*>(other);
@@ -10954,6 +11257,8 @@ struct Owner430 {
     QueuedRefMapView430* m_pMap;
     void FUN_00430bc0(void* target);
 };
+// pdb: ModelLoader::UpdateQueuedReferencePriorities | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCriticalCell
 void Owner430::FUN_00430bc0(void* target) {
     QueuedRefMap430::LockFreeMapIterator iter;
     do {
@@ -11023,6 +11328,8 @@ struct QHolder {
     void FUN_004297f0(int value);
 };
 
+// pdb: ModelLoader::CancelReference | ModelLoader.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apRef
 void QHolder::FUN_004297f0(int value)
 {
     NiPointer<QRef> first;
@@ -11065,6 +11372,8 @@ struct Owner_42cc00 {
     void FUN_0042cc00(int a1, int a2, int a3, int a4, int a5);
 };
 
+// pdb: ModelLoader::QueueTreeModel | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRef, apTree, aePriority, apParent, aeLODFadeMult
 void Owner_42cc00::FUN_0042cc00(int a1, int a2, int a3, int a4, int a5)
 {
     Handle_42cc00<Obj_42cc00> sp;
@@ -11089,6 +11398,7 @@ struct FUN_00431980 : Base431980 {
     void FUN_00431400(int mode);
     virtual ~FUN_00431980();
 };
+// pdb: LockFreeMap<BSFileEntry *,NiPointer<QueuedTexture> >::~LockFreeMap<BSFileEntry *,NiPointer<QueuedTexture> > | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_00431980::~FUN_00431980()
 {
     FUN_00431400(1);
@@ -11151,6 +11461,7 @@ struct FUN_00425540
     ~FUN_00425540();
 };
 
+// pdb: KFModel::~KFModel | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_00425540::~FUN_00425540()
 {
     void* b = buffer;
@@ -11185,6 +11496,8 @@ public:
     unsigned char FUN_00433980(void* object, int arg1, int arg2, float arg3);
 };
 
+// pdb: TES::PickWaterDistance | TES.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apPick, aOrigin, aDir, afDistance
 unsigned char Owner_00433980::FUN_00433980(void* object, int arg1, int arg2, float arg3)
 {
     bool result = false;
@@ -11291,6 +11604,7 @@ struct Owner1057 {
 
 };
 
+// pdb: QueuedHead::CheckFinished | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Owner1057::FUN_00426440() {
 
     if ((unsigned char)(storage20 ? (*(Storage1057* volatile*)&storage20)->IsEmpty() : 1)) {
@@ -11342,6 +11656,8 @@ struct FUN_004246b0_Result {
 
 int __cdecl FUN_00c0050a(int object, int unused, int first, int second, int unused2);
 
+// pdb: ModelLoader::GetModelForBoundObject | ModelLoader.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apBoundObject, apQueuedForRef
 int __stdcall FUN_004246b0(FUN_004246b0_Param1* param1, FUN_004246b0_Param2* param2) {
     int result;
 
@@ -11411,6 +11727,7 @@ public:
     void Clear(bool freeNodes);
     virtual ~FUN_00431620();
 };
+// pdb: LockFreeQueue<NiPointer<QueuedReference> >::~LockFreeQueue<NiPointer<QueuedReference> > | ModelLoader.obj | fnv360_0822_debug, call_seq, medium
 FUN_00431620::~FUN_00431620()
 {
     Clear(true);
@@ -11469,6 +11786,8 @@ struct ItemSlots
     void FUN_00433800(Item* item);
 };
 
+// pdb: TES::RemoveCellFromInteriorBuffer | TES.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apCell
 void ItemSlots::FUN_00433800(Item* item)
 {
     unsigned int i = 0;
@@ -11498,6 +11817,8 @@ struct Ref435{
 };
 void __cdecl FUN_00829350(const char* name,NiPointer<Ref435>* out);
 void __cdecl FUN_00829710(Ref435* obj);
+// pdb: TES::RemoveTextureImage | TES.obj | fnv360_0822_debug, caller, medium
+// pdb params: apfilename, aiOtherRefs
 bool __stdcall FUN_00435310(const char* name,unsigned int extra){
     NiPointer<Ref435> obj;
     FUN_00829350(name,&obj);
@@ -11762,6 +12083,8 @@ extern "C" void __cdecl FUN_006bebf0();
 extern "C" void __cdecl FUN_0061a000(Node43a30* arg);
 extern "C" App43a30* __cdecl FUN_00bccee0();
 
+// pdb: TES::ShowLoadingMenu | TES.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: abShow, apLocation
 bool This43a30::FUN_00433a30(char flag, Node43a30* node)
 {
     if (flag != 0)
@@ -11936,6 +12259,8 @@ public:
                       Obj42cb60* a4, int a5, bool a6, bool a7, bool a8);
 };
 
+// pdb: ModelLoader::QueueModel | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apModelFileName, apTextureList, aspQueuedModel, aePriority, apParent, aeLODFadeMult, abPrepareAfterLoad, abAddRefCount, abFaceGenModel
 void Owner42cb60::FUN_00428a30(int a1, int a2, NiPointer<Obj42cb60>* out, int a3,
                                Obj42cb60* a4, int a5, bool a6, bool a7, bool a8)
 {
@@ -11983,6 +12308,7 @@ struct Node {
 extern Node* DAT_0106e588;
 extern Node* DAT_0106e584;
 extern unsigned int DAT_00f4c78c;
+// pdb: NiTAbstractPoolAllocator<unsigned int>::CreateFreeMem | MultiBoundMarkerData.obj | fnv360_0721_beta, udata, medium
 void FUN_00422ab0() {
  DAT_0106e588=new Node[DAT_00f4c78c];
  Node* node=DAT_0106e588+DAT_00f4c78c-1;
@@ -12012,6 +12338,8 @@ struct TLSData {
 
 __declspec(thread) TLSData g_tls;
 
+// pdb: BSSimpleArray<BGSLoadFormBuffer *,1024>::Add | BGSSaveLoadGame.obj | fnv360_1110_debug, call_gap, low
+// pdb params: aValue
 bool __stdcall FUN_0043c350(bool flag) {
     bool old = (~g_tls.flags) & 1;
     if (!flag) {
@@ -12043,6 +12371,7 @@ struct F3Extra_00420250 {
     void* next; void* value; void* tail;
     F3Extra_00420250();
 };
+// pdb: ExtraEnableStateChildren::ExtraEnableStateChildren | ExtraDataObjects.obj | fnv360_0721_beta, call_seq, medium
 F3Extra_00420250::F3Extra_00420250() { type=0x38; next=0; vtable=&DAT_00db72fc; value=0; tail=0; }
 }   // namespace f3m_00420250
 
@@ -12054,6 +12383,7 @@ struct F3Extra_004202e0 {
     void* next; void* value; void* tail;
     F3Extra_004202e0();
 };
+// pdb: ExtraLinkedRefChildren::ExtraLinkedRefChildren | ExtraDataObjects.obj | fnv360_0721_beta, call_seq, medium
 F3Extra_004202e0::F3Extra_004202e0() { type=0x52; next=0; vtable=&DAT_00db7308; value=0; tail=0; }
 }   // namespace f3m_004202e0
 
@@ -12065,6 +12395,7 @@ struct F3Extra_00420f40 {
     void* next; void* value; void* tail;
     F3Extra_00420f40();
 };
+// pdb: ExtraDroppedItemList::ExtraDroppedItemList | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, medium
 F3Extra_00420f40::F3Extra_00420f40() { type=0x3a; next=0; vtable=&DAT_00db7314; value=0; tail=0; }
 }   // namespace f3m_00420f40
 
@@ -12076,6 +12407,7 @@ struct F3Value_00422900 {
     unsigned char unk0c,unk0d; unsigned short unk0e;
     F3Value_00422900();
 };
+// pdb: MapMarkerData::MapMarkerData | MapMarkerData.obj | fnv360_0822_retail, call_gap_sim, high
 F3Value_00422900::F3Value_00422900() {
     vtable=&DAT_00db3440;unk04=0;unk08=0;unk0a=0;unk0c=0;unk0d=0;unk0e=0;
 }
@@ -12105,6 +12437,7 @@ public:
     virtual ~ExtraPlayerCrimeList();
 };
 
+// pdb: ExtraPlayerCrimeList::~ExtraPlayerCrimeList | ExtraDataObjects.obj | fnv360_0822_debug, call_seq, high
 ExtraPlayerCrimeList::~ExtraPlayerCrimeList()
 {
     delete crimeList;
@@ -12177,6 +12510,7 @@ class LoadedFileStringMap_1f90 : public LoadedFileMap_1f90 {
 public:
     virtual ~LoadedFileStringMap_1f90();
 };
+// pdb: LockFreeStringMap<LoadedFile *>::`scalar deleting destructor' | ModelLoader.obj | fnv360_0822_retail, uvref, medium
 LoadedFileStringMap_1f90::~LoadedFileStringMap_1f90()
 {
     FUN_004312c0(1);
@@ -12237,6 +12571,7 @@ struct Ref_e210 : RefBase_e210 {
     Base_e210* base44;
     void FUN_0042e210();
 };
+// pdb: QueuedTreeModel::QueueMe | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Ref_e210::FUN_0042e210()
 {
     char fullPath[260];
@@ -12339,6 +12674,7 @@ public:
     void FUN_0042e700();
 };
 
+// pdb: QueuedActor::QueueModels | ModelLoader.obj | fnv360_0822_retail, call_gap, low
 void ProcessRecordV::FUN_0042e700()
 {
     ThreadOwnerScopeV scope(owner);
@@ -12389,6 +12725,7 @@ struct Record4228
     void FUN_00422890();
 };
 
+// pdb: MapMarkerData::Save | MapMarkerData.obj | fnv360_0822_retail, call_gap, low
 void Record4228::FUN_00422890()
 {
     FUN_004556a0('MANF', unk0C);
@@ -12427,6 +12764,8 @@ public:
     int unk3C;
 };
 
+// pdb: QueuedReplacementKF::QueuedReplacementKF | ModelLoader.obj | fnv360_0822_retail, uvref, medium
+// pdb params: apFileName, aePriority, apAnim, apOwner
 QueuedReplacementKF::QueuedReplacementKF(int arg0, int arg1, int arg2, int arg3)
     : QueuedKF(arg0, arg1), unk38(arg2), unk3C(arg3)
 {
@@ -12472,6 +12811,7 @@ public:
     ExtraLightData* lightData;
 };
 
+// pdb: ExtraLight::~ExtraLight | ExtraDataObjects.obj | fnv360_0822_debug, call_seq, high
 ExtraLight::~ExtraLight()
 {
     delete lightData;
@@ -12501,6 +12841,7 @@ public:
     BSSimpleList<TESObjectREFR*> refs;
 };
 
+// pdb: ExtraWaterLightRefs::~ExtraWaterLightRefs | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, high
 ExtraWaterLightRefs::~ExtraWaterLightRefs()
 {
     refs.RemoveAll();
@@ -12530,6 +12871,7 @@ public:
     RunOnceNode_0150* packs;
 };
 
+// pdb: ExtraRunOncePacks::~ExtraRunOncePacks | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, high
 ExtraRunOncePacks::~ExtraRunOncePacks()
 {
     for (RunOnceNode_0150* node = packs; node; node = node->next) {
@@ -12607,6 +12949,8 @@ public:
     unsigned char flags3C;
 };
 
+// pdb: QueuedModel::QueuedModel | ModelLoader.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: apModel, aePriority, aeLODFadeMult, abPrepareAfterLoad, bAddRefCount
 QueuedModel::QueuedModel(ModelSource425da0* source, void* entry, int formType, bool flag0, bool flag1)
     : QueuedFileEntry(entry), formType38(formType), source34(source), flags3C(0)
 {
@@ -12687,6 +13031,7 @@ struct FUN_004274d0_MyStandin {
     int* FUN_004274d0(int param_2);
 };
 
+// pdb: NiPointer<QueuedFaceGenFile>::~NiPointer<QueuedFaceGenFile> | ModelLoader.obj | fnv360_0822_debug, call_gap_sim, low, conflict (skyrim: std::allocator<char>::max_size)
 int* FUN_004274d0_MyStandin::FUN_004274d0(int param_2) {
     *reinterpret_cast<int*>(this) = param_2;
     if (param_2 != 0) {
@@ -12742,6 +13087,7 @@ public:
     Flags42bdf0 flags34;
     void FUN_0042bdf0();
 };
+// pdb: QueuedTexture::QueueMe | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void FUN_0042bdf0_Obj::FUN_0042bdf0()
 {
     if (unk2C) {
@@ -12779,6 +13125,7 @@ struct Manager609{
 };
 extern Manager609* DAT_0116d138;
 struct Owner609{void FUN_00424600();};
+// pdb: QueuedKF::QueueMe | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Owner609::FUN_00424600(){DAT_0116d138->Notify(this);}
 }   // namespace f3m_00424600
 
@@ -12787,6 +13134,8 @@ namespace f3m_00424c60 {
 struct Manager644{void FUN_00aa2ba0(void*,void*);};
 extern Manager644* DAT_0116d138;
 struct Owner644{void FUN_00424c60(void*);};
+// pdb: IOTask::Requeue | ModelLoader.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: QueuedReference::DoAttach)
+// pdb params: aeNewPriority
 void Owner644::FUN_00424c60(void* value){DAT_0116d138->FUN_00aa2ba0(this,value);}
 }   // namespace f3m_00424c60
 
@@ -12794,6 +13143,8 @@ void Owner644::FUN_00424c60(void* value){DAT_0116d138->FUN_00aa2ba0(this,value);
 #include <string.h>
 namespace f3m_00431dd0 {
 
+// pdb: LockFreeStringMap<Model *>::IsKeyGreaterOrEqual | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apKey1, apKey2
 bool __stdcall FUN_00431dd0(const char* a, const char* b)
 {
     return strcmp(a, b) >= 0;
@@ -12830,6 +13181,8 @@ struct StrA670 : StrBaseA670
     StrA670& FUN_0042a670(unsigned int off, unsigned int count);
 };
 
+// pdb: std::basic_string<char,std::char_traits<char>,std::allocator<char> >::erase | TESObject.obj | fnv360_0822_retail, caller, low
+// pdb params: _Off, _Count
 StrA670& StrA670::FUN_0042a670(unsigned int off, unsigned int count)
 {
     if (Mysize < off)
@@ -12860,6 +13213,7 @@ struct Owner689 {
     }
     unsigned char FUN_00432b00();
 };
+// pdb: TESObjectCELL::LightMarkerNode | TESObjectCELL.obj | fnv360_0822_debug, call_gap_sim, low
 unsigned char Owner689::FUN_00432b00() { return GetValue(); }
 }   // namespace f3m_00432b00
 
@@ -12899,6 +13253,7 @@ public:
 
 using namespace f3m_00436190;
 
+// pdb: TES::ClearDeadCountList | TES.obj | fnv360_0822_retail, call_gap_sim, medium
 void Owner::FUN_00436190()
 {
     for (ListNode* node = &items; node; node = node->next) {
@@ -13041,6 +13396,7 @@ struct Owner944 {
     void* vtable00;
     Owner944* FUN_00427830(unsigned int flags);
 };
+// pdb: BSTask<__int64>::`scalar deleting destructor' | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 Owner944* Owner944::FUN_00427830(unsigned int flags) {
     vtable00 = &DAT_00db785c;
     DAT_00d9b064(&DAT_0106ca6c);
@@ -13083,6 +13439,7 @@ struct Owner943 {
     void* GetFallback() { Child943* child = child5C; if (child) return child->value14; return 0; }
     void* FUN_00424eb0();
 };
+// pdb: TESObjectREFR::Get3D | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void* Owner943::FUN_00424eb0() {
     if (this == gCachedOwner943) return gCachedValue943;
     return GetFallback();
@@ -13125,6 +13482,7 @@ struct Owner956 {
     void FUN_00426150();
     void FUN_0042fa20();
 };
+// pdb: QueuedReplacementKF::Finish | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Owner956::FUN_0042fa20() {
     FUN_00426150();
     if (active30 && unk0C != 6) {
@@ -13165,6 +13523,7 @@ struct Owner967 {
     Child967* child3C;
     void FUN_00426260();
 };
+// pdb: QueuedAnimIdle::PostProcess | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Owner967::FUN_00426260() {
     int value = value30;
     if (value && unk0C != 6) child3C->FUN_004647c0(value);
@@ -13220,6 +13579,7 @@ struct Owner4368e0 {
     void FUN_004368e0();
 };
 
+// pdb: TES::UnloadDefaultModels | TES.obj | fnv360_0822_retail, call_gap_sim, low
 void Owner4368e0::FUN_004368e0()
 {
     if (*DAT_00f621f8.value)
@@ -13313,6 +13673,8 @@ struct Owner1007 {
     Data1007* data28;
     bool FUN_00426670(int first, int second);
 };
+// pdb: QueuedHead::GetDescription | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apDescription, aiBufferSize
 bool Owner1007::FUN_00426670(int first, int second) {
     const char* text = data28->nameD0.Get();
     FUN_00403230(first, second, DAT_00db7cc4, text);
@@ -13344,6 +13706,8 @@ public:
 };
 extern Heap432120 DAT_01090a78;
 
+// pdb: LockFreeCaseInsensitiveStringMap<Model *>::CopyKey | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apKey
 char* __stdcall FUN_00432120(const char* src)
 {
     AutoMemContext432120 context(6);
@@ -13446,6 +13810,7 @@ public:
     NiPointer<NiTexture> m_spObject;
 };
 
+// pdb: BSStream::~BSStream | ModelLoader.obj | fnv360_0721_beta, caller, medium
 BSStream::~BSStream()
 {
     if (m_pFile)
@@ -13481,6 +13846,7 @@ struct Owner {
     PartB* m_pB;
     void FUN_004284e0();
 };
+// pdb: QueuedCharacter::FinishAttach | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Owner::FUN_004284e0()
 {
     AllocTagScope scope(m_iTag);
@@ -13575,6 +13941,7 @@ public:
     BSSimpleList<void*> list;
     virtual ~SettingCollList();
 };
+// pdb: RegSettingCollection::`scalar deleting destructor' | Main.obj | fnv360_0822_retail, uvref, medium
 SettingCollList::~SettingCollList()
 {
     list.~BSSimpleList<void*>();
@@ -13598,6 +13965,8 @@ struct Map
 extern Map* DAT_0108f068;
 }
 using namespace f3m_00424e10;
+// pdb: BSTexturePalette::GetTexture | ModelLoader.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: BSStream::KillObjectRefMap)
+// pdb params: apEntry, arTexture
 bool FUN_00424e10(unsigned int key, RefObj** out)
 {
     RefObj* p = *out;
@@ -13660,6 +14029,8 @@ namespace f3m_00423d40 {
 extern char DAT_00f46078, DAT_00f47aa8;
 void* __cdecl FUN_00c0050a(void* object, int unused, const void* baseType, const void* targetType, int flags);
 struct Owner1056 { void* reference00; void* FUN_00423d40(int unused); };
+// pdb: DoorTeleportData::InitLoadGame | TeleportData.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apLoadGameBuffer
 void* Owner1056::FUN_00423d40(int unused) {
     reference00 = reference00 ? FUN_00c0050a(TESForm_GetFormByNumericID(reinterpret_cast<unsigned int>(reference00)), 0, &DAT_00f46078, &DAT_00f47aa8, 0) : 0;
     return reference00;
@@ -13700,6 +14071,8 @@ struct Owner27930
     Owner27930* FUN_00427930(int a, int b, int c, int d);
 };
 
+// pdb: Model::Model | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apFilename, apStream, abPrepareObject, abFaceGenModel
 Owner27930* Owner27930::FUN_00427930(int a, int b, int c, int d)
 {
     Guard14 tmp(this);
@@ -13747,6 +14120,7 @@ struct Owner : OwnerBase {
     ~Owner();
 };
 
+// pdb: QueuedFileLoad::~QueuedFileLoad | ModelLoader.obj | fnv360_0822_debug, call_seq, medium
 Owner::~Owner() {
 }
 }   // namespace f3m_00426d10
@@ -13959,6 +14333,7 @@ public:
     void FUN_00425f80();
 };
 
+// pdb: QueuedTreeModel::Run | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void FUN_00425f80_cls::FUN_00425f80()
 {
     TlsSaveGuard guard;
@@ -14071,6 +14446,8 @@ int FUN_00433630_cls::TES_FreeInteriorBuffer(bool flag)
 // @f3 0x00431e20 (community match, verified in this file)
 #include <string.h>
 namespace f3m_00431e20 {
+// pdb: LockFreeStringMap<Model *>::IsKeyEqual | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apKey1, apKey2
 bool __stdcall FUN_00431e20(const char* first,const char* second) { return strcmp(first,second)==0; }
 }   // namespace f3m_00431e20
 
@@ -14159,6 +14536,8 @@ struct Listener : ListenerBase
     Listener(int value, unsigned char kind);
     virtual ~Listener();
 };
+// pdb: SettingT<INISettingCollection>::SettingT<INISettingCollection> | TES.obj | fnv360_0822_debug, caller, medium
+// pdb params: apID, abValue
 Listener::Listener(int value, unsigned char kind) : ListenerBase(value, kind)
 {
     if (!DAT_0116d6f4)
@@ -14241,6 +14620,7 @@ struct Owner
     void FUN_004266b0();
 };
 
+// pdb: QueuedHelmet::Run | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Owner::FUN_004266b0()
 {
     for (int i = 0; i < 20; i++) {
@@ -14303,6 +14683,7 @@ public:
     SharedPointer second;
 };
 
+// pdb: QueuedCharacter::~QueuedCharacter | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_00428370::~FUN_00428370()
 {
 }
@@ -14336,6 +14717,8 @@ struct ThreadSlotPool
     void* FUN_0042ba10(SlotFactory* factory);
 };
 
+// pdb: ThreadSpecificInterfaceManager<LockFreeMap<MobileObject *,NiPointer<LipTask> >::LockFreeMapInterface>::AddInterface | LipSyncBackgroundManager.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: apInterfacedClass
 void* ThreadSlotPool::FUN_0042ba10(SlotFactory* factory)
 {
     void* value = 0;
@@ -14357,6 +14740,8 @@ struct Base1269{Base1269(int);virtual ~Base1269();int unk04,unk08,unk0C,unk10,un
 struct Resource1269{void* value;Resource1269():value(0){}~Resource1269();};
 void __cdecl FUN_00bc8820(const char*,char*,unsigned int);
 class QueuedTexture:public Base1269{public:Resource1269 resource30;bool flag34;QueuedTexture(const char*,int);virtual ~QueuedTexture();};
+// pdb: QueuedTexture::QueuedTexture | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apFileName, aePriority
 QueuedTexture::QueuedTexture(const char* path,int mode):Base1269(mode),resource30(),flag34(false){char buffer[0x104];FUN_00bc8820(path,buffer,0x104);FUN_00aa5120(buffer);FUN_00aa5440(true);}
 }   // namespace f3m_004257a0
 
@@ -14369,6 +14754,7 @@ struct Record1280{unsigned int id,field04,field08,field0C,field10,field14,field1
 extern bool DAT_0106dd0e;void __cdecl TESForm___AddChunkData(unsigned int,const void*,unsigned int);
 inline void Swap1280(unsigned int& v){v=_byteswap_ulong(v);}
 struct Owner1280{Form1280* form;unsigned int field04,field08,field0C,field10,field14,field18;unsigned char flag1C;void FUN_00423e00();};
+// pdb: DoorTeleportData::Save | TeleportData.obj | fnv360_0822_retail, call_gap, low
 void Owner1280::FUN_00423e00(){if(form){Record1280 record;memset(&record,0,sizeof(record));record.id=form->id0C;record.field04=field04;record.field08=field08;record.field0C=field0C;record.field10=field10;record.field14=field14;record.field18=field18;record.flag1C=flag1C;if(DAT_0106dd0e){Swap1280(record.id);Swap1280(record.field04);Swap1280(record.field08);Swap1280(record.field0C);Swap1280(record.field10);Swap1280(record.field14);Swap1280(record.field18);}TESForm___AddChunkData(0x4c455458,&record,0x20);}}
 }   // namespace f3m_00423e00
 
@@ -14410,6 +14796,8 @@ public:
     StringAssignView& FUN_0042f100(const char* text, unsigned int count);
 };
 
+// pdb: std::basic_string<char,std::char_traits<char>,std::allocator<char> >::assign | TESObject.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: _Ptr, _Count
 StringAssignView& StringAssignView::FUN_0042f100(const char* text, unsigned int count)
 {
     if (Inside(text))
@@ -14600,6 +14988,8 @@ static inline void Dec426930(long* p)
         *p = 0;
 }
 
+// pdb: QueuedReference::Cancel | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aePreviousState, apTaskOwner
 void Obj426930::FUN_00426930(int a, int b)
 {
     if (task)
@@ -14654,6 +15044,7 @@ struct Owner434630 {
     void FUN_00434630();
 };
 
+// pdb: TES::InitializeWater | TES.obj | fnv360_0822_retail, call_gap, low
 void Owner434630::FUN_00434630()
 {
     HeapCtx434630 ctx(0x1d);
@@ -14764,6 +15155,8 @@ struct Q42B600Owner
     int __thiscall FUN_0042b600(int value);
 };
 
+// pdb: SettingCollectionList<Setting>::GetViewerStrings | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStringsA
 int __thiscall Q42B600Owner::FUN_0042b600(int value)
 {
     Q42B600TagScope scope(9);
@@ -14821,6 +15214,7 @@ struct QThis {
     void FUN_0042e700();
     void FUN_0042fb60();
 };
+// pdb: QueuedCharacter::QueueModels | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void QThis::FUN_0042fb60()
 {
     QScope scope(unk18);
@@ -14843,6 +15237,8 @@ namespace f3m_0043c020 {
 namespace Task690 {struct Heap {void* FUN_0086b930(unsigned);};extern Heap DAT_01090a78;}
 void FUN_00887da0(const char*,...);
 // @fnv 0x0046f0c0
+// pdb: TESDataHandler::CheckForNiRawImageData | TESDataHandler.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pFilename
 void __stdcall FUN_0043c020(const char* path)
 {
     HANDLE hFile = CreateFileA(path, 0x80000000, 1, 0, 3, 0x08000001, 0);
@@ -15050,6 +15446,8 @@ struct C4377c0 {
     void FUN_004377c0(int param);
 };
 
+// pdb: TES::RunCellTest | TES.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aiOptions
 void C4377c0::FUN_004377c0(int param)
 {
     unsigned int tick;
@@ -15133,6 +15531,8 @@ struct Owner42 : Base42 {
     int zero;
     Owner42(unsigned, unsigned, int);
 };
+// pdb: LockFreeMap<Animation *,NiPointer<QueuedReplacementKFList> >::LockFreeMap<Animation *,NiPointer<QueuedReplacementKFList> > | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiMaxThreads, aiNumBuckets, aiDeleteBatchSize
 Owner42::Owner42(unsigned n, unsigned m, int a) {
     Guard42 guard;
     zero = 0;
@@ -15150,6 +15550,7 @@ struct Member {void* head;void* next;void FUN_006c8220();~Member(){FUN_006c8220(
 void __cdecl FUN_00420370(Member*);
 struct Base {virtual void v0();int unk04,unk08;~Base() {}};
 struct FUN_00420450:Base {Member member;~FUN_00420450();};
+// pdb: ExtraActivateRef::~ExtraActivateRef | ExtraDataObjects.obj | fnv360_0822_debug, call_seq, high
 FUN_00420450::~FUN_00420450(){FUN_00420370(&member);}
 }
 }   // namespace f3m_00420450
@@ -15341,6 +15742,8 @@ struct Text4238d0 {
     void FUN_004238d0(Src4238d0* src);
 };
 
+// pdb: DoorTeleportData::Load | TeleportData.obj | fnv360_0822_retail, call_gap_sim, low, conflict (bridge: ExtraDataList::SetPatrolRefData)
+// pdb params: apFile
 void Text4238d0::FUN_004238d0(Src4238d0* src) {
     if (!src)
         return;
@@ -15461,6 +15864,7 @@ struct SsArr1425 {
  unsigned int size;
  unsigned int capacity;
 };
+// pdb: BSSimpleArray<CombatTimeStamp,1024>::`scalar deleting destructor' | ExtraDataObjects.obj | fnv360_0822_retail, vtable, medium
 SsArr1425* __fastcall FUN_00421770(SsArr1425* object, int, unsigned int flags) {
  object->SsArr1425::~SsArr1425();
  if (flags & 1) task1425::DAT_01090a78.FUN_0086ba60(object);
@@ -15492,6 +15896,8 @@ struct Search42f360 {
     bool FUN_0042f360(int key, int hint, int* outValue);
 };
 
+// pdb: LockFreeMap<PathingRequest *,PathingTaskData *>::LockFreeMapInterface::GetAt | PathManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiBucket, aKey, arData
 bool Search42f360::FUN_0042f360(int key, int hint, int* outValue)
 {
     bool v = Locate42dd40(key, hint);
@@ -15517,6 +15923,7 @@ struct Array {
  void* data; int count; int capacity;
  Array* FUN_004217c0(unsigned int flags);
 };
+// pdb: BSSimpleArray<unsigned int,1024>::`scalar deleting destructor' | ExtraDataObjects.obj | fnv360_0822_retail, vtable, medium
 Array* Array::FUN_004217c0(unsigned int flags){this->Array::~Array();if(flags&1)DAT_01090a78.FUN_0086ba60(this);return this;}
 }
 
@@ -15600,6 +16007,8 @@ struct Owner420690 {
     void FUN_00420690(SaveArg420690* arg);
 };
 
+// pdb: ExtraLitWaterRefs::InitItem | ExtraDataObjects.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apOwner
 void Owner420690::FUN_00420690(SaveArg420690* arg)
 {
     RefNode420690* cur = &list;
@@ -15646,6 +16055,7 @@ struct Owner {unsigned unk00;unsigned unk04;unsigned unk08;unsigned unk0c;unsign
     void FUN_004353f0(const char*,void*,int,int);
     void FUN_00436770();
 };
+// pdb: TES::PreloadDefaultModels | TES.obj | fnv360_0822_retail, objrun, medium
 void Owner::FUN_00436770() {
     ScopedTask task(7);
     if(*FUN_00f621fc) DAT_0106ca70->FUN_0042cac0(FUN_00f621fc,5,0,0,1,1,0);
@@ -15705,6 +16115,7 @@ public:
 	BSSimpleArray<unsigned int, 1024> guardedRefs;   // 0C
 };
 
+// pdb: ExtraGuardedRefData::~ExtraGuardedRefData | ExtraDataObjects.obj | fnv360_0822_debug, call_seq, high
 FUN_00421a10::~FUN_00421a10()
 {
 }
@@ -15725,6 +16136,7 @@ struct FUN_00420300 : Base {
  List entries;
  virtual ~FUN_00420300();
 };
+// pdb: ExtraLinkedRefChildren::~ExtraLinkedRefChildren | ExtraDataObjects.obj | fnv360_0822_debug, call_seq, high
 FUN_00420300::~FUN_00420300() { entries.FUN_006c8220(); }
 }
 }   // namespace f3m_00420300
@@ -15778,6 +16190,7 @@ public:
 	BSSimpleArray<unsigned int, 1024> guardedRefs;   // 0C
 };
 
+// pdb: ExtraGuardedRefData::ExtraGuardedRefData | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, medium
 FUN_004219b0::FUN_004219b0()
 {
 }
@@ -15810,6 +16223,7 @@ struct FUN_00421fb0 : FUN_00409e90 {
  virtual ~FUN_00421fb0();
  FUN_00421fb0();
 };
+// pdb: ExtraFriendHits::ExtraFriendHits | ExtraDataObjects.obj | fnv360_0822_retail, uvref, high
 FUN_00421fb0::FUN_00421fb0():FUN_00409e90(0x45),buffer(0){}
 }
 }   // namespace f3m_00421fb0
@@ -15863,6 +16277,8 @@ struct List {Node* head;Node* tail;Pool pool;
  __declspec(noinline) void FUN_00af0680(const Ptr& p){Node* node=pool.FUN_00423640();node->item=p;node->prev=0;node->next=head;if(head)head->prev=node;else tail=node;++pool.count;head=node;}
 };
 struct Owner {int padding[9];List list;void FUN_004236f0(Obj*);};
+// pdb: NiAVObject::AttachProperty | MultiBoundMarkerData.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: pkProperty
 void Owner::FUN_004236f0(Obj* obj){if(obj->Type()<7)list.FUN_00af0680(obj);}
 }
 }   // namespace f3m_004236f0
@@ -15898,6 +16314,8 @@ struct Owner4302
     int FUN_00430290(LONG a2, LONG a3, int a4, char a5);
 };
 
+// pdb: LockFreeMap<PathingRequest *,PathingTaskData *>::SetAt | PathManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiBucket, aKey, aData, abReplaceExisting
 int Owner4302::FUN_00430290(LONG a2, LONG a3, int a4, char a5)
 {
     ThreadSlot4302* s = slot;
@@ -15931,6 +16349,7 @@ struct FUN_00438420_Obj {
     void FUN_00438420();
 };
 
+// pdb: TES::HideUnneededLandPasses | TES.obj | fnv360_0822_retail, call_gap, medium
 void FUN_00438420_Obj::FUN_00438420() {
     if (DAT_0106e9cc != 5)
         return;
@@ -16010,6 +16429,7 @@ struct FUN_004256f0_Guard {
     }
 };
 
+// pdb: LoadedFile::~LoadedFile | ModelLoader.obj | fnv360_0822_retail, objrun, medium
 void FUN_004256f0_Owner::FUN_004256f0()
 {
     FUN_004256f0_Guard guard(this);
@@ -16131,6 +16551,8 @@ struct TESGridOwner
 };
 
 // @fnv 0x00459490
+// pdb: TES::SaveGame | TES.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apSaveGameBuffer
 void TESGridOwner::FUN_00436420(SaveBuffer* buffer)
 {
     int count = 0;
@@ -16357,6 +16779,8 @@ struct Node {
     unsigned short unkA4;
     unsigned short childCount;
 };
+// pdb: MakeNewGeomData | TES.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObject
 void __cdecl FUN_00435d30(Scene* object) {
     PropPtr result;
     if (object) {
@@ -16569,6 +16993,8 @@ struct FUN_005e5280 {unsigned unk00,unk04,unk08,unk0c;FUN_005e5280(int);static v
 struct Base {Base(){}virtual ~Base(){} virtual void v4();};
 struct FUN_0042aa90 : Base {Pair* first;Pair* last;int arg;Element* elements;FUN_005e5280* child;int flag;
 FUN_0042aa90(int,int);virtual ~FUN_0042aa90();virtual void v4();};
+// pdb: LockFreeQueue<NiPointer<AttachDistant3DTask> >::LockFreeQueue<NiPointer<AttachDistant3DTask> > | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiMaxThreads, aiDeleteBatchSize
 FUN_0042aa90::FUN_0042aa90(int count,int other){Scope context;flag=0;first=new Pair();last=first;arg=other;elements=new Element[count<<1];child=new FUN_005e5280(count);}
 }
 }   // namespace f3m_0042aa90
@@ -16753,6 +17179,8 @@ struct FUN_005e5280:Alloc {int unk00,unk04,unk08,unk0c;FUN_005e5280(int);};
 struct ArrayEntry {int value;static void* operator new[](unsigned n){return DAT_01090a78.FUN_0086b930(n);}};
 struct Base {Base(){}virtual ~Base(){}virtual void v04();};
 struct FUN_0042a8b0:Base {Pair* first;Pair* last;int arg;void* data;FUN_005e5280* child;int size;FUN_0042a8b0(int,int);virtual ~FUN_0042a8b0();virtual void v04();};
+// pdb: LockFreeQueue<NiPointer<QueuedReference> >::LockFreeQueue<NiPointer<QueuedReference> > | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiMaxThreads, aiDeleteBatchSize
 FUN_0042a8b0::FUN_0042a8b0(int count,int a){
  Scope context;size=0;first=new Pair();last=first;arg=a;data=new ArrayEntry[count<<1];child=new FUN_005e5280(count);
 }
@@ -17311,6 +17739,7 @@ struct FUN_00439300 {
  ~FUN_00439300();
  void FUN_00435070(int,int);bool FUN_00433540(void*);void TES_FreeInteriorBuffer(int);void FUN_00436190();void FUN_004391f0();void FUN_004368e0();
 };
+// pdb: TES::~TES | TES.obj | fnv360_0822_retail, call_gap, low
 FUN_00439300::~FUN_00439300(){
  unk00=&DAT_00db8d18;
  DAT_0116d708=0;
@@ -17359,6 +17788,8 @@ struct Node;
 struct FUN_0059acc0 {Node* head;FUN_0059acc0();};
 struct FUN_005e5280 {unsigned int unk00,unk04,unk08,unk0C;FUN_005e5280(unsigned int);};
 struct Map:InterfacedClass {Node** deletedBuffers;unsigned int bucketCount;FUN_0059acc0* buckets;unsigned int deleteBatchSize;FUN_005e5280* manager;volatile unsigned int itemUpdates;Map(unsigned int,unsigned int,unsigned int);virtual ~Map();};
+// pdb: LockFreeMap<TESObjectREFR *,NiPointer<QueuedHelmet> >::LockFreeMap<TESObjectREFR *,NiPointer<QueuedHelmet> > | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiMaxThreads, aiNumBuckets, aiDeleteBatchSize
 Map::Map(unsigned int threads,unsigned int count,unsigned int batch){
  MemoryContext context;
  itemUpdates=0;
@@ -17384,6 +17815,8 @@ struct Node;
 struct FUN_0059acc0 {Node* head;FUN_0059acc0();};
 struct FUN_005e5280 {unsigned int unk00,unk04,unk08,unk0C;FUN_005e5280(unsigned int);};
 struct Map:InterfacedClass {Node** deletedBuffers;unsigned int bucketCount;FUN_0059acc0* buckets;unsigned int deleteBatchSize;FUN_005e5280* manager;volatile unsigned int itemUpdates;Map(unsigned int,unsigned int,unsigned int);virtual ~Map();};
+// pdb: LockFreeMap<char const *,KFModel *>::LockFreeMap<char const *,KFModel *> | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiMaxThreads, aiNumBuckets, aiDeleteBatchSize
 Map::Map(unsigned int threads,unsigned int count,unsigned int batch){
  MemoryContext context;
  itemUpdates=0;
@@ -17410,6 +17843,8 @@ struct Node;
 struct FUN_0059acc0 {Node* head;FUN_0059acc0();};
 struct FUN_005e5280 {unsigned int unk00,unk04,unk08,unk0C;FUN_005e5280(unsigned int);};
 struct Map:InterfacedClass {Node** deletedBuffers;unsigned int bucketCount;FUN_0059acc0* buckets;unsigned int deleteBatchSize;FUN_005e5280* manager;volatile unsigned int itemUpdates;Map(unsigned int,unsigned int,unsigned int);virtual ~Map();};
+// pdb: LockFreeMap<BSFileEntry *,NiPointer<QueuedTexture> >::LockFreeMap<BSFileEntry *,NiPointer<QueuedTexture> > | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiMaxThreads, aiNumBuckets, aiDeleteBatchSize
 Map::Map(unsigned int threads,unsigned int count,unsigned int batch){
  MemoryContext context;
  itemUpdates=0;
@@ -17552,6 +17987,7 @@ struct QueuedKF
     void FUN_0042be50();
 };
 
+// pdb: QueuedKF::Run | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void QueuedKF::FUN_0042be50()
 {
     MemContextGuard kContext(0x33);
@@ -17577,6 +18013,7 @@ void QueuedKF::FUN_0042be50()
 
 // @f3 0x00426010 (community match, verified in this file)
 namespace f3m_00426010 {
+// pdb: QueuedMagicItem::CheckFinished | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 namespace Drain441{struct Queue{int unk00,unk04,head,unk0c,tail;};struct Owner{void FUN_00406d90();};struct Task{virtual ~Task();int unk04;volatile int refs;int state,unk10,unk14,unk18,unk1c;Queue*queue;int unk24;Owner*owner;void FUN_00426010();};void Task::FUN_00426010(){if(state>=4){int empty=1;if(queue){const volatile Queue*current=*(Queue*const volatile*)&queue;int head=current->head;empty=head==current->tail;}if((unsigned char)empty){owner->FUN_00406d90();if(!refs)delete this;}}}}
 
 
@@ -17676,6 +18113,8 @@ NiSourceTexture* __cdecl FUN_0082f530(const NiFixedString& name, FormatPrefs4353
 void __cdecl FUN_00829410(NiSourceTexture* tex, void* handle);
 void __cdecl FUN_00887da0(const char* fmt, ...);
 
+// pdb: TES::CreateTextureImage | TES.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apfilename, aspSourceTexture, abNoFileOK, abArchiveOnly
 void __stdcall FUN_004353f0(const char* pFileName, NiPointer<NiSourceTexture>& spTexture, bool bQuiet, bool bArchiveOnly)
 {
     unsigned int iArchiveType = 0;
@@ -17740,6 +18179,8 @@ struct Mgr432 {
     void FUN_00432230(const char* name, void* arg2);
 };
 
+// pdb: LockFreeCaseInsensitiveStringMap<Model *>::GetAt | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apKey, aData
 void Mgr432::FUN_00432230(const char* name, void* arg2)
 {
     char buf[1000];
@@ -17805,6 +18246,8 @@ struct FUN_0042b500_Obj {
     }
     void FUN_0042b500(Setting42b500* setting);
 };
+// pdb: SettingCollectionList<Setting>::Add | ModelLoader.obj | fnv360_0822_retail, vtable, high
+// pdb params: apSetting
 void FUN_0042b500_Obj::FUN_0042b500(Setting42b500* setting)
 {
     HeapContextGuard42b500 guard(9);
@@ -17826,6 +18269,8 @@ struct Ptr {
 };
 struct Owner { void FUN_00428810(int a1, Ptr* result, int a2, int a3, int a4, int a5, int a6, int a7); void FUN_0042cac0(int a1, int a2, int a3, int a4, int a5, int a6, int a7); };
 }
+// pdb: ModelLoader::QueueModel | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apModelFileName, aePriority, apParent, aeLODFadeMult, abPrepareAfterLoad, abAddRefCount, abFaceGenModel
 void w42cac0::Owner::FUN_0042cac0(int a1, int a2, int a3, int a4, int a5, int a6, int a7)
 {
     w42cac0::Ptr result;
@@ -17871,6 +18316,7 @@ public:
     f3m_422610::ParentArray children;
     virtual ~FUN_00422610();
 };
+// pdb: ExtraDismemberedLimbs::~ExtraDismemberedLimbs | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, high
 FUN_00422610::~FUN_00422610()
 {
     for (unsigned int i = 0; i < children.GetSize(); ++i) { f3m_422610::Child* c = children.GetAt(i); if (c) delete c; }
@@ -17927,6 +18373,7 @@ struct Owner_5140 {
     void FUN_00435140();
 };
 
+// pdb: TES::RunScripts | TES.obj | fnv360_0822_retail, call_gap, low
 void Owner_5140::FUN_00435140()
 {
     if (DAT_0106cd7c)
@@ -18141,6 +18588,7 @@ struct FUN_00424420_Owner {
     void __thiscall FUN_00424420();
 };
 
+// pdb: QueuedTreeBillboard::CreateBillboard | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void __thiscall FUN_00424420_Owner::FUN_00424420() {
     FUN_00424420_Virtual* object = unk38->unk00->FUN_004bb660(1);
     if (!object) {
@@ -18208,6 +18656,7 @@ struct World {
     void FUN_00433f70();
 };
 
+// pdb: TES::UpdateFadeNodesForAttachedCells | TES.obj | fnv360_0822_retail, call_gap_sim, low
 void World::FUN_00433f70()
 {
     if (DAT_0106cdcc) {
@@ -18268,6 +18717,8 @@ struct U42a100Obj : U42a100Base {
     int unk3C;
 };
 
+// pdb: ModelLoader::QueueTreeBillboard | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apFilename, apBillboardData
 void __stdcall FUN_0042a100(const char* name, int value)
 {
     NiPointer<U42a100Obj> obj = new U42a100Obj(name, value);
@@ -18329,6 +18780,7 @@ struct Owner5ec0 {
     void FUN_00425ec0();
 };
 
+// pdb: QueuedModel::CheckFinished | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Owner5ec0::FUN_00425ec0() {
     if (!(flags3C & 4)) {
         FUN_00aa5240();
@@ -18371,6 +18823,8 @@ public:
     NamedRef(const char* name, NiRefObject* ref);
 };
 
+// pdb: Model::Model | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apFilename, apObject3D
 NamedRef::NamedRef(const char* name, NiRefObject* ref)
 {
     unsigned int length = strlen(name) + 1;
@@ -18403,6 +18857,8 @@ struct FUN_004201f0_Obj {
     List4201f0* list;
     void FUN_004201f0(void* key, unsigned char value);
 };
+// pdb: ExtraRunOncePacks::AddRunOncePack | ExtraDataObjects.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apPack, acDay
 void FUN_004201f0_Obj::FUN_004201f0(void* key, unsigned char value)
 {
     for (List4201f0* node = list; node && node->item; node = node->next) {
@@ -18472,6 +18928,8 @@ struct Owner {
 }
 using namespace f3m_00436aa0;
 
+// pdb: TES::GetUnusedCachedParticleObject | TES.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apModel, arInstance
 int Owner::FUN_00436aa0(void* key, RefPtr& out)
 {
     out = 0;
@@ -18530,6 +18988,7 @@ public:
     void FUN_00433570(void* value);
 };
 
+// pdb: TESObjectCELL::Get3D | TESObjectCELL.obj | fnv360_1110_debug, call_seq, low
 void Obj433570::FUN_00433570(void* value)
 {
     if (FUN_00433540(value))
@@ -18578,6 +19037,7 @@ public:
  virtual ~FUN_00431800();
  void FUN_00431400(bool);
 };
+// pdb: LockFreeMap<TESObjectREFR *,NiPointer<QueuedHelmet> >::~LockFreeMap<TESObjectREFR *,NiPointer<QueuedHelmet> > | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_00431800::~FUN_00431800() {
  FUN_00431400(true);
  DAT_01090a78.FUN_0086ba60(entries);
@@ -18635,6 +19095,8 @@ struct FUN_00427160_cls {
     void FUN_00427160(int a1, bool a2);
 };
 
+// pdb: ModelLoader::ReleaseKF | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apKFFileName, abDeleteIfUnreferenced
 void FUN_00427160_cls::FUN_00427160(int a1, bool a2)
 {
     FUN_00427160_Out* out = 0;
@@ -18770,6 +19232,7 @@ public:
     virtual ~FUN_004310a0();
 };
 
+// pdb: SettingT<INISettingCollection>::~SettingT<INISettingCollection> | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_004310a0::~FUN_004310a0()
 {
     if (DAT_0116d6f4 == 0) {
@@ -18790,6 +19253,7 @@ struct State1212 { int unk00,unk04; unsigned long thread08; Pair1212 first0C; in
  void Notify(){ unsigned long thread=thread08; if(thread!=GetCurrentThreadId()){ if(first0C.count==0) first0C.Signal(); second18.Signal(); } } };
 struct Manager1212 { int unk00,unk04,unk08,unk0C,unk10,unk14,unk18,unk1C,unk20,unk24;State1212* state28; };
 extern Manager1212* DAT_0106ca70;
+// pdb: ModelLoader::ResumeCallback | ModelLoader.obj | fnv360_0822_retail, objrun, medium
 void __cdecl FUN_004247f0(){DAT_0106ca70->state28->Notify();}
 }
 
@@ -18815,6 +19279,8 @@ struct Map:Base {
     Word* words;int count;Element* elements;int extra;Child* child;int flag;
     Map(int,int,int);virtual ~Map();virtual void v4();
 };
+// pdb: LockFreeMap<TESObjectREFR *,NiPointer<QueuedReference> >::LockFreeMap<TESObjectREFR *,NiPointer<QueuedReference> > | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiMaxThreads, aiNumBuckets, aiDeleteBatchSize
 Map::Map(int n,int c,int e){
     Scope context;flag=0;count=c;elements=new Element[c];words=new Word[n*3];extra=e;child=new Child(n);
 }
@@ -18843,6 +19309,8 @@ struct Map:Base {
     Word* words;int count;Element* elements;int extra;Child* child;int flag;
     Map(int,int,int);virtual ~Map();virtual void v4();
 };
+// pdb: LockFreeMap<AnimIdle *,NiPointer<QueuedAnimIdle> >::LockFreeMap<AnimIdle *,NiPointer<QueuedAnimIdle> > | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiMaxThreads, aiNumBuckets, aiDeleteBatchSize
 Map::Map(int n,int c,int e){
     Scope context;flag=0;count=c;elements=new Element[c];words=new Word[n*3];extra=e;child=new Child(n);
 }
@@ -18871,6 +19339,8 @@ struct Map:Base {
     Word* words;int count;Element* elements;int extra;Child* child;int flag;
     Map(int,int,int);virtual ~Map();virtual void v4();
 };
+// pdb: LockFreeMap<char const *,LoadedFile *>::LockFreeMap<char const *,LoadedFile *> | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiMaxThreads, aiNumBuckets, aiDeleteBatchSize
 Map::Map(int n,int c,int e){
     Scope context;flag=0;count=c;elements=new Element[c];words=new Word[n*3];extra=e;child=new Child(n);
 }
@@ -19091,6 +19561,8 @@ struct Holder {
     }
 };
 inline float Abs(float v) { return (float)fabs(v); }
+// pdb: MultiBoundMarkerData::CreateMultiBoundForRef | MultiBoundMarkerData.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRef
 Holder* FUN_00422ba0(Source* src) {
     Node* node = 0;
     Holder* h = 0;
@@ -19677,6 +20149,8 @@ extern Ref* DAT_0107a104;
 extern Mgr DAT_0107c0a0;
 void __stdcall FUN_0043c350(unsigned char v);
 inline unsigned char Touch() { unsigned char r = (unsigned char)~DAT_0117c27c & 1; DAT_0117c27c |= 1; return r; }
+// pdb: TESDataHandler::UnloadCell | TESDataHandler.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCell
 void __stdcall FUN_0043cb10(Form* form)
 {
     if (form == 0)
@@ -19779,6 +20253,8 @@ struct Owner {
     Lookup* unk00;
     int FUN_00429eb0(const char* name, int a2, bool a3, bool quiet, bool a5, bool noRef);
 };
+// pdb: ModelLoader::LoadFile | ModelLoader.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apFilename, aeLODFadeMult, abPrepareObject, abSuppressWarning, abFaceGenModel, abDontIncrementRefCount
 int Owner::FUN_00429eb0(const char* name, int a2, bool a3, bool quiet, bool a5, bool noRef)
 {
     Model* model = 0;
@@ -19889,6 +20365,8 @@ struct Task : TaskBase {
     int unk40;
     Owner* unk44;
 };
+// pdb: ModelLoader::QueueTreeModel | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRef, apTree, aspQueuedModel, aePriority, apParent, aeLODFadeMult
 void __stdcall FUN_00428c10(int a1, Owner* owner, Ptr<TaskBase>* out, int a4, int a5, int a6)
 {
     Ptr<TaskBase> task = new Task(a1, owner, a4, a6);
@@ -19957,6 +20435,8 @@ struct Owner {
     Lookup* unk04;
     bool FUN_00428d30(int a1, int a2, int a3);
 };
+// pdb: ModelLoader::QueueKF | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apKFFileName, aePriority, apParent
 bool Owner::FUN_00428d30(int a1, int a2, int a3)
 {
     Task* found = 0;
@@ -20006,6 +20486,8 @@ public:
         }
         return *this;
     }
+    // pdb: NiPointer<BSTask<__int64> >::operator= | IOManager.obj | fnv360_0721_beta, call_seq, medium
+    // pdb params: ptr
     __declspec(noinline) Ptr& FUN_00427450(const Ptr& other)
     {
         if (m_pObject != other.m_pObject)
@@ -20057,6 +20539,8 @@ struct Owner {
     Lookup* unk00;
     void FUN_00428630(Key* key, Ptr<Task>* out, int a3, Task* a4, int a5, int a6, bool a7, bool a8);
 };
+// pdb: ModelLoader::QueueModel | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apModel, aspQueuedModel, aePriority, apParent, aeLODFadeMult, abPrepareAfterLoad, abAddRefCount, abFaceGenModel, afOverriddenVisualDistance
 void Owner::FUN_00428630(Key* key, Ptr<Task>* out, int a3, Task* a4, int a5, int a6, bool a7, bool a8)
 {
     Task* found = 0;
@@ -20306,6 +20790,7 @@ struct Task {
     unsigned char unk3c;
     void FUN_00427da0();
 };
+// pdb: QueuedModel::Finish | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Task::FUN_00427da0()
 {
     Scope scope(unk18);
@@ -20424,6 +20909,8 @@ struct Loader {
     GroupMap* groups;
     void FUN_00429a80(Node* list, Target* owner, int a3, Task* a4, const char* prefix);
 };
+// pdb: ModelLoader::QueueReplacementKFList | ModelLoader.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apKFList, apAnim, aePriority, apParent, apBasePath
 void Loader::FUN_00429a80(Node* list, Target* owner, int a3, Task* a4, const char* prefix)
 {
     Task* value = a4;
@@ -20552,6 +21039,8 @@ struct Owner {
     Task* FUN_0042a530(unsigned int key);
     bool FUN_0042c3c0(unsigned int key, int level, int value);
 };
+// pdb: ModelLoader::ReuseQueuedTexture | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apTextureFileEntry, aePriority, apParent
 bool Owner::FUN_0042c3c0(unsigned int key, int level, int value)
 {
     Task* obj = FUN_0042a530(key);
@@ -20847,6 +21336,7 @@ struct FUN_00432800 {
     bool unk2c;
     FUN_00432800();
 };
+// pdb: ModelLoader::ModelLoader | ModelLoader.obj | fnv360_0822_retail, uvref, medium
 FUN_00432800::FUN_00432800() {
     unk00 = new List280(0xa, 0x3f1, 0xc);
     unk04 = new List3c0(0xa, 0x3f1, 0xc);
@@ -20898,6 +21388,8 @@ struct ExtraData35 : ExtraBase {
     ItemList* list;
     ExtraData35(void* item);
 };
+// pdb: ExtraPlayerCrimeList::ExtraPlayerCrimeList | ExtraDataObjects.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apCrime
 ExtraData35::ExtraData35(void* item) : ExtraBase(0x35)
 {
     list = new ItemList;
@@ -21003,6 +21495,7 @@ public:
     FUN_0043b7f0(int a, int b);
 };
 
+// pdb: SettingT<INISettingCollection>::InitCollection | ModelLoader.obj | fnv360_0822_retail, call_seq, low
 FUN_0043b7f0::FUN_0043b7f0(int a, int b) : Guard43(a, b)
 {
     if (!DAT_0116d6f4) {
@@ -21050,6 +21543,7 @@ public:
     void FUN_0042f9f0();
 };
 
+// pdb: QueuedAnimIdle::CheckFinished | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void WorkOwner::FUN_0042f9f0() {
     if (state >= 4) {
         if (!queue || static_cast<unsigned char>((*reinterpret_cast<WorkQueue* volatile*>(&queue))->IsEmpty()))
@@ -21081,6 +21575,7 @@ struct Root980 {
     Child980* child3C;
 };
 struct Owner980 { Root980* root00; unsigned int FUN_00423850(); };
+// pdb: DoorTeleportData::GetTeleportWorldSpace | TeleportData.obj | fnv360_0822_retail, call_gap, medium
 unsigned int Owner980::FUN_00423850() {
     unsigned int result = 0;
     Root980* root = root00;
@@ -21179,6 +21674,8 @@ struct Loader {
     TaskMap* map0C;
     void FUN_00428e90(Form* form, int priority, bool queue);
 };
+// pdb: ModelLoader::QueueReference | ModelLoader.obj | fnv360_0822_debug, caller, medium
+// pdb params: apRef, aePriority, abAllowQueueReferenceQueuing
 void Loader::FUN_00428e90(Form* form, int priority, bool queue)
 {
     unsigned int flags = DAT_01079858->unk244;
@@ -21290,6 +21787,8 @@ struct Focus {
     float y;
     void Sky_Update(float time);
 };
+// pdb: TES::UpdateCellAnimations | TES.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afTime
 void Owner::FUN_00437290(float delta)
 {
     Scene* scene = unk34;
@@ -21391,6 +21890,8 @@ struct Manager {
     bool FUN_0042c3c0(void* entry, int priority, Owner* owner);
     bool FUN_0042c500(const char* path, int priority, Owner* owner);
 };
+// pdb: ModelLoader::QueueTexture | ModelLoader.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apTextureFileName, aePriority, apParent
 bool Manager::FUN_0042c500(const char* path, int priority, Owner* owner)
 {
     Owner* target = owner;
@@ -21507,6 +22008,8 @@ struct Table {
     void FUN_00431400(bool keepEmpty);
 };
 
+// pdb: LockFreeMap<MobileObject *,NiPointer<LipTask> >::RemoveAll | LipSyncBackgroundManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: abCalledByDestructor
 void Table::FUN_00431400(bool keepEmpty)
 {
     TlsScope scope(6);
@@ -21787,6 +22290,8 @@ struct Owner {
     Queue queue;
     void FUN_0042e3f0(Ref* r);
 };
+// pdb: QueuedReference::AttachDistant3D | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apNode
 void Owner::FUN_0042e3f0(Ref* r) {
     r->unk58 = *actor->v125();
     r->unk34 = actor->FUN_004e7c10();
@@ -21847,6 +22352,8 @@ Entry* __cdecl FUN_00424d50(Table* table, int key);
 struct Owner {
     void FUN_0043e450(Node* node, int arg);
 };
+// pdb: TESDataHandler::CheckTexturesRecurse | TESDataHandler.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObject, apModel
 void Owner::FUN_0043e450(Node* node, int arg) {
     if (!node) return;
     if (node->v1C()) {
@@ -21975,6 +22482,8 @@ static inline bool IsKindOf(Node* node)
     return false;
 }
 
+// pdb: KFModel::InitSequence | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apFilename
 void Owner::FUN_004279c0(const char* name)
 {
     if (!unk04)
@@ -22019,6 +22528,8 @@ struct FUN_00429980_cls {
     void FUN_00429980(Entry_b0692* node, int a2, int a3, const char* dir);
 };
 
+// pdb: ModelLoader::QueueKFList | ModelLoader.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apKFList, aePriority, apParent, apBasePath
 void FUN_00429980_cls::FUN_00429980(Entry_b0692* node, int a2, int a3, const char* dir)
 {
     int v = *(volatile int*)&a3;
@@ -22077,6 +22588,7 @@ struct Owner {
     }
     void FUN_00439030();
 };
+// pdb: TES::SetupTemporaryParticleCache | TES.obj | fnv360_0822_retail, call_gap, low
 void Owner::FUN_00439030() {
     if (DAT_0106cd84) return;
     Scope scope(0x32);
@@ -22206,6 +22718,8 @@ struct Owner
     void FUN_0042cc90(void*, int, int, void*);
     void FUN_0042e8e0(Model*, int, int, void*);
 };
+// pdb: ModelLoader::QueueCreatureParts | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apModel, aePriority, apParent, apQueuedForRef
 void Owner::FUN_0042e8e0(Model* model, int mode, int flags, void* context)
 {
     int savedFlags = *(volatile int*)&flags;
@@ -22319,6 +22833,8 @@ struct Owner {
     void FUN_004211e0(Source* source);
 };
 
+// pdb: ExtraFactionChanges::ExpelFromFaction | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apFaction
 void Owner::FUN_004211e0(Source* source)
 {
     FUN_0041fd80 seen;
@@ -23253,6 +23769,8 @@ struct FormType1021519_43cda0 : FormStorage0301519_43cda0 {
 };
 void FUN_00887da0(const char*, ...);
 
+// pdb: TESDataHandler::CreateFormOfType | TESDataHandler.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aType
 FactoryObject1519_43cda0* FUN_0043cda0(unsigned char type)
 {
     FormAllocationContext1519_43cda0 context(0x30);
@@ -23546,6 +24064,8 @@ struct FUN_0042a040_List {
 
 extern "C" void __cdecl FUN_00c007fc(char* destination, unsigned int size, const char* source);
 
+// pdb: ModelLoader::CopyFilenameList | ModelLoader.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: apList, apDestList
 FUN_0042a040_List* __stdcall FUN_0042a040(
     FUN_0042a040_Node* param_1,
     FUN_0042a040_List* param_2)
@@ -23648,6 +24168,8 @@ __declspec(noinline) DecalEntry420820* ExtraDecalRefs::FUN_0041f440(int key)
     return result;
 }
 
+// pdb: ExtraDecalRefs::Compare | ExtraDataObjects.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCompare
 bool ExtraDecalRefs::FUN_00420820(BSExtraData* other)
 {
     ExtraDecalRefs* o = dynamic_cast<ExtraDecalRefs*>(other);
@@ -23709,6 +24231,8 @@ struct Cls431 {
     bool FUN_00431160(int arg1, NiPtr431 arg2);
 };
 
+// pdb: LockFreeMap<MobileObject *,NiPointer<LipTask> >::Remove | LipSyncBackgroundManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiBucket, aData
 bool Cls431::FUN_00431160(int arg1, NiPtr431 arg2)
 {
     TlsHolder431* holder = m_pTls;
@@ -23855,6 +24379,8 @@ struct Owner {
     void FUN_0042e0a0(Ref*);
 };
 
+// pdb: ModelLoader::QueueAttachDistant3DTask | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apTask
 void Owner::FUN_0042e0a0(Ref* arg) {
     Get()->FUN_0042ba60(Holder(arg));
 }
@@ -23881,6 +24407,7 @@ struct FUN_00431a00 : Base431a00 {
     void FUN_004312c0(int mode);
     virtual ~FUN_00431a00();
 };
+// pdb: LockFreeMap<char const *,LoadedFile *>::~LockFreeMap<char const *,LoadedFile *> | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_00431a00::~FUN_00431a00()
 {
     FUN_004312c0(1);
@@ -23947,6 +24474,7 @@ public:
     void FUN_00433ea0();
 };
 
+// pdb: TES::CreateFurnitureList | TES.obj | fnv360_0822_retail, call_dedup, medium
 void Owner433ea0::FUN_00433ea0()
 {
     if (cell34) {
@@ -23997,6 +24525,8 @@ struct Owner436500
     void FUN_00436500(void* unused);
 };
 
+// pdb: TES::FinishLoadGame | TES.obj | fnv360_0822_debug, call_seq, low, conflict (skyrim: TES::InitGridCellArray)
+// pdb params: apLoadGameBuffer
 void Owner436500::FUN_00436500(void* unused)
 {
     bool go = true;
@@ -24086,6 +24616,7 @@ public:
     void FUN_00434190();
 };
 
+// pdb: TES::InitDistantTextureBlending | TES.obj | fnv360_0822_retail, call_gap_sim, low
 void Owner_00434190::FUN_00434190()
 {
     bool go = true;
@@ -24277,6 +24808,8 @@ World* world;
 void FUN_00435070(bool,int);void FUN_00433420(bool);void FUN_00435ea0(bool);void FUN_00438c80();bool FUN_00435870(const Point&,float&);void FUN_00433ea0();void FUN_00435140();void FUN_00439720(const Point*,bool);
 bool Busy(){return flag51||flag52;}
 };
+// pdb: TES::ReloadGridCells | TES.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apPos, abFullreload
 void TES::FUN_00439720(const Point*position,bool reload){
 if(!DAT_0106cdcc||interior)return;if(DAT_0106cd85)return;Grid* initialGrid=grid;DAT_0106cd85=true;
 if(reload){initialGrid->Reset();DAT_00f4c96c=true;ClearRef();world->FUN_00501cc0()->FUN_00615340();world->FUN_00501cc0()->FUN_00615b90(DAT_0107a104->GetPosition(),15);grid->SetGridPosition(gridX,gridY);FUN_00435070(false,0);FUN_00433420(false);FUN_00435ea0(false);FUN_00438c80();DAT_0116d138->FUN_00aa4b30(4);Point point(position->x,position->y,0.0f);FUN_00435870(*position,point.z);DAT_01067ba0=false;FUN_004fdb90(point,DAT_00f725a4,1.0f);DAT_01067ba0=true;
@@ -24347,6 +24880,8 @@ void Node::FUN_00421610(Item*& value)
     }
 }
 
+// pdb: ExtraReflectedRefs::RemoveReference | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, high
+// pdb params: apRef
 void Owner::FUN_00421d90(int key)
 {
     Node* node = &list;
@@ -24402,6 +24937,7 @@ struct QThis42e640 {
     void FUN_0042e640();
 };
 
+// pdb: QueuedTree::QueueModels | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void QThis42e640::FUN_0042e640()
 {
     QScope42e640 scope(unk18);
@@ -24457,6 +24993,7 @@ struct FUN_004261d0 : Base {
     NiPointer unk3c;
     ~FUN_004261d0();
 };
+// pdb: QueuedAnimIdle::~QueuedAnimIdle | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_004261d0::~FUN_004261d0() {
 }
 }
@@ -24505,6 +25042,8 @@ inline Iter_a9c0::Iter_a9c0(Owner_a9c0* o, int* begin, int* end)
 {
 }
 
+// pdb: LockFreeQueue<bhkRigidBody *>::AllocateInterface | NavMeshObstacleManager.obj | fnv360_0822_retail, vtable, high
+// pdb params: aiNum
 Iter_a9c0* Owner_a9c0::FUN_0042a9c0(int index)
 {
     HeapScope_a9c0 scope(6);
@@ -24598,6 +25137,7 @@ const char* __cdecl FUN_00475d90(unsigned int type);
 using namespace f3m_0043e5c0;
 void __cdecl FUN_00887da0(const char* format, ...);
 
+// pdb: TESDataHandler::CheckIcons | TESDataHandler.obj | fnv360_0822_retail, ustr, medium
 void FUN_0043e5c0()
 {
     if (DAT_0106ce34)
@@ -24802,6 +25342,7 @@ struct Owner
     Lookup* cells;
     void FUN_004332e0();
 };
+// pdb: TES::UpdateGridLights | TES.obj | fnv360_0822_retail, call_gap, low, conflict (bridge: ProcessLists::HandleInvalidPositions)
 void Owner::FUN_004332e0()
 {
     bool ok = true;
@@ -25024,6 +25565,7 @@ struct Owner {
  QueuedPtr unka4;
  void FUN_00437990();
 };
+// pdb: TES::PreloadAddonNodes | TES.obj | fnv360_0822_retail, call_gap_sim, low
 void Owner::FUN_00437990() {
  FUN_00aa5160* cur = unka4.ptr;
  if (cur == 0) {
@@ -25102,6 +25644,8 @@ struct Owner {
     void FUN_0042a370(Node* node);
 };
 
+// pdb: ModelLoader::LoadAddons | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apNode
 void Owner::FUN_0042a370(Node* node)
 {
     if (!node) return;
@@ -25166,6 +25710,7 @@ struct QThis {
     void FUN_0042e700();
     void FUN_0042fc80();
 };
+// pdb: QueuedCreature::QueueModels | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void QThis::FUN_0042fc80()
 {
     QScope scope(unk18);
@@ -25218,6 +25763,7 @@ struct Owner {
     FUN_004371d0* head;
     void FUN_004391f0();
 };
+// pdb: TES::CleanupTemporaryParticleCache | TES.obj | fnv360_0822_retail, call_gap_sim, low
 void Owner::FUN_004391f0()
 {
     FUN_004371d0* node = head;
@@ -25288,6 +25834,7 @@ struct Owner {
     Node list7c;
     void FUN_0043e980();
 };
+// pdb: TESDataHandler::SortAllList | TESDataHandler.obj | fnv360_0822_retail, call_gap_sim, low
 void Owner::FUN_0043e980()
 {
     SortList(&list7c);
@@ -25367,6 +25914,7 @@ extern Owner* DAT_0106cdcc;
 extern Loader* DAT_0107a0d8;
 extern bool DAT_0106fe80;
 
+// pdb: TES::PreloadPlaceableWaterNoiseTextures | TES.obj | fnv360_0822_retail, objrun, medium
 void FUN_00436980()
 {
     TlsHeapContext context;
@@ -25489,6 +26037,8 @@ struct Owner {
     bool FUN_0042c7f0(unsigned int key, int arg, Value* value);
 };
 
+// pdb: ModelLoader::QueueTexture | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTextureFileEntry, aePriority, apParent
 bool Owner::FUN_0042c7f0(unsigned int key, int arg, Value* value)
 {
     NiPointer<RefObj> found;
@@ -25872,6 +26422,7 @@ struct Process
     Ref* unk28;
     void FUN_00426820();
 };
+// pdb: QueuedReference::QueueMe | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Process::FUN_00426820()
 {
     MemContextGuard kContext(unk18);
@@ -26054,6 +26605,7 @@ struct QueuedModel {
 };
 }
 
+// pdb: QueuedModel::Run | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void n427bc0::QueuedModel::FUN_00427bc0()
 {
     f3m_0042be50::MemContextGuard kContext(context);
@@ -26148,6 +26700,7 @@ struct Owner {
     void FUN_004281d0();
 };
 
+// pdb: QueuedReference::UseDistant3D | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Owner::FUN_004281d0()
 {
     char path[260];
@@ -26224,6 +26777,7 @@ struct Owner {
     Ptr second;
     void FUN_00426480();
 };
+// pdb: QueuedHead::Run | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Owner::FUN_00426480()
 {
     FUN_0058a850();
@@ -26285,6 +26839,8 @@ struct Owner {
     FUN_004344b0* head;
     void FUN_00437c70(Src* key);
 };
+// pdb: TES::AddTemporaryParticleObjectToCache | TES.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObject
 void Owner::FUN_00437c70(Src* key)
 {
     if (!key)
@@ -26359,6 +26915,7 @@ struct Self {
     Node list9C;
     void FUN_004362b0();
 };
+// pdb: TES::SaveGame | TES.obj | fnv360_0721_beta, objrun, medium
 void Self::FUN_004362b0()
 {
     Marker m;
@@ -26446,6 +27003,7 @@ struct Runner {
     void FUN_0042c1b0();
 };
 
+// pdb: QueuedReference::QueueModels | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Runner::FUN_0042c1b0()
 {
     TlsTagGuard guard(tag);
@@ -26474,6 +27032,7 @@ extern float DAT_01067b04;
 extern float DAT_01067b08;
 extern float DAT_01067b14;
 namespace f3m_00432fe0 {
+// pdb: BSTempNode::SetTime | BSTempNodeManager.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00432fe0()
 {
     float v;
@@ -26619,6 +27178,8 @@ struct Owner437650 {
     List437650 entries;
     void FUN_00437650(n437650::Loader* loader);
 };
+// pdb: TES::LoadGame | TES.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apLoadGameBuffer
 void Owner437650::FUN_00437650(n437650::Loader* loader) {
     unsigned int n = loader->BGSLoadGameBuffer_LoadVariableSizedValue();
     for (unsigned int i = 0; i < n; i++) {
@@ -26679,6 +27240,8 @@ struct Owner355 {
  Cell355* main; Cell355** cells; Cell355** others;
  unsigned FUN_00435550(Kind355 kind,bool disable,bool grid);
 };
+// pdb: TES::ShowCellNode | TES.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiNode, abShow, abActiveCellsOnly
 unsigned Owner355::FUN_00435550(Kind355 kind,bool disable,bool grid) {
  if(!disable) g_mask355|=1<<kind; else g_mask355&=~(1<<kind);
  if(kind==11) {
@@ -26800,6 +27363,8 @@ static __forceinline void NormalizeKey(char* dst, const char* src)
     }
     *dst = 0;
 }
+// pdb: LockFreeCaseInsensitiveStringMap<Model *>::RemoveAt | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apKey
 void Owner_2380::FUN_00432380(const char* name)
 {
     char lower[1000];
@@ -26838,6 +27403,8 @@ public:
     void FUN_0042cac0(const char*, unsigned, unsigned, int, int, int, int);
     void FUN_0042cee0(FilenameNode*, const IndexedFiles*, unsigned, unsigned, const char*);
 };
+// pdb: ModelLoader::QueueModelList | ModelLoader.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apModelList, apTextureListArray, aePriority, apParent, apBasePath
 void Owner::FUN_0042cee0(FilenameNode* files, const IndexedFiles* indexed, unsigned arg3, unsigned arg4, const char* prefix)
 {
     unsigned options = *(volatile unsigned*)&arg4;
@@ -26965,6 +27532,8 @@ Thing42e810* Cls42e810::Get()
     return t;
 }
 
+// pdb: BackgroundCloneThread::AddQueuedReference | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apQueuedReference
 void Cls42e810::FUN_0042e810(Ref42e810* arg)
 {
     {
@@ -27056,6 +27625,8 @@ __declspec(noinline) void Data42f5f0::FUN_0042ba60(Ptr42f5f0<Task42f5f0>& object
         object.m_pObject->IncRefCount();
 }
 
+// pdb: IOManager::AddPostProcessTask | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTask
 void Mgr42f5f0::FUN_0042f5f0(Task42f5f0* task)
 {
     Ptr42f5f0<Task42f5f0> object(task);
@@ -27166,6 +27737,8 @@ struct TeleportData {
     Vector3 position,angles;
     bool FUN_00423980(LoadContext*);
 };
+// pdb: DoorTeleportData::InitItem | TeleportData.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apOwner
 bool TeleportData::FUN_00423980(LoadContext* context) {
     unsigned int resolvedID=formID;
     TESForm_AddCompileIndex(&resolvedID,context->TESForm_GetFile(-1));
@@ -27251,6 +27824,7 @@ struct Owner
     Ref* ref;
     void FUN_00437b20();
 };
+// pdb: TES::UnloadAddonNodes | TES.obj | fnv360_0822_retail, callee_sim, low
 void Owner::FUN_00437b20()
 {
     if (ref)
@@ -27280,6 +27854,8 @@ struct Grid_004336d0 {
     bool FUN_004336a0(f3m_004336d0::Cell* wanted);
 };
 
+// pdb: TES::IsExteriorBuffered | TES.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCell
 bool Grid_004336d0::FUN_004336a0(f3m_004336d0::Cell* wanted) {
     f3m_004336d0::Cell* c;
     for (unsigned int i = 0; GetCell(i, c); ++i) {
@@ -27339,6 +27915,8 @@ struct Owner {
     Queue* unk10;
     int FUN_00429510(int a, Counted4* p, int b, int c);
 };
+// pdb: QueuedAnimIdle::QueuedAnimIdle | ModelLoader.obj | fnv360_0822_retail, uvref, medium
+// pdb params: apFileName, aePriority, apAnimIdle, apRef
 int Owner::FUN_00429510(int a, Counted4* p, int b, int c)
 {
     NiPointer<Task> task((Task*)new NewTask(a, p, b, c));
@@ -30190,6 +30768,8 @@ struct ModelLoader42a1 {
     void FUN_0042a1c0(char* apFileName, int aePriority, TaskRef42a1* apParent, int aeFileIndex);
 };
 
+// pdb: ModelLoader::QueueFaceGenFile | ModelLoader.obj | fnv360_0721_beta, call_gap, low
+// pdb params: apFileName, aePriority, apParent, aeFileIndex
 void ModelLoader42a1::FUN_0042a1c0(char* apFileName, int aePriority, TaskRef42a1* apParent, int aeFileIndex)
 {
     NiPtrLoaded42a1 loaded(GetHolderValue(apFileName));
@@ -30243,6 +30823,8 @@ public:
     void FUN_00421180(int key, unsigned char flag);
 };
 
+// pdb: ExtraFactionChanges::AddToFaction | ExtraDataObjects.obj | fnv360_0822_retail, call_gap, low, conflict (bridge: ExtraFactionChanges::SetFactionRank)
+// pdb params: apFaction, aiRank
 void ExtraOwner42::FUN_00421180(int key, unsigned char flag)
 {
     List421* node = unk0c;
@@ -30354,6 +30936,7 @@ struct F2fThis : F2fThisBase {
     void FUN_0042f6e0();
 };
 
+// pdb: QueuedMagicItem::QueueMe | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void F2fThis::FUN_0042f6e0()
 {
     bool done = false;
@@ -31190,6 +31773,8 @@ struct ReloadManager
     void FUN_0043a670(ReloadPoint*);
 };
 // @fnv 0x00454450
+// pdb: TES::LeaveInterior | TES.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apPos
 void ReloadManager::FUN_0043a670(ReloadPoint* point)
 {
     ReloadName* world = FUN_004fd3e0();
@@ -31680,6 +32265,8 @@ struct Handler {
     }
     void* FUN_0043c730(const char* name, int* px, int* py);
 };
+// pdb: TESDataHandler::GetExtCellDataFromFileByEditorID | TESDataHandler.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apCellID, aiOutX, aiOutY
 void* Handler::FUN_0043c730(const char* name, int* px, int* py)
 {
     Scope scope(0x16);
@@ -31989,6 +32576,8 @@ struct FileList {char* item;FileList* next;bool FUN_00645c20();void FUN_00415d70
 struct Manager{void* TESIdleManager_GetRootFilenameList(char*,int);void* FUN_00554680(char*,void*,bool);};extern Manager* DAT_010721b8;
 void* __cdecl FUN_00bc7e30(char*,char*,bool,void*);
 struct Loader{void* FUN_0042a040(void*,void*);void* FUN_0042d160(char*,bool,bool,int);};
+// pdb: ModelLoader::BuildKFFileList | ModelLoader.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apBaseFilename, abAddLocomotion, abAddMTAnims, aeWeaponGroup
 void* Loader::FUN_0042d160(char* apPath, bool abLoadLocomotion, bool arg2, int aiIndex)
 {
     MemGuard helper2(0x33);
@@ -32139,6 +32728,7 @@ struct Owner {
     Node* head;
     void FUN_0042bbb0();
 };
+// pdb: LockFreeQueue<NiPointer<QueuedReference> >::LockFreeQueueInterface::~LockFreeQueueInterface | ModelLoader.obj | fnv360_0822_retail, call_dedup, low
 void Owner::FUN_0042bbb0()
 {
     TlsGuard guard(6);
@@ -32228,6 +32818,8 @@ struct Obj4346d0 {
     void FUN_004346d0(bool flag, int unused);
 };
 
+// pdb: TES::CullGridCells | TES.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abDisable, apPos
 void Obj4346d0::FUN_004346d0(bool flag, int unused)
 {
     if (!::DAT_0106cdcc)
@@ -32577,6 +33169,7 @@ struct QueuedTexture
     void FUN_00425a10();
 };
 
+// pdb: QueuedTexture::Run | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void QueuedTexture::FUN_00425a10()
 {
     MemContextGuard kContext(unk18);
@@ -32730,6 +33323,8 @@ struct Owner435 {
     void FUN_00435ea0(int mode);
 };
 
+// pdb: TES::InitModelsToLoad | TES.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aeType
 void Owner435::FUN_00435ea0(int mode)
 {
     unsigned count = 0;
@@ -32834,6 +33429,8 @@ struct Owner {
     KFModel* FUN_0042cff0(const char* name);
 };
 
+// pdb: ModelLoader::LoadKF | ModelLoader.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apFilename
 KFModel* Owner::FUN_0042cff0(const char* name)
 {
     KFModel* model = 0;
@@ -32963,6 +33560,8 @@ struct Outer {
     static void operator delete(void* p) { NodeMemoryFree(p); }
 };
 inline float Abs(float v) { return (float)fabs(v); }
+// pdb: MultiBoundMarkerData::CreateRoomForRef | MultiBoundMarkerData.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apRef
 Outer* FUN_00422d70(Source* src) {
     Node* node = 0;
     Outer* out = 0;
@@ -33945,6 +34544,8 @@ struct FUN_00438510 {
     SPr unkc0;
     FUN_00438510(FUN_00444db0* p1, Parent* p2, int p3, QObj* p4, int p5);
 };
+// pdb: TES::TES | TES.obj | fnv360_0822_retail, udata, high
+// pdb params: apPathname, apRoot, apLandRoot, apSky, apLODWaterRoot
 FUN_00438510::FUN_00438510(FUN_00444db0* p1, Parent* p2, int p3, QObj* p4, int p5)
     : unk00(DAT_00db8d18), unk6c(0)
 {
@@ -34107,6 +34708,8 @@ struct Owner {
     void FUN_00428810(const char* a1, Ptr* result, int a2, int a3, int a4, bool a5, bool a6, bool a7);
 };
 
+// pdb: ModelLoader::QueueModel | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apModelFileName, aspQueuedModel, aePriority, apParent, aeLODFadeMult, abPrepareAfterLoad, abAddRefCount, abFaceGenModel
 void Owner::FUN_00428810(const char* a1, Ptr* result, int a2, int a3, int a4, bool a5, bool a6, bool a7)
 {
     RefObj* found = 0;
@@ -34158,6 +34761,8 @@ struct Owner437 {
     CountList437 counts;
     void FUN_004375f0(void* key, short count);
 };
+// pdb: TES::AddDeadCount | TES.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apObject, ascount
 void Owner437::FUN_004375f0(void* key, short count)
 {
     for (CountNode437* node = &counts.head; node && node->item; node = node->next) {
@@ -34247,6 +34852,8 @@ struct Owner {
     void FUN_00420590(SaveArg* arg);
 };
 
+// pdb: ExtraDecalRefs::InitItem | ExtraDataObjects.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: apOwner
 void Owner::FUN_00420590(SaveArg* arg) {
     Node* prev = 0;
     Node* cur = &list;
@@ -34321,6 +34928,8 @@ struct FUN_00439940_Owner {
     void __thiscall FUN_00439940(float* position, unsigned int flags);
 };
 
+// pdb: TES::InitGridCells | TES.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apPos, abFullreload
 void __thiscall FUN_00439940_Owner::FUN_00439940(float* position, unsigned int flags) {
     if (f3m_00433ff0::DAT_0106cdcc == 0 || unk34 != 0 || f3m_00433ff0::DAT_0106cdcc->flag5a6 != 0) {
         return;
@@ -34361,6 +34970,8 @@ namespace f3m_004330f0 {
 namespace Range99 {
 struct Position {float x,y,z;};
 struct Grid {unsigned unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20;int centerX,centerY;unsigned unk2c,unk30;unsigned bypass;bool FUN_004330f0(const Position*);};
+// pdb: TES::IsCoordInLoadedArea | TES.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aCoord
 bool Grid::FUN_004330f0(const Position* p){
  if(bypass)return true;
  int x=fnv_FloatToInt(p->x)>>12;
@@ -34419,6 +35030,8 @@ struct Grid {
     Cell* TES_GetGridCellCell(int x, int y);
     bool FUN_00435a50(const Point3* position, QueryResult* output);
 };
+// pdb: TES::GetLandColor | TES.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: acoord, acolor
 bool Grid::FUN_00435a50(const Point3* position, QueryResult* output) {
     int cellX = fnv_FloatToInt(position->GetX());
     int cellY = fnv_FloatToInt(position->GetY());
@@ -34457,6 +35070,8 @@ struct Grid {
     Cell* TES_GetGridCellCell(int x, int y);
     bool FUN_00435950(const Point3* position, Point3* normal, Point3* output);
 };
+// pdb: TES::GetLandNormal | TES.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aCoord, aNormal, aFaceNormal
 bool Grid::FUN_00435950(const Point3* position, Point3* normal, Point3* output) {
     int cellX = fnv_FloatToInt(position->GetX());
     int cellY = fnv_FloatToInt(position->GetY());
@@ -34478,6 +35093,8 @@ namespace f3m_00434100 {
 void __cdecl FUN_004ef0a0(void* pObject);
 void __cdecl FUN_004ef150(void* pObject);
 
+// pdb: TES::RangedNodeVisibilityChangedCB | TES.obj | fnv360_0822_debug, caller_sim, low
+// pdb params: apNode, abVisible
 void __cdecl FUN_00434100(void* pObject, bool bDestroy)
 {
     if (bDestroy)
@@ -34552,6 +35169,8 @@ struct Owner {
     void FUN_00430ae0(Cell* cell);
 };
 
+// pdb: ModelLoader::CancelReferencesForCell | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCell
 void Owner::FUN_00430ae0(Cell* cell) {
     if (!cell || !cell->m_a4)
         return;
@@ -34588,6 +35207,8 @@ struct TES {
     Cell* TES_GetGridCellCell(int x, int y);
     bool FUN_00435870(const Point& pos, float& outZ);
 };
+// pdb: TES::GetLandHeight | TES.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: acoord, afHeight
 bool TES::FUN_00435870(const Point& pos, float& outZ) {
     int ix = fnv_FloatToInt(pos.x);
     int iy = fnv_FloatToInt(pos.y);
@@ -34636,6 +35257,8 @@ class F3Out_4242d0
     __int64 iSecond;
 };
 
+// pdb: BSPrecisionTimer::Reset | ModelLoader.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: afTargetTime
 void __fastcall FUN_004242d0(F3Out_4242d0* pThis, int iUnused, float fScale)
 {
     pThis->iFirst = ((F3Source_4242d0*)pThis)->FUN_0086c140();
@@ -34679,6 +35302,8 @@ namespace f3m_00424d20 {
 namespace Type424d20 {
 struct Type {const char* name;Type* parent;};
 struct Object {virtual void slot0();virtual void slot1();virtual Type* type();};
+// pdb: NiObject::IsKindOf | ModelLoader.obj | fnv360_0721_beta, call_dedup, low
+// pdb params: pkRTTI
 bool FUN_00424d20(Type* wanted,Object* object) {
  if(object) {for(Type* type=object->type();type;type=type->parent) if(type==wanted) return true;}
  return false;
@@ -34710,6 +35335,7 @@ void* data;
 unsigned char byteAt(unsigned shift) const { return (unsigned char)(*(const __int64*)&low >> shift); }
 void FUN_00426410();
 };
+// pdb: QueuedHead::QueueMe | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Object::FUN_00426410(){FUN_00591e20(data,byteAt(16),this);finish();}
 }
 
@@ -34876,6 +35502,8 @@ virtual void reset();
 };
 struct Manager {void ProcessLists_RemoveActorFromTempChangeList(Actor*);};
 extern Manager DAT_0107c0a0;
+// pdb: TES::PreCloneMove | TES.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apRef
 void __stdcall FUN_004333f0(Actor* actor){if(actor->isActor()){actor->reset();DAT_0107c0a0.ProcessLists_RemoveActorFromTempChangeList(actor);}}
 }
 
@@ -34890,6 +35518,7 @@ struct Object {
  void FUN_00aa53c0();
  Object* FUN_00427b80(unsigned flags);
 };
+// pdb: QueuedModel::`scalar deleting destructor' | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 Object* Object::FUN_00427b80(unsigned flags) {
  if(ref) InterlockedDecrement(&ref->count);
  FUN_00aa53c0();
@@ -34909,6 +35538,7 @@ struct Object {
  void FUN_00aa53c0();
  Object* FUN_00427fc0(unsigned flags);
 };
+// pdb: QueuedTreeModel::`scalar deleting destructor' | ModelLoader.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: QueuedReference::NeedsToBeQueued)
 Object* Object::FUN_00427fc0(unsigned flags) {
  table=&DAT_00db7bc4; Ref* value=ref; if(value) InterlockedDecrement(&value->count);
  FUN_00aa53c0();
@@ -34921,6 +35551,8 @@ Object* Object::FUN_00427fc0(unsigned flags) {
 namespace f3m_004216e0 {
 namespace Equal4216e0 {
 struct Array {int unk00;unsigned* data;unsigned count;bool FUN_004216e0(const Array*);};
+// pdb: BSSimpleArray<TESBoundObject *,1024>::CompareBuffer<1024> | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aDestArray
 bool Array::FUN_004216e0(const Array* other) {
  if(other->count!=count)return false;
  for(unsigned i=0;i<count;++i)if(other->data[i]!=data[i])return false;
@@ -34937,6 +35569,8 @@ struct String {int proxy;char buffer[16];unsigned size,capacity;
  void FUN_0042f100(const char*,unsigned);
  String* FUN_00430f30(const char*);
 };
+// pdb: CTreeEngine::SetSize | TreeEngine.obj | fnv360_0822_debug, call_gap, low, conflict (skyrim: std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)
+// pdb params: fSize, fVariance
 String* String::FUN_00430f30(const char* value) {
  capacity=15;
  size=0;
@@ -34953,6 +35587,8 @@ namespace Load423d00 {
 struct Stream {void FUN_006e0750(void*,unsigned);void FUN_006e06d0(void*);};
 struct Vec3 {float x,y,z;};
 struct Object {int unk00;Vec3 first,second;unsigned char flag;void FUN_00423d00(Stream*);};
+// pdb: DoorTeleportData::LoadGame | TeleportData.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apLoadGameBuffer
 void Object::FUN_00423d00(Stream* stream) {
  stream->FUN_006e0750(&first,12);
  stream->FUN_006e0750(&second,12);
@@ -35051,6 +35687,7 @@ int unk78;
 void* first[20];void* second[20];void* finalItem;
 void FUN_00426730();
 };
+// pdb: QueuedHelmet::Attach | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 void Object::FUN_00426730(){
 for(int i=0;i<20;++i)if(second[i])target->FUN_00473c50(first[i],second[i],i);
 DAT_0106ca70->resource->release(finalItem);
@@ -35117,6 +35754,7 @@ int unkc8;
 Item* volatile item;
 void FUN_004344f0(Item*);
 };
+// pdb: BSMultiBoundRoom::FreeCompoundFrustum | TES.obj | fnv360_0822_retail, call_gap, medium
 void Object::FUN_004344f0(Item* value){
 Item* old=item;
 if(old && old!=value){old->FUN_00aa8280();DAT_01090a78.FUN_0086ba60(old);item=0;}
@@ -35228,6 +35866,8 @@ int unk5c;
 int unk60;
 int unk64;
 Child* child;void FUN_00433870(Input*);};
+// pdb: TES::SetAtmosphere | TES.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apCell
 void Object::FUN_00433870(Input* input){Child* current=child;if(current->state){if(input){if(input->flags&1){if(input->flags&0x80)current->FUN_0057db80(2);else current->FUN_0057db80(1);}else current->FUN_0057db80(3);}else current->FUN_0057db80(3);}}
 }
 
@@ -35251,6 +35891,8 @@ int unk24;
 int unk28;
 int unk2c;
 Item* volatile item;volatile int value34,value38;volatile bool flag;void FUN_00aa5370(void*);Object* FUN_00425e60(Item*,void*);};
+// pdb: QueuedModel::QueuedModel | ModelLoader.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apModel, aePriority
 Object* Object::FUN_00425e60(Item* replacement,void* value){FUN_00aa5370(value);vtable=&DAT_00db7b54;item=0;value34=0;value38=0;flag=false;Item* old=item;if(old!=replacement){if(old)InterlockedDecrement(&old->refs);item=replacement;if(replacement)InterlockedIncrement(&replacement->refs);}unk0c=5;return this;}
 }
 
@@ -35263,6 +35905,8 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile lo
 struct Item {int unk00,unk04;long refs;void FUN_00424350(int);};
 struct Table {virtual void slot0();virtual void slot1();virtual bool find(void*,Item**);};
 struct Object {Table* table;void FUN_00427280(Item*,void*);void FUN_00429640(void*,bool,int);};
+// pdb: ModelLoader::ReleaseModel | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apModelFileName, abDeleteIfUnreferenced, aiNumDecrements
 void Object::FUN_00429640(void* key,bool notify,int count){Item* item=0;if(table->find(key,&item)){if(count==1){long* refs=&item->refs;if(*refs>0)InterlockedDecrement(refs);}else item->FUN_00424350(-(short)count);if(notify)FUN_00427280(item,key);}}
 }
 }   // namespace f3m_00429640
@@ -35273,6 +35917,7 @@ namespace f3m_00424c80 {
 namespace Id424c80 {
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long*);
 struct Object {int unk00,unk04,unk08,unk0c;__int64 value;void FUN_00424c80();};
+// pdb: IOTask::GenerateKey | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Object::FUN_00424c80(){unsigned short low=(unsigned short)InterlockedIncrement(&DAT_0116d13c);unsigned char category=(unsigned char)(value>>16);unsigned __int64 result=(unsigned)InterlockedIncrement(&DAT_0116d140)+0x300000000ui64;result*=256;result+=category;result*=65536;result+=low;value=result;}
 }
 
@@ -35296,6 +35941,8 @@ struct Mat423fd0
     void FUN_00423fd0(float angle);
 };
 
+// pdb: NiMatrix3::MakeYRotation | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: fAngle
 void Mat423fd0::FUN_00423fd0(float angle)
 {
     float s;
@@ -35350,6 +35997,8 @@ struct Player {
 extern Player* DAT_0107a104;
 extern Reference* __cdecl FUN_007bc5b0(Form*, int, int, Cell*, Vector3, Matrix3);
 
+// pdb: TESDataHandler::CreateExplosionAtLocation | TESDataHandler.obj | fnv360_0822_debug, call_gap, medium
+// pdb params: apObject, aLocation, aDirection, apInterior, apWorld
 Reference* __stdcall FUN_0043bf10(Form* form, const Vector3* position, const Vector3* angles, Cell* cell, World* world)
 {
     Reference* result=0;
@@ -35562,6 +36211,8 @@ struct Owner {
     Word thirdWord;
     bool FUN_00422a30(Stream* stream);
 };
+// pdb: MultiBoundMarkerData::Load | MultiBoundMarkerData.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apFile
 bool Owner::FUN_00422a30(Stream* stream) {
     bool success = false;
     if (stream && stream->TESFile_GetTESChunk() == 0x4F424D58) {
@@ -35625,6 +36276,8 @@ struct Manager {
     bool FUN_0042a490(void* handle, RefObj* obj);
 };
 
+// pdb: ModelLoader::AddQueuedTextureToMap | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apFileEntry, apQueuedTexture
 bool Manager::FUN_0042a490(void* handle, RefObj* obj)
 {
     SmartPtr sp(obj);
@@ -35742,6 +36395,8 @@ struct Owner431e70 {
     char* FUN_00431e70(const char* str);
 };
 
+// pdb: LockFreeStringMap<Model *>::CopyKey | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apKey
 char* Owner431e70::FUN_00431e70(const char* str)
 {
     TlsGuard guard(6);
@@ -35778,6 +36433,7 @@ struct FUN_00424620 : FUN_00aa6560 {
     virtual ~FUN_00424620();
 };
 
+// pdb: BackgroundCloneThread::~BackgroundCloneThread | ModelLoader.obj | fnv360_0822_debug, call_seq, low, conflict (skyrim: QueuedModel::QueuedModel)
 FUN_00424620::~FUN_00424620()
 {
     delete child2C;
@@ -35794,6 +36450,7 @@ struct Base {virtual ~Base();char kind;int value;Base():kind(0x7e),value(0){}};
 struct Array {virtual ~Array();unsigned count;void* data;int used;__forceinline Array():count(37),used(0){data=FUN_0089e810(148);memset(data,0,count*4);}};
 struct DerivedArray:Array {virtual ~DerivedArray();__forceinline DerivedArray():Array(){}};
 struct FUN_004220d0:Base {DerivedArray array;int tail;FUN_004220d0();virtual ~FUN_004220d0();};
+// pdb: ExtraWaterZoneMap::ExtraWaterZoneMap | ExtraDataObjects.obj | fnv360_0822_retail, uvref, medium
 FUN_004220d0::FUN_004220d0():Base(),array(),tail(0){}
 }
 }   // namespace f3m_004220d0
@@ -35822,6 +36479,8 @@ protected:
     unsigned int buckets08;                           // +0x08: the divisor - named buckets to match that sibling body returning hash % buckets08 ✓✗→✓✓ it is read ONCE, after the loop ✗ so I do not cache it earlier ✓ 
 };                                                    
 
+// pdb: LockFreeStringMap<Model *>::GetBucketForKey | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apKey
 unsigned int Owner431::FUN_00431ff0(const char* text) {   // their build fetches the first byte BEFORE clearing the accumulator and tests it, which is what makes an empty string return zero ✓✗→? 
     unsigned int hash = 0;                             // ORIG: 'xor eax,eax' right after that first load ✓✗→✓✓ spelled exactly as the sibling body at line 7838 does ✗ 
     signed char lower = *text;                         // ORIG: 'mov dl,[esi] ; test dl,dl ; je tail' ✓✗→✓✓ and inside the loop the same class of load is SIGN-extended ('movsx eax,dl' ✓ ) so the character type here must be
@@ -35846,6 +36505,8 @@ namespace f3m_004296b0 {
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long*);
 namespace Lookup334 {
 struct Ref{virtual ~Ref();int unk04;volatile long refs;void release(){if(!InterlockedDecrement(&refs))delete this;}};struct Ptr{Ref* p;Ptr():p(0){}~Ptr(){if(p)p->release();}};struct Store{virtual void v0();virtual void v4();virtual bool lookup(int,Ptr*);};struct Manager{void FUN_00427340(Ref*,int);};extern Manager* DAT_0116d138;
+// pdb: ModelLoader::CancelReplacementKFList | ModelLoader.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apAnim
 struct Owner{int unk00,unk04,unk08,unk0c,unk10;Store* store;void FUN_004296b0(int);};void Owner::FUN_004296b0(int key){Ptr ptr;if(store->lookup(key,&ptr))DAT_0116d138->FUN_00427340(ptr.p,0);}
 }
 
@@ -35856,6 +36517,8 @@ namespace f3m_00421cf0 {
 namespace Copy346 {
 struct Heap{void* FUN_0086b930(unsigned);};extern Heap DAT_01090a78;extern char DAT_00f48448,DAT_00f46e68;void* FUN_00c0050a(void*,int,void*,void*,int);void* FUN_00bffa60(void*,const void*,unsigned);
 struct Record{int a,b,c,d,e,f,g;};struct Node{Record* value;Node* next;Node(Record* r):value(r),next(0){}static void* operator new(unsigned n){return DAT_01090a78.FUN_0086b930(n);}};
+// pdb: ExtraDecalRefs::Copy | ExtraDataObjects.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCopy
 struct Owner{int unk00,unk04,unk08;Node head;void FUN_00420960();void FUN_00421cf0(void*);};void Owner::FUN_00421cf0(void* input){Owner* source=(Owner*)FUN_00c0050a(input,0,&DAT_00f46e68,&DAT_00f48448,0);if(source){FUN_00420960();Node* it=&source->head;if(it){do{if(!it->next&&!it->value)break;{Record* value=it->value;Record* copy=(Record*)DAT_01090a78.FUN_0086b930(sizeof(Record));FUN_00bffa60(copy,value,sizeof(Record));if(copy){if(head.value){Node* node=new Node(head.value);node->next=head.next;head.next=node;}head.value=copy;}}it=it->next;}while(it);}}}
 }
 
@@ -35864,6 +36527,7 @@ struct Owner{int unk00,unk04,unk08;Node head;void FUN_00420960();void FUN_00421c
 // @f3 0x00422700 (community match, verified in this file)
 namespace f3m_00422700 {
 namespace Load352 {
+// pdb: MapMarkerData::Load | MapMarkerData.obj | tesv_win, objopen_prop, low
 struct Reader{unsigned TESFile_GetTESChunk();bool TESFile_NextChunk();void FUN_00447d60(void*,unsigned);void TESFile_GetChunkData(unsigned short*);};struct Owner;void FUN_00456560(Owner*,Reader*);struct Owner{int unk00,unk04,unk08;unsigned char first,second;unsigned short value;bool FUN_00422700(Reader*);};bool Owner::FUN_00422700(Reader* r){if(r&&r->TESFile_GetTESChunk()==0x4b524d58&&r->TESFile_NextChunk()){if(r->TESFile_GetTESChunk()==0x4d414e46){r->FUN_00447d60(&first,1);second=first;if(!r->TESFile_NextChunk())return false;}if(r->TESFile_GetTESChunk()==0x4c4c5546){FUN_00456560(this,r);if(r->TESFile_NextChunk()&&r->TESFile_GetTESChunk()==0x4d414e54){r->TESFile_GetChunkData(&value);return true;}}}return false;}
 }
 }   // namespace f3m_00422700
@@ -35922,6 +36586,8 @@ public:
     FUN_0042bd10(const char* name, void* stream);
 };
 
+// pdb: KFModel::KFModel | ModelLoader.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apFilename, apStream
 FUN_0042bd10::FUN_0042bd10(const char* name, void* stream)
     : m_unk0c(0), m_unk10(0)
 {
@@ -35983,6 +36649,8 @@ struct Owner {
     bool FUN_0043bb60(Form* form, int unused);
 };
 
+// pdb: TESDataHandler::SaveForm | TESDataHandler.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pForm, master
 bool Owner::FUN_0043bb60(Form* form, int unused)
 {
     if (!target198)
@@ -36049,6 +36717,7 @@ struct ItemOwner
     bool FUN_0042b6e0();
 };
 
+// pdb: SettingCollectionList<Setting>::ReadSettings | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 bool ItemOwner::FUN_0042b6e0()
 {
     HeapContext context(9);
@@ -36086,6 +36755,7 @@ class Virtual42f { public: virtual void fillerAt04();      // vtable displacemen
                                      //     two independent dword fields gate that one manager call, emptiness at twenty-eight checked before inequality against six at twelve ✓ 
                       int FUN_0042fa50(); };   // ORIG: no bare retn anywhere - the body ends in 'jmp edx' after one pop ✓✗→✓ a thiscall member taking NO stack
                                                   //     parameters whose answer comes from that virtual tail transfer ✗ hence an int return with the call returned ✓ 
+// pdb: QueuedHelmet::Finish | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 int Virtual42f::FUN_0042fa50() {                   
     if (this->field1C == 0) {                         // ORIG: first gate, a non-zero value jumping past that manager call straight into the dispatch ✓✗→✓ both refusals
                                        //     and the normal path land on ONE shared tail block at +6B in their build ✗ which two nested positive guards reproduce without me chasing block order ✓ 
@@ -36162,6 +36832,7 @@ struct Owner435070 {
     int FUN_00435070(bool flag, NS435070::World88* world);
 };
 
+// pdb: TES::DetachGridCells | TES.obj | fnv360_0822_retail, call_seq, low, conflict (bridge: TES::FreeExteriorBuffer)
 int Owner435070::FUN_00435070(bool flag, NS435070::World88* world)
 {
     int count = 0;
@@ -36245,6 +36916,8 @@ struct FUN_00430ff0 : RegisteredBase
     FUN_00430ff0(int id, float value);
 };
 
+// pdb: SettingT<INISettingCollection>::SettingT<INISettingCollection> | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apID, afValue
 FUN_00430ff0::FUN_00430ff0(int id, float value) : RegisteredBase(id, value)
 {
     vtable = DAT_00db8684;
@@ -36274,6 +36947,7 @@ struct Owner {
  Attachments* attachments;
  void FUN_0042e2f0();
 };
+// pdb: QueuedAnimIdle::QueueMe | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Owner::FUN_0042e2f0() {
  if(attachments) {
   for(int i=7;i<9;++i) {
@@ -36297,6 +36971,7 @@ struct Heap {void FUN_0086ba60(void*);};
 extern Heap DAT_01090a78;
 extern int (__stdcall *const DAT_00d9b07c)(unsigned);
 struct Owner {unsigned count,index;Entry* entries;void FUN_0042f3c0();};
+// pdb: ThreadSpecificInterfaceManager<LockFreeMap<PathingRequest *,PathingTaskData *>::LockFreeMapInterface>::~ThreadSpecificInterfaceManager<LockFreeMap<PathingRequest *,PathingTaskData *>::LockFreeMapInterface> | PathManager.obj | fnv360_0822_retail, call_gap, low
 void Owner::FUN_0042f3c0() {
  for(unsigned i=0;i<count;++i) {
   Item* volatile item=entries[i].item;
@@ -36320,6 +36995,8 @@ typedef long (__stdcall *Increment)(volatile long*);extern Increment const DAT_0
 struct Ptr {Ref* value;Ptr(Ref* p=0):value(p){if(value)DAT_00d9b068(&value->refs);}~Ptr();};
 Ptr __cdecl FUN_0043c2d0(Ref*);
 struct Owner {int unk00;Ref** data;unsigned count;Ptr FUN_0043c300(unsigned);};
+// pdb: NavMeshArray::GetNavMeshByIndex | TESDataHandler.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiNavMeshIndex
 Ptr Owner::FUN_0043c300(unsigned index){if(index>=count)return FUN_0043c2d0(0);return Ptr(data[index]);}
 }
 }   // namespace f3m_0043c300
@@ -36374,6 +37051,8 @@ struct Ref_42e150 : RefBase_42e150 {
     void FUN_0042e150(ItemList_42e150* list);
 };
 
+// pdb: QueuedModel::QueueMe | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apTextureList
 void Ref_42e150::FUN_0042e150(ItemList_42e150* list)
 {
     if (list) {
@@ -36439,6 +37118,8 @@ public:
     NamedObject(const char* source,Payload* value);
     virtual ~NamedObject();
 };
+// pdb: LoadedFile::LoadedFile | ModelLoader.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apFileName, apFile
 NamedObject::NamedObject(const char* source,Payload* value) : RefBase(),payload(value)
 {
     unsigned length=static_cast<unsigned>(strlen(source))+1;
@@ -36778,6 +37459,7 @@ struct FUN_00428100 : FUN_00aa51a0 {
     Ptr8 fourth;
     ~FUN_00428100();
 };
+// pdb: QueuedReference::~QueuedReference | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 FUN_00428100::~FUN_00428100() {}
 }
 }   // namespace f3m_00428100
@@ -36855,6 +37537,8 @@ struct Container
     Iterator* FUN_0042b080(int index);
 };
 
+// pdb: LockFreeMap<MobileObject *,NiPointer<LipTask> >::AllocateInterface | LipSyncBackgroundManager.obj | fnv360_0822_retail, vtable, high
+// pdb params: aiNum
 Iterator* Container::FUN_0042b080(int index)
 {
     TlsHeapContext context;
@@ -37085,6 +37769,7 @@ struct Owner {
     AssetPointer asset;
     void FUN_0042fa80();
 };
+// pdb: QueuedReference::CheckFinished | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Owner::FUN_0042fa80() {
     if(state<4) return;
     if(!(unsigned char)(tasks ? (*(TaskList* const volatile*)&tasks)->IsEmpty() : 1)) return;
@@ -37141,6 +37826,8 @@ struct Cursor {
     bool FUN_0042dd40(unsigned bucket,unsigned value);
     bool FUN_0042dc50(unsigned bucket,unsigned* value,void** output);
 };
+// pdb: LockFreeMap<PathingRequest *,PathingTaskData *>::LockFreeMapInterface::GetNext | PathManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiBucket, arKey, arData
 bool Cursor::FUN_0042dc50(unsigned bucket,unsigned* value,void** output) {
     bool result;
     for(;;) {
@@ -37228,6 +37915,8 @@ struct ModelLoader {
  void FUN_0042a1c0(char*,int,FUN_00427050*,int);
  void FUN_0042d8b0(Source*,int,FUN_00427050*,int);
 };
+// pdb: ModelLoader::QueueTRIFile | ModelLoader.obj | fnv360_0822_retail, ustr_rel, medium
+// pdb params: apModel, aePriority, apParent, aiHeadPart
 void ModelLoader::FUN_0042d8b0(Source* source,int priority,FUN_00427050* parent,int unused) {
  ObjectPtr object;
  ResourcePtr resource;
@@ -37275,6 +37964,8 @@ struct Owner {
  Table* table;
  bool FUN_004298f0(unsigned key);
 };
+// pdb: ModelLoader::IsReferenceQueued | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRef
 bool Owner::FUN_004298f0(unsigned key) {
  TaskPtr result;
  return table->Find(key,&result);
@@ -37375,6 +38066,8 @@ struct Node435200 {
 struct Owner435200 {
     int FUN_00435200(Node435200* node, bool flag);
 };
+// pdb: TES::GetFaceCount | TES.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apRoot, abCountculled
 int Owner435200::FUN_00435200(Node435200* node, bool flag)
 {
     int total = 0;
@@ -37622,6 +38315,7 @@ struct Owner {
  ObjectPtr object;
  bool FUN_00426a00();
 };
+// pdb: QueuedReference::BackgroundClone | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 bool Owner::FUN_00426a00(){
  bool result=false;
  TagScope scope(allocationTag);
@@ -37677,6 +38371,7 @@ struct Object {
     Item* item;
     void FUN_00426780();
 };
+// pdb: AttachDistant3DTask::PostProcess | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Object::FUN_00426780() {
     if (type != 6 && ref && !ref->scene()) {
         ref->FUN_004fac30(item);
@@ -37709,6 +38404,7 @@ struct Owner {
     Node head;
     void FUN_00421ea0();
 };
+// pdb: ExtraReflectedRefs::ClearReferenceData | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, medium
 void Owner::FUN_00421ea0() {
     while (!head.Empty()) {
         Node* node = head.next;
@@ -37757,6 +38453,7 @@ struct Owner350 {
     void FUN_0042e350();
 };
 
+// pdb: QueuedHelmet::QueueMe | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Owner350::FUN_0042e350()
 {
     for (int i = 0; i < 20; i++) {
@@ -37779,6 +38476,8 @@ struct Cell;
 struct World { Cell* TESWorldSpace_GetCellFromCellCoord(int x, int y); };
 struct Form { int unk00; unsigned char type; };
 void* __cdecl FUN_007c9d80(Form* form, int a, int b, int c, NiPoint3 position, float angleZ, float angleX, int d, int e, int f, int g, float h, float i, Cell* cell);
+// pdb: TESDataHandler::CreateProjectileAtLocation | TESDataHandler.obj | fnv360_0721_beta, call_gap_sim, low
+// pdb params: apObject, aLocation, aDirection, apInterior, apWorld
 void* __stdcall FUN_0043be50(Form* form, NiPoint3* position, NiPoint3* angle, Cell* cell, World* world)
 {
     void* result = 0;
@@ -37803,6 +38502,8 @@ namespace Init430520 {
 struct FUN_00c01a3e {void* vtable;int unk04,unk08;FUN_00c01a3e();~FUN_00c01a3e();};
 struct String {int unk00;volatile char text[16];unsigned length,capacity;void FUN_0042eff0(const String*,unsigned,unsigned);inline void initialize(const String* source){length=0;capacity=15;text[0]=0;FUN_0042eff0(source,0,~0u);}};
 struct FUN_00430520:FUN_00c01a3e {String value;FUN_00430520(const String*);};
+// pdb: std::_Xout_of_range | xthrow.obj | fnv360_0822_retail, call_gap, low
+// pdb params: _Message
 FUN_00430520::FUN_00430520(const String* source){vtable=&DAT_00db8518;value.initialize(source);}
 }
 
@@ -37817,6 +38518,8 @@ struct Table427630 { virtual void Vfn00(); virtual void Vfn04(); virtual void Vf
 }
 using namespace f3m_00427630;
 struct Iter427630 { Table427630* table; int* out04; unsigned int* out08; int* out0C; volatile unsigned int* volatile bucket; volatile unsigned int cur; bool FUN_00427630(unsigned int idx, int arg, int* out); };
+// pdb: LockFreeMap<PathingRequest *,PathingTaskData *>::LockFreeMapInterface::GetFirst | PathManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiBucket, arKey, arData
 bool Iter427630::FUN_00427630(unsigned int idx, int arg, int* out)
 {
     bool tmp;
@@ -37923,6 +38626,7 @@ struct Loader {
     void FUN_00429db0();
 };
 
+// pdb: MessageHandler::MessageBoxCBTHookProc | MessageHandler.obj | tesv_win, uimport, low
 void Loader::FUN_00429db0()
 {
     if (!DAT_0106fcc4) {
@@ -37987,6 +38691,8 @@ struct C {
     Grid* grid;
     bool FUN_00435780(Item* item, int b, int c, float d, bool e);
 };
+// pdb: TES::PickWorldDistance | TES.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apPick, aOrigin, aDir, afDistance, acNodeFlags
 bool C::FUN_00435780(Item* item, int b, int c, float d, bool e)
 {
     bool res = false;
@@ -38038,6 +38744,8 @@ struct Owner {
     List list;
     bool FUN_00421500(int,int,int,int,int);
 };
+// pdb: ExtraFollowerSwimBreadcrumbs::UpdateLeaderInfo | ExtraDataObjects.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: aeLeaderState, aLeaderLocation, aLeaderNavMeshID
 bool Owner::FUN_00421500(int next,int e,int f,int g,int h) {
     bool saved = false;
     if (next) {
@@ -38074,6 +38782,8 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile lo
 struct Node {virtual ~Node();Node* next;long refs;};
 struct Owner {int unk00,unk04,unk08;unsigned limit;};
 struct Object {Owner* owner;int unk04,unk08;unsigned count;Node* head;void FUN_0042bbb0();void FUN_0042dbf0(Node*);};
+// pdb: LockFreeQueue<NiPointer<QueuedReference> >::LockFreeQueueInterface::DeleteNode | ModelLoader.obj | fnv360_0721_retail, objrun_prop, low
+// pdb params: apNode
 void Object::FUN_0042dbf0(Node* node){if(node->next){Node* old=node->next;if(!InterlockedDecrement(&old->refs))delete old;node->next=0;}node->next=head;++count;head=node;if(count==owner->limit)FUN_0042bbb0();}
 }
 }   // namespace f3m_0042dbf0
@@ -38144,6 +38854,7 @@ struct Owner_426b40 {
     void FUN_00426b40();
 };
 
+// pdb: QueuedTree::UseDistant3D | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Owner_426b40::FUN_00426b40()
 {
     Ref_426b40* ref = unk28->unk1c->FUN_004bb660(0);
@@ -38225,6 +38936,8 @@ struct Owner {
  void FUN_004336d0();
  void FUN_00434ff0(Item*);
 };
+// pdb: TES::AddToBuffer | TES.obj | fnv360_0822_debug, call_seq, low
+// pdb params: apCell
 void Owner::FUN_00434ff0(Item* item) {
  
  FUN_004336d0();
@@ -38326,6 +39039,8 @@ struct Grid {
     Cell* TES_GetGridCellCell(int x, int y);
     LandData* FUN_00435c00(const Point3* position);
 };
+// pdb: TES::GetLandTexture | TES.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: aCoord
 LandData* Grid::FUN_00435c00(const Point3* position) {
     LandData* data = 0;
     int cellX = fnv_FloatToInt(position->GetX());
@@ -38587,6 +39302,8 @@ struct DataHandler {
     TESObjectREFR* FUN_0043be50(TESForm* form, NiPoint3* pos, NiPoint3* angle, TESObjectCELL* cell, TESWorldSpace* world);
     TESObjectREFR* FUN_0043def0(TESForm* form, NiPoint3* pos, NiPoint3* angle, TESObjectCELL* cell, TESWorldSpace* world, TESObjectREFR* ref, int extra, int extra2);
 };
+// pdb: TESDataHandler::CreateReferenceAtLocation | TESDataHandler.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObject, aLocation, aDirection, apInterior, apWorld, apReference, apAddPrimitive, apAdditionalData
 TESObjectREFR* DataHandler::FUN_0043def0(TESForm* form, NiPoint3* pos, NiPoint3* angle, TESObjectCELL* cell, TESWorldSpace* world, TESObjectREFR* ref, int extra, int extra2)
 {
     bool wasSet = false;
@@ -38820,6 +39537,8 @@ struct Owner {
     void FUN_0042cd20(char* a1, NiPointer<RefObj>* a2, int a3, int a4, int a5);
 };
 
+// pdb: ModelLoader::QueueHelmet | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apBipedAnim, aspQueuedHelmet, aePriority, apParent, aeBipedObject
 void Owner::FUN_0042cd20(char* a1, NiPointer<RefObj>* a2, int a3, int a4, int a5)
 {
     NiPointer<RefObj> sp;
@@ -38857,6 +39576,8 @@ struct Owner {
  Manager* manager;
  void FUN_00430fa0(void*,void*);
 };
+// pdb: LockFreeMap<PathingRequest *,PathingTaskData *>::GetAt | PathManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aKey, arData
 void Owner::FUN_00430fa0(void* first,void* second) {
  Manager* service=manager;
  Context* context=service->Get(this);
@@ -38917,6 +39638,8 @@ struct Table {
     void FUN_004312c0(bool keepEmpty);
 };
 
+// pdb: LockFreeMap<PathingRequest *,PathingTaskData *>::RemoveAll | PathManager.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: abCalledByDestructor
 void Table::FUN_004312c0(bool keepEmpty)
 {
     TlsScope scope(6);
@@ -38988,6 +39711,7 @@ struct World {
     void FUN_00433f00();
 };
 
+// pdb: TES::QueueReferencesForAttachedCells | TES.obj | fnv360_0822_retail, call_gap, low
 void World::FUN_00433f00()
 {
     if (DAT_0106cdcc) {
@@ -39027,6 +39751,8 @@ struct Refs4209c0 : Base4209c0 {
     Entry4209c0* FUN_0041f440(int key);
     void FUN_004209c0(int key, const Vec4209c0& a, const Vec4209c0& b);
 };
+// pdb: ExtraDecalRefs::SetRefDecalData | ExtraDataObjects.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apRef, aIntersect, aNormal
 void Refs4209c0::FUN_004209c0(int key, const Vec4209c0& a, const Vec4209c0& b)
 {
     Entry4209c0* entry = FUN_0041f440(key);
@@ -39092,6 +39818,7 @@ int unk038; int unk03c;
     bool FUN_00426a00();
     bool FUN_00428410();
 };
+// pdb: QueuedCharacter::BackgroundClone | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 bool Owner::FUN_00428410()
 {
     HeapCtx ctx(unk18);
@@ -39121,6 +39848,8 @@ __forceinline bool GetItem(Obj433570* list, unsigned int i, void*& item)
 }
 }
 
+// pdb: TES::IsInteriorBuffered | TES.obj | fnv360_0822_debug, call_gap, low
+// pdb params: apCell
 bool Obj433570::FUN_00433540(void* value)
 {
     void* item;
@@ -39144,6 +39873,7 @@ struct SmallStringB {
     unsigned capacity;
     const char* FUN_004249b0() const;
 };
+// pdb: std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Myptr | TESObject.obj | fnv360_0822_retail, callee_sim, low
 const char* SmallStringB::FUN_004249b0() const
 {
     if (capacity >= 16)
@@ -39365,6 +40095,8 @@ struct Owner {
     void FUN_004221d0(Actor* actor, int type, bool flag);
 };
 
+// pdb: ExtraDismemberedLimbs::Dismember | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRef, aeLimb, abExplodedLimb
 void Owner::FUN_004221d0(Actor* actor, int type, bool flag)
 {
     if (mask & (1 << type))
@@ -39528,6 +40260,8 @@ struct S0042d4e0_Loader {
 };
 
 struct S0042d4e0_PtrDerived : S0042d4e0_TaskPtr { __forceinline S0042d4e0_PtrDerived(S0042d4e0_Task* q, S0042d4e0_Task*& out) throw() : S0042d4e0_TaskPtr(q) { out = p; _ReadWriteBarrier(); } };
+// pdb: ModelLoader::QueueEGMFile | ModelLoader.obj | fnv360_0822_debug, caller, medium
+// pdb params: apModel, aePriority, apParent, aiHeadPart
 void S0042d4e0_Loader::FUN_0042d4e0(S0042d4e0_Named* owner, int priority, S0042d4e0_Parent* parent, int type)
 {
     NiPointer<S0042d4e0_Shape> shape;
@@ -39578,6 +40312,8 @@ struct Rect433050 { int left, top, right, bottom; };
 namespace n433050 { extern unsigned int DAT_0106e9cc; }
 struct RectOwnerB { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int x; int y; void FUN_00433050(Rect433050* out, float pad); };
 static __forceinline float W(int n) { return (float)(n << 12); }
+// pdb: TES::GetLoadedAreaRect | TES.obj | fnv360_0822_retail, objrun, low
+// pdb params: aOutRect, afOffsetInside
 void RectOwnerB::FUN_00433050(Rect433050* out, float pad)
 {
     unsigned half = n433050::DAT_0106e9cc >> 1;
@@ -39623,6 +40359,7 @@ public:
     void FUN_00434350();
 };
 
+// pdb: TES::ActivateAllSubmergedReferencesIslands | TES.obj | fnv360_0822_retail, call_gap, medium
 void Owner::FUN_00434350() {
     Cell* cell = selected;
     if (cell) {
@@ -39655,6 +40392,7 @@ struct Owner
     Cell** cells;
     bool FUN_00434c20();
 };
+// pdb: TES::AllCellsInGridLoaded | TES.obj | fnv360_0822_retail, call_gap, low
 bool Owner::FUN_00434c20()
 {
     if (!((Manager*)DAT_0107a0d8)->world)
@@ -39782,6 +40520,7 @@ struct FUN_004307f0 {
     ~FUN_004307f0();
 };
 
+// pdb: ModelLoader::~ModelLoader | ModelLoader.obj | fnv360_0822_retail, ustr, medium
 FUN_004307f0::~FUN_004307f0()
 {
     FUN_0042fe30(0, 0);
@@ -39950,6 +40689,7 @@ public:
 
 }
 
+// pdb: QueuedReference::Attach | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void f3m_0042e4f0::QueuedReference::FUN_0042e4f0()
 {
     MemoryContextScope context(m_memoryContext);
@@ -40042,6 +40782,7 @@ struct Owner {
     void FUN_004276f0();
 };
 
+// pdb: LockFreeMap<PathingRequest *,PathingTaskData *>::LockFreeMapInterface::ScanForDeletedNodes | PathManager.obj | fnv360_0822_retail, call_seq, medium
 void Owner::FUN_004276f0()
 {
     TlsGuard guard(6);
@@ -40166,6 +40907,7 @@ struct Owner {
     bool FUN_00430cd0();
 };
 
+// pdb: ModelLoader::UpdateAttachDistant3DQueue | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
 bool Owner::FUN_00430cd0()
 {
     ItemPtr item;
@@ -40293,6 +41035,7 @@ struct QueuedFile {
     void FUN_00426e30();
 };
 
+// pdb: QueuedFileLoad::Run | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void QueuedFile::FUN_00426e30()
 {
     AutoMemContext context(memContext);
@@ -40359,6 +41102,8 @@ struct Owner {
     void FUN_00421ef0(void* input);
 };
 
+// pdb: ExtraLitWaterRefs::Copy | ExtraDataObjects.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCopy
 void Owner::FUN_00421ef0(void* input)
 {
     Owner* source = (Owner*)FUN_00c0050a(input, 0, &DAT_00f46e68, &DAT_00f47a1c, 0);
@@ -40673,6 +41418,7 @@ struct S_00422880 {
     unsigned short m;
     int FUN_00422880();
 };
+// pdb: MapMarkerData::GetMarkerType | MapMarkerData.obj | fnv360_0822_retail, call_gap, low
 int S_00422880::FUN_00422880()
 {
     return m;
@@ -40681,6 +41427,7 @@ int S_00422880::FUN_00422880()
 
 // @f3 0x00423bd0 (community match, verified in this file)
 namespace f3m_00423bd0 {
+// pdb: DoorTeleportData::GetSaveSize | TeleportData.obj | fnv360_0822_retail, call_dedup, low
 short __cdecl FUN_00423bd0()
 {
     return 28;
@@ -40694,6 +41441,7 @@ struct S_004272d0 {
     unsigned char m;
     void FUN_004272d0();
 };
+// pdb: LockFreeStringMap<Model *>::LockFreeStringMapIterator::ClearKey | ModelLoader.obj | fnv360_0822_retail, vtable, low
 void S_004272d0::FUN_004272d0()
 {
     m = 0;
@@ -41337,6 +42085,8 @@ struct AnimLoader
 
 
 
+// pdb: ModelLoader::QueueAnimations | ModelLoader.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apModel, aePriority, apParent, apQueuedForRef, abCreature, abForceAnimationLoad
 void AnimLoader::FUN_0042ea50(TESModel* model, int priority, void* queued, ActorQ* actor, bool useSkeleton,
 
                               bool forceSkeleton)
@@ -41608,6 +42358,7 @@ struct ThisClass {
     void FUN_0043ec60();
 };
 
+// pdb: TESDataHandler::SortInteriorCells | TESDataHandler.obj | fnv360_0822_retail, call_dedup, low
 void ThisClass::FUN_0043ec60()
 {
     arr.FUN_00553fe0();
@@ -41858,6 +42609,8 @@ struct Loaded {
     }
     void FUN_00425190(const char* path, Model* model, bool a, bool b);
 };
+// pdb: Model::InitModel | ModelLoader.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apFilename, apStream, abPrepareObject, abFaceGenModel
 void Loaded::FUN_00425190(const char* path, Model* model, bool a, bool b) {
     memset(&pair, 0, sizeof(pair));
     SetName(path);
@@ -41984,6 +42737,8 @@ struct Owner {
     void FUN_00421e00(void* input);
 };
 
+// pdb: ExtraWaterLightRefs::Copy | ExtraDataObjects.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCopy
 void Owner::FUN_00421e00(void* input)
 {
     Owner* source = (Owner*)FUN_00c0050a(input, 0, &DAT_00f46e68, &DAT_00f479f8, 0);
@@ -42023,6 +42778,7 @@ struct PtrArray_43eb {
     void FUN_0043eb00();
 };
 
+// pdb: NiTLargeArray<TESTopicInfo *,NiTMallocInterface<TESTopicInfo *> >::Compact | TESTopic.obj | fnv360_0822_retail, call_seq, high
 void PtrArray_43eb::FUN_0043eb00()
 {
     if (m_uiESize == m_uiSize)
@@ -42151,6 +42907,8 @@ struct FUN_0042fe30_cls {
     void FUN_0042fe30(StatSink* sink, bool keep);
 };
 
+// pdb: ModelLoader::OutputModelMapContents | ModelLoader.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apFile, abShowZeroCountModels
 void FUN_0042fe30_cls::FUN_0042fe30(StatSink* sink, bool keep)
 {
     char buf[0x400];
@@ -42226,6 +42984,8 @@ struct Vt429220 {
 
 namespace n42c1b0 {
 
+// pdb: ModelLoader::QueueBoundObject | ModelLoader.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apBoundObject, aspQueuedModel, aePriority, apParent, apQueuedForRef
 void Manager::FUN_00429220(void* a, int* out, int flag, Runner* runner, Holder* holder)
 {
     int node = f3m_004246b0::FUN_004246b0(
@@ -42336,6 +43096,8 @@ struct Iter {
     bool FUN_00427520(unsigned int idx, int arg, Ptr* out);
 };
 
+// pdb: LockFreeMap<MobileObject *,NiPointer<LipTask> >::LockFreeMapInterface::GetFirst | LipSyncBackgroundManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiBucket, arKey, arData
 bool Iter::FUN_00427520(unsigned int idx, int arg, Ptr* out)
 {
     bool tmp;
@@ -42456,6 +43218,7 @@ __declspec(noinline) bool Map::FUN_00749780(void* it, Ref** key, void* value, bo
     return true;
 }
 
+// pdb: ModelLoader::CancelAllFiles | ModelLoader.obj | fnv360_0822_retail, call_gap, low
 void Owner::FUN_00431ba0()
 {
     DAT_0116d138->FUN_00aa2820();
@@ -42514,6 +43277,8 @@ struct Refs420c00 {
     void FUN_00420c00(int key, int value);
 };
 
+// pdb: ExtraReflectedRefs::SetReference | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, high
+// pdb params: apRef, aiEffectFlags
 void Refs420c00::FUN_00420c00(int key, int value)
 {
     Entry420c00* entry = FUN_0041f440(key);
@@ -42656,6 +43421,8 @@ struct Owner {
     void FUN_00421bb0(SaveArg* arg);
 };
 
+// pdb: ExtraReflectorRefs::InitItem | ExtraDataObjects.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apOwner
 void Owner::FUN_00421bb0(SaveArg* arg)
 {
     Node* prev = 0;
@@ -42728,6 +43495,8 @@ struct Node {
     }
 };
 struct Owner { int unk00, unk04, unk08; Node head; void FUN_00421ea0(); void FUN_00422420(void*); };
+// pdb: ExtraReflectedRefs::Copy | ExtraDataObjects.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCopy
 void Owner::FUN_00422420(void* input)
 {
     Owner* source = (Owner*)FUN_00c0050a(input, 0, &DAT_00f46e68, &DAT_00f479b0, 0);
@@ -42785,6 +43554,8 @@ struct Node {
     }
 };
 struct Owner { int unk00, unk04, unk08; Node head; void FUN_00421ea0(); void FUN_004224d0(void*); };
+// pdb: ExtraReflectorRefs::Copy | ExtraDataObjects.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCopy
 void Owner::FUN_004224d0(void* input)
 {
     Owner* source = (Owner*)FUN_00c0050a(input, 0, &DAT_00f46e68, &DAT_00f479d4, 0);
@@ -42832,6 +43603,8 @@ struct Table
     void FUN_00427340(Task* task, int arg);
 };
 // Cancel a task: move it to state 6 from whatever state it is in, waiting while it is busy.
+// pdb: BSTaskManager<__int64>::CancelTask | ModelLoader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTask, apTaskOwner
 void Table::FUN_00427340(Task* task, int arg)
 {
     DAT_0116d134 = false;
@@ -42978,6 +43751,8 @@ class ExtraActivateRef : public BSExtraData
 extern char DAT_00f46e68, DAT_00f48428;
 ExtraActivateRef* __cdecl FUN_00c0050a(BSExtraData*, int, const void*, const void*, int);
 
+// pdb: ExtraActivateRef::Copy | ExtraDataObjects.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCopy
 void ExtraActivateRef::FUN_004204c0(BSExtraData* source)
 {
     ExtraActivateRef* other = FUN_00c0050a(source, 0, &DAT_00f46e68, &DAT_00f48428, 0);
@@ -43517,6 +44292,8 @@ struct Owner {
  __forceinline Groups* GetGroups(){return unk64;}
  __declspec(noinline) void FUN_00437dc0(Input* input);
 };
+// pdb: TES::UpdateMultiBoundVisibility | TES.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apCamera
 void Owner::FUN_00437dc0(Input* input) {
  FUN_00a69400 collector(0);
  collector.source=input;
@@ -43665,6 +44442,8 @@ struct Owner {
     bool FUN_0042dd40(unsigned int bucket, unsigned int value);
 };
 
+// pdb: LockFreeMap<PathingRequest *,PathingTaskData *>::LockFreeMapInterface::Find | PathManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiBucket, aKey
 bool Owner::FUN_0042dd40(unsigned int bucket, unsigned int value) {
     volatile MarkedPtr* head = &table->buckets[bucket];
 retry:
@@ -43734,6 +44513,8 @@ struct Owner {
     bool FUN_0042ded0(int bucket, int* key);
 };
 
+// pdb: LockFreeMap<PathingRequest *,PathingTaskData *>::LockFreeMapInterface::FindValue | PathManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiBucket, arData
 bool Owner::FUN_0042ded0(int bucket, int* key) {
     volatile MarkedPtr* head = &table->buckets[bucket];
 retry:
@@ -43820,6 +44601,8 @@ struct Owner {
     bool FUN_0042f440(unsigned int bucket, unsigned int value);
 };
 
+// pdb: LockFreeMap<MobileObject *,NiPointer<LipTask> >::LockFreeMapInterface::Find | LipSyncBackgroundManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiBucket, aKey
 bool Owner::FUN_0042f440(unsigned int bucket, unsigned int value) {
     volatile MarkedPtr* head = &table->buckets[bucket];
 retry:
@@ -43925,6 +44708,8 @@ struct ThreadData {
     bool FUN_0042f1d0(void* a1, int a2, const int* a3, bool a4);
 };
 
+// pdb: LockFreeMap<PathingRequest *,PathingTaskData *>::LockFreeMapInterface::SetAt | PathManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiBucket, aKey, arData, abReplaceExisting
 bool ThreadData::FUN_0042f1d0(void* a1, int a2, const int* a3, bool a4)
 {
     TlsContext ctx;
@@ -44041,6 +44826,8 @@ struct ThreadData {
     bool FUN_00430310(int a1, void* a2, const CPtr* a3, bool a4);
 };
 
+// pdb: LockFreeMap<MobileObject *,NiPointer<LipTask> >::LockFreeMapInterface::SetAt | LipSyncBackgroundManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiBucket, aKey, arData, abReplaceExisting
 bool ThreadData::FUN_00430310(int a1, void* a2, const CPtr* a3, bool a4)
 {
     TlsContext ctx;
@@ -44143,6 +44930,8 @@ static __forceinline void NormalizeCreateKey(char* dst, const char* src)
     }
     *dst = 0;
 }
+// pdb: LockFreeCaseInsensitiveStringMap<Model *>::SetAt | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apKey, aData, abReplaceExisting
 bool Owner_2645::FUN_004322d0(const char* name, unsigned int value, unsigned int overwrite)
 {
     char lower[1000];
@@ -44287,6 +45076,7 @@ struct Owner : FUN_00aa51a0 {
     __forceinline void* Attach(Graph* g, Inner* inner, int index) { return unk28->FUN_00471ca0(g, inner->GetC(), index); }
 };
 
+// pdb: QueuedHelmet::CheckFinished | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Owner::FUN_00432460()
 {
     if (!(unk120 & 1)) {
@@ -44556,6 +45346,7 @@ struct Grid_00438c80
     void FUN_00438c80();
 };
 
+// pdb: TES::GridArrayLoad | TES.obj | fnv360_0822_retail, call_gap, low
 void Grid_00438c80::FUN_00438c80()
 {
     MemContextGuard context(26);
@@ -44688,6 +45479,7 @@ unsigned unk8c;
     bool FUN_00432d10();
 };
 
+// pdb: bhkPickData::CalcTo | TES.obj | fnv360_0822_retail, call_dedup, low
 bool Obj::FUN_00432d10() {
     Vec delta;
     delta.x = value.x - reinterpret_cast<Vec&>(DAT_01092a50).x;
@@ -45118,6 +45910,8 @@ extern S004399f0_Player* DAT_0107a104;
 bool __cdecl FUN_0061a040();
 void __cdecl FUN_005736a0();
 
+// pdb: TES::UpdateCurrentGridCell | TES.obj | fnv360_0822_debug, caller, medium
+// pdb params: apPos, abAllowPartialRemovals
 int S004399f0_TES::FUN_004399f0(const S004399f0_Point* pos, bool arg)
 {
     unk8c.FUN_006c8220();
@@ -45289,6 +46083,8 @@ struct S00433c10_Grid {
     int unk24; int unk28;
     int FUN_00433c10(S00433c10_Cell* cell, const float* pos);
 };
+// pdb: TES::GetCellPriority | TES.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apCell, apPos
 int S00433c10_Grid::FUN_00433c10(S00433c10_Cell* cell, const float* pos)
 {
     if (DAT_0106cd5c == cell)
@@ -45388,6 +46184,7 @@ public:
     void FUN_004305d0();
 };
 
+// pdb: BackgroundCloneThread::ThreadUpdate | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void Worker5d0::FUN_004305d0()
 {
     while (stop != true) {
@@ -46121,6 +46918,8 @@ struct S43a040_TES {
     void FUN_0043a040(S43a040_Cell* cell, const float* position);
 };
 
+// pdb: TES::LoadInterior | TES.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apNewInterior, apPos
 void S43a040_TES::FUN_0043a040(S43a040_Cell* cell, const float* position)
 {
     if (!Busy())
@@ -46539,6 +47338,8 @@ public:
     void FUN_00436b40(bool abLandscape, bool abRooms);
 };
 
+// pdb: TES::ResetAllMultiBoundNodes | TES.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: abLandscape, abRooms
 void TES::FUN_00436b40(bool abLandscape, bool abRooms)
 {
     NiNode* pnode;
@@ -46679,6 +47480,7 @@ struct Obj {
     void FUN_0041fd80();
     Obj* FUN_004215c0(unsigned flags);
 };
+// pdb: BSMap<TESFaction *,bool>::`scalar deleting destructor' | ExtraDataObjects.obj | fnv360_0822_debug, vtable, medium
 Obj* Obj::FUN_004215c0(unsigned flags) {
     FUN_0041fd80();
     if (flags & 1) DAT_01090a78.FUN_0086ba60(this);
@@ -46694,6 +47496,7 @@ struct Obj {
     void FUN_00424620();
     Obj* FUN_00427120(unsigned flags);
 };
+// pdb: BackgroundCloneThread::`scalar deleting destructor' | ModelLoader.obj | fnv360_0822_debug, vtable, medium
 Obj* Obj::FUN_00427120(unsigned flags) {
     FUN_00424620();
     if (flags & 1) DAT_01090a78.FUN_0086ba60(this);
@@ -46799,6 +47602,7 @@ struct ActorTaskM
     void FUN_00426bf0();
 };
 
+// pdb: QueuedActor::QueueMe | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 void ActorTaskM::FUN_00426bf0()
 {
     ActorM* actor = actor28;

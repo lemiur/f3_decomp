@@ -108,6 +108,8 @@ struct Matrix44_shell {
     char FUN_00515c10(CB20B0_Class* a2);
 };
 
+// pdb: TESGlobal::Load | TESGlobal.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 char Matrix44_shell::FUN_00515c10(CB20B0_Class* a2)
 {
     if (a2->GetType() != 6)
@@ -298,6 +300,8 @@ int unk258;
 unsigned chunkSize;unsigned char TESFile_GetTESForm();unsigned TESFile_GetTESChunk();bool TESFile_NextChunk();void FUN_00447d60(void*,unsigned);};
 void __cdecl TESTexture_LoadTextureChunk(void*,File50ae*);
 struct Owner50ae{void**table;int unk04;int unk08;int unk0C;int unk10;int unk14;int icon;void FUN_00454410(File50ae*);bool FUN_0050ae40(File50ae*);};
+// pdb: BGSMenuIcon::Load | BGSMenuIcon.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Owner50ae::FUN_0050ae40(File50ae*file){if(file->TESFile_GetTESForm()!=5)return false;FUN_00454410(file);unsigned chunk=file->TESFile_GetTESChunk();while(chunk){switch(chunk){case 0x4e4f4349:TESTexture_LoadTextureChunk(this?&icon:0,file);break;case 0x444e424f:((void(__thiscall*)(Owner50ae*,File50ae*))table[56])(this,file);break;case 0x44494445:{char*text=(char*)_alloca(file->chunkSize);file->FUN_00447d60(text,512);((void(__thiscall*)(Owner50ae*,char*))table[77])(this,text);break;}}if(!file->TESFile_NextChunk())break;chunk=file->TESFile_GetTESChunk();}return true;}
 }   // namespace f3m_0050ae40
 
@@ -459,6 +463,8 @@ int unk258;
 unsigned chunkSize;void FUN_00448800(unsigned*);unsigned char TESFile_GetTESForm();unsigned TESFile_GetTESChunk();bool TESFile_NextChunk();void FUN_00447d60(void*,unsigned);};
 struct List50aa{void FUN_0061c430(unsigned*);};
 struct Owner50aa{void**table;int unk04;int unk08;int unk0C;int unk10;int unk14;List50aa list;void TESForm_SetInitialized(int);void FUN_00454410(File50aa*);bool FUN_0050aa60(File50aa*);};
+// pdb: BGSListForm::Load | BGSListForm.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Owner50aa::FUN_0050aa60(File50aa*file){FUN_00454410(file);TESForm_SetInitialized(0);unsigned chunk=file->TESFile_GetTESChunk();while(chunk){switch(chunk){case 0x4d414e4c:{unsigned id=0;file->FUN_00448800(&id);unsigned value=id;list.FUN_0061c430(&value);break;}case 0x444e424f:((void(__thiscall*)(Owner50aa*,File50aa*))table[56])(this,file);break;case 0x44494445:{char*text=(char*)_alloca(file->chunkSize);file->FUN_00447d60(text,512);((void(__thiscall*)(Owner50aa*,char*))table[77])(this,text);break;}}if(!file->TESFile_NextChunk())break;chunk=file->TESFile_GetTESChunk();}return true;}
 }   // namespace f3m_0050aa60
 
@@ -470,6 +476,8 @@ struct Stream50b9 {int unk00; int unk04; int unk08; int unk0C; int unk10; int un
 struct Owner50b9;struct Part50b9;typedef void (__thiscall *PartCall50b9)(Part50b9*,char*);struct PartTable50b9 {int unk00,unk04,unk08,unk0C;PartCall50b9 unk10;};struct Part50b9 {PartTable50b9* unk00;};
 typedef void (__thiscall *Read50b9)(Owner50b9*,Stream50b9*);typedef void (__thiscall *Name50b9)(Owner50b9*,char*);struct Table50b9 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C; int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; int unkBC; int unkC0; int unkC4; int unkC8; int unkCC; int unkD0; int unkD4; int unkD8; int unkDC; Read50b9 unkE0; int unkE4; int unkE8; int unkEC; int unkF0; int unkF4; int unkF8; int unkFC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; int unk128; int unk12C; int unk130; Name50b9 unk134;};
 struct Owner50b9 {Table50b9* unk00;int unk04,unk08,unk0C,unk10,unk14;Part50b9 unk18;void FUN_00454410(Stream50b9*);void TESForm_SetInitialized(int);bool FUN_0050b9a0(Stream50b9*);};
+// pdb: BGSMusicType::Load | BGSMusicType.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Owner50b9::FUN_0050b9a0(Stream50b9* stream){FUN_00454410(stream);TESForm_SetInitialized(0);unsigned tag=stream->TESFile_GetTESChunk();while(tag){switch(tag){case 'MANF':{char* text=(char*)_alloca(stream->unk25C);stream->FUN_00447d60(text,0);unk18.unk00->unk10(&unk18,text);break;}case 'DNBO':unk00->unkE0(this,stream);break;case 'DIDE':{char* text=(char*)_alloca(stream->unk25C);stream->FUN_00447d60(text,0x200);unk00->unk134(this,text);break;}}if(!stream->TESFile_NextChunk())break;tag=stream->TESFile_GetTESChunk();}return true;}
 }   // namespace f3m_0050b9a0
 
@@ -834,6 +842,8 @@ public:
     bool FUN_005066c0(TESFile* pFile);
 };
 
+// pdb: BGSCameraPath::Load | BGSCameraPath.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool BGSCameraPath::FUN_005066c0(TESFile* pFile)
 {
     if (pFile->TESFile_GetTESForm() != ENUM_FORM_ID_CPTH_ID)

@@ -32,6 +32,7 @@ struct D942F0Island
 void __cdecl hkpWorldOperationUtil_splitSimulationIsland(D942F0Island* island, void* world, void* context, D942F0Array* out);
 
 // @fnv 0x00d942f0
+// pdb: hkCpuSplitSimulationIslandJobImpl | hkpCpuSplitSimulationIslandJob.obj | tesv_win, hash, low
 void __cdecl ClearFlagsAndMarkDirty(D942F0Island* island, void* context)
 {
     island->m_flags &= ~3;

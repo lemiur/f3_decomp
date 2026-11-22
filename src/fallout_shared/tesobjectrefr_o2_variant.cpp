@@ -14,6 +14,7 @@ struct FUN_00c9c240_holder
 };
 
 // @fnv 0x00c9d600
+// pdb: bhkEntity::Deactivate | bhkEntity.obj | fnv360_0822_retail, call_gap_sim, low
 void FUN_00c9c240_holder::FUN_00c9d600()
 {
     if (this && m8)
@@ -43,6 +44,7 @@ struct ProjectileListener
     void FUN_00c876a0();
 };
 // @fnv 0x00c876a0
+// pdb: bhkSerializable::Kill | bhkSerializable.obj | fnv360_0822_retail, vtable, medium
 void ProjectileListener::FUN_00c876a0()
 {
     typedef void(__thiscall * Fn)(void*, int);
@@ -107,6 +109,7 @@ struct Holder00c9d5d0
     void FUN_00c9d5d0();
 };
 // @fnv 0x00c9d5d0
+// pdb: bhkEntity::UpdateCFilter | bhkEntity.obj | fnv360_0822_retail, caller_sim, medium
 void Holder00c9d5d0::FUN_00c9d5d0()
 {
     CallRet* p = GetRet();
@@ -184,6 +187,7 @@ struct bhkAabbPhantom : PhantomBase
     void FUN_00c9f460();
 };
 // @fnv 0x00c9f460
+// pdb: bhkPhantom::UpdateCFilter | bhkPhantom.obj | fnv360_0822_retail, caller_sim, medium
 void bhkAabbPhantom::FUN_00c9f460()
 {
     WorldHolder* w = GetWorld();
@@ -293,6 +297,7 @@ struct MM
 };
 extern MM _g_memoryManager;
 // @fnv 0x00cb30a0
+// pdb: bhkRagdollController::`scalar deleting destructor' | bhkRagdollController.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: Projectile::UpdateInstant)
 void* MM::FUN_00cb30a0(unsigned int f)
 {
     FUN_00cb2ff0();
@@ -332,6 +337,7 @@ struct FUN_00cb3860 : public bhkRefObject
     FUN_00cb3860();
 };
 // @fnv 0x00cb3860
+// pdb: bhkRigidBodyT::bhkRigidBodyT | bhkRigidBodyT.obj | fnv360_0822_retail, objrun, high
 FUN_00cb3860::FUN_00cb3860()
 {
     Initialize();
@@ -364,6 +370,7 @@ struct FUN_00c9fb00 : FUN_0056e780_Class
     virtual ~FUN_00c9fb00();
 };
 // @fnv 0x00c9fb00
+// pdb: bhkConvexShape::~bhkConvexShape | bhkConvexShape.obj | fnv360_0822_retail, call_seq, high
 FUN_00c9fb00::~FUN_00c9fb00()
 {
     FUN_00c876a0();
@@ -410,6 +417,7 @@ struct Object_00c9f5a0 : S_00cb79d0_Base, A51BF0Base
 };
 
 // @f3 0x0090dfd0 (community match, verified in this file)
+// pdb: bhkAabbPhantom::CreateObject | bhkAabbPhantom.obj | fnv360_0822_retail, objrun, medium
 void* FUN_00c9f5a0()
 {
     return new Object_00c9f5a0;
@@ -430,6 +438,7 @@ void FUN_00c876a0();
 extern int DAT_012680f8;
 
 // @fnv 0x00c84c50
+// pdb: bhkShape::~bhkShape | bhkShape.obj | fnv360_0822_retail, call_seq, high
 FUN_00c84c50::~FUN_00c84c50()
 {
     FUN_00c876a0();
@@ -654,6 +663,8 @@ static __forceinline hkCdBodyStub* BodyOf(bhkBase_c878c0* o)
     return o ? o->GetBody() : 0;
 }
 
+// pdb: bhkWorldObject::GetViewerStrings | bhkWorldObject.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apStrings
 void bhkWorldObject_c86190::FUN_00c86190(DebugStrArray* arr)
 {
     BaseDebugInfo(arr);
@@ -697,6 +708,7 @@ class bhkTransformShape : public FUN_00c8bed0_base_cls // src: F3_EXE vtable 0x0
 };
 
 // @fnv 0x00c8bed0
+// pdb: bhkTransformShape::~bhkTransformShape | bhkTransformShape.obj | fnv360_0822_retail, call_seq, medium
 bhkTransformShape::~bhkTransformShape()
 {
     this->unk08();
@@ -1299,6 +1311,8 @@ struct R9_Obj
     int unk04;
     R9_Ctx* ctx;
 };
+// pdb: bhkSimpleShapePhantom::GetFixedClosestPoints | bhkSimpleShapePhantom.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: arCollector
 void S_00c9f1e0_Obj::FUN_00c9f1e0(S_00c9f1e0_Range* r)
 {
     R9_Holder* h = ((R9_Obj*)this)->GetWorld();
@@ -1438,6 +1452,7 @@ struct Guard6ba760
     }
 };
 
+// pdb: SummonCreatureEffect::`scalar deleting destructor' | SummonCreatureEffect.obj | fnv360_0822_retail, caller_sim, low
 void FUN_00c9f320_object::FUN_00c9f320()
 {
     View6ba760* view = reinterpret_cast<View6ba760*>(this);
@@ -1499,6 +1514,8 @@ struct PcFO3
     void FUN_008f9990(Object_00c9f5a0* projectile, int mode);
 };
 
+// pdb: bhkAabbPhantom::CreateClone | bhkAabbPhantom.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arCloneData
 Object_00c9f5a0* ProjectileCreator::FUN_00c9f640(int mode)
 {
     DAT_00d9b09c(&DAT_010f3194);
@@ -1851,6 +1868,8 @@ struct SphereShape : SphereShapeBase
 
 // @f3 0x0090c5a0 (community match, verified in this file)
 extern double FUN_00db88e8;
+// pdb: bhkConvexShape::GetViewerStrings | bhkConvexShape.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apStrings
 void SphereShape::FUN_00c9fc50(ViewerStringArray* apViewerStrings)
 {
     BaseGetViewerStrings(apViewerStrings);
@@ -1871,6 +1890,8 @@ struct SphereScaleFieldsF3
     unsigned int m_00, m_04, m_08, m_0c, m_10, m_14, m_18, m_1c;
     float m_20, m_24, m_28, m_2c;
 };
+// pdb: bhkNiTriStripsShape::CopyMembers | bhkNiTriStripsShape.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apDest, arCloneData
 void SphereScalingMethod::FUN_00c9fea0(void* first, ArgB* second)
 {
     char flag;
@@ -2139,6 +2160,7 @@ class FUN_00ca0540 : public CA0540Base
 };
 
 // @fnv 0x00ca0540
+// pdb: bhkSimpleShapePhantom::~bhkSimpleShapePhantom | bhkSimpleShapePhantom.obj | fnv360_0822_retail, call_seq, high
 FUN_00ca0540::~FUN_00ca0540()
 {
     Shutdown();
@@ -2208,6 +2230,7 @@ class FUN_00ca0660 : public FUN_00ca0660_base
 };
 
 // @fnv 0x00ca0660
+// pdb: bhkSphereShape::~bhkSphereShape | bhkSphereShape.obj | fnv360_0822_retail, call_seq, high
 FUN_00ca0660::~FUN_00ca0660()
 {
     this->unk08();
@@ -2273,6 +2296,7 @@ class FUN_00caacf0 : public CAACF0Base
 };
 
 // @fnv 0x00caacf0
+// pdb: WeaponObject::Kill | WeaponObject.obj | tesv_win, objopen_prop, low
 FUN_00caacf0::~FUN_00caacf0()
 {
     Shutdown();
@@ -2282,6 +2306,7 @@ FUN_00caacf0::~FUN_00caacf0()
 extern int DAT_012683c8;
 
 // @fnv 0x00cb3060
+// pdb: bhkSpringAction::GetRTTI | bhkSpringAction.obj | fnv360_0822_retail, objrun_open, low
 void* FUN_00cb3060()
 {
     return &DAT_012683c8;
@@ -2346,6 +2371,7 @@ class bhkCachingShapePhantom : public CC2350Base // src: F3_EXE vtable 0x00e3314
 };
 
 // @fnv 0x00cc2350
+// pdb: bhkCachingShapePhantom::~bhkCachingShapePhantom | bhkCachingShapePhantom.obj | fnv360_0822_retail, caller_sim, high
 bhkCachingShapePhantom::~bhkCachingShapePhantom()
 {
     Release();
@@ -2384,6 +2410,7 @@ class FUN_00cce900 : public CCE900Base
 };
 
 // @fnv 0x00cce900
+// pdb: bhkConvexVerticesShape::~bhkConvexVerticesShape | bhkConvexVerticesShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 FUN_00cce900::~FUN_00cce900()
 {
     Release();
@@ -2532,6 +2559,8 @@ struct FUN_00931740_Obj
     void hkpWorldObject_addProperty(int* value, int* result, S_00c85c10_flag flag);
 };
 
+// pdb: bhkWorldObject::SetAVObject | bhkWorldObject.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObject, aiKey
 void S_00c85c10::FUN_00c85c10(int* result, int* value)
 {
     S_00c85c10_pair local;
@@ -3093,6 +3122,7 @@ bool Query::FUN_008f8280() {
 
 }
 
+// pdb: bhkAction::Remove | bhkAction.obj | fnv360_0822_retail, vtable, medium
 bool ActionOwnerC9d590::FUN_00c9d590(){return reinterpret_cast<Task1423::Query*>(this)->FUN_008f8280();}
 
 
@@ -3119,6 +3149,7 @@ struct FUN_00cd2de0 : FUN_00c84c50
     void FUN_00c876a0();
 };
 // @fnv 0x00cd2de0
+// pdb: bhkShapeCollection::~bhkShapeCollection | bhkShapeCollection.obj | fnv360_0822_retail, call_seq, medium
 FUN_00cd2de0::~FUN_00cd2de0()
 {
     FUN_00c876a0();
@@ -3363,6 +3394,8 @@ struct Arr_8f9cf0
 };
 }
 
+// pdb: bhkWorldObject::LoadBinary | bhkWorldObject.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void LoadObject::FUN_00c85f20(LoadStream* stream)
 {
     stream->Prepare();
@@ -3853,6 +3886,8 @@ __forceinline void ClearAndFree(hkArr<Pair8>* arr)
     arr->m_iCapacityState = (arr->m_iCapacityState & 0xc0000000) | 0x80000000;
 }
 
+// pdb: bhkWorldObject::SaveBinary | bhkWorldObject.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void Obj86060::FUN_00c86060(Stream86060& stream)
 {
     void* handle;
@@ -4077,6 +4112,8 @@ struct FUN_00c9f700_stand
 {
     void FUN_008f9cf0(Arg* a);
 };
+// pdb: bhkAabbPhantom::LoadBinary | bhkAabbPhantom.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: bhkAabbPhantom::SaveBinary)
+// pdb params: arStream
 void FUN_00c9f700_cls::FUN_00c9f700(Arg* volatile a)
 {
     Arg* p = a;
@@ -4319,6 +4356,8 @@ class C9F770Constraint
 };
 
 // @f3 0x0090e1b0 (community match, verified in this file)
+// pdb: bhkAabbPhantom::SaveBinary | bhkAabbPhantom.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void C9F770Constraint::FUN_00c9f770(C9F770Stream& kStream)
 {
     bool bIsValid;
@@ -4572,6 +4611,8 @@ struct Cls_00c9fbc0F3
 {
     void FUN_008f7490(Arg_00c9fbc0* a);
 };
+// pdb: bhkConvexShape::LoadBinary | bhkConvexShape.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void Cls_00c9fbc0::FUN_00c9fbc0(Arg_00c9fbc0* a1)
 {
     Arg_00c9fbc0* volatile* pa = &a1;
@@ -4967,6 +5008,8 @@ struct FUN_00c9ff00_cls
 };
 
 // @f3 0x009142c0 (community match, verified in this file)
+// pdb: bhkBoxShape::LoadBinary | bhkBoxShape.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void FUN_00c9ff00_cls::FUN_00c9ff00(FUN_00c9ff00_arg* volatile a1)
 {
     FUN_00c9ff00_arg* obj = a1;
@@ -5164,6 +5207,8 @@ struct FUN_00c9ff50_cls
 };
 
 // @f3 0x00914320 (community match, verified in this file)
+// pdb: bhkBoxShape::SaveBinary | bhkBoxShape.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void FUN_00c9ff50_cls::FUN_00c9ff50(FUN_00c9ff50_arg* a1)
 {
     unsigned int tmp;
@@ -5216,6 +5261,7 @@ struct FUN_00ca4da0 : FUN_00c84c50
 };
 
 // @fnv 0x00ca4da0
+// pdb: bhkBvTreeShape::~bhkBvTreeShape | bhkBvTreeShape.obj | fnv360_0822_retail, call_seq, high
 FUN_00ca4da0::~FUN_00ca4da0()
 {
     FUN_00c876a0();
@@ -5383,6 +5429,8 @@ struct FUN_00cb38c0 : bhkRigidBodyBase
 // @f3 0x009260d0 (community match, verified in this file)
 extern int DAT_010f33b0;
 struct RefAt9316e0 { void FUN_009316e0(); };
+// pdb: bhkRigidBodyT::bhkRigidBodyT | bhkRigidBodyT.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apBody
 FUN_00cb38c0::FUN_00cb38c0(bhkRigidBodyBase* source)
 {
     ++DAT_010f33b0;
@@ -5422,6 +5470,8 @@ namespace task1476 {
 struct Owner { int FUN_008f9c90(int); };
 struct Helpers { void FUN_0090e600(const void*); void FUN_008f9c30(int,int); };
 }
+// pdb: bhkCollisionBox::Init | bhkCollisionBox.obj | fnv360_0721_beta, objrun, medium
+// pdb params: arInfo, apCharController
 void S00cbe9f0_cls::FUN_00cbe9f0(int a1, FUN_00cbe9f0_Target* a2) {
  m1c=0;
  ((task1476::Helpers*)this)->FUN_0090e600((const void*)a1);
@@ -5493,6 +5543,8 @@ struct FUN_00c9d4f0_cls
 };
 
 // @f3 0x0090acd0 (community match, verified in this file)
+// pdb: bhkEntity::LoadBinary | bhkEntity.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arStream
 void FUN_00c9d4f0_cls::FUN_00c9d4f0(FUN_00c9d4f0_obj* p)
 {
     FUN_00c85f20(p);
@@ -5729,6 +5781,8 @@ struct FUN_00c9d530_cls
 };
 
 // @f3 0x0090ad10 (community match, verified in this file)
+// pdb: bhkEntity::SaveBinary | bhkEntity.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void FUN_00c9d530_cls::FUN_00c9d530(FUN_00c9d530_arg* a1)
 {
     FUN_00c9d530_arg* a = *(FUN_00c9d530_arg* volatile*)&a1;
@@ -5881,6 +5935,8 @@ extern "C" char* __cdecl FUN_00847b90(const char*,unsigned char);
 extern "C" char* __cdecl FUN_00847e70(const char*,const char*);
 extern "C" int __cdecl FUN_00403230(char*,unsigned int,const char*,...);
 struct BodyIsActiveProxy { bool* FUN_0090b0e0(bool*); };
+// pdb: bhkEntity::GetViewerStrings | bhkEntity.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apStrings
 void Object::FUN_00c9d6b0(StringArray* strings)
 {
   FUN_008f9fc0(strings);
@@ -6172,6 +6228,8 @@ struct S00ca0900_Raw
     short refs;
 };
 typedef void (__thiscall* S00ca0900_Del)(void* self, unsigned int flags);
+// pdb: bhkSphereShape::Init | bhkSphereShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: arInfo
 void S00ca0900_cls::FUN_00ca0900(S00ca0900_Arg* arg)
 {
     if (arg)
@@ -6242,6 +6300,8 @@ struct B00c9fde0
     B00c9fde0();
 };
 // @fnv 0x00c9fe30
+// pdb: bhkSphereShape::CreateClone | bhkSphereShape.obj | fnv360_0822_retail, caller_sim, low, conflict (bridge: bhkSphereShape::CreateObject)
+// pdb params: arCloneData
 B00c9fde0* __cdecl FUN_00c9fe30()
 {
     return new B00c9fde0;
@@ -6271,6 +6331,7 @@ void __cdecl operator delete(void* ptr, S00cb39d0_S_00aa3e40& manager, unsigned 
 {}
 
 // @fnv 0x00cb39d0
+// pdb: bhkRigidBodyT::CreateObject | bhkRigidBodyT.obj | fnv360_0822_retail, objrun, medium, conflict (skyrim: bhkRigidBodyT::GetTransform)
 void __cdecl FUN_00cb39d0(void* arg0, void* arg1, void* arg2, void* arg3)
 {
     new (*(S00cb39d0_S_00aa3e40*)&DAT_011f6238, 0x50) S00cb39d0_S_00cb3860();

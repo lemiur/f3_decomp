@@ -60,6 +60,8 @@ public:
     Shape(const Info*);
     virtual ~Shape();
 };
+// pdb: hkNiTriStripsShape::hkNiTriStripsShape | hkNiTriStripsShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arInfo
 Shape::Shape(const Info* info):CollectionBase(0x1e) {
     radius=info->radius;
     Vector4 copiedScale(info->scale);
@@ -323,6 +325,8 @@ struct Body : Base {
     void hkpRigidBody_updateCachedShapeInfo(void* p, Vec4* out);
     Body(const CInfo& info);
 };
+// pdb: hkpWorldObject::copyProperties | hkpRigidBody.obj | fnv360_0822_retail, call_dedup, low, conflict (skyrim: hkpRigidBody::hkpRigidBody)
+// pdb params: otherObj
 Body::Body(const CInfo& info) : Base(info.shape)
 {
     unk80 = info.unk08;

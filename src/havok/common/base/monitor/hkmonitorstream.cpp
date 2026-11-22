@@ -9,6 +9,7 @@ struct S_00cb0da0
 };
 
 // @fnv 0x00cb0da0
+// pdb: hkMonitorStream::reset | hkMonitorStream.obj | tesv_win, objrun_open, low
 void FUN_00cb0da0(S_00cb0da0* p)
 {
     p->m_04 = p->m_00;
@@ -68,6 +69,7 @@ struct StubAllocF3 {
     char* FUN_008f6f60(unsigned int size, int kind);
 };
 
+// pdb: NiObject::NiObject | NiObject.obj | fnv360_0822_debug, objopen_prop, low, conflict (skyrim: hkMonitorStream::resize)
 void ResizeBuffer(SpawnedBuffer* pBuffer, int iSize)
 {
 

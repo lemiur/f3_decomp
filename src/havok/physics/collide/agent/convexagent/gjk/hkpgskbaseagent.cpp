@@ -7,6 +7,8 @@ struct hkpGskBaseAgent
     virtual void FUN_00dabe90(bool);
 };
 // @fnv 0x00dabe90
+// pdb: hkpGskBaseAgent::cleanup | hkpGskBaseAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: constraintOwner
 void hkpGskBaseAgent::FUN_00dabe90(bool)
 {
     if (this)
@@ -41,6 +43,8 @@ class FUN_00dabed0_cls
 // If m_18 equals expected, stores value into m_18; otherwise sets m_18 to DAT_01012054 and zeroes m_20.
 // @f3 0x00a348c0 (community match, verified in this file)
 namespace Defaults370 { extern const float DAT_00db38b8; }
+// pdb: hkpGskBaseAgent::warpTime | hkpGskBaseAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: oldTime, newTime, input
 void FUN_00dabed0_cls::SetValueIfExpected(float expected, float value, int unused) {
     if (m_18 == expected) {
         m_18 = value;
@@ -161,6 +165,8 @@ struct hkpCdPointCollectorF3
 };
 int FUN_00a345e0(const GskInputF3* input, void* status, hkVector4F3* out1, hkVector4F3* out2);
 
+// pdb: hkpGskBaseAgent::getClosestPoints | hkpGskBaseAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void FUN_00dac9e0_cls::ProcessGskContact(const hkpCdBody* bodyA, const hkpCdBody* bodyB, const GskAgentInput* input,
                                          hkpCdPointCollector* collector)
 {
@@ -332,6 +338,8 @@ struct FUN_00dabf10_cls
 
 // Initializes the GskSub at m_0c from the two nodes, sets m_06, m_08 and the vtable, and stores the smaller of the two chain-end nodes' m_4c in m_1c.
 // @f3 0x00a34900 (community match, verified in this file)
+// pdb: hkpGskBaseAgent::hkpGskBaseAgent | hkpGskBaseAgent.obj | fnv360_0822_retail, uvref, high
+// pdb params: bodyA, bodyB, mgr
 FUN_00dabf10_cls* FUN_00dabf10_cls::FUN_00dabf10(GskNode* apNodeA, GskNode* apNodeB, int a3)
 {
     m_06 = 1;
@@ -613,6 +621,8 @@ struct __declspec(align(16)) S_00dac2b0_GskX
                      S_00dac2b0_Vec* out);
 };
 
+// pdb: hkpGskBaseAgent::staticGetPenetrations | hkpGskBaseAgent.obj | fnv360_0822_retail, call_seq, high
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl TestGsk(const S_00dac2b0_Body& bodyA, const S_00dac2b0_Body& bodyB, const void* input,
                      S_00dac2b0_Collector& collector)
 {

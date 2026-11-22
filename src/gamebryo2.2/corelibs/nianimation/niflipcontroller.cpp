@@ -54,6 +54,7 @@ struct FUN_00a4f320_Holder : NiFlipController
 };
 // Returns the cached string at offset 0x50, lazily formatting the integer at offset 0x4c into a 15-byte buffer with "%d" if it is null.
 // @fnv 0x00a4f320
+// pdb: NiFlipController::GetCtlrID | NiFlipController.obj | fnv360_0822_retail, caller_sim, low
 const char* __thiscall FUN_00a4f320_Holder::GetFormattedValue()
 {
     char* pcFormattedValue = m_pcCtlrID;
@@ -81,6 +82,8 @@ struct NiObjectNET
 };
 // Walks pkTarget's NiRTTI base chain and returns true if it reaches g_011f49a4, false for a null target or RTTI.
 // @fnv 0x00a4f5e0
+// pdb: NiFlipController::InterpTargetIsCorrectType | NiFlipController.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: pkTarget
 bool __stdcall FUN_00a4f5e0(NiObjectNET* pkTarget)
 {
     if (!pkTarget)
@@ -108,6 +111,7 @@ struct Proxy880
 };
 // Calls FUN_00a4f570 on this, then if bit 0 of a1 is set frees this with _delete and returns this.
 // @fnv 0x00a4f880
+// pdb: PathingLOSGridMap::`scalar deleting destructor' | PathingLOSGridMap.obj | fnv360_0822_retail, vtable, medium
 void* __thiscall Proxy880::DestroyIfFlagged(unsigned int auiFlags)
 {
     ((Proxy570*)this)->FUN_00a4f570();
@@ -138,6 +142,8 @@ struct FlipCopy : NiFlipController
 };
 // Calls the base copy, copies the int at offset 0x4c to dst, then copies each source entry via GetSrc and FUN_00a4f8a0.
 // @fnv 0x00a4f920
+// pdb: NiFlipController::CopyMembers | NiFlipController.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: pkDest, kCloning
 void __thiscall FlipCopy::FUN_00a4f920(NiAlphaController* dst, CloningProcess& proc)
 {
     ((NiAlphaController*)this)->CopyMemberData(dst, proc);
@@ -157,6 +163,8 @@ struct FUN_00a40520 : BSFadeNode
     __declspec(nothrow) FUN_00a40520(bool, float, unsigned char);
 };
 // @fnv 0x00a4f2c0
+// pdb: NiFlipController::CreateBlendInterpolator | NiFlipController.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: usIndex, bManagerControlled, bAccumulateAnimations, fWeightThreshold, ucArraySize
 FUN_00a40520* __stdcall FUN_00a4f2c0(unsigned short usIndex, bool bManagerControlled, bool bAccumulateAnimations,
                                      float fWeightThreshold, unsigned char ucArraySize)
 {
@@ -200,6 +208,8 @@ struct ProxyFlip : NiFlipController
     bool __thiscall FUN_00a4f350(NiStream& kStream);
 };
 // @fnv 0x00a4f350
+// pdb: NiFlipController::RegisterStreamables | NiFlipController.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 bool ProxyFlip::FUN_00a4f350(NiStream& kStream)
 {
     if (!((BaseA*)this)->FUN_00a57780(kStream))
@@ -232,6 +242,8 @@ struct FUN_00a4fa20_shell : FlipCopy
 
 // Allocates a NiFlipController, initialises it via FUN_00a4f820, copies from kCloning via FUN_00a4f920, and returns it as a NiObject.
 // @fnv 0x00a4fa20
+// pdb: NiFlipController::CreateClone | NiFlipController.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCloning
 void* FUN_00a4fa20_shell::CreateFlipController(CloningProcess& kCloning)
 {
     NiFlipController* pkObject = (NiFlipController*)A51BF0Base::operator new(0x54);
@@ -269,6 +281,8 @@ struct FUN_00a4f270_cls
 };
 
 // @fnv 0x00a4f270
+// pdb: NiFlipController::GetTargetFloatValue | NiFlipController.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: fValue
 void FUN_00a4f270_cls::GetFloatValue(float* pfOut)
 {
     *pfOut = (float)m_48;
@@ -303,6 +317,8 @@ struct FUN_00a4f290_class
 
 // Returns 0 if FUN_00a57c10 fails, otherwise returns whether unk4c equals param->unk4c.
 // @fnv 0x00a4f290
+// pdb: NiFlipController::IsEqual | NiFlipController.obj | fnv360_0822_retail, objopen_prop, low, conflict (bridge: NiLightDimmerController::IsEqual)
+// pdb params: pkObject
 unsigned char FUN_00a4f290_class::FUN_00a4f290(FUN_00a4f290_class* param)
 {
     if (!FUN_00a57c10(param))
@@ -357,6 +373,8 @@ struct FNVFlipController : NiFlipController
 };
 // Calls the base save, writes the field at 0x4c and a count, then saves each of the count objects from the array at 0x3c via the stream.
 // @fnv 0x00a4f4e0
+// pdb: NiFlipController::SaveBinary | NiFlipController.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: kStream
 void __thiscall FNVFlipController::SaveToStream(FNVStream* stream)
 {
     ((FNVBaseController*)this)->FUN_00a57c00(stream);
@@ -500,6 +518,7 @@ struct Map
     Map* __thiscall FUN_006cb0f0();
 };
 
+// pdb: BGSReconstructFormsMap::BGSReconstructFormsMap | BGSReconstructFormsInAllFilesMap.obj | fnv360_0822_retail, call_dedup, low
 Map* Map::FUN_006cb0f0()
 {
     m_pVtable = &DAT_00e0e018;
@@ -660,6 +679,8 @@ struct NiFlipControllerF
 
 // Advances the flip controller's interpolator and applies the resulting texture index to the target's affected map or shader map.
 // @fnv 0x00a4f3a0
+// pdb: NiFlipController::Update | NiFlipController.obj | fnv360_0822_retail, objrun, medium
+// pdb params: UpdateData
 void NiFlipControllerF::UpdateFlipController(NiUpdateDataF& kUpdate)
 {
     if (GetManagerControlled())
@@ -1028,6 +1049,8 @@ struct FUN_00a4f8a0_Obj
 
 // Grows the array if needed, increments the reference count of p, stores a copy of p in the array slot, then decrements the count and releases if zero.
 // @fnv 0x00a4f8a0
+// pdb: NiFlipController::AttachTexture | NiFlipController.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiNode::CopyMembers)
+// pdb params: pkTexture, uiIndex
 void __thiscall FlipCopy::FUN_00a4f8a0(void* apRef, unsigned int aiIndex)
 {
     FUN_00a4f8a0_Obj* pObj = (FUN_00a4f8a0_Obj*)this;
@@ -1096,6 +1119,8 @@ struct A4F990Flip : A4F990Base
 
 // Calls FUN_00a57630, then, when unk2C is nonnull, reads a count and stores that many F570RefObject pointers in m_kTextureSwapList.
 // @fnv 0x00a4f990
+// pdb: NiFlipController::LinkObject | NiFlipController.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void A4F990Flip::FUN_00a4f990(A4F990Stream& kStream) throw()
 {
     FUN_00a57630(kStream);

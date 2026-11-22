@@ -115,6 +115,8 @@ static __forceinline void Resize(hkIntArray* a, int n) {
     a->m_iElementCount=n;
 }
 }
+// pdb: hkaDetectRagdollPenetration::hkaDetectRagdollPenetration | hkaDetectRagdollPenetration.obj | fnv360_0822_retail, uvref, high
+// pdb params: setup
 FUN_00d1fa50::FUN_00d1fa50(const Desc& d)
 {
     m_sReferenceCount = 1;

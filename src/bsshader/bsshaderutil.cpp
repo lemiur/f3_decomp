@@ -8,6 +8,7 @@
 
 // Allocates two BSShaderUtilTextureName objects and stores them in DAT_011fa050 and DAT_011fa054.
 // @fnv 0x00b6ba70
+// pdb: BSShaderUtil::InitSDM | BSShaderUtil.obj | fnv360_0822_retail, ustr, high
 void BSShaderRenderUtility::InitializeMultiBounds()
 {
     DAT_011fa050 = new BSShaderUtilTextureName("ConvertedTexture");
@@ -15,6 +16,8 @@ void BSShaderRenderUtility::InitializeMultiBounds()
 }
 
 // @fnv 0x00b6c0d0
+// pdb: BSShaderUtil::RenderScene | BSShaderUtil.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apCamera, apAccumulator, abUseSPU
 void BSShaderRenderUtility::SetRenderCamera(NiCamera* camera, BSShaderAccumulator* accumulator, bool)
 {
     if (NiRenderer::ms_pRenderer && camera)
@@ -29,6 +32,8 @@ void BSShaderRenderUtility::SetRenderCamera(NiCamera* camera, BSShaderAccumulato
 }
 
 // @fnv 0x00b6bb30
+// pdb: BSShaderUtil::RecursiveSetPropertyFadeAlpha | BSShaderUtil.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apNode, afAlpha
 void BSShaderRenderUtility::SetAlphaOnNode(NiNode* node, float alpha)
 {
     if (node && node->m_kWorldBound && node->m_kWorldBound->m_fBoundRadius != 0.0f)
@@ -80,6 +85,8 @@ extern NiPointer<NiRefObject> g_spCurrentAccumulator;
 
 // Stores the given BSShaderAccumulator into the global g_spCurrentAccumulator smart pointer.
 // @fnv 0x00b54b10
+// pdb: BSShaderUtil::RenderScenePreResolveDepth | BSShaderUtil.obj | fnv360_0822_retail, caller, low, conflict (skyrim: NiDX9Renderer::Do_DisplayFrame)
+// pdb params: apCamera, apAccumulator, abUseSPU
 void FUN_00b54b10(BSShaderAccumulator* accumulator)
 {
     g_spCurrentAccumulator = reinterpret_cast<NiRefObject*>(accumulator);
@@ -192,6 +199,8 @@ struct PointerList6b
 };
 // Sets the sorting camera from the first list item, then registers later items when the manager and camera are non-null.
 // @fnv 0x00b6bfc0
+// pdb: BSShaderUtil::AccumulateSceneList | BSShaderUtil.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCamera, aSceneList, aCuller
 void __cdecl FUN_00b6bfc0(void* pkCamera, PointerList6b& kList, Accumulator6b* pkAccumulator)
 {
     if (!DAT_011f4748 || !pkCamera)
@@ -418,6 +427,8 @@ NiTexture* FUN_00a5ff10(NiPixelData*, void*, TextureFormatPrefs*);
 
 // Converts a NiTexture to a supported D3D format by copying each mip level and swapping RGB bytes when needed, then builds a new NiTexture from the result.
 // @fnv 0x00b6bbd0
+// pdb: BSShaderUtil::ConvertTexture | BSShaderUtil.obj | fnv360_0721_beta, call_dedup, low
+// pdb params: apTex, arFormat
 NiTexture* FUN_00b6bbd0(NiTexture* texture, const NiPixelFormat* pixelFormat)
 {
     TextureRenderer* renderer = DAT_011f4748;

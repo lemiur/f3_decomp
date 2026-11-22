@@ -21,6 +21,8 @@ struct ShapeData
 
 // Resets the three fields, forwards each ref's value at offset 0x10 to FUN_00d738f0, then calls FUN_00d74a20 and returns this.
 // @fnv 0x00d74b20
+// pdb: _SharedShapeData::_SharedShapeData | hkpTransformCollapseUtil.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: rigidBodies
 ShapeData* ShapeData::FUN_00d74b20(ShapeRefArray* refs)
 {
     m_kPointA = 0;
@@ -41,6 +43,8 @@ struct FUN_00d74980_Class
 
 // Scans the refs array in groups of three and returns the third entry of the first group whose first or second entry equals value, otherwise 0.
 // @fnv 0x00d74980
+// pdb: hkMatrix4::operator() | hkMathUtil.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: r, c
 int FUN_00d74980_Class::FindMappedValue(int value)
 {
     for (int i = 0; i < count; ++i)
@@ -171,6 +175,8 @@ struct ShpObjA057 {
     int type;                           // [12]
 };
 
+// pdb: _SharedShapeData::findShapeDataIndex | hkpTransformCollapseUtil.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: shape
 int D749Table::SetEntryValue(int key, int value)
 {
     int i = 0;
@@ -717,6 +723,8 @@ hkReferencedObject* __cdecl ProcessShape(hkReferencedObject* shape, void* contex
 
 // Remaps each collision shape in refs via ProcessShape, storing results back into the entries and releasing the old references.
 // @f3 0x00a05580 (community match, verified in this file)
+// pdb: hkpTransformCollapseUtil::collapseTransforms | hkpTransformCollapseUtil.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: rigidBodies, options, resultsOut
 int __cdecl RemapCollisionShapes(hkShapeEntryArrayD748* refs, void* context, hkShapeOutputD748* out)
 {
     out->FUN_00d73400();
@@ -797,6 +805,7 @@ static __forceinline void PushBackShapeD737(hkArrayD748<const hkpShapeD737*>* a,
     a->m_iElementCount++;
 }
 
+// pdb: _getShapeChildren | hkpTransformCollapseUtil.obj | fnv360_0721_beta, objrun_prop, low
 static __declspec(noinline) void FUN_00d737d0(const hkpShapeD737* shape, hkArrayD748<const hkpShapeD737*>* out)
 {
     switch (shape->m_type)

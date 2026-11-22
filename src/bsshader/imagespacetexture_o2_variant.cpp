@@ -10,6 +10,7 @@ struct FUN_00ba3770_struct
 };
 
 // @fnv 0x00ba3770
+// pdb: ImageSpaceTexture::GetRenderedTexture | ImageSpaceTexture.obj | fnv360_0822_retail, call_gap, medium
 int __thiscall FUN_00ba3770_struct::FUN_00ba3770()
 {
     if (reinterpret_cast<char*>(this)[1])
@@ -40,6 +41,8 @@ struct Holder00ba37f0
     void __thiscall FUN_00ba37f0(Tex00ba37f0* apTex);
 };
 // @fnv 0x00ba37f0
+// pdb: ImageSpaceTexture::SetTexture | ImageSpaceTexture.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTex
 void __thiscall Holder00ba37f0::FUN_00ba37f0(Tex00ba37f0* apTex)
 {
     if (pTileTexture != apTex)
@@ -108,6 +111,7 @@ struct H_00ba39a0
     void FUN_00ba39a0();
 };
 // @fnv 0x00ba39a0
+// pdb: ImageSpaceTexture::ReturnRenderedTexture | ImageSpaceTexture.obj | fnv360_0822_retail, call_seq, medium
 void H_00ba39a0::FUN_00ba39a0()
 {
     if (!b2)
@@ -152,6 +156,8 @@ struct OwnerStandIn
     void FUN_00ba37a0(RefBase* p);
 };
 // @fnv 0x00ba37a0
+// pdb: ImageSpaceTexture::SetTexture | ImageSpaceTexture.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apRendTex
 void OwnerStandIn::FUN_00ba37a0(RefBase* p)
 {
     if (ptr != p)
@@ -184,6 +190,7 @@ struct Holder
 };
 
 // @fnv 0x00ba38b0
+// pdb: ImageSpaceTexture::ClearTexture | ImageSpaceTexture.obj | fnv360_0822_retail, call_seq, medium
 void __thiscall Holder::FUN_00ba38b0()
 {
     RefObj* tmp = _4;
@@ -218,6 +225,8 @@ struct H_00ba3840
 };
 
 // @fnv 0x00ba3840
+// pdb: ImageSpaceTexture::BorrowRenderedTexture | ImageSpaceTexture.obj | fnv360_0822_retail, call_seq, low, conflict (bridge: ImageSpaceEffect::SetTexture)
+// pdb params: aeType
 void H_00ba3840::FUN_00ba3840(int arg)
 {
     Tex00ba37f0* pNew = ((TexMgr00ba3840*)DAT_011f91a8)->CreateRenderTargetTexture(DAT_011f9508, arg, 0, 0, 0);
@@ -255,6 +264,7 @@ struct FUN_00ba26f0_struct
     void FUN_00ba26f0();
 };
 // @fnv 0x00ba26f0
+// pdb: ImageSpaceEffectWaterFFT::InitializeUtilityBuffers | ImageSpaceEffectWaterFFT.obj | fnv360_0822_retail, call_dedup, low
 void FUN_00ba26f0_struct::FUN_00ba26f0()
 {
     if (!((ISTex*)((char*)this + 0x88))->GetTexture())
@@ -278,6 +288,7 @@ struct FUN_00ba3780_struct
 };
 
 // @fnv 0x00ba3780
+// pdb: ImageSpaceTexture::GetTexture | ImageSpaceTexture.obj | fnv360_0822_retail, call_seq, medium
 TextureReceiver* FUN_00ba3780_struct::FUN_00ba3780()
 {
     if (flag)
@@ -297,6 +308,8 @@ class BA3760Object
 };
 
 // @fnv 0x00ba3760
+// pdb: NonActorMagicCaster::SetCurrentSpell | NonActorMagicCaster.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCurrentSpell
 void BA3760Object::FUN_00ba3760(int iValue)
 {
     m_iValue = iValue;
@@ -330,6 +343,8 @@ struct FUN_00ba3940_cls
 };
 
 // @fnv 0x00ba3940
+// pdb: ImageSpaceTexture::operator= | ImageSpaceTexture.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aTex
 FUN_00ba3940_cls* FUN_00ba3940_cls::FUN_00ba3940(FUN_00ba3940_cls* src)
 {
     *(volatile unsigned char*)&m_01 = src->m_01;
@@ -555,6 +570,8 @@ static __forceinline WorkObj* WorkRef(WorkObj* const& p)
 }
 
 
+// pdb: ImageSpaceEffectWaterFFT::Render | ImageSpaceEffectWaterFFT.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apGeometry, apRenderer, apParam, abEndFrame
 void Owner::FUN_00ba2760(int a1, int a2, int a3, int a4)
 
 
@@ -1215,6 +1232,7 @@ struct TextureOwnerB63D
 };
 
 // @fnv 0x00b63d10
+// pdb: ImageSpaceShaderVolumetricFog::ReturnVolumetricFogTexture | BSShaderAccumulator.obj | fnv360_0822_retail, caller_sim, medium
 void TextureOwnerB63D::FUN_00b63d10()
 {
     TextureNodeB63D* current = node;

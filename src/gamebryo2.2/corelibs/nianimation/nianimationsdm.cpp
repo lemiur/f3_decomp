@@ -84,6 +84,7 @@ static const char s_sz70[] = "NiVisData";
 extern const char g_szShutdownEnd[] = "";
 
 // @fnv 0x00a2de70
+// pdb: NiAnimationSDM::Shutdown | NiAnimationSDM.obj | fnv360_0822_retail, caller_sim, high
 void __cdecl ShutdownAnimationClasses()
 {
     if (!g_bInitialized_011f369d)
@@ -314,6 +315,7 @@ void FUN_00a42ee0();
 extern const char DAT_01095a04[];  // NiVisData
 void FUN_00a537f0();
 // @fnv 0x00a2d8a0
+// pdb: NiAnimationSDM::Init | NiAnimationSDM.obj | fnv360_0822_debug, ustr_rel, medium
 void FUN_00a2d8a0()
 {
     if (!DAT_011f369d)

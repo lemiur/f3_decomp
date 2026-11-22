@@ -5422,6 +5422,8 @@ struct Ca35Owner
     unsigned int FUN_00ca35d0(unsigned int a1);
 };
 // @fnv 0x00ca35d0
+// pdb: hkpTriangleShape::setWeldingType | hkPackedNiTriStripsShape.obj | fnv360_0822_debug, objopen_prop, low
+// pdb params: type
 unsigned int Ca35Owner::FUN_00ca35d0(unsigned int a1)
 {
     unsigned int type = a1 >> 24;
@@ -5571,6 +5573,7 @@ struct VelocityBodyCaller
     void FUN_00571d10(float amount, const __m128* velocity);
 };
 
+// pdb: bhkForceController::ApplyForce | bhkForceController.obj | fnv360_0822_retail, objrun, medium
 void VelocityController::FUN_00cb9290()
 {
     if (node)
@@ -5795,6 +5798,8 @@ struct Aux2Body
     float f184;
 };
 
+// pdb: bhkForceController::TestForce | bhkForceController.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObject, arForce, apSpot
 void __cdecl FUN_00cb9320(NiAVObject* a1, const void* a2, NiAVObject* a3)
 {
     NiAVObject* pObj = a3;
@@ -8250,6 +8255,8 @@ struct FUN_0092c6a0 : MaterialShapeLocal
 
 } // namespace fn_0092ce00
 
+// pdb: bhkRagdollTemplateData::ReplaceRagdollData | bhkRagdollTemplate.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObj, afScale
 void ShapeUpdater::FUN_00cba6f0(SceneObject* object, float scale)
 {
     using namespace fn_0092ce00;
@@ -8798,6 +8805,8 @@ struct S00931b40_Owner
     bool FUN_00931b40(S00931b40_Target* pkTarget);
 };
 
+// pdb: bhkCollisionBox::Add | bhkCollisionBox.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: apWorld
 bool S00931b40_Owner::FUN_00931b40(S00931b40_Target* pkTarget)
 {
     bool bResult = false;
@@ -9160,6 +9169,7 @@ struct This529
     void FUN_00931b80();
 };
 
+// pdb: bhkCollisionBox::Update | bhkCollisionBox.obj | fnv360_0822_retail, caller_sim, low
 void This529::FUN_00931b80()
 {
     extern unsigned char DAT_010f342c;

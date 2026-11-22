@@ -122,6 +122,7 @@ struct S00d6e280_Rec
 // @f3 0x009fb410 (community match, verified in this file)
 extern "C" void FUN_00a4e900(S00d6e280_Call* p, S00d6e280_Other* o, S00d6e280_Rec** cursor);
 extern const double FUN_00e20408;
+// pdb: buildJacobianFromLinFrictionAtom | hkpBuildJacobianFromAtoms.obj | fnv360_0822_retail, objrun, medium
 static __declspec(noinline) void FUN_00d6e280(S00d6e280_Rec** cursor, __m128* table, S00d6e280_Obj* self,
                                               S00d6e280_Other* other, const S00d6e280_Arg* a1)
 {
@@ -487,6 +488,7 @@ struct S00d6f300_Vec
 }
 
 
+// pdb: buildJacobianFromLinMotorAtom | hkpBuildJacobianFromAtoms.obj | tesv_win, caller_sim, low
 static __declspec(noinline) void FUN_00d6f300(S00d6f300_A* s, S00d6f300_O* o, S00d6f300_B* a2, __m128* a3,
                                               S00d6f300_Cmd** p)
 {

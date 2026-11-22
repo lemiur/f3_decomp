@@ -138,6 +138,7 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedCompareExchange(long 
 extern unsigned int DAT_0106e5a4;
 extern PoolAllocatorBase<unsigned int>::LinkedListEntry* DAT_0106e588;
 
+// pdb: NiDynamicEffect::DetachAllUnaffectedNodes | NiDynamicEffect.obj | fnv360_0822_retail, call_seq, medium
 void FUN_00a68e30_shell::FUN_00a68e30()
 {
     while (m_uiCount)
@@ -207,6 +208,7 @@ class A72720StreamSet
 };
 
 // @fnv 0x00a72720
+// pdb: NiAdditionalGeometryData::GetDataStream | NiAdditionalGeometryData.obj | tesv_win, call_seq, medium
 bool A72720StreamSet::FUN_00a72720(unsigned int uiIndex, char** ppcData, void** ppvStream,
                                    unsigned short* pusVertexCount, int* piFormat, int* piStride, int* piUsage)
 {

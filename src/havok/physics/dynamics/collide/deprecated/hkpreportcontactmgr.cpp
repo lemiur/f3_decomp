@@ -14,6 +14,8 @@ struct FUN_00cfca20
 };
 
 // @fnv 0x00cfca20
+// pdb: hkpReportContactMgr::Factory::Factory | hkpReportContactMgr.obj | fnv360_0822_retail, uvref, high
+// pdb params: mgr
 FUN_00cfca20::FUN_00cfca20(void* data)
 {
     m_flag = 1;
@@ -98,6 +100,8 @@ struct CFCA90Object
 // @f3 0x00986af0 (community match, verified in this file)
 void __cdecl hkpEntityCallbackUtil_fireContactProcessInternal(void*, void*);
 
+// pdb: hkpReportContactMgr::processContactImpl | hkpReportContactMgr.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: a, b, input, collisionData
 void CFCA90Object::ProcessShapePair(CFCA90Shape* shapeA, CFCA90Shape* shapeB, void* unusedInput, CFCA90Range* range)
 {
     if (m_remainingCount-- != 0)
@@ -319,6 +323,8 @@ struct Owner
 // @f3 0x00986960 (community match, verified in this file)
 void __cdecl hkpWorldCallbackUtil_fireContactPointRemoved(World* world, Contact* eventData);
 void __cdecl hkpEntityCallbackUtil_fireContactPointRemovedInternal(Entity* entity, Contact* eventData);
+// pdb: hkpReportContactMgr::removeContactPointImpl | hkpReportContactMgr.obj | fnv360_0822_retail, objrun_open, high
+// pdb params: cpId, info
 void Owner::NotifyContact(unsigned short flags, unsigned int state)
 {
     Entity* const entityA = a;
@@ -389,6 +395,8 @@ struct S_Cfca40_TlsHeap
 {
     void* Allocate(unsigned int bytes, unsigned int tag);
 };
+// pdb: hkpReportContactMgr::Factory::createContactMgr | hkpReportContactMgr.obj | fnv360_0822_retail, vtable, high
+// pdb params: a, b, env
 void S_Cfca40_Factory::CreateElement(S_Cfca40_AdjustedSource* apFirstSource, S_Cfca40_AdjustedSource* apSecondSource,
                                      S_Cfca40_AdjustedSource* unused)
 {
@@ -786,6 +794,8 @@ struct CollisionOwner
 // @f3 0x009867e0 (community match, verified in this file)
 void FUN_00988bb0(int a, void* b);
 void FUN_00988180(void* a, void* b);
+// pdb: hkpReportContactMgr::addContactPointImpl | hkpReportContactMgr.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkpReportContactMgr::addToiImpl)
+// pdb params: a, b, input, output, contactCache, pcp
 int CollisionOwner::FUN_00cfc760(Word a1, int a2, int a3, CollisionStateData* apStateData, float a5, int a6, int a7,
                                  CollisionBody* apBody, CollisionStateData* apOutState)
 {

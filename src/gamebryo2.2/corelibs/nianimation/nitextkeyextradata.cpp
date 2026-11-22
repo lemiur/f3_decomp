@@ -6,6 +6,7 @@ extern void* g_011f3f28;
 
 // Returns the address of the global pointer g_011f3f28.
 // @fnv 0x00a46b60
+// pdb: NiTextKeyExtraData::GetRTTI | NiTextKeyExtraData.obj | fnv360_0822_retail, objrun_prop, low
 void* __cdecl FUN_00a46b60()
 {
     return &g_011f3f28;
@@ -75,6 +76,8 @@ struct FakeKey00
 };
 // Calls the base loader on stream, then loads each of the 0xC-count keys at offset 0x10 from the stream, returning true on success.
 // @fnv 0x00a46b10
+// pdb: NiTextKeyExtraData::RegisterStreamables | NiTextKeyExtraData.obj | fnv360_0822_retail, objrun_open, high
+// pdb params: stream
 bool __fastcall LoadFromStream(NiTextKeyExtraData* _this, void* _edx, NiStream* stream)
 {
     if (!((FakeBase00*)_this)->FUN_00a7b290(stream))
@@ -110,6 +113,8 @@ struct A46BB0KeyData : A46BB0Object
 
 // Checks that pkObject is non-null, base-equal, has the same key count, and that every key's time and value match; returns true if so.
 // @fnv 0x00a46bb0
+// pdb: NiTextKeyExtraData::IsEqual | NiTextKeyExtraData.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: NiBoolData::IsEqual)
+// pdb params: pObject
 bool A46BB0KeyData::FUN_00a46bb0(A46BB0Object* pkObject)
 {
     if (!pkObject)
@@ -146,6 +151,7 @@ struct FUN_00a46d50_class
     void __thiscall DestroyKeyList();
 };
 // @fnv 0x00a46d50
+// pdb: NiTextKeyExtraData::~NiTextKeyExtraData | NiTextKeyExtraData.obj | fnv360_0822_retail, caller_sim, medium
 void FUN_00a46d50_class::DestroyKeyList()
 {
     *(void**)this = &DAT_0109827c;
@@ -180,6 +186,8 @@ struct FUN_00a46b50_cls
 };
 
 // @fnv 0x00a46b50
+// pdb: NiTexturingProperty::Map::SetTextureTransform | NiTextureTransformController.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: pkTextureTransform
 FUN_00a46b50_cls* FUN_00a46b50_cls::FUN_00a46b50()
 {
     m_i04 = DAT_0109b220;
@@ -275,6 +283,8 @@ struct TextKeyExtraData : ExtraDataBase
 
 // Appends the base strings, the key count, and one formatted "Time : Text" entry per text key to pkStrings.
 // @fnv 0x00a46ef0
+// pdb: NiTextKeyExtraData::GetViewerStrings | NiTextKeyExtraData.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pStrings
 void TextKeyExtraData::WriteToStrings(StrArray* pkStrings)
 {
     FUN_00a7b580(pkStrings);

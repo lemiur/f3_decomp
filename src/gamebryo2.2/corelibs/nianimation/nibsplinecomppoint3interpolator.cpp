@@ -3,6 +3,8 @@
 #include "nibsplinecomppoint3interpolator_decls.h"
 // Calls the base LoadBinary, then reads 8 bytes from the stream's input into the interpolator's data.
 // @fnv 0x00a51400
+// pdb: NiBSplineCompPoint3Interpolator::LoadBinary | NiBSplineCompPoint3Interpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void NiBSplineCompPoint3Interpolator::LoadBinary(NiStream& stream)
 {
     NiBSplinePoint3Interpolator::LoadBinary(stream);
@@ -86,6 +88,8 @@ struct SplineEvaluationState
     bool __thiscall EvaluateSplineAtTime(float time, unsigned int unused, Vec3* out);
 };
 // @fnv 0x00a51280
+// pdb: NiBSplineCompPoint3Interpolator::Update | NiBSplineCompPoint3Interpolator.obj | fnv360_0721_retail, objrun, high
+// pdb params: fTime, pkInterpTarget, kValue
 bool SplineEvaluationState::EvaluateSplineAtTime(float time, unsigned int unused, Vec3* out)
 {
     if (lastTime == time)
@@ -252,6 +256,7 @@ struct Comp4 : Base506
 };
 // Allocates and returns a new Comp4 instance on the heap.
 // @fnv 0x00a513c0
+// pdb: NiBSplineCompPoint3Interpolator::CreateObject | NiBSplineCompPoint3Interpolator.obj | fnv360_0822_retail, objrun, high
 void* __cdecl CreateComp4()
 {
     return new Comp4();

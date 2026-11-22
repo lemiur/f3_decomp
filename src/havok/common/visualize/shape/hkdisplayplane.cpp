@@ -387,6 +387,7 @@ struct S_00a6b7c0_Geometry
     {}
 };
 
+// pdb: hkDisplayPlane::buildGeometry | hkDisplayPlane.obj | fnv360_0822_retail, vtable, medium
 void S_00de5110_Pyramid::BuildPyramidGeometry()
 {
     m_pSourceGeometry = reinterpret_cast<S_00de5110_Geometry*>(new S_00a6b7c0_Geometry());

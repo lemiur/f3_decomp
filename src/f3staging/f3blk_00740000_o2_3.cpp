@@ -178,6 +178,8 @@ virtual void v278();
 virtual int GetIndex();
 float FUN_0074bd90(int);
 };
+// pdb: LowProcess::GetCurrentDestinationRadius | LowProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apActor
 float Actor::FUN_0074bd90(int arg) {
  float result=128.0f;
  if(!GetProc()) return result;
@@ -1199,6 +1201,8 @@ void FUN_0074acb0();float FUN_00749cc0(Actor*);bool FUN_0074a030(Actor*);void Up
 void Script_SetActionFlag(TESPackage*,void*,int);
 struct Script {static void GetLocalData(TESPackage*p,void*d,int f){Script_SetActionFlag(p,d,f);}};
 inline const char* PackageName(TESPackage*p){return DAT_00f66798[p->GetPackType()];}
+// pdb: LowProcess::Update | LowProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apRef
 void LowProcess::FUN_00750eb0(Actor* mobile)
 {
     if (!mobile)

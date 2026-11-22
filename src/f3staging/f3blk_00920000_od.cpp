@@ -58,6 +58,8 @@ void __cdecl FUN_0056b5b0(hkFileSystem* fs) throw();
 void __cdecl FUN_0056b560(hkReferencedObject* error) throw();
 void __cdecl hkBaseSystem_initSingletons() throw();
 
+// pdb: hkBaseSystem::init | hkBaseSystem.obj | fnv360_0822_retail, uvref, medium
+// pdb params: memoryRouter, errorReportFunction, errorReportObject
 int __cdecl FUN_0092eaa0(void* memoryManager, void* threadMemory, hkErrorReportFunction errorReportFunction, void* errorReportObject)
 {
     if (!DAT_010f3408) {
@@ -197,6 +199,8 @@ public:
 
 }
 
+// pdb: bhkRigidBodyT::SetPosition | bhkRigidBodyT.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arPos
 void f3m_00925b30::Body::FUN_00925b30(const hkVector4& pos)
 {
     if (this && unk08)

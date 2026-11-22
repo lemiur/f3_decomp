@@ -11,6 +11,7 @@ typedef char _sizecheck_NiMemObject[sizeof(NiMemObject) == 1 ? 1 : -1];
 extern NiMemObject g_01202548;
 
 // @fnv 0x00c22af0
+// pdb: BSFrustumFOVController::GetRTTI | BSFrustumFOVController.obj | fnv360_0822_retail, objrun_open, medium
 NiMemObject* __cdecl FUN_00c22af0()
 {
     return &g_01202548;
@@ -19,6 +20,7 @@ NiMemObject* __cdecl FUN_00c22af0()
 extern "C" void* g_01202790;
 
 // @fnv 0x00c2e540
+// pdb: NiBSplineBasisData::GetRTTI | NiBSplineBasisData.obj | fnv360_0822_retail, objrun_open, low
 void* __cdecl FUN_00c2e540()
 {
     return &g_01202790;
@@ -66,6 +68,8 @@ struct NiPSysGravityModifier : NiPSysModifier
 };
 // Allocates and constructs a copy of this gravity modifier, copies its fields, runs the base clone step with process, and returns the clone.
 // @fnv 0x00c22b00
+// pdb: NiPSysBombModifier::CreateClone | NiPSysBombModifier.obj | fnv360_0822_retail, objopen_prop, low, conflict (skyrim: NiPSysGravityModifier::CreateClone)
+// pdb params: kCloning
 NiPSysGravityModifier* NiPSysGravityModifier::FUN_00c22b00(CloningProcess& process)
 {
     NiPSysGravityModifier* clone = static_cast<NiPSysGravityModifier*>(operator new(0x40));
@@ -122,6 +126,8 @@ struct FUN_00c2e520_shell : NiPSysBombModifier
 };
 
 // @fnv 0x00c2e520
+// pdb: NiPSysGravityModifier::LinkObject | NiPSysGravityModifier.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: kStream
 void FUN_00c2e520_shell::LinkObject(NiStream& stream)
 {
     NiPSysBombModifier::LinkObject(stream);
@@ -348,6 +354,8 @@ struct S_00c236b0_Obj : S_00c236b0_Base
 
 // Loads the object's base data, member m_1C, m_28, m_2C, m_30, and conditionally m_34, m_38 and m_3C from kStream based on version checks.
 // @fnv 0x00c236b0
+// pdb: NiPSysGravityModifier::LoadBinary | NiPSysGravityModifier.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void S_00c236b0_Obj::LoadFromStream(S_00c236b0_Stream& kStream)
 {
     FUN_00c318b0(kStream);
@@ -390,6 +398,8 @@ struct FNVSerializer
 };
 // Writes a header, a subproperty, and five 4-byte values plus one 1-byte value from this object to the stream writer.
 // @fnv 0x00c237c0
+// pdb: NiPSysGravityModifier::SaveBinary | NiPSysGravityModifier.obj | fnv360_0822_retail, objrun, high
+// pdb params: kStream
 void FNVSerializer::WriteToStream(FNVStreamArchive* stream)
 {
     FUN_00c31950(stream);
@@ -488,6 +498,8 @@ struct NiPSysGravityModifierImpl
 
 // Appends the gravity modifier's RTTI name, gravity object, axis, decay, strength, turbulence, force type and world-aligned flag to the viewer strings array.
 // @fnv 0x00c238c0
+// pdb: NiPSysGravityModifier::GetViewerStrings | NiPSysGravityModifier.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void NiPSysGravityModifierImpl::AddViewerStrings(NiViewerStringsArray* pkStrings)
 {
     FUN_00c319e0(pkStrings);
@@ -573,6 +585,8 @@ struct FUN_00c235f0_cls
 
 // Compares two FUN_00c235f0_cls objects for equality, checking m_18, m_1c, and the float/int/char fields m_28 through m_3c.
 // @fnv 0x00c235f0
+// pdb: NiPSysGravityModifier::IsEqual | NiPSysGravityModifier.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: pkObject
 bool FUN_00c235f0_cls::IsEqual(FUN_00c235f0_cls* apOther)
 {
     if (FUN_00c31830(apOther))
@@ -1129,6 +1143,7 @@ __forceinline void AdvancePath(EffectC22* effect,EmitterC22* particleData,unsign
                 StepPlanar(*pParticle,v * kIter + vOffset,elapsed);
             }
         }
+// pdb: NiPSysGravityModifier::Update | NiPSysGravityModifier.obj | tesv_win, caller_sim, low
 void EffectC22::FUN_00c22b70(float elapsed, EmitterC22* emitter)
 {
     if (!emitter->GetActiveCount())

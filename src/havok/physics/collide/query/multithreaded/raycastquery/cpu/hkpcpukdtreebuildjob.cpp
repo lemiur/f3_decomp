@@ -418,6 +418,8 @@ struct P2PQueueApi
     int finishJobAndGetNextJob( int threadType, const void* oldJob, P2PJobEntry& jobOut, void* params = 0, int wait = 0 );
 };
 
+// pdb: hkCpuSolveConstraintsJob | hkpCpuSolveConstraintsJobs.obj | fnv360_0822_retail, strset, low
+// pdb params: tl, jobQueue, jobInOut
 void __cdecl FUN_00d947e0( S00d947e0_Obj** a1, S00d947e0_Queue* apQueue, S00d947e0_Data* apData )
 {
     extern void* (__stdcall* DAT_00d9b080)( unsigned long );

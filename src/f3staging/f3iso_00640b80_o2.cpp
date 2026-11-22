@@ -105,6 +105,8 @@ static __forceinline void AddTail(MenuOwner* list, Tile* tile)
     list->m_pkTail = item;
 }
 
+// pdb: HackingMenu::ScrollLog | HackingMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aiTicks, pNewEntries
 void MenuOwner::FUN_00640b80(unsigned int count, char** texts)
 {
     Iterator it(this->m_pkHead);

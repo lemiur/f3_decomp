@@ -10,6 +10,8 @@ struct FUN_00d5e2e0_Class
 };
 
 // @fnv 0x00d5e2e0
+// pdb: hkpConvexListShape::getNextKey | hkpConvexListShape.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: oldKey
 int FUN_00d5e2e0_Class::GetNextKey(int key)
 {
     ++key;
@@ -53,6 +55,7 @@ struct SumContainer {
     SumElement** items;
     int count;
 };
+// pdb: hkpConvexListShape::getNumCollisionSpheresImpl | hkpConvexListShape.obj | fnv360_0822_retail, objrun_sim, low
 int __fastcall SumVirtualResults(void* self) {
     SumContainer* container = static_cast<SumContainer*>(self);
     int total = 0;
@@ -63,6 +66,8 @@ int __fastcall SumVirtualResults(void* self) {
 
 
 // @fnv 0x00d5e2f0
+// pdb: hkpConvexListShape::getChildShape | hkpConvexListShape.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: key, buffer
 int __fastcall FUN_00d5e2f0(char* self, int edx, int key, int pad)
 {
     return ((int*)((int*)self)[0xc])[key];
@@ -82,6 +87,7 @@ struct FUN_00d5e0f0_cls
 };
 
 // @fnv 0x00d5e0f0
+// pdb: hkpConvexPieceShape::getContainer | hkpConvexPieceShape.obj | fnv360_0822_retail, objrun_open, low
 char* FUN_00d5e0f0_cls::FUN_00d5e0f0()
 {
     return this != 0 ? (char*)this + 0x14 : 0;
@@ -95,6 +101,8 @@ int __cdecl hkpPhysicsSystemWithContacts_clone()
 }
 
 // @fnv 0x00d5e0e0
+// pdb: hkpConvexListShape::getCollisionFilterInfo | hkpConvexListShape.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: key
 int __stdcall FUN_00d5e0e0(int)
 {
     return 0;
@@ -142,6 +150,8 @@ struct StandInShape
     virtual void WriteElements(void* destination);
 };
 
+// pdb: hkpConvexListShape::getCollisionSpheresImpl | hkpConvexListShape.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: sphereBuffer
 void* __thiscall FUN_00d5e1c0_Collection::WriteToBuffer(void* destination)
 {
     char* cursor = (char*)destination;
@@ -174,6 +184,7 @@ struct FUN_00d5e2d0_cls
     int FUN_00d5e2d0();
 };
 // @fnv 0x00d5e2d0
+// pdb: ActorMover::GetPreferredMoveMode | ActorMover.obj | fnv360_0822_retail, vtable, medium
 int FUN_00d5e2d0_cls::FUN_00d5e2d0()
 {
     return unk34;
@@ -259,6 +270,8 @@ struct ShapeChildSlotD5E
     virtual void childData(const int* keys, int numKeys, ShapeOutD5E* out);
 };
 
+// pdb: hkpConvexListShape::convertVertexIdsToVerticesImpl | hkpConvexListShape.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: ids, numIds, verticesOut
 void ShapeListD5E::GetChildData(const unsigned short* keys, int numKeys, ShapeOutD5E* out)
 {
     for (int i = 0; i < numKeys; i++)
@@ -859,6 +872,8 @@ struct hkpShapeRayF3
     virtual void v0C();
     virtual void castRayWithCollector(const ShapeRayCastQuery& input, const hkpCdBody& cdBody, hkpRayHitCollector& collector) const;
 };
+// pdb: hkpConvexListShape::castRayWithCollectorImpl | hkpConvexListShape.obj | fnv360_0822_retail, objrun_sim, medium
+// pdb params: input, cdBody, collector
 void FUN_00d5e600_Class::FUN_00d5e600(const ShapeRayCastQuery& input, const hkpCdBody& cdBody,
                                       hkpRayHitCollector& collector) const
 {

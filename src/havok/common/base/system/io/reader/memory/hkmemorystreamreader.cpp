@@ -14,6 +14,7 @@ struct FUN_00e059e0
 };
 
 // @fnv 0x00e059e0
+// pdb: hkMemoryStreamReader::rewindToMark | hkMemoryStreamReader.obj | fnv360_0822_retail, vtable, high
 int __thiscall FUN_00e059e0::GetCurrentOffset()
 {
     if (m_14 >= 0)
@@ -36,6 +37,7 @@ struct hkMemoryStreamReader
 };
 
 // @fnv 0x00e059c0
+// pdb: hkMemoryStreamReader::markSupported | hkMemoryStreamReader.obj | fnv360_0822_retail, vtable, high
 unsigned char* __thiscall hkMemoryStreamReader::IsSupported(unsigned char* supported)
 {
     *supported = (m_10 != 0);
@@ -103,6 +105,7 @@ class hkObjectE059
 };
 
 // @fnv 0x00e059a0
+// pdb: hkMemoryStreamReader::isOk | hkMemoryStreamReader.obj | fnv360_0822_retail, vtable, high
 hkBoolE059 hkObjectE059::IsNotAtEnd() const
 {
     return m_iEnd != m_iCurrent + 1;
@@ -158,6 +161,7 @@ struct FnvCpu_FUN_00e05a70_CpuObject
     int FUN_00e05a70();
 };
 // @fnv 0x00e05a70
+// pdb: NonActorMagicCaster::GetCurrentSpell | NonActorMagicCaster.obj | fnv360_0822_retail, vtable, medium
 int FnvCpu_FUN_00e05a70_CpuObject::FUN_00e05a70()
 {
     return value;
@@ -180,6 +184,8 @@ struct FUN_00e05a80Class
 extern "C" void __cdecl FUN_00cb1260(void* destination, const void* source, int count);
 
 // @fnv 0x00e05a80
+// pdb: hkMemoryStreamReader::read | hkMemoryStreamReader.obj | fnv360_0822_retail, vtable, high
+// pdb params: buf, nbytes
 int __thiscall FUN_00e05a80Class::ReadFromBuffer(void* destination, int count)
 {
     unsigned char state;
@@ -207,6 +213,8 @@ struct FUN_00e05af0_Obj : hkMemoryStreamReader
 };
 
 // @fnv 0x00e05af0
+// pdb: hkMemoryStreamReader::skip | hkMemoryStreamReader.obj | fnv360_0822_retail, vtable, high
+// pdb params: nbytes
 int __thiscall FUN_00e05af0_Obj::ReadBytes(int aiByteCount)
 {
     int local;
@@ -290,6 +298,8 @@ struct M3_Alloc
 };
 extern "C" void* __cdecl FUN_009234e0(void* destination, const void* source, int count);
 
+// pdb: hkMemoryStreamReader::hkMemoryStreamReader | hkMemoryStreamReader.obj | fnv360_0822_retail, objrun, medium
+// pdb params: mem, memSize, mt
 FUN_00e05b40::FUN_00e05b40(void* data, int size, int external) throw()
 {
     unk0C = 0;

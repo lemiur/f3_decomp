@@ -6,6 +6,7 @@ void __cdecl hkAgent1nMachine_WarpTime(int a1, float a2, float a3, int a4);
 
 // Calls hkAgent1nMachine_WarpTime with unk08, unk0C, unk10 and unk14, dropping unk04.
 // @fnv 0x00da6e30
+// pdb: hkpCollectionCollectionAgent3::warpTime | hkpCollectionCollectionAgent3.obj | tesv_win, objrun, medium
 void __cdecl FUN_00da6e30(int aiUnused, int aiArg1, float afArg2, float afArg3, int aiArg4)
 {
     hkAgent1nMachine_WarpTime(aiArg1, afArg2, afArg3, aiArg4);

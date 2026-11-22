@@ -113,6 +113,7 @@ int position; File* file;
 };
 File* FUN_00bc7fc0(const char*,int,int,int);
 void FUN_00887da0(const char*);
+// pdb: BSFile::Read | BSFile.obj | tesv_win, caller_sim, low
 int __stdcall FUN_00bdb8f0(State* state,unsigned op,void* data,int size) {
 switch(op) {
 case 3: {
@@ -171,6 +172,8 @@ struct Layout {
     unsigned int count, capacity;
     Layout();
 };
+// pdb: BSSoundInfo::BSSoundInfo | BSAudioManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiID
 Layout::Layout() {
     width = 0.0f;
     height = 0.0f;
@@ -241,6 +244,7 @@ struct FUN_00bdc1a0 {
     bool dirty;
     FUN_00bdc1a0();
 };
+// pdb: XUserInterface::ReloadGame | XUserInterface.obj | fnv360_0822_retail, objrun_open, low
 FUN_00bdc1a0::FUN_00bdc1a0() : unk2d4(0), unk2d8(0)
 {
     memset(table, 0, sizeof(table));
@@ -356,6 +360,7 @@ struct FUN_00bd7a00_Obj
 };
 
 
+// pdb: BSGameSound::Init | BSGameSound.obj | fnv360_0822_retail, objrun, medium
 void FUN_00bd7a00_Obj::FUN_00bd7a00()
 {
     unk24 = 1.0f;

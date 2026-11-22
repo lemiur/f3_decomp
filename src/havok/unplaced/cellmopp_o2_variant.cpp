@@ -191,6 +191,8 @@ struct S_008f7580_Owner
 {
     void FUN_008f7580(int first, int second);
 };
+// pdb: bhkBvTreeShape::CopyMembers | bhkBvTreeShape.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apDest, arCloneData
 void This::FUN_00ca4e50(int first, int second)
 {
     char output;
@@ -268,6 +270,8 @@ struct First {
 };
 struct Base { bool FUN_008f8830(NiStream*); };
 }
+// pdb: bhkBvTreeShape::RegisterStreamables | bhkBvTreeShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arStream
 void HC1Base::FUN_00ca4f40(NiStream* stream) {
  if(this) {
   Task1473::First* first=(Task1473::First*)unk08;
@@ -382,6 +386,8 @@ struct OwnerF3
         return 0;
     }
 };
+// pdb: bhkBvTreeShape::SaveBinary | bhkBvTreeShape.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void Owner::FUN_00ca4f80(Sink* sink)
 {
     OwnerF3* self = (OwnerF3*)this;
@@ -1163,6 +1169,8 @@ struct MyObj30 : MyRef
     MyObj30(MyObj40* body, S00cb0820_Tag tag);
 };
 
+// pdb: bhkTriSampledHeightFieldBvTreeShape::Init | bhkTriSampledHeightFieldBvTreeShape.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arInfo
 void S00cb0820_World::FUN_00cb0820(S00cb0820_Outer* outer)
 {
     if (!outer) return;
@@ -1256,6 +1264,8 @@ struct FUN_00cb00a0_Class
 
 // @f3 0x00921ce0 (community match, verified in this file)
 struct FUN_00cb00a0_ClassF3 { void FUN_00910e70(char* object); };
+// pdb: bhkTriSampledHeightFieldBvTreeShape::LoadBinary | bhkTriSampledHeightFieldBvTreeShape.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void FUN_00cb00a0_Class::FUN_00cb00a0(char* object)
 {
     ((FUN_00cb00a0_ClassF3*)this)->FUN_00910e70(object);
@@ -1332,6 +1342,8 @@ struct T
 };
 
 // @f3 0x00921d60 (community match, verified in this file)
+// pdb: bhkTriSampledHeightFieldBvTreeShape::SaveBinary | bhkTriSampledHeightFieldBvTreeShape.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void T::FUN_00cb0120(void* arg)
 {
     char local;
@@ -1484,6 +1496,8 @@ static __forceinline void* getVal(ValueOwner* owner)
     return 0;
 }
 
+// pdb: bhkBvTreeShape::CanShare | bhkBvTreeShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: arCloneData
 bool ValueOwner::FUN_00ca5040(int a)
 {
     ValueObj_00ca5040* pkColl = static_cast<ValueObj_00ca5040*>(getVal(this));

@@ -14,6 +14,7 @@ extern double g_fAngleStep;
 
 // Fills both tables with 512 sine and cosine values of an angle difference that increases by g_fTwoPi multiplied by g_fAngleStep.
 // @fnv 0x00a813c0
+// pdb: CreateSinTable | NiMath.obj | fnv360_0822_retail, call_gap, high
 void InitTrigTables()
 {
     float fAngleDifference = 0.0f;

@@ -800,6 +800,8 @@ struct ArrayElementE80390 {
 };
 
 // @fnv 0x00e80390
+// pdb: NiTNewInterface<NiD3DPass>::Allocate | NiD3DPass.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: uiNumElements
 ArrayElementE80390* __cdecl FUN_00e80390(unsigned int count)
 {
     return new(count) ArrayElementE80390[count];

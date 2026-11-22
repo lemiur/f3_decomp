@@ -13,6 +13,8 @@ struct FUN_00dd4b10_struct
 
 // Copies six consecutive unsigned ints from p into this at offsets 8 through 28.
 // @fnv 0x00dd4b10
+// pdb: hkpMoppCompiler::setSplitParams | hkpMoppCompiler.obj | fnv360_0822_retail, call_gap, high
+// pdb params: sp
 void __thiscall FUN_00dd4b10_struct::AssignFromSource(const void* pSource)
 {
     const unsigned int* src = (const unsigned int*)pSource;
@@ -45,6 +47,8 @@ struct FUN_00dd4b40_Class
 
 // Copies six unsigned ints from the array p into fields m_20 through m_34.
 // @fnv 0x00dd4b40
+// pdb: hkpMoppCompiler::setCostParams | hkpMoppCompiler.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: sp
 void __thiscall FUN_00dd4b40_Class::SetValues(const unsigned int* auiValues)
 {
     m_20 = auiValues[0];
@@ -72,6 +76,8 @@ struct FUN_00dd5170_class
 
 // Copies six consecutive ints from the pointed-to array into fields c through h.
 // @fnv 0x00dd5170
+// pdb: hkpMoppCostFunction::updateParams | hkpMoppCostFunction.obj | fnv360_0822_retail, objrun, medium
+// pdb params: bp
 void __thiscall FUN_00dd5170_class::CopySixInts(const int* pSource)
 {
     c = pSource[0];
@@ -106,6 +112,8 @@ struct FUN_00dd0420_Class
 };
 // If arg is nonzero, zeroes m_00/m_08/m_0c, sets m_04 to 0x10, calls hkpConstraintConstructionKit_computeConstraintInfo on m_1c and this, then sets m_00 to m_04; returns this.
 // @fnv 0x00dd0420
+// pdb: hkpGenericConstraintDataScheme::hkpGenericConstraintDataScheme | hkpGenericConstraintScheme.obj | fnv360_0822_retail, call_seq, high
+// pdb params: f
 FUN_00dd0420_Class* __thiscall FUN_00dd0420_Class::FUN_00dd0420(int aiFlag)
 {
     if (aiFlag)
@@ -140,6 +148,7 @@ struct FUN_00ddfb70_cls
 };
 
 // @fnv 0x00ddfb70
+// pdb: hkpShapeDisplayBuilder::hkpShapeDisplayBuilderEnvironment::hkpShapeDisplayBuilderEnvironment | hkpShapeDisplayBuilder.obj | fnv360_0822_retail, call_dedup, low
 FUN_00ddfb70_cls* FUN_00ddfb70_cls::FUN_00ddfb70()
 {
     m_00 = 8;
@@ -174,6 +183,7 @@ struct View543 {
         return heap->FUN_008f6d90(data,allocation*4,23);
     }
 };
+// pdb: hkpRemoveTerminalsMoppModifier::~hkpRemoveTerminalsMoppModifier | hkpRemoveTerminalsMoppModifier.obj | fnv360_0822_retail, call_seq, medium, conflict (bridge: hkpRemoveTerminalsMoppModifier2::hkpRemoveTerminalsMoppModifier2)
 FUN_00dc9e70_Class* FUN_00dc9e70_Class::FUN_00dc9e70(){
     View543* self=reinterpret_cast<View543*>(this);
     self->primary=&Globals543::DAT_00e84ed4;self->secondary=&Globals543::DAT_00e84ec4;
@@ -200,6 +210,8 @@ struct FUN_00dcc5a0_class
     FUN_00dcc5a0_class* FUN_00dcc5a0(int arg);
 };
 // @fnv 0x00dcc5a0
+// pdb: hkIstream::operator>> | hkIStream.obj | fnv360_0822_retail, objrun, medium
+// pdb params: c
 FUN_00dcc5a0_class* FUN_00dcc5a0_class::FUN_00dcc5a0(int arg)
 {
     m_08->v4(arg, 1);
@@ -216,6 +228,7 @@ struct FUN_00dcd4b0_Class
 };
 
 // @fnv 0x00dcd4b0
+// pdb: CIdvCamera::`scalar deleting destructor' | Camera.obj | fnv360_0822_retail, vtable, medium
 FUN_00dcd4b0_Class* __thiscall FUN_00dcd4b0_Class::InitializeAndMaybeFree(int flags)
 {
     m_ppVirtualMethodTable = DAT_010d77b4;
@@ -236,6 +249,8 @@ struct FUN_00dda6b0_Class
 
 // Writes the three consecutive unsigned ints pointed to by p to the stream via writeInt32.
 // @fnv 0x00dda6b0
+// pdb: hkDisplaySerializeOStream::writeTriangle | hkDisplaySerializeOStream.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: ti
 void __thiscall FUN_00dda6b0_Class::WriteUInt32Triple(const unsigned int* auiValues)
 {
     ((DDA7C0OStream*)this)->writeInt32(auiValues[0]);
@@ -276,6 +291,8 @@ struct FUN_00ddfb80_s
 
 // Initialises the object: sets field at offset 6 to 1, assigns the vtable, copies two pointers from src, and zeroes the field at offset 16.
 // @fnv 0x00ddfb80
+// pdb: hkpShapeDisplayBuilder::hkpShapeDisplayBuilder | hkpShapeDisplayBuilder.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: env
 FUN_00ddfb80_s* __fastcall FUN_00ddfb80(FUN_00ddfb80_s* self, int, const void* src)
 {
     *(unsigned short*)((char*)self + 6) = 1;
@@ -288,6 +305,8 @@ FUN_00ddfb80_s* __fastcall FUN_00ddfb80(FUN_00ddfb80_s* self, int, const void* s
 
 // FUN_00dc1660: __stdcall identity on its single stack parameter.
 // @fnv 0x00dc1660
+// pdb: hkpConstraintData::getSolverResults | hkpConstraintData.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: runtime
 int __stdcall FUN_00dc1660(int a1)
 {
     return a1;
@@ -302,6 +321,7 @@ struct FUN_00dc1670_cls
 };
 
 // @fnv 0x00dc1670
+// pdb: hkStructureLayout::hkStructureLayout | hkStructureLayout.obj | fnv360_0822_retail, call_seq, high
 FUN_00dc1670_cls* FUN_00dc1670_cls::FUN_00dc1670()
 {
     this->m_00 = DAT_011b7b88;
@@ -369,6 +389,7 @@ struct FUN_00dcc180_Class
 
 // If unk08 is set, forwards value to its virtual method; otherwise writes 0 to *value and returns value.
 // @fnv 0x00dcc180
+// pdb: hkIstream::isOk | hkIStream.obj | tesv_win, hash, low
 unsigned char* __thiscall FUN_00dcc180_Class::FUN_00dcc180(unsigned char* pucValue)
 {
     if (unk08)
@@ -397,6 +418,8 @@ struct FUN_00dcc660_cls
 };
 
 // @fnv 0x00dcc660
+// pdb: hkIstream::read | hkIStream.obj | fnv360_0822_retail, objrun_sim, medium
+// pdb params: buf, nbytes
 void FUN_00dcc660_cls::FUN_00dcc660(int a)
 {
     m_pFlagTarget->Forward(a);
@@ -425,6 +448,7 @@ extern FUN_00dcc670_Manager* DAT_01268364;
 
 // Sets unk06 to 1, unk00 to &DAT_010d7540, and unk08 to the result of DAT_01268364->FUN_00dcc670_v3(value), then returns this.
 // @fnv 0x00dcc670
+// pdb: hkIstream::hkIstream | hkIStream.obj | tesv_win, call_gap, low
 int* __thiscall FUN_00dcc670_Class::InitFromValue(int* value)
 {
     int* local_value = value;
@@ -541,6 +565,7 @@ struct S_00dcc9c0_StringBuf
 extern int g_unk01269bb4;
 
 // @fnv 0x00dccb00
+// pdb: getVtablehkpTransformShape | hkpCollideReflections.obj | tesv_win, objrun_open, low
 int* __cdecl FUN_00dccb00()
 {
     return &g_unk01269bb4;
@@ -578,6 +603,7 @@ struct FUN_00dced30_cls
 };
 
 // @fnv 0x00dced30
+// pdb: cleanupLoadedObjecthkpConstraintChainInstanceAction | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dced30(FUN_00dced30_cls* pObject)
 {
     pObject->m_v00(0);
@@ -586,6 +612,7 @@ void __cdecl FUN_00dced30(FUN_00dced30_cls* pObject)
 extern int DAT_01269c44;
 
 // @fnv 0x00dced40
+// pdb: getVtablehkpRemoveTerminalsMoppModifier | hkpRemoveTerminalsMoppModifierClass.obj | fnv360_0822_retail, objrun_open, low
 int __cdecl FUN_00dced40()
 {
     return reinterpret_cast<int>(&DAT_01269c44);
@@ -608,6 +635,8 @@ struct FUN_00dd50f0_cls
 
 // Initialises the object's fields to defaults, then overrides m_00 and m_08 depending on mode (0 or 1), and returns this.
 // @fnv 0x00dd50f0
+// pdb: hkpMoppSplitter::hkpMoppSplitParams::hkpMoppSplitParams | hkpMoppSplitter.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: meshType
 FUN_00dd50f0_cls* FUN_00dd50f0_cls::FUN_00dd50f0(int mode)
 {
     m_00 = DAT_0101e2bc;
@@ -646,6 +675,8 @@ struct FUN_00dd5150_cls
 };
 
 // @fnv 0x00dd5150
+// pdb: hkpMoppCostFunction::hkpMoppSplitCostParams::hkpMoppSplitCostParams | hkpMoppCostFunction.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: __formal
 void* FUN_00dd5150_cls::FUN_00dd5150(int aiUnused)
 {
     this->m_f00 = 1.0f;
@@ -676,6 +707,8 @@ struct FUN_00dd51a0
 };
 
 // @fnv 0x00dd51a0
+// pdb: hkpMoppCostFunction::hkpMoppCostFunction | hkpMoppCostFunction.obj | fnv360_0822_retail, uvref, high
+// pdb params: bp
 FUN_00dd51a0::FUN_00dd51a0(const int* data)
 {
     enabled06 = 1;
@@ -892,6 +925,8 @@ struct FUN_00dd9160_Class
 
 // Sets unk06 to 1, unk00 to &UNK_010d7c80, stores flag in unk0c and the result of DAT_01268364->vfn3(arg) in unk08, then returns this.
 // @fnv 0x00dd9160
+// pdb: hkIArchive::hkIArchive | hkIArchive.obj | fnv360_0822_retail, objrun, medium
+// pdb params: filename, bs
 FUN_00dd9160_Class* FUN_00dd9160_Class::FUN_00dd9160(unsigned int arg, unsigned char flag)
 {
     unk06 = 1;
@@ -1018,6 +1053,7 @@ static __declspec(noinline) unsigned short readInteger64(IniTokenStream* stream,
 }
 
 // @fnv 0x00dcc740
+// pdb: hkIstream::operator>> | hkIStream.obj | tesv_win, objrun_sim, low
 S_00dcc740_Cls* S_00dcc740_Cls::ReadSignedShort(unsigned short* out)
 {
     unsigned char flag;
@@ -1050,6 +1086,8 @@ struct FUN_00dda690 : Base_00d60b40
 };
 
 // @fnv 0x00dda690
+// pdb: hkDisplaySerializeOStream::hkDisplaySerializeOStream | hkDisplaySerializeOStream.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: buf
 FUN_00dda690::FUN_00dda690(int a)
 {
     FUN_00d60b40(a, 0);
@@ -1084,6 +1122,7 @@ static __declspec(noinline) unsigned short readInteger64(unsigned char* ok, S_00
 
 // Reads a 16-bit value via readInteger64 and stores it negated into result when ok is set, otherwise as-is; returns this.
 // @fnv 0x00dcc790
+// pdb: hkIstream::operator>> | hkIStream.obj | tesv_win, objrun_sim, low
 S_00dcc790_Class* __thiscall S_00dcc790_Class::ReadSignedValue(unsigned short* result)
 {
     unsigned char ok;
@@ -1127,6 +1166,8 @@ static __declspec(noinline) FNVInt64 S_00dcc8a0_ParseInt(S_00dcc8a0_Handle h, un
 
 // Parses an integer from the handle's reader, negates it if the sign flag is set, stores it in out and returns this.
 // @fnv 0x00dcc8a0
+// pdb: readInteger<unsigned short> | hkIStream.obj | fnv360_0822_debug, objrun_sim, low, conflict (skyrim: hkIstream::operator>>)
+// pdb params: reader, tOut
 FUN_00dcc8a0_Class* FUN_00dcc8a0_Class::ParseSignedInt(FNVInt64* out)
 {
     unsigned char neg;
@@ -1203,6 +1244,8 @@ struct S_00dcc600_Class
 
 // Resets the stream, then reads bytes into buffer until the value or end is hit, returning the index or -1.
 // @fnv 0x00dcc600
+// pdb: hkIstream::getline | hkIStream.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: str, maxlen, delim
 int S_00dcc600_Class::ReadUntilValue(unsigned char* buffer, int length, signed char value)
 {
     S_00dcc600_Reset(this->m_08);
@@ -1247,6 +1290,7 @@ struct Block388
 };
 
 // @fnv 0x00dd8fd0
+// pdb: byteswap | hkIArchive.obj | fnv360_0822_retail, objrun_open, low
 static __declspec(noinline) void FUN_00dd8fd0(unsigned char* a, unsigned char* b)
 {
     unsigned char t = *a;
@@ -1352,6 +1396,8 @@ class FUN_00dcc5c0_cls
 };
 
 // @fnv 0x00dcc5c0
+// pdb: hkIstream::operator>> | hkIStream.obj | fnv360_0822_retail, objrun, high
+// pdb params: f
 FUN_00dcc5c0_cls* __thiscall FUN_00dcc5c0_cls::GetFloatValue(float* out)
 {
     *out = FUN_00dcc3b0(m_08);
@@ -1390,6 +1436,7 @@ struct FUN_00dcc7e0_Class
 
 // Reads a signed integer from the stream at m_08 via readInteger64, applies the sign flag, stores the result in out, and returns this.
 // @fnv 0x00dcc7e0
+// pdb: hkIstream::operator>> | hkIStream.obj | tesv_win, objrun_sim, low
 FUN_00dcc7e0_Class* FUN_00dcc7e0_Class::ReadSignedInt(int* out)
 {
     unsigned char flag;
@@ -1432,6 +1479,8 @@ static __declspec(noinline) FNVInt64 S_dcc860_ParseInt(S_dcc860_Handle h, unsign
 
 // Parses a signed 64-bit integer from the reader handle, applies the sign, stores it in out, and returns this.
 // @fnv 0x00dcc860
+// pdb: readInteger<short> | hkIStream.obj | fnv360_0822_debug, objrun_sim, low, conflict (skyrim: hkIstream::operator>>)
+// pdb params: reader, tOut
 FUN_00dcc860_Class* FUN_00dcc860_Class::ReadInt64(FNVInt64* out)
 {
     unsigned char neg;
@@ -1545,6 +1594,7 @@ struct TokenReader
 
 // Reads 64-byte chunks from stream, skipping whitespace until a non-space character is found, then resets and skips to that position.
 // @fnv 0x00dcc1b0
+// pdb: eatWhiteSpace | hkIStream.obj | fnv360_0822_retail, call_seq, high
 static __declspec(noinline) void SkipWhitespace(TokenReader* stream)
 {
     int buffer[16];
@@ -1658,6 +1708,8 @@ __forceinline float Clamp(const float& value, const float& hi, const float& lo)
 
 // Switches on a->m08: modes 1 to 3 fill six floats in out from a and b; mode 4 calls the function pointer stored in a.
 // @fnv 0x00dcfff0
+// pdb: hkCalcMotorData | hkpMotorBuildJacobian.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: someMotor, input, output
 void __cdecl FUN_00dcfff0(ObjA* a, ObjB* b, float* out)
 {
     float s0, s4, s8, sC, s10, t18;
@@ -1836,6 +1888,8 @@ class DCC5E0Reader
 };
 
 // @fnv 0x00dcc5e0
+// pdb: hkIstream::operator>> | hkIStream.obj | fnv360_0822_retail, objrun, high
+// pdb params: d
 DCC5E0Reader& DCC5E0Reader::ReadDouble(double& rdValue)
 {
     rdValue = DCC5E0ReadNumber(m_pDataStream);
@@ -1892,6 +1946,8 @@ struct FUN_00dd92f0_rec20
     int unk10;
 };
 
+// pdb: hkProcessFactory::createProcess | hkProcessFactory.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: tag, contexts
 int FUN_00dd92f0_cls::InvokeRecord(int index, int arg)
 {
     FUN_00dd92f0_lockobj* lock = reinterpret_cast<FUN_00dd92f0_lockobj*>(this->m_pCrit);
@@ -2072,6 +2128,8 @@ TokenReader* TokenReader::ReadToken(TokenOwner* owner)
 }  // namespace fnv_00dcc8e0
 
 // @fnv 0x00dccb60
+// pdb: hkpConstrainedSystemFilter::constraintRemovedCallback | hkpConstrainedSystemFilter.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: constraint
 void __stdcall FUN_00dccb60(int value)
 {}
 
@@ -2417,6 +2475,8 @@ static __forceinline void factorTridiagonal(int numConstraints, float cfm, Jacob
 
 // The output record, the offset array and the accumulator base arrive as the pack's untyped parameters and are
 // read through the classes above. The record's cursor is read through the parameter each time, as the image does.
+// pdb: hkStiffSpringChainBuildJacobian | hkpChainBuildJacobian.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: numConstraints, tau, damping, cfm, accumulators, accumBase, jacobiansEnd, in, out
 void FUN_00dd1180(int n, float a, float b, float c, char** src, int stride, int u1, int u2, char** pp)
 {
     chn520c0::AccumulatorOffset* accumulators = (chn520c0::AccumulatorOffset*)src;

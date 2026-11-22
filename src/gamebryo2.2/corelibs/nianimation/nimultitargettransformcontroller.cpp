@@ -59,6 +59,8 @@ struct NiMultiTargetTransformController__PoseSource
 };
 
 // @fnv 0x00a2ffe0
+// pdb: NiMultiTargetTransformController::CreatePoseInterpolator | NiMultiTargetTransformController.obj | fnv360_0822_retail, objrun, high
+// pdb params: usIndex
 NiInterpolator* NiMultiTargetTransformController::GetInterpolatorAtIndex(unsigned short index)
 {
     NiMultiTargetTransformController__PoseSource* source =
@@ -89,6 +91,7 @@ void __cdecl FUN_00aa1460(void* ptr, unsigned int size);
 void __cdecl FUN_00aa1490(void* ptr, unsigned int size);
 
 // @fnv 0x00a2ff70
+// pdb: NiBlendTransformInterpolator::`vector deleting destructor' | NiMultiTargetTransformController.obj | fnv360_0822_retail, objrun, high
 void* __fastcall FUN_00a2ff70(char* pThis, int, unsigned int flags)
 {
     if (flags & 2)
@@ -149,6 +152,8 @@ struct Helper2
 };
 
 // @fnv 0x00a30070
+// pdb: NiMultiTargetTransformController::CopyMembers | NiMultiTargetTransformController.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pkDest, kCloning
 void FUN_00a30070_shell::CloneTo(NiMultiTargetTransformController* pkDest, CloningProcess* kCloning)
 {
     ((NiTransformController*)this)->FUN_00a2f8a0((NiTransformController*)pkDest, *kCloning);
@@ -225,6 +230,8 @@ struct NiBlendTransformInterpolator_Stub
 
 // Calls the base ProcessClone, then clones each target transform interpolator and remaps its target object through the cloning process's pointer map.
 // @fnv 0x00a300d0
+// pdb: NiMultiTargetTransformController::ProcessClone | NiMultiTargetTransformController.obj | fnv360_0721_beta, objrun, medium
+// pdb params: kCloning
 void FUN_00a300d0_shell::FUN_00a300d0(CloningProcess* kCloning)
 {
     ((NiTimeController*)this)->NiTimeController::ProcessClone(*kCloning);
@@ -257,6 +264,7 @@ struct NiMemObject_Del : public NiMemObject
 
 // Calls FUN_00a2fb70 on pThis, then deletes pThis with size 0x40 when flags has bit 1 set, and returns pThis.
 // @fnv 0x00a30280
+// pdb: bhkLiquidAction::`scalar deleting destructor' | Explosion.obj | fnv360_0822_retail, vtable, medium
 void* __fastcall FUN_00a30280(void* pThis, int, unsigned int flags)
 {
     FUN_00a2fb70(pThis);
@@ -273,6 +281,8 @@ struct Blend34
     char* p;
 };
 // @fnv 0x00a2fa30
+// pdb: NiMultiTargetTransformController::GetInterpolator | NiMultiTargetTransformController.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: BSTScatterTableKernel<struct BSTScatterTableTraits<class BSFixedString,class NiAVObject *,struct BSTScatterTableDefaultKVStorage,struct BSTScatterTableDefaultHashPolicy<class BSFixedString>,struct BSTScatterTableHeapAllocator<struct BSTScatterTableEntry<class BSFixedString,class NiAVObject *,struct BSTScatterTableDefaultKVStorage> >,8> >::HashToEntry)
+// pdb params: usIndex
 char* __fastcall FUN_00a2fa30(Blend34* self, int, unsigned short ausIndex)
 {
     return self->p + ausIndex * 0x30;
@@ -382,6 +392,8 @@ struct Ctl
     unsigned short num;
 };
 // @fnv 0x00a30240
+// pdb: NiMultiTargetTransformController::GetInterpolatorIndexFx | NiMultiTargetTransformController.obj | fnv360_0822_retail, objrun, low
+// pdb params: arName
 unsigned short __fastcall FindTargetIndex(Ctl* self, int, const NiFixedString* arName)
 {
     unsigned short us;
@@ -414,6 +426,7 @@ struct Ctl
 };
 // Walks the RTTI chain of self->target and returns true if it reaches g_011f4428_arg1, otherwise false.
 // @fnv 0x00a302a0
+// pdb: BSPlayerDistanceCheckController::TargetIsRequiredType | BSPlayerDistanceCheckController.obj | fnv360_0822_retail, vtable, medium
 bool __fastcall IsTargetOfType(Ctl* pCtl)
 {
     Obj* t = pCtl->target;
@@ -514,6 +527,7 @@ struct Ctl : Base
 };
 // Allocates and constructs a new Ctl object, returning the pointer.
 // @fnv 0x00a30330
+// pdb: NiMultiTargetTransformController::CreateObject | NiMultiTargetTransformController.obj | fnv360_0822_retail, objrun, medium
 Ctl* __cdecl CreateCtl()
 {
     return new Ctl;
@@ -663,6 +677,8 @@ extern float DAT_01096b8c;
 
 // If active, iterates targets with selective update, blends each via Update, and applies non-sentinel translate, rotate and scale values.
 // @fnv 0x00a2fbe0
+// pdb: NiMultiTargetTransformController::Update | NiMultiTargetTransformController.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: UpdateData
 void FUN_00a2fbe0_shell::UpdateTargets(NiUpdateData* UpdateData)
 {
     if (((CtlFlags_a2fbe0*)this)->GetActive())
@@ -743,6 +759,8 @@ struct FUN_00a2fae0_cls
 };
 
 // @fnv 0x00a2fae0
+// pdb: NiMultiTargetTransformController::IsEqual | NiMultiTargetTransformController.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pkObject
 bool FUN_00a2fae0_cls::Equals(FUN_00a2fae0_cls* other)
 {
     if (!this->FUN_00c283f0(other))
@@ -856,6 +874,7 @@ struct NiMultiTargetTimeShell : public NiMultiTargetTransformController
     void UpdateTimeRange();
 };
 // @fnv 0x00a2fde0
+// pdb: NiMultiTargetTransformController::ResetTimeExtrema | NiMultiTargetTransformController.obj | fnv360_0822_retail, objrun, high
 void NiMultiTargetTimeShell::UpdateTimeRange()
 {
     if (!GetManagerControlled())
@@ -1153,6 +1172,8 @@ class BA2FD60Controller
 
 // Returns the index of the first item whose m_pcName matches pcName, or INVALID_INDEX if pcName is null or no match is found.
 // @fnv 0x00a2fd60
+// pdb: NiMultiTargetTransformController::GetInterpolatorIndex | NiMultiTargetTransformController.obj | fnv360_0822_retail, objrun, high
+// pdb params: pcID
 unsigned short BA2FD60Controller::FindItemIndexByName(const char* pcName) const
 {
     if (!pcName)
@@ -1171,6 +1192,7 @@ struct NiMultiTargetTransformControllerStandIn : public NiMultiTargetTransformCo
 };
 
 // @fnv 0x00a2fa20
+// pdb: NiMultiTargetTransformController::GetInterpolatorCount | NiMultiTargetTransformController.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: NiDefaultAVObjectPalette::GetRTTI)
 unsigned short __thiscall NiMultiTargetTransformControllerStandIn::FUN_00a2fa20()
 {
     return m_usNumInterps;
@@ -1430,6 +1452,7 @@ struct FUN_00a2fb70 : NiRefBase_a2fb70
 };
 // Destroys the blends array and frees the targets pointer.
 // @fnv 0x00a2fb70
+// pdb: NiMultiTargetTransformController::~NiMultiTargetTransformController | NiMultiTargetTransformController.obj | fnv360_0822_retail, caller_sim, medium
 FUN_00a2fb70::~FUN_00a2fb70() throw()
 {
     delete[] blends;

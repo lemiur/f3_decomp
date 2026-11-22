@@ -224,6 +224,8 @@ static int CapacityA692(const ArrayA692& a)
 {
     return a.m_capacityAndFlags & 0x3fffffff;
 }
+// pdb: hkpConvexRadiusBuilder::getCurrentRawGeometry | hkpConvexRadiusBuilder.obj | fnv360_0822_debug, objrun, low, conflict (bridge: _createConvexDisplayFromPlanes)
+// pdb params: displayGeometries
 static hkpShape* FUN_00de3360(const VertexSource* src, const hkTransform& transform)
 {
     ArrayA692 input = {0, 0, 0x80000000};

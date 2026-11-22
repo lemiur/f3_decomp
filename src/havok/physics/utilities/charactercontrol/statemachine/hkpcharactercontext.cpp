@@ -9,6 +9,8 @@ struct FUN_00ca9670_cls
     void __thiscall FUN_00ca9670(float a, float b, float c);
 };
 // @fnv 0x00ca9670
+// pdb: hkpCharacterContext::setFilterParameters | hkpCharacterContext.obj | fnv360_0822_retail, objrun, medium
+// pdb params: gain, maxVelocity, maxAcceleration
 void __thiscall FUN_00ca9670_cls::FUN_00ca9670(float a, float b, float c)
 {
     *(float*)((char*)this + 0x24) = a;
@@ -30,6 +32,8 @@ struct FUN_00ca9660_cls
 };
 
 // @fnv 0x00ca9660
+// pdb: D3DDevice_ReleaseThreadOwnership | device.obj | fnv360_0721_beta, call_gap_sim, low, conflict (skyrim: NiD3DGeometryGroupManager::SetHWSkinning)
+// pdb params: pDevice
 void FUN_00ca9660_cls::FUN_00ca9660(unsigned char value)
 {
     m_18 = value;
@@ -45,6 +49,8 @@ struct FUN_00ca9690_cls
 };
 
 // @fnv 0x00ca9690
+// pdb: PackageTarget::SetTargValue | PackageTarget.obj | fnv360_0822_retail, vtable, low
+// pdb params: aiValue
 void FUN_00ca9690_cls::FUN_00ca9690(int value)
 {
     m_08 = value;
@@ -53,6 +59,7 @@ void FUN_00ca9690_cls::FUN_00ca9690(int value)
 extern int DAT_010c8198;
 
 // @fnv 0x00ca9600
+// pdb: BaseProcess::GetCurrentProcedureIndex | BaseProcess.obj | fnv360_0822_retail, vtable, medium
 int __fastcall FUN_00ca9600(char* object)
 {
     return *reinterpret_cast<int*>(object + 0x10);
@@ -97,6 +104,8 @@ class hkpCharacterContextCA96
 
 // Leaves the current state, stores the new state id, then enters the new state via the state manager.
 // @fnv 0x00ca9610
+// pdb: hkpCharacterContext::setState | hkpCharacterContext.obj | fnv360_0721_beta, objrun, medium
+// pdb params: state, input, output
 void hkpCharacterContextCA96::SetState(int iState, const hkpCharacterInputCA96& kInput, hkpCharacterOutputCA96& kOutput)
 {
     int iPrevState = m_iPreviousState;

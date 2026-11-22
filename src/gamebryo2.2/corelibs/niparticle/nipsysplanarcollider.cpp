@@ -3,6 +3,8 @@
 
 // Copies the base collider and the three collider parameters into dest, then clones and ref-counts the collider at offset 0x28.
 // @fnv 0x00c32510
+// pdb: NiPSysCollider::CopyMembers | NiPSysCollider.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkDest, kCloning
 void NiPSysPlanarCollider::CopyMemberData(NiPSysPlanarCollider* dest, CloningProcess& process)
 {
     NiPSysCollider::CreateVertexBufferSet(dest, process);
@@ -32,6 +34,8 @@ void NiPSysPlanarCollider::CopyMemberData(NiPSysPlanarCollider* dest, CloningPro
 
 // Loads the planar collider's stream fields: two floats, then two NiColor values, after the base collider's LoadBinary.
 // @fnv 0x00c29770
+// pdb: NiPSysPlanarCollider::LoadBinary | NiPSysPlanarCollider.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void NiPSysPlanarCollider::LoadBinary(NiStream& stream)
 {
     NiPSysCollider::LoadBinary(stream);
@@ -54,6 +58,7 @@ struct FUN_00c299e0_Holder
 };
 // Releases m_pObject, destroys the NiRefObject base, and frees this with _delete when uiFlags has bit 0 set; returns this.
 // @fnv 0x00c299e0
+// pdb: NiPSysPlanarCollider::`scalar deleting destructor' | NiPSysPlanarCollider.obj | fnv360_0822_retail, objrun, medium
 void* FUN_00c299e0_Holder::DestroyHolder(unsigned int uiFlags)
 {
     if (m_pObject)
@@ -125,6 +130,8 @@ struct PlanarColliderResponse : NiPSysPlanarCollider
 };
 // Projects the particle velocity onto the plane normal and reflects or removes the normal component, then calls NiPSysCollider_Update.
 // @fnv 0x00c29320
+// pdb: NiPSysPlanarCollider::Update | NiPSysPlanarCollider.obj | fnv360_0822_retail, objrun, high
+// pdb params: fTime, pkData, usCurParticle
 void PlanarColliderResponse::ApplyPlanarCollision(float time, BoundDataBlock* particles, unsigned short index)
 {
     NiPoint3& velocity = particles->velocities[index].velocity;
@@ -409,6 +416,8 @@ class SpawnedObject
 
 // Allocates a 0x100-byte SpawnedObject, initialises it, passes it to FUN_00c32510, then copies m_f30..m_v44 from this into it and returns it.
 // @fnv 0x00c29a30
+// pdb: NiPSysPlanarCollider::CreateClone | NiPSysPlanarCollider.obj | fnv360_0822_retail, objrun, high
+// pdb params: kCloning
 SpawnedObject* SpawnedObject::CreateAndCopy(void* param)
 {
     SpawnedObject* obj;
@@ -475,6 +484,8 @@ struct FUN_00c27ac0_shell : public NiPSysPlanarCollider
 };
 
 // @fnv 0x00c27ac0
+// pdb: NiPSysPlanarCollider::LinkObject | NiPSysPlanarCollider.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: kStream
 void FUN_00c27ac0_shell::LinkColliderObject(NiStream& kStream)
 {
     reinterpret_cast<NiPSysColliderLinkBase*>(this)->LinkObject(kStream);
@@ -539,6 +550,8 @@ struct NiPSysPlanarColliderView : public NiPSysPlanarCollider
 
 // Appends the base collider strings plus collider object name, width, height and X/Y axis strings to pkStrings.
 // @f3 0x00ac9fe0 (community match, verified in this file)
+// pdb: NiPSysPlanarCollider::GetViewerStrings | NiPSysPlanarCollider.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void NiPSysPlanarColliderView::FUN_00c29b70(NiViewerStringsArray* pkStrings)
 {
     static_cast<NiPSysColliderView*>(static_cast<NiPSysCollider*>(this))->GetViewerStrings(pkStrings);
@@ -619,6 +632,8 @@ struct FUN_00c28d00_cls
     bool FUN_00c28d00(void* a1);
 };
 // @fnv 0x00c28d00
+// pdb: NiKeyBasedInterpolator::CopyMembers | NiKeyBasedInterpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pkDest, kCloning
 bool FUN_00c28d00_cls::FUN_00c28d00(void* a1)
 {
     return reinterpret_cast<FUN_00c32680_Obj*>(this)->FUN_00c32680(a1);
@@ -720,6 +735,8 @@ struct DummyTransform
 
 // Calls the base initializer, stores the collider object and axis vectors, initializes plane and matrix data, and resets two transforms.
 // @fnv 0x00c29900
+// pdb: NiPSysPlanarCollider::NiPSysPlanarCollider | NiPSysPlanarCollider.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: fBounce, bSpawnOnCollide, bDieOnCollide, pkSpawnModifier, pkColliderObj, fWidth, fHeight, kXAxis, kYAxis
 void* __fastcall FUN_00c29900(void* this_ptr, int, float fBounce, int bSpawnOnCollide, int bDieOnCollide,
                               void* pkSpawnModifier, void* pkColliderObj, float m_fGlyphWidthInPixels, float m_fGlyphExtent, NiPoint3 kXAxis,
                               NiPoint3 kYAxis)

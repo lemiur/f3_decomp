@@ -9,6 +9,8 @@ struct NiBSplineColorInterpolator
 };
 
 // @fnv 0x00a51a20
+// pdb: NiBSplineColorInterpolator::GetControlHandle | NiBSplineColorInterpolator.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: usChannel
 unsigned int NiBSplineColorInterpolator::FUN_00a51a20(unsigned short usChannel)
 {
     if (usChannel)
@@ -39,6 +41,7 @@ struct Obj34
     char _tail[0x4];
 };
 // @fnv 0x00a51c60
+// pdb: NiBSplineColorInterpolator::CreateObject | NiBSplineColorInterpolator.obj | fnv360_0822_retail, objrun, medium
 void* FUN_00a51c60()
 {
     Obj34* p = (Obj34*)BSFadeNode::operator new(52);
@@ -116,6 +119,8 @@ struct A51BF0Property : A51BF0Base
 };
 
 // @fnv 0x00a51bf0
+// pdb: NiBSplineColorInterpolator::CreateClone | NiBSplineColorInterpolator.obj | fnv360_0721_retail, objrun, medium, conflict (bridge: NiBSplinePoint3Interpolator::CreateClone)
+// pdb params: kCloning
 A51BF0Base* A51BF0Property::FUN_00a51bf0(A51BF0CloningProcess& kCloning)
 {
     A51BF0Property* pkClone = new A51BF0Property;
@@ -386,6 +391,8 @@ struct S_00a50610_Obj
 
 // Returns true when flag is zero and the value returned by vfnE0(0) is not greater than zero; otherwise returns false.
 // @fnv 0x00a50610
+// pdb: NiBSplinePoint3Interpolator::GetChannelPosed | NiBSplinePoint3Interpolator.obj | fnv360_0721_beta, objopen_prop, low
+// pdb params: usChannel
 bool S_00a50610_Obj::FUN_00a50610(unsigned short flag)
 {
     if (0 == flag)
@@ -423,6 +430,8 @@ struct FUN_00a51a40_cls
 };
 
 // @fnv 0x00a51a40
+// pdb: NiBSplineColorInterpolator::SetControlHandle | NiBSplineColorInterpolator.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: kControlHandle, usChannel
 void FUN_00a51a40_cls::SetValueIfFlagClear(unsigned int value, unsigned short flag)
 {
     if (flag == 0)
@@ -469,6 +478,8 @@ struct FnvBSplineColorInterpolator
 };
 
 // @fnv 0x00a51b10
+// pdb: NiBSplineColorInterpolator::Update | NiBSplineColorInterpolator.obj | fnv360_0721_retail, objrun, medium
+// pdb params: fTime, pkInterpTarget, kValue
 bool FnvBSplineColorInterpolator::EvaluateColorAtTime(float fTime, float fUnused, FnvColor4* pColorOut)
 {
     // The colour is already the one of this time stamp.
@@ -522,6 +533,7 @@ struct FUN_00a51cf0_cls
     bool FUN_00a51cf0(FUN_00a51cf0_cls* other);
 };
 // @fnv 0x00a51cf0
+// pdb: NiBSplineColorInterpolator::IsEqual | NiBSplineColorInterpolator.obj | tesv_win, hash, low
 bool FUN_00a51cf0_cls::FUN_00a51cf0(FUN_00a51cf0_cls* other)
 {
     if (!NiBSplineInterpolator_IsEqual(other))
@@ -537,6 +549,8 @@ bool FUN_00a51cf0_cls::FUN_00a51cf0(FUN_00a51cf0_cls* other)
 }
 
 // @fnv 0x00a51a00
+// pdb: NiBSplineColorInterpolator::GetDimension | NiBSplineColorInterpolator.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: usChannel
 unsigned int __stdcall FUN_00a51a00(unsigned short usValue)
 {
     return (0 == usValue) ? 4 : 0;

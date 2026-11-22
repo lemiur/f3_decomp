@@ -14,6 +14,8 @@ struct NiVisController
 };
 
 // @fnv 0x00a44d00
+// pdb: NiVisController::GetTargetBoolValue | NiVisController.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: bValue
 void NiVisController::GetVisibility(bool& abVisible)
 {
     NiBoolInterpController* p = *(NiBoolInterpController**)((char*)this + 0x2c);
@@ -34,6 +36,7 @@ extern void* DAT_01097e8c;
 
 // Allocates a 0x38-byte BSFadeNode, runs its constructor, sets its vtable to DAT_01097e8c, and returns the pointer or 0 on allocation failure.
 // @fnv 0x00a44f10
+// pdb: NiUVData::CreateObject | NiUVData.obj | fnv360_0822_retail, objrun_open, low
 void* __cdecl FUN_00a44f10()
 {
     void* mem = BSFadeNode::operator new(0x38);
@@ -72,6 +75,8 @@ struct NiStream
 void __stdcall FUN_00a57c70(NiStream*);
 void __stdcall FUN_00a44d20(NiStream* pStream);
 // @fnv 0x00a44d20
+// pdb: NiPSysModifierBoolCtlr::LoadBinary | NiPSysModifierBoolCtlr.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void __stdcall FUN_00a44d20(NiStream* pStream)
 {
     FUN_00a57c70(pStream);
@@ -97,6 +102,7 @@ struct NiTransformController
 };
 // Walks the target's RTTI base chain and returns true if it reaches g_011f4428_arg1, otherwise false.
 // @fnv 0x00a44de0
+// pdb: NiVisController::InterpTargetIsCorrectType | NiVisController.obj | tesv_win, objrun_open, low
 bool NiTransformController::IsTargetOfType(NiObjectNET* pkTarget) const
 {
     if (pkTarget)
@@ -326,6 +332,8 @@ class BA44D50Controller
 };
 
 // @fnv 0x00a44d50
+// pdb: NiVisController::LinkObject | NiVisController.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void BA44D50Controller::LinkBoolInterpolator(BA44D50Stream& kStream)
 {
     BaseLinkObject(kStream);
@@ -362,6 +370,7 @@ struct OwnerA44
 };
 // Allocates a 0x38-byte CtlA44, constructs it in place, passes it with uiArg to FUN_00a57620, and returns it.
 // @fnv 0x00a44ec0
+// pdb: NiVisController::CreateClone | NiVisController.obj | tesv_win, caller_sim, low
 CtlA44* OwnerA44::CreateCtlA44(unsigned int uiArg)
 {
     void* pMem = BSFaceGenMorphData::operator new(0x38);
@@ -497,6 +506,8 @@ class NiVisControllerA44E
 };
 
 // @fnv 0x00a44e10
+// pdb: NiVisController::Update | NiVisController.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: UpdateData
 void NiVisControllerA44E::FUN_00a44e10(NiUpdateDataA44E& kUpdateData)
 {
     if (GetManagerControlled())

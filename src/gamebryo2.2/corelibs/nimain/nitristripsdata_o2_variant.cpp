@@ -11,6 +11,7 @@ extern const void* DAT_0109d8ac;
 NiTriBasedGeomData* __fastcall InitializeTriBasedGeomData(NiTriBasedGeomData* p);
 
 // @fnv 0x00a75e20
+// pdb: NiTriStripsData::NiTriStripsData | NiTriStripsData.obj | fnv360_0822_retail, objrun, high
 NiTriBasedGeomData* __fastcall FUN_00a75e20(NiTriBasedGeomData* self)
 {
     InitializeTriBasedGeomData(self);
@@ -30,6 +31,7 @@ struct Standin00a761a0
     void* FUN_00a761a0(unsigned int);
 };
 // @fnv 0x00a761a0
+// pdb: PathingLOSMap::`scalar deleting destructor' | PathingLOSMap.obj | fnv360_0822_retail, vtable, medium
 void* Standin00a761a0::FUN_00a761a0(unsigned int flags)
 {
     FUN_00a76040();
@@ -39,6 +41,8 @@ void* Standin00a761a0::FUN_00a761a0(unsigned int flags)
 }
 
 // @fnv 0x00a75f10
+// pdb: NiGeometryData::SetAdditionalGeometryData | NiGeometryData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiTriStripsData::GetStripLists)
+// pdb params: pkAddData
 int __fastcall FUN_00a75f10(char* self)
 {
     return *reinterpret_cast<int*>(self + 0x4c);
@@ -100,6 +104,8 @@ struct NiTriStripsDataStandin
 };
 
 // @fnv 0x00a760c0
+// pdb: NiTriStripsData::Replace | NiTriStripsData.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: usStrips, pusStripLengths, pusStripLists
 void NiTriStripsDataStandin::FUN_00a760c0(unsigned short count, unsigned short* data1, unsigned short* data2)
 {
     SharedData_S* sharedData = GetSharedData();
@@ -192,6 +198,8 @@ struct FUN_00a75dc0 : FUN_00a8a920
                  unsigned short* lengths, unsigned short* lists);
 };
 // @fnv 0x00a75dc0
+// pdb: NiTriStripsData::NiTriStripsData | NiTriStripsData.obj | fnv360_0721_retail, call_seq, high
+// pdb params: usVertices, pkVertex, pkNormal, pkColor, pkTexture, usNumTextureSets, eNBTMethod, usTriangles, usStrips, pusStripLengths, pusStripLists
 FUN_00a75dc0::FUN_00a75dc0(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, unsigned short stripCount,
                            unsigned short* lengths, unsigned short* lists)
     : FUN_00a8a920(a1, a2, a3, a4, a5, a6, a7, a8), strips(stripCount), stripLengths(lengths), stripLists(lists)
@@ -203,6 +211,7 @@ struct S_a76020_Strips : public NiTriStripsData
     unsigned int FUN_00a76020();
 };
 // @fnv 0x00a76020
+// pdb: NiTriStripsData::GetBlockAllocationSize | NiTriStripsData.obj | fnv360_0822_retail, objrun_prop, low
 unsigned int S_a76020_Strips::FUN_00a76020()
 {
     unsigned short listLen = m_usTriangles + m_usStrips * 2;
@@ -487,6 +496,8 @@ struct NiTriStripsSerializer : NiTriStripsData
 };
 
 // @fnv 0x00a76430
+// pdb: NiTriStripsData::GetViewerStrings | NiTriStripsData.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void NiTriStripsSerializer::FUN_00a76430(NiStream& stream)
 {
     AppendTrianglesInfo(stream);
@@ -744,6 +755,8 @@ struct TSD : NiTriStripsData
     void FUN_00a75e40(unsigned short i, unsigned short& i0, unsigned short& i1, unsigned short& i2) const;
 };
 // @fnv 0x00a75e40
+// pdb: NiTriStripsData::GetTriangleIndices | NiTriStripsData.obj | fnv360_0822_retail, objrun_sim, medium
+// pdb params: i, i0, i1, i2
 void TSD::FUN_00a75e40(unsigned short i, unsigned short& i0, unsigned short& i1, unsigned short& i2) const
 {
     unsigned short* pusStripLists = m_pusStripLists;
@@ -782,6 +795,8 @@ class NiTriStripsDataA75F : public NiTriStripsData
 };
 
 // @fnv 0x00a75f80
+// pdb: NiTriStripsData::IsEqual | NiTriStripsData.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiTriShapeData::IsEqual)
+// pdb params: pkObject
 bool NiTriStripsDataA75F::FUN_00a75f80(NiObject* pkObject)
 {
     if (!((FUN_00a8a9c0_s*)this)->MatchesTriangleCount(pkObject))
@@ -852,6 +867,7 @@ inline void ReleaseShared(NiSharedDataA76* pkShared) throw()
 }
 
 // @fnv 0x00a76040
+// pdb: NiTriStripsData::~NiTriStripsData | NiTriStripsData.obj | fnv360_0822_retail, caller_sim, high
 FUN_00a76040::~FUN_00a76040()
 {
     if (FUN_00a669c0())

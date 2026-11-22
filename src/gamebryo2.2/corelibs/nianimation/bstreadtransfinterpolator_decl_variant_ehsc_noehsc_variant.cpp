@@ -583,6 +583,8 @@ class BSTreadTransfInterpolator : public NiInterpolator
     void FUN_00a43690(BSTreadTransfInterpolator*, void*);
 };
 // @fnv 0x00a43690
+// pdb: BSTreadTransfInterpolator::CopyMembers | BSTreadTransfInterpolator.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkDest, kCloning
 void BSTreadTransfInterpolator::FUN_00a43690(BSTreadTransfInterpolator* destination, void* context)
 {
     FUN_00aa0ab0(destination, context);

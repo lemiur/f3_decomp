@@ -31,6 +31,7 @@ struct MeshShapeDCCBC0 : public hkpMeshShape
     int FUN_00dccbc0();
 };
 // @fnv 0x00dccbc0
+// pdb: hkpMeshShape::getFirstKey | hkpMeshShape.obj | fnv360_0822_retail, objrun_open, medium
 int MeshShapeDCCBC0::FUN_00dccbc0()
 {
     if (*reinterpret_cast<unsigned int*>(&m_kScaling.z) == 0)
@@ -109,6 +110,8 @@ class hkpMeshShapeDCC : public hkpShapeCollection
 };
 
 // @f3 0x00a45530 (community match, verified in this file)
+// pdb: hkpMeshShape::getNextKey | hkpMeshShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: initialKey
 hkUint32 hkpMeshShapeDCC::GetNextNonDegenerateTriangleKey(hkUint32 auiKey) const throw()
 {
     hkpShapeBufferDCC buffer;
@@ -214,6 +217,8 @@ class FUN_00dccd00_C : public Base0DCCD, public Base1DCCD
 
 // Gets an index for uiKey from GetElement on the owner; if found, returns the pointer stored in that page's value array, otherwise null.
 // @fnv 0x00dccd00
+// pdb: hkpMeshShape::getCollisionFilterInfo | hkpMeshShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: key
 void* Base1DCCD::FindValue(unsigned int uiKey)
 {
     FUN_00dccd00_C* pkOwner = (FUN_00dccd00_C*)((char*)this - 0x10);
@@ -392,6 +397,7 @@ class __declspec(novtable) Msh_dccf60_TriF3 : public ShapePrefix2129
     virtual ~Msh_dccf60_TriF3();
 };
 
+// pdb: hkpMeshShape::getChildShape | hkpMeshShape.obj | tesv_win, objrun_sim, low
 const void* Msh_dccf60_Mesh::CreateTriangle(unsigned int key, void* buffer) const
 {
     unsigned int triangleIndex = key & (~0U >> m_iNumBitsForSubpartIndex);
@@ -523,6 +529,8 @@ class FUN_00dcd410_C
 
 // Looks up the element at uiKey in the paged array, returning its byte or short value, or -1 if the page is not allocated.
 // @fnv 0x00dcd410
+// pdb: hkpMeshShape::getMeshMaterial | hkpMeshShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: hkpMeshShape::getMaterialIndex)
+// pdb params: key
 int FUN_00dcd410_C::GetElement(unsigned int uiKey)
 {
     unsigned int uiPage = uiKey >> (32 - m_iShift);
@@ -727,6 +735,7 @@ static __declspec(noinline) void ExpandAabbWithVertex(MeshAabb& b, const hkTrans
 }
 // Computes the world-space AABB of all subpart triangles, then expands it by margin plus m_fSphereRadius.
 // @f3 0x00a457b0 (community match, verified in this file)
+// pdb: hkpMeshShape::getAabbImpl | hkpMeshShape.obj | tesv_win, objrun_sim, low
 void MeshShapeHelper::FUN_00dccdd0(const hkTransform& transform, hkReal tolerance, MeshAabb& out) const
 {
     out.m_kMinimumCorner.m_vComponents.m128_f32[0] = kRealMax;

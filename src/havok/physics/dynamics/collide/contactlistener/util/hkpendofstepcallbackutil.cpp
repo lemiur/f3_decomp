@@ -9,6 +9,7 @@ struct FUN_00d9ec10_cls
 
 // Swaps the first three ints of this object with the first three ints of the given array.
 // @fnv 0x00d9ec10
+// pdb: hkArray<class hkpEntity *,struct hkContainerHeapAllocator>::swap | hkpWorldOperationUtil.obj | tesv_win, hash, low
 void FUN_00d9ec10_cls::SwapThreeInts(int* paiValues)
 {
     int* b = (int*)this;

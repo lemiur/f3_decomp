@@ -9,6 +9,7 @@ extern GlobalObjectO2_00a7b610 g_011f4a5c;
 
 // Returns the address of the global object g_011f4a5c.
 // @fnv 0x00a756c0
+// pdb: NiMaterialProperty::GetRTTI | NiMaterialProperty.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: NiFogProperty::GetRTTI)
 GlobalObjectO2_00a7b610* __cdecl FUN_00a756c0()
 {
     return &g_011f4a5c;
@@ -53,6 +54,7 @@ struct ObjectWithFloats
 };
 
 // @fnv 0x00a75650
+// pdb: NiMaterialProperty::NiMaterialProperty | NiMaterialProperty.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: NiFogProperty::NiFogProperty)
 void* __fastcall FUN_00a75650(void* self)
 {
     ObjectWithFloats* p = (ObjectWithFloats*)self;

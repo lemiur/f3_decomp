@@ -169,6 +169,7 @@ struct Credits {
 template<> inline BSStringT<char>::BSStringT(){pString=0;sLen=0;sMaxLen=0;}
 template<> inline BSStringT<char>::~BSStringT(){if(pString)DAT_01090a78.FUN_0086ba60(pString);pString=0;sMaxLen=0;sLen=0;}
 inline void releaseCredits(char* p) { DAT_01090a78.FUN_0086ba60(p); }
+// pdb: CreditsMenu::InitCreditsRoot | CreditsMenu.obj | fnv360_0822_retail, call_gap, low
 void Credits::FUN_0063c810() {
  FileCredits file(DAT_00e04f58,0,0x2800,0);
  StreamCredits& stream=file;
@@ -1495,6 +1496,7 @@ struct DebugInterfaceManager {
     TESObjectREFR* selectedReference;
     void FUN_006242f0();
 };
+// pdb: InterfaceManager::DisplayCurrentPickRef | InterfaceManager.obj | fnv360_0721_beta, ustr, low, conflict (skyrim: Console::DisplayRef)
 void DebugInterfaceManager::FUN_006242f0()
 {
     int headingRow;

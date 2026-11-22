@@ -31,6 +31,7 @@ struct NiQuaternionInterpolator : NiKeyBasedInterpolator
 };
 
 // @fnv 0x00a487e0
+// pdb: NiQuaternionInterpolator::IsQuaternionValueSupported | NiQuaternionInterpolator.obj | fnv360_0721_beta, objrun_open, low
 AnimationKey::KeyContent __stdcall NiQuaternionInterpolator::FUN_00a487e0()
 {
     return kCONTENT_FLOAT;
@@ -57,6 +58,8 @@ struct NiRotData
 };
 
 // @fnv 0x00a48960
+// pdb: NiQuaternionInterpolator::GuaranteeTimeRange | NiQuaternionInterpolator.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: fStartTime, fEndTime
 void NiQuaternionInterpolator::FUN_00a48960(float m_fStartTime, float m_fMaximumDistance)
 {
     NiRotData* p = *(NiRotData**)((char*)this + 0x1c);
@@ -86,6 +89,7 @@ struct NiKeyBasedInterpolatorHelper
 struct NiQuaternionInterpolator;
 
 // @fnv 0x00a48d70
+// pdb: NiQuaternionInterpolator::CreateObject | NiQuaternionInterpolator.obj | fnv360_0721_beta, objrun, high
 NiQuaternionInterpolator* __cdecl CreateNiQuaternionInterpolator()
 {
     NiQuaternionInterpolator* p = (NiQuaternionInterpolator*)BSFadeNode::operator new(0x24);
@@ -137,6 +141,8 @@ struct TargetWrap
     void SaveToStream(NiStream*);
 };
 // @fnv 0x00a48a20
+// pdb: NiQuaternionInterpolator::SaveBinary | NiQuaternionInterpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void TargetWrap::SaveToStream(NiStream* kStream)
 {
     ((FUN_00a95ca0_helper*)this)->FUN_00a95ca0(kStream);
@@ -164,6 +170,7 @@ struct FUN_00a48dd0_shell
     void* __thiscall Release(unsigned int);
 };
 // @fnv 0x00a48dd0
+// pdb: NiQuaternionInterpolator::`scalar deleting destructor' | NiQuaternionInterpolator.obj | fnv360_0721_beta, objrun, medium
 void* __thiscall FUN_00a48dd0_shell::Release(unsigned int uiDeleteFlags)
 {
     RefObj* p = m_p;
@@ -298,6 +305,7 @@ struct NiQuatInterp
 };
 
 // @fnv 0x00a48820
+// pdb: NiQuaternionInterpolator::Collapse | NiQuaternionInterpolator.obj | fnv360_0822_retail, objrun_open, low
 void NiQuatInterp::CollapseQuatInterp()
 {
     if (m_spQuaternionData)
@@ -468,6 +476,8 @@ inline void Assign(RefObj*& dst, RefObj* src)
 }
 
 // @fnv 0x00a48bc0
+// pdb: NiQuaternionInterpolator::GetSequenceInterpolator | NiQuaternionInterpolator.obj | fnv360_0822_retail, objrun_prop, high
+// pdb params: fStartTime, fEndTime
 FUN_00a48bc0_cls* FUN_00a48bc0_cls::Interpolate(float a, float b)
 {
     FUN_00a48bc0_cls* pResult = FUN_00a57050(a, b);
@@ -558,6 +568,8 @@ class QuatInterp48c
 };
 
 // @fnv 0x00a48c80
+// pdb: NiQuaternionInterpolator::Update | NiQuaternionInterpolator.obj | fnv360_0721_beta, objrun, medium
+// pdb params: fTime, pkInterpTarget, kValue
 bool QuatInterp48c::GetQuaternionAtTime(float fTime, ObjNET48c* pkInterpTarget, Quat48c& kValue)
 {
     if (!TimeHasChanged(fTime))
@@ -611,6 +623,8 @@ struct FUN_00a48ac0_cls
     void GetKeyRange(float*, float*);
 };
 // @fnv 0x00a48ac0
+// pdb: NiQuaternionInterpolator::GetActiveTimeRange | NiQuaternionInterpolator.obj | fnv360_0721_retail, objrun, medium
+// pdb params: fBeginKeyTime, fEndKeyTime
 void FUN_00a48ac0_cls::GetKeyRange(float* outLo, float* outHi)
 {
     KeyDesc* p = m_1c;
@@ -697,6 +711,8 @@ struct A48E20_Owner
 };
 // Allocates a new A48E20_Object, initializes it via FUN_00a3c0a0 with the given CloningProcess, and returns the new object.
 // @fnv 0x00a48e20
+// pdb: NiQuaternionInterpolator::CreateClone | NiQuaternionInterpolator.obj | fnv360_0721_beta, objrun, high
+// pdb params: kCloning
 A48E20_Object* A48E20_Owner::Clone(CloningProcess* cloning)
 {
     A48E20_Object* clone = new A48E20_Object;

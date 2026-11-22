@@ -3,6 +3,8 @@
 #include "nibsplinepoint3interpolator_decls.h"
 // Loads the base interpolator, the point3 value, and the control point handle from the stream.
 // @fnv 0x00a50910
+// pdb: NiBSplinePoint3Interpolator::LoadBinary | NiBSplinePoint3Interpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void NiBSplinePoint3Interpolator::LoadBinary(NiStream& stream)
 {
     NiBSplineInterpolator::LoadBinary(stream);
@@ -23,6 +25,8 @@ struct NiBSplineTransformInterpolator
 
 // Calls NiBSplineInterpolator_CopyMembers, then copies the four int fields at offsets 0x1C-0x28 from this into dest.
 // @fnv 0x00a50680
+// pdb: NiBSplinePoint3Interpolator::CopyMembers | NiBSplinePoint3Interpolator.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pkDest, kCloning
 void NiBSplineTransformInterpolator::CopyUnknownFields(NiBSplineTransformInterpolator* dest, CloningProcess& process)
 {
     NiBSplineTransformInterpolator::NiBSplineInterpolator_CopyMembers(dest, process);
@@ -57,6 +61,8 @@ struct FUN_00a50640_shell
 };
 
 // @fnv 0x00a50640
+// pdb: NiBSplinePoint3Interpolator::GetControlHandle | NiBSplinePoint3Interpolator.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: usChannel
 unsigned int FUN_00a50640_shell::GetChannelValue(unsigned short usChannel)
 {
     if (usChannel != 0)
@@ -69,6 +75,8 @@ struct FUN_00a50660_shell
     void SetPoint3ControlHandle(unsigned int kControlHandle, unsigned short usChannel);
 };
 // @fnv 0x00a50660
+// pdb: NiBSplinePoint3Interpolator::SetControlHandle | NiBSplinePoint3Interpolator.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: kControlHandle, usChannel
 void __thiscall FUN_00a50660_shell::SetPoint3ControlHandle(unsigned int kControlHandle, unsigned short usChannel)
 {
     if (!usChannel)
@@ -86,6 +94,7 @@ struct FUN_00a57f20_shell
 };
 
 // @fnv 0x00a50840
+// pdb: NiBSplinePoint3Interpolator::CreateObject | NiBSplinePoint3Interpolator.obj | fnv360_0822_retail, objrun, medium
 void* __cdecl FUN_00a50840()
 {
     void* p = BSFadeNode::operator new(0x2c);
@@ -107,6 +116,8 @@ struct FUN_00a506c0_shell
     void* FUN_00a506c0(int a1, int a2, int a3);
 };
 // @fnv 0x00a506c0
+// pdb: NiBSplinePoint3Interpolator::NiBSplinePoint3Interpolator | NiBSplinePoint3Interpolator.obj | fnv360_0822_retail, objrun, high
+// pdb params: pkData, kPoint3CPHandle, pkBasisData
 void* FUN_00a506c0_shell::FUN_00a506c0(int a1, int aiValue, int a3)
 {
     ((FUN_00a57f20_shell*)this)->FUN_00a57f20(a1, a3);
@@ -130,6 +141,8 @@ struct FUN_00a507e0_obj
     NiObject* Clone(CloningProcess& kCloning);
 };
 // @fnv 0x00a507e0
+// pdb: NiBSplinePoint3Interpolator::CreateClone | NiBSplinePoint3Interpolator.obj | fnv360_0822_retail, objrun, medium
+// pdb params: kCloning
 NiObject* FUN_00a507e0_obj::Clone(CloningProcess& kCloning)
 {
     FUN_00a507e0_obj* pkObject = (FUN_00a507e0_obj*)BSFadeNode::operator new(44);
@@ -185,6 +198,8 @@ struct FUN_00a50710_shell
     bool __thiscall SampleBSpline(float time, int unk, Point3* output);
 };
 // @fnv 0x00a50710
+// pdb: NiBSplinePoint3Interpolator::Update | NiBSplinePoint3Interpolator.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fTime, pkInterpTarget, kValue
 bool FUN_00a50710_shell::SampleBSpline(float time, int aiUnused, Point3* output)
 {
     if (lastTime == time)
@@ -452,6 +467,8 @@ struct S_00a508d0_Obj
 };
 
 // @fnv 0x00a508d0
+// pdb: NiBSplinePoint3Interpolator::IsEqual | NiBSplinePoint3Interpolator.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkObject
 bool S_00a508d0_Obj::FUN_00a508d0(S_00a508d0_Obj* pOther)
 {
     if (!NiBSplineInterpolator_IsEqual(pOther))

@@ -97,6 +97,7 @@ public:
     FUN_00aa2480();
     virtual ~FUN_00aa2480();
 };
+// pdb: BSMultiBoundRoom::BSMultiBoundRoom | BSMultiBoundRoom.obj | fnv360_0822_retail, call_dedup, medium
 FUN_00aa2480::FUN_00aa2480()
 {
     flags |= 0x800;
@@ -118,6 +119,8 @@ struct Shape_ad9a {
     float GetRadius() const { return radius; }
     void FUN_00aad9a0(Sphere_ad9a* out);
 };
+// pdb: BSMultiBoundSphere::GetNiBound | BSMultiBoundSphere.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: aBound
 void Shape_ad9a::FUN_00aad9a0(Sphere_ad9a* out)
 {
     float r = GetRadius();
@@ -146,6 +149,8 @@ struct FileLookupAA5440
     void FUN_00aa5440(int archive);
 };
 
+// pdb: QueuedFileEntry::LookupFileEntry | QueuedFiles.obj | fnv360_0721_retail, call_seq, medium
+// pdb params: aeArchiveTypeIndex
 void FileLookupAA5440::FUN_00aa5440(int archive)
 {
     if (unk28)
@@ -173,6 +178,7 @@ void FUN_00aa5f20();
 
 extern bool g_initializedAL_ab5;
 
+// pdb: BSMain::InitSDM | BSMain.obj | fnv360_0822_retail, call_gap, low
 void FUN_00ab5c60()
 {
     if (!g_initializedAL_ab5) {
@@ -188,6 +194,8 @@ void FUN_00ab5c60()
 }
 
 // @f3 0x00aa2ee0 (community match, verified in this file)
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::IsKeyGreaterOrEqual | IOManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aKey1, aKey2
 int __stdcall FUN_00aa2ee0(__int64 first, __int64 second) {
     return first >= second;
 }
@@ -267,6 +275,8 @@ struct Owner418 {
     bool FUN_00aac1f0(void* first, void* second, unsigned int a, unsigned int b, unsigned int c);
     bool FUN_00aac320(void* first, void* second);
 };
+// pdb: BSPolygon2D::IsPointInsidePoly | BSPolygon.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afPoint
 bool Owner418::FUN_00aac320(void* first, void* second) {
     int total = count;
     int i = 0;
@@ -309,6 +319,8 @@ struct Owner481 {
     void FUN_00ab5d90(Node481*,void*);
     Node481* FUN_00aa9a50(void*);
 };
+// pdb: BSRangeNode::CreateClone | BSRangeNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 Node481* Owner481::FUN_00aa9a50(void* argument) {
     Node481* node=new Node481;
     FUN_00ab5d90(node,argument);
@@ -321,6 +333,8 @@ Node481* Owner481::FUN_00aa9a50(void* argument) {
 struct Words539 {int x,y,z;};
 struct Other539 {virtual void slot00();virtual void slot04();virtual void slot08();virtual void slot0c();virtual void slot10();virtual void slot14();virtual void slot18();virtual void slot1c();virtual void slot20();virtual void slot24();virtual void slot28();virtual void slot2c();virtual void slot30();virtual void slot34();virtual void slot38();virtual void slot3c();virtual void slot40();virtual void slot44();virtual void slot48();virtual void slot4c();virtual void slot50();virtual void slot54();virtual void slot58();virtual void slot5c();virtual void slot60();virtual void slot64();virtual void slot68();virtual void slot6c();virtual void slot70();virtual void slot74();virtual void slot78();virtual void slot7c();virtual void slot80();virtual void slot84();virtual void slot88();virtual void slot8c();virtual void slot90();virtual void slot94();virtual void slot98();virtual void slot9c();virtual void slota0();virtual void slota4();virtual void slota8();virtual void slotac();virtual void slotb0();virtual void slotb4();virtual void Set(void**);unsigned int unk04,unk08,unk0c,unk10,unk14;Words539 position;};
 struct Owner539 {unsigned int unk00,unk04,unk08;void* handle;unsigned int unk10,unk14;Words539 position;void BSMultiBoundShape_CopyMembers(Other539*,int);void FUN_00aa0b30(Other539*,int);};
+// pdb: BSMultiBoundAABB::CopyMembers | BSMultiBoundAABB.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pDest, arCloneData
 void Owner539::FUN_00aa0b30(Other539* other,int argument) {BSMultiBoundShape_CopyMembers(other,argument);other->Set(&handle);other->position=position;}
 
 // @f3 0x00aa6460 (community match, verified in this file)
@@ -330,6 +344,7 @@ struct Target725 {
     virtual void slot00();
     virtual void slot04();
 };
+// pdb: BSTaskManagerThread::~BSTaskManagerThread | BSTaskManager.obj | tesv_win, objrun_open, low
 int __stdcall FUN_00aa6460(Target725* target)
 {
     FUN_008f24c0();
@@ -356,6 +371,8 @@ struct Class_00aa48b0
     void FUN_00aa48b0(Task_00aa48b0* task);
 };
 
+// pdb: BSTaskManager<__int64>::FinishTask | IOManager.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: IOManager::GetBucketForKey)
+// pdb params: apTask
 void Class_00aa48b0::FUN_00aa48b0(Task_00aa48b0* task)
 {
     task->unk0C = 4;
@@ -377,6 +394,8 @@ struct Owner5 {
     void FUN_00abbbd0(Handle5* handle);
     void FUN_00ab4be0(void* argument);
 };
+// pdb: BSPSysMultiTargetEmitterCtlr::ProcessClone | BSPSysMultiTargetEmitterCtlr.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kCloning
 void Owner5::FUN_00ab4be0(void* argument) {
     Handle5* handle = (Handle5*)*(void* volatile*)&argument;
     FUN_00abbbd0(handle);
@@ -439,6 +458,8 @@ public:
     unsigned int iKTarget : 1;
 };
 
+// pdb: BSXFlags::GetViewerStrings | BSXFlags.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStrings
 void BSXFlags::FUN_00aa6170(ViewerStrings* strings)
 {
     FUN_00863fe0(strings);
@@ -504,6 +525,8 @@ public:
     float firstEnd, secondStart, secondEnd, thirdStart;
 };
 
+// pdb: BSPSysSimpleColorModifier::GetViewerStrings | BSPSysSimpleColorModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkStrings
 void BSPSysSimpleColorModifier::FUN_00ab6840(ViewerStrings* strings)
 {
     FUN_00ac60d0(strings);
@@ -1253,6 +1276,8 @@ struct Sequence {
     void FUN_00ab5200(const float* time);
 };
 
+// pdb: BSPSysMultiTargetEmitterCtlr::Update | BSPSysMultiTargetEmitterCtlr.obj | fnv360_0822_retail, vtable, medium
+// pdb params: UpdateData
 void Sequence::FUN_00ab5200(const float* time)
 {
     if (track->keyCount == 0) {
@@ -1429,6 +1454,8 @@ struct BufferAA {
 struct GrowListAA {void FUN_005bb760(int count,int grow);void FUN_00aa8350(int count,int grow);};
 
 
+// pdb: BSCompoundFrustum::AddPortal | BSCompoundFrustum.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apPortal, abFinalRoom
 void BufferAA::FUN_00aa87c0(SourceAA* src,float threshold)
 {
     if (itemCount + 2 >= itemCapacity)
@@ -1607,6 +1634,7 @@ struct C4E1E0
 };
 
 // @fnv 0x00c4e1e0
+// pdb: BSPolygon2D::CreateTriData | BSPolygon.obj | fnv360_0822_retail, objrun, medium
 NiTriShapeData* C4E1E0::FUN_00aac380()
 {
     m0c = new NiPoint3[m24];
@@ -1828,6 +1856,8 @@ struct Bound
 };
 
 // @fnv 0x00c38b00
+// pdb: BSMultiBoundOBB::MakeDebugGeom | BSMultiBoundOBB.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apLines, apShape, akBaseColor
 void Bound::FUN_00aa04a0(Geometry* lines, Geometry* triangles, Color color)
 {
 
@@ -2064,6 +2094,8 @@ struct GeometryCommands
     GeometryPoint origin;
     void FUN_00aa8910(CommandPolygon* polygon);
 };
+// pdb: BSCompoundFrustum::AddOcclusionPlane | BSCompoundFrustum.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apPlane
 void GeometryCommands::FUN_00aa8910(CommandPolygon* polygon)
 {
     int type = polygon->FUN_00c35980();
@@ -2239,6 +2271,8 @@ struct BSPSysSimpleColorModifierCand
 };
 
 // FNV particle-color interpolation reference.
+// pdb: BSPSysSimpleColorModifier::Update | BSPSysSimpleColorModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: fTime, pkData
 void BSPSysSimpleColorModifierCand::FUN_00ab6250(float fTime, NiPSysData* pkData)
 {
     unsigned short usNumParticlesTmp;
@@ -2341,6 +2375,7 @@ struct BoxPoints
     BoxPoints* FUN_00ab93e0();
 };
 
+// pdb: DECAL_PLACEMENT_VECTOR_GROUP_DATA::DECAL_PLACEMENT_VECTOR_GROUP_DATA | BSDecalPVExtraData.obj | fnv360_0822_retail, call_seq, medium
 BoxPoints* BoxPoints::FUN_00ab93e0()
 {
     unk00 = 0;
@@ -2430,6 +2465,8 @@ template <class T> class PtrArray
 };
 
 // @fnv 0x00c628c0
+// pdb: NiTArray<NiPointer<NiAVObject>,NiTMallocInterface<NiPointer<NiAVObject> > >::SetSize | BSPSysArrayEmitter.obj | fnv360_0822_retail, call_seq, high
+// pdb params: uiMaxSize
 template <class T> void PtrArray<T>::FUN_00ab8130(unsigned int uiMaxSize)
 {
     if (uiMaxSize == m_usMaxSize)
@@ -2680,6 +2717,8 @@ struct MeshEmitter : EmitterBase
 };
 
 // @fnv 0x00c5e9f0
+// pdb: BSMasterParticleSystem::GetViewerStrings | BSMasterParticleSystem.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkStrings
 void MeshEmitter::FUN_00ab7460(ViewerStrings* pkStrings)
 {
     EmitterBase::FUN_0082ee90(pkStrings);
@@ -2767,6 +2806,7 @@ NiObject* __cdecl FUN_00ab5f10();
 
 
 // @fnv 0x00c3a6d0
+// pdb: BSStream::InitLoaders | BSStream.obj | fnv360_0822_retail, strset, low
 void FUN_00aa65e0()
 {
     NiStream::FUN_0082b9e0(DAT_00e89c04, FUN_00ab9bf0);
@@ -2905,6 +2945,8 @@ struct Prim
 };
 
 // @fnv 0x00c384f0
+// pdb: BSMultiBoundAABB::CheckBound | BSMultiBoundAABB.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: aTargetBound
 int Prim::FUN_00aa1680(Param* arg)
 {
     int mode_2 = arg->GetBV()->v35();
@@ -3013,6 +3055,8 @@ struct OccShape
 };
 
 // @fnv 0x00c387f0
+// pdb: BSMultiBoundAABB::WithinFrustum | BSMultiBoundAABB.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: aPlanes
 bool OccShape::FUN_00aa1250(Frustum6* pkPlanes)
 {
     Pt3 kVerts[8];
@@ -3057,6 +3101,8 @@ struct ObjectDE80 {
 };
 
 // @fnv 0x00c4de80
+// pdb: BSPolygon2D::IsPointInsideTri | BSPolygon.obj | fnv360_0822_retail, objrun, medium
+// pdb params: afPoint, aiIndex1, aiIndex2, aiIndex3
 bool ObjectDE80::FUN_00aac1f0(float x, float y, int A, int B, int C)
 {
     float p, h, a, i, s, f, eb, cf, q, b, ba, k, l, c, e;
@@ -3168,6 +3214,7 @@ struct CmpPtrArray
 };
 
 // @fnv 0x00c63030
+// pdb: NiTArray<NiPointer<NiAVObject>,NiTMallocInterface<NiPointer<NiAVObject> > >::Compact | BSPSysArrayEmitter.obj | fnv360_0822_retail, call_seq, medium
 void CmpPtrArray::FUN_00ab8300()
 {
     if (m_usESize == m_usSize)
@@ -3249,6 +3296,8 @@ struct QRequest
     bool FUN_00aa5580(char*, unsigned int, const char*);
 };
 // @fnv 0x00c3d0e0
+// pdb: QueuedFileEntry::GetDescription | QueuedFiles.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apDescription, aiBufferSize, apFileEntryTypeDescription
 bool QRequest::FUN_00aa5580(char* out, unsigned int size, const char* type)
 {
     char buffer[13000];
@@ -3495,6 +3544,8 @@ struct ListOwner_c5e830 : BaseForCall {
 };
 
 // @fnv 0x00c5e830
+// pdb: BSMasterParticleSystem::IsEqual | BSMasterParticleSystem.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkObject
 bool ListOwner_c5e830::FUN_00ab6f80(NiObject* pObject)
 {
     ListOwner_c5e830* kPOther;
@@ -3617,6 +3668,8 @@ struct FUN_00aa8e30_cls
 };
 
 // @fnv 0x00c48800
+// pdb: BSCompoundFrustum::AddCompoundFrustum | BSCompoundFrustum.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apFrustum
 void FUN_00aa8e30_cls::FUN_00aa8e30(FUN_00aa8e30_cls* arg)
 {
     int cf;
@@ -3682,6 +3735,8 @@ struct Mat4 { float m[4][4]; };
 extern NiPoint3 DAT_0108f04c;
 extern "C" Mat4* __stdcall FUN_00c20844(Mat4*, float*, const Mat4*);
 // @fnv 0x00c4c2d0
+// pdb: BSUtilities::GetInverseWorldMatrix | BSUtilities.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aWorld, apSkin, aOut
 void __cdecl FUN_00aabd50(NiAVObject* pObj, int bInverse, Mat4* pOut)
 {
     if (!bInverse)
@@ -3767,6 +3822,8 @@ struct Node_a94440 {
     int FUN_00aae7d0(void* item);
     void FUN_00aae9e0(ItemE9* item, int arg);
 };
+// pdb: BSParticleSystemManager::AttachChild | BSParticleSystemManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apChild, abFirstAvail
 void Node_a94440::FUN_00aae9e0(ItemE9* item, int arg)
 {
     if (item) {
@@ -3843,6 +3900,8 @@ public:
     float radius;
 };
 
+// pdb: BSMultiBoundCapsule::GetViewerStrings | BSMultiBoundCapsule.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStrings
 void QSphereObj::FUN_00ab6dd0(ViewerStrings* strings)
 {
     FUN_008beac0(strings);
@@ -3899,6 +3958,8 @@ struct QCamHolder {
 }
 using namespace f3m_00aaeff0;
 namespace f3m_00aaeff0 {
+// pdb: BSSceneGraph::SetViewDistanceBasedOnFrameRate | BSSceneGraph.obj | fnv360_0822_retail, vtable, medium
+// pdb params: afTime
 void QCamHolder::FUN_00aaeff0(float dt)
 {
     if (!DAT_0116da2c) return;
@@ -4137,6 +4198,8 @@ struct EmitterSampler
 };
 
 // @fnv 0x00c625f0
+// pdb: BSPSysArrayEmitter::GetPointFromGeometry | BSPSysArrayEmitter.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: pObject, arPos, arVel
 void EmitterSampler::FUN_00ab8600(EmitterObject* object, NiPoint3& position, NiPoint3& direction)
 {
     Geometry* geometry = object ? ((GetGeometryFunction)object->vtable[6])(object) : 0;
@@ -4293,6 +4356,8 @@ inline C50Object* C50ChildAt(C50Object* node, unsigned int index)
     return lookup.value;
 }
 // @fnv 0x00c50f90
+// pdb: BSParticleSystemManager::CheckEmitterRecurse | BSParticleSystemManager.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apObject, apMasterSystem
 bool __cdecl FUN_00aae800(C50Object* object, void* material)
 {
     if (!object)
@@ -4460,6 +4525,8 @@ __forceinline float CircleTrigB(float a)
     return std::sin(a);
 }
 // @fnv 0x00c58f00
+// pdb: BSTestObjects::CreateCircle | BSTestObjects.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: afRadius, asSegments, apColor
 void* __cdecl FUN_00ab2f20(float radius, unsigned short count, Vec4Item* color)
 {
     Vec3Item* aVal = new Vec3Item[count];
@@ -4742,6 +4809,8 @@ public:
  void FUN_00aaeaf0(float,int,int,int);
  void FUN_00aaef70();
 };
+// pdb: BSSceneGraph::BSSceneGraph | BSSceneGraph.obj | fnv360_0822_retail, ustr, high
+// pdb params: apSceneGraphName, abMenuSceneGraph, apCamera
 BSSceneGraph::BSSceneGraph(const char* name,bool enabled,CameraArgRootZ cameraArg):NiNode(0),camera() {
  unkb8=enabled;
  culling=new BSCullingProcess;
@@ -4968,6 +5037,8 @@ struct Bound
 };
 
 // @fnv 0x00c38b00
+// pdb: BSMultiBoundAABB::MakeDebugGeom | BSMultiBoundAABB.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: apLines, apShape, akBaseColor
 void Bound::FUN_00aa1800(Geometry* lines, Geometry* triangles, Color color)
 {
 
@@ -5187,6 +5258,8 @@ class BSMultiBoundSphere : public BSMultiBoundShape
     int FUN_00aadb90(BSMultiBound*);
 };
 // @fnv 0x00c4ff60
+// pdb: BSMultiBoundSphere::CheckBound | BSMultiBoundSphere.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: aTargetBound
 int BSMultiBoundSphere::FUN_00aadb90(BSMultiBound* other)
 {
     int type = other->GetShape()->GetShapeType();
@@ -5420,6 +5493,8 @@ struct CollisionGenerator : CollisionShape
                        int d, void* data);
 };
 // @fnv 0x00c55d50
+// pdb: BSTestObjects::CreateBox | BSTestObjects.obj | fnv360_0822_retail, caller, medium
+// pdb params: arLeftCorner, arRightCorner, afForwardDepth, afBackwardDepth, afUpwardHeight, afDownwardHeight, apLeftColor, apRightColor
 CollisionShape* __cdecl FUN_00ab1490(Point3* start, Point3* end, float forwardExtent, float backwardExtent,
                                      float upExtent, float downExtent, FilterData* nearFilter, FilterData* farFilter)
 {
@@ -5761,6 +5836,8 @@ inline Mesh* __cdecl FUN_00ab1490(const Vec3& start, const Vec3& end, float forw
 }
 
 // @fnv 0x00c5a0f0
+// pdb: BSTestObjects::Create3DArrow | BSTestObjects.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arStart, arFinish, afSize, afHeight, apStartColor, apEndColor
 MeshRoot* FUN_00ab3850(const Vec3& start, const Vec3& end, float width, float height, const Color4* shaftColor,
                        const Color4* tipColor)
 {
@@ -6000,6 +6077,8 @@ __forceinline StandNode* CastNode(StandRef* object)
     return IsKindOfType(reinterpret_cast<const StandRTTI*>(&DAT_0116d700), object) ? static_cast<StandNode*>(object) : 0;
 }
 // @fnv 0x00c44ed0
+// pdb: BSTempNodeManager::RemoveExpired | BSTempNodeManager.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BSOrderedNode::UpdateOrderedBound)
+// pdb params: afTime
 void StandNode::FUN_00aa9660(float f)
 {
     StandPtr<StandRef> spRemoved;
@@ -6040,6 +6119,8 @@ struct Array {
  unsigned table; unsigned data; unsigned short capacity,size,count,grow;
  void FUN_00ab0630(unsigned);
 };
+// pdb: NiTArray<FurnitureMark,NiTNewInterface<FurnitureMark> >::SetSize | BSFurnitureMarker.obj | fnv360_0822_retail, call_seq, low, conflict (bridge: FurnitureMark::LoadBinary)
+// pdb params: uiMaxSize
 void Array::FUN_00ab0630(unsigned n) {
  if(n==capacity) return;
  unsigned short i;
@@ -6118,6 +6199,7 @@ struct Lights {const Dispatch* vtable;void* data;unsigned int size,capacity;
  __forceinline ~Lights(){vtable=&DAT_00e894a0;if(data){vtable->release(this,data);data=0;capacity=0;size=0;}}
 };
 struct Room:Base {Array12 first,second;Culling* culling;ArrayD0 third;Lights lights;virtual ~Room();};
+// pdb: BSMultiBoundRoom::~BSMultiBoundRoom | BSMultiBoundRoom.obj | fnv360_0822_retail, call_seq, high
 Room::~Room(){first.FUN_00bd12d0();second.FUN_00bd12d0();third.FUN_00abb340();lights.Clear();Culling* owned=culling;if(owned){owned->FUN_00aa8280();DAT_01090a78.FUN_0086ba60(owned);culling=0;}}
 }
 
@@ -6254,6 +6336,7 @@ void FUN_004d3210();
 unsigned char Flag(){return static_cast<unsigned char>(flags>>19)&1;}
 void FUN_00aa20a0();
 };
+// pdb: BSMultiBoundRoom::UpdateWorldBound | BSMultiBoundRoom.obj | fnv360_0822_retail, vtable_prefix, medium
 void Node::FUN_00aa20a0()
 {
     const Bound* a0;
@@ -6451,6 +6534,8 @@ public:
     unsigned short entryCount;
 };
 
+// pdb: BSPSysArrayEmitter::GetViewerStrings | BSPSysArrayEmitter.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStrings
 void Controller::FUN_00ab8b90(ViewerStrings* strings)
 {
     FUN_00ac6410(strings);
@@ -6540,6 +6625,8 @@ struct EmissionController {
     unsigned int arrayType;
     void FUN_00ab7f60(EmissionObject*,EmissionPoint*,EmissionPoint*);
 };
+// pdb: BSPSysArrayEmitter::GetPointFromObject | BSPSysArrayEmitter.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pObject, arPos, arVel
 void EmissionController::FUN_00ab7f60(EmissionObject* object,EmissionPoint* position,EmissionPoint* direction)
 {
     if(object) {
@@ -6610,6 +6697,7 @@ struct ControlGraph {
 };
 
 // @fnv 0x00c49850
+// pdb: BSCompoundFrustum::PrethreadOpList | BSCompoundFrustum.obj | fnv360_0822_retail, call_seq, medium
 void ControlGraph::FUN_00aa91e0() {
     if (!ready && count > 0) {
         GraphRecord* local60;
@@ -6796,6 +6884,8 @@ struct Node;
 struct FUN_0059acc0 {Node* head;FUN_0059acc0();};
 struct FUN_005e5280 {unsigned int unk00,unk04,unk08,unk0C;FUN_005e5280(unsigned int);};
 struct Map:InterfacedClass {Node** deletedBuffers;unsigned int bucketCount;FUN_0059acc0* buckets;unsigned int deleteBatchSize;FUN_005e5280* manager;volatile unsigned int itemUpdates;Map(unsigned int,unsigned int,unsigned int);virtual ~Map();};
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::LockFreeMap<__int64,NiPointer<BSTask<__int64> > > | IOManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiMaxThreads, aiNumBuckets, aiDeleteBatchSize
 Map::Map(unsigned int threads,unsigned int count,unsigned int batch){
  MemoryContext context;
  itemUpdates=0;
@@ -6822,6 +6912,8 @@ struct RefObject{void IncRefCount();void DecRefCount();};
 struct Entry{Entry* next;NiPointer<RefObject> data;Entry() throw():next(0),data(0){}};
 struct FUN_005e5280{unsigned int unk00,unk04,unk08,unk0C;FUN_005e5280(unsigned int);};
 struct Queue:InterfacedClass{Entry* head;Entry* tail;unsigned int deleteBatchSize;Entry** deletedBuffers;FUN_005e5280* manager;volatile int count;Queue(unsigned int,unsigned int);virtual ~Queue();};
+// pdb: LockFreeQueue<NiPointer<IOTask> >::LockFreeQueue<NiPointer<IOTask> > | IOManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiMaxThreads, aiDeleteBatchSize
 Queue::Queue(unsigned int threads,unsigned int batch){MemoryContext context;count=0;head=new Entry;tail=head;deleteBatchSize=batch;deletedBuffers=new Entry*[threads*2];manager=new FUN_005e5280(threads);}
 }
 }   // namespace f3m_00aa28f0
@@ -6837,6 +6929,7 @@ class BSLinearTaskThread {public:virtual ~BSLinearTaskThread();unsigned int unk0
 class BSParallelTaskThread:public BSLinearTaskThread {public:ThreadOwner2025* owner;BSParallelTaskThread(ThreadOwner2025* p):owner(p){}virtual ~BSParallelTaskThread();};
 class ThreadOwner2025 {public:BSParallelTaskThread** thread;unsigned int unk04,unk08;bool unk0C;ThreadOwner2025();};
 typedef char ThreadSize[(sizeof(BSParallelTaskThread)==0x50)?1:-1];
+// pdb: BSParallelTaskManager::BSParallelTaskManager | BSParallelTaskManager.obj | fnv360_0822_retail, ustr, medium
 ThreadOwner2025::ThreadOwner2025(){
  thread=0;unk04=0;unk08=0;unk0C=false;
  thread=new BSParallelTaskThread*;
@@ -6975,6 +7068,8 @@ unsigned int unk04,unk08,unk0c;
  void FUN_00ab9060(float,Data*);
 };
 }
+// pdb: BSParentVelocityModifier::Update | BSParentVelocityModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: afTime, apData
 void VelocityAB::Owner::FUN_00ab9060(float time,Data* data) {
  if(!data->count) return;
  Transform* target=link->target;
@@ -7042,6 +7137,8 @@ struct FUN_00aa4cc0:FUN_00aa2d70 {
  FUN_00aa4cc0(unsigned,unsigned,unsigned);virtual void v0();
 };
 }
+// pdb: BSTaskManager<__int64>::BSTaskManager<__int64> | IOManager.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aiNumInterfaceThreads, aiNumTaskThreads, aiNumTaskBuckets
 Task1803::FUN_00aa4cc0::FUN_00aa4cc0(unsigned reserved,unsigned n,unsigned slotCount):FUN_00aa2d70(reserved+n,slotCount,12),workers(n) {
  slots=new Slot[slotCount];
  memset(slots,0,slotCount*sizeof(void*));
@@ -7153,6 +7250,7 @@ __declspec(noinline) bool Owner::FUN_00aa3df0(Job* job, __int64* extra, TaskPtr*
     return task->p != 0;
 }
 
+// pdb: BSTaskManagerThread<__int64>::ThreadUpdate | IOManager.obj | fnv360_0822_retail, vtable, medium
 void Worker::FUN_00aa3eb0()
 {
     while (owner->stop != 1) {
@@ -7410,6 +7508,8 @@ struct Controller
     void FUN_00ab4d70(float now, float start, float end, float emitStart, float emitEnd, float rate);
 };
 // @fnv 0x00c5c790
+// pdb: BSPSysMultiTargetEmitterCtlr::EmitParticles | BSPSysMultiTargetEmitterCtlr.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: fTime, fCurTime, fLastTime, fEmitStart, fEmitStop, fBirthRate
 void Controller::FUN_00ab4d70(float now, float start, float end, float emitStart, float emitEnd, float rate)
 {
     float age;
@@ -7771,6 +7871,8 @@ struct SphereBoxTest
 };
 // Tests a sphere against the axis-aligned box m_kCenter/m_kExtents and returns 2 for inside, 1 for intersecting, or 0 for outside.
 // @fnv 0x00c382b0
+// pdb: BSMultiBoundAABB::CheckBound | BSMultiBoundAABB.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: aTargetBound
 int SphereBoxTest::FUN_00aa10c0(const NiBound& bound)
 {
     NiPoint3 p = bound.m_kCenter;
@@ -8087,6 +8189,8 @@ struct NiBoneLODController
     void FUN_00aafcc0(NiStream* stream);
 };
 
+// pdb: NiBSBoneLODController::LoadBinary | NiBSBoneLODController.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void NiBoneLODController::FUN_00aafcc0(NiStream* stream)
 {
     unsigned int i;
@@ -8161,6 +8265,7 @@ struct Queue {
  volatile int count;
  void FUN_00aa4df0(bool keepEmpty);
 };
+// pdb: LockFreePriorityQueue<NiPointer<IOTask> >::RemoveAll | IOManager.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: LockFreeMap<__int64,class NiPointer<class BSTask> >::LockFreeMapInterface::SetAt)
 void Queue::FUN_00aa4df0(bool keepEmpty){
  MemoryContext context;
  unsigned int threads=manager->unk00;
@@ -8228,6 +8333,8 @@ struct Self
     void FUN_008338b0(int* p);
     void FUN_00aad4e0(Target* target, Other* other, void* override);
 };
+// pdb: BSCullingProcess::Process | BSCullingProcess.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apCamera, apScene, apVisibleSet
 void Self::FUN_00aad4e0(Target* target, Other* other, void* override)
 {
     if (!target || !other)
@@ -8272,6 +8379,7 @@ struct Polygon {
 }
 using fo3_aac080::Polygon;
 
+// pdb: BSPolygon2D::Area | BSPolygon.obj | fnv360_0822_retail, callee_sim, low
 float Polygon::FUN_00aac080()
 {
     float area = 0.0f;
@@ -8338,6 +8446,8 @@ struct Owner {
     QueuedParents* parents;
     void FUN_00aa5950(QueuedFile* file);
 };
+// pdb: QueuedFile::AddAdditionalParent | QueuedFiles.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apAdditionalParent
 void Owner::FUN_00aa5950(QueuedFile* file)
 {
     if (!parents)
@@ -8402,6 +8512,8 @@ public:
     unsigned char maximum;
 };
 
+// pdb: BSRangeNode::GetViewerStrings | BSRangeNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStrings
 void Owner::FUN_00aa9c80(ViewerStrings* strings)
 {
     FUN_0082ee90(strings);
@@ -8464,6 +8576,8 @@ struct Loader {
     }
     void FUN_00aa4b30(int state);
 };
+// pdb: IOManager::LoadQueuedPriority | IOManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aePriority
 void Loader::FUN_00aa4b30(int state)
 {
     if (state40 == 7)
@@ -8954,6 +9068,8 @@ struct FUN_00aa0010_Box {
     void FUN_00a9fa20(NiPlane* planes);
     bool FUN_00aa0010(const NiPoint3* p);
 };
+// pdb: BSMultiBoundOBB::QPointWithin | BSMultiBoundOBB.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aPoint
 bool FUN_00aa0010_Box::FUN_00aa0010(const NiPoint3* p)
 {
     NiPlane planes[3];
@@ -9004,6 +9120,7 @@ struct Polygon {
     void FUN_00aac680();
 };
 
+// pdb: BSPolygon2D::StoreConcaveVertices | BSPolygon.obj | fnv360_0822_retail, objrun, medium
 void Polygon::FUN_00aac680()
 {
     if (convex)
@@ -9041,6 +9158,7 @@ struct Buf00aa8740 : BufferAA {
     void FUN_00aa8740();
 };
 
+// pdb: BSCompoundFrustum::StartGroupUnion | BSCompoundFrustum.obj | fnv360_0822_retail, call_seq, medium
 void Buf00aa8740::FUN_00aa8740() {
     if (itemCount + 1 >= itemCapacity)
         ((GrowListAA*)((char*)this + 0x14))->FUN_005bb760(itemCapacity + 10, 1);
@@ -9069,6 +9187,8 @@ struct Holder00ab9f60 : NiExtraData {
     unsigned int count;
     void FUN_00ab9f60(NiStream& stream);
 };
+// pdb: BSTextureData::LinkObject | BSTextureData.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void Holder00ab9f60::FUN_00ab9f60(NiStream& stream)
 {
     LinkObject(stream);
@@ -9080,6 +9200,8 @@ void Holder00ab9f60::FUN_00ab9f60(NiStream& stream)
 }   // namespace f3m_00ab9f60
 
 // @f3 0x00aae7d0 (community match, verified in this file)
+// pdb: BSParticleSystemManager::FindChildIndex | BSParticleSystemManager.obj | fnv360_0822_debug, call_gap, low
+// pdb params: apChild
 int __thiscall Node_a94440::FUN_00aae7d0(void* item)
 {
     unsigned int count = (unsigned int)((unsigned short)unkA8);
@@ -9105,6 +9227,8 @@ int __thiscall Node_a94440::FUN_00aae7d0(void* item)
 namespace f3m_00aa8190 {
 struct Heap { void* FUN_0086bae0(void* block, unsigned int size); };
 extern Heap DAT_01090a78;
+// pdb: BSSimpleArray<NiFrustumPlanes,1024>::_Reallocate | BSCompoundFrustum.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apBuffer, aiNewSizeInItem
 void* __stdcall FUN_00aa8190(void* block, unsigned int count)
 {
     return DAT_01090a78.FUN_0086bae0(block, count * 100);
@@ -9125,6 +9249,8 @@ public:
 
 void __cdecl FUN_0086c3e0();
 
+// pdb: MessageHandler::MessageHandler | MessageHandler.obj | fnv360_0822_retail, call_seq, high
+// pdb params: abStatic
 unsigned int* FUN_00aa5c40_Class::FUN_00aa5c40(unsigned char param_2) {
     FUN_0086c3e0();
     this->unk04 = param_2;
@@ -9235,6 +9361,8 @@ struct FUN_00abcb40_Owner {
 void __stdcall FUN_00ac67c0(FUN_00abcb40_Param* param);
 char* __cdecl FUN_00847b50(const char* label);
 
+// pdb: NiPSysEmitterCtlr::GetViewerStrings | NiPSysEmitterCtlr.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkStrings
 void FUN_00abcb40_Owner::FUN_00abcb40(FUN_00abcb40_Param* param)
 {
     FUN_00ac67c0(param);
@@ -9270,6 +9398,8 @@ struct FUN_00ab9c70_Obj {
     bool FUN_008258d0(FUN_00ab9c70_Arg* a);
     bool FUN_00ab9c70(FUN_00ab9c70_Arg* arg);
 };
+// pdb: BSReference::IsEqual | BSReference.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apObject
 bool FUN_00ab9c70_Obj::FUN_00ab9c70(FUN_00ab9c70_Arg* arg)
 {
     if (FUN_008258d0(arg)) {
@@ -9288,6 +9418,8 @@ struct FUN_00aa9f80_Type {};
 
 void __stdcall FUN_00aa9fc0(FUN_00aa9f80_Type* a, unsigned int b);
 
+// pdb: BSParallelTaskManager::RunTask | BSParallelTaskManager.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apArrayTask
 void __stdcall FUN_00aaa030(unsigned int param_1) {
     static FUN_00aa9f80_Type instance;
     FUN_00aa9fc0(&instance, param_1);
@@ -9370,6 +9502,7 @@ public:
  float FUN_00aaedd0();
 };
 
+// pdb: BSSceneGraph::GetFarDistance | BSSceneGraph.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: NiMatrix3::SetRow)
 float BSSceneGraph::FUN_00aaedd0() {
     float result;
     if (unkb8) {
@@ -9404,6 +9537,7 @@ struct FUN_00ab6be0_Obj : FUN_00aad5f0 {
  int unk20;
  int unk24;
 };
+// pdb: BSMultiBoundCapsule::CreateObject | BSMultiBoundCapsule.obj | fnv360_0822_retail, objrun, medium
 NiObject* __cdecl FUN_00ab6be0() {
     FUN_00ab6be0_Obj* p = new FUN_00ab6be0_Obj();
     return p;
@@ -9617,6 +9751,8 @@ struct Mod417 : FnvModBase {
     void FUN_00aaaaf0(Save417* s);
 };
 
+// pdb: BSPSysStripUpdateModifier::SaveBinary | BSPSysStripUpdateModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void Mod417::FUN_00aaaaf0(Save417* s) {
     FnvModBase::FUN_00c31950(s);
     Stream417* b = s->unk250;
@@ -9845,6 +9981,8 @@ struct Owner417 {
     void FUN_00ab5e70(Set417* a, int b);
 };
 
+// pdb: BSNiNode::ReparentSkinInstances | BSNiNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apRoot, apNewParent
 void Owner417::FUN_00ab5e70(Set417* a, int b) {
     if (!a)
         return;
@@ -9894,6 +10032,7 @@ struct StandIn_ab8ed0
 };
 
 
+// pdb: BSParentVelocityModifier::BSParentVelocityModifier | BSParentVelocityModifier.obj | fnv360_0822_retail, uvref, medium
 StandIn_ab8ed0* StandIn_ab8ed0::FUN_00ab8ed0()
 {
     FUN_00ac5e10();
@@ -9919,6 +10058,8 @@ StandIn_ab8ed0* StandIn_ab8ed0::FUN_00ab8ed0()
 
 // @f3 0x00aa48a0 (community match, verified in this file)
 namespace f3m_00aa48a0 {
+// pdb: BSTaskManager<__int64>::RunTask | IOManager.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: IOTask::Process)
+// pdb params: apTask
 void __stdcall FUN_00aa48a0(f3m_00aa48b0::Task_00aa48b0* task)
 {
     task->slot04();
@@ -9929,6 +10070,8 @@ void __stdcall FUN_00aa48a0(f3m_00aa48b0::Task_00aa48b0* task)
 namespace f3m_00ab7b40 {
 extern char __stdcall FUN_00849750(int value);
 
+// pdb: BSDecalPlacementVectorExtraData::RegisterStreamables | BSDecalPVExtraData.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 bool __stdcall FUN_00ab7b40(int value)
 {
     return FUN_00849750(value) == 0;
@@ -9983,6 +10126,8 @@ struct Owner {
     void FUN_00aa9c80(Array* output);
     void FUN_00aab300(Array* output);
 };
+// pdb: BSDamageStage::GetViewerStrings | BSDamageStage1.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStrings
 void Owner::FUN_00aab300(Array* output) {
     FUN_00aa9c80(output);
     char* text = FUN_00847b50(DAT_0116d770);
@@ -10012,6 +10157,8 @@ struct Obj {
     Obj* FUN_00aadeb0(int unused);
 };
 
+// pdb: BSPortal::CreateClone | BSPortal.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 Obj* Obj::FUN_00aadeb0(int)
 {
     Obj* copy = new Obj;
@@ -10071,6 +10218,7 @@ struct Obj : Mid {
     Obj();
 };
 
+// pdb: BSPortal::BSPortal | BSPortal.obj | fnv360_0822_retail, call_seq, medium
 Obj::Obj()
 {
     ref = 0;
@@ -10116,6 +10264,8 @@ public:
     float damping;
 };
 
+// pdb: BSParentVelocityModifier::GetViewerStrings | BSParentVelocityModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStrings
 void Modifier::FUN_00ab9350(ViewerStrings* strings)
 {
     FUN_00ac60d0(strings);
@@ -10154,6 +10304,8 @@ public:
     unsigned int unk04, unk08, unk0c, unk10, unk14;
     float value;
 };
+// pdb: BSPSysStripUpdateModifier::GetViewerStrings | BSPSysStripUpdateModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkStrings
 void Modifier::FUN_00ab6110(ViewerStrings* strings)
 {
     FUN_00ac60d0(strings);
@@ -10172,6 +10324,7 @@ struct Owner {
     Resource* resource;
     bool FUN_00aaf880();
 };
+// pdb: NiBSBoneLODController::TargetIsRequiredType | NiBSBoneLODController.obj | fnv360_0822_retail, vtable, medium
 bool Owner::FUN_00aaf880(){if(resource && resource->GetValue())return true;return false;}
 }
 }   // namespace f3m_00aaf880
@@ -10205,6 +10358,7 @@ struct RegSettingCollection {
     bool FUN_00ab5940(Setting* setting);
 };
 
+// pdb: RegSettingCollection::WriteSetting | XRegSetting.obj | tesv_win, uimport, low
 bool RegSettingCollection::FUN_00ab5940(Setting* setting)
 {
     Flags f;
@@ -10249,6 +10403,7 @@ struct ComPtr {
     void FUN_00aad2d0();
 };
 
+// pdb: BSOcclusionQuery::~BSOcclusionQuery | BSOcclusionQuery.obj | fnv360_0721_beta, call_seq, low, conflict (skyrim: BSTempEffect::Initialize)
 void ComPtr::FUN_00aad2d0()
 {
     if (p)
@@ -10291,6 +10446,8 @@ struct Node {
     void BSRangeNode_SetCurrent(unsigned char value);
     void FUN_00aa9b20(NiStream* stream);
 };
+// pdb: BSRangeNode::LoadBinary | BSRangeNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 void Node::FUN_00aa9b20(NiStream* stream)
 {
     FUN_0082db60(stream);
@@ -10314,6 +10471,8 @@ struct Class {
     void FUN_00ab8e50(unsigned int arg);
 };
 
+// pdb: BSPSysArrayEmitter::SetEmitterObj | BSPSysArrayEmitter.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apEmitter
 void Class::FUN_00ab8e50(unsigned int arg) {
     unk54 = arg;
     FUN_00ab8dc0();
@@ -10357,6 +10516,8 @@ struct Obj {
     void FUN_00ab9d10(List* list);
 };
 
+// pdb: BSNodeReferences::LinkObject | BSReference.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 void Obj::FUN_00ab9d10(List* list) {
     sub_78c030(list);
     unsigned int count = list->sub_82a2b0();
@@ -10385,6 +10546,7 @@ struct FUN_00aad310_Owner
     void FUN_00aad310();
 };
 
+// pdb: BSOcclusionQuery::End | BSOcclusionQuery.obj | fnv360_0822_retail, call_gap, medium
 void FUN_00aad310_Owner::FUN_00aad310()
 {
     if (DAT_0116d984 == 0)
@@ -10440,6 +10602,7 @@ struct RefList {
 extern RefList DAT_010667f0;
 extern unsigned long DAT_010667ec;
 
+// pdb: NiObjectGarbage::Update | NiObjectGarbage.obj | fnv360_0822_debug, objrun, medium
 void __cdecl FUN_00aaadc0()
 {
     DAT_0116d740.FUN_00409a80(0);
@@ -10474,6 +10637,8 @@ public:
     char** buffer;
     unsigned short capacity, firstFree, count, growBy;
 };
+// pdb: NiTArray<unsigned int,NiTMallocInterface<unsigned int> >::Add | TESObjectTREE.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: element
 unsigned int ViewerStrings::FUN_00ab9e10(char* const& value)
 {
     unsigned int index = firstFree;
@@ -10495,6 +10660,8 @@ class Controller {
 public:
     char* FUN_00ab7ed0(const char* label, unsigned int value);
 };
+// pdb: BSPSysArrayEmitter::GetViewerString | BSPSysArrayEmitter.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apPrefix, aeType
 char* Controller::FUN_00ab7ed0(const char* label, unsigned int value)
 {
     unsigned int size = strlen(label) + 0x10;
@@ -10524,6 +10691,8 @@ struct Owner {
     ItemList items;
     void FUN_00ab42f0(Item* item);
 };
+// pdb: BSPortalGraph::RemovePortal | BSPortalGraph.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apPortal
 void Owner::FUN_00ab42f0(Item* item)
 {
     if (item)
@@ -10546,6 +10715,7 @@ struct Pool : Base {
     void FUN_00aa44f0(bool freeAll);
     virtual ~Pool();
 };
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::~LockFreeMap<__int64,NiPointer<BSTask<__int64> > > | IOManager.obj | fnv360_0822_retail, call_seq, medium
 Pool::~Pool()
 {
     FUN_00aa44f0(true);
@@ -10779,6 +10949,8 @@ struct Holder00aba140 : NiExtraData_aba140 {
     unsigned int count;
     void FUN_00aba140(NiStream_aba140& stream);
 };
+// pdb: BSTextureData::SaveBinary | BSTextureData.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void Holder00aba140::FUN_00aba140(NiStream_aba140& stream)
 {
     SaveBinary(stream);
@@ -10831,6 +11003,8 @@ struct Controller : Base {
     unsigned short count;
     void FUN_00ab9d80(NiStream* stream);
 };
+// pdb: BSNodeReferences::SaveBinary | BSReference.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 void Controller::FUN_00ab9d80(NiStream* stream)
 {
     FUN_0078c030(stream);
@@ -10878,6 +11052,8 @@ struct Dispatcher {
     int count;
     void FUN_00aa1f90(int event);
 };
+// pdb: BSMultiBoundRoom::QPointWithin | BSMultiBoundRoom.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: aPoint
 void Dispatcher::FUN_00aa1f90(int event)
 {
     if (primary->Handle(event))
@@ -10911,6 +11087,7 @@ struct NiObject {
     NiObject();
     void FUN_008245d0(const NiFixedString& name);
 };
+// pdb: BSBound::CreateObject | BSBound.obj | fnv360_0822_retail, objrun, medium
 NiObject* __cdecl FUN_00ab0e80()
 {
     NiObject* object = new NiObject;
@@ -10932,6 +11109,7 @@ struct FUN_00aa2560_Obj {
     void FUN_00aa2560();
 };
 
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::LockFreeMapIterator::ClearKey | IOManager.obj | fnv360_0822_retail, vtable, medium
 void FUN_00aa2560_Obj::FUN_00aa2560() {
     unk10 = 0;
     unk14 = 0;
@@ -10962,6 +11140,7 @@ struct FixedString {
 
 extern FixedString* DAT_0116d6e0;
 
+// pdb: BSXFlags::KillSDM | BSXFlags.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BSTaskManager::ForceSignal)
 void __cdecl FUN_00aa6130()
 {
     delete DAT_0116d6e0;
@@ -10996,6 +11175,8 @@ public:
     unsigned int m90;
     void FUN_00aa7d20(unsigned int* src);
 };
+// pdb: BSCompoundFrustum::SetActivePlaneState | BSCompoundFrustum.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apPlaneState
 void Owner_00aa7d20::FUN_00aa7d20(unsigned int* src)
 {
     m90 = src[0];
@@ -11024,6 +11205,8 @@ struct Obj {
     bool FUN_008459a0(NiObject* other);
     bool FUN_00ab0ca0(NiObject* other);
 };
+// pdb: BSBound::RegisterStreamables | BSBound.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BSNonUniformScaleExtraData::RegisterStreamables)
+// pdb params: arStream
 bool Obj::FUN_00ab0ca0(NiObject* other)
 {
     return !FUN_008459a0(other);
@@ -11051,6 +11234,8 @@ struct Node : Base {
     unsigned short count;
     void FUN_00aaf6a0(NiStream* stream);
 };
+// pdb: NiBSBoneLODController::LinkObject | NiBSBoneLODController.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void Node::FUN_00aaf6a0(NiStream* stream)
 {
     FUN_008380f0(stream);
@@ -11071,6 +11256,8 @@ namespace f3m_00aa4990 {
 struct Settings {
     int FUN_00aa4990(__int64 key);
 };
+// pdb: IOManager::GetBucketForKey | IOManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiKey
 int Settings::FUN_00aa4990(__int64 key)
 {
     unsigned char group = (unsigned char)(key >> 16);
@@ -11150,6 +11337,8 @@ public:
 
 void __stdcall FUN_00845bc0(int argument);
 
+// pdb: BSBound::LoadBinary | BSBound.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BSNonUniformScaleExtraData::LoadBinary)
+// pdb params: arStream
 void __thiscall Ab0c70Owner::FUN_00ab0c70(int argument) {
     FUN_00845bc0(argument);
     part0C.FUN_00823eb0(argument);
@@ -11227,6 +11416,8 @@ public:
     int unkE0;
     void FUN_00aa7c50(Owner_00aa7c50* other);
 };
+// pdb: BSCompoundFrustum::SetCamera | BSCompoundFrustum.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCamera
 void Owner_00aa7c50::FUN_00aa7c50(Owner_00aa7c50* other)
 {
     if (other)
@@ -11329,6 +11520,7 @@ struct StandIn_aad3d0 {
     void FUN_00aad3d0();
 };
 
+// pdb: BSCullingProcess::PopCullMode | BSCullingProcess.obj | fnv360_0822_retail, call_gap, medium
 void StandIn_aad3d0::FUN_00aad3d0() {
     unkBC--;
     unk90 = unk94[unkBC];
@@ -11352,6 +11544,7 @@ struct NameHolder {
 extern NameHolder* DAT_0116d6e0;
 }
 
+// pdb: BSXFlags::InitSDM | BSXFlags.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_00aa5f20()
 {
     f3m_00aa5f20::DAT_0116d6e0 = new f3m_00aa5f20::NameHolder("BSX");
@@ -11374,6 +11567,7 @@ struct NameHolder {
 extern NameHolder* DAT_0116da60;
 }
 
+// pdb: BSFurnitureMarker::InitSDM | BSFurnitureMarker.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_00ab01f0()
 {
     f3m_00ab01f0::DAT_0116da60 = new f3m_00ab01f0::NameHolder("FRN");
@@ -11396,6 +11590,7 @@ struct NameHolder {
 extern NameHolder* DAT_0116eb64;
 }
 
+// pdb: BSWArray::InitSDM | BSWArray.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_00ab7b90()
 {
     f3m_00ab7b90::DAT_0116eb64 = new f3m_00ab7b90::NameHolder("BSW");
@@ -11418,6 +11613,7 @@ struct NameHolder {
 extern NameHolder* DAT_0116eb70;
 }
 
+// pdb: PArrayPoint::InitSDM | BSPSysArrayEmitter.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_00ab7e40()
 {
     f3m_00ab7e40::DAT_0116eb70 = new f3m_00ab7e40::NameHolder("PAP");
@@ -11440,6 +11636,7 @@ struct NameHolder {
 extern NameHolder* DAT_0116ebb0;
 }
 
+// pdb: BSTextureData::InitSDM | BSTextureData.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_00aba030()
 {
     f3m_00aba030::DAT_0116ebb0 = new f3m_00aba030::NameHolder("TXD");
@@ -11466,6 +11663,7 @@ struct NameHolder {
 extern NameHolder* DAT_0116da60;
 }
 
+// pdb: BSFurnitureMarker::KillSDM | BSFurnitureMarker.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_00ab0400()
 {
     delete f3m_00ab0400::DAT_0116da60;
@@ -11494,6 +11692,7 @@ struct NameHolder {
 extern NameHolder* DAT_0116da80;
 }
 
+// pdb: BSBound::KillSDM | BSBound.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_00ab0f20()
 {
     delete f3m_00ab0f20::DAT_0116da80;
@@ -11522,6 +11721,7 @@ struct NameHolder {
 extern NameHolder* DAT_0116eb64;
 }
 
+// pdb: BSWArray::KillSDM | BSWArray.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_00ab7d10()
 {
     delete f3m_00ab7d10::DAT_0116eb64;
@@ -11550,6 +11750,7 @@ struct NameHolder {
 extern NameHolder* DAT_0116eb70;
 }
 
+// pdb: PArrayPoint::KillSDM | BSPSysArrayEmitter.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_00ab8440()
 {
     delete f3m_00ab8440::DAT_0116eb70;
@@ -11578,6 +11779,7 @@ struct NameHolder {
 extern NameHolder* DAT_0116ebb0;
 }
 
+// pdb: BSTextureData::KillSDM | BSTextureData.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BSReference::CreateObject)
 void __cdecl FUN_00aba1b0()
 {
     delete f3m_00aba1b0::DAT_0116ebb0;
@@ -11606,6 +11808,7 @@ struct NameHolder {
 extern NameHolder* DAT_0116ebbc;
 }
 
+// pdb: BSAttachPoints::KillSDM | BSAttachPoints.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_00aba5b0()
 {
     delete f3m_00aba5b0::DAT_0116ebbc;
@@ -11633,6 +11836,8 @@ struct Data : BaseData {
 };
 }
 
+// pdb: BSMultiBoundNode::RegisterStreamables | BSMultiBoundNode.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BSFadeNode::RegisterStreamables)
+// pdb params: arStream
 bool f3m_00aaa230::Data::FUN_00aaa230(const void* other)
 {
     if (!FUN_0082e410(other))
@@ -11655,6 +11860,8 @@ struct Data : BaseData {
 };
 }
 
+// pdb: BSPSysStripUpdateModifier::IsEqual | BSPSysStripUpdateModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkObject
 char f3m_00ab5f70::Data::FUN_00ab5f70(const Data* other)
 {
     if (FUN_00ac5f20(other) && other->value == value)
@@ -11699,6 +11906,8 @@ struct Data : BaseData {
 };
 }
 
+// pdb: BSWindModifier::IsEqual | BSWindModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apObject
 char f3m_00aaa9a0::Data::FUN_00aaa9a0(const Data* other)
 {
     char equal = FUN_00ac5f20(other);
@@ -11725,6 +11934,8 @@ struct Data : BaseData {
 };
 }
 
+// pdb: BSParentVelocityModifier::IsEqual | BSParentVelocityModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apObject
 char f3m_00ab8ea0::Data::FUN_00ab8ea0(const Data* other)
 {
     char equal = FUN_00ac5f20(other);
@@ -11781,6 +11992,7 @@ public:
     f3m_00aa6bb0::PrimitiveArray items;
 };
 
+// pdb: BSNodeReferences::BSNodeReferences | BSStream.obj | fnv360_0822_debug, call_gap, low
 BSNodeReferences::BSNodeReferences()
 {
 }
@@ -11824,6 +12036,8 @@ public:
     ViewerPoint3 center;
     ViewerPoint3 extents;
 };
+// pdb: BSBound::GetViewerStrings | BSBound.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStrings
 void FUN_00ab0f60_Class::FUN_00ab0f60(ViewerStrings* strings)
 {
     FUN_00845ca0(strings);
@@ -11869,6 +12083,8 @@ public:
     int unk08;
     unsigned int m_uiSize;
 };
+// pdb: BSWArray::GetViewerStrings | BSWArray.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStrings
 void FUN_00ab7d50_Class::FUN_00ab7d50(ViewerStrings* strings)
 {
     FUN_00863d60(strings);
@@ -11892,6 +12108,7 @@ struct FUN_00aa9f80_Object
     volatile long unk0C;
 };
 
+// pdb: BSParallelTaskThread::`scalar deleting destructor' | BSParallelTaskManager.obj | fnv360_0721_beta, objrun, medium
 void __cdecl FUN_00aa9f80(FUN_00aa9f80_Object* object)
 {
     unsigned int index = 0;
@@ -11910,6 +12127,8 @@ extern const char DAT_0116d880[];
 int __cdecl FUN_00ec65a6(char* buffer, unsigned int size, const char* format);
 int __cdecl _strcat_s(char* dest, unsigned int size, const char* src);
 
+// pdb: MessageHandler::SetProgrammerOutputFileName | MessageHandler.obj | fnv360_0721_retail, objrun, medium
+// pdb params: apFileName
 void __cdecl FUN_00aa5df0(const char* arg)
 {
     FUN_00ec65a6((char*)&g_01269fe8, 0x104, DAT_0116d880);
@@ -11952,6 +12171,7 @@ public:
 };
 }
 
+// pdb: NiBSBoneLODController::CreateObject | NiBSBoneLODController.obj | fnv360_0822_debug, objrun, medium
 f3m_00aafc50::FUN_00aaf800* __cdecl FUN_00aafc50()
 {
     return new f3m_00aafc50::FUN_00aaf800;
@@ -11973,6 +12193,7 @@ public:
 };
 }
 
+// pdb: BSParentVelocityModifier::CreateObject | BSParentVelocityModifier.obj | fnv360_0822_retail, objrun, medium
 f3m_00ab8ff0::FUN_00ab8ed0* __cdecl FUN_00ab8ff0()
 {
     return new f3m_00ab8ff0::FUN_00ab8ed0;
@@ -12059,6 +12280,8 @@ struct Node {
     void FUN_0082e820(NiStream* stream);
     void FUN_00aa9bd0(NiStream* stream);
 };
+// pdb: BSRangeNode::SaveBinary | BSRangeNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 void Node::FUN_00aa9bd0(NiStream* stream)
 {
     FUN_0082e820(stream);
@@ -12137,6 +12360,8 @@ struct Node : Base {
     ObjectArray objects;
     void FUN_00ab7120(NiStream* stream);
 };
+// pdb: BSMasterParticleSystem::LinkObject | BSMasterParticleSystem.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void Node::FUN_00ab7120(NiStream* stream)
 {
     FUN_0082e780(stream);
@@ -12188,6 +12413,7 @@ struct Owner {
 };
 }
 
+// pdb: BSPSysArrayEmitter::SetupArray | BSPSysArrayEmitter.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BSSegmentedTriShape::MergeEnabledSegments)
 void f3m_00ab8dc0::Owner::FUN_00ab8dc0()
 {
     sub.FUN_00aaab30();
@@ -12250,6 +12476,8 @@ struct Source {
     void BSDecalPlacementVectorExtraData_CopyMembers(DecalExtra* dest, CloningProcess& process);
     DecalExtra* FUN_00ab9a00(CloningProcess& process);
 };
+// pdb: BSDecalPlacementVectorExtraData::CreateClone | BSDecalPVExtraData.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 DecalExtra* Source::FUN_00ab9a00(CloningProcess& process)
 {
     DecalExtra* clone = new DecalExtra;
@@ -12271,6 +12499,7 @@ struct Array {
 };
 }
 
+// pdb: BSSimpleArray<NiPoint3,1024>::Reverse | BSPolygon.obj | fnv360_0822_retail, objrun, medium
 void f3m_00aac5f0::Array::FUN_00aac5f0()
 {
     int j = count - 1;
@@ -12303,6 +12532,8 @@ struct Node {
     void FUN_0082e680(Child* child, NiPointer<Child>& removed);
     void FUN_00aae690(Child* child, NiPointer<Child>& removed);
 };
+// pdb: BSParticleSystemManager::DetachChild | BSParticleSystemManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkChild, aspAVObject
 void Node::FUN_00aae690(Child* child, NiPointer<Child>& removed)
 {
     NiPointer<Child> detached;
@@ -12341,6 +12572,8 @@ public:
 };
 }
 
+// pdb: BSScissorTriShape::CreateClone | BSScissorTriShape.obj | fnv360_0822_debug, vtable, low, conflict (skyrim: BSLODTriShape::CreateClone)
+// pdb params: arCloneData
 f3m_00ab5680::Light* f3m_00ab5680::Light::FUN_00ab5680(void* cloning)
 {
     Light* clone = new Light;
@@ -12360,6 +12593,7 @@ struct Shape {
     static void* operator new(unsigned int n) throw() { return FUN_0089eb90(n); }
 };
 
+// pdb: BSTextureData::CreateObject | BSTextureData.obj | fnv360_0721_beta, caller_sim, low
 Shape* __cdecl FUN_00aba270()
 {
     return new Shape;
@@ -12379,6 +12613,8 @@ struct Object : Base {
 };
 }
 
+// pdb: BSDamageStage::UpdateSelectedDownwardPass | BSDamageStage1.obj | fnv360_0822_retail, vtable, medium
+// pdb params: UpdateData, uFlags
 void f3m_00aab2b0::Object::FUN_00aab2b0(int a, int b)
 {
     if (!(flags & 1))
@@ -12439,6 +12675,8 @@ public:
 
 extern AA2BA0* DAT_0116d138;
 
+// pdb: QueuedFile::Requeue | QueuedFiles.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aeNewPriority
 void __thiscall AA5320Owner::FUN_00aa5320(int value)
 {
     AA5320Owner* self = this;
@@ -12467,6 +12705,7 @@ struct CounterAA2CE0 {
     void FUN_00aa2ce0();
 };
 
+// pdb: LockFreePriorityQueue<NiPointer<IOTask> >::IncrementCount | IOManager.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
 void CounterAA2CE0::FUN_00aa2ce0() {
     InterlockedIncrement(&counter);
 }
@@ -12480,6 +12719,7 @@ struct CountedState {
     void FUN_00aa2cf0();
 };
 
+// pdb: LockFreePriorityQueue<NiPointer<IOTask> >::DecrementCount | IOManager.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
 void CountedState::FUN_00aa2cf0() {
     InterlockedDecrement(&count);
 }
@@ -12487,6 +12727,8 @@ void CountedState::FUN_00aa2cf0() {
 
 // @f3 0x00aa2eb0 (community match, verified in this file)
 namespace f3m_00aa2eb0 {
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::CopyKey | IOManager.obj | fnv360_0721_beta, vtable, medium
+// pdb params: aKey
 __int64 __stdcall FUN_00aa2eb0(__int64 value) {
     return value;
 }
@@ -12500,6 +12742,7 @@ struct CountedStateAA2F40 {
     void FUN_00aa2f40();
 };
 
+// pdb: LockFreeMap<MobileObject *,NiPointer<LipTask> >::IncrementCount | LipSyncBackgroundManager.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
 void CountedStateAA2F40::FUN_00aa2f40() {
     InterlockedIncrement(&count);
 }
@@ -12529,6 +12772,8 @@ struct ObjectAA73D0 {
     bool FUN_00aa73d0(void*);
 };
 
+// pdb: INISettingCollection::Open | XINISetting.obj | fnv360_0822_retail, vtable, medium
+// pdb params: abWrite
 bool ObjectAA73D0::FUN_00aa73d0(void*) {
     owner = this;
     return true;
@@ -12558,6 +12803,8 @@ struct EntryTable {
     unsigned int FUN_00ab3db0(unsigned int index) const;
 };
 
+// pdb: BSPortalGraph::GetAlwaysRenderAt | BSPortalGraph.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: i
 unsigned int EntryTable::FUN_00ab3db0(unsigned int index) const {
     return entries[index];
 }
@@ -12571,6 +12818,8 @@ struct TableAA2EA0 {
     unsigned FUN_00aa2ea0(unsigned __int64 key);
 };
 
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::GetBucketForKey | IOManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aKey
 unsigned TableAA2EA0::FUN_00aa2ea0(unsigned __int64 key) {
     return static_cast<unsigned>(key) % bucketCount;
 }
@@ -12608,6 +12857,7 @@ struct CallbackOwner {
     void FUN_00aa9de0();
 };
 
+// pdb: BSParallelTaskThread::RunLinearTasks | BSParallelTaskManager.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BSMultiBoundNode::IsMultiBoundNode)
 void CallbackOwner::FUN_00aa9de0() {
     callback->invoke(callback->context);
 }
@@ -12628,6 +12878,8 @@ struct NodeAAB2A0 : FUN_00a94040_shell {
     void FUN_00aab2a0(FNV_UpdateFlags* update, unsigned options);
 };
 
+// pdb: BSDamageStage::UpdateDownwardPass | BSDamageStage1.obj | fnv360_0822_retail, vtable, medium
+// pdb params: UpdateData, uFlags
 void NodeAAB2A0::FUN_00aab2a0(FNV_UpdateFlags* update, unsigned options) {
     if ((flags & 1) == 0)
         FUN_00a5dd70(update, options);
@@ -12723,6 +12975,8 @@ struct DispatchOwner {
     void FUN_00aaa6c0(void* value);
 };
 
+// pdb: BSMultiBoundNode::QPointWithin | BSMultiBoundNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aPoint
 void DispatchOwner::FUN_00aaa6c0(void* value) {
     target->Dispatch(value);
 }
@@ -12789,6 +13043,8 @@ struct OwnerAAD3F0 {
     TargetAAD3F0* target;
     bool FUN_00aad3f0(void* object);
 };
+// pdb: BSCullingProcess::AddShared | BSCullingProcess.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apObject
 bool OwnerAAD3F0::FUN_00aad3f0(void* object) {
     return target->dispatch(object);
 }
@@ -12894,6 +13150,7 @@ struct DispatchOwnerAAD400 {
     void FUN_00aad400();
 };
 
+// pdb: BSCullingProcess::ClearSharedMap | BSCullingProcess.obj | fnv360_0822_retail, call_seq, medium
 void DispatchOwnerAAD400::FUN_00aad400() {
     target->Dispatch();
 }
@@ -12953,6 +13210,8 @@ struct Aaa290Owner
 
 void __stdcall FUN_0082e460(void* object);
 
+// pdb: BSMultiBoundNode::IsEqual | BSMultiBoundNode.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BSFadeNode::IsEqual)
+// pdb params: apObject
 unsigned char Aaa290Owner::FUN_00aaa290(int argument)
 {
     FUN_0082e460((void*)argument);
@@ -12968,6 +13227,8 @@ namespace f3m_00aab140 {
 char* __cdecl FUN_00847b50(const char* label);
 void __stdcall FUN_00aa9c80(f3m_00aa6170::ViewerStrings* strings);
 
+// pdb: BSDebrisNode::GetViewerStrings | BSDebrisNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStrings
 void __stdcall FUN_00aab140(f3m_00aa6170::ViewerStrings* strings)
 {
     FUN_00aa9c80(strings);
@@ -13044,6 +13305,8 @@ struct OwnerAAA6F0 {
     LinkAAA6F0* link;
     unsigned FUN_00aaa6f0(void* argument);
 };
+// pdb: BSMultiBoundNode::CheckBound | BSMultiBoundNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aTargetBound
 unsigned OwnerAAA6F0::FUN_00aaa6f0(void* argument) {
     return link->target->dispatch(argument);
 }
@@ -13051,6 +13314,8 @@ unsigned OwnerAAA6F0::FUN_00aaa6f0(void* argument) {
 
 // @f3 0x00aa2ec0 (community match, verified in this file)
 namespace f3m_00aa2ec0 {
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::CopyKeyDirect | IOManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aKey, arCopiedKey
 void __stdcall FUN_00aa2ec0(__int64 value, __int64* destination) {
     *destination = value;
 }
@@ -13127,6 +13392,7 @@ struct FUN_00a5db30_shell {
 struct NodeAA2380 : FUN_00a5db30_shell {
     void FUN_00aa2380();
 };
+// pdb: BSMultiBoundNode::UpdateUpwardPass | BSMultiBoundRoom.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BSMultiBoundRoom::GetRTTI)
 void NodeAA2380::FUN_00aa2380() {
     FUN_00a5db30();
     finish();
@@ -13140,6 +13406,8 @@ struct Heap {
 };
 extern Heap DAT_01090a78;
 }
+// pdb: BSSimpleArray<NiFrustumPlanes,1024>::_Allocate | BSCompoundFrustum.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiSizeInItem
 void* __stdcall FUN_00aa8170(unsigned int count) {
     return Alloc00aa8170::DAT_01090a78.FUN_0086b930(count * 100u);
 }
@@ -13188,6 +13456,8 @@ struct Argument00ab6db0 {
     unsigned int unk00, unk04, unk08;
     Target00ab6db0* target;
 };
+// pdb: BSMultiBoundCapsule::CheckBound | BSMultiBoundCapsule.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aTargetBound
 int __stdcall FUN_00ab6db0(Argument00ab6db0* argument) {
     argument->target->Dispatch();
     return 0;
@@ -13204,6 +13474,8 @@ struct Owner00ab4100 {
     Member00ab4100 member;
     void FUN_00ab4100(void* value);
 };
+// pdb: BSPortalGraph::RemoveOccluder | BSPortalGraph.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apOccluder
 void Owner00ab4100::FUN_00ab4100(void* value) {
     if (value)
         member.FUN_0066bcc0(&value);
@@ -13223,6 +13495,7 @@ struct OwnerAA2840 {
     bool FUN_00aa2650();
     void FUN_00aa2840();
 };
+// pdb: IOManager::Resume | IOManager.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void OwnerAA2840::FUN_00aa2840() {
     if (FUN_00aa2650() && callback)
         callback();
@@ -13256,6 +13529,7 @@ struct FUN_00aa5000 : FUN_00aa4cc0 {
     unsigned unk40,unk44,unk48,unk4c,unk50,unk54,unk58;
     FUN_00aa5000();
 };
+// pdb: IOManager::IOManager | IOManager.obj | fnv360_0822_retail, call_gap, low
 FUN_00aa5000::FUN_00aa5000() : FUN_00aa4cc0(10,1,24) {
     vptr = &DAT_00e896ec;
     unk48=0; unk50=0; unk44=0; unk54=0; unk58=0; unk40=6;
@@ -13283,6 +13557,8 @@ struct Bounds {
     void FUN_008beac0(ViewerStrings*);
     void FUN_00aa1d60(ViewerStrings*);
 };
+// pdb: BSMultiBoundAABB::GetViewerStrings | BSMultiBoundAABB.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: apStrings
 void Bounds::FUN_00aa1d60(ViewerStrings* strings) {
     FUN_008beac0(strings);
     char* name=FUN_00847b50(DAT_0116d124);
@@ -13343,6 +13619,8 @@ struct Q52Obj {
     bool FUN_00aaf610(unsigned idx);
 };
 // @fnv 0x00aaf610
+// pdb: NiBSBoneLODController::SetBoneLOD | NiBSBoneLODController.obj | fnv360_0822_retail, objrun, low
+// pdb params: iLOD
 bool Q52Obj::FUN_00aaf610(unsigned idx)
 {
     if (m_num > 0 && m_cur != idx)
@@ -13471,6 +13749,8 @@ struct Owner
     void FUN_00ab4310(RefObject* object);
 };
 
+// pdb: BSPortalGraph::AddUnboundNode | BSPortalGraph.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apNode
 void Owner::FUN_00ab4310(RefObject* object)
 {
     if (object)
@@ -13538,6 +13818,8 @@ public:
     virtual void vf00();
     FUN_00ab8480();
 };
+// pdb: NiTPrimitiveArray<NiPointer<NiAVObject> >::NiTPrimitiveArray<NiPointer<NiAVObject> > | BSPSysArrayEmitter.obj | fnv360_0822_retail, uvref, high
+// pdb params: uiMaxSize, uiGrowBy
 FUN_00ab8480::FUN_00ab8480() : type(2) {}
 }   // namespace f3m_00ab8480
 
@@ -13573,6 +13855,7 @@ struct FUN_00aafff0 : Base {
     void FUN_00aafeb0();
     ~FUN_00aafff0();
 };
+// pdb: NiBSBoneLODController::~NiBSBoneLODController | NiBSBoneLODController.obj | fnv360_0822_debug, call_seq, high
 FUN_00aafff0::~FUN_00aafff0() { FUN_00aafeb0(); }
 }
 }   // namespace f3m_00aafff0
@@ -13599,6 +13882,7 @@ struct Object: FUN_00abc050 {
     static void* operator new(unsigned int size) {return FUN_0089eb90(size);}
     static void operator delete(void* pointer,unsigned int size) {FUN_0089ec10(pointer,size);}
 };
+// pdb: BSPSysMultiTargetEmitterCtlr::CreateObject | BSPSysMultiTargetEmitterCtlr.obj | fnv360_0822_retail, caller_sim, low
 Object* __cdecl FUN_00ab50a0() {return new Object;}
 }
 }   // namespace f3m_00ab50a0
@@ -13615,6 +13899,8 @@ struct ArrayBase {
 };
 struct Array:ArrayBase {Array():ArrayBase(0,1){}virtual ~Array();};
 struct Extra: A7F920ExtraData {Array entries;Extra();virtual ~Extra();};
+// pdb: NiTObjectArray<FurnitureMark>::NiTObjectArray<FurnitureMark> | BSFurnitureMarker.obj | fnv360_0822_retail, uvref, medium
+// pdb params: uiMaxSize, uiGrowBy
 Extra::Extra(){FUN_008245d0(*DAT_0116da60);}
 }
 }   // namespace f3m_00ab07b0
@@ -13624,6 +13910,8 @@ extern float DAT_01066a50;
 namespace f3m_00ab00a0 {
 namespace task2432 {
 struct Owner {unsigned unk00,unk04,unk08;unsigned short value;void FUN_00ab00a0(float);};
+// pdb: FurnitureMark::SetHeading | BSFurnitureMarker.obj | fnv360_0822_debug, caller, medium
+// pdb params: afHeading
 void Owner::FUN_00ab00a0(float angle){
  while(angle<0.0f)angle+=DAT_01066a50;
  while(angle>=DAT_01066a50)angle-=DAT_01066a50;
@@ -13697,6 +13985,8 @@ struct FUN_00ab7930 {
  void FUN_0082daa0(FUN_00ab7930*,void*);
  FUN_00ab7930* FUN_00ab7a30(void*);
 };
+// pdb: BSMasterParticleSystem::CreateClone | BSMasterParticleSystem.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kCloning
 FUN_00ab7930* FUN_00ab7930::FUN_00ab7a30(void* process) {
  FUN_00ab7930* object=0;
  object=new FUN_00ab7930();
@@ -13744,6 +14034,8 @@ struct Clone2441 : FUN_00c1c390 {
  void FUN_00abbb40(Clone2441*,void*);
  Clone2441* FUN_00ab5000(void*);
 };
+// pdb: BSPSysMultiTargetEmitterCtlr::CreateClone | BSPSysMultiTargetEmitterCtlr.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kCloning
 Clone2441* Clone2441::FUN_00ab5000(void* process) {
  Clone2441* object=new Clone2441();
  FUN_00abbb40(object,process);
@@ -13769,6 +14061,8 @@ struct Modifier : FUN_00ac5e10 {
     static void* operator new(unsigned n) {return FUN_0089eb90(n);}
     Modifier* FUN_00aaaa60(CloneContext&);
 };
+// pdb: BSWindModifier::CreateClone | BSWindModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 Modifier* Modifier::FUN_00aaaa60(CloneContext& context) {
     Modifier* result = new Modifier();
     FUN_00ac5e70(result,context);
@@ -13825,6 +14119,8 @@ class CenteredPointBounds
 };
 
 // @fnv 0x00c38a20
+// pdb: BSMultiBoundAABB::QPointWithin | BSMultiBoundAABB.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: kpoint
 int CenteredPointBounds::FUN_00aa14b0(const Pt& kPoint)
 {
     Pt kDiff = kPoint - m_kCenter;
@@ -13847,6 +14143,7 @@ struct DAT_00e89844 : FUN_00aa51a0 {
  __forceinline ~DAT_00e89844() { ((MemoryManager2424*)&DAT_01090a78)->FUN_0086ba60(data28); }
  DAT_00e89844* FUN_00aa5790(unsigned flags);
 };
+// pdb: QueuedFileEntry::`scalar deleting destructor' | QueuedFiles.obj | fnv360_0822_retail, vtable, medium
 DAT_00e89844* DAT_00e89844::FUN_00aa5790(unsigned flags) {
  this->DAT_00e89844::~DAT_00e89844();
  if(flags & 1) ((MemoryManager2424*)&DAT_01090a78)->FUN_0086ba60(this);
@@ -14018,6 +14315,8 @@ struct ProcessOwner_j61
     void* event;
     void FUN_00aae340(void* context);
 };
+// pdb: BSParticleSystemManager::UpdateParallel | BSParticleSystemManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: updateData
 void ProcessOwner_j61::FUN_00aae340(void* context)
 {
     unsigned int total = count;
@@ -14061,6 +14360,8 @@ struct FUN_00c54a30
     void FUN_00ab0270(unsigned int uiIndex, const ElemZ& kElem);
 };
 // @fnv 0x00c54a30
+// pdb: NiTArray<FurnitureMark,NiTNewInterface<FurnitureMark> >::SetAt | BSFurnitureMarker.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: uiIndex, element
 void FUN_00c54a30::FUN_00ab0270(unsigned int uiIndex, const ElemZ& kElem)
 {
     static ElemZ s_kEmpty;
@@ -14158,6 +14459,8 @@ struct Source {
     int unkc0;
     FUN_00aae130* FUN_00aae1f0(int unused);
 };
+// pdb: BSPortalSharedNode::CreateClone | BSPortal.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 FUN_00aae130* Source::FUN_00aae1f0(int unused)
 {
     return new FUN_00aae130(unkc0);
@@ -14195,6 +14498,7 @@ struct Obj {
     bool FUN_00aa25b0();
     void FUN_00aa2820();
 };
+// pdb: GetCurrentThreadId | getcurrentthreadid.obj | fnv360_0721_retail, call_seq, medium
 void Obj::FUN_00aa2820()
 {
     if (FUN_00aa25b0() && callback)
@@ -14222,6 +14526,8 @@ struct Owner2410
     void FUN_00aa2410(unsigned int key);
 };
 
+// pdb: BSMultiBoundRoom::RemoveOccluder | BSMultiBoundRoom.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apOccluder
 void Owner2410::FUN_00aa2410(unsigned int key)
 {
     if (key)
@@ -14298,6 +14604,8 @@ struct Clone : FUN_00aad5f0 {
     Clone() {}
     Clone* FUN_00aada50(Process& proc);
 };
+// pdb: BSMultiBoundSphere::CreateClone | BSMultiBoundSphere.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: arCloneData
 Clone* Clone::FUN_00aada50(Process& proc)
 {
     Clone* c = new Clone;
@@ -14540,6 +14848,8 @@ struct Object {
     void FUN_0082e820(Stream& s);
     void FUN_00ab7280(Stream& s);
 };
+// pdb: BSMasterParticleSystem::SaveBinary | BSMasterParticleSystem.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void Object::FUN_00ab7280(Stream& s)
 {
     FUN_0082e820(s);
@@ -14569,6 +14879,7 @@ struct Created : FUN_00825800 {
     Created() : unk08(0) {}
     virtual void v00();
 };
+// pdb: BSReference::CreateObject | BSReference.obj | fnv360_0822_retail, objrun, medium
 FUN_00825800* __cdecl FUN_00ab9bf0()
 {
     return new Created;
@@ -14807,6 +15118,8 @@ struct Owner {
     void FUN_0082db60(Stream&);
     void FUN_00ab7230(Stream&);
 };
+// pdb: BSMasterParticleSystem::LoadBinary | BSMasterParticleSystem.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void Owner::FUN_00ab7230(Stream& stream) {
     FUN_0082db60(stream);
     stream.underlying->ReadShort(value);
@@ -14844,6 +15157,7 @@ struct FUN_00aba1f0 : FUN_00845b60 {
     Array array;
     FUN_00aba1f0();
 };
+// pdb: BSTextureData::BSTextureData | BSTextureData.obj | fnv360_0822_retail, call_seq, high
 FUN_00aba1f0::FUN_00aba1f0() : FUN_00845b60(*DAT_0116ebb0) {}
 }
 
@@ -14872,6 +15186,8 @@ public:
 
 void __stdcall FUN_008459d0(int value);
 
+// pdb: BSBound::SaveBinary | BSBound.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BSNonUniformScaleExtraData::SaveBinary)
+// pdb params: arStream
 void __thiscall Ab0cc0Owner::FUN_00ab0cc0(int value)
 {
     FUN_008459d0(value);
@@ -15122,6 +15438,8 @@ unsigned unkf8;
     void FUN_00aaeaf0(float m_fFirstFloat, unsigned char ucFlag, C52020Obj* pObj, unsigned char ucArg4);
 };
 
+// pdb: BSSceneGraph::SetCameraFOV | BSSceneGraph.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: afFOV, abForce, apCamera, abSetLODMult
 void C52020Obj::FUN_00aaeaf0(float afFov,unsigned char ucFlag,C52020Obj* apTarget,unsigned char ucArg4) {
     C52020Obj* aTarget=apTarget;
     if(!aTarget) aTarget=m_ac;
@@ -15252,6 +15570,8 @@ struct DecisionTree {
  bool __thiscall FUN_00aa7e80(SSNode* query);
 };
 // @fnv 0x00c49560
+// pdb: BSCompoundFrustum::ProcessPlane | BSCompoundFrustum.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apPlane
 bool DecisionTree::FUN_00aa7e80(SSNode* query) {
  VolumeRecord* result = 0;
  bool bResult = true;
@@ -15303,6 +15623,7 @@ struct RangeNameObj {
     void FUN_00aa9930();
 };
 // @fnv 0x00c45670
+// pdb: BSRangeNode::ParseNameForRanges | BSRangeNode.obj | fnv360_0822_retail, vtable, medium
 void RangeNameObj::FUN_00aa9930()
 {
     const char* pcName2 = m_pcName;
@@ -15487,6 +15808,8 @@ struct HostV {
     void FUN_00aad410(ObjV*);
 };
 // @fnv 0x00c4ee90
+// pdb: BSCullingProcess::Process | BSCullingProcess.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apObject
 void HostV::FUN_00aad410(ObjV* pkObj)
 {
     if (m_iFadeIndex != 2 && m_iFadeIndex != 1)
@@ -15849,6 +16172,8 @@ struct ScissorProperty_Stub : ScissorBase_Stub
 };
 
 // @fnv 0x00c5d110
+// pdb: BSScissorTriShape::RenderImmediate | BSScissorTriShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkRenderer
 void ScissorProperty_Stub::FUN_00ab5570(NiDX9Renderer_Stub* pkRenderer)
 {
     NiDX9Renderer_Stub* pkDX9Renderer = pkRenderer;
@@ -15898,6 +16223,8 @@ struct Array {
     unsigned int ShrinkSize() { return capacity>0x800 ? capacity-0x400 : capacity>>1; }
     void FUN_00aabed0(unsigned int index,bool resize);
 };
+// pdb: BSSimpleArray<unsigned short,1024>::Remove | BSPolygon.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aiIndex, abShrink
 void Array::FUN_00aabed0(unsigned int index,bool resize)
 {
     if (resize && ShouldShrink()) {
@@ -16064,6 +16391,7 @@ __forceinline DAT_00e8aa0c::~DAT_00e8aa0c()
 }
 
 
+// pdb: BSSceneGraph::~BSSceneGraph | BSSceneGraph.obj | fnv360_0822_retail, call_seq, medium
 void DAT_00e8aa0c::FUN_00aaee80() { this->DAT_00e8aa0c::~DAT_00e8aa0c(); }
 }   // namespace f3m_00aaee80
 
@@ -16129,6 +16457,7 @@ struct FUN_00aae280 : FUN_0082ea60 {
     FUN_00aae280();
 };
 // @fnv 0x00c503d0
+// pdb: BSParticleSystemManager::BSParticleSystemManager | BSParticleSystemManager.obj | fnv360_0822_retail, call_seq, medium
 FUN_00aae280::FUN_00aae280() : FUN_0082ea60(0) {
     count = 10;
     void* allocated = DAT_01090a78.FUN_0086b930(40);
@@ -16184,6 +16513,8 @@ struct FUN_00c53af0
     bool FUN_00aaf730(FUN_00c53af0* pkObj);
 };
 // @fnv 0x00c53af0
+// pdb: NiBSBoneLODController::IsEqual | NiBSBoneLODController.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkObject
 bool FUN_00c53af0::FUN_00aaf730(FUN_00c53af0* pkObj)
 {
     unsigned int i;
@@ -16272,6 +16603,8 @@ class A55320Object
 
 // Appends the class name and formatted m_iLOD and m_uiNumLODs strings to pkStrings.
 // @fnv 0x00a55320
+// pdb: NiBSBoneLODController::GetViewerStrings | NiBSBoneLODController.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkStrings
 void A55320Object::FUN_00aaff20(BA55320StringArray* pkStrings)
 {
     pkStrings->Add(FUN_00847b50(DAT_0116da58));
@@ -16379,6 +16712,7 @@ struct FUN_00aae5e0 : FUN_0082e4f0 {
     unsigned int count;
     Task* task;
 };
+// pdb: BSParticleSystemManager::~BSParticleSystemManager | BSParticleSystemManager.obj | fnv360_0822_retail, call_seq, high
 FUN_00aae5e0::~FUN_00aae5e0()
 {
     void* old=data;
@@ -16465,6 +16799,8 @@ struct TCColorEq : public TCEq
 
 // Calls the base equality check, then compares m0c, m18 and m24 against the same fields of pObject cast to TCColorEq.
 // @fnv 0x00c60f60
+// pdb: BSMultiBoundCapsule::IsEqual | BSMultiBoundCapsule.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apObject
 bool TCColorEq::FUN_00ab6b30(NiObject* pObject)
 {
     bool bResultTmp = FUN_008c1550(pObject);
@@ -16531,6 +16867,7 @@ struct FUN_00aa4800 : public FUN_00aa4780
 };
 
 // @fnv 0x00c3fa70
+// pdb: BSTaskManager<__int64>::~BSTaskManager<__int64> | IOManager.obj | fnv360_0822_retail, call_seq, high
 FUN_00aa4800::~FUN_00aa4800()
 {
     unsigned int i = 0;
@@ -16563,6 +16900,7 @@ struct Ref2554 {
  void DecRefCount() { if (InterlockedDecrement(&refs)==0) DeleteThis(); }
 };
 struct Array2554:NiTObjectArray<NiPointer<Ref2554> > { void FUN_00aaab30(); };
+// pdb: NiTArray<NiPointer<BSTempEffect>,NiTNewInterface<NiPointer<BSTempEffect> > >::RemoveAll | GarbageCollector.obj | fnv360_0822_retail, call_seq, medium
 void Array2554::FUN_00aaab30() {
  for (unsigned short i=0;i<m_usSize;i++) {m_pBase[i]=NiPointer<Ref2554>();}
  m_usSize=0;
@@ -16968,6 +17306,8 @@ struct Owner {
     Destination destination;
     bool FUN_00ab9ec0(Context*,Object*);
 };
+// pdb: BSNodeReferences::AddParentRef | BSReference.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: arStream, apObject
 bool Owner::FUN_00ab9ec0(Context* context,Object* object)
 {
     Object* local;
@@ -17034,6 +17374,7 @@ struct FUN_00aabf90
     ~FUN_00aabf90();
 };
 // @fnv 0x00c4ccd0
+// pdb: BSPolygon2D::~BSPolygon2D | BSPolygon.obj | fnv360_0822_retail, call_gap, low
 FUN_00aabf90::~FUN_00aabf90()
 {
     if (m28 == 0)
@@ -17097,6 +17438,7 @@ class FUN_00aa6c20 : public FUN_00825830
 };
 
 // @fnv 0x00c3bab0
+// pdb: BSNodeReferences::~BSNodeReferences | BSStream.obj | fnv360_0822_retail, call_seq, high
 FUN_00aa6c20::~FUN_00aa6c20()
 {
     m_aiIndexedValues.RemoveAll();
@@ -17137,6 +17479,8 @@ class ColorProperty2572 : public ColorBase2572
 };
 
 // @fnv 0x00c38090
+// pdb: BSBound::IsEqual | BSBound.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apObject
 bool ColorProperty2572::FUN_00ab0cf0(const ColorBase2572* pkObject)
 {
     bool bEqual = FUN_00845af0(pkObject);
@@ -17185,6 +17529,8 @@ class ColorProperty : public ColorPropertyBase
 };
 
 // @fnv 0x00c38090
+// pdb: BSMultiBoundAABB::IsEqual | BSMultiBoundAABB.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: apObject
 bool ColorProperty::FUN_00aa0b70(const ColorPropertyBase* pkObject)
 {
     bool bEqual = FUN_008c1550(pkObject);
@@ -17228,6 +17574,8 @@ Member2578 axis;
  void FUN_00aa0a00(Array2578*);
 };
 // @fnv 0x00a564d0
+// pdb: BSMultiBoundOBB::GetViewerStrings | BSMultiBoundOBB.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStrings
 void Viewer2578::FUN_00aa0a00(Array2578* pArray2578)
 {
     FUN_00aa1d60(pArray2578);
@@ -17249,6 +17597,7 @@ void Viewer2578::FUN_00aa0a00(Array2578* pArray2578)
 namespace f3m_00ab1020 {
 struct PerpPoint2555 { float x,y,z; PerpPoint2555 NiPoint3_UnitCross(const PerpPoint2555&) const; PerpPoint2555 FUN_00ab1020() const; };
 // @fnv 0x00c5a800
+// pdb: NiPoint3::Perpendicular | BSTestObjects.obj | fnv360_0822_debug, callee_sim, low
 PerpPoint2555 PerpPoint2555::FUN_00ab1020() const
 {
     if (fabs(x) < fabs(y))
@@ -17366,6 +17715,8 @@ struct S_00c4aca0_Self
     S_00c4aca0_Obj* __thiscall FUN_00aab060(int arg);
 };
 // @fnv 0x00c4aca0
+// pdb: BSDebrisNode::CreateClone | BSDebrisNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 S_00c4aca0_Obj* __thiscall S_00c4aca0_Self::FUN_00aab060(int arg)
 {
     S_00c4aca0_Obj* p = new S_00c4aca0_Obj;
@@ -17390,6 +17741,8 @@ struct Modifier : ModifierBase {
     float value48,value4c,value50,value54,value58,value5c;
     void FUN_00ab61a0(ModifierBase*,CloneProcess&);
 };
+// pdb: BSPSysSimpleColorModifier::CopyMembers | BSPSysSimpleColorModifier.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BSPSysSubTexModifier::CopyMembers)
+// pdb params: pkDest, kCloning
 void Modifier::FUN_00ab61a0(ModifierBase* base,CloneProcess& process)
 {
     FUN_00ac5e70(base,process);
@@ -17501,6 +17854,8 @@ struct Owner2598
     void FUN_00aae3d0(int);
 };
 // @fnv 0x00c51700
+// pdb: BSParticleSystemManager::DetachChild | BSParticleSystemManager.obj | fnv360_0721_beta, vtable, medium
+// pdb params: pkChild
 void Owner2598::FUN_00aae3d0(int arg)
 {
     ScopedRef2598 ptr;
@@ -17537,6 +17892,8 @@ struct S_00c4aca0_Self
     S_00c4aca0_Obj* __thiscall FUN_00ab6050(int arg);
 };
 // @fnv 0x00c4aca0
+// pdb: BSPSysStripUpdateModifier::CreateClone | BSPSysStripUpdateModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kCloning
 S_00c4aca0_Obj* __thiscall S_00c4aca0_Self::FUN_00ab6050(int arg)
 {
     S_00c4aca0_Obj* p = new S_00c4aca0_Obj;
@@ -17612,6 +17969,8 @@ struct S_00c4aca0_Self
     S_00c4aca0_Obj* __thiscall FUN_00aaaef0(int arg);
 };
 // @fnv 0x00c4aca0
+// pdb: BSBlastNode::CreateClone | BSBlastNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 S_00c4aca0_Obj* __thiscall S_00c4aca0_Self::FUN_00aaaef0(int arg)
 {
     S_00c4aca0_Obj* p = new S_00c4aca0_Obj;
@@ -17664,6 +18023,7 @@ public:
 
 extern NiFixedString* DAT_0116da80;
 
+// pdb: BSBound::InitSDM | BSBound.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_00ab0d80()
 {
     DAT_0116da80 = new NiFixedString("BBX");
@@ -17726,6 +18086,7 @@ struct DAT_00e89d44 : FUN_00ab5d60 {
  DAT_00e89d44() { fieldb0=0; fieldb4=0; }
  static void* operator new(unsigned n) throw() { return FUN_0089eb90(n); }
 };
+// pdb: BSValueNode::CreateObject | BSValueNode.obj | fnv360_0822_retail, objrun, medium
 DAT_00e89d44* __cdecl FUN_00aa7020() { return new DAT_00e89d44(); }
 }   // namespace f3m_00aa7020
 
@@ -17789,6 +18150,8 @@ struct Factory {
     void FUN_00aa9a10(Object*,int);
     Object* FUN_00aab1c0(int);
 };
+// pdb: BSDamageStage::CreateClone | BSDamageStage1.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 Object* Factory::FUN_00aab1c0(int argument)
 {
     Object* result=new Object;
@@ -17872,6 +18235,8 @@ struct Owner {
 void FUN_0082daa0(FUN_00aae280*,void*);
 FUN_00aae280* FUN_00aae560(void*);
 };
+// pdb: BSParticleSystemManager::CreateClone | BSParticleSystemManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kCloning
 FUN_00aae280* Owner::FUN_00aae560(void* arg) {
  FUN_00aae280* obj=0;
  obj=new FUN_00aae280();
@@ -17978,6 +18343,8 @@ struct Owner
     void FUN_00aae450(int);
 };
 // @fnv 0x00c51700
+// pdb: BSParticleSystemManager::DetachChildAt | BSParticleSystemManager.obj | fnv360_0721_beta, vtable, medium
+// pdb params: i
 void Owner::FUN_00aae450(int arg)
 {
     ScopedRef ptr;
@@ -18089,6 +18456,7 @@ public:
 
 extern NiFixedString* DAT_0116ebbc;
 
+// pdb: BSAttachPoints::InitSDM | BSAttachPoints.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_00aba530()
 {
     DAT_0116ebbc = new NiFixedString("ATP");
@@ -18136,6 +18504,8 @@ struct Owner {
     void BSPSysArrayEmitter_CopyMembers(FUN_00ab8480*,int);
     FUN_00ab8480* FUN_00ab8b10(int);
 };
+// pdb: BSPSysArrayEmitter::CreateClone | BSPSysArrayEmitter.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 FUN_00ab8480* Owner::FUN_00ab8b10(int arg) {
     FUN_00ab8480* item = new FUN_00ab8480;
     BSPSysArrayEmitter_CopyMembers(item,arg);
@@ -18150,6 +18520,8 @@ namespace task2611 {
 void* __cdecl FUN_0089eb90(unsigned);struct CloningProcess;
 struct Modifier {unsigned unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c;float value;unsigned unk24,unk28,unk2c,unk30,unk34,unk38;void FUN_00ac5e70(Modifier*,CloningProcess&);Modifier* FUN_00ab9250(CloningProcess&);};
 struct FUN_00ab8ed0:Modifier {FUN_00ab8ed0();static void*operator new(unsigned n){return FUN_0089eb90(n);}static void operator delete(void*);};
+// pdb: BSParentVelocityModifier::CreateClone | BSParentVelocityModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 Modifier* Modifier::FUN_00ab9250(CloningProcess& process){Modifier*p=new FUN_00ab8ed0;FUN_00ac5e70(p,process);p->value=value;return p;}
 }
 }   // namespace f3m_00ab9250
@@ -18185,6 +18557,7 @@ struct FUN_00aa5fa0 {
  static void operator delete(void* p,unsigned int n) { FUN_0089ec10(p,n); }
  void FUN_008245d0(const FixedString&);
 };
+// pdb: BSXFlags::CreateObject | BSXFlags.obj | fnv360_0822_retail, objrun, medium
 FUN_00aa5fa0* FUN_00aa6080() {
  FUN_00aa5fa0* object=new FUN_00aa5fa0;
  object->FUN_008245d0(DAT_0108f3fc);
@@ -18207,6 +18580,8 @@ struct FUN_00c4fce0_cls
 
 // Compares this object with another: first calls FUN_008c1550, then checks m_pos x/y/z and m_18 are equal, returning the combined result.
 // @fnv 0x00c4fce0
+// pdb: BSMultiBoundSphere::IsEqual | BSMultiBoundSphere.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: apObject
 bool FUN_00c4fce0_cls::FUN_00aad6b0(FUN_00c4fce0_cls* other)
 {
     bool r6 = FUN_008c1550(other);
@@ -18342,6 +18717,8 @@ struct FUN_00aae010_cls
 };
 
 // @fnv 0x00c4f6d0
+// pdb: BSPortalSharedNode::OnVisible | BSPortal.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: NiSwitchNode::OnVisible)
+// pdb params: kCuller
 void FUN_00aae010_cls::FUN_00aae010(FUN_00aae010_arg* pObj)
 {
     FUN_00aae010_sub* tgtC;
@@ -18437,6 +18814,7 @@ FUN_00aaa070();
 static void* operator new(unsigned int n) { return FUN_0089eb90(n); }
 static void operator delete(void* p,unsigned int n) { FUN_0089ec10(p,n); }
 };
+// pdb: BSMultiBoundNode::CreateObject | BSMultiBoundNode.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: BSMultiBoundNode::RegisterStreamables)
 FUN_00aaa070* FUN_00aaa2c0() { return new FUN_00aaa070; }
 }
 }   // namespace f3m_00aaa2c0
@@ -18453,6 +18831,7 @@ static void* operator new(unsigned n){return FUN_0089eb90(n);}
 static void operator delete(void*);
 void FUN_008245d0(const FixedString&);
 };
+// pdb: BSFurnitureMarker::CreateObject | BSFurnitureMarker.obj | fnv360_0822_retail, objrun, medium
 FUN_00ab07b0* FUN_00ab08a0(){FUN_00ab07b0* object=new FUN_00ab07b0;object->FUN_008245d0(DAT_0108f3fc);return object;}
 }
 
@@ -18462,6 +18841,8 @@ namespace Task2623 {
 void* __cdecl FUN_00c01530(void*,const void*,unsigned int);
 struct Copier {void FUN_00aa7ab0(char*,char*,unsigned int);};
 // @fnv 0x006dbf20
+// pdb: BSSimpleArray<NiFrustumPlanes,1024>::_MoveItems | BSCompoundFrustum.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: apDestAddr, apSrcAddr, aiCount
 void __thiscall Copier::FUN_00aa7ab0(char* dst, char* src, unsigned int count)
 {
     if (!(count > 0))
@@ -18492,6 +18873,7 @@ struct Heap {void FUN_0086ba60(void*);};extern Heap DAT_01090a78;
 struct Array {void*data;virtual ~Array(){DAT_01090a78.FUN_0086ba60(data);}};
 struct FUN_00845a20 {unsigned unk04,unk08;virtual void vfn();~FUN_00845a20();};
 struct FUN_00ab0350:FUN_00845a20 {Array items;~FUN_00ab0350();};
+// pdb: BSFurnitureMarker::~BSFurnitureMarker | BSFurnitureMarker.obj | fnv360_0822_debug, call_seq, medium
 FUN_00ab0350::~FUN_00ab0350(){}
 }
 }   // namespace f3m_00ab0350
@@ -18504,6 +18886,8 @@ typedef void*(__cdecl* Callback)(void*,void*,unsigned);
 extern Callback DAT_0116d6ac;
 extern unsigned char DAT_01090bbc[24];
 extern unsigned DAT_0116d6c4,DAT_01090bd4;
+// pdb: GetLocalTime | getlocaltime.obj | fnv360_0721_retail, objrun_prop, low, conflict (bridge: XSetFileCacheSize)
+// pdb params: lpLocalTime
 void FUN_00aa5e70(unsigned char a,unsigned char b,unsigned char c,unsigned char d,unsigned e){
 FUN_00aa5d10();DAT_01066650=a;DAT_01066651=b;DAT_01066652=c;DAT_01066653=d;DAT_0116d6ac=reinterpret_cast<Callback>(e);
 for(int i=0;i<24;i++) DAT_01090bbc[i]=0;
@@ -18548,6 +18932,7 @@ public:
     OwnedHelper* m_pkHelper;
 };
 
+// pdb: IOManager::~IOManager | IOManager.obj | fnv360_0822_debug, call_seq, high
 FUN_00aa4920::~FUN_00aa4920()
 {
     delete m_pkHelper;
@@ -18575,6 +18960,7 @@ struct FUN_00ab8500 : FUN_00ac5e40 {
  Array array;
  ~FUN_00ab8500();
 };
+// pdb: BSPSysArrayEmitter::~BSPSysArrayEmitter | BSPSysArrayEmitter.obj | fnv360_0822_debug, call_seq, medium
 FUN_00ab8500::~FUN_00ab8500() {}
 }
 }   // namespace f3m_00ab8500
@@ -18650,6 +19036,8 @@ struct FUN_00aaa070 {
  static void* operator new(unsigned n) { return FUN_0089eb90(n); }
 };
 struct Factory { void FUN_00aaa360(FUN_00aaa070*,void*); FUN_00aaa070* FUN_00aaa710(void*); };
+// pdb: BSMultiBoundNode::CreateClone | BSMultiBoundNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 FUN_00aaa070* Factory::FUN_00aaa710(void* arg) { FUN_00aaa070* obj=0; obj=new FUN_00aaa070(); FUN_00aaa360(obj,arg); return obj; }
 }
 }   // namespace f3m_00aaa710
@@ -18732,6 +19120,8 @@ class FUN_00aa68a0_cls
 };
 
 // @fnv 0x00c3a8a0
+// pdb: BSStream::Load | BSStream.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFileName, apFile
 bool FUN_00aa68a0_cls::FUN_00aa68a0(unsigned int a1, unsigned int a2)
 {
     if (a2 == 0)
@@ -18823,6 +19213,8 @@ namespace f3m_00aa67b0 {
 namespace task2674 {
 struct FUN_00825800 {virtual void v0();virtual void DeleteThis();long refs;FUN_00825800();void FUN_00825830();~FUN_00825800(){FUN_00825830();}};
 struct FUN_00aa67b0: FUN_00825800 {void* member;FUN_00aa67b0(void*);virtual void v0();void BSReference_SetName(void*);};
+// pdb: BSReference::BSReference | BSStream.obj | fnv360_0822_retail, call_dedup, medium, conflict (bridge: BSReference::SetName)
+// pdb params: apName
 FUN_00aa67b0::FUN_00aa67b0(void* p){member=0;BSReference_SetName(p);}
 }
 
@@ -18887,6 +19279,8 @@ struct FUN_00ab54f0 : FUN_0083f490 {
  virtual ~FUN_00ab54f0();
  FUN_00ab54f0(unsigned short a, void* b, void* c, void* d, void* e, unsigned short f, unsigned g, unsigned short h, unsigned short* i,int j,int k,int l,int m);
 };
+// pdb: BSScissorTriShape::BSScissorTriShape | BSScissorTriShape.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: usVertices, pkVertex, pkNormal, pkColor, pkTexture, usNumTextureSets, eNBTMethod, usTriangles, pusTriList, aiLeft, aiTop, aiRight, aiBottom
 FUN_00ab54f0::FUN_00ab54f0(unsigned short a, void* b, void* c, void* d, void* e, unsigned short f, unsigned g, unsigned short h, unsigned short* i,int j,int k,int l,int m) : FUN_0083f490(a,b,c,d,e,f,g,h,i) { left=j;top=k;right=l;bottom=m; }
 }
 
@@ -18948,6 +19342,7 @@ struct Object : FUN_00aa9840 {
     Object() {}
     virtual void Slot00();
 };
+// pdb: BSDamageStage::CreateObject | BSDamageStage1.obj | fnv360_0822_retail, caller_sim, medium
 Object* FUN_00aab240() { return new Object; }
 }
 }   // namespace f3m_00aab240
@@ -19087,6 +19482,8 @@ struct FUN_00c39c80_cls
 };
 
 // @fnv 0x00c39c80
+// pdb: BSMultiBoundRoom::CheckBound | BSMultiBoundRoom.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: aTargetBound
 int FUN_00c39c80_cls::FUN_00aa1fe0(int a1)
 {
     int res;
@@ -19120,6 +19517,7 @@ namespace task2677 {
 void*__cdecl FUN_0089eb90(unsigned);
 struct FUN_00aad5f0{virtual ~FUN_00aad5f0();unsigned unk04,unk08,unk0c,unk10,unk14,unk18;FUN_00aad5f0();};
 struct Derived:FUN_00aad5f0{virtual ~Derived();static void*operator new(unsigned n){return FUN_0089eb90(n);}static void operator delete(void*);};
+// pdb: BSMultiBoundSphere::CreateObject | BSMultiBoundSphere.obj | fnv360_0822_retail, objrun, medium
 FUN_00aad5f0*__cdecl FUN_00aad720(){return new Derived();}
 }
 }   // namespace f3m_00aad720
@@ -19132,6 +19530,7 @@ struct FUN_00aa6820 : FUN_00825830 {
  virtual ~FUN_00aa6820();
  void BSReference_SetName(bool);
 };
+// pdb: BSReference::`scalar deleting destructor' | BSStream.obj | fnv360_0721_beta, objrun, low, conflict (skyrim: BSReference::~BSReference)
 FUN_00aa6820::~FUN_00aa6820() { BSReference_SetName(false); }
 }
 }   // namespace f3m_00aa6820
@@ -19192,6 +19591,8 @@ struct Object : FUN_00aa9840 {
  static void* operator new(unsigned int n) {return FUN_0089eb90(n);}
  Object() {}
 };
+// pdb: BSBlastNode::CopyMembers | BSBlastNode.obj | fnv360_0822_debug, objrun, low, conflict (bridge: BSBlastNode::CreateObject)
+// pdb params: pDest, arCloneData
 Object* FUN_00aaaf70() {return new Object;}
 }
 }   // namespace f3m_00aaaf70
@@ -19218,6 +19619,7 @@ struct S_00c4aca0_Obj : FUN_00ac5e10
     {}
     virtual void vf0();
 };
+// pdb: BSPSysStripUpdateModifier::CreateObject | BSPSysStripUpdateModifier.obj | fnv360_0822_retail, objrun, medium
 S_00c4aca0_Obj* FUN_00ab5f10() { return new S_00c4aca0_Obj; }
 }
 }   // namespace f3m_00ab5f10
@@ -19468,6 +19870,8 @@ unsigned int unk9c;
 Node** children; unsigned short capacity,count;
 };
 // @fnv 0x00c4b500
+// pdb: BSUtilities::ProcessSelectiveUpdate | BSUtilities.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apObject
 void FUN_00aabca0(Node* apNode)
 {
     if (apNode) {
@@ -19516,6 +19920,8 @@ struct NiPersistentSrcTextureRendererData
 };
 // Links the object to the stream, then swaps m_spPalette to the stream's palette, releasing the old one and incrementing the new one's refcount.
 // @fnv 0x00a98110
+// pdb: BSMultiBoundNode::LinkObject | BSMultiBoundNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 void NiPersistentSrcTextureRendererData::FUN_00aaa1d0(NiStream& kStream)
 {
     ((NiObjectHelper*)this)->NiObjectHelper::FUN_0082e780(kStream);
@@ -19667,6 +20073,8 @@ struct FUN_00aa2040_cls
 };
 
 // @fnv 0x00c39c80
+// pdb: BSMultiBoundRoom::CheckBound | BSMultiBoundRoom.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: aTargetBound
 int FUN_00aa2040_cls::FUN_00aa2040(int a1)
 {
     int res;
@@ -19894,6 +20302,8 @@ struct DAT_00e8a35c : FUN_00aa9840 {
  DAT_00e8a35c() {}
  static void* operator new(unsigned n) throw() { return FUN_0089eb90(n); }
 };
+// pdb: BSDebrisNode::CopyMembers | BSDebrisNode.obj | fnv360_0822_debug, objrun, low, conflict (bridge: BSDebrisNode::CreateObject)
+// pdb params: pDest, arCloneData
 DAT_00e8a35c* __cdecl FUN_00aab0e0() { return new DAT_00e8a35c(); }
 }   // namespace f3m_00aab0e0
 
@@ -19917,6 +20327,8 @@ struct GlobalObjectO2_00a7b610
 };
 extern GlobalObjectO2_00a7b610 DAT_0116d12c;
 // @fnv 0x00bc28f0
+// pdb: BSMultiBoundRoom::GetViewerStrings | BSMultiBoundRoom.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: pStrings
 void __stdcall FUN_00aa2430(StrArr* pStrArr)
 {
     FUN_00aaa790(pStrArr);
@@ -20010,6 +20422,8 @@ struct Owner {
  Owner* FUN_00825200(const RTTI*);
 };
 // @fnv 0x00c4b470
+// pdb: BSUtilities::GetObjectByName | BSUtilities.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apScene, apName, bTestScenegraph
 int __cdecl FUN_00aab440(Owner* pOwner, void** a2, unsigned char bFallback)
 {
     Owner* node7;
@@ -20051,6 +20465,7 @@ struct BufferOwner {
     virtual ~BufferOwner() { delete[] elements; }
     void* FUN_00aaac90(unsigned char flags);
 };
+// pdb: NiTArray<NiPointer<NiRefObject>,NiTNewInterface<NiPointer<NiRefObject> > >::`scalar deleting destructor' | NiObjectGarbage.obj | fnv360_0822_retail, vtable, high
 void* BufferOwner::FUN_00aaac90(unsigned char flags)
 {
     this->BufferOwner::~BufferOwner();
@@ -20146,6 +20561,8 @@ struct Node {
  bool FUN_0082e410(Stream&);
  bool FUN_00ab6f30(Stream&);
 };
+// pdb: BSMasterParticleSystem::RegisterStreamables | BSMasterParticleSystem.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 bool Node::FUN_00ab6f30(Stream& stream) {
  if(!FUN_0082e410(stream)) return false;
  for(unsigned int i=0;i<count;++i) {
@@ -20231,6 +20648,8 @@ struct FUN_00ab0140_cls {
  bool FUN_00ab0140(FUN_00ab0140_cls*);
 };
 // @fnv 0x00c54cc0
+// pdb: FurnitureMark::LoadBinary | BSFurnitureMarker.obj | fnv360_0822_debug, objrun, low
+// pdb params: arStream
 bool FUN_00ab0140_cls::FUN_00ab0140(FUN_00ab0140_cls* other)
 {
     return (bool)(((m_00 == other->m_00) && (m_04 == other->m_04) && (m_08 == other->m_08)) ? 1 : 0) &&
@@ -20257,6 +20676,7 @@ struct SsArr {
  void* data;
  int a,b;
 };
+// pdb: BSSimpleArray<ShadowSceneLight *,1024>::`scalar deleting destructor' | BSMultiBoundRoom.obj | fnv360_0822_retail, vtable, medium
 SsArr* __fastcall FUN_00aa1e50(SsArr* p,int,unsigned flags) {
  p->SsArr::~SsArr();
  if(flags&1) DAT_01090a78.FUN_0086ba60(p);
@@ -20284,6 +20704,8 @@ struct GlobalObjectO2_00a7b610
 };
 extern GlobalObjectO2_00a7b610 DAT_0108f200;
 // @fnv 0x00bc28f0
+// pdb: BSDecalPlacementVectorExtraData::GetViewerStrings | BSDecalPVExtraData.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkStrings
 void __stdcall FUN_00ab98d0(StrArr* pStrArr)
 {
     FUN_00863fe0(pStrArr);
@@ -20318,6 +20740,7 @@ struct Array {
  void FUN_00aa5720(void*,unsigned);
  Array* FUN_00aa5bb0(unsigned char flags);
 };
+// pdb: BSSimpleArray<NiPointer<QueuedFile>,1024>::~BSSimpleArray<NiPointer<QueuedFile>,1024> | QueuedFiles.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: MessageHandler::RemoveAssertHandler)
 Array* Array::FUN_00aa5bb0(unsigned char flags) {
  this->Array::~Array();
  if(flags & 1) DAT_01090a78.FUN_0086ba60(this);
@@ -20337,6 +20760,8 @@ struct S_00aa9880_Obj {
  char FUN_00aa9880(S_00aa9880_Obj*);
 };
 // @fnv 0x00aa9880
+// pdb: BSRangeNode::IsEqual | BSRangeNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apObject
 char S_00aa9880_Obj::FUN_00aa9880(S_00aa9880_Obj* other) {
     bool r7 = FUN_0082e460(other);
     if (r7) {
@@ -20846,6 +21271,8 @@ struct S_00ab9cb0 : S_00ab9cb0_Base
 
 // Calls FUN_00825ad0, reads unk08 from the stream, looks it up in the stream's map, and passes any found object to apStream->v28.
 // @fnv 0x00ab9cb0
+// pdb: BSReference::LoadBinary | BSReference.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 void S_00ab9cb0::FUN_00ab9cb0(S_00ab9cb0_Stream* apStream)
 {
     FUN_00825ad0(apStream);
@@ -20935,6 +21362,8 @@ inline TargetC4BB* DynamicCastC4BB(NiObjectC4BB* pkObject)
 }
 
 // @fnv 0x00c4bb40
+// pdb: BSUtilities::GetTextureName | BSUtilities.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTexture
 void* __cdecl FUN_00aabd00(NiObjectC4BB* pkObject)
 {
     void* pvData = 0;
@@ -21001,6 +21430,8 @@ unsigned char flag; int p;
 bool FUN_0082e460(Object*);
 char FUN_00aa6fe0(Object*);
 };
+// pdb: BSValueNode::IsEqual | BSValueNode.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: NiSwitchNode::IsEqual)
+// pdb params: apObject
 char Object::FUN_00aa6fe0(Object* other) {
 bool result=FUN_0082e460(other);
 if(result) {
@@ -21034,6 +21465,7 @@ struct SsArr2759 {
  unsigned int size;
  unsigned int capacity;
 };
+// pdb: BSSimpleArray<BSCompoundFrustum::FunctionOp,1024>::`scalar deleting destructor' | BSCompoundFrustum.obj | fnv360_0822_retail, vtable, medium
 SsArr2759* __fastcall FUN_00aa8230(SsArr2759* object, int, unsigned int flags) {
  object->SsArr2759::~SsArr2759();
  if (flags & 1) task2759::DAT_01090a78.FUN_0086ba60(object);
@@ -21050,6 +21482,8 @@ namespace f3m_00ab9fe0 {
 namespace task2755 {
 struct FUN_00c5f100_cls { int unk00,unk04,unk08,unk0c;void**m_ppItems;unsigned m_uiCount;bool FUN_00ab9fe0(FUN_00c5f100_cls*); };
 // @fnv 0x00c5f100
+// pdb: BSTextureData::IsEqual | BSTextureData.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pObject
 bool FUN_00c5f100_cls::FUN_00ab9fe0(FUN_00c5f100_cls* other) {
     if (other == 0) {
         return false;
@@ -21083,6 +21517,8 @@ struct Object {
  int unk00,unk04,unk08;Vector vector;unsigned int value;
  void FUN_00c22010(Stream*);void FUN_00aadaf0(Stream*);
 };
+// pdb: BSMultiBoundSphere::LoadBinary | BSMultiBoundSphere.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: arStream
 void Object::FUN_00aadaf0(Stream* stream) {
  FUN_00c22010(stream);
  vector.FUN_00823eb0(stream);
@@ -21275,6 +21711,8 @@ struct Owner {
  void FUN_008cbd30(Stream*);
  void FUN_00aadb40(Stream*);
 };
+// pdb: BSMultiBoundSphere::SaveBinary | BSMultiBoundSphere.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: arStream
 void Owner::FUN_00aadb40(Stream* stream) {
  FUN_008cbd30(stream);
  point.FUN_0083fa20(stream);
@@ -21346,6 +21784,8 @@ class F010Cls
     bool FUN_00ab9fa0(void* a);
 };
 // @fnv 0x00c5f010
+// pdb: BSTextureData::RegisterStreamables | BSTextureData.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 bool F010Cls::FUN_00ab9fa0(void* a)
 {
     if (!FUN_008459a0(a))
@@ -21378,6 +21818,7 @@ struct SsArr {
  void* data;
  int a,b;
 };
+// pdb: BSSimpleArray<NiFrustumPlanes,1024>::`scalar deleting destructor' | BSCompoundFrustum.obj | fnv360_0822_retail, vtable, medium
 SsArr* __fastcall FUN_00aa81e0(SsArr* p,int,unsigned flags) {
  p->SsArr::~SsArr();
  if(flags&1) DAT_01090a78.FUN_0086ba60(p);
@@ -21620,6 +22061,8 @@ struct FUN_00aa5160 : FUN_00424c00
 };
 
 // @fnv 0x00c3c590
+// pdb: QueuedFile::QueuedFile | QueuedFiles.obj | fnv360_0822_retail, call_seq, high
+// pdb params: aePriority
 FUN_00aa5160::FUN_00aa5160(int a1) : FUN_00424c00(a1)
 {
     RefPtr2777* p;
@@ -21648,6 +22091,8 @@ struct Object {
  int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c;unsigned int value;
  void FUN_00ac6040(Stream*);void FUN_00ab9310(Stream*);
 };
+// pdb: BSParentVelocityModifier::SaveBinary | BSParentVelocityModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 void Object::FUN_00ab9310(Stream* stream) {
  FUN_00ac6040(stream);
  Buffer* reader=stream->buffer;
@@ -21817,6 +22262,8 @@ unsigned int field0c;
 unsigned int field10;
 unsigned int field14;
 float value; void FUN_00ac5fa0(Stream*); void FUN_00ab60d0(Stream*);};
+// pdb: BSPSysStripUpdateModifier::LoadBinary | BSPSysStripUpdateModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void Owner::FUN_00ab60d0(Stream* stream) {
 FUN_00ac5fa0(stream);
 Binary* __restrict input=stream->input; unsigned int size=4;
@@ -21831,6 +22278,7 @@ namespace task2804 {
 struct Item {int type,unk04,unk08;};
 struct Array {int unk00;Item*data;int unk08,capacity,unk10,count;void FUN_005bb760(int,bool);};
 struct Owner {unsigned char dirty;int unk04,unk08,unk0c,unk10;Array entries;void FUN_00aa8780();};
+// pdb: BSCompoundFrustum::EndGroup | BSCompoundFrustum.obj | fnv360_0822_retail, call_seq, medium
 void Owner::FUN_00aa8780(){int cap=entries.capacity;if(entries.count+1>=cap){int c=entries.capacity;entries.FUN_005bb760(c+10,true);}dirty=0;entries.data[entries.count].type=6;entries.count=entries.count+1;}
 }
 }   // namespace f3m_00aa8780
@@ -21848,6 +22296,8 @@ struct Loader2789 {
  void FUN_00ac5fa0(Stream2789*);
  void FUN_00ab92d0(Stream2789*);
 };
+// pdb: BSParentVelocityModifier::LoadBinary | BSParentVelocityModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 void Loader2789::FUN_00ab92d0(Stream2789* stream) {
  FUN_00ac5fa0(stream);
  Binary2789* input=*(Binary2789**)((char*)stream+0x24c);
@@ -21861,6 +22311,7 @@ namespace task2816 {
 struct Item {int type,unk04,unk08;};
 struct Array {int unk00;Item*data;int unk08,capacity,unk10,count;void FUN_005bb760(int,bool);};
 struct Owner {unsigned char dirty;int unk04,unk08,unk0c,unk10;Array entries;void FUN_00aa8700();};
+// pdb: BSCompoundFrustum::StartGroupIntersection | BSCompoundFrustum.obj | fnv360_0822_retail, call_gap, medium
 void Owner::FUN_00aa8700(){int cap=entries.capacity;if(entries.count+1>=cap){int c=entries.capacity;entries.FUN_005bb760(c+10,true);}entries.data[entries.count].type=4;entries.count=entries.count+1;}
 }
 }   // namespace f3m_00aa8700
@@ -21871,6 +22322,8 @@ struct Object { virtual void v0(); virtual void v1(); virtual void* v2(); };
 extern char DAT_0116eb5c;
 bool FUN_00aae800(Object*,Object*);
 // @fnv 0x00c511f0
+// pdb: BSParticleSystemManager::IsValidMasterParticleSystem | BSParticleSystemManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObject
 bool __cdecl FUN_00aae920(Object* obj)
 {
     bool result2 = false;
@@ -21901,6 +22354,8 @@ struct FUN_00aa97b0_owner
     void FUN_00aa97b0(float* arg, unsigned int second);
 };
 
+// pdb: BSTempNodeManager::UpdateDownwardPass | BSTempNodeManager.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BSOrderedNode::UpdateDownwardPass)
+// pdb params: UpdateData, uFlags
 void FUN_00aa97b0_owner::FUN_00aa97b0(float* arg, unsigned int second)
 {
     FUN_00aa9660(*arg);
@@ -21929,6 +22384,8 @@ struct FUN_00aa0a90_owner
     void FUN_00aa0a90(void* arg);
 };
 
+// pdb: BSMultiBoundAABB::LoadBinary | BSMultiBoundAABB.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: arStream
 void FUN_00aa0a90_owner::FUN_00aa0a90(void* arg)
 {
     FUN_00c22010(arg);
@@ -22143,6 +22600,8 @@ Color first,second,third;
 unsigned int field48,field4c,field50,field54,field58,field5c;
 void FUN_00ac6040(Stream*); void FUN_00ab6740(Stream*);
 };
+// pdb: BSPSysSimpleColorModifier::SaveBinary | BSPSysSimpleColorModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void Serializer::FUN_00ab6740(Stream* stream) {
 FUN_00ac6040(stream);
 stream->writer->Write(&field48,4);
@@ -22314,6 +22773,8 @@ int unk248;
 Writer*writer;Writer*WriterPtr(){return writer;} };
 struct Color{float r,g,b,a;void FUN_0083faa0(Stream*);};
 struct State{int unk00,unk04,unk08,unk0c,unk10,unk14;Color c1,c2,c3;float red,green,blue,alpha,threshold,blendMode;void FUN_00ac5fa0(Stream*);void FUN_00ab6640(Stream*);};
+// pdb: BSPSysSimpleColorModifier::LoadBinary | BSPSysSimpleColorModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void State::FUN_00ab6640(Stream* stream){FUN_00ac5fa0(stream);Writer* __restrict writer=stream->WriterPtr();unsigned elementWidth=4;
 writer->bytesWritten += writer->write(writer,&red,4,&elementWidth,1);
 writer=stream->WriterPtr();elementWidth=4;
@@ -22445,6 +22906,8 @@ struct FUN_00ab7320_cls
     void __thiscall FUN_00ab7320(RefQ* pObj);
 };
 // @fnv 0x00c5dcd0
+// pdb: BSMasterParticleSystem::AddEmitterObj | BSMasterParticleSystem.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apEmitterObj
 void __thiscall FUN_00ab7320_cls::FUN_00ab7320(RefQ* pObj)
 {
     void* pos = m_kNode.FindPos(pObj);
@@ -22516,6 +22979,8 @@ unsigned int unka8;
 unsigned int flags; int value;
 void FUN_0082ee90(StrArr*); void FUN_00aa72f0(StrArr*);
 };
+// pdb: BSValueNode::GetViewerStrings | BSValueNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStrings
 void Viewer::FUN_00aa72f0(StrArr* strings) {
 FUN_0082ee90(strings);
 char* text=FUN_00847b50(DAT_0116d6ec); strings->Add(&text);
@@ -22536,6 +23001,7 @@ extern char DAT_0116d5a0[];
 struct FUN_0086c3f0 {virtual ~FUN_0086c3f0();};typedef FUN_0086c3f0 Base;
 struct FUN_00aa5c70:Base {virtual ~FUN_00aa5c70();};
 extern Base* DAT_0116d6c4;
+// pdb: MessageHandler::~MessageHandler | MessageHandler.obj | fnv360_0822_retail, call_seq, high
 FUN_00aa5c70::~FUN_00aa5c70(){Size info;if(FUN_005932b0(DAT_0116d5a0,&info)==0){if(info.low==0x46&&info.high==0)BSSystemFile_DeleteFileA(DAT_0116d5a0);}if(DAT_0116d6c4==this)DAT_0116d6c4=0;}
 }
 
@@ -22636,6 +23102,8 @@ int unka4;
 int unka8;
 FUN_0082ea60(unsigned);};
 struct Node: FUN_0082ea60 {virtual void v00();static void*operator new(unsigned n)throw(){return FUN_0089eb90(n);}static void operator delete(void*p,unsigned n){FUN_0089ec10(p,n);}Node():FUN_0082ea60(0){}void FUN_0082daa0(Node*,int);Node* FUN_00ab5de0(int);};
+// pdb: BSNiNode::CreateClone | BSNiNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 Node* Node::FUN_00ab5de0(int arg){Node*p=new Node;FUN_0082daa0(p,arg);p->vbc();return p;}
 }
 }   // namespace f3m_00ab5de0
@@ -22771,6 +23239,8 @@ struct Array {
     void FUN_00aa8350(unsigned int,bool);
 };
 // @fnv 0x00c4a070
+// pdb: BSSimpleArray<NiFrustumPlanes,1024>::SetSize | BSCompoundFrustum.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aiNewSize, abFreeMemory
 void Array::FUN_00aa8350(unsigned int uiNewSize, bool bFree)
 {
     if (uiNewSize == 0)
@@ -22871,6 +23341,8 @@ virtual ~Object() {}
 void FUN_00ab5d90(Object*,int);
 Object* FUN_00aa7150(int);
 };
+// pdb: BSValueNode::CreateClone | BSValueNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 Object* Object::FUN_00aa7150(int arg) {
 Object* object=new Object;
 FUN_00ab5d90(object,arg);
@@ -22895,6 +23367,8 @@ Array values;
 void FUN_00845a50(FUN_00aba1f0*,int);
 FUN_00aba1f0* FUN_00aba3c0(int);
 };
+// pdb: BSTextureData::CreateClone | BSTextureData.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kCloning
 FUN_00aba1f0* FUN_00aba1f0::FUN_00aba3c0(int context) {
 FUN_00aba1f0* result = new FUN_00aba1f0;
 FUN_00845a50(result,context);
@@ -22916,6 +23390,8 @@ class FUN_0086c3e0 {public:
 };
 class Derived:public FUN_0086c3e0 {public:bool enabled;Derived():enabled(false){}virtual void v00();};
 extern Derived* DAT_0116d6c4;
+// pdb: XapipGetTimeZoneBias | xapipgettimezonebias.obj | fnv360_0721_retail, objrun_prop, low
+// pdb params: bias
 void FUN_00aa5d10(){DAT_0116d6c4=new Derived;}
 }
 
@@ -22949,6 +23425,8 @@ static void operator delete(void*);
 void FUN_00837bc0(FUN_00aaf800*,int);
 FUN_00aaf800* FUN_00aaf8a0(int);
 };
+// pdb: NiBSBoneLODController::CreateClone | NiBSBoneLODController.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 FUN_00aaf800* FUN_00aaf800::FUN_00aaf8a0(int argument) {
 FUN_00aaf800* object=new FUN_00aaf800;
 FUN_00837bc0(object,argument);
@@ -23133,6 +23611,8 @@ struct Object {
     void FUN_0083fa20(Stream&);
     void FUN_00ab05a0(Stream&);
 };
+// pdb: FurnitureMark::SaveBinary | BSFurnitureMarker.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arStream
 void Object::FUN_00ab05a0(Stream& s) {
     FUN_0083fa20(s);
     Save(s,flags);
@@ -23149,6 +23629,8 @@ namespace Task2892 {
 struct FUN_008459f0 {FUN_008459f0();~FUN_008459f0();virtual void v00();int refs;void* name;void FUN_008245d0(const char*);};
 struct IntData: FUN_008459f0 {int value;IntData(int v):value(v){}};
 struct FUN_00aa6010: IntData {FUN_00aa6010(int);virtual void v00();};
+// pdb: BSXFlags::BSXFlags | BSXFlags.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiValue
 FUN_00aa6010::FUN_00aa6010(int v):IntData(v){FUN_008245d0(DAT_0116d6e0);}
 }
 }   // namespace f3m_00aa6010
@@ -23166,6 +23648,8 @@ struct Owner00aa5120 {
     void FUN_00aa5120(const char* src);
 };
 
+// pdb: QueuedFileEntry::SetFileName | QueuedFiles.obj | fnv360_0721_retail, call_seq, medium
+// pdb params: apFileName
 void Owner00aa5120::FUN_00aa5120(const char* src)
 {
     if (src) {
@@ -23188,6 +23672,8 @@ struct Owner9b50 {
     void FUN_00ab9b50(NiStreamView9b50* stream);
 };
 
+// pdb: BSReference::SaveBinary | BSReference.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 void Owner9b50::FUN_00ab9b50(NiStreamView9b50* stream)
 {
     FUN_0078c030(stream);
@@ -23237,6 +23723,7 @@ public:
 	BSSimpleArray<unsigned int, 1024> guardedRefs;   // 0C
 };
 
+// pdb: BSTextureData::~BSTextureData | BSTextureData.obj | fnv360_0822_debug, call_seq, medium
 Owner::~Owner()
 {
 }
@@ -23251,6 +23738,7 @@ namespace task2896 {
 struct FUN_008459f0 { FUN_008459f0(); virtual ~FUN_008459f0(); unsigned refs; const char* name; void FUN_008245d0(const char*); };
 struct Integers2896:FUN_008459f0 { unsigned count; int* values; virtual ~Integers2896(); Integers2896(){values=0;count=0;} };
 struct FUN_00ab7c10:Integers2896 { FUN_00ab7c10(); virtual ~FUN_00ab7c10(); };
+// pdb: BSWArray::CreateObject | BSWArray.obj | fnv360_0822_retail, udata, high
 FUN_00ab7c10::FUN_00ab7c10(){FUN_008245d0(DAT_0116eb64);}
 }
 }   // namespace f3m_00ab7c10
@@ -23261,6 +23749,7 @@ struct FUN_008459f0 {int unk04,unk08;FUN_008459f0();virtual ~FUN_008459f0();};
 struct Mid: FUN_008459f0 {int unk0c;Mid(){unk0c=0;}virtual ~Mid(){}};
 extern int DAT_0116d6e0;
 struct FUN_00aa5fa0:Mid {FUN_00aa5fa0();virtual ~FUN_00aa5fa0();void FUN_008245d0(int);};
+// pdb: BSXFlags::BSXFlags | BSXFlags.obj | fnv360_0822_retail, call_seq, high
 FUN_00aa5fa0::FUN_00aa5fa0(){FUN_008245d0(DAT_0116d6e0);}
 }
 
@@ -23281,6 +23770,7 @@ struct FUN_00ab0e00 : FUN_00845b60 {
  FUN_00ab0e00();
  virtual ~FUN_00ab0e00();
 };
+// pdb: BSBound::BSBound | BSBound.obj | fnv360_0822_retail, uvref, high
 FUN_00ab0e00::FUN_00ab0e00() : FUN_00845b60(*DAT_0116da80) {
  first=DAT_0108ec68;
  second=DAT_0108ec68;
@@ -23292,6 +23782,8 @@ namespace f3m_00aa60f0 {
 namespace task2913 {
 struct Extra {virtual void v0();virtual void v4();virtual void* v8();};
 struct Object {Extra* FUN_00824a50(void*);};extern void* DAT_0116d6e0;extern int DAT_0116d6e4;
+// pdb: BSXFlags::Find | BSXFlags.obj | fnv360_0822_debug, udata, low, conflict (skyrim: BSXFlags::GetFlags)
+// pdb params: apObject
 void* FUN_00aa60f0(Object*obj){void*result=0;if(obj){Extra*extra=obj->FUN_00824a50(DAT_0116d6e0);bool ok;if(!extra)ok=false;else ok=extra->v8()==&DAT_0116d6e4;if(ok)result=extra;}return result;}
 }
 }   // namespace f3m_00aa60f0
@@ -23329,6 +23821,8 @@ unsigned unk5c;
 unsigned unk60;
 unsigned unk64;
 Array values;void FUN_00ab43a0(unsigned);};
+// pdb: BSPortalGraph::RemoveUnboundNode | BSPortalGraph.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apNode
 void Owner::FUN_00ab43a0(unsigned value){unsigned index=Find(&values,value);if(index!=~0u)values.FUN_00ab4040(index,1);}
 }
 }   // namespace f3m_00ab43a0
@@ -23348,6 +23842,7 @@ public:
     unsigned int* FUN_00ab5650(unsigned char param2);
 };
 
+// pdb: BSScissorTriShape::`scalar deleting destructor' | BSScissorTriShape.obj | fnv360_0822_retail, vtable_prefix, medium
 unsigned int* FUN_00ab5650_Class::FUN_00ab5650(unsigned char param2)
 {
     *reinterpret_cast<unsigned int*>(this) = 0xe8b15c;
@@ -23367,6 +23862,8 @@ struct State00ab7440 {
     void FUN_00ab7400();
     void FUN_00ab7440(Input00ab7440*);
 };
+// pdb: BSMasterParticleSystem::PostLinkObject | BSMasterParticleSystem.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void State00ab7440::FUN_00ab7440(Input00ab7440* input) {
     FUN_00825330(input);
     if (input->size < 16)
@@ -23432,6 +23929,7 @@ struct BSValueNodeView_aa6f80 {
     BSValueNodeView_aa6f80* FUN_00aa6f80();
 };
 
+// pdb: BSValueNode::BSValueNode | BSValueNode.obj | fnv360_0822_retail, call_gap, low
 BSValueNodeView_aa6f80* BSValueNodeView_aa6f80::FUN_00aa6f80()
 {
     ((BaseInitView_00ab5d60*)this)->FUN_00ab5d60();
@@ -23507,6 +24005,8 @@ struct State00aaa260 {
     void FUN_0082e820(Stream00aaa260*);
     void FUN_00aaa260(Stream00aaa260*);
 };
+// pdb: BSMultiBoundNode::SaveBinary | BSMultiBoundNode.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BSFadeNode::SaveBinary)
+// pdb params: arStream
 void State00aaa260::FUN_00aaa260(Stream00aaa260* stream) {
     FUN_0082e820(stream);
     stream->Apply(member);
@@ -23524,6 +24024,7 @@ struct ObjectInitView_aaa330 : BaseInitView_aaa120 {
     ObjectInitView_aaa330* FUN_00aaa330(unsigned char mode);
 };
 
+// pdb: BSMultiBoundNode::`scalar deleting destructor' | BSMultiBoundNode.obj | fnv360_0822_retail, vtable, high
 ObjectInitView_aaa330* ObjectInitView_aaa330::FUN_00aaa330(unsigned char mode)
 {
     FUN_00aaa120();
@@ -23540,6 +24041,8 @@ struct Owner {
     void FUN_0082dcf0(const float* input, int flag);
     void FUN_00aa97e0(const float* input, int flag);
 };
+// pdb: BSTempNodeManager::UpdateSelectedDownwardPass | BSTempNodeManager.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BSOrderedNode::UpdateSelectedDownwardPass)
+// pdb params: UpdateData, uFlags
 void Owner::FUN_00aa97e0(const float* input, int flag)
 {
     FUN_00aa9660(*input);
@@ -23585,6 +24088,7 @@ struct Owner : Base {
  void* buffer;
  ~Owner();
 };
+// pdb: NiPSysEmitterCtlr::~NiPSysEmitterCtlr | BSPSysMultiTargetEmitterCtlr.obj | fnv360_0822_retail, call_seq, low
 Owner::~Owner() { void* b = buffer; FUN_0089e890(b); }
 }
 }   // namespace f3m_00ab4cd0
@@ -23609,6 +24113,7 @@ struct State00aa53c0 {
     void FUN_00aa51a0();
     void FUN_00aa53c0();
 };
+// pdb: QueuedFileEntry::~QueuedFileEntry | QueuedFiles.obj | fnv360_0822_retail, call_seq, medium
 void State00aa53c0::FUN_00aa53c0() {
     table = &DAT_00e89844;
     HeapNamespace00aa53c0::DAT_01090a78.FUN_0086ba60(memory);
@@ -23618,6 +24123,8 @@ void State00aa53c0::FUN_00aa53c0() {
 
 // @f3 0x00aa2f10 (community match, verified in this file)
 namespace f3m_00aa2f10 {
+// pdb: NiTMapBase<DFALL<NiTMapItem<__int64,int> >,__int64,int>::IsKeysEqual | BGSSaveLoadGame.obj | fnv360_0822_retail, vtable, medium
+// pdb params: key1, key2
 int __stdcall FUN_00aa2f10(unsigned int a, unsigned int b, unsigned int c, unsigned int d)
 {
     return a == c && b == d;
@@ -23636,6 +24143,7 @@ struct Owner_aad2e0 {
     Object_aad2e0* object;
     bool FUN_00aad2e0();
 };
+// pdb: BSOcclusionQuery::Begin | BSOcclusionQuery.obj | fnv360_0822_retail, call_gap, low
 bool Owner_aad2e0::FUN_00aad2e0()
 {
     if (DAT_0116d984)
@@ -23653,6 +24161,7 @@ struct State00ab7a00 {
     void FUN_00ab7600();
     State00ab7a00* FUN_00ab7a00(unsigned int flags);
 };
+// pdb: BSMasterParticleSystem::`scalar deleting destructor' | BSMasterParticleSystem.obj | fnv360_0822_retail, vtable, high
 State00ab7a00* State00ab7a00::FUN_00ab7a00(unsigned int flags) {
     FUN_00ab7600();
     if (flags & 1)
@@ -23716,6 +24225,8 @@ struct Dispatch_aa2350 {
     void FUN_0082db90(unsigned int, unsigned int);
     void FUN_00aa2350(unsigned int, unsigned int);
 };
+// pdb: BSMultiBoundNode::UpdateDownwardPass | BSMultiBoundRoom.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BSMultiBoundRoom::UpdateDownwardPass)
+// pdb params: UpdateData, uFlags
 void Dispatch_aa2350::FUN_00aa2350(unsigned int first, unsigned int second)
 {
     FUN_0082db90(first, second);
@@ -23762,6 +24273,8 @@ struct State00aa9810 {
     void FUN_0082e030(Input00aa9810* input, void* other);
     void FUN_00aa9810(Input00aa9810* input, void* other);
 };
+// pdb: BSTempNodeManager::UpdateRigidDownwardPass | BSTempNodeManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: UpdateData, uFlags
 void State00aa9810::FUN_00aa9810(Input00aa9810* input, void* other) {
     FUN_00aa9660(input->value);
     FUN_0082e030(input, other);
@@ -24062,6 +24575,7 @@ struct State00aad2a0 {
     unsigned int value;
     State00aad2a0* FUN_00aad2a0();
 };
+// pdb: BSOcclusionQuery::BSOcclusionQuery | BSOcclusionQuery.obj | fnv360_0822_retail, call_gap, medium
 State00aad2a0* State00aad2a0::FUN_00aad2a0() {
     value = 0;
     Target00aad2a0* target = DAT_0108f048->target;
@@ -24078,6 +24592,8 @@ struct Table_aad330 {
 };
 struct Object_aad330 { Table_aad330* table; };
 struct Owner_aad330 { Object_aad330* object; bool FUN_00aad330(void* value, bool enabled); };
+// pdb: BSOcclusionQuery::GetResult | BSOcclusionQuery.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: pResult, bFlush
 bool Owner_aad330::FUN_00aad330(void* value, bool enabled)
 {
     int mode = 0;
@@ -24162,6 +24678,7 @@ struct State00ab5a70 {
     HKEY__* key;
     bool FUN_00ab5a70();
 };
+// pdb: RegSettingCollection::Close | XRegSetting.obj | fnv360_0822_debug, vtable, medium
 bool State00ab5a70::FUN_00ab5a70() {
     bool result = true;
     if (key) {
@@ -24271,6 +24788,8 @@ virtual void vb4();
 virtual void vb8(const Point&);
 int unk04,unk08;Point pos,other;FUN_00aad5f0();};
 struct Object:FUN_00aad5f0 {virtual void v00();static void*operator new(unsigned n){return FUN_0089eb90(n);}static void operator delete(void*p,unsigned n){FUN_0089ec10(p,n);}Object(){}void BSMultiBoundShape_CopyMembers(Object*,int);Object* FUN_00aa15d0(int);};
+// pdb: BSMultiBoundAABB::CreateClone | BSMultiBoundAABB.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: arCloneData
 Object* Object::FUN_00aa15d0(int context){Object*p=new Object;BSMultiBoundShape_CopyMembers(p,context);p->vb8(pos);p->other=other;return p;}
 }
 }   // namespace f3m_00aa15d0
@@ -24384,6 +24903,8 @@ struct FUN_00aae130: FUN_0082ea60 {
  virtual ~FUN_00aae130();
  FUN_00aae130(int);
 };
+// pdb: BSPortalSharedNode::BSPortalSharedNode | BSPortal.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apPortal
 FUN_00aae130::FUN_00aae130(int input):FUN_0082ea60(0) {
  child=new FUN_00aa8410;
  flags |= 0x800;
@@ -24412,6 +24933,8 @@ struct Host {
  void FUN_00ab61a0(Object*,int);
  Object* FUN_00ab6440(int argument);
 };
+// pdb: BSPSysSimpleColorModifier::CreateClone | BSPSysSimpleColorModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kCloning
 Object* Host::FUN_00ab6440(int argument) {
  Object* p=new Object;
  FUN_00ab61a0(p,argument);
@@ -24455,6 +24978,7 @@ struct Owner {
  void FUN_00aa41f0();
  void FUN_00aa50d0();
 };
+// pdb: IOManager::CancelAllTasks | IOManager.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: LockFreeMap<__int64,class NiPointer<class BSTask> >::SetAt)
 void Owner::FUN_00aa50d0(){FUN_00aa41f0();group->Clear();}
 }
 }   // namespace f3m_00aa50d0
@@ -24468,6 +24992,8 @@ extern void* DAT_0116d880;
 void FUN_00c007fc(void* a, unsigned int b, void* c);
 void FUN_00c00fcc(void* a, unsigned int b, void* c);
 
+// pdb: MessageHandler::SetProgramFlowFileName | MessageHandler.obj | fnv360_0721_retail, objrun, medium
+// pdb params: apFileName
 void __cdecl FUN_00aa5dc0(void* param_1)
 {
     FUN_00c007fc(&DAT_0116d498, 0x104, &DAT_0116d880);
@@ -24484,6 +25010,7 @@ struct State00ab5db0 {
     void FUN_0082e4f0();
     State00ab5db0* FUN_00ab5db0(unsigned int flags);
 };
+// pdb: BSNiNode::`scalar deleting destructor' | BSNiNode.obj | fnv360_0822_retail, vtable, high
 State00ab5db0* State00ab5db0::FUN_00ab5db0(unsigned int flags) {
     table = &DAT_00e8b28c;
     FUN_0082e4f0();
@@ -24684,6 +25211,7 @@ struct Polygon {
     void FUN_00aac030();
 };
 
+// pdb: BSPolygon2D::RemoveZ | BSPolygon.obj | fnv360_0822_retail, call_gap_sim, low
 void Polygon::FUN_00aac030()
 {
     for (int i = 0; i < m_24; i++) {
@@ -24763,6 +25291,7 @@ struct FUN_00aa8280 {
     f3m_00aa8280::ArrB b;
     ~FUN_00aa8280();
 };
+// pdb: BSCompoundFrustum::~BSCompoundFrustum | BSCompoundFrustum.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BSTArray<class BSTEventSink<struct Pickpocket::Event> *,class BSTArrayHeapAllocator>::Clear)
 FUN_00aa8280::~FUN_00aa8280()
 {
     a.RemoveAll();
@@ -24812,6 +25341,7 @@ struct Pool25B0 {
     bool FUN_00aa25b0();
 };
 
+// pdb: BSTaskManager<__int64>::Pause | IOManager.obj | fnv360_0822_retail, udata, high
 bool Pool25B0::FUN_00aa25b0()
 {
     DAT_0116d134 = 0;
@@ -24852,6 +25382,8 @@ struct FUN_00aa7b30_Manager
     int method(FUN_00aa7b30_Entry* entry);
 };
 
+// pdb: BSCompoundFrustum::TestIntersection | BSCompoundFrustum.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apBound, apPlanes
 char __stdcall FUN_00aa7b30(FUN_00aa7b30_Manager* manager, FUN_00aa7b30_Container* container)
 {
     if (!container->flags)
@@ -24977,6 +25509,8 @@ public:
     void FUN_00aab2c0(int a, int b);
 };
 
+// pdb: BSDamageStage::UpdateRigidDownwardPass | BSDamageStage1.obj | fnv360_0822_retail, vtable, medium
+// pdb params: UpdateData, uFlags
 void S_aab2c0::FUN_00aab2c0(int a, int b)
 {
     if (flags & 1) return;
@@ -25021,6 +25555,8 @@ struct Obj {
     void FUN_00833110(int arg);
     void FUN_00aa70b0(int arg);
 };
+// pdb: BSValueNode::UpdateWorldData | BSValueNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: UpdateData
 void Obj::FUN_00aa70b0(int arg)
 {
     FUN_00833110(arg);
@@ -25051,6 +25587,8 @@ struct Obj {
     }
     void FUN_00ab40b0(void* elem);
 };
+// pdb: BSPortalGraph::AddOccluder | BSPortalGraph.obj | fnv360_0721_beta, caller, medium
+// pdb params: apOccluder
 void Obj::FUN_00ab40b0(void* elem)
 {
     if (!elem)
@@ -25070,6 +25608,8 @@ public:
     void FUN_00ab8af0(int a, int b, int c);
 };
 
+// pdb: BSPSysArrayEmitter::ComputeVolumeInitialPositionAndVelocity | BSPSysArrayEmitter.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: NiPSysVolumeEmitter::~NiPSysVolumeEmitter)
+// pdb params: arEmitterToPSys, arPosition, arVelocity
 void C_00ab8af0::FUN_00ab8af0(int a, int b, int c)
 {
     FUN_00ab8a10(b, c);
@@ -25084,6 +25624,8 @@ struct C00ab8e60 {
     void FUN_00ab8e60(void* a);
 };
 
+// pdb: BSPSysArrayEmitter::PostLinkObject | BSPSysArrayEmitter.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BSSegmentedTriShape::RenderImmediate)
+// pdb params: arStream
 void C00ab8e60::FUN_00ab8e60(void* a)
 {
     FUN_00ab8dc0();
@@ -25095,6 +25637,8 @@ void C00ab8e60::FUN_00ab8e60(void* a)
 #include <string.h>
 extern char DAT_0116d288[];
 namespace f3m_00aa5e20 {
+// pdb: MessageHandler::SetCrashTraceFileName | MessageHandler.obj | fnv360_0721_retail, objrun, medium
+// pdb params: apFileName
 int __cdecl FUN_00aa5e20(const char* suffix)
 {
     strcpy_s(DAT_0116d288, 260, DAT_0116d880);
@@ -25134,6 +25678,7 @@ struct State00ab51d0 {
     void FUN_00ab4cd0();
     State00ab51d0* FUN_00ab51d0(unsigned int flags);
 };
+// pdb: BSPSysMultiTargetEmitterCtlr::`scalar deleting destructor' | BSPSysMultiTargetEmitterCtlr.obj | fnv360_0822_retail, vtable, high
 State00ab51d0* State00ab51d0::FUN_00ab51d0(unsigned int flags) {
     table = &DAT_00e8b034;
     value = 0;
@@ -25194,6 +25739,7 @@ struct Node_aa9840 {
     void FUN_00ab5d60();
     Node_aa9840* FUN_00aa9840();
 };
+// pdb: BSRangeNode::BSRangeNode | BSRangeNode.obj | fnv360_0822_retail, call_seq, medium
 Node_aa9840* Node_aa9840::FUN_00aa9840()
 {
     FUN_00ab5d60();
@@ -25213,6 +25759,8 @@ struct Reference00aae770 {
     virtual void Destroy();
     volatile long references;
 };
+// pdb: BSParticleSystemManager::DetachChildAt | BSParticleSystemManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: i, aspAVObject
 void __stdcall FUN_00aae770(void* unused, Reference00aae770** slot) {
     Reference00aae770* value = *slot;
     if (value) {
@@ -25237,6 +25785,7 @@ struct State00aa6560 {
     void* handle1c;
     void FUN_00aa6560();
 };
+// pdb: BSTaskThread::~BSTaskThread | BSTaskManager_Xenon.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: TESModelDB::TESQueuedHandles::TESQueuedHandles)
 void State00aa6560::FUN_00aa6560() {
     table = &DAT_00e89a64;
     SuspendThread(thread);
@@ -25256,6 +25805,8 @@ struct State00ab8ab0 {
     void FUN_00ab87c0(unsigned int index, void* value);
     unsigned int FUN_00ab8ab0(void* value);
 };
+// pdb: NiTArray<NiPointer<NiAVObject>,NiTMallocInterface<NiPointer<NiAVObject> > >::Add | BSPSysArrayEmitter.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: BSPSysArrayEmitter::CreateObject)
+// pdb params: element
 unsigned int State00ab8ab0::FUN_00ab8ab0(void* value) {
     unsigned int index = size;
     if (index >= capacity)
@@ -25296,6 +25847,8 @@ struct Lock
     void LockIt(void* p);
 };
 
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::LockFreeMapInterface::GetAt | IOManager.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: aKey, arData
 bool C::FUN_00aa39f0(int a, int b, int c, Lock* d)
 {
     bool ok = FUN_00aa31d0(a, b, c);
@@ -25318,6 +25871,7 @@ namespace task2938 {
 struct Shape {virtual ~Shape();};
 struct Heap {void FUN_0086ba60(void*);};extern Heap DAT_01090a78;
 struct FUN_00aa2d10 {virtual ~FUN_00aa2d10();Shape** data;unsigned count;};
+// pdb: LockFreePriorityQueue<NiPointer<IOTask> >::~LockFreePriorityQueue<NiPointer<IOTask> > | IOManager.obj | fnv360_0822_retail, call_seq, high
 FUN_00aa2d10::~FUN_00aa2d10(){for(unsigned i=0;i<count;++i)delete data[i];DAT_01090a78.FUN_0086ba60(data);}
 }
 }   // namespace f3m_00aa2d10
@@ -25394,6 +25948,8 @@ struct UpdateOwner {
  void FUN_00aaa400(UpdateContext*);
 };
 // @fnv 0x00c46f60
+// pdb: BSMultiBoundNode::OnVisible | BSMultiBoundNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kCuller
 void UpdateOwner::FUN_00aaa400(UpdateContext* pContext) {
  UpdateChild** slot;
  int replacementState2;
@@ -25476,6 +26032,8 @@ struct Viewed {
 };
 struct Holder {char pad[12];Viewed* object;};
 struct Owner {char pad[0xac];Holder* holder;unsigned mode;void FUN_0082ee90(Array*);void FUN_00aaa790(Array*);};
+// pdb: BSMultiBoundNode::GetViewerStrings | BSMultiBoundNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStrings
 void Owner::FUN_00aaa790(Array* arr){
  FUN_0082ee90(arr);
  arr->add(FUN_00847b50(DAT_0116d718));
@@ -25619,6 +26177,7 @@ void FUN_004d3210();
 unsigned char Flag(){return static_cast<unsigned char>(flags>>19)&1;}
 void FUN_00aaa580();
 };
+// pdb: BSMultiBoundNode::UpdateWorldBound | BSMultiBoundNode.obj | fnv360_0822_retail, vtable, medium
 void Node::FUN_00aaa580()
 {
     const Bound* a0;
@@ -25755,6 +26314,8 @@ struct Task : RefObj {
     void FUN_00aa5a60(long newState, RefObj* p);
 };
 }
+// pdb: QueuedFile::Cancel | QueuedFiles.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aePreviousState, apTaskOwner
 void naa5a60::Task::FUN_00aa5a60(long newState, RefObj* p)
 {
     IncRef();
@@ -25852,6 +26413,7 @@ struct FUN_00aae960_shell {
     void* FUN_00aae960(unsigned int flags);
 };
 
+// pdb: BSParticleSystemManager::`scalar deleting destructor' | BSParticleSystemManager.obj | fnv360_0822_retail, vtable, high
 void* FUN_00aae960_shell::FUN_00aae960(unsigned int flags)
 {
     FUN_00aae5e0();
@@ -25998,6 +26560,8 @@ struct FUN_00ab4120_cls
     void __thiscall FUN_00ab4120(RefQ* pObj);
 };
 // @fnv 0x00c5aef0
+// pdb: BSPortalGraph::AddRoom | BSPortalGraph.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apRoom
 void __thiscall FUN_00ab4120_cls::FUN_00ab4120(RefQ* pObj)
 {
     if (pObj)
@@ -26075,6 +26639,7 @@ struct State00ab7400 {
     void FUN_00ab7400();
 };
 void __stdcall FUN_00ab7180(State00ab7400*, Array00ab7400*);
+// pdb: BSMasterParticleSystem::UpdateParticleSystemList | BSMasterParticleSystem.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BSMasterParticleSystem::AddEmitterObj)
 void State00ab7400::FUN_00ab7400() {
     Array00ab7400& local = array;
     for (unsigned short i = 0; i < local.size; ++i)
@@ -26096,6 +26661,8 @@ struct State00ab42a0 {
     Alloc00ab42a0 allocator;
     void FUN_00ab42a0(void* value);
 };
+// pdb: BSPortalGraph::AddPortal | BSPortalGraph.obj | fnv360_0822_debug, objrun, medium
+// pdb params: apPortal
 void State00ab42a0::FUN_00ab42a0(void* value) {
     if (!value) return;
     Node00ab42a0* node = allocator.FUN_00423640();
@@ -26289,6 +26856,8 @@ struct Nav
     void FUN_00aa85b0(Nav* dst);
 };
 
+// pdb: BSCompoundFrustum::CopyMembers | BSCompoundFrustum.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apDest
 void Nav::FUN_00aa85b0(Nav* dst)
 {
     dst->m_28 = m_28;
@@ -26315,6 +26884,8 @@ extern "C" char* __cdecl FUN_00847b50(const char* label);
 extern const char* DAT_0116d760;
 namespace fo3_ab7460 {
 void __stdcall FUN_00aa9c80(ViewerStrings* s);
+// pdb: BSBlastNode::GetViewerStrings | BSBlastNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStrings
 void __stdcall FUN_00aaafd0(ViewerStrings* self)
 {
     FUN_00aa9c80(self);
@@ -26375,6 +26946,8 @@ struct PairAB { int first, second; };
 bool __cdecl FUN_00bc8820(const char*, char*, unsigned int);
 void __cdecl FUN_00bccca0(char*, PairAB*, PairAB*);
 void* __cdecl FUN_00bca5c0(int, PairAB*, PairAB*, char*);
+// pdb: BSEntryMap::SetAt | BSTexturePalette.obj | fnv360_0721_beta, call_seq, low
+// pdb params: apEntry, apValue
 void* __cdecl FUN_00ab5ce0(ObjAB* object) {
  char buffer[260]; PairAB first, second;
  FUN_00bc8820(object->getName()->text, buffer, 260);
@@ -26416,6 +26989,8 @@ public:
     unsigned int FUN_00ab5bd0(ViewerStringsAB5BD0* strings);
 };
 
+// pdb: RegSettingCollection::GetViewerStrings | XRegSetting.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStringsA
 unsigned int RegSettingsAB5BD0::FUN_00ab5bd0(ViewerStringsAB5BD0* strings)
 {
     strings->Add(FUN_00847b50("RegSettings"));
@@ -26429,6 +27004,7 @@ unsigned int RegSettingsAB5BD0::FUN_00ab5bd0(ViewerStringsAB5BD0* strings)
 namespace f3m_00ab6f00 {
 struct ChildAB6 { int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8; int unkac; int unkb0; int unkb4; int unkb8; int unkbc; int unkc0; int unkc4; int unkc8; int unkcc; int unkd0; int unkd4; unsigned char dirty; };
 struct OwnerAB6 { int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8; int unkac; int unkb0; int unkb4; int unkb8; int unkbc; int unkc0; int unkc4; int unkc8; int unkcc; ChildAB6** volatile items; unsigned short unkD4, count; void FUN_00ab6f00(); };
+// pdb: BSMasterParticleSystem::ClearAllParticles | BSMasterParticleSystem.obj | fnv360_0822_retail, call_seq, medium
 void OwnerAB6::FUN_00ab6f00() {
  unsigned int n=count;
  for (unsigned int i=0; i<n; ++i) {
@@ -26498,6 +27074,7 @@ public:
     void __thiscall FUN_00aae3a0();
 };
 
+// pdb: BSParticleSystemManager::ClearAllParticles | BSParticleSystemManager.obj | fnv360_0822_retail, callee_sim, low
 void __thiscall FUN_00aae3a0_Obj::FUN_00aae3a0()
 {
     unsigned int count = unkA6;
@@ -26540,6 +27117,7 @@ public:
     void* __thiscall FUN_00aa6590(int flag);
 };
 
+// pdb: BSTaskThread::`scalar deleting destructor' | BSTaskManager_Xenon.obj | fnv360_0822_retail, vtable, high
 void* Holder_00aa6590::FUN_00aa6590(int flag)
 {
     unsigned int thread = this->thread;
@@ -26586,6 +27164,8 @@ public:
     unsigned int FUN_00aa7480(ViewerStringsArg* strings);
 };
 
+// pdb: INISettingCollection::GetViewerStrings | XINISetting.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStringsA
 unsigned int StringOwner::FUN_00aa7480(ViewerStringsArg* strings)
 {
 
@@ -26668,6 +27248,8 @@ public:
     unsigned int entryCount;
 };
 
+// pdb: BSTextureData::GetViewerStrings | BSTextureData.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pStrings
 void Owner::FUN_00aba440(ViewerStrings* strings)
 {
     FUN_00845ca0(strings);
@@ -26695,6 +27277,8 @@ struct f3m_00aad3a0_Obj
     int m_iDepth;
     void FUN_00aad3a0(int value);
 };
+// pdb: BSCullingProcess::PushCullMode | BSCullingProcess.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aeType
 void f3m_00aad3a0_Obj::FUN_00aad3a0(int value)
 {
     m_aiStack[m_iDepth++] = m_iCurrent;
@@ -26752,6 +27336,7 @@ class FUN_00ab7600 : public f3m_00ab7600::Base
     f3m_00ab7600::PrimitiveArray<void*> m_kArray;
 };
 
+// pdb: BSMasterParticleSystem::~BSMasterParticleSystem | BSMasterParticleSystem.obj | fnv360_0822_retail, call_seq, high
 FUN_00ab7600::~FUN_00ab7600()
 {
     m_iC0 = 0;
@@ -26824,6 +27409,8 @@ public:
     void FUN_00abd420(unsigned int a_uiIndex, const ObjectPtrd420& a_rElement);
 };
 
+// pdb: NiTArray<NiPointer<NiGeometry>,NiTNewInterface<NiPointer<NiGeometry> > >::SetAt | NiPSysMeshEmitter.obj | fnv360_0721_beta, callee_sim, medium
+// pdb params: uiIndex, element
 void FUN_00abd420_Array::FUN_00abd420(unsigned int a_uiIndex, const ObjectPtrd420& a_rElement) {
     static ObjectPtrd420 s_kInvalid;
 
@@ -26873,6 +27460,7 @@ public:
 
 } // namespace ParticleVelocity
 
+// pdb: BSParentVelocityModifier::HandleReset | BSParentVelocityModifier.obj | fnv360_0822_retail, vtable, medium
 void __fastcall FUN_00ab8e80(ParticleVelocity::Owner* pThis)
 {
     pThis->ResetLastPosition();
@@ -27117,6 +27705,8 @@ typedef FUN_0083f490 Mesh;
 
 extern const unsigned short DAT_00e8af40[];
 void* __cdecl FUN_00bffa60(void*,const void*,unsigned);
+// pdb: BSTestObjects::CreateBox | BSTestObjects.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arExtents, apColor
 Mesh* FUN_00ab10c0(const Vec3& size,const Color4* color) {
  static Vec3 corners[8]={Vec3(.5f,.5f,.5f),Vec3(.5f,.5f,-.5f),Vec3(.5f,-.5f,.5f),Vec3(.5f,-.5f,-.5f),Vec3(-.5f,.5f,.5f),Vec3(-.5f,.5f,-.5f),Vec3(-.5f,-.5f,.5f),Vec3(-.5f,-.5f,-.5f)};
  Vec3* vertices=new Vec3[8];
@@ -27198,6 +27788,8 @@ public:
     bool FUN_00aa3640(QPtrA3640* volatile out);
 };
 
+// pdb: LockFreeQueue<NiPointer<QueuedReference> >::LockFreeQueueInterface::Pop | ModelLoader.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: arData
 bool QPopA3640::FUN_00aa3640(QPtrA3640* volatile out)
 {
     QNodeA3640* volatile nodes[2];
@@ -27287,6 +27879,8 @@ public:
     bool FUN_00aad8f0(PlaneSet* ps);
 };
 
+// pdb: BSMultiBoundSphere::CompletelyWithinFrustum | BSMultiBoundSphere.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: aPlanes
 bool BoundSphere_L::FUN_00aad8f0(PlaneSet* ps) {
     Sph s;
     s.r = sph.r;
@@ -27337,6 +27931,8 @@ struct OwnerAA0130
     NewObjAA0130* FUN_00aa0130(int argument);
 };
 
+// pdb: BSMultiBoundOBB::CreateClone | BSMultiBoundOBB.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 NewObjAA0130* OwnerAA0130::FUN_00aa0130(int argument)
 {
     NewObjAA0130* o = new NewObjAA0130();
@@ -27354,6 +27950,8 @@ struct OwnerAA58 {
  void FUN_005e30b0(unsigned int*, unsigned int*, unsigned int);
  void FUN_00aa5810(unsigned int index, unsigned int count);
 };
+// pdb: BSSimpleArray<NiPointer<QueuedFile>,1024>::RemoveFast | QueuedFiles.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aiIndex, aiHowMany
 void OwnerAA58::FUN_00aa5810(unsigned int index, unsigned int count) {
  unsigned int remaining = size - index - count;
  unsigned int j = remaining < count ? remaining : count;
@@ -27379,6 +27977,8 @@ struct State00ab6d10 {
     void FUN_00c22010(Stream00ab6d10*);
     void FUN_00ab6d10(Stream00ab6d10*);
 };
+// pdb: BSMultiBoundCapsule::LoadBinary | BSMultiBoundCapsule.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 void State00ab6d10::FUN_00ab6d10(Stream00ab6d10* stream) {
     FUN_00c22010(stream);
     first.FUN_00823eb0(stream);
@@ -27434,6 +28034,8 @@ struct FUN_00aa41a0_Obj
 
 extern "C" __declspec(dllimport) unsigned long __stdcall TlsGetValue(unsigned long dwTlsIndex);
 
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::SetAt | IOManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiBucket, aKey, aData, abReplaceExisting
 void __thiscall FUN_00aa41a0_Obj::FUN_00aa41a0(Args20 s)
 {
     FUN_0042ba10_Obj* tls = unk14;
@@ -27544,6 +28146,7 @@ struct Pool00aa2650
     Elem00aa2650** arr2c;
     bool FUN_00aa2650();
 };
+// pdb: BSTaskManager<__int64>::Resume | IOManager.obj | fnv360_0721_retail, objrun_prop, medium
 bool Pool00aa2650::FUN_00aa2650()
 {
     if (refs24 == 0 || InterlockedDecrement(&refs24) != 0)
@@ -27640,6 +28243,8 @@ struct unkNode {
     virtual int v12();
 };
 struct unkThis { void FUN_00ab7180(unkNode* node, unkArr* arr); };
+// pdb: BSMasterParticleSystem::FindNiParticlesRecurse | BSMasterParticleSystem.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObject, apNiParticles
 void unkThis::FUN_00ab7180(unkNode* node, unkArr* arr)
 {
     if (node) {
@@ -27755,6 +28360,7 @@ struct FUN_00aadf30 : Base0 {
     ~FUN_00aadf30();
 };
 
+// pdb: BSPortalSharedNode::~BSPortalSharedNode | BSPortal.obj | fnv360_0822_retail, call_seq, high
 FUN_00aadf30::~FUN_00aadf30() {
     delete unkAC;
     unkB0.Reset();
@@ -27801,6 +28407,8 @@ public:
     void FUN_00ab6d60(int argument);
     void FUN_008cbd30(int argument);
 };
+// pdb: BSMultiBoundCapsule::SaveBinary | BSMultiBoundCapsule.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 void FUN_00ab6d60_Obj::FUN_00ab6d60(int argument)
 {
     FUN_008cbd30(argument);
@@ -27852,6 +28460,7 @@ struct Obj_ab9920 : Base_ab9920 {
     void FUN_00ab9920();
 };
 
+// pdb: BSDecalPlacementVectorExtraData::~BSDecalPlacementVectorExtraData | BSDecalPVExtraData.obj | fnv360_0822_retail, call_seq, high
 void Obj_ab9920::FUN_00ab9920()
 {
     {
@@ -28024,6 +28633,8 @@ class TreeEvaluator
     bool FUN_00aa7d80(TreeQuery* pkQuery);
 };
 
+// pdb: BSCompoundFrustum::Process | BSCompoundFrustum.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObject
 bool TreeEvaluator::FUN_00aa7d80(TreeQuery* pkQuery)
 {
     if (!pkQuery->HasVector())
@@ -28149,6 +28760,8 @@ struct Self {
     void FUN_00ac62f0(Handle* handle);
     void FUN_00ab88d0(Handle* handle);
 };
+// pdb: BSPSysArrayEmitter::ProcessClone | BSPSysArrayEmitter.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 void Self::FUN_00ab88d0(Handle* handle)
 {
     FUN_00ac62f0(handle);
@@ -28233,6 +28846,8 @@ struct Self {
 }
 extern AA::V3 DAT_0116d728;
 namespace AA { struct P7 { V3 pos; float u0C; float u10; float u14; float u18; }; }
+// pdb: BSWindModifier::Update | BSWindModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: afTime, apData
 void AA::Self::FUN_00aaa910(float d, AA::Node* n) {
     unsigned short c = n->count;
     if (c == 0) return;
@@ -28273,6 +28888,7 @@ struct State00ab64f0 {
     }
 };
 
+// pdb: BSPSysSimpleColorModifier::CreateObject | BSPSysSimpleColorModifier.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: BSPSysSimpleColorModifier::BSPSysSimpleColorModifier)
 State00ab64f0* __cdecl FUN_00ab64f0() {
     return new State00ab64f0;
 }
@@ -28332,6 +28948,7 @@ struct Task : RefObject {
     bool AllFinished() const {return progress ? progress->IsComplete() : 1;}
     void FUN_00aa5240();
 };
+// pdb: QueuedFile::CheckFinished | QueuedFiles.obj | fnv360_0822_retail, vtable, medium
 void Task::FUN_00aa5240()
 {
     if (!listener && !listeners)
@@ -28401,6 +29018,7 @@ __forceinline bool Owner::IsClosed(int& n)
     return i == n && depth == 0;
 }
 
+// pdb: BSCompoundFrustum::MakeIntoUnion | BSCompoundFrustum.obj | fnv360_0822_retail, call_gap, low, conflict (bridge: NavMeshObstacleCutter::GetModifiedTriangleList)
 void Owner::FUN_00aa8f50()
 {
     int n;
@@ -28435,6 +29053,8 @@ struct Shape97 : Shape_ad9a {
     int __thiscall FUN_00aad780(Sphere_ad9a* other);
 };
 
+// pdb: BSMultiBoundSphere::CheckBound | BSMultiBoundSphere.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: aTargetBound
 int __thiscall Shape97::FUN_00aad780(Sphere_ad9a* other)
 {
     Vec3_ad9a delta;
@@ -28524,6 +29144,8 @@ struct Node {
     void FUN_0082db60(NiStream* stream);
     void FUN_00aa7200(NiStream* stream);
 };
+// pdb: BSValueNode::LoadBinary | BSValueNode.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: NiSwitchNode::LoadBinary)
+// pdb params: arStream
 void Node::FUN_00aa7200(NiStream* stream)
 {
     FUN_0082db60(stream);
@@ -28767,6 +29389,8 @@ struct Owner {
 void __stdcall FUN_00845bc0(Manager* manager);
 }
 using namespace f3m_00aba2e0;
+// pdb: BSTextureData::LoadBinary | BSTextureData.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void Owner::FUN_00aba2e0(Manager* manager)
 {
     FUN_00845bc0(manager);
@@ -28846,6 +29470,8 @@ struct Obj {
     void FUN_008459d0(Stream* s);
     void FUN_00ab0830(Stream* s);
 };
+// pdb: BSFurnitureMarker::SaveBinary | BSFurnitureMarker.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 void Obj::FUN_00ab0830(Stream* sp)
 {
     Stream* s = *(Stream* volatile*)&sp;
@@ -28906,6 +29532,7 @@ struct Owner {
     void FUN_00aa9f10();
 };
 
+// pdb: BSParallelTaskManager::~BSParallelTaskManager | BSParallelTaskManager.obj | fnv360_0822_retail, call_gap, low
 void Owner::FUN_00aa9f10() {
     outer->inner->Stop();
     outer->inner->b.Wait();
@@ -28945,6 +29572,8 @@ struct BSMultiBoundSphere
     float radius;
     bool FUN_00aad9d0(const BoundPoint& pt) const;
 };
+// pdb: BSMultiBoundSphere::QPointWithin | BSMultiBoundSphere.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: aPoint
 bool BSMultiBoundSphere::FUN_00aad9d0(const BoundPoint& pt) const
 {
     if (pt.FUN_00439ef0(center).FUN_00457990() < radius)
@@ -28970,6 +29599,7 @@ struct Queue2889 : Base2889 {
     void FUN_00aa4df0(bool);
     virtual ~Queue2889();
 };
+// pdb: LockFreeQueue<NiPointer<IOTask> >::~LockFreeQueue<NiPointer<IOTask> > | IOManager.obj | fnv360_0822_debug, call_seq, high
 Queue2889::~Queue2889() {
     FUN_00aa4df0(true);
     void* volatile pData = data;
@@ -28988,6 +29618,8 @@ struct OwnerAA1450 {
     float x, y, z;
     void FUN_00aa1450(VecAA1450* out);
 };
+// pdb: BSMultiBoundAABB::GetNiBound | BSMultiBoundAABB.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aBound
 void OwnerAA1450::FUN_00aa1450(VecAA1450* out) {
     float squared = x * x + y * y + z * z;
     float length = (float)sqrt((double)squared);
@@ -29055,6 +29687,8 @@ struct Owner {
     void FUN_0082e820(Stream& s);
     void FUN_00aa7280(Stream& s);
 };
+// pdb: BSValueNode::SaveBinary | BSValueNode.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: NiSwitchNode::SaveBinary)
+// pdb params: arStream
 void Owner::FUN_00aa7280(Stream& s) {
     FUN_0082e820(s);
     int v = fieldB0;
@@ -29083,6 +29717,8 @@ struct Target {
     int FUN_004754d0(Entry* entry);
 };
 
+// pdb: BSCompoundFrustum::TestNotContained | BSCompoundFrustum.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apBound, apPlanes
 char __stdcall FUN_00aa7ba0(Target* target, Set* set)
 {
     if (set->mask == 0)
@@ -29135,6 +29771,8 @@ struct Owner {
     TlsObj* tls;
     void __thiscall FUN_00aa4690(int a, int b, int c);
 };
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::GetAt | IOManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aKey, arData
 void Owner::FUN_00aa4690(int a, int b, int c) {
     Wrapper* w = tls->Get(this);
     int a0 = a;
@@ -29166,6 +29804,7 @@ struct Item4080
 
 extern int (__stdcall * const DAT_00d9b07c)(unsigned long index);
 
+// pdb: ThreadSpecificInterfaceManager<LockFreeQueue<NiPointer<QueuedReference> >::LockFreeQueueInterface>::~ThreadSpecificInterfaceManager<LockFreeQueue<NiPointer<QueuedReference> >::LockFreeQueueInterface> | ModelLoader.obj | fnv360_0822_retail, call_dedup, low
 void f3m_00aa4df0::FUN_005e5280::FUN_00aa4080()
 {
     unsigned int index = 0;
@@ -29228,6 +29867,7 @@ struct AA53 : Base {
     void FUN_00aa53e0();
 };
 
+// pdb: QueuedFileEntry::GenerateKey | QueuedFiles.obj | fnv360_0822_retail, vtable, medium
 void AA53::FUN_00aa53e0() {
     if (sub2c) {
         unsigned int id = (unsigned short)InterlockedIncrement(&DAT_0116d13c);
@@ -29268,6 +29908,8 @@ struct FUN_00aa6490 {
     FUN_00aa6490(unsigned unused,const char* name);
     ~FUN_00aa6490();
 };
+// pdb: BSTaskThread::BSTaskThread | BSTaskManager_Xenon.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiProcessor, apThreadName
 FUN_00aa6490::FUN_00aa6490(unsigned unused,const char* name) : wake(0,0x7fffffff),lock(1,1) {
     thread=DAT_00d9b170(0,0,FUN_00aa6460,this,4,&threadId);
     if(name) FUN_0089fee0(threadId,name);
@@ -29313,6 +29955,8 @@ struct Owner
     bool FUN_00aad840(const Frustum* frustum);
 };
 
+// pdb: BSMultiBoundSphere::WithinFrustum | BSMultiBoundSphere.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: aPlanes
 bool Owner::FUN_00aad840(const Frustum* frustum)
 {
     NiBound bound = m_kBound;
@@ -29393,6 +30037,8 @@ struct K {
  char pad[0x18]; float s; char pad2[0x30-0x1c]; V3 v;
  void FUN_00ab8f60(Data* d, unsigned short i);
 };
+// pdb: BSParentVelocityModifier::Initialize | BSParentVelocityModifier.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apData, aiNewParticle
 void K::FUN_00ab8f60(Data* d, unsigned short i) {
  V3* pa=&d->a[i].v;
  pa->x=v.x+pa->x; pa->y=v.y+pa->y; pa->z=v.z+pa->z;
@@ -29457,6 +30103,8 @@ struct AAD {
     void FUN_00aad360(void* p);                   // thiscall member, one stack param (ret 4)
 };
 
+// pdb: BSCullingProcess::AppendVirtual | BSCullingProcess.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kVisible
 void AAD::FUN_00aad360(void* p) {
     Checker* c = *(Checker**)(raw + 0xc4);        // ORIG: mov ecx,[ecx+0xc4] - this is never saved
     bool ok = false;
@@ -29554,6 +30202,8 @@ extern RefList DAT_010667f0;
 // callee defined in this unit so the compiler sees it only reads r (no reload of r.p after the call)
 __declspec(noinline) void RefList::FUN_00aaabd0(unsigned int index, const RefPtr& r) { RefObj* n = r.p; if (n) InterlockedIncrement(&n->refs); RefObj* old = data[index]; data[index] = n; if (old) { if (InterlockedDecrement(&old->refs) == 0) old->DeleteThis(); } }
 
+// pdb: NiObjectGarbage::Add | NiObjectGarbage.obj | fnv360_1110_retail, call_seq, medium
+// pdb params: apObject
 void __cdecl FUN_00aaace0(RefObj* o)
 {
     DAT_0116d740.FUN_00409a80(0);
@@ -29570,6 +30220,8 @@ public:
     bool FUN_00aa13c0(const f3m_00aa1250::fo3_00aa1250::Frustum6* planes);
 };
 
+// pdb: BSMultiBoundAABB::CompletelyWithinFrustum | BSMultiBoundAABB.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: aPlanes
 bool FUN_00aa13c0_Box::FUN_00aa13c0(const f3m_00aa1250::fo3_00aa1250::Frustum6* planes)
 {
     CornerVec corners[8];
@@ -29757,6 +30409,8 @@ struct ParamBC0
 
 
 struct Owner {unsigned unk00,unk04,unk08;MemberBC0 elements;void FUN_00845bc0(ParamBC0*);void FUN_00ab0bc0(ParamBC0*);};
+// pdb: BSFurnitureMarker::LoadBinary | BSFurnitureMarker.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 void Owner::FUN_00ab0bc0(ParamBC0* parameter){
  FUN_00845bc0(parameter);
  TargetBC0* __restrict target=parameter->unk24C;
@@ -29806,6 +30460,7 @@ struct OwnerAae {                                   // thiscall receiver with no
 
 }
 
+// pdb: BSPortal::AnyRoomsVisible | BSPortal.obj | fnv360_0822_debug, objrun, medium
 int W_AAE::OwnerAae::FUN_00aae090() {               // ORIG: mov edx,[ecx+0xfc] with no frame at all - a leaf using only volatile registers and ecx
     using namespace W_AAE;
 
@@ -29873,6 +30528,7 @@ __declspec(noinline) bool Owner2968::FUN_00aa3df0(FUN_00aa2580* it, __int64* key
     item->object = p;
     return p != 0;
 }
+// pdb: BSTaskManager<__int64>::CancelAllTasks | IOManager.obj | fnv360_0822_retail, vtable, medium
 void Owner2968::FUN_00aa41f0() {
     bool changed=true;
     while(changed) {
@@ -29901,6 +30557,8 @@ struct Owner2b {                                    // the receiver is only forw
 
 }
 
+// pdb: IOManager::RequeueTask | IOManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTask, aeNewPriority
 int W_AA2B::Owner2b::FUN_00aa2ba0(void* obj, int value) {   // ORIG: ecx holds the receiver and is parked in ebp; this function cleans its two stack arguments (ret 8)
     unsigned long long total = (unsigned long long)(long long)value * 0x10000LL + (*(long long*)((char*)obj + 0x10) & (long long)0xffffffffff00ffffLL);   // ORIG: cdq sign-extends the argument for the multiply, then add esi,eax ; adc edi,edx - unsigned so the high half is used straight out of its register with no shift at all
 
@@ -29926,6 +30584,8 @@ struct unkB
     void* unk2C;
     void* FUN_00aa54e0(int arg1, int arg2);
 };
+// pdb: QueuedFileEntry::GetFile | QueuedFiles.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeArchiveTypeIndex, aeArchiveType
 void* unkB::FUN_00aa54e0(int arg1, int arg2)
 {
     void* result = 0;
@@ -29999,6 +30659,7 @@ struct TaskObj : BaseObj {
     void FUN_00aa51a0();
 };
 
+// pdb: QueuedFile::~QueuedFile | QueuedFiles.obj | fnv360_0822_retail, call_seq, medium
 void TaskObj::FUN_00aa51a0() {
     vtbl = &DAT_00e89814;
     this->TaskObj::~TaskObj();
@@ -30182,6 +30843,8 @@ struct Obj {
     void FUN_00ab00a0(float f);
     void FUN_00ab04e0(Stream& s);
 };
+// pdb: FurnitureMark::LoadBinary | BSFurnitureMarker.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arStream
 void Obj::FUN_00ab04e0(Stream& s)
 {
     FUN_00823eb0(s);
@@ -30243,6 +30906,8 @@ struct Owner {
 };
 
 
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::SetAt | IOManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aKey, aData, abReplaceExisting
 void __thiscall Owner::FUN_00aa46e0(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4) {
     Wrapper* w = tls->Get(this);
     unsigned int a4v = *(volatile unsigned int*)&a4;
@@ -30281,6 +30946,8 @@ struct FUN_00aa5370 : FUN_00aa5160 {
     int extraCount, extraCapacity;
     FUN_00aa5370(int argument);
 };
+// pdb: QueuedFileEntry::QueuedFileEntry | QueuedFiles.obj | fnv360_0721_retail, call_seq, medium
+// pdb params: aePriority
 FUN_00aa5370::FUN_00aa5370(int argument) : FUN_00aa5160(argument) {
     extraCount = 0;
     extraCapacity = 0;
@@ -30310,6 +30977,8 @@ struct S00aa9020_Nav : Nav
     void FUN_00aa9020(Nav* src, S00aa9020_Ctx* ctx);
 };
 
+// pdb: BSCompoundFrustum::BuildForPortal | BSCompoundFrustum.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apExistingFrustum, apPortal
 void S00aa9020_Nav::FUN_00aa9020(Nav* src, S00aa9020_Ctx* ctx)
 {
     Nav* s = src;
@@ -30623,6 +31292,7 @@ using namespace f3m_00aa49c0;
 
 __int64 __cdecl FUN_0086c140();
 
+// pdb: IOManager::UpdateQueue | IOManager.obj | fnv360_0822_retail, caller, medium
 bool __fastcall FUN_00aa49c0(QTarget* t, int)
 {
     if (DAT_0116d174)
@@ -30724,6 +31394,8 @@ struct Owner {
  bool FUN_00aa3850(void*,Pair*,Smart*);
 };
 }
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::LockFreeMapInterface::GetNext | IOManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiBucket, arKey, arData
 bool IterateAA::Owner::FUN_00aa3850(void* context,Pair* key,Smart* result) {
  bool found;
  for(;;) {
@@ -30990,6 +31662,7 @@ __declspec(noinline) bool Polygon::FUN_00aac810(unsigned a,unsigned b,unsigned c
  }
  return true;
 }
+// pdb: BSPolygon2D::Triangulate | BSPolygon.obj | fnv360_0721_beta, objrun, medium
 void Polygon::FUN_00aac8e0() {
  IndexArray indexlist; IndexArray& indices=indexlist;
  for(unsigned n=0;n<vertices->GetSize();++n)indices.Add(n);
@@ -31106,6 +31779,8 @@ struct Node {
     void FUN_00aaa360(Node* dst, void* arg);
 };
 
+// pdb: BSMultiBoundNode::CopyMembers | BSMultiBoundNode.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: pDest, arCloneData
 void Node::FUN_00aaa360(Node* dst, void* arg)
 {
     FUN_00ab5d90(dst, arg);
@@ -31185,6 +31860,8 @@ struct NiBoneLODController : NiTimeController {
 
 typedef char ControllerSize[(sizeof(NiBoneLODController) == 0x4c) ? 1 : -1];
 
+// pdb: NiBSBoneLODController::SaveBinary | NiBSBoneLODController.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void NiBoneLODController::FUN_00aafb10(NiStream& stream)
 {
     SaveBinary(stream);
@@ -31342,6 +32019,8 @@ void FUN_00ab5d90(Object*,void*);
 void BSRangeNode_SetCurrent(unsigned char);
 void FUN_00aa9a10(Object*,void*);
 };
+// pdb: BSRangeNode::CopyMembers | BSRangeNode.obj | fnv360_0822_retail, call_seq, low
+// pdb params: pDest, arCloneData
 void Object::FUN_00aa9a10(Object* dest,void* context) {
 FUN_00ab5d90(dest,context);
 dest->first=first;
@@ -31358,6 +32037,7 @@ struct Config {float time;bool a,b,c,d,e;Config(){time=0;a=0;b=0;c=0;d=0;e=0;}};
 struct Node {virtual void v00(); virtual void v04(); virtual void v08(); virtual void v0c(); virtual void v10(); virtual void v14(); virtual void v18(); virtual void v1c(); virtual void v20(); virtual void v24(); virtual void v28(); virtual void v2c(); virtual void v30(); virtual void v34(); virtual void v38(); virtual void v3c(); virtual void v40(); virtual void v44(); virtual void v48(); virtual void v4c(); virtual void v50(); virtual void v54(); virtual void v58(); virtual void v5c(); virtual void v60(); virtual void v64(); virtual void v68(); virtual void v6c(); virtual void v70(); virtual void v74(); virtual void v78(); virtual void v7c(); virtual void v80(); virtual void v84(); virtual void v88(); virtual void v8c(); virtual void v90(); virtual void v94(); virtual void v98(); virtual void v9c(); virtual void va0(); virtual void va4(); virtual void va8(); virtual void vac(); virtual void vb0(); virtual void vb4(); virtual void vb8(); virtual void vbc(); virtual void vc0(); virtual void vc4(); virtual void vc8(); virtual void vcc(); virtual void vd0(); virtual void vd4(); virtual void vd8(); virtual void attach(Data*,int);};
 struct Data {int unk00,unk04,unk08,unk0c,unk10,unk14;Node* parent;void FUN_008264c0(Config*);};
 struct Object {int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; Node** items;unsigned short capacity,count;int unka8;Data* data;Node* first(){if(0>=count)return 0;return items[0];}void FUN_00aaef70();};
+// pdb: BSSceneGraph::SetCameraScene | BSSceneGraph.obj | fnv360_0822_retail, call_gap, low
 void Object::FUN_00aaef70(){Node* parent=data->parent;if(parent!=first()){first()->attach(data,1);Config c;data->FUN_008264c0(&c);}}
 }
 
@@ -31370,6 +32050,7 @@ extern long (__stdcall* DAT_00d9b064)(volatile long*);
 struct Item {virtual void v00();virtual void destroy();long refs;};struct Ptr {Item* value;Ptr():value(0){}void clear(){Item* p=*(Item* volatile*)&value;if(p){if(!DAT_00d9b064(&p->refs))p->destroy();value=0;}}~Ptr(){clear();}};
 struct FUN_00ab5d60 {virtual ~FUN_00ab5d60();int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c;unsigned flags;int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8;FUN_00ab5d60();};
 struct FUN_00aaa070:FUN_00ab5d60 {Ptr item;FUN_00aaa070();virtual ~FUN_00aaa070();};
+// pdb: BSMultiBoundNode::BSMultiBoundNode | BSMultiBoundNode.obj | fnv360_0822_retail, call_seq, medium
 FUN_00aaa070::FUN_00aaa070(){item.clear();flags|=0x800;}
 }
 }   // namespace f3m_00aaa070
@@ -31381,6 +32062,8 @@ struct Vec3 {float x,y,z;};struct Query {int unk00; int unk04; int unk08; int un
 struct Type {int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int type;};struct Input {void FUN_00a9e0b0(Vec3,Query*);};
 struct Receiver {virtual void v000(); virtual void v004(); virtual void v008(); virtual void v00c(); virtual void v010(); virtual void v014(); virtual void v018(); virtual void v01c(); virtual void v020(); virtual void v024(); virtual void v028(); virtual void v02c(); virtual void v030(); virtual void v034(); virtual void v038(); virtual void v03c(); virtual void v040(); virtual void v044(); virtual void v048(); virtual void v04c(); virtual void v050(); virtual void v054(); virtual void v058(); virtual void v05c(); virtual void v060(); virtual void v064(); virtual void v068(); virtual void v06c(); virtual void v070(); virtual void v074(); virtual void v078(); virtual void v07c(); virtual void v080(); virtual void v084(); virtual void v088(); virtual void v08c(); virtual void v090(); virtual void v094(); virtual void v098(); virtual void v09c(); virtual bool query(Query*);int unk04;int state;};struct Data {int unk00,unk04,unk08;Receiver* receiver;};
 struct Owner {int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8; Data* data;bool FUN_00aaa4e0(Vec3,Type*,Input*);};
+// pdb: BSMultiBoundNode::VisibleAgainstActiveOccluders | BSMultiBoundNode.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: akViewPoint, akCuller, apOccluder
 bool Owner::FUN_00aaa4e0(Vec3 pos,Type* type,Input* input){if(type->type!=3&&type->type!=1&&input){Query q;input->FUN_00a9e0b0(pos,&q);if(data->receiver->query(&q)){data->receiver->state=2;return false;}}return true;}
 }
 }   // namespace f3m_00aaa4e0
@@ -31389,6 +32072,8 @@ bool Owner::FUN_00aaa4e0(Vec3 pos,Type* type,Input* input){if(type->type!=3&&typ
 #include <stdlib.h>
 namespace f3m_00ab8a10 {
 namespace Random357 {
+// pdb: BSPSysArrayEmitter::GetAPoint | BSPSysArrayEmitter.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arPos, arVel
 extern double DAT_00dc8dc8;struct Owner{int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int mode;int unk5c;void** data;unsigned short capacity,count;void FUN_00ab7f60(void*,int,int);void FUN_00ab8600(void*,int,int);void FUN_00ab8a10(int,int);};void Owner::FUN_00ab8a10(int a,int b){void* selected;unsigned n=count;if(n){float f=(float)(rand()/DAT_00dc8dc8);unsigned index=(unsigned)(f*n);if(index==n)--index;selected=data[index];}else selected=0;if(mode)FUN_00ab7f60(selected,a,b);else FUN_00ab8600(selected,a,b);}
 }
 
@@ -31429,6 +32114,8 @@ struct ClonedObject : FUN_00aad5f0
     ClonedObject* FUN_00ab6c60(void* cloning);
 };
 
+// pdb: BSMultiBoundCapsule::CreateClone | BSMultiBoundCapsule.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 ClonedObject* ClonedObject::FUN_00ab6c60(void* cloning)
 {
     ClonedObject* clone = new ClonedObject;
@@ -31472,6 +32159,8 @@ struct Object {
  void FUN_008beac0(Strings*);
  void FUN_00aadd50(Strings*);
 };
+// pdb: BSMultiBoundSphere::GetViewerStrings | BSMultiBoundSphere.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: apStrings
 void Object::FUN_00aadd50(Strings* strings) {
  FUN_008beac0(strings);
  strings->add(FUN_00847b50(DAT_0116d998));
@@ -31533,6 +32222,8 @@ struct Owner_aa3c20 {
     bool FUN_00aa3c20(void* context, Pair key);
 };
 
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::LockFreeMapInterface::RemoveAt | IOManager.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: aKey
 bool Owner_aa3c20::FUN_00aa3c20(void* context, Pair key)
 {
     bool ok;
@@ -31579,6 +32270,8 @@ Child** children;unsigned short capacity,count,active,unkaa;
 Info* info;int mode;unsigned unkb4,unkb8;void* extra;unsigned unkc0,unkc4,unkc8;Token* token;
 void FUN_00aa1ea0(Context*);
 };
+// pdb: BSMultiBoundRoom::OnVisible | BSMultiBoundRoom.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: kCuller
 void Owner::FUN_00aa1ea0(Context* context) {
     if(!active && !extra) return;
     int kind=info->type->kind;
@@ -31621,6 +32314,8 @@ struct FUN_00aad1b0 {
     FUN_00aad1b0(Points*);
     float FUN_00aac080();void FUN_00aac680();
 };
+// pdb: BSPolygon2D::BSPolygon2D | BSPolygon.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apVertexSimpleArray
 FUN_00aad1b0::FUN_00aad1b0(Points* input) : first(0),second(0) {
     count=input->count;
     points=input;
@@ -31643,6 +32338,8 @@ struct Emitter : f3m_00ab76f0::MeshCursorAB76::Emitter {
  bool BSMasterParticleSystem_ChildHasActiveParticles();void FUN_0082db90(float*,void*);
  void FUN_00ab7810(float*,void*);
 };
+// pdb: BSMasterParticleSystem::UpdateDownwardPass | BSMasterParticleSystem.obj | fnv360_0822_retail, vtable, medium
+// pdb params: UpdateData, uFlags
 void Emitter::FUN_00ab7810(float* time,void* data){
  BSMasterParticleSystem_ClearUnreferencedEmitters();
  if(accepted>0 || BSMasterParticleSystem_ChildHasActiveParticles()){
@@ -31687,6 +32384,7 @@ struct Map
     void FUN_00abb340();
 };
 
+// pdb: NiTPointerListBase<NiTPointerAllocator<unsigned int>,NiPointer<NiProperty> >::RemoveAll | BSTempEffectSimpleDecal.obj | fnv360_0822_retail, call_seq, high
 void Map::FUN_00abb340()
 {
     Node* n = first;
@@ -31779,6 +32477,8 @@ struct OwnerAAA6D0 {
     LinkAAA6D0* link;
     unsigned FUN_00aaa6d0(void* argument);
 };
+// pdb: BSMultiBoundNode::CheckBound | BSMultiBoundNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aTargetBound
 unsigned OwnerAAA6D0::FUN_00aaa6d0(void* argument) {
     return link->target->dispatch(argument);
 }
@@ -31791,6 +32491,7 @@ namespace f3m_00aa70e0 {
 namespace Small530 {
 long __cdecl FUN_00c047de(const char*);
 struct Owner {int unk00,unk04;const char* name;int unk0c,unk10,unk14,unk18,unk1c,unk20,unk24,unk28,unk2c,unk30,unk34,unk38,unk3c,unk40,unk44,unk48,unk4c,unk50,unk54,unk58,unk5c,unk60,unk64,unk68,unk6c,unk70,unk74,unk78,unk7c,unk80,unk84,unk88,unk8c,unk90,unk94,unk98,unk9c,unka0,unka4,unka8,unkac;long value;bool FUN_00aa70e0();};
+// pdb: BSValueNode::ParseNameForValue | BSValueNode.obj | fnv360_0822_retail, vtable, medium
 bool Owner::FUN_00aa70e0(){
     unsigned length;
     bool found=false;
@@ -31886,6 +32587,8 @@ __declspec(noinline) bool S00aa42d0_ns::S00aa42d0_Owner::FUN_00aa3df0(
     return task->p != 0;
 }
 
+// pdb: IOManager::RequeuePrioritiesToNewPriority | IOManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aeOldPriority, aeNewPriority
 void S00aa42d0_ns::S00aa42d0_Owner::FUN_00aa42d0(int maxPriority, int arg)
 {
     if (maxPriority <= arg)
@@ -31967,6 +32670,8 @@ struct Map {
  Link* BucketPtr(unsigned int i) {return &buckets[i];}
  void FUN_00aa44f0(bool keepPool);
 };
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::RemoveAll | IOManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: abCalledByDestructor
 void Map::FUN_00aa44f0(bool keepPool){
  MemoryContext context;
  if(!manager)
@@ -32519,6 +33224,8 @@ struct Owner {
     void FUN_00aa3170(Node* node);
     bool FUN_00aa3d10(unsigned int a, unsigned int b);
 };
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::LockFreeMapInterface::Remove | IOManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiBucket, arData
 bool Owner::FUN_00aa3d10(unsigned int a, unsigned int b)
 {
     bool ok;
@@ -32572,6 +33279,8 @@ struct FUN_00aa2be0 {
  FUN_00aa2be0(unsigned,void*,void*);
 };
 }
+// pdb: LockFreePriorityQueue<NiPointer<IOTask> >::LockFreePriorityQueue<NiPointer<IOTask> > | IOManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiPriorityCount, aiMaxThreads, aiDeleteBatchSize
 Task3209::FUN_00aa2be0::FUN_00aa2be0(unsigned n,void* a,void* b) {
  Context context(6);
  count=0;
@@ -32617,6 +33326,8 @@ struct LockFreeMap {
         return s->FUN_0042ba10(this);
     }
 };
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::RemoveAt | IOManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aKey
 bool LockFreeMap::FUN_00aa4730(__int64 key)
 {
     return Call(GetNode(), key);
@@ -32663,6 +33374,8 @@ struct Owner {
     bool FUN_00aa4100(int arg1, NiPtr arg2);
 };
 
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::Remove | IOManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiBucket, aData
 bool Owner::FUN_00aa4100(int arg1, NiPtr arg2)
 {
     TlsHolder* holder = m_pTls;
@@ -32682,6 +33395,7 @@ struct DispatchTransitionA293 {
     void FUN_0082e4f0();
     void FUN_00aa9650();
 };
+// pdb: BSTempNodeManager::~BSTempNodeManager | BSTempNodeManager.obj | fnv360_0822_retail, call_seq, high
 void DispatchTransitionA293::FUN_00aa9650() {
     dispatch=&DAT_00db88f4;
     FUN_0082e4f0();
@@ -32692,11 +33406,14 @@ void DispatchTransitionA293::FUN_00aa9650() {
 extern char DAT_00e8b28c;
 namespace f3m_00ab5d80 {
 struct CleanupObject { void* table; void FUN_0082e4f0(); void FUN_00ab5d80(); };
+// pdb: BSNiNode::~BSNiNode | BSNiNode.obj | fnv360_0822_retail, call_seq, high
 void CleanupObject::FUN_00ab5d80() { table = &DAT_00e8b28c; FUN_0082e4f0(); }
 }   // namespace f3m_00ab5d80
 
 // @f3 0x00aaa9d0 (community match, verified in this file)
 namespace f3m_00aaa9d0 {
+// pdb: BSWindModifier::SetWind | BSWindModifier.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afSpeed, afAngle
 void __cdecl FUN_00aaa9d0(float arg1, float arg2)
 {
     AA::V3 in;
@@ -32814,6 +33531,7 @@ struct Owner {
     void FUN_00aa3000();
 };
 
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::LockFreeMapInterface::ScanForDeletedNodes | IOManager.obj | fnv360_0721_beta, caller, low
 void Owner::FUN_00aa3000()
 {
     TlsGuard guard(6);
@@ -32980,6 +33698,8 @@ struct ItemQueue
     void FUN_00ab47e0(RefObject* obj);
 };
 
+// pdb: BSPortalGraph::DetachAlwaysRenderChild | BSPortalGraph.obj | fnv360_0822_retail, call_gap, low
+// pdb params: pkChild
 void ItemQueue::FUN_00ab47e0(RefObject* obj)
 {
     DAT_00fdf05c(&DAT_0116daf4);
@@ -33092,6 +33812,7 @@ struct FUN_00aa8410 {
     FUN_00aa8410();
 };
 
+// pdb: BSCompoundFrustum::BSCompoundFrustum | BSCompoundFrustum.obj | fnv360_0822_retail, call_seq, medium
 FUN_00aa8410::FUN_00aa8410()
 {
     m_24 = 0;
@@ -33112,6 +33833,7 @@ struct S_00ab6b20 {
     float m;
     float FUN_00ab6b20();
 };
+// pdb: MobileObject::GetLooking | MobileObject.obj | fnv360_0822_retail, vtable, medium
 float S_00ab6b20::FUN_00ab6b20()
 {
     return m;
@@ -33125,6 +33847,7 @@ struct S_00ab3dc0 {
     unsigned short m;
     int FUN_00ab3dc0();
 };
+// pdb: BSPortalGraph::GetAlwaysRenderArrayCount | BSPortalGraph.obj | fnv360_0721_beta, call_seq, medium
 int S_00ab3dc0::FUN_00ab3dc0()
 {
     return m;
@@ -33136,12 +33859,15 @@ bool qab0630::Entry::operator==(const Entry& rhs) const
 {
     return color.r == rhs.color.r && color.g == rhs.color.g && color.b == rhs.color.b && flag == rhs.flag && value == rhs.value;
 }
+// pdb: FurnitureMark::SaveBinary | BSFurnitureMarker.obj | fnv360_0822_debug, objrun, medium
+// pdb params: arStream
 bool qab0630::Entry::FUN_00ab0190(const Entry& rhs) const
 {
     return !(*this == rhs);
 }
 
 // @f3 0x00aa56b0 (community match, verified in this file)
+// pdb: QueuedChildren::`scalar deleting destructor' | QueuedFiles.obj | fnv360_0822_debug, objrun, medium
 __declspec(noinline) int QueuedParents::FUN_00aa56b0_Impl(const NiPointer<QueuedFile>& item)
 {
     int index = FUN_005e5350();
@@ -33401,6 +34127,8 @@ struct Owner {
     bool FUN_00aa3a60(int index, Pair key, Ref* value, bool replace);
 };
 
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::LockFreeMapInterface::SetAt | IOManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiBucket, aKey, arData, abReplaceExisting
 bool Owner::FUN_00aa3a60(int index, Pair key, Ref* value, bool replace)
 {
     TlsGuard guard(6);
@@ -33490,6 +34218,8 @@ inline float NiAbs(float fValue)
 }
 
 // @fnv 0x00c4b600
+// pdb: BSUtilities::GetRotationZToVector | BSUtilities.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apVector
 Mat3 __cdecl FUN_00aab4a0(Pt kWorldPosition)
 {
     Pt kAt = kWorldPosition;
@@ -33588,6 +34318,8 @@ struct Search31 {
     bool FUN_00aa31d0(unsigned index, unsigned a, unsigned b);
 };
 
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::LockFreeMapInterface::Find | IOManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiBucket, aKey
 bool Search31::FUN_00aa31d0(unsigned index, unsigned a, unsigned b) {
     Tag31* volatile bucket = map->buckets + index;
     Tag31 s;
@@ -33719,6 +34451,7 @@ static __forceinline void ShutdownTask(FUN_00ab4500* self)
     self->ptr2c = (CountedObject*)0;
     self->ptr4c = (CountedObject*)0;
 }
+// pdb: BSPortalGraph::~BSPortalGraph | BSPortalGraph.obj | fnv360_0822_retail, call_seq, high
 FUN_00ab4500::~FUN_00ab4500()
 {
     ShutdownTask(this);
@@ -33795,6 +34528,8 @@ inline bool CasLink(Tag33* dest, long exchange, long comparand) {
     return FUN_00d9b06c((volatile long*)dest, exchange, comparand) == comparand;
 }
 
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::LockFreeMapInterface::FindValue | IOManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiBucket, arData
 bool Search33::FUN_00aa33a0(unsigned index, const NiPointer<Payload33>& value) {
     Tag33* bucket = map->buckets + index;
     Tag33 s;
@@ -33861,6 +34596,8 @@ struct Vec3_aab6 {
     }
 };
 struct Matrix_aab6 { float elements[9]; };
+// pdb: BSUtilities::GetRotationZToVectorTranspose | BSUtilities.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apVector
 Matrix_aab6 FUN_00aab6b0(Vec3_aab6 input)
 {
     Vec3_aab6 v;
@@ -33935,6 +34672,8 @@ struct Owner {
  void FUN_00837ca0(Context*);bool FUN_00aaf610(unsigned);void FUN_00aaf920(Context*);
  void ResetCurrent(){unsigned old=current;current=~0u;FUN_00aaf610(old);}
 };
+// pdb: NiBSBoneLODController::ProcessClone | NiBSBoneLODController.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 void Owner::FUN_00aaf920(Context* context){
  FUN_00837ca0(context);
  Owner* clone=0;
@@ -34035,6 +34774,8 @@ public:
 };
 
 
+// pdb: BSUtilities::ReflectCameraAboutArbitraryPlane | BSUtilities.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCamera, apPlane, apReflectedCamera
 void FUN_00aab8c0(NiCamera* pkSrc, const NiPlane& kPlane, NiCamera* pkDst)
 {
     NiPoint3 kDir, kUp, kRight;
@@ -34130,6 +34871,8 @@ struct Target {
     void IncrementBucket(unsigned b) { InterlockedIncrement(&buckets[b]); }
     bool FUN_00aa2a00(Task*);
 };
+// pdb: BSTaskManager<__int64>::AddTask | IOManager.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apTask
 bool Target::FUN_00aa2a00(Task* task) {
     task->SetState(1);
     unsigned bucket = Bucket(task->GetKey());
@@ -34226,6 +34969,8 @@ struct ScannerAA26
     bool FUN_00aa26f0(unsigned int auiBucket, __int64& arKey, PtrAA26& arData);
 };
 
+// pdb: LockFreeMap<__int64,NiPointer<BSTask<__int64> > >::LockFreeMapInterface::GetFirst | IOManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiBucket, arKey, arData
 bool ScannerAA26::FUN_00aa26f0(unsigned int auiBucket, __int64& arKey, PtrAA26& arData)
 {
     bool tmp;
@@ -34300,6 +35045,8 @@ class NiNode : public NiAVObject
 };
 NiAVObject* __cdecl BSTestObjects_CreateCylinder(float fX, float fY, float fZ, int iArg0, int iArg1, int iArg2);
 
+// pdb: BSTestObjects::CreateCappedCylinder | BSTestObjects.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: afBaseRadius, afTopRadius, afHeight, aiSlices, aiStacks, apColor
 NiNode* __cdecl FUN_00ab2d70(float fX, float fY, float fZ, int iArg0, int iArg1, int iArg2)
 {
     NiNode* pkNode = new NiNode(0);
@@ -34392,6 +35139,8 @@ public:
     void FUN_00a9fa20(NiPlane* planes);
     int FUN_00aa01c0(BSMultiBound* other);
 };
+// pdb: BSMultiBoundOBB::CheckBound | BSMultiBoundOBB.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aTargetBound
 int BSMultiBoundOBB::FUN_00aa01c0(BSMultiBound* other)
 {
     int type = other->m_spShape->GetType();

@@ -361,6 +361,8 @@ struct FUN_00ddba20_hits
     {}
 };
 
+// pdb: hkInspectProcess::step | hkInspectProcess.obj | fnv360_0822_retail, vtable, medium
+// pdb params: frameTimeInMs
 void Shape_ddba::FUN_00ddba20(int unused)
 {
     FUN_00ddba20_hits hits;

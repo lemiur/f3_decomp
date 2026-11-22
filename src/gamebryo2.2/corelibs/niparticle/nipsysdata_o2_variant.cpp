@@ -26,6 +26,7 @@ struct FUN_00a963f0 : FUN_00a67c00
     FUN_00a963f0();
 };
 // @fnv 0x00a963f0
+// pdb: NiParticlesData::NiParticlesData | NiParticlesData.obj | fnv360_0822_retail, caller_sim, medium
 FUN_00a963f0::FUN_00a963f0()
 {
     *(void**)this = (void*)&DAT_010a05e4;
@@ -103,6 +104,7 @@ struct S_00c25280
     void* FUN_00c25280(unsigned int);
 };
 // @fnv 0x00c25280
+// pdb: NiPSysData::`scalar deleting destructor' | NiPSysData.obj | fnv360_0822_retail, caller_sim, medium, conflict (bridge: NiParticlesData::`scalar deleting destructor')
 void* S_00c25280::FUN_00c25280(unsigned int f)
 {
     *(void**)this = (void*)&DAT_010be254;
@@ -130,6 +132,7 @@ struct Unknown00c24ef0
     void FUN_00c24ef0();
 };
 // @fnv 0x00c24ef0
+// pdb: NiPSysData::~NiPSysData | NiPSysData.obj | fnv360_0822_retail, caller_sim, low
 void Unknown00c24ef0::FUN_00c24ef0()
 {
     f0 = (void*)&DAT_010be254;
@@ -212,6 +215,7 @@ struct FnvPSysData
 };
 
 // @fnv 0x00c24d20
+// pdb: NiPSysData::ResolveAddedParticles | NiPSysData.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: NiObjectGarbage::Add)
 void FnvPSysData::FUN_00c24d20()
 {
     if (m_usActive < m_usNumParticles)
@@ -258,6 +262,7 @@ class FUN_00c24da0_cls
 };
 
 // @fnv 0x00c24da0
+// pdb: NiPSysData::CreateObject | NiPSysData.obj | fnv360_0822_retail, objrun, medium
 FUN_00c24da0_cls* __cdecl FUN_00c24da0()
 {
     FUN_00c24da0_cls* p = (FUN_00c24da0_cls*)FUN_00aa13e0(0x7c);
@@ -376,6 +381,8 @@ struct FUN_00c25850_cls
 };
 
 // @fnv 0x00c25850
+// pdb: NiPSysUpdateTask::Init | NiPSysUpdateTask.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: pkSystem, fTime
 FUN_00c25850_cls* FUN_00c25850_cls::FUN_00c25850()
 {
     BaseCtor();
@@ -448,6 +455,8 @@ struct Source08
 // @f3 0x00ac5000 (community match, verified in this file)
 extern const char* const g_012685ec_arg1;
 
+// pdb: NiPSysData::GetViewerStrings | NiPSysData.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void Source08::FUN_00c255b0(StrArr* strings)
 {
     FUN_00a97420(strings);
@@ -773,6 +782,7 @@ PSysDataClone* PSysDataCloneSrc::NiPSysData_CreateClone(void* kCloning)
 namespace f3m_00ac4900 {
 namespace fn_00ac4900 {
 struct PSysData : NiPSysData { unsigned short FUN_00ac4900(); };
+// pdb: NiPSysData::AddParticle | NiPSysData.obj | fnv360_0822_retail, objrun_sim, low
 unsigned short PSysData::FUN_00ac4900() {
     if (m_usNumActive == 0) {
         m_usNumParticles = m_usActive;

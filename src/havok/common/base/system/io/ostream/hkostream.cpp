@@ -8,6 +8,7 @@ extern int DAT_01268108;
 extern "C" __declspec(dllimport) void __stdcall free(void*);
 
 // @fnv 0x00c85750
+// pdb: `dynamic atexit destructor for 'iMaxGrassTypesPerTexture'' | TESLand.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00c85750()
 {
     free((void*)DAT_01268108);
@@ -57,6 +58,7 @@ struct World_7d7a60
     void FUN_007ab580();
 };
 
+// pdb: CombatProcedureHideFromTarget::Shutdown | CombatProcedureHideFromTarget.obj | fnv360_0822_retail, vtable, medium
 void World_7d7a60::FUN_007d7a60()
 {
     m_broadPhase->m_listener->FUN_006f8ce0();
@@ -129,6 +131,7 @@ void __thiscall Own_00cc0470::hkOstream_write(void* a)
 extern int g_unk01268560;
 
 // @fnv 0x00cc04c0
+// pdb: hkpConstraintData::isBuildJacobianCallbackRequired | bhkMalleableConstraint.obj | fnv360_0721_beta, objrun_open, low, conflict (bridge: bhkMalleableConstraint::GetRTTI)
 int* __cdecl FUN_00cc04c0()
 {
     return &g_unk01268560;
@@ -137,6 +140,7 @@ int* __cdecl FUN_00cc04c0()
 extern int DAT_01268ad8;
 
 // @fnv 0x00cc0770
+// pdb: bhkRigidBodyT::GetRTTI | bhkRigidBodyT.obj | fnv360_0822_retail, objrun_prop, low
 int __cdecl FUN_00cc0770()
 {
     return reinterpret_cast<int>(&DAT_01268ad8);
@@ -743,6 +747,8 @@ struct Owner {
  void* result;
  bool FUN_0074a440(void*);
 };
+// pdb: LowProcess::SetTargetForPackage | LowProcess.obj | fnv360_1110_retail, objrun, medium
+// pdb params: apActor
 bool Owner::FUN_0074a440(void* input){
  unsigned mode=table->mode(this);
  Table* dispatch=table;
@@ -1206,6 +1212,8 @@ struct FUN_008f7f40_cls
     void __thiscall FUN_008f7f40(NiStream& stream);
 };
 
+// pdb: bhkMoppBvTreeShape::LoadCInfo | bhkMoppBvTreeShape.obj | fnv360_0822_retail, ustr, medium
+// pdb params: arStream
 unsigned int bhkMoppBvTreeShape::FUN_00cc9f60(NiStream& stream)
 {
     unsigned int size = slotA8();

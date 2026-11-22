@@ -224,6 +224,8 @@ class FUN_00a69400
 };
 
 // @fnv 0x00a69400
+// pdb: NiCullingProcess::NiCullingProcess | NiCullingProcess.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: pkVisibleSet
 FUN_00a69400::FUN_00a69400(void* pkCamera)
     : m_bUpdated(false), m_kCameraFrustum(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, false)
 {
@@ -294,6 +296,8 @@ struct Sub694a0 : S694a0
     void __thiscall ProcessWorkerWithHandler(void* worker, Handler* handler, void* temporary);
 };
 // @fnv 0x00a69570
+// pdb: NiCullingProcess::Process | NiCullingProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkCamera, pkScene, pkVisibleSet
 void Sub694a0::ProcessWorkerWithHandler(void* worker, Handler* handler, void* temporary)
 {
     if (worker != 0 && handler != 0)
@@ -352,6 +356,8 @@ struct WorkerA69640 : WorkerS694a0
 };
 // Checks bits 12, 20 and 11 of the object's flags and either invokes the object's callback or calls NiCullingProcess_DoCulling based on them and this->flags.
 // @fnv 0x00a69640
+// pdb: NiCullingProcess::Process | NiCullingProcess.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkObject
 void WorkerA69640::ProcessObject(NiAVObject* object)
 {
     ObjFlags* obj = (ObjFlags*)object;
@@ -380,6 +386,7 @@ extern MemoryManager g_memoryManager;
 struct FUN_00a69470
 {
     virtual ~FUN_00a69470();
+    // pdb: SettingCollection<Setting>::`scalar deleting destructor' | EffectItem.obj | fnv360_0822_retail, vtable, medium
     void operator delete(void* p)
     {
         g_memoryManager.Deallocate(p);

@@ -11,6 +11,8 @@ struct hkpConvexListAgent
 };
 
 // @fnv 0x00d33770
+// pdb: hkpConvexListAgent::invalidateTim | hkpConvexListAgent.obj | fnv360_0822_retail, vtable_prefix, high
+// pdb params: input
 void __thiscall hkpConvexListAgent::FUN_00d33770(int a)
 {
     if (*(char*)((char*)this + 0x84))
@@ -381,6 +383,8 @@ static __forceinline hkpCollisionAgentD33D* AllocAgent(unsigned int uiSize)
     return p;
 }
 
+// pdb: hkpConvexListAgent::createConvexListConvexAgent | hkpConvexListAgent.obj | fnv360_0822_debug, objrun, high
+// pdb params: bodyA, bodyB, input, mgr
 hkpCollisionAgentD33D* __cdecl CreateConvexListAgent(const hkpCdBodyD33D& kBodyA, const hkpCdBodyD33D& kBodyB,
                                                      const hkpCollisionInputD33D& kInput,
                                                      hkpContactMgrD33D* pkMgr) throw()
@@ -600,6 +604,8 @@ extern "C" void __cdecl FUN_00d43dc0(void* a, void* b, void* c, hkCollectorBaseD
 
 // Constructs an hkCollectorD347 with the given filter and passes it to FUN_00d43dc0 along with a, b and c.
 // @fnv 0x00d34790
+// pdb: hkpSymmetricAgentLinearCast<hkpShapeCollectionAgent>::staticGetPenetrations | hkpConvexListAgent.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_00d34790(void* b, void* a, void* c, int filter)
 {
     hkCollectorD347 collector(filter);
@@ -629,6 +635,8 @@ class hkObjD337
 
 // Sets a value on the object, calling SetValueIfExpected when m_84 is true, otherwise delegating to hkAgent1nMachine_WarpTime on m_30.
 // @fnv 0x00d337a0
+// pdb: hkpConvexListAgent::warpTime | hkpConvexListAgent.obj | fnv360_0822_retail, vtable_prefix, high
+// pdb params: oldTime, newTime, input
 void hkObjD337::SetValue(float a, float b, int c)
 {
     if (m_84)
@@ -768,6 +776,8 @@ struct S00d33940_Obj : S00d33940_Base
 
 // Calls FUN_00dacbd0(a, b, d), sets vt to DAT_010cebf0 and unk80 to *c, sets unk84/85, calls FUN_00dafcd0 on unk0c, and sets unk18 and unk2c to DAT_01012054.
 // @fnv 0x00d33940
+// pdb: hkpConvexListAgent::hkpConvexListAgent | hkpConvexListAgent.obj | fnv360_0822_retail, uvref, high
+// pdb params: bodyA, bodyB, input, mgr
 S00d33940_Obj* S00d33940_Obj::FUN_00d33940(int* a, int* b, int* c, void* d)
 {
     FUN_00dacbd0(a, b, d);
@@ -819,6 +829,8 @@ void __cdecl FUN_00d34790(void* a, void* b, void* c, void* d);
 
 // Writes timer entries (LtCvxList/StcheckHull, Stchildren, lt), calls TestGsk with a collector, and calls FUN_00d34790 if the collector registered a hit.
 // @fnv 0x00d33b90
+// pdb: hkpConvexListAgent::staticGetPenetrations | hkpConvexListAgent.obj | fnv360_0822_retail, call_seq, high
+// pdb params: bodyA, bodyB, input, collector
 extern "C" void __cdecl FUN_00d33b90(void* a, void* b, void* c, void* d)
 {
     volatile DWORD tick;
@@ -1028,6 +1040,8 @@ struct ClosestCollectorQ
     int unk4C;
 };
 
+// pdb: hkpConvexListAgent::staticGetClosestPoints | hkpConvexListAgent.obj | fnv360_0822_retail, call_seq, high
+// pdb params: bodyA, bodyB, input, collector
 extern "C" void __cdecl FUN_00d339d0(int apBodyA, int apBodyB, int a3, int apCollector)
 {
     {

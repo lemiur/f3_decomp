@@ -12,6 +12,7 @@ struct Out { V4 a, b, c; };
 struct Stream { char pad[0xb8]; int numDecoded; };
 extern "C" void FUN_00a4e410(Out* o, int a4, int a5);
 static inline void cp(V4& d, const V4& s) { d.x = s.x; d.y = s.y; d.z = s.z; d.w = s.w; }
+// pdb: hkpGenericConstraintData::constrainToAngularW | hkpGenericConstraintData.obj | tesv_win, objrun, medium
 void __stdcall FUN_009de740(unsigned int** a0, int u1, int u2, V4* apStream, int a4, int a5)
 {
     Out out;
@@ -258,6 +259,8 @@ __forceinline void hkTimerEnd()
 struct RootBody : hkpCdBody {unsigned u10,u14,u18,flags;};
 struct __declspec(align(16)) hkpShapeBuffer {unsigned long m_data[128];};
 // @fnv 0x00d43b90
+// pdb: hkpShapeCollectionAgent::staticLinearCast | hkpShapeCollectionAgent.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: bodyA, bodyB, input, collector, startCollector
 void __cdecl FUN_009d1840(const hkpCdBody* bodyA, const hkpCdBody* bodyB, const CollisionAgentContext* input, void* a4,
                           void* a5)
 {
@@ -1910,6 +1913,7 @@ struct hkpCollisionInput
 void __cdecl FUN_0096d120(const hkVector4* capsAPoints, float capsARadius, const hkVector4* capsBPoints, float capsBRadius,
                           hkContactPoint* points);
 
+// pdb: getThreeClosestPointsInl | hkpCapsuleCapsuleAgent.obj | fnv360_0822_retail, objrun, medium
 static __declspec(noinline) void FUN_009c4bb0(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const hkpCollisionInput& input,
                                               hkContactPoint* points)
 {
@@ -4169,6 +4173,7 @@ inline void __cdecl hkVector4Util::uncompressExpandedAabbUint32(const hkAabbUint
 
 using namespace S9ceea0_;
 
+// pdb: hkCollectionBvTreeAgent3_extractCachedAabbsOrRecalculate | hkpCollectionCollectionAgent3.obj | fnv360_0822_retail, call_gap, medium, conflict (bridge: hk1AxisSweep::collide)
 static int __cdecl FUN_009ceea0( const hkpCdBody* cdBody, const hkpShapeContainer* collection, const hkpProcessCollisionInput& input, hk1AxisSweep::AabbInt* aabbs, int aabbsCapacity )
 {
 	const int useContinuousPhysics = input.m_collisionQualityInfo->m_useContinuousPhysics;

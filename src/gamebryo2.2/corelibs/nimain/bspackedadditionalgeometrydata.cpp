@@ -12,6 +12,7 @@ struct FakeBase
 };
 extern int DAT_0102e1dc;
 // @fnv 0x00a7f740
+// pdb: BSPackedAdditionalGeometryData::CreateObject | BSPackedAdditionalGeometryData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void* FUN_00a7f740()
 {
     void* p = BSFadeNode::operator new(52);
@@ -60,6 +61,8 @@ extern char* __cdecl FUN_00a7d330(const char*);
 extern char* __cdecl FUN_00a7d510(const char*, const char*);
 // Calls FUN_00a73e40 on list, then appends the strings from FUN_00a7d330(g_011f4aac) and FUN_00a7d510(str_0109deec, name), growing the list as needed.
 // @fnv 0x00a7f780
+// pdb: NiBSplineColorInterpolator::GetViewerStrings | NiBSplineColorInterpolator.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void Owner::AppendNameStrings(StringList* list)
 {
     char* text;
@@ -114,6 +117,8 @@ struct FUN_00a7f680_cls : S_00a7f680_Base
 };
 
 // @fnv 0x00a7f680
+// pdb: BSPackedAdditionalGeometryData::SaveBinary | BSPackedAdditionalGeometryData.obj | fnv360_0822_retail, vtable, high
+// pdb params: kStream
 void FUN_00a7f680_cls::SaveFields(void* p)
 {
     NiAdditionalGeometryData_SaveBinary(p);
@@ -324,6 +329,8 @@ class A7F6E0Object
 
 // Loads the base object data from kStream, then reads m_fValue0 and m_fValue1 as binary values.
 // @fnv 0x00a7f6e0
+// pdb: BSPackedAdditionalGeometryData::LoadBinary | BSPackedAdditionalGeometryData.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void A7F6E0Object::LoadBinary(A7F6E0Stream& kStream)
 {
     LoadBinaryBase(kStream);

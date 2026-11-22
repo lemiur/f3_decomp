@@ -49,6 +49,8 @@ struct Task1939List : Task1939Base, Task1939Node
 };
 float __cdecl FUN_0047ca30(float value, float step);
 // @fnv 0x007214b0
+// pdb: ListBox<StartMenu::Option *>::GetHighlightTarget | StartMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aeButton
 Task1939Tile* Task1939List::FUN_0067c070(unsigned int action)
 {
     Task1939Tile* result = 0;
@@ -165,6 +167,8 @@ struct FUN_00660dc0_cls {
     Obj* FUN_00660dc0(int code);
 };
 
+// pdb: ListBox<BGSNote *>::GetHighlightTarget | MapMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aeButton
 Obj* FUN_00660dc0_cls::FUN_00660dc0(int code)
 {
     Obj* found = 0;
@@ -338,6 +342,8 @@ float __cdecl Tile_GetMaximumDepth();
 int __cdecl FUN_00c048fb(int c);
 
 
+// pdb: SleepWaitMenu::Create | SleepWaitMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: abSleep
 SwTile* __cdecl FUN_00674aa0(bool sleep)
 {
     SwIface* interfaceState = DAT_01075b24;

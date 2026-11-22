@@ -63,6 +63,7 @@ struct FUN_00a54410_shell
     void* FreeAndMaybeDeallocate(unsigned int);
 };
 // @fnv 0x00a54410
+// pdb: NiTArray<char *,NiTMallocInterface<char *> >::`scalar deleting destructor' | TESScriptFunctions.obj | fnv360_0822_retail, vtable, high
 void* FUN_00a54410_shell::FreeAndMaybeDeallocate(unsigned int flags)
 {
     void* tmp = m_ptr;
@@ -92,6 +93,8 @@ struct NiBoneLODController : public NiObject
     NiBoneLODController* FUN_00a552c0(CloningProcess&);
 };
 // @fnv 0x00a552c0
+// pdb: NiBoneLODController::CreateClone | NiBoneLODController.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kCloning
 NiBoneLODController* NiBoneLODController::FUN_00a552c0(CloningProcess& kCloning)
 {
     NiBoneLODController* pkObject = static_cast<NiBoneLODController*>(BSFadeNode::operator new(0x68));
@@ -159,6 +162,7 @@ struct NiBoneLODController
 };
 // Checks whether m_target's RTTI chain contains DAT_011f4428, returning false if m_target or its RTTI is null.
 // @fnv 0x00a55130
+// pdb: NiBoneLODController::TargetIsRequiredType | NiBoneLODController.obj | fnv360_0822_retail, objrun, high
 bool NiBoneLODController::IsTargetOfType() const
 {
     TargetObj* pkTarget = m_target;
@@ -192,6 +196,8 @@ struct NiBoneLODController
 };
 // Clamps the global LOD value to the controller's LOD count and, if it differs from the current LOD, applies it via FUN_00a541f0.
 // @fnv 0x00a55160
+// pdb: NiBoneLODController::Update | NiBoneLODController.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: UpdateData
 void NiBoneLODController::UpdateLOD(NiUpdateData& UpdateData)
 {
     int iNewLOD = DAT_011a90c4;
@@ -213,6 +219,7 @@ struct A51BF0Base
 };
 
 // @fnv 0x00a55300
+// pdb: NiBoneLODController::CreateObject | NiBoneLODController.obj | fnv360_0822_retail, caller_sim, medium
 NiBoneLODController* CreateBoneLODController()
 {
     NiBoneLODController* p = (NiBoneLODController*)A51BF0Base::operator new(0x68);
@@ -351,6 +358,8 @@ class NiBoneLODControllerA53 : public NiTimeController
 
 // Calls the base RegisterStreamables, then registers the skin instance of every skin info in each LOD skin info set, returning false if the base call fails.
 // @fnv 0x00a53d00
+// pdb: NiBoneLODController::RegisterStreamables | NiBoneLODController.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: kStream
 bool NiBoneLODControllerA53::FUN_00a53d00(NiStream& kStream)
 {
     if (!NiTimeController::RegisterStreamables(kStream))
@@ -467,6 +476,8 @@ struct LODManager : NiBoneLODController
 };
 // Switches the LOD level: toggles stateFlags on group and default nodes, updates link-group references, and stores the new LOD if it differs and is valid.
 // @fnv 0x00a541f0
+// pdb: NiBoneLODController::SetBoneLOD | NiBoneLODController.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: iLOD
 bool LODManager::FUN_00a541f0(int desiredLOD)
 {
     if (m_uiNumLODs > 0 && m_iLOD != desiredLOD &&
@@ -615,6 +626,7 @@ template <class T> struct ArrayViewF3
     }
 };
 
+// pdb: NiBoneLODController::CleanUp | NiBoneLODController.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void FUN_00a55190_owner::ClearEntries()
 {
     ArrayViewF3<FirstEntry>& smallArray = *(ArrayViewF3<FirstEntry>*)&smallEntries;
@@ -711,6 +723,8 @@ class A55320Object
 
 // Appends the class name and formatted m_iLOD and m_uiNumLODs strings to pkStrings.
 // @fnv 0x00a55320
+// pdb: NiBoneLODController::GetViewerStrings | NiBoneLODController.obj | fnv360_0822_retail, ustr_rel, medium
+// pdb params: pkStrings
 void A55320Object::AppendViewerStrings(BA55320StringArray* pkStrings)
 {
     pkStrings->Add(FUN_00a7d330(g_pcA55320ClassName));
@@ -1177,6 +1191,8 @@ struct BoneLODLoader
 };
 // Reads the current LOD, LOD count, node groups, skin groups and extra links from the stream, building the group arrays.
 // @fnv 0x00a54c40
+// pdb: NiBoneLODController::LoadBinary | NiBoneLODController.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: kStream
 void BoneLODLoader::ReadFromStream(LODStream* stream)
 {
     unsigned int i;
@@ -1560,6 +1576,7 @@ class FUN_00a550b0 : public a550::FUN_00a6d220
 };
 // Default constructor that initializes m_iLOD to -1 and m_uiNumLODs to 0.
 // @fnv 0x00a550b0
+// pdb: NiBoneLODController::NiBoneLODController | NiBoneLODController.obj | fnv360_0822_retail, call_seq, high
 FUN_00a550b0::FUN_00a550b0() : m_iLOD(-1), m_uiNumLODs(0)
 {}
 
@@ -1878,6 +1895,7 @@ struct A54440CloneWork
 
 // Copies this manager's groups, links, and defaults into its mapped clone, applying mapped references where available.
 // @fnv 0x00a54440
+// pdb: NiBoneLODController::ProcessClone | NiBoneLODController.obj | tesv_win, caller_sim, low
 void A54440Manager::CloneFrom(A54440Remap* remap)
 {
     unsigned int i;

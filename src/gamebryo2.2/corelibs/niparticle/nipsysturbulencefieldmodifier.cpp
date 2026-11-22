@@ -29,6 +29,8 @@ struct NiPSysTurbulenceFieldModifier : NiPSysFieldModifier
 };
 
 // @fnv 0x00c27390
+// pdb: NiPSysTurbulenceFieldModifier::IsEqual | NiPSysTurbulenceFieldModifier.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pkObject
 bool __thiscall NiPSysTurbulenceFieldModifier::FUN_00c27390(NiObject* pkObject)
 {
     NiPSysTurbulenceFieldModifier* pkDest;
@@ -71,6 +73,8 @@ struct NiPSysFieldModifier_00c27670
     void FUN_00c32020(NiPSysParticle*, CloningProcess*);
 };
 // @fnv 0x00c27670
+// pdb: NiPSysTurbulenceFieldModifier::CreateClone | NiPSysTurbulenceFieldModifier.obj | fnv360_1110_retail, objrun, medium
+// pdb params: kCloning
 NiPSysFieldModifier_00c27670* __fastcall CloneFieldModifier(NiPSysFieldModifier_00c27670* self, int,
                                                             CloningProcess* kCloning)
 {
@@ -163,6 +167,8 @@ struct C27A30Object : C27A30Base
 
 // Appends the RTTI name and a formatted "Frequency" string for m_fFrequency to pkStrings after calling the base handler.
 // @fnv 0x00c27a30
+// pdb: NiPSysTurbulenceFieldModifier::GetViewerStrings | NiPSysTurbulenceFieldModifier.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void C27A30Object::FUN_00c27a30(C27A30StringArray* pkStrings)
 {
     C27A30Base::FUN_00c322b0(pkStrings);
@@ -197,6 +203,8 @@ struct FUN_00c27700_class
 };
 // Reads a float from the stream at object+0x24c and stores its reciprocal, or a fallback constant when the value is below DAT_01032980.
 // @fnv 0x00c27700
+// pdb: NiPSysTurbulenceFieldModifier::LoadBinary | NiPSysTurbulenceFieldModifier.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void __thiscall FUN_00c27700_class::ReadFloatAndComputeInverse(void* object)
 {
     LoadFromStream(object);
@@ -366,6 +374,8 @@ struct TTurbulenceModifier
 
 // Applies a random offset scaled by m_fInfluence to particle values whose squared distance from the transformed field position is at most m_fFieldStrength.
 // @fnv 0x00c274c0
+// pdb: NiPSysTurbulenceFieldModifier::UpateNoAttenuation | NiPSysTurbulenceFieldModifier.obj | fnv360_1110_retail, objrun, medium
+// pdb params: fTime, pkData
 void TTurbulenceModifier::FUN_00c274c0(float fTime, TPSysData* pkData)
 {
     NiTransform kFieldXform = m_pkFieldObject->m_kWorldSpaceTransform;
@@ -558,6 +568,7 @@ inline float NiPoint3::Length() const
 
 // Applies random turbulence offsets to particle values based on distance from the field object, scaling by influence and attenuation.
 // @fnv 0x00c277b0
+// pdb: NiPSysTurbulenceFieldModifier::Update | NiPSysTurbulenceFieldModifier.obj | tesv_win, caller_sim, low
 void __thiscall NiPSysTurbulenceFieldModifierDerived::UpdateTurbulence(float fTime, NiPSysData* pkData)
 {
     if (fTime >= m_fFieldDistance && fTime < m_fFieldDistance + m_fFieldMagnitude)
@@ -700,6 +711,8 @@ struct C273D0Modifier
 
 // Adds a random 3D offset scaled by m_fInfluence to each particle's m_kValue in pkData.
 // @fnv 0x00c273d0
+// pdb: NiPSysTurbulenceFieldModifier::UpateNoAttenuationNoDistance | NiPSysTurbulenceFieldModifier.obj | fnv360_1110_retail, objrun, medium
+// pdb params: fTime, pkData
 void C273D0Modifier::ApplyRandomOffset(float fTime, C273D0ParticleData* pkData)
 {
     for (unsigned short us = 0; us < pkData->m_usNumParticles; us++)

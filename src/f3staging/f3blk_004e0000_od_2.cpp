@@ -369,6 +369,8 @@ void FUN_004d9280(void*); void FUN_004d9310(void*); void FUN_004d9370(void*); vo
 struct FUN_0056adf0:AllocE {int a,b; FUN_0056adf0();void FUN_0056ad60(TargetE*);};
 extern FUN_0056adf0* DAT_01071528; extern bool DAT_0106cafd;
 void* __cdecl FUN_00573620(); void* __cdecl FUN_00432f70();
+// pdb: TESObjectCELL::CreateWorld | TESObjectCELL.obj | fnv360_0822_retail, uvref, medium
+// pdb params: arCenter
 FUN_00908b80* __cdecl FUN_004e1e00(VecE* input){
  ContextE context;
  bhkWorldCinfo info;

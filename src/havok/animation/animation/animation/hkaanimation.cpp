@@ -5,6 +5,8 @@
 #include "havok/hkaAnimation.h"
 
 // @fnv 0x00e2f270
+// pdb: hkDisplaySphere::getWireframeGeometry | hkDisplaySphere.obj | fnv360_0822_retail, vtable, medium
+// pdb params: lines, a
 void __stdcall FUN_00e2f270(int)
 {}
 

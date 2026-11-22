@@ -238,6 +238,8 @@ struct FUN_00979fb0 : RefHeader, HavokAllocation {
 
 }
 
+// pdb: hkpConstraintUtils::convertToLimits | hkpConstraintUtils.obj | fnv360_0822_retail, call_gap, high
+// pdb params: originalConstraint
 Instance* __cdecl CloneInstanceFromSource(Instance* source)
 {
     using namespace ConstraintCloning;

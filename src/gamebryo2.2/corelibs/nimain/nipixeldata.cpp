@@ -13,6 +13,8 @@ __forceinline bool pixelCompressed(int f)
 
 // Initializes pixel format, mipmap levels, faces, per-level widths/heights/offsets, allocates data and copies the level tables.
 // @fnv 0x00a7c190
+// pdb: NiPixelData::NiPixelData | NiPixelData.obj | fnv360_0822_retail, call_seq, high
+// pdb params: uiWidth, uiHeight, kFormat, uiMipmapLevels, uiFaces
 NiPixelData::NiPixelData(unsigned int width, unsigned int height, const NiPixelFormat& format,
                          unsigned int mipmapLevels, unsigned int faces) throw()
 {
@@ -95,6 +97,7 @@ class NiMemObject
 void __fastcall ReleaseSpawnedRefs(void*);
 
 // @fnv 0x00a7c450
+// pdb: NiPixelData::`scalar deleting destructor' | NiPixelData.obj | fnv360_0822_retail, objrun, high
 void* __fastcall FUN_00a7c450(void* pThis, int, unsigned int flags)
 {
     ReleaseSpawnedRefs(pThis);
@@ -219,6 +222,7 @@ struct SpawnedPixelData : NiObject
 
 // Allocates and constructs a new SpawnedPixelData object, returning it as a void pointer.
 // @fnv 0x00a7c3f0
+// pdb: NiPixelData::CreateObject | NiPixelData.obj | fnv360_0822_retail, objrun, high
 void* __cdecl CreateSpawnedPixelData()
 {
     return new SpawnedPixelData();
@@ -278,6 +282,8 @@ static __forceinline void TransferData(NiStreamSerialization* stream, const void
 
 // Serializes the pixel format, palette, mipmap level/stride/width/height/offset arrays, face count and pixel data through the stream.
 // @fnv 0x00a7c670
+// pdb: NiPixelData::SaveBinary | NiPixelData.obj | fnv360_0721_beta, objrun, high
+// pdb params: kStream
 void NiPixelDataSerialization::SaveToStream(NiStreamSerialization* stream)
 {
     reinterpret_cast<NiObjectSerialization*>(this)->FUN_00a89af0(stream);
@@ -583,6 +589,8 @@ struct FUN_00a7c820_shell : NiPixelData
 };
 // Appends the base debug strings plus Width, Height, mipmap level, face count, total and per-face byte sizes to pkStrings.
 // @f3 0x00847030 (community match, verified in this file)
+// pdb: NiPixelData::GetViewerStrings | NiPixelData.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FUN_00a7c820_shell::AppendPixelDataDebugStrings(StrArr* pkStrings)
 {
     ((Base00a5d6e0*)this)->AppendCameraPathEntries(pkStrings);
@@ -663,6 +671,8 @@ struct PixelDataBE80 : public RendererDataBase_s
 
 // Calls the base LinkObject on kStream, then loads m_spPalette from the stream via FUN_00a63430.
 // @fnv 0x00a7be80
+// pdb: NiPixelData::LinkObject | NiPixelData.obj | fnv360_0721_retail, objrun, medium
+// pdb params: kStream
 void PixelDataBE80::FUN_00a7be80(NiStream& kStream)
 {
     RendererDataBase_s::LinkObject(kStream);
@@ -692,6 +702,7 @@ struct FUN_00a7c390_cls
 
 // Decrements m_4c's reference count before and after BaseCleanup, deleting either object at zero, then calls BaseTeardown.
 // @fnv 0x00a7c390
+// pdb: NiPixelData::~NiPixelData | NiPixelData.obj | fnv360_0822_retail, objrun, high
 void FUN_00a7c390_cls::ReleaseSpawnedRefs()
 {
     *(void* volatile*)&m_vptr = (void*)&DAT_0109dbb4;
@@ -725,6 +736,8 @@ static inline unsigned int Levels(unsigned int v)
 }
 // Returns the number of mip levels for a texture of the given width and height, or 0 if either dimension is zero.
 // @fnv 0x00a7be30
+// pdb: NiPixelData::ComputeMipmapLevels | NiPixelData.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: uiWidth, uiHeight
 unsigned int GetMipLevelCount(unsigned int width, unsigned int height)
 {
     if (!width || !height)
@@ -885,6 +898,8 @@ class FUN_00a7c030 : public NiObject
 };
 
 // @fnv 0x00a7c030
+// pdb: NiPixelData::NiPixelData | NiPixelData.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: kSrc
 FUN_00a7c030::FUN_00a7c030(const FUN_00a7c030& kSrc) throw()
 {
     m_bNoConvert = false;

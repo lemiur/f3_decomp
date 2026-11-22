@@ -44,6 +44,8 @@ struct Target401 {
     void FUN_0090b960(Interface401* object);
     void hkpEntity_removeEntityActivationListener(Interface401* object);
 };
+// pdb: bhkTelekinesisListener::entityDeletedCallback | bhkTelekinesisListener.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: hkpTriggerVolume::entityDeletedCallback)
+// pdb params: apEntity
 void FUN_00d0ae30_cls::FUN_00d0ae30(CallbackTarget* target) {
     Outer401* outer = reinterpret_cast<Outer401*>(reinterpret_cast<char*>(this) - 4);
     Target401* receiver = reinterpret_cast<Target401*>(target);

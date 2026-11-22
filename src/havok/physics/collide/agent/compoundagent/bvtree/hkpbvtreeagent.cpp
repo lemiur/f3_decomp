@@ -117,6 +117,8 @@ void __stdcall hkpBvTreeAgent_linearCast(void* apFirst, void* apSecond, void* ap
 
 extern "C" void __cdecl FUN_00d31110(void* arg0, void* arg1, void* arg2, void* arg3);
 // @fnv 0x00d315d0
+// pdb: hkpBvTreeAgent::getClosestPoints | hkpBvTreeAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 extern "C" void __stdcall FUN_00d315d0(void* arg0, void* arg1, void* arg2, void* arg3)
 {
     FUN_00d31110(arg0, arg1, arg2, arg3);
@@ -278,6 +280,8 @@ struct S_00d2f8f0_ArgF3
     char m_bFlag10;
 };
 
+// pdb: hkpBvTreeAgent::calcContentStatistics | hkpBvTreeAgent.obj | fnv360_0822_retail, ustr, high
+// pdb params: collector, cls
 void S_00d2f8f0::WriteToStream(S_00d2f8f0_Arg* apStream)
 {
     S_00d2f8f0_ArgF3* pStream = (S_00d2f8f0_ArgF3*)apStream;
@@ -1488,6 +1492,8 @@ struct CallbackEntry518 {Callback518 callback;int fields04,fields08,fields0c,fie
 struct Dispatcher518 {unsigned char types[0x9a8];CallbackEntry518 entries[1];};
 struct Input518 {Dispatcher518* dispatcher;float tolerance;Filter518* filter;};
 struct Heap518 {void FUN_008f6d90(void*,int,int);};
+// pdb: hkpBvTreeAgent::staticGetClosestPoints | hkpBvTreeAgent.obj | fnv360_0822_retail, call_seq, high
+// pdb params: bodyA, bodyB, input, collector
 extern "C" void __cdecl FUN_00d31110(void* apBodyA,void* apBodyB,void* apInput,void* collector)
 {
  TlsGetter518 getTls=TlsGetValue;

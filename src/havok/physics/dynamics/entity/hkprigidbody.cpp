@@ -7,6 +7,7 @@ struct FUN_00ca86c0_class
     unsigned char __thiscall FUN_00ca86c0();
 };
 // @f3 0x005af1d0 (community match, verified in this file)
+// pdb: NiTask::Clear | BSTECreateTask.obj | fnv360_0822_retail, vtable, medium
 unsigned char FUN_00ca86c0_class::FUN_00ca86c0()          // ORIG entry at 0x005af1d0, nineteen bytes ✓⚠',
 {                                                             //     their unit declares this struct with NO data ⚠✓',
     unsigned int kind = *(unsigned int*)((char*)this + 8);    //     members, and their own bodies cast through raw ✗✓',
@@ -26,6 +27,7 @@ struct FUN_00ca88c0_Class
 };
 
 // @f3 0x0090c710 (community match, verified in this file)
+// pdb: bhkConvexShape::GetCinfo | bhkConvexShape.obj | fnv360_0822_debug, objrun_open, low, conflict (bridge: hkpRigidBody::setMass)
 void FUN_00ca88c0_Class::FUN_00ca88c0(float afValue)
 {
     ((void(__thiscall*)(void*, float))(*(void**)(*(int*)((char*)this + 0xd0) + 12)))((char*)this + 0xd0, afValue);
@@ -59,6 +61,8 @@ struct Output_0090c7b0
         unk38, unk3c, unk40, unk44;
     float value;
 };
+// pdb: hkpEntity::setCachedShapeData | hkpEntity.obj | fnv360_0721_beta, call_gap, low, conflict (skyrim: estimateAllowedPenetrationDepth)
+// pdb params: world, shape
 void __fastcall ComputeScaledMinimum(const Vector3* values, Output* result)
 {
     float firstMinimum = lowerPair(values->x, values->y);
@@ -492,6 +496,7 @@ struct FUN_00ca9270 : BaseRecord
 
 // Constructs the object by forwarding apFirst and apSecond to BaseRecord with flag 0, then sets m_c08 to 2.
 // @fnv 0x00ca9270
+// pdb: hkpSphereMotion::hkpSphereMotion | hkpRigidBody.obj | tesv_win, hash, low
 FUN_00ca9270::FUN_00ca9270(void* apFirst, void* apSecond) : BaseRecord(apFirst, apSecond, 0)
 {
     m_c08 = 2;
@@ -1058,6 +1063,8 @@ void View::Apply(int mode)
 }
 }
 
+// pdb: hkpRigidBody::enableDeactivation | hkpRigidBody.obj | fnv360_0822_retail, call_gap, medium, conflict (bridge: hkpMotion::enableDeactivation)
+// pdb params: _enableDeactivation
 void S_00ca8630_Class::FUN_00ca8630(bool f)
 {
     reinterpret_cast<n90c670::View*>(this)->Apply(*(int*)&f);
@@ -1397,6 +1404,7 @@ static __forceinline void EntityCopyQuads(void* dst, const void* src, int numQua
     } while (--numQuads > 0);
 }
 
+// pdb: hkpRigidBody::clone | hkpRigidBody.obj | fnv360_0822_retail, vtable, medium
 FUN_00ca90c0_cls* FUN_00ca90c0_cls::Clone()
 {
     FnvScratch cinfo;
@@ -1976,6 +1984,8 @@ static __forceinline void copyFloatC9(char* out,int od,const char* in,int sd)
 {
     *(float*)(out+od) = *(const float*)(in+sd);
 }
+// pdb: hkpRigidBody::getCinfo | hkpRigidBody.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: info
 void S_00ca8f50_Src::WriteToInfo(S_00ca8f50_Info* info)
 {
     char* dst=(char*)info;

@@ -19,6 +19,8 @@ struct PhantomWorldCall
 {
     void __thiscall FUN_00902ab0(void* p);
 };
+// pdb: hkpPhantomDisplayViewer::removeWorld | hkpPhantomDisplayViewer.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: world
 void hkpPhantomDisplayViewer::FUN_00d66250(void* arg)
 {
     void* p1 = this ? (char*)this + 0x28 : 0;
@@ -129,6 +131,8 @@ struct FnvCpu_FUN_00d66370_CpuOwner
     void FUN_00d66370();
 };
 // @fnv 0x00d66370
+// pdb: hkpPhantomDisplayViewer::worldRemovedCallback | hkpPhantomDisplayViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void FnvCpu_FUN_00d66370_CpuOwner::FUN_00d66370()
 {
     reinterpret_cast<FnvCpu_FUN_00d66370_CpuTarget*>(reinterpret_cast<char*>(this) + (-32))->FUN_00d66250();
@@ -163,6 +167,8 @@ Derived::Derived()
 
 // Calls the base constructor AttachToIsland on this object.
 // @fnv 0x00d66380
+// pdb: hkpConvexRadiusViewer::worldAddedCallback | hkpConvexRadiusViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void Derived::FUN_00d66380()
 {
     this->PrimaryBase::AttachToIsland();
@@ -215,6 +221,7 @@ struct FUN_00d66330_StandIn
     void FUN_00d66330();
 };
 // @fnv 0x00d66330
+// pdb: hkpPhantomDisplayViewer::init | hkpPhantomDisplayViewer.obj | fnv360_0822_retail, vtable, medium
 void FUN_00d66330_StandIn::FUN_00d66330()
 {
     if (m_pShapeCollection)
@@ -268,6 +275,8 @@ struct ViewerOwner : OwnerBase, ViewerList
 // Scans entries for target, decrements count, moves the last entry into its slot, and notifies the owner's callback with the target's callbackState.
 // @f3 0x009f31c0 (community match, verified in this file)
 extern int DAT_0116980c;
+// pdb: hkpPhantomDisplayViewer::phantomRemovedCallback | hkpPhantomDisplayViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: phantom
 void ViewerList::RemoveViewer(Viewer* pViewer)
 {
     int index = 0;
@@ -383,6 +392,8 @@ class FUN_00d66430 : public d664::FUN_00ddccb0,
 };
 // Constructor that passes contexts to the FUN_00ddccb0 base constructor; its own body is empty.
 // @fnv 0x00d66430
+// pdb: hkpPhantomDisplayViewer::hkpPhantomDisplayViewer | hkpPhantomDisplayViewer.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: contexts
 FUN_00d66430::FUN_00d66430(const void* contexts) : d664::FUN_00ddccb0(contexts)
 {}
 
@@ -942,6 +953,8 @@ __forceinline void MonitorEvent(const char* name, volatile unsigned int& tick) {
 }
 } // namespace ns_009f3640
 
+// pdb: hkpPhantomDisplayViewer::postSimulationCallback | hkpPhantomDisplayViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void S00d667b0_Viewer::FUN_00d667b0(PhantomWorld* world) {
     using namespace ns_009f3640;
     NativePhantomWorld* nativeWorld = reinterpret_cast<NativePhantomWorld*>(world);

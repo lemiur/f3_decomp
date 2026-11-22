@@ -9,6 +9,7 @@ void __fastcall FUN_00d2d480(void* self, int, int, int);
 
 extern "C" void __cdecl hkAgent1nMachine_WarpTime(void*, float, float, int);
 // @fnv 0x00d2d480
+// pdb: hkBvTreeAgent3::warpTime | hkpBvTreeAgent3.obj | tesv_win, objrun_sim, low
 void __cdecl FUN_00d2d480(void*, void* target, float first, float second, int flags)
 {
     hkAgent1nMachine_WarpTime(target, first, second, flags);
@@ -25,6 +26,8 @@ struct LessU32
 
 // Partitions pArr[d..h] around a middle pivot using cmpLess, swapping out-of-order elements, then recurses on the left part and loops on the right.
 // @fnv 0x00d2da70
+// pdb: hkAlgorithm::quickSortRecursive<unsigned int,hkAlgorithm::less<unsigned int> > | hkpBvTreeAgent3.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pArr, d, h, cmpLess
 extern "C" void __cdecl QuickSortRange(unsigned* auiArray, int aiLow, int aiHigh, LessU32 aComparator)
 {
 setpoint:
@@ -90,6 +93,7 @@ struct SourceDispatch {
     int (__thiscall* GetValue)(ValueSource*);
 };
 void __cdecl FUN_00a2b420(void*, CallBuf*);
+// pdb: hkBvTreeAgent3::updateFilter | hkpBvTreeAgent3.obj | tesv_win, objrun_prop, low
 void __cdecl CallWithValueSource(void* unused, void* target, int arg0, ValueSource** source, int arg1, int arg2, int arg3)
 {
     int result = (*(SourceDispatch**)*source)->GetValue(*source);
@@ -262,6 +266,8 @@ struct S00d2d890_TMem
     char* m_end;
 };
 
+// pdb: hkBvTreeAgent3::process | hkpBvTreeAgent3.obj | fnv360_0822_retail, strset, low
+// pdb params: input, entry, agentData, separatingNormal, output
 char* __cdecl FUN_00d2d890(char* self, int a1, char* child, int a3, int a4)
 {
     volatile unsigned int tb;

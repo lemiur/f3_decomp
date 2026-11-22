@@ -27,6 +27,8 @@ struct NiD3DVertexDeclaration
 };
 
 // @fnv 0x00e76700
+// pdb: NiXenonShaderDeclaration::Create | NiXenonShaderDeclaration.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: NiDX9ShaderDeclaration::Create)
+// pdb params: pkRenderer, uiMaxStreamEntryCount, uiStreamCount
 NiD3DVertexDeclaration* FUN_00e76700(NiRenderer* renderer, unsigned int maxStreamEntries, unsigned int streamCount)
 {
     if (streamCount > renderer->m_maxStreamEntries)

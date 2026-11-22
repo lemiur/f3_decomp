@@ -3,6 +3,7 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 // @fnv 0x00dc9bc0
+// pdb: hkpStiffSpringConstraintData::getType | hkpStiffSpringConstraintData.obj | tesv_win, objopen_prop, low
 int __cdecl FUN_00dc9bc0()
 {
     return 8;
@@ -35,6 +36,8 @@ struct NiCullingProperty : NiProperty
 };
 // Allocates and constructs a copy of this NiCullingProperty, runs FUN_00a5d7a0 on it, copies unk18, and returns the copy.
 // @fnv 0x00a9a5f0
+// pdb: NiDitherProperty::CreateClone | NiDitherProperty.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: kCloning
 NiCullingProperty* NiCullingProperty::FUN_00a9a5f0(CloningProcess& process)
 {
     NiCullingProperty* copy = (NiCullingProperty*)BSFadeNode::operator new(0x1c);

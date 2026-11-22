@@ -5,6 +5,8 @@
 #include "havok/hkpPointToPathConstraintData.h"
 
 // @fnv 0x00dee720
+// pdb: hkpPointToPathConstraintData::getConstraintInfo | hkpPointToPathConstraintData.obj | fnv360_0822_debug, objopen_prop, low
+// pdb params: info
 void __stdcall FUN_00dee720(int aiUnused, void* apData)
 {
     *(int*)((char*)apData + 4) = 7;
@@ -18,6 +20,8 @@ struct FUN_00dee7f0_class
 
 // Fills the struct at a with a pointer to this+0xc and constant fields 0, 0x180, 7, 8, 0xc.
 // @fnv 0x00dee7f0
+// pdb: hkpPointToPathConstraintData::getConstraintInfo | hkpPointToPathConstraintData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: info
 void __thiscall FUN_00dee7f0_class::FUN_00dee7f0(void* a)
 {
     *(int*)((char*)a + 0x10) = (int)((char*)this + 0xc);
@@ -29,6 +33,7 @@ void __thiscall FUN_00dee7f0_class::FUN_00dee7f0(void* a)
 }
 
 // @fnv 0x00dee740
+// pdb: hkpPointToPathConstraintData::getType | hkpPointToPathConstraintData.obj | fnv360_0721_beta, objrun_open, low
 int __cdecl FUN_00dee740()
 {
     return 3;
@@ -102,6 +107,7 @@ class hkObjectDEE8
 
 // Returns true when m_18 is non-null and m_20 is set.
 // @fnv 0x00dee840
+// pdb: hkpPointToPathConstraintData::isValid | hkpPointToPathConstraintData.obj | fnv360_0822_retail, objrun_open, low
 hkBoolDEE8 hkObjectDEE8::FUN_00dee840() const
 {
     return m_18 != 0 && m_20;

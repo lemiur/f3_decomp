@@ -6,6 +6,8 @@
 
 // Writes 5 and 0x28 into target[1] and target[0] when param is nonzero, otherwise writes zeros.
 // @fnv 0x00cbe1e0
+// pdb: hkpHingeConstraintData::getRuntimeInfo | hkpHingeConstraintData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: wantRuntime, infoOut
 void __stdcall SetTargetValues(char param, int* target)
 {
     if (param)
@@ -78,6 +80,8 @@ struct CpuObject
     float FUN_00cbe1a0();
 };
 // @fnv 0x00cbe1a0
+// pdb: LowProcess::SetGenericLocation | HighProcess.obj | fnv360_0721_retail, objrun_open, low
+// pdb params: apLoc
 float CpuObject::FUN_00cbe1a0()
 {
     return value;
@@ -126,6 +130,7 @@ class FUN_00cbe750_C
 };
 
 // @fnv 0x00cbe750
+// pdb: hkpHingeConstraintData::isValid | hkpHingeConstraintData.obj | fnv360_0822_retail, objrun_open, low
 hkBoolCBE7 FUN_00cbe750_C::FUN_00cbe750() const
 {
     return m_kPointA.IsOrthonormal(0.001f) && m_kPointB.IsOrthonormal(0.001f);

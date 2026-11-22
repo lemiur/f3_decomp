@@ -167,6 +167,7 @@ struct FUN_00ba7f70 : FUN_00ba8e50
 };
 // Initialises particle system fields to defaults, clears kArray, allocates pParticles for the shader's particle count and zeroes it.
 // @f3 0x00b2a1f0 (community match, verified in this file)
+// pdb: ParticleShaderProperty::ParticleShaderProperty | ParticleShaderProperty.obj | fnv360_0822_retail, call_gap, low
 FUN_00ba7f70::FUN_00ba7f70() : kArray(10, 10)
 {
     spRetainedObject = 0;
@@ -301,6 +302,8 @@ struct ParticleEmitter : ParticleSystemBase
 };
 
 // @fnv 0x00ba6cf0
+// pdb: ParticleShaderProperty::RewindTimer | ParticleShaderProperty.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afNewTime
 void ParticleEmitter::AdvanceParticleTimes(float fTime)
 {
     float fTimeSinceScaleStart = fTime - fScaleTime;
@@ -332,6 +335,7 @@ struct FloatQuad
 };
 
 // @fnv 0x00ba73a0
+// pdb: ParticleShaderProperty::GetInstanceIndex | ParticleShaderProperty.obj | fnv360_0721_beta, call_seq, medium
 int __cdecl GetFloatQuadTable()
 {
     char** ppTable = reinterpret_cast<char**>(&DAT_01200420);
@@ -402,6 +406,8 @@ struct ShaderArrayOwner
 
 // Calls Prep(-1); if the holder's count is zero, inserts two entries (0x41 and 0x241) and sets each new entry's m_06 to 0xe and 1, then returns the holder.
 // @fnv 0x00ba7420
+// pdb: ParticleShaderProperty::GetRenderPasses | ParticleShaderProperty.obj | fnv360_0822_retail, objrun, high
+// pdb params: apGeom, aiEnabledPasses, asCount, auiRenderMode, apAccumulator, abUpdateList
 ShaderArrayHolder* ShaderArrayOwner::EnsureShaderArrayEntries(int p1, int, int, int, int, int)
 {
     Prep(-1);
@@ -439,6 +445,8 @@ struct ParticleInitializer : FUN_00ba7f70
 };
 // Initializes each particle's fields with randomized life, angle, rotation and speed variations, sets fScaleTime, and resets iParticleCount to 0.
 // @fnv 0x00ba6e00
+// pdb: ParticleShaderProperty::InitParticleData | ParticleShaderProperty.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afTime
 void ParticleInitializer::InitParticles(float time)
 {
     unsigned int count = FUN_00ba52d0();
@@ -767,6 +775,8 @@ struct EmitterPick : ParticleEmitter
 };
 
 // @fnv 0x00ba74a0
+// pdb: ParticleShaderProperty::GenerateFromGeometry | ParticleShaderProperty.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aiIndex
 void EmitterPick::PickParticle(int aiIndex)
 {
     PickVector a = DAT_011f426c;
@@ -925,6 +935,8 @@ struct ParticleUpdater : FUN_00ba7f70
 };
 // Ages and emits particles, optionally compensating for parent node movement.
 // @fnv 0x00ba7b60
+// pdb: ParticleShaderProperty::UpdateParticles | ParticleShaderProperty.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afTime, abNeedsOffset, abGenerateNew
 void ParticleUpdater::FUN_00ba7b60(float time, bool compensate, bool emit)
 {
     float delta = time - fScaleTime;
@@ -1249,6 +1261,8 @@ inline float RandomSigned71()
 }
 // Computes a particle position and direction from the first object in kArray, transforms them if enabled, and writes them into pParticles at the given index.
 // @fnv 0x00ba71d0
+// pdb: ParticleShaderProperty::GenerateFromRay | ParticleShaderProperty.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: aiIndex
 void Target71::FUN_00ba71d0(unsigned int index)
 {
     Point71 position;
@@ -1359,6 +1373,7 @@ struct FUN_00ba7df0 : FUN_00ba8e50
 
 // Releases the retained object, removes array entries, deletes the particle array, and deallocates a global pointer when a global counter reaches zero.
 // @fnv 0x00ba7df0
+// pdb: ParticleShaderProperty::~ParticleShaderProperty | ParticleShaderProperty.obj | fnv360_0822_retail, udata, high
 FUN_00ba7df0::~FUN_00ba7df0()
 {
 

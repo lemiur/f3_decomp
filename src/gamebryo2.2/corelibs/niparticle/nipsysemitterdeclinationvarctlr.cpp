@@ -92,6 +92,7 @@ struct FUN_00c2b8d0_cls
 };
 
 // @fnv 0x00c2b8d0
+// pdb: NiPSysEmitterDeclinationVarCtlr::CreateClone | NiPSysEmitterDeclinationVarCtlr.obj | tesv_win, caller_sim, low
 SpawnedObject* FUN_00c2b8d0_cls::FUN_00c2b8d0(void* arg)
 {
     SpawnedObject* obj = (SpawnedObject*)FUN_00aa13e0(0x40);

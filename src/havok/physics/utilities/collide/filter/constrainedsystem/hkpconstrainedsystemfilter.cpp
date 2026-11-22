@@ -116,6 +116,8 @@ class Task1447Entity
     int hkpEntity_getNumConstraints() throw();
     int hkpEntity_getConstraint(int i) throw();
 };
+// pdb: hkpConstrainedSystemFilter::isCollisionEnabled | hkpConstrainedSystemFilter.obj | fnv360_0822_retail, vtable, high
+// pdb params: a, b
 hkBoolE46B hkpConstraintCollisionFilterE46B::ConstraintCollisionFilter(const hkpCollidableE46B& a,
                                                                        const hkpCollidableE46B& b) const throw()
 {
@@ -172,6 +174,8 @@ struct ConstraintFilter
     FilterResult Evaluate(int, int, int, int, int);
 };
 // @fnv 0x00e46cf0
+// pdb: hkpConstrainedSystemFilter::isCollisionEnabled | hkpConstrainedSystemFilter.obj | fnv360_0822_retail, vtable, high
+// pdb params: input, a, b, bContainer, bKey
 FilterResult ConstraintFilter::Evaluate(int aiArg1, int aiArg2, int aiArg3, int aiArg4, int aiArg5)
 {
     FilterDelegate* const& ref = delegate;
@@ -215,6 +219,8 @@ class hkObjE46D
 
 // Returns true if the object has no world or its world's filter accepts the two arguments.
 // @fnv 0x00e46df0
+// pdb: hkpConstrainedSystemFilter::isCollisionEnabled | hkpConstrainedSystemFilter.obj | fnv360_0822_retail, vtable, high
+// pdb params: a, collidableB
 hkBoolE46D hkObjE46D::IsInWorldFilter(void* a, void* b)
 {
     return !m_pOwningWorld || m_pOwningWorld->m_iFilter.IsCollisionEnabled(a, b).m_cBooleanValue;
@@ -266,6 +272,8 @@ class hkListE46C
 
 // Returns true when m_iFilter is null or when m_iFilter->IsCollisionEnabled(a, b, c, d, e, f, g) is true.
 // @fnv 0x00e46d40
+// pdb: hkpConstrainedSystemFilter::isCollisionEnabled | hkpConstrainedSystemFilter.obj | fnv360_0822_retail, vtable, high
+// pdb params: input, collectionBodyA, collectionBodyB, containerShapeA, containerShapeB, keyA, keyB
 hkBoolE46C hkListE46C::FUN_00e46d40(const void* a, const void* b, const void* c, const void* d, const void* e,
                                     const void* f, const void* g) const
 {
@@ -317,6 +325,8 @@ class hkListE46D
 
 // Returns true when m_iFilter is null or when m_iFilter->IsCollisionEnabled(a, b, c, d) is true.
 // @fnv 0x00e46da0
+// pdb: hkpConstrainedSystemFilter::isCollisionEnabled | hkpConstrainedSystemFilter.obj | fnv360_0822_retail, vtable, high
+// pdb params: aInput, shape, bContainer, bKey
 hkBoolE46D hkListE46D::FUN_00e46da0(const void* a, const void* b, const void* c, const void* d) const
 {
     return !m_iFilter || m_iFilter->IsCollisionEnabled(a, b, c, d);

@@ -4,6 +4,8 @@
 
 // Destructor: if the file is good and open, flushes and closes m_pFile, then frees m_pBuffer.
 // @fnv 0x00aa1690
+// pdb: NiFile::DefaultDirectoryExistsFunc | NiFile_Xenon.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: NiFile::~NiFile)
+// pdb params: pcDirName
 NiFile::~NiFile()
 {
     if (m_bGood && m_pFile)
@@ -15,6 +17,7 @@ NiFile::~NiFile()
 }
 
 // @fnv 0x00aa15a0
+// pdb: NiFile::Flush | NiFile_Xenon.obj | fnv360_0822_retail, call_gap, medium
 bool NiFile::Flush()
 {
     if (m_eMode == READ_ONLY)
@@ -42,6 +45,8 @@ struct S_00aa15f0
     int GetFileSize();
 };
 // @fnv 0x00aa15f0
+// pdb: NiFile::DefaultCreateDirectoryFunc | NiFile_Xenon.obj | fnv360_0721_beta, objrun, low, conflict (skyrim: NiFile::GetFileSize)
+// pdb params: pcDirName
 int S_00aa15f0::GetFileSize()
 {
     int cur = _ftell(_f);
@@ -90,6 +95,7 @@ struct FUN_00aa14d0_cls : NiBinaryStreamBase
 };
 
 // @fnv 0x00aa14d0
+// pdb: NiFile::NiFile | NiFile_Win32.obj | tesv_win, call_seq, medium
 FUN_00aa14d0_cls::FUN_00aa14d0_cls(const char* name, unsigned int mode, unsigned int bufSize)
 {
     NiFile_SetEndianSwap(0);
@@ -116,6 +122,8 @@ FUN_00aa14d0_cls::FUN_00aa14d0_cls(const char* name, unsigned int mode, unsigned
 extern "C" __declspec(dllimport) unsigned long __stdcall GetFileAttributesA(const char* lpFileName);
 
 // @fnv 0x00aa1670
+// pdb: NiFile::DefaultCreateDirectoryFunc | NiFile_Xenon.obj | fnv360_0822_retail, objrun_sim, low, conflict (skyrim: NiFile::DefaultDirectoryExistsFunc)
+// pdb params: pcDirName
 bool __cdecl IsDirectory(const char* pcPath)
 {
     unsigned long uiAttributes = GetFileAttributesA(pcPath);
@@ -133,6 +141,7 @@ struct FUN_00aa16d0_cls : NiFile
 
 // Seeks the file: advances within the read buffer when possible, otherwise flushes and calls the underlying seek, updating position and good flag.
 // @fnv 0x00aa16d0
+// pdb: NiFile::~NiFile | NiFile_Xenon.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: NiFile::Seek)
 void FUN_00aa16d0_cls::FUN_00aa16d0(unsigned int offset, unsigned int whence)
 {
     if (!m_bGood)
@@ -188,6 +197,8 @@ class AA1F10BinaryStream
 };
 
 // @fnv 0x00aa1f10
+// pdb: NiBinaryStream::GetLine | NiBinaryStream.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: pBuffer, uiMaxBytes
 unsigned int AA1F10BinaryStream::ReadLine(char* pcLineBuffer, unsigned int uiMaxBytes)
 {
     unsigned int uiBytesRead = 0;
@@ -208,6 +219,7 @@ unsigned int AA1F10BinaryStream::ReadLine(char* pcLineBuffer, unsigned int uiMax
 
 #include <windows.h>
 // @fnv 0x00aa1650
+// pdb: NiFile::DefaultCreateDirectoryFunc | NiFile_Win32.obj | tesv_win, objrun, medium
 unsigned char __cdecl FUN_00aa1650(char* path)
 {
     return CreateDirectoryA(path, 0) != 0;
@@ -237,6 +249,7 @@ struct FUN_00aa18c0 : NiBinaryStream
     NiFile::OpenMode m_eMode;
     bool m_bGood;
     virtual ~FUN_00aa18c0();
+    // pdb: NiFile::`scalar deleting destructor' | NiFile_Win32.obj | tesv_win, caller_sim, low
     void operator delete(void* p)
     {
         g_memoryManager._DeallocateAlias(p);

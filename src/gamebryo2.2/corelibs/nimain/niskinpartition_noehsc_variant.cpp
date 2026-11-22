@@ -1180,6 +1180,8 @@ struct LBSkinPartition : LBObject
 };
 
 // @fnv 0x00a83c30
+// pdb: NiSkinPartition::LoadBinary | NiSkinPartition.obj | fnv360_0822_retail, objrun, medium
+// pdb params: kStream
 void LBSkinPartition::FUN_00a83c30(LBStream& arStream)
 {
     LBObject::LoadBinary(arStream);

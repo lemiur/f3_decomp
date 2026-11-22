@@ -68,6 +68,7 @@ struct FUN_008f6f60_obj
     void FUN_008f6f90(void* p);
 };
 
+// pdb: hkpMoppCodeGenerator::resize | hkpMoppCodeGenerator.obj | fnv360_0822_retail, call_seq, high
 void E06490Stack::GrowBuffer()
 {
     void* (__stdcall* tlsGetValue)(unsigned long) = FUN_00d9b080;
@@ -267,6 +268,8 @@ class FUN_00e065f0 : public hkReferencedObjectE06
     int m_iUsed;
     void* m_pData;
 };
+// pdb: hkpMoppCodeGenerator::hkpMoppCodeGenerator | hkpMoppCodeGenerator.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: size
 FUN_00e065f0::FUN_00e065f0(int iSize)
 {
     hkMemAllocStandIn* pkHeap = reinterpret_cast<hkMemAllocStandIn*>(TlsGetValue(DAT_010f3170));

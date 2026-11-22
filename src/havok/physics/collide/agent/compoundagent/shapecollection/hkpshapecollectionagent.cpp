@@ -13,6 +13,8 @@ struct hkpShapeCollectionAgent
 };
 
 // @fnv 0x00d436f0
+// pdb: hkpShapeCollectionAgent::cleanup | hkpShapeCollectionAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: info
 void hkpShapeCollectionAgent::FUN_00d436f0(int arg)
 {
     for (int i = 0; i < count; ++i)
@@ -57,6 +59,8 @@ class FUN_00d43730_cls
 };
 
 // @fnv 0x00d43730
+// pdb: hkpShapeCollectionAgent::invalidateTim | hkpShapeCollectionAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: input
 void FUN_00d43730_cls::CallShapeItems(int arg)
 {
     int i = 0;
@@ -105,6 +109,8 @@ class FUN_00d43760_cls
 };
 
 // @fnv 0x00d43760
+// pdb: hkpShapeCollectionAgent::warpTime | hkpShapeCollectionAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: oldTime, newTime, input
 void FUN_00d43760_cls::DispatchToEntries(float afArg1, float afArg2, int aiArg3)
 {
     int i = 0;
@@ -312,6 +318,8 @@ struct Task1499Context
     int m_unk04;
     hkpShapeCollectionFilter* m_pCollisionFilter;
 };
+// pdb: hkpShapeCollectionAgent::staticGetClosestPoints | hkpShapeCollectionAgent.obj | fnv360_0822_retail, objrun, high
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl GetClosestPointsShapeCollection(const hkpCdBody* bodyA, const hkpCdBody* bodyB,
                                              const CollisionAgentContext* input, void* collector)
 {
@@ -353,6 +361,8 @@ void __cdecl GetClosestPointsShapeCollection(const hkpCdBody* bodyA, const hkpCd
 extern "C" void __cdecl QueryClosestPoints();
 
 // @fnv 0x00d36920
+// pdb: bhkBlendCollisionObjectAddRotation::LoadBinary | bhkBlendCollisionObjectAddRotation.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void __cdecl FUN_00d36920()
 {
     QueryClosestPoints();
@@ -360,6 +370,8 @@ void __cdecl FUN_00d36920()
 
 void FUN_00d34790();
 // @fnv 0x00d36990
+// pdb: bhkBlendCollisionObjectAddRotation::RegisterStreamables | bhkBlendCollisionObjectAddRotation.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arStream
 void FUN_00d36990()
 {
     FUN_00d34790();
@@ -608,6 +620,8 @@ inline void S9d1db0_Reserve(AgentArray* a, int n)
     }
 }
 
+// pdb: hkpShapeCollectionAgent::hkpShapeCollectionAgent | hkpShapeCollectionAgent.obj | fnv360_0822_retail, uvref, high
+// pdb params: bodyA, bodyB, input, mgr
 FUN_00d440f0::FUN_00d440f0(const CdBodyS& bodyA, const CdBodyS& bodyB, const CollisionInputS& input,
                            ContactMgrS* mgr)
     : CollisionAgentS(mgr)
@@ -1388,6 +1402,8 @@ struct Task1445ShapeView
     virtual const S_00d43cd0_Container* GetShapeContainer() const;
 };
 
+// pdb: hkpShapeCollectionAgent::getPenetrations | hkpShapeCollectionAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void S_00d43cd0::ProcessCollisionEntries(const S_00d43cd0_CdBody& bodyA, const S_00d43cd0_CdBody& bodyB,
                                          const S_00d43cd0_Input& input, S_00d43cd0_Collector& collector)
 {
@@ -1723,6 +1739,8 @@ struct S_00d43dc0_CollisionInputFix
     const S_00d43dc0_CollisionFilterFix* m_iFilter;
 };
 
+// pdb: hkpShapeCollectionAgent::staticGetPenetrations | hkpShapeCollectionAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_00d43dc0(const S_00d43dc0_CdBody& bodyA, const S_00d43dc0_CdBody& bodyB,
                           const S_00d43dc0_CollisionInput& input, S_00d43dc0_CdBodyPairCollector& collector)
 {

@@ -531,6 +531,8 @@ static __forceinline void TransformVertex(
     out.z = static_cast<float>(yz + xz + c2.z * z + c3.z);
     out.w = 0.0f;
 }
+// pdb: hkpSphereTriangleAgent::getClosestPoint | hkpSphereTriangleAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: bodyA, bodyB, input, cache, cpoint
 int __cdecl FUN_00d3d520(S_00d3d520_A* a, S_00d3d520_Body* b, S_00d3d520_Info* info, int a4, S_00d3d520_Out* outp)
 {
     S_00d3d520_Shape* sphere = a->shape;

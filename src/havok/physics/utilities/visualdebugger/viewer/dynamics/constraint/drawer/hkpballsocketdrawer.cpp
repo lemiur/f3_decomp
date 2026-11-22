@@ -101,6 +101,8 @@ struct ObjM
     void FUN_00a6a750(int a);
     void FUN_00a6a7b0(int a);
 };
+// pdb: hkpBallSocketDrawer::drawConstraint | hkpBallSocketDrawer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: constraint, displayHandler, id, tag
 void Obj::FireMotionEvent(Body* apBody, Listener* apListener, int aiArg)
 {
     ObjM* pSelf = (ObjM*)this;

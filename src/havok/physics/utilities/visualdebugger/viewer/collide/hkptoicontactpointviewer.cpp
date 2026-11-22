@@ -4,6 +4,7 @@
 
 extern int currentState;
 // @fnv 0x00d68260
+// pdb: NiD3DShaderProgramFactory::GetInstance | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, call_gap, medium
 int __cdecl FUN_00d68260() {
     return currentState;
 }
@@ -52,6 +53,8 @@ struct FUN_00d66bf0_cls {
 };
 
 // @fnv 0x00d66bf0
+// pdb: hkpMousePickingViewer::dragObject | hkpMousePickingViewer.obj | fnv360_0822_retail, objrun, medium
+// pdb params: newWorldSpacePoint
 void FUN_00d66bf0_cls::DispatchToChild(int arg)
 {
     SpawnedChild* child = m_pChildObject;
@@ -79,6 +82,8 @@ struct FUN_00d682a0_cls {
 
 // Calls apTarget->FUN_00c91a20 with a pointer to this+8, or null if this-0x20 is null.
 // @fnv 0x00d682a0
+// pdb: hkpConstraintViewer::worldRemovedCallback | hkpConstraintViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void FUN_00d682a0_cls::InvokeTargetWithSelfOffset(Target* apTarget)
 {
     apTarget->FUN_00c91a20(((char*)this - 0x20) != 0 ? (char*)this + 8 : 0);
@@ -110,6 +115,8 @@ struct FUN_00d682d0_cls {
 
 // Calls FUN_00ddccb0 with a1, then stores five DAT_ pointers into this at offsets 0x28, 0x00, 0x08, 0x20 and 0x28, and returns this.
 // @fnv 0x00d682d0
+// pdb: hkpToiContactPointViewer::hkpToiContactPointViewer | hkpToiContactPointViewer.obj | fnv360_0822_retail, objrun, high
+// pdb params: contexts
 void* FUN_00d682d0_cls::FUN_00d682d0(int aiArg)
 {
     FUN_00ddccb0(aiArg);
@@ -149,6 +156,7 @@ public:
 
 // Iterates the item list and calls m_sub.v1 on each item until the list ends or the count is reached.
 // @fnv 0x00d68310
+// pdb: hkpContactPointViewer::init | hkpContactPointViewer.obj | fnv360_0822_retail, vtable, medium
 void FUN_00d68310_cls::FUN_00d68310() {
     int i = 0;
     while (m_kNode != 0) {
@@ -239,6 +247,7 @@ public:
 };
 
 // @fnv 0x00d68350
+// pdb: hkpToiContactPointViewer::~hkpToiContactPointViewer | hkpToiContactPointViewer.obj | fnv360_0822_retail, call_seq, medium
 void FUN_00d68350_cls::FUN_00d68350()
 {
     int i = 0;
@@ -269,6 +278,7 @@ extern int g_stateResult;
 extern const char str_010d1ea0[];
 
 // @fnv 0x00d686f0
+// pdb: hkpConvexRadiusViewer::registerViewer | hkpConvexRadiusViewer.obj | fnv360_0822_retail, ustr, medium
 void DispatchStateHandler()
 {
     g_stateResult = g_stateTarget->Dispatch(str_010d1ea0, FUN_00d686b0);
@@ -299,6 +309,8 @@ struct FUN_00d68270_Arg {
 };
 // Calls arg->FUN_00c93a20 with the address 8 bytes past this, treated as the Base2 part of the enclosing Derived object.
 // @fnv 0x00d68270
+// pdb: hkpConstraintViewer::worldAddedCallback | hkpConstraintViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void FUN_00d68270_Base1::FUN_00d68270(FUN_00d68270_Arg* arg)
 {
     arg->FUN_00c93a20(reinterpret_cast<FUN_00d68270_Derived*>(reinterpret_cast<char*>(this) - sizeof(FUN_00d68270_Base0)));

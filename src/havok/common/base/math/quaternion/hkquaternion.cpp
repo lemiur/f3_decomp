@@ -33,6 +33,7 @@ static __declspec(noinline) void FUN_00cb2550(FUN_005611c0_t* obj, float* pts)
 }
 
 // @fnv 0x00cb2830
+// pdb: hkQuaternion::setAndNormalize | hkQuaternion.obj | tesv_win, hash, low
 void FUN_005611c0_t::FUN_00cb2830(float* apPoints)
 {
     FUN_00cb2550(this, apPoints);
@@ -55,6 +56,7 @@ struct FUN_008d27a0_cls
     void FUN_008d27a0(unsigned char* flag);
 };
 
+// pdb: hkQuaternion::isOk | hkQuaternion.obj | tesv_win, objrun, medium
 unsigned char* FUN_00cb24c0_cls::IsNormalized(unsigned char* apResult)
 {
     ((FUN_008d27a0_cls*)this)->FUN_008d27a0(apResult);
@@ -134,6 +136,7 @@ struct S00cb2550_Quat
 // @f3 0x009241c0 (community match, verified in this file)
 #include <math.h>
 
+// pdb: quaternionFromRotatation | hkQuaternion.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 static __declspec(noinline) void FUN_00cb2550(S00cb2550_Quat* apQuat, const S00cb2550_Rot& arRot)
 {
     S00cb2550_V4 v;

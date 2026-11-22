@@ -21,6 +21,8 @@ struct Base_6a13f0
 
 extern int DAT_00e09dbc;
 
+// pdb: AssociatedItemEffect::AssociatedItemEffect | AssociatedItemEffect.obj | fnv360_0721_retail, call_seq, medium
+// pdb params: apCaster, apSpell, apEffect
 void* Wrapper_00878610::FUN_00878610(char* apSceneGraphName, bool abMenuSceneGraph, void* apCamera)
 {
     ((Base_6a13f0*)this)->FUN_006a13f0(apSceneGraphName, abMenuSceneGraph, apCamera);

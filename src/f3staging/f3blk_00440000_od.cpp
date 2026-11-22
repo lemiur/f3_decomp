@@ -272,6 +272,8 @@ void FUN_00887da0(const char*,...);
 void FUN_004580b0(Model*,TESFile*);
 struct Header { unsigned int health; unsigned char count,flags; unsigned short unused; };
 struct DiskStage { union { unsigned int packed; struct { unsigned char index,stage,health,flags; }; }; unsigned int damage,explosion,debris,count; };
+// pdb: BGSDestructibleObjectForm::LoadChunk | BGSDestructibleObjectForm.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apDestruct, apFile
 void FUN_0044c110(BGSDestructibleObjectForm* obj,TESFile* file) {
  if (!file || !obj) return;
  unsigned int type=file->TESFile_GetTESChunk();
@@ -347,6 +349,7 @@ extern "C" void FUN_004556a0(int tag, unsigned char value);
 extern "C" void FUN_00455710(int tag, float value);
 extern "C" void FUN_00455b30(int tag, int* arr, unsigned int count);
 
+// pdb: BGSIdleCollection::Save | BGSIdleCollection.obj | fnv360_0822_retail, call_seq, medium
 void CThing::FUN_0044d3b0()
 {
     if (field05 == 0)
@@ -414,6 +417,8 @@ struct TESModel458 {
 
 void __cdecl FUN_004580b0(TESModel458* model, TESFile458* file);
 
+// pdb: TESModel::LoadModelChunk | TESModel.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apModel, apFile
 void __cdecl FUN_00458210(TESModel458* model, TESFile458* file)
 {
     if (file && model) {
@@ -519,6 +524,8 @@ public:
 
 }
 
+// pdb: TESTextureListArray::Load | TESModelList.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apModelList, apFile
 void f3m_00458510::FileEntryListCollection::FUN_00458510(TESModelList* owner, TESFile* file)
 {
     FUN_004584b0();

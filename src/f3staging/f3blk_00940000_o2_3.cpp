@@ -174,6 +174,8 @@ static __declspec(noinline) void FUN_00943180(Variant* variant, NameEntry* table
     }
 }
 
+// pdb: hkStatisticsCollector::addObjectMemory | hkStatisticsCollector.obj | fnv360_0822_debug, caller_sim, low
+// pdb params: cls, obj, flags
 static __declspec(noinline) void FUN_00943200(VariantArray* array, Tracker* tracker, Klass* klass, NameEntry* table)
 {
     Variant variant;

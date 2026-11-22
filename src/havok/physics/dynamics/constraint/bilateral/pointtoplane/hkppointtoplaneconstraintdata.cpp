@@ -6,6 +6,7 @@
 
 // Sets b[0] and b[1] to 8 and 1 when a is nonzero, otherwise to 0 and 0.
 // @fnv 0x00d84780
+// pdb: hkpPulleyConstraintData::getRuntimeInfo | hkpPulleyConstraintData.obj | tesv_win, objrun_open, low
 void __stdcall FUN_00d84780(unsigned char a, int* pData)
 {
     if (a)
@@ -28,12 +29,15 @@ struct FUN_00d84760
 };
 
 // @fnv 0x00d84760
+// pdb: hkpPointToPlaneConstraintData::getConstraintInfo | hkpPointToPlaneConstraintData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: infoOut
 void* FUN_00d84760::PopulateInfo(int a)
 {
     return FUN_00d21a60((char*)this + 0x10, 0x94, a);
 }
 
 // @fnv 0x00d847b0
+// pdb: GuardActorPackageData::GetPackageType | GuardPackage.obj | fnv360_0822_retail, vtable, medium
 int __cdecl FUN_00d847b0()
 {
     return 14;
@@ -55,6 +59,7 @@ struct FUN_00d84b70
 };
 // Returns true if the Transform at offset 0x20 and the one at offset 0x60 both pass a 0.001 tolerance validation.
 // @fnv 0x00d84b70
+// pdb: hkpPointToPlaneConstraintData::isValid | hkpPointToPlaneConstraintData.obj | tesv_win, objrun_open, low
 ValidationResult FUN_00d84b70::CheckValid()
 {
     Transform* pFirstTransform = (Transform*)((char*)this + 0x20);
@@ -199,6 +204,8 @@ struct Rot_d849a0
 }  // namespace fnv_00d849a0
 
 // @f3twin 0x00a72440 of 0x007ee170
+// pdb: hkpSimpleMeshShape::initWeldingInfo | hkpSimpleMeshShape.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: weldingType
 int __cdecl F3_FUN_00a72440()
 {
     return 14;

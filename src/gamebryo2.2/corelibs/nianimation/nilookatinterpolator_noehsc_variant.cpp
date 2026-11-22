@@ -991,6 +991,7 @@ class NiLookAtInterpolatorX : public NiInterpolator
 };
 
 // @fnv 0x00a4be20
+// pdb: NiLookAtInterpolator::~NiLookAtInterpolator | NiLookAtInterpolator.obj | fnv360_0822_retail, objrun, medium
 NiLookAtInterpolatorX::~NiLookAtInterpolatorX()
 {
     m_kTargetNodeName = *(LAFixedString*)&g_StaticFixedString_011f49e0;

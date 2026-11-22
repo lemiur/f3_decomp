@@ -3,6 +3,8 @@
 #include "nipsysgrowfademodifier_decls.h"
 // Loads the modifier's base data, then four fields and, for stream version above 16, one more field from the stream.
 // @fnv 0x00c2a530
+// pdb: NiPSysGrowFadeModifier::LoadBinary | NiPSysGrowFadeModifier.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void NiPSysGrowFadeModifier::LoadBinary(NiStream& stream)
 {
     NiPSysModifier::LoadBinary(stream);
@@ -25,6 +27,7 @@ struct FUN_00c2a370_shell : NiPSysGrowFadeModifier
 };
 // Calls FUN_00c31750, then deletes this with operator delete when flags has bit 0 set, and returns this.
 // @fnv 0x00c2a370
+// pdb: NiD3DShaderProgram::`scalar deleting destructor' | NiD3DShaderProgram.obj | fnv360_0721_beta, objopen_prop, low
 FUN_00c2a370_shell* FUN_00c2a370_shell::FUN_00c2a370(unsigned int flags)
 {
     FUN_00c31750();
@@ -44,6 +47,8 @@ struct FUN_00c2a2f0_shell : NiPSysGrowFadeModifier
 };
 
 // @fnv 0x00c2a2f0
+// pdb: NiPSysGrowFadeModifier::IsEqual | NiPSysGrowFadeModifier.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pkObject
 bool FUN_00c2a2f0_shell::FUN_00c2a2f0(NiObject* pkObject)
 {
     FUN_00c2a2f0_shell* pkDest = (FUN_00c2a2f0_shell*)pkObject;
@@ -87,6 +92,8 @@ struct FUN_00c2a390_shell : NiPSysGrowFadeModifier
 
 // For each active particle, computes a fade/grow ratio from age and lifespan and writes the clamped scale into data->scales.
 // @fnv 0x00c2a390
+// pdb: NiPSysGrowFadeModifier::Update | NiPSysGrowFadeModifier.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fTime, pkData
 void FUN_00c2a390_shell::ComputeParticleScales(unsigned int, ParticleData_00c2a390* data)
 {
     float scaleRange = 1.0f - m_fInitialScale;
@@ -152,6 +159,8 @@ struct FUN_00c2a610_cls : NiPSysGrowFadeModifier
 
 // Loads the base modifier stream, then reads five values from the stream into the grow/fade modifier's fields.
 // @fnv 0x00c2a610
+// pdb: NiPSysGrowFadeModifier::SaveBinary | NiPSysGrowFadeModifier.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void FUN_00c2a610_cls::LoadGrowFadeModifier(NiStream& stream)
 {
     reinterpret_cast<NiPSysModifierStand*>(this)->LoadStream(stream);
@@ -195,6 +204,8 @@ struct FUN_00c2a6e0_shell : NiPSysGrowFadeModifier
     void AppendGrowFadeModifierStrings(StrArr* pkStrings);
 };
 // @f3 0x00acab50 (community match, verified in this file)
+// pdb: NiPSysGrowFadeModifier::GetViewerStrings | NiPSysGrowFadeModifier.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FUN_00c2a6e0_shell::AppendGrowFadeModifierStrings(StrArr* pkStrings)
 {
     ((Base00c319e0*)this)->FUN_00c319e0(pkStrings);

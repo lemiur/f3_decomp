@@ -494,6 +494,8 @@ __forceinline InspectorInfo::InspectorInfo()
 {
     ((InfoInit*)this)->FUN_00900d70();
 }
+// pdb: bhkRigidBody::GetViewerStrings | bhkRigidBody.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apStrings
 void MaterialInspector::FUN_00c8f870(InspectorList* outputArg)
 {
     ViewerList* output=(ViewerList*)outputArg;

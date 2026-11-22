@@ -23,6 +23,8 @@ void __cdecl FalloutRadio_Revert(int a);
 void __cdecl FUN_00c24b70(int a);
 void __cdecl FUN_006cd570(const char* fmt, ...);
 
+// pdb: BGSSaveLoadGlobalData::RevertGlobalDataRange | BGSSaveLoadGlobalData.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aiStart, aiEnd, abFullRevert
 bool __cdecl FUN_006d2250(unsigned int type, int data, bool flag)
 {
     switch (type) {

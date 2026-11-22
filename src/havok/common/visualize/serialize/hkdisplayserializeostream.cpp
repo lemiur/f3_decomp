@@ -3,6 +3,8 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 // @fnv 0x00dda830
+// pdb: hkDisplaySerializeOStream::computeBytesRequired | hkDisplaySerializeOStream.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: g
 unsigned int FUN_00dda830(const unsigned int* puiValues)
 {
     return 4 * (3 * (puiValues[4] + puiValues[1])) + 8;
@@ -10,6 +12,8 @@ unsigned int FUN_00dda830(const unsigned int* puiValues)
 
 void __stdcall WriteFloatArray(unsigned int, unsigned int);
 // @fnv 0x00dda730
+// pdb: hkDisplaySerializeOStream::writeQuadVector4 | hkDisplaySerializeOStream.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: v
 void __stdcall FUN_00dda730(unsigned int p)
 {
     WriteFloatArray(p, 3);
@@ -101,6 +105,8 @@ struct StreamTriangleIndices
     int pointC;
 };
 
+// pdb: hkDisplaySerializeOStream::writeGeometry | hkDisplaySerializeOStream.obj | fnv360_0822_retail, call_gap, low
+// pdb params: g
 void DDA7C0OStream::WriteGeometry(const DDA7C0Geometry& geometry)
 {
     int numVertices = geometry.m_kVertices.m_iElementCount;
@@ -164,6 +170,8 @@ struct hkOArchiveStandIn
 };
 
 // @fnv 0x00d60920
+// pdb: hkOArchive::write16u | hkOArchive.obj | fnv360_0822_retail, call_seq, high
+// pdb params: u
 void hkOArchiveStandIn::WriteUInt16(unsigned int value)
 {
     WriteSwapped(&value, 2, 1);
@@ -221,6 +229,8 @@ struct Matrix474 {
 struct Transform474 { Matrix474 rotation; Vector474 translation; };
 struct Quaternion474 { Vector474 value; void FUN_00924360(const Matrix474&); };
 struct Writer474 { void FUN_009eea90(const float*,int); };
+// pdb: hkDisplaySerializeOStream::writeTransform | hkDisplaySerializeOStream.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: t
 void S_00dda740::WriteTransform(const S_00dda740_Transform& transform) {
     const Transform474& input=reinterpret_cast<const Transform474&>(transform);
     Vector474 translation=input.translation;
@@ -236,6 +246,8 @@ int FUN_00dda830(int value);
 
 // Returns a constant chosen by the int at param+0x50 (0x1d plus FUN_00dda830(param+8) for 6), or 1 for other values.
 // @fnv 0x00dda850
+// pdb: hkDisplaySerializeOStream::computeBytesRequired | hkDisplaySerializeOStream.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: dg
 int FUN_00dda850(int param)
 {
     int result = 1;
@@ -319,6 +331,8 @@ struct DDA8C0Writer
 };
 // Writes a Shape to the stream by dispatching on its tag and serializing the tag-specific fields via the writer's hash and write helpers.
 // @f3 0x00a625d0 (community match, verified in this file)
+// pdb: hkDisplaySerializeOStream::writeDisplayGeometry | hkDisplaySerializeOStream.obj | fnv360_0822_retail, call_gap, low
+// pdb params: dg
 void DDA8C0Writer::WriteShape(Shape* p)
 {
     float tmp[4];

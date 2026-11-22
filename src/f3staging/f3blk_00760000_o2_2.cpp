@@ -490,6 +490,8 @@ void FUN_004e8730(float);
 void FUN_004e8750(float);
 void FUN_00765230(float);
 };
+// pdb: MobileObject::SetHeading | MobileObject.obj | fnv360_0822_retail, vtable, medium
+// pdb params: afAngle
 void Actor1385::FUN_00765230(float afAngle)
 {
     if (process)
@@ -1573,6 +1575,7 @@ struct TLSState {
 };
 extern __declspec(thread) TLSState DAT_TLS;
 __forceinline Scene* Parent(Scene* s) { return s==DAT_TLS.unk24c ? DAT_TLS.unk248 : (s->unk5c ? (Scene*)s->unk5c->unk14 : 0); }
+// pdb: MobileObject::InitHavok | MobileObject.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: Actor::InitHavok)
 void Scene::FUN_00769230() {
  FUN_004f3e40(0);
  if (!unk60 || (unk60->unk28!=0 && unk60->unk28!=1)) return;
@@ -3164,6 +3167,7 @@ struct S7794_Span {
     S7794_Span(float a, float b) : lo(a), hi(b) {}
 };
 
+// pdb: PlayerCharacter::UpdateAutoAimActor | PlayerCharacter.obj | fnv360_0822_retail, call_dedup, medium
 void S7794_Ref::FUN_007794b0()
 {
     if (!Get3D())

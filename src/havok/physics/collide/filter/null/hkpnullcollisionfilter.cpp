@@ -132,6 +132,8 @@ struct Target570 {
     virtual void v50();
     virtual void Dispatch(Dispatch570*,S_00cfab30_this*,int);
 };
+// pdb: hkpSimpleWorldRayCaster::castRaysFromSinglePoint | hkpSimpleWorldRayCaster.obj | fnv360_0822_retail, ustr, high
+// pdb params: broadphase, inputArray, numRays, filter, cache, outputs
 void S_00cfab30_this::RecordAndDispatch(S_00cfab30_object* target,S_00cfab30_arg* input,void* context,void* adjusted,void* extra,void* owner){
     S_00cfab30_allocator* (__stdcall* lookup)(unsigned long)=DAT_00d9b080;
     volatile unsigned int timestamp;

@@ -486,6 +486,8 @@ static inline unsigned int C6A0B0IsEnabled(NiAVObject* pkObject)
 }
 
 // @fnv 0x00c6a0b0
+// pdb: bhkWorld::EnableCollision | bhkWorld.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apObject, abEnable, abRecurse, abForce
 bool FUN_00c6a0b0(NiAVObject* pkObject, bool bValue, bool bRecurse, bool bForce)
 {
     bool bResult = false;

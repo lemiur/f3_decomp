@@ -125,6 +125,8 @@ struct NativeSupportResult16
     virtual void calc(FNV_V4* a, FNV_V4* out);
 };
 
+// pdb: hkpConvexPieceShape::getSupportingVertexImpl | hkpConvexPieceShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: dir, supportingVertex
 void FNV_Owner::FUN_00e608d0(FNV_V4* pA, FNV_V4* pOut)
 {
     ShapeBuffer338 big;

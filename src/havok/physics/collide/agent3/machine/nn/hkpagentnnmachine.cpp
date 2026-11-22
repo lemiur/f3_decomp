@@ -36,6 +36,8 @@ struct LinkNode
 
 // Searches the smaller node's entry list for an entry whose key equals the other node and returns its value, else 0.
 // @f3 0x00998710 (community match, verified in this file)
+// pdb: hkAgentNnMachine_FindAgent | hkpAgentNnMachine.obj | fnv360_0822_retail, call_seq, high
+// pdb params: collA, collB
 void* __cdecl FindEntryValue(LinkNode* apFirst, LinkNode* apSecond)
 {
     LinkNode* pSmaller;
@@ -74,6 +76,8 @@ struct unk_00cfddc0
 };
 
 // @fnv 0x00cfddc0
+// pdb: hkAgentNnMachine_AssertTrackValidity | hkpAgentNnMachine.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: track
 void FUN_00cfddc0(unk_00cfddc0* pArg)
 {
     int i = 0;
@@ -127,6 +131,8 @@ struct FnvCtx
 };
 
 // @f3 0x00998970 (community match, verified in this file)
+// pdb: hkAgentNnMachine_GetAgentType | hkpAgentNnMachine.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: cdBodyA, cdBodyB, input, agentTypeOut, isFlippedOut
 void GetNodePairValue(FnvNode** ppA, FnvNode** ppB, FnvCtx* pCtx, int* pOutVal, int* pOutFlag)
 {
     FnvNode* pNodeA = *ppA;
@@ -472,6 +478,8 @@ typedef void(__cdecl* FUN_00cfdc90_Fn)(FUN_00cfdc90_Obj* self, void* p, float a,
 
 // Looks up a per-slot callback from ctx and invokes it with obj, a payload pointer, x and y; for types 4 and 12 it also updates obj->unk18 from x/y.
 // @f3 0x00998650 (community match, verified in this file)
+// pdb: hkAgentNnMachine_WarpTimeInAgent | hkpAgentNnMachine.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: entry, oldTime, newTime, input
 void __cdecl DispatchSlotCallback(FUN_00cfdc90_Obj* obj, float x, float y, void* ctx)
 {
     switch (obj->type)
@@ -791,6 +799,8 @@ struct hkpLinkedCollidableCFEA
 void __cdecl FUN_00cfe020(void* track, hkpAgentNnEntryCFEA* entry);
 
 // @f3 0x00999390 (community match, verified in this file)
+// pdb: hkAgentNnMachine_DestroyAgent | hkpAgentNnMachine.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: track, entry, dispatcher, constraintOwner
 void __cdecl FUN_00cfea30(void* track, hkpAgentNnEntryCFEA* entry, hkpCollisionDispatcherCFEA* dispatch, void* constraintOwner)
 {
     void __cdecl hkArrayUtil__reduce(void* array, int elemSize, void* storage, int newCapacity);
@@ -1444,6 +1454,7 @@ struct Task1440Input
     Transform relative;
 };
 void __cdecl hkSweptTransformUtil_lerp2(const SweptPose&, float, Transform&);
+// pdb: hkAgentNnMachine_initInputAtTime | hkpAgentNnMachine.obj | tesv_win, caller_sim, low
 static __declspec(noinline) void FUN_00cfde10(PairInput& rawOut, PairInput& rawIn, PairTemporary& temp)
 {
     Task1440Input& out = reinterpret_cast<Task1440Input&>(rawOut);

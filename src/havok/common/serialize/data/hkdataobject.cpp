@@ -57,6 +57,7 @@ struct FUN_00dba750
 };
 
 // @fnv 0x00dba750
+// pdb: hkpPrimitiveDrawer::hkpPrimitiveDrawer | hkpPrimitiveDrawer.obj | fnv360_0822_retail, call_seq, medium
 FUN_00dba750::FUN_00dba750()
 {
     m_pObject = 0;
@@ -255,6 +256,8 @@ struct Disp101
     virtual void invoke(int a, int b);
 };
 
+// pdb: TESActorBase::SetActorValue | TESCreature.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiWhich, afValue
 void FUN_00dbaaf0_cls::DispatchToInner(unsigned char b, void* p)
 {
     ((Disp101*)this)->invoke(*(int*)&b, (int)*(float*)&p);
@@ -529,6 +532,7 @@ __forceinline void Release929(DBA7F0Object* object) {
     }
 }
 
+// pdb: bhkCharacterControllerCinfo::ReleaseDefaultManager | bhkCharacterController.obj | fnv360_0822_retail, call_gap_sim, low
 void DBA7F0Ref::FUN_00dba7f0() {
     if (DAT_010f2e7c) {
         Release929(DAT_010f2e7c);
@@ -573,6 +577,8 @@ struct Buffer936 {
     void* data;
     unsigned int size;
 };
+// pdb: BGSLoadGameBuffer::Load | BGSLoadGameBuffer.obj | fnv360_0822_retail, objrun, low
+// pdb params: apFile, aiSize
 void __thiscall FUN_00dbaa30_cls::FUN_00dbaa30(int source, void* size) {
     Buffer936* buffer = (Buffer936*)this;
     buffer->size = (unsigned int)size;

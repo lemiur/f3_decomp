@@ -75,6 +75,8 @@ struct S00a6c720
 };
 
 // @fnv 0x00a6c720
+// pdb: BSDismemberSkinInstance::CopyMembers | BSDismemberSkinInstance.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkDest, kCloning
 void S00a6c720::FUN_00a6c720(S00a6c720* pkDest, void* kCloning)
 {
     CopyRefCountedPointers(pkDest, kCloning);
@@ -155,6 +157,8 @@ S00a6c7c0::S00a6c7c0() throw()
 }
 
 // @fnv 0x00a6c7c0
+// pdb: BSDismemberSkinInstance::CreateClone | BSDismemberSkinInstance.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kCloning
 S00a6c7c0* S00a6c7c0::FUN_00a6c7c0(CloningProcess& kCloning)
 {
     S00a6c7c0* pkSkinInstance = new S00a6c7c0();
@@ -410,6 +414,8 @@ class A6C900Skin : public A6C900SkinBase
 };
 
 // @fnv 0x00a6c900
+// pdb: BSDismemberSkinInstance::LoadBinary | BSDismemberSkinInstance.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void A6C900Skin::FUN_00a6c900(A6C900Stream& kStream)
 {
     A6C900SkinBase::LoadBinary(kStream);
@@ -510,6 +516,8 @@ struct BSDismemberSkinInstanceStub : NiSkinInstanceStub
 };
 
 // @fnv 0x00a6cac0
+// pdb: BSDismemberSkinInstance::GetViewerStrings | BSDismemberSkinInstance.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkStrings
 void BSDismemberSkinInstanceStub::FUN_00a6cac0(NiTPrimitiveArray<char*>* pkStrings)
 {
     NiSkinInstanceStub::GetViewerStrings(pkStrings);
@@ -718,6 +726,8 @@ struct DismemberOutput : BSDismemberSkinInstanceStub
     void FUN_00a6c9c0(OutputStream&);
 };
 // @fnv 0x00a6c9c0
+// pdb: BSDismemberSkinInstance::SaveBinary | BSDismemberSkinInstance.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void DismemberOutput::FUN_00a6c9c0(OutputStream& stream)
 {
     SaveSkinInstance(stream);

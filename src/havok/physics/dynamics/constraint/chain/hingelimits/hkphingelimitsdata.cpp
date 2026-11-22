@@ -10,6 +10,8 @@ struct hkPhingeLimitsData
     void __thiscall FUN_00d52f10(int arg);
 };
 // @fnv 0x00d52f10
+// pdb: hkpHingeLimitsData::getConstraintInfo | hkpHingeLimitsData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: infoOut
 void __thiscall hkPhingeLimitsData::FUN_00d52f10(int arg)
 {
     FUN_00d21a60((char*)this + 0x10, 0x84, arg);

@@ -77,6 +77,8 @@ struct S00601d30
     void FUN_00601d30(S00601d30* arg);
 };
 
+// pdb: PathingRequestClosePoint::CopyTo | PathingRequestClosePoint.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BSTScatterTableBase<struct BSTScatterTableTraits<unsigned int,struct IBSTCreator<class BSPathingRequest> const *,struct BSTScatterTableDefaultKVStorage,struct BSTScatterTableDefaultHashPolicy<unsigned int>,struct BSTStaticHashMapBase<unsigned int,struct IBSTCreator<class BSPathingRequest> const *,64,struct BSTScatterTableDefaultHashPolicy>::Allocator<struct BSTScatterTableEntry<unsigned int,struct IBSTCreator<class BSPathingRequest> const *,struct BSTScatterTableDefaultKVStorage> >,64> >::BSTScatterTableBase<struct BSTScatterTableTraits<unsigned int,struct IBSTCreator<class BSPathingRequest> const *,struct BSTScatterTableDefaultKVStorage,struct BSTScatterTableDefaultHashPolicy<unsigned int>,struct BSTStaticHashMapBase<unsigned int,struct IBSTCreator<class BSPathingRequest> const *,64,struct BSTScatterTableDefaultHashPolicy>::Allocator<struct BSTScatterTableEntry<unsigned int,struct IBSTCreator<class BSPathingRequest> const *,struct BSTScatterTableDefaultKVStorage> >,64> >)
+// pdb params: apDest
 void S00601d30::FUN_00601d30(S00601d30* arg)
 {
     FUN_00601080(arg);

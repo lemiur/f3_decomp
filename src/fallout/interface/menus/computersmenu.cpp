@@ -937,6 +937,8 @@ public:
     int __thiscall FUN_004a5280(void* a);
 };
 
+// pdb: BGSExplosion::GetImpactData | BGSExplosion.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aehkMatType
 int __thiscall BGSExplosion::FUN_004a5280(void* a)
 {
     int r = 0;

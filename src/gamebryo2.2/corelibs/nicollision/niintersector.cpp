@@ -36,6 +36,8 @@ class FUN_00eae720 : public SpawnedBase
 
 // Initializes the object's fields: stores d and a, b, c, computes 1/b, and sets several float fields to g_fltDefault.
 // @fnv 0x00eae720
+// pdb: NiIntersector::NiIntersector | NiIntersector.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: fMaxTime, fDerivativeTimeStep, fPseudodistanceThreshold, iMaxIterations
 FUN_00eae720::FUN_00eae720(float a, float b, float c, int d)
 {
     float fDefault = g_fltDefault;
@@ -67,6 +69,8 @@ struct FnvCpu_FUN_00eae6f0_CpuObject
     float FUN_00eae6f0();
 };
 // @fnv 0x00eae6f0
+// pdb: hkpMalleableConstraintData::setStrength | hkpMalleableConstraintData.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: tau
 float FnvCpu_FUN_00eae6f0_CpuObject::FUN_00eae6f0()
 {
     return value;
@@ -77,6 +81,7 @@ struct FnvCpu_FUN_00eae700_CpuObject
     char* FUN_00eae700();
 };
 // @fnv 0x00eae700
+// pdb: TESLandTexture::GetGrassList | TESLandTexture.obj | fnv360_0822_retail, call_gap, medium
 char* FnvCpu_FUN_00eae700_CpuObject::FUN_00eae700()
 {
     return reinterpret_cast<char*>(this) + 32;
@@ -87,6 +92,7 @@ struct FnvCpu_FUN_00eae710_CpuObject
     char* FUN_00eae710();
 };
 // @fnv 0x00eae710
+// pdb: TESObjectREFR::GetLocationOnReference | ExtraDataObjects.obj | fnv360_0822_retail, vtable, medium
 char* FnvCpu_FUN_00eae710_CpuObject::FUN_00eae710()
 {
     return reinterpret_cast<char*>(this) + 44;
@@ -100,6 +106,7 @@ extern MemoryManager g_memoryManager;
 struct FUN_00eae770
 {
     virtual ~FUN_00eae770();
+    // pdb: GridArray::`scalar deleting destructor' | GridArray.obj | fnv360_0822_retail, vtable, high
     void operator delete(void* p)
     {
         g_memoryManager.Deallocate(p);
@@ -140,6 +147,8 @@ struct S_00eae7a0_Solver
 
 // Uses finite-difference slope estimates to update x, then stores a result and status in m_fResult and m_iResult.
 // @fnv 0x00eae7a0
+// pdb: NiIntersector::Find | NiIntersector.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: kV0, kV1
 void S_00eae7a0_Solver::Solve(const S_00eae7a0_Point& apPointA, const S_00eae7a0_Point& apPointB)
 {
     float x = 0.0f;

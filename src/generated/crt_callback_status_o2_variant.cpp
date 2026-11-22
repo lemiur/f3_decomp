@@ -6945,6 +6945,7 @@ void __cdecl LoadBezPosKeys();
 void __cdecl SaveKeyArray();
 void __cdecl FUN_00a28620(int, int);
 // @fnv 0x00a28680
+// pdb: NiBezPosKey::RegisterLoader | NiBezPosKey.obj | tesv_win, hash, low
 int __cdecl FUN_00a28680()
 {
     if (DAT_011f3668)
@@ -6975,6 +6976,7 @@ extern int DAT_011f3a6c;
 extern int DAT_011f3dcc;
 
 // @fnv 0x00a2aab0
+// pdb: NiLinPosKey::RegisterLoader | NiLinPosKey.obj | tesv_win, hash, low
 int __cdecl FUN_00a2aab0()
 {
     if (DAT_011f3693)
@@ -7006,6 +7008,7 @@ extern int DAT_011f3a74;
 extern int DAT_011f3dd4;
 
 // @fnv 0x00a2bb90
+// pdb: NiTCBPosKey::RegisterLoader | NiTCBPosKey.obj | tesv_win, hash, low
 int __cdecl FUN_00a2bb90()
 {
     if (DAT_011f3695)
@@ -7097,6 +7100,7 @@ extern S_00a29110_Fn DAT_011f3848;
 void __cdecl FUN_00a28f50();
 void __cdecl FUN_00a2a600();
 // @fnv 0x00a29110
+// pdb: NiBezRotKey::RegisterLoader | NiBezRotKey.obj | tesv_win, hash, low
 int FUN_00a29110()
 {
     if (DAT_011f367c)
@@ -7144,6 +7148,7 @@ void FUN_00a29680();
 void FUN_00a27080();
 
 // @fnv 0x00a273a0
+// pdb: NiBezFloatKey::RegisterLoader | NiBezFloatKey.obj | tesv_win, hash, low
 int __cdecl FUN_00a273a0()
 {
     if (DAT_011f3655 != 0)
@@ -7184,6 +7189,7 @@ void Callback5();
 void __cdecl FUN_00a27aa0(int, int);
 
 // @fnv 0x00a27b00
+// pdb: NiPosKey::RegisterLoader | NiPosKey.obj | tesv_win, hash, low
 int FUN_00a27b00()
 {
     if (DAT_011f3656)
@@ -7220,6 +7226,7 @@ void __cdecl FUN_00e7cd40_b();
 void __cdecl RegisterCurveOps(int, int);
 
 // @fnv 0x00a294f0
+// pdb: NiBoolKey::RegisterLoader | NiBoolKey.obj | fnv360_0822_retail, objopen_prop, low
 int FUN_00a294f0()
 {
     if (DAT_011f367e)
@@ -7312,6 +7319,7 @@ void __cdecl FUN_00a2c130();
 void __cdecl FUN_00a2c1b0();
 
 // @fnv 0x00a2c4c0
+// pdb: NiTCBRotKey::RegisterLoader | NiTCBRotKey.obj | tesv_win, hash, low
 int __cdecl FUN_00a2c4c0()
 {
     if (DAT_011f3696 != 0)
@@ -7359,6 +7367,7 @@ void __cdecl FUN_00a2c7a0();
 void __cdecl NiTCBFloatKey_Insert();
 
 // @fnv 0x00a2cb80
+// pdb: NiTCBFloatKey::RegisterLoader | NiTCBFloatKey.obj | tesv_win, hash, low
 int __cdecl FUN_00a2cb80()
 {
     if (DAT_011f3697 != 0)
@@ -7607,6 +7616,8 @@ extern int* CopyGlobalsToBuffer(int, int, int, int*);
 extern bool CompareHelpers(const Helper*, const Helper*);
 
 // @fnv 0x00a299f0
+// pdb: NiColorKey::DeleteArray | NiColorKey.obj | fnv360_0822_debug, objopen_prop, low, conflict (skyrim: NiColorKey::RegisterLoader)
+// pdb params: pkKeyArray
 int FUN_00a299f0()
 {
     if (DAT_011f367f != 0)
@@ -7650,6 +7661,7 @@ extern void (*DAT_011f3b20)();
 extern void (*DAT_011f37c0)();
 extern void (*DAT_011f3850)();
 // @fnv 0x00a2a110
+// pdb: NiEulerRotKey::RegisterLoader | NiEulerRotKey.obj | tesv_win, hash, low
 int __cdecl FUN_00a2a110()
 {
     if (DAT_011f3690)

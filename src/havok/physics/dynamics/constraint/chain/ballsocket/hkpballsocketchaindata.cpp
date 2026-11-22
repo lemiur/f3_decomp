@@ -16,6 +16,8 @@ struct hkpBallSocketChainData_00d53cf0
 };
 
 // @fnv 0x00d53cf0
+// pdb: hkpBallSocketChainData::getConstraintInfo | hkpBallSocketChainData.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkpBallSocketChainData::getRuntimeInfo)
+// pdb params: info
 void hkpBallSocketChainData_00d53cf0::GetConstraintSizeInfo(bool abEnabled, S_00d53cf0* apSizeInfo)
 {
     if (abEnabled)
@@ -36,6 +38,8 @@ struct hkpBallSocketChainData_00d53ca0
 };
 // Initializes the output chain data: stores a pointer to this+0xc, zeroes fields, and sets sizes from the count at this+0x1c.
 // @fnv 0x00d53ca0
+// pdb: hkpBallSocketChainData::getConstraintInfo | hkpBallSocketChainData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: info
 void hkpBallSocketChainData_00d53ca0::InitChainData(char* out)
 {
     *(int*)(out + 0x10) = (int)(this + 0xc);
@@ -114,6 +118,7 @@ class FUN_00d53d90 : public hkpConstraintDataD53E
 };
 
 // @fnv 0x00d53d90
+// pdb: hkpBallSocketChainData::hkpBallSocketChainData | hkpBallSocketChainData.obj | fnv360_0822_retail, caller_sim, high
 FUN_00d53d90::FUN_00d53d90()
 {
     m_fTau = 0.6f;

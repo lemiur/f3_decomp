@@ -71,6 +71,7 @@ __declspec(dllimport) void __stdcall ExitProcess(unsigned int);
 extern char DAT_0106f500[];
 int __cdecl FUN_00490420(int, int);
 
+// pdb: Main_InitArchive | Main.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: Main::InitRenderer)
 void __fastcall FUN_0086d500(int* pThis)
 {
     char buf[512];
@@ -1255,6 +1256,7 @@ extern NiPointer<NiNode> g_011d86bc;
 // Clears the three global objects by assigning null to g_011d86bc, g_011d86a8 and g_011d8690.
 // @f3 0x006e12f0 (community match, verified in this file)
 struct Receiver799 { void FUN_006e1120(int index); };
+// pdb: BGSSaveLoadQueuedSubBufferMap::LoadAllQueuedSubBuffers | BGSLoadGameSubBuffer.obj | fnv360_0822_retail, call_gap, low
 void __fastcall FUN_0086beb0(void* self)
 {
     Receiver799* receiver = static_cast<Receiver799*>(self);

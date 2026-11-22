@@ -16,6 +16,8 @@ struct NiPointLight : NiObject
 };
 
 // @fnv 0x00a7d730
+// pdb: NiPointLight::CopyMembers | NiPointLight.obj | fnv360_0822_debug, objrun, low, conflict (skyrim: NiPointLight::IsEqual)
+// pdb params: pDest, kCloning
 bool NiPointLight::FUN_00a7d730(NiObject* pObject)
 {
     NiPointLight* pOtherLight = static_cast<NiPointLight*>(pObject);
@@ -62,6 +64,8 @@ struct NiPointLight : NiAVObject
 };
 
 // @fnv 0x00a7d7a0
+// pdb: NiPointLight::LinkObject | NiPointLight.obj | fnv360_0822_debug, objrun, medium
+// pdb params: stream
 void NiPointLight::FUN_00a7d7a0(NiUpdateData& update)
 {
     NiAVObject::UpdateWorldData(update);
@@ -161,6 +165,8 @@ struct FUN_00a7d7c0_Class
     void* ClonePointLight(void* process);
 };
 // @fnv 0x00a7d7c0
+// pdb: NiPointLight::RegisterStreamables | NiPointLight.obj | fnv360_0822_debug, objrun, low, conflict (skyrim: NiPointLight::CreateObject)
+// pdb params: stream
 void* FUN_00a7d7c0_Class::ClonePointLight(void* process)
 {
     NiPointLightLayout* clone;
@@ -370,6 +376,8 @@ struct NiPointLightSave : NiPointLightLayout
 };
 
 // @fnv 0x00a7d840
+// pdb: NiPointLight::SaveBinary | NiPointLight.obj | fnv360_0822_debug, objrun, low, conflict (skyrim: NiPointLight::LoadBinary)
+// pdb params: stream
 void NiPointLightSave::SaveToStream(NiStream* stream)
 {
     this->FUN_00a72080(stream);
@@ -588,6 +596,8 @@ struct NiPointLightSave : NiPointLightLayout
 
 // Calls FUN_00a720f0 then writes the three 4-byte values at unkF0, unkF4 and unkF8 to stream->unk250, accumulating the byte counts into its unk04.
 // @fnv 0x00a7d8d0
+// pdb: NiPointLight::IsEqual | NiPointLight.obj | fnv360_0822_debug, objrun, low, conflict (skyrim: NiPointLight::SaveBinary)
+// pdb params: pObject
 void NiPointLightSave::SavePointLight(NiStream* stream)
 {
     this->FUN_00a720f0(stream);
@@ -661,6 +671,8 @@ struct FUN_00a7d960_cls : S_00a7d960_base
 };
 
 // @fnv 0x00a7d960
+// pdb: NiPointLight::GetViewerStrings | NiPointLight.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pStrings
 void FUN_00a7d960_cls::FUN_00a7d960(S_00a7d960_arg* pBuffer)
 {
     AppendEffectProperties(pBuffer);
@@ -681,6 +693,8 @@ void __cdecl FUN_00a9b360()
 void __cdecl FUN_00a720f0(int param1, int param2);
 
 // @fnv 0x00a9b370
+// pdb: Explosion::FinishLoadGame | Explosion.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apLoadGameBuffer
 void __cdecl FUN_00a9b370(int param1, int param2)
 {
     FUN_00a720f0(param1, param2);
@@ -689,6 +703,8 @@ void __cdecl FUN_00a9b370(int param1, int param2)
 extern void __cdecl FUN_00a72160();
 
 // @fnv 0x00a9b380
+// pdb: GrenadeProjectile::LoadGame | GrenadeProjectile.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apLoadGameBuffer
 void __cdecl FUN_00a9b380()
 {
     FUN_00a72160();

@@ -71,6 +71,8 @@ struct S00d261b0_cls {
 
 // If a1's f10 is below f04, stores it in f04, copies v00, f10 and i14 into *p0c, sets p0c's slot at m_idx40 to -1, and sets b08 to 1.
 // @f3 0x009a7950 (community match, verified in this file)
+// pdb: `anonymous namespace'::NearestHitCollector::addRayHit | hkpSampledHeightFieldShape.obj | fnv360_0822_retail, vtable, high
+// pdb params: cdBody, hitInfoIn
 void S00d261b0_cls::UpdateMinValue(int a0, int a1)
 {
     S00d261b0_Elem* e = (S00d261b0_Elem*)a1;

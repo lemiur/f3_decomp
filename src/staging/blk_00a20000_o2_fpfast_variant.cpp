@@ -2886,6 +2886,7 @@ public:
 };
 
 // @fnv 0x00a316a0
+// pdb: NiControllerSequence::NiControllerSequence | NiControllerSequence.obj | fnv360_0822_retail, call_dedup, low
 NiControllerSequence::NiControllerSequence() :
     m_kName(DAT_0109b220), m_uiNumControlledBlocks(0), m_uiNumIDTags(0), m_pInterpArray(0), m_pkIDTags(0), m_fWeight(1.0f), m_spTextKeyData(0), m_fFrequency(1.0f), m_fFirstKeyTime(DAT_01096548)
 {

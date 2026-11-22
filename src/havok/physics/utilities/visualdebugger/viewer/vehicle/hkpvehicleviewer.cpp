@@ -20,6 +20,7 @@ struct D625A0CharArray
 
 extern char d_010d17d0;
 // @fnv 0x00d634d0
+// pdb: getVtablehkpMultiRayShape | hkpMultiRayShapeClass.obj | fnv360_0721_beta, objrun_open, low
 char* FUN_00d634d0()
 {
     return &d_010d17d0;
@@ -89,6 +90,7 @@ struct FUN_00d634e0_cls
 
 // Iterates m_pHolder's items and passes each to the sink's Process callback when m_pHolder is non-null.
 // @fnv 0x00d634e0
+// pdb: hkpVehicleViewer::init | hkpVehicleViewer.obj | fnv360_0822_retail, vtable, medium
 void FUN_00d634e0_cls::ProcessItems()
 {
     if (m_pHolder != 0)
@@ -158,6 +160,7 @@ void __cdecl FUN_00d63da0()
 extern int g_D63DC0Value;
 
 // @fnv 0x00d63dc0
+// pdb: BGSMoviePlayer::GetScreenWidth | BGSMoviePlayer.obj | fnv360_0822_retail, objrun, medium
 int __cdecl FUN_00d63dc0()
 {
     return g_D63DC0Value;
@@ -190,6 +193,8 @@ struct FUN_00d63480_cls
 
 // Passes pointers to this object's members at offsets 8 and 0xc to the target's two callbacks, or null if the owner pointer is null.
 // @fnv 0x00d63480
+// pdb: hkpVehicleViewer::worldRemovedCallback | hkpVehicleViewer.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BSTArray<class NiPointer<class bhkCharacterController>,class BSTSmallArrayHeapAllocator<120> >::DestructItems)
+// pdb params: w
 void FUN_00d63480_cls::PassMembersToTarget(Target* apTarget)
 {
     char* pOwner = (char*)this - 0x20;
@@ -247,6 +252,8 @@ extern int DAT_010d1814;
 extern int DAT_010d1804;
 
 // @fnv 0x00d63c50
+// pdb: hkpVehicleViewer::hkpVehicleViewer | hkpVehicleViewer.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: contexts
 FUN_00d63c50::FUN_00d63c50(ViewerArg* arg) : WorldViewerBase(arg)
 {
     m_vtbl28 = &DAT_010cb1d4;
@@ -594,6 +601,8 @@ struct HkReferencedObjectLayout
 // hkArrayUtil::_reserve(array, sizeElem): grows the array in place.
 void __cdecl FUN_00901f10(void* apArray, int iSizeElem);
 
+// pdb: hkpVehicleViewer::actionAddedCallback | hkpVehicleViewer.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: hkbUtils::getNodesByClass)
+// pdb params: action
 void VehicleViewerD635::AddVehicle(hkReferencedObjectD635* pkObj)
 {
     hkBuiltinTypeRegistryD635* pkReg = hkD635::DAT_01268b08;

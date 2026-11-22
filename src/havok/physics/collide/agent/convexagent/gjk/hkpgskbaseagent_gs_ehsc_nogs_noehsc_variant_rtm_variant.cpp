@@ -1307,6 +1307,8 @@ struct ScalarSolverCalls {
  void hkpGsk_convertFeatureToClosestDistance(const hkVector4&,ShapePairDistanceData&);
 };
 struct ScalarRotateCall { void hkVector4_setRotatedDir(const hkRotation&,const hkVector4&); };
+// pdb: hkpGskBaseAgent::staticGetClosestPoints | hkpGskBaseAgent.obj | fnv360_0822_retail, objrun, low
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl hkpGskBaseAgent_S::FUN_00dac450(const hkpCdBody_S&bodyA,const hkpCdBody_S&bodyB,const hkpCollisionInput_S&input,class hkpCdPointCollector_S&collector)
 {
 {hkMonitorStream_S&mStream=*static_cast<hkMonitorStream_S*>(DAT_00d9b080(DAT_0116913c));if(mStream.memoryAvailable()){hkMonitorStream_S::CommandTimingEntry*h=reinterpret_cast<hkMonitorStream_S::CommandTimingEntry*>(mStream.GetStreamEnd());h->m_pCommandName=DAT_00e7f394;h->setTime();mStream.setEnd((char*)(h+1));}};

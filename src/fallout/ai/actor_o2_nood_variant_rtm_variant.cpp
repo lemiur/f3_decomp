@@ -2974,6 +2974,8 @@ extern ReviewedRTTI DAT_010f31e4;
 __forceinline F8e_ReviewFloat4& F8e_QLoad(F8e_ReviewFloat4& t, const float* v){ t.x=v[0];t.y=v[1];t.z=v[2];t.w=v[3]; return t; }
 __forceinline void F8e_QStore(float* v, const F8e_ReviewFloat4& t){ v[0]=t.x;v[1]=t.y;v[2]=t.z;v[3]=t.w; }
 __forceinline void F8e_QMulS(float f, F8e_ReviewFloat4& t){ t.x*=f;t.y*=f;t.z*=f;t.w*=f; }
+// pdb: bhkRagdollController::CreateSGSkeletonRec | bhkRagdollController.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apObj, arBoneA, arboneMap
 void ReviewedContext::FUN_00c7b4f0(ReviewedNode* node, ReviewedArray* out, ReviewedContext* receiver)
 {
     unsigned char* raw=(unsigned char*)Task2996Heap::DAT_01090a78.FUN_0086b930(0x60);

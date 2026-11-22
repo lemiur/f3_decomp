@@ -27,6 +27,7 @@ struct NiPSysAirFieldSpreadCtlr
 };
 
 // @fnv 0x00c2f3e0
+// pdb: NiPSysAirFieldSpreadCtlr::GetTargetFloatValue | NiPSysAirFieldSpreadCtlr.obj | tesv_win, objrun_open, low
 void __thiscall NiPSysAirFieldSpreadCtlr::FUN_00c2f3e0(float& fValue)
 {
     fValue = m_pkModifier->m_fSpread;
@@ -52,6 +53,8 @@ struct NiPSysAgeDeathModifier : NiPSysModifier
 };
 
 // @fnv 0x00c2ef60
+// pdb: NiStreamLoadEnum<enum NiPSysBombModifier::DecayType> | NiPSysBombModifier.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: NiPSysAgeDeathModifier::LinkObject)
+// pdb params: kStream, value
 void NiPSysAgeDeathModifier::FUN_00c2ef60(NiStream& kStream)
 {
     NiPSysModifier::LinkObject(kStream);
@@ -119,6 +122,8 @@ struct NiPSysAgeDeathModifier : NiPSysModifier
 };
 // Calls the base ProcessClone, looks up the clone in the cloning map, and remaps the spawn modifier pointer to its cloned counterpart.
 // @fnv 0x00c2f1a0
+// pdb: NiPSysAgeDeathModifier::ProcessClone | NiPSysAgeDeathModifier.obj | fnv360_0822_retail, objrun, medium
+// pdb params: kCloning
 void __thiscall NiPSysAgeDeathModifier::FUN_00c2f1a0(CloningProcess& kCloning)
 {
     bool bFound;
@@ -177,6 +182,8 @@ struct FUN_00c2f2c0_shell : Base00c319e0
     void FUN_00c2f2c0(StrArr* pkStrings);
 };
 // @f3 0x00acf720 (community match, verified in this file)
+// pdb: NiPSysAgeDeathModifier::GetViewerStrings | NiPSysAgeDeathModifier.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FUN_00c2f2c0_shell::FUN_00c2f2c0(StrArr* pkStrings)
 {
     FUN_00c319e0(pkStrings);
@@ -305,6 +312,8 @@ class BC2EF80Emitter : public BC2EF80Modifier
 };
 
 // @fnv 0x00c2ef80
+// pdb: NiPSysAgeDeathModifier::IsEqual | NiPSysAgeDeathModifier.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pkObject
 bool BC2EF80Emitter::FUN_00c2ef80(BC2EF80Object* pkObject)
 {
     if (!ModifierIsEqual(pkObject))
@@ -461,6 +470,8 @@ struct AgeDeath
 };
 // Advances each particle's age by the elapsed time and removes particles whose age exceeds their lifespan, optionally spawning on death.
 // @fnv 0x00c2f010
+// pdb: NiPSysAgeDeathModifier::Update | NiPSysAgeDeathModifier.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fTime, pkData
 void AgeDeath::UpdateAges(float time, ParticleSystem* particles)
 {
     if (spawnOnDeath && spawn)
@@ -565,6 +576,8 @@ struct FUN_00c2f260_shell
 };
 // Calls the base modifier save, writes the spawn-on-death flag to the stream's binary output, then writes the spawn modifier link.
 // @fnv 0x00c2f260
+// pdb: NiPSysAgeDeathModifier::SaveBinary | NiPSysAgeDeathModifier.obj | fnv360_0822_retail, objrun, high
+// pdb params: kStream
 void FUN_00c2f260_shell::SaveAgeDeathModifier(NiStream* stream)
 {
     reinterpret_cast<NiPSysModifierSaveBase*>(this)->FUN_00c31950(stream);
@@ -595,6 +608,7 @@ double g_01012070 = 1.0;
 
 // Clamps fValue to [0,1] and stores it into the target's unk64 field.
 // @fnv 0x00c2f3f0
+// pdb: NiPSysAirFieldSpreadCtlr::SetTargetFloatValue | NiPSysAirFieldSpreadCtlr.obj | tesv_win, hash, low
 void __thiscall NiPSysSpawnModifier::FUN_00c2f3f0(float fValue)
 {
     FUN_00c2f3f0Target* target = this->unk3c;
@@ -615,6 +629,8 @@ void __thiscall NiPSysSpawnModifier::FUN_00c2f3f0(float fValue)
 void __cdecl FUN_00c31670();
 
 // @fnv 0x00c28b60
+// pdb: NiAlphaAccumulator::LoadBinary | NiAlphaAccumulator.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void __cdecl FUN_00c28b60()
 {
     FUN_00c31670();

@@ -30,6 +30,8 @@ extern M004a54b0* DAT_0106ca70;
 struct A004a54b0 { char pad[0xd1]; bool fd1; };
 struct C004a54b0 { void* FUN_004b2df0(A004a54b0*, int); void* FUN_004a54b0(A004a54b0*, int); };
 
+// pdb: BGSExplosion::Clone3D | BGSExplosion.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pRequester, deepCopy
 void* C004a54b0::FUN_004a54b0(A004a54b0* a, int b)
 {
     void* r = 0;
@@ -59,6 +61,8 @@ struct C004a7000 { virtual void v0(); virtual void v1(); virtual void v2(); virt
 struct E004a7000 { int f0; int f4; C004a7000* f8; };
 struct A004a7000 { int f0; int f4; int f8; int f0c; char pad[0x12c]; E004a7000* f13c; int Id() const { return f0c; } C004a7000* F8() const { return f13c->f8; } };
 
+// pdb: BGSProjectile::Clone3D | BGSProjectile.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pRequester, deepCopy
 R004a7000* C004a7000::FUN_004a7000(A004a7000* a, int b)
 {
     R004a7000* r = 0;

@@ -8,6 +8,7 @@ struct FUN_00ee8220_shell
 };
 
 // @fnv 0x00ee8220
+// pdb: NiRenderedCubeMap::GetWidth | NiRenderedCubeMap.obj | fnv360_0822_retail, objrun_open, low
 void* __thiscall FUN_00ee8220_shell::FUN_00ee8220()
 {
     void* p = *(void**)(this + 0x4C);
@@ -20,6 +21,7 @@ struct FUN_00ee8230_shell
 };
 
 // @fnv 0x00ee8230
+// pdb: NiRenderedCubeMap::GetHeight | NiRenderedCubeMap.obj | fnv360_0822_retail, objrun_open, low
 int __thiscall FUN_00ee8230_shell::FUN_00ee8230()
 {
     int* p = *(int**)((char*)this + 0x4c);
@@ -39,6 +41,7 @@ struct NiRenderedCubeMap_shell : NiRenderedCubeMap
 };
 // Calls FUN_00ee82b0, then frees this with operator delete when flags has bit 0 set, and returns this.
 // @fnv 0x00ee8440
+// pdb: NiPSysBoxEmitter::`scalar deleting destructor' | NiPSysBoxEmitter.obj | fnv360_0822_retail, objrun, medium
 void* __thiscall NiRenderedCubeMap_shell::FUN_00ee8440(unsigned int flags)
 {
     FUN_00ee82b0();
@@ -101,6 +104,7 @@ struct FUN_00ee8240 : Mid_ee8240
 };
 // Constructor for FUN_00ee8240 that sets the vtable pointer and zero-initializes m_i4C through m_i60 plus m_i48.
 // @fnv 0x00ee8240
+// pdb: NiRenderedCubeMap::NiRenderedCubeMap | NiRenderedCubeMap.obj | fnv360_0822_retail, call_gap, high
 FUN_00ee8240::FUN_00ee8240() throw()
 {
     m_pVtbl = &DAT_0110102c;
@@ -153,6 +157,7 @@ struct Obj
 };
 // Releases the six Ref pointers and item24, resets the vtable to DAT_0109b944, then calls NiTexture_RemoveTextureFromList and DestroyFogProperty.
 // @fnv 0x00ee82b0
+// pdb: NiRenderedTexture::~NiRenderedTexture | NiRenderedTexture.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiRenderedCubeMap::~NiRenderedCubeMap)
 void Obj::FUN_00ee82b0()
 {
     Ref** next = &end64;

@@ -3,6 +3,8 @@
 #include "nisingleinterpcontroller_decls.h"
 // Calls the base NiTimeController::ProcessClone, then forwards the clone process to the interpolator if one is set.
 // @fnv 0x00a38f50
+// pdb: NiSingleInterpController::ProcessClone | NiSingleInterpController.obj | fnv360_0822_retail, call_dedup, high
+// pdb params: kCloning
 void NiSingleInterpController::ProcessClone(CloningProcess& process)
 {
     NiTimeController::ProcessClone(process);
@@ -11,6 +13,8 @@ void NiSingleInterpController::ProcessClone(CloningProcess& process)
         pInterpolator->ProcessClone(process);
 }
 // @fnv 0x00a38f80
+// pdb: NiSingleInterpController::LoadBinary | NiSingleInterpController.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kStream
 void NiSingleInterpController::LoadBinary(NiStream& stream)
 {
     NiInterpController::LoadBinary(stream);
@@ -33,6 +37,7 @@ extern int DAT_0109632c;
 void __fastcall FUN_00a6d220(void*);
 
 // @fnv 0x00a2f8c0
+// pdb: NiInterpController::NiInterpController | NiInterpController.obj | tesv_win, uvref, medium
 void* __fastcall FUN_00a2f8c0(void* pThis)
 {
     FUN_00a6d220(pThis);
@@ -91,6 +96,8 @@ struct FUN_00a38e30_shell : public NiSingleInterpController
 };
 
 // @fnv 0x00a38e30
+// pdb: NiSingleInterpController::GetInterpolatorIndex | NiSingleInterpController.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: pcID
 NiInterpolator* __thiscall FUN_00a38e30_shell::FUN_00a38e30(unsigned short usIndex)
 {
     return m_spInterpolator;
@@ -104,6 +111,7 @@ struct FUN_00a2f8e0_shell : public NiInterpController
 extern const char* const g_011f36bc_arg1;
 
 // @fnv 0x00a2f8e0
+// pdb: BSTempNode::GetRTTI | TES.obj | fnv360_0822_retail, vtable, medium
 void* FUN_00a2f8e0_shell::FUN_00a2f8e0()
 {
     return (void*)&g_011f36bc_arg1;
@@ -278,6 +286,8 @@ struct FUN_00a38fe0_shell : NiSingleInterpController
 };
 // Calls FUN_00a2f8b0, then if the interpolator at offset 0x34 is set, registers its streamables with kStream; returns true unless the first call fails.
 // @fnv 0x00a38fe0
+// pdb: NiSingleInterpController::RegisterStreamables | NiSingleInterpController.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kStream
 bool FUN_00a38fe0_shell::RegisterInterpolatorStreamables(NiStream& kStream)
 {
     if (!FUN_00a2f8b0(kStream))
@@ -297,6 +307,8 @@ struct FUN_00a39010_shell : NiSingleInterpController
     void FUN_00a39010(NiStream&);
 };
 // @fnv 0x00a39010
+// pdb: NiSingleInterpController::SaveBinary | NiSingleInterpController.obj | fnv360_0822_retail, call_gap, low
+// pdb params: kStream
 void FUN_00a39010_shell::FUN_00a39010(NiStream& kStream)
 {
     ((S00c27120*)this)->FUN_00c27120(kStream);
@@ -355,6 +367,8 @@ struct Holder00a390a0 : NiSingleInterpController
 };
 // @f3 0x008b2830 (community match, verified in this file)
 extern const char* const DAT_01091f5c;
+// pdb: NiSingleInterpController::GetViewerStrings | NiSingleInterpController.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkStrings
 void Holder00a390a0::FUN_00a390a0(StrArr* pkStrings)
 {
     ((BaseWrap*)this)->WriteManagerControlledFlag(pkStrings);
@@ -376,6 +390,7 @@ struct FUN_00a38e40_cls : public NiSingleInterpController
 
 // Replaces the stored interpolator pointer, releasing the old one and incrementing the new one's reference count.
 // @fnv 0x00a38e40
+// pdb: NiSingleInterpController::SetInterpolator | NiSingleInterpController.obj | tesv_win, objrun_sim, low
 void FUN_00a38e40_cls::FUN_00a38e40(NiInterpolator* apNewInterpolator, unsigned int unused)
 {
     NiInterpolator* pOld = m_spInterpolator;
@@ -432,6 +447,8 @@ struct FUN_00a39030_cls : public NiSingleInterpController
 };
 
 // @fnv 0x00a39030
+// pdb: NiSingleInterpController::IsEqual | NiSingleInterpController.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pkObject
 bool FUN_00a39030_cls::IsCompatibleWith(NiSingleInterpController* other)
 {
     if (!CheckCompatible(other))
@@ -477,6 +494,8 @@ class FUN_00a39080_cls
 };
 
 // @fnv 0x00a39080
+// pdb: NiSingleInterpController::GetInterpolatorIndexFx | NiSingleInterpController.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arName
 short FUN_00a39080_cls::FUN_00a39080(int* piValue)
 {
     Holder* holder = m_2c;
@@ -594,6 +613,7 @@ class NiTimeControllerA38
 };
 
 // @fnv 0x00a38ec0
+// pdb: NiSingleInterpController::ResetTimeExtrema | NiSingleInterpController.obj | fnv360_0822_retail, objrun, high
 void NiTimeControllerA38::UpdateKeyTimes()
 {
     if (GetManagerControlled())
@@ -606,6 +626,8 @@ void NiTimeControllerA38::UpdateKeyTimes()
 extern void FUN_00c9a6b0();
 
 // @fnv 0x00a35850
+// pdb: TESChallenge::GetSaveSize | TESChallenge.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiFlags
 void FUN_00a35850()
 {
     FUN_00c9a6b0();
@@ -621,6 +643,8 @@ struct FUN_00a35870 : A30440Controller
     void DoSave(A30440Stream& arStream);
 };
 // @fnv 0x00a35870
+// pdb: TESReputation::LoadGame | TESReputation.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiFlags, aiCurrentFlags
 void FUN_00a35870::DoSave(A30440Stream& arStream)
 {
     SaveBinary(arStream);
@@ -629,6 +653,8 @@ void FUN_00a35870::DoSave(A30440Stream& arStream)
 unsigned short __cdecl FUN_00c283f0(void*, void*);
 
 // @fnv 0x00a35880
+// pdb: TESObjectBOOK::Activate | TESObjectBOOK.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apItemActivated, apActionRef, abIdFlag, apObjectToGet, aiCount
 unsigned short __cdecl FUN_00a35880(void* param1, void* param2)
 {
     return FUN_00c283f0(param1, param2);
@@ -710,6 +736,8 @@ unsigned short BSMultiTargetTreadTransfControllerStandIn::BSMultiTargetTreadTran
 
 void __cdecl FUN_00a2f8b0(int arg);
 // @fnv 0x00a35860
+// pdb: TESReputation::SaveGame | TESReputation.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiFlags
 void __cdecl FUN_00a35860(int arg)
 {
     FUN_00a2f8b0(arg);

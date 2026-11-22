@@ -11,6 +11,8 @@ NiBackToFrontAccumulator::NiBackToFrontAccumulator()
 
 // Returns the median of the three values at indices left, mid and right in the array.
 // @fnv 0x00aa0a20
+// pdb: NiBackToFrontAccumulator::ChoosePivot | NiBackToFrontAccumulator.obj | fnv360_0721_beta, objopen_prop, medium
+// pdb params: l, r
 float NiBackToFrontAccumulator::GetPivotValue(int left, int right)
 {
     int mid = (left + right) >> 1;
@@ -30,6 +32,8 @@ float NiBackToFrontAccumulator::GetPivotValue(int left, int right)
 }
 
 // @fnv 0x00aa0b40
+// pdb: NiBackToFrontAccumulator::SortObjectsByDepth | NiBackToFrontAccumulator.obj | fnv360_0721_beta, objopen_prop, high
+// pdb params: l, r
 void NiBackToFrontAccumulator::QuickSort(int left, int right)
 {
     if (right > left)
@@ -69,6 +73,8 @@ void NiBackToFrontAccumulator::QuickSort(int left, int right)
 struct NiObject;
 unsigned char __stdcall FUN_00ba87d0(NiObject*);
 // @fnv 0x00aa0ae0
+// pdb: NiBSplineCompColorInterpolator::RegisterStreamables | NiBSplineCompColorInterpolator.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: kStream
 unsigned char __stdcall FUN_00aa0ae0(NiObject* pkObject)
 {
     unsigned char r = FUN_00ba87d0(pkObject);
@@ -77,6 +83,7 @@ unsigned char __stdcall FUN_00aa0ae0(NiObject* pkObject)
 
 extern const char g_011f5f74_arg1[];
 // @fnv 0x00aa0e50
+// pdb: NiFloatExtraData::GetRTTI | NiFloatExtraData.obj | fnv360_0822_retail, udata, medium
 const char* __cdecl FUN_00aa0e50()
 {
     return g_011f5f74_arg1;
@@ -238,6 +245,7 @@ extern S_00aa0d00_Node* DAT_0106e588;
 extern S_00aa0d00_Renderer* DAT_0108f048;
 struct TailCaller { void FUN_00748e30(); };
 
+// pdb: NiBackToFrontAccumulator::FinishAccumulating | NiBackToFrontAccumulator.obj | fnv360_0822_retail, caller_sim, low
 void S_00aa0d00_Base::ReleaseAllItems()
 {
     S_00aa0d00_Renderer* r = DAT_0108f048;
@@ -305,6 +313,7 @@ class AA0F30Object
 // Scalar deleting destructor.
 // Runs the destructor, then frees this object with AA0F30DeleteSized when uiFlags has bit 0 set, and returns this.
 // @fnv 0x00aa0f30
+// pdb: NiTexturingProperty::`scalar deleting destructor' | NiTexturingProperty.obj | fnv360_0822_retail, caller_sim, low
 AA0F30Object* AA0F30Object::DestroyAndFree(unsigned int uiFlags)
 {
     this->~AA0F30Object();
@@ -365,6 +374,7 @@ class BackToFront_aa0 : public FUN_00aa0fc0
 };
 
 // @fnv 0x00aa0f50
+// pdb: NiBackToFrontAccumulator::CreateClone | NiBackToFrontAccumulator.obj | tesv_win, caller_sim, low
 BackToFront_aa0* BackToFront_aa0::FUN_00aa0f50(CloningProcess& kCloning)
 {
     BackToFront_aa0* pkObject = new BackToFront_aa0;
@@ -401,6 +411,7 @@ extern PoolLockF3 DAT_0106e5a0;
 extern S_00aa0d00_Node* DAT_0106e588;
 extern int DAT_00e27cbc;
 extern int DAT_00e27c14;
+// pdb: NiBackToFrontAccumulator::~NiBackToFrontAccumulator | NiBackToFrontAccumulator.obj | fnv360_0822_retail, caller_sim, medium
 void C_00aa0dc0::FUN_00aa0dc0()
 {
     NiBackToFrontAccumulator* self = this;
@@ -556,6 +567,7 @@ class FUN_00aa0c00_cls : public NiBackToFrontAccumulator
 
 // Collects geometry pointers from m_pkGeometryList, computes their dot-product sort values against the camera view direction, and calls FUN_00aa0b40 to sort them.
 // @fnv 0x00aa0c00
+// pdb: NiBackToFrontAccumulator::Sort | NiBackToFrontAccumulator.obj | fnv360_0721_beta, objrun_open, medium
 void FUN_00aa0c00_cls::SortGeometriesBackToFront()
 {
     if (!m_pkGeometryList)

@@ -15,6 +15,7 @@ struct BSFadeNode
 };
 
 // @fnv 0x00a4f000
+// pdb: NiFloatsExtraDataController::CreateObject | NiFloatsExtraDataController.obj | fnv360_0721_retail, objrun, medium
 int* __cdecl FUN_00a4f000()
 {
     int* p = static_cast<int*>(BSFadeNode::operator new(0x48));
@@ -45,6 +46,8 @@ struct FUN_00a4ef70_shell
     InterpStub* CreateInterpStub(unsigned short);
 };
 // @fnv 0x00a4ef70
+// pdb: NiFloatsExtraDataController::CreatePoseInterpolator | NiFloatsExtraDataController.obj | fnv360_0822_retail, objrun_prop, high
+// pdb params: usIndex
 InterpStub* FUN_00a4ef70_shell::CreateInterpStub(unsigned short usIndex)
 {
     InterpStub* p = (InterpStub*)BSFadeNode::operator new(0x18);
@@ -70,6 +73,8 @@ struct NiFloatsExtraDataController : NiPSysModifierCtlr
 };
 // Allocates and constructs a NiFloatsExtraDataController copy, runs the clone helper, then copies the extra data index from this object.
 // @fnv 0x00a4efb0
+// pdb: NiFloatsExtraDataController::CreateClone | NiFloatsExtraDataController.obj | fnv360_0721_retail, objrun, medium
+// pdb params: kCloning
 NiFloatsExtraDataController* NiFloatsExtraDataController::FUN_00a4efb0(CloningProcess& kCloning)
 {
     NiFloatsExtraDataController* pkObject = static_cast<NiFloatsExtraDataController*>(BSFadeNode::operator new(0x48));
@@ -116,6 +121,8 @@ struct NiFloatsExtraDataController : Base00
 };
 // Calls the base loader, then reads a 4-byte float from the stream into the controller's float field and advances the stream position.
 // @fnv 0x00a4f1a0
+// pdb: NiFloatsExtraDataController::SaveBinary | NiFloatsExtraDataController.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void NiFloatsExtraDataController::FUN_00a4f1a0(NiStream& stream)
 {
     FUN_00a57130(stream);
@@ -178,6 +185,8 @@ struct NiFloatsExtraDataController : NiPSysModifierCtlr
     void FUN_00a4f150(NiStream&);
 };
 // @fnv 0x00a4f150
+// pdb: NiFloatsExtraDataController::LoadBinary | NiFloatsExtraDataController.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void NiFloatsExtraDataController::FUN_00a4f150(NiStream& kStream)
 {
     NiPSysModifierCtlr::LoadBinary(kStream);
@@ -228,6 +237,7 @@ struct StrHolder
 
 // Returns m_str.m_pString, lazily building it from m_pPrefix and m_iIndex via FUN_00a305b0 when m_str is empty.
 // @fnv 0x00a4ebd0
+// pdb: NiFloatsExtraDataPoint3Controller::GetCtlrID | NiFloatsExtraDataPoint3Controller.obj | fnv360_0721_beta, objopen_prop, low
 char* StrHolder::GetFormattedString()
 {
     if (m_str.m_pString != DAT_0109b220)
@@ -382,6 +392,8 @@ struct NiFloatsExtraDataController : NiTransformController
 
 // Copies NiTransformController member data and transfers the NiFixedString name reference count between pkDest and the source.
 // @fnv 0x00c312f0
+// pdb: NiPSysModifierCtlr::CopyMembers | NiPSysModifierCtlr.obj | fnv360_1110_retail, objrun, high
+// pdb params: pkDest, kCloning
 void NiFloatsExtraDataController::FUN_00c312f0(NiFloatsExtraDataController* pkDest, void* kCloning)
 {
     NiTransformController::CopyMemberData(pkDest, kCloning);
@@ -451,6 +463,7 @@ void __cdecl FUN_00aa1460(void*, unsigned int);
 
 // Releases shared storage, calls FUN_00a572d0, and frees this when destroyFlag bit 0 is set.
 // @fnv 0x00a4f040
+// pdb: NiFloatsExtraDataController::`scalar deleting destructor' | NiFloatsExtraDataController.obj | fnv360_0721_retail, objrun, medium, conflict (bridge: NiColorExtraDataController::`scalar deleting destructor')
 MyController* MyController::FUN_00a4f040(unsigned int destroyFlag)
 {
 

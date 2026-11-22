@@ -2,12 +2,15 @@
 #include "nistream_cpp_decls.h"
 
 // @fnv 0x00A634E0
+// pdb: NiStream::GetGroupFromID | NiStream.obj | fnv360_0822_retail, call_seq, high
+// pdb params: uiID
 NiObjectGroup* NiStream::GetObjectGroup(unsigned int groupID)
 {
     return m_kGroups.m_pBase[groupID];
 }
 
 // @fnv 0x00A63430
+// pdb: NiStream::GetObjectFromLinkID | NiStream.obj | fnv360_0822_retail, call_seq, high
 NiObject* NiStream::GetLoadedObject()
 {
     unsigned int linkIndex = m_uiLinkIndex;
@@ -19,6 +22,8 @@ NiObject* NiStream::GetLoadedObject()
 }
 
 // @fnv 0x00A64700
+// pdb: NiStream::SetNumberOfLinkIDs | NiStream.obj | fnv360_0822_retail, caller, high
+// pdb params: uiLinks
 void NiStream::SetLinkIDCount(unsigned int numberOfLinkIDs)
 {
     NiStreamLinkIDSet& linkIDBlocks = (NiStreamLinkIDSet&)m_kLinkIDBlocks;
@@ -36,6 +41,7 @@ void NiStream::SetLinkIDCount(unsigned int numberOfLinkIDs)
 }
 
 // @fnv 0x00A635B0
+// pdb: NiStream::RegisterObjects | NiStream.obj | fnv360_0822_retail, vtable, high
 void NiStream::RegisterObjects()
 {
     for (unsigned int index = 0; index < m_kTopObjects.m_uiSize; ++index)
@@ -46,6 +52,8 @@ void NiStream::RegisterObjects()
 }
 
 // @fnv 0x00A63380
+// pdb: NiStream::Save | NiStream.obj | fnv360_0822_retail, vtable, high
+// pdb params: pkOstr
 bool NiStream::Save(NiBinaryStream* stream)
 {
     m_pkOstr = stream;
@@ -56,12 +64,16 @@ bool NiStream::Save(NiBinaryStream* stream)
 }
 
 // @fnv 0x00A633D0
+// pdb: TESEffectShader::StopParticleShader | TESEffectShader.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BGSProcedureFleeExecState::SetFleeSucceeded)
+// pdb params: apTargetObject, apProp
 void NiStream::GetTexture(const char* textureName, NiPointer<NiTexture>& texture)
 {
     fnv_NiStreamGetTexture(textureName, texture);
 }
 
 // @fnv 0x00A636F0
+// pdb: NiStream::SetFilePath | NiStream.obj | fnv360_0822_retail, call_gap, high
+// pdb params: pcFilePath
 void NiStream::SetStreamPath(const char* path)
 {
     if (path != 0 && path[0] != '\0')
@@ -77,6 +89,8 @@ void NiStream::SetStreamPath(const char* path)
 }
 
 // @fnv 0x00A63330
+// pdb: NiStream::Load | NiStream.obj | fnv360_0822_retail, vtable, high
+// pdb params: pkIstr
 bool NiStream::Load(NiBinaryStream* stream)
 {
     typedef bool(__thiscall * StreamReadyFunction)(NiBinaryStream*);
@@ -92,6 +106,7 @@ bool NiStream::Load(NiBinaryStream* stream)
 }
 
 // @fnv 0x00A644F0
+// pdb: NiStream::RemoveAllObjects | NiStream.obj | fnv360_0822_retail, call_gap, high
 void NiStream::ClearTopLevelObjects()
 {
     fnv_EnterCriticalSection(&fnv_NiStreamCriticalSection);
@@ -105,12 +120,16 @@ void NiStream::ClearTopLevelObjects()
 }
 
 // @fnv 0x00A64920
+// pdb: NiStream::RegisterPostProcessFunction | NiStream.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pfnFunc
 void NiStream::RegisterPostProcess(NiStreamPostProcess function)
 {
     DAT_011f4788->AddPostProcess(function);
 }
 
 // @fnv 0x00A64900
+// pdb: NiStream::RegisterLoader | NiStream.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pcName, pfnFunc
 int NiStream::RegisterObjectLoader(const char* name, NiObject*(__cdecl* loader)())
 {
     DAT_011f4784->SetAt(name, (NiShader*)loader);
@@ -118,6 +137,8 @@ int NiStream::RegisterObjectLoader(const char* name, NiObject*(__cdecl* loader)(
 }
 
 // @fnv 0x00A636B0
+// pdb: NiStream::GetNextSearchPath | NiStream.obj | fnv360_0822_retail, call_gap, high
+// pdb params: pcPath, uiStringLen
 bool NiStream::GetLastLoadedFilePath(char* buffer, unsigned int size)
 {
     if (DAT_011f4780)
@@ -130,6 +151,8 @@ bool NiStream::GetLastLoadedFilePath(char* buffer, unsigned int size)
 }
 
 // @fnv 0x00A632F0
+// pdb: NiStream::Load | NiStream.obj | fnv360_0822_retail, vtable, high
+// pdb params: pcBuffer, iBufferSize
 bool NiStream::Load(char* buffer, int size)
 {
     NiStreamMemoryBuffer stream;
@@ -141,6 +164,8 @@ bool NiStream::Load(char* buffer, int size)
 }
 
 // @fnv 0x00A635E0
+// pdb: NiStream::Save | NiStream.obj | fnv360_0822_retail, vtable, high
+// pdb params: pcBuffer, iBufferSize
 bool NiStream::Save(char*& buffer, int& size)
 {
     NiStreamMemoryBuffer stream;
@@ -154,6 +179,7 @@ bool NiStream::Save(char*& buffer, int& size)
 }
 
 // @fnv 0x00A64620
+// pdb: NiStream::ResolveLinkID | NiStream.obj | fnv360_0822_retail, call_seq, medium
 NiObject* NiStream::DeserializeObject()
 {
     unsigned int linkID;
@@ -164,6 +190,8 @@ NiObject* NiStream::DeserializeObject()
 }
 
 // @fnv 0x00A64550
+// pdb: NiStream::ChangeObject | NiStream.obj | fnv360_0822_retail, vtable, high
+// pdb params: pkNewObject
 void NiStream::ChangeObject(NiObject* object)
 {
     NiObject* pointer = object;
@@ -176,6 +204,7 @@ void NiStream::ChangeObject(NiObject* object)
 }
 
 // @fnv 0x00A63D80
+// pdb: NiStream::SaveTopLevelObjects | NiStream.obj | fnv360_0822_retail, vtable, high
 void NiStream::SaveTopLevelObjects()
 {
     unsigned int count = m_kTopObjects.m_uiSize;
@@ -188,6 +217,8 @@ void NiStream::SaveTopLevelObjects()
 }
 
 // @fnv 0x00A66370
+// pdb: NiStream::InsertObject | NiStream.obj | fnv360_0822_retail, call_gap, high
+// pdb params: pkObject
 void NiStream::InsertObject(NiObject* object)
 {
     NiObject* pointer = object;
@@ -709,6 +740,7 @@ extern const char DAT_00e321f0[];
 extern "C" NiObject* __cdecl FUN_00944990();
 extern const char DAT_00e321e0[];
 
+// pdb: bhkWorld::InitSystem | bhkWorld.obj | fnv360_0822_retail, ustr, high
 void InitHavokPhysics() {
     DAT_01169108.a=DAT_010f2a90.value;
     DAT_01169108.b=DAT_010f2a9c.value;
@@ -804,6 +836,7 @@ extern char* DAT_011f3ec0;
 extern char* DAT_011f3ec4;
 
 // @fnv 0x00a42230
+// pdb: NiActorManager::_SDMShutdown | NiActorManager.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl ClearGlobalStrings()
 {
     char* old = DAT_011f3ec0;
@@ -1016,6 +1049,8 @@ struct S_00a48070_Ref
 void GetGPUProgram(S_00a48070_Obj* obj, int a, S_00a48070_Ref** b, void* c);
 // Initializes obj, releases and clears p3 when OpenFile returns false, otherwise calls GetGPUProgram, then finalizes obj.
 // @fnv 0x00a48070
+// pdb: NiSequence::CreateFromKFFile | NiSequence.obj | fnv360_0721_beta, call_seq, high
+// pdb params: pcSequenceFile, uiIndex, aspSequence, pcSequenceName
 void CreateOrReleaseRef(const char* apPath, int p2, S_00a48070_Ref** ppRef, void* p4)
 {
     S_00a48070_Obj obj;
@@ -1072,6 +1107,8 @@ void* FUN_00a48110()
 void __cdecl FUN_00a61c50(NiObject* pkObject, void* pvArg);
 
 // @fnv 0x00a633b0
+// pdb: NiStream::SetTexture | NiStream.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkTexture
 void __stdcall FUN_00a633b0(const NiObject* pkObject)
 {
     FUN_00a61c50((NiObject*)pkObject, 0);
@@ -1091,6 +1128,8 @@ struct FUN_00a633f0_shell
 };
 
 // @fnv 0x00a633f0
+// pdb: NiStream::GetStringID | NiStream.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BSFixedString::operator!)
+// pdb params: kString
 int FUN_00a633f0_shell::FindIndex(int* pVal)
 {
     int v = *pVal;
@@ -1158,6 +1197,8 @@ struct NiTStringPointerMap
 extern NiTStringPointerMap* DAT_011f4784;
 // Looks up a function pointer in DAT_011f4784 by name and calls it, returning the result or 0 if not found.
 // @fnv 0x00a634b0
+// pdb: NiStream::CreateObjectByRTTI | NiStream.obj | fnv360_0822_retail, udata, medium, conflict (skyrim: )
+// pdb params: pcRTTI
 void* InvokeNamedFunction(const char* name)
 {
     void*(__cdecl * fn)();
@@ -1169,6 +1210,8 @@ void* InvokeNamedFunction(const char* name)
 
 // Searches the array at pThis+0xcc for val and returns its index, or 0 if not found.
 // @fnv 0x00a634f0
+// pdb: NiPoint3::SaveBinary | BSDecalPVExtraData.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: NiColorA::SaveBinary)
+// pdb params: stream, pkValues, uiNumValues
 unsigned int __fastcall FUN_00a634f0(char* pThis, int, int aiValue)
 {
     unsigned int count = *(unsigned short*)(pThis + 0xd2);
@@ -1189,6 +1232,8 @@ struct NiTMapBase
 extern void* DAT_011f4784;
 
 // @fnv 0x00a63520
+// pdb: Interface::AddToEnterStack | Interface.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiID, abForceRemoval
 void __cdecl FUN_00a63520(const char* apKey)
 {
     NiTMapBase* map = reinterpret_cast<NiTMapBase*>(DAT_011f4784);
@@ -1231,6 +1276,8 @@ typedef void (*S_00a63540_PostProcess)(void*);
 extern S_00a63540_Array<S_00a63540_PostProcess>* DAT_011f4788;
 // Removes the given post-process callback from the global post-process array by finding and removing the matching entry.
 // @fnv 0x00a63540
+// pdb: NiStream::UnregisterPostProcessFunction | NiStream.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pfnFunc
 void RemovePostProcess(S_00a63540_PostProcess apPostProcess)
 {
     for (unsigned int ui = 0; ui < DAT_011f4788->GetSize(); ui++)
@@ -1250,6 +1297,8 @@ extern long __cdecl FUN_00eca6d3(const char* text);
 
 // Copies text into a 16-byte buffer, splits it on '.' with strtok_s, and packs each token's FUN_00eca6d3 value into a 32-bit integer.
 // @fnv 0x00a63630
+// pdb: NiStream::GetVersionFromString | NiStream.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: pcVersionString
 unsigned int __cdecl FUN_00a63630(const char* text)
 {
     char buffer[16];
@@ -1324,6 +1373,8 @@ template <class T> class NiTLargeArrayA637
 
 // Stores element at uiIndex in m_pBase, growing m_uiSize if needed and adjusting m_uiESize when the slot's emptiness changes.
 // @fnv 0x00a63730
+// pdb: NiTLargeArray<NiFixedString,NiTNewInterface<NiFixedString> >::SetAt | NiStream.obj | fnv360_0822_retail, call_seq, high
+// pdb params: uiIndex, element
 template <class T> void NiTLargeArrayA637<T>::FUN_00a63730(unsigned int uiIndex, const T& element) throw()
 {
     if (uiIndex >= m_uiSize)
@@ -1390,6 +1441,7 @@ struct FUN_00a63910 : S_00a63910_Map
 
 // Frees the m_key strings of all hash table items when m_bCopy is set, then defers to the base class destructor.
 // @fnv 0x00a63910
+// pdb: NiTStringTemplateMap<NiTPointerMap<char const *,NiD3DPixelShader *>,NiD3DPixelShader *>::~NiTStringTemplateMap<NiTPointerMap<char const *,NiD3DPixelShader *>,NiD3DPixelShader *> | NiD3DShaderProgramFactory.obj | fnv360_0721_beta, objrun_open, low
 FUN_00a63910::~FUN_00a63910() throw()
 {
     if (m_bCopy)
@@ -1599,6 +1651,8 @@ struct S_00a63be0_Stream
 };
 // Copies name into m_acFileName, calls FUN_00aa2a00, attempts to get a file, and calls LoadFile if it is good.
 // @fnv 0x00a63be0
+// pdb: NiStream::Load | NiStream.obj | fnv360_0822_retail, vtable, high
+// pdb params: pcFileName
 bool S_00a63be0_Stream::OpenFile(const char* apFilePath)
 {
     strcpy_s(m_acFileName, 0x104, apFilePath);
@@ -1647,6 +1701,8 @@ struct ThisObj
 };
 // Clears bit 0x10, sets mask 0xE in m_flags, then recurses on each non-null element in the f3() holder.
 // @fnv 0x00a63cb0
+// pdb: NiStream::SetSelectiveUpdateFlagsTTTFRecursive | NiStream.obj | fnv360_0721_beta, caller, medium
+// pdb params: pkAVObject
 void ThisObj::SetFlagsRecursively(Arg* apArg)
 {
     apArg->m_flags = (apArg->m_flags & ~0x10) | 0xE;
@@ -1815,6 +1871,7 @@ struct Receiver
 };
 // Iterates the Item array and calls SetFlagsRecursively on items whose Query() chain reaches g_011f4280 and whose unk18 is zero.
 // @fnv 0x00a63d10
+// pdb: NiStream::SetSelectiveUpdateFlagsForOldVersions | NiStream.obj | fnv360_0822_retail, call_gap, medium
 void __thiscall Receiver::FUN_00a63d10()
 {
     if (unk0d8 >= 0x401000cU)
@@ -2107,6 +2164,8 @@ class NiStreamA63E
 
 // Seeks the backing stream back to uiStartPos and writes each link ID from m_puiLinkIDs to the stream.
 // @fnv 0x00a63e60
+// pdb: NiStream::SaveObjectSizeTable | NiStream.obj | fnv360_0822_retail, vtable, high
+// pdb params: uiStartOffset
 bool NiStreamA63E::SaveLinkIDs(unsigned int uiStartPos)
 {
     unsigned int uiDelta = m_pkOstr->GetPosition() - uiStartPos;
@@ -2622,6 +2681,8 @@ struct FUN_00a641f0_cls
 
 // Writes four bytes: DAT_0109bc30 if the argument's first pointer matches DAT_0109b220, otherwise its object link ID.
 // @fnv 0x00a641f0
+// pdb: NiStream::SaveFixedString | NiStream.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kString
 void FUN_00a641f0_cls::WriteObjectLink(void* apObject)
 {
     unsigned int id;
@@ -3276,6 +3337,7 @@ struct LinkLoader
 };
 // Reads linkCount 4-byte values from input into the links array and returns true.
 // @fnv 0x00a64740
+// pdb: NiStream::LoadObjectSizeTable | NiStream.obj | fnv360_0822_retail, vtable, high
 bool LinkLoader::ReadLinks()
 {
     links.FUN_00864280(linkCount);
@@ -3381,6 +3443,7 @@ struct QGroupArray
 };
 // Reads the group count from the stream, resizes the group array, and allocates NiObjectGroup instances for each group.
 // @fnv 0x00a647f0
+// pdb: NiStream::LoadObjectGroups | NiStream.obj | fnv360_0822_retail, caller, medium
 void FUN_00a647f0_shell::LoadGroups()
 {
     unsigned int uiNumGroups;
@@ -3460,6 +3523,7 @@ struct NiStreamImpl
 
 // Writes the NIF header (version, endianness, object count, and optional creator/export info) to the backing stream.
 // @fnv 0x00a64940
+// pdb: NiStream::SaveHeader | NiStream.obj | fnv360_0822_retail, vtable, high
 void NiStreamImpl::WriteHeader()
 {
     m_pkOstr->SetEndianSwap(false);
@@ -3738,6 +3802,7 @@ class ImageSpaceShaderW
 
 // Rebuilds m_kTextureSwapList from shader params and accumulates GetCount into each texture's m_uiValueBeforeCount.
 // @fnv 0x00a64b80
+// pdb: NiStream::UpdateObjectGroups | NiStream.obj | fnv360_0822_retail, call_seq, high
 void ImageSpaceShaderW::UpdateTextureSwapList()
 {
     m_kTextureSwapList.SetSize(1);
@@ -3784,6 +3849,7 @@ struct StreamHack : NiStream
 };
 // Locks the critical section, removes all top objects, zeroes four fields, and unlocks the section.
 // @fnv 0x00a64ca0
+// pdb: NiStream::FreeLoadData | NiStream.obj | fnv360_0822_retail, call_seq, high
 void StreamHack::Clear()
 {
     EnterCriticalSection(&_fnv_NiStreamCriticalSection);
@@ -4235,6 +4301,8 @@ struct S_00a64fe0_LargeArray
 
 // Resizes the large array to uiMaxSize, copying existing elements, zeroing new slots, and freeing the old buffer.
 // @fnv 0x00a64fe0
+// pdb: NiTLargeArray<NiPointer<NiObject>,NiTNewInterface<NiPointer<NiObject> > >::SetSize | BSStream.obj | fnv360_0822_retail, call_seq, high
+// pdb params: uiMaxSize
 void S_00a64fe0_LargeArray::FUN_00a64fe0(unsigned int uiMaxSize)
 {
     if (uiMaxSize == m_uiMaxSize)
@@ -4324,6 +4392,7 @@ struct FUN_00a65300_holder
 };
 // Calls Del(1) on three members, clears top-level objects and the map, and passes stored pointers to cleanup routines.
 // @fnv 0x00a65300
+// pdb: NiStream::~NiStream | NiStream.obj | fnv360_0822_retail, caller, high
 void __fastcall FUN_00a65300(FUN_00a65300_holder* s)
 {
     s->vt = &DAT_0109bdcc;
@@ -4427,6 +4496,7 @@ struct NiStreamImpl
 
 // Reads and validates the NIF file header from m_pkIstr, storing version, endian, and object count, returning false on any validation failure.
 // @fnv 0x00a65400
+// pdb: NiStream::LoadHeader | NiStream.obj | fnv360_0822_retail, vtable, high
 bool NiStreamImpl::ReadNifHeader()
 {
     char acBuffer[0x80];
@@ -4699,6 +4769,7 @@ class ObjectLoadStream
 };
 // Reads a count and object IDs from input, populates topObjects with ObjectReference entries, and removes references from loaded objects.
 // @fnv 0x00a65720
+// pdb: NiStream::LoadTopLevelObjects | NiStream.obj | fnv360_0822_retail, vtable, high
 void ObjectLoadStream::LoadTopObjects()
 {
     unsigned int count;
@@ -5148,6 +5219,7 @@ class StreamEx
 
 // Reads a count and string lengths from m_spIStream, allocates a buffer, loads each string into m_kFixedStringTable via FUN_00a63730, and frees the buffer.
 // @fnv 0x00a65b00
+// pdb: NiStream::LoadFixedStringTable | NiStream.obj | fnv360_0822_retail, call_gap, medium
 bool StreamEx::LoadFixedStrings()
 {
     unsigned int ItemUpdateArray;
@@ -5484,6 +5556,8 @@ struct S_00a65f80_Array
 };
 
 // @fnv 0x00a65f80
+// pdb: NiTLargeArray<NiFixedString,NiTNewInterface<NiFixedString> >::AddFirstEmpty | NiStream.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: element
 unsigned int S_00a65f80_Array::FUN_00a65f80(const S_00a65f80_FixedString& element)
 {
     if (element == S_00a65f80_FixedString())
@@ -5516,6 +5590,7 @@ struct FUN_00a66030_obj
 };
 // Calls the object's cleanup method and, when the low bit of flags is set, deallocates the object through g_memoryManager, then returns the object pointer.
 // @fnv 0x00a66030
+// pdb: NiTStringTemplateMap<NiTMap<char const *,Setting *>,Setting *>::`scalar deleting destructor' | EffectItem.obj | fnv360_0822_retail, vtable, high
 FUN_00a66030_obj* __fastcall FUN_00a66030(FUN_00a66030_obj* apThis, int, unsigned int flags)
 {
     apThis->DestroyMap();
@@ -5555,6 +5630,7 @@ struct Holder66070
 };
 // Saves mem, sets vf to DAT_0109bd4c, calls FUN_00a644a0 with the saved pointer, and conditionally calls _DeallocateAlias on this.
 // @fnv 0x00a66070
+// pdb: NiTArray<BGSCameraPath *,NiTMallocInterface<BGSCameraPath *> >::`scalar deleting destructor' | BGSCameraPathManager.obj | fnv360_0822_retail, vtable, medium
 void* Holder66070::FUN_00a66070(unsigned int flags)
 {
     void* tmp = mem;
@@ -5842,6 +5918,7 @@ extern int DAT_00e211f8;
 extern int FUN_00f72bd4;
 extern int FUN_00f72bd8;
 
+// pdb: NiStream::NiStream | NiStream.obj | fnv360_0822_retail, call_seq, high
 FUN_00a66150::FUN_00a66150()
     : VPtr_a66150(&DAT_0109bdcc), m_kGroups(&DAT_00e2113c, 0, 1),
       m_kObjects(&DAT_00e213a4, 0, 1024), m_kObjectSizes(&DAT_00e10604, 0, 1),
@@ -5872,6 +5949,7 @@ struct FUN_00a66350_obj
 };
 // Calls the NiStream destructor alias and deallocates the object via g_memoryManager when the low bit of flags is set.
 // @fnv 0x00a66350
+// pdb: SettingT<GameSettingCollection>::`scalar deleting destructor' | EffectItem.obj | fnv360_0822_retail, vtable, high
 FUN_00a66350_obj* __fastcall NiStreamDtor(FUN_00a66350_obj* apStream, int, unsigned int flags)
 {
     apStream->_NiStreamDtorAlias();
@@ -6083,6 +6161,8 @@ struct StreamMatch
 
 // Adds object to linkMap and objects array, incrementing its reference count, then decrements it and returns true.
 // @fnv 0x00a663e0
+// pdb: NiStream::RegisterSaveObject | NiStream.obj | fnv360_0822_retail, call_dedup, high
+// pdb params: pkObject
 bool StreamMatch::AddObject(RefCountedObj* object)
 {
     RefCountedObj* obj = object;
@@ -6813,6 +6893,7 @@ struct RtStream
 
 // Writes the RTTI name table and per-object RTTI IDs (with clone flag) to the backing stream.
 // @fnv 0x00a665f0
+// pdb: NiStream::SaveRTTI | NiStream.obj | fnv360_0822_retail, call_seq, high
 void RtStream::WriteRTTIHeader()
 {
     RtStringMap kRTTIMap;
@@ -7036,6 +7117,7 @@ struct NiMemStream : NiBinaryStream
 
 // Sets the vtable pointer, frees the buffer at offset 0x10 if the flags at 0x20 and 0x21 are clear, and calls the NiBinaryStream destructor.
 // @fnv 0x00aa2d30
+// pdb: NiMemStream::~NiMemStream | NiMemStream.obj | fnv360_0822_retail, call_seq, medium
 void NiMemStream::NiMemStreamDestructor()
 {
     *(void**)this = &DAT_010a256c;
@@ -7240,6 +7322,8 @@ struct FUN_00c89860_clsF3
 {
     void FUN_008f7ec0(Stream* apStream);
 };
+// pdb: bhkConstraint::RegisterStreamables | bhkConstraint.obj | fnv360_0822_debug, objrun, low, conflict (bridge: bhkConstraint::LinkObject)
+// pdb params: arStream
 void FUN_00c89860_cls::FUN_00c89860(Stream* apStream)
 {
     ((StreamF3*)apStream)->FUN_0082a2b0();
@@ -7397,6 +7481,8 @@ struct S_00ca76b0_Cls
 
 // Reads a count and objects from s, conditionally prepares the holder array, fills entries, and calls FUN_00c84cc0.
 // @f3 0x00912f50 (community match, verified in this file)
+// pdb: bhkNiTriStripsShape::LinkObject | bhkNiTriStripsShape.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: bhkRigidBody::LinkObject)
+// pdb params: arStream
 void S_00ca76b0_Cls::FUN_00ca76b0(S_00ca76b0_Stream* apStream)
 {
     char flag;
@@ -7721,6 +7807,7 @@ FUN_00c68150::~FUN_00c68150()
 
 // Stores object at index, extends m_uiSize to index + 1 when needed, and adjusts m_uiESize based on the slot and object.
 // @fnv 0x00cc1a10
+// pdb: NiRefObject::IncRefCount | ExtraDataCell.obj | fnv360_0822_debug, call_seq, low, conflict (skyrim: NiTLargeArray<class NiPointer<class NiObject>,class NiTNewInterface<class NiPointer<class NiObject> > >::SetAt)
 void NiStreamTopObjects::FUN_00cc1a10(unsigned int index, const NiPointer<NiObject>& object)
 {
     if (index >= m_uiSize)

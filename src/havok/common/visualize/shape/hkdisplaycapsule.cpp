@@ -1563,6 +1563,7 @@ hkSimplexSolverSolve3dSolveSequentually:
 	velocityOut = pointVel;
 }
 }
+// pdb: hkSimplexSolverExamineActivePlanes | hkpSimplexSolver.obj | tesv_win, call_seq, medium
 static inline void FUN_00d23f50( SimplexInfo& simplexInfo )
 {
 	using namespace hk_009a5680;

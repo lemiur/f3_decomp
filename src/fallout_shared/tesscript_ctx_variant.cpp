@@ -121,6 +121,8 @@ inline char* AllocateZeroed(unsigned count,unsigned size){unsigned bytes=count*s
 void __cdecl FUN_00887da0(const char*,...);
 }
 // @fnv 0x005ab9f0
+// pdb: Script::Load | TESScript.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pFile
 bool ScriptLoader::FUN_005ab9f0(TESFile* originalFile)
 {
     using namespace Task2037;

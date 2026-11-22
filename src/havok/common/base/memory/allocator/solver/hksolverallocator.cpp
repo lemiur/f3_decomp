@@ -22,6 +22,7 @@ struct FUN_00cd06a0_class : public FUN_00c66560_class
 // @f3 0x0086da50 (community match, verified in this file)
 extern int DAT_00e2804c;
 extern int DAT_00e27f54;
+// pdb: AbstractHeap::~AbstractHeap | AbstractHeap.obj | tesv_win, objrun_sim, low
 void FUN_00cd06a0_class::ResetVftableAndDeleteCriticalSection()
 {
     m_pVftable = &DAT_00e2804c;
@@ -31,6 +32,7 @@ void FUN_00cd06a0_class::ResetVftableAndDeleteCriticalSection()
 
 
 // @fnv 0x00d5e880
+// pdb: hkpSimpleContactConstraintData::getSolverResults | hkpSimpleContactConstraintData.obj | tesv_win, objrun_open, low
 int __stdcall FUN_00d5e880(int arg0)
 {
     return 0;

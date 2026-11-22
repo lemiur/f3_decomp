@@ -5,6 +5,7 @@
 #include "havok/hkpStiffSpringChainData.h"
 
 // @fnv 0x00e3af30
+// pdb: hkpStiffSpringChainData::getType | hkpStiffSpringChainData.obj | fnv360_0822_retail, objrun_open, low
 int __cdecl FUN_00e3af30()
 {
     return 0x64;
@@ -27,6 +28,8 @@ class hkpStiffSpringChain : public hkpStiffSpringChainData
 };
 
 // @fnv 0x00e3af40
+// pdb: hkpStiffSpringChainData::getConstraintInfo | hkpStiffSpringChainData.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: info
 void hkpStiffSpringChain::FUN_00e3af40(ConstraintInfo& info)
 {
     info.m_kBridgeAtoms = &m_kBridgeAtoms;

@@ -13,6 +13,7 @@ struct FUN_00ba8690
 };
 
 // @fnv 0x00ba8690
+// pdb: SpeedTreeBillboardShaderProperty::`scalar deleting destructor' | SpeedTreeBillboardShaderProperty.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 FUN_00ba8690::FUN_00ba8690(int flags)
 {
     m_p = (void*)&DAT_010b8330;
@@ -89,6 +90,8 @@ struct BA86C0Owner
 
 // Calls FUN_00a5a040 when pArg+0x9c is null and clears unk58 when *unkAC is zero, then returns 0.
 // @fnv 0x00ba86c0
+// pdb: SkyShaderProperty::SetupGeometry | SkyShaderProperty.obj | fnv360_0822_retail, caller_sim, low, conflict (bridge: SpeedTreeBillboardShaderProperty::ClarifyShader)
+// pdb params: apGeometry
 int BA86C0Owner::FUN_00ba86c0(A5A040Cls* pArg, int arg2, int arg3)
 {
     if ((char*)pArg + 0x9c == 0)
@@ -278,6 +281,8 @@ struct SpawnedObject : FUN_00aea2f0
 };
 struct Host { void FUN_00ae99b0(SpawnedObject*, int); };
 }
+// pdb: SpeedTreeBillboardShaderProperty::CreateClone | SpeedTreeBillboardShaderProperty.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: kCloning
 int* SpawnerHost::CreateSpawnedObject(int flags) { task1436::SpawnedObject* p=new task1436::SpawnedObject(); ((task1436::Host*)this)->FUN_00ae99b0(p,flags); return (int*)p; }
 
 

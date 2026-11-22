@@ -390,6 +390,8 @@ hkBool __cdecl FUN_00cc0d60(hkpWorld* world, FUN_00943bb0* writer, hkBool binary
                             const StructureLayoutRules* rules, int aiFlags);
 }
 
+// pdb: hkpWorldSnapshotViewer::step | hkpWorldSnapshotViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: frameTimeInMs
 void FUN_00d63040_cls::FUN_00d63040(float frameTimeInMs)
 {
     int wi = 0;

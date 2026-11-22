@@ -23,6 +23,7 @@ class NiParticleMeshes : public NiParticles
 };
 
 // @fnv 0x00a9b120
+// pdb: NiTriShape::NiTriShape | NiTriShape.obj | tesv_win, objrun_prop, low
 NiParticleMeshes::NiParticleMeshes()
 {}
 
@@ -49,6 +50,7 @@ struct FUN_00a98ed0_shell : public NiParticleMeshes
 
 // Calls FUN_00a80580, then deletes this with _delete when flags has bit 1 set, and returns this.
 // @fnv 0x00a98ed0
+// pdb: NiParticleMeshes::`scalar deleting destructor' | NiParticleMeshes.obj | fnv360_0822_retail, objrun, medium
 void* FUN_00a98ed0_shell::FUN_00a98ed0(unsigned int flags)
 {
     NiParticleMeshes* p = this;
@@ -109,6 +111,8 @@ char* __cdecl _FUN_00a7d330(const char*);
 extern const char* const g_011f5f14_arg1;
 // Appends the string returned by _FUN_00a7d330(g_011f5f14_arg1) to pkStrings, growing the array if it is full.
 // @fnv 0x00a990c0
+// pdb: NiBoolInterpController::GetViewerStrings | NiBoolInterpController.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pkStrings
 void Caller::AppendString(StrArr2* pkStrings)
 {
     FUN_00a9b2e0(pkStrings);
@@ -245,6 +249,8 @@ struct StandinNiParticleMeshes : NiGeometry
     void UpdatePropertyState(NiPropertyState* pkParentState);
 };
 // @fnv 0x00a99040
+// pdb: NiParticleMeshes::UpdatePropertiesDownward | NiParticleMeshes.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkParentState
 void StandinNiParticleMeshes::UpdatePropertyState(NiPropertyState* pkParentState)
 {
     NiGeometry::UpdatePropertiesDownwardPass(pkParentState);
@@ -315,6 +321,8 @@ struct S_00a98e30
     void FUN_00a98e30(S_00a98e30_Val* p, int x);
 };
 // @fnv 0x00a98e30
+// pdb: NiParticleMeshes::UpdateDownwardPass | NiParticleMeshes.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: UpdateData, uFlags
 void S_00a98e30::FUN_00a98e30(S_00a98e30_Val* apVal, int x)
 {
     unkC4 = apVal->f;
@@ -387,6 +395,8 @@ struct S_00a98e50 : S_00a98e50_Base
 };
 // Stores kData.m_fTime into m_fLastTime, then forwards kData to the base UpdateDownwardPassIfSelective.
 // @fnv 0x00a98e50
+// pdb: NiParticleMeshes::UpdateSelectedDownwardPass | NiParticleMeshes.obj | fnv360_0822_retail, objrun, low, conflict (bridge: NiParticleMeshes::UpdateDownwardPass)
+// pdb params: UpdateData, uFlags
 void S_00a98e50::FUN_00a98e50(S_00a98e50_UpdateData& kData)
 {
     m_fLastTime = kData.m_fTime;
@@ -463,6 +473,8 @@ struct FUN_00a99070_shell
     void RenderTarget(NiRenderer* pkRenderer);
 };
 // @fnv 0x00a99070
+// pdb: NiParticleMeshes::OnVisible | NiParticleMeshes.obj | fnv360_0822_retail, objrun, high
+// pdb params: kCuller
 void FUN_00a99070_shell::RenderTarget(NiRenderer* pkRenderer)
 {
     m_pUserData->m_pkTarget->Render(pkRenderer);
@@ -487,6 +499,8 @@ struct FUN_00a98f00_shell : public NiParticleMeshes
 
 // Allocates a 0xcc-byte CreatedObj, initialises it with a table pointer and flag, then passes it to FUN_00a9b140 with pArg and returns it.
 // @fnv 0x00a98f00
+// pdb: NiParticleMeshes::CreateClone | NiParticleMeshes.obj | fnv360_0822_retail, objrun, low
+// pdb params: kCloning
 CreatedObj* FUN_00a98f00_shell::CreateAndInitObj(void* pArg)
 {
     CreatedObj* pObj = (CreatedObj*)FUN_00aa13e0(0xcc);
@@ -674,6 +688,8 @@ struct FUN_00a98f60 : A98F60AVObject
 
 // Copies the object's world transform to the accumulation camera, updates particle meshes, and calls two functions when the renderer flag is set.
 // @fnv 0x00a98f60
+// pdb: NiParticleMeshes::UpdateWorldData | NiParticleMeshes.obj | fnv360_0721_beta, objrun, medium
+// pdb params: UpdateData
 void FUN_00a98f60::UpdateWorldData(NiUpdateData& kData)
 {
     A98F60AVObject::UpdateWorldData(kData);

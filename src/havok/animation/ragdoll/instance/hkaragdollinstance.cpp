@@ -344,6 +344,7 @@ struct RagdollOwnerStandIn_ce24 : RagdollInstance_ce24
                       Skeleton_ce24* skeleton);
 };
 
+// pdb: hkaRagdollInstance::hkaRagdollInstance | hkaRagdollInstance.obj | tesv_win, objrun_sim, low
 RagdollInstance_ce24* RagdollInstance_ce24::FUN_00ce2470(const hkArray_ce24<ReferenceObject*>& bodies,
                                                          const hkArray_ce24<ReferenceObject*>& constraints,
                                                          Skeleton_ce24* skeleton)
@@ -505,6 +506,7 @@ struct RagdollCopyOwner_9623 : FUN_00ce2510
 {
     void FUN_00962190(int a, int b, int c);
 };
+// pdb: hkaRagdollInstance::hkaRagdollInstance | hkaRagdollInstance.obj | tesv_win, call_gap, low
 FUN_00ce2510::FUN_00ce2510(int a, int b, int c, ObjectArray<int>* d) : m_vptr((m_6 = 1, &DAT_00e7c38c))
 {
     static_cast<RagdollCopyOwner_9623*>(this)->FUN_00962190(a, b, c);

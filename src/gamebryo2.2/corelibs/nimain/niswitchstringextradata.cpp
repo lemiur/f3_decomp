@@ -51,6 +51,7 @@ struct FUN_00a93750_shell
     void FUN_00a93750();
 };
 // @fnv 0x00a93750
+// pdb: NiSwitchStringExtraData::~NiSwitchStringExtraData | NiSwitchStringExtraData.obj | fnv360_0822_retail, objrun_prop, medium
 void FUN_00a93750_shell::FUN_00a93750()
 {
     m_pData = &DAT_0109ff64;
@@ -72,6 +73,7 @@ void __cdecl FUN_00a93750();
 
 // Calls FUN_00a93750, then frees this with _delete when flags has bit 0 set, and returns this.
 // @fnv 0x00a938b0
+// pdb: bhkPhantom::`scalar deleting destructor' | TESObjectREFR.obj | fnv360_0822_retail, vtable_prefix, high
 void* __thiscall NiSwitchStringExtraData::FUN_00a938b0(unsigned int flags)
 {
     FUN_00a93750();
@@ -94,6 +96,7 @@ struct S_00a918e0
     void* __thiscall FUN_00a918e0(unsigned int);
 };
 // @fnv 0x00a918e0
+// pdb: NiTArray<FaceGenUndo *,NiTMallocInterface<FaceGenUndo *> >::`scalar deleting destructor' | TESNPC.obj | fnv360_0822_retail, vtable, medium
 void* __thiscall S_00a918e0::FUN_00a918e0(unsigned int auiFlags)
 {
     void* v = f4;
@@ -143,6 +146,8 @@ struct FUN_00a93a60_shell
 
 // Appends viewer strings for the base object, m_uiSize, each m_ppcValue[i] and m_iIndex to the given string array.
 // @f3 0x0085f840 (community match, verified in this file)
+// pdb: NiSwitchStringExtraData::GetViewerStrings | NiSwitchStringExtraData.obj | fnv360_0822_retail, strset, low
+// pdb params: pStrings
 void FUN_00a93a60_shell::FUN_00a93a60(StrArr* apViewerStrings)
 {
     reinterpret_cast<A89C70Base*>(this)->GetViewerStrings(apViewerStrings);
@@ -256,6 +261,8 @@ class A93680Strings
 };
 
 // @fnv 0x00a93680
+// pdb: NiSwitchStringExtraData::IsEqual | NiSwitchStringExtraData.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pObject
 bool A93680Strings::Equals(A93680Strings* pkOther)
 {
     if (!pkOther)
@@ -296,6 +303,8 @@ void* __cdecl FUN_00aa1070(unsigned int size);
 void __cdecl FUN_00ec65a6(void* dst, unsigned int size, void* src);
 
 // @fnv 0x00a937a0
+// pdb: NiSwitchStringExtraData::CopyMembers | NiSwitchStringExtraData.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pDest, kCloning
 void StrListObj::CopyStringList(StrListObj* dst, void* arg2)
 {
     FUN_00a7b330(dst, arg2);
@@ -386,6 +395,8 @@ template <class T> __forceinline void ReadBinaryValue(NiStreamView& kStream, T& 
 }
 
 // @fnv 0x00a939d0
+// pdb: NiSwitchStringExtraData::SaveBinary | NiSwitchStringExtraData.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void NiExtraDataView::LoadFromStream(NiStreamView& kStream)
 {
     NiExtraData_SaveBinary(kStream);
@@ -421,6 +432,8 @@ struct SSE_Owner : NiSwitchStringExtraData
     void CopyStringList(SSE_Node*, unsigned int);
 };
 // @fnv 0x00a938d0
+// pdb: NiSwitchStringExtraData::CreateClone | NiSwitchStringExtraData.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kCloning
 SSE_Node* SSE_Owner::CreateNode(unsigned int arg)
 {
     SSE_Node* obj = new SSE_Node;
@@ -487,6 +500,8 @@ class LinkArrayExtraA939 : public NiExtraDataA939
 
 // Reads m_uiCount, allocates m_ppkObjects and loads each object via kStream, then reads m_uiValue1 from the underlying stream.
 // @fnv 0x00a93930
+// pdb: NiSwitchStringExtraData::LoadBinary | NiSwitchStringExtraData.obj | fnv360_0822_retail, caller_sim, medium, conflict (bridge: NiStringsExtraData::LoadBinary)
+// pdb params: kStream
 void LinkArrayExtraA939::FUN_00a93930(NiStreamA939& kStream)
 {
     FUN_00a7b4a0(kStream);

@@ -22,6 +22,8 @@ struct FUN_00dd90d0_cls
 };
 
 // @fnv 0x00dd90d0
+// pdb: hkIArchive::readRaw | hkIArchive.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: buf, nbytes
 void FUN_00dd90d0_cls::FUN_00dd90d0(int a)
 {
     m_08->Tail(a);
@@ -56,6 +58,7 @@ class hkWrapperDD90
 };
 
 // @fnv 0x00dd90e0
+// pdb: hkIArchive::isOk | hkIArchive.obj | fnv360_0822_retail, call_seq, medium
 hkResultDD90 hkWrapperDD90::GetStreamResult()
 {
     return m_stream->getResult();
@@ -99,6 +102,8 @@ static __forceinline void swapByte(unsigned char& low, unsigned char& high)
 }
 // Writes itemSize*itemCount bytes to the stream writer, then swaps byte order in-place for 2, 4, or 8-byte items when m_swapByteOrder is set.
 // @fnv 0x00dd8fe0
+// pdb: hkIArchive::readArrayGeneric | hkIArchive.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: array, elemsize, arraySize
 void DD8FE0_Stream::FUN_00dd8fe0(void* data, int itemSize, int itemCount)
 {
     m_pStreamWriter->Write(data, itemSize * itemCount);

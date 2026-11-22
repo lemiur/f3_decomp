@@ -281,6 +281,8 @@ struct FUN_006c8220 {
 struct ListForm53 { int unk00,unk04,unk08,unk0c,unk10,unk14; FUN_006c8220 list; FUN_006c8220* GetList() { return &list; } };
 inline unsigned char GetFormType53(TESForm* form) { return form->type; }
 template<> __forceinline BSStringT<char>::BSStringT():pString(0),sLen(0),sMaxLen(0) {}
+// pdb: Script::RemoveItemFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0053a480(void* p1,void* p2,TESObjectREFR* thisObj,void* p4,void* p5,void* p6,double* result,void* p8) {
  TESForm* pRemoveForm=0;
  TESBoundObject* pObject=0;

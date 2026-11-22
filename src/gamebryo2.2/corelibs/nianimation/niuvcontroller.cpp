@@ -40,6 +40,7 @@ struct FUN_00a45a90_shell : UVController_00a459f0
 
 // Reads fields at offsets 0x20, 0x28, 0x4a and 0x24 from the pointer at this+0x48 into the out params and returns the 0x24 value, or zeros if null.
 // @fnv 0x00a45a90
+// pdb: NiUVController::GetUTilingData | NiUVController.obj | tesv_win, hash, low
 int __thiscall FUN_00a45a90_shell::GetSomeValues(int* piValue1, int* piValue2, char* c)
 {
     UVData_00a459f0* p = m_spUVData;
@@ -73,6 +74,7 @@ struct FUN_00a459f0_shell : UVController_00a459f0
 };
 
 // @fnv 0x00a459f0
+// pdb: NiUVController::GetUOffsetData | NiUVController.obj | tesv_win, hash, low
 int __thiscall FUN_00a459f0_shell::GetDataFromMember(int* piValue1, int* piValue2, char* c)
 {
     UVData_00a459f0* p = m_spUVData;
@@ -99,6 +101,7 @@ struct FUN_00a45ae0_shell : UVController_00a459f0
 
 // Reads three ints and a byte from the object at this+0x48 into the out params and returns another int, or zeroes them if that pointer is null.
 // @fnv 0x00a45ae0
+// pdb: NiUVController::GetVTilingData | NiUVController.obj | tesv_win, hash, low
 int __thiscall FUN_00a45ae0_shell::GetSomePtrValues(int* piValue1, int* piValue2, char* c)
 {
     UVData_00a459f0* p = m_spUVData;
@@ -125,6 +128,7 @@ struct FUN_00a45a40_shell : UVController_00a459f0
 
 // Reads fields from the object at this+0x48 (offset 0x14) into the three out-params and returns q[1], or zeroes them and returns 0 when that pointer is null.
 // @fnv 0x00a45a40
+// pdb: NiUVController::GetVOffsetData | NiUVController.obj | tesv_win, hash, low
 int __thiscall FUN_00a45a40_shell::GetSomeData(int* piFirst, int* piSecond, char* c)
 {
     UVData_00a459f0* p = m_spUVData;
@@ -156,6 +160,7 @@ struct FUN_00a46000_shell
 };
 // Calls FUN_00a45b60, then if bit 0 of flags is set deletes this with size 0x50, and returns this.
 // @fnv 0x00a46000
+// pdb: BSTreeModel::`scalar deleting destructor' | BSTreeModel.obj | fnv360_0822_retail, vtable, medium
 void* __thiscall FUN_00a46000_shell::DestroyIfFlagged(unsigned int flags)
 {
     FUN_00a45b60();
@@ -208,6 +213,8 @@ struct MyCtrl : Base44
     void FUN_00a46070(MyStream* kStream);
 };
 // @fnv 0x00a46070
+// pdb: NiUVController::SaveBinary | NiUVController.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: kStream
 void MyCtrl::FUN_00a46070(MyStream* kStream)
 {
     Base44::FUN_00a6d730(kStream);
@@ -285,6 +292,7 @@ struct NiUVController : BasePad
     bool __thiscall FUN_00a45970(NiStream&);
 };
 // @fnv 0x00a45970
+// pdb: NiUVController::RegisterStreamables | NiUVController.obj | tesv_win, objrun_prop, low
 bool __thiscall NiUVController::FUN_00a45970(NiStream& kStream)
 {
     if (!FUN_00a6d0f0(kStream))
@@ -316,6 +324,8 @@ struct NiUVController
 };
 
 // @fnv 0x00a45cf0
+// pdb: NiUVController::Update | NiUVController.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: UpdateData
 void NiUVController::FUN_00a45cf0(NiUpdateData& UpdateData)
 {
     if (!m_TimeController.AdvanceController(UpdateData.fTime))
@@ -354,6 +364,7 @@ struct Holder_00a45fa0
 };
 // Releases the old m48 reference, stores p with an incremented refcount, resets m34/m38/m3c/m40, then calls FUN_00a45bc0.
 // @fnv 0x00a45fa0
+// pdb: NiUVController::`scalar deleting destructor' | NiUVController.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: NiUVController::SetUVData)
 void __thiscall Holder_00a45fa0::AssignRefObj(RefObj_00a45fa0* apRefObj)
 {
     if (m48 != apRefObj)
@@ -404,6 +415,7 @@ struct NiUVController : NiTimeController
 };
 // Links the controller to the stream, replacing its UV data pointer with the stream's object and updating reference counts.
 // @fnv 0x00a45910
+// pdb: NiUVController::LinkObject | NiUVController.obj | tesv_win, caller_sim, low
 void NiUVController::LinkUVData(NiStream& kStream)
 {
     NiTimeController::LinkObject(kStream);
@@ -471,6 +483,7 @@ struct HolderF
 };
 
 // @fnv 0x00a45b40
+// pdb: NiUVController::IsVertexController | NiUVController.obj | fnv360_0721_beta, objopen_prop, low, conflict (skyrim: NiUVController::SetTarget)
 void HolderF::ResetRefObject()
 {
     RefObjF* p = m48;
@@ -544,6 +557,7 @@ struct FUN_00a45b60 : BaseController
 
 // Destructor that releases the controller's shared owner reference via SharedRef::Reset.
 // @fnv 0x00a45b60
+// pdb: NiUVController::TargetIsRequiredType | NiUVController.obj | fnv360_0721_beta, objopen_prop, low, conflict (skyrim: NiUVController::~NiUVController)
 FUN_00a45b60::~FUN_00a45b60() throw()
 {
     owner.Reset();
@@ -599,6 +613,7 @@ struct SpawnedObject
 
 // Allocates and default-constructs a SpawnedObject, then returns the new instance.
 // @fnv 0x00a45f50
+// pdb: NiUVController::CreateObject | NiUVController.obj | fnv360_0822_retail, objrun, medium
 SpawnedObject* __cdecl FUN_00a45f50() throw()
 {
     SpawnedObject* p = new SpawnedObject();
@@ -633,6 +648,8 @@ struct MyUVController : MyCtrl
 };
 
 // @fnv 0x00a46020
+// pdb: NiUVController::LoadBinary | NiUVController.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void MyUVController::WriteToStream(MyStreamWriter* stream)
 {
     FUN_00a6d5e0(stream);
@@ -725,6 +742,8 @@ class A59A0Node : public A59A0Base
 };
 
 // @fnv 0x00a459a0
+// pdb: NiUVController::IsEqual | NiUVController.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pkObject
 bool A59A0Node::FUN_00a459a0(A59A0Base* pkObject)
 {
     A59A0Node* pkOther = (A59A0Node*)pkObject;
@@ -814,6 +833,8 @@ void __fastcall FUN_00a6d220(void* pObject);
 
 // Allocates a MyUVData, initialises it via FUN_00a6cfe0, copies m34/m38/m3C/m40/m44 and the m48 reference, and returns it.
 // @fnv 0x00a460c0
+// pdb: NiUVController::CreateClone | NiUVController.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: kCloning
 unsigned int* __thiscall MyNiUVController::CloneUVData(unsigned int flags)
 {
     MyUVData* pUVData = new MyUVData;
@@ -892,6 +913,7 @@ struct Holder
 // @f3 0x008bfd40 (community match, verified in this file)
 extern float DAT_00db9568;
 extern float DAT_00db7260;
+// pdb: NiUVController::~NiUVController | NiUVController.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: NiUVController::ResetKeyTimeExtrema)
 void __thiscall Holder::FUN_00a45bc0()
 {
     m14 = DAT_00db9568;
@@ -1086,6 +1108,7 @@ struct UVGeom
 
 // Applies animated UV offset and tiling to the target geometry's texture coordinates when m_bChanged is set.
 // @fnv 0x00a45d10
+// pdb: NiUVController::OnPreDisplay | NiUVController.obj | fnv360_0822_retail, objrun, medium
 void UVController::UpdateUVTransform()
 {
     if (!m_bChanged)

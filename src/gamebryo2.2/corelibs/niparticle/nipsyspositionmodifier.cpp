@@ -3,6 +3,7 @@
 #include "nipsyspositionmodifier_decls.h"
 
 // @fnv 0x00c31720
+// pdb: NiPSysModifier::NiPSysModifier | NiPSysModifier.obj | fnv360_1110_retail, objrun, high
 NiPSysPositionModifier::NiPSysPositionModifier()
 {
     m_kName = EmptyFS;
@@ -19,6 +20,7 @@ struct Helper
 };
 // Calls FUN_00c31750, then deletes this with size 0x18 when bit 0 of flags is set, and returns this.
 // @fnv 0x00c28ba0
+// pdb: bhkShapePhantom::`scalar deleting destructor' | TESObjectREFR.obj | fnv360_0822_retail, vtable_prefix, high
 void* Helper::DestroyIfFlagged(unsigned int flags)
 {
     FUN_00c31750();
@@ -125,6 +127,8 @@ struct FnvMod
 
 // Advances each particle position by its velocity times the elapsed time since its last update, then stores the new time.
 // @fnv 0x00c28bc0
+// pdb: NiPSysPositionModifier::Update | NiPSysPositionModifier.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: fTime, pkData
 void __stdcall IntegrateParticlePositions(float fTime, FnvMod* pMod)
 {
     pMod->Slot43();
@@ -195,6 +199,8 @@ class NiPSysModifier
     void FUN_00c28b50(NiStream& a1);
 };
 // @fnv 0x00c28b50
+// pdb: NiAmbientLight::IsEqual | NiAmbientLight.obj | fnv360_0822_retail, objrun_prop, high
+// pdb params: pObject
 void NiPSysModifier::FUN_00c28b50(NiStream& a1)
 {
     LoadBinary(a1);
@@ -211,6 +217,8 @@ void __cdecl NiAlphaAccumulator_RegisterStreamables()
 void __cdecl FUN_00c31950();
 
 // @fnv 0x00c28b70
+// pdb: BSMultiBoundOBB::LinkObject | BSMultiBoundOBB.obj | fnv360_0822_retail, vtable, high
+// pdb params: arStream
 void __cdecl FUN_00c28b70()
 {
     FUN_00c31950();

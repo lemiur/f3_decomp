@@ -60,6 +60,7 @@ struct NiPSysEmitterCtlrData
     void* Destroy(unsigned int);
 };
 // @fnv 0x00c2bc30
+// pdb: NiPSysEmitterCtlrData::`scalar deleting destructor' | NiPSysEmitterCtlrData.obj | fnv360_0822_retail, objrun, high
 void* NiPSysEmitterCtlrData::Destroy(unsigned int flags)
 {
     void* pkKeys = m_pkBirthRateKeys;
@@ -105,6 +106,8 @@ char* __cdecl FUN_00a7d510(char const*, unsigned int);
 char* __cdecl FUN_00a7d5e0(char const*, char const*);
 
 // @f3 0x00acc390 (community match, verified in this file)
+// pdb: NiPSysEmitterCtlrData::GetViewerStrings | NiPSysEmitterCtlrData.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FUN_00c2bf00_shell::AppendBirthRateKeys(StrArr* pkStrings)
 {
     unsigned int uiIndex;
@@ -185,6 +188,8 @@ struct S_00c2bab0
 extern bool(__cdecl* DAT_011f3ae0[])(unsigned char*, unsigned char*);
 
 // @fnv 0x00c2bab0
+// pdb: NiPSysEmitterCtlrData::IsEqual | NiPSysEmitterCtlrData.obj | fnv360_0822_retail, objrun_sim, high
+// pdb params: pkObject
 bool S_00c2bab0::Equals(S_00c2bab0* other)
 {
     if (!IsSameAs(other))

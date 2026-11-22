@@ -12,6 +12,7 @@ template <class T> BSStringT<T>::BSStringT()
 {
 }
 
+// pdb: BSFaceGenModel::BSFaceGenModel | BSFaceGenModel.obj | fnv360_0822_retail, call_gap, low
 TESIcon::TESIcon()
 {
     *(int*)((char*)this + 4) = 0;

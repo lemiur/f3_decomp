@@ -20,6 +20,7 @@ struct RWL
     void __thiscall FUN_0059acd0();
 };
 
+// pdb: TESAIForm::TESAIForm | TESAIForm.obj | fnv360_0822_retail, call_seq, high
 FUN_00cd06a0::FUN_00cd06a0()
 {
     m_p00 = &DAT_00dbc94c;

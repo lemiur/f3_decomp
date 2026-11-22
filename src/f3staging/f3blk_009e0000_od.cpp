@@ -28,6 +28,8 @@ struct FUN_009e1ed0_cls {
     char* FUN_009e1ed0(char* flag, unsigned int arg2, Ctx* ctx);
 };
 
+// pdb: hkpMoppBvTreeShape::castRayImpl | hkpMoppBvTreeShape.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: input, results
 char* FUN_009e1ed0_cls::FUN_009e1ed0(char* flag, unsigned int arg2, Ctx* ctx)
 {
     Frame frame;
@@ -119,6 +121,7 @@ struct Obj {
     Writer* w;
     int FUN_009e0430(unsigned char reg, float value);
 };
+// pdb: hkpConstraintConstructionKit::setLinearFriction | hkpConstraintConstructionKit.obj | tesv_win, objrun_open, low
 int Obj::FUN_009e0430(unsigned char reg, float value)
 {
     w->ops.pushBack(0x15);
@@ -164,6 +167,7 @@ inline void Copy(Vec4& d, const Vec4& s) { d.x = s.x; d.y = s.y; d.z = s.z; d.w 
 inline void CopyNeg(Vec4& d, const Vec4& s) { d.x = -s.x; d.y = -s.y; d.z = -s.z; d.w = -s.w; }
 inline const Vec4& At(const char* base, unsigned int off) { return *(const Vec4*)(base + off); }
 
+// pdb: buildJacobianFrom2dAngAtom | hkpBuildJacobianFromAtoms.obj | fnv360_0721_beta, objopen_prop, low
 static __declspec(noinline) void FUN_009f85c0(const Info* info, const char* base, int arg1, const Vec4* sources, int arg3)
 {
     unsigned int idx = info->type;
@@ -219,6 +223,7 @@ struct Block {
     float b;
 };
 void __cdecl FUN_00a4fb30(Block* block, int p1, int p2);
+// pdb: buildJacobianFromLinLimitAtom | hkpBuildJacobianFromAtoms.obj | fnv360_0822_retail, objrun, medium
 static __declspec(noinline) void FUN_009f9e20(Info* info, Frame* self, Frame* other, int p1, int p2)
 {
     Block block;
@@ -446,6 +451,8 @@ extern int DAT_011697f4;
 
 namespace S009f0d00_ns {
 
+// pdb: hkpSweptTransformDisplayViewer::entityAddedCallback | hkpSweptTransformDisplayViewer.obj | fnv360_0822_retail, objrun, medium
+// pdb params: entity
 void S009f0d00_Viewer::FUN_009f0d00(char* entity)
 {
     if (*(void**)(entity + 0x10) == 0)
@@ -570,6 +577,8 @@ public:
     void FUN_009e5870(const unsigned short* ids, int numIds, hkVector4* verticesOut) const;
 };
 
+// pdb: hkpCylinderShape::convertVertexIdsToVerticesImpl | hkpCylinderShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: ids, numIds, verticesOut
 void hkpCylinderShape::FUN_009e5870(const unsigned short* ids, int numIds, hkVector4* verticesOut) const
 {
     int i = numIds - 1;
@@ -1522,6 +1531,8 @@ struct S009f6cd0_Self {
 struct S009f6cd0_Outer : S009f6cd0_OuterBase, S009f6cd0_Self {
 };
 
+// pdb: hkpMidphaseViewer::postSimulationCallback | hkpMidphaseViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void S009f6cd0_Self::FUN_009f6cd0(S009f6cd0_Param* param)
 {
     S009f6cd0_timer(DAT_00e8132c);
@@ -2793,6 +2804,8 @@ struct S9f1730_Self {
 struct S9f1730_Viewer : S9f1730_OuterBase, S9f1730_Self {
 };
 
+// pdb: hkpSimulationIslandViewer::postSimulationCallback | hkpSimulationIslandViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void S9f1730_Self::FUN_009f1730(S9f1730_World* world)
 {
     S9f1730_timer(DAT_00e80c90);

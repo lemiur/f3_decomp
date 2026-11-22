@@ -52,6 +52,7 @@ struct FUN_00a99ed0 : NiProperty
     FUN_00a99ed0();
 };
 // @fnv 0x00a99ed0
+// pdb: NiFogProperty::NiFogProperty | BSFogProperty.obj | fnv360_0822_retail, call_seq, medium
 FUN_00a99ed0::FUN_00a99ed0()
 {
     m_uiObjectFlags = 0;
@@ -72,6 +73,8 @@ char* __cdecl NiSprintf(char*, unsigned int, const char*, ...);
 
 // Allocates a string of strlen(pcPrefix)+20 bytes and formats pcPrefix with the name of the given fog function.
 // @fnv 0x00a99e50
+// pdb: NiFogProperty::GetViewerString | NiFogProperty.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pcPrefix, eFunc
 char* FormatFogFunction(const char* pcPrefix, FogFunction eFunc)
 {
     char* pcString;
@@ -124,6 +127,8 @@ void* __cdecl operator new(unsigned int, void* p)
 }
 
 // @fnv 0x00a99f60
+// pdb: NiFogProperty::CreateClone | NiFogProperty.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCloning
 void* MyClass::FUN_00a99f60(int arg)
 {
     if (this->m_0c != 0)
@@ -175,6 +180,7 @@ struct NiFogProperty : NiProperty
 
 // Allocates memory for a NiFogProperty and constructs it in place, returning the new object or null on allocation failure.
 // @fnv 0x00a99fd0
+// pdb: NiFogProperty::CreateObject | NiFogProperty.obj | fnv360_0822_retail, objrun, medium
 NiFogProperty* __cdecl CreateNiFogProperty()
 {
     void* memory = FUN_00aa13e0(sizeof(NiFogProperty));
@@ -205,6 +211,8 @@ struct A9a030Fog : FUN_00a99ed0
 };
 
 // @fnv 0x00a9a030
+// pdb: NiFogProperty::IsEqual | NiFogProperty.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkObject
 bool __thiscall A9a030Fog::FUN_00a9a030(FUN_00a99ed0* other)
 {
     EqBase* base = reinterpret_cast<EqBase*>(this);
@@ -291,6 +299,8 @@ static __forceinline void QStreamRead(Reader* pReader, void* value, unsigned int
 {
     pReader->position += pReader->read(pReader, value, bytes, &uiSize, 1);
 }
+// pdb: NiFogProperty::LoadBinary | NiFogProperty.obj | fnv360_0822_retail, uconst, low
+// pdb params: kStream
 void NiPropertyData::LoadPropertyData(LoadStream* stream)
 {
     FUN_00825c70(stream);
@@ -393,6 +403,8 @@ struct FogViewer : PropertyBase
 };
 
 // @fnv 0x00a9a2a0
+// pdb: NiFogProperty::GetViewerStrings | NiFogProperty.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FogViewer::FUN_00a9a2a0(ViewerStrings* pViewerStrings)
 {
     GetViewerStringsBase(pViewerStrings);
@@ -512,6 +524,7 @@ template <class T> struct PtrRef
 };
 // Allocates a NiFogProperty and assigns it to DAT_011f5f3c through a reference-counting smart pointer.
 // @fnv 0x00a9a090
+// pdb: NiFogProperty::_SDMInit | NiFogProperty.obj | fnv360_0721_beta, objrun, medium
 void FUN_00a9a090()
 {
     PtrRef<Obj00a9a120> r(DAT_011f5f3c);

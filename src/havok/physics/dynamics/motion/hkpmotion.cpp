@@ -12,6 +12,7 @@ struct FUN_00c86400_Class
 };
 
 // @fnv 0x00c86400
+// pdb: hkpMotion::setTransform | hkpMotion.obj | tesv_win, objrun, medium
 void __thiscall FUN_00c86400_Class::FUN_00c86400(void* a)
 {
     SetMotionState(a, (char*)this + 0x10);
@@ -22,6 +23,8 @@ struct FUN_00c86420_Class
     void __thiscall FUN_00c86420(char a);
 };
 // @fnv 0x00c86420
+// pdb: hkpMotion::setDeactivationClass | hkpMotion.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: deactivationClass
 void __thiscall FUN_00c86420_Class::FUN_00c86420(char a)
 {
     ((char*)this)[0xbe] = a;
@@ -44,6 +47,8 @@ struct FUN_00c86330_Class
 
 // Computes the inverse of mass (0 if mass is 0) and passes it to the virtual function at vtable slot 4.
 // @fnv 0x00c86330
+// pdb: hkpMotion::setMass | hkpMotion.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: mass
 void __thiscall FUN_00c86330_Class::FUN_00c86330(float mass)
 {
     float invMass;
@@ -66,6 +71,7 @@ struct FUN_00c863a0_Class
     void __thiscall FUN_00c863a0(void* a);
 };
 // @fnv 0x00c863a0
+// pdb: hkpMotion::setPosition | hkpMotion.obj | tesv_win, objrun, medium
 void __thiscall FUN_00c863a0_Class::FUN_00c863a0(void* a)
 {
     FUN_00cf20d0(a, (char*)this + 0x10);
@@ -79,6 +85,7 @@ struct FUN_00c863c0_Class
 };
 
 // @fnv 0x00c863c0
+// pdb: hkpMotion::setRotation | hkpMotion.obj | tesv_win, caller_sim, low
 void __thiscall FUN_00c863c0_Class::FUN_00c863c0(void* a)
 {
     FUN_00cf2160(a, (char*)this + 0x10);
@@ -92,6 +99,8 @@ struct FUN_00c863e0_Class
 };
 
 // @fnv 0x00c863e0
+// pdb: hkpMotion::setPositionAndRotation | hkpMotion.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: position, rotation
 void FUN_00c863e0_Class::FUN_00c863e0(void* pFirst, void* pSecond)
 {
     FUN_00cf1f80(pFirst, pSecond, static_cast<void*>(reinterpret_cast<char*>(this) + 0x10));
@@ -111,6 +120,8 @@ struct FUN_00c86490_Class
 };
 
 // @fnv 0x00c86490
+// pdb: hkpMotion::approxTransformAt | hkpMotion.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: time, transformOut
 void FUN_00c86490_Class::SweepTransform(float value, void* result)
 {
     sweptTransform.Evaluate(value, result);
@@ -118,6 +129,7 @@ void FUN_00c86490_Class::SweepTransform(float value, void* result)
 
 int __cdecl ApplyDelta(int, int);
 // @fnv 0x00c86380
+// pdb: hkpMotion::setCenterOfMassInLocal | hkpMotion.obj | tesv_win, objrun, medium
 int __fastcall FUN_00c86380(unsigned int registerArg0, unsigned int registerArg1, unsigned int arg0)
 {
     unsigned int callResult0 = (unsigned int)ApplyDelta((int)arg0, (int)(registerArg0 + 16u));

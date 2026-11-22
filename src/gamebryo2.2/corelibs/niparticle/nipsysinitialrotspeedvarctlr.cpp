@@ -13,6 +13,7 @@ struct FUN_00c32d80
 };
 
 // @fnv 0x00c32d80
+// pdb: NiPSysModifierFloatCtlr::NiPSysModifierFloatCtlr | NiPSysModifierFloatCtlr.obj | tesv_win, uvref, medium
 FUN_00c32d80::FUN_00c32d80()
 {
     FUN_00c31260();
@@ -38,6 +39,7 @@ struct SpawnedHost
 
 // Allocates a 0x40-byte SpawnedCtlr, initialises it and its vtable, passes it to FUN_00c32de0 with a1, and returns it.
 // @fnv 0x00c29eb0
+// pdb: NiPSysInitialRotSpeedVarCtlr::CreateClone | NiPSysInitialRotSpeedVarCtlr.obj | tesv_win, caller_sim, low
 SpawnedCtlr* SpawnedHost::CreateSpawnedCtlr(void* a1)
 {
     SpawnedCtlr* obj = (SpawnedCtlr*)FUN_00aa13e0(0x40);

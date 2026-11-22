@@ -46,6 +46,8 @@ class FilterList
 };
 
 // @fnv 0x00e49cf0
+// pdb: hkpCollisionFilterList::isCollisionEnabled | hkpCollisionFilterList.obj | fnv360_0822_retail, vtable, high
+// pdb params: input, collectionBodyA, collectionBodyB, containerShapeA, containerShapeB, keyA, keyB
 hkBoolRet FilterList::FUN_00e49cf0(void* a1, void* a2, void* a3, void* a4, void* a5, void* a6, void* a7)
 {
     for (int i = m_kFilters.m_iElementCount - 1; i >= 0; --i)
@@ -98,6 +100,8 @@ struct FilterChain
 
 // Evaluates each filter predicate from last to first and returns false as soon as one is disabled, otherwise true.
 // @fnv 0x00e49d60
+// pdb: hkpCollisionFilterList::isCollisionEnabled | hkpCollisionFilterList.obj | fnv360_0822_retail, vtable, high
+// pdb params: a, collidableB
 CheckResult FilterChain::EvaluateAllFilters(int first, int second)
 {
     for (int index = filterCount - 1; index >= 0; --index)
@@ -184,6 +188,8 @@ class CollisionFilterList9BC0
 
 // Returns true if every filter in m_kFilters reports that collision between a and b is enabled, otherwise false.
 // @fnv 0x00e49bc0
+// pdb: hkpCollisionFilterList::isCollisionEnabled | hkpCollisionFilterList.obj | fnv360_0822_retail, vtable, high
+// pdb params: a, b
 hkBool9BC0 CollisionFilterList9BC0::FUN_00e49bc0(const CollidableA9BC0& a, const CollidableB9BC0& b) const
 {
     for (int i = m_kFilters.GetLogicalSize() - 1; i >= 0; i--)
@@ -259,6 +265,8 @@ class FilterList9C20
 };
 // Returns true only if every filter in m_kFilters reports IsCollisionEnabled true for the given arguments.
 // @fnv 0x00e49c20
+// pdb: hkpCollisionFilterList::isCollisionEnabled | hkpCollisionFilterList.obj | fnv360_0822_retail, vtable, high
+// pdb params: input, a, b, bContainer, bKey
 hkBool9C20 FilterList9C20::FUN_00e49c20(const void* p0, const void* p1, const void* p2, const void* p3,
                                         const void* p4) const
 {
@@ -337,6 +345,8 @@ class FilterList9C90
 };
 // Returns true only if every filter in m_kFilters reports IsCollisionEnabled true for the given arguments.
 // @fnv 0x00e49c90
+// pdb: hkpCollisionFilterList::isCollisionEnabled | hkpCollisionFilterList.obj | fnv360_0822_retail, vtable, high
+// pdb params: aInput, bShape, bContainer, bKey
 hkBool9C90 FilterList9C90::FUN_00e49c90(const void* p0, const void* p1, const void* p2, const void* p3) const
 {
     for (int i = m_kFilters.GetLogicalSize() - 1; i >= 0; i--)
@@ -453,6 +463,8 @@ __forceinline void Assign(FilterArrayE49& dst, const FilterArrayE49& src)
     FilterArrayE49::CopyItems(dst.data, src.data, n);
 }
 }
+// pdb: hkpCollisionFilterList::hkpCollisionFilterList | hkpCollisionFilterList.obj | fnv360_0721_beta, objrun, high
+// pdb params: collisionFilters
 FUN_00e49e50::FUN_00e49e50(const FilterArrayE49& source) throw()
 {
     type = 3;
@@ -587,6 +599,7 @@ struct FUN_00a779f0 : S00a779f0_CollisionFilter
     virtual ~FUN_00a779f0() throw();
     S00a779f0_Array<S00a779f0_CollisionFilter*> filters;
 };
+// pdb: hkpCollisionFilterList::hkpCollisionFilterList | hkpCollisionFilterList.obj | tesv_win, hash, low
 FUN_00a779f0::FUN_00a779f0() throw()
 {
 }

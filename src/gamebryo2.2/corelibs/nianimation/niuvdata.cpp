@@ -15,6 +15,8 @@ struct S45280
     void FUN_00a45280(void* keys, unsigned int count, int type);
 };
 // @fnv 0x00a45280
+// pdb: NiUVData::ReplaceVOffsetAnim | NiUVData.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: pkKeys, uiNumKeys, eType
 void S45280::FUN_00a45280(void* keys, unsigned int count, int type)
 {
     void* oldKeys = *(void**)((char*)this + 0x18);
@@ -53,6 +55,8 @@ struct FUN_00a45340_shell
 
 // Releases the previous key data, then stores the new keys, count and type (or clears them when keys or count is null/zero).
 // @fnv 0x00a45340
+// pdb: NiUVData::ReplaceVTilingAnim | NiUVData.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: pkKeys, uiNumKeys, eType
 void FUN_00a45340_shell::FUN_00a45340(void* keys, unsigned int count, unsigned int type)
 {
     if (m_pKeyArray)
@@ -94,6 +98,8 @@ struct FUN_00a45220_shell
 
 // Releases the current key array, then stores the new keys, count and type (or clears them when keys or numKeys is null/zero).
 // @fnv 0x00a45220
+// pdb: NiUVData::ReplaceUOffsetAnim | NiUVData.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: pkKeys, uiNumKeys, eType
 void FUN_00a45220_shell::FUN_00a45220(TimedAnimationKey* keys, unsigned int numKeys, unsigned int type)
 {
     if (m_pKeyArray)
@@ -129,6 +135,8 @@ struct FUN_00a452e0_shell
 };
 // Releases the previous key array, then stores the new keys, count and type (or clears them when keys or count is null/zero).
 // @fnv 0x00a452e0
+// pdb: NiUVData::ReplaceUTilingAnim | NiUVData.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: pkKeys, uiNumKeys, eType
 void FUN_00a452e0_shell::FUN_00a452e0(void* keys, unsigned int count, unsigned int type)
 {
     if (m_pKeyArray)
@@ -159,6 +167,7 @@ struct NiRefObject
 
 // Sets the vtable, releases the four pointer members via DAT_011f38a0 if non-null, then calls the NiRefObject destructor.
 // @fnv 0x00a45020
+// pdb: NiUVData::~NiUVData | NiUVData.obj | fnv360_0822_retail, objrun, medium
 void NiUVData::Destructor()
 {
     *(void**)this = (void*)&DAT_01097f84;

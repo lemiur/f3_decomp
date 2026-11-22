@@ -34,6 +34,7 @@ struct FUN_00a3ca10 : NiInterpolator
 };
 
 // @fnv 0x00a3ca10
+// pdb: NiKeyBasedInterpolator::NiKeyBasedInterpolator | NiKeyBasedInterpolator.obj | tesv_win, call_seq, medium
 FUN_00a3ca10::FUN_00a3ca10()
 {
     *reinterpret_cast<void**>(this) = &_DAT_01097054;
@@ -48,6 +49,7 @@ struct NiKeyBasedInterpolator
     NiKeyBasedInterpolator* __thiscall FUN_00a3ca50(unsigned int flags);
 };
 // @fnv 0x00a3ca50
+// pdb: NiTask::`scalar deleting destructor' | BSTECreateTask.obj | fnv360_0822_retail, vtable, medium
 NiKeyBasedInterpolator* __thiscall NiKeyBasedInterpolator::FUN_00a3ca50(unsigned int flags)
 {
     m_pVTable = &DAT_01097054;
@@ -97,6 +99,8 @@ struct NiKeyBasedInterpolator : public NiInterpolator
 char* _FUN_00a7d330(const char*);
 extern const char* _DAT_011f3740;
 // @fnv 0x00a3cbf0
+// pdb: NiScreenElements::GetViewerStrings | NiScreenElements.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: pkStrings
 void NiKeyBasedInterpolator::FUN_00a3cbf0(StrArr* pkStrings)
 {
     NiInterpolator::FUN_00a570b0(pkStrings);

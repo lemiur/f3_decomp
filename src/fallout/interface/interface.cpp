@@ -763,6 +763,7 @@ struct EventState {
 };
 extern EventState* DAT_01075b24;
 void __cdecl FUN_00bf3580(int);
+// pdb: Interface::SetFirstChanceTextureRelease | Interface.obj | fnv360_0822_retail, call_gap, medium
 void FUN_00704bc0() {
     if (DAT_01075b24 && DAT_01075b24->enabled) {
         DAT_01075b24->pending = 1;
@@ -1739,6 +1740,8 @@ struct F3Buffer_61a210
     void FUN_006e1830(void* data, unsigned size, int flags);
 };
 
+// pdb: Interface::SaveGame | Interface.obj | fnv360_0822_debug, call_seq, medium
+// pdb params: apSaveGameBuffer
 void FUN_007066d0(Buffer* buffer_)
 {
     F3Buffer_61a210* buffer = (F3Buffer_61a210*)buffer_;

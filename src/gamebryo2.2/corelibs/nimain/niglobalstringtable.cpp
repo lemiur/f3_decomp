@@ -9,6 +9,8 @@
 #pragma optimize("y", on)
 // Looks up or allocates a reference-counted copy of s in the global string table under a critical section and returns the string pointer.
 // @f3 0x008242a0 (community match, verified in this file)
+// pdb: NiGlobalStringTable::AddString | NiGlobalStringTable.obj | fnv360_0721_beta, udata, medium, conflict (skyrim: BSFixedString::BSFixedString)
+// pdb params: pcString
 __pragma(intrinsic(strlen))
 
 char* NiGlobalStringTable::AddString(const char* s)

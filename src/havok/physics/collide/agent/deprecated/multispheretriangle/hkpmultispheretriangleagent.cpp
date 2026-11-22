@@ -101,6 +101,8 @@ struct CpuObject
 };
 // Builds a CpuCallData from fourth, DAT_0104da48 and DAT_010ce7fc, then forwards second, first and third to FUN_00d38390.
 // @fnv 0x00d38e90
+// pdb: hkpSymmetricAgentLinearCast<hkpMultiSphereTriangleAgent>::getClosestPoints | hkpMultiSphereTriangleAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void CpuObject::FUN_00d38e90(void* first, void* second, unsigned int third, unsigned int fourth)
 {
     CpuCallData data;
@@ -176,6 +178,8 @@ struct Operation
 
 // Initialises a CallbackState with the given context and vtable, then calls FUN_00d37ed0 with the reordered arguments and the callback.
 // @fnv 0x00d38a80
+// pdb: hkpSymmetricAgentLinearCast<hkpMultiSphereTriangleAgent>::getPenetrations | hkpMultiSphereTriangleAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void Operation::FUN_00d38a80(unsigned first, unsigned second, unsigned third, unsigned context)
 {
     CallbackState callback;
@@ -206,6 +210,8 @@ extern char unk_10ce7fc[];
 void __cdecl FUN_00d386c0(int unk04, int unk08, int unk0c, FUN_00d38ed0_Local* unk10);
 
 // @fnv 0x00d38ed0
+// pdb: hkpSymmetricAgentLinearCast<hkpMultiSphereTriangleAgent>::staticGetClosestPoints | hkpMultiSphereTriangleAgent.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_00d38ed0(int aiArg1, int aiArg2, int aiArg3, int aiArg4)
 {
     FUN_00d38ed0_Local local;

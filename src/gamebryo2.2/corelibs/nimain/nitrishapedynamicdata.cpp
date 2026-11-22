@@ -14,6 +14,8 @@ struct NiTriShapeDynamicData
 };
 
 // @fnv 0x00a81730
+// pdb: NiTriShapeDynamicData::GetStripData | NiTriShapeDynamicData.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: usStrips, pusStripLengths, pusTriList, uiStripLengthSum
 void __thiscall NiTriShapeDynamicData::FUN_00a81730(unsigned short& usStrips, const unsigned short*& pusStripLengths,
                                                     const unsigned short*& pusTriList, unsigned int& uiStripLengthSum)
 {
@@ -34,6 +36,8 @@ struct NiTriShapeDynamicData
 };
 
 // @fnv 0x00a81820
+// pdb: NiTriShapeDynamicData::SetActiveTriangleCount | NiTriShapeDynamicData.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: usActiveTriangles
 void __thiscall NiTriShapeDynamicData::FUN_00a81820(unsigned short usActiveTriangles)
 {
     m_usActiveTriangles = usActiveTriangles;
@@ -53,6 +57,8 @@ struct NiTriShapeDynamicDataShell : NiTriShapeData
 };
 // Compares this shape data with another via FUN_00a7b7e0 and checks that the active vertex and triangle counts match.
 // @fnv 0x00a817c0
+// pdb: NiTriShapeDynamicData::IsEqual | NiTriShapeDynamicData.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: NiTriStripsDynamicData::IsEqual)
+// pdb params: pkObject
 bool NiTriShapeDynamicDataShell::FUN_00a817c0(const NiTriShapeDynamicDataShell* other)
 {
     if (FUN_00a7b7e0(other) && m_usActiveVertices == other->m_usActiveVertices &&
@@ -67,6 +73,8 @@ struct NiTriShapeDynamicData_shell : NiTriShapeDynamicData
 };
 
 // @fnv 0x00a81810
+// pdb: NiTriShapeDynamicData::SetActiveVertexCount | NiTriShapeDynamicData.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: usActiveVertices
 void NiTriShapeDynamicData_shell::FUN_00a81810(unsigned short usActiveVertices)
 {
     m_usActiveVertices = usActiveVertices;
@@ -119,6 +127,8 @@ struct FUN_00a818b0_cls
 };
 // Calls NiTriShapeData_SaveBinary, then writes the active vertex and triangle counts to the stream's output stream.
 // @fnv 0x00a818b0
+// pdb: NiTriShapeDynamicData::SaveBinary | NiTriShapeDynamicData.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: kStream
 void FUN_00a818b0_cls::FUN_00a818b0(void* pOther)
 {
     NiStream_00a818b0* pObj = (NiStream_00a818b0*)pOther;
@@ -189,6 +199,8 @@ struct FUN_00a81910_cls
 
 // Calls AppendTriListInfo, then appends the result of FUN_00a7d330(g_011f5af4) and two named values m_usActiveVertices and m_usActiveTriangles to the array.
 // @f3 0x0084c000 (community match, verified in this file)
+// pdb: NiTriShapeDynamicData::GetViewerStrings | NiTriShapeDynamicData.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkStrings
 void FUN_00a81910_cls::AddActiveCounts(NiArr* a)
 {
     AppendTriListInfo(a);
@@ -226,6 +238,7 @@ struct FUN_00a81710_cls
     unsigned short FUN_00a81710();
 };
 // @fnv 0x00a81710
+// pdb: NiTriShapeDynamicData::GetActiveVertexCount | NiTriShapeDynamicData.obj | fnv360_0822_retail, objrun_open, low
 unsigned short FUN_00a81710_cls::FUN_00a81710()
 {
     return m_58;
@@ -261,6 +274,7 @@ struct A81720Owner
 };
 
 // @fnv 0x00a81720
+// pdb: NiTriShapeDynamicData::GetActiveTriangleCount | NiTriShapeDynamicData.obj | fnv360_0822_retail, objrun_open, low
 unsigned short A81720Owner::FUN_00a81720()
 {
     return unk5a;
@@ -462,6 +476,8 @@ static __forceinline void ReadBytes(Reader* bin, void* v, unsigned int bytes)
     bin->m_uiBytesRead += bin->Read(v, bytes, &size, 1);
 }
 // @fnv 0x00a81850
+// pdb: NiTriShapeDynamicData::LoadBinary | NiTriShapeDynamicData.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: kStream
 void Dynamic::FUN_00a81850(Stream* pStream)
 {
     Stream* s = pStream;

@@ -6019,6 +6019,7 @@ void __cdecl FUN_00a27d60(float t, Spl_a28060_Key* a, Spl_a28060_Key* b, Spl_a28
 void __cdecl FUN_00a27e40(float t, Spl_a28060_Key* a, Spl_a28060_Key* b, Spl_a28060_Pt* out);
 
 // @fnv 0x00a28060
+// pdb: NiBezPosKey::ComputeMaxCurvature | NiBezPosKey.obj | tesv_win, objrun_prop, low
 float __cdecl FUN_00a28060(Spl_a28060_Key* keys, int count)
 {
     float fScaledValue = 0.0f;

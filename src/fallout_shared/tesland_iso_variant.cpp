@@ -64,6 +64,8 @@ struct LandscapeSpecularView
                       unsigned char f, unsigned char g, unsigned char h, unsigned char i, unsigned char j);
 };
 // @fnv 0x00b66640
+// pdb: BSShaderPPLightingProperty::SetLandscapeSpecularExponents | BSShaderPPLightingProperty.obj | fnv360_0822_debug, call_gap_sim, medium
+// pdb params: aucDefSpec, aucSpec0, aucSpec1, aucSpec2, aucSpec3, aucSpec4, aucSpec5, aucSpec6, aucSpec7, aucSpec8
 void LandscapeSpecularView::FUN_00b66640(unsigned char a, unsigned char b, unsigned char c, unsigned char d,
                                          unsigned char e, unsigned char f, unsigned char g, unsigned char h,
                                          unsigned char i, unsigned char j)
@@ -895,6 +897,7 @@ class MapIteration1973
         pos = 0;
     }
 };
+// pdb: NiXenonRenderer::PerformPrecache | NiXenonRenderer.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: NiDX9Renderer::PerformPrecache)
 void Mgr_e74120::FUN_00e74120()
 {
     EnterCriticalSection(&cs80);
@@ -1217,6 +1220,8 @@ struct MyPool
 extern MyPool DAT_01090a78;
 extern int DAT_0116f440;
 
+// pdb: TallGrassShaderProperty::RemoveFromTerrainChunk | TallGrassShaderProperty.obj | fnv360_0822_retail, call_gap, low
+// pdb params: alTerrainChunkSeed
 void FUN_00b61370(const char* key)
 {
     TlsGuard guard;

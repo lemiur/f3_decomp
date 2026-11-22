@@ -47,6 +47,7 @@ inline void Rel(NiRefObject2* o)
 // @f3 0x008410a0 (community match, verified in this file)
 struct RefCounted;
 extern RefCounted* DAT_012003f4;
+// pdb: NiImageConverter::_SDMInit | NiImageConverter.obj | fnv360_0822_retail, call_gap, high
 void CreateImageConverter()
 {
     NiRefObject2* p = new NiImageConverter2();
@@ -85,6 +86,7 @@ struct VTable_FUN_00a76d40
 };
 
 // @fnv 0x00a76d40
+// pdb: NiDevImageConverter::IsASupportedMipmapGenerationFormat | NiDevImageConverter.obj | tesv_win, vtable, medium
 bool __fastcall FUN_00a76d40(const VTable_FUN_00a76d40* pThis, int, const NiPixelFormat& kSrcFmt)
 {
     if (pThis->v20(kSrcFmt) || pThis->v24(kSrcFmt))
@@ -135,6 +137,8 @@ struct FUN_00a76890_eq
 };
 
 // @fnv 0x00a76890
+// pdb: NiImageConverter::CanConvertPixelData | NiImageConverter.obj | fnv360_0822_retail, objrun, high
+// pdb params: kSrcFmt, kDestFmt
 bool __stdcall ArePixelFormatsEqual(void* apFormatA, void* apFormatB)
 {
     NiPixelFormat& a = *(NiPixelFormat*)apFormatA;
@@ -160,6 +164,8 @@ int strcpy_s(char*, unsigned int, const char*);
 extern const char* DAT_011f4a78;
 extern char* EmptyFS;
 // @fnv 0x00a76960
+// pdb: NiImageConverter::ConvertFilenameToPlatformSpecific | NiImageConverter.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: kPath, kPlatformSpecificPath
 void FUN_00a76960(char** apszSource, char** apszDest)
 {
     if (DAT_011f4a78)
@@ -427,6 +433,8 @@ class Owner766
 
 // Builds a path from pcFile, checks the loader can load it, opens the file read-only, and delegates to the loader's Load, deleting the file handle.
 // @fnv 0x00a766d0
+// pdb: NiImageConverter::ReadImageFileInfo | NiImageConverter.obj | fnv360_0822_retail, objrun, high
+// pdb params: pcFilename, kFmt, bMipmap, uiWidth, uiHeight, uiNumFaces
 bool Owner766::LoadFile(const char* pcFile, void* p2, void* p3, void* p4, void* p5, void* p6)
 {
     FUN_00aa27d0 kPath(pcFile);
@@ -486,6 +494,8 @@ void __cdecl FUN_00a76d70(unsigned int, unsigned int, unsigned int, unsigned cha
                           PixelFormatBitLayout const&, unsigned char const*, PixelFormatBitLayout const&);
 
 // @fnv 0x00a76e90
+// pdb: VampirismEffect::CopyData | VampirismEffect.obj | fnv360_0721_retail, vtable, medium
+// pdb params: apDestination
 void __cdecl FUN_00a76e90(unsigned int a, unsigned int b, unsigned int c, unsigned char* d, NiPalette const* e,
                           PixelFormatBitLayout const& f, unsigned char const* g, PixelFormatBitLayout const& h)
 {
@@ -495,6 +505,8 @@ void __cdecl FUN_00a76e90(unsigned int a, unsigned int b, unsigned int c, unsign
 void __cdecl BuildFullPath(void);
 
 // @fnv 0x00aa29d0
+// pdb: PlayerMover::InitLoadGame | PlayerMover.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: apLoadGameBuffer
 void __cdecl FUN_00aa29d0(void)
 {
     BuildFullPath();
@@ -524,6 +536,8 @@ struct FileNameComponents
 
 // Populates a buffer from pcPath, setting its extension from DAT_011f4a78 when that value is non-null.
 // @fnv 0x00a768b0
+// pdb: NiImageConverter::ConvertFilenameToPlatformSpecific | NiImageConverter.obj | fnv360_0822_retail, call_gap, low
+// pdb params: pcPath
 char* GetPathWithExtension(const char* pcPath)
 {
     char* pcDest = (char*)_NiMalloc(0x104);
@@ -640,6 +654,8 @@ struct ImageOwner
 };
 // Loads an image from a file path using the loader, returning the result or null on failure.
 // @fnv 0x00a767c0
+// pdb: NiImageConverter::ReadImageFile | NiImageConverter.obj | fnv360_0822_retail, objrun, high
+// pdb params: pcFilename, pkOptDest, apFile
 ImageResult* ImageOwner::LoadImage(const char* apPath, ImageResult* destination, InputFile* apInputFile)
 {
 

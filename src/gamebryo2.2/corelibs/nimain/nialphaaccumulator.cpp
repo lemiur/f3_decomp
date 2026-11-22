@@ -4,6 +4,7 @@
 
 // Constructs the accumulator: sets the vtable pointer and zeroes the list count, head, tail and the remaining members.
 // @fnv 0x00aa0f00
+// pdb: NiBackToFrontAccumulator::NiBackToFrontAccumulator | NiBackToFrontAccumulator.obj | fnv360_0822_retail, call_seq, medium
 NiAlphaAccumulator::NiAlphaAccumulator()
 {
     *(volatile unsigned int*)this = (unsigned int)&kVtbl_NiBackToFrontAccumulator;
@@ -39,6 +40,8 @@ struct DummyObj
 };
 
 // @fnv 0x00a433b0
+// pdb: BSTreadTransfInterpolator::RegisterStreamables | BSTreadTransfInterpolator.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arStream
 DummyObj* __fastcall InitFromGlobals(DummyObj* pThis)
 {
     pThis->f00 = DAT_011a8400;
@@ -66,6 +69,8 @@ struct FUN_00a43350_shell
     unsigned int FUN_00a43350(unsigned short usChannel);
 };
 // @fnv 0x00a43350
+// pdb: BSTreadTransfInterpolator::GetKeyContent | BSTreadTransfInterpolator.obj | fnv360_0822_retail, objrun_sim, medium
+// pdb params: usChannel
 unsigned int FUN_00a43350_shell::FUN_00a43350(unsigned short usChannel)
 {
     return usChannel ? 6 : 0;
@@ -145,6 +150,8 @@ struct FUN_00a43450_shell : FUN_00aa0ad0_base
 };
 // Calls the base register, then registers each link's name string and the data object's streamables with the stream; returns the base result.
 // @fnv 0x00a43450
+// pdb: BSTreadTransfInterpolator::Update | BSTreadTransfInterpolator.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: BSTreadTransfInterpolator::RegisterStreamables)
+// pdb params: afTime, apInterpTarget, arValue
 bool FUN_00a43450_shell::FUN_00a43450(FUN_00a43450_stream* arStream)
 {
     bool bret = FUN_00aa0ad0(arStream);
@@ -175,6 +182,8 @@ struct FUN_00aa0ae0_stub
     char FUN_00aa0ae0(NiObject* pkObject);
 };
 // @fnv 0x00a9b510
+// pdb: NiBSplineColorInterpolator::RegisterStreamables | NiBSplineColorInterpolator.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: kStream
 bool FUN_00a9b510_shell::FUN_00a9b510(NiObject* pkObject)
 {
     bool b = ((FUN_00aa0ae0_stub*)this)->FUN_00aa0ae0(pkObject) != 0;
@@ -235,6 +244,7 @@ struct Derived_a43370 : Base1_a43370
 
 // Allocates and default-constructs a Derived_a43370 object via its operator new and returns the pointer.
 // @fnv 0x00a43370
+// pdb: BSTreadTransfInterpolator::CreateObject | BSTreadTransfInterpolator.obj | fnv360_0822_retail, objrun, high
 Derived_a43370* __cdecl CreateDerivedA43370()
 {
     return new Derived_a43370();
@@ -367,6 +377,8 @@ struct FUN_00a9b850_shell : public NiAlphaAccumulator
 };
 
 // @fnv 0x00a9b850
+// pdb: NiAlphaAccumulator::RegisterObject | NiAlphaAccumulator.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apGeometry
 bool FUN_00a9b850_shell::FUN_00a9b850(FUN_00a9b850_Obj* pObject)
 {
     FUN_00a9b850_Prop* p = pObject->m9c;
@@ -383,6 +395,8 @@ bool FUN_00a9b850_shell::FUN_00a9b850(FUN_00a9b850_Obj* pObject)
 
 void FUN_00a95ca0();
 // @fnv 0x00a43330
+// pdb: MagicItemForm::SetAltered | EnchantmentItem.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: abValue
 void FUN_00a43330()
 {
     FUN_00a95ca0();
@@ -397,6 +411,7 @@ struct FUN_00a43340 : C8CCC0Base
     bool IsEqual(const FUN_00a43340&);
 };
 // @fnv 0x00a43340
+// pdb: BGSBodyPartData::ClearData | BGSBodyPartData.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: BGSBodyPartData::`vector deleting destructor'`adjustor{40}')
 bool FUN_00a43340::IsEqual(const FUN_00a43340& apObject)
 {
     return C8CCC0Base::IsEqual(apObject);
@@ -844,6 +859,8 @@ struct S00a9b790_Acc : NiAlphaAccumulator
     void FUN_00a9b790(S00a9b790_NiVisibleArray& kArray);
 };
 // @fnv 0x00a9b790
+// pdb: NiAlphaAccumulator::RegisterObjectArray | NiAlphaAccumulator.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kArray
 void S00a9b790_Acc::FUN_00a9b790(S00a9b790_NiVisibleArray& kArray)
 {
     ((S00a9b790_VNiAlphaAccumulator*)this)->Body(kArray);

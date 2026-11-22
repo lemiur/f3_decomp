@@ -313,6 +313,8 @@ struct S_00aff060_Fields
     S_00aff060_Target* unk24;
 };
 
+// pdb: ModelLoader::GetLoadedFileFromMap | ModelLoader.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apFileName
 int S_00aff060_Class::FUN_00aff060(void* a1)
 {
     S_00aff060_Fields* self = reinterpret_cast<S_00aff060_Fields*>(this);

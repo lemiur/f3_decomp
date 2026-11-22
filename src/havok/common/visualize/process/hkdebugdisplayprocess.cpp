@@ -25,6 +25,8 @@ struct Interface
 };
 // Retrieves the Owner pointer stored 8 bytes before this Interface and forwards all seven arguments to its forward method.
 // @fnv 0x00ddc9c0
+// pdb: hkDebugDisplayProcess::updateCamera | hkDebugDisplayProcess.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: from, to, up, nearPlane, farPlane, fov, name
 void Interface::ForwardToOwner(unsigned int a, unsigned int b, unsigned int c, float d, float e, float f,
                                unsigned int g)
 {
@@ -85,6 +87,7 @@ extern char FUN_00e808e0;
 extern char FUN_00dcc494;
 extern ProcessManager* DAT_010f323c;
 
+// pdb: hkDebugDisplayProcess::~hkDebugDisplayProcess | hkDebugDisplayProcess.obj | fnv360_0822_retail, call_seq, medium
 void Process::FUN_00ddcb50()
 {
     vftable = &DAT_00e86e68;
@@ -137,6 +140,7 @@ struct S_00ddcb90_RefObj
 namespace fnv_00ddcbe0 {
 extern int DAT_01269cdc;
 // @fnv 0x00ddcbe0
+// pdb: hkpPhantomDisplayViewer::getProcessTag | hkpPhantomDisplayViewer.obj | fnv360_0822_retail, vtable, medium
 int FUN_00ddcbe0()
 {
     return DAT_01269cdc;
@@ -193,6 +197,8 @@ class S_00ddc960_cls
 };
 
 // @fnv 0x00ddc960
+// pdb: hkDebugDisplayProcess::setGeometryColor | hkDebugDisplayProcess.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: color, id, tag
 int S_00ddc960_cls::ForwardToTarget(int aiArg1, int aiArg2, unsigned int c)
 {
     OwnerHolder* h = (OwnerHolder*)((char*)this - 8);
@@ -246,6 +252,8 @@ struct S_00ddc8e0_Cls
     int ForwardToOwnerVirtual(int a, int b, int c, int d);
 };
 // @fnv 0x00ddc8e0
+// pdb: hkDebugDisplayProcess::addGeometry | hkDebugDisplayProcess.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: geometries, transform, id, tag, shapeIdHint
 int S_00ddc8e0_Cls::ForwardToOwnerVirtual(int aiArg1, int aiArg2, int aiArg3, int aiArg4)
 {
     S_00ddc8e0_Owner* pOwner = *(S_00ddc8e0_Owner**)((char*)this - 8);
@@ -283,6 +291,8 @@ struct ForwarderDDCA : public ForwarderBaseDDCA, public ForwarderInterfaceDDCA
 };
 
 // @fnv 0x00ddca10
+// pdb: hkDebugDisplayProcess::displayLine | hkDebugDisplayProcess.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: start, end, color, id, tag
 SinkDDCA* ForwarderInterfaceDDCA::FUN_00ddca10(int aArg1, int aArg2, int aArg3, int aArg4)
 {
     SinkDDCA* pkDelegate =
@@ -369,6 +379,8 @@ class FUN_00ddc900_cls
 };
 
 // @fnv 0x00ddc900
+// pdb: hkDebugDisplayProcess::addGeometryInstance | hkDebugDisplayProcess.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: instID, transform, id, tag, shapeIdHint
 void FUN_00ddc900_cls::FUN_00ddc900(int a, int b, int c, unsigned int d)
 {
     FNVHolder* h = (FNVHolder*)((char*)this - 8);
@@ -437,6 +449,8 @@ class FUN_00ddc980_cls
 };
 
 // @fnv 0x00ddc980
+// pdb: hkDebugDisplayProcess::updateGeometry | hkDebugDisplayProcess.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: transform, id, tag
 void FUN_00ddc980_cls::FUN_00ddc980(int aArg1, int aArg2, int aArg3)
 {
     FNVHolder* h = (FNVHolder*)((char*)this - 8);
@@ -468,6 +482,8 @@ class FUN_00ddc9a0_cls
     void FUN_00ddc9a0(int a, unsigned int b);
 };
 // @fnv 0x00ddc9a0
+// pdb: hkDebugDisplayProcess::removeGeometry | hkDebugDisplayProcess.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: id, tag, shapeIdHint
 void FUN_00ddc9a0_cls::FUN_00ddc9a0(int aiArg, unsigned int auiParam)
 {
     FNVTarget* t = *(FNVTarget**)((char*)this - 8);
@@ -511,6 +527,8 @@ class FUN_00ddca30_cls
 };
 
 // @fnv 0x00ddca30
+// pdb: hkDebugDisplayProcess::displayTriangle | hkDebugDisplayProcess.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: a, b, c, color, id, tag
 void FUN_00ddca30_cls::FUN_00ddca30(int aiArg1, int aiArg2, int aiArg3, int aiArg4, unsigned int auArg5)
 {
     FNVHolder* h = (FNVHolder*)((char*)this - 8);
@@ -556,6 +574,7 @@ class FUN_00ddcaf0_cls
 
 // Initializes m_06, m_0c, m_08, m_20, and m_vtbl, calls Helper if DAT_01269cdc is zero, then dispatches m_20 via GlobalDispatcher.
 // @fnv 0x00ddcaf0
+// pdb: hkDebugDisplayProcess::hkDebugDisplayProcess | hkDebugDisplayProcess.obj | fnv360_0822_retail, objrun_prop, medium
 FUN_00ddcaf0_cls* FUN_00ddcaf0_cls::FUN_00ddcaf0()
 {
     unsigned char flag = 1;
@@ -607,6 +626,8 @@ struct TextForwarder : OwnerHolder, TextEntry
 };
 
 // @fnv 0x00ddca70
+// pdb: hkDebugDisplayProcess::display3dText | hkDebugDisplayProcess.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: text, pos, color, id, tag
 int TextEntry::FUN_00ddca70(const char* text, int color, int id, int tag)
 {
     __assume(this != 0);

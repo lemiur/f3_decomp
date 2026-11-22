@@ -43,6 +43,8 @@ public:
 }
 using namespace f3m_009b5e00;
 
+// pdb: hkpBvTreeStreamAgent::hkpBvTreeStreamAgent | hkpBvTreeStreamAgent.obj | fnv360_0822_retail, call_seq, high
+// pdb params: bodyA, bodyB, input, mgr
 FUN_009b5e00::FUN_009b5e00(int p1, int p2, const Key_5e00& k, int userData) : Base_5e00(userData)
 {
     key = k;
@@ -142,6 +144,8 @@ struct Height:Shape {
     Quad scale,inverse,offset,extents;
     virtual ~Height();Height(const Info&);
 };
+// pdb: hkBSHeightFieldShape::hkBSHeightFieldShape | bhkTriSampledHeightFieldBvTreeShape.obj | fnv360_0822_retail, call_dedup, low, conflict (skyrim: hkpSampledHeightFieldShape::hkpSampledHeightFieldShape)
+// pdb params: arInfo
 Height::Height(const Info& ci):Shape(14){
     xResolution=ci.xResolution;zResolution=ci.zResolution;projection=ci.projection;
     extents.Set(ci.xResolution-1.0f,ci.maxHeight-ci.minHeight,ci.zResolution-1.0f);
@@ -175,6 +179,7 @@ struct hkBool47 {
     hkBool47(bool value) { m_bool = value ? 1 : 0; }
 };
 
+// pdb: hkSimplexSolverSolveTest1d | hkpSimplexSolver.obj | tesv_win, call_dedup, low
 static __declspec(noinline) hkBool47 FUN_009a47c0(const Plane47& plane, const Vec47& velocity)
 {
     Vec47 relative;
@@ -471,6 +476,7 @@ struct PairFinder
     hkBool FUN_009a1000(BoxSet* boxes, N9a1000::hkObjectArray<PairRecord>* out);
 };
 
+// pdb: hkaDetectRagdollPenetration::detectPenetration | hkaDetectRagdollPenetration.obj | tesv_win, objrun, medium
 hkBool PairFinder::FUN_009a1000(BoxSet* boxes, N9a1000::hkObjectArray<PairRecord>* out)
 {
     out->m_array.m_size = 0;
@@ -570,6 +576,8 @@ struct Simplex {
 };
 struct AgentBase {void FUN_009d1460(int,int,int,Simplex*);};
 struct Agent:AgentBase {void FUN_009b7580(int,int,int,Simplex*);};
+// pdb: hkpSymmetricAgentLinearCast<hkpShapeCollectionAgent>::processCollision | hkpBvTreeStreamAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, result
 void Agent::FUN_009b7580(int a,int b,int c,Simplex* out) {
     Vertex* vertex=out->cursor;
     float oldDistance=out->distance;
@@ -659,6 +667,8 @@ struct Agent2358 : AgentBase2358
     void FUN_009beb30(int a, int b, int context, Simplex2358* simplex);
 };
 
+// pdb: hkpSymmetricAgentLinearCast<hkpConvexListAgent>::processCollision | hkpConvexListAgent.obj | fnv360_0822_retail, vtable_prefix, high
+// pdb params: bodyA, bodyB, input, result
 void Agent2358::FUN_009beb30(int a, int b, int context, Simplex2358* simplex)
 {
     Vertex2358* vertex = simplex->end;
@@ -704,6 +714,8 @@ struct ScratchBlock;
 struct ScratchOwner { void AddEntry(ScratchBlock* block, int a, int b); };
 void FUN_00da6fd0(void* p);
 
+// pdb: hkpCollectionAgent3::registerAgent3 | hkpCollectionAgent3.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: dispatcher
 void FUN_009bada0(ScratchOwner* owner)
 {
     __declspec(align(16)) struct
@@ -777,6 +789,8 @@ struct F3FlipCollector : F3CollectorBase {
 
 void __cdecl hkpHeightFieldAgent_staticLinearCast(void* a1, void* a2, void* a3, void* a4, void* a5);
 
+// pdb: hkpSymmetricAgentLinearCast<hkpHeightFieldAgent>::staticLinearCast | hkpHeightFieldAgent.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: bodyA, bodyB, input, collector, startCollector
 void __cdecl FUN_009bc4d0(void* a1, void* a2, F3CastInput* input, int a4, int a5)
 {
     F3CastInput copiedInput;
@@ -842,6 +856,7 @@ struct F3CastInput
 
 void hkpBvTreeAgent_staticLinearCast(void*, void*, void*, void*, void*);
 
+// pdb: hkpSymmetricAgentLinearCast<class hkpBvTreeAgent>::staticLinearCast | hkpBvTreeStreamAgent.obj | tesv_win, caller_sim, low
 void FUN_009b7110(void* a1, void* a2, F3CastInput* p, int a4, int a5)
 {
     F3CastInput in = *p;
@@ -899,6 +914,8 @@ public:
   float m_4c;
   HK_ASSERT_OBJECT_SIZE_OK_FUNC_t& FUN_009bd090(const HK_ASSERT_OBJECT_SIZE_OK_FUNC_t& a);
 };
+// pdb: hkpListShape::hkpListShape | hkpListShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: hkpAgent3Input::hkpAgent3Input)
+// pdb params: shapeArray, numShapes, ref
 HK_ASSERT_OBJECT_SIZE_OK_FUNC_t& HK_ASSERT_OBJECT_SIZE_OK_FUNC_t::FUN_009bd090(const HK_ASSERT_OBJECT_SIZE_OK_FUNC_t& a)
 {
   m_00 = a.m_00;
@@ -928,6 +945,8 @@ HK_ASSERT_OBJECT_SIZE_OK_FUNC_t& HK_ASSERT_OBJECT_SIZE_OK_FUNC_t::FUN_009bd090(c
 
 // @f3 0x009be8a0 (community match, verified in this file)
 namespace f3m_009be8a0 {
+// pdb: hkpSymmetricAgentLinearCast<hkpConvexListAgent>::staticLinearCast | hkpConvexListAgent.obj | fnv360_0822_retail, objrun, high
+// pdb params: bodyA, bodyB, input, collector, startCollector
 namespace Task9be8{struct Vector{__declspec(align(16)) float x;float y,z,w;};struct Transform{Vector v00,v10,v20,v30,v40,v50,v60;};extern float DAT_00de6e60;extern int DAT_00e7e9c8;struct Query{void*methods;float tolerance;int unk08;int unk0c;Vector position;void*target;int unk24;int unk28;int unk2c;Query(const Vector&v,void*p):methods(&DAT_00e7e9c8),tolerance(DAT_00de6e60),position(v),target(p){}};void __cdecl hkpConvexListAgent_staticLinearCast(void*,void*,Transform*,Query*,Query*);void __cdecl FUN_009be8a0(void*a,void*b,const Transform*source,void*first,void*second){Transform inverse=*source;inverse.v50.x=-source->v50.x;inverse.v50.y=-source->v50.y;inverse.v50.z=-source->v50.z;inverse.v50.w=-source->v50.w;Query left(source->v50,first);if(second){Query right(source->v50,second);hkpConvexListAgent_staticLinearCast(b,a,&inverse,&left,&right);}else hkpConvexListAgent_staticLinearCast(b,a,&inverse,&left,0);}}
 }   // namespace f3m_009be8a0
 
@@ -938,6 +957,8 @@ namespace Forward409{
 struct Vec{float x,y,z,w;};struct __declspec(align(16)) Input{Vec a,b,c,d,e,vector,g;};
 struct __declspec(align(16)) Shape{void*vtable;float radius;unsigned int unk08,unk0c;Vec vector;void*object;__forceinline Shape(const Vec&v,void*o){vtable=&DAT_00e7e9c8;radius=DAT_00de6e60;vector=v;object=o;}};
 void __cdecl FUN_009d1840(void*,void*,Input*,Shape*,Shape*);
+// pdb: hkpSymmetricAgentLinearCast<hkpShapeCollectionAgent>::staticLinearCast | hkpConvexListAgent.obj | fnv360_0822_retail, call_seq, high
+// pdb params: bodyA, bodyB, input, collector, startCollector
 void __cdecl FUN_009be680(void*a,void*b,Input*input,void*object,void*optional){Input copy=*input;copy.vector.x=-input->vector.x;copy.vector.y=-input->vector.y;copy.vector.z=-input->vector.z;copy.vector.w=-input->vector.w;Shape first(input->vector,object);if(optional){Shape second(input->vector,optional);FUN_009d1840(b,a,&copy,&first,&second);}else FUN_009d1840(b,a,&copy,&first,0);}
 }
 
@@ -972,6 +993,8 @@ struct Agent2840 {
     void FUN_009ba6b0(int a, int b, const task2840::Body* body, task2840::Filter* f1, task2840::Filter* f2);
     void FUN_009baa10(int a, int b, const task2840::Body* body, void* p1, void* p2);
 };
+// pdb: hkpSymmetricAgent<hkpMoppAgent>::linearCast | hkpMoppAgent.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: bodyA, bodyB, input, collector, startCollector
 void Agent2840::FUN_009baa10(int a, int b, const task2840::Body* body, void* p1, void* p2)
 {
     task2840::Body c = *body;
@@ -1014,6 +1037,8 @@ struct C9b76e0 {
     void FUN_009b5c80(int a, int b, const n9b76e0::Body* body, n9b76e0::Filter* f1, n9b76e0::Filter* f2);
     void FUN_009b76e0(int a, int b, const n9b76e0::Body* body, void* p1, void* p2);
 };
+// pdb: hkpSymmetricAgent<hkpBvTreeStreamAgent>::linearCast | hkpBvTreeStreamAgent.obj | fnv360_0721_beta, vtable, high
+// pdb params: bodyA, bodyB, input, collector, startCollector
 void C9b76e0::FUN_009b76e0(int a, int b, const n9b76e0::Body* body, void* p1, void* p2)
 {
     n9b76e0::Body c = *body;
@@ -1059,6 +1084,8 @@ struct Output {
     struct {unsigned char low:4; unsigned char high:4;} flags;
 };
 struct S009bc5d0_Agent { void hkpHeightFieldAgent_processCollision(void*,void*,void*,Output*); void FUN_009bc5d0(void* first,void* second,void* context,Output* output); };
+// pdb: hkpSymmetricAgentLinearCast<hkpHeightFieldAgent>::processCollision | hkpHeightFieldAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, result
 void S009bc5d0_Agent::FUN_009bc5d0(void* first,void* second,void* context,Output* output) {
     Contact* begin=output->end;
     float oldDistance=output->distance;
@@ -1165,6 +1192,8 @@ struct S009ba7e0_Rot : hkVector4
     void FUN_00477880(const hkTransform* t, const hkVector4* v);
 };
 
+// pdb: hkpBvTreeAgent::calcAabbLinearCast | hkpBvTreeAgent.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: bodyA, bodyB, input, aabbOut
 void __cdecl FUN_009ba7e0(const S009ba7e0_Body* a, const S009ba7e0_Body* b, const S009ba7e0_Input* input, hkAabb* out)
 {
     hkTransform composed;
@@ -1247,6 +1276,7 @@ struct hkpMovingSurfaceModifier_9a1cc0
     hkVector4_9a1cc0 m_velocity;
     void FUN_009a1cc0(const hkContactPoint_9a1cc0& cp, void* a, void* b, void* c, hkVector4_9a1cc0& velOut);
 };
+// pdb: hkpCenterOfMassChangerModifierConstraintAtom::collisionResponseBeginCallback | hkpConstraintAtom.obj | tesv_win, objrun_sim, low
 void hkpMovingSurfaceModifier_9a1cc0::FUN_009a1cc0(const hkContactPoint_9a1cc0& cp, void* a, void* b, void* c, hkVector4_9a1cc0& velOut)
 {
     hkVector4_9a1cc0 vel = m_velocity;
@@ -1550,6 +1580,8 @@ struct hkpSymmetricAgentStandIn9b7
     void FUN_009b7ce0(const void* bodyA, const void* bodyB, const void* input, hkpProcessCollisionOutput* result);
 };
 
+// pdb: hkpSymmetricAgentLinearCast<hkpMoppAgent>::processCollision | hkpMoppAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, result
 void hkpSymmetricAgentStandIn9b7::FUN_009b7ce0(const void* bodyA, const void* bodyB, const void* input,
                                             hkpProcessCollisionOutput* result)
 {
@@ -1771,6 +1803,8 @@ struct Agent {
 
 // Runs hkpBvTreeStreamAgent_processCollision with the first two arguments exchanged, then turns every entry it added
 // (and, when the stored result changed, the collector's own direction and index data) around.
+// pdb: hkpSymmetricAgentLinearCast<hkpBvTreeStreamAgent>::processCollision | hkpBvTreeStreamAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, result
 void f3m_009b7380::Agent::FUN_009b7380(int p1, int p2, int p3, f3m_009b7380::Collector* o)
 {
     using namespace f3m_009b7380;
@@ -1875,6 +1909,8 @@ struct SymmetricAgent {
 }
 using namespace N9bf2b0;
 
+// pdb: hkpSymmetricAgentLinearCast<hkpListAgent>::processCollision | hkpListAgent.obj | fnv360_0822_retail, objrun, high
+// pdb params: bodyA, bodyB, input, result
 void SymmetricAgent::FUN_009bf2b0(int bodyA, int bodyB, int input, ProcessOutput* result) {
     ProcessPoint* pp = result->m_firstFree;
     float oldTime = result->m_toiTime;
@@ -8967,6 +9003,7 @@ static __declspec(noinline) void FUN_009a4d00(SimplexSolverInfo* info, const hkp
     g_sink_009a52d0 = (int)(sci0->m_staticFriction + sci1->m_staticFriction + velocityIn->x) + info->m_numSupportPlanes;
 }
 
+// pdb: hkSimplexSolverSolve3d | hkpSimplexSolver.obj | tesv_win, call_dedup, low
 static __declspec(noinline) void FUN_009a52d0(SimplexSolverInfo* info, const hkpSurfaceConstraintInfo* sci0,
     const hkpSurfaceConstraintInfo* sci1, const hkpSurfaceConstraintInfo* sci2, int allowResort,
     const hkVector4* velocityIn, hkVector4* velocityOut)
@@ -12579,6 +12616,7 @@ struct Owner1da0
     void FUN_009a1da0(const Input1da0& input, int a2, int a3, int a4, int a5, hkVector4& out);
 };
 
+// pdb: hkpCenterOfMassChangerModifierConstraintAtom::collisionResponseEndCallback | hkpConstraintAtom.obj | tesv_win, objrun_sim, low
 void Owner1da0::FUN_009a1da0(const Input1da0& input, int a2, int a3, int a4, int a5, hkVector4& out)
 {
     hkVector4 v = m_vec;
@@ -12679,6 +12717,8 @@ struct Self_009afd60
     void FUN_009afd60(const Arg_009afd60& p);
 };
 
+// pdb: hkLiquidAction::applyAction | hkLiquidAction.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: stepInfo
 void Self_009afd60::FUN_009afd60(const Arg_009afd60& p)
 {
     Owner_009afd60* o = unk18;
@@ -12799,6 +12839,8 @@ struct Owner
     void FUN_009b7840(int a0, int a1, Big70* p, int a3, void* a4);
 };
 
+// pdb: hkpSymmetricAgent<hkpShapeCollectionAgent>::linearCast | hkpBvTreeStreamAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector, startCollector
 void Owner::FUN_009b7840(int a0, int a1, Big70* p, int a3, void* a4)
 {
     Big70 copy = *p;
@@ -12878,6 +12920,8 @@ struct hkpSymmetricAgent : public hkpAgentBase
                       hkpCdPointCollector& collector, hkpCdPointCollector* startCollector);
 };
 
+// pdb: hkpSymmetricAgent<hkpHeightFieldAgent>::linearCast | hkpHeightFieldAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector, startCollector
 void hkpSymmetricAgent::FUN_009bc7b0(const hkpCdBody& bodyA, const hkpCdBody& bodyB,
                                      const hkpLinearCastCollisionInput& input, hkpCdPointCollector& collector,
                                      hkpCdPointCollector* startCollector)
@@ -13431,6 +13475,8 @@ struct hkpSymmetricAgent : public hkpAgentBase
                       hkpCdPointCollector& collector, hkpCdPointCollector* startCollector);
 };
 
+// pdb: hkpSymmetricAgent<hkpConvexListAgent>::linearCast | hkpConvexListAgent.obj | fnv360_0822_retail, vtable_prefix, high
+// pdb params: bodyA, bodyB, input, collector, startCollector
 void hkpSymmetricAgent::FUN_009bea40(const hkpCdBody& bodyA, const hkpCdBody& bodyB,
                                      const hkpLinearCastCollisionInput& input, hkpCdPointCollector& collector,
                                      hkpCdPointCollector* startCollector)
@@ -13502,6 +13548,8 @@ struct hkpSymmetricAgent : public hkpAgentBase
                       hkpCdPointCollector& collector, hkpCdPointCollector* startCollector);
 };
 
+// pdb: hkpSymmetricAgent<hkpListAgent>::linearCast | hkpListAgent.obj | fnv360_0822_retail, objrun, high
+// pdb params: bodyA, bodyB, input, collector, startCollector
 void hkpSymmetricAgent::FUN_009bf410(const hkpCdBody& bodyA, const hkpCdBody& bodyB,
                                      const hkpLinearCastCollisionInput& input, hkpCdPointCollector& collector,
                                      hkpCdPointCollector* startCollector)
@@ -13589,6 +13637,8 @@ public:
     bvt55::Aabb m_cachedAabb;
 };
 
+// pdb: hkpBvTreeAgent::hkpBvTreeAgent | hkpBvTreeAgent.obj | fnv360_0822_debug, objrun_sim, medium
+// pdb params: mgr
 hkpBvTreeAgent::hkpBvTreeAgent(hkpContactMgr* mgr)
     : bvt55::CollisionAgent(mgr)
 {
@@ -13643,6 +13693,7 @@ public:
     hkVector4 m_extents;
     void FUN_009a60f0(const hkTransform& localToWorld, hkReal tolerance, hkAabb& out) const;
 };
+// pdb: hkpSampledHeightFieldShape::getAabbImpl | hkpSampledHeightFieldShape.obj | tesv_win, objrun, medium
 void hkpSampledHeightFieldShape::FUN_009a60f0(const hkTransform& localToWorld, hkReal tolerance, hkAabb& out) const
 {
     hkReal minHeight = getHeightAt(0, 0);

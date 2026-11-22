@@ -50,6 +50,7 @@ struct HeadPart {
 }
 
 
+// pdb: BGSHeadPart::InitItem | BGSHeadPart.obj | fnv360_0822_retail, vtable, medium
 void n_00544ae0::HeadPart::FUN_00544ae0()
 {
     if (GetInitialized())
@@ -150,6 +151,7 @@ struct Note {
 }
 
 
+// pdb: BGSNote::InitItem | BGSNote.obj | fnv360_0822_retail, vtable, medium
 void n_00545c00::Note::FUN_00545c00()
 {
     if (GetInitialized())

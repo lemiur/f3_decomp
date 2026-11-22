@@ -80,6 +80,7 @@ struct FUN_00dc7070_class
 };
 
 // @f3 0x005515c0 (community match, verified in this file)
+// pdb: TESFaction::GetTrackCrime | Actor.obj | fnv360_0822_debug, call_gap_sim, low
 void* FUN_00dc7070_class::FUN_00dc7070(int aiOffset)
 {
     *(int*)((char*)this + 0x44) += aiOffset;
@@ -167,6 +168,8 @@ namespace task1642 {
 struct Layout {unsigned unk00,unk04,unk08,unk0c,unk10,state;};
 struct Heap {void* FUN_0086ba60(Receiver*);};extern Heap DAT_01090a78;
 }
+// pdb: TESSaveLoadGame::DestroyBuffer | TESSaveLoadGame.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apBuffer
 void* FUN_00dc72a0_class::ForwardToReceiver(Receiver* argument){
  void* result=task1642::DAT_01090a78.FUN_0086ba60(argument);
  reinterpret_cast<task1642::Layout*>(this)->state=0;
@@ -529,6 +532,7 @@ struct FUN_00dc9b10_cls
 };
 
 // @fnv 0x00dc9b10
+// pdb: hkpShapeDisplayBuilder::resetCurrentRawGeometry | hkpShapeDisplayBuilder.obj | fnv360_0822_retail, objrun, medium
 void FUN_00dc9b10_cls::FUN_00dc9b10()
 {
     m_10 = 0;
@@ -995,6 +999,8 @@ class hkMultiMapDC90
 
 // Looks up key in the map, unlinks its entry, and moves the entry's chain to the front of the free list.
 // @f3 0x00a2a110 (community match, verified in this file)
+// pdb: hkSerializeMultiMap<hkDataClassDict *,hkDataClassDict *>::removeKey | hkDataObjectDict.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: key
 void hkMultiMapDC90::RemoveKey(int key)
 {
     FUN_00cb18f0_t& hash = m_pHashFunction;
@@ -1135,6 +1141,8 @@ struct hkObjDC99Fields
     void FUN_006e04c0(int iKey);
 };
 
+// pdb: BGSLoadFormBuffer::LoadHeader | BGSLoadFormBuffer.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apFile
 void hkObjDC99Fields::FUN_006e04c0(int iKey)
 {
     hkEntryDC99Block* pKey = (hkEntryDC99Block*)&m_14;
@@ -2302,6 +2310,8 @@ public:
     int value;
     void FUN_00aa5a60(int first, int second);
 };
+// pdb: QueuedReplacementKFList::Cancel | ModelLoader.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aePreviousState, apTaskOwner
 int hkObjDCB3::GetMemberInt(int first, int second) throw() {
     NativeObj1420* self=(NativeObj1420*)this;
     self->FUN_00aa5a60(first, second);
@@ -2437,6 +2447,8 @@ struct hkOwnerViewDCB8 {
     virtual int V2(int iArg0, int iArg1, hkBlockHeaderK* pBlock, int iBlockSize, int iFlags);
 };
 
+// pdb: hkStatisticsCollector::getAllocatedSize | hkStatisticsCollector.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: p, size
 int hkOwnerDCB8::DispatchToEntryObject(int iArg0, int iArg1, int iData)
 {
     hkBlockHeaderK* pBlock = reinterpret_cast<hkBlockHeaderK*>(iData) - 1;
@@ -2498,6 +2510,8 @@ struct Owner {
     char FUN_004ccb70(void* arg);
 };
 
+// pdb: TESObjectLAND::IsNormalSet | TESLand.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: TESObjectLAND::GetGeometry)
+// pdb params: coord
 char Owner::FUN_004ccb70(void* arg)
 {
     Local50 local;
@@ -2999,6 +3013,7 @@ struct hkObjLayout300
     hkSharedRef300* m_pSharedObject;
 };
 
+// pdb: hkpTransformShape::`scalar deleting destructor' | hkpTransformShape.obj | fnv360_0822_retail, objrun_open, low
 hkObjDC8C* hkObjDC8C::FUN_00dc8cd0(unsigned int flags)
 {
     hkObjLayout300* self = reinterpret_cast<hkObjLayout300*>(this);
@@ -4152,6 +4167,8 @@ struct Self_006f8e30 {
     Holder_006f8e30* m_pkHolder;
 };
 
+// pdb: Actor::GetDamageLocation | Actor.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apNode
 int ClassADA0::FUN_00dcada0(const char* pcName) const
 {
     const Self_006f8e30* self = (const Self_006f8e30*)this;
@@ -5943,6 +5960,8 @@ struct PR_Mgr
     PR_Obj* FUN_007911d0(PR_Ref* pkClass);
 };
 
+// pdb: ProcessLists::FindActiveShaderHitEffect | ProcessLists.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apEffectTarget
 PR_Obj* PR_Mgr::FUN_007911d0(PR_Ref* pkClass)
 {
     float fBest = 3.4028234663852886e+38f;

@@ -19,6 +19,7 @@ struct BSFadeNode
 
 // Allocates a 0x20-byte NiBoolInterpolator, initialises its vtable, clears the field at offset 0x18 and the byte at 0x1c, and returns it (or null).
 // @fnv 0x00a52fe0
+// pdb: NiBoolTimelineInterpolator::CreateObject | NiBoolTimelineInterpolator.obj | fnv360_0822_retail, objrun, high
 NiBoolInterpolator* __cdecl CreateBoolInterpolator()
 {
     NiBoolInterpolator* p = static_cast<NiBoolInterpolator*>(BSFadeNode::operator new(0x20));
@@ -54,6 +55,7 @@ void __cdecl _delete(void*, unsigned int);
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile*);
 // Decrements the reference count of m_ptr and calls F1 when it reaches zero, then calls FUN_00a3ca30 and frees this if flag bit 0 is set.
 // @fnv 0x00a52f30
+// pdb: NiBoolTimelineInterpolator::`scalar deleting destructor' | NiBoolTimelineInterpolator.obj | fnv360_0822_retail, objrun, medium
 void* FUN_00a52f30_shell::ReleaseRef(unsigned int auiFlags)
 {
     RefObj* p = m_ptr;
@@ -80,6 +82,7 @@ inline void* __cdecl operator new(unsigned int, void* p)
 }
 // Allocates a 0x18-byte NiKeyBasedInterpolator, constructs it, sets its vtable and fields, and returns the pointer or 0.
 // @fnv 0x00a53500
+// pdb: NiBoolInterpolator::CreateObject | NiBoolInterpolator.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void* CreateNiKeyBasedInterpolator()
 {
     void* p = BSFadeNode::operator new(0x18);
@@ -107,6 +110,8 @@ struct FUN_00a52f00 : NiBoolInterpolator
 };
 // Constructs the object, links it to the given NiBoolData stream, zeroes two fields and sets the vtable.
 // @fnv 0x00a52f00
+// pdb: NiBoolTimelineInterpolator::NiBoolTimelineInterpolator | NiBoolTimelineInterpolator.obj | fnv360_0721_beta, objrun, high
+// pdb params: pkBoolData
 FUN_00a52f00::FUN_00a52f00(NiBoolData* pkBoolData)
 {
     NiBoolInterpolator::LinkObject((NiStream*)pkBoolData);
@@ -148,6 +153,8 @@ struct Timeline
 };
 // Evaluates the boolean key timeline at time, updating index, cached and previousValue, and returns whether a value is available via out.
 // @fnv 0x00a52d80
+// pdb: NiBoolTimelineInterpolator::Update | NiBoolTimelineInterpolator.obj | fnv360_0822_retail, objrun, high
+// pdb params: fTime, pkInterpTarget, bValue
 bool Timeline::EvaluateBoolAtTime(float time, void*, bool& out)
 {
     if (lastTime == time)
@@ -289,6 +296,8 @@ class A53480Object : public A53480Base
 };
 
 // @fnv 0x00a53480
+// pdb: NiBoolInterpolator::CopyMembers | NiBoolInterpolator.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pkDest, kCloning
 void A53480Object::CloneTo(A53480Object* pkDest, A53480CloningProcess& kCloning)
 {
     FUN_00aa0ab0(pkDest, kCloning);
@@ -300,6 +309,7 @@ void A53480Object::CloneTo(A53480Object* pkDest, A53480CloningProcess& kCloning)
 void __cdecl SaveToStream();
 
 // @fnv 0x00a52d00
+// pdb: Interface::CloseMessageMenu | Interface.obj | fnv360_0822_retail, call_gap, medium
 void __cdecl FUN_00a52d00()
 {
     SaveToStream();
@@ -316,6 +326,8 @@ void FUN_00a52ce0()
 extern void FUN_00a3c5b0();
 
 // @fnv 0x00a52cf0
+// pdb: Interface::DisableMessageMenu | Interface.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abDisable
 void FUN_00a52cf0()
 {
     FUN_00a3c5b0();
@@ -327,6 +339,7 @@ struct BoolInterpolator
     bool FUN_00a52d10();
 };
 // @fnv 0x00a52d10
+// pdb: Interface::GetScreenHeight | Interface.obj | fnv360_0721_beta, call_seq, medium
 bool BoolInterpolator::FUN_00a52d10()
 {
     return FUN_00a53220();

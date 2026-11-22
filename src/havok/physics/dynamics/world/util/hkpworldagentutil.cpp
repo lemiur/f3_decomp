@@ -405,6 +405,8 @@ void __cdecl hkpWorldAgentUtil_removeAgent(Owner* owner);
 // @f3 0x009447d0 (community match, verified in this file)
 void __cdecl FUN_00944730(Owner* owner);
 
+// pdb: hkpWorldAgentUtil::removeAgentAndItsToiEvents | hkpWorldAgentUtil.obj | fnv360_0822_retail, caller, medium
+// pdb params: agent
 void __cdecl FUN_00cc1160(Owner* owner)
 {
     Owner* pOwner = owner;
@@ -498,6 +500,8 @@ struct EventSourceView
     int count;
 };
 
+// pdb: hkpWorldAgentUtil::getIslandFromAgentEntry | hkpWorldAgentUtil.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: entry, candidateA, candidateB
 void __cdecl DispatchEvents(EventSource* source, DispatchContext* context)
 {
     EventSourceView* view = (EventSourceView*)source;
@@ -563,6 +567,8 @@ struct ItemOwner;
 struct Call7a6d70 { void CombatGroup_SetMemberGroupStrategyAssignment(void* item, int n); };
 struct Ent7a6d70 { int key; void* item; };
 struct Ctx7a6d70 { char pad[0x1c]; Ent7a6d70* entries; int count; };
+// pdb: CombatGroupStrategyAdvance::Execute | CombatGroupStrategy.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apGroup, apGroupData
 void __stdcall FUN_00cc0ea0(ItemOwner* pOwner, void* pContext)
 {
     Ctx7a6d70* c = (Ctx7a6d70*)pContext;
@@ -611,6 +617,8 @@ void __cdecl DispatchSlotCallback(S_00cc0ed0_Rec* r, float a, float b, int c);
 
 // Iterates over the block pointers in m5c, calling DispatchSlotCallback on each record up to the block end (m58 for the last block, 0x200 otherwise).
 // @fnv 0x00cc0ed0
+// pdb: hkpWorldAgentUtil::warpTime | hkpWorldAgentUtil.obj | fnv360_0822_retail, call_seq, high
+// pdb params: island, oldTime, newTime, collisionInput
 void __cdecl ProcessBlocks(S_00cc0ed0_Blocks* s, float a2, float a3, int a4)
 {
     int i = 0;
@@ -681,6 +689,8 @@ struct Island
 
 // Returns the island with the smaller count if val falls within 0x200 of an entry in its array, otherwise the island with the larger count.
 // @fnv 0x00cc0e20
+// pdb: hkpWorldAgentUtil::getIslandFromAgentEntry | hkpWorldAgentUtil.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: entry, candidateA, candidateB
 Island* __cdecl PickIslandByValue(unsigned int val, Island* apIslandA, Island* apIslandB)
 {
     bool less = apIslandA->count <= apIslandB->count;
@@ -705,6 +715,7 @@ struct SelectorTarget
 };
 
 // @fnv 0x00cc0e90
+// pdb: getAgentData | hkpWorldAgentUtil.obj | fnv360_0822_retail, objrun_open, low
 static unsigned int FUN_00cc0e90(SelectorTarget* p)
 {
     if (p->m_00 == 4)

@@ -377,6 +377,8 @@ struct FUN_004a3cc0_cobj : public TESBoundObjectBase,
     bool FUN_004a3cc0(TESFile* apFile);
 };
 // @fnv 0x004f96f0
+// pdb: BGSConstructibleObject::Load | BGSConstructibleObject.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool FUN_004a3cc0_cobj::FUN_004a3cc0(TESFile* apFile)
 {
     FUN_00454410(apFile);

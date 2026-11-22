@@ -29,6 +29,8 @@ void __cdecl D3DD50Query(int a, int b, int c, D3DD50CollectorBase* collector);
 
 // Constructs a D3DD50Collector from d and passes it to D3DD50Query with b, a, c.
 // @fnv 0x00d3dd50
+// pdb: hkpSymmetricAgentLinearCast<hkpSphereBoxAgent>::staticGetPenetrations | hkpSphereBoxAgent.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl QueryD3DCollector(int aiArg1, int aiArg2, int aiArg3, int aiData)
 {
     D3DD50Collector collector(aiData);
@@ -48,6 +50,8 @@ void __cdecl FUN_00d3d8c0(int a, int b, int c, Functor_d3e110* f);
 
 // Builds a Functor_d3e110 with a max-float value and d, sets its vtable to DAT_010ce7fc, and calls FUN_00d3d8c0(b, a, c, &f).
 // @fnv 0x00d3e110
+// pdb: hkpSymmetricAgentLinearCast<hkpSphereTriangleAgent>::staticGetClosestPoints | hkpSphereTriangleAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_00d3e110(int a, int b, int aiArg3, int d)
 {
     Functor_d3e110 f;
@@ -159,6 +163,8 @@ struct CapsuleAgentSlot3
     float cache20;
     float cache24;
 };
+// pdb: hkpCapsuleTriangleAgent::createTriangleCapsuleAgent | hkpCapsuleTriangleAgent.obj | fnv360_0822_retail, uvref, high
+// pdb params: bodyA, bodyB, input, mgr
 void* __cdecl CreateTargetAgent(void* bodyA, void* bodyB, void* input, void* manager)
 {
     CapsuleThreadMemorySlot3* memory = static_cast<CapsuleThreadMemorySlot3*>(TlsGetValue(DAT_010f3170));
@@ -195,6 +201,8 @@ struct D3DD10Object
 
 // Builds a D3DD10Data with value p3, flag 0 and vt DAT_010ce81c, then calls FUN_00d3d2a0 with p1, p0, p2 and that data.
 // @fnv 0x00d3dd10
+// pdb: hkpSymmetricAgentLinearCast<hkpSphereTriangleAgent>::getPenetrations | hkpSphereTriangleAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void __thiscall D3DD10Object::FUN_00d3dd10(unsigned int p0, unsigned int p1, unsigned int p2, unsigned int uiValue)
 {
     D3DD10Data data;
@@ -501,6 +509,8 @@ struct S_00d3d3e0_P3P
 void __cdecl FUN_00cd7850(S_00d3d3e0_V4* a, void* b, S_00d3d3e0_V4* c, S_00d3d3e0_Out* d);
 extern DWORD DAT_0116913c;
 
+// pdb: hkpSphereTriangleAgent::staticGetPenetrations | hkpSphereTriangleAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: bodyA, bodyB, input, collector
 void FUN_00d3d3e0(S_00d3d3e0_P1P a1, S_00d3d3e0_P2P a2, int unused, S_00d3d3e0_P3P a3)
 {
     S_00d3d3e0_Hdr* h = (S_00d3d3e0_Hdr*)TlsGetValue(DAT_0116913c);
@@ -569,6 +579,8 @@ struct CpuObject
 };
 // Fills a CpuCallData with fourth, DAT_0104da48 and &DAT_010ce7fc, then calls hkpSphereTriangleAgent_getClosestPoints with second, first, third and the data pointer.
 // @fnv 0x00d3e0d0
+// pdb: hkpSymmetricAgentLinearCast<hkpSphereTriangleAgent>::getClosestPoints | hkpSphereTriangleAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void CpuObject::FUN_00d3e0d0(void* first, void* second, unsigned int third, unsigned int uiValue)
 {
     CpuCallData data;

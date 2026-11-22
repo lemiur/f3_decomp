@@ -58,6 +58,8 @@ struct Owner04f0 {
     void FUN_009504f0(int a, int b, float c);
 };
 
+// pdb: bhkCylinderShape::Init | bhkCylinderShape.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: arTop, arBottom, afRad
 void Owner04f0::FUN_009504f0(int a, int b, float c)
 {
     Obj04f0* obj = new Obj04f0(a, b, c, DAT_00f7ad9c);
@@ -94,6 +96,7 @@ struct FUN_00944050 : f3m_00944050::Base944
     virtual ~FUN_00944050() throw();
 };
 
+// pdb: hkpHavokSnapshot::ConvertListener::~ConvertListener | hkpHavokSnapshot.obj | fnv360_0822_retail, call_seq, high
 FUN_00944050::~FUN_00944050() throw()
 {
     for (int i = 0; i < size; i++)
@@ -300,6 +303,8 @@ struct Node {
 };
 struct VecA { void Copy(const void*); };
 struct Owner { int unk0; Node* unk4; void FUN_00949bf0(Node* dst, Src2* p); void FUN_008fc3f0(Node*, Src2*); };
+// pdb: hkRagdollConstraintCinfo::CloneData | bhkRagdollConstraint.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: apData, arCloneData
 void Owner::FUN_00949bf0(Node* dst, Src2* p) {
     Node* src = unk4;
     if (dst == 0) dst = new Node() ;
@@ -337,6 +342,8 @@ struct Object1148 {
  void* unk00; unsigned short unk04,unk06; int unk08;
  Object1148* FUN_00943b30(int value);
 };
+// pdb: hkOstream::hkOstream | hkOStream.obj | fnv360_0822_retail, call_dedup, high
+// pdb params: buf
 Object1148* Object1148::FUN_00943b30(int value) {
  unk06=1;
  unk00=(void*)FUN_00e7a270;
@@ -552,6 +559,8 @@ public:
     void FUN_00946120(Arg* a1);
 };
 
+// pdb: bhkSpringAction::LoadBinary | bhkSpringAction.obj | fnv360_0822_retail, objrun_open, low, conflict (bridge: bhkAngularDashpotAction::LoadBinary)
+// pdb params: arStream
 void Cls00946120::FUN_00946120(Arg* a1)
 {
     Arg* a = *(Arg* volatile*)&a1;
@@ -814,6 +823,8 @@ public:
     void FUN_009316f0();
 };
 
+// pdb: bhkCachingShapePhantom::Init | bhkCachingShapePhantom.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: arInfo
 void Owner::FUN_009459c0(Arg* arg)
 {
     if (arg != 0) {
@@ -932,6 +943,8 @@ struct World946380 {
     void FUN_00946380(SpringDesc946380* desc);
 };
 
+// pdb: bhkSpringAction::Init | bhkSpringAction.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arInfo
 void World946380::FUN_00946380(SpringDesc946380* desc) {
     if (desc) {
         FUN_00d4d340* action = new FUN_00d4d340(desc->entityA, desc->entityB, 0);
@@ -1042,6 +1055,8 @@ struct Table {
     void(__thiscall* finish)(Owner*, Input*);
 };
 struct Owner { Table* table; void FUN_00946970(Input*); };
+// pdb: bhkMotorAction::Init | bhkMotorAction.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arInfo
 void Owner::FUN_00946970(Input* input) {
     if (input) {
         FUN_009da340* shape = new FUN_009da340(input->object, Aligned4(input->direction.x, input->direction.y, input->direction.z, input->direction.w), input->a, input->b);

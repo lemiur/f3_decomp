@@ -53,6 +53,7 @@ extern Registry* DAT_011f5e34;
 extern char* DAT_0109b220;
 // Finds the first non-null registry entry, then repeatedly calls FUN_00a8f770 and runs each returned handler until current becomes null.
 // @fnv 0x00a8f870
+// pdb: NiMaterial::UnloadShadersForAllMaterials | NiMaterial.obj | fnv360_0822_retail, caller_sim, low
 void __cdecl RunRegistryHandlers()
 {
     CallbackState callbackState;
@@ -141,6 +142,8 @@ struct FUN_00a8f950 : CountedObject
 
 // Constructs a CountedObject-derived object holding a copy of name and registers it with g_pObjectRegistry.
 // @fnv 0x00a8f950
+// pdb: NiMaterial::NiMaterial | NiMaterial.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: kName
 FUN_00a8f950::FUN_00a8f950(const String& name) : m_name(name)
 {
     g_pObjectRegistry->Register(&m_name, this);
@@ -227,6 +230,7 @@ struct FUN_00a8f910
 
     void RemoveAll();
 
+    // pdb: NiTMapBase<DFALL<NiTMapItem<int,int> >,int,int>::`scalar deleting destructor' | BGSSceneInfo.obj | fnv360_0822_retail, vtable, high
     static void operator delete(void* pvMem)
     {
         g_A8F910MemoryManager.Deallocate(pvMem);

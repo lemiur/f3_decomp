@@ -14,6 +14,7 @@ __forceinline NiFixedString::NiFixedString(const char* apString)
 #pragma optimize("", on)
 
 // @fnv 0x00b4e270
+// pdb: BSFadeNode::InitSDM | BSFadeNode.obj | fnv360_0822_retail, ustr, high
 void BSFadeNode::InitializeMultiBounds()
 {
     ms_pAlphaProperty = new NiAlphaProperty;
@@ -23,6 +24,7 @@ void BSFadeNode::InitializeMultiBounds()
 
 // Allocates and returns a new BSFadeNode instance.
 // @fnv 0x00b4eaa0
+// pdb: BSFadeNode::CreateObject | BSFadeNode.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: BSFadeNode::CreateClone)
 NiObject* BSFadeNode::CreateObject()
 {
     return new BSFadeNode;
@@ -30,6 +32,8 @@ NiObject* BSFadeNode::CreateObject()
 
 // Clamps nearDistance to the INI setting's integer value and raises farDistance to twice that minimum, then stores both into fNearDistSqr and fFarDistSqr.
 // @fnv 0x00b4dfd0
+// pdb: BSFadeNode::SetRange | BSFadeNode.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afNearDist, afFarDist
 void BSFadeNode::SetRange(float nearDistance, float farDistance)
 {
     float minDistance =
@@ -45,6 +49,7 @@ void BSFadeNode::SetRange(float nearDistance, float farDistance)
 }
 
 // @fnv 0x00b4f530
+// pdb: TES::CancelExteriorCellLoads | TES.obj | fnv360_0822_retail, call_gap_sim, low
 BSRenderedTexture* BSShaderManager::GetSceneDepthRenderedTexture()
 {
     return DAT_011f91ac->GetDepthRenderedTexture();
@@ -107,6 +112,8 @@ struct FUN_00a5e5b0_helper
 };
 
 // @fnv 0x00b4def0
+// pdb: BSMultiBoundOBB::RegisterStreamables | BSMultiBoundOBB.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 bool FUN_00b4def0_shell::FUN_00b4def0(NiStream* arStream)
 {
     if (!((FUN_00a5e5b0_helper*)this)->RegisterChildStreamables(arStream))
@@ -124,6 +131,8 @@ struct Dummy
 };
 
 // @fnv 0x00b4dfb0
+// pdb: BSFadeNode::AddMovingSoundCallback | BSFadeNode.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apObj
 void __cdecl SetFlagOnVirtualResult(Dummy* apDummy)
 {
     if (apDummy)
@@ -144,6 +153,7 @@ class P03MM
 
 // Recursively frees the linked list hanging off self[1], deallocating each node, then clears self[0].
 // @fnv 0x00b4df30
+// pdb: BSSimpleList<char const *>::IsEmpty | MagicItem.obj | fnv360_0822_debug, call_seq, low, conflict (skyrim: BSTArray<struct CommandedActorData,class BSTArrayHeapAllocator>::~BSTArray<struct CommandedActorData,class BSTArrayHeapAllocator>)
 void __fastcall FUN_00b4df30(void* p)
 {
     void** self = (void**)p;
@@ -171,6 +181,8 @@ double(__cdecl* DAT_011f9134)(void*);
 
 // Returns the result of calling the DAT_011f9134 function pointer on param_1, or 1.0f if the pointer is null.
 // @fnv 0x00b4df80
+// pdb: BSShaderAccumulator::StartGroupingAlphas | BSShaderAccumulator.obj | fnv360_0822_retail, call_gap_sim, low, conflict (bridge: NiFile::InvokeReadErrorFunc)
+// pdb params: aBound, abZPrePass
 float __fastcall FUN_00b4df80(void* param_1)
 {
     float f;
@@ -187,6 +199,8 @@ struct FUN_00b4dec0_shell : public BSFadeNode
 };
 
 // @fnv 0x00b4dec0
+// pdb: BSFadeNode::SetLODMultType | BSFadeNode.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeMultType
 void FUN_00b4dec0_shell::FUN_00b4dec0(int aeMultType)
 {
     *(int*)((char*)this + 0xc4) = aeMultType;
@@ -198,6 +212,8 @@ struct NiNode_Helper : public NiNode
 };
 
 // @fnv 0x00b4e3f0
+// pdb: BSFadeNode::CreateClone | BSFadeNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arCloneData
 void* __fastcall FUN_00b4e3f0(void* apSource, int dummy, void* kCloning)
 {
     BSFadeNode* pFadeNode = new BSFadeNode();
@@ -233,6 +249,7 @@ struct MM_Dealloc_b4e380
 };
 
 // @fnv 0x00b4e380
+// pdb: BSFadeNode::KillSDM | BSFadeNode.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl ReleaseFadeNodeResources()
 {
     if (BSFadeNode::ms_pAlphaProperty.m_pObject)
@@ -296,6 +313,8 @@ struct FUN_0082dcf0_owner
 {
     void FUN_0082dcf0(float* apValue, int aiValue);
 };
+// pdb: BSFadeNode::UpdateSelectedDownwardPass | BSFadeNode.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: UpdateData, uFlags
 void FUN_00b4ea20_cls::FUN_00b4ea20(float* apValue, int aiValue)
 {
     if (DAT_01067af0 == 0)
@@ -437,6 +456,8 @@ struct FadeViewer
 };
 // Appends formatted fade-viewer fields and bit flags from field30 to the strings list, then forwards to an Extra viewer if found.
 // @fnv 0x00b4ed70
+// pdb: BSFadeNode::GetViewerStrings | BSFadeNode.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FadeViewer::FUN_00b4ed70(Strings* strings)
 {
     FUN_00a5ea70(strings);
@@ -507,6 +528,7 @@ void FadeViewer::FUN_00b4ed70(Strings* strings)
 void FUN_00a5dd70();
 
 // @fnv 0x00b4ded0
+// pdb: SpectatorPackage::InitLoadGame | SpectatorPackage.obj | fnv360_0822_retail, vtable, medium
 void FUN_00b4ded0()
 {
     FUN_00a5dd70();
@@ -629,6 +651,8 @@ extern float DAT_01067b2c;
 extern float DAT_01067b28;
 void FUN_00aeeec0(Fade*, float);
 
+// pdb: BSFadeNode::CheckFadeRadius | BSFadeNode.obj | fnv360_0822_retail, uconst, low
+// pdb params: apCamera, abNoFade
 bool Fade::UpdateFade(Fade* camera, int unused)
 {
     float alpha = 1.0f;
@@ -729,6 +753,8 @@ struct Pt3
 extern float DAT_01067b00;
 extern float DAT_01067b2c;
 
+// pdb: BSFadeNode::ShouldUpdate | BSFadeNode.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCamera, afDistMult
 bool FUN_00b4e030_shell::IsWithinFadeDistance(NiCamera* apCamera, float afDistMult)
 {
     float ffadeAdjust = *(float*)((char*)apCamera + 0x110);

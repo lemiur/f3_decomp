@@ -272,6 +272,8 @@ struct Obj74b5a0 {
     virtual void v261();
     virtual void v418(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8);
 };
+// pdb: LowProcess::EnterCombat | LowProcess.obj | fnv360_0822_debug, objrun, medium
+// pdb params: apActor, apTarget, abCheckForAmbush, absendalarm, apGroup, abfleeing, abForceFlee, abIsAggressor, acTeam, bforcecombat, bIgnoreDefensivePackage, abCastSpell, apPackage
 bool __stdcall FUN_0074b5a0(Obj74b5a0* p0, int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9, int p10, int p11, int p12)
 {
     p0->v418(p1, p4, p9, p7, p5, 0, p11, p12);

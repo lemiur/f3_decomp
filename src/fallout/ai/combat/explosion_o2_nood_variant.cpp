@@ -1069,6 +1069,8 @@ struct Node00cbd500
 };
 
 // @fnv 0x00cbd500
+// pdb: NiTMap<unsigned int,CombatThreat *>::DeleteItem | CombatThreatMap.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkItem
 void __stdcall FUN_00cbd500(Node00cbd500* p)
 {
     p->unk08 = 0;
@@ -1995,6 +1997,8 @@ extern unsigned char DAT_010f3418;
 extern const double DAT_00db36a8;
 struct SetupLiquid {void __thiscall FUN_0092f910(LiquidLink*);};
 struct NormalPoint {float __thiscall NiPoint3_UnitizeGetLength();};
+// pdb: bhkLiquidAction::Update | bhkLiquidAction.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: afDelta
 void LiquidActionCandidate::FUN_00cbccb0(float delta)
 {
     LiquidVec force;

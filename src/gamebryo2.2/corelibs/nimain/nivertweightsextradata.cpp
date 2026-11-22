@@ -10,6 +10,8 @@ struct NiObject
 extern "C" char __stdcall FUN_00a7b3d0(NiObject*);
 
 // @fnv 0x00a89b00
+// pdb: NiLightDimmerController::IsEqual | NiLightDimmerController.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: pkObject
 char __stdcall FUN_00a89b00(NiObject* pObject)
 {
     char b = FUN_00a7b3d0(pObject);
@@ -19,6 +21,7 @@ char __stdcall FUN_00a89b00(NiObject* pObject)
 extern "C" void* g_011f5b78;
 
 // @fnv 0x00a89b20
+// pdb: NiGeometry::GetRTTI | NiGeometry.obj | fnv360_0822_retail, objrun_open, low
 void* __cdecl FUN_00a89b20()
 {
     return &g_011f5b78;
@@ -82,6 +85,8 @@ struct A89C70Object : A89C70Base
 
 // Calls the base GetViewerStrings, then adds the RTTI name string to the string array.
 // @fnv 0x00a89c70
+// pdb: NiBSplineCompColorInterpolator::GetViewerStrings | NiBSplineCompColorInterpolator.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkStrings
 void A89C70Object::FUN_00a89c70(A89C70StringArray* pkStrings)
 {
     A89C70Base::GetViewerStrings(pkStrings);
@@ -121,6 +126,8 @@ static __forceinline void LoadU32(S_00a89be0_Stream* s, unsigned int* v, unsigne
 }
 
 // @fnv 0x00a89be0
+// pdb: NiVertWeightsExtraData::LoadBinary | NiVertWeightsExtraData.obj | fnv360_0822_retail, uconst, low
+// pdb params: kStream
 void __stdcall FUN_00a89be0(S_00a89be0_Stream* s)
 {
     if (s->m_uiFormatVersion < 0x5000010)

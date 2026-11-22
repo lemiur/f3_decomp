@@ -2072,6 +2072,7 @@ namespace f3m_00a23e70 {
 namespace f3m_00a23e70
 {
 // 0x00a23e70 is Havok's createAndAppendNewTask compiled out of line (0x00a240d0 inlines it at both call sites).
+// pdb: createAndAppendNewTask | hkpCpuIntegrateJob.obj | fnv360_0822_retail, objrun_open, low
 static __declspec(noinline) void FUN_00a23e70( const hkpBuildJacobianTaskHeader* taskHeader, hkpBuildJacobianTaskCollection* outBuildCollection, hkpSolveJacobiansTaskCollection* outSolveCollection,
 	hkpBuildJacobianTask*& prevBuildTask, hkpSolveConstraintBatchTask*& prevSolveTask, hkpSolveConstraintBatchTask*& firstTaskOfPreviousBatch, hkpSolveConstraintBatchTask*& firstTaskOfCurrentBatch,
 	hkpJacobianSchema*& schemas, hkpSolverElemTemp*& elemTemp, hkLocalArray<hkConstraintInternalInfo>& constraintsForThisTask,

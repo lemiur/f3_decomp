@@ -222,6 +222,8 @@ struct C25990Elem
     static void operator delete[](void* p);
 };
 // @fnv 0x00c25990
+// pdb: NiTNewInterface<NiPSysUpdateTask>::Allocate | NiPSysUpdateTask.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: uiNumElements
 void* __cdecl FUN_00c25990(unsigned int count)
 {
     return new (count) C25990Elem[count];

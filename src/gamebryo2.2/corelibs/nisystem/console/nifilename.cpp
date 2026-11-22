@@ -3,6 +3,8 @@
 #include "nifilename_packet.h"
 // Initialises the object and splits path into drive, directory, filename and extension buffers via _splitpath_s.
 // @fnv 0x00aa27d0
+// pdb: NiFilename::NiFilename | NiFilename.obj | fnv360_0822_retail, call_gap, low
+// pdb params: pcFullPath
 FileNameComponents::FileNameComponents(const char* path)
 {
     m_acDirectoryComponent[0] = 0;

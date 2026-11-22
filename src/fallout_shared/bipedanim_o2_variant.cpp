@@ -102,6 +102,8 @@ struct FUN_00b553d0_NodeLayout
 };
 
 // @fnv 0x00b553d0
+// pdb: BSShaderManager::SetEmittanceRecurse | BSShaderManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apObject, aColor
 void __cdecl FUN_00b553d0(NiGeometry* pObject, NiPoint3* pValue)
 {
     if (pObject == 0)

@@ -5,12 +5,15 @@
 #include "havok/hkpSphereShape.h"
 
 // @fnv 0x00cd8050
+// pdb: BSSimpleList<bhkLiquidAction *>::GetNext | bhkLiquidAction.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: hkpHingeConstraintData::getType)
 int __cdecl FUN_00cd8050()
 {
     return 1;
 }
 
 // @fnv 0x00cd87f0
+// pdb: hkpSphereShape::calcSizeForSpu | hkpSphereShape.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: input, spuBufferSizeLeft
 int __stdcall FUN_00cd87f0(int a1, int a2)
 {
     return 0x20;
@@ -59,6 +62,8 @@ class HostCD81
 
 // Writes start and end timer commands to the TLS monitor stream around a call to FUN_00cd85c0, then returns pvResult.
 // @fnv 0x00cd8190
+// pdb: hkpSphereShape::castRayImpl | hkpSphereShape.obj | fnv360_0822_retail, ustr, high
+// pdb params: input, results
 void* HostCD81::RecordTimerCommands(void* pvResult, int a, int b)
 {
     hkMonitorStreamCD81* pkStream = (hkMonitorStreamCD81*)TlsGetValue(DAT_0126835c);

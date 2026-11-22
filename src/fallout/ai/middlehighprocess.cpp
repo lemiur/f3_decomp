@@ -3752,6 +3752,8 @@ struct OwnerSelf709
     void FUN_00729880();
 };
 
+// pdb: PlayerCharacter::SetPCYoung | PlayerCharacter.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: abVal
 void FUN_0091efc0_owner::StopActorMoving(Actor0091efc0* apActor)
 {
     OwnerSelf709* self = (OwnerSelf709*)this;

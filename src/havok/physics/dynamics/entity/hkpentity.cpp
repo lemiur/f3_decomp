@@ -115,6 +115,7 @@ struct FUN_00c9bfa0_Class
 // If m_08 and m_10 are set, calls FUN_00d1a330 with m_08->m_78, a pointer to this, and 1.
 // @f3 0x0090af70 (community match, verified in this file)
 void __cdecl FUN_0099a2d0(int a1, int* a2, int a3);
+// pdb: hkpEntity::updateCachedAabb | hkpEntity.obj | fnv360_0822_debug, caller_sim, low
 void FUN_00c9bfa0_Class::FUN_00c9bfa0()
 {
     if (m_08 && m_10)
@@ -241,6 +242,8 @@ struct FUN_00c9c390_Class
 };
 // Returns the entry at index from the inline array when index is below m_b0, otherwise from the m_b4 array offset by m_b0.
 // @f3 0x0090b220 (community match, verified in this file)
+// pdb: hkpEntity::getConstraint | hkpEntity.obj | fnv360_0822_retail, call_gap, high
+// pdb params: i
 int FUN_00c9c390_Class::GetEntry(int index)
 {
     if (index < *(unsigned short*)(m_auiShapeKeys + 0x9c))
@@ -444,6 +447,8 @@ struct Entity
 
 void __cdecl FUN_0097eef0(const void* object, N90b350::StatisticsCollector* collector, const void* cls);
 
+// pdb: hkpEntity::calcContentStatistics | hkpEntity.obj | fnv360_0822_retail, ustr, high
+// pdb params: collector, cls
 void hkpEntityStats::CollectStats(hkStatisticsCollector* statsCollector) const
 {
     N90b350::StatisticsCollector* collector = (N90b350::StatisticsCollector*)statsCollector;
@@ -522,6 +527,8 @@ class hkOwnerC9C5
 // Finds the first null entry in m_slots and replaces it with p, or appends p if no null entry exists.
 // @f3 0x0090b490 (community match, verified in this file)
 namespace f3m_0090b490 { void __cdecl FUN_0098a9f0(void* array, int elemSize); }
+// pdb: hkpEntity::addContactListener | hkpEntity.obj | fnv360_0822_retail, call_seq, high
+// pdb params: cl
 void hkOwnerC9C5::AddSlot(void* p) {
  hkSmallArrayC9C5<void*>& slots=((hkOwnerC9C5*)((char*)this-0x10))->m_slots;
  int i=((hkOwnerC9C5*)((char*)this-0x10))->m_slots.indexOf(0);
@@ -844,6 +851,7 @@ struct S00c92a80_cls
 
 // Reads a float from obj, builds a S00c92a80_Range, and calls obj->v1c with a0, a1, this, the range, and 1.
 // @fnv 0x00c92a80
+// pdb: hkpWorld::findInitialContactPoints | hkpWorld.obj | tesv_win, objrun_open, low
 void S00c92a80_cls::FUN_00c92a80(int a0, int a1)
 {
     float b = *(float*)((char*)obj + 0x18);
@@ -1033,6 +1041,7 @@ struct FUN_008f6d30_Holder
     void* FUN_008f6d30(unsigned int size, int flags);
 };
 
+// pdb: hkpEntity::getConstraintSlavesImpl | hkpEntity.obj | fnv360_0822_debug, objrun, low, conflict (bridge: hkpEntity::setCachedShapeData)
 void hkpEntityC9C0::UpdateBoundingVolume(const hkpWorldC9C0* pkWorld, const hkpShapeC9C0* pkShape)
 {
     char* p = (char*)this;
@@ -1164,6 +1173,8 @@ class hkOwnerC9C1
 namespace Task1479 {
 struct View { int padding[124]; hkSmallArrayC9C1<void*> entries; };
 }
+// pdb: hkpEntity::removeContactListener | hkpEntity.obj | fnv360_0721_beta, call_seq, low, conflict (skyrim: hkpTriggerVolume::triggerBodyLeftWorld)
+// pdb params: cl
 void hkOwnerC9C1::FUN_00c9c140(void* entry) {
  Task1479::View* self=(Task1479::View*)this;
  self->entries.m_data[self->entries.indexOf(entry)]=0;
@@ -1726,6 +1737,7 @@ class hkpEntityC9CF3
     int unk0CC;
     hkpMotionC9C m_pMotionState;
 };
+// pdb: hkpEntity::activate | hkpEntity.obj | fnv360_0822_retail, call_dedup, low
 void hkpEntityC9C::FUN_00c9c1d0()
 {
     hkpEntityC9CF3* self = (hkpEntityC9CF3*)this;
@@ -1911,6 +1923,8 @@ struct Host_w152_f3
     int unk0C8;
     Listeners_w152_f3* m_pkListeners;
 };
+// pdb: hkpEntity::removeEntityListener | hkpEntity.obj | fnv360_0822_retail, call_gap, low
+// pdb params: el
 void HostC9C6::FUN_00c9c670(void* pvListener)
 {
     Host_w152_f3* self = (Host_w152_f3*)this;
@@ -2635,6 +2649,7 @@ struct EntityView
     float m_unk1DC;
 };
 
+// pdb: hkpEntity::deactivate | hkpEntity.obj | fnv360_0822_retail, caller_sim, low
 void FUN_00c9c240_holder::FUN_00c9c240()
 {
     EntityView* self = (EntityView*)this;
@@ -3108,6 +3123,8 @@ struct KeyArray_93c7a0
     int size;
 };
 
+// pdb: hkDataClass::isSuperClass | hkDataObject.obj | fnv360_1110_retail, objrun_open, low
+// pdb params: k
 static __declspec(noinline) int FUN_0093c7a0(KeyArray_93c7a0* arr, int key)
 {
     for (int i = 0; i < arr->size; ++i)
@@ -3200,6 +3217,7 @@ struct FUN_0090b0c0_State
     FUN_0090b0c0_State(unsigned char v) : value(v) {}
 };
 
+// pdb: hkEntity_isActive | hkpEntity.obj | fnv360_0822_retail, objrun_open, low
 static __declspec(noinline) FUN_0090b0c0_State FUN_0090b0c0(FUN_0090b0c0_Owner* owner)
 {
     FUN_0090b0c0_Island* island = owner->m_island;

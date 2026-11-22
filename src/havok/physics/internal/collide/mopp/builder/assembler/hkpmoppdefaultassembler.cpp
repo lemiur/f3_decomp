@@ -11,6 +11,7 @@ struct FUN_00e06780_class
 
 // Writes character b at the current write position, advances the offset, and calls GrowBuffer when the offset reaches the capacity.
 // @fnv 0x00e06780
+// pdb: hkpMoppCodeGenerator::addCode | hkpMoppDefaultAssembler.obj | tesv_win, call_dedup, low
 void __thiscall FUN_00e06780_class::AppendChar(char acValue)
 {
     char* p = *(char**)((char*)this + 0x10) - *(int*)((char*)this + 0xc);
@@ -62,6 +63,8 @@ struct S_00e066f0
 };
 
 // @fnv 0x00e066f0
+// pdb: hkpMoppAssemblerNodeInfo::updateOffsetAndSpread | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: node
 void S_00e066f0::CopyOffsets(const S_00e066f0_Src* src)
 {
     m_iElementCount = src->m_kRayEnd - src->m_pRayStart;
@@ -100,6 +103,7 @@ struct FUN_00e06730_cls
 };
 
 // @fnv 0x00e06730
+// pdb: hkpMoppAssemblerCutInfo::calcPossibleCutPlanes | hkpMoppDefaultAssembler.obj | tesv_win, call_gap, low
 void FUN_00e06730_cls::AlignRanges()
 {
     int iShift0 = m_iShift;
@@ -144,6 +148,8 @@ struct ByteSink
 
 // Writes acSecond then acFirst to the sink via PutByte, in that order.
 // @fnv 0x00e067b0
+// pdb: hkpMoppCodeGenerator::addCommand8 | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_gap, high
+// pdb params: code, param
 void ByteSink::PutBytePair(char acFirst, char acSecond)
 {
     PutByte(acSecond);
@@ -162,6 +168,8 @@ struct BufferWriter
 };
 // Writes the low three bytes of value into the buffer from the end, advancing position and flushing when it reaches capacity.
 // @fnv 0x00e06920
+// pdb: hkpMoppCodeGenerator::addParam24 | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: param
 void BufferWriter::WriteInt24(int value)
 {
     data[capacity - position - 1] = (unsigned char)value;
@@ -320,6 +328,8 @@ struct Node
 };
 // Walks the linked list from node, marking each node's unk39 flag until one is already set or the list ends.
 // @fnv 0x00e06b20
+// pdb: hkpMoppDefaultAssembler::fixScale | hkpMoppDefaultAssembler.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: currentNode
 void __stdcall FUN_00e06b20(Node* node)
 {
     while (node)
@@ -351,6 +361,8 @@ struct Limits
 };
 // Copies second->unk34 into third->unk34, then compares unk38/unk24 thresholds and may overwrite third->unk34 with first->unk24.
 // @fnv 0x00e06b50
+// pdb: hkpMoppDefaultAssembler::calcReoffset | hkpMoppDefaultAssembler.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: currentNode, parentInfo, currentInfo
 void __stdcall AdjustLimits(Limits* first, Limits* second, Limits* third)
 {
     third->unk34 = second->unk34;
@@ -391,6 +403,8 @@ struct FUN_00e06db0_class
 
 // If *flag is set, calls WriteOp(0, c->m_40) when c->m_44 is 0 and b->m_44 is nonzero; otherwise when c->m_44 is 0 and c->m_40 is set.
 // @fnv 0x00e06db0
+// pdb: hkpMoppDefaultAssembler::checkAndAddProperties | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: currentNode, parentInfo, currentInfo
 void FUN_00e06db0_class::FUN_00e06db0(int* piFlag, Node* pNodeB, Node* pNodeC)
 {
     if (*piFlag)
@@ -435,6 +449,7 @@ template <class T> inline T S_00e07040_Min(T a, T b)
 {
     return a < b ? a : b;
 }
+// pdb: hkpMoppDefaultAssembler::calcRescaleBits | hkpMoppDefaultAssembler.obj | tesv_win, hash, low
 int __stdcall FUN_00e07040(S_00e07040_A* a, S_00e07040_B* b)
 {
     int n = b->unk08 - 8;
@@ -476,6 +491,8 @@ struct E07510Solver
 
 // If the input's m_type is 1, calls FUN_00e07070 with b, c and d, then always calls AdjustLimits with a, b and c.
 // @fnv 0x00e07510
+// pdb: hkpMoppDefaultAssembler::calcReoffset | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_dedup, low, conflict (skyrim: hkpMoppDefaultAssembler::initTopDown)
+// pdb params: currentNode, parentInfo, currentInfo
 void E07510Solver::FUN_00e07510(E07510Input* pInput, void* b, void* c, void* d)
 {
     if (pInput->m_type == 1)
@@ -665,6 +682,7 @@ struct FUN_00e06880_cls
 
 // Writes the low three bytes of v and then a into the buffer from the end, flushing whenever the buffer fills.
 // @fnv 0x00e06880
+// pdb: hkpMoppCodeGenerator::addCommand24 | hkpMoppDefaultAssembler.obj | tesv_win, hash, low
 void __thiscall FUN_00e06880_cls::FUN_00e06880(char acTrailingByte, int aiValue)
 {
     m_buf[m_cap - m_uiItemCount - 1] = (char)aiValue;
@@ -702,6 +720,8 @@ struct FUN_00e069a0_cls
 
 // Writes the four bytes of v and then a into m_buf from the end backwards, flushing whenever the buffer fills.
 // @fnv 0x00e069a0
+// pdb: hkpMoppCodeGenerator::addCommand24 | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: hkpMoppCodeGenerator::addCommand32)
+// pdb params: code, param
 void __thiscall FUN_00e069a0_cls::FUN_00e069a0(char a, unsigned int auValue)
 {
     m_buf[m_cap - m_uiItemCount - 1] = (char)auValue;
@@ -747,6 +767,8 @@ struct FUN_00e06a60_cls
 };
 
 // @fnv 0x00e06a60
+// pdb: hkpMoppCodeGenerator::pad | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: size
 void __thiscall FUN_00e06a60_cls::FillWithPattern(int count)
 {
     if (count <= 0)
@@ -819,6 +841,8 @@ struct FUN_00e06780_owner : public FUN_00e06780_class
 
 // Writes 1 to out if actor->unk08 is below 0x16 or *value exceeds this->unk18, otherwise writes 0, and returns out.
 // @fnv 0x00e06af0
+// pdb: hkpMoppDefaultAssembler::shouldAssemble | hkpMoppDefaultAssembler.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: currentNode, currentInfo
 char* FUN_00e06780_owner::FUN_00e06af0(char* pResult, FUN_00e06780_actor* actor, int* piValue)
 {
     if (actor->unk08 < 0x16)
@@ -870,6 +894,8 @@ struct FUN_00e06c40_class
 };
 
 // @fnv 0x00e06c40
+// pdb: hkpMoppDefaultAssembler::addDataOffset | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, callee_sim, medium, conflict (bridge: copyCodeAndEmbedTerminals)
+// pdb params: offset, numTerminals
 int __thiscall FUN_00e06c40_class::FUN_00e06c40(int a1, int a2)
 {
     m_stream->AppendChar((char)a2);
@@ -922,6 +948,8 @@ class FUN_00e06cb0_cls
 
 // Writes four bytes of the packet (m_b10, m_b0c, m_b08, m_b04) into the sink buffer, flushing when it fills.
 // @fnv 0x00e06cb0
+// pdb: hkpMoppDefaultAssembler::addRescale | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: cmd
 void __thiscall FUN_00e06cb0_cls::WritePacket(const Pkt* p)
 {
     {
@@ -1101,6 +1129,8 @@ extern const double g_thresholdB;
 
 // Compares the x, y and z components of a Vec3 against g_thresholdA and g_thresholdB and returns a code from 0 to 12 identifying the region.
 // @fnv 0x00e06f20
+// pdb: hkpMoppDefaultAssembler::getSplitCode | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, caller, high
+// pdb params: norm
 int __stdcall ClassifyVec3Region(const Vec3* pVec)
 {
     int r;
@@ -1190,6 +1220,8 @@ struct S_00e07070_Result
 extern "C" int __stdcall FUN_00e07040(S_00e07070_Object* a, S_00e07070_Object* b);
 
 // @fnv 0x00e07070
+// pdb: hkpMoppDefaultAssembler::recalcRescale | hkpMoppDefaultAssembler.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: parent, info, cmd
 void __stdcall FUN_00e07070(S_00e07070_Object* a, S_00e07070_Object* b, S_00e07070_Result* out)
 {
     int n = FUN_00e07040(a, b);
@@ -1350,6 +1382,8 @@ struct Handler
     int __thiscall FUN_00e07ca0(Entry*, Entry*, Entry*, char*);
 };
 // @fnv 0x00e07ca0
+// pdb: hkpMoppDefaultAssembler::assembleNonTerminalCommand | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: currentNode, parentInfo, currentInfo, rescaleCommandInfo
 int __thiscall Handler::FUN_00e07ca0(Entry* first, Entry* second, Entry* third, char* flag)
 {
     Entry* originalFirst = first;
@@ -1595,6 +1629,8 @@ struct Tree
 }
 extern int __cdecl hkMath_hkFloatToInt(float);
 
+// pdb: hkpMoppDefaultAssembler::preCalcCutPositions | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_gap, low
+// pdb params: currentNode, parentInfo, currentInfo
 void S_00e07da0_Tree::BuildRegion(S_00e07da0_Node* pNode, S_00e07da0_Region* pParent, S_00e07da0_Region* pRegion)
 {
     n_a87830::Tree* self = (n_a87830::Tree*)this;
@@ -1761,6 +1797,8 @@ struct FUN_00e094a0_cls
 };
 
 // @fnv 0x00e094a0
+// pdb: hkpMoppAssemblerNodeInfo::updateExtents | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: node, codeInfo
 void FUN_00e094a0_cls::BuildScaledRanges(FUN_00e094a0_floatset* pFloatSet, float* pValues)
 {
     int best = 0;
@@ -1803,6 +1841,7 @@ struct FUN_00e09540_Self
 };
 
 // @fnv 0x00e09540
+// pdb: hkpMoppAssemblerNodeInfo::calcMaxExtentsSignificantBits | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, callee_sim, low
 void FUN_00e09540_Self::FUN_00e09540()
 {
     int size = this->unk10 - this->unk0c;
@@ -1871,6 +1910,8 @@ class FUN_00e095d0_cls
 };
 
 // @fnv 0x00e095d0
+// pdb: hkpMoppAssemblerNodeInfo::hkpMoppAssemblerNodeInfo | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: parentInfo, node, codeInfo
 FUN_00e095d0_cls* FUN_00e095d0_cls::FUN_00e095d0(FUN_00e095d0_cls* pSource, unsigned int a2, unsigned int a3)
 {
     *this = *pSource;
@@ -1906,6 +1947,8 @@ class E6BC0Encoder
 
 // Writes iValue to the writer using a byte, short or int opcode chosen by the value's magnitude, offset from iOpcode.
 // @fnv 0x00e06bc0
+// pdb: hkpMoppCodeGenerator::addCode | hkpMoppDefaultAssembler.obj | fnv360_0822_debug, call_seq, low, conflict (skyrim: hkpMoppDefaultAssembler::addProperty)
+// pdb params: code
 void E6BC0Encoder::WriteOp(int iBaseOpcode, int iValue)
 {
     E6BC0Writer* pkWriter = m_pkWriter;
@@ -1931,6 +1974,8 @@ struct FUN_00e06ed0_Class
 
 // Computes the difference between the buffer's field at offset 12 and iTarget, then writes it with a width code (5-8) chosen by its magnitude if positive.
 // @fnv 0x00e06ed0
+// pdb: hkpMoppDefaultAssembler::addJump | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: jumpPos
 void FUN_00e06ed0_Class::WriteOffsetDelta(int iTargetValue)
 {
     int iOffset = ((int*)m_pStreamWriter)[3] - iTargetValue;
@@ -2006,6 +2051,8 @@ struct Tree07400
 };
 
 // @f3 0x00a86eb0 (community match, verified in this file)
+// pdb: hkpMoppDefaultAssembler::calcTermCut | hkpMoppDefaultAssembler.obj | fnv360_0822_debug, call_gap_sim, high
+// pdb params: currentNode, currentInfo
 void Tree07400::ComputeNodeBounds(Node07400* node, Region07400* region)
 {
     Node07400* pNode = *(Node07400* volatile*)&node;
@@ -2257,6 +2304,8 @@ struct NativeTree1921
     int __thiscall FUN_00a86af0(KdCtx*,KdCtx*);
     void __thiscall FUN_00a86b20(KdCtx*,KdCtx*,S_00e07070_Result*);
 };
+// pdb: hkpMoppDefaultAssembler::preCalcScale | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_gap, low
+// pdb params: currentNode, parentInfo, currentInfo
 int __thiscall MyTree::Recurse(KdNode* apNode, KdCtx* a, KdCtx* c)
 {
     NativeTree1921* tree = reinterpret_cast<NativeTree1921*>(this);
@@ -3035,6 +3084,7 @@ struct BvScratch
             FreeSlow(p);
     }
 };
+// pdb: copyCodeAndEmbedTerminals | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, callee_sim, low, conflict (skyrim: hkReferencedObject::addReference)
 static __declspec(noinline) int FUN_00e08380(BvTree* tree, CodeCopySource* source, BvArray<int>* refs,
                                              FUN_00e065f0* destination)
 {

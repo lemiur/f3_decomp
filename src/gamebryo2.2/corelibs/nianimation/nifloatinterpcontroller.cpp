@@ -26,6 +26,8 @@ template <class T, class M> class NiTPrimitiveArray : public StrArr
 typedef NiTPrimitiveArray<char*, NiTMallocInterface<char*> > NiTPrimitiveArray_char;
 
 // @fnv 0x00a576c0
+// pdb: NiTextureTransformController::GetViewerStrings | NiTextureTransformController.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pkStrings
 void __stdcall FUN_00a576c0(NiTPrimitiveArray_char* pkStrings)
 {
     FUN_00a390a0(pkStrings);
@@ -150,6 +152,8 @@ struct FUN_00a57630 : NiSingleInterpController
     void LinkObject(NiStream&);
 };
 // @fnv 0x00a57630
+// pdb: Interface::PlayMenuSound | Interface.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiSoundIndex
 void FUN_00a57630::LinkObject(NiStream& kStream)
 {
     NiSingleInterpController::LinkObject(kStream);
@@ -168,6 +172,7 @@ struct FUN_00a57c70 : NiSingleInterpController
     void LoadBinary(NiStream&);
 };
 // @fnv 0x00a57c70
+// pdb: Interface::DrawLockpickMenu3D | Interface.obj | fnv360_0822_retail, caller_sim, low
 void FUN_00a57c70::LoadBinary(NiStream& kStream)
 {
     NiSingleInterpController::LoadBinary(kStream);

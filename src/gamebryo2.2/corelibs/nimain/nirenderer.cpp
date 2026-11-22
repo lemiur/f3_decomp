@@ -22,6 +22,7 @@ struct FUN_00a63230_shell
 };
 // Calls FUN_00a62b60, then if flags has bit 1 set frees this with size 0x280, and returns this.
 // @fnv 0x00a63230
+// pdb: NiRenderer::`scalar deleting destructor' | NiRenderer.obj | fnv360_0822_retail, objrun_prop, high
 void* __thiscall FUN_00a63230_shell::Destroy(unsigned int flags)
 {
     FUN_00a62b60();
@@ -149,6 +150,7 @@ extern FUN_00a62b60* DAT_011f4748;
 
 // Clears the global DAT_011f4748 pointer to null as part of the FUN_00a62b60 destructor.
 // @fnv 0x00a62b60
+// pdb: NiRenderer::~NiRenderer | NiRenderer.obj | fnv360_0822_retail, objrun, high
 FUN_00a62b60::~FUN_00a62b60()
 {
     DAT_011f4748 = 0;
@@ -257,6 +259,8 @@ inline float AcosClamped(float v)
 
 // Computes four corner points and right/up axes around a center, using a basis or target direction and a given width.
 // @fnv 0x00a62be0
+// pdb: NiRenderer::PackParticleStripUtil_GetVerts | NiRenderer.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aPreviousDir, aPoint, aNextPoint, afSize, aOutPoint, aOutNormal, aOutDir
 bool __cdecl FUN_00a62be0(const NiPoint3** basis, const NiPoint3* apCenter, const NiPoint3* target, float width,
                           NiPoint3* corners, NiPoint3* axes, NiPoint3& direction)
 {

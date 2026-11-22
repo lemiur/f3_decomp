@@ -95,6 +95,8 @@ static inline Disp* GetDisp(Sh* s)
     return (Disp*)(p + p[0x10]);
 }
 // @fnv 0x00cf6ea0
+// pdb: hkpBroadPhaseBorderListener::addCollisionPair | hkpBroadPhaseBorderListener.obj | fnv360_0822_retail, vtable, high
+// pdb params: pair
 void __stdcall DispatchPairByType(Pair* p)
 {
     if (p->a->type == 3 && p->b->type == 3)

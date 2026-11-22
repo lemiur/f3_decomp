@@ -41,6 +41,8 @@ struct NiTriStripsDynamicData : NiTriStripsData
 
 // Compares this dynamic strips data with pkObject: true if IsEqual and both active vertex and triangle counts match.
 // @fnv 0x00a92430
+// pdb: NiTriStripsDynamicData::IsEqual | NiTriStripsDynamicData.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiTriShapeDynamicData::IsEqual)
+// pdb params: pkObject
 bool NiTriStripsDynamicData::IsEqualDynamic(NiObject* pkObject)
 {
     NiTriStripsDynamicData* pkData = (NiTriStripsDynamicData*)pkObject;
@@ -70,6 +72,8 @@ struct FUN_00a92480_shell
 };
 
 // @fnv 0x00a92480
+// pdb: NiTriStripsDynamicData::SetActiveVertexCount | NiTriStripsDynamicData.obj | fnv360_0822_retail, objrun, medium
+// pdb params: usActiveVertices
 void __thiscall FUN_00a92480_shell::FUN_00a92480(short value)
 {
     m_usActiveVertices = value;
@@ -92,6 +96,8 @@ struct FUN_00a92490_shell
 };
 
 // @fnv 0x00a92490
+// pdb: NiTriStripsDynamicData::SetActiveTriangleCount | NiTriStripsDynamicData.obj | fnv360_0822_retail, objrun, medium
+// pdb params: usActiveTriangles
 void __thiscall FUN_00a92490_shell::SetShortValue(short value)
 {
     m_usActiveTriangles = value;
@@ -116,6 +122,8 @@ struct FUN_00a92340 : FUN_00a75dc0
 };
 // Initializes the base class with the given arguments and stores the active vertex and triangle counts.
 // @fnv 0x00a92340
+// pdb: NiTriStripsDynamicData::NiTriStripsDynamicData | NiTriStripsDynamicData.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: usVertices, pkVertex, pkNormal, pkColor, pkTexture, usNumTextureSets, eNBTMethod, usTriangles, usStrips, pusStripLengths, pusStripLists, usActiveVertices, usActiveTriangles
 FUN_00a92340::FUN_00a92340(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4, unsigned int a5,
                            unsigned int a6, unsigned int a7, unsigned int a8, unsigned int a9, unsigned int a10,
                            unsigned int a11, unsigned short ausActiveVertices, unsigned short ausActiveTriangles)
@@ -132,6 +140,7 @@ struct Standin00a761a0
 void __cdecl _delete(void*, unsigned int);
 // Calls FUN_00a76040, then frees this with _delete when arg has bit 1 set, and returns this.
 // @fnv 0x00a924b0
+// pdb: NiTriStripsDynamicData::`scalar deleting destructor' | NiTriStripsDynamicData.obj | fnv360_0822_retail, objrun_prop, low
 void* __thiscall Standin00a761a0::DestroyIfFlagged(unsigned int auiFlags)
 {
     FUN_00a76040();
@@ -423,6 +432,8 @@ struct A92590TriShapeData : A92590Base
 
 // Appends the RTTI name and the active vertex and triangle counts to the viewer string array.
 // @fnv 0x00a92590
+// pdb: NiTriStripsDynamicData::GetViewerStrings | NiTriStripsDynamicData.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkStrings
 void A92590TriShapeData::FUN_00a92590(A92590StringArray* pkStrings)
 {
     A92590Base::GetViewerStrings(pkStrings);

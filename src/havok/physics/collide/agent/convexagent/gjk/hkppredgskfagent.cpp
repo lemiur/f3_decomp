@@ -31,6 +31,8 @@ class SpawnedObject
 };
 
 // @fnv 0x00d41f00
+// pdb: hkPredGskAgent3::registerAgent3 | hkpPredGskAgent3.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: dispatcher, typeA, typeB
 void __cdecl FUN_00d41f00(SpawnedObject* self, int aiArg1, int aiArg2)
 {
     FUN_00d41f00_Local local;

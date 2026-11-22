@@ -38,6 +38,7 @@ FUN_00dbc670::FUN_00dbc670()
 }
 
 // @fnv 0x00dbd720
+// pdb: `anonymous namespace'::getArraySizeInBytes<class hkPackfileSectionHeader> | hkBinaryPackfileWriter.obj | tesv_win, call_seq, medium
 unsigned int __cdecl FUN_00dbd720(unsigned int arg)
 {
     return *reinterpret_cast<unsigned int*>(arg + 4) * 3 * 16;
@@ -58,6 +59,7 @@ struct FUN_00dbd730_class
     void* ForwardToTarget(void* value);
 };
 // @fnv 0x00dbd730
+// pdb: hkOArchive::isOk | hkOArchive.obj | fnv360_0822_retail, call_seq, high
 void* FUN_00dbd730_class::ForwardToTarget(void* value)
 {
     target->Send(value);
@@ -84,6 +86,7 @@ struct S_00dbd770
 };
 
 // @fnv 0x00dbd770
+// pdb: hkSubStreamWriter::seekTellSupported | hkBinaryPackfileWriter.obj | fnv360_0822_retail, vtable, high
 void* S_00dbd770::ForwardToInner(void* apArg)
 {
     unk8->unk18(apArg);
@@ -111,6 +114,7 @@ struct FUN_00dbd7d0_Class
     int GetAdjustedValue();
 };
 // @fnv 0x00dbd7d0
+// pdb: hkSubStreamWriter::tell | hkBinaryPackfileWriter.obj | tesv_win, vtable, medium
 int FUN_00dbd7d0_Class::GetAdjustedValue()
 {
     return object->f8() - offset;
@@ -135,6 +139,7 @@ struct FUN_00dbd870
 };
 // Default-constructs four Triple members and sets trailing to 0.
 // @fnv 0x00dbd870
+// pdb: hkRelocationInfo::hkRelocationInfo | hkDeepCopier.obj | tesv_win, hash, low
 FUN_00dbd870::FUN_00dbd870() : trailing(0)
 {}
 
@@ -213,6 +218,8 @@ static inline int S_Rev(int v)
 }
 
 // @fnv 0x00dbc6f0
+// pdb: hkBinaryPackfileWriter::writeClassName | hkBinaryPackfileWriter.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: context, k, absoluteDataStart
 void __stdcall WriteNodeDiff(FUN_00dbc6f0_cls_owner* apOwner, FUN_00dbc6f0_cls_source* apSource, int aiDiff)
 {
     int x = apSource->Lookup(0);
@@ -275,6 +282,8 @@ struct S_00dbd790_Class
 };
 // Calls the object's f7 virtual method, passing a plus offset when b is zero and a otherwise, along with b.
 // @fnv 0x00dbd790
+// pdb: hkSubStreamWriter::seek | hkBinaryPackfileWriter.obj | fnv360_0822_retail, vtable, high
+// pdb params: offset, whence
 void S_00dbd790_Class::DispatchToObject(int aiValue, int b)
 {
     object->f7(b == 0 ? aiValue + offset : aiValue, b);
@@ -337,6 +346,8 @@ struct FUN_00dbd8a0
 
 // Initialises members from p: stores p, builds unk20 from p->unk04 and unk30 from byte 0, and sets unk4c by comparing DAT_011b7b89 with p->unk04.unk1.
 // @fnv 0x00dbd8a0
+// pdb: hkBinaryPackfileWriter::SaveContext::SaveContext | hkBinaryPackfileWriter.obj | fnv360_0822_debug, call_seq, high
+// pdb params: options
 FUN_00dbd8a0::FUN_00dbd8a0(S_00dbd8a0_Arg* apArg) : unk00(apArg), unk20(&apArg->unk04), unk30(S_00dbd8a0_Byte(0))
 {
     unk4c = DAT_011b7b89 != apArg->unk04.unk1;
@@ -764,6 +775,8 @@ extern "C" void __cdecl FUN_009234e0(void* dst, void* src, int n);
 extern "C" void __cdecl FUN_009233d0(void* dst, void* src, int n);
 extern "C" void __cdecl FUN_00a4a570(void* dst, int n);
 extern int DAT_0116c41c;
+// pdb: hkBinaryPackfileWriter::fillSectionTags | hkBinaryPackfileWriter.obj | fnv360_0822_debug, call_seq, low, conflict (skyrim: saveFileHeader)
+// pdb params: context
 static __declspec(noinline) void FUN_00dbc860(Dbc860Src* apSrc, int value, int extra, Dbc860Sink* sink)
 {
     Dbc860Header header;
@@ -1302,6 +1315,8 @@ struct FixupThree {
 };
 extern int DAT_0116c44c;
 extern char DAT_011b7b89;
+// pdb: hkBinaryPackfileWriter::doDeferredWrites | hkBinaryPackfileWriter.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: context, sectionHeadersStart
 void WriterOwner::FUN_00dbc960(SourceData* source, int position)
 {
     BinaryWriter values;
@@ -2209,6 +2224,8 @@ struct Writer
 // @f3 0x009d7a40 (community match, verified in this file)
 extern "C" int __cdecl FUN_009d88b0(SectionTagsPrivate::HeaderArray* a);
 
+// pdb: hkSubStreamWriter::hkSubStreamWriter | hkBinaryPackfileWriter.obj | fnv360_0822_debug, call_seq, low, conflict (skyrim: hkBinaryPackfileWriter::fillSectionTags)
+// pdb params: child
 void SectionTagsPrivate::Writer::FUN_00dbc7a0(SectionTagsPrivate::Context* context)
 {
     SectionTagsPrivate::HeaderArray* headers = &context->headers;

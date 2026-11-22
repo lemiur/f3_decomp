@@ -41,6 +41,8 @@ struct FUN_00ccf890_t : BSFadeNode
 };
 // Allocates and constructs a FUN_00ccf890_t object and returns it as a BSFadeNode pointer.
 // @fnv 0x00ccf890
+// pdb: bhkConvexListShape::CreateClone | bhkConvexListShape.obj | fnv360_0822_retail, objrun_prop, low, conflict (bridge: bhkConvexListShape::CreateObject)
+// pdb params: arCloneData
 BSFadeNode* FUN_00ccf890()
 {
     return new FUN_00ccf890_t;
@@ -108,6 +110,8 @@ struct hkVisualDebuggerCD0D : hkVisualDebugger
 
 // Creates the debugger's socket server if absent, listens on iListenPort, and reports the outcome via DAT_01268360->message.
 // @f3 0x00952f70 (community match, verified in this file)
+// pdb: hkVisualDebugger::serve | hkVisualDebugger.obj | fnv360_0822_retail, ustr, medium
+// pdb params: listenPort
 void hkVisualDebuggerCD0D::CreateServer(int iListenPort)
 {
     DAT_01268360->BeginSection(0x1293ade8, "Serving");
@@ -227,6 +231,8 @@ struct hkCtrlStub
     hkTargetCD0E* FUN_009ee790();
 };
 
+// pdb: hkVisualDebugger::writeStep | hkVisualDebugger.obj | fnv360_0822_retail, call_seq, high
+// pdb params: i, t
 void hkOwnerCD0E::ActivateEntry(int aiIndex, float t)
 {
     hkEntryCD0E& e = reinterpret_cast<NativeOwner1480*>(this)->m_entries[aiIndex];
@@ -292,6 +298,8 @@ class hkpEntityTrackerCD11
 // Finds pkEntity in the entity array and, if present, removes it and the matching entry from m_entityData.
 // @f3 0x009533c0 (community match, verified in this file)
 namespace Task1561 {struct View {int padding[12];hkArrayCD11<hkpEntityCD11*> entries;hkArrayCD11<void*> details;};}
+// pdb: hkVisualDebugger::removeTrackedObjectCallback | hkVisualDebugger.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: callback
 void hkpEntityTrackerCD11::FUN_00cd1140(hkpEntityCD11* entity){
  Task1561::View* self=(Task1561::View*)this;
  int i=self->entries.indexOf(entity);
@@ -939,6 +947,8 @@ extern const char DAT_00e7bee4[], DAT_00dfa640[], DAT_00e7bec4[], DAT_00e7bb74[]
 }
 }
 
+// pdb: hkVisualDebugger::capture | hkVisualDebugger.obj | fnv360_0822_retail, ustr, medium
+// pdb params: captureFilename
 void hkVisualDebuggerCD1::CaptureSimulationState(const char* filename) throw() {
     using namespace f3m_00953e70;
     Self953* self = reinterpret_cast<Self953*>(this);
@@ -1104,6 +1114,8 @@ struct DebuggerStd836
     hkArray836<F3Callback> m_kCallbackFunctions;
     hkArray836<void*> m_callbackData;
 };
+// pdb: hkVisualDebugger::removeTrackedObject | hkVisualDebugger.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: obj
 void Debugger836::UntrackObject(void* object)
 {
     DebuggerStd836* self = reinterpret_cast<DebuggerStd836*>(this);
@@ -1273,6 +1285,8 @@ struct ServerCd14F3
     int m_numTypes;
     void FUN_009530f0(int aiIndex, float afTime);
 };
+// pdb: hkVisualDebugger::createClient | hkVisualDebugger.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: socket, reader, writer
 void Server_cd14::AddEntry(const char* name, void* a, void* apCompilerInfo)
 {
     ServerCd14F3* self = (ServerCd14F3*)this;
@@ -1408,6 +1422,7 @@ struct Layout488 {
     bool timing;unsigned int unk5c;Timer488 timer;
     void FUN_00953680(char*,char*,char*);
 };
+// pdb: hkVisualDebugger::pollForNewClients | hkVisualDebugger.obj | fnv360_0822_retail, vtable, medium
 void hkVisualDebuggerCD15::FUN_00cd1520() {
     Layout488* owner=reinterpret_cast<Layout488*>(this);
     if(owner->timing) owner->timer.Stop();
@@ -1676,6 +1691,8 @@ struct hkVisualDebuggerView953a90
     hkStopwatchC17 m_kFrameTimer;
 };
 
+// pdb: hkVisualDebugger::hkVisualDebugger | hkVisualDebugger.obj | fnv360_0822_retail, ustr, medium
+// pdb params: contexts, reg
 FUN_00cd1780::FUN_00cd1780(const hkArrayC17<hkProcessContextC17*>& kContexts,
                            const hkVtableClassRegistryC17* pkClassReg) throw()
     : m_kClients(m_kClients), m_kProcessContexts(m_kProcessContexts), m_kTrackedObjects(m_kTrackedObjects),

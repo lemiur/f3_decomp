@@ -5,6 +5,7 @@
 #include "havok/hkpAabbPhantom.h"
 
 // @fnv 0x00cf2460
+// pdb: hkpAabbPhantom::getType | hkpAabbPhantom.obj | fnv360_0822_retail, objrun_open, low
 int __cdecl FUN_00cf2460()
 {
     return 0;
@@ -161,6 +162,8 @@ struct AabbPhantomLayout
     hkArray<void*> m_ppOverlappingCollidables;
 };
 
+// pdb: hkpAabbPhantom::removeOverlappingCollidable | hkpAabbPhantom.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: collidable
 void FUN_00cf2a60_t::FUN_00cf2a60(hkpCollidable* collidable)
 {
     AabbPhantomLayout* self = (AabbPhantomLayout*)this;

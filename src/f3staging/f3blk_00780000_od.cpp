@@ -795,6 +795,7 @@ struct S78ed50_Mgr {
     void FUN_0078ed50();
 };
 
+// pdb: ProcessLists::ChangeProcessLevelTempList | ProcessLists.obj | fnv360_0822_retail, call_gap, medium
 void S78ed50_Mgr::FUN_0078ed50()
 {
     if (DAT_0107a104->FUN_0076c8e0())
@@ -1395,6 +1396,8 @@ void __cdecl FUN_00657ab0();
 void __cdecl FUN_0064de10(int a);
 void __cdecl FUN_00644490(const char* name);
 
+// pdb: PlayerCharacter::PositionPlayer | PlayerCharacter.obj | fnv360_0822_debug, caller, medium
+// pdb params: aPos, aAngle, apCell, abResetWeather
 void Player78::FUN_007820f0(Vec3_78 pos, Vec3_78 rot, Cell78* targetCell, bool flag24)
 {
     if (!((TES78*)DAT_0107a0d8)->unk51 && !((TES78*)DAT_0107a0d8)->unk52)

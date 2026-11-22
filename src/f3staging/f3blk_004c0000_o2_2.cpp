@@ -41,6 +41,7 @@ struct Cell8410 {
     void FUN_004d8410();
 };
 
+// pdb: TESObjectCELL::AddReferencesToLoadedReferenceCollection | TESObjectCELL.obj | fnv360_0721_beta, call_seq, medium
 void Cell8410::FUN_004d8410() {
     refLock.FUN_00409a80("TESObjectCELL::CellRefLockEnter()");
     for (RefNode8410* node = &refs; node; node = node->next) {
@@ -643,6 +644,8 @@ struct Cell5fd0 {
     void FUN_004d5fd0(bool flag);
 };
 
+// pdb: TESObjectCELL::AttachSounds | TESObjectCELL.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abAttach
 void Cell5fd0::FUN_004d5fd0(bool flag)
 {
     if (!g_state5fd0->flag5A9 && !g_settings5fd0->Flag1()) {
@@ -809,6 +812,7 @@ int g_landCount;
 
 void FUN_004ca670();
 
+// pdb: TESObjectLAND::TESObjectLAND | TESLand.obj | fnv360_0721_beta, call_seq, high
 TESObjectLAND::TESObjectLAND()
 {
     if (!g_landInitialised)
@@ -844,6 +848,7 @@ public:
     NiPointer<Shape> transformData;
     virtual ~FUN_004c1f50();
 };
+// pdb: ImageSpaceModifierInstance::~ImageSpaceModifierInstance | ImageSpaceModifierInstance.obj | fnv360_0822_retail, call_seq, medium
 FUN_004c1f50::~FUN_004c1f50() {
     transformData = 0;
 }
@@ -901,6 +906,8 @@ struct Cell_004da190 : Base_004da190 {
     bool FUN_004da190(Item_004da190* item);
 };
 
+// pdb: TESObjectCELL::SavesBefore | TESObjectCELL.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apGroupFORM
 bool Cell_004da190::FUN_004da190(Item_004da190* item)
 {
     bool result = false;
@@ -1077,6 +1084,7 @@ struct Cell {
     void FUN_004d8460();
 };
 
+// pdb: TESObjectCELL::RemoveReferencesFromLoadedReferenceCollection | TESObjectCELL.obj | fnv360_0822_retail, call_gap, low
 void Cell::FUN_004d8460()
 {
     lock80.FUN_00409a80(DAT_00dcd0a8);
@@ -1324,6 +1332,7 @@ public:
     bool FUN_004cf050();
 };
 
+// pdb: TESObjectLAND::LoadVerticesIntoArrays | TESLand.obj | fnv360_0822_retail, ustr, medium
 bool LandForm::FUN_004cf050()
 {
     if (HasData())
@@ -1640,6 +1649,8 @@ struct CellA10 {
     int GetY() { if (!IsInterior() && coords) return coords->y; return 0; }
     bool FUN_004d3a10(const CellPos* pos);
 };
+// pdb: TESObjectCELL::IsPointInCellExterior | TESObjectCELL.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aPt
 bool CellA10::FUN_004d3a10(const CellPos* pos)
 {
     if (IsInterior())
@@ -1940,6 +1951,8 @@ struct MapCell {
     void __thiscall FUN_004db3e0(NiCamera* pkCamera, NiPointer<BSRenderedTexture>& spResult);
 };
 
+// pdb: TESObjectCELL::TakeLocalMapPicture | TESObjectCELL.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apCamera, aspRenderedTexture
 void MapCell::FUN_004db3e0(NiCamera* pkCamera, NiPointer<BSRenderedTexture>& spResult)
 {
     MemoryContext memory;

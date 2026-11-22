@@ -3,6 +3,8 @@
 #include "niskindata_packet.h"
 // Checks whether the root bone or any bone name is present in context.map, returning true on the first hit.
 // @fnv 0x00a862d0
+// pdb: NiSkinInstance::NeedClone | NiSkinInstance.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: kCloning
 bool NiSkinData::MapSkinData(SkinMapContext& context)
 {
     ShaderBufferRecord* result;
@@ -30,6 +32,7 @@ extern int g_011f5b24;
 
 // Returns the address of the global variable g_011f5b24.
 // @fnv 0x00a84d20
+// pdb: NiSkinData::GetRTTI | NiSkinData.obj | fnv360_0822_retail, udata, high
 int __cdecl GetGlobalAddress()
 {
     return (int)&g_011f5b24;
@@ -58,6 +61,8 @@ struct FakeSkin : NiObject
     void FUN_00a84ce0(NiStream&);
 };
 // @fnv 0x00a84ce0
+// pdb: NiSkinData::LinkObject | NiSkinData.obj | fnv360_0822_retail, objrun, medium
+// pdb params: kStream
 void FakeSkin::FUN_00a84ce0(NiStream& kStream)
 {
     NiObject::LinkObject(kStream);
@@ -125,6 +130,8 @@ struct FUN_00a84d70_cls
 
 // Compares this object with another: root, sub-block, count, then each shape's ops, tail, count and entry keys/values; returns true if all match.
 // @fnv 0x00a84d70
+// pdb: NiSkinData::IsEqual | NiSkinData.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pkObject
 bool FUN_00a84d70_cls::Equals(FUN_00a84d70_cls* other)
 {
     if (!reinterpret_cast<SkinCompareOps*>(this)->CompareRoot(other))
@@ -197,6 +204,8 @@ struct S_00a84e70_Array
 };
 
 // @fnv 0x00a84e70
+// pdb: NiTSet<NiPoint3,NiTNewInterface<NiPoint3> >::Realloc | NiSkinData.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: uiNewSize
 void S_00a84e70_Array::Reserve(unsigned int newCapacity)
 {
     if (newCapacity == m_pRayCursor)
@@ -575,6 +584,7 @@ struct FUN_00a84ef0_cls
 };
 
 // @fnv 0x00a84ef0
+// pdb: NiSkinData::`scalar deleting destructor' | NiSkinData.obj | fnv360_0822_retail, objrun, high
 FUN_00a84ef0_cls* FUN_00a84ef0_cls::FUN_00a84ef0(unsigned char acFlags)
 {
     m_vptr = (int)&DAT_0109e574;

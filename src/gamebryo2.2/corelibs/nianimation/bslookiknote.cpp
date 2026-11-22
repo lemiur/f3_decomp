@@ -14,6 +14,7 @@ char const* const* __cdecl BSShaderTextureSet_GetRTTI()
 extern int g_011f3ee8;
 
 // @fnv 0x00a43f80
+// pdb: NiObject::GetRTTI | ImageSpaceModifierInstance.obj | fnv360_0822_retail, vtable, medium
 int* __cdecl FUN_00a43f80()
 {
     return &g_011f3ee8;
@@ -29,6 +30,7 @@ struct BSLookIKNote
 
 // Calls FUN_00a44830, then if flags has bit 0 set frees this with _delete, and returns this.
 // @fnv 0x00a43f90
+// pdb: NiFloatData::`scalar deleting destructor' | TESImageSpaceModifier.obj | fnv360_0822_retail, vtable, high
 void* __thiscall BSLookIKNote::Destroy(unsigned int flags)
 {
     FUN_00a44830();
@@ -54,6 +56,7 @@ struct BSLookIKNote
 };
 
 // @fnv 0x00a43fb0
+// pdb: BSLookIKNote::CreateObject | BSLookIKNote.obj | fnv360_0822_retail, objrun, high
 BSLookIKNote* __cdecl CreateLookIKNote()
 {
     BSLookIKNote* pNote = static_cast<BSLookIKNote*>(BSLookIKNote::operator new(0x18));
@@ -89,6 +92,8 @@ struct FUN_00a43f30_shell : BSLookIKNote
 
 // Returns true if IsEqual(apObject) passes and the float and eState fields match those of apObject cast to BSLookIKNote.
 // @fnv 0x00a43f30
+// pdb: BSLookIKNote::IsEqual | BSLookIKNote.obj | fnv360_0822_retail, objrun_open, low, conflict (bridge: BSGrabIKNote::IsEqual)
+// pdb params: apObject
 bool FUN_00a43f30_shell::IsLookIKNoteEqual(NiObject* apObject)
 {
     if (IsEqual(apObject))
@@ -496,6 +501,8 @@ struct S_00a44190 : S_00a44190_Base
 };
 // Calls the base class save routine, then serializes the two float members unk10 and unk14 to the stream.
 // @fnv 0x00a44190
+// pdb: BSLookIKNote::SaveBinary | BSLookIKNote.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arStream
 void S_00a44190::FUN_00a44190(S_00a44190_Stream& kStream)
 {
     S_00a44190_Base::BSAnimNote_SaveBinary(kStream);
@@ -603,6 +610,8 @@ class LookIKKeyHandler : public TextKeyHandlerBase
 
 // Parses a "LookIK" text key: reads a 4-char float value into m_fValue and sets m_iMode to 1 for Start or 2 for Stop.
 // @fnv 0x00a44050
+// pdb: BSLookIKNote::ParseTextKey | BSLookIKNote.obj | fnv360_0822_retail, ustr, high
+// pdb params: apTextKey
 bool LookIKKeyHandler::ParseLookIKKey(TimedTextEntry* pkKey)
 {
     bool bResult = ParseKey(pkKey);
@@ -681,6 +690,8 @@ inline void S_Push(S_00a441f0_arg* p, char* s)
 }
 
 // @fnv 0x00a441f0
+// pdb: BSLookIKNote::GetViewerStrings | BSLookIKNote.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apStrings
 void S_00a441f0_cls::AppendFormattedFields(S_00a441f0_arg* p)
 {
     FUN_00a44bf0(p);

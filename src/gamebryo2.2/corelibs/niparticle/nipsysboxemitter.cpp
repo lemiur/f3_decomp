@@ -3,12 +3,15 @@
 #include "nipsysboxemitter_decls.h"
 // Constructs a NiPSysEmitter, initializing speed, declination, planar angle, color, radius, lifespan and unknown to their defaults.
 // @fnv 0x00c21f00
+// pdb: NiPSysEmitter::NiPSysEmitter | NiPSysEmitter.obj | fnv360_0822_retail, call_dedup, low
 NiPSysEmitter::NiPSysEmitter()
     : speed(0.0f), speedVar(0.0f), declination(0.0f), declinationVar(0.0f), planarAngle(0.0f), planarAngleVar(0.0f),
       color(DAT_011a9be0), radius(1.0f), radiusVar(0.0f), lifespan(0.0f), lifespanVar(0.0f), unknown(1.0f)
 {}
 // Loads the box emitter's width, height and depth floats from the stream after the base volume emitter data.
 // @fnv 0x00c203b0
+// pdb: NiPSysBoxEmitter::LoadBinary | NiPSysBoxEmitter.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void NiPSysBoxEmitter::LoadBinary(NiStream& stream)
 {
     NiPSysVolumeEmitter::LoadBinary(stream);
@@ -60,6 +63,7 @@ struct S
     void* __thiscall DestroyIfFlagged(unsigned int);
 };
 // @fnv 0x00c20390
+// pdb: NiPathController::`scalar deleting destructor' | NiPathController.obj | fnv360_0822_retail, objrun, high
 void* __thiscall S::DestroyIfFlagged(unsigned int uiFlags)
 {
     FUN_00c31750();
@@ -83,6 +87,8 @@ struct EmitterHack
 };
 // Calls NiPSysVolumeEmitter_IsEqual on pkObject and returns true only if that succeeds and the three floats at offsets 0x58, 0x5c and 0x60 match the other object's.
 // @fnv 0x00c20170
+// pdb: NiPSysBoxEmitter::IsEqual | NiPSysBoxEmitter.obj | fnv360_0822_retail, objrun_open, high
+// pdb params: pkObject
 bool EmitterHack::IsEqual(NiObject* pkObject)
 {
     EmitterHack* pkDest = (EmitterHack*)pkObject;
@@ -120,6 +126,8 @@ struct NiPSysBoxEmitter_shell
 };
 
 // @fnv 0x00c202f0
+// pdb: NiPSysBoxEmitter::CreateClone | NiPSysBoxEmitter.obj | fnv360_0822_retail, objrun, low
+// pdb params: kCloning
 NiObject* NiPSysBoxEmitter_shell::Clone(CloningProcess& kCloning)
 {
     BSFadeNode* pkObject = (BSFadeNode*)A51BF0Base::operator new(0x64);
@@ -220,6 +228,8 @@ struct BoxViewer : NiPSysBoxEmitter
 };
 // Appends the base volume emitter's debug strings, then the box emitter's width, height and depth values to the string array.
 // @fnv 0x00c204d0
+// pdb: NiPSysBoxEmitter::GetViewerStrings | NiPSysBoxEmitter.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkStrings
 void BoxViewer::FUN_00c204d0(StrArr* strings)
 {
     ((VolumeViewer*)this)->FUN_00c31db0(strings);
@@ -238,6 +248,8 @@ struct FUN_00c1fdd0
     void FUN_00c2f4f0(int);
 };
 // @fnv 0x00c1fdd0
+// pdb: NiLinesData::RegisterStreamables | NiLinesData.obj | fnv360_0822_retail, objrun_prop, high
+// pdb params: kStream
 void FUN_00c1fdd0::FUN_00c2f4f0(int a)
 {
     ((FUN_00c61f60_class*)this)->FUN_00c2f4f0(a);
@@ -245,6 +257,8 @@ void FUN_00c1fdd0::FUN_00c2f4f0(int a)
 
 void __cdecl FUN_00c31c90();
 // @fnv 0x00c20150
+// pdb: NiScreenSpaceCamera::LoadBinary | NiOldScreenSpace.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void __cdecl FUN_00c20150()
 {
     FUN_00c31c90();
@@ -253,6 +267,8 @@ void __cdecl FUN_00c20150()
 extern void __cdecl FUN_00c31b40();
 
 // @fnv 0x00c20160
+// pdb: NiScreenSpaceCamera::SaveBinary | NiOldScreenSpace.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void __cdecl FUN_00c20160()
 {
     FUN_00c31b40();

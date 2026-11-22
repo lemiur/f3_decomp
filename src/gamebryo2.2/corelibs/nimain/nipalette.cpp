@@ -16,6 +16,7 @@ extern FUN_00a8b010_Node* DAT_011f5c04;
 extern int DAT_011f5c80;
 // Under a critical section, removes this node from the doubly linked list, updating the head, tail and neighbouring links.
 // @fnv 0x00a8b010
+// pdb: NiPalette::RemovePaletteFromList | NiPalette.obj | fnv360_0822_retail, udata, high
 void FUN_00a8b010_Node::Unlink()
 {
     EnterCriticalSection(&DAT_011f5c80);
@@ -51,6 +52,7 @@ struct MyObj
     int f20;
 };
 // @fnv 0x00a8b220
+// pdb: NiPalette::CreateObject | NiPalette.obj | fnv360_0721_beta, objopen_prop, medium
 void* FUN_00a8b220()
 {
     MyObj* p = (MyObj*)BSFadeNode::operator new(0x24);
@@ -97,6 +99,7 @@ struct NiPalette
     void* DestroyPalette(unsigned int);
 };
 // @fnv 0x00a8b270
+// pdb: NiPalette::~NiPalette | NiPalette.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiPalette::`scalar deleting destructor')
 void* NiPalette::DestroyPalette(unsigned int auiFlags)
 {
     *(void**)this = (void*)&DAT_0109f3fc;
@@ -134,6 +137,8 @@ struct FUN_00a8af40_cls
 // @f3 0x00855d50 (community match, verified in this file)
 #include <string.h>
 struct Base529 {unsigned char FUN_008258d0(void*);};
+// pdb: NiPalette::IsEqual | NiPalette.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pkObject
 unsigned char FUN_00a8af40_cls::Equals(FUN_00a8af40_cls* other) {
     if(!reinterpret_cast<Base529*>(this)->FUN_008258d0(other))return 0;
     if(f08!=other->f08)return 0;
@@ -269,6 +274,8 @@ struct A8b110Owner
 
 // Initializes the owner: stores the byte and count, allocates an element array, copies count*4 bytes from a3, and notifies DAT_011f4748.
 // @fnv 0x00a8b110
+// pdb: NiPalette::NiPalette | NiPalette.obj | fnv360_0822_retail, call_gap, high
+// pdb params: bHasAlpha, uiEntries, pkEntries
 void* A8b110Owner::FUN_00a8b110(unsigned char a1, unsigned int a2, void* pSrc)
 {
     _Call_a5d3a0(this);
@@ -342,6 +349,8 @@ struct DataArray
 };
 // Reads an enabled flag and element count from the source's reader, reallocates values if the count changed, reads the values, then notifies the observer.
 // @fnv 0x00a8b2c0
+// pdb: NiPalette::LoadBinary | NiPalette.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: kStream
 void DataArray::ReadFromSource(DataSource* source)
 {
     ReadGroup(source);
@@ -586,6 +595,8 @@ class A8B3C0Data : public A8B3C0Base
 };
 
 // @fnv 0x00a8b3c0
+// pdb: NiPalette::SaveBinary | NiPalette.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: kStream
 void A8B3C0Data::FUN_00a8b3c0(A8B3C0Stream& kStream)
 {
     A8B3C0Base::SaveBinary(kStream);
@@ -606,6 +617,8 @@ struct A8b080Owner : A8b110Owner
 
 // Copies m_08, m_0C and a deep copy of the m_14 element array from src, then calls FUN_00a8afc0.
 // @fnv 0x00a8b080
+// pdb: NiPalette::NiPalette | NiPalette.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: kPal
 void* A8b080Owner::FUN_00a8b080(const A8b080Owner& src)
 {
     _Call_a5d3a0(this);
@@ -637,6 +650,8 @@ struct ArrayElement
 };
 // Copies the f08 scalar and the f14/f0C integer array from rhs, reallocating the array only when the element count differs.
 // @fnv 0x00a8b190
+// pdb: NiPalette::operator= | NiPalette.obj | fnv360_0822_retail, call_gap, high
+// pdb params: kPal
 MyObj* __fastcall FUN_00a8b190(MyObj* self, void*, const MyObj* rhs)
 {
     if (self != rhs)
@@ -662,6 +677,7 @@ MyObj* __fastcall FUN_00a8b190(MyObj* self, void*, const MyObj* rhs)
 
 // Appends the given node to the end of a doubly-linked list guarded by a critical section, updating the head and tail pointers.
 // @fnv 0x00a8afc0
+// pdb: NiPalette::AddPaletteToList | NiPalette.obj | fnv360_0822_retail, callee_sim, medium
 void __fastcall FUN_00a8afc0(void* apNode)
 {
     FUN_00a8b010_Node* node = static_cast<FUN_00a8b010_Node*>(apNode);

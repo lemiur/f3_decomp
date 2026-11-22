@@ -270,6 +270,8 @@ void FUN_00453570(CompDesc* desc, FileObj* file);
 void FUN_00456560(CompFullName* name, FileObj* file);
 void TESTexture_LoadTextureChunk(CompTexture* icon, FileObj* file);
 
+// pdb: ActorValueInfo::Load | ActorValue.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool ThisObj::FUN_005a2aa0(FileObj* file)
 {
     if (file->TESFile_GetTESForm() != 'Y')

@@ -50,6 +50,7 @@ struct Owner
 };
 
 // @fnv 0x00c2b160
+// pdb: NiPSysFieldMagnitudeCtlr::CreateClone | NiPSysFieldMagnitudeCtlr.obj | tesv_win, caller_sim, low
 Node* Owner::FUN_00c2b160(int arg)
 {
     Node* node = new Node();

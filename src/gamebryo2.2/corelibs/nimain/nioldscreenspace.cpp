@@ -5,6 +5,8 @@ extern "C" void* __cdecl memset(void*, int, unsigned int);
 #include "nioldscreenspace_decls.h"
 // Zeroes the properties array, then assigns the contents of other into this object.
 // @fnv 0x00a89810
+// pdb: NiPropertyState::NiPropertyState | NiPropertyState.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kState
 NiScreenPolygon::NiScreenPolygon(const NiScreenPolygon& other)
 {
     memset(properties, 0, sizeof(properties));
@@ -49,6 +51,7 @@ struct BSFadeNode
 extern int DAT_0109f914;
 
 // @fnv 0x00a8ffc0
+// pdb: NiScreenPolygon::CreateObject | NiOldScreenSpace.obj | fnv360_0822_retail, objrun, medium
 void* __cdecl FUN_00a8ffc0()
 {
     void* p = BSFadeNode::operator new(0x1c);
@@ -79,6 +82,7 @@ struct NiScreenGeometry
 };
 
 // @fnv 0x00a90040
+// pdb: NiTriBasedGeom::`scalar deleting destructor' | NiTriBasedGeom.obj | fnv360_0822_retail, objopen_prop, low
 void* __thiscall NiScreenGeometry::FUN_00a90040(unsigned int flags)
 {
     *(int*)this = (int)&DAT_0109f81c;
@@ -115,6 +119,8 @@ struct Holder
     void FUN_00ba4530(int);
 };
 // @f3 0x00b23040 (community match, verified in this file)
+// pdb: ImageSpaceEffectFullScreenBlur::BorrowTextures | ImageSpaceEffectBlur.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pParam
 void Holder::FUN_00ba4530(int)
 {
     ImageSpaceTexture* p = (ImageSpaceTexture*)((char*)this + 0x58);
@@ -142,6 +148,7 @@ struct HolderBase
     void __thiscall FUN_00a2e620();
 };
 // @fnv 0x00a2e620
+// pdb: NiTArray<NiPointer<NiControllerSequence>,NiTNewInterface<NiPointer<NiControllerSequence> > >::RemoveAll | NiControllerManager.obj | fnv360_0721_beta, call_seq, medium
 void __thiscall HolderBase::FUN_00a2e620()
 {
     for (unsigned short i = 0; i < m_usSize; ++i)
@@ -197,6 +204,8 @@ struct MyStand : NiObject
 };
 // Calls NiObject::RegisterStreamables, then registers streamables on 7 objects reached through the pointer at this+8, returning false if the base call fails.
 // @fnv 0x00a900c0
+// pdb: NiScreenPolygon::RegisterStreamables | NiOldScreenSpace.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: stream
 bool MyStand::FUN_00a900c0(NiStream& stream)
 {
     if (!NiObject::RegisterStreamables(stream))
@@ -300,6 +309,7 @@ struct NiScreenGeometryData
 };
 // Calls FUN_00a911d0, then frees this with _delete when flags has bit 0 set, and returns this.
 // @fnv 0x00a91910
+// pdb: ObstacleUndoData::`scalar deleting destructor' | NavMeshObstacleCutter.obj | fnv360_0822_retail, vtable, medium
 void* __thiscall NiScreenGeometryData::FUN_00a91910(unsigned int flags)
 {
     FUN_00a911d0();
@@ -316,6 +326,7 @@ struct NiScreenSpaceCamera
     void* __thiscall FUN_00a91e60(unsigned int flags);
 };
 // @fnv 0x00a91e60
+// pdb: NiScreenSpaceCamera::`scalar deleting destructor' | NiOldScreenSpace.obj | fnv360_0822_retail, objrun_prop, low
 void* __thiscall NiScreenSpaceCamera::FUN_00a91e60(unsigned int flags)
 {
     FUN_00a915d0();
@@ -331,6 +342,7 @@ struct NiScreenSpaceCamera
 };
 
 // @fnv 0x00a91ee0
+// pdb: NiScreenSpaceCamera::CreateObject | NiOldScreenSpace.obj | fnv360_0822_retail, objrun_prop, low
 BSFadeNode* FUN_00a91ee0()
 {
     void* p = BSFadeNode::operator new(0x134);
@@ -360,6 +372,7 @@ struct FUN_00a90560_host : NiRefObject
     void* __thiscall FUN_00a90560(unsigned int);
 };
 // @fnv 0x00a90560
+// pdb: NiScreenPolygon::`scalar deleting destructor' | NiOldScreenSpace.obj | fnv360_0822_retail, objrun, medium
 void* __thiscall FUN_00a90560_host::FUN_00a90560(unsigned int auiFlags)
 {
     *(void**)this = (void*)&DAT_0109f914;
@@ -461,6 +474,8 @@ struct FUN_00a90d70_poly : NiObject
 };
 // Loads vertex count, vertex colors, and optional texture and color arrays from the stream, then reads the stream link.
 // @fnv 0x00a90d70
+// pdb: NiScreenPolygon::LoadBinary | NiOldScreenSpace.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: stream
 void FUN_00a90d70_poly::FUN_00a90d70(NiStream& kStream)
 {
     ((NiObjLB*)this)->LoadBinary(kStream);
@@ -520,6 +535,7 @@ struct FUN_00a90a50_class
 };
 
 // @fnv 0x00a90b20
+// pdb: NiScreenElementsData::CreateObject | NiScreenElementsData.obj | fnv360_0822_retail, caller_sim, low
 void* __cdecl FUN_00a90b20()
 {
     FUN_00a90a50_class* object = static_cast<FUN_00a90a50_class*>(A51BF0Base::operator new(0x70));
@@ -560,6 +576,8 @@ struct ObjA8F260 : BaseA8F260
 
 // Allocates an ObjA8F260, stores the two arguments in m_08 and m_0c, and returns it.
 // @fnv 0x00a8f260
+// pdb: Ni2DBuffer::Create | Ni2DBuffer.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: uiWidth, uiHeight
 void* __cdecl CreateObjA8F260(int aiValue08, int aiValue0c)
 {
     ObjA8F260* p = new ObjA8F260();
@@ -700,6 +718,8 @@ struct S_00a90100 : S_00a90100_Base
 };
 // Calls the base FUN_00a59ec0, then links every non-null child in m_kA and m_kB to kStream.
 // @fnv 0x00a90100
+// pdb: NiScreenSpaceCamera::ProcessClone | NiOldScreenSpace.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCloning
 void __thiscall S_00a90100::LinkChildren(S_00a90100_Stream& kStream)
 {
     FUN_00a59ec0(kStream);
@@ -737,6 +757,7 @@ struct FUN_00a902e0_cls
 };
 
 // @fnv 0x00a902e0
+// pdb: NiScreenGeometryData::ScreenElement::`vector deleting destructor' | NiOldScreenSpace.obj | fnv360_0822_retail, objrun, medium
 FUN_00a902e0_cls* FUN_00a902e0_cls::FUN_00a902e0(unsigned char acFlags)
 {
     if (acFlags & 2)
@@ -832,6 +853,8 @@ struct ScrGeomData
 
 // Compares this geometry against pkOther: base fields, m_b58, element counts, then each element's polygon/vertex counts and vertex, color and texture arrays.
 // @fnv 0x00a903a0
+// pdb: NiScreenGeometryData::IsEqual | NiOldScreenSpace.obj | fnv360_0721_beta, objrun, medium
+// pdb params: pkObject
 bool ScrGeomData::IsEqual(const ScrGeomData* pkOther)
 {
     if (!BaseIsEqual(pkOther))
@@ -946,6 +969,8 @@ struct OwnerCls_a905c0
 
 // Allocates a SpawnedObj_a905c0, initializes it with arg, then stores a sub-object created from m_08 into m_08 and returns it.
 // @fnv 0x00a905c0
+// pdb: NiScreenPolygon::CreateClone | NiOldScreenSpace.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCloning
 SpawnedObj_a905c0* OwnerCls_a905c0::CreateSpawnedObj(unsigned int arg)
 {
     SpawnedObj_a905c0* p = new SpawnedObj_a905c0();
@@ -1022,6 +1047,8 @@ struct FUN_00a90640_cls
 
 // Calls FUN_00a89af0, then iterates src's items and stores each item with GetKind() <= 7 into m_08 by kind, releasing the previous entry.
 // @fnv 0x00a90640
+// pdb: NiScreenPolygon::LinkObject | NiOldScreenSpace.obj | fnv360_0822_retail, objrun, medium
+// pdb params: stream
 void FUN_00a90640_cls::AddPropsFromSource(PropSrc* pSource)
 {
     FUN_00a89af0(pSource);
@@ -1064,6 +1091,8 @@ struct FUN_00a908b0_cls
 };
 
 // @fnv 0x00a908b0
+// pdb: NiTArray<NiPointer<BSTempEffect>,NiTNewInterface<NiPointer<BSTempEffect> > >::SetAt | GarbageCollector.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: uiIndex, element
 void FUN_00a908b0_cls::AssignElement(unsigned int uiIndex, ElemBase** ppElem)
 {
     if ((g_011f5e78 & 1) == 0)
@@ -1189,6 +1218,8 @@ struct NiScreenPolygonOld
 
 // Appends the RTTI name, m_usVertices, m_pkVertex, m_pkTexture, m_pkColor and the seven property names/pointers to the ViewerStrings list.
 // @fnv 0x00a913f0
+// pdb: NiScreenPolygon::GetViewerStrings | NiOldScreenSpace.obj | fnv360_0822_retail, strset, low
+// pdb params: pkStrings
 void NiScreenPolygonOld::AppendToStrings(ViewerStrings* apViewerStrings)
 {
     AppendCameraPathEntries(apViewerStrings);
@@ -1345,6 +1376,7 @@ class FUN_00a91d80 : public A91D80Camera
 
 // Initializes the camera, marks the viewport dirty, and updates world data and world bound.
 // @fnv 0x00a91d80
+// pdb: NiScreenSpaceCamera::NiScreenSpaceCamera | NiOldScreenSpace.obj | fnv360_0822_retail, objrun_prop, low
 FUN_00a91d80::FUN_00a91d80() : m_kObjectPointers(5, 5), m_kFloatValues(5, 5)
 {
     m_bViewportDirty = true;
@@ -1443,6 +1475,8 @@ struct FUN_00a91e90_cls
 
 // Allocates a NiScreenSpaceCameraNew, initialises it via FUN_00a91d80, passes it to FUN_00a916a0 with a1, and returns it (or 0 on allocation failure).
 // @fnv 0x00a91e90
+// pdb: NiScreenSpaceCamera::CreateClone | NiOldScreenSpace.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: kCloning
 NiScreenSpaceCamera* __thiscall FUN_00a91e90_cls::CreateScreenSpaceCamera(unsigned int a1)
 {
     NiScreenSpaceCamera* p = new NiScreenSpaceCameraNew;
@@ -1505,6 +1539,7 @@ struct FUN_00ba4480 : NodeBase
 };
 
 // @fnv 0x00ba4480
+// pdb: ImageSpaceEffectFullScreenBlur::~ImageSpaceEffectFullScreenBlur | ImageSpaceEffectBlur.obj | fnv360_0822_retail, objrun_prop, low
 FUN_00ba4480::~FUN_00ba4480()
 {
     for (int i = 0; i < 11; ++i)
@@ -1553,6 +1588,8 @@ class NiPSysOwnerA90
 };
 
 // @fnv 0x00a90070
+// pdb: NiParticles::CreateClone | NiParticles.obj | fnv360_0721_beta, objrun_prop, low, conflict (skyrim: NiParticles::CreateObject)
+// pdb params: kCloning
 NiPSysBaseA90* NiPSysOwnerA90::FUN_00a90070(void* pvProcess)
 {
     NiPSysDerivedA90* pkClone = new NiPSysDerivedA90;
@@ -1770,6 +1807,8 @@ struct FUN_00a90f70_poly : NiObject
 };
 // Links the object then writes vertex count, vertex colors, optional texture and color arrays, and property link IDs to the stream.
 // @fnv 0x00a90f70
+// pdb: NiScreenPolygon::SaveBinary | NiOldScreenSpace.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: stream
 void FUN_00a90f70_poly::FUN_00a90f70(SaveStream& kStream)
 {
     LinkObject(kStream);
@@ -1844,6 +1883,8 @@ struct HostA90
 };
 // Serializes the host's flag, element count and each element's polygon/vertex/color/texture data to the save stream.
 // @fnv 0x00a90b40
+// pdb: NiScreenGeometryData::SaveBinary | NiOldScreenSpace.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void HostA90::FUN_00a90b40(SaveStream& stream)
 {
     NiTriShapeData_SaveBinary(stream);
@@ -1916,6 +1957,7 @@ inline void DestroyPool(Pool00a91290* p)
 }
 
 // @fnv 0x00a91930
+// pdb: NiScreenGeometryData::_SDMShutdown | NiOldScreenSpace.obj | fnv360_0822_debug, call_seq, medium
 void __cdecl DestroyGlobalPool()
 {
     DestroyPool(DAT_011f5e50);
@@ -1924,6 +1966,8 @@ void __cdecl DestroyGlobalPool()
 void __cdecl FUN_00a71450();
 
 // @fnv 0x00a90000
+// pdb: Character::InitLoadGame | Character.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: apLoadGameBuffer
 void __cdecl FUN_00a90000()
 {
     FUN_00a71450();
@@ -1932,6 +1976,8 @@ void __cdecl FUN_00a90000()
 void FUN_00a716c0();
 
 // @fnv 0x00a90020
+// pdb: Character::FinishLoadGame | Character.obj | fnv360_0822_retail, vtable_prefix, medium
+// pdb params: apLoadGameBuffer
 void FUN_00a90020()
 {
     FUN_00a716c0();
@@ -1940,6 +1986,7 @@ void FUN_00a90020()
 extern "C" void __cdecl IsEqualTo();
 
 // @fnv 0x00a90030
+// pdb: CharacterProgression::~CharacterProgression | CharacterProgression.obj | fnv360_0822_retail, call_gap_sim, low
 extern "C" void __cdecl FUN_00a90030()
 {
     IsEqualTo();
@@ -2171,6 +2218,8 @@ __declspec(noinline) void A72BB0_DataStreamArray::FUN_00ba3aa0(unsigned int inde
 
 // Uses or creates the stream at uiIndex, optionally allocates a buffer and copies pvData, then stores the stream and bCopy flag.
 // @fnv 0x00a72bb0
+// pdb: NiAdditionalGeometryData::SetDataBlock | NiAdditionalGeometryData.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: uiIndex, pucData, uiTotalSize, bCopyData
 bool A72BB0_DataStreamOwner::FUN_00a72bb0(unsigned int uiIndex, void* pvData, unsigned int uiSize, bool bCopy)
 {
     A72BB0_DataStream* pkStream = 0;
@@ -2271,6 +2320,8 @@ class PolyScreenPolygon : public PolyObject
 };
 // Returns true when IsSameAs succeeds and the vertex counts, vertex values, optional texture and color values, and seven property pointers match.
 // @fnv 0x00a906e0
+// pdb: NiScreenPolygon::IsEqual | NiOldScreenSpace.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: pkObject
 bool PolyScreenPolygon::FUN_00a906e0(PolyObject* pObject)
 {
     if (!PolyObject::IsSameAs(pObject))
@@ -2437,6 +2488,7 @@ struct FUN_00a915d0 : PlainBase
 
 // Destroys the object by clearing elements in m_arr1 and m_arr2, then calling FUN_00a2e620 on both arrays.
 // @fnv 0x00a915d0
+// pdb: NiScreenSpaceCamera::~NiScreenSpaceCamera | NiOldScreenSpace.obj | fnv360_0822_retail, objrun, medium
 FUN_00a915d0::~FUN_00a915d0() throw()
 {
     unsigned int i = 0;
@@ -2724,6 +2776,8 @@ struct Host91950 : LoadBase91950
 void* __cdecl FUN_00aa1070(unsigned int);
 // Reads host data from a load stream, dispatching on version, then loads a flag, legacy fields, and an array of vertex/color/texture elements into m60.
 // @fnv 0x00a91950
+// pdb: NiScreenGeometryData::LoadBinary | NiOldScreenSpace.obj | fnv360_0822_retail, objrun, medium
+// pdb params: kStream
 void Host91950::FUN_00a91950(LoadStream91950& stream)
 {
     if (Version91950(stream) < 0x0a00010f)
@@ -2850,6 +2904,8 @@ struct FUN_00a90980_cls
 
 // Sets the element at idx, updating m_usExtra and reference counts on the old and new ElemBase pointers.
 // @fnv 0x00a90980
+// pdb: NiTArray<NiPointer<NiScreenPolygon>,NiTNewInterface<NiPointer<NiScreenPolygon> > >::SetAt | NiOldScreenSpace.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: uiIndex, element
 void FUN_00a90980_cls::FUN_00a90980(unsigned int aiIndex, ElemBase** appElement)
 {
     static SentinelHolder s_null;
@@ -3103,6 +3159,8 @@ struct SequenceOwner : public ClonerBase
 };
 // Copies base members and clones the m_kSequencesA and m_kSequencesB arrays into pkDest using kCloning.
 // @fnv 0x00a916a0
+// pdb: NiScreenSpaceCamera::CopyMembers | NiOldScreenSpace.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkDest, kCloning
 void SequenceOwner::FUN_00a916a0(SequenceOwner* pkDest, CloningProcess& kCloning) throw()
 {
     CopyBaseMembers(pkDest, kCloning);

@@ -358,6 +358,8 @@ struct SortPair
 };
 
 // @fnv 0x00d36520
+// pdb: hkAlgorithm::quickSortRecursive<hkShapeKeyPair,hkAlgorithm::less<hkShapeKeyPair> > | hkpCollectionCollectionAgent3.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: pArr, d, h, cmpLess
 extern "C" void FUN_00d36520(SortPair* arr, int lo, int hi, unsigned int extra)
 {
     int i;
@@ -634,6 +636,8 @@ void hkCapsuleTriangleAgent3_process();
 void FUN_009c2240();
 void FUN_009c2190();
 void FUN_009c2220();
+// pdb: hkCapsuleTriangleAgent3::registerAgent3 | hkpCapsuleTriangleAgent3.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: dispatcher
 void __cdecl FUN_00d39840(hkpCollisionDispatcherD398* pkDispatcher)
 {
     __declspec(align(16)) hkpAgent3FuncsD398 kFuncs;

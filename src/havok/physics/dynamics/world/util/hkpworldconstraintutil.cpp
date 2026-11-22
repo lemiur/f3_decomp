@@ -132,6 +132,8 @@ struct RP
     RRec* rec;                           /* 0x28 */
 };
 
+// pdb: hkpWorldConstraintUtil::removeConstraint | hkpWorldConstraintUtil.obj | fnv360_0822_retail, call_gap, high
+// pdb params: constraint
 void DetachRecord(S_00d27820_P* pp)
 {
     RP* p = (RP*)pp;

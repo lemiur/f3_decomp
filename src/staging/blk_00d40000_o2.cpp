@@ -35,6 +35,8 @@ void __cdecl FUN_00d49530(FUN_00c9ce00_cls* pObject, int aiValue)
 extern "C" void __cdecl AppendEventRecord(int, int, int, int);
 
 // @fnv 0x00d4de30
+// pdb: hkBeginConstraints | hkpBuildJacobianFromAtoms.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: hkpBreakableConstraintData::buildNopJacobian)
+// pdb params: in, out, sr, solverResultStriding
 void __stdcall FUN_00d4de30(int a, int b)
 {
     AppendEventRecord(a, b, 0, 8);
@@ -116,6 +118,8 @@ struct FUN_00d49580_vtbl
 };
 
 // @fnv 0x00d49580
+// pdb: hkEnum<enum hkpMeshShape::MeshShapeMaterialIndexStridingType,signed char>::operator== | hkpStorageMeshShape.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: cleanupLoadedObjecthkpStorageExtendedMeshShape)
+// pdb params: e
 void __cdecl FUN_00d49580(FUN_00d49580_vtbl* p)
 {
     p->v0(0);
@@ -124,6 +128,7 @@ void __cdecl FUN_00d49580(FUN_00d49580_vtbl* p)
 extern int DAT_010cfb34;
 
 // @fnv 0x00d4b190
+// pdb: cleanupLoadedObjecthkbStateMachine | hkbBehaviorReflections.obj | tesv_win, objrun, medium
 void __cdecl FUN_00d4b190(void* p)
 {
     ((void(__thiscall*)(void*, int))(*reinterpret_cast<void***>(p))[0])(p, 0);
@@ -134,6 +139,7 @@ struct FUN_00d4b250_vt
     virtual void __thiscall FUN_00d4b250(int);
 };
 // @fnv 0x00d4b250
+// pdb: cleanupLoadedObjecthkpStorageMeshShape | hkpCollidehkpMeshShapeReflections.obj | tesv_win, objrun, medium
 void __cdecl FUN_00d4b250(FUN_00d4b250_vt* p)
 {
     p->FUN_00d4b250(0);
@@ -144,6 +150,7 @@ struct FUN_00d4be50_vt
     virtual void FUN_00d4be50(int);
 };
 // @fnv 0x00d4be50
+// pdb: cleanupLoadedObjecthkpPhysicsData | hkpPhysicsDataClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00d4be50(FUN_00d4be50_vt* p)
 {
     p->FUN_00d4be50(0);
@@ -168,12 +175,15 @@ struct FUN_00d48330_vt
     virtual void v0(int);
 };
 // @fnv 0x00d48330
+// pdb: cleanupLoadedObjecthkpExtendedMeshShape | hkpCollidehkpExtendedMeshShapeReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00d48330(FUN_00d48330_vt* p)
 {
     p->v0(0);
 }
 
 // @fnv 0x00d49510
+// pdb: hkEnum<enum hkpMeshShape::MeshShapeIndexStridingType,signed char>::operator== | hkpStorageMeshShape.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: cleanupLoadedObjecthkpStorageExtendedMeshShapeShapeSubpartStorage)
+// pdb params: e
 void __cdecl FUN_00d49510(FUN_00d49580_vtbl* p)
 {
     p->v0(0);
@@ -184,6 +194,7 @@ struct FUN_00d4b1f0_vt
     virtual void __thiscall FUN_00d4b1f0(int);
 };
 // @fnv 0x00d4b1f0
+// pdb: cleanupLoadedObjecthkpStorageMeshShapeSubpartStorage | hkpCollidehkpMeshShapeReflections.obj | tesv_win, objrun, medium
 void __cdecl FUN_00d4b1f0(FUN_00d4b1f0_vt* p)
 {
     p->FUN_00d4b1f0(0);
@@ -194,6 +205,7 @@ struct FUN_00d4b320_vt
     virtual void v0(int);
 };
 // @fnv 0x00d4b320
+// pdb: cleanupLoadedObjecthkpMeshShape | hkpCollidehkpMeshShapeReflections.obj | tesv_win, objrun, medium
 void __cdecl FUN_00d4b320(FUN_00d4b320_vt* p)
 {
     p->v0(0);
@@ -211,6 +223,7 @@ struct FUN_00d4bf30_vt
 };
 
 // @fnv 0x00d4bf30
+// pdb: hkSkipSolverResults | hkpBuildJacobianFromAtoms.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00d4bf30(FUN_00d4bf30_vt* p)
 {
     p->FUN_00d4bf30(0);
@@ -230,6 +243,8 @@ struct FUN_00d532a0_cls
 };
 
 // @f3 0x009e0cd0 (community match, verified in this file)
+// pdb: bhkConstraintChain::RegisterStreamables | bhkConstraintChain.obj | fnv360_0822_retail, objrun, low
+// pdb params: arStream
 void __thiscall FUN_00d532a0_cls::ApplyToAllEntries(int aiValue)
 {
     int* p = this ? *(int**)((char*)this + 8) : 0;
@@ -442,6 +457,8 @@ struct S_009cd320_Name
     virtual void v09(void* first, void* second, int code);
 };
 
+// pdb: hkpPhantomAgent::createNoPhantomAgent | hkpPhantomAgent.obj | fnv360_0822_retail, objrun, high
+// pdb params: bodyA, bodyB, input, mgr
 int __cdecl DispatchToType1dNodes(FNVDispatchNode* pNodeA, FNVDispatchNode* pNodeB, int iCode)
 {
     if (pNodeA->m_pName->m_typeId == 0x1d)
@@ -466,6 +483,8 @@ void __cdecl FUN_00d42760();
 void __cdecl FUN_00d42780();
 
 // @fnv 0x00d42960
+// pdb: hkpPhantomAgent::registerAgent | hkpPhantomAgent.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: dispatcher
 void __cdecl FUN_00d42960(Agent* apAgent)
 {
     CollisionAgentFunctionTable s;
@@ -585,6 +604,7 @@ void* __cdecl FUN_00d48340()
 
 extern int DAT_010cf9a4;
 // @fnv 0x00d48360
+// pdb: getVtablehkpSerializedDisplayRbTransforms | hkpSerializedDisplayRbTransformsClass.obj | fnv360_0822_retail, objrun_open, low
 int* __cdecl FUN_00d48360()
 {
     return &DAT_010cf9a4;
@@ -655,6 +675,7 @@ void* __cdecl InitAndCall(void* volatile a1, void* volatile a2, void* volatile a
 extern int DAT_01268bcc;
 
 // @fnv 0x00d49520
+// pdb: getVtablehkpPoweredChainMapper | hkpPoweredChainMapperClass.obj | fnv360_0822_retail, objrun_open, low
 int* __cdecl FUN_00d49520()
 {
     return &DAT_01268bcc;
@@ -765,6 +786,8 @@ struct FUN_009e4660_stub
     void FUN_009e4660(float f, int i);
 };
 
+// pdb: hkpStorageExtendedMeshShape::hkpStorageExtendedMeshShape | hkpStorageExtendedMeshShape.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: radius, numbits
 void* FUN_00d49c50_cls::FUN_00d49c50(float afValue, int i)
 {
     reinterpret_cast<FUN_009e4660_stub*>(this)->FUN_009e4660(afValue, i);
@@ -783,6 +806,7 @@ void* FUN_00d49c50_cls::FUN_00d49c50(float afValue, int i)
 extern "C" int DAT_01268c8c;
 
 // @fnv 0x00d4b160
+// pdb: hkpConstraintChainInstance::staticClass | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 extern "C" void* __cdecl FUN_00d4b160()
 {
     return &DAT_01268c8c;
@@ -791,6 +815,7 @@ extern "C" void* __cdecl FUN_00d4b160()
 extern int DAT_01268cbc;
 
 // @fnv 0x00d4b1c0
+// pdb: getVtablehkpRotationalConstraintData | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void* __cdecl FUN_00d4b1c0()
 {
     return &DAT_01268cbc;
@@ -799,6 +824,7 @@ void* __cdecl FUN_00d4b1c0()
 extern int DAT_01268d04;
 
 // @fnv 0x00d4b220
+// pdb: getVtablehkpRagdollLimitsData | hkpRagdollLimitsDataClass.obj | fnv360_0822_retail, objrun_open, low
 int __cdecl FUN_00d4b220()
 {
     return reinterpret_cast<int>(&DAT_01268d04);
@@ -806,6 +832,7 @@ int __cdecl FUN_00d4b220()
 
 extern int DAT_01268d4c;
 // @fnv 0x00d4b280
+// pdb: getVtablehkpRagdollConstraintData | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 int* __cdecl FUN_00d4b280()
 {
     return &DAT_01268d4c;
@@ -1337,6 +1364,8 @@ class FUN_00d51720_cls
 
 // Stores the helper pointer, its Query() result in m_04, and zeroes m_08, m_0c and the trailing byte fields.
 // @fnv 0x00d51720
+// pdb: hkpConstraintConstructionKit::begin | hkpConstraintConstructionKit.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: constraint
 void FUN_00d51720_cls::InitFromHelper(void* pHelper)
 {
     m_04 = reinterpret_cast<FUN_00d51720_helper*>(pHelper)->Query();
@@ -1639,6 +1668,7 @@ struct FUN_00d53220 : FUN_00c89640
 };
 
 // @fnv 0x00d53220
+// pdb: bhkGenericConstraint::~bhkGenericConstraint | bhkGenericConstraint.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 FUN_00d53220::~FUN_00d53220()
 {
     FUN_00c876a0();
@@ -1677,6 +1707,8 @@ struct S_00d532f0_Class
 
 // Calls IsEqualWithValues, then compares the unk3c counts and each of the unk38 entries of this's and p's unk08 data, returning whether all match.
 // @f3 0x009e0d20 (community match, verified in this file)
+// pdb: bhkConstraintChain::CopyCinfo | bhkConstraintChain.obj | fnv360_0822_debug, objrun, low, conflict (bridge: bhkConstraintChain::IsEqual)
+// pdb params: arInfo
 bool S_00d532f0_Class::CompareData(S_00d532f0_Class* apOther)
 {
     bool result = IsEqualWithValues(apOther);
@@ -1924,6 +1956,8 @@ class D53360Owner
 };
 
 // @fnv 0x00d53360
+// pdb: bhkConstraintChain::LinkObject | bhkConstraintChain.obj | fnv360_0822_debug, objrun, low, conflict (bridge: hkConstraintChainCinfo::SaveBinary)
+// pdb params: arStream
 void D53360Owner::FUN_00d53360(D53360Stream& kStream)
 {
     unsigned int ItemUpdateArray = m_uiCount;
@@ -1961,6 +1995,8 @@ extern float DAT_011b5be4;
 
 // Converts a bit count to bytes, computes a normalized scale from it, and stores the scale and its reciprocal in two globals.
 // @fnv 0x00d57160
+// pdb: hkpCylinderShape::setNumberOfVirtualSideSegements | hkpCylinderShape.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: numSegments
 void ComputeByteScale(int bits)
 {
     int bytes = bits / 8;
@@ -2322,6 +2358,8 @@ __forceinline void* EntityOf(Param* p)
 }
 }
 
+// pdb: bhkConstraintChain::ProcessEntities | bhkConstraintChain.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: apWorld, abAdd
 bool FUN_00d536a0_shell::UpdateConstraintEntries(ParamD53* pkParam, bool bAdd)
 {
     using namespace co_9e0e70_ns;
@@ -2512,6 +2550,8 @@ struct D53970Callee
 };
 void __cdecl FUN_00901e90(D53970Array* arr, int n, int elemSize);
 
+// pdb: bhkConstraintChain::IsEqual | bhkConstraintChain.obj | fnv360_0822_debug, objrun, low, conflict (bridge: bhkConstraintChain::LinkObject)
+// pdb params: apObject
 void D53970Obj::ReadDataArray(D53970Stream* stream)
 {
     D53970Stream* s = *(D53970Stream* volatile*)&stream;
@@ -2637,6 +2677,7 @@ class hkBlockD46E
 };
 
 // @fnv 0x00d46de0
+// pdb: hkClass::getNumInterfaces | hkClass.obj | fnv360_0822_retail, objrun, high
 int hkBlockD46E::SumLinkedValues() const
 {
     const hkBlockD46E* pkBlock = m_next;
@@ -2691,6 +2732,7 @@ struct hkListNodeD46E
 };
 
 // @fnv 0x00d46e30
+// pdb: hkClass::getNumEnums | hkClass.obj | fnv360_0822_retail, objrun_sim, low
 int hkListNodeD46E::SumListValues() const
 {
     const hkListNodeD46E* pkNode = m_next;
@@ -2721,6 +2763,7 @@ class hkEntryListD46E
 
 // Scans the entries and returns the first whose m_name matches iName via FUN_00cb0fa0, or null if none match.
 // @fnv 0x00d46e90
+// pdb: hkClass::getEnumByName | hkClass.obj | tesv_win, caller_sim, low
 hkNamedEntryD46E* hkEntryListD46E::FindByName(int iName)
 {
     for (int i = 0; i < SumListValues(); i++)
@@ -2750,6 +2793,7 @@ struct FnvCpu_FUN_00d46ef0_CpuObject
     int FUN_00d46ef0();
 };
 // @fnv 0x00d46ef0
+// pdb: VirtualActorPathHandler::GetCurrentNodeIndex | VirtualActorPathHandler.obj | fnv360_0822_retail, vtable, medium
 int FnvCpu_FUN_00d46ef0_CpuObject::FUN_00d46ef0()
 {
     return value;
@@ -2771,6 +2815,7 @@ struct View44 { void* m_pad; FUN_00c90510_Obj* m_04; };
 struct Obj44 { void FUN_0044bbd0(); };
 struct Global44 { void FUN_0086ba60(void* o); };
 extern char DAT_01090a78;
+// pdb: BGSDestructibleObjectForm::ClearDataComponent | BGSDestructibleObjectForm.obj | fnv360_0822_retail, vtable, medium
 FUN_00d47730_cls* FUN_00d47730_cls::SetObject()
 {
     View44* v = (View44*)this;
@@ -2785,6 +2830,7 @@ class GlobalObjectO2_00d472a0;
 extern GlobalObjectO2_00d472a0 g_01268b24;
 
 // @fnv 0x00d47f60
+// pdb: getHkVehicleInstanceName | hkpVehicleViewer.obj | fnv360_0822_retail, objrun, medium
 GlobalObjectO2_00d472a0* __cdecl FUN_00d47f60()
 {
     return &g_01268b24;
@@ -2812,6 +2858,8 @@ void __cdecl FUN_00d47fd0(FUN_00d47fe0_cls* object)
 void __cdecl FUN_00c8a230(int* param_1, int param_2);
 
 // @fnv 0x00d50000
+// pdb: bhkBlendCollisionObjectAddRotation::IsEqual | bhkBlendCollisionObjectAddRotation.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apObject
 void __cdecl FUN_00d50000(int* param_1, int param_2)
 {
     FUN_00c8a230(param_1, param_2);
@@ -2906,6 +2954,8 @@ struct hkContainerW
     int m_numKeys;
 };
 
+// pdb: bhkConstraintChain::CopyCinfo | bhkConstraintChain.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: arInfo
 void hkShapeD539::CopyContainerKeysToInfo(hkInfoD539& info)
 {
     CopyFromSource((unsigned int)&info);
@@ -2940,6 +2990,7 @@ struct FnvCpu_FUN_00d54d60_CpuObject
     void FUN_00d54d60(float input);
 };
 // @fnv 0x00d54d60
+// pdb: hkpMoppCompilerInput::setAbsoluteFitToleranceOfTriangles | hkpMoppCompilerInput.obj | tesv_win, objrun_open, low
 void FnvCpu_FUN_00d54d60_CpuObject::FUN_00d54d60(float input)
 {
     value = input;
@@ -2957,6 +3008,7 @@ struct FnvCpu_FUN_00d54d70_CpuObject
     float FUN_00d54d70();
 };
 // @fnv 0x00d54d70
+// pdb: VirtualActorPathHandler::GetDistanceTraveled | VirtualActorPathHandler.obj | fnv360_0822_retail, vtable, medium
 float FnvCpu_FUN_00d54d70_CpuObject::FUN_00d54d70()
 {
     return value;
@@ -3015,6 +3067,7 @@ void __thiscall FUN_00d54dc0_cls::hkpMoppCompilerInput_setAbsoluteFitToleranceOf
 }
 
 // @fnv 0x00d54dd0
+// pdb: TESActorBaseData::GetKarma | TESActorBaseData.obj | fnv360_0822_retail, vtable, medium
 float __fastcall FUN_00d54dd0(char* self, int)
 {
     return *(float*)(self + 0x14);
@@ -3039,6 +3092,7 @@ static __forceinline void D57MemCpy16NonEmpty(void* dst, const void* src, int nu
 
 // Copies six 16-byte blocks from s to d using D57MemCpy16NonEmpty.
 // @f3 0x009813f0 (community match, verified in this file)
+// pdb: hkString::memCpy16<32> | hkpSimulation.obj | tesv_win, objrun_prop, low
 void __cdecl CopySixteenByteBlocks(int* pDest, const int* pSrc)
 {
     D57MemCpy16NonEmpty(pDest, pSrc, 2);
@@ -3046,6 +3100,8 @@ void __cdecl CopySixteenByteBlocks(int* pDest, const int* pSrc)
 
 
 // @fnv 0x00d584f0
+// pdb: hkpConvexVerticesShape::calcSizeForSpu | bhkCharControllerShape.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: input, spuBufferSizeLeft
 int __stdcall FUN_00d584f0(int iUnused0, int iUnused1)
 {
     return 0x60;
@@ -3137,6 +3193,7 @@ struct FUN_00d5e0c0_Obj
 };
 
 // @fnv 0x00d5e0c0
+// pdb: hkpConvexListShape::getUseCachedAabb | hkpConvexListShape.obj | fnv360_0822_retail, call_gap_sim, low
 unsigned char FUN_00d5e0c0_Obj::FUN_00d5e0c0()
 {
     return unk40;
@@ -3176,6 +3233,7 @@ int D46E50Helper::SumListValues()
 
 // Walks nodes adding unk14 to param minus SumListValues() until it is non-negative, returning that node's unk10 + value * 20; otherwise this->unk10.
 // @fnv 0x00d46e50
+// pdb: hkClass::getEnum | hkClass.obj | tesv_win, hash, low
 int D46E50Node::FUN_00d46e50(int param)
 {
     D46E50Node* node = this;
@@ -3219,6 +3277,7 @@ class OwnerD472
 };
 
 // @fnv 0x00d47290
+// pdb: NiGPUProgramCache::GetValidCompileTargetsForPlatform | NiGPUProgramCache.obj | fnv360_0822_retail, objrun_open, low
 MemberD472* OwnerD472::GetMember()
 {
     return &m_kMember;
@@ -3248,6 +3307,7 @@ d20base* volatile g_d20_self;
 extern "C" int d20_sel(void);
 
 // @fnv 0x00d49c20
+// pdb: numIndices | hkpStorageExtendedMeshShape.obj | tesv_win, hash, low
 static __declspec(noinline) int FUN_00d49c20(d20base* self, int sel)
 {
     switch (sel)
@@ -3280,6 +3340,7 @@ volatile int g_code_d4b390;
 volatile int g_sink_d4b390;
 
 // @fnv 0x00d4b390
+// pdb: storageMeshShape_numIndices | hkpStorageMeshShape.obj | tesv_win, objrun_prop, low
 static __declspec(noinline) int FUN_00d4b390(int base, int code)
 {
     switch (code)
@@ -3617,6 +3678,8 @@ template <typename T> struct hkLocalArrayD53
     int m_iCapacityState;
 };
 
+// pdb: bhkConstraintChain::CopyMembers | bhkConstraintChain.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pDest, arCloneData
 void bhkListShapeD53::FUN_00d53a80(NiObjectD53* pkDest, NiCloningProcessD53& kCloning)
 {
     char cTmp;
@@ -3659,6 +3722,7 @@ class HolderD54D
 };
 
 // @fnv 0x00d54d80
+// pdb: hkpMoppCompilerInput::getAbsoluteFitToleranceOfAxisAlignedTriangles | hkpMoppCompilerInput.obj | fnv360_0822_retail, call_gap, low
 QuadD54D HolderD54D::GetValue() const
 {
     return m_kValue;
@@ -4333,6 +4397,8 @@ void FUN_00d5a630(InputBuffer*, LoadResult*, unsigned int);
 // Copies src into a temporary InputBuffer, calls FUN_00d5a630 to fill a LoadResult, then swaps result.primary into dst.
 // @f3 0x009e8ae0 (community match, verified in this file)
 void FUN_00d5a630(InputBuffer*, LoadResult*, unsigned int, int);
+// pdb: bhkGeometryUtil::ComputePlanesFromVertices | bhkGeometryUtil.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: arVerts, arPlaneEquations, arOutVerts
 void LoadIntoArray(const InputBuffer* src, unsigned int flags, ArrayData* dst)
 {
     InputBuffer input;
@@ -4527,6 +4593,7 @@ struct C
 };
 // Constructor for C that initializes f00, f90, f92, f94, f96, fa0, fa2, fa8, fac, fb0, and fb4 to fixed values.
 // @fnv 0x00d4ff60
+// pdb: hkpPrismaticConstraintData::Atoms::Atoms | hkpPrismaticConstraintData.obj | tesv_win, objrun_sim, low
 C::C() : f00(2), f90(0xb), f92(1), f94(0), f96(0), fa0(0xa), fa2(1), fa8(0xd), fac(7), fb0(7), fb4(9)
 {}
 
@@ -4811,6 +4878,7 @@ extern float FUN_00e7c0c8;
 extern float FUN_00dc3b0c;
 extern float FUN_00e7c0c4;
 extern float FUN_00dcf7d8;
+// pdb: hkpRagdollLimitsData::hkpRagdollLimitsData | hkpRagdollLimitsData.obj | tesv_win, callee_sim, low
 FUN_00d4f2a0::FUN_00d4f2a0()
 {
     float* pa = &m_kBridgeAtoms.m_kLocalRotations.m_kRotationA.m_kColumn0.x;
@@ -4901,6 +4969,7 @@ static const float DAT_0101e2bc = 0.1f;
 
 // @f3twin 0x009b0620 of 0x006b8970
 struct F3Twin_009b0620 : public FnvCpu_FUN_00d46ef0_CpuObject { int F3_FUN_009b0620() ; };
+// pdb: hkClass::getNumDeclaredEnums | hkClass.obj | fnv360_0822_retail, objrun_sim, medium
 int F3Twin_009b0620::F3_FUN_009b0620() 
 {
     return value;
@@ -4953,6 +5022,7 @@ struct C9E1A70
     void __thiscall FUN_009e1a70(const void* kTransformA, const void* kTransformB, const void* kVector);
 };
 
+// pdb: hkpBallAndSocketConstraintData::setInWorldSpace | hkpBallAndSocketConstraintData.obj | tesv_win, hash, low
 void __thiscall C9E1A70::FUN_009e1a70(const void* kTransformA, const void* kTransformB, const void* kVector)
 {
     m_20.FUN_008d2970(kTransformA, kVector);
@@ -4975,6 +5045,7 @@ struct Object {
     void FUN_009e16b0();
     Object* FUN_009e1a40(unsigned int deletionFlags);
 };
+// pdb: hkpBallSocketChainData::`scalar deleting destructor' | hkpBallSocketChainData.obj | fnv360_0822_retail, vtable_prefix, high
 Object* Object::FUN_009e1a40(unsigned int deletionFlags) {
     FUN_009e16b0();
     if (deletionFlags & 1) {

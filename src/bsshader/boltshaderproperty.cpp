@@ -131,6 +131,8 @@ void Ring216::FUN_00bc1c70(int idx)
 }
 // Uses p1 and p3 to update the column range, then adjusts ring indices using p2 and stored bounds.
 // @fnv 0x00bc2740
+// pdb: BoltShaderProperty::UpdateAndMoveBolt | BoltShaderProperty.obj | fnv360_0822_retail, objrun, high
+// pdb params: afTimeDelta, afDesiredBoltDistance, afSpeed, abCleanup
 void Ring216::AddValue(float afValue, float p2, float afScale, float afUnused)
 {
     float fScaledValue = ((double)afValue > DAT_0101ffa0) ? DAT_0101e2bc : afValue;

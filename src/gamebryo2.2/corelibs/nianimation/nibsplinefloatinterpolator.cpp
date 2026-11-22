@@ -3,6 +3,8 @@
 #include "nibsplinefloatinterpolator_decls.h"
 // Calls the base NiBSplineInterpolator::LoadBinary, then reads m_fFloatValue and m_kFloatCPHandle from the stream input.
 // @fnv 0x00a50cd0
+// pdb: NiBSplineFloatInterpolator::LoadBinary | NiBSplineFloatInterpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void NiBSplineFloatInterpolator::LoadBinary(NiStream& stream)
 {
     NiBSplineInterpolator::LoadBinary(stream);
@@ -11,6 +13,8 @@ void NiBSplineFloatInterpolator::LoadBinary(NiStream& stream)
 }
 
 // @fnv 0x00a50a20
+// pdb: NiBSplineFloatInterpolator::GetDimension | NiBSplineFloatInterpolator.obj | fnv360_1110_retail, objrun, medium
+// pdb params: usChannel
 int __stdcall FUN_00a50a20(unsigned short v)
 {
     unsigned short z = 0;
@@ -23,6 +27,8 @@ struct CPX
     unsigned int handle;
 };
 // @fnv 0x00a50a60
+// pdb: NiBSplineFloatInterpolator::GetControlHandle | NiBSplineFloatInterpolator.obj | fnv360_1110_retail, objrun, high
+// pdb params: usChannel
 unsigned int __fastcall GetHandleByIndex(CPX* self, int, unsigned short idx)
 {
     unsigned int r = 0xffff;
@@ -38,6 +44,8 @@ struct CPX
     unsigned int handle;
 };
 // @fnv 0x00a50a80
+// pdb: NiBSplineFloatInterpolator::SetControlHandle | NiBSplineFloatInterpolator.obj | fnv360_1110_retail, objrun, high
+// pdb params: kControlHandle, usChannel
 void __fastcall SetHandleIfFirstIndex(CPX* self, int, unsigned int h, unsigned short idx)
 {
     if (idx == 0)
@@ -57,6 +65,8 @@ struct FInterpX
 };
 // Returns true when NiBSplineInterpolator_IsEqual matches other and both f1c and h are equal; otherwise false.
 // @fnv 0x00a50b30
+// pdb: NiBSplineFloatInterpolator::IsEqual | NiBSplineFloatInterpolator.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: pkObject
 bool __fastcall IsInterpEqual(FInterpX* self, int, FInterpX* other)
 {
     if (!reinterpret_cast<IsEqX*>(self)->NiBSplineInterpolator_IsEqual(other))
@@ -69,6 +79,7 @@ bool __fastcall IsInterpEqual(FInterpX* self, int, FInterpX* other)
 void __fastcall FUN_00a57f80(void*);
 void __cdecl __Dummy_00b6fef0(void*, unsigned int);
 // @fnv 0x00a50b80
+// pdb: BSFaceGenImage::`scalar deleting destructor' | BSFaceGenImage.obj | fnv360_0822_retail, vtable, medium
 void* __fastcall FUN_00a50b80(void* self, int, unsigned int flags)
 {
     FUN_00a57f80(self);
@@ -102,6 +113,8 @@ struct FUN_00a50c20Cls
 };
 // Allocates a new object, initialises it, copies the float value and handle from this, and returns the clone.
 // @fnv 0x00a50c20
+// pdb: NiBSplineFloatInterpolator::CreateClone | NiBSplineFloatInterpolator.obj | fnv360_0822_retail, objrun, high
+// pdb params: kCloning
 FUN_00a50c20Cls* FUN_00a50c20Cls::Clone(CloningProcess& kCloning)
 {
     FUN_00a50c20Cls* pkObject = (FUN_00a50c20Cls*)BSFadeNode::operator new(0x24);
@@ -142,6 +155,8 @@ struct FUN_00a50ba0_cls
 
 // If v differs from m08, computes t from m0c/m10 and evaluates the spline into m1c, then writes m1c to out and caches v in m08.
 // @fnv 0x00a50ba0
+// pdb: NiBSplineFloatInterpolator::Update | NiBSplineFloatInterpolator.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fTime, pkInterpTarget, fValue
 bool FUN_00a50ba0_cls::EvaluateAt(float afTime, unsigned int unused, float* pfOut)
 {
     float t;
@@ -198,6 +213,8 @@ struct FUN_00a50c70_cls : NiBSplineFloatInterpolator
 
 // Loads the base interpolator stream, then reads m_fFloatValue and m_kFloatCPHandle from the stream's binary view.
 // @fnv 0x00a50c70
+// pdb: NiBSplineFloatInterpolator::SaveBinary | NiBSplineFloatInterpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void FUN_00a50c70_cls::LoadFloatInterpolator(NiStream& stream)
 {
     reinterpret_cast<NiBSplineInterpolatorStand*>(this)->LoadStream(stream);
@@ -229,6 +246,7 @@ struct FUN_00a57f80_cls
 
 // Releases the two SpawnedRef pointers m_14 and m_18 via InterlockedDecrement and DeleteThis, then calls BaseTeardown.
 // @fnv 0x00a57f80
+// pdb: NiBSplineInterpolator::~NiBSplineInterpolator | NiBSplineInterpolator.obj | fnv360_0822_retail, objrun, high
 void FUN_00a57f80_cls::FUN_00a57f80()
 {
     *(void* volatile*)&m_vptr00 = (void*)&DAT_0109ae8c;

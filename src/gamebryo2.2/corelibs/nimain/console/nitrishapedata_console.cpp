@@ -113,6 +113,7 @@ class NiTriShapeDataStandIn
 };
 
 // @fnv 0x00a8ed40
+// pdb: NiTriShapeData::CalculateNormals | NiTriShapeData_Xenon.obj | fnv360_0822_retail, caller_sim, low
 void NiTriShapeDataStandIn::RecalculateNormals()
 {
     EnsureNormals(true);

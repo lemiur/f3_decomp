@@ -86,6 +86,8 @@ struct View438 {
     void FUN_00a694a0(void* shape, const Mat4* matrix, XfResult* result);
 };
 __declspec(noinline) void View438::FUN_00a68e20() { count = 0; }
+// pdb: hkpConvexRadiusBuilder::buildDisplayGeometries | hkpConvexRadiusBuilder.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: shape, displayGeometries
 void Node::FUN_00de0f90(void* shape, XfResult* result) {
     __declspec(align(16)) Mat4 matrix;
     matrix.m[0][0] = 0.0f;

@@ -37,6 +37,8 @@ struct ContainerUpdate63
 };
 void __cdecl FUN_00403230(char* buf, unsigned size, const char* fmt, char* name, int count);
 
+// pdb: ContainerMenu::InitFunc | ContainerMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apTile, apItem
 void __cdecl FUN_0075d160(void* param1, void* param2)
 {
     char buf[0x80];

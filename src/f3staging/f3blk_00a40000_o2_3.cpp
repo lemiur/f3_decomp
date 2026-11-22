@@ -434,6 +434,7 @@ struct ProbeRow
 
 using namespace NA50CD0;
 
+// pdb: buildConstraintMatrixLuDecompositionForBallAndSocketChain | hkpChainBuildJacobian.obj | tesv_win, caller_sim, low
 static __declspec(noinline) void FUN_00a50cd0(int aiRowCount, float regularizer, ProbeJac* apJacobian,
                                               ProbeOffset* offsets, const ChainBody* bodies, ProbeRow* output,
                                               int bufferSize)
@@ -606,6 +607,7 @@ class FUN_00a4dfa0 : public hkReferencedObjectDCE
     int m_iUnk130;
 };
 
+// pdb: hkpSerializedAgentNnEntry::hkpSerializedAgentNnEntry | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, call_gap, low
 FUN_00a4dfa0::FUN_00a4dfa0()
     : m_iUnk08(0), m_iUnk0C(0), m_iUnk10(-1), m_iUnk14(-1), m_bUnk18(false), m_iUnk34(0), m_iUnk38(0), m_iUnk3C(0),
       m_iUnk40(0), m_iUnk44(0), m_iUnk48(0), m_iUnk4C(0), m_iUnk12C(0x103), m_iUnk130(1)
@@ -665,6 +667,7 @@ struct Holder {
     Block* block;
     ~Holder() throw();
 };
+// pdb: hkPlatformObjectWriter::~hkPlatformObjectWriter | hkPlatformObjectWriter.obj | fnv360_0822_retail, call_seq, medium
 Holder::~Holder() throw()
 {
     vtable=(void*)0x00e86a0c;
@@ -977,6 +980,8 @@ public:
     void FUN_00a52bd0(const MoppCode* code, const MoppTransform& BvToWorld, const MoppVec4& extent, const float radius, MoppArray<MoppPrimitiveInfo>* primitives_out);
 };
 
+// pdb: hkpMoppObbVirtualMachine::queryObb | hkpMoppObbVirtualMachine.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: code, BvToWorld, extent, radius, primitives_out
 void MoppObbVirtualMachine::FUN_00a52bd0(const MoppCode* code, const MoppTransform& BvToWorld, const MoppVec4& extent, const float radius, MoppArray<MoppPrimitiveInfo>* primitives_out)
 {
     m_code = code;
@@ -1032,6 +1037,7 @@ void __cdecl FUN_00a59d00(Vec4Array* pts);
 void __cdecl FUN_00a5bbb0(Hull* hull, int lo, int hi, const Options* opts, bool* changed);
 }
 
+// pdb: hkGeomConvexHullBuilder::buildConvexHull | hkGeomConvexHullBuilder.obj | tesv_win, call_gap_sim, low
 void __cdecl FUN_00a5f950(const f3m_00a5f950::Options* opts, const f3m_00a5f950::Vec4* points, int count,
                           f3m_00a5f950::Hull* hull, f3m_00a5f950::Vec4Array* pts)
 {
@@ -1133,6 +1139,7 @@ inline void Array42::SetSize(int size) {
     if(cap<size) { int newCap=2*cap; if(size>=newCap) newCap=size; FUN_00901e90(this,newCap,16); }
     count=size;
 }
+// pdb: hkGeomConvexHullBuilder::createBevelPlane | hkGeomConvexHullBuilder.obj | tesv_win, call_gap, low
 void __cdecl FUN_00a59a70(const Vector42* direction,const Vector42* a,const Vector42* b,const Vector42* c,Array42* output) {
     Vector42& plane=output->Expand();
     Vector42 delta=*a-*b;
@@ -1277,6 +1284,8 @@ struct CastA542 {
     void FUN_00a53120(QueryA542*,ShapeA542*,VecA542*,int);
     void FUN_00a542a0(bool*,void*,BodyA542*,const BoundsA542*,void*);
 };
+// pdb: hkpMoppLongRayVirtualMachine::queryLongRay | hkpMoppLongRayVirtualMachine.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: collection, code, input, rayResult
 void CastA542::FUN_00a542a0(bool* output,void* user,BodyA542* object,const BoundsA542* input,void* ctx)
 {
     fraction=1.0f;
@@ -1481,6 +1490,7 @@ struct Vec4Array { Vec4* data; int size, capAndFlags; };
 void __cdecl FUN_00a58b30(Vec4Array*, Bounds*);
 }
 
+// pdb: hkGeomConvexHullBuilder::convertToUnitCube | hkGeomConvexHullBuilder.obj | tesv_win, call_seq, medium
 void __cdecl FUN_00a58ce0(f3m_00a58ce0::Vec4Array* pts, f3m_00a58ce0::Vec4* extent, f3m_00a58ce0::Vec4* center)
 {
     using namespace f3m_00a58ce0;
@@ -1598,6 +1608,7 @@ struct Jac51
 struct Tri51 { float lower, diagonal, upper; };
 __forceinline float max51(float a, float b) { return a > b ? a : b; }
 // Fake match: internal linkage and the caller below expose the target's private register ABI.
+// pdb: buildConstraintMatrixLuDecompositionForStiffSpringChain | hkpChainBuildJacobian.obj | tesv_win, objrun, medium
 static __declspec(noinline) void FUN_00a51e40(int count, float damping, Jac51* rows, Off51* offsets, const Acc51* base, Tri51* output, int bufferSize)
 {
     float previous = 0.0f;
@@ -1730,6 +1741,8 @@ __forceinline float mass(const Body& A,const Body& B,Output& o) {
     return d;
 }
 }
+// pdb: hk1dLinearVelocityMotorBeginJacobian | hkpMotorBuildJacobian.obj | fnv360_0822_retail, objrun, medium
+// pdb params: directionOfConstraint, pivot, in, jac, statusOut
 void FUN_00a507b0(const motor_a507b0::Vector& v,const motor_a507b0::Vector& p,
                   const motor_a507b0::Input& h,motor_a507b0::Output& o,float& r) {
     const motor_a507b0::Body* A=h.p0;
@@ -1820,6 +1833,8 @@ __forceinline void build(const Input& input,const Pair& pair,Output& output) {
     entry->linear.w=input.p24->f04*pair.f1c;
 }
 }
+// pdb: hk1dLinearFrictionBuildJacobian | hkp1dBilateralConstraintBuildJacobian.obj | fnv360_0822_retail, objrun_prop, low, conflict (bridge: hk1dLinearBilateralConstraintBuildJacobian)
+// pdb params: info, in, out
 void __cdecl FUN_00a4e900(const A4e900::Input& input,const A4e900::Pair& pair,A4e900::Output& output) {
     A4e900::build(input,pair,output);
     A4e900::Entry* entry=output.cursor;
@@ -1983,6 +1998,7 @@ struct hkpGsk
                       hkVector4& separatingNormalOut);
 };
 
+// pdb: hk4dGskCalcSeparatingNormal | hkpContinuousGsk.obj | tesv_win, caller_sim, low
 static __declspec(noinline) void FUN_00a41f60(const hkTransform* wTb, const hkTransform* wTa, hkVector4* normalOut,
                                               const hkpConvexShape* shapeA, const hkpConvexShape* shapeB, hkpGsk* gsk,
                                               hkVector4* pointOut)
@@ -2160,6 +2176,7 @@ __forceinline Real pseudoAngle(Real cosA, Real sinA, Real tolerance)
     return angle;
 }
 
+// pdb: hkGeomConvexHullBuilder::getAngleBetweenVertexAndPlane | hkGeomConvexHullBuilder.obj | tesv_win, uconst, low
 Real __cdecl FUN_00a58460(const Config* config, const Vec4& a, const Vec4& normal, const Vec4& b, const Vec4& c)
 {
     Vec4 dir;
@@ -2244,6 +2261,7 @@ struct __declspec(align(16)) Vector
     }
 };
 
+// pdb: hkGeomConvexHullBuilder::getPlaneEquationZaxis | hkGeomConvexHullBuilder.obj | tesv_win, call_seq, medium
 void __cdecl FUN_00a58180(const Vector& a, const Vector& b, Vector& out)
 {
     Vector d;
@@ -2371,6 +2389,8 @@ __forceinline void setMul4(Vector4& dst, const Vector4& a, const Vector4& b)
 
 __forceinline float dotf(const Vector4& a, const Vector4& b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
 
+// pdb: hk1dLinearBilateralConstraintBuildJacobian | hkp1dBilateralConstraintBuildJacobian.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: info, in, out
 void FUN_00a4ebf0(const LinearBilateralInfo& in, const ConstraintQueryIn& info, ConstraintQueryOut& out)
 {
     Lin2AngJacobian* jac = out.jacobians;
@@ -2563,6 +2583,7 @@ public:
 
 // Static in the original: under /O2 it receives separatingNormal, deltaAngles, separatingPoint and msB in edx, ecx,
 // edi and esi, so it is written as a static noinline function with one ordinary caller that makes the compiler emit it.
+// pdb: hk4dGskCalcPointVelocityAssumingAngularVelError | hkpContinuousGsk.obj | fnv360_0822_debug, objrun_prop, low
 static __declspec(noinline) hkReal FUN_00a413c0(const hkMotionState* msA, const hkMotionState* msB,
                            const hkVector4& separatingPoint, const hkVector4& separatingNormal,
                            const hkVector4& linearTimInfo, const hkVector4* deltaAngles, hkTime t)
@@ -2741,6 +2762,8 @@ static __forceinline void rotateInversePoints(const hkRotation& t, const hkVecto
     while (--i >= 0);
 }
 
+// pdb: hk4dGskCollideInitMatrices | hkpContinuousGsk.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: input, Rt, out
 void FUN_00a41610(QueryInput* a, float f, QueryFrames* out)
 {
     StepInfo* b = a->unk40;
@@ -2836,6 +2859,8 @@ struct Output {
     Vector4 angularB;
 };
 
+// pdb: hk1dAngularBilateralConstraintBuildJacobian | hkp1dBilateralConstraintBuildJacobian.obj | fnv360_0721_beta, objrun_prop, medium
+// pdb params: info, in, out
 void __cdecl FUN_00a4e410(const Input* input, const Context* context, Output** cursor) {
     Output* output = *cursor;
     float responseScale = context->responseScale;
@@ -3361,6 +3386,7 @@ static __forceinline float QAtan2(float a, float b)
     return FUN_00954db0(a, b);
 }
 
+// pdb: hkpMeshWeldingUtility::calcAngleFromVertices | hkpMeshWeldingUtility.obj | tesv_win, call_seq, medium
 float __cdecl FUN_00a55c80(QVec4a55* p, float* outA, float* outB)
 {
     QVec4a55 n;
@@ -3630,6 +3656,7 @@ struct __declspec(align(16)) hkVector4
     hkVector4& operator=(const hkVector4& o) { x = o.x; y = o.y; z = o.z; w = o.w; return *this; }
 };
 typedef hkBool (__cdecl *CompareFn)(const hkVector4&, const hkVector4&);
+// pdb: hkAlgorithm::quickSortRecursive<class hkVector4,class hkBool (__cdecl*)(class hkVector4 &,class hkVector4 &)> | hkGeomConvexHullBuilder.obj | tesv_win, call_gap_sim, low
 void __cdecl FUN_00a56e20(hkVector4* arr, int lo, int hi, CompareFn cmp)
 {
     hkVector4 pivot;
@@ -3940,6 +3967,7 @@ struct Mat3 {
 struct Vec4Array { Vec4* data; int size, capAndFlags; };
 }
 
+// pdb: hkGeomConvexHullBuilder::convertFromUnitCube | hkGeomConvexHullBuilder.obj | tesv_win, call_seq, medium
 void __cdecl FUN_00a58f00(f3m_00a58f00::Vec4Array* pts, f3m_00a58f00::Vec4* extent, f3m_00a58f00::Vec4* offset)
 {
     using namespace f3m_00a58f00;
@@ -3967,6 +3995,7 @@ struct Edge_a59540 {unsigned short index; unsigned short other; unsigned int fla
 struct Input_a59540 {Vec4_a59540* vertices; Edge_a59540* edges; int count;};
 struct Output_a59540 {Edge_a59540* left; Edge_a59540* right; int state; int edge; float distance;};
 extern void __cdecl FUN_00a58180(Vec4_a59540*,Vec4_a59540*,const Vec4_a59540*);
+// pdb: hkGeomConvexHullBuilder::getCommonTangent | hkGeomConvexHullBuilder.obj | tesv_win, call_gap, low
 void __cdecl FUN_00a59540(Input_a59540* a,Input_a59540* b,Output_a59540* output,Vec4_a59540* direction)
 {
  Vec4_a59540* base=a->vertices;
@@ -4033,6 +4062,7 @@ struct Heap {
 struct Entry { int unk00; unsigned short unk04; unsigned short pad; };
 struct Array { int unk00; Entry* data; int size; };
 void __cdecl FUN_009232a0(char* buf, const char* fmt, ...);
+// pdb: hkGeomConvexHullBuilder::draw | hkGeomConvexHullBuilder.obj | tesv_win, caller_sim, low
 void __cdecl FUN_00a59c90(const Array* arr)
 {
     __declspec(align(16)) char* buf;
@@ -4076,6 +4106,7 @@ struct QueryAllocator
 extern QueryAllocator* (__stdcall* const DAT_00d9b080)(unsigned long);
 void __cdecl FUN_00a5c3d0(unsigned char* result,const void* inputA,const void* inputB,
  const void* inputC,QueryVector* scratch,void* output,const void* context,ContactArray* contacts);
+// pdb: hkGeomConvexHullBuilder::buildPlaneEquations | hkGeomConvexHullBuilder.obj | tesv_win, caller_sim, low
 void* __cdecl FUN_00a5d940(void* output,const void* inputA,const void* inputB,
  const void* inputC,const void* context)
 {
@@ -4131,6 +4162,7 @@ struct hkVector4Array
 
 // Remove vertices that lie within the tolerance of an earlier one. The array is sorted along x, so only
 // the vertices already kept whose x is within 0.01 of the current one need to be compared.
+// pdb: hkGeomConvexHullBuilder::weldXsortedVertices | hkGeomConvexHullBuilder.obj | tesv_win, call_seq, medium
 void __cdecl FUN_00a59780(hkReal tolerance, hkVector4Array* vertices, int* numVerticesOut)
 {
     hkVector4* cur = vertices->m_data;
@@ -4385,6 +4417,8 @@ static __forceinline hkReal buildJacobian(const hkVector4& pivotA, const hkVecto
     return diff.dot3(dir) * rhsFactor;
 }
 
+// pdb: hk1dLinearBilateralConstraintUserTauBuildJacobian | hkp1dBilateralConstraintBuildJacobian.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: info, in, out
 void __cdecl FUN_00a4f7f0(const BilateralInfo& info, const hkpConstraintQueryIn& in, QueryOut& out)
 {
     const hkpVelocityAccumulator* mA = in.m_bodyA;
@@ -4488,6 +4522,7 @@ void FUN_00a600a0(Entry* data, int first, int last, int (*compare)(const void*, 
 
 // Builds a segment through one point of the set, perpendicular to the edge p0-p1 and to an axis chosen from the
 // angle, scores every entry against it and sorts the entries by that score.
+// pdb: hkGeomConvexHullBuilder::calculateNewNeighbours | hkGeomConvexHullBuilder.obj | tesv_win, call_gap, low
 void FUN_00a59e30(hkVector4* points, Body* body, float angle, hkVector4* dir, unsigned short* index,
                   hkVector4* p0, hkVector4* p1, EntryArray* entries)
 {
@@ -4674,6 +4709,7 @@ struct OutVec4 : Vec4
 static __forceinline float Min2(const float& a, const float& b) { return a < b ? a : b; }
 static __forceinline float Max2(const float& a, const float& b) { return a > b ? a : b; }
 
+// pdb: meshShape_addToAabb | hkpMeshShape.obj | tesv_win, objrun_prop, low
 static __declspec(noinline) void FUN_00a45660(const Vec4& halfExtents, const Vec4& dir, const Transform& t, Aabb& box)
 {
     Vec4 p;
@@ -4949,6 +4985,7 @@ struct Hull {
 };
 float FUN_00401e20(float,float);
 
+// pdb: hkGeomConvexHullBuilder::isSingleLine | hkGeomConvexHullBuilder.obj | tesv_win, call_gap, low
 Result __cdecl FUN_00a59030(float tolerance,Hull& a,Hull& b,Hull& edges) {
     Vector* vertices=a.vertices;
     if(a.indices.Size()>=3 || b.indices.Size()>=3) return false;
@@ -5211,6 +5248,8 @@ static __forceinline void hk1dLinearBilateralBuildJacobian(const hkVector4& pivo
 
 extern "C" void __cdecl FUN_009f8d90(const hkVector4& posA, const hkVector4& posB, const hkpConstraintQueryIn& in, hkp1Lin2AngJacobian* jac);
 
+// pdb: hkStabilizedBallSocketConstraintBuildJacobian_noSchema | hkp1dBilateralConstraintBuildJacobian.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: posA, posB, maxAllowedErrorDistance, in, jac
 extern "C" void __cdecl FUN_00a4fe70(const hkVector4& posA, const hkVector4& posB, hkReal maxVelocity, const hkpConstraintQueryIn& in, hkp1Lin2AngJacobian* jac)
 {
     const hkpVelocityAccumulator* mA = in.m_bodyA;
@@ -5469,6 +5508,8 @@ static __forceinline void buildAxis(const hkVector4* axis, const S00a4e670_Weigh
 
 using namespace S00a4e670_ns;
 
+// pdb: hk1dAngularFrictionBuildJacobian | hkp1dBilateralConstraintBuildJacobian.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: info, in, out
 void __cdecl FUN_00a4e670(const S00a4e670_In* in, const S00a4e670_Info* info, S00a4e670_Schema** schemaOut)
 {
     S00a4e670_Schema* s = *schemaOut;
@@ -5675,6 +5716,8 @@ struct QueryOut
     BilateralSchema* m_jac;
 };
 
+// pdb: hk1dLinearLimitBuildJacobian | hkp1dBilateralConstraintBuildJacobian.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: info, in, out
 void __cdecl FUN_00a4fb30(const BilateralInfo& info, const hkpConstraintQueryIn& in, QueryOut& out)
 {
     BilateralSchema* sch = out.m_jac;
@@ -6714,6 +6757,8 @@ __forceinline void hkpMoppLongRayVirtualMachine::addHit( unsigned int key, const
 	}
 }
 
+// pdb: hkpMoppLongRayVirtualMachine::queryRayOnTree | hkpMoppLongRayVirtualMachine.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: query, PC, fQuery, chunkOffset
 void hkpMoppLongRayVirtualMachine::FUN_00a53120( const QueryInt* query, const unsigned char* PC, QueryFloat* const fQuery, int chunkId )
 {
 	QueryInt scaledQuery;

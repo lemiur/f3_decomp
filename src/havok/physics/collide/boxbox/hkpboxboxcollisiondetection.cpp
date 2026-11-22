@@ -15,6 +15,8 @@ struct FUN_00db0920
 };
 
 // @fnv 0x00db0900
+// pdb: hkpBoxBoxManifold::removePoint | hkpBoxBoxManifold.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: i
 void FUN_00db0920::RemoveValueAt(int index)
 {
     // Stored through an alias on purpose: with a direct member store the

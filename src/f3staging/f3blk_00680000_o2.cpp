@@ -164,6 +164,8 @@ struct FUN_006862b0_Obj {
 
 FUN_006849a0_Obj* __stdcall FUN_00685400(int);
 
+// pdb: StatsMenu::DoLeave | StatsMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void FUN_006862b0_Obj::FUN_006862b0(int, int secondParameter) {
     if (unk21C != 0 && (DAT_01075b28 == 0 || DAT_01075cac != 0)) {
         FUN_006849a0_Obj* result = FUN_00685400(secondParameter);
@@ -341,6 +343,8 @@ bool __cdecl FUN_0068cc10(const char* titleText, const char* initialText, void(_
 }
 
 // @f3 0x006848a0 (community match, verified in this file)
+// pdb: StatsMenu::GetPageFor | StatsMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aeIndex, aePage
 bool __stdcall FUN_006848a0(unsigned int a1, int* a2)
 {
     switch (a1) {
@@ -482,6 +486,7 @@ struct StatsMenu
     void FUN_00688e30();
 };
 
+// pdb: StatsMenu::UpdateAll | StatsMenu.obj | fnv360_0822_retail, ustr, medium
 void StatsMenu::FUN_00688e30()
 {
     StatsMenu_UpdateAllActorValues();
@@ -568,6 +573,7 @@ public:
     bool gamepad;
 };
 
+// pdb: StatsMenu::UpdateHealingMode | StatsMenu.obj | fnv360_0822_retail, call_seq, medium
 void StatsMenu::FUN_006855e0()
 {
     static int xboxButton = FUN_00becd70("_xbox_button", -1);
@@ -1284,6 +1290,8 @@ public:
 };
 RenderPass6a8a0* __cdecl Interface_GetPipboy();
 
+// pdb: FORenderedMenu::Draw | FORenderedMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apTarget, aeClearMode, apSwapTarget
 void RenderPass6a8a0::FUN_0069a8a0(int a1, int a2, BSRenderedTexture* apTarget)
 {
     if (!m_b28 || !m_pNode14)
@@ -1433,6 +1441,8 @@ struct Effect {
     void FUN_0069a230(Source* source, unsigned int value, unsigned int context);
 };
 
+// pdb: FORenderedMenu::DoEffect | FORenderedMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apSource, apDest, aeClearMode
 void Effect::FUN_0069a230(Source* source, unsigned int value, unsigned int context)
 {
     DAT_01068924 = Field<float>(0x40);
@@ -2720,6 +2730,7 @@ extern int DAT_00f6b6ac;
 static __forceinline float PanelOffsetInit(float available,double extent) { return available-extent+DAT_00dbe1e8; }
 static __forceinline float AbsoluteInit(float value) { return (float)fabs(value); }
 static __forceinline float LengthInit(const PointInit& p) { return FUN_0068d550(&p); }
+// pdb: VATSMenu::Create | VATSMenu.obj | fnv360_0822_retail, ustr, medium
 bool __cdecl FUN_00691390()
 {
   {
@@ -3182,6 +3193,7 @@ struct FUN_006976b0 : public FUN_0069af10 {
     NiPointer<LeafPixelShader> m_asp100[3];
     virtual ~FUN_006976b0();
 };
+// pdb: FOPipboyManager::~FOPipboyManager | FOPipboyManager.obj | fnv360_0822_retail, objrun_prop, low
 FUN_006976b0::~FUN_006976b0()
 {
 }
@@ -3201,6 +3213,7 @@ struct Menu697{
     char pad[0x168];bool m16c;
     void FUN_006975f0();
 };
+// pdb: FOPipboyManager::ResetPipBoyManager | FOPipboyManager.obj | fnv360_0822_retail, call_dedup, low
 void Menu697::FUN_006975f0(){
     DAT_0116d138->FUN_00aa4b30(5);
     Proc697* p=((Actor697*)DAT_0107a104)->process;
@@ -3219,6 +3232,8 @@ struct Fade696{
     char pad[0x28];bool active;char pad29[3];float start;float m30;float m34;float m38;float m3c;float m40;char pad44[4];float m48;
     void FUN_00696f90(float a,float b,float c);
 };
+// pdb: FOHUDEffectManager::TriggerShudder | FOHUDEffectManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afDuration, afIntensity, afFrequency
 void Fade696::FUN_00696f90(float a,float b,float c){
     active=true;
     m34=m30=a;
@@ -3231,6 +3246,8 @@ void Fade696::FUN_00696f90(float a,float b,float c){
 
 // @f3 0x006890f0 (community match, verified in this file)
 namespace f3m_006890f0 {
+// pdb: SurgeryMenu::PointInPoly | SurgeryMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: pgon, numverts, point
 int FUN_006890f0(double pgon[][2], int numverts, double point[2])
 {
     int j, yflag0, yflag1, inside_flag;
@@ -3395,6 +3412,8 @@ virtual Point3* GetPos();
 };
 extern Reference* DAT_0107a104;
 float __cdecl FUN_00644100(const Point3&, const Point3&);
+// pdb: VATSMenu::SortDirection | VATSMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apObject1, apObject2
 int __cdecl FUN_0068d860(const void* pvA, const void* pvB)
 {
     Point3 kPlayerPos = *DAT_0107a104->GetPos();
@@ -3587,6 +3606,8 @@ float scale;
 float result;
 void FUN_0069e150(float f);
 };
+// pdb: FOVATSEffectManager::UpdateTargetPulse | FOVATSEffectManager.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: afTime
 void State::FUN_0069e150(float f) {
 float v = f - start;
 float r;
@@ -3614,6 +3635,8 @@ struct Cls684E80 {
     Item684E80* FUN_00684e80(int key);
 };
 
+// pdb: StatsMenu::StatusDataList::Find | StatsMenu.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: aeIndex
 Item684E80* Cls684E80::FUN_00684e80(int key)
 {
     Item684E80* result = 0;
@@ -3643,6 +3666,8 @@ struct Params { float f; bool a; bool b; bool c; bool d; bool e; };
 struct Target { void FUN_008264c0(Params* p); };
 extern Mgr* DAT_010772f8;
 extern Target* DAT_01077334;
+// pdb: SurgeryMenu::SetLimbSequences | SurgeryMenu.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: afPercent
 void __stdcall FUN_0068a070(float scale)
 {
     for (Node* n = DAT_010772f8->FUN_00689f50()->head; n; n = n->next)
@@ -3692,6 +3717,7 @@ struct FUN_00684fb0 {
     FUN_00684fb0();
 };
 extern FUN_00684fb0* DAT_0107724c;
+// pdb: StatsMenu::BodyPartController::GetInstance | StatsMenu.obj | fnv360_0822_debug, call_gap, low
 FUN_00684fb0& FUN_00685400() {
     if (!DAT_0107724c)
         DAT_0107724c = new FUN_00684fb0;
@@ -3789,6 +3815,8 @@ struct Owner68e6 {
     void* FUN_0068d920(void*);
     Node68e6* FUN_0068e650(void*);
 };
+// pdb: VATSMenu::FindTargetPart | VATSMenu.obj | fnv360_0721_beta, caller, low
+// pdb params: aeLimb
 Node68e6* Owner68e6::FUN_0068e650(void* wanted) {
     Actor68e6* actor=G68e6::DAT_0108d014;
     if (!actor->table->available(actor)) return 0;
@@ -3886,6 +3914,7 @@ struct Owner69d5 {
     bool FUN_00699c50();
     bool FUN_0069d510();
 };
+// pdb: FORenderedTerminal::OnIdle | FORenderedTerminal.obj | fnv360_0822_retail, objrun, medium
 bool Owner69d5::FUN_0069d510() {
     if (enabled && (!G69d5::DAT_01077944 || !G69d5::DAT_01077944->IsSet())) {
         G69d5::DAT_01075b24->FUN_0061eb80(0);
@@ -4073,12 +4102,14 @@ struct SmallByteFlag {
  int unk2B0;
  unsigned char unk2B4; unsigned char unk2B5; void FUN_0069e370();
 };
+// pdb: FOVATSEffectManager::DisableScan | FOVATSEffectManager.obj | fnv360_0822_retail, call_gap, medium
 void SmallByteFlag::FUN_0069e370() { if(unk2B4) unk2B5=1; }
 }   // namespace f3m_0069e370
 
 // @f3 0x0068d990 (community match, verified in this file)
 namespace f3m_0068d990 {
 struct Timer990 {int unk000;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;int unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;int unk080;int unk084;int unk088;int unk08c;int unk090;int unk094;int unk098;int unk09c;int unk0a0;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4;int unk0d8;int unk0dc;int unk0e0;int unk0e4;int unk0e8;int unk0ec;int unk0f0;int unk0f4;int unk0f8;int unk0fc;int unk100; unsigned char unk104; unsigned char unk105; unsigned char unk106; unsigned char active; unsigned int unk108; unsigned int time; }; 
+// pdb: VATSMenu::SelectLeftHeld | VATSMenu.obj | fnv360_0822_retail, call_gap_sim, low
 bool __cdecl FUN_0068d990() { Timer990* timer=(Timer990*)DAT_01077448; if(timer && timer->active && (unsigned int)DAT_01090bb0-timer->time>500) return true; return false; }
 }   // namespace f3m_0068d990
 
@@ -4259,6 +4290,8 @@ struct FloatPair {
  int unk2A8;
  float unk2AC;float unk2B0;void FUN_0069e1a0(float);
 };
+// pdb: FOVATSEffectManager::UpdatePulse | FOVATSEffectManager.obj | fnv360_0822_debug, objopen_prop, low
+// pdb params: afTime
 void FloatPair::FUN_0069e1a0(float amount) { using namespace SmallFloat; amount *= DAT_01077acc; amount=2.0f*hkStringPtr_printf(amount); unk2AC=DAT_01077ab8*amount; unk2B0=amount*DAT_010779c8; }
 }   // namespace f3m_0069e1a0
 
@@ -4449,6 +4482,8 @@ struct Timer69e2 {
     float unk2bc;
     void FUN_0069e2a0(float);
 };
+// pdb: FOVATSEffectManager::UpdateScan | FOVATSEffectManager.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: afTime
 void Timer69e2::FUN_0069e2a0(float value) {
     if (unk2b8 == -1.0f) unk2b8 = value;
     value -= unk2b8;
@@ -4596,6 +4631,8 @@ struct Ratios69E390 {
  int unk1a4;
  int unk1a8;
 unsigned char enabled[16]; unsigned denominator[16];unsigned numerator[16]; bool FUN_0069e390(unsigned,float&); };
+// pdb: FOVATSEffectManager::GetVATSGeometryOcclusionPercent | FOVATSEffectManager.obj | fnv360_0721_beta, callee_sim, low
+// pdb params: afResult_out
 bool Ratios69E390::FUN_0069e390(unsigned index,float& output) {
  if(enabled[index]) {
   output=denominator[index]>0 ? (float)numerator[index]/(float)denominator[index] : 0.0f;
@@ -4609,6 +4646,8 @@ bool Ratios69E390::FUN_0069e390(unsigned index,float& output) {
 
 // @f3 0x00689190 (community match, verified in this file)
 namespace f3m_00689190 {
+// pdb: BSSimpleList<SurgeryMenu::LimbWound *>::AddHead | SurgeryMenu.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: item
 int __stdcall FUN_00689190(int value) {
     if(value>=100) return 0;
     if(value>=75) return 1;
@@ -4757,6 +4796,7 @@ struct Owner {
  int unk020;
  int unk024;
  unsigned char ready;bool FUN_00699c50();bool FUN_0069b200(); };
+// pdb: FORenderedMenuRaceSex::OnIdle | FORenderedMenuRaceSex.obj | fnv360_0822_retail, caller_sim, low
 bool Owner::FUN_0069b200() { if(!ready) {FUN_006194f0();return false;} DAT_0107a104->FUN_0076cce0(0,23)->FUN_0045c3e0();DAT_0107a104->table->update(DAT_0107a104);Action* action=DAT_0107a104->FUN_0076cce0(0,0.0f);DAT_0107a104->FUN_0070d7d0(action);return FUN_00699c50(); }
 }
 }   // namespace f3m_0069b200
@@ -4814,6 +4854,7 @@ struct Owner {
     unsigned char unkB8;unsigned char value;
     unsigned char FUN_006995c0();
 };
+// pdb: FORenderedMenu::IsMenuRendering | FORenderedMenu.obj | fnv360_0822_retail, call_gap_sim, low
 unsigned char Owner::FUN_006995c0() {return value;}
 }
 }   // namespace f3m_006995c0
@@ -4824,6 +4865,8 @@ namespace OptionalApplyA {
 struct Node {void FUN_0047b810(void*);};
 struct Child {Node* FUN_00826590(int);};
 struct Owner {int unk00;Child* child;int unk08;int unk0c;void* fallback;int unk14;int unk18;int unk1c;int unk20;int unk24;bool enabled;void FUN_00699c10(void*);};
+// pdb: FORenderedMenu::SetScreenTexture | FORenderedMenu.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apTexture
 void Owner::FUN_00699c10(void* value){if(enabled&&child){Node* node=child->FUN_00826590(3);if(value)node->FUN_0047b810(value);else node->FUN_0047b810(fallback);}}
 }
 }   // namespace f3m_00699c10
@@ -4880,6 +4923,7 @@ struct Owner {
  Rect first;int unkB8;int unkBc;Rect second;
  void FOPipboyManager_InitLight();void FUN_00698830();
 };
+// pdb: FOPipboyManager::ResetColors | FOPipboyManager.obj | fnv360_0822_retail, call_gap, low
 void Owner::FUN_00698830(){
  Rect value;
  if(SystemColorManager_GetInstance(4)->SystemColorManager_GetColor(&value)){second=first=value;FOPipboyManager_InitLight();}
@@ -4890,6 +4934,7 @@ void Owner::FUN_00698830(){
 // @f3 0x00684390 (community match, verified in this file)
 namespace f3m_00684390 {
 namespace Notify4390 { struct Observer; struct Table {void* unk00;void* unk04;void* unk08;void* unk0c;void* unk10;void* unk14;void* unk18; void (__thiscall* notify)(Observer*); }; struct Observer { Table* table; void Notify() { table->notify(this); } }; struct Menu {int unk000;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;int unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;int unk080;int unk084;int unk088;int unk08c;int unk090;int unk094;int unk098;int unk09c;int unk0a0;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4;int unk0d8;int unk0dc;int unk0e0;int unk0e4;int unk0e8;int unk0ec;int unk0f0;int unk0f4;int unk0f8;int unk0fc;int unk100;int unk104;int unk108;int unk10c;int unk110;int unk114;int unk118;int unk11c;int unk120;int unk124;int unk128;int unk12c;int unk130;int unk134;int unk138;int unk13c;int unk140;int unk144;int unk148;int unk14c;int unk150;int unk154;int unk158;int unk15c;int unk160;int unk164;int unk168;int unk16c;int unk170;int unk174;int unk178;int unk17c;int unk180;int unk184;int unk188; Observer observer; }; extern Menu* DAT_01077248;
+// pdb: StatsMenu::ClearPerks | StatsMenu.obj | fnv360_0822_retail, call_gap_sim, low
 void __cdecl FUN_00684390() { if(DAT_01077248 && DAT_01077248->unk0fc) DAT_01077248->observer.Notify(); } }
 }   // namespace f3m_00684390
 
@@ -4918,6 +4963,8 @@ struct Owner {
  int index;
  void FUN_0068cef0();void FUN_0068d420(int);void FUN_0068d510(int,int);
 };
+// pdb: TutorialMenu::DoClick | TutorialMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Owner::FUN_0068d510(int event,int unused){switch(event){case 1:FUN_0068d420(index+1);break;case 2:FUN_0068d420(index-1);break;case 3:FUN_0068cef0();break;}}
 }
 }   // namespace f3m_0068d510
@@ -4925,6 +4972,7 @@ void Owner::FUN_0068d510(int event,int unused){switch(event){case 1:FUN_0068d420
 // @f3 0x0069a7b0 (community match, verified in this file)
 namespace f3m_0069a7b0 {
 struct Smart7b0 { NiRefObject* pointer; void Reset() { NiRefObject* p=pointer; if(p) { p->DecRefCount(); pointer=0; } } }; struct Owner7b0 {int unk00;Smart7b0 unk04;int unk08;Smart7b0 unk0c;Smart7b0 unk10;Smart7b0 unk14;int unk18;Smart7b0 unk1c;int unk20;Smart7b0 unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;int unk3c;int unk40;int unk44;int unk48;int unk4c;int unk50;int unk54;int unk58;int unk5c;int unk60;int unk64;int unk68;int unk6c;int unk70;int unk74;int unk78;int unk7c;int unk80;int unk84;int unk88;int unk8c;int unk90;int unk94;int unk98;int unk9c;int unka0;int unka4;int unka8;int unkac;int unkb0;int unkb4;int unkb8;int unkbc;int unkc0;int unkc4;int unkc8;int unkcc;int unkd0;Smart7b0 unkd4; void FUN_0069a630(); void FUN_0069a7b0(); };
+// pdb: FORenderedMenu::Shutdown | FORenderedMenu.obj | fnv360_0822_retail, caller_sim, low
 void Owner7b0::FUN_0069a7b0() { FUN_0069a630(); unk04.Reset(); unk14.Reset(); unk0c.Reset(); unk10.Reset(); unk1c.Reset(); unk24.Reset(); unkd4.Reset(); *(unsigned char*)&unk28=0; }
 }   // namespace f3m_0069a7b0
 
@@ -4980,6 +5028,7 @@ struct Menu {
  void FUN_0067f920(unsigned int);
 };
 extern Menu* DAT_010770ac;
+// pdb: StartMenu::ChooseControls | StartMenu.obj | fnv360_0822_retail, objrun, medium
 void __cdecl FUN_00680620(){if(DAT_010770ac){DAT_010770ac->list.FUN_0067a7f0(0);DAT_010770ac->tile->FUN_00bee190(0x1004,0.0f,true);DAT_010770ac->FUN_0067f920(0x40);}}
 }
 
@@ -5056,6 +5105,8 @@ struct Owner {int unk00;Item* first;
  int unkD8;
  int unkDC;
  Item* second;void FUN_00698560(bool);};
+// pdb: FOPipboyManager::SetRefractive | FOPipboyManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: abRefractive
 void Owner::FUN_00698560(bool enabled) {Item* saved=first;if(saved && second){if(enabled){saved->flags|=1;second->flags|=1;}else{saved->flags&=~1;second->flags&=~1;}}}
 }
 }   // namespace f3m_00698560
@@ -5114,6 +5165,7 @@ int unka4;
 int unka8;
 Projector* projector;};extern Scene* DAT_0107a224;extern unsigned DAT_0108d014; }
 struct Owner68EFF0 {N68EFF0::Holder* FUN_0068e5e0(unsigned);bool FUN_0068eff0();};
+// pdb: VATSMenu::LimbAppeared | VATSMenu.obj | fnv360_0822_retail, call_dedup, low
 bool Owner68EFF0::FUN_0068eff0() {N68EFF0::Node* node=FUN_0068e5e0(N68EFF0::DAT_0108d014)->root->Head();for(;node;node=node->next){if(!node->next&&!node->data)break;if(!node->data->disabled){N68EFF0::Point point=node->data->position;float x=0.0f,y=0.0f;N68EFF0::DAT_0107a224->projector->FUN_0083a030(&point,&x,&y,0.00001f);if(!(x<=0.0f)&&!(y<=0.0f)&&!(x>=1.0f)&&!(y>=1.0f))return true;}}return false;}
 }   // namespace f3m_0068eff0
 
@@ -5191,6 +5243,7 @@ struct State {
     bool enabled;unsigned char unk111;unsigned short unk112;int value;
 };
 extern State* DAT_01077448;
+// pdb: VATSMenu::GetTemporaryVATSCommand | VATSMenu.obj | fnv360_0822_retail, call_gap_sim, low
 int* __cdecl FUN_0068da80() {
     if(DAT_01077448 && DAT_01077448->enabled) return &DAT_01077448->value;
     return 0;
@@ -5238,6 +5291,8 @@ struct Status685c { void* table; Node685c head; Status685c(){head.value=0;head.n
 struct Named685c { void* table; Node685c head; Named685c(){head.value=0;head.next=0;table=&G685c::DAT_00e04668;} Node685c* Head(){return &head;} };
 struct Group685c { TESForm* form; Status685c status; Named685c named; static void* operator new(unsigned int n){return G685c::DAT_01090a78.FUN_0086b930(n);} Group685c(TESForm* p):status(),named(){form=p;} };
 struct Owner685c { int unk00; Node685c groups; Group685c* FUN_00684e40(unsigned int); void FUN_00685c60(Message685c*); };
+// pdb: StatsMenu::StatusEffectList::Register | StatsMenu.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apActiveEffect
 void Owner685c::FUN_00685c60(Message685c* message) {
     TESForm* form=dynamic_cast<TESForm*>(message->magic);
     Group685c* group=FUN_00684e40(form->Key());
@@ -5289,6 +5344,8 @@ struct ValueTable { int unk000; int unk004; int unk008; int unk00C; int unk010; 
 struct Values { ValueTable* table; int FUN_005a29a0(int); int Get(int id){return table->get(this,id);} };
 struct Player { int unk000; int unk004; int unk008; int unk00C; int unk010; int unk014; int unk018; int unk01C; int unk020; int unk024; int unk028; int unk02C; int unk030; int unk034; int unk038; int unk03C; int unk040; int unk044; int unk048; int unk04C; int unk050; int unk054; int unk058; int unk05C; int unk060; int unk064; int unk068; int unk06C; int unk070; int unk074; int unk078; int unk07C; int unk080; int unk084; int unk088; int unk08C; int unk090; int unk094; int unk098; Values values; }; extern Player* DAT_0107a104;
 struct Tile { int unk000; int unk004; int unk008; int unk00C; int unk010; int unk014; int unk018; int unk01C; int unk020; int unk024; Tile* parent; void FUN_00bee190(int,float,bool); void FUN_00bf11a0(int,const char*,bool); };
+// pdb: StatsMenu::SPECIALUpdateFn | StatsMenu.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apTile, aeIndex
 void __cdecl FUN_00684530(Tile* tile,int id) {
  if(tile) {
  int base=DAT_0107a104->values.FUN_005a29a0(id);
@@ -5316,6 +5373,7 @@ extern Ref* DAT_01077944;
 extern const char* DAT_00f6b70c;
 struct Manager {void FUN_00429640(const char*,bool,bool);};
 extern Manager* DAT_0106ca70;
+// pdb: FORenderedTerminal::ReleaseStaticGeometry | FORenderedTerminal.obj | fnv360_0822_debug, caller, medium
 void __cdecl FUN_0069d7d0(){
  if(DAT_01077944){
   DAT_0106ca70->FUN_00429640(DAT_00f6b70c,true,true);
@@ -5327,6 +5385,7 @@ void __cdecl FUN_0069d7d0(){
 // @f3 0x006854b0 (community match, verified in this file)
 namespace f3m_006854b0 {
 namespace Select54b0 { struct Menu {int unk000;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;int unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;int unk080;int unk084;int unk088;int unk08c;int unk090;int unk094;int unk098;int unk09c;int unk0a0;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4;int unk0d8;int unk0dc;int unk0e0;int unk0e4;int unk0e8;int unk0ec;int unk0f0;int unk0f4;int unk0f8;int unk0fc;int unk100;int unk104;int unk108;int unk10c;int unk110;int unk114;int unk118;int unk11c;int unk120;int unk124;int unk128;int unk12c;int unk130;int unk134;int unk138;int unk13c;int unk140;int unk144;int unk148;int unk14c;int unk150;int unk154;int unk158;int unk15c;int unk160;int unk164;int unk168;int unk16c;int unk170;int unk174;int unk178;int unk17c;int unk180;int unk184;int unk188;int unk18c;int unk190;int unk194;int unk198;int unk19c;int unk1a0;int unk1a4;int unk1a8;int unk1ac;int unk1b0;int unk1b4;int unk1b8;int unk1bc;int unk1c0;int unk1c4;int unk1c8;int unk1cc;int unk1d0;int unk1d4;int unk1d8;int unk1dc;int unk1e0;int unk1e4;int unk1e8;int unk1ec;int unk1f0;int unk1f4;int unk1f8;int unk1fc;int unk200;int unk204;int unk208;int unk20c;int unk210;int unk214;int unk218; bool active; }; extern Menu* DAT_01077248; extern int* __cdecl FUN_00685400(); extern int __cdecl FUN_006841f0(int);
+// pdb: StatsMenu::GetTargetedBodyPart | StatsMenu.obj | fnv360_0822_debug, call_gap_sim, low
 int __cdecl FUN_006854b0() { if(DAT_01077248 && DAT_01077248->active) { int value=*FUN_00685400(); return FUN_006841f0(value); } return -1; } }
 }   // namespace f3m_006854b0
 
@@ -5334,6 +5393,7 @@ int __cdecl FUN_006854b0() { if(DAT_01077248 && DAT_01077248->active) { int valu
 struct Tile602 {float FUN_00becf40(unsigned);};
 struct Menu602 {unsigned unk00;Tile602* tile;};
 extern Menu602* DAT_01077248;
+// pdb: StatsMenu::GetCurrentStatsPage | StatsMenu.obj | fnv360_0822_retail, call_gap_sim, low
 char FUN_006847a0() {
     int page;
     if(DAT_01077248) page=(unsigned)DAT_01077248->tile->FUN_00becf40(0x1004);
@@ -5345,6 +5405,7 @@ char FUN_006847a0() {
 namespace f3m_0068d620 {
 namespace SmallIndexedLookup {
 struct Entry {int unk00;void* value;};extern Entry* DAT_00f46bb8[];
+// pdb: TESObjectWEAP::GetVATSAttackName | TESObjectWEAP.obj | fnv360_0822_retail, call_gap, low
 void* FUN_0068d620(unsigned index){Entry* entry=DAT_00f46bb8[index];if(entry)return entry->value;return 0;}
 }
 }   // namespace f3m_0068d620
@@ -5520,6 +5581,8 @@ struct Owner {
  bool active;unsigned char unk285;unsigned short unk286;float start;float progress;float duration;float next;
  void FUN_0069e230(float);
 };
+// pdb: FOVATSEffectManager::UpdateDistort | FOVATSEffectManager.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: afTime
 void Owner::FUN_0069e230(float time){
  float elapsed=time-start;
  float value=elapsed/duration;
@@ -5729,6 +5792,8 @@ struct State68d9 {
     Data68d9* Data(){Ref68d9* p=actor->table->reference(actor);return p ? p->data : 0;}
 };
 namespace G68d9 {extern State68d9* DAT_0107a104;extern const float DAT_00f5fdc0;extern const float DAT_00f5fdb4;}
+// pdb: VATSMenu::GetShotBurstCount | VATSMenu.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: aeAction, abAllowLongBurst
 unsigned char FUN_0068d9f0(int enabled,bool alternate) {
     Data68d9* data=G68d9::DAT_0107a104->Data();
     if(enabled && (!data || (data->unk100&2))) {
@@ -5891,6 +5956,8 @@ int unk168;
 int unk16c;
 int unk170;
 Receiver* receiver;};extern State* DAT_01075b24;}
+// pdb: StatsMenu::SetKnobPosition | StatsMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abPlaySounds
 void FUN_00684740(int arg) {if(N684740::DAT_01077248){int key=static_cast<unsigned int>(N684740::DAT_01077248->tile->FUN_00becf40(0x1004));N684740::DAT_01075b24->receiver->FUN_00697500(key,arg);}}
 }   // namespace f3m_00684740
 
@@ -6100,6 +6167,7 @@ void N69B330::Owner::FUN_0069b330(float now){float value=now-start;value/=durati
 // @f3 0x00689f50 (community match, verified in this file)
 namespace f3m_00689f50 {
 namespace Lookup9f50 { struct Item { int unk00; void* key; }; struct Node { Item* value; Node* next; bool Empty() { return !next && !value; } Item*& ItemValue() { return value; } }; extern Node DAT_0107738c; struct Owner {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;int unk3c;int unk40;int unk44;int unk48;int unk4c;int unk50;int unk54;int unk58;int unk5c;int unk60;int unk64;int unk68;int unk6c;int unk70;int unk74;int unk78;int unk7c;int unk80;int unk84;int unk88;int unk8c;int unk90;int unk94;int unk98;int unk9c;int unka0;int unka4;int unka8;int unkac;int unkb0;int unkb4;int unkb8;int unkbc; void* key; }; extern Owner* DAT_010772f8;
+// pdb: SurgeryMenu::GetCurrentLimbWound | SurgeryMenu.obj | fnv360_0822_retail, call_gap, medium
 Item* __cdecl FUN_00689f50() { Owner* owner=DAT_010772f8; for(Node* node=&DAT_0107738c;node;node=node->next) { if(node->Empty()) break; if(node->ItemValue()->key==owner->key) return node->ItemValue(); } return 0; } }
 }   // namespace f3m_00689f50
 
@@ -6107,6 +6175,8 @@ Item* __cdecl FUN_00689f50() { Owner* owner=DAT_010772f8; for(Node* node=&DAT_01
 namespace StartTimedState {
 extern unsigned int DAT_01090bb0;
 struct Owner {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;int unk3c;int unk40;int unk44;int unk48;int unk4c;int unk50;int unk54;int unk58;int unk5c; bool active;float startTime;float amount;float duration;float elapsed;void FUN_006996a0(float,float);};
+// pdb: FORenderedMenu::TriggerVertHold | FORenderedMenu.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afDuration, afSpeed
 void Owner::FUN_006996a0(float value,float milliseconds){active=true;amount=value;duration=(float)(milliseconds*0.0010000000474974513);startTime=(float)DAT_01090bb0;elapsed=0.0f;}
 }
 
@@ -6122,6 +6192,7 @@ struct ValueTable { int unk00; int unk04; int (__thiscall *get)(Values*,int); };
 struct Values { ValueTable* table; };
 struct Player { int unk000; int unk004; int unk008; int unk00C; int unk010; int unk014; int unk018; int unk01C; int unk020; int unk024; int unk028; int unk02C; int unk030; int unk034; int unk038; int unk03C; int unk040; int unk044; int unk048; int unk04C; int unk050; int unk054; int unk058; int unk05C; int unk060; int unk064; int unk068; int unk06C; int unk070; int unk074; int unk078; int unk07C; int unk080; int unk084; int unk088; int unk08C; int unk090; int unk094; int unk098; Values values; }; extern Player* DAT_0107a104;
 struct Owner { List* list; int id; int tier; bool dirty; int FUN_0068b610(); };
+// pdb: SurgeryMenu::LimbWound::ResetLimb | SurgeryMenu.obj | fnv360_0721_beta, call_seq, medium
 int Owner::FUN_0068b610() {
  dirty=true;
  for(Node* node=list->Head();node;node=node->next) {
@@ -6144,6 +6215,7 @@ int Owner::FUN_0068b610() {
 // @f3 0x006987f0 (community match, verified in this file)
 namespace f3m_006987f0 {
 namespace N6987F0 {extern unsigned DAT_01090bb0;struct Owner{bool FUN_00699c50();void FUN_00697930(float);void FUN_00698310();bool FUN_006987f0();};}
+// pdb: FOPipboyManager::OnIdle | FOPipboyManager.obj | fnv360_0822_retail, caller_sim, low
 bool N6987F0::Owner::FUN_006987f0(){if(!FUN_00699c50())return false;FUN_00697930((float)DAT_01090bb0);FUN_00698310();return true;}
 }   // namespace f3m_006987f0
 
@@ -6152,6 +6224,8 @@ namespace f3m_0069feb0 {
 namespace routefeb {
 bool __cdecl FUN_0061ab40();
 struct Owner { int unk000; int unk004; int unk008; int unk00C; int unk010; int unk014; int unk018; int unk01C; int unk020; int unk024; int unk028; int unk02C; int unk030; int unk034; int unk038; int unk03C; int unk040; int unk044; int unk048; int unk04C; int unk050; int unk054; int unk058; int unk05C; int unk060; int unk064; int unk068; int unk06C; int unk070; int unk074; int unk078; int unk07C; int unk080; int unk084; int unk088; int unk08C; int unk090; int unk094; int unk098; int unk09C; int unk0A0; int unk0A4; int unk0A8; int unk0AC; int unk0B0; int unk0B4; int unk0B8; int unk0BC; int unk0C0; int unk0C4; int unk0C8; int unk0CC; int unk0D0; int unk0D4; int unk0D8; int unk0DC; int unk0E0; int unk0E4; int unk0E8; int unk0EC; int unk0F0; int unk0F4; int unk0F8; int unk0FC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; unsigned char unk128; unsigned char enabled; int unk12C; int unk130; int unk134; int unk138; int unk13C; int unk140; int unk144; int unk148; int unk14C; int unk150; int unk154; int unk158; int unk15C; int unk160; int unk164; int unk168; int unk16C; int unk170; int unk174; int unk178; int unk17C; int unk180; int unk184; int unk188; int unk18C; int unk190; int unk194; int unk198; int unk19C; int unk1A0; int unk1A4; int unk1A8; int unk1AC; int unk1B0; int unk1B4; int unk1B8; int unk1BC; int unk1C0; int unk1C4; int unk1C8; int unk1CC; int unk1D0; int unk1D4; int unk1D8; int unk1DC; int unk1E0; int unk1E4; int unk1E8; int unk1EC; int unk1F0; int unk1F4; int unk1F8; int unk1FC; int unk200; int unk204; int unk208; int unk20C; int unk210; int unk214; int unk218; int unk21C; int unk220; int unk224; int unk228; int unk22C; int unk230; int unk234; int unk238; int unk23C; int unk240; int unk244; int unk248; int unk24C; int unk250; int unk254; int unk258; int unk25C; int unk260; int unk264; int unk268; int unk26C; int unk270; int unk274; int unk278; int unk27C; int unk280; int unk284; int unk288; int unk28C; int unk290; int unk294; int unk298; int unk29C; int unk2A0; int unk2A4; int unk2A8; int unk2AC; int unk2B0; unsigned char alternate; void FUN_0069e990(unsigned int,unsigned int,unsigned int,unsigned int); void FUN_0069eab0(unsigned int,unsigned int,unsigned int,unsigned int); void FUN_0069feb0(unsigned int,unsigned int,unsigned int,unsigned int); };
+// pdb: FOVATSEffectManager::PrepareEffect | FOVATSEffectManager.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apSourceColors, apSourceMask, apTarget, abClearTarget
 void Owner::FUN_0069feb0(unsigned int a,unsigned int b,unsigned int c,unsigned int d) {
  if(!FUN_0061ab40() && enabled) {if(alternate) FUN_0069e990(a,b,c,d); else FUN_0069eab0(a,b,c,d);}
 }
@@ -6162,6 +6236,8 @@ void Owner::FUN_0069feb0(unsigned int a,unsigned int b,unsigned int c,unsigned i
 namespace f3m_006875a0 {
 namespace UpdateMenuOption {
 struct Menu {void FUN_006866b0(unsigned int);};extern Menu* DAT_01077248;
+// pdb: StatsMenu::SetCurrentStatsPage | StatsMenu.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: acPage
 void __cdecl FUN_006875a0(unsigned char option){if(DAT_01077248)DAT_01077248->FUN_006866b0(option);}
 }
 }   // namespace f3m_006875a0
@@ -6233,6 +6309,7 @@ struct Object{ObjectTable* table;__forceinline void Detach(Ref*r){table->detach(
 struct Control;struct ControlTable{void* unknown00;void* unknown04;void* unknown08;Object*(__thiscall* get)(Control*);};
 struct Control{ControlTable* table;__forceinline Object* Get(){return table->get(this);}};
 struct Pool{void FUN_00ae5ed0(Ref*);};struct Owner{int unknown00,unknown04;Control*control;int unknown0c,unknown10,unknown14,unknown18;NiPointer<Ref> owned;Pool* pool;void FUN_0069a630();};}
+// pdb: FORenderedMenu::ClearMenuLight | FORenderedMenu.obj | fnv360_0822_retail, call_seq, medium
 void N69A630::Owner::FUN_0069a630(){if(owned){if(control->Get()){Object* receiver=control->Get();receiver->Detach(owned);}pool->FUN_00ae5ed0(owned);owned=0;}}
 }   // namespace f3m_0069a630
 
@@ -6375,12 +6452,16 @@ namespace N6867B0 {struct Tile{void FUN_00bee190(unsigned,float,bool);};struct O
  int unknown214;
  int unknown218;
  bool active;int FUN_00684350();void FUN_00685b10();bool FUN_006867b0(int);};}
+// pdb: StatsMenu::SetStatusPage | StatsMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aiPage
 bool N6867B0::Owner::FUN_006867b0(int mode){if((unsigned)mode>2||FUN_00684350()==mode)return false;if(active)FUN_00685b10();tile->FUN_00bee190(0x1004,(float)mode,true);return true;}
 }   // namespace f3m_006867b0
 
 // @f3 0x006890b0 (community match, verified in this file)
 namespace f3m_006890b0 {
 struct Owner90b0; struct Table90b0 { void* unk00; void* unk04; void* unk08; void (__thiscall* set)(Owner90b0*,int,int); }; struct Owner90b0 { Table90b0* table; bool FUN_006890b0(unsigned); };
+// pdb: SurgeryMenu::DoKey | SurgeryMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiKey
 bool Owner90b0::FUN_006890b0(unsigned key) { if(key!=87 && key!=119) { if(key==83 || key==115) { table->set(this,5,0); return true; } return false; } table->set(this,6,0); return true; }
 }   // namespace f3m_006890b0
 
@@ -6565,6 +6646,8 @@ namespace N69E1F0 {extern float DAT_01077a84;struct Owner{
  int unknown2b8;
  int unknown2bc;
  float value;void FUN_0069e1f0(float);};}
+// pdb: FOVATSEffectManager::UpdateTargetPulse | FOVATSEffectManager.obj | fnv360_0822_debug, objopen_prop, low
+// pdb params: afTime
 void N69E1F0::Owner::FUN_0069e1f0(float time){float phase=DAT_01077a84*time;float wave=sinf(phase);value=(wave+1.0)*0.5;}
 }   // namespace f3m_0069e1f0
 
@@ -6605,6 +6688,8 @@ struct State {
 extern State* DAT_01075b24;
 struct Dispatch {int unk00;int unk04;int unk08;void (__thiscall* notify)(void*,int,int);};
 struct Owner {Dispatch* table;void FUN_0068d660(int,int);};
+// pdb: VATSMenu::DoWheelMove | VATSMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Owner::FUN_0068d660(int unused,int unused2) {
     int delta=(int)DAT_01075b24->value / -120;
     if(delta==1) table->notify(this,2,0);
@@ -6764,6 +6849,8 @@ struct Owner {
     int values[1];
     void FUN_0069e410(int);
 };
+// pdb: FOVATSEffectManager::TargetAdditionalLimb | FOVATSEffectManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aeLimb
 void Owner::FUN_0069e410(int value) {
     values[count]=value;
     ++count;
@@ -6774,6 +6861,8 @@ void Owner::FUN_0069e410(int value) {
 // @f3 0x006973f0 (community match, verified in this file)
 namespace f3m_006973f0 {
 namespace bounds3f0 {struct Object {int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; int unk08c; int unk090; int unk094; int unk098; int unk09c; int unk0a0; int unk0a4; int unk0a8; int unk0ac; int unk0b0; int unk0b4; int unk0b8; int unk0bc; int unk0c0; int unk0c4; int unk0c8; int unk0cc; int unk0d0; int unk0d4; int unk0d8; int unk0dc; int unk0e0; int unk0e4; int unk0e8; int unk0ec; int unk0f0; int unk0f4; int unk0f8; int unk0fc; int unk100; int unk104; int unk108; int unk10c; int unk110; int unk114; float lower[3];float upper[3];void FUN_006973f0(int,float,float);};
+// pdb: FOPipboyManager::MoveKnobAbsolute | FOPipboyManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiKnob, afTarget, afRate
 void Object::FUN_006973f0(int axis,float lo,float hi){lower[axis]=lo;upper[axis]=hi;}
 }
 }   // namespace f3m_006973f0
@@ -6951,6 +7040,7 @@ namespace N68CF70 {struct Tile{void FUN_00bee190(unsigned,float,bool);};struct O
  int unknown40;
  int unknown44;
  unsigned index,count;void FUN_0068cf70();};}
+// pdb: TutorialMenu::UpdatePrevNext | TutorialMenu.obj | fnv360_0822_retail, call_seq, medium
 void N68CF70::Owner::FUN_0068cf70(){previous->FUN_00bee190(0xfaf,(float)(index>0),true);next->FUN_00bee190(0xfaf,(float)(index+1<count),true);}
 }   // namespace f3m_0068cf70
 
@@ -6987,12 +7077,15 @@ unsigned unk64;
 unsigned unk68;
 unsigned unk6c;
 unsigned unk70;
+// pdb: FORenderedMenu::UpdateShudder | FORenderedMenu.obj | fnv360_0721_beta, objrun, medium
+// pdb params: afTime
 bool active;unsigned char unk75,unk76,unk77;float start,duration,amplitude,frequency,value;void FUN_006997a0(float);};void Owner::FUN_006997a0(float time){time-=start;if(time>duration){active=false;return;}float phase=time*frequency;float wave=(float)sin(phase);float fade=1.0f-time/duration;value=wave*amplitude*fade;}}
 }   // namespace f3m_006997a0
 
 // @f3 0x00684310 (community match, verified in this file)
 namespace f3m_00684310 {
 namespace N684310 {struct Tile{float FUN_00becf40(unsigned);};struct Owner{int unknown00;Tile*tile;unsigned FUN_00684310();};}
+// pdb: RaceSexMenu::GetActiveList | RaceSexMenu.obj | fnv360_0822_retail, call_gap, medium
 unsigned N684310::Owner::FUN_00684310(){return (unsigned)tile->FUN_00becf40(0x1004);}
 }   // namespace f3m_00684310
 
@@ -7087,12 +7180,16 @@ unsigned unk150;
 unsigned unk154;
 unsigned unk158;
 unsigned unk15c;
+// pdb: FOPipboyManager::FadeLightEffect | FOPipboyManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abFadeOut
 bool enabled;bool unk161;bool pending;unsigned char unk163;float start,value;void FUN_006975a0(bool);};void Owner::FUN_006975a0(bool reverse){if(enabled){start=(float)DAT_01090bb0;pending=true;if(reverse)value=0.0f;else value=1.0f;}}}
 }   // namespace f3m_006975a0
 
 // @f3 0x00684710 (community match, verified in this file)
 namespace f3m_00684710 {
 namespace N684710 {struct Tile{void FUN_00bee190(unsigned,float,bool);};struct Info{int unknown00,value;};extern Info* DAT_0106f2f8[];}
+// pdb: StatsMenu::MiscStatsUpdateFn | StatsMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apTile, aeID
 void FUN_00684710(N684710::Tile*tile,unsigned index){if(tile)tile->FUN_00bee190(0x1005,(float)N684710::DAT_0106f2f8[index]->value,true);}
 }   // namespace f3m_00684710
 
@@ -7166,6 +7263,7 @@ namespace N699D80 {struct Value{
  int unknownb0;
  int unknownb4;
  unsigned char unknownb8;bool active;void FUN_00699d80();};}
+// pdb: FORenderedMenu::OnMenuOpen | FORenderedMenu.obj | fnv360_0822_retail, call_gap, low
 void N699D80::Owner::FUN_00699d80(){if(tile)tile->FUN_00beab90()->active=true;FUN_0061a5b0()->FUN_00bee3a0();if(state)state->flags&=~1u;active=true;}
 }   // namespace f3m_00699d80
 
@@ -7188,6 +7286,8 @@ struct ByteTable {
  unsigned int values[1];
  unsigned int FUN_006841c0(int index,int component);
 };
+// pdb: StatsMenu::BodyPartController::GetLink | StatsMenu.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: aeFrom, aeDir
 unsigned int ByteTable::FUN_006841c0(int index,int component) {
  unsigned int shift=component*8;
  return (values[index] & (255u<<shift)) >> shift;
@@ -7196,11 +7296,14 @@ unsigned int ByteTable::FUN_006841c0(int index,int component) {
 
 // @f3 0x0068cf40 (community match, verified in this file)
 namespace f3m_0068cf40 {
+// pdb: TutorialMenu::DoGamepadUpEvent | TutorialMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiButton, afValue
 namespace Event{struct Owner;struct Table{void*unk00;void*unk04;void*unk08;void*unk0c;void*unk10;void*unk14;void*unk18;void*unk1c;void*unk20;void*unk24;void*unk28;void*unk2c;void*unk30;unsigned(__thiscall*ID)(Owner*);};bool __cdecl FUN_0061c490(unsigned);void __cdecl FUN_0068cef0();struct Owner{Table*table;bool FUN_0068cf40(unsigned,unsigned);};bool Owner::FUN_0068cf40(unsigned event,unsigned unused){if(FUN_0061c490(table->ID(this))&&event==10){FUN_0068cef0();return true;}return false;}}
 }   // namespace f3m_0068cf40
 
 // @f3 0x006970f0 (community match, verified in this file)
 namespace f3m_006970f0 {
+// pdb: FOHUDEffectManager::OnIdle | FOHUDEffectManager.obj | fnv360_0822_retail, call_gap, low
 namespace Update6970 {extern unsigned DAT_01090bb0;struct Object{int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; bool enabled;void FUN_00697030(float);void FUN_006970f0();};void Object::FUN_006970f0(){if(enabled)FUN_00697030((float)DAT_01090bb0);}}
 }   // namespace f3m_006970f0
 
@@ -7273,6 +7376,7 @@ struct Owner {
  unsigned char unkB8; unsigned char activeB9; unsigned char unkBA; unsigned char unkBB;
  void FUN_00699dc0();
 };
+// pdb: FORenderedMenu::OnMenuClose | FORenderedMenu.obj | fnv360_0822_retail, call_seq, medium
 void Owner::FUN_00699dc0() {
  activeB9=0;
  active4D=0;
@@ -7290,6 +7394,7 @@ namespace f3m_006805f0 {
 namespace ResetGlobalSelection {
 struct Selection {void FUN_0067a7f0(int);};
 struct Menu {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;int unk3c;int unk40;int unk44;int unk48;int unk4c;int unk50;int unk54;int unk58;int unk5c;int unk60;int unk64;int unk68;int unk6c;int unk70;int unk74;int unk78;int unk7c;int unk80;int unk84;int unk88;int unk8c;int unk90;int unk94;int unk98;int unk9c;int unka0;int unka4;int unka8; Selection selection;void FUN_0067f920(unsigned int);};extern Menu* DAT_010770ac;
+// pdb: StartMenu::ChooseAudio | StartMenu.obj | fnv360_0822_retail, objrun, medium
 void __cdecl FUN_006805f0(){if(DAT_010770ac){DAT_010770ac->selection.FUN_0067a7f0(0);DAT_010770ac->FUN_0067f920(0x20);}}
 }
 }   // namespace f3m_006805f0
@@ -7299,6 +7404,8 @@ namespace f3m_00699930 {
 namespace motion930 {
 extern float DAT_01077738,DAT_010776d8,DAT_01077754;float __cdecl hkStringPtr_printf(float);
 struct Owner {int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; float x,y;void FUN_00699930(float);};
+// pdb: FORenderedMenu::UpdatePulse | FORenderedMenu.obj | fnv360_0721_beta, objrun, medium
+// pdb params: afTime
 void Owner::FUN_00699930(float phase){phase=DAT_01077738*phase;phase=2.0f*hkStringPtr_printf(phase);x=DAT_010776d8*phase;y=phase*DAT_01077754;}
 }
 }   // namespace f3m_00699930
@@ -7313,12 +7420,16 @@ namespace N69D720 {struct Handle{unsigned unknown00,unknown04,unknown08;void FUN
  int unknown10;
  int unknown14;
  Object*object;void FUN_0069d720();};}
+// pdb: Animation::GetGroupAction | InterfaceManager.obj | fnv360_0822_debug, call_gap, low
+// pdb params: aeSection
 void N69D720::Owner::FUN_0069d720(){Handle handle;FUN_00bd6800()->BSAudioManager_GetSoundHandleByName(&handle,"OBJComputerTerminalPowerDown",0x121,0)->FUN_00bd00c0();if(object)object->Destroy();object=0;DAT_01075b24->FUN_0061eb80(0);}
 }   // namespace f3m_0069d720
 
 // @f3 0x0068e5e0 (community match, verified in this file)
 namespace f3m_0068e5e0 {
 namespace N68E5E0 {struct Item{unsigned key;};struct Node{Item*data;Node*next;};extern Node DAT_010774a8;}
+// pdb: VATSMenu::GetVatsTarget | VATSMenu.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apTarget
 N68E5E0::Node* __stdcall FUN_0068e5e0(unsigned key){using namespace N68E5E0;if(!key)return 0;for(Node*node=&N68E5E0::DAT_010774a8;node&&(node->next||node->data);node=node->next)if(node->data->key==key)return node;return 0;}
 }   // namespace f3m_0068e5e0
 
@@ -7327,6 +7438,8 @@ namespace f3m_006849a0 {
 namespace Search6849 {
 struct Node{void* value;Node* next;bool Contains(void* key){Node* node=this;while(node){if(node->value==key)return true;node=node->next;}return false;}};
 struct Owner{int unk00;Node heads[6];int FUN_006849a0(void*);};
+// pdb: StatsMenu::BodyPartController::Find | StatsMenu.obj | fnv360_0822_debug, call_gap, low
+// pdb params: apTile
 int Owner::FUN_006849a0(void* value){for(int i=0;i<6;++i)if(heads[i].Contains(value))return i;return 6;}
 }
 }   // namespace f3m_006849a0
@@ -7337,6 +7450,8 @@ namespace SelectVisibleObject {
 struct Object {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c; unsigned int flags;};
 struct Owner {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;int unk3c;int unk40;int unk44;int unk48;int unk4c;int unk50;int unk54;int unk58;int unk5c;int unk60;int unk64;int unk68;int unk6c;int unk70;int unk74;int unk78;int unk7c;int unk80;int unk84;int unk88;int unk8c;int unk90;int unk94;int unk98;int unk9c;int unka0;int unka4;int unka8;int unkac;int unkb0;int unkb4;int unkb8;int unkbc;int unkc0;int unkc4;int unkc8;int unkcc;int unkd0;int unkd4;int unkd8;int unkdc;int unke0;int unke4; Object* first;Object* second;Object* third;Object* fourth;void FUN_0069ba10(unsigned int);};
 static __forceinline void SetHidden(Object* object,bool hidden){if(object){if(hidden)object->flags|=1;else object->flags&=~1u;}}
+// pdb: FORenderedMenuRaceSex::LightButton | FORenderedMenuRaceSex.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aiButton
 void Owner::FUN_0069ba10(unsigned int index){SetHidden(first,index!=0);SetHidden(second,index!=1);SetHidden(third,index!=2);SetHidden(fourth,index!=3);}
 }
 }   // namespace f3m_0069ba10
@@ -7356,6 +7471,8 @@ namespace f3m_00699730 {
 namespace Timer6997 {
 extern float DAT_01077844;extern double DAT_00db38a8;extern int DAT_0107781c;int __cdecl FUN_00c04d9a();
 struct Object{int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; char unk94;bool enabled;char unk96,unk97;float start,progress,duration,next;void FUN_00699730(float);};
+// pdb: FORenderedMenu::UpdateDistort | FORenderedMenu.obj | fnv360_0721_beta, objrun, medium
+// pdb params: afTime
 void Object::FUN_00699730(float value){float elapsed=value-start;elapsed/=duration;progress=elapsed;if((double)elapsed>(double)DAT_01077844+DAT_00db38a8){enabled=false;next=(float)(FUN_00c04d9a()%DAT_0107781c)+value;}}
 }
 }   // namespace f3m_00699730
@@ -7411,6 +7528,8 @@ unsigned unk18;
 unsigned unk1c;
 unsigned unk20;
 unsigned unk24;
+// pdb: FOHUDEffectManager::TriggerShudder | FOHUDEffectManager.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aDuration, aIntensity, aFrequency
 bool active;unsigned char unk29,unk2a,unk2b;float start;Pair first,second,third,saved;void FUN_00696fd0(const Pair&,const Pair&,const Pair&);};void Owner::FUN_00696fd0(const Pair&a,const Pair&b,const Pair&c){active=true;first=a;second=b;third=c;start=(float)DAT_01090bb0;saved=DAT_0108f390;}}
 }   // namespace f3m_00696fd0
 
@@ -7585,6 +7704,8 @@ bool active;unsigned char unk285,unk286,unk287;float start,value;void FUN_0069e0
 namespace StartMenuTimers {
 extern unsigned int DAT_01090bb0;
 struct Menu {int unk000;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;int unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;int unk080;int unk084;int unk088;int unk08c;int unk090;int unk094;int unk098;int unk09c;int unk0a0;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4;int unk0d8;int unk0dc;int unk0e0;int unk0e4;int unk0e8;int unk0ec;int unk0f0;int unk0f4;int unk0f8;int unk0fc;int unk100; unsigned short unk104;unsigned char unk106;bool first,second;unsigned int startTime;void FUN_0068d6b0(unsigned int,void*);};
+// pdb: VATSMenu::DoStillDown | VATSMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Menu::FUN_0068d6b0(unsigned int event,void*){switch(event){case 2:if(!first){startTime=DAT_01090bb0;first=true;}break;case 3:if(!second){startTime=DAT_01090bb0;second=true;}break;}}
 }
 
@@ -7609,6 +7730,7 @@ struct Player { Anim* FUN_0076cce0(bool first); };
 extern Player* DAT_0107a104;
 extern float flt_01090bac;
 }
+// pdb: FOPipboyManager::UpdateIdleAnims | FOPipboyManager.obj | fnv360_0822_retail, caller_sim, low
 void __cdecl FUN_00698310()
 {
     if (n698310::FUN_00619620())
@@ -7675,6 +7797,7 @@ struct A6S {
     void FUN_0069d440();
 };
 
+// pdb: FORenderedTerminal::OnMenuClose | FORenderedTerminal.obj | fnv360_0822_retail, caller_sim, low
 void A6S::FUN_0069d440()
 {
     A6Target* t = unk1C;
@@ -7826,6 +7949,8 @@ struct Obj {
     unsigned int flags;
     void FUN_0068d640(unsigned int mask, bool on);
 };
+// pdb: CombatFormulas::CalcBlock | CombatFormulas.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aiSkill
 void Obj::FUN_0068d640(unsigned int mask, bool on)
 {
     if (on)
@@ -7842,6 +7967,8 @@ struct Pool { void* Menu_RenderTemplate(int a, int b, int c); };
 extern Pool* DAT_01077448;
 void __cdecl FUN_006194f0();
 void __cdecl FUN_0068db00();
+// pdb: VATSMenu::VatsMenuRenderTemplate | VATSMenu.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apParent, axName
 void* __cdecl FUN_0068e6d0(int a, int b)
 {
     if (DAT_01077448)
@@ -7876,6 +8003,8 @@ struct Shake {
     float offsetY;
     void FUN_00697030(float time);
 };
+// pdb: FOHUDEffectManager::UpdateShudder | FOHUDEffectManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afTime
 void Shake::FUN_00697030(float time)
 {
     float t = time - start;
@@ -7959,6 +8088,7 @@ struct FUN_0069af10 {
     ~FUN_0069af10();
     void FUN_0069a7b0();
 };
+// pdb: FORenderedMenu::~FORenderedMenu | FORenderedMenu.obj | fnv360_0822_retail, caller_sim, low
 FUN_0069af10::~FUN_0069af10()
 {
     FUN_0069a7b0();
@@ -7973,6 +8103,8 @@ struct Key { int unk00; int unk04; int unk08; int n; };
 struct Value { Key* key; };
 struct Node { Value* data; Node* next; };
 struct Owner { int unk00; Node first; Value* FUN_00684e40(int); };
+// pdb: StatsMenu::StatusEffectList::Find | StatsMenu.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiID
 Value* Owner::FUN_00684e40(int n) {
     Value* result = 0;
     Node* cur = this ? &first : 0;
@@ -7999,6 +8131,7 @@ struct Obj {
     float elapsed;
     void FUN_0069e120();
 };
+// pdb: FOVATSEffectManager::TriggerScan | FOVATSEffectManager.obj | fnv360_0822_retail, call_gap, low
 void Obj::FUN_0069e120()
 {
     if (!active) {
@@ -8088,6 +8221,7 @@ public:
     FUN_0068e610_Node* FUN_0068e610();
 };
 
+// pdb: VATSMenu::GetTargetPart | VATSMenu.obj | fnv360_0822_retail, call_gap, low
 FUN_0068e610_Node* FUN_0068e610_Obj::FUN_0068e610() {
     int* base = FUN_0068e5e0(DAT_0108d014);
     FUN_0068e610_Node* node = (FUN_0068e610_Node*)((*base) + 8);
@@ -8130,6 +8264,7 @@ struct Obj {
     FUN_00aad2d0* soundsB[15];
     void FUN_0069e430();
 };
+// pdb: BSPerformanceTimer::Start | TES.obj | fnv360_0822_debug, call_gap, low
 void Obj::FUN_0069e430()
 {
     for (unsigned int i = 0; i < 15; i++) {
@@ -8158,6 +8293,7 @@ extern FUN_0068cef0_Obj* DAT_0107741c;
 int __cdecl FUN_0061a9a0();
 void __cdecl FUN_006809b0();
 
+// pdb: TutorialMenu::Close | TutorialMenu.obj | fnv360_0822_retail, call_seq, medium
 void __cdecl FUN_0068cef0() {
     if (DAT_0107741c != 0) {
         DAT_0107741c->unk04->FUN_00bee190(0x1772, 1.0f, true);
@@ -8182,6 +8318,7 @@ struct Owner69e400
     void __thiscall FUN_0069e400();
 };
 
+// pdb: FOVATSEffectManager::IsScanning | VATSMenu.obj | fnv360_0822_debug, objopen_prop, low
 void Owner69e400::FUN_0069e400()
 {
     f = 0;
@@ -8220,6 +8357,8 @@ struct FUN_00684350_Obj
     unsigned int FUN_00684350();
 };
 
+// pdb: operator++ | StatsMenu.obj | fnv360_0822_debug, objopen_prop, low
+// pdb params: aePage
 unsigned int FUN_00684350_Obj::FUN_00684350()
 {
     return (unsigned int)unk88->FUN_00becf40(0x1004);
@@ -8234,6 +8373,7 @@ struct Args { float x; bool a,b,c,d,e; };
 struct Vec { float a,b,c; Vec(float x,float y,float z):a(x),b(y),c(z){} };
 struct Target { char pad[0x58]; Vec position; void FUN_008264c0(Args*); };
 struct Owner { char pad[0x14]; Target* target; void FUN_0069d550(); };
+// pdb: FORenderedTerminal::PostDraw | FORenderedTerminal.obj | fnv360_0822_retail, objrun, medium
 void Owner::FUN_0069d550() { Target* t=target; if(t) { t->position=Vec(DAT_00e0970c,0.0f,0.0f); Args args={0.0f,0,0,0,0,0}; t->FUN_008264c0(&args); } }
 }
 }   // namespace f3m_0069d550
@@ -8248,6 +8388,7 @@ struct Smart { Ref* p; Smart():p(0){} ~Smart(){if(p && !InterlockedDecrement(&p-
 struct Embedded { char data[0x24]; Embedded(); ~Embedded(); };
 struct Widget { char p[0x24]; int val; char gap[0x2d]; char a,b; char tail[0x31]; Widget(); void FUN_00b23f20(int,int); static void* operator new(unsigned n) throw() {return DAT_01090a78.FUN_0086b930(n);} };
 struct FUN_00697200 { Smart smart; Embedded embedded; char flag28; char gap[0x1f]; int a,b; Widget* widget; char flag54; char pad[3]; float f58,f5c,f60; FUN_00697200(); };
+// pdb: FOHUDEffectManager::FOHUDEffectManager | FOHUDEffectManager.obj | fnv360_0822_retail, call_gap_sim, low
 FUN_00697200::FUN_00697200() { widget=new Widget; widget->FUN_00b23f20(0,0); widget->a=0; widget->b=0; widget->val=1; smart.reset(); flag28=0; a=DAT_0108f390; b=DAT_0108f394; flag54=0; f5c=DAT_010775a8; f60=DAT_01077584; f58=DAT_01077550; }
 }
 }   // namespace f3m_00697200
@@ -8266,6 +8407,8 @@ struct Fade699 {
     float m88;
     void FUN_006996e0(float a, float b, float c);
 };
+// pdb: FORenderedMenu::TriggerShudder | FORenderedMenu.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afDuration, afIntensity, afFrequency
 void Fade699::FUN_006996e0(float a, float b, float c)
 {
     active = true;
@@ -8306,6 +8449,8 @@ namespace f3m_0069ba80 {
 namespace F3_69ba80 {
 extern float DAT_010778c4; extern double DAT_00dbbcb0; extern unsigned DAT_01090bb0; int __cdecl FUN_00c04d9a();
 struct Owner { void** table; char pad[0x14c]; float prev,stamp; unsigned char active; char gap[3]; float start,delta; char gap2[4]; float threshold; void FUN_0069ba80(float); };
+// pdb: FORenderedMenuRaceSex::UpdateDistort | FORenderedMenuRaceSex.obj | fnv360_0822_retail, objrun, medium
+// pdb params: afTime
 void Owner::FUN_0069ba80(float x) { if(x-prev>DAT_010778c4) { prev=x; stamp=(float)((FUN_00c04d9a()%1000)*DAT_00dbbcb0); } if(active) ((void (__thiscall*)(Owner*,float))table[21])(this,x); else if(x>threshold) { active=1; start=(float)DAT_01090bb0; delta=0.0f; } }
 }
 }   // namespace f3m_0069ba80
@@ -8325,6 +8470,7 @@ struct Set69e { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14
 struct Mgr69e { int unk00, unk04; Set69e* set; };
 extern Mgr69e* DAT_0116ef9c;
 extern int DAT_0117657c;
+// pdb: FOVATSEffectManager::ShutdownEffect | FOVATSEffectManager.obj | fnv360_0822_retail, call_gap, low
 void FUN_0069e940() {
     DAT_0116ef9c->set->first->playing = false;
     DAT_0116ef9c->set->second->playing = false;
@@ -8338,6 +8484,8 @@ void FUN_0069e940() {
 extern MenuInit* DAT_01077448;
 namespace f3m_0068d900 {
 
+// pdb: VATSMenu::SetHeadingReached | VATSMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: abHeadingReached
 void __cdecl FUN_0068d900(unsigned char flag)
 {
     if (DAT_01077448)
@@ -8453,6 +8601,8 @@ unsigned int field158;
 unsigned int field15c;
 float field160;
 void FUN_0069b270(void*,void*,int);};
+// pdb: FORenderedMenuRaceSex::DoEffect | FORenderedMenuRaceSex.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apSource, apDest, aeClearMode
 void Owner223::FUN_0069b270(void* a,void* b,int unused){
  DAT_0106893c=field08c;
  DAT_0117659c=DAT_01077844;
@@ -8479,6 +8629,8 @@ struct String685 {
     }
 };
 struct Obj685 { String685 FUN_00402a10(); };
+// pdb: StatsMenu::NamedEffectSortFn | StatsMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apItem1, apItem2
 int FUN_006859c0(Obj685* a, Obj685* b) {
     return _stricmp(a->FUN_00402a10().CStr(), b->FUN_00402a10().CStr());
 }
@@ -8494,6 +8646,8 @@ struct MenuVt {
 };
 struct MenuCall { void FUN_0068db00(); };
 
+// pdb: VATSMenu::RemoveTarget | VATSMenu.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apRef
 void __cdecl FUN_00691300(EntityInit* actor)
 {
     if (DAT_010774a8.empty()) return;
@@ -8536,6 +8690,8 @@ struct Effect69 {
     void FUN_006995d0(float a,float b,float c);
 };
 
+// pdb: FORenderedMenu::TriggerBurst | FORenderedMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: afBurstDuration, afBurstIntensity, afSoundChance
 void Effect69::FUN_006995d0(float a,float b,float c){
     active=true;
     m54=a;
@@ -8575,6 +8731,7 @@ List* __cdecl FUN_00689f50(){
  return 0;
 }
 struct Owner {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;int unk3c;int unk40;int unk44;int unk48;Tile* tile;int unk50;int unk54;int unk58;int unk5c;int unk60;int unk64;int unk68;int unk6c;Control* control;int unk74;int unk78;int unk7c;int unk80;int unk84;int unk88;int unk8c;int unk90;int unk94;int unk98;int unk9c;int unka0;int unka4;int unka8;int unkac;int unkb0;int unkb4;int unkb8;int unkbc;void* resource; float FUN_00689f90();};
+// pdb: SurgeryMenu::GetLimbPercentFromSequences | SurgeryMenu.obj | fnv360_0721_retail, caller, medium
 float Owner::FUN_00689f90(){
  float sum=0.0f,total=0.0f;List* list=FUN_00689f50();
  if(!list){control->FUN_00bee190(FUN_00bea9e0(DAT_00e035d8),1.0f,true);tile->FUN_00bf11a0(0xfc4,FUN_005a2840(resource),true);return 0.0f;}
@@ -8585,6 +8742,7 @@ float Owner::FUN_00689f90(){
 
 // @f3 0x0068d9c0 (community match, verified in this file)
 namespace f3m_0068d9c0 {
+// pdb: VATSMenu::SelectRightHeld | VATSMenu.obj | fnv360_0822_retail, call_gap_sim, low
 bool __cdecl FUN_0068d9c0()
 {
     unsigned char* object = reinterpret_cast<unsigned char*>(DAT_01077448);
@@ -8708,6 +8866,8 @@ extern QSceneGraph* DAT_010772f8;
 extern QPlayer* DAT_0107a104;
 extern const NiPoint3 DAT_0108ec68;
 
+// pdb: SurgeryMenu::PlaceDecal | SurgeryMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aToolLocation, abInWound
 void __stdcall FUN_0068a510(float x, float y, bool good)
 {
     float fx = g_D63DC0Value * x;
@@ -8762,6 +8922,8 @@ struct Q68de70
     int unk000;
     void FUN_0068de70(int mode, int unused);
 };
+// pdb: VATSMenu::DoEnter | VATSMenu.obj | fnv360_0822_debug, vtable, medium
+// pdb params: aiID, apTarget
 void Q68de70::FUN_0068de70(int mode, int unused)
 {
     if (DAT_01075b28 == 0 || DAT_01075cac != 0) {
@@ -8931,6 +9093,8 @@ struct ModState69 {
     float unkC4;
 };
 
+// pdb: FOPipboyManager::FadeLight | FOPipboyManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afTime
 void Modifier69::FUN_006984d0(float value)
 {
     float v = value - unk164;
@@ -8974,6 +9138,7 @@ int Owner685::FUN_006853e0(int a, int b) {
 
 bool __cdecl FUN_00685a70(void* sub);
 
+// pdb: StatsMenu::ToggleHealingMode | StatsMenu.obj | fnv360_0822_retail, objrun, low
 void FUN_006862b0_Obj::FUN_00685b10()
 {
     unk21C = (unk21C == 0);
@@ -9000,6 +9165,8 @@ struct Form68c { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk1
 struct Menu68c { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; Tile68c* descTile; int unk2C, unk30, unk34; Tile68c* nameTile; int unk3C; Tile68c* valueTile;
     void FUN_0068cfd0(Form68c* form);
 };
+// pdb: TutorialMenu::SetTitleAndText | TutorialMenu.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apMessage
 void Menu68c::FUN_0068cfd0(Form68c* form) {
     if (!form) return;
     if (nameTile) nameTile->FUN_00bf11a0(0xfc4, form->name ? form->name : "", true);
@@ -9024,6 +9191,7 @@ Tile69a* __cdecl Tile_GetMenuByClass(int id);
 struct Menu69a { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C; int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; int unkBC; int unkC0; int unkC4; int unkC8; int unkCC; bool showSecond; bool showThird; bool showFirst;
     void FUN_0069a750();
 };
+// pdb: FORenderedMenu::UnhidePopupMenus | FORenderedMenu.obj | fnv360_0822_retail, caller_sim, low
 void Menu69a::FUN_0069a750() {
     Tile69a* first = Tile_GetMenuByClass(0x3e9);
     Tile69a* second = Tile_GetMenuByClass(0x3f8);
@@ -9037,6 +9205,7 @@ void Menu69a::FUN_0069a750() {
 
 // @f3 0x0068ded0 (community match, verified in this file)
 namespace f3m_0068ded0 {
+// pdb: VATSMenu::GetConsecutiveShots | VATSMenu.obj | fnv360_0822_retail, call_gap, medium
 int __cdecl FUN_0068ded0()
 {
     int count = 0;
@@ -9062,6 +9231,8 @@ class TESForm{public:virtual void v0();};
 class TESFullName:public TESForm{public:const char*name;};
 int __cdecl FUN_00c009eb(const char*,const char*);
 struct Input261{TESForm* form;const char* Name()const{const char*name=dynamic_cast<TESFullName*>(form)->name;return name?name:"";}};
+// pdb: StatsMenu::StatusEffectSortFn | StatsMenu.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apItem1, apItem2
 int __cdecl FUN_00684d90(const Input261* first,const Input261* second){return FUN_00c009eb(first->Name(),second->Name());}
 }   // namespace f3m_00684d90
 
@@ -9218,6 +9389,8 @@ unsigned int unk210;
 unsigned int unk214;
 unsigned int unk218;
 unsigned char enabled;bool FUN_006842a0(int,int);};
+// pdb: StatsMenu::DoGamepadUpEvent | StatsMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiButton, afValue
 bool Owner280::FUN_006842a0(int action,int unused){if(enabled && action==10 && control->FUN_00becf80(4015)){Select(9,0);DAT_011790c8->FUN_00bcfcd0("UIMenuOK",289,0).FUN_00bd00c0();return true;}return false;}
 }
 }   // namespace f3m_006842a0
@@ -9247,6 +9420,7 @@ struct EffFades697 {
 };
 
 
+// pdb: FOPipboyManager::TriggerRandomEffect | FOPipboyManager.obj | fnv360_0822_retail, call_gap, low
 void FUN_00697410()
 {
     FUN_00aa5140* rng = FUN_0044a2d0();
@@ -9277,6 +9451,7 @@ struct Queue_006851c0 {
     void FUN_006851c0();
 };
 
+// pdb: StatsMenu::StatusDataList::Flush | StatsMenu.obj | fnv360_0822_retail, objrun, medium
 void Queue_006851c0::FUN_006851c0()
 {
     while (m08 != 0 || m04 != 0) {
@@ -9300,6 +9475,7 @@ namespace f3m_0069a6a0 {
 namespace F3_69a6a0 {
 struct Control { char pad[0x30]; union { unsigned flags; unsigned char low; }; }; struct Widget { char pad[0x2c]; Control* control; }; Widget* __cdecl Tile_GetMenuByClass(int);
 struct Owner { char pad[0xd0]; bool second,third,first; void FUN_0069a6a0(); };
+// pdb: FORenderedMenu::HidePopupMenus | FORenderedMenu.obj | fnv360_0822_retail, caller_sim, low
 void Owner::FUN_0069a6a0() { Widget* a=Tile_GetMenuByClass(0x3e9); Widget* b=Tile_GetMenuByClass(0x3f8); Widget* c=Tile_GetMenuByClass(0x423); first=a?((unsigned char)~a->control->low & 1):false; second=b?((unsigned char)~b->control->low & 1):false; third=c?((unsigned char)~c->control->low & 1):false; if(first)a->control->flags|=1; if(second)b->control->flags|=1; if(third)c->control->flags|=1; }
 }
 }   // namespace f3m_0069a6a0
@@ -9556,6 +9732,8 @@ struct RefList6a8a0
     void FUN_0069e670(RefOwner6a8a0* apOwner);
 };
 
+// pdb: FOVATSEffectManager::SetMultiTarget | FOVATSEffectManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apTarget
 void RefList6a8a0::FUN_0069e670(RefOwner6a8a0* apOwner)
 {
     int i;
@@ -9751,6 +9929,7 @@ struct QStatsMenu {
     void FUN_00684ff0();
 };
 
+// pdb: StatsMenu::UpdateReputations | StatsMenu.obj | fnv360_0822_retail, call_gap, low
 void QStatsMenu::FUN_00684ff0()
 {
     static TESQuest* bobbleQuest = dynamic_cast<TESQuest*>(TESForm_GetFormByNumericID(0x38959));
@@ -9780,6 +9959,8 @@ struct Q1 {
     void* entries[30];
     bool FUN_0068d5f0(int* index);
 };
+// pdb: Error | TESDataHandler.obj | fnv360_0822_debug, call_gap, low
+// pdb params: apMessage
 bool Q1::FUN_0068d5f0(int* index) {
     for (*index = 1; *index <= 29; (*index)++) {
         if (!entries[*index]) return false;
@@ -9806,6 +9987,8 @@ struct Object684e {
     unsigned int unk00;
     Holder684e* holder;
 };
+// pdb: StatsMenu::PerkListSortFn | StatsMenu.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apItem1, apItem2
 int __cdecl FUN_00684e00(Object684e* first, Object684e* second) {
     const char* a = second->holder->table->info.GetName();
     const char* b = first->holder->table->info.GetName();
@@ -9858,6 +10041,7 @@ struct SelectionArray {
     void FUN_0069e670(int value);
     void FUN_0069e770(int value);
 };
+// pdb: CompareLightLum | ShadowSceneNode.obj | tesv_win, objrun_open, low
 void SelectionArray::FUN_0069e770(int value)
 {
     int result = -1;
@@ -9909,6 +10093,8 @@ struct FUN_00699810_Obj {
     void __thiscall FUN_00699810(float value);
 };
 
+// pdb: FORenderedMenu::UpdateBurst | FORenderedMenu.obj | fnv360_0721_beta, objrun, low
+// pdb params: afTime
 void __thiscall FUN_00699810_Obj::FUN_00699810(float value) {
     value -= unk50;
 
@@ -10545,6 +10731,7 @@ struct ControllerB {
     int selected[15];
     void FUN_0069ecb0();
 };
+// pdb: FOVATSEffectManager::IsolateBodyPart | FOVATSEffectManager.obj | fnv360_0822_retail, call_seq, medium
 void ControllerB::FUN_0069ecb0()
 {
     if (!actor->IsAvailable() || mode == 14 || mode == 15) return;
@@ -10660,6 +10847,7 @@ struct Sound {
 };
 struct Audio { Sound BSAudioManager_GetSoundHandleByName(const char*, unsigned int); };
 Audio* __cdecl FUN_00bd6800();
+// pdb: FORenderedTerminal::PlayShutdownSound | FORenderedTerminal.obj | fnv360_0822_retail, call_gap, low
 void __cdecl FUN_0069d360() {
     FUN_00bd6800()->BSAudioManager_GetSoundHandleByName(DAT_00e096e8,0x121).FUN_00bd00c0(false);
 }
@@ -10762,6 +10950,7 @@ void __cdecl FUN_00619700_fresh(const char*, int, int, int, int, int, const char
 
 }
 
+// pdb: StartMenu::SaveSettings | StartMenu.obj | fnv360_0822_retail, call_gap, low, conflict (bridge: StartMenu::ChooseSettings)
 void __cdecl FUN_006806f0() {
     using namespace f3m_006806f0;
 
@@ -10914,6 +11103,7 @@ struct Owner {
     void FUN_006988b0();
 };
 
+// pdb: FOPipboyManager::OnMenuOpen | FOPipboyManager.obj | fnv360_0822_retail, ustr, medium
 void Owner::FUN_006988b0()
 {
     if (!unk28) return;
@@ -11023,6 +11213,8 @@ __declspec(noinline) void Node::FUN_0061c430(void** value)
     node->value = item;
 }
 
+// pdb: ListBox<StatsMenu::StatusEffect *>::AddItem | StatsMenu.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aAssociatedData, apcItemString, apCompareFn, apcTemplateName
 Tile* Owner::FUN_00686800(void* a1, const char* a2, EntryCompare a3, void* a4)
 {
     Menu* menu = this->menu;
@@ -11349,6 +11541,7 @@ public:
     NiPointer<OBJ280> unk2CC;
 };
 
+// pdb: FOVATSEffectManager::FOVATSEffectManager | FOVATSEffectManager.obj | fnv360_0822_retail, objrun, medium
 FUN_0069f540::FUN_0069f540()
 {
     unk28C = 0.0f;
@@ -11386,6 +11579,8 @@ FUN_0069f540::FUN_0069f540()
 namespace f3m_0068d700 {
 namespace MenuAnimationUpdate {
 
+// pdb: VATSMenu::SortAngle | VATSMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apObject1, apObject2
 int __cdecl FUN_0068d700(TargetInit* pvA, TargetInit* pvB)
 {
     PointInit kPlayerPos = *DAT_0107a104->position();
@@ -11521,6 +11716,7 @@ public:
     bool unk160, unk161, unk162;
 };
 
+// pdb: FOPipboyManager::FOPipboyManager | FOPipboyManager.obj | fnv360_0822_retail, call_gap, low
 FOPipboyManager::FOPipboyManager() : state(-1), unk158(false), unk15C(0)
 {
     NiRefObject* empty = 0;
@@ -11649,6 +11845,7 @@ public:
     NiPointer<NiRefObject> object10C;
 };
 
+// pdb: FORenderedMenuRaceSex::~FORenderedMenuRaceSex | FORenderedMenuRaceSex.obj | fnv360_0822_retail, objrun, medium
 FORenderedMenuRaceSex::~FORenderedMenuRaceSex()
 {
     NiRefObject* empty = 0;
@@ -11753,6 +11950,7 @@ private:
     RenderedMenuPtr refd4;
 };
 
+// pdb: FORenderedMenu::FORenderedMenu | FORenderedMenu.obj | fnv360_0721_beta, callee_sim, low
 FORenderedMenu::FORenderedMenu()
     : positionX(0), positionY(0), positionZ(0),
       color(0.0f, 0.0f, 0.0f, 0.0f), refbc(0),
@@ -11884,6 +12082,8 @@ struct MapMenuG {
     void FUN_00689380(int x, int y);
 };
 
+// pdb: SurgeryMenu::PlaceToolInWindow | SurgeryMenu.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: aiX, aiY
 void MapMenuG::FUN_00689380(int x, int y)
 {
     AVObjectG* center = unke0->GetObjectByName(FixedStringG("CenterNode"));
@@ -12380,6 +12580,7 @@ void* __cdecl FUN_00508e40(int a);
 extern unsigned char DAT_00f6ea1d;
 extern unsigned char DAT_0107743f;
 
+// pdb: VATSMenu::Close | VATSMenu.obj | fnv360_0822_retail, ustr, medium
 void __cdecl FUN_0068db00()
 {
     VATSMenuV* menu = DAT_01077448;
@@ -12530,6 +12731,7 @@ void Owner::FUN_0069b3a0(RefObject* value)
 // @f3 0x0069e4d0 (community match, verified in this file)
 namespace f3m_0069e4d0 {
 struct Init69E4D0 { int unk00; int unk04; Init69E4D0(); };
+// pdb: BSOcclusionPlane::ResetCullResult | TES.obj | fnv360_0822_debug, objrun_open, low
 Init69E4D0::Init69E4D0() { unk04=0; }
 }   // namespace f3m_0069e4d0
 
@@ -12572,6 +12774,7 @@ struct Owner {
     NiPointer<Ref> root;Array array;Target* target;
     ~Owner();
 };
+// pdb: FOHUDEffectManager::~FOHUDEffectManager | FOHUDEffectManager.obj | fnv360_0822_retail, call_gap_sim, low
 Owner::~Owner() {
     root=(Ref*)0;
     if(target) target->Destroy();
@@ -12621,6 +12824,7 @@ struct TargetNodeInit {
 extern int DAT_010772f8;
 extern FUN_00cbc810_cls DAT_0107738c;
 
+// pdb: Menu::StartFadeOut | Menu.obj | fnv360_0721_beta, call_seq, low
 void __cdecl FUN_0068b6a0(int kind)
 {
     if (DAT_010772f8 && !FUN_0061c490(0x41e)) {
@@ -12668,6 +12872,7 @@ struct Mgr680 {
     void FUN_0067f920(int);
 };
 extern Mgr680* DAT_010770ac;
+// pdb: StartMenu::ChooseGameplay | StartMenu.obj | fnv360_0822_retail, objrun, medium
 void FUN_00680580() {
     if (DAT_010770ac) {
         DAT_010770ac->part.FUN_0067a7f0(0);
@@ -12704,6 +12909,7 @@ struct Obj69e {
     Entry69e entries[16];
     void FUN_0069e7d0();
 };
+// pdb: FOVATSEffectManager::ClearMultiTargets | FOVATSEffectManager.obj | fnv360_0822_retail, call_gap, medium
 void Obj69e::FUN_0069e7d0() {
     for (int i = 0; i < count; ++i) {
         entries[i].key = 0;
@@ -12727,6 +12933,7 @@ struct Mgr6805 {
     void FUN_0067f920(int);
 };
 extern Mgr6805* DAT_010770ac;
+// pdb: StartMenu::ChooseDisplay | StartMenu.obj | fnv360_0822_retail, objrun, medium
 void FUN_006805b0() {
     if (DAT_010770ac) {
         DAT_010770ac->tile->FUN_00bee190(0xfa3, 1.0f, true);
@@ -12816,6 +13023,7 @@ extern FUN_006844f0_Obj* DAT_01077248;
 
 const char* __cdecl FUN_0044f3e0(void* object);
 
+// pdb: StatsMenu::UpdatePlayerTitle | StatsMenu.obj | fnv360_0822_debug, caller, medium
 void __cdecl FUN_006844f0()
 {
     if (DAT_01077248 != 0 && DAT_01077248->unk108 != 0) {
@@ -12829,6 +13037,8 @@ namespace task1297 {
 struct ActorValueOwner {virtual void v0();virtual void v4();virtual void v8();virtual float GetValue(int);};
 extern char* DAT_0107a104;
 extern const float DAT_00eaad58;
+// pdb: StatsMenu::RadAwayTargetConditionCallback | StatsMenu.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: aHO
 bool __cdecl FUN_00684920(int* arg)
 {
 int result;
@@ -12897,6 +13107,8 @@ struct Owner069b {
     void FUN_0069b090(NiAVObj069b* s);
 };
 
+// pdb: FORenderedMenu::PrepareGeometry | FORenderedMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apGeometry
 void Owner069b::FUN_0069b090(NiAVObj069b* s) {
     PropBig069b* dest = s->GetProperty069b(3);
     NiAlphaProperty* nv = unk10;
@@ -12968,6 +13180,7 @@ int unk80;
 int unk84;
 int unk88;
 A a; B b;};extern Manager* DAT_0107a104;extern const double DAT_00db8670;
+// pdb: StatsMenu::GetFaceFileNumber | StatsMenu.obj | fnv360_0822_retail, call_gap, low
 int __cdecl FUN_00684cd0() { Node* n=DAT_0107a104->a.Head(); while(n && n->item) { if(n->item->kind==10 && n->item->enabled) return 10; n=n->next; } float maximum=(float)DAT_0107a104->b.Maximum(16); double total=maximum; float difference=(float)(total-DAT_0107a104->b.Current(16)); int result=(int)((difference/maximum)*DAT_00db8670); if(result<0)return 0; if(result>4)return 4; return result; } }
 }   // namespace f3m_00684cd0
 
@@ -13069,6 +13282,8 @@ public:
     Tile* FUN_00694bf0(void* data, const char* text, void* after, const char* name);
 };
 
+// pdb: ListBox<unsigned int>::AddItem | VATSMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aAssociatedData, apcItemString, apCompareFn, apcTemplateName
 Tile* ListBox::FUN_00694bf0(void* data, const char* text, void* after, const char* name)
 {
     if (!parent)
@@ -13299,6 +13514,7 @@ FUN_00631070 memberA;
 FUN_007cf1f0 memberB;
 virtual ~FUN_00694e70();
 };
+// pdb: VATSMenu::~VATSMenu | VATSMenu.obj | fnv360_0822_retail, call_seq, medium
 FUN_00694e70::~FUN_00694e70() {
  DAT_01075974->FaderManager_RemoveFader(0,0);
  FUN_00693890();
@@ -13457,6 +13673,7 @@ bool IsFlagSet(unsigned int flag) { return (flags & flag) != 0; }
 void FUN_0067d800();
 void FUN_00681440();
 };
+// pdb: StartMenu::_BackOutToMainListbox | StartMenu.obj | fnv360_0721_retail, objrun, medium
 void Menu::FUN_00681440() {
     if (list.IsEnabled() && !IsFlagSet(0x20000)) {
         while (!list.FUN_0067a880()) {
@@ -13555,6 +13772,7 @@ struct Owner697 {
     void FUN_006977f0();
     void FUN_0069a7b0();
 };
+// pdb: FOPipboyManager::Shutdown | FOPipboyManager.obj | fnv360_0822_retail, objrun, medium
 void Owner697::FUN_006977f0() {
     Release697(unkD8);
     Release697(unkDC);
@@ -13653,6 +13871,8 @@ struct FUN_0068dea0_Owner {
     void FUN_0068dea0(int value, int unused);
 };
 
+// pdb: VATSMenu::DoLeave | VATSMenu.obj | fnv360_0822_debug, vtable, medium
+// pdb params: aiID, apTarget
 void FUN_0068dea0_Owner::FUN_0068dea0(int value, int unused)
 {
     if (DAT_01075b28 == 0 || DAT_01075cac != 0) {
@@ -13763,6 +13983,8 @@ struct View {
     float speeds[3];
 };
 }
+// pdb: FOPipboyManager::UpdateKnobs | FOPipboyManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afTime
 void f3m_006987f0::N6987F0::Owner::FUN_00697930(float time) {
     using namespace fast6_697930;
     View* owner = reinterpret_cast<View*>(this);
@@ -13835,6 +14057,7 @@ struct Menu {
     void FUN_006843b0();
 };
 
+// pdb: StatsMenu::UpdateRadLevel | StatsMenu.obj | fnv360_0822_retail, call_gap, medium
 void Menu::FUN_006843b0()
 {
     float period = tile->FUN_00becf40(0x1008) * 1000.0;
@@ -14600,6 +14823,8 @@ struct Menu68a2b0 {
 
 extern Menu68a2b0* DAT_010772f8;
 
+// pdb: SurgeryMenu::SetAnimation | SurgeryMenu.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aeAnimation
 void Menu68a2b0::FUN_0068a2b0(int a_anim) {
     anim = a_anim;
     frameAnimTimer = 0.0f;
@@ -14634,6 +14859,8 @@ namespace f3m_00699980 {
 namespace f3m_00699980 {
 struct QRenderer { void FUN_00699980(bool enabled, NiRefObject* resource); };
 }
+// pdb: NiPointer<NiPointLight>::operator= | FORenderedMenu.obj | fnv360_0721_beta, objrun, medium
+// pdb params: pObject
 void f3m_00699980::QRenderer::FUN_00699980(bool enabled, NiRefObject* resource)
 {
     ShadowState6a8a0* self = reinterpret_cast<ShadowState6a8a0*>(this);
@@ -14670,6 +14897,8 @@ public:
     void FUN_0067fd70(int a, int b, unsigned int c, int d, unsigned char e);
     void FUN_00680660(int param1, unsigned char param2);
 };
+// pdb: StartMenu::PopulateConfirmationListBox | StartMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiModes, aucFlags
 void FUN_00680660_Obj::FUN_00680660(int param1, unsigned char param2)
 {
     int offset = (param2 & 1) ? 0xa8 : 0x50;
@@ -14734,6 +14963,8 @@ extern Heap DAT_01090a78;
 struct Record {int count;int unk04;int unk08;int unk0c;int key;Record():count(0),unk04(0),unk08(0),unk0c(0),key(-1){} static void* operator new(unsigned int size){return DAT_01090a78.FUN_0086b930(size);}};
 struct List {void FUN_0049fac0(Record**);void Add(Record* value){FUN_0049fac0(&value);}};
 struct Owner {int unk00;List list;Record* FUN_00684e80(int);void FUN_00685220(Effect*);};
+// pdb: StatsMenu::StatusDataList::Register | StatsMenu.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apActiveEffect
 void Owner::FUN_00685220(Effect* effect){
  if(effect){
   Record* record=FUN_00684e80(effect->Key());
@@ -14797,6 +15028,7 @@ struct Owner9d390 {
     void FUN_00699d80();
     void FUN_0069d390();
 };
+// pdb: FORenderedTerminal::OnMenuOpen | FORenderedTerminal.obj | fnv360_0822_retail, caller_sim, low
 void Owner9d390::FUN_0069d390()
 {
     Node9d390* node = unk08;
@@ -14941,6 +15173,8 @@ void __cdecl FUN_006809b0();
 inline bool IsGamepad() { return DAT_01075b28 && !DAT_01075cac; }
 }
 namespace N = f3m_006814b0;
+// pdb: StartMenu::OnNetworkEvent | StartMenu.obj | fnv360_0721_retail, caller_sim, low
+// pdb params: apEvent, apParam
 void __cdecl FUN_006814b0()
 {
     if (!N::DAT_010770ac)
@@ -14999,6 +15233,7 @@ struct Start:Menu {
     const char* enabledName;
     virtual void v0();Start();
 };
+// pdb: StartMenu::StartMenu | StartMenu.obj | fnv360_0822_retail, uvref, medium
 Start::Start():enabledName(FUN_00becd70(DAT_00e04758,-1)){
     memset(&tiles,0,sizeof(tiles));timer=0.0f;unk1A0=0;index=-1;unk19C=0;unk1AC=0;
     unk1C0=0;unk1BC=0;unk1B8=0;unk1C4=0xff;unk1C8=0;unk1B0=0;
@@ -15189,6 +15424,7 @@ struct Owner699
     bool FUN_00699c50();
 };
 
+// pdb: FORenderedMenu::OnIdle | FORenderedMenu.obj | fnv360_0822_retail, caller_sim, low
 bool Owner699::FUN_00699c50()
 {
     float time = (float)DAT_01090bb0;
@@ -15461,6 +15697,7 @@ struct FUN_0069f730 : Base69f {
     ~FUN_0069f730();
 };
 
+// pdb: FOVATSEffectManager::~FOVATSEffectManager | FOVATSEffectManager.obj | fnv360_0822_retail, objrun, medium
 FUN_0069f730::~FUN_0069f730() {
     unk04 = 0;
     m_08.Clear();
@@ -15636,6 +15873,7 @@ struct MenuX
 };
 
 // @fnv 0x007e23c0
+// pdb: SurgeryMenu::DoIdle | SurgeryMenu.obj | fnv360_0822_retail, vtable, medium
 void MenuX::FUN_0068c840()
 {
     char text[256];
@@ -15792,6 +16030,7 @@ struct FUN_0069d6e0_Obj {
     void FUN_0069d6e0();
 };
 
+// pdb: FORenderedTerminal::FadeOut | FORenderedTerminal.obj | fnv360_0822_retail, call_gap, low
 void FUN_0069d6e0_Obj::FUN_0069d6e0()
 {
     FloatRange2132* range = DAT_01077944;
@@ -15817,6 +16056,7 @@ void FUN_0067a5f0(int,int,unsigned,float);void FUN_0067e360();void FUN_0067c840(
 };extern Menu* DAT_010770ac;extern const float DAT_00db38b8;
 void __cdecl FUN_0067a5d0();void __cdecl FUN_00619700(const char*,int,int,void(*)(),int,int,const char*,const char*,int);
 void __cdecl FUN_0067dff0();void __cdecl FUN_006806f0();void __cdecl FUN_0067c5a0(int);bool __cdecl FUN_00468fb0();
+// pdb: StartMenu::ChooseBack | StartMenu.obj | fnv360_0822_retail, call_gap, medium
 void FUN_006809b0(){
  if(DAT_010770ac && DAT_010770ac->first.Ready()){
  DAT_010770ac->Set(0x20000,false);DAT_010770ac->Set(0x200000,false);
@@ -15999,6 +16239,7 @@ struct TileAnim
     void Tile_AddFadeControl(unsigned int channel, float first, float last, float time, bool reverse);
 };
 
+// pdb: StatsMenu::TargetMostDamagedBodyPart | StatsMenu.obj | fnv360_0822_retail, call_gap, low
 void StatsMenu685860::FUN_00685860()
 {
     float best = DAT_00db9568;
@@ -16294,6 +16535,8 @@ public:
     void FUN_006908e0();
     void FUN_006969b0(int action,int unused);
 };
+// pdb: VATSMenu::DoClick | VATSMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void VatsMenu_6969b0::FUN_006969b0(int action,int unused)
 {
     if(flag107) {
@@ -16473,6 +16716,7 @@ extern const char DAT_00e08858[];
 Tile* __cdecl Tile_GetMenuByClass(int);
 void __cdecl FUN_0068b6a0(int);
 void __cdecl FUN_00689c10();
+// pdb: SurgeryMenu::Close | SurgeryMenu.obj | fnv360_0822_retail, ustr, medium
 void FUN_0068b720() {
  Tile* tile = Tile_GetMenuByClass(0x41e);
  if (!tile) return;
@@ -16554,6 +16798,8 @@ FNV_STATIC_ASSERT(offsetof(ScreenFx69eab0, unk2C0) == 0x2C0);
 FNV_STATIC_ASSERT(offsetof(ScreenFx69eab0, unk2C4) == 0x2C4);
 
 
+// pdb: FOVATSEffectManager::PrepareHighlightEffect | FOVATSEffectManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apSourceColors, apSourceMask, apTarget, abClearTarget
 void ScreenFx69eab0::FUN_0069eab0(unsigned int, EffectDispatch::Source* source, unsigned int, unsigned char flag)
 {
     Quad69eab0 value;
@@ -16741,6 +16987,7 @@ struct Owner {
     float unkAC;
     void FUN_00689260();
 };
+// pdb: SurgeryMenu::UpdateFace | SurgeryMenu.obj | fnv360_0822_retail, call_gap, low
 void Owner::FUN_00689260(){
     Node* root=DAT_0107739c;
     if (root) {
@@ -16805,6 +17052,7 @@ struct Menu {
  void StartMenu__UpdateProfileSpecificData();
  bool FUN_00683e10();
 };
+// pdb: StartMenu::MainMenuIdle | StartMenu.obj | fnv360_0721_retail, call_gap, low
 bool Menu::FUN_00683e10() {
  if (Closing()) return false;
  if (Bit(19) && DAT_010769ac && DAT_0107a0d4->FUN_006e4eb0(0, 2)->FUN_00be81c0()) DAT_010769ac->FUN_00658af0();
@@ -16937,6 +17185,8 @@ struct FUN_00697360_Context {
 };
 
 
+// pdb: FOPipboyManager::MoveKnob | FOPipboyManager.obj | fnv360_0721_retail, ustr, medium
+// pdb params: aiKnob, afAmount, afRate, abPlaySound
 void FUN_00697360_Obj::FUN_00697360(
     int index,
     float value,
@@ -16984,6 +17234,8 @@ struct Obj {
     Container items;
     void FUN_00685170(int id);
 };
+// pdb: StatsMenu::UpdateMiscStat | StatsMenu.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aeID
 void Obj::FUN_00685170(int id)
 {
     Container* c = &items;
@@ -17049,6 +17301,8 @@ struct Owner69B3F0
     void FUN_0069b3f0(float value);
 };
 
+// pdb: FORenderedMenuRaceSex::SetupLights | FORenderedMenuRaceSex.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: afScale
 void Owner69B3F0::FUN_0069b3f0(float value)
 {
     DAT_0116efc4->FUN_00ae32a0(unk100, unkFC->Radius() * 3.0 * value);
@@ -17101,6 +17355,7 @@ struct Menu {
     void FUN_00681010();
 };
 
+// pdb: StartMenu::ConfirmSaveLoad | StartMenu.obj | fnv360_0822_retail, ustr, medium
 void Menu::FUN_00681010()
 {
     unsigned char text = 0;
@@ -17262,6 +17517,8 @@ void __cdecl FUN_0067a5d0();
 void __cdecl FUN_0067c6f0();
 }
 
+// pdb: StartMenu::DoClick | StartMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void StartMenu::FUN_00682fd0(int reason, Tile* clicked)
 {
     if (reason == 5)
@@ -17496,6 +17753,8 @@ struct HelpMenuShell {
     void FUN_0068d420(unsigned int auiPage);
 };
 
+// pdb: TutorialMenu::SetPage | TutorialMenu.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aiPage
 void HelpMenuShell::FUN_0068d420(unsigned int auiPage)
 {
     if (auiPage < uiPageCount)
@@ -17577,6 +17836,7 @@ struct Menu {
     bool FUN_006811b0();
 };
 }
+// pdb: StartMenu::SaveLoadIdle | StartMenu.obj | fnv360_0822_retail, call_gap, medium
 bool n6811b0::Menu::FUN_006811b0()
 {
     using namespace n6811b0;
@@ -17686,6 +17946,7 @@ struct PlayerV698 {
     virtual void f128(); virtual void f129(); virtual void f130(); virtual void f131(); virtual void f132();
     virtual int IsThirdPerson();
 };
+// pdb: FOPipboyManager::OnMenuClose | FOPipboyManager.obj | fnv360_0822_retail, ustr, medium
 void Menu698::FUN_006989d0() {
     bool on = n698::DAT_0107a104->FUN_00721eb0();
     Node698* node = m_04;
@@ -17830,6 +18091,8 @@ struct Owner {
 extern Owner* DAT_01075b24;
 extern float DAT_01077690;
 extern float DAT_0107762c;
+// pdb: StatsMenu::MoveKnob | StatsMenu.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apTarget, aiLastIndex
 void __stdcall FUN_006847f0(Input* input, unsigned* current)
 {
     const unsigned value=static_cast<unsigned>(input->FUN_00becf40(0xfac));
@@ -18095,6 +18358,7 @@ public:
 
 };
 
+// pdb: FORenderedMenu::Initialize | FORenderedMenu.obj | fnv360_0822_retail, ustr, medium
 void FORenderedMenu::FUN_0069a4b0()
 {
     m_pMenuLightNode = new BSShaderAccumulator(BSShaderManager::Interface, 1, 0x2f7);
@@ -18297,6 +18561,8 @@ struct PickMenu
 
 using namespace f3m_0068a7e0;
 
+// pdb: SurgeryMenu::UpdateToolLocation | SurgeryMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: abBurning
 void f3m_0068a7e0::PickMenu::FUN_0068a7e0(bool abForcing)
 {
     PickInterface* pInterface = GetInterface();
@@ -18585,6 +18851,8 @@ public:
     void FUN_0069b430(int a1, int a2, int a3);
 };
 
+// pdb: FORenderedMenuRaceSex::Draw | FORenderedMenuRaceSex.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apTarget, aeClearMode, apSwapTarget
 void RenderPass69b430::FUN_0069b430(int a1, int a2, int a3)
 {
     using namespace N69b430;
@@ -18889,6 +19157,7 @@ struct Menu {
     void FUN_0067efe0();
     void FUN_00683fc0();
 };
+// pdb: StartMenu::DoIdle | StartMenu.obj | fnv360_0822_retail, vtable, medium
 void Menu::FUN_00683fc0() {
     if (!DAT_010769b0->enabled) return;
     if (DAT_010769ac) {
@@ -19179,6 +19448,8 @@ struct Effect {
     RefPtr<Ref> unk2c4;
     void FUN_0069e990(int unused, Source* source, int unused2, int unused3);
 };
+// pdb: FOVATSEffectManager::PrepareScanEffect | FOVATSEffectManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apSourceColors, apSourceMask, apTarget, abClearTarget
 void Effect::FUN_0069e990(int unused, Source* source, int unused2, int unused3) {
     Rect rect;
     SystemColorManager_GetInstance(1)->SystemColorManager_GetColor(&rect);
@@ -19402,6 +19673,8 @@ namespace Pred5a70 {
 
     extern Actor* DAT_0107a104;
 
+    // pdb: StatsMenu::StimpakTargetConditionCallback | StatsMenu.obj | fnv360_0822_retail, call_gap_sim, low
+    // pdb params: aHO
     bool __cdecl FUN_00685a70(Argument* arg) {
         if (arg->value) {
             int index;
@@ -19467,6 +19740,8 @@ struct FUN_0069e4e0_cls {
     void FUN_0069e4e0(Ref* ref, int index, bool flag);
 };
 
+// pdb: FOVATSEffectManager::SetTarget | FOVATSEffectManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apTarget, aeLimb, abDoOcclusion
 void FUN_0069e4e0_cls::FUN_0069e4e0(Ref* ref, int index, bool flag)
 {
     if (!ref)
@@ -19539,6 +19814,8 @@ void __cdecl FUN_0065a020(int flag);
 void __cdecl FUN_00681d60();
 void __cdecl FUN_0067a7b0();
 struct MenuSounds { static void __cdecl FUN_0067a7b0(); };
+// pdb: StartMenu::Create | StartMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abInGame, abForceReload
 bool __cdecl FUN_00683780(bool fromMain, int mode)
 {
     extern Callbacks* DAT_010799fc;
@@ -19642,6 +19919,8 @@ struct Owner685d {
     Tile* FUN_00685d20(int value, int prop, int index, int id);
 };
 
+// pdb: ListBox<PerkRankData *>::AddItem | StatsMenu.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aAssociatedData, apcItemString, apCompareFn, apcTemplateName
 Tile* Owner685d::FUN_00685d20(int value, int prop, int index, int id)
 {
     Tile* parent = unk0c;
@@ -19988,6 +20267,8 @@ extern Player* DAT_0107a104;
 extern float DAT_00f5fe5c;
 extern ReferenceList DAT_0107748c;
 
+// pdb: VATSMenu::FilterDestructibleObjects | VATSMenu.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apRef, aiFilterData
 bool __cdecl FUN_006911f0(Reference* reference)
 {
     Reference* dummy = reference;
@@ -20175,6 +20456,8 @@ struct RenderedMenu {
     bool FUN_0069acc0(const char* name, Scene* lightScene);
 };
 
+// pdb: FORenderedMenu::CreateMenuLight | FORenderedMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apLightNodeName, apShadowSceneNode
 bool RenderedMenu::FUN_0069acc0(const char* name, Scene* lightScene)
 {
     bool result = false;
@@ -20313,6 +20596,7 @@ struct PipboyScreen {
     void FUN_0069c470();
 };
 
+// pdb: FORenderedMenuRaceSex::OnMenuClose | FORenderedMenuRaceSex.obj | fnv360_0822_retail, objrun, medium
 void PipboyScreen::FUN_0069c470()
 {
     DAT_01067ef8 = true;
@@ -20674,6 +20958,7 @@ struct VATSEffect {
     void FUN_0069f8d0();
 };
 
+// pdb: FOVATSEffectManager::OnIdle | FOVATSEffectManager.obj | fnv360_0822_retail, call_gap, low
 void VATSEffect::FUN_0069f8d0()
 {
     if (!camera) {
@@ -20884,6 +21169,8 @@ struct PipboyLight {
     void FUN_00698fe0(float time);
 };
 
+// pdb: FOPipboyManager::UpdateLightEffect | FOPipboyManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afTime
 void PipboyLight::FUN_00698fe0(float time)
 {
     if (!active)
@@ -21035,6 +21322,7 @@ struct PipboyScreen {
     void FUN_00699230();
 };
 
+// pdb: FOPipboyManager::Initialize | FOPipboyManager.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void PipboyScreen::FUN_00699230()
 {
     if (!DAT_01077610 || unk28 || !DAT_0107a104 || !DAT_0107a104->FUN_0076ff40(true))
@@ -21376,6 +21664,7 @@ struct Command {int eAction;bool bFlag4,bFlag5,bFlag6,bFlag7;unsigned char ucSho
 struct AttackQueueNode{Command* data;AttackQueueNode* next;bool Empty(){return !next&&!data;}Command** Get(){return &data;}AttackQueueNode* Next(){return next;}};extern AttackQueueNode DAT_0108d098;extern Actor* DAT_0108d014;extern Actor* DAT_0107a104;float __cdecl FUN_007c4350(Command*);int __cdecl FUN_005a1900(int);unsigned char __cdecl FUN_0068d9f0(int,int);
 struct Chance{unsigned unk000;unsigned unk004;unsigned unk008;unsigned unk00c;unsigned unk010;unsigned unk014;unsigned unk018;unsigned unk01c;int m_iActionValue;};struct VATSMenuX{unsigned unk000;unsigned unk004;unsigned unk008;unsigned unk00c;unsigned unk010;unsigned unk014;unsigned unk018;unsigned unk01c;unsigned unk020;unsigned unk024;unsigned unk028;unsigned unk02c;unsigned unk030;unsigned unk034;unsigned unk038;unsigned unk03c;unsigned unk040;unsigned unk044;unsigned unk048;unsigned unk04c;unsigned unk050;unsigned unk054;unsigned unk058;unsigned unk05c;unsigned unk060;unsigned unk064;unsigned unk068;unsigned unk06c;unsigned unk070;unsigned unk074;unsigned unk078;unsigned unk07c;unsigned unk080;unsigned unk084;unsigned unk088;unsigned unk08c;unsigned unk090;unsigned unk094;unsigned unk098;unsigned unk09c;unsigned unk0a0;unsigned unk0a4;unsigned unk0a8;unsigned unk0ac;unsigned unk0b0;unsigned unk0b4;unsigned unk0b8;unsigned unk0bc;unsigned unk0c0;unsigned unk0c4;unsigned unk0c8;unsigned unk0cc;unsigned unk0d0;unsigned unk0d4;unsigned unk0d8;unsigned unk0dc;unsigned unk0e0;unsigned unk0e4;unsigned unk0e8;unsigned unk0ec;unsigned unk0f0;unsigned unk0f4;Chance* m_pTargetChance;int FUN_0068d920(int);float FUN_0068e730();};
 // @fnv 0x007f48e0
+// pdb: VATSMenu::CalculateProbableEnemyHealth | VATSMenu.obj | fnv360_0822_retail, call_gap, medium
 float VATSMenuX::FUN_0068e730()
 {
     if (!DAT_0108d014 || !DAT_0108d014->IsActor())
@@ -21970,6 +22259,8 @@ struct FUN_00685ef0_cls {
     Tile* FUN_00685ef0(int value, int prop, int index, int id);
 };
 
+// pdb: ListBox<enum MiscStatManager::MiscStatID>::AddItem | StatsMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aAssociatedData, apcItemString, apCompareFn, apcTemplateName
 Tile* FUN_00685ef0_cls::FUN_00685ef0(int value, int prop, int index, int id)
 {
     Tile* parent = unk0c;
@@ -22039,6 +22330,7 @@ struct Owner {
     float FUN_00689f90();
     int FUN_0068b4d0();
 };
+// pdb: SurgeryMenu::ShowLimbCondition | SurgeryMenu.obj | fnv360_0822_retail, call_gap, medium
 int Owner::FUN_0068b4d0()
 {
     float fraction = 1.0f - FUN_00689f90();
@@ -22529,6 +22821,7 @@ extern void* DAT_0116efc4;
 void __cdecl FUN_00aef280(void*, void*, Accum*);
 void __cdecl FUN_00aef470(void*, Camera*, int);
 
+// pdb: LockPickMenu::Draw3DElements | LockPickMenu.obj | fnv360_1110_retail, call_seq, low
 void __cdecl FUN_00689910()
 {
     if (!DAT_01077334 || !DAT_0107739c) return;
@@ -22607,6 +22900,7 @@ struct State
 extern State* DAT_01077248;
 struct Source { void** table; };
 extern Source* DAT_0107a104;
+// pdb: StatsMenu::UpdatePerks | StatsMenu.obj | fnv360_0822_retail, call_gap, medium
 void __cdecl FUN_006863b0()
 {
     State* state = DAT_01077248;
@@ -22677,6 +22971,7 @@ struct Owner {
     int mode;
     void FUN_0069e830();
 };
+// pdb: FOVATSEffectManager::DrawMultipleTargets | FOVATSEffectManager.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: ShadowSceneNode::UpdateOcclusionPlaneVisibility)
 void Owner::FUN_0069e830()
 {
     if (count > 0) {
@@ -22745,6 +23040,8 @@ extern float DAT_010773b0;
 extern float DAT_0107733c;
 extern float DAT_01077370;
 extern float DAT_01077348;
+// pdb: SurgeryMenu::SetSurgeryPlayer3DPosition | SurgeryMenu.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: afX, afY, afScale
 void __cdecl FUN_00689a90(float x, float y, float scale)
 {
     Root* root = DAT_0107739c;
@@ -22804,6 +23101,7 @@ Input* __cdecl FUN_00be78d0();
 void __cdecl FUN_00887da0(const char*, ...);
 void __cdecl FUN_006809b0();
 
+// pdb: StartMenu::ConfirmNewGame | StartMenu.obj | fnv360_0822_retail, ustr, medium
 void __cdecl FUN_00680d10()
 {
     char* end;
@@ -22999,6 +23297,8 @@ void Info6865::operator delete(void* p) { DAT_01090a78.FUN_0086ba60(p); }
 }
 using namespace n686500;
 
+// pdb: StatsMenu::UpdateHealingOptions | StatsMenu.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aeID
 void Menu6865::FUN_00686500(int mode)
 {
     if (!n686500::DAT_0107a104)
@@ -23082,6 +23382,7 @@ namespace TerminalLight69b6 {
         void FUN_0069b6e0();
     };
 
+    // pdb: FORenderedMenuRaceSex::InitLight | FORenderedMenuRaceSex.obj | fnv360_0822_retail, call_gap, medium
     void Menu::FUN_0069b6e0()
     {
         if (FUN_0069acc0(DAT_00e08e48, DAT_0116efbc)) {
@@ -23119,6 +23420,8 @@ struct Owner {int unk00;List list;Record* FUN_00684e80(int);void FUN_006852f0(It
 static __forceinline bool Bit1(unsigned int flags){return ((flags>>1)&1)!=0;}
 static __forceinline bool Bit2(unsigned int flags){return ((flags>>2)&1)!=0;}
 static __forceinline int Key(Item* item){return Bit1(DAT_00f462b8[item->setting->index].flags)?item->key:-1;}
+// pdb: StatsMenu::StatusDataList::Register | StatsMenu.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apEffectItem
 void Owner::FUN_006852f0(Item* item)
 {
     if (!item)
@@ -23393,6 +23696,7 @@ struct Owner {
 };
 extern Owner* DAT_010772f8;
 
+// pdb: SurgeryMenu::UpdateFlesh | SurgeryMenu.obj | fnv360_0822_retail, call_gap, low
 float Owner::FUN_0068beb0()
 {
     Pair* p = FUN_00689f50();
@@ -24334,6 +24638,7 @@ struct VATSMenu {
 
 using namespace N6954a0;
 
+// pdb: VATSMenu::DoIdle | VATSMenu.obj | fnv360_0822_retail, vtable, medium
 void N6954a0::VATSMenu::FUN_006954a0()
 {
     if (m_bStateFlag3)
@@ -24713,6 +25018,7 @@ struct Owner {
     void FUN_00685b60();
 };
 
+// pdb: StatsMenu::StatusEffectList::Flush | StatsMenu.obj | fnv360_0822_retail, objrun, medium
 void Owner::FUN_00685b60()
 {
     while (groups.next || groups.item) {
@@ -25032,6 +25338,7 @@ struct PainMenu68 {
     void FUN_0068c4e0();
 };
 
+// pdb: SurgeryMenu::BurnFlesh | SurgeryMenu.obj | fnv360_0822_retail, ustr, medium
 void PainMenu68::FUN_0068c4e0()
 {
     float result = UpdateWoundInteraction();
@@ -25343,6 +25650,8 @@ __declspec(noinline) TargetList85* Menu85::FindListEntryForTarget(Actor85* targe
     return 0;
 }
 
+// pdb: VATSMenu::ShowTargetLimb | VATSMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: abForceShow
 void __cdecl FUN_0068ed00(bool force)
 {
     Menu85* menu = g_pVatsMenu85;
@@ -25711,6 +26020,7 @@ void* __cdecl FUN_00508e40(int index);
 
 }
 
+// pdb: StatsMenu::Create | StatsMenu.obj | fnv360_0822_retail, ustr, medium
 N6880d0::Tile* FUN_006880d0()
 {
     using N6880d0::AlchemyItem;
@@ -26037,6 +26347,8 @@ float __cdecl FUN_0061e2a0();
 
 } // namespace ProjectedSelection
 
+// pdb: SurgeryMenu::SortSequenceByCursorDistance | SurgeryMenu.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apObject1, apObject2
 int __cdecl FUN_00689d00(const ProjectedSelection::List* first,
                           const ProjectedSelection::List* second)
 {
@@ -27082,6 +27394,7 @@ struct FUN_0069bde0_Class
     void FUN_0069bde0();
 };
 
+// pdb: FORenderedMenuRaceSex::OnMenuOpen | FORenderedMenuRaceSex.obj | fnv360_0822_retail, ustr, medium
 void FUN_0069bde0_Class::FUN_0069bde0()
 {
     DAT_0107a0d4->FUN_006ecc50();
@@ -27420,6 +27733,8 @@ BoneWound* BoneMenu::FUN_00689f50()
     return 0;
 }
 
+// pdb: SurgeryMenu::PrepareSequences | SurgeryMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apNode
 void __cdecl FUN_0068afb0(BoneHost* host)
 {
     if (!host)
@@ -28147,6 +28462,8 @@ public:
     void FUN_00694f20(VATSAction* apAction, bool abAddEntry);
 };
 
+// pdb: VATSMenu::UpdateQueuedActionList | VATSMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apCommand, abForcedReload, bSpecialAttack
 void VATSMenu::FUN_00694f20(VATSAction* apAction, bool abAddEntry)
 {
     if (apAction == 0)
@@ -28397,6 +28714,7 @@ static __forceinline void SelectLimb(
 }
 }
 
+// pdb: VATSMenu::SetTargetLimb | VATSMenu.obj | fnv360_0822_retail, caller, medium
 void f3m_006969b0::f3m_006969b0::VatsMenu_6969b0::FUN_006908e0()
 {
     using namespace n6908e0;
@@ -28897,6 +29215,7 @@ public:
 };
 
 // FNV FOPipboyManager::UpdatePipBoyButton
+// pdb: FOPipboyManager::InitButtons | FOPipboyManager.obj | fnv360_0822_retail, ustr, medium
 void FOPipboyManager::FUN_00698b40()
 {
     NiAVObject* button = DAT_0107a104->GetNode(true)->GetObjectByName(NiFixedString(DAT_00e08ed8));
@@ -29615,6 +29934,7 @@ struct MarkerHud {
     int FUN_0068d920(int);
     void FUN_0068f9a0();
 };
+// pdb: VATSMenu::PrepareMeters | VATSMenu.obj | fnv360_0822_debug, ustr_rel, medium
 void MarkerHud::FUN_0068f9a0() {
     MarkerHolder* holder=FUN_0068e5e0(DAT_0108d014);
     MarkerGroup* group=holder->group;
@@ -29812,6 +30132,8 @@ struct Menu6 {
     void FUN_006860c0(unsigned int index, Tile6* tile);
 };
 
+// pdb: StatsMenu::DoEnter | StatsMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void Menu6::FUN_006860c0(unsigned int index, Tile6* tile)
 {
     if (!tile && index <= 0x2d)
@@ -29871,6 +30193,7 @@ struct S0069f160_Menu {
     void FUN_0069f160();
 };
 
+// pdb: FOVATSEffectManager::RestoreBodyParts | FOVATSEffectManager.obj | fnv360_0822_retail, call_seq, medium
 void S0069f160_Menu::FUN_0069f160()
 {
     if (!actor->IsAvailable() || mode == 14 || mode == 15) return;
@@ -30236,6 +30559,7 @@ struct Owner {
 };
 extern void* DAT_0116efbc;
 extern float DAT_0107794c, DAT_01077914, DAT_01077970, DAT_01077904, DAT_01077958;
+// pdb: FORenderedTerminal::InitLight | FORenderedTerminal.obj | fnv360_0822_retail, call_gap, low
 void Owner::FUN_0069d5b0() {
     if (!FUN_0069acc0(DAT_00e08e48, DAT_0116efbc)) return;
     PointLight* point = light;
@@ -30336,6 +30660,8 @@ inline F699Vec3 operator+(const F699Vec3& a, F699Vec3 b)
     return r;
 }
 
+// pdb: FORenderedMenu::UpdateLight | FORenderedMenu.obj | fnv360_1110_retail, objrun_prop, low
+// pdb params: afTime
 void F699Menu::FUN_00699e00(float fTime)
 {
     F699Light* pLight = spLight;
@@ -30666,6 +30992,7 @@ extern unsigned char DAT_0107744c;
 extern PlayerState* DAT_0107a104;
 extern LimbMenu* DAT_01077448;
 int __cdecl FUN_00becd70(const char*,int);
+// pdb: VATSMenu::UpdateChanceToHit | VATSMenu.obj | fnv360_0822_retail, ustr, medium
 void LimbMenu::FUN_00692c70() {
  static int meter = FUN_00becd70(DAT_00e08b2c,-1);
  static int name = FUN_00becd70(DAT_00e08b48,-1);
@@ -32168,6 +32495,7 @@ struct PowerMenuView
     void FUN_0069d980();
 };
 
+// pdb: FORenderedTerminal::Initialize | FORenderedTerminal.obj | fnv360_0822_retail, ustr, medium
 void PowerMenuView::FUN_0069d980()
 {
     float delay = DAT_0107797c;
@@ -32259,6 +32587,8 @@ struct Class696f50 {
     void FUN_00694f20(int a, int b);
     bool FUN_00696f50(unsigned int c);
 };
+// pdb: VATSMenu::DoKey | VATSMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiKey
 bool Class696f50::FUN_00696f50(unsigned int c)
 {
     if (c == 0x42 || c == 0x62)
@@ -32452,6 +32782,8 @@ extern Player* DAT_0107a104;
 extern char DAT_00e0843c[];
 extern char DAT_00e08438[];
 extern float __cdecl FUN_005817e0(ActorValueOwner* owner, int index, bool flag);
+// pdb: StatsMenu::SkillsUpdateFn | StatsMenu.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apTile, aeIndex
 void __cdecl FUN_006845f0(Tile* tile, int index) {
     if (!tile) return;
     int base = DAT_0107a104->FUN_005a29a0(index);
@@ -32495,6 +32827,8 @@ struct O982 {
     void FUN_006982c0(unsigned int index);
 };
 
+// pdb: FOPipboyManager::ActivateButton | FOPipboyManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiButton
 void O982::FUN_006982c0(unsigned int index)
 {
     if (!unk28)
@@ -32511,6 +32845,8 @@ void O982::FUN_006982c0(unsigned int index)
 namespace f3m_00697500 {
 namespace Change328 {
 struct Handle{int id;unsigned char state;int value;Handle():id(-1),state(0),value(0){}Handle& operator=(const Handle& h){id=h.id;state=h.state;value=h.value;return *this;}void FUN_00bd00c0(int);};struct Manager{Handle FUN_00bcfcd0(const char*,int);};extern Manager* DAT_011790c8;extern char DAT_00e08ddc[];extern float DAT_010775d0;extern bool DAT_010776ac;
+// pdb: FOPipboyManager::SetTabKnobPosition | FOPipboyManager.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aiNewPos, abPlaySounds
 struct Owner{int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8; int unkac; int unkb0; int unkb4; int unkb8; int unkbc; int unkc0; int unkc4; int unkc8; int unkcc; int unkd0; int unkd4; int unkd8; int unkdc; int unke0; int unke4; int unke8; int unkec; int unkf0; int unkf4; int unkf8; int unkfc; int unk100; int unk104; int unk108; int unk10c; int unk110; int unk114; int unk118; int unk11c; float current;int unk124,unk128;float time;float settings[4];void FUN_00697500(int,bool);};void Owner::FUN_00697500(int index,bool play){if(current!=settings[index]){current=settings[index];time=DAT_010775d0;if(DAT_010776ac&&play){Handle sound;sound=DAT_011790c8->FUN_00bcfcd0(DAT_00e08ddc,0x121);sound.FUN_00bd00c0(0);}}}
 }
 
@@ -32536,6 +32872,8 @@ struct Scene_68df20 {
 };
 extern Scene_68df20* DAT_0107a224;
 
+// pdb: VATSMenu::LimbOnScreen | VATSMenu.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: apLimb
 bool __stdcall FUN_0068df20(Data_68df20* data)
 {
     Point_68df20 point = data->position;
@@ -32583,6 +32921,7 @@ struct Entry_693890 {
 
 extern Node_693890 DAT_010774a8;
 
+// pdb: VATSMenu::ClearTargetList | VATSMenu.obj | fnv360_0822_debug, caller, medium
 void __cdecl FUN_00693890()
 {
     while (DAT_010774a8.item) {
@@ -32652,6 +32991,8 @@ struct Obj
     void FUN_00699850(float time);
 };
 
+// pdb: FORenderedMenu::UpdateVertHold | FORenderedMenu.obj | fnv360_0721_beta, objrun, medium
+// pdb params: afTime
 void Obj::FUN_00699850(float time)
 {
     time -= unk64;
@@ -32787,6 +33128,7 @@ extern SmartRef DAT_01077304;
 extern SmartRef DAT_01077334;
 extern SmartRef DAT_0107739c;
 
+// pdb: SurgeryMenu::Shutdown3DElements | SurgeryMenu.obj | fnv360_0721_beta, call_seq, medium
 void __cdecl FUN_00689c10()
 {
     DAT_0116efbc->vf58(DAT_01077334);
@@ -33081,6 +33423,8 @@ struct Menu
     void FUN_006866b0(unsigned int index);
 };
 
+// pdb: InventoryMenu::SetCurrentTab | Interface.obj | fnv360_0822_debug, call_seq, low
+// pdb params: aiTab
 void Menu::FUN_006866b0(unsigned int index)
 {
     if (index > 4)
@@ -33194,6 +33538,8 @@ int Owner::FUN_006891d0(int key)
     return key;
 }
 
+// pdb: SurgeryMenu::SwitchSkinGeometry | SurgeryMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aeOldLimb, aeNewLimb
 void Owner::FUN_0068a420(int a, int b)
 {
     NiNode* node1 = DAT_01077334;
@@ -33407,6 +33753,8 @@ unsigned unk04,unk08,unk0c,unk10,unk14,unk18;
 BaseForm* base;
 };
 extern Actor* DAT_0108d014;
+// pdb: VATSMenu::GetActorValueFromBodyPart | VATSMenu.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aeBodyPart
 int __stdcall FUN_0068d920(int id) {
  if (DAT_0108d014 && DAT_0108d014->IsActor()) {
   BodyParts* parts=DAT_0108d014->base->GetBodyParts();
@@ -33495,6 +33843,8 @@ struct TailCallee69D {
                                                      
 };
 
+// pdb: FORenderedTerminal::Draw | FORenderedTerminal.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apTarget, aeClearMode, apSwapTarget
 void Holder69D::FUN_0069d4a0(unsigned long first, unsigned long second, unsigned long third) {
                           
     struct Owner69D* owner = this->owned;            
@@ -33575,6 +33925,8 @@ struct Owner {
     void FUN_00630a80();
     bool FUN_00693950(Node*, Node*);
 };
+// pdb: ListBox<unsigned int>::Remove | VATSMenu.obj | fnv360_0822_retail, caller, medium
+// pdb params: pkFirst, pkSecond
 bool Owner::FUN_00693950(Node* node, Node* prev) {
     if (node) {
     if (node->entry->object == selected) {
@@ -33647,6 +33999,8 @@ struct Str {
     Str& FUN_00684eb0(const Str& other);
 };
 
+// pdb: BSStringT<char>::operator+= | StatsMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arString
 Str& Str::FUN_00684eb0(const Str& other)
 {
     if (other.data) {
@@ -33704,6 +34058,7 @@ struct Player {
 extern Player* DAT_0107a104;
 extern const char* DAT_00f65058;
 
+// pdb: StatsMenu::UpdatePlayerName | StatsMenu.obj | fnv360_0822_retail, call_gap, medium
 void __cdecl FUN_006854e0()
 {
     if (DAT_01077248 && DAT_0107a104) {
@@ -33741,6 +34096,8 @@ struct OwnerB {
     bool FUN_00694dc0(unsigned int value, bool byIndex);
 };
 
+// pdb: ListBox<unsigned int>::RemoveAt | VATSMenu.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aiIndex, abLiteral
 bool OwnerB::FUN_00694dc0(unsigned int value, bool byIndex)
 {
     OwnerB* self = this;
@@ -33886,6 +34243,7 @@ struct AnimOwner
     void FUN_0068a0f0();
 };
 
+// pdb: SurgeryMenu::UpdateAnimations | SurgeryMenu.obj | fnv360_0721_beta, objrun, medium
 void AnimOwner::FUN_0068a0f0()
 {
     NiTimeController* controller = node->controllers;
@@ -34244,6 +34602,7 @@ class KnobMenu
     void FUN_00697f00();
 };
 
+// pdb: FOPipboyManager::InitKnobs | FOPipboyManager.obj | fnv360_0822_retail, ustr, medium
 void KnobMenu::FUN_00697f00()
 {
     {
@@ -34449,6 +34808,7 @@ struct Owner {
     bool FUN_0069a010(bool,int,int);
     bool FUN_0069d820(bool,int,int);
 };
+// pdb: MapCameraStates::World::PickLand | MapCameraStates.obj | tesv_win, caller_sim, low
 bool Owner::FUN_0069d820(bool enabled,int arg2,int arg3)
 {
     void* selectedNode = selected;
@@ -34708,6 +35068,8 @@ struct GameMgr {
 extern GameMgr* DAT_0107a0d4;
 
 
+// pdb: StatsMenu::DoGamepad | StatsMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiButton, afValue
 bool MenuSelf::FUN_006869d0(int key, float value)
 {
     if (!FUN_0061c490(0x3eb) || !*(unsigned char*)((char*)Interface_GetPipboy() + 0x28))
@@ -35351,6 +35713,8 @@ struct Owner {
     void FUN_0069ff10(Source* source, int mode, int a, int b, int c, bool flush);
 };
 
+// pdb: FOVATSEffectManager::DrawTargetToTexture | FOVATSEffectManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apTarget, aQueryType, abQueryMode, aeDrawMode, aeClearMode, abStopRenderTarget
 void Owner::FUN_0069ff10(Source* source, int mode, int a, int b, int c, bool flush)
 {
     if (target004->FUN_22c(0))
@@ -35782,6 +36146,7 @@ struct StatsMenu {
     void FUN_00686ee0();
 };
 
+// pdb: StatsMenu::UpdateActiveEffects | StatsMenu.obj | fnv360_0822_retail, ustr, medium
 void StatsMenu::FUN_00686ee0()
 {
     if (m_bStatUpdatePending)
@@ -36035,6 +36400,8 @@ struct Ctl69fb30_Ctrl : ControllerB {
     void FUN_0069f160();
 };
 
+// pdb: FOVATSEffectManager::DrawSingleTarget | FOVATSEffectManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abQueryMode, aeDrawMode
 void Ctl69fb30_Ctrl::FUN_0069fb30(bool arg1, int arg2)
 {
     if (!actor)
@@ -36405,6 +36772,8 @@ struct FUN_00694950_Owner {
     bool FUN_00694950();
 };
 
+// pdb: VATSMenu::GetShotBurstCount | VATSMenu.obj | fnv360_0721_retail, call_gap, low
+// pdb params: aeAction, abAllowLongBurst
 bool FUN_00694950_Owner::FUN_00694950()
 {
     if (unk106)
@@ -36550,6 +36919,8 @@ Tile* unk78;
 List first,second,third,fourth,fifth,sixth;
 unsigned unk19c,flags;int unk1a4,unk1a8,unk1ac,unk1b0,unk1b4;Tile* unk1b8;Tile* unk1bc;Tile* unk1c0;int unk1c4,unk1c8,channel;void FUN_0067bd60();void FUN_0067ed50();void FUN_00bfd010(bool);void FUN_00681540(bool,bool); };
 extern Menu* DAT_010770ac;
+// pdb: StartMenu::_Create | StartMenu.obj | fnv360_0822_retail, ustr, medium
+// pdb params: abInGame, abForceReload
 void Menu::FUN_00681540(bool main,bool mode){
 Guard guard(13);
 DAT_0107a0d8->FUN_004353f0(DAT_00e082ac,&unk1b4,0,0);
@@ -37086,6 +37457,7 @@ public:
     void FUN_0069c6f0();
 };
 
+// pdb: FORenderedMenuRaceSex::Initialize | FORenderedMenuRaceSex.obj | fnv360_0822_retail, ustr, medium
 void RaceSexPreview::FUN_0069c6f0()
 {
     unk158 = 0;
@@ -37460,6 +37832,7 @@ __forceinline float Lower(float v) { return v < DAT_00db38b0 ? 0.0f : v; }
 __forceinline float Upper(float v) { return v > DAT_00db38a8 ? 1.0f : v; }
 __forceinline Form* AsAmmo(Form* f) { return f && f->type == 0x29 ? f : 0; }
 __forceinline Form* AsSpecial(Form* f) { return f && f->type == 0x55 ? f : 0; }
+// pdb: VATSMenu::UpdateAmmo | VATSMenu.obj | fnv360_0822_retail, call_gap, low
 bool Menu::FUN_0068dfe0() {
     Item* item = DAT_0107a104->process->equipped();
     Extra* extra = DAT_0107a104->process->extra();
@@ -38783,6 +39156,7 @@ __declspec(noinline) void ZQuery::FUN_0068daa0(ZVec* p) { scaled(direction,*p); 
 static __forceinline ZPart* part(int index) { ZPart* p=new ZPart; p->unk20=index; *(unsigned char*)&p->unk2c=0; *((unsigned char*)&p->unk2c+1)=0; *((unsigned char*)&p->unk2c+2)=0; *((unsigned char*)&p->unk2c+3)=1; memcpy(&p->unk14,&DAT_0108ec68,sizeof(ZVec)); return p; }
 static __forceinline ZPart* unindexedPart() { ZPart* p=new ZPart; *(unsigned char*)&p->unk2c=0; *((unsigned char*)&p->unk2c+1)=0; *((unsigned char*)&p->unk2c+2)=0; *((unsigned char*)&p->unk2c+3)=1; memcpy(&p->unk14,&DAT_0108ec68,sizeof(ZVec)); return p; }
 static __forceinline bool MatchedRayHit(const int id) { ZNode* node=FUN_004780d0(id); if(!node)return false; ZObj* object=FUN_004e7b90(node); if(!object)return false; if(!FUN_0044b010(object->GetBase())) return false; return object->v224(); }
+// pdb: VATSMenu::BuildTargetList | VATSMenu.obj | fnv360_0822_retail, call_gap, low
 bool FUN_00693aa0()
 {
  bool ready=DAT_010774ac || DAT_010774a8.item; if(ready) return true;
@@ -38952,6 +39326,8 @@ inline int OptionForTile(int id)
     }
 }
 
+// pdb: StatsMenu::DoClick | StatsMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiID, apTarget
 void StatsMenu::FUN_00687e30(int id, Tile* tile)
 {
     if (!tile && static_cast<unsigned int>(id) <= 45)
@@ -38999,6 +39375,8 @@ void StatsMenu::FUN_00687e30(int id, Tile* tile)
 
 // @f3 0x006841f0 (community match, verified in this file)
 namespace f3m_006841f0 {
+// pdb: StatsMenu::BodyPartController::Convert | StatsMenu.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: aeBodyPart
 extern "C" int __cdecl FUN_006841f0(int value)
 {
     switch (value) {

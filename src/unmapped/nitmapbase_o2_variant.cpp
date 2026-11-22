@@ -13,6 +13,8 @@ struct NiMapBase
     void __thiscall FUN_00b60210(NiStream* stream);
 };
 // @fnv 0x00b60210
+// pdb: TallGrassShaderProperty::SaveBinary | TallGrassShaderProperty.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: kStream
 void __thiscall NiMapBase::FUN_00b60210(NiStream* stream)
 {
     FUN_00bb7160(stream);
@@ -44,6 +46,7 @@ struct S_00b601a0_Map
 };
 
 // @fnv 0x00b601a0
+// pdb: NiTMapBase<DFALL<NiTMapItem<unsigned int,CombatThreat *> >,unsigned int,CombatThreat *>::RemoveAll | CombatThreatMap.obj | fnv360_0822_retail, call_seq, high
 void S_00b601a0_Map::FUN_00b601a0()
 {
     for (unsigned int i = 0; i < m_uiHashSize; i++)
@@ -81,6 +84,8 @@ struct TexMap : TexBase
 };
 
 // @fnv 0x00b60240
+// pdb: TallGrassShaderProperty::PostLinkObject | TallGrassShaderProperty.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: BSBloodSplatterShaderProperty::LoadTexture)
+// pdb params: kStream
 void TexMap::FUN_00b60240(NiStream* stream)
 {
     FUN_00ba8be0(stream);

@@ -7,6 +7,8 @@ struct FUN_00cfb1e0
     void Set(bool b);
 };
 // @fnv 0x00cfb1e0
+// pdb: hkpCollisionDispatcher::setEnableChecks | hkpCollisionDispatcher.obj | fnv360_0822_retail, objrun, medium
+// pdb params: checkEnabled
 void FUN_00cfb1e0::Set(bool b)
 {
     *(reinterpret_cast<char*>(this) + 0x1e23) = b;
@@ -76,6 +78,7 @@ extern void (__stdcall* DAT_00d9b09c)(char*);
 extern void (__stdcall* DAT_00d9b0a0)(char*);
 extern float FUN_00db38b8;
 
+// pdb: DebugText::DeleteAllDebugText | DebugText.obj | fnv360_0721_beta, call_gap, low
 void Owner::FreeBuffers()
 {
     S_00bfa260_Slot* p;
@@ -171,6 +174,8 @@ struct hkpCollisionDispatcher
 };
 
 // @fnv 0x00cfb2a0
+// pdb: hkpCollisionDispatcher::internalRegisterCollisionAgent | hkpCollisionDispatcher.obj | fnv360_0822_retail, ustr, high
+// pdb params: agentTypesTable, agentType, typeA, typeB, origA, origB, debugTable, depth
 void hkpCollisionDispatcher::RegisterAgentType(signed char (*table)[32], signed char agentType, int typeA, int typeB,
                                                signed char origTypeA, signed char origTypeB,
                                                CollisionAgentEntry (*entries)[32], int depth)
@@ -248,6 +253,8 @@ struct FUN_00cfb510_entry
 };
 
 // @fnv 0x00cfb510
+// pdb: hkpCollisionDispatcher::updateHasAlternateType | hkpCollisionDispatcher.obj | fnv360_0822_retail, objrun, high
+// pdb params: primaryType, alternateType, depth
 void FUN_00cfb510_cls::MergeBitsRecursive(unsigned int uiDstIndex, unsigned int uiSrcIndex, int depth)
 {
     unsigned int* bits = (unsigned int*)((char*)this + 0x110);
@@ -283,6 +290,8 @@ class FUN_00cfbbe0_cls
 
 // Copies a record into the array at offset 0x9a0 at the current index, calls RegisterAgentType on several sub-objects, and increments the index.
 // @fnv 0x00cfbbe0
+// pdb: hkpCollisionDispatcher::registerCollisionAgent | hkpCollisionDispatcher.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: f, typeA, typeB
 void FUN_00cfbbe0_cls::FUN_00cfbbe0(FUN_00cfbbe0_rec* pRecord, int a2, int a3)
 {
     char* base = (char*)this;
@@ -341,6 +350,8 @@ struct FUN_00cfbcc0_cls
 };
 
 // @fnv 0x00cfbcc0
+// pdb: hkpCollisionDispatcher::registerCollisionAgent2 | hkpCollisionDispatcher.obj | fnv360_0822_debug, objrun, medium
+// pdb params: f, typeA, typeB
 void FUN_00cfbcc0_cls::AddSpawnEntry(SpawnRequest* pRequest, int a, int b)
 {
     char* self = (char*)this;
@@ -405,6 +416,8 @@ struct FUN_00cfbd60_cls
 };
 
 // @fnv 0x00cfbd60
+// pdb: hkpCollisionDispatcher::registerAgent3 | hkpCollisionDispatcher.obj | fnv360_0822_retail, call_seq, high
+// pdb params: f, typeA, typeB
 int FUN_00cfbd60_cls::AddEntry(SrcRec* pSrc, int a2, int a3)
 {
     __declspec(align(16)) Ent e;
@@ -575,6 +588,8 @@ struct HkRefCount
     unsigned short unk06;
 };
 
+// pdb: hkpCollisionDispatcher::hkpCollisionDispatcher | hkpCollisionDispatcher.obj | fnv360_0822_retail, call_gap, high
+// pdb params: defaultCollisionAgent, defaultContactMgrFactory
 FUN_00cfc030_cls* FUN_00cfc030_cls::FUN_00cfc030(unsigned int a1, unsigned int v)
 {
     int one = 1;
@@ -1606,6 +1621,7 @@ struct S00cfb080_FlagWriter
     S00cfb080_FlagWriter(bool& r, bool v) : ref(r) { ref = v; }
 };
 
+// pdb: hkpCollisionDispatcher::resetCreationFunctions | hkpCollisionDispatcher.obj | fnv360_0721_beta, caller, medium
 void S00cfb080_State::FUN_00cfb080()
 {
     m_iDirtyA = 1;

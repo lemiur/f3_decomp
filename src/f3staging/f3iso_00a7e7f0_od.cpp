@@ -68,6 +68,8 @@ __forceinline void Perpendicular(const Vec4& edge, Vec4& perp) {
     perp[other]=edge[sel];
     perp[sel]=-edge[other];
 }
+// pdb: hkpConvexPenetrationUtil::builtTetrahedron | hkpConvexPenetrationUtil.obj | fnv360_0822_retail, objrun, medium
+// pdb params: output, gjkStatus
 int Geometry::FUN_00a7e7f0(Result* result,int* status) {
     Vec4* point;
     int best=-1;

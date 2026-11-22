@@ -3243,6 +3243,7 @@ struct Dtor00a2dd70
 };
 
 // @fnv 0x00a291e0
+// pdb: BaseProcess::GetFaceNode | BaseProcess.obj | fnv360_0721_beta, objrun_open, low
 float __cdecl FUN_00a291e0()
 {
     return 0.0f;

@@ -6,6 +6,7 @@ struct hkp3AxisSweep {
     int FUN_00d11630();
 };
 // @fnv 0x00d11630
+// pdb: hkp3AxisSweep::getAabbCacheSize | hkp3AxisSweep.obj | tesv_win, objrun_sim, low
 int hkp3AxisSweep::FUN_00d11630()
 {
     return 8 * (3 * (*(int*)((char*)this + 0xa4) - *(int*)((char*)this + 0xd0))) + 0x24;
@@ -17,6 +18,7 @@ void __cdecl ResizeAudioStream(void*, void*, int);
 struct UnkRet { int x; int y; };
 // @f3 0x009919a0 (community match, verified in this file)
 void __cdecl FUN_00901f10(void* buf, int n);
+// pdb: hkp3AxisSweep::beginOverlap | hkp3AxisSweep.obj | tesv_win, objrun_open, low
 void __fastcall AppendPairToBuffer(UnkRet* apFirst, UnkRet* apSecond, void* apBuffer)
 {
     int* q = (int*)apBuffer;
@@ -30,6 +32,7 @@ void __fastcall AppendPairToBuffer(UnkRet* apFirst, UnkRet* apSecond, void* apBu
 
 
 // @fnv 0x00d10ad0
+// pdb: staticFlipBit | hkp3AxisSweep.obj | tesv_win, objrun_open, low
 void __fastcall ToggleBit(int aiBitIndex, void* apBits)
 {
     int* p = (int*)apBits;
@@ -44,6 +47,8 @@ struct Entry {
 };
 // Binary-searches a sorted Entry range for the first entry whose key is not less than key, returning that entry pointer.
 // @fnv 0x00d10ea0
+// pdb: hkp3AxisSweep::hkpBpAxis::find | hkp3AxisSweep.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: start, end, value
 Entry* __stdcall LowerBoundEntry(Entry* first, Entry* last, unsigned short key) {
     while ((((char*)last - (char*)first) & ~3) > 0x40) {
         Entry* middle = first + (((char*)last - (char*)first) >> 3);
@@ -61,6 +66,7 @@ struct FUN_00d11960_cls {
 };
 
 // @fnv 0x00d11960
+// pdb: hkp3AxisSweep::hkpBpAxis::remove | hkp3AxisSweep.obj | tesv_win, objrun_prop, low
 void FUN_00d11960_cls::FUN_00d11960(int aiFirst, int aiSecond)
 {
     int* p = m_pEntryData + aiFirst;
@@ -195,6 +201,7 @@ struct S_00d1a180_Axis {
 };
 
 // @fnv 0x00d10af0
+// pdb: staticClearBit | hkp3AxisSweep.obj | tesv_win, objrun_open, low
 void __fastcall FUN_00d10af0(int index, unsigned int* apuiBits)
 {
     unsigned int mask = 1u << (index & 0x1f);
@@ -249,6 +256,7 @@ struct FUN_00d11620_cls {
 };
 
 // @fnv 0x00d11620
+// pdb: hkp3AxisSweep::getNumObjects | hkp3AxisSweep.obj | tesv_win, objrun_sim, low
 int FUN_00d11620_cls::FUN_00d11620()
 {
     return m_iA4 - 1;
@@ -326,6 +334,8 @@ struct FUN_00d119c0_owner {
 };
 
 // @fnv 0x00d119c0
+// pdb: hkp3AxisSweep::getAabb | hkp3AxisSweep.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: object, aabb
 void FUN_00d119c0_owner::FUN_00d119c0(UnkHandle* handle) {
     FUN_00d11650(this, handle, this->unkA0 + handle->unk00);
 }
@@ -367,6 +377,7 @@ struct FnvPair8 {
 };
 
 // @f3 0x00991a40 (community match, verified in this file)
+// pdb: hkp3AxisSweep::beginOverlapCheckMarker | hkp3AxisSweep.obj | tesv_win, objrun_open, low
 void __fastcall FUN_00d11c60(void* base, FnvNode* pNode, unsigned short ausValue, FnvNode* pOther, FnvArr* pPairArr)
 {
     if ((pOther->m_0c & 1) == 0) {
@@ -440,6 +451,7 @@ struct FUN_00d11da0_cls {
 
 // @f3 0x00991c00 (community match, verified in this file)
 void __cdecl FUN_00901e90(void* arr, int newCap, int elemSize);
+// pdb: hkp3AxisSweep::hkpBpAxis::insert | hkp3AxisSweep.obj | tesv_win, objrun_prop, low
 void FUN_00d11da0_cls::InsertPair(unsigned int auiUnused, unsigned int auiValue, unsigned short ausKey2,
                                   unsigned short ausKey1, unsigned short* pausIndex2, unsigned short* pausIndex1)
 {
@@ -549,6 +561,8 @@ SpawnedObject* FUN_00d182a0(int a, int b, int c)
 
 // Writes the smallest of v[0], v[1], v[2] to out and returns its index (0, 1 or 2).
 // @fnv 0x00d19d10
+// pdb: hkp3AxisSweep::convertAabbToBroadPhaseResolution | hkp3AxisSweep.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: getMinComponent)
+// pdb params: aabbIn, aabbOut
 int __cdecl FUN_00d19d10(const float* afValues, float* pfMin) {
     if (afValues[0] < afValues[1]) {
         if (afValues[0] < afValues[2]) {
@@ -621,6 +635,8 @@ void __cdecl FUN_00d19fa0(unsigned int* auiValues, int lo, int hi, int auiUnused
 
 // Recursive quicksort partition over 4-byte records keyed by their low 16 bits.
 // @fnv 0x00d1a220
+// pdb: hkAlgorithm::quickSortRecursive<ValueIntPair<unsigned short>,hkAlgorithm::less<ValueIntPair<unsigned short> > > | hkp3AxisSweep.obj | fnv360_0822_retail, objrun_sim, medium
+// pdb params: pArr, d, h, cmpLess
 void __cdecl QuickSortByLowWord(unsigned int* auiArray, int lo, int hi, int auiUnused)
 {
     for (;;) {
@@ -662,6 +678,7 @@ void __cdecl QuickSortByLowWord(unsigned int* auiArray, int lo, int hi, int auiU
 }
 
 // @fnv 0x00d10b10
+// pdb: staticIsBitSet | hkp3AxisSweep.obj | tesv_win, objrun_open, low
 static int __declspec(noinline) FUN_00d10b10(void* self, int index, unsigned int* apuiBits)
 {
     unsigned int mask = 1u << (index & 31);
@@ -683,6 +700,7 @@ public:
 };
 
 // @f3 0x009910a0 (community match, verified in this file)
+// pdb: hkp3AxisSweep::hkpBpAxis::mergeBatch | hkp3AxisSweep.obj | tesv_win, objrun_sim, low
 void FUN_00d11120_cls::MergeEndpoints(char* cells, int aiCount, int aiExtraCount,
                                     unsigned int axis, Endpoint* scratch)
 {
@@ -792,6 +810,7 @@ struct hkArray_00d182e0 {
 
 // Returns 0.
 // @fnv 0x00d10ac0
+// pdb: hkpTriSampledHeightFieldCollection::getFirstKey | hkpTriSampledHeightFieldCollection.obj | fnv360_1110_retail, objrun_open, low
 int __cdecl FUN_00d10ac0() {
     return 0;
 }
@@ -1586,6 +1605,7 @@ struct SweepThreadMemory {
             OnStackUnderflow(p);
     }
 };
+// pdb: hkp3AxisSweep::reQuerySingleObject | hkp3AxisSweep.obj | tesv_win, objrun_prop, low
 void AxisSweep::FUN_00d14100(int* index, EventList* events)
 {
     

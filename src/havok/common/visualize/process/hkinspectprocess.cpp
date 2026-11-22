@@ -3,6 +3,8 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 // @fnv 0x00ddb2f0
+// pdb: hkInspectProcess::getConsumableCommands | hkInspectProcess.obj | fnv360_0822_retail, vtable, medium
+// pdb params: commands, numCommands
 void __stdcall GetPunctuationChars(char** apOutString, int* apiLength)
 {
     *apOutString = "!\"#$%";
@@ -88,6 +90,8 @@ struct hkSourceStandInDDB6
     void FUN_009535d0(void(__cdecl* callback)(void*), void* userData) throw();
 };
 
+// pdb: hkInspectProcess::hkInspectProcess | hkInspectProcess.obj | fnv360_0822_retail, objrun, medium
+// pdb params: contexts
 FUN_00ddb600::FUN_00ddb600(const hkSourceListDDB6& sources) throw()
 {
     m_pObservedSource = sources.m_iElementCount > 0 ? (hkSourceDDB6*)sources.m_data[0]->m_target : 0;
@@ -381,6 +385,7 @@ struct TrackedListCast
 
 }
 
+// pdb: hkInspectProcess::init | hkInspectProcess.obj | fnv360_0822_retail, vtable, medium
 void InspectProcessDDB3::WriteTrackedObjects()
 {
     if (!m_pkTracked)

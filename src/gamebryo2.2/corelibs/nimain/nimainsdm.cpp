@@ -17,6 +17,7 @@ template <class T> struct PoolAllocatorBase
     };
     static LinkedListEntry* ms_pFreeList;
 };
+// pdb: NiTAbstractPoolAllocator<unsigned int>::_SDMShutdown | NiMainSDM.obj | fnv360_0822_retail, call_seq, high
 void FUN_00a8a200()
 {
     void* p = DAT_011c5f54;
@@ -43,6 +44,7 @@ extern void* DAT_011f6034;
 extern void* DAT_011f6038;
 // Walks the linked list starting at DAT_011f6034, deallocating each node, then clears DAT_011f6038 and DAT_011f6034.
 // @fnv 0x00a8a240
+// pdb: NiTAbstractPoolAllocatorSingleThread<unsigned int>::_SDMShutdown | NiMainSDM.obj | fnv360_0822_retail, call_seq, high
 void FreeMemoryList()
 {
     void* pCurrent = DAT_011f6034;
@@ -167,6 +169,7 @@ extern char const* const g_011f5f74_arg0;
 extern char const* const DAT_0109f0a0;
 
 // @fnv 0x00a8a280
+// pdb: NiMainSDM::Shutdown | NiMainSDM.obj | fnv360_0822_retail, strset, low
 void __cdecl FUN_00a8a280()
 {
     if (DAT_011f5b80)
@@ -456,6 +459,7 @@ extern const char DAT_0109ef48;
 void __cdecl FUN_00a64900(const void*, void(__cdecl*)());
 // Runs one-time initialization guarded by DAT_011f5b80: calls setup routines, resets DAT_011f4294/DAT_011f4288, and registers many handlers via FUN_00a64900.
 // @fnv 0x00a89cc0
+// pdb: NiMainSDM::Init | NiMainSDM.obj | fnv360_0822_retail, strset, low
 void __cdecl InitializeGameSystems()
 {
     if (DAT_011f5b80 == 0)

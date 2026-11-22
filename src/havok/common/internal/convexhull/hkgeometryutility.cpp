@@ -61,6 +61,8 @@ struct S_00d5a6b0_Array
 
 // Subtracts val from the w component of every element in the array.
 // @fnv 0x00d5a6b0
+// pdb: hkGeometryUtility::expandPlanes | hkGeometryUtility.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: planeEquations, byDistance
 void SubtractFromW(S_00d5a6b0_Array* pArray, float val)
 {
     for (int i = 0; i < pArray->m_iElementCount; ++i)
@@ -153,6 +155,8 @@ extern unsigned long DAT_010f3170;
 void __cdecl FUN_00a57ba0(const void* shape, D5C110VertexArray& vertices);
 void __cdecl FUN_009ec800(const D5C110StridedVertices& strided, D5C110Geometry& out, int flag);
 
+// pdb: hkGeometryUtility::createGeometryFromPlaneEquations | hkGeometryUtility.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: planeEquationsIn, geometryOut
 void __cdecl BuildGeometryFromShape(const void* shape, D5C110Geometry& aGeometry)
 {
     D5C110VertexArray vertices;
@@ -186,6 +190,8 @@ struct D5C110VertexArray;
 void __cdecl ProcessArg(const void* shape, D5C110VertexArray& vertices);
 
 // @fnv 0x00d5a6a0
+// pdb: NiPSysResetOnLoopCtlr::LinkObject | NiPSysResetOnLoopCtlr.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kStream
 void __cdecl FUN_00d5a6a0(const void* shape, D5C110VertexArray& vertices)
 {
     ProcessArg(shape, vertices);
@@ -200,6 +206,7 @@ struct S00d5ad60_cls
 
 // Returns whether the absolute difference between m_f00 and *other is less than threshold.
 // @fnv 0x00d5ad60
+// pdb: approxEquals | hkGeometryUtility.obj | tesv_win, hash, low
 static __declspec(noinline) unsigned char FUN_00d5ad60(S00d5ad60_cls* self, float* other, float threshold)
 {
     float d = *other - self->m_f00;
@@ -228,6 +235,7 @@ extern float DAT_01011d78;
 // @f3 0x009e9300 (community match, verified in this file)
 #include <math.h>
 
+// pdb: isMultOfXYorZ | hkGeometryUtility.obj | tesv_win, call_gap, low
 static __declspec(noinline) int FUN_00d5ad90(const float* pVec, float fTol)
 {
     __m128 v;
@@ -291,6 +299,7 @@ struct HeapD5C0F3
     void FUN_008f6f90(void* p);
 };
 void FUN_009eab50(S00d5c060_Result* out, char* data, int count, int flags, float scale);
+// pdb: hkGeometryUtility::createMinBoundingSphere | hkGeometryUtility.obj | tesv_win, call_gap_sim, low
 S00d5c060_Result FUN_00d5c060(const S00d5c060_Src* src, float scale)
 {
     S00d5c060_Result result;
@@ -927,6 +936,7 @@ static __declspec(noinline) void FUN_009e9c60(const Vec* axes, Vec* direction, f
 
 }
 
+// pdb: lineMinimize | hkGeometryUtility.obj | tesv_win, objrun_sim, low
 static __declspec(noinline) float FUN_00d5b640(const float* apVertices, int numVertices, int aiStride,
                                                const ObbAxis* axes, float afStep, ObbAxis* direction, int maxIter)
 {
@@ -1616,6 +1626,7 @@ static __declspec(noinline) float LineSearch(const float* data, int count, int s
 }
 }
 
+// pdb: doSteepestDescent | hkGeometryUtility.obj | tesv_win, objrun_prop, low
 static float FUN_00d5b990(const float* data, int count, int stride, const Axis* apInitialAxes, Axis* apResultAxes,
                           int aiMaxIterations)
 {

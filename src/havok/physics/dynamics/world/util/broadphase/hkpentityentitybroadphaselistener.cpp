@@ -273,6 +273,8 @@ struct D10800InputReal
 
 void __cdecl hkpWorldAgentUtil_addAgent(D10800Collidable* collA, D10800Collidable* collB, D10800InputReal* input);
 
+// pdb: hkpEntityEntityBroadPhaseListener::addCollisionPair | hkpEntityEntityBroadPhaseListener.obj | fnv360_0822_retail, vtable, high
+// pdb params: pair
 void D10800Listener::DispatchCollisionPair(D10800HandlePair& pair)
 {
     D10800Collidable* pCollA = pair.m_kPointA->getOwner();
@@ -322,6 +324,8 @@ struct D10860Listener
 };
 
 // @fnv 0x00d10860
+// pdb: hkpEntityEntityBroadPhaseListener::removeCollisionPair | hkpEntityEntityBroadPhaseListener.obj | fnv360_0822_retail, vtable, high
+// pdb params: pair
 void D10860Listener::ProcessHandlePair(D10860HandlePair& pair)
 {
     D10860Collidable* collA = pair.m_kPointA->getOwner();

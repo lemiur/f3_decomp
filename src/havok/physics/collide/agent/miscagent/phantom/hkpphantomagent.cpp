@@ -144,6 +144,8 @@ struct hkpPhantomAgent : S_00d42790_Agent // src: F3_EXE vtable 0x00e7f3a0 (old:
 
 // Stores the root bodies and shape types of two collision bodies in a new agent.
 // @fnv 0x00d42790
+// pdb: hkpPhantomAgent::hkpPhantomAgent | hkpPhantomAgent.obj | fnv360_0822_retail, uvref, high
+// pdb params: bodyA, bodyB, contactMgr
 hkpPhantomAgent::hkpPhantomAgent(const S_00d42790_CdBody& bodyA, const S_00d42790_CdBody& bodyB, void* mgr)
     : S_00d42790_Agent(mgr)
 {
@@ -161,6 +163,8 @@ struct Dispatch
 
 // Forwards apFirst and apSecond to apDispatch->V04 and returns its result.
 // @fnv 0x00d42710
+// pdb: hkpPhantomAgent::getPenetrations | hkpPhantomAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 int __stdcall DispatchToV04(void* apFirst, void* apSecond, void* apThird, Dispatch* apDispatch)
 {
     return apDispatch->V04(apFirst, apSecond);
@@ -173,6 +177,8 @@ struct FUN_00d42730_obj
 };
 
 // @fnv 0x00d42730
+// pdb: hkpPhantomAgent::staticGetPenetrations | hkpPhantomAgent.obj | fnv360_0822_retail, objrun, high
+// pdb params: bodyA, bodyB, input, collector
 int __cdecl CallVirtualMethod(int a1, int a2, int aiUnused, FUN_00d42730_obj* apObj)
 {
     return apObj->v1(a1, a2);

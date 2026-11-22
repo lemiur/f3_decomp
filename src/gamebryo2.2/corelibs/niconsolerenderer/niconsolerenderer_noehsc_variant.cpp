@@ -15260,6 +15260,8 @@ struct ShaderRenderer
 };
 
 // @fnv 0x00e6bdc0
+// pdb: NiXenonRenderer::SetDefaultProgramCache | NiXenonRenderer.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkMaterial, bAutoWriteToDisk, bWriteDebugFile, bLoad, bNoNewProgramCreation, pcWorkingDir
 void ShaderRenderer::FUN_00e6bdc0(ShaderLibrary* lib, int a2, int a3, int a4, int a5, int target)
 {
     const char* profile = FUN_00ee6e2e(m_pDirectInputDevice);

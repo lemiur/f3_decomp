@@ -84,6 +84,8 @@ struct SaveBuffer
 };
 // Clears the matching entry pointer in entries, zeroes the value's unk0c, and updates flags.
 // @fnv 0x00d07130
+// pdb: hkpSimulationIsland::removeAction | hkpSimulationIsland.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: act
 void SaveBuffer::RemoveEntry(FUN_00d07130Arg* apEntry)
 {
     int length = count;
@@ -118,6 +120,8 @@ struct FUN_00d07180_s
 };
 // Merges another instance into this one: takes the larger unk08, adds unk0c and unk10, adds unk14 and returns the other's unk14.
 // @fnv 0x00d07180
+// pdb: hkpSimulationIsland::mergeConstraintInfo | hkpSimulationIsland.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: other
 int FUN_00d07180_s::MergeFrom(FUN_00d07180_s* other)
 {
     int incoming = other->unk08;
@@ -290,6 +294,8 @@ struct S_00d071b0_ItemB
     int unkB8;
 };
 
+// pdb: hkpSimulationIsland::internalRemoveEntity | hkpSimulationIsland.obj | fnv360_0822_retail, call_seq, high
+// pdb params: entity
 void S_00d071b0::RemoveItem(S_00d071b0_Item* pItem)
 {
     S_00d071b0_Item** arr = *(S_00d071b0_Item** volatile*)&m_kUnsortedGeometryList.m_ppItems;

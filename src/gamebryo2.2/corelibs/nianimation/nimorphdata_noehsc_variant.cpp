@@ -847,6 +847,8 @@ struct MorphData
     void LoadBinaryBase(NiStreamL&);
 };
 // @fnv 0x00a41a40
+// pdb: NiMorphData::LoadBinary | NiMorphData.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: stream
 void MorphData::FUN_00a41a40(NiStreamL& kStream)
 {
     LoadBinaryBase(kStream);

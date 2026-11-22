@@ -19,6 +19,7 @@ class FUN_00c855f0_cls
 
 // If m_14 exceeds 1, calls FUN_00c852c0 on m_10 with 0 and m_14 - 1.
 // @fnv 0x00c855f0
+// pdb: hkpAllRayHitCollector::sortHits | hkpAllRayHitCollector.obj | fnv360_0822_retail, call_dedup, low
 void FUN_00c855f0_cls::FUN_00c855f0()
 {
     union

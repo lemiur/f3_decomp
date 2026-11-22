@@ -125,6 +125,8 @@ extern Heap569* (__stdcall* DAT_00d9b080)(unsigned long);
 extern unsigned int DAT_01063010,DAT_0106300c;
 extern char DAT_00e8097c;
 int __cdecl FUN_009233f0(const char*);
+// pdb: hkVersionReporter::sendVersionInformation | hkVersionReporter.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: connection
 int __cdecl WriteCompilerInfo(const char* name){
     Buffer569 buffer;
     buffer.data=0;buffer.size=0;buffer.capacity=0x80000000;

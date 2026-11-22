@@ -20,6 +20,7 @@ struct Owner434 {
     void FUN_00a29450(int key, int value);
     void FUN_00a29490(Sparse434* source);
 };
+// pdb: hkDataObject::~hkDataObject | hkDataObject.obj | fnv360_0721_beta, call_gap, low
 void Owner434::FUN_00a29490(Sparse434* source) {
     for (int index = source->SkipEmpty(0); index <= source->last; index = source->SkipEmpty(index + 1))
         FUN_00a29450(source->data[index], source->data[source->last + index + 1]);
@@ -60,6 +61,7 @@ struct MaskArg
     unsigned int* ptr;
 };
 
+// pdb: setTerminalsFromVertex | hkpBoxBoxCollisionDetection.obj | fnv360_0822_retail, objrun_open, low
 static __declspec(noinline) void FUN_00a3b660(int key, MaskArg mask, int flag)
 {
     unsigned int* __restrict p = mask.ptr;
@@ -97,6 +99,7 @@ void FUN_00a3b660_caller(int key, MaskArg mask, int flag)
 
 // @f3 0x00a3ba00 (community match, verified in this file)
 namespace f3m_00a3ba00 {
+// pdb: getAxisMapFromFeatureBitSet | hkpBoxBoxCollisionDetection.obj | fnv360_0822_retail, objrun, medium
 static __declspec(noinline) unsigned int FUN_00a3ba00(const float* apValues, int* piIndex)
 {
     int idx;
@@ -129,6 +132,7 @@ inline void addCell9(int& mask, int cell) {
     int bit = 1 << (2*cell);
     if (!(mask & (2*bit))) mask += bit;
 }
+// pdb: setTerminalsFromEdge | hkpBoxBoxCollisionDetection.obj | fnv360_0822_retail, objrun_open, low
 static __declspec(noinline) void FUN_00a3b6f0(int& mask, int packedValue) {
     int axis = packedValue & 15;
     unsigned int bits = packedValue >> 4;
@@ -243,6 +247,8 @@ struct TableA2 {
     int freeHead;
     int FUN_00a2a1d0(int key, int index);
 };
+// pdb: hkDataWorldDict::ObjectTracker::untrackStructArray | hkDataObjectDict.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: hkSerializeMultiMap<class hkDataClassDict *,class hkDataArrayImpl *,class hkPointerMap<class hkDataClassDict *,int,struct hkContainerHeapAllocator> >::removeByIndex)
+// pdb params: a
 int TableA2::FUN_00a2a1d0(int key, int index)
 {
     int victim = entries[index].next;
@@ -364,6 +370,7 @@ struct Entry
     int unk0C;
 };
 
+// pdb: hkAgent1nMachine_FindAgent | hkpAgent1nMachine.obj | tesv_win, objrun_open, low
 Entry* __cdecl FUN_00a2a4e0(Block*** list, int key1, int key2, void** out)
 {
     Block** ppBlock = *list;
@@ -494,6 +501,8 @@ struct QCloner {
     QNode* FUN_00a29dd0(QNode* src, QVisitor* visitor, QMap* map, QMap* out) throw();
 };
 
+// pdb: hkDataObjectUtil::toResourceWithRegistry | hkDataObjectUtil.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: src, classReg
 QNode* QCloner::FUN_00a29dd0(QNode* src, QVisitor* visitor, QMap* map, QMap* out) throw()
 {
     FUN_00a29d30 pending;
@@ -930,6 +939,8 @@ static __declspec(noinline) int FUN_00a2ec80(const GeomVec& point,const GeomVec*
     return -1;
 }
 
+// pdb: hkpGsk::processEdgeTriangle | hkpGsk.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: findClosestTriangle)
+// pdb params: vertexA, vertexB, dimA, dimB, comingFromEdgeEdge, supportType
 static __declspec(noinline) int FUN_00a2f2b0(const GeomVec& point,const GeomVec* vertices,float scale)
 {
     GeomVec edge0; edge0.SetSub(vertices[2],vertices[1]);
@@ -1801,6 +1812,7 @@ static __forceinline hkVector4 triangleSideTests(const hkVector4* point, hkVecto
 
 // Barycentric side tests of a point against a triangle; optionally flips the orientation and swaps two vertices
 // when the simplex point lies behind the face. FPU build of FNV Simplex::FUN_00da8500 (hkpgsk.cpp).
+// pdb: findClosestTriangle | hkpGsk.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: hkpGsk::checkTriangleBoundaries)
 int Simplex::FUN_00a2ee70(const hkVector4* point, hkVector4* vertices, int orient)
 {
     hkVector4 normal;
@@ -1935,6 +1947,7 @@ struct Lock00a25be0 {
     void FUN_00a25be0();
 };
 
+// pdb: hkpBroadPhase::unlockImplementation | hkpBroadPhase.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: hkpBroadPhase::lockImplementation)
 void Lock00a25be0::FUN_00a25be0()
 {
     Cs00a25be0* cs = unk10;
@@ -1989,6 +2002,8 @@ struct Data_a216a0 {
     int unk7c;
 };
 
+// pdb: hkSemaphore::operator new | hkJobQueue.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: nbytes
 void __thiscall Owner_a216a0::FUN_00a214b0(int index, Data_a216a0* data) {
     if (data->unk38 + data->unk24 != 0) {
         if (data->unk0c != 0) {
@@ -2039,6 +2054,7 @@ struct Owner
 };
 }
 
+// pdb: spawnSplitSimulationIslandJob | hkpDynamicsJobQueueUtils.obj | fnv360_0822_retail, objopen_prop, medium
 static __declspec(noinline) void FUN_00a25680(f3m_00a25680::Owner* owner, const f3m_00a25680::Source* src, f3m_00a25680::Target* target)
 {
     if (owner->m_bEnabled)
@@ -2101,6 +2117,7 @@ struct Obj {
     Sub* sub;
     void FUN_00a25bd0();
 };
+// pdb: hkpBroadPhase::lockImplementation | hkpBroadPhase.obj | fnv360_0822_retail, call_gap_sim, low
 void Obj::FUN_00a25bd0()
 {
     sub->FUN_00908a00();
@@ -2115,6 +2132,8 @@ struct Obj {
     void FUN_00a292c0(int arg);
     void FUN_00a7df80(int arg);
 };
+// pdb: `anonymous namespace'::ClassVersion::operator== | hkVersionPatchManager.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: v
 void Obj::FUN_00a292c0(int arg)
 {
     int saved = unk1c;
@@ -2184,6 +2203,7 @@ struct Info {
     int unk58, unk5c;
     float x, y, z, w;
 };
+// pdb: hkAgent1nMachine_flipInput | hkpAgent1nMachine.obj | tesv_win, call_gap, low
 static __declspec(noinline) void FUN_00a2b7c0(const Info* in, Info* out)
 {
     out->a = in->b;
@@ -2213,6 +2233,7 @@ struct StandIn_a28370 {
     StandIn_a28370* FUN_00a28370();
 };
 
+// pdb: hkpDefaultToiResourceMgr::hkpDefaultToiResourceMgr | hkpDefaultToiResourceMgr.obj | fnv360_0822_retail, uvref, high
 StandIn_a28370* StandIn_a28370::FUN_00a28370() {
     unk06 = 1;
     unk00 = 0xe85764;
@@ -2234,6 +2255,7 @@ struct D00a28450 {
     void FUN_00a28300();
     D00a28450* FUN_00a28450(unsigned int flags);
 };
+// pdb: hkpDefaultToiResourceMgr::`scalar deleting destructor' | hkpDefaultToiResourceMgr.obj | fnv360_0721_beta, vtable, high
 D00a28450* D00a28450::FUN_00a28450(unsigned int flags)
 {
     FUN_00a28300();
@@ -2263,6 +2285,7 @@ struct A2227Storage {
     int capacity;
     void FUN_00a22270();
 };
+// pdb: hkJobQueueHwSetup::hkJobQueueHwSetup | hkJobQueue.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: hkQueue<struct hkJobQueue::JobQueueEntry>::~hkQueue<struct hkJobQueue::JobQueueEntry>)
 void A2227Storage::FUN_00a22270()
 {
     if (capacity)
@@ -2284,6 +2307,7 @@ struct D00a29170 {
     void FUN_00a28d40();
     D00a29170* FUN_00a29170(unsigned int flags);
 };
+// pdb: hkBsdSocket::`scalar deleting destructor' | hkBsdSocket.obj | tesv_win, vtable_prefix, medium
 D00a29170* D00a29170::FUN_00a29170(unsigned int flags)
 {
     FUN_00a28d40();
@@ -2309,6 +2333,8 @@ struct D00a2a280 {
     void FUN_00a2a060();
     D00a2a280* FUN_00a2a280(unsigned int flags);
 };
+// pdb: hkVersionPatchManager::applyPatchesDebug | hkVersionPatchManager.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: StructArrayImplementation::`vector deleting destructor')
+// pdb params: worldToUpdate
 D00a2a280* D00a2a280::FUN_00a2a280(unsigned int flags)
 {
     FUN_00a2a060();
@@ -2374,6 +2400,7 @@ struct LockedData {
     void FUN_00908a00();
     Data* FUN_00a214a0(Context* context);
 };
+// pdb: hkJobQueue::lockQueue | hkJobQueue.obj | tesv_win, objopen_prop, low
 Data* LockedData::FUN_00a214a0(Context*)
 {
     FUN_00908a00();
@@ -2444,6 +2471,8 @@ struct A2936Owner {
     A2936Sub unk2c;
     void FUN_00a29360(int value);
 };
+// pdb: hkTypeInfoRegistry::getTypeInfo | hkBuiltinTypeRegistry.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: typeName
 void A2936Owner::FUN_00a29360(int value)
 {
     unk2c.FUN_009b10f0(value, value);
@@ -2532,6 +2561,7 @@ struct A25ceObj {
     A25ceMember* unk10;
     void FUN_00a25ce0();
 };
+// pdb: hkpBroadPhase::~hkpBroadPhase | hkpBroadPhase.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void A25ceObj::FUN_00a25ce0()
 {
     vtable = DAT_00e8568c;
@@ -2560,6 +2590,7 @@ struct A2a06Obj {
     void FUN_00a7def0();
     void FUN_00a2a060();
 };
+// pdb: hkContainerResourceMap::`scalar deleting destructor' | hkResourceHandle.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void A2a06Obj::FUN_00a2a060()
 {
     vtable = DAT_00e85ac4;
@@ -2589,6 +2620,7 @@ struct A25baObj {
     int unk10;
     A25baObj* FUN_00a25ba0();
 };
+// pdb: hkpBroadPhase::hkpBroadPhase | hkpBroadPhase.obj | fnv360_0822_retail, caller_sim, high
 A25baObj* A25baObj::FUN_00a25ba0()
 {
     referenceCount = 1;
@@ -2616,6 +2648,7 @@ struct A2972Obj {
     A2972Member unk0c;
     void FUN_00a29720();
 };
+// pdb: hkSerializeMultiMap<unsigned __int64,int>::~hkSerializeMultiMap<unsigned __int64,int> | hkVersionPatchManager.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void A2972Obj::FUN_00a29720()
 {
     unk0c.FUN_00922cf0();
@@ -2660,6 +2693,7 @@ struct A25e5Obj : A25e5Base {
     A25e5Obj() throw() { unk08 = 0; unk0c = 0; }
     virtual ~A25e5Obj();
 };
+// pdb: hkTraceStreamcreate | hkTraceStream.obj | tesv_win, uvref, medium
 A25e5Obj* FUN_00a25e50()
 {
     return new A25e5Obj();
@@ -2743,6 +2777,7 @@ struct FUN_00a261d0 {
     volatile Holder* holder;
     void Dispatch(int,int,int,int,int);
 };
+// pdb: hkpSimpleContactConstraintData::collisionResponseBeginCallback | hkpSimpleContactConstraintData.obj | tesv_win, objrun_prop, low
 void FUN_00a261d0::Dispatch(int a,int b,int c,int d,int e) {
     volatile Holder* current = holder;
     Node* node = current->node;
@@ -2810,6 +2845,7 @@ struct FUN_00a25e90_obj {
     FUN_00a25e90_obj* FUN_00a25e90(unsigned int flags);
 };
 
+// pdb: hkpMultiRayShape::`scalar deleting destructor' | hkpMultiRayShapeClass.obj | fnv360_0822_retail, vtable, high
 FUN_00a25e90_obj* FUN_00a25e90_obj::FUN_00a25e90(unsigned int flags) {
     AllocFn25e90 allocator = FUN_00d9b080;
 
@@ -3082,6 +3118,7 @@ struct FUN_00a28320_This {
     void FUN_00a28320(FUN_00a28320_Obj* obj);
 };
 
+// pdb: hkpDefaultToiResourceMgr::getClassType | hkpDefaultToiResourceMgr.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: hkpDefaultToiResourceMgr::calcContentStatistics)
 void FUN_00a28320_This::FUN_00a28320(FUN_00a28320_Obj* obj) {
     obj->vf4(DAT_00e85744, 2, this);
     obj->vf18();
@@ -3155,6 +3192,7 @@ class FUN_00a28830 : public hkBaseObject
     f3m_00a28830::Node* m_pNode;
 };
 
+// pdb: hkDisplayGeometry::~hkDisplayGeometry | hkDisplayGeometry.obj | fnv360_0822_retail, call_seq, medium
 FUN_00a28830::~FUN_00a28830()
 {
     if (m_pNode)
@@ -4087,6 +4125,7 @@ struct f3m_00a29b90_Obj
     void FUN_00a29b90(f3m_00a29b90::Entry* entries, int count, f3m_00a29b90::Map* map);
 };
 
+// pdb: findPatchIndexInDependencies | hkVersionPatchManager.obj | fnv360_0822_retail, caller_sim, low
 void f3m_00a29b90_Obj::FUN_00a29b90(f3m_00a29b90::Entry* entries, int count, f3m_00a29b90::Map* map)
 {
     if (count > 0)
@@ -4762,6 +4801,8 @@ struct Sa21d70_JobQueue {
     int FUN_00a21d70(int queueIndexOfNewJob, int addAtBack, int threadType, Sa21d70_Entry* jobInOut, int waitStatus);
 };
 
+// pdb: hkJobQueue::finishAddAndGetNextJob | hkJobQueue.obj | fnv360_0822_debug, ustr_rel, medium
+// pdb params: oldJobType, priority, jobInOut, waitStatus
 int Sa21d70_JobQueue::FUN_00a21d70(int queueIndexOfNewJob, int addAtBack, int threadType, Sa21d70_Entry* jobInOut, int waitStatus)
 {
     {
@@ -4990,6 +5031,7 @@ struct ZSelect {
 inline ZVec operator-(const ZVec& a,const ZVec& b) { ZVec r; r.x=a.x-b.x; r.y=a.y-b.y; r.z=a.z-b.z; return r; }
 inline float LengthSqr(const ZVec& a) { float x=a.x; float y=a.y; float z=a.z; return x*x+y*y+z*z; }
 inline ZVec Cross(const ZVec& a,const ZVec& b) { ZVec r; r.x=a.y*b.z-a.z*b.y; r.y=a.z*b.x-a.x*b.z; r.z=a.x*b.y-a.y*b.x; return r; }
+// pdb: hkGskManifold_findRedundant5thPoint | hkpGskManifoldUtil.obj | fnv360_0822_debug, objrun, medium
 int ZSelect::FUN_00a398e0() {
  float maximum=0.0f;
  float minimum=3.40282e+38f;
@@ -5071,6 +5113,7 @@ int ZSelect::FUN_00a398e0() {
 namespace f3m_00a2d4d0 {
 namespace Copya2d4d0 {
 struct Object {float value00,value04,value08,value0c,value10,value14,value18,value1c,value20;int value24;float value28;int value2c,value30;Object* FUN_00a2d4d0(const Object*);};
+// pdb: hkpMoppAabbCastVirtualMachineQueryInt::operator= | hkpMoppAabbCastVirtualMachine.obj | tesv_win, call_gap_sim, low
 Object* Object::FUN_00a2d4d0(const Object* source){value00=source->value00;value04=source->value04;value08=source->value08;value0c=source->value0c;value10=source->value10;value14=source->value14;value18=source->value18;value1c=source->value1c;value20=source->value20;value24=source->value24;value28=source->value28;value2c=source->value2c;value30=source->value30;return this;}
 }
 }   // namespace f3m_00a2d4d0
@@ -5120,6 +5163,8 @@ struct Solver_a34a10 {
     void hkpGsk_getClosestFeature(const Shape_a34a10* a, const Shape_a34a10* b, const Transform_a34a10& aTb, Vector4_a34a10& normal);
 };
 
+// pdb: hkSweptTransformUtil::lerp2 | hkSweptTransformUtil.obj | fnv360_0822_retail, call_dedup, low, conflict (skyrim: hkpGskBaseAgent::calcSeparatingNormal)
+// pdb params: sweptTrans, t, transformOut
 void __cdecl FUN_00a34a10(const CdBody_a34a10& bodyA, const CdBody_a34a10& bodyB, const Input_a34a10& input,
                           Solver_a34a10* solver, Vector4_a34a10& separatingNormal)
 {
@@ -5204,6 +5249,8 @@ struct Array_a2a560 {
 void __cdecl FUN_00901e90(Array_a2a560* array, int capacity, int elementSize);
 void __cdecl FUN_00901f10(Array_a2a560* array, int elementSize);
 
+// pdb: hkAgent1nMachine_Create | hkpAgent1nMachine.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: agentTrack
 void __cdecl FUN_00a2a560(Array_a2a560* array)
 {
     array->size = 0;
@@ -5360,6 +5407,7 @@ static __forceinline LockObject25C* CreateLock25C(int spinCount)
         }
         return lock;
 }
+// pdb: hkpBroadPhase::~hkpBroadPhase | hkpBroadPhase.obj | fnv360_0721_beta, objrun, medium
 void Target25C::FUN_00a25c00(int spinCount)
 {
     if (!unk10) {
@@ -5640,6 +5688,8 @@ static __declspec(noinline) char* FUN_00a28480(char* p, int c)
 
 }
 
+// pdb: hkpProcessFlyingColors | hkpSolverCheck.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: flyingColors
 bool FUN_00a284b0(int mode)
 {
     using namespace f3m_00a284b0;
@@ -5704,6 +5754,7 @@ extern const float* clm_f39c9da5b9f74e4f8b95_input;
 extern float clm_f39c9da5b9f74e4f8b95_bits;
 extern int clm_f39c9da5b9f74e4f8b95_output;
 namespace f3m_00a3bb90 {
+// pdb: getMaxPlaneMask3 | hkpBoxBoxCollisionDetection.obj | fnv360_0822_retail, objrun, medium
 static __declspec(noinline) unsigned short FUN_00a3bb90(const float* p, float bits) {
     unsigned int a = p[0] < 0.0f ? 8 : 0;
     unsigned int b = p[1] < 0.0f ? 4 : 0;
@@ -5943,6 +5994,7 @@ static __forceinline int NegMask(const float* v)
           | ((v[2] < 0.0f) ? 2 : 0) | ((v[3] < 0.0f) ? 1 : 0)) & 0xe;
 }
 
+// pdb: setEdgeFeatureBitSetFromAxisMap | hkpBoxBoxCollisionDetection.obj | fnv360_0822_debug, objrun, medium
 static __declspec(noinline) void FUN_00a3ba50(const V4* a, const V4* b,
                                               int i, int j, unsigned char* out)
 {
@@ -7386,6 +7438,8 @@ struct MoppCastMachine : MoppPrimitiveQueryContext {
         m_fFirstRayCastValue=m_pPointCollector->getEarlyOutDistance();
     }
 };
+// pdb: hkpMoppAabbCastVirtualMachine::queryRayOnTree | hkpMoppAabbCastVirtualMachine.obj | fnv360_0822_debug, objrun_prop, low
+// pdb params: query, PC, fQuery, chunkOffset
 void MoppCastMachine::FUN_00a2d530(const VectorPropertyRecord* query, const unsigned char* PC,
                                    TwoPointVectorBundles fQuery[1], int chunkOffset)
 {
@@ -8278,6 +8332,8 @@ struct BoxBoxCollisionDetection
     hkBool FUN_00a3cc40(BoxBoxEdgeContact* contact);
 };
 
+// pdb: hkpBoxBoxCollisionDetection::isValidEdgeEdge | hkpBoxBoxCollisionDetection.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fpp
 hkBool BoxBoxCollisionDetection::FUN_00a3cc40(BoxBoxEdgeContact* contact)
 {
     const hkVector4& signA = boxVertexSign(((unsigned char)contact->m_featureA >> 1) & 0x70);
@@ -8879,6 +8935,7 @@ struct A25d10 {
     A25d10* FUN_00a25d10(unsigned int flags);
 };
 
+// pdb: hkpBroadPhase::`scalar deleting destructor' | hkpBroadPhase.obj | fnv360_0822_retail, vtable_prefix, high
 A25d10* A25d10::FUN_00a25d10(unsigned int flags)
 {
     FUN_00a25ce0();
@@ -8893,6 +8950,8 @@ A25d10* A25d10::FUN_00a25d10(unsigned int flags)
 
 // @f3 0x00a25d40 (community match, verified in this file)
 namespace f3m_00a25d40 {
+// pdb: hkSingleton<hkTraceStream>::operator= | hkTraceStream.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkTraceStream::dontPrintf)
+// pdb params: other
 void FUN_00a25d40()
 {
 }
@@ -10194,6 +10253,7 @@ __declspec(align(16)) struct hkVec4 {
     }
 };
 
+// pdb: hkGskRecalcContact_pointTriangle | hkpGsk.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: hkGskCalcSupportDistSquared)
 static float __cdecl FUN_00a2e9c0(const hkVec4& support, const hkVec4& newPoint, const hkVec4& oldPoint)
 {
     hkVec4 diff0;
@@ -10994,6 +11054,8 @@ struct MoppLinearCast : MoppCastMachine {
     void FUN_00a2e7f0(const MoppCastQueryData& input, CollectorRecord* collector, CollectorRecord* initialCollector);
 };
 
+// pdb: hkpMoppAabbCastVirtualMachine::aabbCast | hkpMoppAabbCastVirtualMachine.obj | fnv360_0822_debug, objrun_prop, low
+// pdb params: input, castCollector, startCollector
 void MoppLinearCast::FUN_00a2e7f0(const MoppCastQueryData& input, CollectorRecord* collector,
                                   CollectorRecord* initialCollector)
 {
@@ -11038,6 +11100,7 @@ void MoppLinearCast::FUN_00a2e7f0(const MoppCastQueryData& input, CollectorRecor
 
 // @f3 0x00a2e9a0 (community match, verified in this file)
 namespace f3m_00a2e9a0 {
+// pdb: hkpGsk::print | hkpGsk.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00a2e9a0()
 {
 }
@@ -11045,6 +11108,7 @@ void __cdecl FUN_00a2e9a0()
 
 // @f3 0x00a2ea20 (community match, verified in this file)
 namespace f3m_00a2ea20 {
+// pdb: hkpGsk::codeEnd | hkpGsk.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00a2ea20()
 {
 }
@@ -11363,6 +11427,7 @@ struct hkpJobE : public hkpDynamicsJob
     hkpRefCountedCounter* m_counter;
 };
 
+// pdb: spawnBuildJacobiansJobs | hkpDynamicsJobQueueUtils.obj | fnv360_0822_retail, objopen_prop, low
 static __declspec(noinline) void FUN_00a25450(hkpBuildJacobianTaskHeader* taskHeader, const hkpDynamicsJob& job, JobQueueEntryInput& newJobCreated)
 {
     new (&newJobCreated.m_job) hkpJob4(job, taskHeader->m_allEntities, *taskHeader);
@@ -11758,6 +11823,7 @@ int hkpGsk::checkTriangleBoundaries( const hkVector4& a, hkVector4* b, SupportTy
 	return mask;
 }
 
+// pdb: hkpGsk::processEdgeTriangle | hkpGsk.obj | tesv_win, call_gap, low
 hkpGsk::NextCase hkpGsk::FUN_00a30440( hkVector4* __restrict vertexA, hkVector4* __restrict vertexB, hkPadSpu<int>& dimA, hkPadSpu<int>& dimB, hkBool comingFromEdgeEdge, SupportTypes supportType )
 {
 	if ( comingFromEdgeEdge )

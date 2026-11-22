@@ -176,6 +176,8 @@ struct MapMenu {
     void FUN_0065e6e0();
     bool FUN_0065fab0(int event,void* extra);
 };
+// pdb: MapMenu::DoGamepad | MapMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiButton, afValue
 bool MapMenu::FUN_0065fab0(int event,void* extra) {
     if (!FUN_0061c490(0x3ff) || !Interface_GetPipboy()->enabled) return false;
     bool handled=false;
@@ -312,6 +314,8 @@ struct Owner {
     NiPointer<Ref> target;
     void FUN_00645c40(Ref*);
 };
+// pdb: VATSMenu::IsWellFormedMenu | VATSMenu.obj | fnv360_0822_debug, call_gap_sim, low
+// pdb params: ai
 void Owner::FUN_00645c40(Ref* value) {target=value;}
 }
 }   // namespace f3m_00645c40
@@ -381,6 +385,7 @@ struct Menu {
 // helper cannot throw (its body is not part of this pack).
 float __cdecl FUN_0047ca30(float a, float b) throw();
 
+// pdb: HackingMenu::DoIntro | HackingMenu.obj | fnv360_0822_retail, call_seq, medium
 void Menu::FUN_00643540()
 {
     int i;

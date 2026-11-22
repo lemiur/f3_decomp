@@ -52,6 +52,8 @@ struct Owner {
     void FUN_00950780(Arr* a);
 };
 
+// pdb: bhkCylinderShape::GetViewerStrings | bhkCylinderShape.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apStrings
 void Owner::FUN_00950780(Arr* a)
 {
     unsigned val;
@@ -381,6 +383,7 @@ struct hkQuaternion
     void FUN_0095b800(const hkVector4& from, const hkVector4& to);
 };
 
+// pdb: hkQuaternion::setShortestRotation | bhkCartTether.obj | tesv_win, call_dedup, low
 void hkQuaternion::FUN_0095b800(const hkVector4& from, const hkVector4& to)
 {
     const hkReal fx = from(0), tz = to(2);
@@ -793,6 +796,8 @@ struct S0095e7a0_Skeleton
 
 void* __cdecl FUN_00923640(const char* name);
 
+// pdb: hkaRagdollUtils::constructSkeletonForRagdoll | hkaRagdollUtils.obj | fnv360_0822_retail, ustr_rel, medium
+// pdb params: rigidBodies, constraints
 S0095e7a0_Skeleton* __cdecl FUN_0095e7a0(S0095e7a0_BodyList* bodies, S0095e7a0_ConstraintList* constraints)
 {
     S0095e7a0_Skeleton* S = new S0095e7a0_Skeleton;

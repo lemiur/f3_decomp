@@ -19,6 +19,7 @@ struct CtlrStandin
     CtlrStandin* FUN_00c31260();
 };
 // @fnv 0x00c31260
+// pdb: NiPSysModifierCtlr::NiPSysModifierCtlr | NiPSysModifierCtlr.obj | fnv360_0822_retail, call_seq, medium, conflict (bridge: NiSingleInterpController::NiSingleInterpController)
 CtlrStandin* CtlrStandin::FUN_00c31260()
 {
     ((NiTimeController_Call*)this)->SetControllerActive();
@@ -222,6 +223,8 @@ class C32CB0Controller
 };
 
 // @fnv 0x00c32cb0
+// pdb: NiPSysModifierBoolCtlr::Update | NiPSysModifierBoolCtlr.obj | fnv360_0822_retail, objrun, medium
+// pdb params: UpdateData
 void C32CB0Controller::FUN_00c32cb0(const float& fTime)
 {
     if (GetManagerControlled())

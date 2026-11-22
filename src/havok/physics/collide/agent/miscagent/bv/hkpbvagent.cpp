@@ -27,6 +27,8 @@ struct FUN_00d452a0
 };
 // Calls v10(f, g, arg) on p1, and also on p2 when p2 is non-null.
 // @fnv 0x00d452a0
+// pdb: hkpBvAgent::warpTime | hkpBvAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: oldTime, newTime, input
 void FUN_00d452a0::Method(float afValue, float agValue, void* arg)
 {
     p1->v10(afValue, agValue, arg);
@@ -197,6 +199,8 @@ struct D45350Agent
 
 // Builds a child body from the shape's m_childA and m_childB and passes it to m_collectorA and, if present, m_collectorB.
 // @fnv 0x00d45350
+// pdb: hkpBvAgent::updateShapeCollectionFilter | hkpBvAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, constraintOwner
 void D45350Agent::ProcessShapeChildren(const D45350CdBody& body, void* apArg1, void* apArg2, void* apArg3)
 {
     const D45350Shape* shape = body.m_pCollisionShape;
@@ -223,6 +227,8 @@ void __cdecl FUN_00d45dd0(int a, int b, int c, Functor_d46010* f);
 
 // Builds a Functor_d46010 with the given value and a false flag, then passes it with b, a and c to FUN_00d45dd0.
 // @fnv 0x00d46010
+// pdb: hkpSymmetricAgentLinearCast<hkpMultiSphereAgent>::staticGetPenetrations | hkpMultiSphereAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_00d46010(int aiArg1, int aiArg2, int aiArg3, int aiValue)
 {
     Functor_d46010 f;
@@ -260,6 +266,8 @@ struct FUN_00d452f0_cls
 };
 
 // @fnv 0x00d452f0
+// pdb: hkpBvAgent::removePoint | hkpBvAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: idToRemove
 void FUN_00d452f0_cls::DispatchToVt(void* arg)
 {
     if (m_p2)
@@ -300,6 +308,8 @@ struct FUN_00d45330_cls
 };
 
 // @fnv 0x00d45330
+// pdb: hkpBvAgent::createZombie | hkpBvAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: idTobecomeZombie
 void FUN_00d45330_cls::CallSlotVt13(void* arg)
 {
     if (m_pFlagTarget != 0)
@@ -332,6 +342,8 @@ class FUN_00d453d0_cls
 // Initialises the object's vtable and fields, builds an argument struct from a1/a2/a3, and calls a function pointer selected by an index from a table.
 // @f3 0x009d3530 (community match, verified in this file)
 extern int DAT_00e7f5c4;
+// pdb: hkpBvAgent::hkpBvAgent | hkpBvAgent.obj | fnv360_0822_retail, uvref, high
+// pdb params: bodyA, bodyB, input, mgr
 FUN_00d453d0_cls* FUN_00d453d0_cls::Construct(FUN_00d452a0* a1, void* apArg2, void* apArg3, int aiValue)
 {
     m_06 = 1;
@@ -411,6 +423,8 @@ struct FUN_00d46050_cls
 
 // Builds a FUN_00d46050_cls from DAT_0104da48 and a4, then calls FUN_00d45af0 with a2, a1, a3 and a pointer to it.
 // @fnv 0x00d46050
+// pdb: hkpSymmetricAgentLinearCast<hkpBvAgent>::staticGetClosestPoints | hkpBvAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_00d46050(int aiArg1, int aiArg2, int aiArg3, int aiValue)
 {
     FUN_00d46050_cls local;
@@ -429,6 +443,8 @@ struct SearchObject
     int FUN_00d46180(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3);
 };
 // @fnv 0x00d46180
+// pdb: hkpSymmetricAgentLinearCast<hkpBvAgent>::updateShapeCollectionFilter | hkpBvAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, constraintOwner
 int SearchObject::FUN_00d46180(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3)
 {
     unsigned int callResult0 =
@@ -458,6 +474,8 @@ struct FUN_00d461a0_Owner
 
 // Builds an argument struct from DAT_010ce81c and a4, then forwards a2, a1, a3 and the struct to FUN_00d45c50.
 // @fnv 0x00d461a0
+// pdb: hkpSymmetricAgentLinearCast<hkpMultiSphereAgent>::getPenetrations | hkpMultiSphereAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void FUN_00d461a0_Owner::DispatchWithArgs(int aiArg1, int aiArg2, int aiArg3, int aiArg4)
 {
     FUN_00d461a0_Args l;
@@ -486,6 +504,8 @@ struct FUN_00d461e0_Cls
 
 // Builds a Rec from a4, DAT_0104da48 and DAT_010ce7fc, then calls GetPenetrations with a2, a1, a3 and the Rec.
 // @fnv 0x00d461e0
+// pdb: hkpSymmetricAgentLinearCast<hkpBvAgent>::getClosestPoints | hkpBvAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void FUN_00d461e0_Cls::FUN_00d461e0(int aiArg1, int aiArg2, int aiArg3, int aiValue)
 {
     Rec rec;
@@ -1088,6 +1108,8 @@ static __forceinline S_00d45970_Agent* CreateNativeContainedAgent(
     return create(bodyA, bodyB, input, manager);
 }
 
+// pdb: hkpBvAgent::getClosestPoints | hkpBvAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void S_00d45970_BvAgent::GetPenetrations(const S_00d45970_CdBody& bodyA, const S_00d45970_CdBody& bodyB,
                                          const S_00d45970_Input& input, S_00d45970_CollectorBase& result)
 {
@@ -1850,6 +1872,8 @@ struct F3ClosestCollector
 extern void* (__stdcall* DAT_00d9b080)(unsigned long);
 extern unsigned long DAT_0116913c;
 
+// pdb: hkpBvAgent::linearCast | hkpBvAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, pointDetails, startCollector
 void Agent228::CheckBvShape(BvA* a1, BvB* a2, BvC* a3, DWORD a4, DWORD a5)
 {
     volatile DWORD tick;

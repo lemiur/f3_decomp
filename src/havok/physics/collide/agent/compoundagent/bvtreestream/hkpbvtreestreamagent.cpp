@@ -31,6 +31,8 @@ void __thiscall FUN_00d2ddd0_class::FUN_00d2ddd0(int aiValue)
 
 extern "C" void __cdecl FUN_00d31110(void*, void*, void*, void*);
 // @fnv 0x00d2dd50
+// pdb: hkpBvTreeStreamAgent::getClosestPoints | hkpBvTreeStreamAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 extern "C" void __stdcall FUN_00d2dd50(void* apArg1, void* apArg2, void* apArg3, void* apArg4)
 {
     FUN_00d31110(apArg1, apArg2, apArg3, apArg4);
@@ -81,6 +83,7 @@ struct FUN_00d2ddf0_Class
 };
 // Calls hkAgent1nMachine_WarpTime with the subobject at offset 0x30 of this object and the three arguments.
 // @fnv 0x00d2ddf0
+// pdb: hkpBvTreeStreamAgent::warpTime | hkpBvTreeStreamAgent.obj | tesv_win, vtable, medium
 void __thiscall FUN_00d2ddf0_Class::FUN_00d2ddf0(float a, float b, void* c)
 {
     hkAgent1nMachine_WarpTime((char*)this + 0x30, a, b, c);
@@ -160,6 +163,8 @@ void __cdecl FUN_00d31110(int a, int b, int c, D2E9B0CollectorBase* collector);
 
 // Constructs a D2E9B0Collector from d and passes it with b, a, c to FUN_00d31110.
 // @fnv 0x00d2e9b0
+// pdb: hkpSymmetricAgentLinearCast<hkpBvTreeAgent>::staticGetClosestPoints | hkpBvTreeStreamAgent.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_00d2e9b0(int aiArg1, int aiArg2, int aiArg3, int aiData)
 {
     D2E9B0Collector collector(aiData);
@@ -182,6 +187,8 @@ struct Context
 };
 // Builds a collector with threshold DAT_0104da48 and object fourth, then calls FUN_00d43880 with second, first, third and the collector.
 // @fnv 0x00d2edd0
+// pdb: hkpSymmetricAgentLinearCast<hkpShapeCollectionAgent>::getClosestPoints | hkpBvTreeStreamAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void Context::FUN_00d2edd0(void* first, void* second, void* third, void* fourth)
 {
     hkpSymmetricAgentFlipCollector collector;
@@ -221,6 +228,8 @@ struct Collector
 
 // Builds a Collector on the stack with the given collector and vtable, then calls hkpBvTreeAgent_staticGetPenetrations with bodyB, bodyA, arg3 and the Collector.
 // @fnv 0x00d2e970
+// pdb: hkpSymmetricAgentLinearCast<hkpMoppAgent>::staticGetPenetrations | hkpMoppBvTreeStreamAgent.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_00d2e970(void* bodyA, void* bodyB, void* arg3, void* orig_collector)
 {
     Collector c;
@@ -250,6 +259,7 @@ struct FUN_00d2eb50_cls
 };
 
 // @fnv 0x00d2eb50
+// pdb: hkAgent1nMachine_flipInput | hkpAgent1nMachineProcess.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: hkpGskCache::flip)
 void FUN_00d2eb50_cls::SwapFields()
 {
     unsigned char lo = m_nib0a.lo;
@@ -297,6 +307,8 @@ struct FUN_00d2ebb0_cls
 
 // Builds a temporary holding a4 and a zero flag with a vtable pointer, then forwards a2, a1, a3 and the temporary to hkpBvTreeStreamAgent_getPenetrations.
 // @fnv 0x00d2ebb0
+// pdb: hkpSymmetricAgentLinearCast<hkpBvTreeStreamAgent>::getPenetrations | hkpBvTreeStreamAgent.obj | fnv360_0721_beta, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void FUN_00d2ebb0_cls::DispatchWithFlag(void* a1, void* a2, void* a3, unsigned int a4)
 {
     FUN_00d2ebb0_tmp t;
@@ -322,6 +334,8 @@ struct CpuObject
 };
 // Builds a CpuCallData from fourth, DAT_0104da48 and DAT_010ce7fc, then forwards second, first, third and the data to FUN_00d2dd50.
 // @fnv 0x00d2ebf0
+// pdb: hkpSymmetricAgentLinearCast<hkpBvTreeStreamAgent>::getClosestPoints | hkpBvTreeStreamAgent.obj | fnv360_0721_beta, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void CpuObject::DispatchWithBoundData(void* first, void* second, unsigned int third, unsigned int fourth)
 {
     CpuCallData data;
@@ -340,6 +354,8 @@ struct SearchObject
     int CallTarget(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3);
 };
 // @fnv 0x00d2ec30
+// pdb: hkpSymmetricAgentLinearCast<hkpBvTreeStreamAgent>::updateShapeCollectionFilter | hkpBvTreeStreamAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, constraintOwner
 int SearchObject::CallTarget(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3)
 {
     unsigned int callResult0 =
@@ -357,6 +373,8 @@ struct SearchObject
     int FUN_00d2ed70(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3);
 };
 // @fnv 0x00d2ed70
+// pdb: hkpSymmetricAgentLinearCast<hkpShapeCollectionAgent>::updateShapeCollectionFilter | hkpBvTreeStreamAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, constraintOwner
 int SearchObject::FUN_00d2ed70(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3)
 {
     unsigned int callResult0 =
@@ -391,6 +409,8 @@ struct FUN_00d43cd0_class
 
 // Builds a flip-body collector holding a4 and forwards a2, a1, a3 and the collector to ProcessCollisionEntries.
 // @fnv 0x00d2ed90
+// pdb: hkpSymmetricAgentLinearCast<hkpShapeCollectionAgent>::getPenetrations | hkpBvTreeStreamAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void __thiscall FUN_00d43cd0_class::FUN_00d2ed90(void* a1, void* a2, void* a3, void* apPayload)
 {
     hkpSymmetricAgentFlipBodyCollector collector;

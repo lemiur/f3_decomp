@@ -41,6 +41,7 @@ extern int DAT_012681d4;
 extern int DAT_0102e388;
 
 // @fnv 0x00c903d0
+// pdb: bhkListShape::GetRTTI | bhkCharacterController.obj | fnv360_0721_beta, objrun_open, low
 int* __cdecl FUN_00c903d0()
 {
     return &DAT_0102e388;
@@ -707,6 +708,7 @@ struct FUN_0056a350 {
  OwnedBuffer buffer;
  FUN_0056a350();
 };
+// pdb: FOCollisionListener::ObjectDamageImpactData::ObjectDamageImpactData | FOCollisionListener.obj | fnv360_0822_retail, call_seq, medium
 FUN_0056a350::FUN_0056a350(){
  reference.Reset();
  weight=0.0f;

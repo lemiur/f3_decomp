@@ -3,6 +3,8 @@
 #include "niblendpoint3interpolator_decls.h"
 
 // @fnv 0x00a55b90
+// pdb: NiBlendPoint3Interpolator::StoreSingleValue | NiBlendPoint3Interpolator.obj | fnv360_0721_retail, objrun, high
+// pdb params: fTime, pkInterpTarget, kValue
 bool NiBlendPoint3Interpolator::UpdateAccumulatedTransform(float fTime, NiObjectNET* pkTarget, NiPoint3& kValue)
 {
     if (m_uFlags & 1)
@@ -24,6 +26,8 @@ bool NiBlendPoint3Interpolator::UpdateAccumulatedTransform(float fTime, NiObject
 
 // Updates the interpolator: delegates to single or multi-interpolation update based on m_ucInterpCount, stores fTime in m_fLastTime, and returns success.
 // @fnv 0x00a55e00
+// pdb: NiBlendPoint3Interpolator::Update | NiBlendPoint3Interpolator.obj | fnv360_0721_retail, objrun, medium
+// pdb params: fTime, pkInterpTarget, kValue
 bool NiBlendPoint3Interpolator::Update(float fTime, NiObjectNET* pkTarget, NiPoint3& kValue)
 {
     bool bSuccess = false;
@@ -66,6 +70,7 @@ struct Call_439090_tgt
 
 // Calls FUN_00a36fd0 on pkObject; if that succeeds, calls _Call_439090 on pkObject+0x30 and returns its negation.
 // @fnv 0x00a55ec0
+// pdb: NiBlendPoint3Interpolator::IsEqual | NiBlendPoint3Interpolator.obj | tesv_win, caller_sim, low
 bool FUN_00a55ec0_shell::FUN_00a55ec0(NiObject* pkObject)
 {
     bool r = ((FUN_00a36fd0_tgt*)this)->FUN_00a36fd0(pkObject);
@@ -112,6 +117,8 @@ struct StrArrView
 };
 typedef NiTArray<ActorCombatGroup*, NiTMallocInterface<ActorCombatGroup*> > StrArray;
 // @fnv 0x00a55ef0
+// pdb: NiBlendPoint3Interpolator::GetViewerStrings | NiBlendPoint3Interpolator.obj | fnv360_0822_retail, ustr_rel, medium
+// pdb params: pkStrings
 void FUN_00a55ef0_shell::AppendPoint3Value(void* pkStrings)
 {
     ((ViewerBase*)this)->FUN_00a38080(pkStrings);
@@ -132,6 +139,8 @@ void FUN_00a55ef0_shell::AppendPoint3Value(void* pkStrings)
 
 // Calls the virtual function at vtable offset 0xb0 on p and returns its bool result.
 // @fnv 0x00a55a60
+// pdb: NiBlendPoint3Interpolator::InterpolatorIsCorrectType | NiBlendPoint3Interpolator.obj | fnv360_0721_retail, objrun_open, low
+// pdb params: pkInterpolator
 bool __stdcall FUN_00a55a60(NiBlendPoint3Interpolator* p)
 {
     return reinterpret_cast<bool(__thiscall*)(NiObject*)>(*reinterpret_cast<const unsigned int*>(
@@ -148,6 +157,7 @@ extern int _DAT_011a9424;
 extern int _DAT_011a9428;
 extern int _DAT_011a942c;
 // @fnv 0x00a55a80
+// pdb: NiBlendPoint3Interpolator::CreateObject | NiBlendPoint3Interpolator.obj | fnv360_1110_retail, objopen_prop, low
 void* FUN_00a55a80()
 {
     void* p = BSFadeNode::operator new(64);
@@ -178,6 +188,8 @@ struct FUN_00a37ec0_shell : public NiBlendPoint3Interpolator
     void FUN_00a55ad0(NiStream& stream);
 };
 // @fnv 0x00a55ad0
+// pdb: TESLevItem::SaveGame | TESLevItem.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apSaveGameBuffer
 void FUN_00a37ec0_shell::FUN_00a55ad0(NiStream& stream)
 {
     ((FUN_00a37ec0_tgt*)this)->FUN_00a37ec0(stream);
@@ -192,6 +204,7 @@ struct Cls_00a55b00
 };
 // Calls DestroyInterpolatorArray on this, frees this with _delete when bit 0 of f is set, and returns this.
 // @fnv 0x00a55b00
+// pdb: NiMultiTargetTransformController::`scalar deleting destructor' | NiMultiTargetTransformController.obj | fnv360_0822_retail, caller_sim, low
 void* Cls_00a55b00::DestroyIfFlagged(unsigned int auiFlags)
 {
     DestroyInterpolatorArray(this);
@@ -264,6 +277,8 @@ struct FUN_00a55a10
 };
 
 // @fnv 0x00a55a10
+// pdb: NiBlendPoint3Interpolator::NiBlendPoint3Interpolator | NiBlendPoint3Interpolator.obj | fnv360_1110_retail, objrun_open, medium
+// pdb params: bManagerControlled, fWeightThreshold, ucArraySize
 FUN_00a55a10::FUN_00a55a10(void* apArg, float f, void* c)
 {
     ((FUN_00a370b0_tgt*)this)->Init(apArg, f, c);
@@ -285,6 +300,8 @@ struct FUN_00a55e60_cls : public NiBlendPoint3Interpolator
     void FUN_00a55e60(NiObjectNET* p);
 };
 // @fnv 0x00a55e60
+// pdb: NiBlendPoint3Interpolator::LoadBinary | NiBlendPoint3Interpolator.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void FUN_00a55e60_cls::FUN_00a55e60(NiObjectNET* apObject)
 {
     ((FUN_00a37980_tgt*)this)->FUN_00a37980(apObject);
@@ -330,6 +347,8 @@ struct BlendPointShell : NiBlendPoint3Interpolator
 };
 // Blends successful controller values using normalized weights, adjusts for skipped weights, and writes the result to value.
 // @fnv 0x00a55c30
+// pdb: NiBlendPoint3Interpolator::BlendValues | NiBlendPoint3Interpolator.obj | fnv360_0721_retail, objrun, medium
+// pdb params: fTime, pkInterpTarget, kValue
 bool BlendPointShell::FUN_00a55c30(float time, NiObjectNET* target, NiPoint3& value)
 {
     float weight = 1.0f;

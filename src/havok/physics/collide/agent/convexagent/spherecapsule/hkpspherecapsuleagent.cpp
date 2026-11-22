@@ -73,6 +73,8 @@ void __cdecl FUN_00d3e330(unsigned int a, unsigned int b, unsigned int c, FUN_00
 
 // Builds a FUN_00d3f040_tmp with value a3, flag 0 and str pointing at DAT_010ce81c, then calls FUN_00d3e330(a1, a0, a2, &t).
 // @fnv 0x00d3f040
+// pdb: hkpSymmetricAgentLinearCast<hkpSphereTriangleAgent>::staticGetPenetrations | hkpSphereTriangleAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_00d3f040(unsigned int a0, unsigned int a1, unsigned int a2, unsigned int uiValue)
 {
     FUN_00d3f040_tmp t;
@@ -94,6 +96,8 @@ struct CollisionDispatcher {
 };
 // Builds an AgentDispatchDescriptor with the given tag and a fixed dispatch table, then calls hkpSphereCapsuleAgent_getPenetrations with the bodies swapped.
 // @fnv 0x00d3f000
+// pdb: hkpSymmetricAgentLinearCast<hkpSphereCapsuleAgent>::getPenetrations | hkpSphereCapsuleAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void CollisionDispatcher::FUN_00d3f000(void* bodyA, void* bodyB, void* volatile input, unsigned int tag)
 {
     AgentDispatchDescriptor descriptor;

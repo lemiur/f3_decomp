@@ -4,6 +4,8 @@
 
 // If additional geometry data is absent or not packed, updates the consistency bits of m_usDirtyFlags to eConsistency.
 // @fnv 0x00a67050
+// pdb: NiGeometryData::SetConsistency | NiGeometryData.obj | fnv360_0822_retail, call_seq, high
+// pdb params: eConsistency
 void NiGeometryData::SetDataConsistency(Consistency eConsistency)
 {
     if (m_spAdditionalGeomData.m_pObject != NULL && m_spAdditionalGeomData.m_pObject->IsPacked())
@@ -15,6 +17,8 @@ void NiGeometryData::SetDataConsistency(Consistency eConsistency)
 
 // ORs the low 12 bits of uiDirtyFlags into m_usDirtyFlags unless the additional geometry data object exists and is packed.
 // @fnv 0x00a67090
+// pdb: NiGeometryData::MarkAsChanged | NiGeometryData.obj | fnv360_0822_retail, call_seq, high
+// pdb params: usFlags
 void NiGeometryData::SetDirtyFlags(unsigned int uiDirtyFlags)
 {
     if (m_spAdditionalGeomData.m_pObject != NULL && m_spAdditionalGeomData.m_pObject->IsPacked())
@@ -26,6 +30,8 @@ void NiGeometryData::SetDirtyFlags(unsigned int uiDirtyFlags)
 
 // Registers the object and its additional geometry data with the stream, returning false if either registration fails.
 // @fnv 0x00a66f50
+// pdb: NiGeometryData::RegisterStreamables | NiGeometryData.obj | fnv360_0822_retail, objrun_prop, high
+// pdb params: kStream
 bool NiGeometryData::RegisterStreamables(NiStream& kStream)
 {
     if (!NiObject::RegisterStreamables(kStream))
@@ -40,6 +46,8 @@ bool NiGeometryData::RegisterStreamables(NiStream& kStream)
 }
 
 // @fnv 0x00a677e0
+// pdb: NiGeometryData::LinkObject | NiGeometryData.obj | fnv360_0822_retail, objrun, medium
+// pdb params: kStream
 void NiGeometryData::LinkObject(NiStream& kStream)
 {
     NiObject::LinkObject(kStream);
@@ -59,6 +67,8 @@ void NiGeometryData::LinkObject(NiStream& kStream)
 }
 
 // @fnv 0x00a67360
+// pdb: NiGeometryData::LockPackedVertexData | NiGeometryData.obj | fnv360_1110_retail, call_seq, high
+// pdb params: bWriteAccess
 bool NiGeometryData::IsGeometryDataStreamable(bool bWrite)
 {
     if (m_bIsDynamic)
@@ -119,6 +129,7 @@ struct FUN_00a67000_shell
     void FreeBuffer();
 };
 // @fnv 0x00a67000
+// pdb: NiGeometryData::ClearNormals | NiGeometryData.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: hkpRigidBody::setMass)
 void FUN_00a67000_shell::FreeBuffer()
 {
     if (m_pvBuf)
@@ -135,6 +146,8 @@ struct FUN_00a67020_shell
     void FUN_00a67020(NiBound* kBound);
 };
 // @fnv 0x00a67020
+// pdb: NiGeometryData::SetBound | NiGeometryData.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apBound
 void FUN_00a67020_shell::FUN_00a67020(NiBound* kBound)
 {
     if (kBound)
@@ -147,6 +160,7 @@ void FUN_00a67020_shell::FUN_00a67020(NiBound* kBound)
 
 extern const char* const g_011f5b88_arg1;
 // @fnv 0x00a67bf0
+// pdb: NiAVObject::GetRTTI | NiAVObject.obj | fnv360_0822_retail, objrun_open, low
 const char* const* __cdecl FUN_00a67bf0()
 {
     return &g_011f5b88_arg1;
@@ -235,6 +249,7 @@ struct FUN_00a67c00 : _Call_a5d3a0
     FUN_00a67c00();
 };
 // @fnv 0x00a67c00
+// pdb: NiGeometryData::NiGeometryData | NiGeometryData.obj | fnv360_0822_retail, call_seq, high
 FUN_00a67c00::FUN_00a67c00()
 {
     m_usVertices = 0;
@@ -262,6 +277,7 @@ struct FUN_00a68800_shell
     void* FUN_00a68800(unsigned int flags);
 };
 // @fnv 0x00a68800
+// pdb: NiBlendQuaternionInterpolator::`scalar deleting destructor' | NiBlendQuaternionInterpolator.obj | fnv360_0721_beta, objrun, medium
 void* FUN_00a68800_shell::FUN_00a68800(unsigned int flags)
 {
     DestroyGeometryData();
@@ -317,6 +333,8 @@ struct NiGeometryData_shell
 
 // Stores vertex count, vertex/normal/color/texture pointers, and packs texture-set count and NBT method into the flags field.
 // @fnv 0x00a66bb0
+// pdb: NiGeometryData::ReplaceData | NiGeometryData.obj | fnv360_0721_beta, objrun, medium
+// pdb params: usVertices, pkVertex, pkNormal, pkColor, pkTexture, usNumTextureSets, eNBTMethod
 void NiGeometryData_shell::FUN_00a66bb0(unsigned short ausVertexCount, NiPoint3* pkVertex, NiPoint3* pkNormal,
                                         RgbaColor* pkColor, NiPoint2* pkTexture, unsigned short usNumTextureSets,
                                         unsigned short eNBTMethod)
@@ -476,6 +494,7 @@ struct FUN_00a67c00
 
 // Destructor wrapper that invokes the base geometry-data destructor on this object.
 // @fnv 0x00a67c70
+// pdb: NiGeometryData::~NiGeometryData | NiGeometryData.obj | fnv360_0822_retail, caller_sim, medium
 void FUN_00a67c70_shell::DestroyGeometryData()
 {
     ((FUN_00a67c00*)this)->FUN_00a67c00::~FUN_00a67c00();
@@ -502,6 +521,8 @@ struct NiGeometryDataRecovered : NiGeometryData
                       NiPoint2* textureCoords, unsigned short textureSetCount, unsigned short normalBinormalMethod);
 };
 // @fnv 0x00a66b30
+// pdb: NiGeometryData::SetData | NiGeometryData.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: usVertices, pkVertex, pkNormal, pkColor, pkTexture, usNumTextureSets, eNBTMethod
 void NiGeometryDataRecovered::FUN_00a66b30(unsigned short vertexCount, NiPoint3* vertices, NiPoint3* normals,
                                            RgbaColor* colors, NiPoint2* textureCoords, unsigned short textureSetCount,
                                            unsigned short normalBinormalMethod)
@@ -550,6 +571,8 @@ struct NiGeometryDataCmp
 
 // Compares vertex, normal, color and texture data of two vertices selected by usA/usB according to uiFlags, returning -1, 1 or 0.
 // @fnv 0x00a66db0
+// pdb: NiGeometryData::VertexCompare | NiGeometryData.obj | fnv360_0721_beta, objrun, low
+// pdb params: v0, v1, mask
 int NiGeometryDataCmp::CompareVertices(unsigned short usVertexA, unsigned short usVertexB, unsigned int uiCompareFlags)
 {
     float* pkVertex;
@@ -615,6 +638,7 @@ struct FUN_00a66f90_cls : public NiGeometryData
 
 // Computes the total geometry data size from vertex, normal, color and texture buffers and adds the base size.
 // @f3 0x008312c0 (community match, verified in this file)
+// pdb: NiGeometryData::GetBlockAllocationSize | NiGeometryData.obj | fnv360_0822_retail, objrun, medium
 unsigned int FUN_00a66f90_cls::FUN_00a66f90()
 {
     unsigned int total;
@@ -660,6 +684,8 @@ class FUN_00a68820_cls
 };
 
 // @fnv 0x00a68820
+// pdb: NiSkinPartition::MakeBoneMap | NiSkinPartition.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: NiGeometryData::IndexSort)
+// pdb params: kMap, pusTriangle, pkVertexInteraction
 void FUN_00a68820_cls::BuildIndexMappings(unsigned short** ppusForward, unsigned short** ppusInverse,
                                           unsigned int uiValue)
 {
@@ -776,6 +802,8 @@ struct GeomData : Base380
 
 // Appends this geometry's vertex, normal, color, texture, bound and flag fields to arr, then registers the additional-geometry object or a null entry.
 // @fnv 0x00a688b0
+// pdb: NiGeometryData::GetViewerStrings | NiGeometryData.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void GeomData::RegisterFields(StrArr* arr)
 {
     AppendCameraPathEntries(arr);
@@ -850,6 +878,8 @@ struct FUN_00a67b20 : Base302
 };
 // Initialises vertex/normal/color/texture pointers, sets data flags from textureSets and nbt, computes the bound, assigns a new id, and clears dirty flags.
 // @fnv 0x00a67b20
+// pdb: NiGeometryData::NiGeometryData | NiGeometryData.obj | fnv360_0822_retail, call_seq, high
+// pdb params: usVertices, pkVertex, pkNormal, pkColor, pkTexture, usNumTextureSets, eNBTMethod
 FUN_00a67b20::FUN_00a67b20(unsigned short count, NiPoint3* apVertex, NiPoint3* apNormal, RgbaColor* apColor,
                            NiPoint2* apTexture, unsigned short textureSets, unsigned short nbt) throw()
     : vertices(count), dataFlags(0), dirtyFlags(0), vertex(apVertex), normal(apNormal), color(apColor),
@@ -872,6 +902,7 @@ struct GeomView
     unsigned short FUN_00a669e0() const;
 };
 // @fnv 0x00a669e0
+// pdb: TESActorBaseData::GetFatigue | TESActorBaseData.obj | fnv360_0822_retail, vtable, medium
 unsigned short GeomView::FUN_00a669e0() const
 {
     return usVertices;
@@ -904,6 +935,8 @@ struct GeomNormals : public NiGeometryData
 };
 
 // @fnv 0x00a669f0
+// pdb: NiGeometryData::CreateNormals | NiGeometryData.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: bInitialize
 void GeomNormals::EnsureNormals(bool bZero)
 {
     unsigned int uiMul = 1;
@@ -990,6 +1023,8 @@ static unsigned int Mode(bool f0, unsigned int key)
 }
 
 // @fnv 0x00a67720
+// pdb: NiGeometryData::GetTextureSetIterator | NiGeometryData.obj | fnv360_0822_retail, objrun, medium
+// pdb params: usSet, arIterator
 void FUN_00a67720_cls::GetKeyAndMode(unsigned int uiArg, FUN_00a67720_res* pOut)
 {
     unsigned int a, b, c, u, v, w;
@@ -1199,6 +1234,8 @@ struct Owner
 
 // Doubles a3 three times (multiplying by 8) and writes a2 with that size via the owner's callable BinaryWrite.
 // @fnv 0x00a67ae0
+// pdb: NiColorA::SaveBinary | NiGeometryData.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: NiPoint2::SaveBinary)
+// pdb params: stream, pkValues, uiNumValues
 void __cdecl FUN_00a67ae0(Owner* pOwner, unsigned int pData, unsigned int a3)
 {
     Callable* pkCallable = pOwner->m_callable;
@@ -1267,6 +1304,8 @@ class GeometryDataA66A
 
 // Sets the normal binormal tangent method, reallocating m_pkNormal to hold one or three NormalA66A per vertex depending on eMethod.
 // @fnv 0x00a66a60
+// pdb: NiGeometryData::StoreNormalBinormalTangent | NiGeometryData.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: eNBTMethod
 void GeometryDataA66A::FUN_00a66a60(unsigned int eMethod)
 {
     if (GetNormalBinormalTangentMethod() == eMethod)
@@ -1366,6 +1405,8 @@ struct RenderOwner
 
 // When m_bFlag3a is set, fills pOut from m_pObj30 or falls back to m_uiField24 and count 0xc.
 // @fnv 0x00a675b0
+// pdb: NiGeometryData::GetNormalsIterator | NiGeometryData.obj | fnv360_0822_retail, objrun, high
+// pdb params: arIterator
 void RenderOwner::GetBounds(BoundOut* pOut)
 {
     if (m_bFlag3a)
@@ -1446,6 +1487,8 @@ template <class T> inline void WriteBinaryArray(NiBinaryStreamA67& os, const T* 
 
 // Writes an array of NiPoint2A67 values to the backing stream of kStream as a flat array of floats.
 // @fnv 0x00a67aa0
+// pdb: NiPoint2::LoadBinary | NiGeometryData.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: NiColorA::LoadBinary)
+// pdb params: stream, pkValues, uiNumValues
 void __cdecl FUN_00a67aa0(NiStreamA67& kStream, const NiPoint2A67* pkValue, unsigned int uiNumEls)
 {
     WriteBinaryArray(*kStream.m_pBackingStream, (const float*)pkValue, uiNumEls * 2);
@@ -1461,6 +1504,8 @@ class FUN_00a67dd0_cls
 
 // Reorders the unsigned-short entries in pArr between iLo and iHi using pivot selection and CompareVertices.
 // @fnv 0x00a67dd0
+// pdb: NiTMapBase<NiTPointerAllocator<unsigned int>,unsigned int,float>::SetAt | NiSkinPartition.obj | fnv360_0822_retail, call_dedup, low, conflict (skyrim: NiGeometryData::IndexQSort)
+// pdb params: key, val
 void FUN_00a67dd0_cls::FUN_00a67dd0(unsigned short* pArr, unsigned int uiKey, int iLo, int iHi)
 {
     if (iHi <= iLo)
@@ -1771,6 +1816,8 @@ class SlotOwner
 
 // Returns true if the slot is occupied, checking m_pOverride first, then the specific slot pointer or m_pLeveled with m_uiLevel thresholds.
 // @fnv 0x00a66c00
+// pdb: NiGeometryData::ContainsVertexData | NiGeometryData.obj | fnv360_0721_beta, objrun, low
+// pdb params: eParameter
 bool SlotOwner::FUN_00a66c00(int iSlot)
 {
     if (m_pOverride && m_pOverride->HasSlot(iSlot))
@@ -1871,6 +1918,8 @@ struct FUN_00a67660_cls
 
 // When enabled, it may return early; otherwise it writes data and stride from the entry object or defaults.
 // @fnv 0x00a67660
+// pdb: NiGeometryData::GetColorsIterator | NiGeometryData.obj | fnv360_1110_retail, call_seq, medium
+// pdb params: arIterator
 void FUN_00a67660_cls::FUN_00a67660(StreamOut_a676* apStreamOut)
 {
     if (!m_bEnableState)

@@ -166,6 +166,8 @@ static inline void S_00a64bf0_SetSize(hkArrayChar* a, int n)
     a->m_iElementCount = n;
 }
 
+// pdb: hkStreamStatisticsCollector::setDataByCopying | hkStreamStatisticsCollector.obj | fnv360_0822_retail, objrun, low, conflict (bridge: _newCommand)
+// pdb params: buffer, length, endianSwap
 static __declspec(noinline) int* FUN_00ddf370(hkArrayChar* a, int n)
 {
     int* slot;
@@ -397,6 +399,8 @@ static __declspec(noinline) MonitorNode* FUN_00a64f60(
     return result;
 }
 
+// pdb: _sumNodes | hkStreamStatisticsCollector.obj | fnv360_0822_retail, objrun, medium
+// pdb params: n, stringTable
 void __cdecl AggregateChildValues(MonitorNode* node, MonitorStrings* strings)
 {
     if (!node || !node->children.size)
@@ -547,6 +551,8 @@ static __declspec(noinline) int* FUN_00a64bf0(hkArrayChar* a, int n)
     a->m_iElementCount += n;
     return (int*)p;
 }
+// pdb: hkStreamStatisticsCollector::addChunk | hkStreamStatisticsCollector.obj | fnv360_0822_retail, objrun, low, conflict (bridge: hkStreamStatisticsCollector::pushDir)
+// pdb params: type, name, chunkAddress, usedSize, allocSize
 void StrPacker::FUN_00ddf5a0(const char* str)
 {
     if (((hkArrayChar*)((char*)this + 8))->getCapacity() > ((hkArrayChar*)((char*)this + 8))->m_iElementCount + 0x46)
@@ -653,6 +659,7 @@ static __declspec(noinline) int* FUN_00a64bf0(hkArrayChar*a,int n){
 }
 struct Owner{int unk00,unk04;hkArrayChar array;};
 }
+// pdb: hkStreamStatisticsCollector::popDir | hkStreamStatisticsCollector.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 unsigned char* FUN_00ddf640_Cls::FUN_00ddf640(){
  Native1471::Owner* self=reinterpret_cast<Native1471::Owner*>(this);
  unsigned char*out=(unsigned char*)self->array.getCapacity();

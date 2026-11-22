@@ -24,6 +24,7 @@ struct Entry {
     FUN_0045bca0 c;
     Entry();
 };
+// pdb: RANK_DATA::RANK_DATA | TESFaction.obj | fnv360_0721_retail, objrun_prop, low, conflict (skyrim: RaceTintingTemplateEntry::RaceTintingTemplateEntry)
 Entry::Entry() {}
 }
 }   // namespace f3m_00551b90
@@ -56,6 +57,8 @@ struct Owner {
     StatsB8 statsB8;
     void FUN_0054ab80(int selector, int value);
 };
+// pdb: TESActorBase::SetActorValue | TESActorBase.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiWhich, aiValue
 void Owner::FUN_0054ab80(int selector, int value)
 {
     switch (selector) {

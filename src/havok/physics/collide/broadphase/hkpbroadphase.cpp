@@ -119,6 +119,8 @@ struct Obj66AFB0_fit
     float FUN_00becf40(int aiKey);
 };
 
+// pdb: RaceSexMenu::MenuOption::GetRange | RaceSexMenu.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiLow, aiHigh
 void FUN_00d970c0_cls::FUN_00d970c0(void* apArg1, void* apArg2)
 {
     if (m_vptr)

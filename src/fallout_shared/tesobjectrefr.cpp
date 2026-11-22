@@ -5069,6 +5069,7 @@ struct Cls_004471d0 {
     int unk424;
     void FUN_004471d0();
 };
+// pdb: TESFile::FreeDecompressedBuffer | TESFile.obj | fnv360_0822_retail, callee_sim, low
 void Cls_004471d0::FUN_004471d0() {
     if (ptr420) {
         DAT_011f6238.Deallocate(ptr420);

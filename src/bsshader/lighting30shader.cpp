@@ -6,6 +6,7 @@
 // PC virtual slots and cross-platform names are documented in NOTES.md.
 // Builds eight shader declarations with vertex entries, creates a Lighting30Shader, assigns the non-color declarations to its slots, and initializes it.
 // @fnv 0x00bbd0d0
+// pdb: Lighting30Shader::CreateShader | Lighting30Shader.obj | fnv360_0822_retail, call_gap, medium
 BSShader* Lighting30Shader::CreateShader()
 {
     NiD3DVertexDeclaration* declaration = NiD3DVertexDeclaration::Create(g_pkRenderer, 6, 1);
@@ -185,6 +186,7 @@ BSShader* Lighting30Shader::CreateShader()
 #include "lighting30shader_packet.h"
 // Copies DAT_011a9bd0 into DAT_01201b30, sets DAT_012010c4->dirty and the two flags DAT_01200bf4 and DAT_01200bf5 to true.
 // @fnv 0x00bbb840
+// pdb: _blkmov | memcpyp.obj | fnv360_0822_retail, call_seq, medium
 void Lighting30Shader::InvalidateShaderConstants()
 {
     DAT_01201b30 = DAT_011a9bd0;
@@ -195,6 +197,8 @@ void Lighting30Shader::InvalidateShaderConstants()
 
 // Copies the packet into DAT_01201b30 and sets the byte at offset 8 of DAT_012010c4 from param_2 or DAT_01200bf4, then stores param_2 in DAT_01200bf4.
 // @fnv 0x00bbb790
+// pdb: Lighting30Shader::SetAmbientColor | Lighting30Shader.obj | fnv360_1110_retail, callee_sim, low
+// pdb params: akColor, abModified
 void __cdecl ApplyLighting30Packet(const Lighting30Packet4* apPacket, bool param_2)
 {
     DAT_01201b30 = *apPacket;
@@ -225,6 +229,8 @@ extern float DAT_01201368;
 
 // If DAT_012010b0[8] is set, computes pos minus DAT_011f474c minus the offset at DAT_011f91c8+0x1e4 and stores the result into DAT_01201360/64/68.
 // @fnv 0x00bbbcf0
+// pdb: Lighting30Shader::SetupGeometryConstants_RefractionPeriod | Lighting30Shader.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pprop
 void __stdcall UpdatePositionOffset(const NiPoint3& pos)
 {
     if (DAT_012010b0[8])
@@ -262,6 +268,8 @@ extern float DAT_01201b90;
 extern float DAT_01201b94;
 
 // @fnv 0x00bbbdf0
+// pdb: ShadowLightShader::SetupGeometryConstants_RefractionPower | ShadowLightShader.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: pprop
 void __fastcall FUN_00bbbdf0(void* this_ptr, int, char* param_1)
 {
     if (DAT_012010d8[8] != 0)
@@ -350,6 +358,8 @@ struct DummyVTable
 
 // If DAT_012010e0[8] is set, queries param_1->vf4(5, 0) to set DAT_01201bec to 1.0 or 0.0 and copies the float at param_1+0x30 into DAT_01201be8.
 // @fnv 0x00bbbe30
+// pdb: Lighting30Shader::SetupGeometryConstants_WorldBoundCenter | Lighting30Shader.obj | fnv360_0822_retail, objrun_open, low, conflict (bridge: Lighting30Shader::SetupGeometryConstants_Envmap)
+// pdb params: worldBound
 void __fastcall FUN_00bbbe30(void* this_ptr, int edx_unused, DummyVTable* param_1)
 {
     if (DAT_012010e0[8] != 0)
@@ -367,6 +377,8 @@ void __stdcall FUN_00be1ff0(int arg);
 
 // Calls FUN_00be1ff0 with arg unless DAT_011f91e4 falls within any of four excluded ranges.
 // @fnv 0x00bbc5c0
+// pdb: Lighting30Shader::DetermineShaderDeclaration | Lighting30Shader.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: apData
 void __stdcall DispatchIfNotExcluded(int arg)
 {
     if ((DAT_011f91e4 < 0x1cc || DAT_011f91e4 > 0x1dc) && (DAT_011f91e4 < 0x1bd || DAT_011f91e4 > 0x1c3) &&
@@ -402,6 +414,8 @@ extern int DAT_011ff9dc;
 
 // Checks DAT_011f91e4 and state entries, calling FUN_00b97e80, UpdateRendererStateCount or decrementing DAT_011ff9dc and calling FUN_00b97e30 based on flags.
 // @fnv 0x00bbeef0
+// pdb: Lighting30Shader::PostGeometry | Lighting30Shader.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apState
 void __fastcall FUN_00bbeef0(void* this_ptr, int, unsigned char** state)
 {
     unsigned int val = DAT_011f91e4;
@@ -426,6 +440,7 @@ void __fastcall FUN_00bbeef0(void* this_ptr, int, unsigned char** state)
 extern "C" void* g_01201f20;
 
 // @fnv 0x00bbc9b0
+// pdb: NiD3DShaderProgram::GetRTTI | NiD3DShaderProgram.obj | fnv360_0822_retail, objrun_open, low
 void* __cdecl FUN_00bbc9b0()
 {
     return &g_01201f20;
@@ -457,6 +472,7 @@ struct S
     void ApplyToGlobalRange();
 };
 // @fnv 0x00bbb7f0
+// pdb: ShadowLightShader::ClearPassStages | ShadowLightShader.obj | fnv360_0822_retail, objrun, medium
 void S::ApplyToGlobalRange()
 {
     int* p = &DAT_01200ec0;
@@ -470,6 +486,8 @@ void S::ApplyToGlobalRange()
 
 // Iterates entries from start to the count at p+0x18 and zeroes the int at offset 8 of each non-null entry from the array at p+0x24.
 // @fnv 0x00bbc610
+// pdb: Lighting30Shader::ClearUnusedStages | Lighting30Shader.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apPass, auiFirstUnusedStage
 void __stdcall FUN_00bbc610(void* apContainer, unsigned int start)
 {
     for (unsigned int i = start; i < *reinterpret_cast<unsigned int*>(reinterpret_cast<char*>(apContainer) + 0x18); ++i)
@@ -535,6 +553,8 @@ extern P4_bbb890 DAT_01201b40;
 P3_bbb890* __stdcall FUN_00ee6df8(P3_bbb890*, const P3_bbb890*, const M_bbb890*);
 
 // @fnv 0x00bbb890
+// pdb: Lighting30Shader::SetupGeometryConstants_WorldBoundCenter | Lighting30Shader.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: worldBound
 void __stdcall UpdateTransformedPosition(M_bbb890 kMat, Obj_bbb890* pObject)
 {
     if (DAT_012010a4->bOn || DAT_012010c8->bOn)
@@ -748,6 +768,8 @@ struct FUN_00bbdcd0_shell
 
 // Assigns textures to the first two render stages from arg1 and clears the rest, then calls AddToTwoCounters with values derived from textureObject.
 // @fnv 0x00bbdcd0
+// pdb: Lighting30Shader::UpdatePipelineTexEffect | Lighting30Shader.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apBSSProp, apPass
 void FUN_00bbdcd0_shell::ApplyTextureStages(FUN_00bbdcd0_Arg1* pTextureSource, FUN_00bbdcd0_Arg2* pStageList)
 {
     FUN_00bbdcd0_TextureObject* textureObject = pTextureSource->m_pTextureObject;
@@ -802,6 +824,8 @@ class FUN_00bbb820_cls
 };
 
 // @fnv 0x00bbb820
+// pdb: Lighting30Shader::SetRenderStatesForPass | Lighting30Shader.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: auiPass, apL30Prop
 void FUN_00bbb820_cls::FUN_00bbb820(int param_1, int param_2)
 {
     ResultStandIn* pResult = this->SetupPass(param_1, param_2);
@@ -953,6 +977,8 @@ extern FogColorA DAT_01200c28;
 extern FogColorA DAT_01200c38;
 
 // @fnv 0x00bbde20
+// pdb: Lighting30Shader::UpdateTexEffectConstants | Lighting30Shader.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: apGeometry, apBSSProp, apPass
 void __stdcall FUN_00bbde20(int bFog, ShadowSceneOwner* pOwner, int iUnused)
 {
     if (!pOwner)
@@ -1074,6 +1100,8 @@ inline void AssignMap_b3fec0(NiPointer<NiD3DShaderConstantMap>& dst, const NiPoi
     }
 }
 
+// pdb: Lighting30Shader::EnableConstantsForPass | Lighting30Shader.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: auiPassEnum, abAlphaPass
 void __cdecl UpdateLightingPassState(unsigned int pass)
 {
     Lighting30Shader* shader = FUN_00adb960(29);
@@ -1221,6 +1249,8 @@ struct FUN_00bbdda0_cls : public FUN_00bbdcd0_shell
 };
 
 // @fnv 0x00bbdda0
+// pdb: Lighting30Shader::UpdatePipelineZOnlyTexEffect | Lighting30Shader.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apBSSProp, apPass
 void FUN_00bbdda0_cls::SetupTextureStages(FUN_00bbdcd0_Arg1* apTextureSource, FUN_00bbdcd0_Arg2* apStageList)
 {
     unsigned char* pTextureObject = (unsigned char*)apTextureSource->m_pTextureObject;
@@ -1323,6 +1353,8 @@ extern Color3 DAT_011f4998;
 extern Color4 DAT_01201b70;
 // Computes a light's color (override or base), scales it by exposure and intensity, then clamps and accumulates it into the global color or stores it separately.
 // @fnv 0x00bbecd0
+// pdb: Lighting30Shader::SetupGeometryConstants_Emittance | Lighting30Shader.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pmaterialProperty, pprop
 void __stdcall ApplyLightSource(LightSource* light, RenderContext* context)
 {
     Color3 color = light->overrideColor ? *light->overrideColor : light->color;
@@ -1715,6 +1747,8 @@ extern NiPoint3 DAT_011f474c;
 extern void* DAT_011f91c8;
 
 // @fnv 0x00bbba00
+// pdb: Lighting30Shader::SetupGeometryConstants_ShadowProjection | Lighting30Shader.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pskin, worldTransform
 void __stdcall UpdateShaderMatrices(int identity, const ShaderTransform* transform)
 {
     if (!DAT_012010b4->dirty)
@@ -1909,6 +1943,8 @@ struct FUN_00bbd000_cls
 };
 // If a frame is given and m38 is zero and a stage is active or m34 equals m70, submits params to the pipeline and draws the frame via the device.
 // @fnv 0x00bbd000
+// pdb: Lighting30Shader::SetupBoneMatrices | Lighting30Shader.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apGeometry, apSkin, apPartition, apBuffData, apState, apEffects, aWorld, aWorldBound
 int FUN_00bbd000_cls::RenderFrame(int aiUnused, Parameters* params, Frame* frame, int aiUnused4, int aiUnused5,
                                   int aiUnused6, int extra, int aiUnused8)
 {
@@ -2011,6 +2047,7 @@ class SM3ShaderLoader
 
 // Creates SM3 pixel shaders into DAT_01200c48 and DAT_01200d10 from kDescs, adjusting macro definitions by iVersion and DAT_011f94a4.
 // @fnv 0x00bba5d0
+// pdb: Lighting30Shader::LoadPixelShaders | Lighting30Shader.obj | fnv360_0822_retail, ustr, medium
 void SM3ShaderLoader::FUN_00bba5d0()
 {
     ShaderDescriptor kDescs[50] = {
@@ -2321,6 +2358,7 @@ extern float DAT_011f9614, DAT_011f9618;
 extern ResultVector DAT_01201bc0, DAT_01201bd0;
 // When DAT_012010e4->bOn, computes a fog plane from DAT_011f9604 and camera position, and sets DAT_01201bd0 from DAT_011f9614/DAT_011f9618.
 // @fnv 0x00bbbe80
+// pdb: Lighting30Shader::SetupGeometryConstants_WaterFog | Lighting30Shader.obj | fnv360_0822_retail, udata, high
 void UpdateFogPlanes()
 {
     if (DAT_012010e4->bOn)
@@ -2726,6 +2764,8 @@ void __stdcall FUN_00ee6dec(LocalPoint3* dst, const LocalPoint3* src);
 void __stdcall FUN_00ee6df8(LocalPoint3* dst, const LocalPoint3* src, const Matrix* matrix);
 // Sets light colors and updates position/alpha entries in DAT_01201c90 using matrix transforms, actor origin, and scale adjustments.
 // @fnv 0x00bbc050
+// pdb: Lighting30Shader::SetupGeometryConstants_Lights | Lighting30Shader.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pprop, apRenderPass, auiCurrentPass, pmaterialProperty, d3dInvWorld, pskin, worldTransform
 void __stdcall FUN_00bbc050(LightingSource* source, EffectOp* op, unsigned int type, OtherData* detail, Matrix* matrix,
                             int adjustScale, SizeScale* size)
 {
@@ -4145,6 +4185,7 @@ class SM3ShaderLoader
 };
 // Loads 57 vertex shader entries using the selected profile, with four entries that may instead use vs_3_0.
 // @fnv 0x00bb96f0
+// pdb: Lighting30Shader::LoadVertexShaders | Lighting30Shader.obj | fnv360_0822_retail, ustr, medium
 void SM3ShaderLoader::FUN_00bb96f0()
 {
     ShaderDescriptor shaderEntries[57] = {

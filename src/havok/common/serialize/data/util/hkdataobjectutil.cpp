@@ -195,6 +195,8 @@ public:
 };
 extern const char DAT_00e02a3c[];
 int __cdecl FUN_00403230(char*,unsigned,const char*,...);
+// pdb: BGSDistantObjectBlock::BuildBlockFileName | BGSDistantObjectBlock.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apOutput, apWorld, aiLevel, asCellX, asCellY
 int __cdecl FUN_00dc3500(char* buffer,LandscapeForm* form,int level,short x,short y){
  return FUN_00403230(buffer,260,DAT_00e02a3c,form->GetName(),form->GetName(),level,x,y);
 }
@@ -1514,6 +1516,8 @@ class hkPairMap64
     void FUN_00922910(unsigned __int64 key, unsigned __int64 val);
 };
 
+// pdb: hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> >::insert | hkMap.obj | fnv360_0822_retail, call_gap, high
+// pdb params: alloc, key, val
 void hkPairMap64::FUN_00922910(unsigned __int64 key, unsigned __int64 val)
 {
     if ((m_numElems & 0x7fffffff) * 2 > m_hashMod)

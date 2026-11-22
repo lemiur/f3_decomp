@@ -5,6 +5,8 @@
 #include "../../include/layout_support.h"
 
 // @fnv 0x00d1a300
+// pdb: hkpEntityAabbUtil::entityBatchInvalidateAabb | hkpEntityAabbUtil.obj | fnv360_0822_retail, call_seq, high
+// pdb params: entityBatch, numEntities
 void __cdecl InitArrayEntries(int** apEntries, int count)
 {
     int i = 0;
@@ -24,6 +26,7 @@ struct D107A0RTTI;
 extern D107A0RTTI g_D107A0RTTI;
 
 // @fnv 0x00d10790
+// pdb: bhkPositionConstraintMotor::GetRTTI | bhkPositionConstraintMotor.obj | fnv360_0822_retail, objrun_open, low
 D107A0RTTI* __cdecl FUN_00d10790()
 {
     return &g_D107A0RTTI;
@@ -41,6 +44,7 @@ struct FUN_00d107b0
 };
 
 // @fnv 0x00d107b0
+// pdb: hkpNullAgent::hkpNullAgent | hkpNullAgent.obj | fnv360_0822_retail, uvref, high
 FUN_00d107b0::FUN_00d107b0()
 {
     b = 1;
@@ -54,6 +58,7 @@ struct FUN_00d1fa20_t
     void ResetEntries();
 };
 // @fnv 0x00d1fa20
+// pdb: hkaDetectRagdollPenetration::resetBoneStates | hkaDetectRagdollPenetration.obj | fnv360_0822_retail, call_gap, high
 void FUN_00d1fa20_t::ResetEntries()
 {
     for (int i = 0; i < *(int*)((char*)this + 0x1c); ++i)
@@ -121,6 +126,7 @@ class FUN_00d07910_cls
 
 // Iterates the m_98 element array backwards and calls v10(this) on each non-null element.
 // @f3 0x009897e0 (community match, verified in this file)
+// pdb: hkpPhantom::firePhantomDeleted | hkpPhantom.obj | fnv360_0822_retail, call_dedup, high
 void FUN_00d07910_cls::NotifyElements() {
     for (int index = unk90 - 1; index >= 0; --index) {
         FUN_00d07910_elem** slot = &reinterpret_cast<FUN_00d07910_elem**>(unk8C)[index];
@@ -134,6 +140,7 @@ void FUN_00d07910_cls::NotifyElements() {
 
 // File-static helper with a compiler-chosen register convention.
 // @fnv 0x00d10ab0
+// pdb: add1SaturateAndSetLowBit | hkp3AxisSweep.obj | tesv_win, objrun_open, low
 static __declspec(noinline) unsigned int FUN_00d10ab0(unsigned int uiValue)
 {
     if (uiValue != 0xffff)
@@ -149,6 +156,7 @@ unsigned int D10AB0NextOdd(const unsigned int* puiValue)
 extern int DAT_01268838;
 
 // @fnv 0x00d1f110
+// pdb: bhkSpringDamperConstraintMotor::GetRTTI | bhkSpringDamperConstraintMotor.obj | fnv360_0822_retail, objrun_open, low
 int* __cdecl FUN_00d1f110()
 {
     return &DAT_01268838;
@@ -157,6 +165,8 @@ int* __cdecl FUN_00d1f110()
 extern int g_unk01268868;
 
 // @fnv 0x00d1f130
+// pdb: hkpNullAgent::createNullAgent | hkpNullAgent.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: bodyA, bodyB, input, mgr
 void* __cdecl FUN_00d1f130()
 {
     return &g_unk01268868;
@@ -165,6 +175,7 @@ void* __cdecl FUN_00d1f130()
 // FUN_00d1f140 : a one-line function - getter
 extern int g_target_00d1f140;
 // @fnv 0x00d1f140
+// pdb: hkpNullAgent::getNullAgent | hkpNullAgent.obj | fnv360_0822_retail, call_seq, medium
 void* FUN_00d1f140()
 {
     return &g_target_00d1f140;
@@ -177,6 +188,8 @@ class D1F150Object
 };
 
 // @fnv 0x00d1f150
+// pdb: hkpStorageSampledHeightFieldShape::calcSizeForSpu | hkpStorageSampledHeightFieldShape.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: input, spuBufferSizeLeft
 void FUN_00d1f150(D1F150Object* pkObject)
 {
     pkObject->~D1F150Object();
@@ -322,6 +335,8 @@ struct FUN_00d1f730 : S_00d1f730_Base
 
 // Constructs the object from the base constructor and stores the third argument into unk2c.
 // @f3 0x0099e9b0 (community match, verified in this file)
+// pdb: hkpSimpleShapePhantom::hkpSimpleShapePhantom | hkpSimpleShapePhantom.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: shape, transform, collisionFilterInfo
 FUN_00d1f730::FUN_00d1f730(int aiArg1, int aiArg2, int aiValue) : S_00d1f730_Base(aiArg1, aiArg2)
 {
     unk2c = aiValue;
@@ -330,12 +345,14 @@ FUN_00d1f730::FUN_00d1f730(int aiArg1, int aiArg2, int aiValue) : S_00d1f730_Bas
 
 int __fastcall FUN_00d04380(void*);
 // @fnv 0x00d043b0
+// pdb: hkSemaphore::acquire | hkWin32Semaphore.obj | tesv_win, objrun_open, low
 int __cdecl FUN_00d043b0(void* ap)
 {
     return FUN_00d04380(ap);
 }
 
 // @fnv 0x00d043d0
+// pdb: hkp3AxisSweep::getType | hkp3AxisSweep.obj | tesv_win, objrun_open, low
 int __cdecl FUN_00d043d0()
 {
     return 0;
@@ -357,6 +374,8 @@ void __stdcall hkpContinuousSimulation_assertThereIsNoCollisionInformationForAge
 {}
 
 // @fnv 0x00d0a2a0
+// pdb: hkpKeyframedRigidMotion::setMass | hkpKeyframedRigidMotion.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: m
 void __stdcall FUN_00d0a2a0(int)
 {}
 
@@ -368,6 +387,7 @@ struct FUN_00d1bab0_t
     FUN_00d1bab0_t(bool fInit);
 };
 // @fnv 0x00d1bab0
+// pdb: hkpMoppModifier::`scalar deleting destructor' | hkpRemoveTerminalsMoppModifierClass.obj | fnv360_0822_retail, vtable, high
 FUN_00d1bab0_t::FUN_00d1bab0_t(bool fInit)
 {
     m_vft = (int)&DAT_010cd664;
@@ -562,6 +582,8 @@ struct FUN_00d107d0_t
 
 // Sets b to 1, points p8a/p0/p8b at DAT_010c63bc/DAT_010cd598/DAT_010cd588, stores v in c, and returns this.
 // @fnv 0x00d107d0
+// pdb: hkpEntityEntityBroadPhaseListener::hkpEntityEntityBroadPhaseListener | hkpEntityEntityBroadPhaseListener.obj | fnv360_0822_retail, uvref, high
+// pdb params: world
 FUN_00d107d0_t* FUN_00d107d0_t::FUN_00d107d0(int v)
 {
     b = 1;
@@ -672,6 +694,7 @@ struct D10E90Obj
 };
 
 // @fnv 0x00d10e90
+// pdb: getEpValue | hkp3AxisSweep.obj | tesv_win, objrun_sim, low
 static __declspec(noinline) unsigned short FUN_00d10e90(D10E90Obj* obj)
 {
     return obj->unk00;
@@ -702,6 +725,7 @@ class MyClass
 };
 
 // @fnv 0x00d10fe0
+// pdb: hkp3AxisSweep::getOriginalAabb | hkp3AxisSweep.obj | tesv_win, objrun_sim, low
 int* MyClass::GetField20()
 {
     return &unk20;

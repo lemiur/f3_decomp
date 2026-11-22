@@ -18,6 +18,7 @@ struct CFF9B0SmallArray
 
 // Iterates the array backwards and removes every entry whose pointer is null via removeAtAndCopy.
 // @fnv 0x00cff9b0
+// pdb: worldCallbackUtil_cleanupNullPointers | hkpWorldCallbackUtil.obj | fnv360_0822_retail, call_gap, high
 static void FUN_00cff9b0(CFF9B0SmallArray& cleanupArray)
 {
     for (int i = cleanupArray.m_iElementCount - 1; i >= 0; i--)
@@ -1163,6 +1164,8 @@ struct ProfOwner_cffa00
 
 // Iterates pOwner->m_pItems in reverse, writing TtentAddCb/Et rdtsc ticks to the TLS ProfBuf and calling vtbl04 on each item.
 // @f3 0x00987d30 (community match, verified in this file)
+// pdb: hkpWorldCallbackUtil::fireEntityAdded | hkpWorldCallbackUtil.obj | fnv360_0721_beta, ustr_rel, low, conflict (skyrim: hkpEntityCallbackUtil::fireEntityAdded)
+// pdb params: world, entity
 void __cdecl FUN_00cffa00(ProfOwner_cffa00* pOwner)
 {
     LPVOID(WINAPI * pfnTlsGetValue)(DWORD) = TlsGetValue;

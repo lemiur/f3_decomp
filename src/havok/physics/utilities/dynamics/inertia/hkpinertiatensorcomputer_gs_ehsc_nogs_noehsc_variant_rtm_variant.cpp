@@ -391,6 +391,7 @@ static __forceinline void ScaleNormal159(IntegralVector159& v, const float& s)
     v.z = static_cast<volatile float&>(v.z) * s;
     v.w = (float)(s * 0.0);
 }
+// pdb: InternalInertiaTensorComputer::compVolumeIntegrals | hkInertiaTensorComputer.obj | tesv_win, caller_sim, low
 void Integrals159::FUN_00ced390(Mesh159* mesh, const IntegralVector159* offset)
 {
     int triangleCount = mesh->count;

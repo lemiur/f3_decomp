@@ -23,6 +23,7 @@ struct FUN_00d873b0_t
     FUN_00d873b0_t(int x, int y);
 };
 // @fnv 0x00d873b0
+// pdb: hkClassAccessor::hkClassAccessor | hkClassMemberAccessor.obj | tesv_win, call_seq, medium
 FUN_00d873b0_t::FUN_00d873b0_t(int aiFirst, int aiSecond)
 {
     a = aiFirst;
@@ -404,6 +405,8 @@ struct Fields
 };
 }
 
+// pdb: MapMarkerData::Copy | MapMarkerData.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apCopy
 void hkOwnerDBBB::MakeRef(void* pValue)
 {
     V2(pValue);
@@ -803,6 +806,8 @@ class hkLibDBB6
 
 // Returns 0.0f.
 // @fnv 0x00dbba10
+// pdb: ActorValueOwner::GetBaseActorValue | TESCreature.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: aiWhich
 float __stdcall FUN_00dbba10(void* pArg)
 {
     return 0.0f;
@@ -837,6 +842,8 @@ static __declspec(noinline) void FUN_00cc0080(WriterC12* pkWriter, const char* p
         pkWriter->write(pcString, hkString_strLen(pcString));
 }
 // @fnv 0x00cc0120
+// pdb: hkOstream::operator<< | hkOStream.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: p
 hkOstreamDBB7& hkOstreamDBB7::FUN_00cc0120(const void* pvPointer) throw()
 {
     int buffer[2506];

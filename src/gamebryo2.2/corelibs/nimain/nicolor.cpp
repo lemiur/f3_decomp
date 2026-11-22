@@ -59,6 +59,8 @@ struct NiColor
 };
 // Formats the three color components with the given prefix and returns the resulting string.
 // @fnv 0x00a696c0
+// pdb: NiColor::GetViewerString | NiColor.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pPrefix
 char* NiColor::GetFormattedString(const char* pPrefix) const
 {
     char* pString;
@@ -81,6 +83,8 @@ struct RgbaColor
 };
 // Formats the four components with pPrefix and returns the resulting string.
 // @fnv 0x00a69720
+// pdb: NiColorA::GetViewerString | NiColor.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pPrefix
 char* RgbaColor::ToString(const char* pPrefix)
 {
     char* pString;

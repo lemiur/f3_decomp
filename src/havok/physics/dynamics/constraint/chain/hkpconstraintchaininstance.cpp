@@ -21,6 +21,8 @@ struct FUN_00dd0460
     void EntityRemovedCallback(void*);
 };
 // @f3 0x00a50b20 (community match, verified in this file)
+// pdb: hkpConstraintChainInstance::entityRemovedCallback | hkpConstraintChainInstance.obj | fnv360_0822_retail, vtable, high
+// pdb params: entity
 void FUN_00dd0460::EntityRemovedCallback(void* a)
 {
     FUN_00c97510* w = *(FUN_00c97510**)((char*)a + 8);
@@ -131,6 +133,8 @@ struct hkpPhantomOverlapLayout
 
 void __cdecl FUN_00901f10(void* arr, int elemSize);
 
+// pdb: hkpConstraintChainInstance::addEntity | hkpConstraintChainInstance.obj | fnv360_0822_retail, call_gap, high
+// pdb params: entity
 void hkpPhantomOverlapDD04::AddReferencedObject(hkReferencedObjectDD04* pkObject)
 {
     hkpPhantomOverlapLayout* self = (hkpPhantomOverlapLayout*)this;
@@ -244,6 +248,7 @@ static __forceinline void ReleaseOwnerDD05(hkReferencedObject* owner)
     }
 }
 
+// pdb: hkpConstraintChainInstance::~hkpConstraintChainInstance | hkpConstraintChainInstance.obj | fnv360_0822_retail, call_seq, high
 FUN_00dd05c0::~FUN_00dd05c0() throw()
 {
     for (int i = 0; i < unk04[11]; ++i)

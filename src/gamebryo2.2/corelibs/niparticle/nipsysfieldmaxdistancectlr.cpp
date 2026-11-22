@@ -37,6 +37,7 @@ struct FUN_00c2b070_cls
 
 // Allocates a 0x40-byte object, runs its base constructor and sets its vtable, then passes it with a1 to FUN_00c32de0 and returns it.
 // @fnv 0x00c2b070
+// pdb: NiPSysFieldMaxDistanceCtlr::CreateClone | NiPSysFieldMaxDistanceCtlr.obj | tesv_win, caller_sim, low
 void* FUN_00c2b070_cls::FUN_00c2b070(unsigned int a1)
 {
     FUN_00c2b070_cls* p = (FUN_00c2b070_cls*)FUN_00aa13e0(0x40);

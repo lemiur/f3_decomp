@@ -18,6 +18,7 @@ struct FUN_00d46b20_cls
 };
 
 // @fnv 0x00d46b20
+// pdb: hkpWorld::isSimulationAtPsi | hkpWorld.obj | fnv360_0822_retail, objrun_open, low
 void FUN_00d46b20_cls::FUN_00d46b20()
 {
     m_08->Run();
@@ -386,6 +387,8 @@ __forceinline void GrowSeekArray(hkArrayD46B* array, int newSize, const char& fi
     array->m_iElementCount = newSize;
 }
 
+// pdb: hkArrayStreamWriter::seek | hkArrayStreamWriter.obj | fnv360_0822_retail, vtable, high
+// pdb params: offset, whence
 int hkArrayStreamWriterD46B::Seek(int iRelOffset, int eWhence)
 {
     int iAbsOffset = m_offset;

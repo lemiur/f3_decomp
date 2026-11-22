@@ -14,6 +14,7 @@ struct FUN_00cad480_Proxy
     virtual void v04();
     virtual void v08(void* arg);
 };
+// pdb: hkpCharacterProxy::fireContactRemoved | hkpCharacterProxy.obj | tesv_win, call_dedup, low
 void __thiscall FUN_00cad480_Class::FUN_00cad480(void* arg)
 {
     int count = *(int*)((char*)this + 0x84);
@@ -76,6 +77,8 @@ struct ReverseNotifyListener {
     virtual void Notify(void* first, void* second);
 };
 
+// pdb: hkpCharacterProxy::fireContactAdded | hkpCharacterProxy.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: hkpCharacterProxy::fireConstraintsProcessed)
+// pdb params: point
 void S_00cad440::FUN_00cad440(void* first, void* second)
 {
     for (int index = unk84 - 1; index >= 0; --index)
@@ -280,6 +283,7 @@ struct CpuObject {
     unsigned int FUN_00cac910();
 };
 // @fnv 0x00cac910
+// pdb: hkpCharacterProxy::getPosition | hkpCharacterProxy.obj | tesv_win, call_seq, medium
 unsigned int CpuObject::FUN_00cac910()
 {
     return value->value + 48u;
@@ -313,6 +317,8 @@ struct Stub_00921660 {
     float hkpCharacterProxy_surfaceDistance(void* a, void* b);
 };
 
+// pdb: hkpCharacterProxy::findSurface | hkpCharacterProxy.obj | fnv360_0822_debug, callee_sim, low, conflict (skyrim: hkpCharacterProxy::fireContactAdded)
+// pdb params: info
 int FUN_00cacf10_cls::FUN_00cacf10(void* arg) {
     ArgminLocal s;
     s.best = DAT_0101e2bc;
@@ -467,6 +473,8 @@ struct BhkProxyLayout {
     volatile int m_idcount;
 };
 
+// pdb: hkpCharacterProxy::entityRemovedCallback | hkpCharacterProxy.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: entity
 void BhkProxy::RemoveTarget(BhkTarget* pTarget)
 {
     BhkProxyLayout* self = reinterpret_cast<BhkProxyLayout*>(this);
@@ -962,6 +970,7 @@ template <> HkArray289<HkPhantom289*>::~HkArray289() throw()
     }
 }
 
+// pdb: hkpCharacterProxy::~hkpCharacterProxy | hkpCharacterProxy.obj | fnv360_0822_retail, call_seq, medium
 FUN_00cadb00::~FUN_00cadb00()
 {
     for (int i = 0; i < m_kActorEntries.m_iElementCount; i++) {

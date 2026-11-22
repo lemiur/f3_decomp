@@ -1259,6 +1259,7 @@ struct B8_9e3220 { V4_9e3220 a; V4_9e3220 b; };
 
 struct Xf_9e3220 { void hkVector4_setTransformedPos(const M44_9e3220* m, const V4_9e3220* v); };
 
+// pdb: hkVector4::setTransformedPos | hkVector4.obj | tesv_win, objopen_prop, low
 static __declspec(noinline) void FUN_009e3220(V3_9e3220* a, V3_9e3220* b,
                                               const M44_9e3220* m, B8_9e3220* out)
 {
@@ -1531,6 +1532,7 @@ static hkSphere makeSphere2( const hkVector4& pA, const hkVector4& pB, const hkR
     return hkSphere( pr, radius + radiusEpsilon );
 }
 hkSphere makeSphere3( const hkVector4& pA, const hkVector4& pB, const hkVector4& pC, const hkReal radiusEpsilon );
+// pdb: makeSphere | hkGeometryUtility.obj | tesv_win, call_gap, low
 static hkSphere FUN_009ea810( const hkVector4& pA, const hkVector4& pB, const hkVector4& pC, const hkVector4& pD, const hkReal radiusEpsilon )
 {
     hkVector4 b; b.setSub4( pB, pA );
@@ -1660,6 +1662,7 @@ namespace n9e3540
         return reinterpret_cast<const float*>(reinterpret_cast<const char*>(part.base) + indices[corner] * part.scale);
     }
 
+    // pdb: hkpExtendedMeshShape::calcAabbExtents | hkpExtendedMeshShape.obj | tesv_win, objopen_prop, low
     static __declspec(noinline) void FUN_009e3540(unkBox& box, unkHelper* subpart, unkHolder* factors)
     {
         Aabb* accum = reinterpret_cast<Aabb*>(&box);

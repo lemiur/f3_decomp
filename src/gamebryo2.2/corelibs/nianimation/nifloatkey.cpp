@@ -15,6 +15,8 @@ struct TimedAnimationKey : AnimationKey
 bool __cdecl AreRecordsEqual(const AnimationKey&, const AnimationKey&);
 // Returns false if AreRecordsEqual rejects the keys, otherwise compares the two float fields of the keys for equality.
 // @fnv 0x00a26f30
+// pdb: NiBezFloatKey::Equal | NiBezFloatKey.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: key0, key1
 bool FUN_00a26f30(const AnimationKey& key0, const AnimationKey& key1)
 {
     const TimedAnimationKey* pKey1Floats = (const TimedAnimationKey*)&key1;
@@ -37,6 +39,8 @@ struct MyStream
 };
 // Reads 4 bytes from the stream's input into pValue and advances the input position by the bytes read.
 // @fnv 0x00a26df0
+// pdb: NiStreamLoadBinary<unsigned int> | NiXenonPersistentSrcTextureRendererData.obj | fnv360_0822_retail, call_gap, low
+// pdb params: kStream, value
 void FUN_00a26df0(MyStream* pkStream, void* pValue)
 {
     MyIn* __restrict pkInput = pkStream->input;
@@ -96,6 +100,8 @@ struct SObj
 void __cdecl CallAnimCallback(SStream*, SObj*);
 // Calls CallAnimCallback, then writes the float at a2->v into the stream's output via its fn callback and advances pos by the bytes written.
 // @fnv 0x00a26ef0
+// pdb: NiFloatKey::SaveBinary | NiFloatKey.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: stream, pkKey
 void WriteFloatToStream(SStream* pStream, SObj* pObj)
 {
     CallAnimCallback(pStream, pObj);
@@ -132,6 +138,7 @@ extern BA26E20Func g_apfnA26E20IsPosed[];
 
 // Registers the float-key operations in the global function tables and key-size table, returning 1 on first registration and 0 if already registered.
 // @fnv 0x00a26e20
+// pdb: NiFloatKey::RegisterLoader | NiFloatKey.obj | fnv360_0822_retail, objrun, medium
 int __cdecl RegisterFloatKeyOps()
 {
     if (g_bA26E20Registered)
@@ -194,6 +201,8 @@ extern float g_fDefaultValueA26;
 
 // Returns the key value at fTime, clamping to the first/last key outside the range and otherwise delegating to the interpolating lookup.
 // @fnv 0x00a26d70
+// pdb: NiFloatKey::GenInterpDefault | NiFloatKey.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: fTime, pkKeys, eType, uiNumKeys, ucSize
 float NiFloatKeyA26::GetValueAtTime(float fTime, NiFloatKeyA26* pkKeys, KeyType eType, unsigned int uiNumKeys,
                                     unsigned char ucSize)
 {
@@ -226,6 +235,8 @@ static inline const S00a26b40_Key& S00a26b40_At(const S00a26b40_Key* keys, unsig
 
 // Selects a key interval for time, interpolates when a next key exists, and updates lastIndex on the multi-key path.
 // @fnv 0x00a26b40
+// pdb: NiFloatKey::GenInterp | NiFloatKey.obj | fnv360_0822_retail, call_seq, high
+// pdb params: fTime, pkKeys, eType, uiNumKeys, uiLastIdx, ucSize
 float __cdecl InterpolateKey(float time, const S00a26b40_Key* keys, unsigned int type, unsigned int count,
                              unsigned int* lastIndex, unsigned char keySize)
 {

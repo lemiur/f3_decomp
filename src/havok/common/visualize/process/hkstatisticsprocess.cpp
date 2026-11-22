@@ -80,6 +80,7 @@ struct SecondBase
 extern int DAT_01269cd8;
 
 // @fnv 0x00ddc820
+// pdb: hkpShapeDisplayViewer::getProcessTag | hkpShapeDisplayViewer.obj | fnv360_0822_retail, vtable, medium
 int FUN_00ddc820()
 {
     return DAT_01269cd8;
@@ -543,6 +544,8 @@ struct OArchive
 
 using namespace N63f10;
 
+// pdb: hkStatisticsProcess::step | hkStatisticsProcess.obj | fnv360_0822_retail, vtable, medium
+// pdb params: frameTimeInMs
 void ThisCls::WriteToStream(int aiUnused)
 {
     if (m_0c == 0)

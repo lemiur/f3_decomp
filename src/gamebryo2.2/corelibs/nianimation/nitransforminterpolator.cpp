@@ -2,6 +2,8 @@
 #include "f3_common.h"
 #include "nitransforminterpolator_decls.h"
 // @fnv 0x00a3fae0
+// pdb: NiTransformInterpolator::NiTransformInterpolator | NiTransformInterpolator.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: kPoseValue
 NiTransformInterpolator::NiTransformInterpolator(NiQuatTransform kTransform)
     : m_kTransformValue(kTransform), m_spData(0)
 {
@@ -17,6 +19,7 @@ static inline bool TransformIsValid(const NiQuatTransform& value)
            value.m_kTranslate.x != -3.4028234663852886e38;
 }
 // @fnv 0x00a3fdb0
+// pdb: NiTransformInterpolator::Update | NiTransformInterpolator.obj | tesv_win, caller_sim, low
 bool NiTransformInterpolator::Update(float time, NiObjectNET* target, NiQuatTransform& value)
 {
     if (bPose)
@@ -71,6 +74,7 @@ void __fastcall FUN_00a3ca30(void* pThis);
 void __cdecl FUN_00aa1460(void* p, unsigned int s);
 
 // @fnv 0x00a40410
+// pdb: NiTransformInterpolator::`scalar deleting destructor' | NiTransformInterpolator.obj | fnv360_0822_retail, objrun, high
 void* __fastcall FUN_00a40410(NiTransformInterpolator* pThis, int, unsigned int flags)
 {
     NiTransformData* pkData = pThis->m_spData.p;
@@ -95,6 +99,8 @@ enum KeyContent
 
 // Maps a channel index to a KeyContent: 0 quaternion, 1 position, 2 none, otherwise tangent.
 // @fnv 0x00a3f570
+// pdb: NiTransformInterpolator::GetKeyContent | NiTransformInterpolator.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: usChannel
 KeyContent __stdcall FUN_00a3f570(unsigned short usChannel)
 {
     if (usChannel == 0)
@@ -113,6 +119,8 @@ struct FUN_00a3f600_shell : public NiTransformInterpolator
 
 // Returns the pointer stored at offset 0x14, 0x10 or 0x18 of the object at this+0x2c depending on a (0, 1, 2), or null.
 // @fnv 0x00a3f600
+// pdb: NiTransformInterpolator::GetKeyType | NiTransformInterpolator.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: usChannel
 void* FUN_00a3f600_shell::FUN_00a3f600(short aiIndex)
 {
     if (aiIndex == 0)
@@ -143,6 +151,8 @@ struct FUN_00a3f650_shell : public NiTransformInterpolator
 
 // Returns a field from the object at offset 0x2c based on arg (0, 1, or 2), or 0 if that pointer is null or arg is other.
 // @fnv 0x00a3f650
+// pdb: NiTransformInterpolator::GetKeyArray | NiTransformInterpolator.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: usChannel
 int __thiscall FUN_00a3f650_shell::FUN_00a3f650(short aiIndex)
 {
     if (aiIndex == 0)
@@ -173,6 +183,7 @@ struct FUN_00a3f990_shell : public NiTransformInterpolator
 
 // Reads fields at offsets 0xa, 0x14, 0x1d and 0x24 from the object at this+0x2c into the out parameters and returns the last; zeroes them if that pointer is null.
 // @fnv 0x00a3f990
+// pdb: NiTransformInterpolator::GetPosData | NiTransformInterpolator.obj | tesv_win, hash, low
 int __thiscall FUN_00a3f990_shell::FUN_00a3f990(unsigned int* puiValue, int* piValue, unsigned char* pucValue)
 {
     NiTransformData* pkData = m_spData.p;
@@ -279,6 +290,8 @@ struct FUN_00a3f5b0_t : public NiTransformInterpolator
 };
 // Returns the unsigned short at offset 0xa, 0x8 or 0xc of the data pointer at this+0x2c for channel 0, 1 or 2, else 0.
 // @fnv 0x00a3f5b0
+// pdb: NiTransformInterpolator::GetKeyCount | NiTransformInterpolator.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: usChannel
 unsigned int FUN_00a3f5b0_t::FUN_00a3f5b0(unsigned short usChannel) const
 {
     if (usChannel == 0)
@@ -308,6 +321,8 @@ struct FUN_00a3f6a0_t : public NiTransformInterpolator
 };
 // Returns the bool flag at offset 0x1d, 0x1c or 0x1e of the data pointer at this+0x2c for channel 0, 1 or 2; false otherwise.
 // @fnv 0x00a3f6a0
+// pdb: NiTransformInterpolator::GetKeyStride | NiTransformInterpolator.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: usChannel
 bool FUN_00a3f6a0_t::FUN_00a3f6a0(unsigned short usChannel) const
 {
     if (usChannel == 0)
@@ -340,6 +355,8 @@ struct FUN_00a3f6f0_t : public NiTransformInterpolator
     void FUN_00a3f6f0(float m_fStartTime, float m_fMaximumDistance);
 };
 // @fnv 0x00a3f6f0
+// pdb: NiTransformInterpolator::GuaranteeTimeRange | NiTransformInterpolator.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: fStartTime, fEndTime
 void FUN_00a3f6f0_t::FUN_00a3f6f0(float afArg1, float afArg2)
 {
     NiTransformData_FUN_00a4df40* pkData = (NiTransformData_FUN_00a4df40*)m_spData.p;
@@ -349,6 +366,7 @@ void FUN_00a3f6f0_t::FUN_00a3f6f0(float afArg1, float afArg2)
 
 // Returns the scale key array from the interpolator's transform data, filling in key count, interpolation type and key size, or zeroes if no data exists.
 // @fnv 0x00a3f9e0
+// pdb: NiTransformInterpolator::GetScaleData | NiTransformInterpolator.obj | tesv_win, hash, low
 TimedAnimationKey* NiTransformInterpolator::FUN_00a3f9e0(unsigned int& uiNumScaleKeys,
                                                          AnimationKey::KeyType& eScaleKeyType,
                                                          unsigned char& ucScaleKeySize)
@@ -437,6 +455,8 @@ struct Holder
 };
 // Replaces the held RefObj pointer with pkData, adjusting reference counts, and resets the three counters to zero.
 // @fnv 0x00a3f930
+// pdb: NiPointer<NiTransformData>::operator= | NiTransformInterpolator.obj | fnv360_0721_beta, call_seq, low, conflict (skyrim: NiTransformInterpolator::SetTransformData)
+// pdb params: pObject
 void Holder::FUN_00a3f930(RefObj* pkData)
 {
     if (m_spData != pkData)
@@ -467,6 +487,8 @@ struct FUN_00a3fa30 : public NiKeyBasedInterpolator
     FUN_00a3fa30(NiTransformData* pkData);
 };
 // @fnv 0x00a3fa30
+// pdb: NiTransformInterpolator::NiTransformInterpolator | NiTransformInterpolator.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: pkData
 FUN_00a3fa30::FUN_00a3fa30(NiTransformData* pkData) : m_spData(pkData)
 {
     m_kTransformValue.m_kTranslate.x = DAT_01015f5c;
@@ -622,6 +644,8 @@ static inline float TI_Time(char* keys, unsigned int i, unsigned char s)
 
 // Computes the first and last key times across the position, rotation and scale key arrays, defaulting both to 0 when no keys exist.
 // @fnv 0x00a3fb20
+// pdb: NiTransformInterpolator::GetActiveTimeRange | NiTransformInterpolator.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fBeginKeyTime, fEndKeyTime
 void FUN_00a3fb20_shell::FUN_00a3fb20(float* fBeginKeyTime, float* fEndKeyTime)
 {
     *fBeginKeyTime = DAT_01097308;
@@ -748,6 +772,8 @@ struct FUN_00a38cb0_shell
 extern char* _FUN_00a7d330(char*);
 extern char* g_011f3ee0_arg1;
 // @fnv 0x00a404b0
+// pdb: NiTransformInterpolator::GetViewerStrings | NiTransformInterpolator.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkStrings
 void FUN_00a404b0_shell::FUN_00a404b0(void* pkStrings)
 {
     ((FUN_00a3cbf0_shell*)this)->FUN_00a3cbf0((StrArr*)pkStrings);
@@ -845,6 +871,8 @@ class FUN_00a3f720_cls
 
 // For modes 0-2, rejects when m_2c is set and v56(mode) > 0, otherwise compares the mode's float field against DAT_010241b0.
 // @fnv 0x00a3f720
+// pdb: NiTransformInterpolator::GetChannelPosed | NiTransformInterpolator.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: usChannel
 bool FUN_00a3f720_cls::FUN_00a3f720(unsigned short mode)
 {
     double value;
@@ -924,6 +952,8 @@ struct S_00a3f870_This
 
 // Calls FUN_00aa0ad0(arg); if it succeeds, invokes v21(arg) on unk2c when non-null and returns true, otherwise returns false.
 // @fnv 0x00a3f870
+// pdb: NiTransformInterpolator::RegisterStreamables | NiTransformInterpolator.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: kStream
 bool __thiscall S_00a3f870_This::FUN_00a3f870(unsigned int arg)
 {
     if (!this->FUN_00aa0ad0(arg))
@@ -1053,6 +1083,8 @@ struct FUN_00a3f8a0_t
 };
 
 // @fnv 0x00a3f8a0
+// pdb: NiTransformInterpolator::SaveBinary | NiTransformInterpolator.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void __thiscall FUN_00a3f8a0_t::FUN_00a3f8a0(NiStream* stream)
 {
     reinterpret_cast<FUN_00a95ca0_helper*>(this)->FUN_00a95ca0(stream);

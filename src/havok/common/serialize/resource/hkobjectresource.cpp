@@ -55,6 +55,7 @@ class FUN_00d46d40_s
 };
 
 // @fnv 0x00e04e50
+// pdb: hkpConvexPieceMeshShape::getFirstKey | hkpConvexPieceMeshShape.obj | fnv360_0822_retail, objrun_open, low
 int __cdecl FUN_00e04e50()
 {
     return 0;
@@ -88,6 +89,7 @@ struct Owner {
     void FUN_006d5980();
 };
 
+// pdb: BGSSaveLoadManager::DeleteSaveGameList | BGSSaveLoadManager.obj | fnv360_0721_beta, caller, low, conflict (skyrim: BGSCellNumericIDArrayMap::AddReference)
 void Owner::FUN_006d5980()
 {
     for (ListNode* node = list; node; node = node->next) {

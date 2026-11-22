@@ -3,6 +3,8 @@
 #include "fnv_a3d_camera.h"
 
 // @fnv 0x00A711B0
+// pdb: Animation::UpdateMovement | Animation.obj | fnv360_0822_retail, call_seq, high
+// pdb params: apRef
 void NiCamera::UpdateWorldData(NiUpdateData& update)
 {
     NiAVObject::UpdateWorldData(update);
@@ -10,6 +12,8 @@ void NiCamera::UpdateWorldData(NiUpdateData& update)
 }
 
 // @fnv 0x00A6FAF0
+// pdb: NiCamera::SetViewFrustum | NiCamera.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kFrustum
 void NiCamera::UpdateViewFrustum(const NiFrustum& frustum)
 {
     m_kViewFrustum.m_fNearPlane = frustum.m_fNearPlane;
@@ -27,6 +31,8 @@ void NiCamera::UpdateViewFrustum(const NiFrustum& frustum)
 }
 
 // @fnv 0x00A711D0
+// pdb: NiCamera::LinkObject | NiCamera.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void NiCamera::LinkObject(NiStream& stream)
 {
     NiAVObject::LinkObject(stream);
@@ -81,6 +87,8 @@ void NiCamera::LinkObject(NiStream& stream)
 #undef FNV_READ_SCALAR
 
 // @fnv 0x00A703A0
+// pdb: NiCamera::ViewPointToRay | NiCamera.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: fVx, fVy, kOrigin, kDir
 void NiCamera::ScreenPointToRay(float x, float y, NiPoint3& origin, NiPoint3& direction)
 {
     if (m_kViewFrustum.m_bOrthographic)
@@ -155,6 +163,7 @@ void NiCamera::ScreenPointToRay(float x, float y, NiPoint3& origin, NiPoint3& di
 }
 
 // @fnv 0x00A70B40
+// pdb: NiAVObject::CreateBoundIfNone | TESObjectCELL.obj | fnv360_0822_retail, call_seq, low
 void NiCamera::UpdateWorldBound()
 {
     if (!m_kWorldBound)
@@ -180,6 +189,7 @@ struct NiMemObject
 };
 
 // @fnv 0x00a70050
+// pdb: NiCamera::`scalar deleting destructor' | NiCamera.obj | tesv_win, vtable_prefix, medium
 void* __fastcall DestroyCamera(int* pThis, int, unsigned int flags)
 {
     *pThis = (int)&DAT_0109cb9c;
@@ -236,6 +246,7 @@ struct FUN_00a712f0 : BSFadeNode
     char body[0x114];
 };
 // @fnv 0x00a71430
+// pdb: NiCamera::CreateObject | NiCamera.obj | fnv360_0822_retail, caller_sim, low
 FUN_00a712f0* FUN_00a71430()
 {
     return new FUN_00a712f0();
@@ -281,6 +292,8 @@ struct FUN_00a71920_shell
 };
 
 // @f3 0x0083bd00 (community match, verified in this file)
+// pdb: NiCamera::GetViewerStrings | NiCamera.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FUN_00a71920_shell::FUN_00a71920(StrArr* strings)
 {
     reinterpret_cast<FUN_00a5ea70_t*>(this)->FUN_00a5ad00(strings);
@@ -364,6 +377,8 @@ struct ComparableCamera : NiCamera
     bool IsEqualTo(NiObject* other);
 };
 // @fnv 0x00a6ff20
+// pdb: NiCamera::IsEqual | NiCamera.obj | fnv360_0822_retail, objrun_prop, high
+// pdb params: pkObject
 bool ComparableCamera::IsEqualTo(NiObject* other)
 {
     NiCamera* camera = (NiCamera*)other;
@@ -465,6 +480,8 @@ struct CamLook : public NiCamera
 };
 
 // @fnv 0x00a701b0
+// pdb: NiCamera::LookAtWorldPoint | NiCamera.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: kWorldPt, kWorldUp
 bool CamLook::SetLookAt(const CamPoint& point, const CamPoint& worldUp)
 {
     CamPoint dir = GetWorldTranslate() - point;
@@ -494,6 +511,8 @@ struct ScreenCamera : public NiCamera
 };
 
 // @fnv 0x00a6fc50
+// pdb: NiCamera::WorldPtToScreenPt | NiCamera.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: kPt, fBx, fBy, fZeroTolerance
 bool ScreenCamera::ProjectToScreen(const NiPoint3& kPt, float& fBx, float& fBy, float fZeroTolerance) const
 {
     float fW = kPt.x * m_afWorldToCamera[3][0] + kPt.y * m_afWorldToCamera[3][1] + kPt.z * m_afWorldToCamera[3][2] +
@@ -532,6 +551,7 @@ class FUN_00a6ff10_StandIn
 };
 
 // @fnv 0x00a6ff10
+// pdb: FOPipboyManager::ReInitialize | FOPipboyManager.obj | fnv360_0822_retail, call_gap, low
 bool FUN_00a6ff10_StandIn::FUN_00a6ff10(NiStream& stream)
 {
     return FUN_00a59f00(stream);
@@ -573,6 +593,8 @@ inline void ReadBinaryValue(NiStream& stream, bool& value)
 
 // Reads camera frustum, port, and trailing values from a NiStream, handling NIF version differences for flags and orthographic projection.
 // @fnv 0x00a71450
+// pdb: NiCamera::LoadBinary | NiCamera.obj | fnv360_0822_retail, uconst, low
+// pdb params: kStream
 void NiCameraHack::FUN_00a71450(NiStream& stream)
 {
     NiAVObject::LoadBinary(stream);
@@ -633,6 +655,8 @@ struct FUN_00a6fdb0_t : public NiCamera
 
 // Projects a world-space point into camera/screen space using m_afWorldToCamera and m_kPort, writing the result to fBx, fBy, fBz.
 // @fnv 0x00a6fdb0
+// pdb: NiCamera::WorldPtToScreenPt3 | NiCamera.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: kPt, fBx, fBy, fBz, fZeroTolerance
 bool FUN_00a6fdb0_t::ProjectPointToScreen(const NiPoint3& kPt, float& fBx, float& fBy, float& fBz,
                                           float fZeroTolerance) const
 {
@@ -739,6 +763,7 @@ class S00a70ba0_Cam : public NiAVObject
 
 // Computes the m_afWorldToCamera matrix from the camera orientation, translation, and view frustum for orthographic or perspective projection.
 // @fnv 0x00a70ba0
+// pdb: NiCamera::WorldToCameraMatrix | NiCamera.obj | fnv360_0822_retail, call_gap, high
 void S00a70ba0_Cam::UpdateWorldToCamera()
 {
     CameraVector kWorldPosition;
@@ -872,6 +897,8 @@ struct CameraWindowRay : NiCamera
 };
 // Maps screen coordinates to a view-space ray using the camera port and view frustum, returning false if the point is outside the port.
 // @fnv 0x00a71080
+// pdb: NiPick::NiPick | NiPick.obj | fnv360_0822_retail, call_gap, low
+// pdb params: uiResultsInitialSize, uiResultsGrowBy
 bool CameraWindowRay::MapScreenToRay(long aiScreenX, long aiScreenY, NiPoint3& origin, NiPoint3& direction,
                                      const NiRenderTargetGroup* apRenderTargetGroup)
 {
@@ -956,6 +983,8 @@ struct NiCamera_Candidate : public NiCamera
 
 // Saves the camera's AV object data, view frustum, port, and link ID to the binary stream via SerializeValue calls.
 // @fnv 0x00a716c0
+// pdb: NiCamera::SaveBinary | NiCamera.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void NiCamera_Candidate::FUN_00a716c0(NiStream& kStream)
 {
     ((NiAVObjectHelper*)this)->SaveBinaryAV(kStream);
@@ -1002,6 +1031,8 @@ struct NiRectFloat
 
 // Formats the rect's four float bounds into a newly allocated string prefixed by pPrefix.
 // @fnv 0x00a71020
+// pdb: NiRect<float>::GetViewerString | NiCamera.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pPrefix
 char* NiRectFloat::ToString(const char* pPrefix) const
 {
     char* pString;
@@ -1159,6 +1190,7 @@ class FUN_00a712f0_Camera : public NiAVObjectA71
 
 // Initialises the camera's view frustum, port, near/far limits and trailing value, then calls UpdateWorldData, UpdateWorldFrustum and UpdateCameras.
 // @fnv 0x00a712f0
+// pdb: NiCamera::NiCamera | NiCamera.obj | fnv360_0822_retail, call_dedup, low
 FUN_00a712f0_Camera::FUN_00a712f0_Camera() : m_kViewFrustum(false)
 {
     m_kViewFrustum.m_bOrthographic = false;
@@ -1359,6 +1391,8 @@ class NiCameraV7 : public NiAVObjectV7
 
 // Projects a bound onto the camera's forward axis to set the view frustum near/far planes, then updates world data and bound.
 // @fnv 0x00a70080
+// pdb: NiCamera::FitNearAndFarToBound | NiCamera.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: kBound
 bool NiCameraV7::FUN_00a70080(const NiBoundV7& bound)
 {
     NiPoint3V7 kWDir = GetWorldTranslation();

@@ -33,6 +33,7 @@ struct EffectSetting
 };
 
 // @f3 0x00402af0 (community match, verified in this file)
+// pdb: EffectItem::GetEffectName | EffectItem.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: NiTStringMap<class Setting *>::~NiTStringMap<class Setting *>)
 void* __thiscall EffectSetting::FUN_00405e60(void* a0)
 {
     EffectSetting* p = *(EffectSetting**)((char*)this + 0x14);
@@ -60,6 +61,7 @@ struct Global_01090a78
     void* FUN_0086ba60(void* p);
 };
 extern Global_01090a78 DAT_01090a78;
+// pdb: TESRegionData::SetPriority | TESRegionData.obj | tesv_win, call_gap, low
 BSExtraData* BaseExtraList::FUN_00418200()
 {
     Layout_BSExtraList* self = (Layout_BSExtraList*)this;

@@ -450,6 +450,7 @@ struct FUN_008d04d0_self
     int unk20;
 };
 
+// pdb: BGSListForm::ClearData | BGSListForm.obj | fnv360_0822_retail, vtable, medium
 void FUN_008d04d0_s::FUN_008d04d0()
 {
     FUN_008d04d0_self* self = reinterpret_cast<FUN_008d04d0_self*>(this);

@@ -45,6 +45,8 @@ struct TargetCls : public NiNode
     void __thiscall FUN_00a95410(NiStream&);
 };
 // @fnv 0x00a95410
+// pdb: NiSortAdjustNode::LinkObject | NiSortAdjustNode.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: stream
 void __thiscall TargetCls::FUN_00a95410(NiStream& stream)
 {
     ReadChildListFromStream(stream);
@@ -83,6 +85,8 @@ struct MyNode
 };
 // Calls the base class stream writer, then writes the int at offset 0xac to the NiBinaryStream.
 // @fnv 0x00a954b0
+// pdb: NiSortAdjustNode::SaveBinary | NiSortAdjustNode.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: BSMultiBoundNode::SaveBinary)
+// pdb params: stream
 void MyNode::WriteToStream(NiStream& stream)
 {
     ((MyBase*)this)->FUN_00a5e880(stream);
@@ -100,6 +104,8 @@ struct MyOther : CompareBase
 };
 // Calls FUN_00a5e600(other); if that succeeds, returns whether the int at offset 0xac matches between this and other.
 // @fnv 0x00a952e0
+// pdb: NiSortAdjustNode::IsEqual | NiSortAdjustNode.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiBillboardNode::IsEqual)
+// pdb params: pObject
 unsigned char MyOther::FUN_00a952e0(MyOther* other)
 {
     unsigned char result = FUN_00a5e600(other);
@@ -177,6 +183,8 @@ struct S_00a953b0_Sort : S_00a953b0_Node
 };
 
 // @fnv 0x00a953b0
+// pdb: NiSortAdjustNode::CreateClone | NiSortAdjustNode.obj | fnv360_0822_retail, caller_sim, low, conflict (bridge: BSClearZNode::CreateClone)
+// pdb params: kCloning
 S_00a953b0_Node* S_00a953b0_Sort::FUN_00a953b0(void* process)
 {
     S_00a953b0_Sort* p = new S_00a953b0_Sort;
@@ -408,6 +416,8 @@ struct S_00a95440_SortAdjustNode : S_00a95440_Node
 };
 
 // @fnv 0x00a95440
+// pdb: NiSortAdjustNode::LoadBinary | NiSortAdjustNode.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: stream
 void S_00a95440_SortAdjustNode::FUN_00a95440(S_00a95440_Stream& kStream)
 {
     S_00a95440_Node::LoadBinary(kStream);
@@ -504,6 +514,8 @@ class FUN_00a95350_cls
 
 // Calls NiNode_OnVisible, then sets or clears bit 0x40 in the flags of each list item added during that call, depending on whether m_iAc equals 1.
 // @fnv 0x00a95350
+// pdb: NiSortAdjustNode::OnVisible | NiSortAdjustNode.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCuller
 void FUN_00a95350_cls::UpdateItemFlags(FUN_00a95350_Arg* pArg)
 {
     bool hide = (m_iAc != 1);
@@ -530,6 +542,8 @@ void FUN_00a95350_cls::UpdateItemFlags(FUN_00a95350_Arg* pArg)
 void __cdecl FUN_00a5dce0();
 // Calls FUN_00a5dce0.
 // @fnv 0x00a95290
+// pdb: NiSortAdjustNode::ProcessClone | NiSortAdjustNode.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiBillboardNode::RegisterStreamables)
+// pdb params: kCloning
 void __cdecl FUN_00a95290()
 {
     FUN_00a5dce0();

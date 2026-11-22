@@ -2,6 +2,8 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 // @fnv 0x00cbfe20
+// pdb: hkMath::hkFloorToInt | hkMathTypes.obj | fnv360_0822_retail, objrun, medium
+// pdb params: r
 int __cdecl FUN_00cbfe20(float afValue)
 {
     union fiu

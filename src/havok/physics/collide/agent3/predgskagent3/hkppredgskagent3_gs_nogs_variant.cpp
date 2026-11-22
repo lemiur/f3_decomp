@@ -296,6 +296,8 @@ struct FNV_Shape13
     virtual void GetVerticesForIds(const unsigned short* ids, int numIds, void* out) const;
 };
 
+// pdb: hkPredGskAgent3::sepNormal | hkpPredGskAgent3.obj | fnv360_0822_debug, objrun, medium
+// pdb params: input, entry, agentData, separatingNormalOut
 void __cdecl FUN_00d41930(Input_s* input, int unused, hkpGskCache_s* cache, Output_s* output)
 {
     hkpConvexShape_s* shapeA = input->m_pBodyA->m_pCollisionShape;

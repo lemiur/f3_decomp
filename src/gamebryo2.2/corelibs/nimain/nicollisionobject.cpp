@@ -2,18 +2,24 @@
 #include "f3_common.h"
 #include "nicollisionobject_decls.h"
 // @fnv 0x00a80fd0
+// pdb: bhkExtraData::LoadBinary | bhkExtraData.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void NiCollisionObject::LoadBinary(NiStream& stream)
 {
     NiObject::LoadBinary(stream);
     stream.ResetStreamState();
 }
 // @fnv 0x00a80ff0
+// pdb: NiCollisionObject::LinkObject | NiCollisionObject.obj | fnv360_0822_retail, call_seq, low
+// pdb params: kStream
 void NiCollisionObject::LinkObject(NiStream& stream)
 {
     NiObject::LinkObject(stream);
     m_pkSceneObject = static_cast<NiAVObject*>(stream.GetLoadedObject());
 }
 // @fnv 0x00a810b0
+// pdb: NiCollisionObject::SetSceneGraphObject | NiCollisionObject.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkSceneObject
 void NiCollisionObject::SetSceneObject(NiAVObject* object)
 {
     m_pkSceneObject = object;
@@ -21,6 +27,8 @@ void NiCollisionObject::SetSceneObject(NiAVObject* object)
         object->AssignCollisionObject(this);
 }
 // @fnv 0x00a810d0
+// pdb: NiCollisionObject::NiCollisionObject | NiCollisionObject.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pkSceneObject
 NiCollisionObject::NiCollisionObject(NiAVObject* apSceneObject) : m_pkSceneObject(apSceneObject)
 {
     if (apSceneObject && apSceneObject->m_spCollisionObject != this)
@@ -140,6 +148,8 @@ struct FakeThis00a81040 : NiObject
 };
 // Links the object to the stream via NiObject::LinkObject, then calls the stream's f12 with unk08.
 // @fnv 0x00a81040
+// pdb: NiCollisionObject::SaveBinary | NiCollisionObject.obj | fnv360_0822_retail, objrun, medium
+// pdb params: kStream
 void FakeThis00a81040::FUN_00a81040(NiStream& kStream)
 {
     NiObject::LinkObject(kStream);
@@ -155,6 +165,8 @@ struct T_00a81060
 };
 // Returns false if IsSameAs fails or if _8 and pkObject disagree on being null; otherwise returns true.
 // @fnv 0x00a81060
+// pdb: NiCollisionObject::IsEqual | NiCollisionObject.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkObject
 bool T_00a81060::FUN_00a81060(NiObject* pkObject)
 {
     if (!IsSameAs(pkObject))
@@ -237,6 +249,8 @@ class BA81100Object : public BA81100Base
 
 // Appends the base viewer strings, the A81100 name string, and any extra viewer strings to pkStrings.
 // @fnv 0x00a81100
+// pdb: NiCollisionData::GetViewerStrings | NiCollisionData.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkStrings
 void BA81100Object::FUN_00a81100(BA81100StringArray* pkStrings)
 {
     BaseGetViewerStrings(pkStrings);
@@ -270,6 +284,8 @@ class ClaimCls
 };
 
 // @fnv 0x00a81160
+// pdb: NiCollisionObject::AddViewerStrings | NiCollisionObject.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void ClaimCls::WriteToStream(StreamShell& kStream)
 {
     {

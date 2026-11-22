@@ -9,6 +9,7 @@ struct NiRTTI
 extern NiRTTI g_011f3ee0;
 
 // @fnv 0x00a43ab0
+// pdb: NiBillboardNode::GetRTTI | TESObjectTREE.obj | fnv360_0822_retail, vtable, medium
 NiRTTI* __cdecl FUN_00a43ab0()
 {
     return &g_011f3ee0;
@@ -104,6 +105,7 @@ struct FUN_00a43e90_cls
 };
 
 // @fnv 0x00a43e90
+// pdb: BSRotAccumTransfInterpolator::CreateClone | BSRotAccumTransfInterpolator.obj | tesv_win, objrun_open, low
 BSRotAccumTransfInterpolator* FUN_00a43e90_cls::CreateInterpolator(int a)
 {
     BSRotAccumTransfInterpolator* obj = (BSRotAccumTransfInterpolator*)FUN_00aa13e0(0x58);
@@ -179,6 +181,8 @@ struct FUN_00a43ac0_Class : BaseInterp
 
 // Calls FUN_00a43330, then copies the first rotation key's quaternion into m_kRotValue when rotation keys exist.
 // @fnv 0x00a43ac0
+// pdb: BSRotAccumTransfInterpolator::LinkObject | BSRotAccumTransfInterpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: arStream
 void FUN_00a43ac0_Class::UpdateRotValue(int a)
 {
     FUN_00a43330(a);
@@ -194,6 +198,7 @@ void FUN_00a43ac0_Class::UpdateRotValue(int a)
 
 void __cdecl FUN_00a3f7b0();
 // @fnv 0x00a43a70
+// pdb: TESFaction::ClearData | TESFaction.obj | fnv360_0822_retail, vtable, medium
 void __cdecl FUN_00a43a70()
 {
     FUN_00a3f7b0();
@@ -202,6 +207,8 @@ void __cdecl FUN_00a43a70()
 extern void __cdecl FUN_00a3f870();
 
 // @fnv 0x00a43a80
+// pdb: TESNPC::UnClone3D | TESNPC.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apRequester
 void __cdecl FUN_00a43a80()
 {
     FUN_00a3f870();
@@ -209,6 +216,7 @@ void __cdecl FUN_00a43a80()
 
 void __cdecl FUN_00a3f8a0();
 // @fnv 0x00a43a90
+// pdb: TESSkill::InitializeData | TESSkill.obj | fnv360_0822_retail, vtable, medium
 void __cdecl FUN_00a43a90()
 {
     FUN_00a3f8a0();
@@ -217,6 +225,8 @@ void __cdecl FUN_00a43a90()
 extern void FUN_00a3f8d0();
 
 // @fnv 0x00a43aa0
+// pdb: TESTopicInfo::CloneResponseList | TESTopicInfo.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aResponseListWrapper
 void FUN_00a43aa0()
 {
     FUN_00a3f8d0();
@@ -311,6 +321,8 @@ struct RotAccumInterpolator
 };
 // Evaluates position, rotation and scale keys at time, applies rotation delta to object matrix, and stores the result in result.
 // @fnv 0x00a43b00
+// pdb: BSRotAccumTransfInterpolator::Update | BSRotAccumTransfInterpolator.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: afTime, apInterpTarget, arValue
 bool RotAccumInterpolator::Evaluate(float time, RotationObject* object, TransformValue& result)
 {
     if (alwaysUpdate)
@@ -416,6 +428,7 @@ struct FUN_00a43df0_cls
 
 // Decrements the referenced object's count and calls Release at zero, then calls BaseCleanup and FUN_00aa1460 when bit 0 is set.
 // @fnv 0x00a43df0
+// pdb: BSRotAccumTransfInterpolator::`scalar deleting destructor' | BSRotAccumTransfInterpolator.obj | fnv360_0721_beta, objrun_open, high
 FUN_00a43df0_cls* FUN_00a43df0_cls::FUN_00a43df0(unsigned char acFlags)
 {
     *(volatile int*)&m_vptr = (int)&DAT_01097af4;

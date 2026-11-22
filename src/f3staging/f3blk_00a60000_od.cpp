@@ -27,6 +27,8 @@ struct OtherBase { virtual void g(); };
 struct ArrayX { int* data; int size; unsigned capacity; ArrayX():data(0),size(0),capacity(0x80000000) {} };
 struct Result : Base, OtherBase { ArrayX items; const Keys* keys; Result(void*,Container*,const Keys&); };
 extern void __cdecl build(void*, Bounds&, OtherBase*);
+// pdb: hkpRemoveTerminalsMoppModifier::hkpRemoveTerminalsMoppModifier | hkpRemoveTerminalsMoppModifier.obj | fnv360_0822_retail, objrun, high
+// pdb params: moppCode, shapeContainer, shapesToRemove
 Result::Result(void* code, Container* container, const Keys& k) {
  if (k.size != 0) {
   Bounds a;
@@ -120,6 +122,8 @@ struct This
     void FUN_00a7e460(Owner* owner, Node* node, Out* out);
 };
 
+// pdb: hkpConvexPenetrationUtil::convertResultToFeature | hkpConvexPenetrationUtil.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: polytope, nearestTriangle, output
 void This::FUN_00a7e460(Owner* owner, Node* node, Out* out)
 {
     float bary[3];
@@ -462,6 +466,8 @@ struct HingeQ
     void FUN_00a6a750(int);
     void FUN_00a6c820(ConstraintQ*, HandlerQ*, int);
 };
+// pdb: hkpRagdollLimitsDrawer::drawConstraint | hkpRagdollLimitsDrawer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: constraint, displayHandler, id, tag
 void HingeQ::FUN_00a6c820(ConstraintQ* constraint, HandlerQ* handler, int tag)
 {
     DataQ* data = constraint->data;
@@ -666,6 +672,8 @@ struct __declspec(align(16)) S00a6ec10_Viewer
     void FUN_00a6ec10(S00a6ec10_Input* input, S00a6ec10_Display* display, int id);
 };
 
+// pdb: hkpLimitedHingeDrawer::drawConstraint | hkpLimitedHingeDrawer.obj | fnv360_0822_retail, call_gap, low
+// pdb params: constraint, displayHandler, id, tag
 void S00a6ec10_Viewer::FUN_00a6ec10(S00a6ec10_Input* input, S00a6ec10_Display* display, int id)
 {
     S00a6ec10_Constraint* data = input->constraint;
@@ -870,6 +878,8 @@ void FUN_00a6c270(P1*,Renderer*,int);
 void FUN_00a6aa20(P1*,Transform*,Transform*);
 void FUN_00a6a750(int);
 };
+// pdb: hkpConstraintChainDrawer::drawConstraint | hkpConstraintChainDrawer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: constraint, displayHandler, id, tag
 void This::FUN_00a6c270(P1* p1,Renderer* renderer,int tag) {
  Mat* mat=p1->mat;
  // Fake match: the const copy of the handler and the two named rotation references below only steer product operand order.
@@ -1265,6 +1275,8 @@ struct Registry {unsigned int unk00,unk04;Array<Handler> entries;};
 extern Registry* DAT_0116c4a0;
 
 
+// pdb: hkpShapeDisplayBuilder::buildShapeDisplay | hkpShapeDisplayBuilder.obj | fnv360_0822_retail, objrun, medium
+// pdb params: shape, transform, displayGeometries
 void Builder::FUN_00a65740(const Shape* shape,const Transform& parent,Array<DisplayObject*>& output)
 {
     switch (shape->type)
@@ -2500,6 +2512,8 @@ extern "C" __forceinline void __cdecl hkPoweredChain_ComputeConstraintMatrix_Nex
 		}
 	}
 }
+// pdb: hkPoweredChain_BuildConstraintMatrixAndLuDecomposition | hkpPoweredChainSolverUtil.obj | fnv360_1110_retail, objrun, medium
+// pdb params: numConstraints, cfm, motorsState, j, jAng, va, accumsBase, triples, bufferSize
 void __cdecl FUN_00a7bcf0( int numConstraints, const hkpCfmParam& cfm, hkp3dAngularMotorSolverInfo* motorsState, hkp1Lin2AngJacobian* __restrict j, hkp2AngJacobian* __restrict jAng, hkpVelocityAccumulatorOffset* __restrict va, const hkpVelocityAccumulator* accumsBase, hkpConstraintChainMatrix6Triple* triples, int bufferSize )
 {
 	;
@@ -6626,6 +6640,8 @@ static hkDisplayConvex* _createConvexDisplayFromPlanes( const hkArray<hkVector4>
 	return new hkDisplayConvex(outputGeom);
 }
 
+// pdb: hkpConvexRadiusBuilder::buildShapeDisplay | hkpConvexRadiusBuilder.obj | fnv360_0822_debug, objrun_prop, medium
+// pdb params: shape, transform, displayGeometries
 void hkpConvexRadiusBuilder::FUN_00a694a0(		const hkpShape* shape,
 												const hkTransform& transform,
 												hkArray<hkDisplayGeometry*>& displayGeometries)
@@ -8452,6 +8468,8 @@ static __forceinline hkReal calcTargetVelocity( const hkp2AngJacobian& jac, cons
 {
 	return calcTargetVelocityImpl( jac, mA, mB, solverInfo, tau, damping );
 }
+// pdb: hkPoweredChain_ScanAndEnableMotors | hkpPoweredChainSolverUtil.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: info, modifiedConstraintIndex, modifiedCoordinateIndex, impulse, motorsState
 void __cdecl FUN_00a7b270( const hkpChainSolverInfo& info, int& modifiedConstraintIndex, int& modifiedCoordinateIndex, hkReal& impulse, hkp3dAngularMotorSolverInfo* motorsState )
 {
 	const hkVector8* g = info.m_gTempBuffer + 1;
@@ -9430,6 +9448,7 @@ static __forceinline hkReal calcTargetVelocity( const hkp2AngJacobian& jac, cons
 {
 	return calcTargetVelocityImpl( jac, mA, mB, solverInfo, tau, damping );
 }
+// pdb: hkPoweredChain_CalculateVelocities | hkpPoweredChainSolverUtil.obj | tesv_win, objrun, medium
 void __cdecl FUN_00a7a4c0( const hkpChainSolverInfo& info, hkVector8* velocities )
 {
 	hkp1Lin2AngJacobian* j = info.m_j;

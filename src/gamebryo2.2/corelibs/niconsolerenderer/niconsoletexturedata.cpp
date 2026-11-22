@@ -54,6 +54,7 @@ struct FUN_00a981d0 : S_00a981d0_Mid
 };
 // Initializes the three base integer fields unk08, unk0c and unk10 to zero.
 // @fnv 0x00a981d0
+// pdb: NiPersistentSrcTextureRendererData::NiPersistentSrcTextureRendererData | NiPersistentSrcTextureRendererData.obj | fnv360_0822_retail, caller_sim, high
 FUN_00a981d0::FUN_00a981d0() throw()
 {
     unk08 = 0;

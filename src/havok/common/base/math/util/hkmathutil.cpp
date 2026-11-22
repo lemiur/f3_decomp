@@ -146,6 +146,8 @@ struct TNode
     void FUN_00959ee0(TB* t);
 };
 
+// pdb: bhkRagdollController::bhkRagdollPoweredConstraintController::driveToPose | bhkRagdollController.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: hkaRagdollPoweredConstraintController::driveToPose)
+// pdb params: ragdoll, desiredPose
 void FUN_00c7a410(S_c7a410_Obj* obj, char* apBuffer)
 {
     int iCount = obj->unk2c->unk10;

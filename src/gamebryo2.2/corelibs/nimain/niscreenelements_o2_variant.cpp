@@ -6,6 +6,7 @@
 extern "C" void* g_011f5b48;
 
 // @fnv 0x00a87800
+// pdb: NiTriShapeData::GetRTTI | NiTriShapeData.obj | fnv360_0822_retail, objrun_open, low
 void* __cdecl FUN_00a87800()
 {
     return &g_011f5b48;
@@ -33,6 +34,8 @@ struct MyTarg : BaseCls
     void FUN_00a878b0(StrArr*);
 };
 // @fnv 0x00a878b0
+// pdb: NiBSplineCompTransformInterpolator::GetViewerStrings | NiBSplineCompTransformInterpolator.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkStrings
 void MyTarg::FUN_00a878b0(StrArr* pkStrings)
 {
     FUN_00a74690(pkStrings);
@@ -57,6 +60,7 @@ class FUN_00a87810 : public FUN_00a74480
     FUN_00a87810(unsigned int flags);
 };
 // @fnv 0x00a87810
+// pdb: bhkNiCollisionObject::QIncludedInSkeleton | TESObjectREFR.obj | fnv360_0721_beta, objrun, medium
 FUN_00a87810::FUN_00a87810(unsigned int flags) : FUN_00a74480(flags)
 {
     m_pVftable = &DAT_0109e984;
@@ -134,6 +138,8 @@ struct FUN_00a87860_cls
 };
 
 // @fnv 0x00a87860
+// pdb: NiScreenElements::CreateClone | NiScreenElements.obj | fnv360_0822_retail, objrun, medium
+// pdb params: kCloning
 ChildObject* FUN_00a87860_cls::FUN_00a87860(void* apArg)
 {
     ChildObject* pChild = new ChildObject();

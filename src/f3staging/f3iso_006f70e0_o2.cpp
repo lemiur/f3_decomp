@@ -43,6 +43,7 @@ struct Actor {
     __declspec(noinline) bool hasPackage();
     bool FUN_006f70e0();
 };
+// pdb: Actor::IsTalking | Actor.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: TESForm::IsActor)
 bool Actor::FUN_006f70e0(){
     if(talkingFlag) return true;
     if(process) return process->table->talking(process,this);

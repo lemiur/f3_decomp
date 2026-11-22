@@ -31,6 +31,8 @@ void __cdecl FUN_00d26230(void*, void*, void*, float, int);
 
 // Calls FUN_00d26230 with this+0x20, this+0x30, the float at this+0x10 plus b, and c.
 // @fnv 0x00d591d0
+// pdb: hkpConvexVerticesShape::getAabbImpl | hkpConvexVerticesShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: localToWorld, tolerance, out
 void FUN_00d591d0_class::FUN_00d591d0(void* a, float afDelta, int c)
 {
     FUN_00d26230(
@@ -45,6 +47,8 @@ void FUN_00d591d0_class::FUN_00d591d0(void* a, float afDelta, int c)
 struct Vec4 { float x, y, z, w; };
 
 // @fnv 0x00d58d40
+// pdb: hkpConvexVerticesShape::getCentreImpl | hkpConvexVerticesShape.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: ConvexVerticesShape_FetchVectorFromPpuArray)
+// pdb params: centreOut
 static Vec4* __cdecl FUN_00d58d40(Vec4* base, int index)
 {
     return base + index;
@@ -79,6 +83,7 @@ struct FnvCpu_FUN_00d58d10_CpuObject {
     int FUN_00d58d10();
 };
 // @fnv 0x00d58d10
+// pdb: hkpConvexVerticesShape::getNumCollisionSpheresImpl | hkpConvexVerticesShape.obj | fnv360_0822_retail, objrun_open, low
 int FnvCpu_FUN_00d58d10_CpuObject::FUN_00d58d10()
 {
     return value;
@@ -327,6 +332,8 @@ public:
 
 // Copies numIds rotated vertex positions from m_kRotatedVertices into verticesOut, packing each vertexId into the w field.
 // @fnv 0x00d59060
+// pdb: hkpConvexVerticesShape::convertVertexIdsToVerticesImpl | hkpConvexVerticesShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: ids, numIds, verticesOut
 void hkpConvexVerticesShapeImpl::FUN_00d59060(const hkpVertexId* ids, int numIds, Vector4WithInt24W* verticesOut) const
 {
     int i = numIds - 1;
@@ -597,6 +604,8 @@ __forceinline void Resize458(Array458& array,int count) {
     }
     array.size=count;
 }
+// pdb: hkpConvexVerticesShape::getOriginalVertices | hkpConvexVerticesShape.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: vertices
 void ConvexVertsQ_d59200::FUN_00d59200(VertArray96Q& vertices) const {
     Array458& array=reinterpret_cast<Array458&>(vertices);
     const Shape458* shape=reinterpret_cast<const Shape458*>(this);

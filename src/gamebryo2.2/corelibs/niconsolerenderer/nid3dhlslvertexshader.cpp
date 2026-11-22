@@ -3,6 +3,8 @@
 #include "nid3dhlslvertexshader_decls.h"
 // Constructs a NiTPrimitiveArray by forwarding the size and grow arguments to the NiTArray base constructor.
 // @fnv 0x00e98db0
+// pdb: NiTPrimitiveArray<NiPick::Record *>::NiTPrimitiveArray<NiPick::Record *> | NiPick.obj | fnv360_0721_beta, call_seq, low, conflict (skyrim: NiTScrapArray<class NiPick::Record *>::NiTScrapArray<class NiPick::Record *>)
+// pdb params: uiMaxSize, uiGrowBy
 template <>
 NiTPrimitiveArray<NiD3DShaderProgramCreatorObj*>::NiTPrimitiveArray(unsigned int size, unsigned short grow)
     : NiTArray<NiD3DShaderProgramCreatorObj*>(size, grow)
@@ -65,6 +67,8 @@ struct NiD3DHLSLVertexShader
 };
 // Looks up the constant handle at uiIndex, queries its descriptor, and returns the descriptor's Name if found, otherwise null.
 // @fnv 0x00e97280
+// pdb: NiD3DHLSLPixelShader::GetVariableName | NiD3DHLSLPixelShader.obj | fnv360_0721_beta, objrun_open, low, conflict (bridge: NiD3DHLSLVertexShader::GetVariableCount)
+// pdb params: uiIndex
 const char* NiD3DHLSLVertexShader::GetConstantName(unsigned int uiIndex)
 {
     _D3DXCONSTANT_DESC kDesc;
@@ -83,6 +87,8 @@ const char* NiD3DHLSLVertexShader::GetConstantName(unsigned int uiIndex)
 void __cdecl FUN_00e89ad0();
 
 // @fnv 0x00e97240
+// pdb: hkFixedConstraintCinfo::LoadBinary | bhkFixedConstraint.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: arStream
 void __cdecl FUN_00e97240()
 {
     FUN_00e89ad0();

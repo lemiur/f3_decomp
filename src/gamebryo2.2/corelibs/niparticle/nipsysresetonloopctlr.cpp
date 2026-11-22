@@ -16,6 +16,7 @@ struct NiPSysResetOnLoopCtlr
 
 // Calls FUN_00a6d290, frees this with _delete when flags has bit 0 set, and returns this.
 // @fnv 0x00c28410
+// pdb: BSShaderTextureSet::`scalar deleting destructor' | TESObjectTREE.obj | fnv360_0822_retail, vtable, high
 NiPSysResetOnLoopCtlr* __thiscall NiPSysResetOnLoopCtlr::Destroy(unsigned int flags)
 {
     FUN_00a6d290();
@@ -90,6 +91,8 @@ struct FUN_00c28430_class : CloneableObj
     FUN_00c28430_Object* CreateCloneableObject(void* volatile argument);
 };
 // @fnv 0x00c28430
+// pdb: NiPSysResetOnLoopCtlr::CreateClone | NiPSysResetOnLoopCtlr.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kCloning
 FUN_00c28430_Object* FUN_00c28430_class::CreateCloneableObject(void* volatile argument)
 {
     FUN_00c28430_Object* object = (FUN_00c28430_Object*)NiMemObject::operator new(0x38);
@@ -132,6 +135,8 @@ struct FUN_00c28490_shell
 };
 // Clears two flags, and if unk2c is set and NiTimeController_DontDoUpdate(*p) returns 0, resets unk34 to unk28 and sets unk2c[0xd8] when unk34 exceeds unk28.
 // @fnv 0x00c28490
+// pdb: NiPSysResetOnLoopCtlr::Update | NiPSysResetOnLoopCtlr.obj | fnv360_0822_retail, objrun, medium
+// pdb params: UpdateData
 void FUN_00c28490_shell::FUN_00c28490(float* pfValue)
 {
     flags &= 0xfff9;
@@ -151,6 +156,8 @@ void FUN_00c28490_shell::FUN_00c28490(float* pfValue)
 void __cdecl FUN_00a6d0f0();
 
 // @fnv 0x00a2f8b0
+// pdb: TESBoundAnimObject::ReplaceModel | TESObject.obj | fnv360_0822_retail, vtable, low
+// pdb params: pfilename
 void __cdecl FUN_00a2f8b0()
 {
     FUN_00a6d0f0();
@@ -172,6 +179,8 @@ struct C27120Class : BaseHack
 };
 
 // @fnv 0x00c27120
+// pdb: BSBound::LinkObject | BSBound.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 void C27120Class::FUN_00c27120(NiStream& s)
 {
     FUN_00a6d730(s);
@@ -186,6 +195,8 @@ struct SubNiPSysResetOnLoopCtlr : NiPSysResetOnLoopCtlr
 };
 
 // @fnv 0x00c283e0
+// pdb: NiAlphaProperty::LinkObject | NiAlphaProperty.obj | fnv360_0822_retail, vtable, high
+// pdb params: kStream
 void SubNiPSysResetOnLoopCtlr::FUN_00c283e0(NiStream& stream)
 {
     FUN_00a6d5e0(stream);
@@ -193,6 +204,8 @@ void SubNiPSysResetOnLoopCtlr::FUN_00c283e0(NiStream& stream)
 
 void __cdecl FUN_00a6cc80();
 // @fnv 0x00c283f0
+// pdb: NiBillboardNode::RegisterStreamables | NiBillboardNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void __cdecl FUN_00c283f0()
 {
     FUN_00a6cc80();

@@ -10,6 +10,8 @@ struct FUN_00e48970_struct
 };
 
 // @f3 0x00a76990 (community match, verified in this file)
+// pdb: hkpGroupFilter::disableCollisionsUsingBitfield | hkpGroupFilter.obj | fnv360_0822_retail, objrun, high
+// pdb params: layerBitsA, layerBitsB
 void FUN_00e48970_struct::ClearMaskedBits(unsigned int auiMaskA, unsigned int auiMaskB)
 {
     int i = 0;
@@ -44,6 +46,8 @@ class GroupFilter : public hkpGroupFilter
 
 // Checks whether two collision filter infos may collide, using group/subgroup masks or the group filter table.
 // @fnv 0x00e48830
+// pdb: hkpGroupFilter::isCollisionEnabled | hkpGroupFilter.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: infoA, infoB
 hkBoolRet GroupFilter::ShouldCollide(unsigned int infoA, unsigned int infoB)
 {
     if (((infoA ^ infoB) & 0xffff0000) == 0 && (infoA & 0xffff0000) != 0)
@@ -83,6 +87,8 @@ class hkpGroupFilterE489
 
 // Clears the collision bit for iLayerB in row iLayerA and the bit for iLayerA in row iLayerB of the layer mask table.
 // @fnv 0x00e48940
+// pdb: hkpGroupFilter::disableCollisionsBetween | hkpGroupFilter.obj | fnv360_0822_retail, objrun, medium
+// pdb params: layerA, layerB
 void hkpGroupFilterE489::DisableCollisionPair(int iLayerA, int iLayerB)
 {
     m_uiCollisionGroupMasks[iLayerA] &= ~(1 << iLayerB);
@@ -325,6 +331,7 @@ class FUN_00e489b0 : public S00e489b0_A, public S00e489b0_B, public S00e489b0_C,
 };
 
 // @fnv 0x00e489b0
+// pdb: hkpGroupFilter::hkpGroupFilter | hkpGroupFilter.obj | fnv360_0822_retail, objrun, medium
 FUN_00e489b0::FUN_00e489b0()
 {
     m_iMode = 2;

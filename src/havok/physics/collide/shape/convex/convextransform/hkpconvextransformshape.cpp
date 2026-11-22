@@ -10,6 +10,8 @@ struct FUN_00d5e020_standin
 };
 
 // @fnv 0x00d5e020
+// pdb: hkpConvexTransformShape::convertVertexIdsToVerticesImpl | hkpConvexTransformShape.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkpConvexTransformShape::calcSizeForSpu)
+// pdb params: ids, numIds, verticesOut
 int FUN_00d5e020_standin::FUN_00d5e020(int a, int aiLimit)
 {
     char* p = (char*)this;
@@ -35,6 +37,7 @@ struct GetChildShapeHost : hkpConvexTransformShapeBase
 };
 
 // @fnv 0x00d5d760
+// pdb: hkpBvShape::getContainer | hkpBvShape.obj | fnv360_0822_retail, objrun_open, low
 hkpSingleShapeContainer* GetChildShapeHost::FUN_00d5d760()
 {
     return &m_pContainedShape;
@@ -75,6 +78,8 @@ struct Cls_00d5d800
 
 // Combines t and m_kMotionTransform via FUN_00cb2240 and calls the contained shape's getAabb with the result, tol and out.
 // @fnv 0x00d5d800
+// pdb: hkpConvexTransformShape::getAabbImpl | hkpConvexTransformShape.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: localToWorld, tolerance, out
 void Cls_00d5d800::GetAabb(const hkTransform& t, float tol, Aabb_00d5d800& out)
 {
     __declspec(align(16)) Xf_00d5d800 tmp;

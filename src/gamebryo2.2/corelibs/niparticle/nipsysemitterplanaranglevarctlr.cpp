@@ -7,6 +7,7 @@ struct NiPSysEmitterPlanarAngleVarCtlr
 };
 
 // @fnv 0x00c2b470
+// pdb: NiPSysEmitterPlanarAngleVarCtlr::SetTargetFloatValue | NiPSysEmitterPlanarAngleVarCtlr.obj | tesv_win, objrun_open, low
 void __thiscall NiPSysEmitterPlanarAngleVarCtlr::FUN_00c2b470(float fValue)
 {
     *(float*)(*(int*)(this + 0x3c) + 0x2c) = fValue;
@@ -27,6 +28,7 @@ struct NiPSysEmitterPlanarAngleVarCtlr
 };
 
 // @fnv 0x00c2a8b0
+// pdb: NiPSysGravityStrengthCtlr::SetTargetFloatValue | NiPSysGravityStrengthCtlr.obj | tesv_win, objrun_open, low
 void NiPSysEmitterPlanarAngleVarCtlr::FUN_00c2a8b0(float& rfValue)
 {
     rfValue = m_pkFloatCtlr->m_fValue;
@@ -58,6 +60,7 @@ struct C_00c2b480 : FUN_00c32d80
 };
 // Allocates a 0x40-byte CloneShell, constructs it, passes the argument to FUN_00c32de0, and returns the clone or null.
 // @fnv 0x00c2b480
+// pdb: NiPSysEmitterPlanarAngleVarCtlr::CreateClone | NiPSysEmitterPlanarAngleVarCtlr.obj | tesv_win, caller_sim, low
 CloneShell* C_00c2b480::FUN_00c2b480(void* volatile argument)
 {
     CloneShell* clone = (CloneShell*)NiMemObject::operator new(0x40);

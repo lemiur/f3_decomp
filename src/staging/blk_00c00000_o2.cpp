@@ -16,6 +16,7 @@ struct FUN_00c033f0_class
 };
 // Calls FUN_00c03270, then deallocates this via g_memoryManager when flag has bit 1 set, and returns this.
 // @fnv 0x00c033f0
+// pdb: ExtraWaterLightRefs::`scalar deleting destructor' | ExtraDataList.obj | fnv360_0822_retail, vtable, high
 void* __thiscall FUN_00c033f0_class::FUN_00c033f0(int flag)
 {
     FUN_00c03270();
@@ -101,6 +102,7 @@ struct FUN_00c04710Class
 
 // Calls FUN_00c04620, then deallocates this via g_memoryManager when flag's low bit is set, and returns this.
 // @fnv 0x00c04710
+// pdb: ExtraPatrolRefData::`scalar deleting destructor' | ExtraDataList.obj | fnv360_0822_retail, vtable, high
 FUN_00c04710Class* __thiscall FUN_00c04710Class::FUN_00c04710(bool abFree)
 {
     FUN_00c04620();
@@ -130,6 +132,7 @@ struct FUN_00c04a80_class
 };
 // Calls FUN_00c048b0, deallocates this via g_memoryManager when flag has bit 1 set, and returns this.
 // @fnv 0x00c04a80
+// pdb: NiTMap<TESObjectREFR *,bool>::`scalar deleting destructor' | ExtraDataList.obj | fnv360_0822_debug, vtable, medium
 void* __thiscall FUN_00c04a80_class::FUN_00c04a80(int flag)
 {
     FUN_00c048b0();
@@ -163,6 +166,8 @@ struct FUN_00c04d60_class
 };
 
 // @fnv 0x00c04d60
+// pdb: ImageSpaceEffectCinematic::SetNightEye | ImageSpaceEffectCinematic.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: abNightEye
 int __thiscall FUN_00c04d60_class::FUN_00c04d60()
 {
     if (m_0x60 && !_DAT_011F941E)
@@ -197,6 +202,7 @@ struct FUN_00c05160_class
 };
 
 // @fnv 0x00c05160
+// pdb: ExtraEditorID::`scalar deleting destructor' | ExtraDataList.obj | fnv360_0822_debug, vtable, high
 void* __thiscall FUN_00c05160_class::FUN_00c05160(int aiFlags)
 {
     FUN_00c04da0();
@@ -214,6 +220,8 @@ struct FUN_00c05350_class
 };
 
 // @fnv 0x00c05350
+// pdb: ImageSpaceEffectBloom::SetParams | ImageSpaceEffectBloom.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: apfData
 int FUN_00c05350_class::FUN_00c05350()
 {
     if (DAT_011f9422 && *(int*)((char*)this + 0x58))
@@ -226,6 +234,8 @@ extern "C" void __cdecl _delete(void*, unsigned int);
 extern "C" void __cdecl FUN_00b7a870(int, int);
 
 // @fnv 0x00c1a2f0
+// pdb: SpeedTreeBranchShader::EnableConstantsForPass | SpeedTreeBranchShader_Update.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: usPassEnum
 void __stdcall FUN_00c1a2f0(unsigned short ausValue)
 {
     FUN_00b7a870(ausValue, 0);
@@ -243,6 +253,7 @@ struct NiScreenElements
 
 // Calls FUN_00a89760, then if b has bit 0 set frees this with _delete, and returns this.
 // @fnv 0x00c1a450
+// pdb: PathingRequestLOS::`scalar deleting destructor' | PathingRequestLOS.obj | fnv360_0822_retail, vtable, high
 void* NiScreenElements::DestroyIfRequested(bool abFree)
 {
     FUN_00a89760();
@@ -261,6 +272,8 @@ struct FUN_00c1a660_holder : FUN_00a74480_holder
     FUN_00c1a660_holder* FUN_00c1a660(unsigned int a);
 };
 // @fnv 0x00c1a660
+// pdb: NiScreenElements::NiScreenElements | NiScreenElements.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: BSSceneGraph::GetCameraRoot)
+// pdb params: pkModelData
 FUN_00c1a660_holder* FUN_00c1a660_holder::FUN_00c1a660(unsigned int a)
 {
     FUN_00a74480(a);
@@ -290,6 +303,8 @@ extern NiShaderConstantMapEntry* DAT_011fec44;
 extern NiShaderConstantMapEntry* DAT_011fec6c;
 void __cdecl UpdateFlagHolders(int);
 // @fnv 0x00c02ce0
+// pdb: ShadowLightShader::EnableConstantsForPass_2x | ShadowLightShader_Update_2x.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: auiPassEnum
 void SetShaderConstantMapEntryFlags(int a)
 {
     UpdateFlagHolders(a);
@@ -314,6 +329,8 @@ void __thiscall FUN_00c036e0_class::FUN_00c036e0(int a)
 }
 
 // @f3 0x00b88310 (community match, verified in this file)
+// pdb: EnableStages | Lighting30Shader_Preset.obj | fnv360_0822_debug, callee_sim, low
+// pdb params: b0, b1, b2, b3, b4, b5, b6, b7
 int PackBits(char a, char b, char c, char d, char e, char f, char g, char h)
 {
     return ((((((((h * 2 | g) * 2 | f) * 2 | e) * 2 | d) * 2 | c) * 2 | b) * 2 | static_cast<unsigned char>(a)));
@@ -330,6 +347,7 @@ struct FUN_00c06ee0_class
 
 // Sets m_sp34 to p, releasing the previous RefObject and incrementing the new one's reference count when it changes.
 // @fnv 0x00c06ee0
+// pdb: NiPointer<BSTempEffectGeometryDecal>::~NiPointer<BSTempEffectGeometryDecal> | BGSDecalManager.obj | fnv360_0721_beta, callee_sim, low
 void __thiscall FUN_00c06ee0_class::FUN_00c06ee0(RefObject* apObject)
 {
     if (m_sp34 != apObject)
@@ -477,6 +495,8 @@ struct FUN_00c1a640_class
     unsigned short __thiscall FUN_00c1a640(unsigned short a);
 };
 // @fnv 0x00c1a640
+// pdb: TallGrassTriShape::SetInstanceCount | TallGrassTriShape.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: aiCount
 unsigned short __thiscall FUN_00c1a640_class::FUN_00c1a640(unsigned short a)
 {
     return ((unsigned short*)((char*)this + 0xc4))[0] = a;
@@ -503,6 +523,8 @@ struct FUN_00c053c0_class
 
 // Reads a shader param from this+0x1c and sets its values from m_p58 offsets 4/8 or two globals, then stores 4.0 to _DAT_012003c4 and returns true.
 // @fnv 0x00c053c0
+// pdb: ImageSpaceEffectBloom::UpdateParams | ImageSpaceEffectBloom.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: pParam
 bool __thiscall FUN_00c053c0_class::UpdateShaderParam(int)
 {
     ImageSpaceShaderParam* p = *reinterpret_cast<ImageSpaceShaderParam**>(reinterpret_cast<int**>(this)[7]);
@@ -529,6 +551,7 @@ struct FUN_00c03260_class
     void FUN_00c03260();
 };
 // @fnv 0x00c03260
+// pdb: ImageSpaceEffectSunbeams::ReturnTextures | ImageSpaceEffectSunbeams.obj | fnv360_0822_retail, caller_sim, medium
 void FUN_00c03260_class::FUN_00c03260()
 {
     m_tex.AddRenderedTexture();
@@ -827,6 +850,7 @@ struct FUN_00c04600 : ImageSpaceEffect
     FUN_00c04600();
 };
 // @fnv 0x00c04600
+// pdb: ImageSpaceEffectMenuBG::ImageSpaceEffectMenuBG | ImageSpaceEffectMenuBG.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiPSysVolumeEmitter::NiPSysVolumeEmitter)
 FUN_00c04600::FUN_00c04600()
 {
     m_iWordAt00 = (int)&DAT_010bca64;
@@ -849,6 +873,8 @@ struct FUN_00c046e0_class
 };
 
 // @fnv 0x00c046e0
+// pdb: ImageSpaceEffectMenuBG::UpdateParams | ImageSpaceEffectMenuBG.obj | fnv360_0721_beta, objopen_prop, low
+// pdb params: apParam
 bool FUN_00c046e0_class::FUN_00c046e0(int)
 {
     m_pHolder->m_pParam->SetShaderConstantVector4(0, m_f5c, 0.0f, 0.0f, 0.0f);
@@ -862,6 +888,7 @@ struct FUN_00c054a0_class
 };
 // Calls FUN_00c05250, then frees this via g_memoryManager.Deallocate when bit 0 of a is set, and returns this.
 // @fnv 0x00c054a0
+// pdb: ExtraRoomRefData::`scalar deleting destructor' | ExtraDataList.obj | fnv360_0822_debug, vtable, high
 void* FUN_00c054a0_class::FUN_00c054a0(unsigned char a)
 {
     FUN_00c05250();
@@ -877,6 +904,7 @@ struct FUN_00c056a0_class
 };
 // Calls FUN_00c056a0, then frees this via g_memoryManager.Deallocate when flag bit 0 is set, and returns this.
 // @fnv 0x00c05760
+// pdb: ExtraInfoGeneralTopic::`scalar deleting destructor' | ExtraDataObjects.obj | fnv360_0822_retail, vtable, high
 FUN_00c056a0_class* FUN_00c056a0_class::FUN_00c05760(char flag)
 {
     FUN_00c056a0();
@@ -894,6 +922,7 @@ struct NiD3DPass
 extern int DAT_012022c0;
 
 // @fnv 0x00c12480
+// pdb: SkinShader::LoadStagesAndPasses | SkinShader_Preset.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 bool __fastcall FUN_00c12480(int* pObject)
 {
     int* pPassEntry = &DAT_012022c0;
@@ -919,6 +948,7 @@ extern int DAT_011f91c0;
 extern int DAT_01202350;
 
 // @fnv 0x00c16350
+// pdb: BSShader::CreateStagesAndPasses | BSShader.obj | fnv360_0721_beta, objrun_prop, low, conflict (bridge: SpeedTreeBranchShader::LoadStagesAndPasses)
 bool __fastcall FUN_00c16350(void* self)
 {
     int* p = &DAT_01202350;
@@ -946,6 +976,8 @@ struct FUN_00c1a480_class
     int __thiscall FUN_00c1a480(int a);
 };
 // @fnv 0x00c1a480
+// pdb: NiTriShape::NiTriShape | NiTriShape.obj | fnv360_0822_retail, call_dedup, low, conflict (skyrim: NiNode::GetAtChecked)
+// pdb params: pkModelData
 int FUN_00c1a480_class::FUN_00c1a480(int aiArg)
 {
     FUN_00a71cc0(aiArg);
@@ -985,6 +1017,8 @@ char* __cdecl FUN_00a7d490(char const* name, unsigned short value);
 
 // Appends the pLocalBound string and the instance count string to the given string array, growing it as needed.
 // @f3 0x00b8e780 (community match, verified in this file)
+// pdb: TallGrassTriStrips::GetViewerStrings | TallGrassTriStrips.obj | fnv360_0822_retail, ustr_rel, medium
+// pdb params: apStrings
 void Holder::AppendBoundInfo(StrArr* strings)
 {
     AppendString(strings);
@@ -1063,6 +1097,8 @@ struct FUN_00c1a740_class
 
 // Calls FUN_00a74690, then appends the "pLocalBound" and "instance count" strings to the StrArr, growing it as needed.
 // @fnv 0x00c1a740
+// pdb: TallGrassTriShape::GetViewerStrings | TallGrassTriShape.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apStrings
 void __thiscall FUN_00c1a740_class::SetLocalBoundAndInstanceCount(StrArr* pStrArr)
 {
     reinterpret_cast<Caller74690*>(this)->FUN_00a74690(pStrArr);
@@ -1194,6 +1230,7 @@ struct FUN_00c02d40_cls
 
 // Divides m_f5c by the float of the value returned by vt90(0) on the object from g_pFnvHolder->vtc8(), returning the result as float.
 // @fnv 0x00c02d40
+// pdb: ImageSpaceEffectMotionBlur::GetObjectBlurConst | ShadowLightShader_Update_2x.obj | fnv360_0822_retail, objrun_prop, low
 float FUN_00c02d40_cls::FUN_00c02d40()
 {
     FnvObj* pObj = g_pFnvHolder->vtc8();
@@ -1368,6 +1405,7 @@ struct FUN_00c03270 : Base03270
 
 // Restores the vtable, releases the two objects held by m_1c and clears their slots in m_18.
 // @fnv 0x00c03270
+// pdb: ImageSpaceEffectSunbeams::~ImageSpaceEffectSunbeams | ImageSpaceEffectSunbeams.obj | fnv360_0822_retail, objrun_open, medium
 FUN_00c03270::~FUN_00c03270()
 {
     *(void* volatile*)&m_vtbl = (void*)&DAT_010bc8a4;
@@ -1398,6 +1436,7 @@ FUN_00c03270::~FUN_00c03270()
 extern unsigned char g_unk012023f0;
 
 // @fnv 0x00c03340
+// pdb: TESIdleManager::GetUsedItemActivate | TESIdleManager.obj | fnv360_0822_retail, call_seq, medium
 unsigned char __cdecl FUN_00c03340()
 {
     return g_unk012023f0;
@@ -1483,6 +1522,7 @@ struct FUN_00c03580 : Parent
 
 // Releases the handles and destroyable references stored in m_handles and m_refs, then clears those map entries.
 // @fnv 0x00c03580
+// pdb: ImageSpaceShader::~ImageSpaceShader | ImageSpaceShader.obj | fnv360_0822_debug, objopen_prop, low, conflict (bridge: ImageSpaceEffectGetHit::~ImageSpaceEffectGetHit)
 FUN_00c03580::~FUN_00c03580()
 {
     if (static_cast<HandleMapEntries*>(m_handles.m_entries)->m_iSecondInteger)
@@ -1606,6 +1646,7 @@ class FUN_00c03a20_cls : public SpawnedPrimary_c03a20, public SpawnedSecondary_c
 };
 
 // @fnv 0x00c03a20
+// pdb: ImageSpaceShader::~ImageSpaceShader | ImageSpaceShader.obj | fnv360_0721_beta, call_seq, medium
 FUN_00c03a20_cls::~FUN_00c03a20_cls()
 {}
 
@@ -1696,6 +1737,8 @@ struct ShaderOwner
 
 // Builds vertex and pixel shader paths and names, creates the vertex shader, and creates the pixel shader only when psArg is non-null.
 // @fnv 0x00c03ae0
+// pdb: ImageSpaceShader::LoadShaders | ImageSpaceShader.obj | fnv360_0822_retail, ustr, medium
+// pdb params: aVShader, aPShader, apcName, apcVTarget, apcPTarget
 void ShaderOwner::FUN_00c03ae0(ShaderDesc* pVertexDesc, ShaderDesc* pPixelDesc, const char* name, void* pVertexArg,
                                void* pPixelArg)
 {
@@ -1868,6 +1911,7 @@ FUN_00c04030_renderer* __cdecl FUN_00e76700(FUN_00c04030_renderer* renderer, int
 
 // Obtains a renderer via FUN_00e76700, configures it with two vf8c calls, calls vfb4, then passes it to vfc0.
 // @fnv 0x00c04030
+// pdb: ImageSpaceShader::SetupVertexStream | ImageSpaceShader.obj | fnv360_0721_beta, objrun_prop, low
 void __thiscall FUN_00c04030_class::SetupRenderer()
 {
     FUN_00c04030_renderer* renderer = FUN_00e76700(DAT_011f9508, 2, 1);
@@ -2146,6 +2190,7 @@ class FUN_00c04620 : public C04620Base
 };
 
 // @fnv 0x00c04620
+// pdb: ImageSpaceEffectMenuBG::~ImageSpaceEffectMenuBG | ImageSpaceEffectMenuBG.obj | fnv360_0721_beta, objopen_prop, low
 FUN_00c04620::~FUN_00c04620()
 {
     if (m_pkTexture)
@@ -2215,6 +2260,7 @@ class FUN_00c048b0 : public FUN_00c048b0_base
 };
 
 // @fnv 0x00c048b0
+// pdb: ImageSpaceEffectMenuBG::~ImageSpaceEffectMenuBG | ImageSpaceEffectMenuBG.obj | fnv360_0822_debug, objopen_prop, low, conflict (bridge: ImageSpaceEffectMotionBlur::~ImageSpaceEffectMotionBlur)
 FUN_00c048b0::~FUN_00c048b0()
 {
     if (*m_1c != 0)
@@ -2316,6 +2362,7 @@ struct FUN_00c049c0 : FUN_00ba4080_class
     FUN_00c049c0();
 };
 // @fnv 0x00c049c0
+// pdb: ImageSpaceEffectMotionBlur::ImageSpaceEffectMotionBlur | ImageSpaceEffectMotionBlur.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 FUN_00c049c0::FUN_00c049c0() : vtable(&DAT_010bcaac), color(), m68(0), m69(0), m6a(0), m6c(0), m70(0), m74()
 {
     region.FUN_00a90180(3);
@@ -2342,6 +2389,7 @@ struct FUN_00c04d20_class
 
 // Calls FUN_00ba4080, then sets m_58 and m_64 to 0 and assigns the vtable, m_5c and m_60 pointers.
 // @fnv 0x00c04d20
+// pdb: ImageSpaceEffectCinematic::ImageSpaceEffectCinematic | ImageSpaceEffectCinematic.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 FUN_00c04d20_class::FUN_00c04d20_class()
 {
     FUN_00ba4080();
@@ -2451,6 +2499,7 @@ struct FUN_00c05250 : _Base_00ba3d30
 
 // Deletes the first three objects in m_18 and clears their slots via SetAt.
 // @fnv 0x00c05250
+// pdb: ImageSpaceEffectBloom::~ImageSpaceEffectBloom | ImageSpaceEffectBloom.obj | fnv360_0822_retail, objrun_prop, low
 FUN_00c05250::~FUN_00c05250()
 {
     S_00c05250_Obj* p;
@@ -2613,6 +2662,7 @@ struct FUN_00405930_base
 extern void* DAT_00db552c;
 extern void* DAT_00db54e4;
 extern void* DAT_00db54cc;
+// pdb: SpellItem::SpellItem | SpellItem.obj | fnv360_0822_retail, call_dedup, medium
 FUN_00c05880_cls* FUN_00c05880_cls::FUN_00c05880()
 {
     FUN_00405930_base* self = (FUN_00405930_base*)this;
@@ -2713,6 +2763,8 @@ struct ShaderUpdater
 };
 // Fetches value kind 3 from the interface into the entry at index, then calls FUN_00bb9640 on the entry.
 // @fnv 0x00c0bae0
+// pdb: Lighting30Shader::SetHeightMap | Lighting30Shader_Update.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apPass, apL30Prop, auiStageNum
 void ShaderUpdater::UpdateShaderEntry(ShaderEntryTable* table, ShaderInterface* interfaceObject, int index)
 {
     ShaderEntry* entry = table->entries[index];
@@ -3032,6 +3084,8 @@ extern int DAT_011f95e8;
 
 // Stores DAT_011f95e4 and DAT_011f95e8 into the unk08 fields of the two values referenced by arg->unk24.
 // @fnv 0x00c0bbd0
+// pdb: Lighting30Shader::SetTextureMode | Lighting30Shader.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apStage, apProp
 void __stdcall FUN_00c0bbd0(FUN_00c0bbd0_Arg* arg)
 {
     arg->unk24->unk08->unk08 = DAT_011f95e4;
@@ -3248,6 +3302,8 @@ FNV_Mgr* __cdecl Callee1();
 
 // Calls v3D(4,0) on the node and stores the resulting value into a1->m_p24->m_p04->m_p08, choosing between DAT_011f95d4 and DAT_011f9544 based on flags and a3.
 // @fnv 0x00c0bc00
+// pdb: Lighting30Shader::SetEnvironmentMap | Lighting30Shader_Update.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apPass, apL30Prop, auiPass
 void __stdcall SetNodeResultValue(FNV_A1* a1, FNV_Node* apNode, int aiCode)
 {
     int edi = Callee1()->m_194;
@@ -3408,6 +3464,8 @@ class C0BC90Shader : public C0BC90ShaderBase
 };
 
 // @fnv 0x00c0bc90
+// pdb: Lighting30Shader::SetTextureMode | Lighting30Shader.obj | fnv360_0721_beta, objrun_prop, low, conflict (bridge: Lighting30Shader::SetHeightMap)
+// pdb params: apStage, apProp
 void C0BC90Shader::SetupPassTextureStage(C0BC90Pass* pkPass, C0BC90Geometry* pkGeometry)
 {
     C0BC90Texture* pkTexture = pkGeometry->GetProperty(5, 0);
@@ -3518,6 +3576,8 @@ class C0BCF0Shader : public C0BCF0ShaderBase
 
 // Selects the geometry's texture (or a default based on flag 0x80), assigns it to the pass's stage, and calls SetupTextureStage.
 // @fnv 0x00c0bcf0
+// pdb: Lighting30Shader::SetTextureMode | Lighting30Shader.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: apStage, apProp
 void C0BCF0Shader::ApplyTextureStage(C0BCF0Pass* pkPass, C0BCF0Geometry* pkGeometry, unsigned int uiStage)
 {
     C0BCF0TextureStage** ppkStages = pkPass->m_ppkStages;
@@ -4101,6 +4161,7 @@ RefObject* __cdecl FUN_00c163a0(unsigned int index)
 struct CpuOpaque;
 extern CpuOpaque DAT_012024b8;
 // @fnv 0x00c1a3a0
+// pdb: NiSingleInterpController::GetRTTI | NiSingleInterpController.obj | fnv360_0822_retail, objrun_sim, medium
 CpuOpaque* __cdecl FUN_00c1a3a0()
 {
     return &DAT_012024b8;
@@ -4328,6 +4389,8 @@ class FUN_00c1a500_cls
 
 // Copies m_iC8, m_iCC, m_iD0 and m_fD4 into the output struct at m_pOut20, then calls FUN_00a71d30 when m_wC4 is greater than zero.
 // @fnv 0x00c1a500
+// pdb: TallGrassTriStrips::RenderImmediate | TallGrassTriStrips.obj | fnv360_0721_retail, objrun, medium
+// pdb params: apRenderer
 void FUN_00c1a500_cls::UpdateOutput(unsigned int a1)
 {
     unsigned int i00 = m_iC8;
@@ -4436,6 +4499,8 @@ class C1A550Object
 
 // Copies the world bound center and radius into m_pkBound, then calls RenderImmediate when m_usActive is greater than zero.
 // @fnv 0x00c1a550
+// pdb: TallGrassTriStrips::OnlyRenderImmediate | TallGrassTriStrips.obj | fnv360_0721_retail, objrun, medium
+// pdb params: apRenderer
 void C1A550Object::RenderIfActive(NiRenderer* pkRenderer)
 {
     m_pkBound->SetCenterAndRadius(m_kWorldBound.GetNavMeshData(), m_kWorldBound.GetRadius());
@@ -4522,6 +4587,8 @@ struct FUN_00c1a6a0_cls
 
 // Copies m_c8, m_cc, m_d0 and m_d4 into the output struct's fields and calls unkTail when m_c4 is greater than zero.
 // @fnv 0x00c1a6a0
+// pdb: TallGrassTriShape::RenderImmediate | TallGrassTriShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRenderer
 void FUN_00c1a6a0_cls::CopyStateToOutput(int a1)
 {
     int c8 = m_c8;
@@ -4564,6 +4631,8 @@ struct S_00c1a6f0_Self
 
 // Copies m_c8, m_cc, m_d0 and m_d4 into the destination struct pointed to by m_20, then calls FUN_00a74600 if m_c4 is nonzero.
 // @fnv 0x00c1a6f0
+// pdb: TallGrassTriShape::OnlyRenderImmediate | TallGrassTriShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRenderer
 void __thiscall S_00c1a6f0_Self::CopyStateToDestination(int p)
 {
     unsigned int a = m_c8;
@@ -4604,6 +4673,7 @@ struct FUN_00c1cf20 : CountedObjectBase
 
 // Initializes m_iValue to 0 and runs the CountedObjectBase constructor, which increments g_liveObjectCount.
 // @fnv 0x00c1cf20
+// pdb: NiPSysMeshEmitter::NiSkinnedEmitterData::NiSkinnedEmitterData | NiPSysMeshEmitter.obj | tesv_win, uvref, medium
 FUN_00c1cf20::FUN_00c1cf20()
 {
     m_iValue = 0;
@@ -4629,6 +4699,7 @@ struct FUN_00c1d980_cls
 };
 
 // @fnv 0x00c1d980
+// pdb: NiTLargeArray<unsigned int,NiTMallocInterface<unsigned int> >::`scalar deleting destructor' | TESSaveLoadGame.obj | fnv360_0822_retail, vtable, high
 FUN_00c1d980_cls* FUN_00c1d980_cls::FUN_00c1d980(unsigned char acFlags)
 {
     int value = m_04;
@@ -4662,6 +4733,7 @@ struct FUN_00c1d9b0_cls
 };
 
 // @fnv 0x00c1d9b0
+// pdb: NiTArray<TESRegion *,NiTMallocInterface<TESRegion *> >::`scalar deleting destructor' | PlayerCharacter.obj | fnv360_0822_retail, vtable, medium
 FUN_00c1d9b0_cls* FUN_00c1d9b0_cls::FUN_00c1d9b0(unsigned char acFlags)
 {
     int value = m_04;
@@ -4688,6 +4760,8 @@ struct FUN_00c1f4e0_cls
 };
 
 // @fnv 0x00c1f4e0
+// pdb: NiPSysModifier::SetActive | BSWindModifier.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: CreateNS_BSWindModifier::Create)
+// pdb params: bActive
 void FUN_00c1f4e0_cls::FUN_00c1f4e0(unsigned char value)
 {
     m_b14 = value;
@@ -5006,6 +5080,8 @@ struct L08
     float dimmer;
 };
 // @fnv 0x00c03010
+// pdb: ShadowLightShader::AddEmitToAmbient | ShadowLightShader_Update_1x.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apMat
 void __stdcall AccumulateLightColor(L08* light)
 {
     C08 color = light->ptr ? *light->ptr : light->color;
@@ -5736,6 +5812,7 @@ class FUN_00c05420 : public ImageSpaceEffectC054
 
 // Initializes m_iMode to 0 and sets the primitive array size to 4.
 // @fnv 0x00c05420
+// pdb: ImageSpaceEffectBloom::ImageSpaceEffectBloom | ImageSpaceEffectBloom.obj | fnv360_0822_retail, objrun, high
 FUN_00c05420::FUN_00c05420() : m_iMode(0)
 {
     m_kTextureSwapList.SetSize(4);
@@ -6837,6 +6914,7 @@ extern InitShaderPassPtr DAT_01202320;
 extern InitShaderPassPtr DAT_01202324;
 // Configures each shader pass in DAT_012022c0..DAT_01202324: adds texture stages, assigns textures, sets RSG states and writes size constants.
 // @fnv 0x00c124c0
+// pdb: SkinShader::PresetPasses | SkinShader_Preset.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void ShaderInitialization::FUN_00c124c0()
 {
     InitShaderPassPtr pass;
@@ -8165,6 +8243,8 @@ struct FUN_00c1d8b0_class
 };
 
 // @fnv 0x00c1d8b0
+// pdb: NiTArray<NiPointer<NiShaderConstantMapEntry>,NiTNewInterface<NiPointer<NiShaderConstantMapEntry> > >::SetAt | NiD3DShaderConstantMap.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: uiIndex, element
 void FUN_00c1d8b0_class::FUN_00c1d8b0(unsigned int index, RefObject** value)
 {
     int one = 1;
@@ -8304,6 +8384,8 @@ class FUN_00c1f420_Array : public NiTArrayF42<NiPointerF42<NiObjectF42> >
 
 // Finds the first empty slot in the array and stores element there, incrementing m_usESize; returns the index, or appends via SetAtGrow if none is free.
 // @fnv 0x00c1f420
+// pdb: NiTArray<NiPointer<NiGeometry>,NiTNewInterface<NiPointer<NiGeometry> > >::AddFirstEmpty | NiPSysMeshEmitter.obj | fnv360_0822_retail, call_gap, high
+// pdb params: element
 unsigned int FUN_00c1f420_Array::FUN_00c1f420(const NiPointerF42<NiObjectF42>& element)
 {
     if (element == NiPointerF42<NiObjectF42>(0))
@@ -9088,6 +9170,8 @@ struct Source374
     float multiplier;
 };
 // @fnv 0x00c03180
+// pdb: ShadowLightShader::SetEmitConstant | ShadowLightShader_Update_1x.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apMat
 void __stdcall ApplySourceColor(Source374* source)
 {
     Point374 color = source->color ? *source->color : source->fallback;
@@ -9114,6 +9198,7 @@ struct FUN_00c04da0 : _Base_00ba3d30
 };
 // If the first element of m_18 is non-null, deletes it and clears that slot to null.
 // @fnv 0x00c04da0
+// pdb: ImageSpaceEffectCinematic::~ImageSpaceEffectCinematic | ImageSpaceEffectCinematic.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
 FUN_00c04da0::~FUN_00c04da0()
 {
     if (m_18.m_pBase[0])
@@ -9124,6 +9209,7 @@ FUN_00c04da0::~FUN_00c04da0()
 }
 
 // @fnv 0x00c05870
+// pdb: BaseProcess::GetHeadTrackChangeTimer | BaseProcess.obj | fnv360_0822_retail, vtable_prefix, low
 float __cdecl FUN_00c05870()
 {
     return 1.0f;
@@ -10021,6 +10107,8 @@ struct S00c02c30_ColorA
 };
 
 // @fnv 0x00c02c30
+// pdb: ShadowLightShader::UpdateTogglesConstantLand | ShadowLightShader_Update_2x.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apGeometry, apFog, apShaderProp, aiTextureIndex
 void __stdcall FUN_00c02c30(unsigned int uiUnused, int param_2, FUN_00c02c30_Obj* apObj, int iIndex)
 {
     S00c02c30_ColorA kColor = *reinterpret_cast<S00c02c30_ColorA*>(&DAT_011a9bd0);
@@ -10034,6 +10122,8 @@ void __stdcall FUN_00c02c30(unsigned int uiUnused, int param_2, FUN_00c02c30_Obj
 
 // Returns a2->v3D(4, a3), or DAT_011f95d4 when that is zero.
 // @fnv 0x00c02f30
+// pdb: ShadowLightShader::GetEnvMap | ShadowLightShader_Update_1x.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apProp, aiIndex
 int __stdcall FUN_00c02f30(FNV_Node* apNode, int a3)
 {
     int flag194 = Callee1()->m_194;
@@ -10274,6 +10364,7 @@ struct S00c03c80_cls
 };
 // Iterates m_entries, calling m_processor->ImageSpaceShaderParam_SetTexOffset with item data or provider meta values for each index.
 // @fnv 0x00c03c80
+// pdb: ImageSpaceShader::SetVSConstants | ImageSpaceShader.obj | fnv360_0822_retail, call_gap_sim, medium
 void S00c03c80_cls::ProcessEntries()
 {
     for (unsigned int i = 0; i < m_uiItemCount; ++i)
@@ -10515,6 +10606,7 @@ struct FUN_00c05680 : EffectBaseX
 
 // Constructs a FUN_00c05680 object by initializing its m_zero member to zero.
 // @fnv 0x00c05680
+// pdb: ImageSpaceEffectVolumetricFog::ImageSpaceEffectVolumetricFog | ImageSpaceEffectVolumetricFog.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 FUN_00c05680::FUN_00c05680() : m_zero()
 {}
 
@@ -11560,6 +11652,8 @@ void __stdcall FUN_00c1a310(int aUnused, int abGreen, Obj_c1a310* p)
 
 extern "C" void __cdecl CreateTriStripsObject();
 // @fnv 0x00c1a390
+// pdb: NiTriBasedGeom::LoadBinary | NiTriBasedGeom.obj | fnv360_0721_beta, objrun, low, conflict (skyrim: NiParticleSystem::SetModelData)
+// pdb params: kStream
 void __cdecl FUN_00c1a390()
 {
     CreateTriStripsObject();
@@ -11742,6 +11836,7 @@ inline unsigned int FloatBits(float value)
 }
 // Sets vertex/pixel shaders, render-state values and DAT flags on eight global ShaderPass objects, adding a configured stage to four of them.
 // @fnv 0x00c02340
+// pdb: ShadowLightShader::PresetWaterFogPasses_2x | ShadowLightShader_Preset_2x.obj | fnv360_0822_retail, uconst, low
 void FUN_00c02340()
 {
     ShaderPassPointer pass;
@@ -11941,6 +12036,7 @@ struct FUN_00c056a0 : ImageSpaceEffectBaseC056
 };
 // Destroys the first element of the m_18 parameter array if it is non-null, then clears the slot.
 // @fnv 0x00c056a0
+// pdb: ImageSpaceEffectVolumetricFog::~ImageSpaceEffectVolumetricFog | ImageSpaceEffectVolumetricFog.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
 FUN_00c056a0::~FUN_00c056a0()
 {
     if (m_18.m_pBase[0])
@@ -12024,6 +12120,8 @@ template <class T> class NiTObjectArrayC1D
 
 // Stores element at uiIndex in m_pBase, growing m_usSize if needed and adjusting m_usESize when the slot's null state changes.
 // @fnv 0x00c1d7e0
+// pdb: NiTArray<NiPointer<NiMetricsOutputModule>,NiTNewInterface<NiPointer<NiMetricsOutputModule> > >::SetAt | NiMetricsLayer.obj | fnv360_0822_retail, callee_sim, high
+// pdb params: uiIndex, element
 template <class T> void NiTObjectArrayC1D<T>::Set(unsigned int uiIndex, const T& element)
 {
     static const T kNull(0);

@@ -15,6 +15,7 @@ extern int DAT_01269cd0;
 extern void* DAT_01269008;
 
 // @fnv 0x00d68800
+// pdb: hkpConstraintViewer::registerViewer | hkpConstraintViewer.obj | fnv360_0822_retail, udata, high
 void RegisterContactPointsInactive()
 {
     Registry_00dd9380* reg = (Registry_00dd9380*)DAT_01269cd0;
@@ -30,6 +31,7 @@ struct Registry_00dd9380_StandIn
 };
 extern Registry_00dd9380_StandIn* DAT_01269cd0;
 // @fnv 0x00d688d0
+// pdb: hkpRigidBodyCentreOfMassViewer::registerViewer | hkpRigidBodyCentreOfMassViewer.obj | fnv360_0822_debug, udata, high
 void* RegisterContactPointsActive()
 {
     DAT_0126900c = (int)DAT_01269cd0->FUN_00dd9380("Contact Points (Active)", FUN_00d68890);
@@ -64,6 +66,8 @@ struct FUN_00d68770_cls
 };
 
 // @fnv 0x00d68770
+// pdb: hkpInactiveContactPointViewer::hkpInactiveContactPointViewer | hkpInactiveContactPointViewer.obj | fnv360_0822_retail, uvref, medium
+// pdb params: contexts
 FUN_00d68770_cls* FUN_00d68770_cls::Construct(int aParam)
 {
     BaseConstruct(aParam, 0xff008000);
@@ -75,6 +79,8 @@ FUN_00d68770_cls* FUN_00d68770_cls::Construct(int aParam)
 }
 
 // @fnv 0x00d687b0
+// pdb: hkpInactiveContactPointViewer::getIslands | hkpInactiveContactPointViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void* __stdcall FUN_00d687b0(char* a1)
 {
     return a1 + 0x34;
@@ -138,6 +144,8 @@ struct FUN_00d68840_cls
 };
 
 // @fnv 0x00d68840
+// pdb: hkpActiveContactPointViewer::hkpActiveContactPointViewer | hkpActiveContactPointViewer.obj | fnv360_0822_retail, uvref, medium
+// pdb params: contexts
 void* FUN_00d68840_cls::Init(int aiValue)
 {
     FUN_00de29b0(aiValue, 0xff0000ff);
@@ -161,6 +169,8 @@ void* FUN_00d68840_cls::Init(int aiValue)
 //   00d68887  c2 04 00      ret 4
 
 // @fnv 0x00d68880
+// pdb: hkpActiveContactPointViewer::getIslands | hkpActiveContactPointViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void* __stdcall FUN_00d68880(void* pObject)
 {
     return (void*)((char*)pObject + 0x28);
@@ -212,6 +222,7 @@ void* __cdecl FUN_00d68890(int aiArg)
 extern int DAT_0126900c;
 
 // @fnv 0x00d688f0
+// pdb: GFxSpriteDef::GetHeight | GFxSprite.obj | tesv_win, objrun_open, low
 int __cdecl FUN_00d688f0()
 {
     return DAT_0126900c;
@@ -256,6 +267,7 @@ struct S_00d6adf0_Obj
     virtual void vfn00(int arg);
 };
 // @fnv 0x00d6adf0
+// pdb: cleanupLoadedObjecthkpSerializedAgentNnEntry | hkpSerializedAgentNnEntryClass.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: cleanupLoadedObjecthkpMountedBallGun)
 void __cdecl FUN_00d6adf0(S_00d6adf0_Obj* obj)
 {
     obj->vfn00(0);
@@ -277,6 +289,7 @@ struct VtblForwarder
 };
 
 // @fnv 0x00d6aeb0
+// pdb: cleanupLoadedObjecthkpProjectileGun | hkpUtilitiesReflections.obj | tesv_win, objrun_open, low
 int __cdecl FUN_00d6aeb0(VtblForwarder* p)
 {
     return p->v0(0);
@@ -285,6 +298,7 @@ int __cdecl FUN_00d6aeb0(VtblForwarder* p)
 extern int DAT_01269104;
 
 // @fnv 0x00d6aee0
+// pdb: getVtablehkpConvexPieceStreamData | hkpConvexPieceStreamDataClass.obj | fnv360_0822_retail, objrun_open, low
 void* __cdecl FUN_00d6aee0()
 {
     return &DAT_01269104;
@@ -359,6 +373,7 @@ struct D6C180Command
 extern const double g_dD6C180Offset;
 
 // @fnv 0x00d6c180
+// pdb: hkSkipSolverResults | hkpBuildJacobianFromAtoms.obj | tesv_win, hash, low
 void __fastcall WriteCommand(D6C180Command** ppkCursor, unsigned char ucFlag)
 {
     D6C180Command* pkCommand = *ppkCursor;
@@ -391,6 +406,7 @@ namespace fnv_00d68820 {
 extern int DAT_01269008;
 
 // @fnv 0x00d68820
+// pdb: NiD3DShaderFactory::GetD3DShaderFactory | NiD3DShaderFactory.obj | fnv360_0822_retail, call_gap_sim, medium
 int FUN_00d68820()
 {
     return DAT_01269008;
@@ -471,6 +487,7 @@ class FUN_008e8c10 : public FUN_008f7c10 {
 public:
     FUN_008e8c10();
 };
+// pdb: bhkRefObject::bhkRefObject | bhkRefObject.obj | fnv360_0721_beta, call_seq, low, conflict (bridge: bhkCharacterProxy::bhkCharacterProxy)
 FUN_008e8c10::FUN_008e8c10() : unk0c(0) {
     *(int*)this = 0x00e3321c;
     m10.FUN_0096a7f0(0);
@@ -518,6 +535,8 @@ struct FUN_00d60860
 };
 // Sets the vtable, size to 1 and type, and stores the result of DAT_01268364->v4(pData) in m_pData.
 // @fnv 0x00d60860
+// pdb: hkOArchive::hkOArchive | hkOArchive.obj | fnv360_0822_debug, objrun_sim, low
+// pdb params: filename, bs
 FUN_00d60860::FUN_00d60860(void* pData, unsigned char ucType)
 {
     m_usSize = 1;
@@ -554,6 +573,7 @@ struct FUN_00d61470_Class
 };
 
 // @fnv 0x00d61470
+// pdb: BGSCameraPathManager::GetRootPathArray | BGSCameraPathManager.obj | fnv360_0822_debug, call_gap, low
 void* FUN_00d61470_Class::FUN_00d61470()
 {
     return this;
@@ -568,6 +588,8 @@ struct FUN_00d61520_cls
     int __thiscall FindOffset(int a, int b);
 };
 // @f3 0x00684960 (community match, verified in this file)
+// pdb: StatsMenu::StimpakTargetConditionCallback | StatsMenu.obj | fnv360_0721_beta, call_gap, low
+// pdb params: aHO
 int FUN_00d61520_cls::FindOffset(int a, int b) {
     int (__cdecl *predicate)(int, int) = reinterpret_cast<int (__cdecl *)(int, int)>(a);
     FUN_00d61520_cls* node = this;
@@ -647,6 +669,8 @@ struct hkStringD618
 };
 
 // @f3 0x00923a80 (community match, verified in this file)
+// pdb: hkArrayBase<char>::copy | hkStringBuf.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: dst, src, n
 ResultFlag hkStringD618::ReplaceChar(char from, char to, int replaceType)
 {
     ResultFlag result(false);
@@ -900,6 +924,8 @@ extern int DAT_010d16f0;
 
 // Calls FUN_00ddccb0 with aParam, then stores three global addresses and aValue into the object's fields and returns this.
 // @fnv 0x00d62ef0
+// pdb: hkpWorldSnapshotViewer::hkpWorldSnapshotViewer | hkpWorldSnapshotViewer.obj | fnv360_0822_debug, caller_sim, low
+// pdb params: contexts, convertToPC
 FUN_00d62ef0_cls* __thiscall FUN_00d62ef0_cls::FUN_00d62ef0(int aParam, unsigned char aValue)
 {
     ((FUN_00ddccb0_Obj*)this)->FUN_00ddccb0(aParam);
@@ -1007,6 +1033,7 @@ struct hkObjD633
 
 // Iterates the container's items and passes each to the listener's v04 callback when m_container is set.
 // @fnv 0x00d63300
+// pdb: hkpWorldMemoryViewer::init | hkpWorldMemoryViewer.obj | fnv360_0822_retail, vtable, medium
 void hkObjD633::FUN_00d63300()
 {
     if (m_container)
@@ -1173,6 +1200,8 @@ struct StreamContainer
     void FUN_00a64ae0() throw();
 };
 
+// pdb: hkpWorldMemoryViewer::step | hkpWorldMemoryViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: frameTimeInMs
 void FUN_00d63370_class::UpdatePhysicsDebugDisplay(float fFrameTime) throw()
 {
     StreamContainer* stream = (StreamContainer*)&m_pStreamWriter;
@@ -1199,6 +1228,7 @@ void __cdecl FUN_00d632c0();
 extern void* DAT_01268fc8;
 
 // @fnv 0x00d63400
+// pdb: hkpSweptTransformDisplayViewer::registerViewer | hkpSweptTransformDisplayViewer.obj | fnv360_0822_retail, ustr, medium
 void __cdecl InitWorldMemory()
 {
     DAT_01268fc8 =
@@ -1323,6 +1353,8 @@ class FUN_00d64260 : public FUN_00ddccb0, public hkIfaceAD642, public hkIfaceBD6
 
 // Constructs the object by forwarding p to the base constructor and default-initializing the void* array member.
 // @fnv 0x00d64260
+// pdb: hkpSweptTransformDisplayViewer::hkpSweptTransformDisplayViewer | hkpSweptTransformDisplayViewer.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: contexts
 FUN_00d64260::FUN_00d64260(void* p) throw() : FUN_00ddccb0(p)
 {}
 
@@ -1370,6 +1402,7 @@ extern void* DAT_01268fd0;
 void __cdecl FUN_00d645f0();
 
 // @fnv 0x00d64630
+// pdb: hkpShapeDisplayViewer::registerViewer | hkpShapeDisplayViewer.obj | fnv360_0822_retail, call_gap, low
 void __cdecl RegisterSweptTransformsTask()
 {
     DAT_01268fd0 =
@@ -1529,6 +1562,8 @@ void FnvCpu_FUN_00d65290_CpuObject::FUN_00d65290(unsigned char arg0)
 
 extern "C" void __cdecl FUN_00d72e90();
 // @fnv 0x00d73380
+// pdb: bhkHingeLimitsConstraint::SetEntityB | bhkHingeLimitsConstraint.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: apEntity
 void __cdecl FUN_00d73380()
 {
     FUN_00d72e90();
@@ -1545,6 +1580,7 @@ class FUN_00d733e0
 };
 
 // @fnv 0x00d733e0
+// pdb: hkpTransformCollapseUtil::Results::Results | hkpTransformCollapseUtil.obj | fnv360_0822_retail, callee_sim, low, conflict (skyrim: hkpTransformCollapseUtil::Options::Options)
 FUN_00d733e0::FUN_00d733e0()
 {
     m_iFirst = 0;
@@ -1563,6 +1599,7 @@ struct FUN_00d73400_cls
 };
 
 // @fnv 0x00d73400
+// pdb: hkpTransformCollapseUtil::Results::reset | hkpTransformCollapseUtil.obj | tesv_win, call_seq, medium
 void FUN_00d73400_cls::FUN_00d73400()
 {
     unk00 = 0;
@@ -1615,6 +1652,7 @@ struct hkpTransformCollapseUtilResultsD734
 
 // Logs four counters (collapsed shapes, removed identity transforms, specialized shapes, propagated transforms) via hkErrorD734::message.
 // @fnv 0x00d73430
+// pdb: hkpTransformCollapseUtil::Results::report | hkpTransformCollapseUtil.obj | fnv360_0822_retail, ustr, high
 void hkpTransformCollapseUtilResultsD734::PrintResults() throw()
 {
     {
@@ -2033,6 +2071,7 @@ class FUN_00d62ef0 : public hkReferencedObjectD62, public hkpCollisionAgentD62
 };
 
 // @fnv 0x00d6c1a0
+// pdb: hkUndoBeginConstraints | hkpBuildJacobianFromAtoms.obj | tesv_win, objrun_sim, low
 __declspec(noinline) static void FUN_00d6c1a0(int* piValue)
 {
     *piValue -= 16;
@@ -2076,6 +2115,7 @@ class FUN_00d73410
 };
 
 // @fnv 0x00d73410
+// pdb: hkpTransformCollapseUtil::Options::Options | hkpTransformCollapseUtil.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: hkpTransformCollapseUtil::Results::Results)
 FUN_00d73410::FUN_00d73410()
 {
     m_iUnk00 = 0;
@@ -2103,6 +2143,7 @@ volatile int g_d6c1b0_a1;
 D6C1B0Owner* volatile g_d6c1b0_owner;
 
 // @fnv 0x00d6c1b0
+// pdb: callBridgeFromAtom | hkpBuildJacobianFromAtoms.obj | fnv360_0822_retail, objrun_open, low
 static __declspec(noinline) void FUN_00d6c1b0(D6C180Command** ppkCursor, D6C1B0Owner* pOwner, int a1)
 {
     *ppkCursor -= 1;
@@ -2278,6 +2319,7 @@ Derived::Derived()
 }  // namespace fnv_00d68900
 
 // @fnv 0x00d6c590
+// pdb: buildJacobianFromIgnoreModifier | hkpBuildJacobianFromAtoms.obj | tesv_win, objrun_sim, low
 static __declspec(noinline) void FUN_00d6c590(int* p)
 {
     *p -= 0x10;
@@ -2562,6 +2604,7 @@ static float g_inA00a;
 static float g_inB00a;
 static volatile float g_outA00a;
 
+// pdb: calculateRhs | hkpSimpleContactConstraintInfo.obj | tesv_win, hash, low
 static __declspec(noinline) float FUN_00a00dd0(Cls_a00dd0* self, float a, float b)
 {
 
@@ -2607,6 +2650,8 @@ struct Integrator_a00dc0
     float unk1c;
 };
 
+// pdb: hkAddVelocityBuildJacobian | hkp1dBilateralConstraintBuildJacobian.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: hkSimpleContactConstraintDataAddALittleSurfaceViscosity)
+// pdb params: deltaVel, bodyIndex, out
 void __cdecl FUN_00a00dc0(Integrator_a00dc0* self)
 {
     self->unk0c = 0.0f;

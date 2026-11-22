@@ -17,6 +17,8 @@ struct __declspec(align(16)) Matrix43
     void FUN_00cb22c0(Transform* a, Matrix43* b);
 };
 // @fnv 0x00cb22c0
+// pdb: hkTransform::setMul | hkTransform.obj | fnv360_0822_debug, objrun, medium
+// pdb params: aTb, bTc
 void Matrix43::FUN_00cb22c0(Transform* apTransform, Matrix43* apMatrix)
 {
     Matrix43 temp;
@@ -49,6 +51,8 @@ __declspec(align(16)) struct Matrix44
     void FUN_00cb2420(const Matrix44* left, const Matrix44* right);
 };
 // @fnv 0x00cb2420
+// pdb: hkTransform::setMul | hkTransform.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkTransform::setMulMulInverse)
+// pdb params: aTb, bTc
 void Matrix44::FUN_00cb2420(const Matrix44* left, const Matrix44* right)
 {
     Matrix44 tempMatrix;

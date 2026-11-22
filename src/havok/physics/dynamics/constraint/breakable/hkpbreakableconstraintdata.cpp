@@ -9,6 +9,8 @@ struct FUN_00d4de80_class
     void FUN_00d4de80(int, void* out);
 };
 // @fnv 0x00d4de80
+// pdb: hkpBreakableConstraintData::getRuntimeInfo | hkpBreakableConstraintData.obj | fnv360_0822_debug, objopen_prop, low
+// pdb params: wantRuntime, infoOut
 void FUN_00d4de80_class::FUN_00d4de80(int, void* out)
 {
     ((int*)out)[1] = *(unsigned short*)((char*)this + 0x1e);
@@ -39,6 +41,7 @@ void FUN_00d4de50_class::PopulateInfo(GenericConstraintAtomScheme* info)
 }
 
 // @fnv 0x00d4dec0
+// pdb: SandBoxActorPackageData::GetPackageType | SandBoxPackage.obj | fnv360_1110_retail, vtable, medium
 int __cdecl FUN_00d4dec0()
 {
     return 0xc;
@@ -566,6 +569,7 @@ struct BrkInfo
 };
 
 // @f3twin 0x009dac40 of 0x007efe40
+// pdb: hkpBreakableConstraintData::getType | hkpBreakableConstraintData.obj | fnv360_0822_retail, objrun_open, low
 int __cdecl F3_FUN_009dac40()
 {
     return 0xc;

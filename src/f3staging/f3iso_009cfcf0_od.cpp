@@ -1680,6 +1680,8 @@ __forceinline void __cdecl hkCollectionBvTreeAgent3_calcAabbs( const hkpAgent3Pr
 	}
 }
 
+// pdb: hkpCollectionCollectionAgent3::process | hkpCollectionCollectionAgent3.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: hkpCollectionCollectionAgent3::process_gatherShapeKeys)
+// pdb params: input, entry, agentData, separatingNormal, output
 hkpAgentData* __cdecl hkpCollectionCollectionAgent3::FUN_009cfcf0( const hkpAgent3ProcessInput& input, hkpAgentEntry* entry, hkpAgentData* agentData, hkVector4* separatingNormal, hkpProcessCollisionOutput& output )
 {
 	{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); if ( mStream.memoryAvailable() ) { hkMonitorStream::TimerBeginListCommand* h = reinterpret_cast<hkMonitorStream::TimerBeginListCommand*>(mStream.getEnd()); h->m_commandAndMonitor = "L" "t" "CollColl3"; h->m_nameOfFirstSplit = "S" "t" "Init"; h->setTime(); mStream.setEnd( (char*)(h+1) ); } };

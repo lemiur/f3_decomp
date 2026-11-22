@@ -6,6 +6,8 @@
 extern MemoryManager g_memoryManager;
 
 // @fnv 0x00a968a0
+// pdb: NiParticlesData::ReplaceRotations | NiParticlesData.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pkRotations
 void NiParticlesData::SetRotations(NiQuaternion* pkRotations)
 {
     g_memoryManager.Deallocate(m_pkRotations);
@@ -16,6 +18,8 @@ void __cdecl _NiFreeAlias(void* p);
 
 // Clamps param_3 to 0x10, frees the pointer at this_ptr+0x68, stores the clamped byte at +0x6c and param_2 at +0x68.
 // @fnv 0x00a968e0
+// pdb: NiParticlesData::ReplaceSubTextureOffsets | NiParticlesData.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pkSubTextureOffsets, ucSubTextureOffsetCount
 void __fastcall FUN_00a968e0(char* this_ptr, int, void* param_2, unsigned char param_3)
 {
     if (param_3 >= 0x10)
@@ -42,6 +46,8 @@ struct FUN_00a968c0_shell
 };
 
 // @fnv 0x00a968c0
+// pdb: NiParticlesData::ReplaceRotationAxes | NiParticlesData.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pkRotationAxes
 void __thiscall FUN_00a968c0_shell::SetPointer(void* apPointer)
 {
     g_memoryManager.Deallocate(*(void**)(this + 0x60));
@@ -110,6 +116,7 @@ struct FUN_00a96a10_shell
 };
 // Calls FUN_00a96800, then deletes this with size 0x70 if flags has bit 0 set, and returns this.
 // @fnv 0x00a96a10
+// pdb: NiParticlesData::`scalar deleting destructor' | NiParticlesData.obj | fnv360_0822_retail, caller_sim, low
 void* __thiscall FUN_00a96a10_shell::FUN_00a96a10(unsigned int flags)
 {
     FUN_00a96800();
@@ -134,6 +141,7 @@ struct Candidate : NiParticlesData
 };
 // Copies the last active particle's vertex, color, normal, radii, sizes, rotation and texture data into the given slot, then decrements m_usActive.
 // @fnv 0x00a964c0
+// pdb: NiParticlesData::RemoveParticle | NiParticlesData.obj | tesv_win, objopen_prop, low
 void Candidate::FUN_00a964c0(unsigned short index)
 {
     unsigned short last = m_usActive - 1;
@@ -200,6 +208,8 @@ struct ParticleViewData : NiParticlesData
     void FUN_00a96910(ParticleViewFrame*);
 };
 // @fnv 0x00a96910
+// pdb: NiParticlesData::SortParticles | NiParticlesData.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: apCamera
 void ParticleViewData::FUN_00a96910(ParticleViewFrame* pViewFrame)
 {
     if (!m_pusParticleIndices)
@@ -671,6 +681,8 @@ class NiParticlesDataViewer : public NiGeometryDataViewer
 
 // Appends the base geometry viewer strings plus the particle radii, sizes, rotations, texture indices and sub-texture offsets to pkStrings.
 // @fnv 0x00a97420
+// pdb: NiParticlesData::GetViewerStrings | NiParticlesData.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void NiParticlesDataViewer::FUN_00a97420(NiViewerStringsArray* pkStrings)
 {
     NiGeometryDataViewer::GetViewerStrings(pkStrings);
@@ -713,6 +725,8 @@ class RenderOrderSorter
 };
 // Partitions m_pusParticleIndices between left and right around a pivot value from m_pfSortValues, then recurses on both sub-ranges.
 // @fnv 0x00a966c0
+// pdb: NiParticlesData::QuickSortParticles | NiParticlesData.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: aiLeft, aiRight
 void RenderOrderSorter::FUN_00a966c0(int left, int right)
 {
     int iLeft = left;
@@ -1029,6 +1043,8 @@ struct NewAxis12Stand
         return ((AllocStandIn*)&DAT_011f6238)->FUN_0086b930(n);
     }
 };
+// pdb: NiParticlesData::LoadBinary | NiParticlesData.obj | fnv360_0822_retail, uconst, low
+// pdb params: kStream
 void __thiscall ParticlesLoadView::FUN_00a96cf0(StreamIn* stream)
 {
     union ReadValue

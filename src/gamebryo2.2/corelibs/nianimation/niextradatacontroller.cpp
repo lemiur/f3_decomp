@@ -3,6 +3,8 @@
 #include "niextradatacontroller_decls.h"
 
 // @fnv 0x00a571a0
+// pdb: NiPSysModifierCtlr::LoadBinary | NiPSysModifierCtlr.obj | fnv360_0822_retail, call_gap, high
+// pdb params: kStream
 void NiPSysModifierCtlr::LoadBinary(NiStream& stream)
 {
     NiSingleInterpController::LoadBinary(stream);
@@ -61,6 +63,8 @@ struct FUN_00a57100_Caller : NiExtraDataController
 };
 // Calls the base RegisterInterpolatorStreamables on kStream; if it succeeds, calls kStream's f8 on this+0x38 and returns true, otherwise false.
 // @fnv 0x00a57100
+// pdb: NiExtraDataController::RegisterStreamables | NiExtraDataController.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 bool FUN_00a57100_Caller::FUN_00a57100(NiStream& kStream)
 {
     if (!((BaseFake*)this)->RegisterInterpolatorStreamables(kStream))
@@ -90,6 +94,8 @@ struct FakeController : NiTimeController
 };
 // Releases the object at offset 0x3c, calls NiTimeController::SetTarget, and refreshes extra data if offset 0x2c is set.
 // @fnv 0x00a57330
+// pdb: NiExtraDataController::SetTarget | NiExtraDataController.obj | fnv360_0721_beta, objrun, medium
+// pdb params: pkTarget
 void FakeController::FUN_00a57330(NiObjectNET* pkTarget)
 {
     RefObj* p = m_spExtraData;
@@ -132,6 +138,8 @@ struct FUN_00a57420_Shell : public NiExtraDataController
 };
 
 // @fnv 0x00a57420
+// pdb: NiExtraDataController::GetViewerStrings | NiExtraDataController.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FUN_00a57420_Shell::FUN_00a57420(NiTPrimitiveArray<char*>* strings)
 {
     StrArr* array = strings;
@@ -178,6 +186,8 @@ struct FUN_00a57150_cls
 };
 
 // @fnv 0x00a57150
+// pdb: NiExtraDataController::ProcessClone | NiExtraDataController.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCloning
 void FUN_00a57150_cls::FUN_00a57150(void* arg)
 {
     void* src = arg;
@@ -262,6 +272,8 @@ struct S_00a571e0_Cls : S_00a571e0_Base
 };
 // Compares base fields, the unk3c child pointer (presence and IsEqual), and unk38 against another instance, returning true only if all match.
 // @fnv 0x00a571e0
+// pdb: NiExtraDataController::IsEqual | NiExtraDataController.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pkObject
 unsigned char S_00a571e0_Cls::IsEquivalent(S_00a571e0_Cls* apOther)
 {
     if (!IsCompatibleWith(apOther))
@@ -320,6 +332,8 @@ static __forceinline bool HasTargetType(TargetCandidate* arg)
     return false;
 }
 // @fnv 0x00a57380
+// pdb: NiExtraDataController::InterpTargetIsCorrectType | NiExtraDataController.obj | fnv360_0721_beta, objrun, low
+// pdb params: pkTarget
 bool TargetController::HasMatchingItem(TargetCandidate* pCandidate)
 {
     if (!HasTargetType(pCandidate))

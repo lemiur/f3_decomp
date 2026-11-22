@@ -44,6 +44,8 @@ struct FUN_00d39930_class : ReceiverBase {
 };
 // Dispatches value to each non-0xFFFF receiver id via dispatcher, then releases this if non-null.
 // @fnv 0x00d39930
+// pdb: hkpCapsuleTriangleAgent::cleanup | hkpCapsuleTriangleAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: constraintOwner
 void FUN_00d39930_class::DispatchToReceivers(void* value)
 {
     unsigned short* id = receiverIds;
@@ -71,6 +73,8 @@ void __cdecl FUN_00d3a280(void* apFirst, void* apSecond, void* apThird,
 
 // Builds a CallbackState with a max float, the given value and a constant pointer, then passes it to FUN_00d3a280 with the three pointers reordered.
 // @fnv 0x00d3b220
+// pdb: hkpSymmetricAgentLinearCast<hkpCapsuleTriangleAgent>::staticGetClosestPoints | hkpCapsuleTriangleAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_00d3b220(void* apOne, void* apTwo, void* apThree, int aiValue)
 {
     CallbackState kState;
@@ -239,6 +243,8 @@ struct CallbackHost_d3b160 {
 
 // Builds a temporary object holding a4 and a cleared flag with a vtable, then calls hkpCapsuleTriangleAgent_getPenetrations with a2, a1, a3 and that object.
 // @fnv 0x00d3b160
+// pdb: hkpSymmetricAgentLinearCast<hkpCapsuleTriangleAgent>::getPenetrations | hkpCapsuleTriangleAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void CallbackHost_d3b160::FUN_00d3b160(void* a1, void* a2, void* a3, unsigned int a4)
 {
     FUN_00d3b160_tmp t;
@@ -641,6 +647,8 @@ struct CpuObject {
 };
 // Builds a CpuCallData from fourth, DAT_0104da48 and &DAT_010ce7fc, then calls FUN_00d39ef0 with second, first, third and that data.
 // @fnv 0x00d3b1e0
+// pdb: hkpSymmetricAgentLinearCast<hkpCapsuleTriangleAgent>::getClosestPoints | hkpCapsuleTriangleAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void CpuObject::FUN_00d3b1e0(void* first, void* second, unsigned int third, unsigned int fourth)
 {
     CpuCallData data;
@@ -882,6 +890,8 @@ NativeTransformPoints(*reinterpret_cast<const NativeTransform*>(bodyA->matrix), 
     FUN_0096e450(capsule, capsuleShape->radius, triangle, triangleShape->radius, cache, reinterpret_cast<const NativeCollisionInput*>(input)->tolerance, 0, hit);
 }
 }
+// pdb: hkpCapsuleTriangleAgent::staticGetPenetrations | hkpCapsuleTriangleAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_00d3a8c0(Body* apBodyA, Body* apBodyB, Input* input, PenetrationCollector* collector)
 {
     using namespace f3m_009c3cc0;

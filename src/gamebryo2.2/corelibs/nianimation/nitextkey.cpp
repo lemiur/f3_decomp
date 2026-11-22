@@ -3,6 +3,8 @@
 #include "nitextkey_decls.h"
 // Reads m_fTime from the stream, then loads m_kText using the version-dependent string reader.
 // @fnv 0x00a578d0
+// pdb: NiTextKey::LoadBinary | NiTextKey.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: stream
 void TimedTextEntry::LoadBinary(NiStream& stream)
 {
     NiBinaryStream* input = stream.m_pUnderlyingStream;
@@ -45,6 +47,8 @@ struct NiTextKeyFnv
 };
 
 // @fnv 0x00a57930
+// pdb: NiTextKey::SaveBinary | NiTextKey.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: stream
 void NiTextKeyFnv::ReadFromStream(FNVStream& stream)
 {
     stream.GetInput()->Read(&m_fTime, sizeof(m_fTime));

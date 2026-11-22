@@ -5,6 +5,7 @@
 #include "havok/hkpShape.h"
 
 // @fnv 0x00c9e3f0
+// pdb: hkPadSpu<hkpCollisionDispatcher *>::val | bhkSimpleShapePhantom.obj | fnv360_0822_debug, objrun_open, low
 int __stdcall FUN_00c9e3f0(void* p, int size)
 {
     return -1;

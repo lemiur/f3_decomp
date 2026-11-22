@@ -61,6 +61,7 @@ struct LinkedNode {
 struct LinkReceiver {
     void FUN_004c0fe0(LinkedNode* node);
 };
+// pdb: ExteriorCellLoaderTask::Run | ExteriorCellLoader.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: ExteriorCellLoader::~ExteriorCellLoader)
 void FUN_004d7440_Class::FUN_004d7440() {
     ((LinkReceiver*)*(void**)((char*)this + 0x18))
         ->FUN_004c0fe0((LinkedNode*)*(void**)((char*)this + 0x1c));

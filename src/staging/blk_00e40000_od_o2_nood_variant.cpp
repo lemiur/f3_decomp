@@ -52,6 +52,8 @@ struct LocalObj {
 };
 
 // @fnv 0x00e5cf00
+// pdb: hkMoppEarlyExitObbVirtualMachine_queryObb | hkpMoppMachine.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: code, BvToWorld, extent, radius
 int __cdecl FUN_00e5cf00(void* a1, int a2, int a3, int a4)
 {
     __declspec(align(16)) LocalObj obj;
@@ -62,6 +64,8 @@ int __cdecl FUN_00e5cf00(void* a1, int a2, int a3, int a4)
 struct __declspec(align(16)) Vec4E5 { float x, y, z, w; };
 struct TmpE5CF40 { Vec4E5 a, b; void FUN_00e64f00(int a, int b, int c); };
 // @fnv 0x00e5cf40
+// pdb: hkMoppSphereVirtualMachine_querySphere | hkpMoppMachine.obj | fnv360_0822_retail, objrun, medium
+// pdb params: code, sphere, primitives_out
 void __cdecl FUN_00e5cf40(int a, int b, int c)
 {
     TmpE5CF40 tmp;
@@ -74,6 +78,8 @@ struct __declspec(align(16)) FUN_00e5d010_Block {
     void __thiscall FUN_00dd1da0(int first,int second,int third);
 };
 // @fnv 0x00e5d010
+// pdb: hkMoppObbVirtualMachine_queryAabb | hkpMoppMachine.obj | fnv360_0822_retail, objrun, medium
+// pdb params: code, aabb, primitives_out
 extern "C" void __cdecl FUN_00e5d010(int first,int second,int third)
 {
     FUN_00e5d010_Block instance;

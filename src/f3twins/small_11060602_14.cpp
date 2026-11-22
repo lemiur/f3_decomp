@@ -97,6 +97,7 @@ struct SP_00b52fb0 { RC_00b52fb0* p; ~SP_00b52fb0(); };
 struct Base_00b52fb0 { virtual ~Base_00b52fb0(); char pad[0x88]; };
 struct D_00b52fb0 : Base_00b52fb0 { SP_00b52fb0 a1[26]; SP_00b52fb0 a2[13]; virtual ~D_00b52fb0(); };
 extern R_00b52fb0* DAT_01178060[26];
+// pdb: SkinShader::~SkinShader | SkinShader.obj | fnv360_0822_retail, objrun, high
 D_00b52fb0::~D_00b52fb0()
 {
     for (int i = 0; i < 26; i++) {

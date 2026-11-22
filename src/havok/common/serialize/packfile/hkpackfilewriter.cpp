@@ -199,6 +199,7 @@ struct DbSecond
 
 // Calls first->GetLastNodeFlag; if its first character is nonzero, returns second->vf10(arg) or 0; otherwise returns the first pointer.
 // @fnv 0x00dbd9f0
+// pdb: getExactClass | hkPackfileWriter.obj | fnv360_0822_retail, call_gap, medium
 static __declspec(noinline) unsigned int FUN_00dbd9f0(DbFirst* first, DbSecond* second, unsigned int arg)
 {
     bool bFlag;
@@ -319,6 +320,8 @@ struct DBD7MapView
     void FUN_00922710(const void* key,int value);
 };
 struct Fwd { static __forceinline const char* key(const char* k) { return k; } };
+// pdb: hkPackfileWriter::notDuplicateMetaData | hkPackfileWriter.obj | fnv360_0822_retail, uconst, high
+// pdb params: pointer, klass
 int hkPackfileWriterDB7::RegisterObject(void* pvObject,const hkClassDB7* pkClass) throw()
 {
     if (hkString_strCmp(((const ClassDB7View*)pkClass)->FUN_009b0490(), &DAT_00e44a74) == 0)
@@ -430,6 +433,8 @@ class hkStringPoolXdbdd40
 
 // Looks up str in m_map, returning the existing index; otherwise copies str, stores it in m_pStringFunctions, registers it in m_map, and returns the new index.
 // @f3 0x00a4a7b0 (community match, verified in this file)
+// pdb: hkPackfileWriter::sectionTagToIndex | hkPackfileWriter.obj | fnv360_0822_retail, call_seq, high
+// pdb params: sectionTag
 int hkStringPoolXdbdd40::GetOrAddString(const char* apString)
 {
     void __cdecl FUN_00901f10(void* a, int b);
@@ -525,6 +530,8 @@ struct RBase
 void __cdecl FUN_00901f10(void* a, int b);
 extern char DAT_0116a994;
 
+// pdb: hkPackfileWriter::addPendingWrite | hkPackfileWriter.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: pointer, klass, pointerIn, klassIn, sectionTag
 void S00dbde40_Obj::FUN_00dbde40(int a, int b, int c, int d, int e)
 {
     int result = ((RBase*)this)->FUN_00a4a820(c, d, e);
@@ -821,6 +828,8 @@ struct S00dbddc0_cls : public S00dbddc0_Base
 
 // Looks up a hash entry for a1, then walks the node chain a2 calling GetValue on each key, returning the first hit or calling GetOrAddString(a3).
 // @fnv 0x00dbddc0
+// pdb: hkPackfileWriter::findSectionFor | hkPackfileWriter.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: pointer, klass, sectionTag
 int S00dbddc0_cls::FUN_00dbddc0(int a1, S00dbddc0_Node* apStartNode, int a3)
 {
     int r = m_sub9c.LookupHashEntry(a1, -1);

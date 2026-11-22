@@ -70,6 +70,7 @@ FUN_00d27570MemoryRouter* __cdecl _D1A0E0GetMemoryRouter();
 extern int DAT_012689e4;
 
 // @fnv 0x00d27560
+// pdb: getVtablehkpPhysicsData | hkpPhysicsDataClass.obj | fnv360_0822_retail, objrun_open, low
 void* __cdecl FUN_00d27560()
 {
     return &DAT_012689e4;
@@ -94,6 +95,7 @@ struct StreamBufferD27210
     int FlushToDestination();
 };
 // @fnv 0x00d27210
+// pdb: hkBufferedStreamWriter::flushBuffer | hkBufferedStreamWriter.obj | fnv360_0822_retail, call_seq, medium
 int StreamBufferD27210::FlushToDestination()
 {
     if (m_destination != 0)
@@ -186,6 +188,7 @@ class hkObjD273
 };
 
 // @fnv 0x00d27300
+// pdb: hkBufferedStreamWriter::isOk | hkBufferedStreamWriter.obj | fnv360_0822_retail, vtable, high
 hkBoolD273 hkObjD273::GetBool()
 {
     return m_pObservedSource ? m_pObservedSource->IsStreamValid() : hkBoolD273(m_10 != m_14);
@@ -288,6 +291,8 @@ class FUN_00d274c0 : public hkReferencedObjectD274
 };
 
 // @fnv 0x00d274c0
+// pdb: hkBufferedStreamWriter::hkBufferedStreamWriter | hkBufferedStreamWriter.obj | fnv360_0822_retail, call_seq, high
+// pdb params: mem, memSize, memoryIsString
 FUN_00d274c0::FUN_00d274c0(void* pvMem, int aiSize, hkBool bMemoryIsString) throw()
 {
     m_offset = 0;
@@ -322,6 +327,7 @@ class FUN_00d27340_cls
 
 // Returns m_inner->isValid() when m_inner is non-null, otherwise true.
 // @fnv 0x00d27340
+// pdb: hkBufferedStreamWriter::seekTellSupported | hkBufferedStreamWriter.obj | fnv360_0822_retail, vtable, high
 hkBoolD273 FUN_00d27340_cls::IsValid() const
 {
     return m_inner ? m_inner->isValid() : hkBoolD273(true);

@@ -62,6 +62,8 @@ void __cdecl operator delete(void* memory, RigidBodyInfoAllocator& allocator);
 
 namespace task1800 { struct OwnerCallView { void FUN_008fe7a0(FUN_00c8f510*); }; }
 
+// pdb: bhkRigidBody::CreateCinfo | bhkRigidBody.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: arCreated
 FUN_00c8f510* FUN_00c8f5a0_Class::GetOrCreateRigidBodyInfo(unsigned char* wasCreated)
 {
     MemoryContextGuard guard;
@@ -311,6 +313,8 @@ struct ListFO3
     void FUN_0090ad10(C8D9Stream* pkStream);
 };
 
+// pdb: bhkRigidBody::SaveBinary | bhkRigidBody.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arStream
 void FUN_00c8d960_cls::FUN_00c8d960(C8D9Stream* pkStream)
 {
     bool bCreated;

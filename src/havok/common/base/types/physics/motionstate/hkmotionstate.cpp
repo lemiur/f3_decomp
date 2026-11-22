@@ -94,6 +94,8 @@ struct SweptStub
     int __thiscall hkMotionState_initMotionState(int, void*);
 };
 
+// pdb: hkpShapePhantom::hkpShapePhantom | hkpShapePhantom.obj | fnv360_0822_retail, uvref, high
+// pdb params: shape, transform
 FUN_00c9ea40_cls::FUN_00c9ea40_cls(int a, int b) : FUN_00c9ea90(a)
 {
     FUN_00827200_class tmp;

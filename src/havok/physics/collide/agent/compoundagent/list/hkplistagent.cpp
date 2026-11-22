@@ -15,6 +15,8 @@ struct hkpListAgent
 };
 
 // @fnv 0x00d36850
+// pdb: hkpListAgent::invalidateTim | hkpListAgent.obj | fnv360_0721_beta, objrun, high
+// pdb params: input
 void __thiscall hkpListAgent::FUN_00d36850(void* arg)
 {
     hkAgent1nMachine_InvalidateTim((char*)this + 0x10, arg);
@@ -39,6 +41,7 @@ struct Owner
 };
 // Forwards the three arguments to hkAgent1nMachine_WarpTime with the object's field at offset 0x10 as its first argument.
 // @fnv 0x00d36870
+// pdb: hkpListAgent::warpTime | hkpListAgent.obj | tesv_win, hash, low
 void Owner::FUN_00d36870(float afValue1, float afValue2, int aiValue)
 {
     hkAgent1nMachine_WarpTime((char*)this + 0x10, afValue1, afValue2, aiValue);
@@ -76,6 +79,8 @@ struct FUN_00d36820_cls
 
 // Calls hkAgent1nMachine_Destroy with &unk10, unk0C, unk08 and a1, then invokes v00(1).
 // @fnv 0x00d36820
+// pdb: hkpListAgent::cleanup | hkpListAgent.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: constraintOwner
 void FUN_00d36820_cls::FUN_00d36820(int aiValue)
 {
     hkAgent1nMachine_Destroy(&unk10, unk0C, unk08, aiValue);

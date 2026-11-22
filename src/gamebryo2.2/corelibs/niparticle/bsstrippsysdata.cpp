@@ -44,6 +44,8 @@ struct FUN_00c25dd0_shell : BSStripPSysData
 };
 
 // @fnv 0x00c25dd0
+// pdb: D3DDevice_EndVertices | draw.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: BSStripPSysData::GetMaxPointCount)
+// pdb params: pDevice
 short __thiscall FUN_00c25dd0_shell::FUN_00c25dd0()
 {
     return usMaxPointCount;
@@ -64,6 +66,8 @@ struct FUN_00c25e70_shell : BSStripPSysData
 
 // Indexes the pointer at this+0x7c by a*32, then returns that element plus b*0x84+0xc.
 // @fnv 0x00c25e70
+// pdb: BSStripPSysData::GetPointVerts | BSStripPSysData.obj | fnv360_0822_retail, objrun, medium, conflict (skyrim: BSStripPSysData::GetTexCoordDelta)
+// pdb params: ausParticle, ausPoint
 void* FUN_00c25e70_shell::GetElementField(unsigned short ausIndex, unsigned short ausSubIndex)
 {
     return pStripList[ausIndex].pPointList[ausSubIndex].kVertex;
@@ -78,6 +82,7 @@ struct FUN_00c26380_shell
 };
 
 // @fnv 0x00c26380
+// pdb: GeometryDecalShader::`scalar deleting destructor' | GeometryDecalShader.obj | fnv360_0822_retail, objrun, medium
 void* __thiscall FUN_00c26380_shell::DestroyIfFlagged(unsigned int flags)
 {
     void* p = FUN_00c25ef0();
@@ -91,6 +96,8 @@ struct FUN_00c25db0_shell : BSStripPSysData
     unsigned short __thiscall FUN_00c25db0(unsigned short index);
 };
 // @fnv 0x00c25db0
+// pdb: BSStripPSysData::GetPointCount | BSStripPSysData.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: ausParticle
 unsigned short __thiscall FUN_00c25db0_shell::FUN_00c25db0(unsigned short index)
 {
     return pStripList[index].usPointCount;
@@ -102,6 +109,8 @@ struct FUN_00c25de0_shell : BSStripPSysData
 };
 
 // @fnv 0x00c25de0
+// pdb: BSStripPSysData::GetPointLastUpdateTime | BSStripPSysData.obj | fnv360_0822_retail, call_seq, high
+// pdb params: ausParticle
 float __thiscall FUN_00c25de0_shell::GetEntryFloat(unsigned short usIndex)
 {
     return pStripList[usIndex].fLastTime;
@@ -124,6 +133,7 @@ struct FUN_00c24c90 : FUN_00a963f0
 };
 // Constructor that initializes m70, m74, m78 and m7a to zero.
 // @fnv 0x00c24c90
+// pdb: NiPSysData::NiPSysData | NiPSysData.obj | fnv360_0822_retail, objrun_prop, medium
 FUN_00c24c90::FUN_00c24c90() : m70(0), m74(0), m78(0)
 {
     m7a = 0;
@@ -162,6 +172,8 @@ struct FUN_00c25e20_shell : BSStripPSysData
 };
 // Indexes base[a].p to an inner object and returns its float field at index b.
 // @fnv 0x00c25e20
+// pdb: BSStripPSysData::GetPointSize | BSStripPSysData.obj | fnv360_0822_retail, objrun, high
+// pdb params: ausParticle, ausPoint
 float __thiscall FUN_00c25e20_shell::GetInnerValue(unsigned short ausOuterIndex, unsigned short ausInnerIndex)
 {
     return pStripList[ausOuterIndex].pPointList[ausInnerIndex].fSize;
@@ -271,6 +283,8 @@ struct FUN_00c25e00_cls
 };
 
 // @fnv 0x00c25e00
+// pdb: BSStripPSysData::GetPointPoint | BSStripPSysData.obj | fnv360_0822_retail, objrun, medium, conflict (skyrim: BSStripPSysData::GetPointVerts)
+// pdb params: ausParticle, ausPoint
 char* FUN_00c25e00_cls::GetSlotData(unsigned short auTableIndex, unsigned short auSlotIndex)
 {
     return m_pTable[auTableIndex].m_pData + auSlotIndex * 0x84;
@@ -340,6 +354,8 @@ struct FUN_00c25d40_shell
 };
 
 // @fnv 0x00c25d40
+// pdb: BSStripPSysData::InitializePoint | BSStripPSysData.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: ausParticle
 void FUN_00c25d40_shell::ResetEntry(unsigned short index)
 {
     m_entries[index].unk04 = 0;
@@ -372,6 +388,7 @@ struct FUN_00c25ef0 : public Base_c24ef0
 };
 // Frees each strip point's pointer for all m_usVertices entries, nulls them, then frees the pkStripPoints array.
 // @fnv 0x00c25ef0
+// pdb: BSStripPSysData::~BSStripPSysData | BSStripPSysData.obj | fnv360_0822_retail, caller_sim, medium
 FUN_00c25ef0::~FUN_00c25ef0()
 {
 
@@ -453,6 +470,8 @@ void* FUN_00ec44d0(void* dst, const void* src, unsigned int n);
 
 // Copies the base strip and its fields into dest, then allocates and deep-copies the item array from unk7c into dest->unk7c.
 // @fnv 0x00c26000
+// pdb: BSStripPSysData::CopyMembers | BSStripPSysData.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkDest, kCloning
 void S_00c26000_Strip::CloneStrip(S_00c26000_Strip* dest, S_00c26000_Proc* proc)
 {
     NiPSysData_CopyMembers(dest, proc);
@@ -738,6 +757,8 @@ struct FUN_00c25f40_cls
 
 // Decrements the record's count and advances its index, or removes the slot and swaps the last record into it.
 // @fnv 0x00c25f40
+// pdb: BSStripPSysData::RemoveParticle | BSStripPSysData.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: ausParticle
 void* FUN_00c25f40_cls::PopRecord(unsigned int auiIndex)
 {
     unsigned short idx = (unsigned short)auiIndex;
@@ -832,6 +853,8 @@ struct FUN_00c26630_cls
 };
 // Calls FUN_00c255b0 on the array, then appends entries built from g_01202680, m80, m84, m88 and m8c via the FUN_00a7d3xx/d4xx/d5xx helpers.
 // @f3 0x00ac5c50 (community match, verified in this file)
+// pdb: BSStripPSysData::GetViewerStrings | BSStripPSysData.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FUN_00c26630_cls::FUN_00c26630(void* pArray)
 {
     ArrHdr* a = (ArrHdr*)pArray;
@@ -859,6 +882,7 @@ struct FUN_00a817b0_shell : NiPSysData
     bool __thiscall FUN_00a817b0(NiStream& a);
 };
 // @fnv 0x00a817b0
+// pdb: BGSMoviePlayer::PauseMusic | BGSMoviePlayer.obj | fnv360_0822_retail, objrun, medium
 bool __thiscall FUN_00a817b0_shell::FUN_00a817b0(NiStream& a)
 {
     return RegisterStreamables(a);

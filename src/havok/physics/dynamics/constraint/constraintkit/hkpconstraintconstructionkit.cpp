@@ -38,6 +38,7 @@ struct FUN_00d52140_cls
 };
 
 // @f3 0x009dfce0 (community match, verified in this file)
+// pdb: hkpConstraintConstructionKit::setPivotsHelper | hkpConstraintConstructionKit.obj | tesv_win, caller_sim, low
 int FUN_00d52140_cls::FUN_00d52140(char* a1, char* a2, const __m128* a3)
 {
     FUN_00c7f690_cls t1;
@@ -166,6 +167,7 @@ struct __declspec(align(16)) Draw328_Vec4
     float z;
     float w;
 };
+// pdb: hkpConstraintConstructionKit::setConeLimit | hkpConstraintConstructionKit.obj | tesv_win, objrun_open, low
 unsigned int Draw328_cls::AppendHeaderAndVector(unsigned char a1, float a2)
 {
     Draw328_intarr* ints = &m_pMgr->m_auiHeaderValues;
@@ -313,6 +315,7 @@ static __forceinline void AppendGeomCommand(hkArr<int>* commands, const int& val
     ++commands->m_iElementCount;
 }
 
+// pdb: hkpConstraintConstructionKit::setTwistLimit | hkpConstraintConstructionKit.obj | tesv_win, objrun_open, low
 int GeomWriter::FUN_00d524d0(unsigned char a1, unsigned char a2, float a3, float a4)
 {
     AppendGeomCommand(&m_buffer->m_cmds, 0x13);

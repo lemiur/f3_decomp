@@ -34,6 +34,7 @@ struct S00a9b1c0
 };
 // Calls FUN_00a80580 on this, frees this with _delete when bit 0 of f is set, and returns this.
 // @fnv 0x00a9b1c0
+// pdb: NiParticleMeshes::`vector deleting destructor' | NiParticleMeshes.obj | tesv_win, vtable_prefix, medium
 void* S00a9b1c0::FUN_00a9b1c0(unsigned int auiFlags)
 {
     ((DtorObj*)this)->FUN_00a80580();
@@ -59,6 +60,7 @@ struct FUN_00a9b1f0_shell
     void SetupRenderer(NiRenderer*);
 };
 // @fnv 0x00a9b1f0
+// pdb: NiParticles::`scalar deleting destructor' | NiParticles.obj | fnv360_0721_beta, objrun, medium
 void FUN_00a9b1f0_shell::SetupRenderer(NiRenderer* apkRenderer)
 {
     NiRenderer* pkRenderer = apkRenderer;
@@ -87,6 +89,8 @@ struct FUN_00a9b250_cls
 };
 
 // @fnv 0x00a9b250
+// pdb: NiScreenGeometry::CreateClone | NiOldScreenSpace.obj | fnv360_0822_retail, objopen_prop, low, conflict (skyrim: BSLODTriShape::CreateObject)
+// pdb params: kCloning
 FUN_00a9b250_obj* FUN_00a9b250_cls::CreateAndInitObject(unsigned int arg)
 {
     FUN_00a9b250_obj* p = (FUN_00a9b250_obj*)FUN_00aa13e0(0xc4);
@@ -186,6 +190,8 @@ struct FUN_00a9b2a0_cls
 
 // If m_9C is set and its flag bits are set, forwards pArg->m_0C to m_B8, then calls FUN_00a7fd90(pArg).
 // @fnv 0x00a9b2a0
+// pdb: NiParticles::OnVisible | NiParticles.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: kCuller
 void FUN_00a9b2a0_cls::ProcessArgIfFlagged(ArgRec* pArg)
 {
     ObjHdr* pObjHdr = m_9C;

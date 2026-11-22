@@ -5,6 +5,7 @@
 
 #pragma optimize("gty", on)
 // @fnv 0x00ba3720
+// pdb: MTRenderingSystem::CreateThreads | MTRenderingSystem.obj | fnv360_0822_retail, ustr, high
 void TaskThreadManager::StartRenderingTaskThread()
 {
     if (DAT_011f94b4)
@@ -15,6 +16,7 @@ void TaskThreadManager::StartRenderingTaskThread()
 #pragma optimize("gty", on)
 // Ends all rendered textures, then advances the renderer state from 1 to 3 or from 3 to 0 and increments frameCount when the matching check passes.
 // @fnv 0x00b6b730
+// pdb: BSShaderManager::RenderDebugTexture | BSShaderManager.obj | fnv360_0822_debug, callee_sim, low
 void TaskThreadManager::EndRenderingTaskThread()
 {
     NiRenderer* renderer = NiRenderer::ms_pRenderer;

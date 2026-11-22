@@ -794,6 +794,7 @@ struct Owner9AFFields
 
 extern "C" __declspec(dllimport) unsigned long __stdcall GetCurrentThreadId(void);
 
+// pdb: TaskQueueInterface::ProcessQueue | TaskQueueInterface.obj | fnv360_0822_retail, call_dedup, low, conflict (skyrim: SeenData::SaveGame)
 void* Owner9AF::GetFirstListItem()
 {
     Owner9AFFields* self = (Owner9AFFields*)this;

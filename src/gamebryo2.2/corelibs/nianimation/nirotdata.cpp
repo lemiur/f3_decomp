@@ -30,6 +30,8 @@ extern void(__cdecl* DAT_011f38d0[])(TimedRotationKey*);
 
 // Releases the current key array, then stores the new key pointer, count and interpolation type, or clears them when no keys are given.
 // @fnv 0x00a48220
+// pdb: NiRotData::ReplaceAnim | NiRotData.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pkKeys, uiNumKeys, eType
 void NiRotData::FUN_00a48220(TimedRotationKey* pkKeys, unsigned int uiNumKeys, AnimationKey::KeyType eInterpType)
 {
     if (m_pKeyArray)
@@ -64,6 +66,7 @@ struct Struct00a47ba0
     void* FUN_00a47ba0(unsigned int);
 };
 // @fnv 0x00a47ba0
+// pdb: NiTArray<unsigned int,NiTMallocInterface<unsigned int> >::`scalar deleting destructor' | TESFile.obj | fnv360_0822_retail, vtable, medium
 void* Struct00a47ba0::FUN_00a47ba0(unsigned int auiFlags)
 {
     void* p = _4;
@@ -91,6 +94,7 @@ struct StandIn
     void* FUN_00a481e0(unsigned int);
 };
 // @fnv 0x00a481e0
+// pdb: NiRotData::`scalar deleting destructor' | NiRotData.obj | fnv360_0822_retail, objopen_prop, high
 void* StandIn::FUN_00a481e0(unsigned int auiFlags)
 {
     TimedRotationKey* pk = m_pKeyArray;
@@ -116,6 +120,7 @@ struct TimedRotationKey
 
 // Reads the rotation key data stored at offset 0x40 of the NiRotData and writes its key, count, key size and key array to the output pointers, or zeros if absent.
 // @fnv 0x00a49d00
+// pdb: NiPathController::GetPathData | NiPathController.obj | tesv_win, call_seq, medium
 void __fastcall GetRotKeyData(NiRotData* pThis, int, TimedRotationKey** ppkKeysOut, int* piKeyOut, int* piCountOut,
                               unsigned char* pKeySize)
 {
@@ -197,6 +202,8 @@ struct SelfStub
 };
 // Calls FUN_00b702b0 with the given arguments, then invokes v52 on the same char pointer.
 // @fnv 0x00b665d0
+// pdb: BSShaderPPLightingProperty::CopyMembers | BSShaderPPLightingProperty.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: pDest, arCloneData
 void SelfStub::FUN_00b665d0(char* a, void* b)
 {
     FUN_00b702b0(a, b);
@@ -262,6 +269,8 @@ struct S00b66600
 void __fastcall FUN_00b70290(S00b66600*, int, int);
 // Calls FUN_00b70290 with the two int arguments, then invokes the virtual method v52 on the object with the second argument.
 // @fnv 0x00b66600
+// pdb: BSShaderPPLightingProperty::IsEqual | BSShaderPPLightingProperty.obj | fnv360_0721_beta, objopen_prop, low
+// pdb params: pkObject
 void __fastcall FUN_00b66600(S00b66600* p, int aiFirst, int aiSecond)
 {
     FUN_00b70290(p, aiFirst, aiSecond);
@@ -830,6 +839,8 @@ struct RotDataLink_cls : public NiObject2
 
 // Loads the object header, key count, request type, and key array from the stream using the key link function table.
 // @fnv 0x00a48440
+// pdb: NiRotData::SaveBinary | NiRotData.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: kStream
 void RotDataLink_cls::FUN_00a48440(NiStream2& kStream)
 {
     NiObject2::FUN_00a89af0(kStream);
@@ -867,6 +878,8 @@ void __cdecl NiAnimationKey_CopySequence(int a1, int a2, void* a3, unsigned int 
 
 // Obtains an object, fills its keys using the current key data and time arguments, then assigns it to ppRival with reference counting.
 // @fnv 0x00a48280
+// pdb: NiRotData::GetSequenceData | NiRotData.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: fStartTime, fEndTime, aspRotData
 void A48280Obj::CopyTo(float fTime, float fDuration, A48280Obj** ppRival)
 {
     A48280Obj* pNew = 0;

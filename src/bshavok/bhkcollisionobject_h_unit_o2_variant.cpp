@@ -20,6 +20,7 @@ struct MyType : BSFadeNode
     }
 };
 // @fnv 0x00c65830
+// pdb: bhkPCollisionObject::CreateObject | bhkPCollisionObject.obj | fnv360_0822_retail, caller_sim, medium
 void* FUN_00c65830()
 {
     return new MyType;
@@ -66,6 +67,8 @@ struct MyNode : BSFadeNode
     }
 };
 
+// pdb: bhkCollisionObject::CreateClone | bhkCollisionObject.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: arCloneData
 MyType* FUN_00c659d0_shell::FUN_00c659d0(void* param)
 {
     ScopedMemoryContext scope(0x10);
@@ -368,6 +371,8 @@ static inline bool IsFixedMotion(int type)
     return type < 6 || type == 8;
 }
 
+// pdb: bhkCollisionObject::SetMotionType | bhkCollisionObject.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: aeType, apObject, abAllowActivate
 void ColObj_c65f40::FUN_00c65f40(int type, NiObj_c65f40* obj, bool update)
 {
     RigidBody_c65f40* rb;
@@ -662,6 +667,8 @@ class CollisionObj : public CollisionParent
 };
 
 // @f3 0x008d26a0 (community match, verified in this file)
+// pdb: bhkCollisionObject::AddViewerStrings | bhkCollisionObject.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apStrings
 void CollisionObj::FUN_00c66060(ViewerStrings* apViewerStrings)
 {
     ParentViewerStrings(apViewerStrings);

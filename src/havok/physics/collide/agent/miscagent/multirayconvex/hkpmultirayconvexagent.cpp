@@ -10,6 +10,8 @@ struct FUN_00d37690_Class
 };
 
 // @fnv 0x00d37690
+// pdb: hkpMultiRayConvexAgent::getPenetrations | hkpMultiRayConvexAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void __thiscall FUN_00d37690_Class::ForwardToFunction(int aiArg1, int aiArg2, int aiArg3, int aiArg4)
 {
     FUN_00d374f0(aiArg1, aiArg2, aiArg3, aiArg4);
@@ -39,6 +41,8 @@ struct Owner
 };
 // Calls handler->process for each non-0xffff value in values, then deletes this.
 // @fnv 0x00d36fc0
+// pdb: hkpMultiRayConvexAgent::cleanup | hkpMultiRayConvexAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: constraintOwner
 void Owner::ProcessValuesAndDelete(int argument)
 {
     int length = count;
@@ -73,6 +77,8 @@ void FUN_00d374f0(void* b, void* a, void* c, S_00d37860_Collector* collector);
 
 // Builds a collector from filter and runs FUN_00d374f0 with b, a, c and the collector.
 // @fnv 0x00d37860
+// pdb: hkpSymmetricAgentLinearCast<hkpMultiRayConvexAgent>::staticGetPenetrations | hkpMultiRayConvexAgent.obj | fnv360_0822_retail, objrun, high
+// pdb params: bodyA, bodyB, input, collector
 void FUN_00d37860(void* a, void* b, void* c, int filter)
 {
     S_00d37860_Collector collector(filter);
@@ -90,6 +96,8 @@ extern const char DAT_010ce7fc[];
 void FUN_00d37280(int, int, int, Payload*);
 // Builds a Payload from DAT_010ce7fc, DAT_0104da48 and d, then passes it with b, a and c to FUN_00d37280.
 // @fnv 0x00d378a0
+// pdb: hkpSymmetricAgentLinearCast<hkpMultiRayConvexAgent>::staticGetClosestPoints | hkpMultiRayConvexAgent.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: bodyA, bodyB, input, collector
 void FUN_00d378a0(int aiArg1, int aiArg2, int aiArg3, int aiId)
 {
     Payload p;
@@ -195,6 +203,8 @@ class FUN_00d376b0 : public D376B0Filter
 // Constructs a filter from a shape reference, sizing an index array to the shape's child count and filling it with 0xffff.
 // @f3 0x009bffd0 (community match, verified in this file)
 void __cdecl FUN_00901e90(void* apArray, int aiCapacity, int aiElementSize);
+// pdb: hkpMultiRayConvexAgent::hkpMultiRayConvexAgent | hkpMultiRayConvexAgent.obj | fnv360_0822_retail, uvref, high
+// pdb params: bodyA, bodyB, input, mgr
 FUN_00d376b0::FUN_00d376b0(const D376B0ShapeRef& shape, void* pUnused, void* unused1, void* userData)
     : D376B0Filter(userData)
 {

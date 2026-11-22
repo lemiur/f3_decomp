@@ -29,6 +29,8 @@ struct FUN_00df0810_Dest
 
 // Selects value1 or value2 of a source channel based on its 2-bit mode and stores it into the destination's values array.
 // @fnv 0x00df0810
+// pdb: hkPoweredChain_OverwriteVelocityWithExplicitImpulse | hkpPoweredChainSolverUtil.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: modifiedConstraintIndex, modifiedCoordinateIndex, motorsState, velocities
 void __cdecl CopyChannelValue(int index, int channel, FUN_00df0810_Source* sources, FUN_00df0810_Dest* dests)
 {
     FUN_00df0810_Source* source = &sources[index];
@@ -283,6 +285,8 @@ struct InputStruct
 // @f3 0x00a7af40 (community match, verified in this file)
 extern "C" void __cdecl FUN_00a98580(void* dst, const void* matrix, const void* src);
 
+// pdb: hkPoweredChain_SolveConstraintMatrix_ComputeVectorG | hkpPoweredChainSolverUtil.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: info, tempBufferG
 void __cdecl FUN_00df11a0(InputStruct* apInput, hkAabb* out)
 {
     ++out;

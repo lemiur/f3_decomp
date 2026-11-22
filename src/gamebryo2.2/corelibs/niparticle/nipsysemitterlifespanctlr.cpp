@@ -78,6 +78,7 @@ class C2B680Object : public C2B680Base
 };
 
 // @fnv 0x00c2b680
+// pdb: NiPSysEmitterLifeSpanCtlr::CreateClone | NiPSysEmitterLifeSpanCtlr.obj | tesv_win, caller_sim, low
 C2B680Object* C2B680Object::FUN_00c2b680(void* pvCloning)
 {
     C2B680Object* pkClone = new C2B680Object;

@@ -5,6 +5,7 @@
 #include "havok/hkpRagdollConstraintData.h"
 
 // @fnv 0x00cde9d0
+// pdb: hkpRagdollConstraintData::getRuntimeInfo | hkpRagdollConstraintData.obj | tesv_win, objrun_open, low
 void __stdcall FUN_00cde9d0(int* apUnused, int* apiOut)
 {
     apiOut[1] = 0xc;
@@ -39,6 +40,7 @@ struct Ref403 {
         }
     }
 };
+// pdb: hkpRagdollConstraintData::~hkpRagdollConstraintData | hkpRagdollConstraintData.obj | fnv360_0822_retail, call_seq, medium
 FUN_00cdf1f0::~FUN_00cdf1f0() {
     m_ppVirtualMethodTable = &DAT_00e7c094;
     for (int i = 0; i < 3; ++i) {
@@ -51,6 +53,7 @@ FUN_00cdf1f0::~FUN_00cdf1f0() {
 
 
 // @fnv 0x00cdead0
+// pdb: CombatProcedureBeInCover::GetType | CombatProcedureBeInCover.obj | fnv360_0822_retail, vtable, high
 int __cdecl FUN_00cdead0()
 {
     return 7;
@@ -468,6 +471,7 @@ struct FUN_00cb9170
 }  // namespace fnv_00cb9170
 
 // @f3twin 0x0095a050 of 0x004a0640
+// pdb: hkpRagdollConstraintData::getMotorsActive | hkpRagdollConstraintData.obj | fnv360_0822_retail, objrun_sim, low
 int __cdecl F3_FUN_0095a050()
 {
     return 7;

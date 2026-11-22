@@ -21,6 +21,8 @@ public:
     void* FUN_00925840(void* arg);
 };
 
+// pdb: bhkRigidBodyT::GetRotation | bhkRigidBodyT.obj | fnv360_0822_retail, objrun, low
+// pdb params: arRot
 void* C925840::FUN_00925840(void* arg) {
     Vec v;
     FUN_008fe950(&v);
@@ -31,6 +33,8 @@ void* C925840::FUN_00925840(void* arg) {
 
 // @f3 0x00934150 (community match, verified in this file)
 namespace f3m_00934150 {
+// pdb: hkDataArrayNative::swizzleObjectMember | hkDataObjectNative.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: hkDataObjectNative::asReal)
+// pdb params: name
 namespace Convert378{extern char DAT_00e46128;struct Array{int FUN_0093d8c0();};struct __declspec(align(8)) FUN_0093d600{void*object;int index;FUN_0093d600(void*,const char*);Array*FUN_0093d790();unsigned char*FUN_0093d710(int);unsigned short*FUN_0093d6f0(int);};void __cdecl FUN_00934150(void*source,void*destination){FUN_0093d600 from(source,&DAT_00e46128);FUN_0093d600 to(destination,&DAT_00e46128);for(int i=0;i<to.FUN_0093d790()->FUN_0093d8c0();++i){unsigned short value=*from.FUN_0093d710(i);*to.FUN_0093d6f0(i)=value;}}}
 }   // namespace f3m_00934150
 
@@ -278,6 +282,8 @@ struct QuaternionF3
     void FUN_009243a0(const QuaternionF3& q0, const QuaternionF3& q1, float t);
 };
 
+// pdb: hkQuaternion::setSlerp | hkQuaternion.obj | fnv360_0822_retail, caller, medium
+// pdb params: q0, q1, t
 void QuaternionF3::FUN_009243a0(const QuaternionF3& q0, const QuaternionF3& q1, float t)
 {
     float cosTheta = q0.vec.x * q1.vec.x + q0.vec.y * q1.vec.y + q0.vec.z * q1.vec.z + q0.vec.w * q1.vec.w;
@@ -358,6 +364,7 @@ struct Member {
 };
 }
 
+// pdb: GASMovieClipProto::GASMovieClipProto | GFxSprite.obj | tesv_win, ustr, medium
 void __cdecl FUN_00932ce0(void* oldObject, void* newObject)
 {
     using namespace f3m_00932ce0;
@@ -728,6 +735,7 @@ bool Trn::InTol(const Trn* other, float eps)
     return (mask & 0xEu) == 0xEu;
 }
 
+// pdb: hkTransform::isApproximatelyEqual | hkTransform.obj | tesv_win, objrun, medium
 unsigned char* Trn::FUN_00924fe0(unsigned char* out, const Trn* other, float eps)
 {
     unsigned char flag;
@@ -757,6 +765,8 @@ struct S_9258b0 {
     float* FUN_009258b0(float* param);
 };
 
+// pdb: bhkRigidBodyT::GetCenterOfMassInWorld | bhkRigidBodyT.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arCOM
 float* S_9258b0::FUN_009258b0(float* param)
 {
     FUN_008fea60(param);
@@ -945,6 +955,8 @@ struct __declspec(align(16)) Mat4 {
     void hkTransform_setMul(const Mat4* m, int arg);
     void FUN_00925480(int arg);
 };
+// pdb: hkTransform::setMulEq | hkTransform.obj | fnv360_0822_debug, objrun, medium, conflict (bridge: hkpConvexTranslateShape::castRayWithCollectorImpl)
+// pdb params: b
 void Mat4::FUN_00925480(int arg)
 {
     Mat4 a(*this);
@@ -1015,6 +1027,7 @@ struct Entry {float a,b,c,d,e,f,g,h;Node* firstRoot;int firstId;Node* secondRoot
 struct Array {Entry* data;int size;unsigned capacityFlags;};
 void __cdecl FUN_00901f10(Array*,unsigned);
 struct Object {unsigned unk00,unk04,unk08,unk0c;Array entries;void FUN_00921990(Input*);};
+// pdb: hkpAllCdPointCollector::addCdPoint | hkpAllCdPointCollector.obj | tesv_win, vtable, medium
 void Object::FUN_00921990(Input* source){
  Array* array=&entries;
  if(array->size==(array->capacityFlags&0x3fffffff))FUN_00901f10(array,64);
@@ -1272,6 +1285,8 @@ struct Tracker {
     void FUN_0092dd80(const Vec4* v);
 };
 
+// pdb: hkpMouseSpringAction::setMousePosition | hkpMouseSpringAction.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: mousePositionInWorld
 void Tracker::FUN_0092dd80(const Vec4* v)
 {
     Vec4 d;
@@ -1494,6 +1509,8 @@ struct Owner
     void FUN_00925e70(ArgObj* arg);
 };
 
+// pdb: bhkRigidBodyT::CreateDisplayGeometry | bhkRigidBodyT.obj | fnv360_0822_retail, ustr_rel, medium
+// pdb params: apNode
 void Owner::FUN_00925e70(ArgObj* arg)
 {
     Body* body = 0;
@@ -1718,6 +1735,8 @@ struct QueryOwner {
  void FUN_009215d0(const void* a,const void* b);
 };
 
+// pdb: bhkCharacterProxy::CheckSupport | bhkCharacterController.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: arDirection, arGround
 void QueryOwner::FUN_009215d0(const void* a, const void* b) {
     hkpAllCdPointCollector c;
     FUN_0091fe80(a, b, c);
@@ -1752,6 +1771,8 @@ public:
 
 // Rotates the vector at +0x30 by the rotation `in` (x,y,z,w), adds `out`, combines `in` with the
 // vector at +0x20, normalises that and hands both results to FUN_008fe9f0.
+// pdb: bhkRigidBodyT::SetPosRot | bhkRigidBodyT.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arPos, arRot
 void Cls::FUN_00925cd0(V4& out, V4& in)
 {
     // Fake match: `imag` is a second name for `in`, declared before `w` and `q` and used only for
@@ -2619,6 +2640,8 @@ struct hkTransform
     void FUN_00925300(const hkTransform& bTa, const hkTransform& bTc);
 };
 
+// pdb: hkTransform::setInverse | hkTransform.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: hkTransform::setMulInverseMul)
+// pdb params: t
 void hkTransform::FUN_00925300(const hkTransform& bTa, const hkTransform& bTc)
 {
     rotateInversePoints(bTa.getRotation(), &bTc.getRotation().getColumn(0), 3, &getRotation().getColumn(0));
@@ -2886,6 +2909,8 @@ struct hkRotation : hkMatrix3
     hkBool FUN_00924ca0(hkReal epsilon) const;
 };
 
+// pdb: hkRotation::isOrthonormal | hkRotation.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: epsilon
 hkBool hkRotation::FUN_00924ca0(hkReal epsilon) const
 {
     // the columns have length one
@@ -3097,6 +3122,8 @@ struct hkpLimitedHingeConstraintData : hkpConstraintData
     Atoms m_atoms;
 };
 
+// pdb: hkpLimitedHingeConstraintData::setInBodySpace | hkpLimitedHingeConstraintData.obj | fnv360_0721_beta, objrun, medium
+// pdb params: pivotA, pivotB, axisA, axisB, axisAPerp, axisBPerp
 void hkpLimitedHingeConstraintData::FUN_0092b430(const hkTransform& bodyATransform,
                                                  const hkTransform& bodyBTransform, const hkVector4& pivot,
                                                  const hkVector4& axisIn)
@@ -3671,6 +3698,8 @@ __forceinline void hkSampledHeightFieldShape_collideSpheres(const IMPL& hfShape,
     }
 }
 
+// pdb: hkBSHeightFieldShape::collideSpheres | bhkTriSampledHeightFieldBvTreeShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arInput, apOutputArray
 void hkSampledHeightFieldShape::FUN_00921e40(const CollideSpheresInput& input, SphereCollisionOutput* outputArray) const
 {
     hkSampledHeightFieldShape_collideSpheres(*this, input, outputArray);
@@ -4300,6 +4329,8 @@ class hkpCharacterProxy : public hkReferencedObject, public hkpEntityListener, p
 // Not steering, but needed: numTouching++ follows the two add4 calls, and the support threshold is 0.99f (the
 // original's 8-byte literal is 0.99f widened to double, not 0.001).
 // No destructors on hkLocalArray (destruct() called by hand): that is what removes the exception frame.
+// pdb: hkpCharacterProxy::checkSupportDeprecated | hkpCharacterProxy.obj | fnv360_0822_retail, objrun, medium
+// pdb params: direction, ground
 void hkpCharacterProxy::FUN_00920730(const hkVector4& direction, hkpSurfaceInfoDeprecated& ground)
 {
     hkTimerBegin(DAT_00e36998);
@@ -5369,6 +5400,8 @@ public:
                                QEntity* apEnt, QArray* apArr);
 };
 
+// pdb: hkpMouseSpringAction::hkpMouseSpringAction | hkpMouseSpringAction.obj | fnv360_0822_debug, call_seq, high
+// pdb params: positionInRbLocal, mousePositionInWorld, springDamping, springElasticity, objectDamping, rb, appliedCallbacks
 QMouseSpring* QMouseSpring::FUN_0092e3c0(QVec* apPos, QVec* apMouse, float afDamping, float afElasticity,
                                          float afObjDamping, QEntity* apEnt, QArray* apArr)
 {
@@ -6081,6 +6114,8 @@ public:
 typedef FUN_0093d7f0 hkClassAccessor;
 int __cdecl hkString_strCmp(const char* a, const char* b);
 
+// pdb: hkClassMember::getAttribute | hkClassMember.obj | fnv360_0822_retail, call_gap, low
+// pdb params: id
 static __declspec(noinline) int FUN_00935000(const hkClassAccessor& object, const char* name)
 {
     hkClassMemberAccessor field = object.member("type");

@@ -26,6 +26,8 @@ struct Derived : Base0, Base1, Base2
 
 // Computes the Derived pointer from this and passes the Base2 subobject (or null) to t->FUN_00c93920.
 // @fnv 0x00d649f0
+// pdb: hkpToiContactPointViewer::worldAddedCallback | hkpToiContactPointViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: w
 void Base1::PassSelfAsBase2ToTarget(Target* apTarget)
 {
     Derived* d = (Derived*)((char*)this - 0x20);
@@ -72,6 +74,7 @@ struct S_00d65180_RefObj
 extern int g_D651E0Value;
 
 // @fnv 0x00d651e0
+// pdb: GRefCountBaseStatImpl<class GRefCountImpl,2>::operator delete | BarterMenu.obj | tesv_win, objopen_prop, low
 int __cdecl FUN_00d651e0()
 {
     return g_D651E0Value;
@@ -264,6 +267,8 @@ class FUN_00d64a50 : public FUN_00ddccb0, public hkListenerD64A
 };
 // After the base constructor, calls FUN_00c93920 with this on each actor entry of the owning world, if the world is set.
 // @fnv 0x00d64a50
+// pdb: hkpSimulationIslandViewer::hkpSimulationIslandViewer | hkpSimulationIslandViewer.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: contexts
 FUN_00d64a50::FUN_00d64a50(void* pkInfo) throw() : FUN_00ddccb0(pkInfo)
 {
     if (m_pOwningWorld)
@@ -338,6 +343,8 @@ struct IslandWorldRemoval : IslandRemovalParent, hkListenerD64A
 
 // Calls ClearValue on world with this object's listener base.
 // @fnv 0x00d64a20
+// pdb: hkpToiContactPointViewer::worldRemovedCallback | hkpToiContactPointViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: w
 void IslandWorldRemoval::FUN_00d64a20(S_Elem2* world)
 {
     world->ClearValue(static_cast<hkListenerD64A*>(this));

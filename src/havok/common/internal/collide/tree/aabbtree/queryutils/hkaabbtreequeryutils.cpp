@@ -76,6 +76,8 @@ extern int __cdecl FUN_00d1c560(void*, int, int, int, int, int);
 
 extern "C" void __cdecl FUN_00d1ca00();
 // @fnv 0x00d1d530
+// pdb: bhkShape::LinkObject | bhkShape.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: arStream
 extern "C" void __cdecl FUN_00d1d530()
 {
     FUN_00d1ca00();

@@ -23,6 +23,8 @@ struct SlotState
 
 // For each of three slots, recursively updates the slot's callback state and stores the result, then invokes the slot's callback with a5 and a6.
 // @fnv 0x00a3d930
+// pdb: NiAnimationKey::GuaranteeKeyAtStartAndEnd | NiAnimationKey.obj | fnv360_0822_retail, objrun, medium
+// pdb params: eContent, eType, pkKeys, uiNumKeys, fStartTime, fEndTime
 void __cdecl UpdateSlotStates(int aiSlotGroup, int a2, void** apSlotData, int* apiState, float afValueA, float afValueB)
 {
     if (a2 == 4)

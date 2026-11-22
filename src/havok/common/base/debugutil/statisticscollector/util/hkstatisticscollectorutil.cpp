@@ -57,6 +57,8 @@ struct FUN_00cf5fe0_Manager
 };
 extern "C" FUN_00cf5fe0_Manager* __cdecl FUN_0046b690();
 
+// pdb: BGSDecalManager::AddDecalEmitter | BGSDecalManager.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apEmitter
 extern "C" void __cdecl FUN_00cf5fe0(void* value)
 {
     if (!value)
@@ -143,6 +145,8 @@ struct Thing
 
 // Reads the type from apThing, looks up its TypeInfo, and returns m_sValue if positive, else the result of FUN_00d470d0 for kind 0x19, otherwise -1.
 // @f3 0x0097e9c0 (community match, verified in this file)
+// pdb: hkStatisticsCollectorUtil::_getArrayElementSize | hkStatisticsCollectorUtil.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: mem
 int __cdecl GetThingValue(Thing* thing) {
  TypeInfo* info=FUN_00d868a0(thing->m_ucType);
  short value=info->m_sValue;

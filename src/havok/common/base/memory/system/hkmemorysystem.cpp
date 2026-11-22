@@ -12,6 +12,7 @@ int __stdcall hkStreamReader_seek(int a, int b)
 extern int DAT_01268418;
 
 // @fnv 0x00cbbfc0
+// pdb: TESLevItem::GetMaxLevelDifference | TESLevItem.obj | fnv360_0822_retail, vtable, medium
 int FUN_00cbbfc0()
 {
     return DAT_01268418;

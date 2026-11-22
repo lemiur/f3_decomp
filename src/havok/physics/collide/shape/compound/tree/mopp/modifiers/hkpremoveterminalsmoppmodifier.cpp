@@ -59,6 +59,8 @@ class hkpRemoveTerminalsMoppModifierE485 : public hkReferencedObjectE485, public
 };
 
 // @fnv 0x00e48510
+// pdb: hkpRemoveTerminalsMoppModifier::shouldTerminalBeRemoved | hkpRemoveTerminalsMoppModifier.obj | fnv360_0822_retail, vtable, high
+// pdb params: id, properties
 hkBoolE485 hkpRemoveTerminalsMoppModifierE485::IsTerminalRemoved(hkUint32 id, const hkUint32* properties)
 {
     return m_pTerminalIdsToRemove->indexOf(id) >= 0;
@@ -108,6 +110,8 @@ struct FUN_00e48580_Obj
 // @f3 0x00a76540 (community match, verified in this file)
 void __cdecl FUN_00901f10(void* array, int elementSize);
 
+// pdb: hkpRemoveTerminalsMoppModifier::addTerminalRemoveInfo | hkpRemoveTerminalsMoppModifier.obj | fnv360_0822_retail, vtable, high
+// pdb params: relativeMoppAddress
 void FUN_00e48580_Obj::AppendPackedValue(int value)
 {
     FUN_00e48580_Array* arr = &this->arr;
@@ -162,6 +166,8 @@ class FUN_00e486e0 : public hkRefObjE486, public hkVisitorE486
 };
 
 // @fnv 0x00e486e0
+// pdb: hkpRemoveTerminalsMoppModifier::hkpRemoveTerminalsMoppModifier | hkpRemoveTerminalsMoppModifier.obj | fnv360_0822_retail, objrun, medium
+// pdb params: moppCode, aabb, shapesToRemove
 FUN_00e486e0::FUN_00e486e0(void* apFirst, void* apSecond, void* context) throw()
 {
     m_iValueAtOffset0C = context;
@@ -281,6 +287,8 @@ struct __declspec(align(16)) FUN_00e67230_Obj
 
 // Constructs a temporary object and forwards the three arguments to its constructor.
 // @fnv 0x00e5d040
+// pdb: hkMoppModifyVirtualMachine_queryAabb | hkpMoppMachine.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: code, aabb, modifierOut
 void __cdecl ConstructTemporaryObject(int a1, int a2, int a3)
 {
     FUN_00e67230_Obj tmp;

@@ -352,6 +352,7 @@ __forceinline void S0096fee0_swap(T& a, T& b)
     b = t;
 }
 
+// pdb: hkpCollideTriangleUtil::calcTrianglePlaneDirections | hkpCollideTriangleUtil.obj | tesv_win, objrun, medium
 void __cdecl FUN_0096fee0(const Vec4* tri, const S0096fee0_TriCache& cache, S0096fee0_Matrix4& planeEquationsOut, Vec4& normalOut)
 {
     Vec4 E0;
@@ -413,6 +414,7 @@ static __forceinline void S0096de30_swap(T& a, T& b)
     b = t;
 }
 
+// pdb: hkCollideCapsuleUtil_calcTrianglePlaneDirections | hkpCollideCapsuleUtil.obj | tesv_win, objrun, medium
 static __declspec(noinline) void FUN_0096de30(const Vec4* tri, Vec4& plane, const S0096de30_Scales& s, S0096de30_Matrix4& m)
 {
     Vec4 e0;
@@ -978,6 +980,8 @@ static __forceinline void S977e_setRotatedDir(Vec4& out, const S977e_Rotation& r
     out(3) = 0.0f;
 }
 
+// pdb: hkSweptTransformUtil::warpTo | hkSweptTransformUtil.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: position, rotation, ms
 void __cdecl FUN_00977e70(const Vec4& position, const S977e_Quat& rotation, S977e_MotionState& ms)
 {
     S977e_SweptTransform& sweptTransform = ms.m_sweptTransform;
@@ -1325,6 +1329,8 @@ public:
     float FUN_0097de00(const Vec4& direction) const;
 };
 
+// pdb: hkpTransformShape::getMaximumProjection | hkpTransformShape.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: direction
 float hkpTransformShape::FUN_0097de00(const Vec4& direction) const
 {
     Vec4 localDir;
@@ -1370,6 +1376,7 @@ struct Rotation : Matrix3
 };
 }
 
+// pdb: hkMatrix3::invertSymmetric | hkMatrix3.obj | tesv_win, call_seq, medium
 void f3m_0096cac0::Rotation::FUN_0096cac0()
 {
     Matrix3& m = *this;
@@ -1520,6 +1527,8 @@ struct State
     void FUN_0096c050(CtrlX* ctrl);
 };
 
+// pdb: bhkCharacterStateOnGround::Update | bhkCharacterStateOnGround.obj | fnv360_0721_beta, caller_sim, low
+// pdb params: arInput
 void State::FUN_0096c050(CtrlX* ctrl)
 {
     if (!((unsigned char)(ctrl->m294 >> 8) & 1) && !ctrl->b4a0)
@@ -3134,6 +3143,8 @@ class hkpInertiaTensorComputer
 		static void __cdecl shiftInertiaToCom(hkVector4& shift, hkReal mass, hkMatrix3& inertia);
 		static void __cdecl shiftInertiaFromCom(hkVector4& shift, hkReal mass, hkMatrix3& inertia);
 };
+// pdb: hkpInertiaTensorComputer::computeCylinderVolumeMassProperties | hkpInertiaTensorComputer.obj | fnv360_0822_retail, objrun, medium
+// pdb params: startAxis, endAxis, radius, mass, result
 hkResult hkpInertiaTensorComputer::FUN_00975310(const hkVector4& startAxis, const hkVector4& endAxis, hkReal radius, hkReal mass, hkpMassProperties& result)
 {
 	;
@@ -4074,6 +4085,8 @@ class hkpInertiaTensorComputer
 		static void __cdecl shiftInertiaToCom(hkVector4& shift, hkReal mass, hkMatrix3& inertia);
 		static void __cdecl shiftInertiaFromCom(hkVector4& shift, hkReal mass, hkMatrix3& inertia);
 };
+// pdb: hkpInertiaTensorComputer::computeCapsuleVolumeMassProperties | hkpInertiaTensorComputer.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: hkInertiaTensorComputer::computeCapsuleVolumeMassProperties)
+// pdb params: startAxis, endAxis, radius, mass, result
 hkResult hkpInertiaTensorComputer::FUN_00974950(const hkVector4& startAxis, const hkVector4& endAxis, hkReal radius, hkReal mass, hkpMassProperties& result)
 {
 	;
@@ -5821,6 +5834,8 @@ static __forceinline void hkSimulation_setRotation( hkpRigidBody* body, const hk
 	hkVector4 centerShift; centerShift._setRotatedDir( transform.getRotation(), body->getCenterOfMassLocal() );
 	transform.getTranslation().setSub4( body->getCenterOfMassInWorld(), centerShift );
 }
+// pdb: hkpSimulation::processAgentsOfEntities | hkpSimulation.obj | fnv360_0822_retail, objrun, medium
+// pdb params: entities, numEntities, processInput, processingFunction, findExtraContacts
 void hkpSimulation::FUN_0097fef0( hkpEntity** entities, int numEntities, const hkpProcessCollisionInput& processInput, AgentEntryProcessFunction processingFunction, FindContacts findExtraContacts )
 {
 	hkPointerMapBase<hkUlong> processedEntities( numEntities );
@@ -11692,6 +11707,8 @@ struct hkGeometry
 	hkArray<hkVector4> m_vertices;
 	hkArray<Triangle> m_triangles;
 };
+// pdb: hkpInertiaTensorComputer::computeTriangleSurfaceMassProperties | hkpInertiaTensorComputer.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: v0, v1, v2, mass, surfaceThickness, result
 hkResult hkpInertiaTensorComputer::FUN_00973c80(const hkVector4& v0, const hkVector4& v1, const hkVector4& v2, hkReal mass, hkReal surfaceThickness, hkpMassProperties& result)
 {
 	;

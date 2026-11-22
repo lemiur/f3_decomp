@@ -17,6 +17,7 @@ struct BSFadeNode
 extern int DAT_010a0134;
 
 // @fnv 0x00a94930
+// pdb: NiStringsExtraData::CreateObject | NiStringsExtraData.obj | fnv360_0822_retail, objrun, medium
 void* __cdecl FUN_00a94930()
 {
     void* p = BSFadeNode::operator new(0x14);
@@ -44,6 +45,7 @@ struct NiStringsExtraData
     void __thiscall FUN_00a7b300();
 };
 // @fnv 0x00a94830
+// pdb: NiStringsExtraData::~NiStringsExtraData | NiStringsExtraData.obj | fnv360_0822_retail, objrun, medium
 void __thiscall NiStringsExtraData::FreeStrings()
 {
     m_vtbl = &DAT_010a0134;
@@ -64,6 +66,7 @@ struct NiStringsExtraData : NiExtraData
 };
 // Calls FreeStrings, frees this with operator delete when flags has bit 0 set, and returns this.
 // @fnv 0x00a94970
+// pdb: NiBinaryExtraData::`scalar deleting destructor' | TESLand.obj | fnv360_0822_debug, vtable, high
 void* __thiscall NiStringsExtraData::FUN_00a94970(unsigned int flags)
 {
     FreeStrings();
@@ -94,6 +97,8 @@ int __cdecl _strcpy_s(char*, unsigned int, const char*);
 extern "C" unsigned int __cdecl strlen(const char*);
 
 // @fnv 0x00a94880
+// pdb: NiStringsExtraData::CopyMembers | NiStringsExtraData.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pDest, kCloning
 void __thiscall FUN_00a94880_shell::CopyStringsExtraData(NiStringsExtraData* pDest, void* pCloning)
 {
     unsigned int i;
@@ -174,6 +179,8 @@ struct S_00a94a50 : NiStringsExtraData
 };
 
 // @fnv 0x00a94a50
+// pdb: NiStringsExtraData::LoadBinary | NiStringsExtraData.obj | fnv360_0822_retail, caller_sim, medium, conflict (bridge: NiSwitchStringExtraData::LoadBinary)
+// pdb params: kStream
 void S_00a94a50::LoadStringArray(S_00a94a50_Stream* s)
 {
     FUN_00a7b4a0(s);
@@ -238,6 +245,8 @@ struct StringsExtraDataViewer : ExtraDataViewerBase
 
 // Appends the base viewer strings, the m_uiSize value and one formatted string per m_ppcValue entry to the viewer string array.
 // @f3 0x0085fd80 (community match, verified in this file)
+// pdb: NiStringsExtraData::GetViewerStrings | NiStringsExtraData.obj | fnv360_0822_retail, ustr_rel, low, conflict (skyrim: BGSAttachTechniquesUtil::ProcessAttachTechniques)
+// pdb params: pStrings
 void StringsExtraDataViewer::FUN_00a94ae0(ViewerStringArray* pViewerStrings)
 {
     ExtraDataViewerBase::GetViewerStrings(pViewerStrings);
@@ -552,6 +561,8 @@ class StrsExtraA947
 
 // Compares two StrsExtraA947 objects for equality by checking m_uiSize and each m_ppcValue string via strcmp.
 // @fnv 0x00a94760
+// pdb: NiStringsExtraData::IsEqual | NiStringsExtraData.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pObject
 bool StrsExtraA947::IsEqual(StrsExtraA947* pkObject)
 {
     if (!pkObject)

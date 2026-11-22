@@ -3,6 +3,8 @@
 #include "nibsplinecompfloatinterpolator_decls.h"
 // Calls the base NiBSplineFloatInterpolator::LoadBinary and then reads a value from the stream input into a member.
 // @fnv 0x00a51660
+// pdb: NiBSplineCompFloatInterpolator::LoadBinary | NiBSplineCompFloatInterpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void NiBSplineCompFloatInterpolator::LoadBinary(NiStream& stream)
 {
     NiBSplineFloatInterpolator::LoadBinary(stream);
@@ -16,6 +18,7 @@ struct FUN_00a52d20_shell
 };
 
 // @fnv 0x00a52d20
+// pdb: NiBoolInterpolator::GetKeys | NiBoolTimelineInterpolator.obj | tesv_win, hash, low
 int __thiscall FUN_00a52d20_shell::FUN_00a52d20(int* b, int* c, char* d)
 {
     int* p = *(int**)((char*)this + 0x10);
@@ -43,6 +46,8 @@ struct FUN_00a509f0_shell
 };
 // Calls FUN_00a57f20 with a and c, sets the vtable pointer to DAT_010997f4, stores b at offset 0x20, and returns this.
 // @fnv 0x00a509f0
+// pdb: NiBSplineFloatInterpolator::NiBSplineFloatInterpolator | NiBSplineFloatInterpolator.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pkData, kFloatCPHandle, pkBasisData
 FUN_00a509f0_shell* __thiscall FUN_00a509f0_shell::FUN_00a509f0(int aiArg1, int b, int aiArg2)
 {
     ((FUN_00a57f20_shell*)this)->FUN_00a57f20(aiArg1, aiArg2);
@@ -62,6 +67,8 @@ struct FUN_00a514e0_shell
     bool __thiscall Equals(void* pkObject);
 };
 // @fnv 0x00a514e0
+// pdb: NiBSplineCompFloatInterpolator::IsEqual | NiBSplineCompFloatInterpolator.obj | fnv360_0822_retail, objrun_prop, high
+// pdb params: pkObject
 bool __thiscall FUN_00a514e0_shell::Equals(void* pkObject)
 {
     FUN_00a514e0_shell* pkDest;
@@ -95,6 +102,8 @@ struct FUN_00a516a0_shell
     void __thiscall WriteToStream(void* kStream);
 };
 // @fnv 0x00a516a0
+// pdb: NiBSplineCompFloatInterpolator::SaveBinary | NiBSplineCompFloatInterpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void __thiscall FUN_00a516a0_shell::WriteToStream(void* kStream)
 {
     ((BaseShell*)this)->LoadFloatInterpolator(kStream);
@@ -125,6 +134,8 @@ struct FUN_00a51530_cls
 };
 
 // @fnv 0x00a51530
+// pdb: NiBSplineCompFloatInterpolator::Update | NiBSplineCompFloatInterpolator.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fTime, pkInterpTarget, fValue
 bool FUN_00a51530_cls::EvaluateAtTime(float afTime, unsigned int unused, float* pfOut)
 {
     float t;

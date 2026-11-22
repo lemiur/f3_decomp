@@ -2237,6 +2237,7 @@ struct Elem48
 };
 
 // @fnv 0x00a29db0
+// pdb: NiEulerRotKey::FillDerivedVals | NiEulerRotKey.obj | tesv_win, objrun, medium
 Elem48* __cdecl FUN_00a29db0(unsigned int count)
 {
     return new Elem48[count];
@@ -2317,6 +2318,8 @@ struct BoolKeyS
 bool GenInterpBool(float t, BoolKeyS* keys, int type, unsigned int count, unsigned int stride);
 
 // @fnv 0x00a2ccd0
+// pdb: NiStepBoolKey::Insert | NiStepBoolKey.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: fTime, pkKeys, uiNumKeys
 bool FUN_00a2ccd0(float fTime, BoolKeyS*& pkKeys, unsigned int& uiNumKeys)
 {
     unsigned int uiIndex;
@@ -2365,6 +2368,7 @@ struct A28F00Elem
 };
 
 // @fnv 0x00a28f00
+// pdb: NiBezRotKey::CreateArray | NiBezRotKey.obj | tesv_win, objrun_open, low
 A28F00Elem* __cdecl FUN_00a28f00(unsigned int ItemUpdateArray)
 {
     return new A28F00Elem[ItemUpdateArray];
@@ -2412,6 +2416,7 @@ struct TCBRotKeyS
 };
 typedef TCBRotKeyS RotKeyS;
 // @fnv 0x00a28f50
+// pdb: NiBezRotKey::Insert | NiBezRotKey.obj | tesv_win, caller_sim, low
 bool FUN_00a28f50(float t, RotKeyS*& pkKeys, unsigned int& uiNumKeys)
 {
     TCBRotKeyS* pkOld = (TCBRotKeyS*)pkKeys;
@@ -2459,6 +2464,7 @@ struct A290A0Key
 };
 
 // @fnv 0x00a290a0
+// pdb: NiBezRotKey::CreateFromStream | NiBezRotKey.obj | tesv_win, objrun_open, low
 A290A0Key* __cdecl FUN_00a290a0(A290A0Stream* pkStream, unsigned int ItemUpdateArray)
 {
     A290A0Key* pkKeys = new A290A0Key[ItemUpdateArray];
@@ -2604,6 +2610,8 @@ struct FUN_00a2bdb0
 QuatA __cdecl SampleKeyedVec4(float, FUN_00a2bdb0*, int, unsigned, unsigned);
 void __cdecl FUN_00a2c130(FUN_00a2bdb0*, unsigned, unsigned);
 // @fnv 0x00a2c1b0
+// pdb: NiTCBRotKey::Insert | NiTCBRotKey.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fTime, pkKeys, uiNumKeys
 bool __cdecl FUN_00a2c1b0(float time, FUN_00a2bdb0** keys, unsigned* count)
 {
     FUN_00a2bdb0* oldKeys = *keys;
@@ -2653,6 +2661,7 @@ struct FUN_00a2bdb0
 };
 
 // @fnv 0x00a2c420
+// pdb: NiTCBRotKey::CreateFromStream | NiTCBRotKey.obj | tesv_win, caller_sim, low
 FUN_00a2bdb0* __cdecl FUN_00a2c420(S_a2c300_Stream* s, unsigned int count)
 {
     FUN_00a2bdb0* arr = new FUN_00a2bdb0[count];
@@ -2995,6 +3004,8 @@ class SeqMgrE2E7
 };
 
 // @fnv 0x00a2e7d0
+// pdb: NiControllerManager::RemoveSequence | NiControllerManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkSequence, aspControllerSequence
 void SeqMgrE2E7::FUN_00a2e7d0(SeqE2E7* pkSequence, NiPointer<SeqE2E7>& spOut)
 {
     for (unsigned int ui = 0; ui < m_kSequences.GetSize(); ui++)

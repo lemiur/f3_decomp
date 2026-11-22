@@ -13,6 +13,7 @@ struct FUN_00b81290_class
 };
 // Calls FUN_00b81130, then deletes this with size 0x70 when flags has bit 0 set, and returns this.
 // @fnv 0x00b81290
+// pdb: NiScreenGeometryData::`scalar deleting destructor' | NiOldScreenSpace.obj | fnv360_0822_retail, objrun_prop, low
 void* __thiscall FUN_00b81290_class::FUN_00b81290(int flags)
 {
     FUN_00b81130();
@@ -31,6 +32,7 @@ struct FUN_00b8d580_Class : public FUN_00b8d4d0_Class
     FUN_00b8d580_Class* __thiscall FUN_00b8d580(unsigned int a);
 };
 // @fnv 0x00b8d580
+// pdb: ImageSpaceManager::AddEffect | ImageSpaceManager.obj | tesv_win, objrun_open, low
 FUN_00b8d580_Class* __thiscall FUN_00b8d580_Class::FUN_00b8d580(unsigned int auiFlags)
 {
     FUN_00b8d4d0_Class::FUN_00b8d4d0();
@@ -54,6 +56,7 @@ struct FUN_00b924d0_class
 
 // Calls FUN_00b92450, then frees this with operator delete when b has bit 0 set, and returns this.
 // @fnv 0x00b924d0
+// pdb: ImageSpaceShaderTextureMask::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0822_retail, objrun_prop, low
 FUN_00b924d0_class* __thiscall FUN_00b924d0_class::FUN_00b924d0(bool abFree)
 {
     FUN_00b92450();
@@ -66,6 +69,8 @@ extern "C" void __cdecl FUN_00b983d0(int, int, int, int);
 extern "C" int DAT_011ffa1c;
 
 // @fnv 0x00b985f0
+// pdb: NiTPointerMap<TESObjectREFR *,TESObjectREFR *>::DeleteItem | TESWater.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: pkItem
 void __cdecl FUN_00b985f0(int aiAmount)
 {
     DAT_011ffa1c -= aiAmount;
@@ -82,6 +87,7 @@ struct FUN_00b9b380_class
 
 // Calls FUN_00b9aa80, then deletes this (size 0x98) when bit 0 of a is set, and returns this.
 // @fnv 0x00b9b380
+// pdb: TallGrassShaderProperty::`scalar deleting destructor' | TallGrassShaderProperty.obj | fnv360_0822_retail, objrun_prop, medium
 FUN_00b9b380_class* FUN_00b9b380_class::FUN_00b9b380(int aiFlags)
 {
     FUN_00b9aa80();
@@ -151,6 +157,7 @@ struct FUN_00b8d700
 extern int DAT_010b083c;
 extern int DAT_010b0860;
 // @fnv 0x00b8d700
+// pdb: ImageSpaceShaderAlphaMult::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b8d700::FUN_00b8d700()
 {
     *(int*)this = (int)&DAT_010b0860;
@@ -194,6 +201,7 @@ struct FUN_00b8d990 : public ImageSpaceEffectShader
     FUN_00b8d990();
 };
 // @fnv 0x00b8d990
+// pdb: ImageSpaceShaderBlur::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b8d990::FUN_00b8d990()
 {
     *(int**)((char*)this + 0x00) = &DAT_010b0b98;
@@ -388,6 +396,7 @@ struct FUN_00b8ee20_class : ImageSpaceEffectShader
 };
 
 // @fnv 0x00b8ee20
+// pdb: ImageSpaceShaderBlur13::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b8ee20_class::FUN_00b8ee20_class()
 {
     *(void**)this = (void*)&DAT_010b2140;
@@ -429,6 +438,7 @@ struct FUN_00b8f470_class
     int* __thiscall FUN_00b8f470(bool);
 };
 // @fnv 0x00b8f470
+// pdb: ImageSpaceShaderStencilCopyNoTextureNoDepth::SetState | ImageSpaceManager.obj | fnv360_0822_debug, objrun, medium
 int* __thiscall FUN_00b8f470_class::FUN_00b8f470(bool abFree)
 {
     *reinterpret_cast<int**>(this) = &DAT_010b2610;
@@ -546,6 +556,7 @@ struct FUN_00b8f930 : public ImageSpaceEffectShader
     FUN_00b8f930();
 };
 // @fnv 0x00b8f930
+// pdb: ImageSpaceShaderCopyRenderTarget1::SetState | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b8f930::FUN_00b8f930()
 {
     *(int*)this = (int)&DAT_010b2db0;
@@ -594,6 +605,7 @@ struct FUN_00b8fa80_class : public ImageSpaceEffectShader
     FUN_00b8fa80_class();
 };
 // @fnv 0x00b8fa80
+// pdb: ImageSpaceShaderDepthOfField::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b8fa80_class::FUN_00b8fa80_class()
 {
     *(int*)this = (int)&DAT_010b2f50;
@@ -634,6 +646,7 @@ struct FUN_00b8fbe0 : public ImageSpaceEffectShader
     FUN_00b8fbe0();
 };
 // @fnv 0x00b8fbe0
+// pdb: ImageSpaceShaderRadialBlur::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b8fbe0::FUN_00b8fbe0()
 {
     *(void**)this = (void*)&DAT_010b30e0;
@@ -677,6 +690,7 @@ struct FUN_00b8fd40 : public ImageSpaceEffectShader
     FUN_00b8fd40();
 };
 // @fnv 0x00b8fd40
+// pdb: ImageSpaceShaderRadialBlurHigh::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b8fd40::FUN_00b8fd40()
 {
     *(void**)this = (void*)&DAT_010b3268;
@@ -719,6 +733,7 @@ struct FUN_00b8fea0 : ImageSpaceEffectShader
     FUN_00b8fea0();
 };
 // @fnv 0x00b8fea0
+// pdb: ImageSpaceShaderDepthOfFieldMask::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b8fea0::FUN_00b8fea0()
 {
     *(int*)this = (int)&DAT_010b33f0;
@@ -764,6 +779,7 @@ struct FUN_00b8fff0 : public ImageSpaceEffectShader
     FUN_00b8fff0();
 };
 // @fnv 0x00b8fff0
+// pdb: ImageSpaceShaderDoubleVision::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b8fff0::FUN_00b8fff0()
 {
     *(int**)((char*)this + 0x00) = (int*)&DAT_010b3598;
@@ -825,6 +841,7 @@ struct FUN_00b917c0 : public ImageSpaceEffectShader
     ~FUN_00b917c0();
 };
 // @fnv 0x00b917c0
+// pdb: ImageSpaceShaderHDRDownSample16LightAdapt::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b917c0::FUN_00b917c0()
 {
     vtbl = (void*)&DAT_010b4de8;
@@ -869,6 +886,7 @@ struct FUN_00b91900 : ImageSpaceEffectShader
     FUN_00b91900();
 };
 // @fnv 0x00b91900
+// pdb: ImageSpaceShaderMap::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b91900::FUN_00b91900()
 {
     *(void**)this = (void*)&DAT_010b4f80;
@@ -1002,6 +1020,7 @@ struct FUN_00b91e40 : ImageSpaceEffectShader
     FUN_00b91e40();
 };
 // @fnv 0x00b91e40
+// pdb: ImageSpaceShaderMotionBlur::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b91e40::FUN_00b91e40()
 {
     *reinterpret_cast<int**>(this) = &DAT_010b5640;
@@ -1188,6 +1207,7 @@ struct FUN_00b92930 : ImageSpaceEffectShader
     FUN_00b92930();
 };
 // @fnv 0x00b92930
+// pdb: ImageSpaceShaderWaterDisplacementClearSimulation::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b92930::FUN_00b92930()
 {
     *(void**)((char*)this + 0) = &DAT_010b6048;
@@ -1239,6 +1259,7 @@ struct FUN_00b92ee0_class : public ImageSpaceEffectShader
     ~FUN_00b92ee0_class();
 };
 // @fnv 0x00b92ee0
+// pdb: ImageSpaceShaderWaterRainHeightmap::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b92ee0_class::FUN_00b92ee0_class()
 {
     *(void**)((char*)this + 0) = &DAT_010b66f0;
@@ -1328,6 +1349,7 @@ struct FUN_00b93290_shell
 };
 // Sets the vtable and f27 pointers, calls FUN_00c03a20, and if flag bit 0 is set deletes this with size 0xd0, returning this.
 // @fnv 0x00b93290
+// pdb: BSImagespaceShaderGreyScale::`vector deleting destructor' | ImageSpaceManager.obj | tesv_win, objopen_prop, low
 FUN_00b93290_shell* __thiscall FUN_00b93290_shell::FUN_00b93290(bool abFree)
 {
     vft = &DAT_010b6a40;
@@ -1480,6 +1502,7 @@ struct FUN_00b93d40_class : public ImageSpaceEffectShader
     FUN_00b93d40_class();
 };
 // @fnv 0x00b93d40
+// pdb: ImageSpaceShaderWaterBlendHeightmaps::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b93d40_class::FUN_00b93d40_class()
 {
     *(void**)((char*)this) = &DAT_010b7418;
@@ -1574,6 +1597,8 @@ struct FUN_00b9cfd0_class
 };
 // Replaces the ref-counted pointer at offset 0x1a0, releasing the old object and incrementing the new one's reference count.
 // @fnv 0x00b9cfd0
+// pdb: NiPointer<ShadowSceneLight>::operator= | VATS.obj | fnv360_0721_beta, call_gap, low
+// pdb params: pObject
 void __thiscall FUN_00b9cfd0_class::AssignRefCounted(void* apObject)
 {
     void* old = *(void**)((char*)this + 0x1a0);
@@ -1648,6 +1673,7 @@ struct FUN_00b8d850 : ImageSpaceEffectShader
 };
 
 // @fnv 0x00b8d850
+// pdb: ImageSpaceShaderBlend::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b8d850::FUN_00b8d850()
 {
     m_000[0] = (int)&DAT_010b0a00;
@@ -1663,6 +1689,7 @@ struct FUN_00b8dae0_class : public ImageSpaceEffectShader
 };
 // Initialises the object's vtable pointers and sets the embedded texture array at offset 0x94 to size 2.
 // @fnv 0x00b8dae0
+// pdb: ImageSpaceShaderBlur3::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b8dae0_class::FUN_00b8dae0_class()
 {
     *(int*)this = (int)&DAT_010b0d40;
@@ -1676,6 +1703,7 @@ struct FUN_00b8dc30_class : public ImageSpaceEffectShader
 };
 // Initializes the object's vtable pointers and sets the size of the texture array at offset 0x94 to 2.
 // @fnv 0x00b8dc30
+// pdb: ImageSpaceShaderBlur5::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b8dc30_class::FUN_00b8dc30_class()
 {
     int* v = (int*)this;
@@ -1694,6 +1722,7 @@ struct FUN_00b8ded0 : ImageSpaceEffectShader
 };
 // Sets two vtable pointers and initialises the texture array at offset 0x94 with a size of 2.
 // @fnv 0x00b8ded0
+// pdb: ImageSpaceShaderBlur9::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b8ded0::FUN_00b8ded0()
 {
     *(int*)this = (int)&DAT_010b11c0;
@@ -1709,6 +1738,7 @@ struct FUN_00b8f360_class : public ImageSpaceEffectShader
 };
 // Initialises two vtable pointers and sets the size of the texture array at offset 0x94 to 1.
 // @fnv 0x00b8f360
+// pdb: ImageSpaceShaderStencilCopy::SetState | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b8f360_class::FUN_00b8f360_class()
 {
     m_000 = &DAT_010b2610;
@@ -1723,6 +1753,7 @@ struct FUN_00b8f520_class : ImageSpaceEffectShader
 };
 // Initialises the object's vtable pointers and sets the embedded texture array at offset 0x94 to size 1.
 // @fnv 0x00b8f520
+// pdb: ImageSpaceShaderStencilCopyNoTextureNoDepth::~ImageSpaceShaderStencilCopyNoTextureNoDepth | ImageSpaceManager.obj | fnv360_0822_debug, objrun, medium
 FUN_00b8f520_class::FUN_00b8f520_class()
 {
     ((int*)this)[0] = (int)&DAT_010b27a8;
@@ -1757,6 +1788,7 @@ struct FUN_00b91b80 : ImageSpaceEffectShader
     FUN_00b91b80();
 };
 // @fnv 0x00b91b80
+// pdb: ImageSpaceShaderTV::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_retail, objrun, medium
 FUN_00b91b80::FUN_00b91b80()
 {
     *reinterpret_cast<void**>(this) = &DAT_010b52c0;
@@ -1789,6 +1821,7 @@ struct GlobalObjectO2_00b8a9e0
 };
 // Runs the destructor, then deallocates this object via g_memoryManager if flag bit 0 is set, and returns this.
 // @fnv 0x00b8aaf0
+// pdb: ExtraCellImpactSwap::`scalar deleting destructor' | ExtraDataCell.obj | fnv360_0822_debug, vtable, medium
 void* GlobalObjectO2_00b8a9e0::DestroyAndFree(bool abFree)
 {
     this->GlobalObjectO2_00b8a9e0::~GlobalObjectO2_00b8a9e0();
@@ -1804,6 +1837,8 @@ struct FUN_00b8cad0_class
 };
 // Stores value at offset 0xac of this object, saving and restoring the thread-local g_tls_2b4 around the write.
 // @fnv 0x00b8cad0
+// pdb: ImageSpaceManager::SetBaseParameterData | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apParameterData
 void __thiscall FUN_00b8cad0_class::SetValue(int value)
 {
     int old = g_tls_2b4;
@@ -1841,6 +1876,7 @@ struct FUN_00b8dd80_Class : public ImageSpaceEffectShader
 };
 
 // @fnv 0x00b8dd80
+// pdb: ImageSpaceShaderBlur7::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b8dd80_Class::FUN_00b8dd80_Class()
 {
     *(int**)this = &DAT_010b1040;
@@ -1870,6 +1906,7 @@ struct FUN_00b932d0_class : ImageSpaceEffectShader
 
 // Initialises the vtable and m_6c pointers and sets the m_94 texture array size to 3.
 // @fnv 0x00b932d0
+// pdb: ImageSpaceShaderWaterDisplacementNormals::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b932d0_class::FUN_00b932d0_class()
 {
     *(void**)this = (void*)&DAT_010b6bd8;
@@ -1960,6 +1997,7 @@ struct FUN_00b9b930_class
 };
 // Calls FUN_00b9b450, then frees this via _g_memoryManager if del is set, and returns this.
 // @fnv 0x00b9b930
+// pdb: ExtraCellCanopyShadowMask::`scalar deleting destructor' | ExtraDataCell.obj | fnv360_0822_retail, vtable, medium
 FUN_00b9b930_class* FUN_00b9b930_class::FUN_00b9b930(bool abDelete)
 {
     FUN_00b9b450();
@@ -2070,6 +2108,7 @@ class FUN_00b81200_cls : public BB81200Shader
 };
 
 // @f3 0x00b03980 (community match, verified in this file)
+// pdb: BSShaderBloodSplatterProperty::BSShaderBloodSplatterProperty | BSShaderBloodSplatterProperty.obj | fnv360_0822_retail, objrun_prop, low
 FUN_00b81200_cls::FUN_00b81200_cls()
 {
     m_iFirst = 0;
@@ -2124,6 +2163,8 @@ struct FUN_00b812b0_class
 };
 
 // @fnv 0x00b812b0
+// pdb: BSShaderBloodSplatterProperty::CopyMembers | BSShaderBloodSplatterProperty.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pDest, arCloneData
 void FUN_00b812b0_class::FUN_00b812b0(FUN_00b812b0_class* dst, int flag)
 {
     FUN_00ba8b10(dst, flag);
@@ -2303,6 +2344,7 @@ struct FUN_00b81730_class
 
 // Calls call on each of the 74 entries in m_6c.
 // @fnv 0x00b81730
+// pdb: WaterShader::ClearPassStages | WaterShader.obj | fnv360_0822_retail, objrun_open, medium
 void FUN_00b81730_class::CallAll()
 {
     for (int i = 0; i < 74; ++i)
@@ -2531,6 +2573,7 @@ class B8C690Shader
 
 // Clears all four texture smart pointers (m_spTexture0 through m_spTexture3) to null.
 // @fnv 0x00b8c690
+// pdb: ImageSpaceManager::ShutdownGeometry | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: ImageSpaceManager::ReloadShaders)
 void B8C690Shader::ClearTextures()
 {
     m_spTexture0 = 0;
@@ -2546,6 +2589,8 @@ struct FUN_00b8cc20_class
 };
 // Saves the TLS context, sets it to 39, and for two entries adds values[index]*scale into a component offset of this, then restores the context.
 // @fnv 0x00b8cc20
+// pdb: ImageSpaceManager::ApplyParamModifierWeather | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeEffect, uiParam, afValue, afStrength
 void __thiscall FUN_00b8cc20_class::AccumulateComponentValues(int mode, int component, const float* values, float scale)
 {
     int previousContext = g_tls_2b4;
@@ -2599,6 +2644,7 @@ typedef void(__thiscall* RunShader_00b8d3a0)(ShaderController_00b8d3a0*);
 
 // Builds two zeroed shader arguments from global sources, calls the vtable configure function with three globals, then runs the shader.
 // @fnv 0x00b8d3a0
+// pdb: ImageSpaceShaderVolumetricFog::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void ShaderController_00b8d3a0::ConfigureAndRunShader()
 {
     ShaderArgument_00b8d3a0 first;
@@ -2727,6 +2773,7 @@ class FUN_00b8d620_cls
 
 // Fills a shader parameter frame with the base and copy HLSL paths, zeroes the remaining fields, then calls v4F to create the ALPHAMULT shader and v53.
 // @fnv 0x00b8d620
+// pdb: ImageSpaceShaderAlphaMult::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b8d620_cls::InitAlphaMultShader()
 {
     FUN_00b8d620_frame f;
@@ -2850,6 +2897,7 @@ class FUN_00b8d770_cls
 
 // Fills a shader descriptor with base/blend HLSL paths and TEX2, zeroes the remaining fields, then calls v4F to create the BLEND shader and v53.
 // @fnv 0x00b8d770
+// pdb: ImageSpaceShaderBlend::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b8d770_cls::CreateBlendShader()
 {
     FUN_00b8d770_frame f;
@@ -3061,6 +3109,7 @@ struct S_00b8d8c0_Cls
     void FUN_00b8d8c0();
 };
 // @fnv 0x00b8d8c0
+// pdb: ImageSpaceShaderBlur::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void S_00b8d8c0_Cls::FUN_00b8d8c0()
 {
     S_00b8d8c0_Desc s1;
@@ -3183,6 +3232,7 @@ class FUN_00b8da00_cls
 
 // Fills a ShaderBuildFrame with the base.v.hlsl and blur2.p.hlsl shader paths and profiles, then calls v4F with BLUR3, vs_1_1 and ps_2_a.
 // @fnv 0x00b8da00
+// pdb: ImageSpaceShaderBlur3::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, strset, low
 void FUN_00b8da00_cls::InitBlur3Shader()
 {
     ShaderBuildFrame f;
@@ -3552,6 +3602,7 @@ class FUN_00b8dca0_cls
 
 // Fills two shader descriptor structs with HLSL paths and technique names, then calls v4F to create the "BLUR7" shader and v53.
 // @fnv 0x00b8dca0
+// pdb: ImageSpaceShaderBlur7::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, udata, high
 void FUN_00b8dca0_cls::CreateBlur7Shader()
 {
     SS1 s1;
@@ -3675,6 +3726,7 @@ class FUN_00b8ddf0_cls
 
 // Fills a shader parameter frame with the base vertex shader and blur2 pixel shader paths, then calls v4F to create the "BLUR9" shader and v53.
 // @fnv 0x00b8ddf0
+// pdb: ImageSpaceShaderBlur9::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, udata, high
 void FUN_00b8ddf0_cls::CreateBlur9Shader()
 {
     FUN_00b8ddf0_frame f;
@@ -3885,6 +3937,7 @@ struct S_00b8df40_Cls
     void InitBlur11Shader();
 };
 // @fnv 0x00b8df40
+// pdb: ImageSpaceShaderBlur11::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void S_00b8df40_Cls::InitBlur11Shader()
 {
     S_00b8df40_Desc s1;
@@ -4010,6 +4063,7 @@ class B8E090ImageSpaceEffect
 
 // Builds vertex and pixel shader file descriptors for BLUR13 and calls CreateShaders followed by SetupShaders.
 // @fnv 0x00b8e090
+// pdb: ImageSpaceShaderBlur13::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void B8E090ImageSpaceEffect::CreateBlur13Shaders()
 {
     B8E090ShaderFile kVertexDelta;
@@ -4132,6 +4186,7 @@ class FUN_00b8e1e0_cls
 
 // Fills a shader frame with the BLUR15 imagespace shader paths and parameters, then passes it to v4F and calls v53.
 // @fnv 0x00b8e1e0
+// pdb: ImageSpaceShaderBlur15::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b8e1e0_cls::InitBlur15Shader()
 {
     FUN_00b8e1e0_frame f;
@@ -4302,6 +4357,7 @@ class B8F080ImageSpaceEffect
 
 // Builds vertex and pixel shader file descriptors with macros and calls CreateShaders for COPYRT1, then SetupShaders.
 // @fnv 0x00b8f080
+// pdb: ImageSpaceShaderCopyRenderTarget1::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void B8F080ImageSpaceEffect::CreateCopyShaders()
 {
     B8F080ShaderFile kVertexDelta;
@@ -4409,6 +4465,7 @@ struct FUN_00b8f220_cls
     void InitStencilCopyShader();
 };
 // @fnv 0x00b8f220
+// pdb: ImageSpaceShaderStencilCopy::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b8f220_cls::InitStencilCopyShader()
 {
     unsigned int f[0x26];
@@ -4531,6 +4588,7 @@ class FUN_00b8f3d0_cls
 
 // Builds a shader parameter frame with base/copy HLSL paths and NOTEX, then calls v4F with "STENCILCOPYNOTEXNODEPTH" and vs_1_1.
 // @fnv 0x00b8f3d0
+// pdb: ImageSpaceShaderStencilCopyNoTextureNoDepth::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b8f3d0_cls::CreateStencilCopyNoTexNoDepth()
 {
     FUN_00b8f3d0_frame f;
@@ -4654,6 +4712,7 @@ class FUN_00b8f590_cls
 
 // Fills a shader frame with the base.v.hlsl path, NOTEX and NULL names, zeroes its parameter blocks, then calls v4F and v53.
 // @fnv 0x00b8f590
+// pdb: ImageSpaceShaderNULL::ImageSpaceShaderNULL | ImageSpaceManager.obj | fnv360_0822_debug, objrun, medium
 void FUN_00b8f590_cls::FUN_00b8f590()
 {
     FUN_00b8f590_frame f;
@@ -4777,6 +4836,7 @@ class B8F850ImageSpaceEffect
 
 // Builds the base vertex and DepthOfField pixel shader file descriptors and calls CreateShaders with "DOF", then SetupShaders.
 // @fnv 0x00b8f850
+// pdb: ImageSpaceShaderDepthOfField::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr_rel, high
 void B8F850ImageSpaceEffect::CreateDepthOfFieldShaders()
 {
     B8F850ShaderFile kVertexDelta;
@@ -4914,6 +4974,7 @@ class FUN_00b8f9a0_cls
 
 // Fills a shader-source frame with base.v.hlsl and RadialBlur.p.hlsl paths, zeroes the remaining fields, then calls v4F with RBLUR/vs_1_1/ps_2_0 and v53.
 // @fnv 0x00b8f9a0
+// pdb: ImageSpaceShaderRadialBlur::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr_rel, high
 void FUN_00b8f9a0_cls::InitRadialBlurShader()
 {
     FUN_00b8f9a0_frame f;
@@ -5045,6 +5106,7 @@ class FUN_00b8faf0_cls
 };
 
 // @fnv 0x00b8faf0
+// pdb: ImageSpaceShaderRadialBlurMedium::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b8faf0_cls::CreateRadialBlurShader()
 {
     FUN_00b8faf0_frame f;
@@ -5161,6 +5223,7 @@ struct FUN_00b8fc50_cls
 };
 // Fills two shader parameter blocks (base.v.hlsl/TEX2 and RadialBlur.p.hlsl/NUM_STEPS=10.0f), passes them to v13c with RBLURH/vs_1_1/ps_2_0, then calls v14c.
 // @fnv 0x00b8fc50
+// pdb: ImageSpaceShaderRadialBlurHigh::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b8fc50_cls::FUN_00b8fc50()
 {
     unsigned int f[0x26];
@@ -5292,6 +5355,7 @@ class FUN_00b8fdb0_cls
 };
 
 // @fnv 0x00b8fdb0
+// pdb: ImageSpaceShaderDepthOfFieldMask::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b8fdb0_cls::CreateDepthOfFieldMaskShader()
 {
     FUN_00b8fdb0_frame f;
@@ -5481,6 +5545,7 @@ struct FUN_00b916f0_Object
 
 // Fills two shader descriptor structs with string pointers and zeroed data, passes them with macro and shader names to vf13C, then calls vf14C.
 // @fnv 0x00b916f0
+// pdb: ImageSpaceShaderInterfaceScanlinesBlend::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void __thiscall FUN_00b916f0_Object::InitializeShader()
 {
     FUN_00b916f0_First first;
@@ -5602,6 +5667,7 @@ class FUN_00b91830_cls
 
 // Builds two shader descriptors for base.v.hlsl and map_P20.p.hlsl, passes them to v4F with MAP/vs_1_1/ps_2_0, then calls v53.
 // @fnv 0x00b91830
+// pdb: ImageSpaceShaderMap::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b91830_cls::CreateMapShader()
 {
     FUN_00b91830_src lo;
@@ -5708,6 +5774,7 @@ struct FUN_00b91970_cls
     void InitMenuBGShader();
 };
 // @fnv 0x00b91970
+// pdb: ImageSpaceShaderMenuBG::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b91970_cls::InitMenuBGShader()
 {
     unsigned int f[0x26];
@@ -5769,6 +5836,7 @@ struct FUN_00b91a40 : ImageSpaceEffectShader
 };
 // Initialises the two vtables and sets the textures array size to 2.
 // @fnv 0x00b91a40
+// pdb: ImageSpaceShaderInterfaceScanlinesBlend::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b91a40::FUN_00b91a40()
 {
     primaryVTable = &DAT_010b5140;
@@ -5890,6 +5958,7 @@ class B91AB0ImageSpaceEffect
 
 // Builds vertex and pixel shader file descriptors for COPYUNPACK, gets the pixel shader profile, then calls CreateShaders and SetupShaders.
 // @fnv 0x00b91ab0
+// pdb: ImageSpaceShaderMenuUnpack::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void B91AB0ImageSpaceEffect::CreateCopyUnpackShaders()
 {
     B91AB0ShaderFile kVertexDelta;
@@ -6022,6 +6091,7 @@ struct FUN_00b91bf0_Object
 };
 
 // @fnv 0x00b91bf0
+// pdb: ImageSpaceShaderMotionBlur::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void __thiscall FUN_00b91bf0_Object::InitMotionBlurShader()
 {
     FUN_00b91bf0_First first;
@@ -6138,6 +6208,7 @@ struct FUN_00b91d60_cls
     void InitNoiseScrollAndBlendShader();
 };
 // @fnv 0x00b91d60
+// pdb: ImageSpaceShaderNoiseScrollAndBlend::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: BSImagespaceShaderNoiseScrollAndBlend::GetImagespaceFXMacros)
 void FUN_00b91d60_cls::InitNoiseScrollAndBlendShader()
 {
     unsigned int f[0x26];
@@ -6247,6 +6318,7 @@ struct FUN_00b91eb0_cls
     void InitNoiseNormalMapShader();
 };
 // @fnv 0x00b91eb0
+// pdb: ImageSpaceShaderNoiseNormalmap::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: BSImagespaceShaderNoiseNormalmap::GetImagespaceFXMacros)
 void FUN_00b91eb0_cls::InitNoiseNormalMapShader()
 {
     unsigned int f[0x26];
@@ -6379,6 +6451,7 @@ struct FUN_00b921f0_Class : public FUN_00b921f0_Vt
 };
 
 // @fnv 0x00b921f0
+// pdb: ImageSpaceShaderRefraction::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b921f0_Class::CreateRefractionShader()
 {
     FUN_00b921f0_Desc kDesc1;
@@ -6474,6 +6547,7 @@ struct FUN_00b922d0 : Base_c04570
 
 // Sets the array size to 2 and assigns the global reference-counted object DAT_011f9520 to m_spD0.
 // @fnv 0x00b922d0
+// pdb: ImageSpaceShaderRefraction::`scalar deleting destructor' | ImageSpaceManager.obj | fnv360_0721_beta, objrun, medium
 FUN_00b922d0::FUN_00b922d0()
 {
     m_kArr94.SetSize(2);
@@ -6517,6 +6591,7 @@ typedef void(__thiscall* ConfigureEffect)(ShaderEffect*, ShaderPassParameters*, 
 typedef void(__thiscall* FinalizeEffect)(ShaderEffect*);
 
 // @fnv 0x00b92390
+// pdb: ImageSpaceShaderTextureMask::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void __thiscall ShaderEffect::ConfigureShaderPasses()
 {
     ShaderPassParameters first;
@@ -6633,6 +6708,7 @@ class FUN_00b92450_cls : public SpawnPrimary_b7231, public SpawnSecondary_b7231
 
 // Destructor of a class holding a reference-counted pointer; the member's destructor releases the object.
 // @fnv 0x00b92450
+// pdb: ImageSpaceShaderTextureMask::~ImageSpaceShaderTextureMask | ImageSpaceManager.obj | fnv360_0822_retail, objrun_sim, low
 FUN_00b92450_cls::~FUN_00b92450_cls()
 {}
 
@@ -6750,6 +6826,7 @@ class B92700WaterEffect
 
 // Builds vertex and pixel shader file descriptors for water displacement clear simulation and passes them to CreateShaders, then calls SetupShaders.
 // @fnv 0x00b92700
+// pdb: ImageSpaceShaderWaterDisplacementClearSimulation::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: BSImagespaceShaderWaterDisplacementClearSimulation::GetImagespaceFXMacros)
 void B92700WaterEffect::CreateClearSimulationShaders()
 {
     B92700ShaderFile kVertexDelta;
@@ -6874,6 +6951,7 @@ class FUN_00b92850_cls
 };
 
 // @fnv 0x00b92850
+// pdb: ImageSpaceShaderWaterDisplacementTexOffset::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: BSImagespaceShaderWaterDisplacementTexOffset::GetImagespaceFXMacros)
 void FUN_00b92850_cls::InitWaterDisplacementTexOffset()
 {
     FUN_00b92850_frame f;
@@ -7008,6 +7086,7 @@ class FUN_00b929a0_cls
     void InitWadingRippleShader();
 };
 // @fnv 0x00b929a0
+// pdb: ImageSpaceShaderWaterDisplacementWadingRipple::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: BSImagespaceShaderWaterDisplacementWadingRipple::GetImagespaceFXMacros)
 void FUN_00b929a0_cls::InitWadingRippleShader()
 {
     struct Frame
@@ -7148,6 +7227,7 @@ class B92AF0WaterEffect
 
 // Builds vertex and pixel shader files for the rain ripple water displacement effect, then creates and sets up the shaders.
 // @fnv 0x00b92af0
+// pdb: ImageSpaceShaderWaterDisplacementRainRipple::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: BSImagespaceShaderWaterDisplacementRainRipple::GetImagespaceFXMacros)
 void B92AF0WaterEffect::CreateRainRippleShaders()
 {
     B92AF0ShaderFile kVertexDelta;
@@ -7281,6 +7361,7 @@ class B92C40WaterEffect
 
 // Builds vertex and pixel shader files for water displacement with the HEIGHTMAP_WADING macro, then creates and sets up the shaders.
 // @fnv 0x00b92c40
+// pdb: ImageSpaceShaderWaterWadingHeightmap::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: BSImagespaceShaderWaterWadingHeightmap::GetImagespaceFXMacros)
 void B92C40WaterEffect::CreateWadingHeightmapShaders()
 {
     B92C40ShaderFile kVertexDelta;
@@ -7407,6 +7488,7 @@ class FUN_00b92e00_cls
 };
 
 // @fnv 0x00b92e00
+// pdb: ImageSpaceShaderWaterRainHeightmap::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: BSImagespaceShaderWaterRainHeightmap::GetImagespaceFXMacros)
 void FUN_00b92e00_cls::FUN_00b92e00()
 {
     FUN_00b92e00_frame f;
@@ -7537,6 +7619,7 @@ class B92F50WaterEffect
 
 // Builds vertex and pixel shader file descriptors for water displacement with BLEND_HEIGHTMAPS, then calls CreateShaders and SetupShaders.
 // @fnv 0x00b92f50
+// pdb: ImageSpaceShaderWaterBlendHeightmaps::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: BSImagespaceShaderWaterBlendHeightmaps::GetImagespaceFXMacros)
 void B92F50WaterEffect::CreateDisplacementShaders()
 {
     B92F50ShaderFile kVertexDelta;
@@ -7668,6 +7751,7 @@ class B930A0WaterEffect
 
 // Builds vertex and pixel shader files for the smooth heightmap water effect and calls CreateShaders with the pixel shader profile, then SetupShaders.
 // @fnv 0x00b930a0
+// pdb: ImageSpaceShaderWaterSmoothHeightmap::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: BSImagespaceShaderWaterSmoothHeightmap::GetImagespaceFXMacros)
 void B930A0WaterEffect::CreateSmoothHeightmapShaders()
 {
     B930A0ShaderFile kVertexDelta;
@@ -7794,6 +7878,7 @@ class FUN_00b931f0_cls
 };
 
 // @fnv 0x00b931f0
+// pdb: ImageSpaceShaderWaterDisplacementNormals::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b931f0_cls::FUN_00b931f0()
 {
     FUN_00b931f0_frame f;
@@ -7902,6 +7987,7 @@ struct FUN_00b93340_cls
 };
 // Fills two shader descriptor blocks (base.v.hlsl and waterhmap.p.hlsl with WATER_SPECTRUM), then calls v13c with FFTWATERSPECTRUM/vs_1_1 and v14c.
 // @fnv 0x00b93340
+// pdb: ImageSpaceShaderWaterFFTWaterSpectrum::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b93340_cls::InitWaterSpectrumShader()
 {
     unsigned int f[0x26];
@@ -8353,6 +8439,7 @@ class S_00b93670_cls
 };
 
 // @fnv 0x00b93670
+// pdb: ImageSpaceShaderWaterFFTHorizontalButterfly::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void S_00b93670_cls::InitHorizontalButterflyShader()
 {
     S_00b93670_frame shaderFrame;
@@ -8467,6 +8554,7 @@ struct FUN_00b939c0_cls
     void InitVerticalButterflyShader();
 };
 // @fnv 0x00b939c0
+// pdb: ImageSpaceShaderWaterFFTVerticalButterfly::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b939c0_cls::InitVerticalButterflyShader()
 {
     unsigned int f[0x26];
@@ -8600,6 +8688,7 @@ class FUN_00b93b10_cls
 };
 
 // @fnv 0x00b93b10
+// pdb: ImageSpaceShaderWaterFFTHorizontalScramble::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b93b10_cls::FUN_00b93b10()
 {
     ShaderSourceA source;
@@ -8714,6 +8803,7 @@ struct FUN_00b93c60_cls
     void InitVerticalScrambleShader();
 };
 // @fnv 0x00b93c60
+// pdb: ImageSpaceShaderWaterFFTVerticalScramble::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b93c60_cls::InitVerticalScrambleShader()
 {
     unsigned int f[0x26];
@@ -8884,6 +8974,7 @@ struct FUN_00b93db0_Object
 };
 
 // @fnv 0x00b93db0
+// pdb: ImageSpaceShaderWaterFFTNormals::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void __thiscall FUN_00b93db0_Object::FUN_00b93db0()
 {
     FUN_00b93db0_First first;
@@ -8999,6 +9090,7 @@ struct FUN_00b93f00_cls
     void CreateFilterShader();
 };
 // @fnv 0x00b93f00
+// pdb: ImageSpaceShaderWaterFFTFilter::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b93f00_cls::CreateFilterShader()
 {
     unsigned int f[0x26];
@@ -9153,6 +9245,7 @@ struct S_00b94050_Obj
 };
 // Builds two shader descriptors (base.v.hlsl and waterhmap.p.hlsl with DISPLAY_NORMALS), gets a profile name, then calls FUN_x13c and FUN_x14c.
 // @fnv 0x00b94050
+// pdb: ImageSpaceShaderWaterFFTDisplayNormals::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void S_00b94050_Obj::InitDisplayNormalsShaders()
 {
     S_00b94050_A a;
@@ -9309,6 +9402,7 @@ class FUN_00b942f0_cls
 };
 
 // @fnv 0x00b942f0
+// pdb: ImageSpaceShaderWaterFFTDisplayAmplitude::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b942f0_cls::InitWaterHmapDisplayAmplitude()
 {
     FUN_00b942f0_frame f;
@@ -9420,6 +9514,7 @@ struct FUN_00b94440_cls
 };
 // Fills two shader descriptor blocks, resolves a value via FUN_00b4f380(1), then calls v13c with the descriptors and v14c.
 // @fnv 0x00b94440
+// pdb: ImageSpaceShaderWaterFFTDisplayWaterHeight::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b94440_cls::InitWaterHeightShader()
 {
     unsigned int f[0x26];
@@ -9531,6 +9626,8 @@ extern unsigned char* DAT_011f4748;
 
 // If DAT_011ffa10 is zero, packs the four arguments into a B9697Args and passes it to v4B of the object at DAT_011f4748+0x288, then adds a4 to DAT_011ffa10.
 // @fnv 0x00b97d20
+// pdb: BSRenderState::SetScissorRect | BSRenderState_Xenon.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiLeft, aiTop, aiRight, aiBottom, aeLock
 void __cdecl AccumulateAndDispatch(int a0, int a1, int a2, int a3, int aiDelta)
 {
     if (DAT_011ffa10 == 0)
@@ -9599,6 +9696,8 @@ struct FUN_00b97e30_obj
 };
 
 // @fnv 0x00b97e30
+// pdb: BSRenderState::SetZWriteEnable | BSRenderState_Xenon.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: abEnabled, aeLock
 void FUN_00b97e30(unsigned char a1, unsigned int uiAmount)
 {
     unsigned int idx = DAT_011ffa68;
@@ -9634,6 +9733,8 @@ extern int DAT_011ad888[];
 
 // For two channels, sends a notification when the channel counter is zero, then adds increment to each channel counter.
 // @fnv 0x00b97f20
+// pdb: StatsMenu::SetCurrentPage | StatsMenu.obj | fnv360_0822_debug, objopen_prop, low
+// pdb params: aePage
 void __cdecl FUN_00b97f20(int index, int secondValue, int increment)
 {
     int firstChannel = DAT_011ffa94;
@@ -9670,6 +9771,7 @@ typedef void(__thiscall* FinishEvent)(EventHandler*);
 typedef void(__stdcall* DispatchUI)(UIService*, unsigned int, unsigned int, unsigned int);
 
 // @fnv 0x00b988e0
+// pdb: BSBatchRenderer::EndPass | BSBatchRenderer.obj | fnv360_0822_retail, call_gap, medium
 void __cdecl FUN_00b988e0()
 {
     EventHandler* eventHandler = DAT_011ffe2c;
@@ -9784,6 +9886,8 @@ class B9B3D0Shader
 
 // Calls Setup on the high or low stage array entry at iStage, depending on whether m_iMode is positive.
 // @fnv 0x00b9b3d0
+// pdb: BSBatchRenderer::RegisterAlphaPass | BSBatchRenderer.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apRenderPass, aiIndex
 void B9B3D0Shader::SetupStage(B9B3D0Pass* pkPass, int iStage)
 {
     if (m_iMode > 0)
@@ -9807,6 +9911,8 @@ class FUN_00b9b400_cls
 
 // Fills m_table198 and m_table98 with 256 bytes from DAT_011ad900 starting at an offset derived from key.
 // @fnv 0x00b9b400
+// pdb: ImageSpaceEffectNoise::InitTables | ImageSpaceEffectNoise.obj | fnv360_0822_retail, uconst, low
+// pdb params: aiSeed
 void FUN_00b9b400_cls::FUN_00b9b400(unsigned int key)
 {
     unsigned int shift = ((key * 0x5391313du) + 0x22fc2945u) >> 0x18;
@@ -9891,6 +9997,7 @@ class FUN_00b9b450 : public B9B450EffectBase
 
 // Destructor deletes the two shaders stored in m_kShaders and clears their slots.
 // @fnv 0x00b9b450
+// pdb: ImageSpaceEffectNoise::~ImageSpaceEffectNoise | ImageSpaceEffectNoise.obj | fnv360_0822_retail, objrun_prop, medium
 FUN_00b9b450::~FUN_00b9b450()
 {
     if (m_kShaders.GetAt(0))
@@ -9984,6 +10091,7 @@ class FUN_00b9b830 : public B9B830ImageSpaceEffect
 
 // Registers this instance globally, clears the flag, copies the 256-byte table into both tables, and zeroes the five vectors.
 // @fnv 0x00b9b830
+// pdb: ImageSpaceEffectNoise::ImageSpaceEffectNoise | ImageSpaceEffectNoise.obj | fnv360_0822_retail, udata, high
 FUN_00b9b830::FUN_00b9b830()
 {
     g_pkB9B830Instance = this;
@@ -10388,6 +10496,8 @@ struct ISEffectX
 };
 
 // @fnv 0x00b9b950
+// pdb: ImageSpaceEffectNoise::Setup | ImageSpaceEffectNoise.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apManager, apParam
 void ISEffectX::InitFromTexOwner(TexOwner* owner, int unused)
 {
     SetupBase(2);
@@ -10488,6 +10598,8 @@ class B9BB10Effect
 
 // Sets m_fValue when it differs from fValue, resetting m_fTimer to 1.0 or rescaling it by the clamped ratio against g_fB9BB10Duration.
 // @fnv 0x00b9bb10
+// pdb: ShadowSceneLight::SetFadeTarget | ShadowSceneLight.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: afTarget, abForce
 void B9BB10Effect::FUN_00b9bb10(float fValue, bool bReset)
 {
     if (m_fValue != fValue)
@@ -10728,6 +10840,8 @@ static inline NiAVObject*& GetNext(ListNode*& pos)
 }
 
 // @fnv 0x00b9d020
+// pdb: ShadowSceneLight::Display | ShadowSceneLight.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: arCuller
 bool CullerOwner::CullSceneObjects(NiCullingProcess& kCuller)
 {
     if (pFlags->flags30 & 1)
@@ -11115,6 +11229,8 @@ class ImageSpaceManagerB8C
 
 // Sets up a texture from pkSource on the effect at index uiEffect, renders it to the main or alt target, then clears the texture.
 // @fnv 0x00b8c730
+// pdb: ImageSpaceManager::RenderEffect | ImageSpaceManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiEffect, apRenderer, apDestinationBuffer, apParam, abEndFrame
 void ImageSpaceManagerB8C::FUN_00b8c730(unsigned int uiEffectIndex, void* pvArg1, SourceB8C* pkSource, void* pvArg2,
                                         void* pvArg3)
 {
@@ -11180,6 +11296,8 @@ struct FUN_00b8c830_class
 };
 // Wraps two BSRenderedTextures into ImageSpaceTextures, binds them to the shader slots 0 and 1, renders the geometry, then unbinds the slots.
 // @fnv 0x00b8c830
+// pdb: ImageSpaceManager::RenderEffect | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apEffect, apRenderer, apSourceBuffer, apDestinationBuffer, apParam, abEndFrame
 void FUN_00b8c830_class::RenderWithTextures(HolderForAccum* apShader, int aiArg1, BSRenderedTexture* apSource0,
                                             BSRenderedTexture* apSource1, int aiArg2, int aiArg3)
 {
@@ -11331,6 +11449,7 @@ extern "C" char str_010b0158[], str_010b0820[], str_010b22e0[], str_010a93ec[];
 void* __cdecl FUN_00ec61c0(void*, int, unsigned int);
 int __cdecl FUN_00b4f380(int);
 // @fnv 0x00b8f710
+// pdb: ImageSpaceShaderCopy::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr_rel, high
 void Renderer::InitBuffers()
 {
     BufferDescriptor primary;
@@ -11504,6 +11623,7 @@ struct FUN_00b8ff10_class : public S_00b8ff10_Base
 };
 
 // @fnv 0x00b8ff10
+// pdb: ImageSpaceShaderDoubleVision::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void FUN_00b8ff10_class::FUN_00b8ff10()
 {
     S_00b8ff10_Local1 local1;
@@ -12159,6 +12279,8 @@ extern int g_aiB7DE0PushCounts[];
 
 // If the current level's push count is zero, sets render state 7 on the renderer, then adds iCount to that level's push count.
 // @fnv 0x00b97de0
+// pdb: BSRenderState::SetZEnable | BSRenderState_Xenon.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: abEnabled, aeLock
 void __cdecl FUN_00b97de0(bool bEnable, int iCount)
 {
     unsigned int uiTreeBlockIndex = g_uiB7DE0Level;
@@ -12200,6 +12322,8 @@ struct FUN_00b98480_Sub
 };
 // If the counter at DAT_011ff9d8[idx] is zero, calls f26(8, 2 or 3, 0, 0) on the object at DAT_011f9508+0x8b8, then adds param_2 to the counter.
 // @f3 0x00b0e0d0 (community match, verified in this file)
+// pdb: BSRenderState::SetWireframeEnable | BSRenderState_Xenon.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: abEnable, aeLock
 void __cdecl FUN_00b98480(char abFlag, int aiAmount)
 {
     unsigned int idx = DAT_011ffa50;
@@ -12342,6 +12466,7 @@ struct FUN_00b8d4d0 : ImageSpaceShaderHDRBase, ImageSpaceShaderSecondary
 
 // Releases the texture, destroys and deallocates the texture stored at index 2 of m_94, then clears that slot.
 // @fnv 0x00b8d4d0
+// pdb: ImageSpaceShaderVolumetricFog::~ImageSpaceShaderVolumetricFog | ImageSpaceManager.obj | fnv360_0822_retail, caller_sim, medium
 FUN_00b8d4d0::~FUN_00b8d4d0()
 {
     ReleaseTexture();
@@ -12493,6 +12618,8 @@ struct Main
 extern int DAT_011ffa8c;
 extern int DAT_011ad888[];
 // @fnv 0x00b97e80
+// pdb: BSRenderState::SetZFunc | BSRenderState_Xenon.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeZFunc, aeLock
 void __cdecl FUN_00b97e80(int idx, int amount)
 {
     int i = DAT_011ffa8c;
@@ -12503,6 +12630,8 @@ void __cdecl FUN_00b97e80(int idx, int amount)
 
 extern unsigned int DAT_011ffa6c;
 // @fnv 0x00b97ed0
+// pdb: BSRenderState::SetAlphaTestEnable | BSRenderState_Xenon.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: abEnabled, aeLock
 void __cdecl FUN_00b97ed0(unsigned char aByteValue, int aiDelta)
 {
     unsigned int index = DAT_011ffa6c;
@@ -12852,6 +12981,8 @@ class ShadowSceneLight
 };
 
 // @fnv 0x00b9bbb0
+// pdb: ShadowSceneLight::BoundWithinLightFrustum | ShadowSceneLight.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: arBound
 bool ShadowSceneLight::TestSphereFrustum(const NiSphere& kSphere)
 {
     bool bInside = true;
@@ -13166,6 +13297,7 @@ struct Self_b89970
 
 // Calls FUN_00be0870, then if unk6c is set decrements its unk64 (calling FUN_00e80190 at zero) and clears unk6c; returns the FUN_00be0870 result.
 // @fnv 0x00b89970
+// pdb: SkyShader::Initialize | SkyShader.obj | fnv360_0822_retail, objrun, medium
 char Self_b89970::FUN_00b89970()
 {
     char result = FUN_00be0870();
@@ -13431,6 +13563,8 @@ class ImageSpaceManagerB979
 
 // Prepares end-of-frame effects, then iterates active effects to render them, swapping source and destination render targets between passes.
 // @fnv 0x00b97900
+// pdb: ImageSpaceManager::RenderEndOfFrameEffects | ImageSpaceManager.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: apRenderer, apScreenBuffer, apDestinationBuffer
 void ImageSpaceManagerB979::RenderEndOfFrameEffects(RendererB979* pkRenderer, RenderTargetB979** ppkSource,
                                                     RenderTargetB979** ppkDest)
 {
@@ -13675,6 +13809,7 @@ struct FUN_00b9b7f0_cls
 
 // Calls FUN_00b9b400 on this with DAT_011f9410 and sets m_2b8 to 1.
 // @fnv 0x00b9b7f0
+// pdb: ImageSpaceEffectNoise::InitializeUtilityBuffers | ImageSpaceEffectNoise.obj | fnv360_0822_retail, caller_sim, medium
 void FUN_00b9b7f0_cls::FUN_00b9b7f0()
 {
     ((B9B400Cls*)this)->FUN_00b9b400((unsigned int)DAT_011f9410);
@@ -13871,6 +14006,8 @@ __declspec(noinline) void FX::FUN_00b9b400(unsigned int value)
 
 // If m_2b8 is false, calls FUN_00b9b400 with DAT_011f9410 and sets m_2b8 to true, then returns true.
 // @fnv 0x00b9bac0
+// pdb: ImageSpaceEffectNoise::UpdateParams | ImageSpaceEffectNoise.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: pParam
 bool FX::EnsureInitialized(int unused)
 {
     if (!m_2b8)
@@ -13932,6 +14069,7 @@ struct FUN_00b81130 : public FUN_00baa0e0
 
 // Releases the two ReleaseObject slots by decrementing their reference counts and calling v04 when the count reaches zero.
 // @fnv 0x00b81130
+// pdb: BSShaderBloodSplatterProperty::~BSShaderBloodSplatterProperty | BSShaderBloodSplatterProperty.obj | fnv360_0822_retail, objrun_prop, medium
 FUN_00b81130::~FUN_00b81130()
 {
     ReleaseObject** slot = &m_60[0].m_pObject;
@@ -14094,6 +14232,7 @@ class FUN_00b8a8e0 : public FUN_00b8a8e0_base
 
 // Destructor that calls Cleanup; the member and base destructors then run implicitly.
 // @fnv 0x00b8a8e0
+// pdb: ImageSpaceShaderParam::~ImageSpaceShaderParam | ImageSpaceShaderParam.obj | fnv360_0822_retail, call_gap, low
 FUN_00b8a8e0::~FUN_00b8a8e0()
 {
     Cleanup();
@@ -14107,6 +14246,7 @@ class WaterFFTDisplayEffect : public B8F080ImageSpaceEffect
 
 // Creates vertex and pixel shaders for the FFT display high-water effect and calls SetupShaders.
 // @fnv 0x00b941a0
+// pdb: ImageSpaceShaderWaterFFTDisplayHighW::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void WaterFFTDisplayEffect::FUN_00b941a0()
 {
     B8F080ShaderFile kVertexDelta = {"imagespace\\1x\\v\\base.v.hlsl", {{NULL, NULL}}};
@@ -14353,6 +14493,7 @@ struct FUN_00b97690
 };
 // If active, calls ShutdownAllEffects, ClearTextures and FUN_00b8a7e0, clears active, and passes m_textureId to DAT_011f91a8->FUN_00b6da10.
 // @fnv 0x00b97690
+// pdb: ImageSpaceManager::~ImageSpaceManager | ImageSpaceManager.obj | fnv360_0822_retail, call_gap_sim, medium
 FUN_00b97690::~FUN_00b97690()
 {
     if (active)
@@ -14660,6 +14801,8 @@ class B9DBE0Fader
 
 // Stores in m_fFade the distance from the camera position plus offset to the bound center, minus the bound radius, divided by the fade range, and returns it.
 // @fnv 0x00b9dbe0
+// pdb: ShadowSceneLight::GetLuminanceToBound | ShadowSceneLight.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apBound
 float B9DBE0Fader::ComputeFade(const B9DBE0Bound* pkBound)
 {
     B9DBE0Point3 kCameraPos = DAT_011f91c8->m_kWorldPos;
@@ -18331,6 +18474,8 @@ static float WeightUpperBound(float limit, float x)
 }
 // Computes a weighted blend of nearby B9Light sources into output light translation, diffuse color, and attenuation distance.
 // @fnv 0x00b9d150
+// pdb: ShadowSceneLight::ComputeWeightedShadowLight | ShadowSceneLight.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apLightingProperty, aTargetCenter
 void B9D150::UpdateOutputLight(B9List* lights, B9Point3 position)
 {
     B9Bounds* bounds = object->FUN_00a5bdd0(DAT_012031e4);
@@ -18687,6 +18832,7 @@ class B8EE90CinematicShader : public B92700WaterEffect
 };
 
 // @fnv 0x00b8ee90
+// pdb: ImageSpaceShaderCinematic::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr, medium
 void B8EE90CinematicShader::FUN_00b8ee90()
 {
     B92700ShaderFile kVertexShader;

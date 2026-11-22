@@ -29,6 +29,8 @@ struct OutBa
     InBa* fC;
 };
 // @f3 0x00b284e0 (community match, verified in this file)
+// pdb: ParticleShader::SetupGeometryTextures | ParticleShader.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apState
 void __stdcall FUN_00ba6240(OutBa* a1)
 {
     InBa* p = a1->fC;
@@ -105,6 +107,8 @@ struct S86870
     void FUN_00c86870(NiStream* s);
 };
 // @fnv 0x00c86870
+// pdb: bhkBvTreeShape::LinkObject | bhkBvTreeShape.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arStream
 void S86870::FUN_00c86870(NiStream* s)
 {
     char tmp;
@@ -228,6 +232,8 @@ bool FUN_00c75460_S::bhkRagdollController_InitGrabIK()
 void __cdecl FUN_00b97e80(int, int);
 
 // @f3 0x00b28080 (community match, verified in this file)
+// pdb: ParticleShader::SetupGeometryRenderStates | ParticleShader.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apState, abFirstPass
 void __stdcall FUN_00ba5de0(OutBa* a1, int unused)
 {
     InBa* p = a1->fC;
@@ -261,6 +267,8 @@ struct SearchObject
     int FUN_00ba5ed0(unsigned int arg0);
 };
 // @fnv 0x00ba5ed0
+// pdb: StatsMenu::DoControllerSwitch | StatsMenu.obj | fnv360_0822_retail, vtable, medium
+// pdb params: abHas360Controller
 int SearchObject::FUN_00ba5ed0(unsigned int arg0)
 {
     unsigned int callResult0 = (unsigned int)((CallTarget_00ba5320*)this)->FUN_00ba5320();
@@ -293,6 +301,8 @@ __forceinline int LookupValue387(S_00c85ef0_Map* map, int key) {
         return reinterpret_cast<Lookup387*>(map)->FUN_00477900(key).first;
     return 0;
 }
+// pdb: bhkCharacterProxy::Getbhk | bhkCharacterController.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: apPhantom
 S_00c85ef0_Ret FUN_00c85ef0(S_00c85ef0_Map* map, int key) {
     return S_00c85ef0_Ret(LookupValue387(map, key));
 }
@@ -328,6 +338,8 @@ class FUN_00c867d0_cls
 };
 
 // @fnv 0x00c867d0
+// pdb: bhkLiquidAction::CopyCinfo | bhkLiquidAction.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arInfo
 void FUN_00c867d0_cls::FUN_00c867d0(FUN_00c867d0_out* out)
 {
     this->FUN_00c879e0(out);
@@ -379,6 +391,8 @@ struct FUN_00c86800_Class : S86870
 };
 
 // @fnv 0x00c86800
+// pdb: bhkUnaryAction::CopyMembers | bhkUnaryAction.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: pDest, arCloneData
 void FUN_00c86800_Class::FUN_00c86800(int a1, FUN_00c86800_Table* a2)
 {
     char key;
@@ -536,6 +550,8 @@ extern char FUN_00e7b29c[];
 extern double FUN_00db88e8;
 struct Float3Formatter { float x, y, z; char* FUN_00823dc0(const char*); };
 
+// pdb: bhkMoppBvTreeShape::GetViewerStrings | bhkMoppBvTreeShape.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apStrings
 void Wrapper86b80::FUN_00c86b80(StringArray* arr)
 {
     ((ExactWrapper86b80*)this)->FUN_00911090(arr);
@@ -593,6 +609,8 @@ __forceinline float X532(FUN_00c86d20_Class* owner){return owner && owner->inner
 __forceinline float Y532(FUN_00c86d20_Class* owner){return owner && owner->inner?owner->inner->y44:0.0f;}
 __forceinline float W532(FUN_00c86d20_Class* owner){return owner && owner->inner?owner->inner->w4c:0.0f;}
 __forceinline void Copy532(FourFloatVector& output,const FourFloatVector& input){output.x=input.x;output.y=input.y;output.z=input.z;output.w=input.w;}
+// pdb: bhkMouseSpringAction::CopyCinfo | bhkMouseSpringAction.obj | fnv360_0721_beta, objrun, medium
+// pdb params: arInfo
 void FUN_00c86d20_Class::FUN_00c86d20(OutputData* dest) {
     reinterpret_cast<Base532*>(this)->FUN_008f8840(dest);
     dest->x30=X532(this);dest->y34=Y532(this);dest->w3c=W532(this);
@@ -919,6 +937,8 @@ void __cdecl DevCallbackMode(int, int);
 void __cdecl AddToTwoCounters(int, int, int);
 
 // @f3 0x00b28100 (community match, verified in this file)
+// pdb: ParticleShader::SetupGeometryAlphaBlending | ParticleShader.obj | fnv360_0822_retail, objrun, low, conflict (bridge: BSShaderNoLighting::SetupGeometryAlphaBlending)
+// pdb params: apState
 void __stdcall FUN_00ba5e60(OutBa* a1)
 {
     InBaFull* p = reinterpret_cast<InBaFull*>(a1->fC);
@@ -956,6 +976,8 @@ static inline unsigned int C69EE0IsEnabled(NiAVObject* pkObject)
 extern void (*DAT_011afe8c)(NiCollisionObject*, CollisionObjectCountContext*);
 
 // @fnv 0x00c69ee0
+// pdb: bhkWorld::RemoveObjects | bhkWorld.obj | fnv360_0822_retail, call_seq, medium, conflict (bridge: WeaponObject::~WeaponObject)
+// pdb params: apObject, abRecurse, abForce
 bool FUN_00c69ee0(NiAVObject* pkObject, bool bRecurse, bool bForce)
 {
     bool bResult = false;
@@ -1180,6 +1202,7 @@ class BeamPassShader
 };
 
 // @fnv 0x00ba59e0
+// pdb: ParticleShader::PresetStages | ParticleShader.obj | fnv360_0822_retail, objrun, medium
 void BeamPassShader::FUN_00ba59e0()
 {
     NiD3DPassPtr spRenderPass;
@@ -1524,6 +1547,8 @@ struct Update_b28180
 extern Geom** DAT_0116efd0;
 extern int DAT_01176170;
 inline int isCurrentSource(Source* p) { if (!p) return false; return p->unk1c == 16; }
+// pdb: ParticleShader::SetupGeometryConstants | ParticleShader.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apState
 void Obj::FUN_00ba5ee0(Arg* arg)
 {
     Geom* geom = *DAT_0116efd0;
@@ -1637,6 +1662,8 @@ class FUN_00c868b0_cls
 };
 
 // @fnv 0x00c868b0
+// pdb: bhkUnaryAction::SaveBinary | bhkUnaryAction.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arStream
 void FUN_00c868b0_cls::FUN_00c868b0(C868_Iface* a1)
 {
     C868_L3* l3;
@@ -1698,6 +1725,7 @@ class RefObjC86D : public TESObjectDoorController
 };
 
 // @f3 0x008f8dd0 (community match, verified in this file)
+// pdb: bhkMouseSpringAction::CreateObject | bhkMouseSpringAction.obj | fnv360_0721_beta, objrun, medium
 RefObjC86D* __cdecl FUN_00c86de0()
 {
     return new RefObjC86D;
@@ -1773,6 +1801,8 @@ public:
         ++DAT_010f31c4;
     }
 };
+// pdb: bhkMouseSpringAction::LoadBinary | bhkMouseSpringAction.obj | fnv360_0721_beta, objrun, low, conflict (bridge: bhkMouseSpringAction::CreateClone)
+// pdb params: arStream
 AllocatedNode* FUN_00c87010_cls::FUN_00c87010(FUN_00c86800_Table* p)
 {
     EnterCriticalSection(&DAT_010f3194);
@@ -2460,6 +2490,8 @@ struct FUN_008f88e0_t
     void FUN_008f88e0(NiStream86* pkStream);
 };
 
+// pdb: bhkMouseSpringAction::SaveBinary | bhkMouseSpringAction.obj | fnv360_0721_beta, objrun, low, conflict (bridge: bhkMouseSpringAction::LoadBinary)
+// pdb params: arStream
 void FUN_00c86e80_t::FUN_00c86e80(NiStream86* pkStream)
 {
     ((FUN_008f88e0_t*)this)->FUN_008f88e0(pkStream);
@@ -2665,6 +2697,8 @@ class FUN_00c86f10_cls
 };
 
 // @f3 0x008f8fd0 (community match, verified in this file)
+// pdb: bhkMouseSpringAction::CreateClone | bhkMouseSpringAction.obj | fnv360_0721_beta, objrun, low, conflict (bridge: bhkMouseSpringAction::SaveBinary)
+// pdb params: arCloneData
 void FUN_00c86f10_cls::FUN_00c86f10(FUN_00c86f10_arg* a1)
 {
     unsigned int tmp;

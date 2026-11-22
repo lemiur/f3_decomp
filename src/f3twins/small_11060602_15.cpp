@@ -56,6 +56,7 @@ struct C_00b53b10
     V_00b53b10* d[3];
     void FUN_00b53b10();
 };
+// pdb: HairShader::RecreateRendererData | HairShader.obj | fnv360_0822_retail, objrun_prop, medium
 void C_00b53b10::FUN_00b53b10()
 {
     if (f28)
@@ -141,6 +142,7 @@ struct D_00b561d0 : B_00b561d0
     float f88[8];
     D_00b561d0();
 };
+// pdb: SpeedTreeFrondShader::SpeedTreeFrondShader | SpeedTreeFrondShader.obj | fnv360_0822_retail, call_seq, medium
 D_00b561d0::D_00b561d0()
 {
     f84 = 0;
@@ -161,6 +163,8 @@ struct D_00b57b30 : B_00b57b30
     M_00b57b30 b[10];
     D_00b57b30(int p);
 };
+// pdb: SpeedTreeBranchShader::SpeedTreeBranchShader | SpeedTreeBranchShader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apShaderDecl
 D_00b57b30::D_00b57b30(int p) : B_00b57b30(p, 0, 0, 0)
 {
     f68 = 5;

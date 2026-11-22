@@ -5,6 +5,8 @@
 extern "C" void __cdecl FUN_00ecc7b0(char* dest, const char* src, int count);
 
 // @fnv 0x00cb10b0
+// pdb: hkString::strNcpy | hkString.obj | fnv360_0822_retail, call_gap, low
+// pdb params: dst, src, n
 void __cdecl CopyIfNonEmpty(char* dest, const char* src, int count)
 {
     if (count)
@@ -16,6 +18,8 @@ extern "C" BSAudio* __cdecl FUN_00c85750();
 
 double __cdecl FUN_00ecdf2d(unsigned int value, int mode);
 // @fnv 0x00cb1110
+// pdb: hkString::atof | hkString.obj | fnv360_0822_debug, objrun, medium
+// pdb params: in
 float __cdecl ConvertToFloat(unsigned int value)
 {
     return FUN_00ecdf2d(value, 0);
@@ -45,6 +49,8 @@ BSAudio* FUN_00c85750();
 // @f3 0x005435a0 (community match, verified in this file)
 extern unsigned int FUN_00f5a830[];
 
+// pdb: BGSEntryPointFunction::ExecuteFunction | BGSEntryPointFunction.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeFunction, apPerkOwner, aeFunctionType, acArgumentCount, apFunctionArgument, apData
 void __cdecl FUN_00cb13e0(int aiArg1, int aiArg2)
 {
     int* args = &aiArg2;
@@ -57,6 +63,8 @@ void __cdecl FUN_00cb13e0(int aiArg1, int aiArg2)
 
 
 // @fnv 0x00cb1090
+// pdb: hkString::strCpy | hkString.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: hkString::strDup)
+// pdb params: dst, src
 void __cdecl FUN_00cb1090(char* pcDest, const char* pcSrc)
 {
     const char* s = pcSrc;
@@ -142,6 +150,8 @@ void __cdecl FUN_00cb1280(void* dest, int value, unsigned int count)
 extern "C" int __cdecl FUN_00ecddf1(char* buf, unsigned int n, const char* fmt, va_list args);
 
 // @fnv 0x00cb0f60
+// pdb: hkString::snprintf | hkString.obj | fnv360_0822_retail, call_seq, high
+// pdb params: buf, len, fmt
 int __cdecl Vsnprintf(char* buf, int n, const char* fmt, ...)
 {
     va_list args;
@@ -163,6 +173,8 @@ int __cdecl hkString_strLen(const char* apString)
 
 namespace fnv_00cb1130 {
 // @fnv 0x00cb1130
+// pdb: BSBlendTreadTransfInterpolator::SaveBinary | BSBlendTreadTransfInterpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: arStream
 const char* __cdecl FUN_00cb1130(const char* a, const char* b)
 {
     return strstr(a, b);

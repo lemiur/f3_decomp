@@ -30,6 +30,7 @@ struct FUN_00d63210_class
 };
 
 // @fnv 0x00d63210
+// pdb: hkpWorldSnapshotViewer::getProcessTag | hkpWorldSnapshotViewer.obj | fnv360_0822_retail, vtable, medium
 int FUN_00d63210_class::GetValueByFlag()
 {
     if (*(char*)((char*)this + 0x20))
@@ -53,6 +54,7 @@ void __cdecl AllocateRecordWithData();
 
 // Registers the two world-snapshot commands with the profile registry, storing their returned handles in DAT_01268fc4 and DAT_01268fc0.
 // @fnv 0x00d63000
+// pdb: hkpWorldSnapshotViewer::registerViewer | hkpWorldSnapshotViewer.obj | fnv360_0822_debug, udata, high
 void __cdecl RegisterSnapshotCommands()
 {
     DAT_01268fc4 = DAT_01269cd0->FUN_00dd9380("* Grab World Snapshot Native", FUN_00d62f20);
@@ -107,6 +109,8 @@ struct FUN_00c7be20_cls
 // @f3 0x008e2fd0 (community match, verified in this file)
 void __cdecl FUN_00901e90(FUN_00c7be20_arr* self, unsigned int newCap, int elemSize);
 
+// pdb: bhkRagdollController::GetRBForBones | bhkRagdollController.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arBoneRBA
 void FUN_00c7be20_cls::CopySourceArray(FUN_00c7be20_arr* out)
 {
     FUN_00c7be20_src* pSource = m_48;
@@ -163,6 +167,7 @@ struct FUN_00d62fa0_class
 };
 
 // @fnv 0x00d62fa0
+// pdb: hkpWorldSnapshotViewer::init | hkpWorldSnapshotViewer.obj | fnv360_0822_retail, vtable, medium
 void __thiscall FUN_00d62fa0_class::ProcessContainerItems()
 {
     if (m_container)

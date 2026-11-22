@@ -1,12 +1,15 @@
 #include "f3_common.h"
 #include "nid3dshaderconstantmap_decls.h"
 // @fnv 0x00e87200
+// pdb: NiD3DShaderConstantMap::SortByEnabled | NiD3DShaderConstantMap.obj | fnv360_0822_debug, objrun_open, low
 void NiD3DShaderConstantMap::ResetShaderConstantMap()
 {
     ClearShaderConstantEntries(&entries);
     ClearShaderConstantEntries(&defined);
 }
 // @fnv 0x00b71a40
+// pdb: NiD3DUtility::GetD3DFromNi | NiXenonRenderer.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: kD3D, kNiRot, kNiTrans, fNiScale
 void BuildTransformMatrix(float* afOutMatrix, const ThreeByThreeMatrix& r, const NiPoint3& atTranslation, float afScale)
 {
     afOutMatrix[0] = r.m[0][0] * afScale;
@@ -102,6 +105,8 @@ struct NiShaderConstantMap
 };
 unsigned int __cdecl FUN_00a9bbf0(unsigned int, unsigned int);
 // @fnv 0x00a9c0a0
+// pdb: NiShaderConstantMap::LookUpPredefinedMappingType | NiShaderConstantMap.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: pszMapping
 unsigned int __cdecl FUN_00a9c0a0(const char* name)
 {
     unsigned int a, b;
@@ -115,6 +120,8 @@ extern GlobalObjectO2_00a7b610 g_0126f7c4;
 
 void __fastcall UpdateMatrix(void*);
 // @fnv 0x00bc5c20
+// pdb: NiD3DPass::SetPixelConstantMap | NiXenonFragmentShader.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: pkSCMPixel
 char* __fastcall FUN_00bc5c20(char* self)
 {
     if (self[0x1c])
@@ -123,6 +130,8 @@ char* __fastcall FUN_00bc5c20(char* self)
 }
 
 // @fnv 0x00e826c0
+// pdb: NiD3DShaderConstantMap::GetEntryAtIndex | NiD3DShaderConstantMap.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: uiIndex
 void* __fastcall FUN_00e826c0(char* self, int unused, unsigned int i)
 {
     return (*(void***)(self + 0x10))[i];
@@ -142,6 +151,8 @@ bool __cdecl LookupShaderConstantMapping(unsigned int, void*&);
 unsigned int __cdecl GetAttributeTypeForMapping(void*, unsigned int*, unsigned int*);
 // Looks up the entry's key, stores a byte from DAT_011f5fb4 indexed by the result into flags, and on success stores the pointer and y into p10 and v20.
 // @fnv 0x00e82ac0
+// pdb: NiD3DShaderConstantMap::SetupObjectEntry | NiD3DShaderConstantMap.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkEntry
 unsigned int __stdcall UpdateEntryFromKey(FUN_00e82ac0_e* pEntry)
 {
     void* x;
@@ -211,6 +222,8 @@ const void* __stdcall GetConstantData(void*);
 // @f3 0x008939a0 (community match, verified in this file)
 const void* __stdcall FUN_008928d0(void*);
 
+// pdb: NiD3DShaderConstantMap::SetConstantConstant | NiD3DShaderConstantMap.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkShaderProgram, pkEntry, uiPass
 unsigned int __stdcall FUN_00e84b60(FUN_00e84b60_prog* prog, void* entry, unsigned int pass)
 {
     const void* pvData = FUN_008928d0(entry);
@@ -273,6 +286,8 @@ struct RArr
     void FUN_00e86f40(unsigned int, void*);
 };
 // @fnv 0x00e87010
+// pdb: NiD3DShaderConstantMap::RemoveEntry | NiD3DShaderConstantMap.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pszKey
 unsigned int __fastcall LookupAndReleaseEntry(RMap* self, int unused, const char* name)
 {
     unsigned int idx = self->LookupSequenceByKey(name);
@@ -298,6 +313,8 @@ unsigned int __fastcall LookupAndReleaseEntry(RMap* self, int unused, const char
 }
 
 // @fnv 0x00a9bbf0
+// pdb: NiShaderConstantMap::LookUpPredefinedMappingType | NiShaderConstantMap.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: uiMappingID, uiNumRegisters
 unsigned int __cdecl FUN_00a9bbf0(unsigned int aiCode, unsigned int b)
 {
     switch (aiCode)
@@ -1113,6 +1130,8 @@ class FUN_00e82640_Obj
 
 // Searches two entry arrays by name using FUN_00aa1360 and returns the matching entry, or 0 if not found.
 // @fnv 0x00e82640
+// pdb: NiD3DShaderConstantMap::GetEntry | NiD3DShaderConstantMap.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pszKey
 FUN_00e82640_Entry* __thiscall FUN_00e82640_Obj::FindEntry(unsigned int name)
 {
     unsigned int count;
@@ -1186,6 +1205,8 @@ class FUN_00e82960_cls
 };
 
 // @fnv 0x00e82960
+// pdb: NiD3DShaderConstantMap::GetEntryIndex | NiD3DShaderConstantMap.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pszKey
 unsigned int FUN_00e82960_cls::FindEntryIndex(const char* name)
 {
     unsigned int n = count;
@@ -1233,6 +1254,8 @@ struct ShaderConstEntry
 
 // Looks up the shader constant type for the entry key, sets flags, dataSize, type, and matrix descriptor fields, returning 0 on success or 0x40 on failure.
 // @fnv 0x00e829b0
+// pdb: NiD3DShaderConstantMap::SetupPredefinedEntry | NiD3DShaderConstantMap.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkEntry
 unsigned int __stdcall InitShaderConstantEntry(ShaderConstEntry* apEntry)
 {
     unsigned int count = 4;
@@ -1306,6 +1329,8 @@ void __stdcall Transpose(Matrix*, Matrix*);
 void __stdcall Transform(Vector*, Vector*, void*);
 // Computes a matrix or vector constant based on type and mode, applies inverse or transpose in some matrix cases, and passes it to SetConstant.
 // @fnv 0x00e82b40
+// pdb: NiD3DShaderConstantMap::PerformOperatorMultiply | NiD3DShaderConstantMap.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: pkShaderProgram, pkEntry, eType1, eType2, bInverse, bTranspose
 unsigned int __stdcall FUN_00e82b40(FUN_00e84b60_prog* prog, void* entry, unsigned int type, unsigned int mode,
                                     bool inverse, bool transpose)
 {
@@ -1598,6 +1623,8 @@ extern float DAT_0126f7e0[];
 
 // Converts extraData fields according to the mapped type, returning a static buffer, pData, or null.
 // @fnv 0x00e83840
+// pdb: NiD3DShaderConstantMap::MapAttributeValue | NiD3DShaderConstantMap.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: pkEntry, pkExtra
 const void* __stdcall GetShaderConstantValue(NiShaderConstantMapEntry* entry, ExtraDataStandIn* extraData)
 {
     int type = DAT_011f5fc4[entry->flags & 0xff];
@@ -1715,6 +1742,8 @@ extern float DAT_0126f7e0[16];
 
 // Returns entry data directly for some counts, otherwise converts supported values into static buffers.
 // @fnv 0x00e83a90
+// pdb: NiD3DShaderConstantMap::MapConstantValue | NiD3DShaderConstantMap.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: pkEntry
 const void* __stdcall GetConstantData(void* apEntry)
 {
     ConstantEntryView* entry = static_cast<ConstantEntryView*>(apEntry);
@@ -1938,6 +1967,8 @@ struct TexConstantMap
 
 // Resolves a texture for a TexEntry via cache or geom, looks up its constant data, and calls prog->SetConstant with a size derived from entry->flags.
 // @fnv 0x00e84ba0
+// pdb: NiD3DShaderConstantMap::SetAttributeConstant | NiD3DShaderConstantMap.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkShaderProgram, pkEntry, pkGeometry, pkSkin, pkPartition, pkBuffData, pkState, pkEffects, kWorld, kWorldBound, uiPass, bGlobal, pkExtraData
 unsigned int TexConstantMap::FUN_00e84ba0(TexProgram* prog, TexEntry* entry, NiAVObject* geom, void* apUnused3,
                                           void* apUnused4, void* apUnused5, void* apUnused6, void* apUnused7,
                                           void* apUnused8, void* apUnused9, unsigned int pass, bool global,
@@ -2146,6 +2177,8 @@ struct FUN_00e86a50_object
 
 // Copies the float data from object into the matching slot of g_0126f7c4 based on the type code and returns that code.
 // @fnv 0x00e86a50
+// pdb: NiD3DShaderConstantMap::SetupConstantConstantValue | NiD3DShaderConstantMap.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: uiOperatorNum, pkEntry, uiPass
 unsigned int __stdcall FUN_00e86a50(unsigned int index, FUN_00e86a50_object* object, unsigned int unused)
 {
     float* source = object->data;
@@ -2276,6 +2309,8 @@ struct SCConstantMap
 };
 
 // @fnv 0x00e86ca0
+// pdb: NiD3DShaderConstantMap::SetupAttributeConstantValue | NiD3DShaderConstantMap.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: uiOperatorNum, pkEntry, pkGeometry, pkSkin, pkState, kWorld, kWorldBound, uiPass
 int SCConstantMap::LoadConstant(unsigned int auiRegister, SCMapEntry* apEntry, SCGeometry* apGeometry, void* apSkin,
                                 void* apPartition, void* apBuffData, unsigned int auiPass, void* apState)
 {
@@ -2389,6 +2424,7 @@ struct S_00e86f40_Arr
 };
 
 // @fnv 0x00e86f40
+// pdb: NiTPointerMap<char const *,NiControllerSequence *>::NewItem | NiControllerManager.obj | fnv360_0721_beta, objrun_prop, low, conflict (skyrim: NiTArray<class NiPointer<class NiControllerSequence>,class NiTNewInterface<class NiPointer<class NiControllerSequence> > >::SetAt)
 void S_00e86f40_Arr::FUN_00e86f40(unsigned int uiIndex, const S_00e86f40_Ptr& e)
 {
     static const S_00e86f40_Ptr kEmpty;
@@ -2447,6 +2483,8 @@ void ShaderEntryArray::FUN_00e86f40(unsigned int uiIndex, const NiShaderConstant
 
 // Moves enabled shader constant map entries to the front of the array, leaving disabled entries at the end.
 // @fnv 0x00e870c0
+// pdb: NiD3DShaderConstantMap::SortListByEnabled | NiD3DShaderConstantMap.obj | fnv360_0822_debug, objopen_prop, low
+// pdb params: apEntries
 void __stdcall CompactEnabledEntries(ShaderEntryArray* pkArray)
 {
     NiShaderConstantMapEntryPtr spEntry;
@@ -2565,6 +2603,8 @@ struct FUN_00e87220_shell
 
 // Resolves two operand entries, dispatches their evaluation by type, then applies the operator to the shader program and returns the result.
 // @fnv 0x00e87220
+// pdb: NiD3DShaderConstantMap::SetOperatorConstant | NiD3DShaderConstantMap.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkShaderProgram, pkEntry, pkGeometry, pkSkin, pkState, pkEffects, kWorld, kWorldBound, uiPass
 unsigned int FUN_00e87220_shell::FUN_00e87220(void* pkShaderProgram, OpCEntry* pkEntry, void* pkGeometry,
                                               const void* pkSkin, const void* pkState, const void* pkEffects,
                                               const void* kWorld, const void* kWorldBound, unsigned int uiPass)
@@ -3509,6 +3549,8 @@ extern "C" LightValue* __cdecl FUN_00424d50(const unsigned int*, Light*);
 struct ConstantGeometry {
     __declspec(nothrow) NiExtraData* FUN_00824a50(const S83_FixedStr&) throw();
 };
+// pdb: NiD3DShaderConstantMap::SetDefinedConstant | NiD3DShaderConstantMap.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: pkShaderProgram, pkEntry, pkGeometry, pkSkin, pkPartition, pkBuffData, pkState, pkEffects, kWorld, kWorldBound, uiPass
 unsigned int ConstantMap::FUN_00e83db0(Program* prog, Entry* entry, Geometry* geom, Skin* skin, Partition* partition,
                                        void* buffer, Properties* props, Effects* effects, const void* transform,
                                        const void* bound, unsigned int pass)

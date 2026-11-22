@@ -40,6 +40,8 @@ struct Obj {
 
 // Calls v10 on m_target with the given float and int arguments and returns its result.
 // @fnv 0x00d42a10
+// pdb: hkpTransformAgent::warpTime | hkpTransformAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: oldTime, newTime, input
 int Obj::ForwardToTarget(float a, float b, int c)
 {
     return m_target->v10(a, b, c);
@@ -120,6 +122,8 @@ struct Caster {
     int ProcessSource(Source* s, int a, int b, int c, int d);
 };
 // @fnv 0x00d42cf0
+// pdb: hkpTransformAgent::linearCast | hkpTransformAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyAin, bodyB, input, collector, startCollector
 int Caster::ProcessSource(Source* pSource, int aiArg1, int aiArg2, int aiArg3, int aiArg4)
 {
     Body* body = pSource->body;
@@ -197,6 +201,8 @@ struct S_00d42d60_Input
 
 
 // @fnv 0x00d42d60
+// pdb: hkpTransformAgent::staticLinearCast | hkpTransformAgent.obj | fnv360_0822_retail, objrun, high
+// pdb params: bodyAin, bodyB, input, collector, startCollector
 void __cdecl DispatchClosestPoints(const S_00d42d60_CdBody& bodyA, const S_00d42d60_CdBody& bodyB,
                           const S_00d42d60_Input& input, S_00d42d60_Collector* pCollectorA, S_00d42d60_Collector* pCollectorB)
 {
@@ -291,6 +297,8 @@ void __cdecl ProcessTransformShapeCollision(int a, int b, int c, D432F0Collector
 
 // Constructs a D432F0Collector from d and calls ProcessTransformShapeCollision with b, a, c and the collector.
 // @fnv 0x00d432f0
+// pdb: hkpSymmetricAgentLinearCast<hkpSphereCapsuleAgent>::staticGetPenetrations | hkpSphereCapsuleAgent.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl RunCollector(int aiArgA, int aiArgB, int aiArgC, int aiData)
 {
     D432F0Collector collector(aiData);
@@ -309,6 +317,8 @@ struct hkpSymmetricAgentFlipCollector
 
 // Builds a local hkpSymmetricAgentFlipCollector from DAT_0104da48 and arg4, then calls hkpTransformAgent_staticGetClosestPoints with arg2, arg1, arg3 and the collector.
 // @fnv 0x00d43330
+// pdb: hkpSymmetricAgentLinearCast<hkpTransformAgent>::staticGetClosestPoints | hkpTransformAgent.obj | fnv360_0822_retail, objrun, high
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl RunSymmetricAgentFlipCollector(void* arg1, void* arg2, int arg3, int arg4)
 {
     hkpSymmetricAgentFlipCollector local;
@@ -326,6 +336,8 @@ struct Wrapper {
 };
 // Builds a CallData from fourth and DAT_0104da48 with descriptor DAT_010ce7fc, then calls FUN_00d42de0 with second, first and third.
 // @fnv 0x00d434a0
+// pdb: hkpSymmetricAgentLinearCast<hkpTransformAgent>::getClosestPoints | hkpTransformAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void Wrapper::FUN_00d434a0(void* first, void* second, unsigned int third, unsigned int fourth) {
     CallData data;
     data.value = fourth;
@@ -515,6 +527,8 @@ __declspec(align(16)) struct MotionState {
     void hkTransform_setMul(const void* rot, const hkVector4& t);
 };
 
+// pdb: hkpTransformAgent::createTransformAAgent | hkpTransformAgent.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: bodyA, bodyB, input, mgr
 Header* __cdecl BuildHeaderAndDispatchHandler(InputA* pSource,InputB* pPathInput,InputC* pStateInput,int value) {
     void* tls = DAT_00d9b080(DAT_010f3170);
     Header* header = (Header*)((BlockAllocator*)tls)->FUN_008f6d30(0x10, 0x1f);
@@ -618,6 +632,8 @@ struct CollisionInput_00d42f40
 
 // Builds a child collision body from the transform shape's child and transform, then dispatches it against the second body via the dispatcher.
 // @fnv 0x00d42f40
+// pdb: hkpTransformAgent::staticGetPenetrations | hkpTransformAgent.obj | fnv360_0822_retail, objrun, high
+// pdb params: bodyAin, bodyB, input, collector
 void __cdecl ProcessTransformShapeCollision(
     const CollisionBody_00d42f40* first,
     const CollisionBody_00d42f40* second,
@@ -644,6 +660,8 @@ struct SearchObject {
     int FUN_00d43600(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3);
 };
 // @fnv 0x00d43600
+// pdb: hkpSymmetricAgentLinearCast<hkpTransformAgent>::updateShapeCollectionFilter | hkpTransformAgent.obj | fnv360_0822_debug, vtable, high
+// pdb params: bodyA, bodyB, input, constraintOwner
 int SearchObject::FUN_00d43600(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3)
 {
     unsigned int uiResult = (unsigned int)((CallTarget_00d42fc0*)this)->hkpTransformAgent_updateShapeCollectionFilter((int)arg1, (int)arg0, (int)arg2, (int)arg3);
@@ -721,6 +739,8 @@ struct S_00d431b0 {
 
 // Copies the rows, blk, u90-u9c, fa0-fa8 and ba-bc members from o into this object and returns *this.
 // @f3 0x009cdcb0 (community match, verified in this file)
+// pdb: hkMotionState::hkMotionState | hkpTransformAgent.obj | fnv360_0822_retail, call_seq, high
+// pdb params: __that
 S_00d431b0& S_00d431b0::CopyFrom(const S_00d431b0& o)
 {
   volatile S_00d431b0_Raw stage;
@@ -1023,6 +1043,8 @@ struct S9cdb30_Symmetric : S9cdb30_TransformAgent {
     virtual void vfn04();
 };
 
+// pdb: hkpTransformAgent::createTransformBAgent | hkpTransformAgent.obj | fnv360_0822_retail, uvref, high
+// pdb params: bodyA, bodyB, input, mgr
 S_00d43030_Agent* CreateTransformAgent(const S_00d43030_CdBody& bodyA, const S_00d43030_CdBody& bodyB, const S_00d43030_CollisionInput& input, S_00d43030_ContactMgr* mgr)
 {
     S9cdb30_TransformAgent* agent = new S9cdb30_Symmetric(bodyA, bodyB, input, mgr);

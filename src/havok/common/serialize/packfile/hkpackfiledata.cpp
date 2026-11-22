@@ -42,6 +42,8 @@ struct FUN_00e06d70_Class
 };
 
 // @fnv 0x00e06d70
+// pdb: hkpMoppDefaultAssembler::addTermIdOffset | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, objrun, medium
+// pdb params: offset
 void FUN_00e06d70_Class::WriteSize(unsigned int size)
 {
     void* p = m_pWriter;

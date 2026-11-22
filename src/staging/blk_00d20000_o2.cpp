@@ -15,6 +15,8 @@ struct FUN_00d2be30
 };
 
 // @fnv 0x00d2be30
+// pdb: hkStdioStreamWriter::open | hkStdioStreamWriter.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: nameIn, mode
 void FUN_00d2be30::SetFile(const char* acPath, const char* acMode)
 {
     m_8 = fopen(acPath, acMode);
@@ -30,6 +32,8 @@ struct FUN_00d2f220_class
 };
 
 // @fnv 0x00d2f220
+// pdb: NiTriBasedGeom::NiTriBasedGeom | NiTriBasedGeom.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: pkModelData
 int __thiscall FUN_00d2f220_class::InitializeWithGlobal(int aiValue)
 {
     FUN_00d2f980(aiValue);
@@ -44,6 +48,8 @@ extern "C" void __cdecl FUN_00d34810();
 
 // Fills the four function pointers at p[0..3] and sets the bytes at offsets 0x10 and 0x11 to 0 and 1.
 // @fnv 0x00d36bb0
+// pdb: hkpListAgent::initAgentFuncInverse | hkpListAgent.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: af
 void __cdecl FUN_00d36bb0(void** p)
 {
     p[0] = (void*)&FUN_00d36b70;
@@ -79,6 +85,8 @@ void FUN_00daf8e0();
 
 // Fills the first four pointer slots of p with function addresses and clears the two bytes at offsets 0x10 and 0x11.
 // @fnv 0x00d3dbe0
+// pdb: hkpSphereTriangleAgent::initAgentFunc | hkpSphereTriangleAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: af
 void __cdecl FUN_00d3dbe0(void* apObject)
 {
     ((void**)apObject)[0] = (void*)&CreateRetObj;
@@ -96,6 +104,8 @@ void __cdecl FUN_00d3ac80(void);
 
 // Fills the first four pointer slots of p with four function pointers and sets the bytes at offsets 0x10 and 0x11 to 1 and 0.
 // @fnv 0x00d3dc10
+// pdb: hkpSphereTriangleAgent::initAgentFuncInverse | hkpSphereTriangleAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: af
 void FUN_00d3dc10(void* apObject)
 {
     ((void**)apObject)[0] = (void*)CreateTargetAgent;
@@ -129,6 +139,8 @@ struct FUN_00db0920 {
 };
 
 // @fnv 0x00d3fdf0
+// pdb: hkBoxBoxAgent3::create | hkpBoxBoxAgent3.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: input, entry, agentData
 void* __cdecl InitAndGetOffset(void* apUnused1, void* apUnused2, void* apObject)
 {
     if (apObject)
@@ -165,6 +177,8 @@ void __cdecl FUN_009ba1b0();
 void __cdecl FUN_009b9ff0();
 void __cdecl FUN_009ba620();
 
+// pdb: hkpBvTreeAgent::registerAgent | hkpBvTreeAgent.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: dispatcher
 void __cdecl FUN_00d2dc70(Agent* pAgent)
 {
     CollisionAgentFunctionTable f;
@@ -193,6 +207,8 @@ void __cdecl FUN_00d2dc70(Agent* pAgent)
 
 
 // @f3 0x009a91b0 (community match, verified in this file)
+// pdb: hkpWorldConstraintUtil::updateFatherOfMovedAtom | hkpWorldConstraintUtil.obj | fnv360_0822_retail, call_seq, high
+// pdb params: instance, oldAtom, updatedAtom, updatedSizeOfAtom
 void ReplaceEntry(int pList, int pOldEntry, int pNewEntry, unsigned short usValue)
 {
     int iVar1 = *(int*)(pList + 0x10);
@@ -246,6 +262,8 @@ struct FUN_00d27f70 {
 
 // Stores the index array and its count, then fills the array with -1.
 // @fnv 0x00d27f70
+// pdb: hkUnionFind::hkUnionFind | hkUnionFind.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: parents, numnode
 FUN_00d27f70::FUN_00d27f70(int** indices, int numIndices)
 {
     m_ppIndices = indices;
@@ -281,6 +299,7 @@ struct D28030UnionFind {
 };
 
 // @f3 0x009ad2b0 (community match, verified in this file)
+// pdb: hkUnionFind::addEdge | hkUnionFind.obj | tesv_win, callee_sim, low
 void D28030UnionFind::Union(int aiNodeA, int aiNodeB)
 {
     if (aiNodeA > aiNodeB) {
@@ -308,6 +327,8 @@ void D28030UnionFind::Union(int aiNodeA, int aiNodeB)
 struct LinkedIndexArray { int** entries; int count; void FUN_00d280e0(); };
 // For each non-negative entry, follows the chain of indices in entries until a negative value is reached, then advances to the next entry.
 // @fnv 0x00d280e0
+// pdb: hkUnionFind::findRootOfNode | hkUnionFind.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkUnionFind::collapseTree)
+// pdb params: i
 void LinkedIndexArray::FUN_00d280e0(){
 int* values=*entries; int* current=*entries; int* end=current+count;while(current!=end){if(*current>=0){while(values[*current]>=0){*current=values[*current];values=*entries;}}++current;}
 }
@@ -321,6 +342,7 @@ struct IndexRemapper { IndexStorage* entries; int length; void FUN_00d280e0(); v
 // @f3 0x009ad3a0 (community match, verified in this file)
 struct IndexRemapperF3 { void FUN_009ad360(); };
 void __cdecl FUN_00901f10(IndexBuffer* apArray, int aiElementSize);
+// pdb: hkUnionFind::assignGroups | hkUnionFind.obj | tesv_win, call_gap_sim, low
 void IndexRemapper::RemapIndices(IndexBuffer* output) {
  ((IndexRemapperF3*)this)->FUN_009ad360(); int nextIndex=0;
  for(int i=0;i<length;++i) {
@@ -481,6 +503,8 @@ void __cdecl FUN_009ba1b0();
 void __cdecl hkpMoppAgent_staticLinearCast();
 void __cdecl hkpMoppAgent_createBvBvAgent();
 
+// pdb: hkpMoppAgent::registerAgent | hkpMoppAgent.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: dispatcher
 void __cdecl FUN_00d2f2c0(D2F2C0Dispatcher* dispatcher)
 {
     {
@@ -521,6 +545,8 @@ struct SearchObject {
     int FUN_00d2f3d0(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3);
 };
 // @fnv 0x00d2f3d0
+// pdb: hkpSymmetricAgentLinearCast<hkpMoppAgent>::updateShapeCollectionFilter | hkpMoppAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, constraintOwner
 int SearchObject::FUN_00d2f3d0(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3)
 {
     unsigned int uiResult = (unsigned int)((CallTarget_00d2f760*)this)->FUN_00d2f760((int)arg1, (int)arg0, (int)arg2, (int)arg3);
@@ -552,6 +578,8 @@ struct FnvCpu_FUN_00d31730_CpuObject {
 };
 // Builds a call data struct from the arguments and DAT globals, then forwards it to FUN_00d315d0 with second and first swapped.
 // @fnv 0x00d31730
+// pdb: hkpSymmetricAgentLinearCast<hkpMoppAgent>::getClosestPoints | hkpMoppAgent.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: bodyA, bodyB, input, collector
 void FnvCpu_FUN_00d31730_CpuObject::FUN_00d31730(void* first, void* second, unsigned int third, unsigned int fourth)
 {
     FnvCpu_FUN_00d31730_CpuCallData data;
@@ -614,6 +642,8 @@ struct FUN_00d36b20_Class {
 };
 
 // @fnv 0x00d36b20
+// pdb: hkpListAgent::hkpListAgent | hkpListAgent.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: bodyA, bodyB, input, contactMgr
 FUN_00d36b20_Class* FUN_00d36b20_Class::FUN_00d36b20(int aiUnused1, int aiUnused2, int* piValue, int aiValue) {
     this->unk06 = 1;
     this->unk08 = aiValue;
@@ -680,6 +710,7 @@ struct FUN_00d36cc0_Obj {
 };
 
 // @fnv 0x00d36cc0
+// pdb: hkpSymmetricAgentLinearCast<class hkpListAgent>::updateShapeCollectionFilter | hkpListAgent.obj | tesv_win, caller_sim, low
 void __thiscall FUN_00d36cc0_Obj::FUN_00d36cc0(int param_1, int param_2, int param_3, int param_4) {
     this->hkpListAgent_updateShapeCollectionFilter(param_2, param_1, param_3, param_4);
 }
@@ -693,6 +724,8 @@ struct FnvCpu_FUN_00d36ce0_CpuObject {
 };
 // Builds a call-data struct from fourth, DAT_0104da48 and DAT_010ce7fc, then forwards second, first and third to FUN_00d36940.
 // @fnv 0x00d36ce0
+// pdb: hkpSymmetricAgentLinearCast<hkpListAgent>::getClosestPoints | hkpListAgent.obj | fnv360_0822_retail, objrun, high
+// pdb params: bodyA, bodyB, input, collector
 void FnvCpu_FUN_00d36ce0_CpuObject::FUN_00d36ce0(void* first, void* second, unsigned int third, unsigned int fourth)
 {
     FnvCpu_FUN_00d36ce0_CpuCallData data;
@@ -742,6 +775,8 @@ public:
 
 // Constructs a D37B90Collector with iFilter and runs FUN_00d37010 with pkB, pkA, pkInput and the collector.
 // @fnv 0x00d37b90
+// pdb: hkpSymmetricAgentLinearCast<hkpMultiRayConvexAgent>::getClosestPoints | hkpMultiRayConvexAgent.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: bodyA, bodyB, input, collector
 void D37B90Agent::FUN_00d37b90(void* pkA, void* pkB, void* pkInput, int iFilter)
 {
     D37B90Collector kCollector(iFilter);
@@ -815,6 +850,7 @@ struct S_00d37da0_TriAgent : S_00d37da0_Agent {
 void __cdecl ReleaseHandles(int a1, int a2, int a3, int a4);
 
 // @fnv 0x00d39130
+// pdb: hkCapsuleTriangleAgent3::destroy | hkpCapsuleTriangleAgent3.obj | tesv_win, objrun, medium
 void __cdecl FUN_00d39130(int a1, int a2, int a3, int a4, int a5)
 {
     ReleaseHandles(a1, a2, a3, a4);
@@ -870,6 +906,8 @@ struct FnvCpu_FUN_00d3f480_CpuObject {
 };
 // Builds a call-data record from the fourth argument, a global float and a global byte, then forwards it with the other arguments to FUN_00d3e850.
 // @fnv 0x00d3f480
+// pdb: hkpSymmetricAgentLinearCast<hkpSphereCapsuleAgent>::getClosestPoints | hkpSphereCapsuleAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void FnvCpu_FUN_00d3f480_CpuObject::FUN_00d3f480(void* first, void* second, unsigned int third, unsigned int fourth)
 {
     FnvCpu_FUN_00d3f480_CpuCallData data;
@@ -892,6 +930,8 @@ void* __cdecl FUN_00d3ebe0(void* a, void* b, void* c, S_00d3f4c0_Obj* o);
 
 // Constructs an S_00d3f4c0_Obj from d and DAT_0104da48, then calls FUN_00d3ebe0 with b, a, c and the object.
 // @fnv 0x00d3f4c0
+// pdb: hkpSymmetricAgentLinearCast<hkpSphereCapsuleAgent>::staticGetClosestPoints | hkpSphereCapsuleAgent.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: bodyA, bodyB, input, collector
 void* __cdecl FUN_00d3f4c0(void* a, void* b, void* c, int iValue)
 {
     S_00d3f4c0_Obj obj(iValue);
@@ -939,6 +979,8 @@ S_00d3f620_Obj* __cdecl FUN_00d3f620(int a1, int a2, int a3, int aiValue) {
 
 void __cdecl FUN_00d3fce0(CollisionAgentFunctionTable*);
 // @fnv 0x00d3fd00
+// pdb: hkpGskfAgent::registerAgent | hkpGskfAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: dispatcher
 void __cdecl FUN_00d3fd00(Agent* agent) {
     CollisionAgentFunctionTable funcs;
     funcs.e = 0;
@@ -968,6 +1010,8 @@ struct FUN_00d3fd60_cls_Ref
 };
 
 // @fnv 0x00d3fd60
+// pdb: hkBoxBoxAgent3::removePoint | hkpBoxBoxAgent3.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: entry, agentData, idToRemove
 void* __cdecl RemoveEntryByKey(FUN_00d3fd60_cls_Ref* ref, FUN_00d3fd60_cls* table, unsigned short key)
 {
     int count = table->m_uiItemCount;
@@ -1006,6 +1050,8 @@ struct FUN_00d3fda0_table {
 };
 
 // @fnv 0x00d3fda0
+// pdb: hkBoxBoxAgent3::commitPotential | hkpBoxBoxAgent3.obj | fnv360_0822_retail, objrun, high
+// pdb params: entry, agentData, idToCommit
 int __cdecl FindOrClaimEntry(int unused, FUN_00d3fda0_table* table, unsigned short value) {
     int i = 0;
     int n = table->count;
@@ -1059,6 +1105,8 @@ public:
 };
 
 // @fnv 0x00d3fe10
+// pdb: hkBoxBoxAgent3::cleanup | hkpBoxBoxAgent3.obj | fnv360_0822_retail, objrun, high
+// pdb params: entry, agentData, mgr, constraintOwner
 D3FE10Entry* __cdecl ResetEntryAgents(D3FE10Header* pkHeader, D3FE10Entry* pkEntry, D3FE10Manager* pkManager, void* pkInfo)
 {
     for (int i = 0; i < pkEntry->m_numAgents; i++) {
@@ -1089,6 +1137,8 @@ struct Wrapper {
 };
 // Builds a SpawnedBuf pointing at DAT_010ce81c with the given value and passes it to ForwardToFunction along with b, a and c.
 // @fnv 0x00d37bd0
+// pdb: hkpSymmetricAgentLinearCast<hkpMultiRayConvexAgent>::getPenetrations | hkpMultiRayConvexAgent.obj | fnv360_0822_debug, objrun, high
+// pdb params: bodyA, bodyB, input, collector
 void Wrapper::FUN_00d37bd0(int a,int b,int c,int d) {
     SpawnedBuf s;
     s.m_8=d; s.m_iWordAt04=0; s.m_iWordAt00=&DAT_010ce81c;
@@ -1432,6 +1482,8 @@ struct FindNodeStandIn
 	PairEntry* m_entries;
 	unsigned short m_iNumberOfEntries;
 };
+// pdb: hkpWorldConstraintUtil::getConstraint | hkpWorldConstraintUtil.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: entityA, entityB
 void* __cdecl FindSharedEntryValue(PairNode* pNodeA, PairNode* pNodeB)
 {
 	PairNode* pNodePair[2];
@@ -1474,6 +1526,8 @@ struct FUN_00d277f0_arg
 };
 // Walks the linked list from a->unk10 while node unk00 is at least 0x17 and returns the last node visited.
 // @fnv 0x00d277f0
+// pdb: hkpWorldConstraintUtil::findLastModifier | hkpWorldConstraintUtil.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: instance
 FUN_00d277f0_node* __cdecl FUN_00d277f0(FUN_00d277f0_arg* a)
 {
     FUN_00d277f0_node* p = a->unk10;
@@ -1532,6 +1586,7 @@ struct C_d2cda0 {
 // @f3 0x00941f60 (community match, verified in this file)
 struct SubA_fix { void FUN_00984a70(); };
 
+// pdb: hkCpuJobThreadPool::WorkerThreadData::WorkerThreadData | hkCpuJobThreadPool.obj | tesv_win, caller_sim, low
 C_d2cda0* C_d2cda0::FUN_00d2cda0() {
     reinterpret_cast<SubA_fix*>(&a8)->FUN_00984a70();
     reinterpret_cast<SubB*>(&m_20)->Create(0, 1);
@@ -1553,6 +1608,8 @@ struct FnvCpu_FUN_00d329b0_CpuObject {
 };
 // Builds a call-data record from the fourth argument, DAT_0104da48 and DAT_010ce7fc, then forwards it to hkpHeightFieldAgent_getClosestPoints with the first two arguments swapped.
 // @fnv 0x00d329b0
+// pdb: hkpSymmetricAgentLinearCast<hkpHeightFieldAgent>::getClosestPoints | hkpHeightFieldAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void FnvCpu_FUN_00d329b0_CpuObject::DispatchWithBound(void* first, void* second, unsigned int third, unsigned int fourth)
 {
     FnvCpu_FUN_00d329b0_CpuCallData data;
@@ -1563,12 +1620,16 @@ void FnvCpu_FUN_00d329b0_CpuObject::DispatchWithBound(void* first, void* second,
 }
 
 // @fnv 0x00d32ac0
+// pdb: hkConvexListAgent3::getAgent1nTrack | hkpConvexListAgent3.obj | fnv360_0822_retail, call_seq, high
+// pdb params: entry, data
 int __cdecl FUN_00d32ac0(int param_1, int param_2)
 {
     return param_2 + 0x10;
 }
 
 // @fnv 0x00d32ad0
+// pdb: hkConvexListAgent3::getAgent1nTrack | hkpConvexListAgent3.obj | fnv360_0822_retail, call_seq, high
+// pdb params: entry, data
 void* __cdecl FUN_00d32ad0(int unused, char* p) {
     return p + 16;
 }
@@ -1577,6 +1638,8 @@ extern int DAT_010ce81c;
 void __cdecl FUN_00d33b90(int b, int a, int c, SpawnedBuf* buffer);
 // Initializes a SpawnedBuf with zero, a global pointer and d, then calls FUN_00d33b90 with b, a, c and the buffer.
 // @fnv 0x00d34930
+// pdb: hkpSymmetricAgentLinearCast<hkpConvexListAgent>::staticGetPenetrations | hkpConvexListAgent.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl InitSpawnedBuffer(int a, int b, int c, int d)
 {
     SpawnedBuf buffer;
@@ -1600,6 +1663,7 @@ struct FUN_00d34aa0_Obj {
     virtual void __thiscall FUN_00d34aa0(int a, int b, int c, int d);
 };
 // @fnv 0x00d34aa0
+// pdb: hkpSymmetricAgentLinearCast<class hkpConvexListAgent>::updateShapeCollectionFilter | hkpConvexListAgent.obj | tesv_win, vtable_prefix, medium
 void __thiscall FUN_00d34aa0_Obj::FUN_00d34aa0(int param_1, int param_2, int param_3, int param_4)
 {
     hkpConvexListAgent_updateShapeCollectionFilter(param_2, param_1, param_3, param_4);
@@ -1613,6 +1677,8 @@ struct FnvCpu_FUN_00d34b00_CpuObject {
     void DispatchCpuCall(void*, void*, unsigned int, unsigned int);
 };
 // @fnv 0x00d34b00
+// pdb: hkpSymmetricAgentLinearCast<hkpConvexListAgent>::getClosestPoints | hkpConvexListAgent.obj | fnv360_0822_retail, vtable_prefix, high
+// pdb params: bodyA, bodyB, input, collector
 void FnvCpu_FUN_00d34b00_CpuObject::DispatchCpuCall(void* first, void* second, unsigned int third, unsigned int fourth)
 {
     FnvCpu_FUN_00d34b00_CpuCallData data;
@@ -1624,6 +1690,8 @@ void FnvCpu_FUN_00d34b00_CpuObject::DispatchCpuCall(void* first, void* second, u
 
 // Scans the first three entries of table for key and, if found, replaces it with 0xffff and returns.
 // @fnv 0x00d39030
+// pdb: hkCapsuleTriangleAgent3::removePoint | hkpCapsuleTriangleAgent3.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: entry, agentData, idToRemove
 void RemoveKeyFromTable(int, unsigned short* table, unsigned short key)
 {
     for (int i = 0; i < 3; ++i) {
@@ -1636,6 +1704,8 @@ void RemoveKeyFromTable(int, unsigned short* table, unsigned short key)
 
 // Scans the first three slots for the 0xffff empty marker and writes value into the first free one, then returns.
 // @fnv 0x00d39060
+// pdb: hkCapsuleTriangleAgent3::commitPotential | hkpCapsuleTriangleAgent3.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: entry, agentData, idToCommit
 void __cdecl InsertIntoSlotArray(void* unused, unsigned short* slots, unsigned short value) {
     for (int i = 0; i < 3; ++i) {
         if (slots[i] == 0xffff) {
@@ -1683,6 +1753,8 @@ struct FUN_00d390a0_Out {
 };
 void __cdecl ComputeInverseLengths(void* a, void* b);
 // @fnv 0x00d390a0
+// pdb: hkCapsuleTriangleAgent3::create | hkpCapsuleTriangleAgent3.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: input, entry, agentData
 char* __cdecl InitOutputDefaults(FUN_00d390a0_Owner* owner, FUN_00d390a0_Flags* flags, FUN_00d390a0_Out* out) {
     FUN_00d390a0_Leaf* leaf = owner->m_mid->m_pLeafNode;
     flags->unk02 = 0;
@@ -1722,6 +1794,8 @@ struct D390HandleTable {
 
 // Calls callback->method14 for each non-0xffff handle in handles, marks them 0xffff, and returns &handles->state20.
 // @fnv 0x00d390e0
+// pdb: hkCapsuleTriangleAgent3::cleanup | hkpCapsuleTriangleAgent3.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: entry, agentData, mgr, constraintOwner
 unsigned short* __cdecl ReleaseHandles(void* unused, D390HandleTable* handles, D390Callback* callback, void* context)
 {
     for (int index = 0; index < 3; ++index) {
@@ -1752,6 +1826,7 @@ struct Foo00d24660 {
 };
 
 // @fnv 0x00d24660
+// pdb: BGSPickupPutdownSounds::~BGSPickupPutdownSounds | BGSPickupPutdownSounds.obj | fnv360_0822_retail, call_gap, low
 void Foo00d24660::FUN_00d24660()
 {
     *(int*)this = (int)&DAT_0102e388;
@@ -1796,6 +1871,7 @@ public:
 void hkAgent1nMachine_InvalidateTim(void*, void*);
 
 // @fnv 0x00d2d460
+// pdb: hkBvTreeAgent3::invalidateTim | hkpBvTreeAgent3.obj | tesv_win, objrun_sim, low
 void FUN_00d2d460(int, void* b, void* c)
 {
     hkAgent1nMachine_InvalidateTim(b, c);
@@ -1817,6 +1893,8 @@ struct D347D0Query {
 
 // Builds a D347D0Query from DAT_010ce7fc, DAT_0104da48 and filter, then calls GetClosestPointsShapeCollection with b, a, c and the query.
 // @fnv 0x00d347d0
+// pdb: hkpSymmetricAgentLinearCast<hkpShapeCollectionAgent>::staticGetClosestPoints | hkpConvexListAgent.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl QueryClosestPoints(void* a, void* b, void* c, unsigned int filter)
 {
     D347D0Query query = { &DAT_010ce7fc, DAT_0104da48, filter };
@@ -1834,6 +1912,8 @@ struct D34970Context {
 extern "C" void __cdecl FUN_00d339d0(int first, int second, int third, D34970Context* context);
 // Builds a D34970Context from DAT_010ce7fc, DAT_0104da48, and arg3, then calls FUN_00d339d0 with arg1, arg0, arg2, and the context.
 // @fnv 0x00d34970
+// pdb: hkpSymmetricAgentLinearCast<hkpConvexListAgent>::staticGetClosestPoints | hkpConvexListAgent.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_00d34970(int arg0, int arg1, int arg2, int aiOption) {
     D34970Context context;
     context.pointer = &DAT_010ce7fc;
@@ -1857,6 +1937,8 @@ struct FUN_00d33c80_class {
 
 // Builds a local struct holding &DAT_010ce81c, 0 and d, then calls hkpConvexListAgent_getPenetrations with b, a, c and a pointer to the struct.
 // @fnv 0x00d34ac0
+// pdb: hkpSymmetricAgentLinearCast<hkpConvexListAgent>::getPenetrations | hkpConvexListAgent.obj | fnv360_0822_retail, vtable_prefix, high
+// pdb params: bodyA, bodyB, input, collector
 void FUN_00d33c80_class::FUN_00d34ac0(void* a, void* b, void* c, void* d)
 {
     D34ac0Struct s;
@@ -1892,6 +1974,8 @@ struct RetObjF3
     int m14;
 };
 }
+// pdb: hkpCapsuleTriangleAgent::createCapsuleTriangleAgent | hkpCapsuleTriangleAgent.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: bodyA, bodyB, input, mgr
 void* __cdecl CreateRetObj(int a1, char** a2, int a3, int aiValue)
 {
     f3m_009c2a70::RetObjHeapF3* heap = (f3m_009c2a70::RetObjHeapF3*)DAT_00d9b080(DAT_010f3170);
@@ -2072,6 +2156,8 @@ struct FUN_00d9b_bump
     char* end;
 };
 
+// pdb: hkUnionFind::moveBiggestGroupToIndexZero | hkUnionFind.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: elementsPerGroup
 int S00d281b0_Target::MoveLargestToFirst(S00d281b0_IntArray* values)
 {
     int largest = 0;
@@ -2261,6 +2347,8 @@ struct FUN_009ae1a0
     }
     FUN_009ae1a0(ShapeB110* pShape, const hkVector4B110& kA, const hkVector4B110& kB, float fA, float fB, void* pUser);
 };
+// pdb: hkOrientHingedBodyAction::clone | hkOrientHingedBodyAction.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: newEntities, newPhantoms
 AgentB110* AgentFactoryB110::FUN_00d2b110(const InputB110* apInputA, const InputB110* apInputB)
 {
     if (apInputA->m_type != 2)
@@ -2375,6 +2463,8 @@ void __cdecl FUN_00d2f0d0();
 typedef void (__cdecl *Fn)(int, int, Src*, Q*, Q*);
 // XORs c->v with DAT_010c44d0 into a copy of c, builds one or two Q structs from c->v, d and e, and calls FUN_00d2f0d0 with b, a, the copy and the Qs.
 // @f3 0x009b59e0 (community match, verified in this file)
+// pdb: hkpSymmetricAgentLinearCast<hkpMoppAgent>::staticLinearCast | hkpMoppBvTreeStreamAgent.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: bodyA, bodyB, input, collector, startCollector
 void __cdecl FUN_00d2daf0(int a, int b, Src* apSrc, int d, int e)
 {
     __declspec(align(16)) Src copy = *apSrc;
@@ -2411,6 +2501,8 @@ struct Holder {
 };
 // Fills a CallbackState with d, a zero flag, and a pointer to DAT_010ce81c, then calls FUN_00d315f0 with b, a, c, and the state.
 // @fnv 0x00d2f3f0
+// pdb: hkpSymmetricAgentLinearCast<hkpMoppAgent>::getPenetrations | hkpMoppAgent.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: bodyA, bodyB, input, collector
 void Holder::FUN_00d2f3f0(int a, int b, int c, int aiValue)
 {
     CallbackState s;
@@ -2571,6 +2663,8 @@ struct FUN_00d32970_Agent {
 
 // Initialises a Collector with a4 and passes it to FUN_00d32150 with a2, a1 and a3.
 // @fnv 0x00d32970
+// pdb: hkpSymmetricAgentLinearCast<hkpHeightFieldAgent>::getPenetrations | hkpHeightFieldAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void FUN_00d32970_Agent::FUN_00d32970(void* a1, void* a2, void* a3, unsigned int uiValue)
 {
     FUN_00d32970_Collector collector;
@@ -2733,6 +2827,7 @@ struct Point {
 extern "C" void __cdecl hkAgent1nMachine_InvalidateTim(int, int);
 // Forwards a2 and a3 to hkAgent1nMachine_InvalidateTim, ignoring a1.
 // @fnv 0x00d34d60
+// pdb: hkpCollectionCollectionAgent3::invalidateTim | hkpCollectionCollectionAgent3.obj | tesv_win, objrun, medium
 void __cdecl ForwardCall(int aUnused, int a2, int a3)
 {
     hkAgent1nMachine_InvalidateTim(a2, a3);
@@ -2915,6 +3010,8 @@ struct D22260_Math {
 
 // FUN_00d24650 - __stdcall function, callee pops 4 bytes (1 stack parameter)
 // @fnv 0x00d24650
+// pdb: hkDisplayCylinder::getWireframeGeometry | hkDisplayCylinder.obj | fnv360_0822_retail, vtable, medium
+// pdb params: lines, a
 void __stdcall FUN_00d24650(int _param) {
 }
 
@@ -2941,6 +3038,8 @@ public:
 };
 // Swaps the two hkpCdBody arguments and forwards them to hkpListAgent::FUN_00d36b00 via a hkpSymmetricAgentFlipBodyCollector.
 // @fnv 0x00d36d20
+// pdb: hkpSymmetricAgentLinearCast<hkpListAgent>::getPenetrations | hkpListAgent.obj | fnv360_0822_retail, objrun, high
+// pdb params: bodyA, bodyB, input, collector
 template<> void hkpSymmetricAgent<hkpListAgent>::FUN_00d36d20(
     const hkpCdBody& a, const hkpCdBody& b,
     const CollisionAgentContext& input, hkpCdBodyPairCollector& output)
@@ -3293,6 +3392,7 @@ class hkpBvTreeAgent
 		static hkpCollisionAgent* __cdecl FUN_009b7f40( const hkpCdBody& bodyA, const hkpCdBody& bodyB, const hkpCollisionInput& input, hkpContactMgr* mgr );
 };
 
+// pdb: hkpBvTreeAgent::defaultAgentCreate | hkpBvTreeAgent.obj | tesv_win, objrun, medium
 hkpCollisionAgent* __cdecl hkpBvTreeAgent::FUN_009b7f40( const hkpCdBody& bodyA, const hkpCdBody& bodyB, const hkpCollisionInput& input, hkpContactMgr* mgr )
 {
 	return input.m_dispatcher->getNewCollisionAgent( bodyA, bodyB, input, mgr );

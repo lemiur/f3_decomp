@@ -35,6 +35,8 @@ struct MalleableReal
     MalleableRuntime* m_runtime;
 };
 
+// pdb: bhkConstraint::SetEntityA | bhkConstraint.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: apEntity
 void hkMalleableConstraintData::SetContactNormal(int index)
 {
     if (this == 0)
@@ -57,6 +59,7 @@ void hkMalleableConstraintData::SetContactNormal(int index)
 
 
 // @fnv 0x00cdf6b0
+// pdb: PatrolActorPackageData::GetPackageType | PatrolPackage.obj | fnv360_0822_retail, vtable, high
 int FUN_00cdf6b0()
 {
     return 13;
@@ -122,6 +125,8 @@ public:
     virtual void V15(FUN_00cdf620_Arg* argument);
 };
 }
+// pdb: hkpMalleableConstraintData::getConstraintInfo | hkpMalleableConstraintData.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: info
 void FUN_00cdf620_cls::DispatchArg(FUN_00cdf620_Arg* argument) {
     ((task1470::FUN_00cdf620_Target*)m_target)->V15(argument);
     argument->m_data = &m_10;
@@ -140,6 +145,8 @@ struct InventoryActionHandler
     int FUN_00697500(int selected, int item);
 };
 
+// pdb: InventoryMenu::SetKnobPosition | InventoryMenu.obj | fnv360_0822_debug, objrun, medium
+// pdb params: abPlaySounds
 int __cdecl FUN_00652db0(int item)
 {
     if (DAT_01076860 != 0)
@@ -157,6 +164,7 @@ class MalleableGetterStandIn : public hkpMalleableConstraintData
 };
 
 // @fnv 0x00cdf6c0
+// pdb: hkpMalleableConstraintData::getWrappedConstraintData | hkpMalleableConstraintData.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: hkpRagdollConstraintData::getType)
 hkpConstraintData* MalleableGetterStandIn::FUN_00cdf6c0()
 {
     return m_pConstraintData;

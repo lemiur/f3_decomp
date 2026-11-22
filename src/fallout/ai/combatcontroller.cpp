@@ -586,6 +586,7 @@ struct FUN_00c21d10_shell {
     void* FUN_00c21d10(int);
 };
 
+// pdb: TES::ClearBedChairList | TES.obj | fnv360_0822_debug, objrun_open, low
 char FUN_00981970_shell::FUN_00981970() {
     char active = ((FUN_00c21d10_shell*)this)->FUN_00c21d10(0) != 0;
     *(char*)this = active;

@@ -279,6 +279,8 @@ struct OwnerD55AF3
     GroupF3* m_pGroups;
     int m_iGroupCount;
 };
+// pdb: hkArrayBase<unsigned short>::copyFromArray | hkpExtendedMeshShape.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: alloc, a, __formal
 int FUN_00d55a90_cls::FUN_00d55a90(int a1, int a2)
 {
     OwnerD55AF3* self = (OwnerD55AF3*)this;
@@ -488,6 +490,8 @@ struct MeshShapeF3
     ShapeSubpartF3* m_kShapesSubparts;
     unsigned int m_numShapesSubparts;
 };
+// pdb: hkpExtendedMeshShape::getNextKey | hkpExtendedMeshShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: initialKey
 unsigned int S_00d55bd0_MeshShape::FindNextNonDegenerateShapeKey(unsigned int initialKey) const
 {
     const MeshShapeF3* self = (const MeshShapeF3*)this;
@@ -742,6 +746,7 @@ struct bhkShapeOwner
 
 // @f3 0x009e3c70 (community match, verified in this file)
 extern "C" char* __cdecl FUN_00a564b0(char* result, const void* v0, const void* v1, const void* v2, float tol);
+// pdb: hkpExtendedMeshShape::getFirstKey | hkpExtendedMeshShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
 int bhkShapeOwner::GetShapeKey()
 {
     FUN_00d55b40_Shape* shape;

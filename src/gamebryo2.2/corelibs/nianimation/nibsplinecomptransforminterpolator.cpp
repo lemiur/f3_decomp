@@ -9,6 +9,8 @@
 extern double _DAT_010241b0;
 
 // @fnv 0x00a51140
+// pdb: NiBSplineCompTransformInterpolator::LoadBinary | NiBSplineCompTransformInterpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void NiBSplineCompTransformInterpolator::LoadBinary(NiStream& stream)
 {
     NiBSplineTransformInterpolator::LoadBinary(stream);
@@ -18,6 +20,8 @@ void NiBSplineCompTransformInterpolator::LoadBinary(NiStream& stream)
 
 // Copies the spline transform interpolator's translation, rotation and scale control-point handles and an extra field into destination.
 // @fnv 0x00a4fec0
+// pdb: NiBSplineTransformInterpolator::CopyMembers | NiBSplineTransformInterpolator.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkDest, kCloning
 void NiBSplineCompTransformInterpolator::CopyMemberData(NiBSplineCompTransformInterpolator* destination,
                                                         CloningProcess& cloningProcess)
 {
@@ -29,6 +33,7 @@ void NiBSplineCompTransformInterpolator::CopyMemberData(NiBSplineCompTransformIn
 }
 
 // @fnv 0x00a50f60
+// pdb: NiBSplineCompTransformInterpolator::Update | NiBSplineCompTransformInterpolator.obj | tesv_win, caller_sim, low
 bool NiBSplineCompTransformInterpolator::Update(float time, NiObjectNET* target, NiQuatTransform& value)
 {
     if (m_fLastTime == time)
@@ -92,6 +97,7 @@ struct NiMemObject_DeleteHelper : public NiMemObject
 
 // Calls FUN_00a57f80 on pThis, then frees pThis with the delete helper when flags has bit 0 set, and returns pThis.
 // @fnv 0x00a50e50
+// pdb: NiBSplineCompTransformInterpolator::`scalar deleting destructor' | NiBSplineCompTransformInterpolator.obj | fnv360_0822_retail, objrun, medium
 void* __fastcall FUN_00a50e50(void* pThis, int, unsigned int flags)
 {
     FUN_00a57f80(pThis);
@@ -203,6 +209,8 @@ struct FUN_00a4fff0_t : BaseHolder
 
 // Calls the base constructor with a and e, sets the vtable, copies global values into fields m_f1c..m_f38, and stores b, c, d in m_f3c..m_f44.
 // @fnv 0x00a4fff0
+// pdb: NiBSplineTransformInterpolator::NiBSplineTransformInterpolator | NiBSplineTransformInterpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pkData, kTransCPHandle, kRotCPHandle, kScaleCPHandle, pkBasisData
 FUN_00a4fff0_t::FUN_00a4fff0_t(int aiArg1, int aiArg2, int aiArg3, int aiArg4, int aiArg5)
 {
     FUN_00a57f20(aiArg1, aiArg5);
@@ -346,6 +354,8 @@ class A50E70Object : public A50E70Base
 };
 
 // @fnv 0x00a50e70
+// pdb: NiBSplineCompTransformInterpolator::CreateClone | NiBSplineCompTransformInterpolator.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCloning
 A50E70Object* A50E70Object::FUN_00a50e70(A50E70CloningProcess& kCloning)
 {
     A50E70Object* pkDest = new A50E70Object;

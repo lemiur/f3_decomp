@@ -3,6 +3,8 @@
 
 // Initializes the object's vtables, three hash maps, stores the texture, calls its virtual method, and clears the maps.
 // @fnv 0x00e8fb20
+// pdb: NiXenonIndexBufferManager::NiXenonIndexBufferManager | NiXenonIBManager.obj | fnv360_0721_beta, call_gap, low, conflict (skyrim: NiDX9IndexBufferManager::NiDX9IndexBufferManager)
+// pdb params: pkD3DDevice9
 FnvTextureData* FnvTextureData::AllocateData(FnvTextureReference* texture)
 {
     m_ppVirtualMethodTable = reinterpret_cast<void**>(&kVtbl_NiRefObject);
@@ -99,6 +101,7 @@ struct Obj00a47600
 };
 // Decrements each element's reference count, calls DeleteThis on those reaching zero, then frees the array's header block.
 // @fnv 0x00a47600
+// pdb: NiTNewInterface<class NiPointer<class NiMetricsOutputModule> >::Deallocate | NiMetricsLayer.obj | tesv_win, call_seq, medium
 void __cdecl ReleaseObjectArray(Obj00a47600** apObjects)
 {
     if (apObjects)
@@ -116,6 +119,8 @@ void __cdecl ReleaseObjectArray(Obj00a47600** apObjects)
 }
 
 // @fnv 0x00e902f0
+// pdb: NiXenonDynamicTextureData::SetLocked | NiXenonDynamicTextureData.obj | fnv360_1110_retail, objopen_prop, low
+// pdb params: bTextureLocked
 void __fastcall FUN_00e902f0(char* self, int, bool v)
 {
     *reinterpret_cast<bool*>(self + 0x70) = v;
@@ -231,6 +236,8 @@ int __fastcall CallVirtualSlot43(char* self, int)
 
 char __stdcall FUN_00a98170(int);
 // @fnv 0x00e91710
+// pdb: BSBlastNode::RegisterStreamables | BSBlastNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 char __stdcall FUN_00e91710(int a)
 {
     return FUN_00a98170(a) != 0;
@@ -260,6 +267,7 @@ struct FUN_00e8fc30_shell
 
 // Calls FUN_00e8f840, deletes this with size 0x4c when arg has bit 0 set, and returns this.
 // @fnv 0x00e8fc30
+// pdb: NiUVData::`scalar deleting destructor' | NiUVData.obj | fnv360_0822_retail, objrun, high
 void* FUN_00e8fc30_shell::FUN_00e8fc30(int arg)
 {
     FUN_00e8f840();
@@ -281,6 +289,7 @@ struct FUN_00e90560_shell
 
 // Sets the vtable, clears DAT_0126f74c, calls FUN_00e806c0, and frees this with _delete when param1 has bit 0 set.
 // @fnv 0x00e90560
+// pdb: NiXenonErrorShader::`scalar deleting destructor' | NiXenonErrorShader.obj | fnv360_0721_beta, objopen_prop, low
 void* __thiscall FUN_00e90560_shell::FUN_00e90560(int aiFlags)
 {
     *(int*)this = (int)&DAT_010f0764;
@@ -372,6 +381,8 @@ struct FUN_00e8a260 : _Call_a5d3a0
 };
 // Initializes the object's fields: stores a1 in m_08, a2 in m_60, sets m_58-m_5a to 0xff, m_5b/m_64/m_68/m_0c/m_10 to 0, and installs two vtable pointers.
 // @fnv 0x00e8a260
+// pdb: NiXenonTextureData::NiXenonTextureData | NiXenonTextureData.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: NiDX9TextureData::NiDX9TextureData)
+// pdb params: pkTexture, pkRenderer
 FUN_00e8a260::FUN_00e8a260(unsigned int a1, unsigned int a2) : m_00((int)&DAT_010a080c), m_08((int)a1), m_0c(0), m_10(0)
 {
     m_58 = 0xff;
@@ -394,6 +405,7 @@ struct FUN_00e8fd60_shell
 };
 
 // @fnv 0x00e8fd60
+// pdb: NiDX9RenderedTextureData::NiDX9RenderedTextureData | NiDX9RenderedTextureData.obj | tesv_win, call_seq, medium
 void* FUN_00e8fd60_shell::InitWithArgs(int aiArg1, int aiArg2, int aiArg3)
 {
     FUN_00e8a260(aiArg1, aiArg2);
@@ -415,6 +427,8 @@ struct S_00e8fd80
     void FUN_00e8fd80();
 };
 // @fnv 0x00e8fd80
+// pdb: D3DDevice_GetSamplerState_BorderColor | state.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: NiDX9RenderedTextureData::~NiDX9RenderedTextureData)
+// pdb params: pDevice, Sampler
 void S_00e8fd80::FUN_00e8fd80()
 {
     void* v0 = unk60;
@@ -443,6 +457,7 @@ struct Mid_00e90080
     void* FUN_00e90080(unsigned int);
 };
 // @fnv 0x00e90080
+// pdb: NiDX9RenderedCubeMapData::`vector deleting destructor' | NiDX9RenderedCubeMapData.obj | tesv_win, objrun_prop, low
 void* Mid_00e90080::FUN_00e90080(unsigned int flags)
 {
     void* p = m60;
@@ -472,6 +487,7 @@ struct S00e90300
     void* __thiscall FUN_00e90300(unsigned int);
 };
 // @fnv 0x00e90300
+// pdb: NiXenonDynamicTextureData::`scalar deleting destructor' | NiXenonDynamicTextureData.obj | fnv360_1110_retail, objopen_prop, low
 void* __thiscall S00e90300::FUN_00e90300(unsigned int auiFlags)
 {
     void* o = unk60;
@@ -534,6 +550,8 @@ struct Renderer_00e90a80
     void* unk288;
 };
 // @fnv 0x00e90a80
+// pdb: NiXenonTextureManager::NiXenonTextureManager | NiXenonTextureManager.obj | fnv360_0721_beta, call_gap, medium
+// pdb params: pkRenderer
 void* S00e90a80::FUN_00e90a80(void* p)
 {
     f0 = &kVtbl_NiRefObject;
@@ -660,6 +678,8 @@ struct Obj00e90d20
 extern NiRTTI DAT_0108f20c;
 extern "C" NiObject* __cdecl FUN_00424d50(const NiRTTI* apRtti, NiObject* apObject);
 
+// pdb: NiXenonTextureManager::GetFormatFromTexture | NiXenonTextureManager.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kIm
 int FUN_00e90d20_shell::FUN_00e90d20(NiObject* apObject)
 {
     Obj00e90d20* pObject = (Obj00e90d20*)apObject;
@@ -981,6 +1001,7 @@ struct BSFadeNode
 extern int DAT_010f099c;
 
 // @fnv 0x00e916d0
+// pdb: NiPersistentSrcTextureRendererData::CreateObject | NiPersistentSrcTextureRendererData.obj | fnv360_0822_retail, caller_sim, low
 void* FUN_00e916d0()
 {
     BSFadeNode* p = (BSFadeNode*)BSFadeNode::operator new(0x94);
@@ -1004,6 +1025,7 @@ struct FUN_00e91750_shell
 };
 // Sets m_pvt to DAT_010f099c, calls FUN_00a98240, and if flags has bit 1 set, deletes this with size 0x94; returns this.
 // @fnv 0x00e91750
+// pdb: NiDX9PersistentSrcTextureRendererData::`scalar deleting destructor' | NiDX9PersistentSrcTextureRendererData.obj | tesv_win, caller_sim, low
 void* __thiscall FUN_00e91750_shell::FUN_00e91750(int flags)
 {
     m_pvt = &DAT_010f099c;
@@ -1042,6 +1064,8 @@ struct Holder_E91790 : Base_E91790
     bool FUN_00e91790(Base_E91790* pk);
 };
 // @fnv 0x00e91790
+// pdb: NiXenonPersistentSrcTextureRendererData::IsEqual | NiXenonPersistentSrcTextureRendererData.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: NiDX9PersistentSrcTextureRendererData::IsEqual)
+// pdb params: pkObject
 bool Holder_E91790::FUN_00e91790(Base_E91790* pk)
 {
     if (pk && pk->IsKindOfType(&g_0126f9f8))
@@ -1066,6 +1090,8 @@ char* __cdecl _FUN_00a7d330(const char*);
 extern const char* g_0126f9f8;
 // Calls AppendToStrings, gets a string via _FUN_00a7d330, grows the array if full, then stores the string at the current size index.
 // @fnv 0x00e91a90
+// pdb: NiPSysInitialRotAngleCtlr::GetViewerStrings | NiPSysInitialRotAngleCtlr.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: pkStrings
 void __stdcall FUN_00e91a90(StrArr* pkStrings)
 {
     AppendToStrings(pkStrings);
@@ -1168,6 +1194,7 @@ struct S_00e8a2b0 : NiRefObject
     void FUN_00e8a2b0();
 };
 // @fnv 0x00e8a2b0
+// pdb: NiXenonTextureData::~NiXenonTextureData | NiXenonTextureData.obj | fnv360_0822_retail, objrun, medium
 void S_00e8a2b0::FUN_00e8a2b0()
 {
     Tex00* a = unk64;
@@ -1297,6 +1324,7 @@ struct Host00
     void* __thiscall FUN_00e8fdc0(unsigned int);
 };
 // @fnv 0x00e8fdc0
+// pdb: NiXenonDynamicTextureData::`scalar deleting destructor' | NiXenonDynamicTextureData.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: NiDX9RenderedTextureData::`vector deleting destructor')
 void* __thiscall Host00::FUN_00e8fdc0(unsigned int auiFlags)
 {
     *(void**)this = (void*)&DAT_010f02fc;
@@ -1543,6 +1571,7 @@ typedef void*(__thiscall* RTD_BufFn)(void*);
 
 // Allocates an RTD_Obj, initializes it, queries IDirect3DTexture9, creates the buffer data, and releases the object on failure.
 // @fnv 0x00e8ff60
+// pdb: NiDX9RenderedTextureData::Create | NiDX9RenderedTextureData.obj | tesv_win, ustr, medium
 void* __cdecl CreateRenderedTextureData(unsigned int a1, unsigned int a2, unsigned int a3)
 {
     RTD_Obj* p = new RTD_Obj(a1, a2);
@@ -1592,6 +1621,7 @@ struct NiD3DVertexDeclaration
 };
 
 // @fnv 0x00e90970
+// pdb: NiXenonErrorShader::CreateShaderDeclaration | NiXenonErrorShader.obj | fnv360_0721_beta, objrun, medium
 bool NiD3DVertexDeclaration::FUN_00e90970()
 {
     NiD3DVertexDeclaration* pNew = NiD3DVertexDeclaration::Create(unk18, 1, 1);
@@ -1644,6 +1674,8 @@ extern double DAT_0109ed88;
 
 // Builds a color from three random bytes and sets several render states on the shader's render state group, then forwards the arguments to FUN_00a8f3e0.
 // @fnv 0x00e90590
+// pdb: NiXenonErrorShader::SetupTransformations | NiXenonErrorShader.obj | fnv360_0721_beta, objopen_prop, low
+// pdb params: pkGeometry, pkSkin, pkPartition, pkRendererData, pkState, pkEffects, kWorld, kWorldBound
 void NiShader::SetRandomColorRenderStates(unsigned int arg1, unsigned int arg2, unsigned int arg3, unsigned int arg4,
                                           unsigned int arg5, unsigned int arg6, unsigned int arg7)
 {
@@ -1759,6 +1791,8 @@ struct ResourceCache
                                           unsigned int usage);
 };
 // @fnv 0x00e8fc50
+// pdb: NiXenonIndexBufferManager::GetIndexBuffer | NiXenonIBManager.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: NiDX9IndexBufferManager::GetIndexBuffer)
+// pdb params: uiLength, uiUsage, eFormat, ePool
 CachedResource* ResourceCache::AcquireCachedResource(unsigned int size, unsigned int format, unsigned int pool,
                                                      unsigned int usage)
 {
@@ -1920,6 +1954,7 @@ struct ErrorShaderStandIn
 };
 
 // @fnv 0x00e90850
+// pdb: NiXenonErrorShader::CreateStagesAndPasses | NiXenonErrorShader.obj | fnv360_0721_beta, call_seq, medium
 bool ErrorShaderStandIn::InitErrorShaderPass()
 {
     StageReturn* stage;
@@ -2107,6 +2142,8 @@ extern TexDeviceState* DAT_011f4748;
 
 // Rejects tiled owners, allocates and constructs a TexRecord, checks it against the device flag, and on failure destroys it and returns 0.
 // @fnv 0x00e904c0
+// pdb: NiXenonDynamicTextureData::Create | NiXenonDynamicTextureData.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: pkTexture
 TexRecord* __cdecl CreateDynamicTexture(TexOwner* owner)
 {
     if (owner->m_38 != 0)
@@ -2179,6 +2216,7 @@ extern int DAT_010f0764;
 extern void* __cdecl FUN_00a5b690(const char* s);
 
 // @fnv 0x00e909e0
+// pdb: NiXenonErrorShader::NiXenonErrorShader | NiXenonErrorShader.obj | fnv360_0721_beta, call_gap, low
 FUN_00e909e0_cls* FUN_00e909e0_cls::FUN_00e909e0()
 {
     FUN_00e818a0();
@@ -3726,6 +3764,8 @@ struct Renderer_e91590 : RendererBase
 
 // Allocates a Renderer_e91590, initializes it, updates matching entries in DAT_011bfce8, sets flag bit 2 when zenable, and stores the result of FUN_00e978a0.
 // @fnv 0x00e91590
+// pdb: NiXenonRenderState::Create | NiXenonRenderState.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: pkRenderer, bZBuffer
 Renderer_e91590* __cdecl CreateRenderer(int adapter, CreateDesc* desc, bool zenable)
 {
     Renderer_e91590* r = new Renderer_e91590(adapter, desc);
@@ -4044,6 +4084,8 @@ struct Counts
 
 // Normalizes fmt (6->2) and tile (3->0), then returns the first non-zero Counts field chosen by fmt and tile, or 0.
 // @f3 0x008843d0 (community match, verified in this file)
+// pdb: NiXenonTextureData::FindClosestPixelFormat | NiXenonTextureData.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: NiDX9TextureData::FindClosestPixelFormat)
+// pdb params: kPrefs, ppkDestFmts
 int __cdecl SelectFormatTileValue(Pair* p, Counts* pCounts)
 {
     int fmt = p->fmt;
@@ -4277,6 +4319,7 @@ struct FnvCpu_FUN_00e902d0_CpuObject
     int FUN_00e902d0();
 };
 // @fnv 0x00e902d0
+// pdb: TESWorldSpace::GetPortalGraph | TESWorldSpace.obj | fnv360_0822_retail, call_seq, low
 int FnvCpu_FUN_00e902d0_CpuObject::FUN_00e902d0()
 {
     return value;
@@ -4288,6 +4331,7 @@ struct FnvTexRefFlagGet : FnvTextureData
 };
 
 // @fnv 0x00e902e0
+// pdb: NiXenonDynamicTextureData::IsLocked | NiXenonDynamicTextureData.obj | fnv360_1110_retail, objrun_open, low
 char FnvTexRefFlagGet::FUN_00e902e0()
 {
     return m_unused[0x24];
@@ -4321,6 +4365,8 @@ struct Emitter807
 };
 // Adds random offsets to the input transform's x, y, and z using params->spread, then calls FUN_00e807d0.
 // @fnv 0x00e90760
+// pdb: NiPointer<NiD3DShaderDeclaration>::operator= | NiXenonErrorShader.obj | fnv360_0721_beta, objopen_prop, low
+// pdb params: pObject
 void Emitter807::FUN_00e90760(void* a1, void* apUnused1, void* apUnused2, void* a4, void* a5, void* a6,
                               const Transform807* apTransform, const Parameters807* params)
 {
@@ -4959,6 +5005,7 @@ class CubeData
 };
 // Creates a cube texture surface of the given size using the renderer's device, selecting a pixel format from the texture's preferences and storing it in surface.
 // @fnv 0x00e900c0
+// pdb: NiDX9RenderedCubeMapData::CreateSurf | NiDX9RenderedCubeMapData.obj | tesv_win, ustr, medium
 PixelFormat* CubeData::CreateSurface(Texture* texture)
 {
     if (!texture)
@@ -5608,6 +5655,7 @@ struct OwnerProxy
 // @f3 0x00889fb0 (community match, verified in this file)
 D3DMULTISAMPLE_TYPE FUN_008827c0(int);
 
+// pdb: NiDX9RenderedTextureData::CreateSurf | NiDX9RenderedTextureData.obj | tesv_win, ustr, medium
 PixelProxy* OwnerProxy::FUN_00e8fe10(TextureProxy* source, int multisample)
 {
     if (!source)
@@ -6260,6 +6308,8 @@ struct NiDX9DynamicTextureData
 };
 
 // @fnv 0x00e90340
+// pdb: NiXenonDynamicTextureData::CreateSurf | NiXenonDynamicTextureData.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: pkTexture, bDynTexturesCap
 const NiPixelFormatStandIn* NiDX9DynamicTextureData::FUN_00e90340(DynamicTextureStandIn* pkTexture, bool bDynamic)
 {
     if (!pkTexture)
@@ -7473,6 +7523,8 @@ struct TextureCalls {
 struct PaletteCalls {
     void FUN_008e9650(FnvResource*);
 };
+// pdb: NiXenonSourceTextureData::Create | NiXenonSourceTextureData.obj | fnv360_0822_retail, ustr_rel, low, conflict (skyrim: NiDX9SourceTextureData::Create)
+// pdb params: pkTexture, pkRenderer
 FnvOutput* __cdecl FUN_00e68ef0(FnvSource* source, FnvDevice* device)
 {
     if (source)
@@ -7950,6 +8002,7 @@ extern int DAT_010f049c;
 
 // Allocates a NiDX9RenderedCubeMapData, creates six D3D cube faces, and accumulates texture memory usage into global counters.
 // @fnv 0x00e901a0
+// pdb: NiDX9RenderedCubeMapData::Create | NiDX9RenderedCubeMapData.obj | tesv_win, ustr, medium
 NiDX9RenderedCubeMapData* __cdecl FUN_00e901a0(NiRenderedCubeMap* pkTexture, NiDX9Renderer* pkRenderer)
 {
     CubeMapBaseInit* pkShell = (CubeMapBaseInit*)::BSFadeNode::operator new(0x70);

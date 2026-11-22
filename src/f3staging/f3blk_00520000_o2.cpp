@@ -282,6 +282,8 @@ public:
     virtual FUN_0052ce20_Other* slot_263();
 };
 
+// pdb: Script::DebugCombatPlanFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052ce20(int unk04, int unk08, FUN_0052ce20_Obj* p) {
     if (p->slot_064()) {
         FUN_0052ce20_Other* o = p->slot_263();
@@ -309,6 +311,8 @@ public:
 extern FUN_0052f920_Obj* DAT_0107a104;
 extern FUN_0052f920_Mgr* DAT_0107a0d8;
 
+// pdb: Script::TriggerLODApocalypseFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: Script::CreateDetectionEventFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052f920()
 {
     *((unsigned char*)DAT_0107a104 + 0x9a6) = 1;
@@ -329,6 +333,8 @@ bool __cdecl FUN_00517950(unsigned int a1, unsigned int a2, unsigned int a8,
     unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6, RunResult** result);
 ResultOperation* __stdcall FUN_00be78d0(RunResult* result);
 
+// pdb: Script::RevokeCodeFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: SetRBMass)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052bb30(unsigned int a1, unsigned int a2, unsigned int a3,
     unsigned int a4, unsigned int a5, unsigned int a6, unsigned int unused, unsigned int a8)
 {
@@ -485,6 +491,8 @@ public:
     unsigned int unkF4;
     unsigned char flagF8;
 };
+// pdb: Script::StopCombatFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: Script::LoopGroupFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005231d0(unsigned int unusedFirst, unsigned int unusedSecond, CallbackActor* actor) {
     if (actor && actor->slot_064()) {
         if (actor->flagF8)
@@ -517,6 +525,8 @@ struct Ref871 {
     List871 list40;
     void FUN_004e9c50();
 };
+// pdb: Script::Reset3DStateFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052bb00(int unused1, int unused2, Ref871* object) {
     if (object) {
         object->FUN_004e9c50();
@@ -531,6 +541,8 @@ bool __cdecl FUN_0052bb00(int unused1, int unused2, Ref871* object) {
 // @f3 0x00523b20 (community match, verified in this file)
 namespace f3m_00523b20 {
 struct Data895 { int unk00, unk04, unk08, unk0C; const char* text10; };
+// pdb: Script::ScriptEffectStartFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00523b20(int a, int b, int c, int d, int e, Data895* data, double* output) {
     *output = 0.0;
     if (data && data->text10 && data->text10[0]) *output = 1.0;
@@ -618,6 +630,8 @@ public:
 bool __cdecl FUN_00517950(ParamInfo* paramInfo, void* scriptData, unsigned int* opcodeOffsetPtr,
     TESObjectREFR* thisObj, TESObjectREFR* containingObj, Script* scriptObj, ScriptEventList* eventList, ...);
 
+// pdb: Script::SetCritStageFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052fe90(ParamInfo* paramInfo, void* scriptData, TESObjectREFR* thisObj,
     TESObjectREFR* containingObj, Script* scriptObj, ScriptEventList* eventList, double* result,
     unsigned int* opcodeOffsetPtr)
@@ -1258,6 +1272,8 @@ void FUN_004ee3e0(Actor* a, Form* f, Link* l);
 void FUN_00887da0(int s);
 extern const float DAT_FLTMAX;
 
+// pdb: Script::MoveToFunctionBase | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apMoveRef, apTargetRef, afX, afY, afZ
 void FUN_00528730(Actor* a, Ref* b, float dx, float dy, float dz)
 {
     if (a == Player() && Player()->v22c(0))
@@ -1571,6 +1587,8 @@ struct Actor1023 {
     virtual void Slot1E0();
     virtual Child1023* GetScene();
 };
+// pdb: Script::SkipAnimFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00522f80(unsigned int unusedFirst, unsigned int unusedSecond, Actor1023* actor) {
     if (actor && actor->GetScene()) actor->GetScene()->FUN_0045c3e0(0x14);
     return true;
@@ -1625,6 +1643,8 @@ struct Interface {
 extern Interface* DAT_01075b24;
 void FUN_00619660();
 }
+// pdb: Script::GetPlayerName | TESScriptFunctions.obj | fnv360_0721_retail, ustr_rel, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0053e240()
 {
     f3m_0053e240::TileMenu* tile = new f3m_0053e240::TileMenu();
@@ -1686,6 +1706,8 @@ void __cdecl FUN_006195d0(const char* fmt, ...);
 }
 using namespace f3m_0052afb0;
 
+// pdb: Script::GetWeaponHealthFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052afb0(void* paramInfo, void* scriptData, TESObjectREFR* thisObj)
 {
     bool result = true;
@@ -1732,6 +1754,7 @@ void __cdecl Script_GetXPForNextLevelFunction(unsigned int p1, unsigned int p2, 
 
 // @f3 0x0053dd00 (community match, verified in this file)
 namespace f3m_0053dd00 {
+// pdb: TileMenu::GetType | TESScriptFunctions.obj | fnv360_0721_retail, objrun, low
 int __cdecl FUN_0053dd00(){return 905;}
 }   // namespace f3m_0053dd00
 
@@ -1743,6 +1766,8 @@ namespace f3m_0052c240 {
 
 void __cdecl FUN_006195d0(const char* fmt, ...);
 
+// pdb: Script::SetTargetDOF | TESScriptFunctions.obj | fnv360_0822_retail, ustr, high
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052c240() {
     unsigned int tlsIdx = *(volatile unsigned int*)&DAT_01179af4;
     void* tlsBlock = ((void**)__readfsdword(0x2c))[tlsIdx];
@@ -1805,6 +1830,8 @@ public:
     bool FUN_00518430(int value, int mask);
 };
 
+// pdb: Script::OnPackageChangeFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00527570(unsigned int a1, unsigned int a2, unsigned int a3,
     unsigned int a4, unsigned int a5, EventList* a6, double* result, unsigned int a8)
 {
@@ -2026,6 +2053,8 @@ extern F3Obj_5384d0** DAT_0107c0a8;
 extern unsigned int DAT_0107c0c4;
 extern struct FUN_0052f920_Obj* DAT_0107a104;
 
+// pdb: Script::DisableAllMinesFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005384d0()
 {
     for (unsigned int i = 0; i < DAT_0107c0c4; i++) {
@@ -2067,6 +2096,8 @@ public:
 
 }
 
+// pdb: Script::SetStageFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: Script::StopQuestFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00524f80(
     f3m_0052fe90::f3m_0052fe90::ParamInfo* paramInfo,
     void* scriptData,
@@ -2379,6 +2410,7 @@ public:
     Proc0052e4f0* proc60;
 };
 
+// pdb: `Script::ResetDialogueFlags'::`2'::MobDialogueFlagResetter::Operate | TESScriptFunctions.obj | fnv360_0822_retail, vtable, medium
 void __stdcall FUN_0052e4f0(Ref0052e4f0* obj)
 {
     if (obj->FUN_slot40())
@@ -2437,6 +2469,8 @@ extern Mgr* DAT_01077ae0;
 
 using namespace f3m_0052c840;
 
+// pdb: Script::SendSherlockDebugPage | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052c840(void* paramInfo, void* scriptData, void* thisObj, void* containingObj,
                   void* scriptObj, void* eventList, void* unused, unsigned int* opcodeOffsetPtr)
 {
@@ -2506,6 +2540,8 @@ class TESObjectREFR;
 
 extern "C" bool __cdecl FUN_00513740(TESObjectREFR* thisObj, int unkarg1, int unkarg2, double* result);
 
+// pdb: Script::GetMinorCrimeCountFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052e990(ParamInfo* paramInfo, void* scriptData, TESObjectREFR* thisObj,
     TESObjectREFR* containingObj, Script* scriptObj, ScriptEventList* eventList,
     double* result, unsigned int* opcodeOffsetPtr)
@@ -2557,6 +2593,8 @@ struct Obj;
 
 bool __cdecl FUN_0050f570(Obj* object, int a, int b, double* output);
 
+// pdb: Script::GetVampire | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: `anonymous namespace'::OutputInfoStream::operator bool)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00524710(int unused1, int unused2, Obj* object, int unused3,
                           int unused4, int unused5, double* output)
 {
@@ -2608,6 +2646,8 @@ public:
     void FUN_00530a70(TexTexture* pkTexture);
 };
 
+// pdb: NiTexturingProperty::SetBaseTexture | TESScriptFunctions.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: pkTexture
 void TexProperty::FUN_00530a70(TexTexture* pkTexture)
 {
     TexMap* pkMap = m_kMaps.m_pBase[0];
@@ -2641,6 +2681,8 @@ public:
 extern char DAT_01079b64;
 extern FlagObj_524250* DAT_010799fc;
 
+// pdb: Script::ForceSave | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00524250()
 {
     if (DAT_01079b64) {
@@ -2717,6 +2759,8 @@ bool __cdecl FUN_00517950(ParamInfo* paramInfo, void* scriptData, unsigned int* 
     TESObjectREFR* thisObj, TESObjectREFR* containingObj, Script* scriptObj,
     ScriptEventList* eventList, ParamResult** result);
 
+// pdb: Script::SetActorFullNameFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00539d20(ParamInfo* paramInfo, void* scriptData, TESObjectREFR* thisObj,
     TESObjectREFR* containingObj, Script* scriptObj, ScriptEventList* eventList,
     double* unusedResult, unsigned int* opcodeOffsetPtr)
@@ -3103,6 +3147,7 @@ public:
     void* FUN_0053dbc0(int flags);
 };
 
+// pdb: NiTArray<NiPointer<NiTexture>,NiTNewInterface<NiPointer<NiTexture> > >::`scalar deleting destructor' | TESScriptFunctions.obj | fnv360_0822_retail, vtable, medium
 void* Sub58_b9960::FUN_0053dbc0(int flags)
 {
     m_vtbl = DAT_00dd8fb0;
@@ -3128,6 +3173,8 @@ int __cdecl Script_GetClothingValue(unsigned int a1, unsigned int a2, unsigned i
 namespace f3m_0052e0e0 {
 bool __cdecl FUN_006c41f0(int a1);
 
+// pdb: Script::ForceRadioStationUpdateFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052e0e0()
 {
     FUN_006c41f0(1);
@@ -3139,6 +3186,8 @@ bool FUN_0052e0e0()
 namespace f3m_0052e850 {
 int __cdecl FUN_00619df0(int a1);
 
+// pdb: Script::TestRaceSexTerminalFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052e850()
 {
     FUN_00619df0(0);
@@ -3334,6 +3383,8 @@ struct Vt52ca00 {
 };
 struct Obj52ca00 { Vt52ca00* vtable; };
 void __cdecl FUN_00619a40(Obj52ca00*);
+// pdb: Script::ShowRepairMenuFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052ca00(int, int, Obj52ca00* object) {
  if (object && object->vtable->predicate(object)) FUN_00619a40(object);
  return true;
@@ -3349,6 +3400,8 @@ struct RunResult;
 bool __cdecl FUN_00517950(unsigned int a1, unsigned int a2, unsigned int a8,
     unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6, RunResult** result);
 
+// pdb: Script::SetLocationSpecificLoadScreensOnlyFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::AddMusicFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005238c0(unsigned int a1, unsigned int a2, unsigned int a3,
     unsigned int a4, unsigned int a5, unsigned int a6, unsigned int a7, unsigned int a8)
 {
@@ -3380,6 +3433,8 @@ void __cdecl FUN_006194f0();bool __cdecl FUN_0052e620(){FUN_006194f0();return tr
 namespace f3m_00527d00 {
 namespace match527d00 {
 bool FUN_00512350(void*,int,int,void*);
+// pdb: Script::IsHorseStolenFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: Script::IsTorchOutFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00527d00(void* a,void* b,void* c,void* d,void* e,void* f,void* g) {
  if(c) return FUN_00512350(c,0,0,g);
  return true;
@@ -3422,6 +3477,8 @@ void __cdecl FUN_006195d0(unsigned int);void __cdecl FUN_00524510(unsigned int v
 
 // @f3 0x00530350 (community match, verified in this file)
 namespace f3m_00530350 {
+// pdb: Script::RadioShutOffFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 void __cdecl FUN_006c0d10(unsigned int);bool __cdecl FUN_00530350(){FUN_006c0d10(0);return true;}
 }   // namespace f3m_00530350
 
@@ -3431,6 +3488,8 @@ struct State523b80 {
  int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14;
  int unk18; int unk1C; int unk20; int unk24; char unk28; bool unk29;
 };
+// pdb: Script::ScriptEffectUpdateFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00523b80(int a,int b,int c,int d,State523b80* state,int f,double* out) {
  *out=0.0;
  if(state && &state->unk18 && state->unk29) *out=1.0;
@@ -3450,6 +3509,8 @@ bool Script_GetAngleFunction(int a,int b,int c,int d,int e,int f,int g,int h){ s
 namespace f3m_00523bb0 {
 struct Value523bb0 { int unk00; float unk04; };
 struct Context523bb0 { int unk00; int unk04; int unk08; int unk0C; Value523bb0* unk10; };
+// pdb: Script::ScriptEffectElapsedTimeFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00523bb0(int a,int b,int c,int d,int e,Context523bb0* context,double* out) {
  *out=0.0;
  if(context && context->unk10) *out=context->unk10->unk04;
@@ -3503,6 +3564,8 @@ namespace f3m_0052a2f0 {
 extern bool __cdecl FUN_00517950(int,int,int,int,int,int,int,int*);
 extern void __cdecl FUN_00679590();
 extern void __cdecl FUN_006794c0(int);
+// pdb: Script::ShowSPECIALBookMenu | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052a2f0(int a,int b,int c,int d,int e,int f,int g,int h){if(DAT_0107a104){int value=0; if(!FUN_00517950(a,b,h,c,d,e,f,&value)){FUN_00679590(); return true;} FUN_006794c0(value);} return true;}
 
 }   // namespace f3m_0052a2f0
@@ -3510,6 +3573,8 @@ bool FUN_0052a2f0(int a,int b,int c,int d,int e,int f,int g,int h){if(DAT_0107a1
 // @f3 0x0052e1e0 (community match, verified in this file)
 namespace f3m_0052e1e0 {
 struct Reference1447 { void FUN_004ed1e0(unsigned int); };
+// pdb: Script::RemoveMerchantContainer | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052e1e0(unsigned int unused1,unsigned int unused2,Reference1447* reference)
 {
     reference->FUN_004ed1e0(0);
@@ -3522,6 +3587,8 @@ namespace Command1448 {
     struct Player { void PlayerCharacter_DebugResetAllTerminals(); };
     extern Player* DAT_0107a104;
 }
+// pdb: Script::ResetAllTerminals | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052e530()
 {
     Command1448::DAT_0107a104->PlayerCharacter_DebugResetAllTerminals();
@@ -3597,6 +3664,8 @@ public:
 };
 bool __cdecl FUN_00517950(unsigned int a1, unsigned int a2, unsigned int a8,
     unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6, int* out1, int* out2);
+// pdb: Script::SetFogDepthFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00522380(unsigned int a1, unsigned int a2, unsigned int a3,
     unsigned int a4, unsigned int a5, unsigned int a6, unsigned int unused, unsigned int a8)
 {
@@ -3624,6 +3693,8 @@ struct Target1453
     void* value1C;
 };
 Target1453* __cdecl Sky_GetInstance();
+// pdb: Script::ReleaseWeatherOverride | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00531170()
 {
     Sky_GetInstance()->value1C=0;
@@ -3653,6 +3724,8 @@ namespace f3m_00526640 {
 extern bool __cdecl FUN_00517950(int,int,int,int,int,int,int,int*);
 struct Manager526640 { void FUN_00775c00(int,int,int); };
 
+// pdb: Script::AddTopicFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00526640(int a,int b,int c,int d,int e,int f,int g,int h) {
  int value=0;
  if(!FUN_00517950(a,b,h,c,d,e,f,&value)) return false;
@@ -3666,6 +3739,8 @@ bool __cdecl FUN_00526640(int a,int b,int c,int d,int e,int f,int g,int h) {
 extern bool DAT_00f4cf80;
 extern bool DAT_0106fd54;
 namespace f3m_0052bae0 {
+// pdb: Script::ToggleWaterRadius | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052bae0()
 {
     if(DAT_00f4cf80) DAT_0106fd54=true;
@@ -3677,6 +3752,8 @@ bool __cdecl FUN_0052bae0()
 extern bool DAT_0116f20e;
 namespace f3m_0052c2b0 {
 void __cdecl FUN_00b2f5e0();
+// pdb: Script::ClearAdaptedLight | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052c2b0()
 {
     if(DAT_0116f20e) FUN_00b2f5e0();
@@ -3687,6 +3764,8 @@ bool __cdecl FUN_0052c2b0()
 // @f3 0x00523eb0 (community match, verified in this file)
 namespace f3m_00523eb0 {
 int __cdecl Script_GetDisabledConditionFunction(void*,int,int,double*);
+// pdb: Script::GetDisabledFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 int __cdecl FUN_00523eb0(int a,int b,void* object,int d,int e,int argument,double* result) {
     return Script_GetDisabledConditionFunction(object,argument,0,result);
 }
@@ -3706,6 +3785,8 @@ bool Script_SetPCFactionMurderFunction(unsigned a,unsigned b,unsigned c,unsigned
 namespace f3m_0053e320 {
 namespace Command1462 { extern void* DAT_0107a104; }
 bool __cdecl FUN_0053e240();
+// pdb: Script::ShowNameMenu | TESScriptFunctions.obj | fnv360_0721_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0053e320()
 {
     if(Command1462::DAT_0107a104) return FUN_0053e240();
@@ -4239,6 +4320,8 @@ struct Obj52f3b0 {
  void FUN_00729880();
 };
 bool __cdecl FUN_00517950(int,int,int,int,int,int,int,int*);
+// pdb: Script::AgeRaceFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052f3b0(int a1,int a2,Obj52f3b0* actor,int a4,int a5,int a6,int a7,int a8) {
  int count=0;
  if(!FUN_00517950(a1,a2,a8,(int)actor,a4,a5,a6,&count)) return false;
@@ -4297,6 +4380,7 @@ namespace match53a0e0 {
 struct Owner53a0e0;
 extern void (__thiscall *DAT_00dd8fec)(Owner53a0e0*,void*);
 struct Owner53a0e0 {void* vtable; void* data; unsigned count,capacity; void FUN_0053a0e0();};
+// pdb: SettingT<class INISettingCollection>::operator= | TESScriptFunctions.obj | tesv_win, objopen_prop, low
 void Owner53a0e0::FUN_0053a0e0() {
  vtable=&DAT_00dd8fe4;
  if(data) { DAT_00dd8fec(this,data); data=0;capacity=0;count=0; }
@@ -4307,6 +4391,8 @@ void Owner53a0e0::FUN_0053a0e0() {
 // @f3 0x00522340 (community match, verified in this file)
 extern bool DAT_00f504b0;
 namespace f3m_00522340 {
+// pdb: Script::ToggleGrassUpdateFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00522340()
 {
     DAT_00f504b0=!DAT_00f504b0;
@@ -4477,6 +4563,8 @@ struct State
 };
 extern State* DAT_010762b4;
 }
+// pdb: Script::KillQuestUpdates | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: NiPSysEmitterCtlr::SetParticlesLimit)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005305e0()
 {
     if(Command1474::DAT_010762b4) Command1474::DAT_010762b4->enabled218=true;
@@ -4486,6 +4574,8 @@ bool __cdecl FUN_005305e0()
 // @f3 0x0052a1f0 (community match, verified in this file)
 namespace f3m_0052a1f0 {
 extern void __cdecl FUN_00619df0(int);
+// pdb: Script::ShowBarberMenu | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052a1f0() { if(DAT_0107a104) FUN_00619df0(2); return true; }
 }   // namespace f3m_0052a1f0
 
@@ -4586,6 +4676,8 @@ struct Object52fb00 {
  unsigned char unk16C;
 };
 Object52fb00* __cdecl Interface_GetPipboy();
+// pdb: Script::ResetPipboyManagerFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052fb00() {
  Object52fb00* object=Interface_GetPipboy();
  if(object) object->unk16C=1;
@@ -5000,6 +5092,8 @@ struct Player
 };
 extern Player* DAT_0107a104;
 }
+// pdb: Script::GetPlayerSleepHours | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: PlayerCharacter::GetSleepingHours)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00529360(unsigned int unused1,unsigned int unused2,unsigned int unused3,
     unsigned int unused4,unsigned int unused5,unsigned int unused6,double* result,unsigned int unused8)
 {
@@ -5032,6 +5126,8 @@ struct Player
 };
 extern Player* DAT_0107a104;
 }
+// pdb: Script::ClearLocationMarkersFunction | TESScriptFunctions.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052e3a0()
 {
     Command1482::Target* target=Command1482::DAT_0107a104->target3C;
@@ -5045,6 +5141,8 @@ struct Obj531a;typedef bool (__thiscall *Active531a)(Obj531a*);
 struct Table531a {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C; int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; int unkBC; int unkC0; int unkC4; int unkC8; int unkCC; int unkD0; int unkD4; int unkD8; int unkDC; int unkE0; int unkE4; int unkE8; int unkEC; int unkF0; int unkF4; int unkF8; int unkFC; Active531a unk100;};
 struct Obj531a {Table531a* unk00; void FUN_0071ac50(int,float);};
 extern Obj531a** DAT_0107c0a8;extern unsigned DAT_0107c0c4;extern bool __cdecl FUN_00517950(int,int,int,int,int,int,int,int*);
+// pdb: Script::KillAllActorsFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00531a10(int a,int b,int c,int d,int e,int f,int g,int h){int value=0;if(!FUN_00517950(a,b,h,c,d,e,f,&value))return false;for(unsigned i=0;i<DAT_0107c0c4;++i){Obj531a* obj=DAT_0107c0a8[i];if(obj&&obj->unk00->unk100(obj))obj->FUN_0071ac50(value,0.0f);}return true;}
 }   // namespace f3m_00531a10
 
@@ -5093,6 +5191,8 @@ namespace f3m_0052a3b0 {
 struct Form52A { int unk00; unsigned char type; };
 struct Reference52A { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; Form52A* base; };
 extern void __cdecl FUN_0061d5a0(int,Reference52A*,int,int,int);
+// pdb: Script::ShowHackingMiniGame | TESScriptFunctions.obj | fnv360_0822_retail, objrun_sim, low, conflict (skyrim: Script::ShowNameMenu)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052a3b0(void* first,void* second,Reference52A* reference) {
  if(reference && reference->base->type==0x17) {
   FUN_0061d5a0(2,reference,0,0,1);
@@ -5106,6 +5206,7 @@ bool __cdecl FUN_0052a3b0(void* first,void* second,Reference52A* reference) {
 // @f3 0x005270b0 (community match, verified in this file)
 namespace f3m_005270b0 {
 struct Subject5270b0 { bool FUN_00518430(int,int); };
+// pdb: Script::OnGrabFunction | TESScriptFunctions.obj | tesv_win, objrun, medium
 bool __cdecl FUN_005270b0(int a,int b,int c,int d,int e,Subject5270b0* subject,double* out) {
  *out=0.0;
  if(c && subject && subject->FUN_00518430(0,0x80000)) *out=1.0;
@@ -5139,6 +5240,8 @@ bool Script_GetPlayerControlsDisabledFunction(void* a,void* b,void* c,void* d,vo
 // @f3 0x00523ef0 (community match, verified in this file)
 namespace f3m_00523ef0 {
 extern bool __cdecl Script_GetLockLevelConditionFunction(void*,void*,unsigned,void*);
+// pdb: Script::GetLockLevelFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00523ef0(void*,void*,void* third,void*,void*,void* sixth,void* seventh) {
     return Script_GetLockLevelConditionFunction(third,sixth,0,seventh);
 }
@@ -5148,6 +5251,8 @@ bool __cdecl FUN_00523ef0(void*,void*,void* third,void*,void*,void* sixth,void* 
 namespace f3m_0052a210 {
 namespace Command1497 { extern void* DAT_0107a104; }
 void __cdecl FUN_00619df0(unsigned int);
+// pdb: Script::ShowPlasticSurgeonMenu | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052a210()
 {
     if(Command1497::DAT_0107a104) FUN_00619df0(3);
@@ -5188,6 +5293,8 @@ bool __cdecl Script_HasLoaded3DFunction(unsigned int unused1,unsigned int unused
 // @f3 0x00522180 (community match, verified in this file)
 namespace f3m_00522180 {
 bool __cdecl FUN_0050f130(void*,void*,void*,double*);
+// pdb: Script::GetFatiguePercentageFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::GetStaminaPercentageFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00522180(unsigned int unused1,unsigned int unused2,void* reference,
     unsigned int unused4,unsigned int unused5,unsigned int unused6,double* result,unsigned int unused8)
 {
@@ -5280,6 +5387,8 @@ struct CodexModeActor { CodexModeVtable* table; };
 bool __cdecl FUN_00517950(int,int,int,CodexModeActor*,int,int,int,int*,void**);
 void __cdecl FUN_006c3380(CodexModeActor*,void*);
 void __cdecl FUN_006c1090(CodexModeActor*);
+// pdb: Script::SetNPCRadio | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052df90(int a,int b,CodexModeActor* actor,int d,int e,int f,int unused,int h) {
     void* object=0;
     int mode=0;
@@ -5315,6 +5424,8 @@ bool __cdecl Script_GetKillingBlowLimbFunction(unsigned int unused1,unsigned int
 // @f3 0x005222c0 (community match, verified in this file)
 namespace f3m_005222c0 {
 bool __cdecl FUN_00513000(void*,void*,void*,double*);
+// pdb: Script::HasFriendDispositionFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005222c0(unsigned int unused1,unsigned int unused2,void* reference,unsigned int unused4,unsigned int unused5,unsigned int unused6,double* result,unsigned int unused8)
 {
     return FUN_00513000(reference,0,0,result);
@@ -5384,6 +5495,8 @@ namespace f3m_00529020 {
 extern "C" int __cdecl FUN_00c0050a(int, int, int, int, int);
 struct MiscCall { int FUN_0078d490(void*); };
 extern "C" void _ReadWriteBarrier(void);
+// pdb: Script::IsActorDetected | TESScriptFunctions.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: Script::WaitFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 unsigned char __cdecl FUN_00529020(int a1,int a2,int a3,int a4,int a5,int a6,double* out) {
     void* value = (void*)FUN_00c0050a(a3,0,(int)DAT_00f47aa8,(int)DAT_00f47ac4,0);
     if (!value) return 1;
@@ -5435,6 +5548,8 @@ bool Script_SetAlertFunction(void* a,void* b,void* c,void* d,void* e,void* f,voi
 // @f3 0x00520880 (community match, verified in this file)
 namespace f3m_00520880 {
 struct Result5208 {void FUN_00697360();};extern Result5208* __stdcall Interface_GetPipboy(int,float,float,int);extern const float DAT_00e08dc8;extern bool __cdecl FUN_00517950(int,int,int,int,int,int,int,int*,float*);
+// pdb: Script::MovePipboyKnobFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00520880(int a,int b,int c,int d,int e,int f,int g,int h){int index;float value;if(!FUN_00517950(a,b,h,c,d,e,f,&index,&value))return false;Interface_GetPipboy(index,value,DAT_00e08dc8,1)->FUN_00697360();return true;}
 }   // namespace f3m_00520880
 
@@ -5453,6 +5568,8 @@ namespace f3m_005249b0 {
 namespace Script49B0 {
 struct State { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C; int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; int unkBC; int unkC0; int unkC4; int unkC8; int unkCC; int unkD0; int unkD4; int unkD8; int unkDC; int unkE0; int unkE4; int unkE8; int unkEC; int unkF0; int unkF4; int unkF8; int unkFC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; int unk128; int unk12C; int unk130; int unk134; int unk138; int unk13C; int unk140; int unk144; int unk148; int unk14C; int unk150; int unk154; int unk158; int unk15C; int unk160; int unk164; int unk168; int unk16C; int unk170; int unk174; int unk178; int unk17C; int unk180; int unk184; int unk188; int unk18C; int unk190; int unk194; int unk198; int unk19C; int unk1A0; int unk1A4; int unk1A8; int unk1AC; int unk1B0; int unk1B4; int unk1B8; int unk1BC; int unk1C0; int unk1C4; int unk1C8; int unk1CC; int unk1D0; int unk1D4; int unk1D8; int unk1DC; int unk1E0; int unk1E4; int unk1E8; int unk1EC; int unk1F0; int unk1F4; int unk1F8; bool enabled; }; extern State* DAT_0107a104;
 extern bool __cdecl FUN_00517950(unsigned,unsigned,unsigned,unsigned,unsigned,unsigned,unsigned,int*);
+// pdb: Script::SetShowQuestItemsFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::GetKeywordItemCount)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005249b0(unsigned a,unsigned b,unsigned c,unsigned d,unsigned e,unsigned f,unsigned g,unsigned h) { int value=0; if(!FUN_00517950(a,b,h,c,d,e,f,&value)) return false; DAT_0107a104->enabled=value>0; return true; }
 }
 }   // namespace f3m_005249b0
@@ -5549,6 +5666,8 @@ struct Vt536aa0 {
 struct Obj536aa0 {Vt536aa0* vtable;};
 void __cdecl FUN_006f2050(void*,unsigned int,Obj536aa0*,double);
 bool __cdecl FUN_00517950(int,int,int,int,int,int,int,float*);
+// pdb: Script::DamageObjectFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00536aa0(int a1,int a2,Obj536aa0* object,int a4,int a5,int a6,int a7,int a8) {
  float value=0.0f;
  if(!FUN_00517950(a1,a2,a8,(int)object,a4,a5,a6,&value)) return false;
@@ -5562,6 +5681,8 @@ bool __cdecl FUN_00536aa0(int a1,int a2,Obj536aa0* object,int a4,int a5,int a6,i
 // @f3 0x0052d490 (community match, verified in this file)
 namespace f3m_0052d490 {
 extern bool __cdecl FUN_00517950(int,int,int,int,int,int,int,int*);extern void __cdecl FUN_00619dd0(int,int,int);
+// pdb: Script::ShowLockpickMenuDebug | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052d490(int a,int b,int c,int d,int e,int f,int g,int h){int value=3;FUN_00517950(a,b,h,c,d,e,f,&value);FUN_00619dd0(0,value-1,1);return true;}
 }   // namespace f3m_0052d490
 
@@ -6162,6 +6283,8 @@ struct CodexTargetVtable {
 };
 struct CodexTargetActor { CodexTargetVtable* table; };
 bool __cdecl FUN_00517950(int,int,int,CodexTargetActor*,int,int,int,void**);
+// pdb: Script::RemovePerkFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052c770(int a,int b,CodexTargetActor* actor,int d,int e,int f,int unused,int h) {
     void* target=0;
     if (!FUN_00517950(a,b,h,actor,d,e,f,&target)) return false;
@@ -6188,6 +6311,7 @@ bool Script_GetPlayerTeammateCountFunction(int a,int b,int c,int d,int e,int f,i
 namespace f3m_00526f30 {
 struct CodexCommandOwner { bool FUN_00518430(unsigned,int); };
 bool __cdecl FUN_00517950(int,int,int,void*,int,int,CodexCommandOwner*,unsigned*);
+// pdb: Script::OnDropFunction | TESScriptFunctions.obj | tesv_win, objrun, medium
 bool __cdecl FUN_00526f30(int a,int b,void* actor,int d,int e,CodexCommandOwner* owner,double* result,int h) {
     unsigned value=0;
     if (!FUN_00517950(a,b,h,actor,d,e,owner,&value)) return false;
@@ -6239,6 +6363,8 @@ bool __cdecl Script_GetDeadCount(void* a1,void* a2,void* a3,void* a4,void* a5,vo
 namespace f3m_0052dad0 {
 namespace match52dad0 {
 bool FUN_00515720(void*,int,int,void*);
+// pdb: Script::GetGroupMemberCountFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::DoesNotExistFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052dad0(void* a,void* b,void* c,void* d,void* e,void* f,void* g) {return FUN_00515720(c,0,0,g);}
 }
 }   // namespace f3m_0052dad0
@@ -6247,6 +6373,8 @@ bool FUN_0052dad0(void* a,void* b,void* c,void* d,void* e,void* f,void* g) {retu
 namespace f3m_00528f20 {
 struct Reference528F { void** table; };
 extern bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,Reference528F**,int*);
+// pdb: Script::SetQuestObjectFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::SetEssentialFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00528f20(void* a,void* b,void* c,void* d,void* e,void* f,double* result,void* offset) {
  *result=0.0;
  Reference528F* reference=0;
@@ -6261,6 +6389,8 @@ bool __cdecl FUN_00528f20(void* a,void* b,void* c,void* d,void* e,void* f,double
 namespace f3m_0052adf0 {
 namespace match52adf0 {
 bool FUN_00512aa0(void*,int,int,void*);
+// pdb: Script::IsXBoxFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052adf0(void* a,void* b,void* c,void* d,void* e,void* f,void* g) {return FUN_00512aa0(c,0,0,g);}
 }
 }   // namespace f3m_0052adf0
@@ -6313,6 +6443,8 @@ bool Script_AbsFunction(void* a,void* b,void* c,void* d,void* e,void* f,double* 
 namespace f3m_00534920 {
 struct Data5349 {float unk00,unk04,unk08,unk0C,unk10,unk14,unk18,unk1C;};struct Branch5349 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; Data5349* unk6C;};struct Step5349 {int unk00;Branch5349* unk04;};struct Root5349 {int unk00,unk04;Step5349* unk08;Data5349* Data(){return unk08->unk04->unk6C;}};extern Root5349* DAT_0116ef9c;extern float DAT_01068000,DAT_0116ef80,DAT_0116ef78,DAT_0116ef7c;
 extern char DAT_00dd81b4[],DAT_00dd81ac[],DAT_00dd8184[],DAT_00dd815c[],DAT_00dd8154[],DAT_00dd812c[],DAT_00dd8124[],DAT_00dd80f8[],DAT_00dd80d0[],DAT_00dd80a8[];extern void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::PrintHDRParamFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00534920(){Root5349* root=DAT_0116ef9c;FUN_006195d0(DAT_00dd81b4);FUN_006195d0(DAT_00dd81ac);FUN_006195d0(DAT_00dd8184,root->Data()->unk04);FUN_006195d0(DAT_00dd815c,root->Data()->unk1C,root->Data()->unk18);FUN_006195d0(DAT_00dd8154);FUN_006195d0(DAT_00dd812c,DAT_0116ef80,DAT_01068000);FUN_006195d0(DAT_00dd8124);FUN_006195d0(DAT_00dd80f8,root->Data()->unk00,root->Data()->unk0C);FUN_006195d0(DAT_00dd80d0,DAT_0116ef7c,DAT_0116ef78);FUN_006195d0(DAT_00dd80a8,root->Data()->unk14,root->Data()->unk10);return true;}
 }   // namespace f3m_00534920
 
@@ -6545,6 +6677,8 @@ struct CodexPairVtable {
 };
 struct CodexPairActor { CodexPairVtable* table; };
 bool __cdecl FUN_00517950(int,int,int,CodexPairActor*,int,int,int,CodexPairActor**);
+// pdb: Script::StartCannibalFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052a560(int a,int b,CodexPairActor* actor,int d,int e,int f,int unused,int h) {
     CodexPairActor* target=0;
     if (!FUN_00517950(a,b,h,actor,d,e,f,&target)) return false;
@@ -6611,6 +6745,8 @@ public:
     void TESObjectREFR_SetScale(float value);
 };
 
+// pdb: Script::SetScaleBase | TESScriptFunctions.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: apRefObject, afValue
 void __cdecl FUN_00523290(Obj523290* obj, float value) {
     if (obj) {
         obj->TESObjectREFR_SetScale(value);
@@ -6681,6 +6817,8 @@ bool __cdecl Script_HasPerkFunction(ParamInfo* paramInfo, void* scriptData, TESO
 namespace f3m_00525000 {
 struct Ref5250 { void FUN_0055c690(int); };
 extern bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,Ref5250**);
+// pdb: Script::StartQuestFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::CompleteQuestFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00525000(void* a,void* b,void* c,void* d,void* e,void* f,void* result,void* offset) {
  Ref5250* reference=0;
  if(!FUN_00517950(a,b,offset,c,d,e,f,&reference)) return false;
@@ -6739,6 +6877,8 @@ bool __cdecl Script_CanHaveFlamesFunction(int a,int b,int c,int d,int e,int f,vo
 namespace f3m_0052c940 {
 extern bool __cdecl FUN_00517950(int,int,int,int,int,int,int,void**);
 struct Player52c940 { void** table; };
+// pdb: Script::RewardExperiencePointsFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052c940(int a,int b,int c,int d,int e,int f,int g,int h) {
  void* value=0;
  if(!FUN_00517950(a,b,h,c,d,e,f,&value)) return false;
@@ -6753,6 +6893,8 @@ namespace f3m_005207e0 {
 struct CodexFloatSettings { void FUN_00696f90(float,float,float); };
 CodexFloatSettings* __cdecl FUN_00619e70();
 bool __cdecl FUN_00517950(int,int,int,int,int,int,int,float*,float*,float*,float*);
+// pdb: Script::TriggerHUDShudderFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005207e0(int a,int b,int c,int d,int e,int f,int unused,int h) {
     float first=500.0f;
     float second=0.1f;
@@ -6818,6 +6960,8 @@ bool Script_SqrtFunction(unsigned a,unsigned b,unsigned c,unsigned d,unsigned e,
 // @f3 0x005250a0 (community match, verified in this file)
 namespace f3m_005250a0 {
 struct Target5250 {void FUN_0055c6b0(bool);};extern bool __cdecl FUN_00517950(int,int,int,int,int,int,int,Target5250**);
+// pdb: Script::CompleteQuestFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005250a0(int a,int b,int c,int d,int e,int f,int g,int h){Target5250* target=0;if(!FUN_00517950(a,b,h,c,d,e,f,&target))return false;if(target)target->FUN_0055c6b0(true);return true;}
 }   // namespace f3m_005250a0
 
@@ -6872,6 +7016,7 @@ namespace f3m_0053a200 {
 extern void (__stdcall *DAT_00dd8fd8)(void*);
 struct Heap53a200 { void FUN_0086ba60(void*); };
 struct Owner53a200 { void* unk00; void* unk04; int unk08; int unk0C; Owner53a200* FUN_0053a200(unsigned); };
+// pdb: BSSimpleArray<TESObjectREFR *,1024>::`scalar deleting destructor' | TESScriptFunctions.obj | fnv360_0822_retail, vtable, medium
 Owner53a200* Owner53a200::FUN_0053a200(unsigned flags) {
  unk00=&DAT_00dd8fd0;
  if(unk04) { DAT_00dd8fd8(unk04); unk04=0; unk0C=0; unk08=0; }
@@ -6899,6 +7044,8 @@ public:
 bool __cdecl FUN_00517950(ParamInfo* paramInfo, void* scriptData, unsigned int* opcodeOffsetPtr,
     TESObjectREFR* thisObj, TESObjectREFR* containingObj, Script* scriptObj, ScriptEventList* eventList, ...);
 
+// pdb: Script::OnTriggerEnterFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00527770(ParamInfo* paramInfo, void* scriptData, TESObjectREFR* thisObj,
     TESObjectREFR* containingObj, Script* scriptObj, ScriptEventList* eventList, double* result,
     unsigned int* opcodeOffsetPtr)
@@ -6944,6 +7091,7 @@ bool __cdecl Script_SameRaceAsPC(void* a,void* b,void* reference,void* d,void* e
 // @f3 0x0053a0b0 (community match, verified in this file)
 namespace f3m_0053a0b0 {
 extern int DAT_00dd8fd0;extern void (__stdcall *DAT_00dd8fd8)(void*);struct Buffer53a0 {int* unk00;void* unk04;int unk08,unk0C;void FUN_0053a0b0();};
+// pdb: Script::IsUnlockedDoorFunction | TESScriptFunctions.obj | tesv_win, objopen_prop, low
 void Buffer53a0::FUN_0053a0b0(){unk00=&DAT_00dd8fd0;if(unk04){DAT_00dd8fd8(unk04);unk04=0;unk0C=0;unk08=0;}}
 }   // namespace f3m_0053a0b0
 
@@ -7001,6 +7149,8 @@ bool __cdecl FUN_00517950(ParamInfo* paramInfo, void* scriptData, unsigned int* 
 
 IfaceSub* __cdecl FUN_00619e50();
 
+// pdb: Script::HighlightBodyPartFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00520600(ParamInfo* paramInfo, void* scriptData, ScriptTarget* thisObj,
     void* containingObj, void* scriptObj, void* eventList, unsigned int unused, unsigned int* opcodeOffsetPtr)
 {
@@ -7067,6 +7217,8 @@ bool __cdecl Script_HasBeenEatenFunction(ParamInfo* paramInfo, void* scriptData,
 // @f3 0x005273b0 (community match, verified in this file)
 namespace f3m_005273b0 {
 struct CodexEvent73B { bool FUN_00518430(unsigned,unsigned); };
+// pdb: Script::OnCombatEndFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005273b0(void*,void*,void* context,void*,void*,CodexEvent73B* event,double* result,void*) {
     *result=0.0;
     if(context && event && event->FUN_00518430(0,0x40)) *result=1.0;
@@ -7133,6 +7285,8 @@ struct Vt5232c0 {
 };
 struct Obj5232c0 {Vt5232c0* vtable;float FUN_004e6d80();void TESObjectREFR_SetScale(float);};
 bool __cdecl FUN_00517950(int,int,int,int,int,int,int,float*);
+// pdb: Script::ModScaleFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005232c0(int a1,int a2,Obj5232c0* object,int a4,int a5,int a6,int a7,int a8) {
  float value=0.0f;
  if(!FUN_00517950(a1,a2,a8,(int)object,a4,a5,a6,&value)) return false;
@@ -7162,6 +7316,8 @@ namespace match539fa0 {
 struct Owner539fa0;
 struct VTable539fa0 {void* unk00;void* unk04;void* unk08;void* unk0C;void* unk10;void* unk14;bool (__thiscall *open)(Owner539fa0*,bool);void (__thiscall *close)(Owner539fa0*);bool (__thiscall *process)(Owner539fa0*);};
 struct Owner539fa0 {VTable539fa0* vtable;char path[260];bool FUN_00539fa0(const char*);};
+// pdb: SettingCollection<Setting>::WriteSettingsToFile | XBlendSettings.obj | fnv360_1110_retail, call_gap_sim, low, conflict (skyrim: Script::IsExitingInteractionInstantFunction)
+// pdb params: apFileName
 bool Owner539fa0::FUN_00539fa0(const char* source) {
  if(source)strcpy_s(path,sizeof(path),source);else path[0]=0;
  bool success=vtable->open(this,true);
@@ -7175,6 +7331,8 @@ bool Owner539fa0::FUN_00539fa0(const char* source) {
 namespace f3m_0052e150 {
 namespace ScriptE150 {
 extern bool __cdecl FUN_00513280(void*,int,int,double*);
+// pdb: Script::IsActorTalkingThroughActivatorFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052e150(unsigned a,unsigned b,void* actor,unsigned d,unsigned e,unsigned f,double* result,unsigned h) { return FUN_00513280(actor,0,0,result); }
 }
 }   // namespace f3m_0052e150
@@ -7182,6 +7340,8 @@ bool FUN_0052e150(unsigned a,unsigned b,void* actor,unsigned d,unsigned e,unsign
 // @f3 0x0052f990 (community match, verified in this file)
 namespace f3m_0052f990 {
 struct Child52f9 {void FUN_00be9c50(float,float,int,int,int,int,bool);};struct Manager52f9 {Child52f9* FUN_006e4eb0();};extern Manager52f9* DAT_0107a0d4;extern const double DAT_00db8c48;extern bool __cdecl FUN_00517950(int,int,int,int,int,int,int,float*,float*,float*);
+// pdb: Script::SetRumbleFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::SetNoActivationSound)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052f990(int a,int b,int c,int d,int e,int f,int g,int h){float first=0.0f,second=0.0f,third=0.0f;if(!FUN_00517950(a,b,h,c,d,e,f,&first,&second,&third))return false;Child52f9* child=DAT_0107a0d4->FUN_006e4eb0();if(child)child->FUN_00be9c50(first,second,(int)(third*DAT_00db8c48),0,0,0,true);return true;}
 }   // namespace f3m_0052f990
 
@@ -7190,6 +7350,8 @@ namespace f3m_0052c0b0 {
 namespace UpdateC0B0 {
 struct State { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C; int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; int unkBC; int unkC0; int unkC4; int unkC8; int unkCC; int unkD0; int unkD4; int unkD8; int unkDC; int unkE0; int unkE4; int unkE8; int unkEC; int unkF0; int unkF4; int unkF8; int unkFC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int pending; }; extern State* DAT_01076bb8; extern bool DAT_0117627c;
 extern void __cdecl FUN_00665b00(int);
+// pdb: Script::OutputLocalMapPictures | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052c0b0() { DAT_0117627c=true; if(DAT_01076bb8) DAT_01076bb8->pending=0; for(int i=0;i<25;++i) if(DAT_01076bb8) FUN_00665b00(1); DAT_0117627c=false; return true; }
 }
 }   // namespace f3m_0052c0b0
@@ -7209,6 +7371,8 @@ bool __cdecl Script_IsWaterObjectFunction(void* a1, void* a2, void* a3, void* a4
 namespace f3m_0052a430 {
 namespace match52a430 {
 bool FUN_00512350(void*,int,int,void*);
+// pdb: Script::GetPersuasionNumberFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::ShowSpellmakingMenu)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052a430(void* a,void* b,void* c,void* d,void* e,void* f,void* g) {return FUN_00512350(c,0,0,g);}
 }
 }   // namespace f3m_0052a430
@@ -7217,6 +7381,8 @@ bool FUN_0052a430(void* a,void* b,void* c,void* d,void* e,void* f,void* g) {retu
 namespace f3m_00523b50 {
 struct Data523B { unsigned char unk00; bool active; };
 struct Event523B { int unk00; int unk04; int unk08; int unk0C; Data523B* data; };
+// pdb: Script::ScriptEffectFinishFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::ScriptEffectElapsedTimeFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00523b50(void* a,void* b,void* c,void* d,void* e,Event523B* event,double* result,void* offset) {
  *result=0.0;
  if(event && event->data && event->data->active) *result=1.0;
@@ -7229,6 +7395,8 @@ namespace f3m_00525050 {
 namespace Script5050 {
 struct Target { void FUN_0055c690(bool); };
 extern bool __cdecl FUN_00517950(unsigned,unsigned,unsigned,unsigned,unsigned,unsigned,unsigned,Target**);
+// pdb: Script::StopQuestFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00525050(unsigned a,unsigned b,unsigned c,unsigned d,unsigned e,unsigned f,unsigned g,unsigned h) { Target* target=0; if(!FUN_00517950(a,b,h,c,d,e,f,&target)) return false; if(target) target->FUN_0055c690(false); return true; }
 }
 }   // namespace f3m_00525050
@@ -7283,6 +7451,7 @@ bool Script_GetQuestRunning(int a,int b,int c,int d,int e,int f,int g,int h){int
 namespace f3m_00527230 {
 struct Subject527230 { bool FUN_00518430(int,int); };
 extern bool __cdecl FUN_00517950(int,int,int,int,int,int,Subject527230*,int*);
+// pdb: Script::OnDeathFunction | TESScriptFunctions.obj | tesv_win, objrun_sim, low
 bool __cdecl FUN_00527230(int a,int b,int c,int d,int e,Subject527230* subject,double* out,int h) {
  int value=0;
  if(!FUN_00517950(a,b,h,c,d,e,subject,&value)) return false;
@@ -7308,6 +7477,8 @@ bool Script_IsInInteriorFunction(int a, int b, int c, int d, int e, int f, int g
 #include <math.h>
 namespace f3m_0052ff60 {
 bool __cdecl FUN_00517950(int,int,int,int,int,int,int,float*,int*);
+// pdb: Script::SinFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052ff60(int a,int b,int c,int d,int e,int f,double* result,int h) {
     float value=0.0f;
     int inverse=0;
@@ -7366,6 +7537,8 @@ namespace f3m_00522670 {
 namespace Color2670 {
 struct Color { float r,g,b,a; }; extern Color DAT_0116fe10; extern const double DAT_00dd6570;
 extern bool __cdecl FUN_00517950(unsigned,unsigned,unsigned,unsigned,unsigned,unsigned,unsigned,int*,int*,int*);
+// pdb: Script::HairTint | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00522670(unsigned p,unsigned q,unsigned r,unsigned s,unsigned t,unsigned u,unsigned v,unsigned w) { int red=0,green=0,blue=0; if(!FUN_00517950(p,q,w,r,s,t,u,&red,&green,&blue)) return false; Color color; color.r=red*DAT_00dd6570; color.g=green*DAT_00dd6570; color.b=blue*DAT_00dd6570; color.a=1; DAT_0116fe10=color; return true; }
 }
 }   // namespace f3m_00522670
@@ -7375,6 +7548,8 @@ extern unsigned short DAT_01066f5c;
 namespace f3m_005304a0 {
 namespace Script04A0 {
 extern bool __cdecl FUN_00517950(unsigned,unsigned,unsigned,unsigned,unsigned,unsigned,unsigned,unsigned*);
+// pdb: Script::SetEmitterParticleMax | TESScriptFunctions.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005304a0(unsigned a,unsigned b,unsigned c,unsigned d,unsigned e,unsigned f,unsigned g,unsigned h) { unsigned value=0; if(FUN_00517950(a,b,h,c,d,e,f,&value) && value<=65535) { DAT_01066f5c=(unsigned short)value; return true; } return false; }
 }
 }   // namespace f3m_005304a0
@@ -7382,6 +7557,8 @@ bool FUN_005304a0(unsigned a,unsigned b,unsigned c,unsigned d,unsigned e,unsigne
 // @f3 0x00525ae0 (community match, verified in this file)
 namespace f3m_00525ae0 {
 extern bool __cdecl FUN_005107c0(void*,int,int,double*);
+// pdb: Script::GetUsedItemActivateFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00525ae0(void* a,void* b,void* reference,void* d,void* e,void* f,double* result,void* offset){ return FUN_005107c0(reference,0,0,result); }
 }   // namespace f3m_00525ae0
 
@@ -7401,6 +7578,8 @@ bool __cdecl Script_GetKillerObjectFunction(int a1,int a2,void* object,int a4,in
 // @f3 0x005246f0 (community match, verified in this file)
 namespace f3m_005246f0 {
 void __cdecl FUN_0050f530(unsigned int, unsigned int, unsigned int, unsigned int);
+// pdb: Script::GetDisease | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: `anonymous namespace'::OutputInfoStream::WriteNoSwap)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 void FUN_005246f0(unsigned int a1, unsigned int a2, unsigned int a3,
     unsigned int a4, unsigned int a5, unsigned int a6, unsigned int a7)
 {
@@ -7411,12 +7590,15 @@ void FUN_005246f0(unsigned int a1, unsigned int a2, unsigned int a3,
 // @f3 0x00527070 (community match, verified in this file)
 namespace f3m_00527070 {
 struct Manager5270 {bool FUN_00518430(unsigned,unsigned);};
+// pdb: Script::OnCloseFunction | TESScriptFunctions.obj | tesv_win, objrun, medium
 bool FUN_00527070(int a,int b,void* c,int d,int e,Manager5270* manager,double* result){*result=0.0;if(c&&manager&&manager->FUN_00518430(0,0x20000))*result=1.0;return true;}
 }   // namespace f3m_00527070
 
 // @f3 0x00528fa0 (community match, verified in this file)
 namespace f3m_00528fa0 {
 extern bool __cdecl FUN_00517950(int,int,int,int,int,int,int,int*);extern bool __cdecl FUN_00511e00(int,int,int,int);
+// pdb: Script::GetDetectionLevelFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: TESActorBaseData::SetEssential)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00528fa0(int a,int b,int c,int d,int e,int f,int g,int h){int value=0;if(!FUN_00517950(a,b,h,c,d,e,f,&value))return false;return FUN_00511e00(c,value,0,g);}
 }   // namespace f3m_00528fa0
 
@@ -7798,6 +7980,8 @@ extern float DAT_01075930;
 bool FUN_00517950(void* paramInfo, void* scriptData, void* opcodeOffset, void* thisObj,
                   void* containingObj, void* script, void* eventList, ...);
 
+// pdb: Script::SetLODObjectDistanceFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: Script::SetFogDepthFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00531850(void* paramInfo, void* scriptData, void* thisObj, void* containingObj,
                   void* script, void* eventList, double* result, void* opcodeOffset) {
     float a = 0.0f;
@@ -7825,6 +8009,8 @@ namespace Script9DF0 {
 extern bool __cdecl FUN_00517950(unsigned,unsigned,unsigned,void*,unsigned,unsigned,unsigned,float*);
 extern void __cdecl FUN_006f2050(void*,unsigned,void*,double);
 extern void __cdecl FUN_00536910(void*,float);
+// pdb: Script::SetRigidBodyMass | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: Script::SetPlayerAIDrivenFuncton)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00539df0(unsigned a,unsigned b,void* actor,unsigned d,unsigned e,unsigned f,unsigned g,unsigned h) { float value; if(!FUN_00517950(a,b,h,actor,d,e,f,&value)) return false; if(!actor) return false; if(DAT_0106cd30>1) { FUN_006f2050(DAT_0107a79c,0x1156,actor,value); return true; } FUN_00536910(actor,value); return true; }
 }
 }   // namespace f3m_00539df0
@@ -7842,6 +8028,8 @@ bool Script_GetPosFunction(unsigned a,unsigned b,unsigned c,unsigned d,unsigned 
 // @f3 0x00523220 (community match, verified in this file)
 namespace f3m_00523220 {
 struct Actor5232;typedef void (__thiscall *Set5232)(Actor5232*,int);struct Table5232 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C; int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; int unkBC; int unkC0; int unkC4; int unkC8; int unkCC; int unkD0; int unkD4; int unkD8; int unkDC; int unkE0; int unkE4; int unkE8; int unkEC; int unkF0; int unkF4; int unkF8; int unkFC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; int unk128; int unk12C; int unk130; int unk134; int unk138; int unk13C; int unk140; int unk144; int unk148; int unk14C; int unk150; int unk154; int unk158; int unk15C; int unk160; int unk164; int unk168; int unk16C; int unk170; int unk174; int unk178; int unk17C; int unk180; int unk184; int unk188; int unk18C; int unk190; int unk194; int unk198; int unk19C; int unk1A0; int unk1A4; int unk1A8; int unk1AC; int unk1B0; int unk1B4; int unk1B8; int unk1BC; int unk1C0; int unk1C4; int unk1C8; int unk1CC; int unk1D0; int unk1D4; int unk1D8; int unk1DC; int unk1E0; int unk1E4; int unk1E8; int unk1EC; int unk1F0; int unk1F4; int unk1F8; int unk1FC; int unk200; int unk204; int unk208; int unk20C; int unk210; int unk214; int unk218; int unk21C; int unk220; int unk224; int unk228; int unk22C; int unk230; int unk234; int unk238; int unk23C; int unk240; int unk244; int unk248; int unk24C; int unk250; int unk254; int unk258; int unk25C; int unk260; int unk264; int unk268; int unk26C; int unk270; int unk274; int unk278; int unk27C; int unk280; int unk284; int unk288; int unk28C; int unk290; int unk294; int unk298; int unk29C; int unk2A0; int unk2A4; int unk2A8; int unk2AC; int unk2B0; int unk2B4; int unk2B8; int unk2BC; int unk2C0; int unk2C4; int unk2C8; int unk2CC; int unk2D0; int unk2D4; int unk2D8; int unk2DC; int unk2E0; int unk2E4; int unk2E8; int unk2EC; int unk2F0; int unk2F4; int unk2F8; int unk2FC; int unk300; int unk304; int unk308; int unk30C; int unk310; int unk314; int unk318; int unk31C; int unk320; int unk324; int unk328; int unk32C; int unk330; int unk334; int unk338; int unk33C; int unk340; int unk344; int unk348; int unk34C; int unk350; int unk354; int unk358; int unk35C; int unk360; int unk364; int unk368; int unk36C; int unk370; int unk374; int unk378; int unk37C; int unk380; int unk384; int unk388; int unk38C; int unk390; int unk394; int unk398; int unk39C; int unk3A0; int unk3A4; int unk3A8; int unk3AC; int unk3B0; int unk3B4; int unk3B8; int unk3BC; int unk3C0; int unk3C4; int unk3C8; int unk3CC; int unk3D0; int unk3D4; int unk3D8; int unk3DC; int unk3E0; int unk3E4; int unk3E8; int unk3EC; int unk3F0; int unk3F4; int unk3F8; int unk3FC; int unk400; int unk404; int unk408; int unk40C; int unk410; int unk414; int unk418; int unk41C; int unk420; int unk424; Set5232 unk428;};struct Actor5232 {Table5232* unk00;};struct Queue5232 {void FUN_0078d2a0(Actor5232*,int);};namespace OwnQueue5232 {extern Queue5232 DAT_0107c0a0;}extern int DAT_00f47aa8,DAT_00f47ac4;extern Actor5232* __cdecl FUN_00c0050a(void*,int,void*,void*,int);
+// pdb: Script::StopCombatAlarmOnActorFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00523220(int a,int b,void* input){if(input){Actor5232* actor=FUN_00c0050a(input,0,&DAT_00f47aa8,&DAT_00f47ac4,0);if(actor){OwnQueue5232::DAT_0107c0a0.FUN_0078d2a0(actor,0);actor->unk00->unk428(actor,0);}}return true;}
 }   // namespace f3m_00523220
 
@@ -8016,6 +8204,8 @@ struct Obj52e910 {
 };
 bool __cdecl FUN_00517950(int,int,int,int,int,int,int,int*);
 void __cdecl FUN_0061d5a0(int,Obj52e910*,int,int,int);
+// pdb: Script::OpenTeammateContainerFunction | TESScriptFunctions.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052e910(int a1,int a2,Obj52e910* object,int a4,int a5,int a6,int a7,int a8) {
  if(object && object->vtable->valid(object)) {
  int notify=0;
@@ -8031,6 +8221,8 @@ namespace f3m_00525540 {
 namespace match525540 {
 bool FUN_00517950(void*,void*,void*,void*,void*,void*,void*,void**);
 bool FUN_00510230(void*,void*,int,void*);
+// pdb: Script::GetIsClass | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00525540(void* a,void* b,void* c,void* d,void* e,void* f,void* g,void* h) {void* value=0;if(!FUN_00517950(a,b,h,c,d,e,f,&value))return false;return FUN_00510230(c,value,0,g);}
 }
 }   // namespace f3m_00525540
@@ -8038,6 +8230,7 @@ bool FUN_00525540(void* a,void* b,void* c,void* d,void* e,void* f,void* g,void* 
 // @f3 0x00527030 (community match, verified in this file)
 namespace f3m_00527030 {
 struct Event5270 {bool FUN_00518430(int,unsigned);};
+// pdb: Script::OnOpenFunction | TESScriptFunctions.obj | tesv_win, objrun, medium
 bool __cdecl FUN_00527030(void* a,void* b,void* reference,void* d,void* e,Event5270* event,double* result,void* offset){
  *result=0.0;
  if(reference && event && event->FUN_00518430(0,0x10000)) *result=1.0;
@@ -8089,6 +8282,8 @@ struct RunResult;
 bool __cdecl FUN_00517950(unsigned int a1, unsigned int a2, unsigned int a8,
     unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6, RunResult** result);
 
+// pdb: Script::SetGamma | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052c100(unsigned int a1, unsigned int a2, unsigned int a3,
     unsigned int a4, unsigned int a5, unsigned int a6, unsigned int unused, unsigned int a8)
 {
@@ -8107,6 +8302,8 @@ bool __cdecl FUN_0052c100(unsigned int a1, unsigned int a2, unsigned int a3,
 // @f3 0x00527c80 (community match, verified in this file)
 namespace f3m_00527c80 {
 bool __cdecl FUN_00510e50(void*,int,int,double*);
+// pdb: Script::IsWeaponOutFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: Script::GetIsWeaponOutFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00527c80(int,int,void* object,int,int,int,double* out,int) {
  if(object) return FUN_00510e50(object,0,0,out);
  return true;
@@ -8118,6 +8315,8 @@ namespace f3m_00531100 {
 struct CodexParsedSettings { void FUN_0057dd70(int,bool); };
 CodexParsedSettings* __cdecl Sky_GetInstance();
 bool __cdecl FUN_00517950(int,int,int,int,int,int,int,int*,int*);
+// pdb: Script::ForceWeather | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00531100(int a,int b,int c,int d,int e,int f,int unused,int h) {
     int value=0;
     int enabled=0;
@@ -8194,6 +8393,8 @@ namespace ScriptFF90 {
 extern bool __cdecl FUN_00517950(unsigned,unsigned,unsigned,void*,unsigned,unsigned,unsigned,unsigned*,unsigned*);
 extern void __cdecl FUN_006f2050(void*,unsigned,void*,unsigned,unsigned);
 extern void __cdecl FUN_0053f550(void*,unsigned,unsigned);
+// pdb: Script::MatchFaceGeometryFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0053ff90(unsigned a,unsigned b,void* actor,unsigned d,unsigned e,unsigned f,unsigned g,unsigned h) { unsigned first=0,second=0; if(!FUN_00517950(a,b,h,actor,d,e,f,&first,&second)) return false; if(DAT_0106cd30>1) { FUN_006f2050(DAT_0107a79c,0x11df,actor,first,second); return true; } FUN_0053f550(actor,first,second); return true; }
 }
 }   // namespace f3m_0053ff90
@@ -8241,6 +8442,8 @@ struct CodexUpdateRef { CodexUpdateVtable* table;
     int unk3C;
     CodexUpdateExtra extra;
 };
+// pdb: Script::ClearOwnershipFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052d140(int a,int b,CodexUpdateRef* object) {
     if (object) {
         object->extra.ExtraDataList_RemoveOwnership();
@@ -8271,6 +8474,8 @@ bool __cdecl Script_SetMPSParticleMax(int a,int b,int c,int d,int e,int f,int g,
 namespace f3m_00525600 {
 extern bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,unsigned*);
 extern bool __cdecl Script_GetIsRaceConditionFunction(void*,unsigned,unsigned,void*);
+// pdb: Script::GetIsRace | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00525600(void* a1,void* a2,void* a3,void* a4,void* a5,void* a6,void* result,void* a8) {
     unsigned value=0;
     if(!FUN_00517950(a1,a2,a8,a3,a4,a5,a6,&value)) return false;
@@ -8310,6 +8515,8 @@ extern char DAT_00dd763c[];
 namespace f3m_00530660 {
 bool __cdecl FUN_00517950(int,int,int,int,int,int,int,int*);
 void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::SetTaskThreadUpdateSleepFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, low, conflict (F3 string "BSTaskThread::sUpdateSleepValue set to %d ms")
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00530660(int a,int b,int c,int d,int e,int f,int unused,int h) {
     int value=0;
     if (!FUN_00517950(a,b,h,c,d,e,f,&value)) return false;
@@ -8498,6 +8705,8 @@ struct Actor {
     void FUN_0070b740(void*,int,bool);
 };
 bool __cdecl FUN_00517950(int,int,int,TESObjectREFR*,int,int,int,void**,int*);
+// pdb: Script::ModFactionRank | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: Script::SetFactionRank)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00525c60(int a,int b,TESObjectREFR* reference,int d,int e,int f,double* result,int h) {
     void* object=0;
     int value=0;
@@ -8636,6 +8845,8 @@ struct VTable52c610 {
  unsigned (__thiscall *set)(Object52c610*,float,bool);
 };
 struct Object52c610 {VTable52c610* vtable;};
+// pdb: Script::DamageObjectBase | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRef, afValue
 unsigned FUN_0052c610(Object52c610* object,float value) {return object->vtable->set(object,value,true);}
 }
 }   // namespace f3m_0052c610
@@ -8662,6 +8873,8 @@ bool __cdecl Script_GetPCIsClass(int a,int b,int c,int d,int e,int f,double* res
 // @f3 0x0052b3e0 (community match, verified in this file)
 namespace f3m_0052b3e0 {
 extern void __cdecl Script_IsInCombatConditionFunction(void*,int,int,double*);
+// pdb: Script::IsInCombatFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052b3e0(void* a,void* b,void* reference,void* d,void* e,void* f,double* result,void* offset){Script_IsInCombatConditionFunction(reference,0,0,result);return true;}
 }   // namespace f3m_0052b3e0
 
@@ -8692,6 +8905,8 @@ public:
 bool __cdecl FUN_00517950(ParamInfo* paramInfo, void* scriptData, unsigned int* opcodeOffsetPtr,
     TESObjectREFR* thisObj, TESObjectREFR* containingObj, Script* scriptObj, ScriptEventList* eventList, ...);
 
+// pdb: Script::SetMerchantContainer | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052e1f0(ParamInfo* paramInfo, void* scriptData, TESObjectREFR* thisObj,
     TESObjectREFR* containingObj, Script* scriptObj, ScriptEventList* eventList, double* result,
     unsigned int* opcodeOffsetPtr)
@@ -8737,6 +8952,8 @@ struct State { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14;
 extern State* __cdecl FUN_00619e70();
 inline void SetX(float value) { FUN_00619e70()->x=value; } inline void SetY(float value) { FUN_00619e70()->y=value; } inline void SetZ(float value) { FUN_00619e70()->z=value; }
 extern bool __cdecl FUN_00517950(unsigned,unsigned,unsigned,unsigned,unsigned,unsigned,unsigned,float*,float*,float*,unsigned*);
+// pdb: Script::SetHUDGlowConstants | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00522420(unsigned a,unsigned b,unsigned c,unsigned d,unsigned e,unsigned f,unsigned g,unsigned h) { float first=DAT_01077550,second=DAT_01077584,third=DAT_010775a8; unsigned unused; if(!FUN_00517950(a,b,h,c,d,e,f,&first,&second,&third,&unused)) return false; SetX(first); SetZ(second); SetY(third); return true; }
 }
 }   // namespace f3m_00522420
@@ -8775,6 +8992,8 @@ bool __cdecl FUN_00517950(unsigned int a1, unsigned int a2, unsigned int a8,
     unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6, RunResult** result);
 void __cdecl FUN_006c3450(unsigned int key, RunResult* result);
 
+// pdb: Script::StartRadioConversation | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::PipboyRadio)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052e0f0(unsigned int a1, unsigned int a2, unsigned int a3,
     unsigned int a4, unsigned int a5, unsigned int a6, unsigned int unused, unsigned int a8)
 {
@@ -8790,6 +9009,8 @@ bool FUN_0052e0f0(unsigned int a1, unsigned int a2, unsigned int a3,
 namespace f3m_0052b090 {
 void __cdecl FUN_005126f0(void* target, int unused1, int unused2, int value);
 
+// pdb: Script::GetArmorRatingUpperFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 void FUN_0052b090(int a1, int a2, void* target, int a4, int a5, int a6, int value)
 {
     FUN_005126f0(target, 0, 0, value);
@@ -8799,6 +9020,8 @@ void FUN_0052b090(int a1, int a2, void* target, int a4, int a5, int a6, int valu
 // @f3 0x0052a350 (community match, verified in this file)
 extern unsigned char* DAT_010762b4;
 namespace f3m_0052a350 {
+// pdb: Script::AutoDisplayObjectives | TESScriptFunctions.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052a350(unsigned int a1, unsigned int a2, unsigned int a3,
     unsigned int a4, unsigned int a5, unsigned int a6, unsigned int unused, unsigned int a8)
 {
@@ -8817,6 +9040,7 @@ bool FUN_0052a350(unsigned int a1, unsigned int a2, unsigned int a3,
 
 // @f3 0x00530bd0 (community match, verified in this file)
 namespace f3m_00530bd0 {
+// pdb: TESNPC::ClearHead | TESScriptFunctions.obj | fnv360_0822_retail, call_gap, low
 struct Object530B {void** table;long count;__forceinline void Release(){if(!InterlockedDecrement(&count))((void(__thiscall*)(Object530B*))table[1])(this);}};struct Owner530B { int unk000; int unk004; int unk008; int unk00C; int unk010; int unk014; int unk018; int unk01C; int unk020; int unk024; int unk028; int unk02C; int unk030; int unk034; int unk038; int unk03C; int unk040; int unk044; int unk048; int unk04C; int unk050; int unk054; int unk058; int unk05C; int unk060; int unk064; int unk068; int unk06C; int unk070; int unk074; int unk078; int unk07C; int unk080; int unk084; int unk088; int unk08C; int unk090; int unk094; int unk098; int unk09C; int unk0A0; int unk0A4; int unk0A8; int unk0AC; int unk0B0; int unk0B4; int unk0B8; int unk0BC; int unk0C0; int unk0C4; int unk0C8; int unk0CC; int unk0D0; int unk0D4; int unk0D8; int unk0DC; int unk0E0; int unk0E4; int unk0E8; int unk0EC; int unk0F0; int unk0F4; int unk0F8; int unk0FC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; int unk128; int unk12C; int unk130; int unk134; int unk138; int unk13C; int unk140; int unk144; int unk148; int unk14C; int unk150; int unk154; int unk158; int unk15C; int unk160; int unk164; int unk168; int unk16C; int unk170; int unk174; int unk178; int unk17C; int unk180; int unk184; int unk188; int unk18C; int unk190; int unk194; int unk198; int unk19C; int unk1A0; Object530B* primary;Object530B* secondary;void FUN_00530bd0();};void Owner530B::FUN_00530bd0(){if(primary){primary->Release();primary=0;}if(secondary!=primary){if(secondary)secondary->Release();secondary=primary;if(primary)InterlockedIncrement(&primary->count);}}
 
 }   // namespace f3m_00530bd0
@@ -8841,6 +9065,8 @@ extern Player* DAT_0107a104;
 bool FUN_00517950(void* paramInfo, void* scriptData, void* opcodeOffset, void* thisObj,
                   void* containingObj, void* script, void* eventList, ...);
 
+// pdb: Script::DisablePlayerControlsFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00527950(void* paramInfo, void* scriptData, void* thisObj, void* containingObj,
                   void* script, void* eventList, double* result, void* opcodeOffset) {
     unsigned int flags = 0;
@@ -8885,6 +9111,8 @@ namespace f3m_00524520 {
 namespace Callback4520 {
 typedef void (__cdecl *Callback)(); extern Callback DAT_0116efe4;
 extern void __cdecl FUN_00524510(); extern void __cdecl FUN_00adbbd0();
+// pdb: Script::ReloadShaders | TESScriptFunctions.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00524520() { Callback previous=DAT_0116efe4; DAT_0116efe4=FUN_00524510; FUN_00adbbd0(); DAT_0116efe4=previous; return true; }
 }
 }   // namespace f3m_00524520
@@ -8922,6 +9150,8 @@ int unk18;
 Form* base;
 };
 void FUN_0061d5a0(int,Reference*,void*,void*,int);
+// pdb: Script::ShowComputersInterface | TESScriptFunctions.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052a3f0(void* a,void* b,Reference* target){
  if(target && target->base->type==0x17){FUN_0061d5a0(3,target,0,0,1);return true;}
  FUN_0061d5a0(3,0,0,0,1);return true;
@@ -8932,6 +9162,8 @@ bool FUN_0052a3f0(void* a,void* b,Reference* target){
 // @f3 0x0052c630 (community match, verified in this file)
 namespace f3m_0052c630 {
 void __cdecl FUN_00512d10(unsigned int, unsigned int, unsigned int, unsigned int);
+// pdb: Script::GetLastPlayerActionFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 void FUN_0052c630(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6, unsigned int a7)
 {
     FUN_00512d10(a3, 0, 0, a7);
@@ -8941,6 +9173,8 @@ void FUN_0052c630(unsigned int a1, unsigned int a2, unsigned int a3, unsigned in
 // @f3 0x00522ed0 (community match, verified in this file)
 namespace f3m_00522ed0 {
 struct Child522e {void Animation_PlayGroup(unsigned,unsigned,unsigned,int);};struct Actor522e;typedef void (__thiscall *Notify522e)(Actor522e*,bool);typedef Child522e* (__thiscall *Get522e)(Actor522e*);struct Table522e {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C; int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; int unkBC; int unkC0; int unkC4; Notify522e unkC8;int unkCC; int unkD0; int unkD4; int unkD8; int unkDC; int unkE0; int unkE4; int unkE8; int unkEC; int unkF0; int unkF4; int unkF8; int unkFC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; int unk128; int unk12C; int unk130; int unk134; int unk138; int unk13C; int unk140; int unk144; int unk148; int unk14C; int unk150; int unk154; int unk158; int unk15C; int unk160; int unk164; int unk168; int unk16C; int unk170; int unk174; int unk178; int unk17C; int unk180; int unk184; int unk188; int unk18C; int unk190; int unk194; int unk198; int unk19C; int unk1A0; int unk1A4; int unk1A8; int unk1AC; int unk1B0; int unk1B4; int unk1B8; int unk1BC; int unk1C0; int unk1C4; int unk1C8; int unk1CC; int unk1D0; int unk1D4; int unk1D8; int unk1DC; int unk1E0; Get522e unk1E4;};struct Actor522e {Table522e* unk00;};extern bool __cdecl FUN_00517950(int,int,int,Actor522e*,int,int,int,unsigned*,unsigned*,unsigned*);
+// pdb: Script::LoopGroupFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00522ed0(int a,int b,Actor522e* actor,int d,int e,int f,int g,int h){unsigned first;unsigned third;unsigned second;second=0;third=0;if(!FUN_00517950(a,b,h,actor,d,e,f,&first,&second,&third))return false;if(actor&&actor->unk00->unk1E4(actor)){actor->unk00->unk1E4(actor)->Animation_PlayGroup(first,third,second,-1);actor->unk00->unkC8(actor,true);}return true;}
 }   // namespace f3m_00522ed0
 
@@ -8991,6 +9225,8 @@ bool __cdecl Script_IsInListFunction(int a1,int a2,void* object,int a4,int a5,in
 // @f3 0x0052f6c0 (community match, verified in this file)
 namespace f3m_0052f6c0 {
 void __cdecl FUN_00513c30(unsigned int, unsigned int, unsigned int, unsigned int);
+// pdb: Script::GetRadiationLevelFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::IsCarryableFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 void FUN_0052f6c0(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6, unsigned int a7)
 {
     FUN_00513c30(a3, 0, 0, a7);
@@ -9001,6 +9237,8 @@ void FUN_0052f6c0(unsigned int a1, unsigned int a2, unsigned int a3, unsigned in
 extern bool DAT_0107a0f5;
 namespace f3m_00523af0 {
 bool __cdecl FUN_00619160();
+// pdb: Script::GameModeFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::ToggleShadowVolumesFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00523af0(void*,void*,void*,void*,void*,void*,double* result) {
  if(!FUN_00619160() && !DAT_0107a0f5) *result=1.0;
  else *result=0.0;
@@ -9026,6 +9264,8 @@ bool __cdecl FUN_00517950(unsigned int a1, unsigned int a2, unsigned int a8,
 
 bool __cdecl Script_GetTalkingActivatorActorConditionFunction(void* target, RunResult* result, int form, double* out);
 
+// pdb: Script::GetTalkingActivatorActorFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052c710(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4,
                   unsigned int a5, unsigned int a6, unsigned int a7, unsigned int a8)
 {
@@ -9049,6 +9289,8 @@ struct Context52d040 { void** table; const char* Name() { return ((const char* (
 extern bool __cdecl FUN_00517950(int,int,int,Source52d040*,int,Context52d040*,int,Actor52d040**,void**);
 extern float __cdecl FUN_00582980(Point52d040*,void*);
 extern void __cdecl FUN_00887da0(const char*,...);
+// pdb: Script::PushActorAwayFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052d040(int a,int b,Source52d040* source,int d,Context52d040* context,int f,int g,int h) {
  void* value; Actor52d040* actor; actor=0; value=0;
  if(!FUN_00517950(a,b,h,source,d,context,f,&actor,&value)) return false;
@@ -9069,6 +9311,8 @@ extern Manager* DAT_0107a104;
 }
 void FUN_00b2adb0(bool enable);
 bool __cdecl FUN_00517950(void* paramInfo, void* scriptData, unsigned int* opcodeOffset, void* thisObj, void* containingObj, void* script, void* eventList, ...);
+// pdb: Script::ToggleFlyCam | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00520e90(void* paramInfo, void* scriptData, void* thisObj, void* containingObj, void* script, void* eventList, double* result, unsigned int* opcodeOffset) {
     int mode = 0;
     if (!FUN_00517950(paramInfo, scriptData, opcodeOffset, thisObj, containingObj, script, eventList, &mode)) {
@@ -9454,6 +9698,8 @@ int unk5C4;
 int unk5C8;
 char unk5CC;bool enabled;};extern Player* DAT_0107a104;}
 bool __cdecl FUN_00517950(int,int,int,int,int,int,int,int*);
+// pdb: Script::SetCanPCFastTravelFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052b030(int a1,int a2,int a3,int a4,int a5,int a6,int a7,int a8){int value=0;if(!FUN_00517950(a1,a2,a8,a3,a4,a5,a6,&value))return false;Local52b::DAT_0107a104->enabled=value!=0;return true;}
 }   // namespace f3m_0052b030
 
@@ -9499,6 +9745,7 @@ public:
     virtual ~FUN_0053a340();
     FUN_00424aa0* items;
 };
+// pdb: NiTFixedStringMapBase<DFALL<NiTMapItem<NiFixedString,NiTexture *> >,NiTexture *>::`scalar deleting destructor' | TESScriptFunctions.obj | fnv360_0721_beta, objrun, medium
 FUN_0053a340::~FUN_0053a340() {
     if (items) {
         delete[] items;
@@ -9512,6 +9759,8 @@ struct ToggleState {
  void FUN_00bcfaf0(bool);
 };
 extern ToggleState* DAT_011790c8;
+// pdb: Script::SetAudioMultiThreading | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052e170(void* a1,void* a2,void* a3,void* a4,void* a5,void* a6,void*,void* a8) {
  int requested;
  if(!FUN_00517950(a1,a2,a8,a3,a4,a5,a6,&requested)) return false;
@@ -9524,6 +9773,8 @@ bool __cdecl FUN_0052e170(void* a1,void* a2,void* a3,void* a4,void* a5,void* a6,
 namespace f3m_00523ed0 {
 namespace match523ed0 {
 bool Script_GetLockedConditionFunction(void*,void*,void*,void*);
+// pdb: Script::GetLockedFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00523ed0(void* a1,void* a2,void* a3,void* a4,void* a5,void* a6,void* a7){return Script_GetLockedConditionFunction(a3,a6,0,a7);}
 }
 }   // namespace f3m_00523ed0
@@ -9583,6 +9834,7 @@ public:
     void DecRefCount() { if (InterlockedDecrement(&m_refCount) == 0) DeleteThis(); }
 };
 
+// pdb: BSSimpleList<TESQuestStageItem *>::RemoveAll | TESScriptFunctions.obj | fnv360_0721_beta, objrun, medium
 void Holder530a20::FUN_00530a20(RefObj530a20* pObject)
 {
     if (m_pObject != pObject)
@@ -9599,12 +9851,16 @@ void Holder530a20::FUN_00530a20(RefObj530a20* pObject)
 // @f3 0x00526120 (community match, verified in this file)
 namespace f3m_00526120 {
 extern bool __cdecl FUN_00510b20(void*,unsigned,unsigned,void*);
+// pdb: Script::GetArmorRating | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00526120(void*,void*,void* context,void*,void*,void*,void* result){return FUN_00510b20(context,0,0,result);}
 }   // namespace f3m_00526120
 
 // @f3 0x0052b760 (community match, verified in this file)
 namespace f3m_0052b760 {
 extern bool __cdecl FUN_005127f0(int,int,int,int);
+// pdb: Script::IsActorEvilFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::GetPairedAnimationFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052b760(int a,int b,int c,int d,int e,int f,int g){return FUN_005127f0(c,0,0,g);}
 }   // namespace f3m_0052b760
 
@@ -9758,6 +10014,8 @@ struct RotatableRef {
  void FUN_004e8710(float);void FUN_004e8730(float);void FUN_004e8750(float);
  RotationMatrix FUN_004e7c10();
 };
+// pdb: Script::SetAngleBase | TESScriptFunctions.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: apRefObject, acAxis, afValue
 void __cdecl FUN_00522b50(RotatableRef* reference,char axis,float angle) {
  if(reference) {
   float radians=(float)(angle*DAT_00dc2df0);
@@ -9893,6 +10151,8 @@ virtual bool Eligible();
 void FUN_006f9c20(bool);
 };
 bool __cdecl FUN_00517950(void*,void*,void*,Actor83*,void*,void*,void*,...);
+// pdb: Script::SetPlayerTeammateFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052e860(void* param,void* data,Actor83* actor,void* container,void* script,void* events,double* result,void* offset){
  unsigned int value=0;
  if(!FUN_00517950(param,data,offset,actor,container,script,events,&value))return false;
@@ -9907,6 +10167,8 @@ namespace Command93{
 struct Manager93{void FUN_0076e040(bool);};
 extern Manager93* DAT_0107a104;
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,...);
+// pdb: Script::SetPCToddlerFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052f600(void* param,void* data,void* actor,void* container,void* script,void* events,double* result,void* offset){
  unsigned int value=0;
  if(!FUN_00517950(param,data,offset,actor,container,script,events,&value))return false;
@@ -9925,6 +10187,8 @@ bool __cdecl Script_IsActorUsingATorchFunction(int,int,void* object,int,int,int,
 // @f3 0x0052aba0 (community match, verified in this file)
 namespace f3m_0052aba0 {
 bool __cdecl FUN_00512600(void*,int,int,unsigned int);
+// pdb: Script::GetBarterGoldFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::IsXBoxFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052aba0(int,int,void* object,int,int,int,unsigned int value){return FUN_00512600(object,0,0,value);}
 
 }   // namespace f3m_0052aba0
@@ -9966,6 +10230,8 @@ bool __cdecl Script_OnResetFunction(int,int,void* object,int,int,Context112* con
 namespace f3m_0052c270 {
 namespace Command113{
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,...);
+// pdb: Script::WasteMemory | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052c270(void* param,void* data,void* actor,void* container,void* script,void* events,double*,void* offset){
  float value=0.0f;
  return FUN_00517950(param,data,offset,actor,container,script,events,&value)?true:false;
@@ -10108,12 +10374,16 @@ virtual void slot128();
 virtual void slot129();
 virtual void Apply(int);
 };
+// pdb: Script::ResetInventoryFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052f830(int,int,Owner120* owner){if(owner)owner->Apply(0);return true;}
 }   // namespace f3m_0052f830
 
 // @f3 0x00525ac0 (community match, verified in this file)
 namespace f3m_00525ac0 {
 bool __cdecl FUN_00510770(void*,int,int,unsigned int);
+// pdb: Script::GetUsedItemLevelFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00525ac0(int,int,void* object,int,int,int,unsigned int value){return FUN_00510770(object,0,0,value);}
 
 }   // namespace f3m_00525ac0
@@ -10121,6 +10391,8 @@ bool __cdecl FUN_00525ac0(int,int,void* object,int,int,int,unsigned int value){r
 // @f3 0x0052f970 (community match, verified in this file)
 namespace f3m_0052f970 {
 bool __cdecl FUN_00513d60(void*,int,int,unsigned int);
+// pdb: Script::GetWeaponHealthPercFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052f970(int,int,void* object,int,int,int,unsigned int value){return FUN_00513d60(object,0,0,value);}
 
 }   // namespace f3m_0052f970
@@ -10579,6 +10851,8 @@ namespace Command165{
 extern int DAT_00f47ac4,DAT_00f47aa8;
 void* __cdecl FUN_00c0050a(void*,int,const void*,const void*,int);
 struct Actor165{unsigned int unk00,unk04,flags;void FUN_00709630(int,int);};
+// pdb: Script::ResetAIFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005265a0(int,int,void* object){
  Actor165* actor=static_cast<Actor165*>(FUN_00c0050a(object,0,&DAT_00f47aa8,&DAT_00f47ac4,0));
  if(actor&&!(static_cast<unsigned char>(actor->flags>>11)&1)&&!(static_cast<unsigned char>(actor->flags>>5)&1))actor->FUN_00709630(0,1);
@@ -11124,6 +11398,8 @@ Process* process;void Actor_UpdateAlpha();
 extern Actor* DAT_0107a104;
 inline double ClampLow(float v){return v<DAT_00db38b0?0.0:v;}
 inline double ClampHigh(float v){return v>DAT_00db38a8?1.0:v;}
+// pdb: Script::SetActorAlpha | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052b560(void* a1,void* a2,Actor* actor,void* a4,void* a5,void* a6,void* a7,void* a8){
  float value=0;
  if(!FUN_00517950(a1,a2,a8,actor,a4,a5,a6,&value))return false;
@@ -11140,6 +11416,8 @@ bool FUN_0052b560(void* a1,void* a2,Actor* actor,void* a4,void* a5,void* a6,void
 // @f3 0x00520310 (community match, verified in this file)
 extern bool DAT_0116ef70;extern int DAT_0116efb0;extern bool DAT_0116fd4a;
 namespace f3m_00520310 {
+// pdb: Script::ToggleRefractionDebug | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00520310(){if(DAT_0116ef70 && DAT_0116efb0>=2)DAT_0116fd4a=!DAT_0116fd4a;return true;}
 }   // namespace f3m_00520310
 
@@ -11148,6 +11426,8 @@ namespace f3m_0052fa80 {
 namespace Match2FA {
 struct Actor;struct Table {void* unk000;void* unk004;void* unk008;void* unk00c;void* unk010;void* unk014;void* unk018;void* unk01c;void* unk020;void* unk024;void* unk028;void* unk02c;void* unk030;void* unk034;void* unk038;void* unk03c;void* unk040;void* unk044;void* unk048;void* unk04c;void* unk050;void* unk054;void* unk058;void* unk05c;void* unk060;void* unk064;void* unk068;void* unk06c;void* unk070;void* unk074;void* unk078;void* unk07c;void* unk080;void* unk084;void* unk088;void* unk08c;void* unk090;void* unk094;void* unk098;void* unk09c;void* unk0a0;void* unk0a4;void* unk0a8;void* unk0ac;void* unk0b0;void* unk0b4;void* unk0b8;void* unk0bc;void* unk0c0;void* unk0c4;void* unk0c8;void* unk0cc;void* unk0d0;void* unk0d4;void* unk0d8;void* unk0dc;void* unk0e0;void* unk0e4;void* unk0e8;void* unk0ec;void* unk0f0;void* unk0f4;void* unk0f8;void* unk0fc;bool (__thiscall* Check)(Actor*);void* unk104;void* unk108;void* unk10c;void* unk110;void* unk114;void* unk118;void* unk11c;void* unk120;void* unk124;void* unk128;void* unk12c;void* unk130;void* unk134;void* unk138;void* unk13c;void* unk140;void* unk144;void* unk148;void* unk14c;void* unk150;void* unk154;void* unk158;void* unk15c;void* unk160;void* unk164;void* unk168;void* unk16c;void* unk170;void* unk174;void* unk178;void* unk17c;void* unk180;void* unk184;void* unk188;void* unk18c;void* unk190;void* unk194;void* unk198;void* unk19c;void* unk1a0;void* unk1a4;void* unk1a8;void* unk1ac;void* unk1b0;void* unk1b4;void* unk1b8;void* unk1bc;void* unk1c0;void* unk1c4;void* unk1c8;void* unk1cc;void* unk1d0;void* unk1d4;void* unk1d8;void* unk1dc;void* unk1e0;void* unk1e4;void* unk1e8;void* unk1ec;void* unk1f0;void* unk1f4;void* unk1f8;void* unk1fc;void* unk200;void* unk204;void* unk208;void* unk20c;void* unk210;void* unk214;void* unk218;void* unk21c;void* unk220;void* unk224;void* unk228;void* unk22c;void* unk230;void* unk234;void* unk238;void* unk23c;void* unk240;void* unk244;void* unk248;void* unk24c;void* unk250;void* unk254;void* unk258;void* unk25c;void* unk260;void* unk264;void* unk268;void* unk26c;void* unk270;void* unk274;void* unk278;void* unk27c;void* unk280;void* unk284;void* unk288;void* unk28c;void* unk290;void* unk294;void* unk298;void* unk29c;void* unk2a0;void* unk2a4;void* unk2a8;void* unk2ac;void* unk2b0;void* unk2b4;void* unk2b8;void* unk2bc;void* unk2c0;void* unk2c4;void* unk2c8;void* unk2cc;void* unk2d0;void* unk2d4;void* unk2d8;void* unk2dc;void* unk2e0;void* unk2e4;void* unk2e8;void* unk2ec;void* unk2f0;void* unk2f4;void* unk2f8;void* unk2fc;void* unk300;void* unk304;void* unk308;void* unk30c;void* unk310;void* unk314;void* unk318;void (__thiscall* Set)(Actor*,bool);};struct Actor {Table* table;};
 bool __cdecl FUN_00517950(void*,void*,void*,Actor*,void*,void*,void*,int*);
+// pdb: Script::IgnoreCrimeFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052fa80(void* a1,void* a2,Actor* actor,void* a4,void* a5,void* a6,void* result,void* a8){int value=0;if(!FUN_00517950(a1,a2,a8,actor,a4,a5,a6,&value))return false;if(actor && actor->table->Check(actor)){if(value>0)actor->table->Set(actor,true);else actor->table->Set(actor,false);}return true;}
 }
 }   // namespace f3m_0052fa80
@@ -11156,12 +11436,16 @@ bool __cdecl FUN_0052fa80(void* a1,void* a2,Actor* actor,void* a4,void* a5,void*
 namespace f3m_00527470 {
 struct Event5274 {bool FUN_00518430(unsigned,unsigned);};
 extern bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,Event5274*,unsigned*);
+// pdb: Script::OnPackageStartFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00527470(void* a,void* b,void* reference,void* d,void* e,Event5274* event,double* result,void* offset){unsigned value=0;if(!FUN_00517950(a,b,offset,reference,d,e,event,&value))return false;*result=0.0;if(reference&&event&&event->FUN_00518430(value,0x200))*result=1.0;return true;}
 }   // namespace f3m_00527470
 
 // @f3 0x0052ea70 (community match, verified in this file)
 namespace f3m_0052ea70 {
 void __cdecl FUN_005136b0(void*,int,int,void*);
+// pdb: Script::GetActorFactionPlayerEnemyFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 void __cdecl FUN_0052ea70(void* a,void* b,void* target,void* d,void* e,void* f,void* context) { FUN_005136b0(target,0,0,context); }
 }   // namespace f3m_0052ea70
 
@@ -11170,6 +11454,8 @@ namespace f3m_0052d5a0 {
 namespace Command189{
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,...);
 bool __cdecl Script_GetFactionCombatReactionConditionFunction(void*,unsigned int,unsigned int,double*);
+// pdb: Script::GetFactionCombatReactionFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052d5a0(void* param,void* data,void* actor,void* container,void* script,void* events,double* result,void* offset){
  unsigned int first=0,second=0;
  if(!FUN_00517950(param,data,offset,actor,container,script,events,&first,&second))return false;
@@ -11197,6 +11483,8 @@ bool __cdecl Script_SetPCYoungFunction(void* a1,void* a2,void* a3,void* a4,void*
 namespace f3m_005217c0 {
 extern bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,void**);
 extern bool __cdecl Script_GetPermanentActorValueConditionFunction(void*,void*,int,double*);
+// pdb: Script::GetPermanentActorValueFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005217c0(void* a,void* b,void* reference,void* d,void* e,void* f,double* result,void* offset){void* target=0;if(!FUN_00517950(a,b,offset,reference,d,e,f,&target))return false;return Script_GetPermanentActorValueConditionFunction(reference,target,0,result);}
 }   // namespace f3m_005217c0
 
@@ -11334,6 +11622,8 @@ struct SelectionPlayer {
  unsigned short unk1C0;bool active;
  void FUN_00783100(int,SelectionResult*);
 };
+// pdb: Script::CenterOnExteriorFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00531910(void* a1,void* a2,void* a3,void* a4,void* a5,void* a6,void*,void* a8) {
  int first=0,second=0;
  if(!FUN_00517950(a1,a2,a8,a3,a4,a5,a6,&first,&second))return false;
@@ -11352,6 +11642,7 @@ namespace f3m_00526eb0 {
 namespace match526eb0 {
 struct Owner {bool FUN_00518430(void*,unsigned);};
 bool FUN_00517950(void*,void*,void*,void*,void*,void*,Owner*,void**);
+// pdb: Script::OnUnequipFunction | TESScriptFunctions.obj | tesv_win, objrun, medium
 bool FUN_00526eb0(void* a1,void* a2,void* reference,void* a4,void* a5,Owner* owner,double* result,void* a8){
  void* value=0;
  if(!FUN_00517950(a1,a2,a8,reference,a4,a5,owner,&value))return false;
@@ -11386,6 +11677,8 @@ namespace f3m_00521460 {
 struct ParamInfo;class ScriptEventList;struct Script5214{void* TESForm_GetFile(int);};struct Object5214{void FUN_005e5500();};
 bool __cdecl FUN_00517950(ParamInfo*,void*,unsigned*,TESObjectREFR*,TESObjectREFR*,Script5214*,ScriptEventList*,...);
 int __cdecl FUN_00c04515(const char*,const char*,...);void __cdecl TESForm_AddCompileIndex(unsigned*,void*);Object5214* __stdcall FUN_005e9ad0(unsigned);
+// pdb: Script::EnableNavMesh | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00521460(ParamInfo*a1,void*a2,TESObjectREFR*a3,TESObjectREFR*a4,Script5214*script,ScriptEventList*a6,double*,unsigned*a8){char text[512];if(!FUN_00517950(a1,a2,a8,a3,a4,script,a6,text))return false;unsigned id=0;FUN_00c04515(text,"%x",&id);if(id){if(script&&script->TESForm_GetFile(-1))TESForm_AddCompileIndex(&id,script->TESForm_GetFile(-1));FUN_005e9ad0(id)->FUN_005e5500();}return true;}
 }   // namespace f3m_00521460
 
@@ -11393,6 +11686,8 @@ bool __cdecl FUN_00521460(ParamInfo*a1,void*a2,TESObjectREFR*a3,TESObjectREFR*a4
 extern float DAT_0107bb94;
 namespace f3m_005208f0 {
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,float*);
+// pdb: Script::SetUFOCamSpeedMult | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005208f0(void* a,void* b,void* c,void* d,void* e,void* f,void* g,void* h) {
  float result; if(!FUN_00517950(a,b,h,c,d,e,f,&result)) return false;
  DAT_0107bb94=result; return true;
@@ -11402,6 +11697,8 @@ bool __cdecl FUN_005208f0(void* a,void* b,void* c,void* d,void* e,void* f,void* 
 // @f3 0x0052daf0 (community match, verified in this file)
 namespace f3m_0052daf0 {
 bool __cdecl FUN_00515770(void*,int,int,void*);
+// pdb: Script::GetGroupTargetCountFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::GetGroupMemberCountFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052daf0(void* a,void* b,void* c,void* d,void* e,void* f,void* g){return FUN_00515770(c,0,0,g);}
 }   // namespace f3m_0052daf0
 
@@ -11409,6 +11706,8 @@ bool __cdecl FUN_0052daf0(void* a,void* b,void* c,void* d,void* e,void* f,void* 
 namespace f3m_0052f360 {
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,void**);
 void __cdecl TutorialMenu_Create(void*,int);
+// pdb: Script::ShowTutorialMenu | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052f360(void* a,void* b,void* c,void* d,void* e,void* f,void* g,void* h){void* result=0;FUN_00517950(a,b,h,c,d,e,f,&result);TutorialMenu_Create(result,0);return true;}
 }   // namespace f3m_0052f360
 
@@ -11417,6 +11716,8 @@ namespace f3m_005276f0 {
 namespace match5276f0 {
 struct Owner {bool FUN_00518430(void*,unsigned);};
 bool FUN_00517950(void*,void*,void*,void*,void*,void*,Owner*,void**);
+// pdb: Script::OnTriggerFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005276f0(void* a1,void* a2,void* reference,void* a4,void* a5,Owner* owner,double* result,void* a8){
  void* value=0;
  if(!FUN_00517950(a1,a2,a8,reference,a4,a5,owner,&value))return false;
@@ -11458,6 +11759,7 @@ namespace Match53a2 {
 extern const char DAT_00dd900c[];extern void (__stdcall *DAT_00dd9014)(void*);
 struct Pool53a2 {void FUN_0086ba60(void*);};extern Pool53a2 DAT_01090a78;
 struct Owner53a2 {const void* unk00;void* unk04;int unk08,unk0C;Owner53a2* FUN_0053a2f0(unsigned);};
+// pdb: BSSimpleArray<TESNPC *,1024>::`scalar deleting destructor' | TESScriptFunctions.obj | fnv360_0822_retail, vtable, medium
 Owner53a2* Owner53a2::FUN_0053a2f0(unsigned flags){unk00=DAT_00dd900c;if(unk04){DAT_00dd9014(unk04);unk04=0;unk0C=0;unk08=0;}if(flags&1)DAT_01090a78.FUN_0086ba60(this);return this;}
 
 }
@@ -11476,6 +11778,8 @@ bool __cdecl Script_SetQuestDelayFunction(void* a1,void* a2,void* a3,void* a4,vo
 // @f3 0x00524c90 (community match, verified in this file)
 namespace f3m_00524c90 {
 bool __cdecl FUN_0050fa70(void*,int,int,void*);
+// pdb: Script::GetFurnitureMarkerID | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00524c90(void*,void*,void* reference,void*,void*,void*,void* result) {return FUN_0050fa70(reference,0,0,result);}
 }   // namespace f3m_00524c90
 
@@ -11513,6 +11817,8 @@ bool __cdecl FUN_00517950(ParamInfo* paramInfo, void* scriptData, unsigned int* 
     TESObjectREFR* thisObj, TESObjectREFR* containingObj, Script* scriptObj,
     ScriptEventList* eventList, TESObjectREFR** ref, void** data, unsigned int* key);
 
+// pdb: Script::AddNPCToLeveledListFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: Script::ShowMenu)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00530740(ParamInfo* paramInfo, void* scriptData, TESObjectREFR* thisObj,
     TESObjectREFR* containingObj, Script* scriptObj, ScriptEventList* eventList, double* result,
     unsigned int* opcodeOffsetPtr)
@@ -11544,6 +11850,8 @@ bool __cdecl Script_CastImmediateOnSelfFunction(int a1,int a2,Actor5233*actor,in
 namespace f3m_0052b360 {
 class TESObjectREFR;
 bool FUN_00512350(TESObjectREFR* ref, void* arg1, void* arg2, double* result);
+// pdb: Script::IsTorchOutFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: Script::IsHorseStolenFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052b360(void* paramInfo, void* scriptData, TESObjectREFR* thisObj, TESObjectREFR* containingObj, void* script, void* eventList, double* result, unsigned int* opcodeOffset) {
     FUN_00512350(thisObj, 0, 0, result);
     return true;
@@ -11566,6 +11874,8 @@ bool FUN_00517950(void*,void*,void*,void*,void*,void*,void*,float*);
 void* TESForm_GetFormByNumericID(unsigned);void* FUN_00c0050a(void*,int,const void*,const void*,int);
 void ImageSpaceModifierInstanceForm_Trigger(void*,float,int);
 inline void* Get(){if(!DAT_00f4ef39)return 0;if(!DAT_01070c00)DAT_01070c00=FUN_00c0050a(TESForm_GetFormByNumericID(0x162),0,&DAT_00f46078,&DAT_00f49898,0);return DAT_01070c00;}
+// pdb: Script::TriggerHitShaderFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052b910(void* a1,void* a2,void* a3,void* a4,void* a5,void* a6,void* a7,void* a8){
  float value=1;
  if(!FUN_00517950(a1,a2,a8,a3,a4,a5,a6,&value))return false;
@@ -11578,6 +11888,8 @@ bool FUN_0052b910(void* a1,void* a2,void* a3,void* a4,void* a5,void* a6,void* a7
 namespace f3m_005277f0 {
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,unsigned*);
 struct EventGate {bool FUN_00518430(unsigned,unsigned);};
+// pdb: Script::OnTriggerLeaveFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005277f0(void* a1,void* a2,void* reference,void* a4,void* a5,EventGate* events,double* result,void* a8) {
  unsigned value=0;
  if(!FUN_00517950(a1,a2,a8,reference,a4,a5,events,&value))return false;
@@ -11603,12 +11915,15 @@ void Script_GetAlertFunction(int a1, int a2, void *obj, int a4, int a5, int a6, 
 namespace f3m_005271b0 {
 struct Events5271 {bool FUN_00518430(int,unsigned);};
 bool __cdecl FUN_00517950(int,int,int,void*,int,int,Events5271*,int*);
+// pdb: Script::OnHitFunction | TESScriptFunctions.obj | tesv_win, objrun_sim, low
 bool __cdecl FUN_005271b0(int a1,int a2,void*object,int a4,int a5,Events5271*events,double*out,int a8){int value=0;if(!FUN_00517950(a1,a2,a8,object,a4,a5,events,&value))return false;*out=0;if(object&&events&&events->FUN_00518430(value,0x80))*out=1;return true;}
 }   // namespace f3m_005271b0
 
 // @f3 0x0052e080 (community match, verified in this file)
 namespace f3m_0052e080 {
 bool __cdecl FUN_00517950(int,int,int,void*,int,int,int,int*);void __cdecl FUN_006c10e0(void*,bool);
+// pdb: Script::SetBroadcastState | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052e080(int a1,int a2,void*object,int a4,int a5,int a6,double*,int a8){int value=0;if(!FUN_00517950(a1,a2,a8,object,a4,a5,a6,&value))return false;FUN_006c10e0(object,value>0);return true;}
 }   // namespace f3m_0052e080
 
@@ -11618,6 +11933,7 @@ class ScriptEventList5270f0 {
 public:
     bool FUN_00518430(void* target, unsigned int eventMask);
 };
+// pdb: Script::OnReleaseFunction | TESScriptFunctions.obj | tesv_win, objrun, medium
 bool FUN_005270f0(void* paramInfo, void* scriptData, void* thisObj, void* containingObj, void* script, ScriptEventList5270f0* eventList, double* result, unsigned int* opcodeOffset) {
     *result = 0.0;
     if (thisObj && eventList) {
@@ -11657,6 +11973,7 @@ public:
     bool FUN_00518430(void* target, unsigned int eventMask);
 };
 bool __cdecl FUN_00517950(void* paramInfo, void* scriptData, unsigned int* opcodeOffset, void* thisObj, void* containingObj, void* script, void* eventList, ...);
+// pdb: Script::OnSellFunction | TESScriptFunctions.obj | tesv_win, objrun, medium
 bool FUN_00526db0(void* paramInfo, void* scriptData, void* thisObj, void* containingObj, void* script, ScriptEventList526db0* eventList, double* result, unsigned int* opcodeOffset) {
     void* target = 0;
     if (!FUN_00517950(paramInfo, scriptData, opcodeOffset, thisObj, containingObj, script, eventList, &target)) {
@@ -11738,6 +12055,8 @@ bool __cdecl Script_SetAllVisible(void* a1,void* a2,void* a3,void* a4,void* a5,v
 
 // @f3 0x00532d80 (community match, verified in this file)
 namespace f3m_00532d80 {
+// pdb: Script::SetScaleFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: SkyrimScript::`anonymous namespace'::SetScaleFunctor::operator())
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 struct Ref532D;struct Vtable532D {void* unk000;void* unk004;void* unk008;void* unk00C;void* unk010;void* unk014;void* unk018;void* unk01C;void* unk020;void* unk024;void* unk028;void* unk02C;void* unk030;void* unk034;void* unk038;void* unk03C;void* unk040;void* unk044;void* unk048;void* unk04C;void* unk050;void* unk054;void* unk058;void* unk05C;void* unk060;void* unk064;void* unk068;void* unk06C;void* unk070;void* unk074;void* unk078;void* unk07C;void* unk080;void* unk084;void* unk088;void* unk08C;void* unk090;void* unk094;void* unk098;void* unk09C;void* unk0A0;void* unk0A4;void* unk0A8;void* unk0AC;void* unk0B0;void* unk0B4;void* unk0B8;void* unk0BC;void* unk0C0;void* unk0C4;void (__thiscall *Update)(Ref532D*,int);};struct Ref532D {Vtable532D* vtable;void TESObjectREFR_SetScale(float);};extern int DAT_0106cd30;extern void* DAT_0107a79c;bool __cdecl FUN_00517950(void*,void*,void*,Ref532D*,void*,void*,void*,float*);void __cdecl FUN_006f2050(void*,int,Ref532D*,double);bool __cdecl FUN_00532d80(void* a,void* b,Ref532D* ref,void* d,void* e,void* f,void* unused,void* g){float value=0.0f;if(!FUN_00517950(a,b,g,ref,d,e,f,&value))return false;if(DAT_0106cd30>1){FUN_006f2050(DAT_0107a79c,0x113c,ref,value);return true;}if(ref){ref->TESObjectREFR_SetScale(value);ref->vtable->Update(ref,1);}return true;}
 }   // namespace f3m_00532d80
 
@@ -11751,6 +12070,8 @@ bool __cdecl Script_SetPlayerSleepHours(void* a,void* b,void* c,void* d,void* e,
 
 // @f3 0x00527670 (community match, verified in this file)
 namespace f3m_00527670 {
+// pdb: Script::OnMagicEffectHitFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 struct Script5276 {bool FUN_00518430(unsigned,unsigned);};bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,Script5276*,unsigned*);bool __cdecl FUN_00527670(void* a,void* b,void* reference,void* d,void* e,Script5276* script,double* output,void* h){unsigned value=0;if(!FUN_00517950(a,b,h,reference,d,e,script,&value))return false;*output=0.0;if(reference && script && script->FUN_00518430(value,0x2000))*output=1.0;return true;}
 }   // namespace f3m_00527670
 
@@ -11789,6 +12110,8 @@ struct Player { void FUN_00770580(void* form); };
 extern Player* DAT_0107a104;
 }
 bool __cdecl FUN_00517950(void* paramInfo, void* scriptData, unsigned int* opcodeOffset, void* thisObj, void* containingObj, void* script, void* eventList, ...);
+// pdb: Script::ForceActiveQuestFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: Script::MatchFaceGeometryFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052eeb0(void* paramInfo, void* scriptData, void* thisObj, void* containingObj, void* script, void* eventList, double* result, unsigned int* opcodeOffset) {
     void* form = 0;
     if (!FUN_00517950(paramInfo, scriptData, opcodeOffset, thisObj, containingObj, script, eventList, &form)) {
@@ -11885,6 +12208,8 @@ bool __cdecl Script_GetWindSpeedFunction(void* a,void* b,void* c,void* d,void* e
 namespace f3m_00526080 {
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,void**);
 bool __cdecl FUN_00510960(void*,void*,int,void*);
+// pdb: Script::GetDisposition | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00526080(void* a,void* b,void* object,void* d,void* e,void* f,void* context,void* h) {void* result=0;if(!FUN_00517950(a,b,h,object,d,e,f,&result))return false;return FUN_00510960(object,result,0,context);}
 }   // namespace f3m_00526080
 
@@ -11915,6 +12240,7 @@ bool __cdecl Script_ToggleTrees(){FUN_0059baa0(1)->enabled=!(unsigned char)Enabl
 
 // @f3 0x00527330 (community match, verified in this file)
 namespace f3m_00527330 {
+// pdb: Script::OnMurderFunction | TESScriptFunctions.obj | tesv_win, objrun_sim, low
 struct Script5276 {bool FUN_00518430(unsigned,unsigned);};bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,Script5276*,unsigned*);bool __cdecl FUN_00527330(void* a,void* b,void* reference,void* d,void* e,Script5276* script,double* output,void* h){unsigned value=0;if(!FUN_00517950(a,b,h,reference,d,e,script,&value))return false;*output=0.0;if(reference && script && script->FUN_00518430(value,0x20))*output=1.0;return true;}
 }   // namespace f3m_00527330
 
@@ -11923,6 +12249,8 @@ namespace f3m_00530440 {
 namespace Match304 {
 struct Player {int unk000;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;int unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;int unk080;int unk084;int unk088;int unk08c;int unk090;int unk094;int unk098;int unk09c;int unk0a0;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4;int unk0d8;int unk0dc;int unk0e0;int unk0e4;int unk0e8;int unk0ec;int unk0f0;int unk0f4;int unk0f8;int unk0fc;int unk100;int unk104;int unk108;int unk10c;int unk110;int unk114;int unk118;int unk11c;int unk120;int unk124;int unk128;int unk12c;int unk130;int unk134;int unk138;int unk13c;int unk140;int unk144;int unk148;int unk14c;int unk150;int unk154;int unk158;int unk15c;int unk160;int unk164;int unk168;int unk16c;int unk170;int unk174;int unk178;int unk17c;int unk180;int unk184;int unk188;int unk18c;int unk190;int unk194;int unk198;int unk19c;int unk1a0;int unk1a4;int unk1a8;int unk1ac;int unk1b0;int unk1b4;int unk1b8;int unk1bc;int unk1c0;int unk1c4;int unk1c8;int unk1cc;int unk1d0;int unk1d4;int unk1d8;int unk1dc;int unk1e0;int unk1e4;int unk1e8;int unk1ec;int unk1f0;int unk1f4;int unk1f8;int unk1fc;int unk200;int unk204;int unk208;int unk20c;int unk210;int unk214;int unk218;int unk21c;int unk220;int unk224;int unk228;int unk22c;int unk230;int unk234;int unk238;int unk23c;int unk240;int unk244;int unk248;int unk24c;int unk250;int unk254;int unk258;int unk25c;int unk260;int unk264;int unk268;int unk26c;int unk270;int unk274;int unk278;int unk27c;int unk280;int unk284;int unk288;int unk28c;int unk290;int unk294;int unk298;int unk29c;int unk2a0;int unk2a4;int unk2a8;int unk2ac;int unk2b0;int unk2b4;int unk2b8;int unk2bc;int unk2c0;int unk2c4;int unk2c8;int unk2cc;int unk2d0;int unk2d4;int unk2d8;int unk2dc;int unk2e0;int unk2e4;int unk2e8;int unk2ec;int unk2f0;int unk2f4;int unk2f8;int unk2fc;int unk300;int unk304;int unk308;int unk30c;int unk310;int unk314;int unk318;int unk31c;int unk320;int unk324;int unk328;int unk32c;int unk330;int unk334;int unk338;int unk33c;int unk340;int unk344;int unk348;int unk34c;int unk350;int unk354;int unk358;int unk35c;int unk360;int unk364;int unk368;int unk36c;int unk370;int unk374;int unk378;int unk37c;int unk380;int unk384;int unk388;int unk38c;int unk390;int unk394;int unk398;int unk39c;int unk3a0;int unk3a4;int unk3a8;int unk3ac;int unk3b0;int unk3b4;int unk3b8;int unk3bc;int unk3c0;int unk3c4;int unk3c8;int unk3cc;int unk3d0;int unk3d4;int unk3d8;int unk3dc;int unk3e0;int unk3e4;int unk3e8;int unk3ec;int unk3f0;int unk3f4;int unk3f8;int unk3fc;int unk400;int unk404;int unk408;int unk40c;int unk410;int unk414;int unk418;int unk41c;int unk420;int unk424;int unk428;int unk42c;int unk430;int unk434;int unk438;int unk43c;int unk440;int unk444;int unk448;int unk44c;int unk450;int unk454;int unk458;int unk45c;int unk460;int unk464;int unk468;int unk46c;int unk470;int unk474;int unk478;int unk47c;int unk480;int unk484;int unk488;int unk48c;int unk490;int unk494;int unk498;int unk49c;int unk4a0;int unk4a4;int unk4a8;int unk4ac;int unk4b0;int unk4b4;int unk4b8;int unk4bc;int unk4c0;int unk4c4;int unk4c8;int unk4cc;int unk4d0;int unk4d4;int unk4d8;int unk4dc;int unk4e0;int unk4e4;int unk4e8;int unk4ec;int unk4f0;int unk4f4;int unk4f8;int unk4fc;int unk500;int unk504;int unk508;int unk50c;int unk510;int unk514;int unk518;int unk51c;int unk520;int unk524;int unk528;int unk52c;int unk530;int unk534;int unk538;int unk53c;int unk540;int unk544;int unk548;int unk54c;int unk550;int unk554;int unk558;int unk55c;int unk560;int unk564;int unk568;int unk56c;int unk570;int unk574;int unk578;int unk57c;int unk580;int unk584;int unk588;int unk58c;int unk590;int unk594;int unk598;int unk59c;int unk5a0;int unk5a4;int unk5a8;int unk5ac;int unk5b0;int unk5b4;int unk5b8;int unk5bc;int unk5c0;int unk5c4;int unk5c8;int unk5cc;int unk5d0;int unk5d4;int unk5d8;int unk5dc;int unk5e0;int unk5e4;int unk5e8;int unk5ec;int unk5f0;int unk5f4;int unk5f8;int unk5fc;int unk600;int unk604;int unk608;int unk60c;int unk610;int unk614;int unk618;int unk61c;int unk620;int unk624;int unk628;int unk62c;int unk630;int unk634;int unk638;int unk63c;int unk640;int unk644;int unk648;int unk64c;int unk650;int unk654;int unk658;int unk65c;int unk660;int unk664;int unk668;int unk66c;int unk670;int unk674;int unk678;int unk67c;int unk680;int unk684;int unk688;int unk68c;int unk690;int unk694;int unk698;int unk69c;int unk6a0;int unk6a4;int unk6a8;int unk6ac;int unk6b0;int unk6b4;int unk6b8;int unk6bc;int unk6c0;int unk6c4;int unk6c8;int unk6cc;int unk6d0;int unk6d4;int unk6d8;int unk6dc;int unk6e0;int unk6e4;int unk6e8;int unk6ec;int unk6f0;int unk6f4;int unk6f8;int unk6fc;int unk700;int unk704;unsigned char unk708;unsigned char unk709;unsigned char unk70a;bool enabled;};extern Player* DAT_0107a104;
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,int*);
+// pdb: Script::SetPCCanUsePowerArmorFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00530440(void* a1,void* a2,void* a3,void* a4,void* a5,void* a6,void* result,void* a8){int value=0;if(!FUN_00517950(a1,a2,a8,a3,a4,a5,a6,&value))return false;DAT_0107a104->enabled=value!=0;return true;}
 }
 }   // namespace f3m_00530440
@@ -11932,6 +12260,8 @@ namespace Match2AD {
 struct Process {int unk000;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;int unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;int unk080;int unk084;int unk088;int unk08c;int unk090;int unk094;int unk098;int unk09c;int unk0a0;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4;int unk0d8;int unk0dc;int unk0e0;int unk0e4;int unk0e8;int unk0ec;int unk0f0;int unk0f4;int unk0f8;int unk0fc;int unk100;int unk104;int unk108;int unk10c;int unk110;int unk114;int unk118;int unk11c;int unk120;int unk124;int unk128;int unk12c;int unk130;int unk134;int unk138;int unk13c;int unk140;int unk144;int unk148;int unk14c;int unk150;int unk154;int unk158;int unk15c;int unk160;int unk164;int unk168;int unk16c;int unk170;int unk174;int unk178;int unk17c;int unk180;int unk184;int unk188;int unk18c;int unk190;int unk194;int unk198;int unk19c;int unk1a0;int unk1a4;int unk1a8;int unk1ac;int unk1b0;int unk1b4;int unk1b8;int unk1bc;int unk1c0;int unk1c4;int unk1c8;int unk1cc;int unk1d0;int unk1d4;int unk1d8;int unk1dc;int unk1e0;int unk1e4;int unk1e8;int unk1ec;int unk1f0;int unk1f4;int unk1f8;int unk1fc;int unk200;int unk204;int unk208;int unk20c;int unk210;int unk214;int unk218;int unk21c;int unk220;int unk224;int unk228;int unk22c;int unk230;int unk234;int unk238;int unk23c;int unk240;int unk244;int unk248;int unk24c;int unk250;int unk254;int unk258;int unk25c;int unk260;int unk264;int unk268;int unk26c;int unk270;int unk274;int unk278;int unk27c;int unk280;int unk284;int unk288;int unk28c;int unk290;int unk294;int unk298;int unk29c;int unk2a0;int unk2a4;int unk2a8;int unk2ac;int unk2b0;int unk2b4;int unk2b8;int unk2bc;int unk2c0;int unk2c4;int unk2c8;int unk2cc;int unk2d0;int unk2d4;int unk2d8;int unk2dc;int unk2e0;int unk2e4;int unk2e8;int unk2ec;int unk2f0;int unk2f4;int unk2f8;int unk2fc;int unk300;int unk304;int unk308;int unk30c;int unk310;int unk314;int unk318;int unk31c;int unk320;int unk324;int unk328;int unk32c;int unk330;int unk334;int unk338;int unk33c;int unk340;int unk344;int unk348;int unk34c;int unk350;int unk354;int unk358;int unk35c;int unk360;int unk364;int unk368;int unk36c;int unk370;int unk374;int unk378;int unk37c;int unk380;int unk384;int unk388;int unk38c;int unk390;int unk394;int unk398;int unk39c;int unk3a0;int unk3a4;int unk3a8;int unk3ac;int unk3b0;int unk3b4;int unk3b8;int unk3bc;int unk3c0;int unk3c4;int unk3c8;int unk3cc;float value;};struct Actor {Process* FUN_00764ea0();};
 extern int DAT_00f47ac4;extern int DAT_00f47aa8;
 void* __cdecl FUN_00c0050a(void*,int,void*,void*,int);
+// pdb: Script::ResetFallDamageTimerFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052adb0(void*,void*,void* input){Actor* actor=(Actor*)FUN_00c0050a(input,0,&DAT_00f47aa8,&DAT_00f47ac4,0);if(actor && actor->FUN_00764ea0())actor->FUN_00764ea0()->value=0.0f;return true;}
 }
 
@@ -11945,6 +12275,8 @@ int __cdecl FUN_00513230(void*,int,int,void*);int __cdecl Script_GetPlantedExplo
 namespace f3m_0052cb00 {
 struct Actor52cb{void**table;void FUN_006f8fb0(int,int);};
 bool __cdecl FUN_00517950(int,int,int,Actor52cb*,int,int,int,int*,int*);
+// pdb: Script::AddFactionFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052cb00(int a1,int a2,Actor52cb*actor,int a4,int a5,int a6,double*,int a8){int value=0;int mode=-1;if(!FUN_00517950(a1,a2,a8,actor,a4,a5,a6,&value,&mode))return false;if(value&&((bool(__thiscall*)(Actor52cb*))actor->table[64])(actor))actor->FUN_006f8fb0(value,mode);return true;}
 }   // namespace f3m_0052cb00
 
@@ -12077,6 +12409,8 @@ unsigned unk1b4;
 unsigned unk1b8;
 unsigned unk1bc;
 unsigned char unk1c0,unk1c1,changed;void FUN_00783100(int,void*);};extern Player* DAT_0107a104;
+// pdb: Script::CenterOnWorldFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00521650(void* a,void* b,void* c,void* d,void* e,void* f,void* g,void* h) {
  Object* object=0;unsigned first=0;unsigned second=0;
  if(!FUN_00517950(a,b,h,c,d,e,f,&object,&first,&second))return false;if(!object)return false;
@@ -12091,6 +12425,8 @@ bool __cdecl FUN_00521650(void* a,void* b,void* c,void* d,void* e,void* f,void* 
 namespace f3m_00520e40 {
 namespace Match520e {
 extern bool __cdecl FUN_00517950(int,int,int,int,int,int,int,...);extern bool DAT_010f3324;
+// pdb: Script::SetNoAvoidance | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00520e40(int a,int b,int c,int d,int e,int f,int g,int h){unsigned value=0;if(!FUN_00517950(a,b,h,c,d,e,f,&value))return false;DAT_010f3324=value!=0;return true;}
 }
 }   // namespace f3m_00520e40
@@ -12113,6 +12449,8 @@ bool Script_SameSex(void* a1,void* a2,void* a3,void* a4,void* a5,void* a6,void* 
 namespace f3m_00521760 {
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,void**);
 bool __cdecl FUN_0050ef90(void*,void*,int,void*);
+// pdb: Script::GetActorValueFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00521760(void* a,void* b,void* c,void* d,void* e,void* f,void* g,void* h){void* result=0;if(!FUN_00517950(a,b,h,c,d,e,f,&result))return false;return FUN_0050ef90(c,result,0,g);}
 }   // namespace f3m_00521760
 
@@ -12125,11 +12463,15 @@ bool __cdecl Script_ModFactionReaction(void* a,void* b,void* c,void* d,void* e,v
 
 // @f3 0x0052e9b0 (community match, verified in this file)
 namespace f3m_0052e9b0 {
+// pdb: Script::GetMajorCrimeCountFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 int __cdecl FUN_005137c0(void*,int,int,void*);int __cdecl FUN_0052e9b0(void*,void*,void* reference,void*,void*,void*,void* output){return FUN_005137c0(reference,0,0,output);}
 }   // namespace f3m_0052e9b0
 
 // @f3 0x00523760 (community match, verified in this file)
 namespace f3m_00523760 {
+// pdb: Script::StreamMusicFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00523760(ParamInfo* a1, void* a2, TESObjectREFR* a3, TESObjectREFR* a4, f3m_0052c840::Script* a5, ScriptEventList* a6, double* a7, unsigned int* a8) {
  char text[512];
  FUN_00517950(a1, a2, a8, a3, a4, a5, a6, text);
@@ -12153,6 +12495,7 @@ public:
 bool __cdecl FUN_00517950(unsigned int a1, unsigned int a2, unsigned int a8,
     Ref5272* a3, unsigned int a4, unsigned int a5, EventList5272* a6, unsigned int* result);
 
+// pdb: Script::OnStartCombatFunction | TESScriptFunctions.obj | tesv_win, objrun_sim, low
 bool __cdecl FUN_005272b0(unsigned int a1, unsigned int a2, Ref5272* a3,
     unsigned int a4, unsigned int a5, EventList5272* a6, double* result, unsigned int a8)
 {
@@ -12176,6 +12519,8 @@ struct CondObj;
 
 void __cdecl FUN_00514320(CondObj* obj, int unk04, int unk08, double* out);
 
+// pdb: Script::GetIgnoreCrimeFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 void __cdecl FUN_0052fa60(int a1, int a2, CondObj* obj, int a4, int a5, int a6, double* out)
 {
     FUN_00514320(obj, 0, 0, out);
@@ -12192,6 +12537,8 @@ public:
     void FUN_004377c0(RunResult* result);
 };
 
+// pdb: Script::RunCellTest | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052bf20(unsigned int a1, unsigned int a2, unsigned int a3,
     unsigned int a4, unsigned int a5, unsigned int a6, unsigned int unused, unsigned int a8)
 {
@@ -12240,6 +12587,8 @@ bool __cdecl FUN_00517950(ParamInfo* paramInfo, void* scriptData, unsigned int* 
     TESObjectREFR* thisObj, TESObjectREFR* containingObj, Script* scriptObj,
     ScriptEventList* eventList, ...);
 
+// pdb: Script::SetCellFullNameFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::ToggleDialogSubtitle)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00539c90(ParamInfo* paramInfo, void* scriptData, TESObjectREFR* thisObj,
     TESObjectREFR* containingObj, Script* scriptObj, ScriptEventList* eventList,
     double* unusedResult, unsigned int* opcodeOffsetPtr)
@@ -12423,6 +12772,8 @@ struct Actor : public TESObjectREFR {
   void FUN_00709630(int a, int b);
 };
 
+// pdb: Script::EvaluatePackageFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005265f0(int unusedFirst, int unusedSecond, TESObjectREFR* p)
 {
     Actor* actor = dynamic_cast<Actor*>(p);
@@ -12441,6 +12792,8 @@ bool __cdecl FUN_005265f0(int unusedFirst, int unusedSecond, TESObjectREFR* p)
 namespace f3m_00520570 {
 void FUN_00689a90(float, float, float);
 
+// pdb: Script::SetTerminalMenuPosFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00520570(f3m_0052fe90::f3m_0052fe90::ParamInfo* paramInfo, void* scriptData,
     f3m_0052fe90::f3m_0052fe90::TESObjectREFR* thisObj,
     f3m_0052fe90::f3m_0052fe90::TESObjectREFR* containingObj,
@@ -12466,6 +12819,8 @@ extern char DAT_010f3324;
 namespace f3m_0052c470 {
 
 
+// pdb: Script::SetSceneIsComplex | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::ToggleCombatDebugFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052c470(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4,
     unsigned int a5, unsigned int a6, unsigned int unused, unsigned int a8)
 {
@@ -12488,6 +12843,8 @@ namespace f3m_0052caa0 {
 
 bool __cdecl Script_GetHasNoteConditionFunction(unsigned int a1, RunResult* a2, unsigned int a3, double* a4);
 
+// pdb: Script::GetHasNoteFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052caa0(unsigned int paramInfo, unsigned int scriptData, unsigned int thisObj,
     unsigned int containingObj, unsigned int scriptObj, unsigned int eventList, double* result,
     unsigned int opcodeOffsetPtr)
@@ -12524,6 +12881,7 @@ bool __cdecl FUN_00517950(unsigned int a1, unsigned int a2, unsigned int a8,
     unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6,
     float* f1, float* f2);
 
+// pdb: Script::StopLookFunction | TESScriptFunctions.obj | tesv_win, objrun, medium
 bool __cdecl FUN_00526920(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4,
     unsigned int a5, unsigned int a6, unsigned int unused, unsigned int a8)
 {
@@ -12546,6 +12904,8 @@ public:
     bool FUN_00518430(void* key, unsigned int mask);
 };
 
+// pdb: Script::OnPackageEndFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005274f0(unsigned int a1, unsigned int a2, unsigned int a3,
                           unsigned int a4, unsigned int a5, unsigned int a6,
                           double* result, unsigned int a8)
@@ -12626,6 +12986,8 @@ public:
 };
 }
 
+// pdb: Script::SetChargenValue | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::GetIsClass)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005255a0(unsigned int a1, unsigned int a2, unsigned int a3,
     unsigned int a4, unsigned int a5, unsigned int a6, unsigned int unused, unsigned int a8)
 {
@@ -12659,6 +13021,8 @@ bool Script_GetThreatRatioFunction(unsigned int a1, unsigned int a2, unsigned in
 namespace f3m_0052a450 {
 extern "C" void __cdecl FUN_00512360(int a1, int a2, int a3, double* a4);
 
+// pdb: Script::GetSandmanFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::GetVampireFeedFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 void FUN_0052a450(int a1, int a2, int a3, int a4, int a5, int a6, double* a7)
 {
     FUN_00512360(a3, 0, 0, a7);
@@ -12892,6 +13256,8 @@ namespace f3m_00528ea0 {
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,void*,int*);
 struct ExtractedFlags {void FUN_0044f750(unsigned,bool,bool);};
 struct ExtractedForm {unsigned unk00,unk04,unk08,unk0C,unk10,unk14,unk18,unk1C,unk20,unk24,unk28,unk2C;ExtractedFlags flags;};
+// pdb: Script::SetEssentialFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: Script::GetEquippedShoutFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00528ea0(void* a1,void* a2,void* a3,void* a4,void* a5,void* a6,double* result,void* a8) {
  *result=0.0;
  ExtractedForm* form=0;
@@ -12954,6 +13320,7 @@ namespace f3m_0053a2a0 {
 extern void (__stdcall* DAT_00dd9000)(void*);
 struct ArrayFreeHeap {void FUN_0086ba60(void*);};
 struct DeletingArray {void** table;void* data;unsigned size,capacity;DeletingArray* FUN_0053a2a0(unsigned);};
+// pdb: BSSimpleArray<Tile::Value *,8>::`scalar deleting destructor' | Interface.obj | fnv360_0822_retail, vtable, medium
 DeletingArray* DeletingArray::FUN_0053a2a0(unsigned flags) {
  void* storage=data;table=DAT_00dd8ff8;
  if(storage) {DAT_00dd9000(storage);data=0;capacity=0;size=0;}
@@ -12967,6 +13334,8 @@ DeletingArray* DeletingArray::FUN_0053a2a0(unsigned flags) {
 namespace f3m_0052da70 {
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,void**);
 bool __cdecl FUN_00513200(void*,void*,int,void*);
+// pdb: Script::ExistsFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052da70(void* a1,void* a2,void* reference,void* a4,void* a5,void* a6,void* result,void* a8) {
  void* target=0;
  if(!FUN_00517950(a1,a2,a8,reference,a4,a5,a6,&target))return false;
@@ -12999,6 +13368,7 @@ bool __cdecl FUN_00517950(unsigned int a1, unsigned int a2, unsigned int a8,
     unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6,
     RunResult** result);
 
+// pdb: Script::ActorOnEquipFunction | TESScriptFunctions.obj | tesv_win, objrun, medium
 bool __cdecl FUN_00526e30(unsigned int a1, unsigned int a2, unsigned int a3,
     unsigned int a4, unsigned int a5, unsigned int a6, double* result,
     unsigned int a8)
@@ -13026,6 +13396,8 @@ namespace f3m_00538320 {
 extern char DAT_00db3438[];struct Object5383{int unk00;int unk04;int unk08;int unk0C;int unk10;int unk14;int unk18;int unk1C;int unk20;int unk24;int unk28;int unk2C;int unk30;const char*name;__forceinline const char*Name(){const char*text=name;return text?text:DAT_00db3438;}};
 namespace Global5383{struct Manager{void FUN_00bd0030(const char*,unsigned,Object5383*);};extern Manager*DAT_011790c8;extern Object5383*DAT_01079048;}
 bool __cdecl FUN_00517950(int,int,int,int,int,int,int,Object5383**);
+// pdb: Script::SetNoActivationSound | TESScriptFunctions.obj | fnv360_0822_retail, uconst, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00538320(int a1,int a2,int a3,int a4,int a5,int a6,int,int a8){Object5383*object=0;if(FUN_00517950(a1,a2,a8,a3,a4,a5,a6,&object)&&object){Global5383::DAT_011790c8->FUN_00bd0030(object->Name(),0x20000121,object);Global5383::DAT_011790c8->FUN_00bd0030(object->Name(),0x20000121,object);Global5383::DAT_011790c8->FUN_00bd0030(object->Name(),0x20000121,object);Global5383::DAT_01079048=object;}return true;}
 }   // namespace f3m_00538320
 
@@ -13065,6 +13437,8 @@ struct FUN_0052bb90_Ref {
 bool __cdecl FUN_00517950(void* paramInfo, void* scriptData, unsigned* opcodeOffset,
     FUN_0052bb90_Ref* thisObj, FUN_0052bb90_Ref* containingObj, void* script, void* eventList, ...);
 
+// pdb: Script::SetIgnoreFriendlyHitsFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052bb90(void* paramInfo, void* scriptData, FUN_0052bb90_Ref* thisObj,
     FUN_0052bb90_Ref* containingObj, void* script, void* eventList, double* result,
     unsigned* opcodeOffset)
@@ -13101,6 +13475,8 @@ void __cdecl FUN_006c3a40(void*, bool);
 
 
 // @fnv 0x005d7fb0
+// pdb: Script::PipboyRadio | TESScriptFunctions.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: hkbVariableBindingSet::addBinding)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052de40(
     const ScriptParameter* apParameters,
     const char* apCompiledParams,
@@ -13167,6 +13543,8 @@ bool __cdecl FUN_00517950(unsigned int a1, unsigned int a2, unsigned int a8,
 struct PlayerControls { void FUN_00784160(bool enabled, unsigned int flags); };
 extern PlayerControls* DAT_0107a104;
 
+// pdb: Script::EnablePlayerControlsFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00527870(unsigned int param_1, unsigned int param_2, unsigned int param_3,
                          unsigned int param_4, unsigned int param_5, unsigned int param_6,
                          unsigned int param_7, unsigned int param_8)
@@ -13310,6 +13688,8 @@ virtual bool IsActor();
 void FUN_006f6120(int,float);
 };
 // @fnv 0x005c6b60
+// pdb: Script::ResetHealthFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00524a10(void*, void*, ActorRepair* actor)
 
 {
@@ -13369,6 +13749,8 @@ public:
 extern void* DAT_010799fc;
 
 // @fnv 0x005c54d0
+// pdb: Script::LoadGame | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00524160(const ScriptParameter* apParameters,
                  const char* apCompiledParams,
                  TESObjectREFR* apRefObject,
@@ -13565,6 +13947,8 @@ struct FUN_005d54a0_VTableChain<221> : FUN_005d54a0_VTableChain<220>
 };
 
 // @fnv 0x005d54a0
+// pdb: Script::SetDispositionFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052cc00(const ScriptParameter* scriptParameter,
                  const char* scriptName,
                  TESObjectREFR* object,
@@ -13887,6 +14271,8 @@ virtual void V274();
 virtual void V275();
 virtual void SetValue(void*,float); };
 // @fnv 0x005c8510
+// pdb: Script::ModDisposition | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00526140(const ScriptParameter* paramInfo, const char* scriptData, TESObjectREFR* ref, TESObjectREFR* container, Script* script, ScriptLocals* locals, double& result, unsigned int& opcodeOffset) {
     void* target = 0;
     int count = 0;
@@ -13906,6 +14292,8 @@ namespace f3m_0052d360 {
 extern bool __cdecl FUN_00517950(int, int, int, int, int, int, int, int*, int*);
 extern void __cdecl FUN_0061a0a0(int, int, unsigned char, unsigned char);
 
+// pdb: Script::SetTagSkills | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052d360(int a, int b, int c, int d, int e, int f, int g, int h)
 {
     bool result = true;
@@ -13927,6 +14315,8 @@ namespace match52d160 {
 bool FUN_00517950(void*, void*, void*, void*, void*, void*, void*, int*, int*, int*);
 void FUN_0061a0a0(int, int, int, bool);
 
+// pdb: Script::ShowCharGenMenu | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052d160(void* a1, void* a2, void* a3, void* a4,
                   void* a5, void* a6, void* a7, void* a8)
 {
@@ -13956,6 +14346,8 @@ class ScriptLocals;
 bool __cdecl FUN_00517950(const ScriptParameter*, const char*, unsigned int*, TESObjectREFR*, TESObjectREFR*, Script*, ScriptLocals*, ...);
 void __cdecl FUN_0061a0a0(int, int, unsigned char, unsigned char);
 // @fnv 0x005d7150
+// pdb: Script::ShowCharGenMenuModValues | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052d200(const ScriptParameter* apParameters, const char* apCompiledParams, TESObjectREFR* apRefObject, TESObjectREFR* apContainer, Script* apScript, ScriptLocals* apScriptLocals, double& afReturnValue, unsigned int& auiOffset)
 {
     bool bResult = true;
@@ -14041,6 +14433,8 @@ bool FUN_00517950(void* paramInfo, void* scriptData, void* opcodeOffset, void* t
                   void* containingObj, void* script, void* eventList, void* out);
 void FUN_0061a0a0(int a, void* form, int b, int c);
 
+// pdb: Script::AddSPECIALPoints | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052d300(void* paramInfo, void* scriptData, void* thisObj, void* containingObj,
                   void* script, void* eventList, double* result, void* opcodeOffset) {
     bool ok = true;
@@ -14121,6 +14515,8 @@ namespace ScriptAction0324 {
 bool __cdecl FUN_00517950(int,int,int,int,int,int,int,int*);
 void __cdecl FUN_0061a0a0(int,int,int,int);
 // @fnv 0x005d73d0
+// pdb: Script::SetSPECIALPoints | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052d2a0(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8)
 {
     bool success = true;
@@ -14142,6 +14538,8 @@ namespace ScriptAction0325 {
 bool __cdecl FUN_00517950(int,int,int,int,int,int,int,int*);
 void __cdecl FUN_0061a0a0(int,int,int,int);
 // @fnv 0x005d73d0
+// pdb: Script::AddTagSkills | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052d3e0(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8)
 {
     bool success = true;
@@ -14191,6 +14589,8 @@ class Script;
 class ScriptLocals;
 bool __cdecl FUN_00517950(const ScriptParameter*, const char*, unsigned int*, TESObjectREFR*, TESObjectREFR*, Script*, ScriptLocals*, ...);
 void __cdecl FUN_006195d0(const char*, ...);
+// pdb: Script::SetTaskThreadSleepFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, low, conflict (F3 string "BSTaskThread::sPauseSleepValue set to %d ms")
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00530600(const ScriptParameter* parameters, const char* scriptData,
     TESObjectREFR* thisObject, TESObjectREFR* container, Script* script,
     ScriptLocals* locals, double& result, unsigned int& opcodeOffset)
@@ -14273,6 +14673,8 @@ struct Player530{void PlayerCharacter_CheckForQuestTargetUpdate(Player530* p);};
 extern Player530* DAT_0107a104;
 void __cdecl FUN_00887da0(const char* fmt,...);
 }
+// pdb: Script::SetMinimalUseFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005303a0(unsigned int a1,unsigned int a2,n530::Ref530* a3,unsigned int a4,n530::Named530* a5,unsigned int a6,unsigned int unused,unsigned int a8){
     RunResult* flag=0;
     if(!FUN_00517950(a1,a2,a8,(unsigned int)a3,a4,(unsigned int)a5,a6,&flag))return false;
@@ -14396,6 +14798,7 @@ extern char DAT_0116efc8;
 namespace f3m_00530bb0 {
 
 
+// pdb: BSShaderManager::GetShadows | TESScriptFunctions.obj | fnv360_0822_retail, call_seq, low
 int FUN_00530bb0()
 {
     if (DAT_0116efb0 >= 3)
@@ -14415,6 +14818,8 @@ public:
     void FUN_00638640();
 };
 
+// pdb: Script::ForceTerminalBackFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: `anonymous namespace'::ClearSayOnceFlagFunctor)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005302f0()
 {
     TgtObj* o = Tile_GetMenuByClass(0x421);
@@ -14450,6 +14855,8 @@ struct FileEntryList
 {
     void FUN_00457430(TESForm*, unsigned int, int, TESForm*, FUN_00408e30*);
 };
+// pdb: Script::AddItemToLeveledListFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005307d0(const ScriptParameter* parameter, const char* functionName,
     TESObjectREFR* reference, TESObjectREFR* reference2, Script* script,
     ScriptLocals* scriptLocals, double& result, unsigned int& resultCode)
@@ -14481,6 +14888,8 @@ namespace f3m_00530900 {
 void __cdecl FUN_00887da0(const char*,...);
 struct Form530900 {int unk00;unsigned char kind;void TESWaterForm_SetRemappedWaterForm(Form530900*);};
 bool __cdecl FUN_00517950(int,int,int,int,int,int,int,Form530900**,Form530900**);
+// pdb: Script::RemapWaterTypeFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00530900(int a1,int a2,int a3,int a4,int a5,int a6,double* out,int a8) {
  *out=0.0;
  Form530900* forms[2];forms[0]=0;forms[1]=0;
@@ -14634,6 +15043,8 @@ static bool DAT_01071d1a;
 bool __cdecl FUN_00517950(unsigned int a1, unsigned int a2, unsigned int a8, unsigned int a3,
     unsigned int a4, unsigned int a5, unsigned int a6, float* f1, float* f2);
 
+// pdb: Script::ToggleTestLight | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00520940(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4,
     unsigned int a5, unsigned int a6, unsigned int unused, unsigned int a8)
 {
@@ -14670,6 +15081,8 @@ bool __cdecl FUN_00517950(void* a1, void* a2, unsigned int* a8, void* a3, void* 
 bool __cdecl FUN_0053a370(void* a1, void* a2, void* a3, void* a4, void* a5, void* a6,
     unsigned int a7, unsigned int* a8, char* text, QString* out);
 
+// pdb: Script::ShowWarningFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0053d430(void* a1, void* a2, void* a3, void* a4, void* a5, void* a6,
     unsigned int a7, unsigned int* a8)
 {
@@ -14741,6 +15154,8 @@ struct Q54d4a0 { void FUN_0054d4a0(); };
 struct QPlayer { Q54d4a0* Actor_GetClass(unsigned int, unsigned int); };
 extern QPlayer* DAT_0107a104;
 
+// pdb: Script::SetPlayerTagSkillFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052ea90(void* paramInfo, void* scriptData, void* thisObj, void* containingObj, void* scriptObj, void* eventList, double* result, unsigned int* opcodeOffsetPtr)
 {
     unsigned int a = 0xffffffff;
@@ -14760,6 +15175,8 @@ struct Player { void FUN_00783100(const char*, int); };
 extern Player* DAT_0107a104;
 bool __cdecl FUN_00517950(ParamInfo*, void*, unsigned*, TESObjectREFR*, TESObjectREFR*, Script*, ScriptEventList*, ...);
 void __cdecl FUN_00619660();
+// pdb: Script::CenterOnCellFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005215a0(ParamInfo* a1, void* a2, TESObjectREFR* a3, TESObjectREFR* a4, Script* a5, ScriptEventList* a6, double* result, unsigned* a8)
 {
     char text[512];
@@ -14783,6 +15200,8 @@ extern char DAT_00dd7568[];
 extern void __cdecl FUN_00887da0(const char*,...);
 extern bool __cdecl FUN_00517950(void*,void*,void*,Ref52F2*,void*,Script52F2*,void*,Item52F2**);
 static __forceinline Item52F2* AsType28(Item52F2* t){if(t && t->type==0x28) return t; return 0;}
+// pdb: Script::FireWeaponFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052f2b0(void* a,void* b,Ref52F2* reference,void* d,Script52F2* script,void* f,double* result,void* offset){
  Item52F2* item=0;
  if(!FUN_00517950(a,b,offset,reference,d,script,f,&item))return false;
@@ -14966,6 +15385,8 @@ void __cdecl FUN_00519040(TESForm* ref);
 void __cdecl Script_AddPendingEnabledReference(TESForm* ref);
 int __cdecl FUN_00434130(int value);
 
+// pdb: Script::EnableFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00523bd0(ParamInfo* paramInfo, void* scriptData, TESForm* thisObj,
     TESForm* containingObj, TESForm* scriptObj, ScriptEventList* eventList, double* result,
     unsigned int* opcodeOffsetPtr)
@@ -15030,6 +15451,8 @@ public:
 
 bool __cdecl FUN_00517950(int, int, int, int, int, int, int, float*, float*);
 
+// pdb: Script::SetCameraFOV | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005338c0(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8)
 {
     float value = 0.0f;
@@ -15075,6 +15498,8 @@ inline void AdjustCounter1121(bool enter) {
     else InterlockedDecrement(&DAT_0116d6bc);
     if(DAT_0116d6bc < 0) DAT_0116d6bc = 0;
 }
+// pdb: Script::DumpModelMap | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00524540(void* p1,void* p2,void* p3,void* p4,void* p5,void* p6,void* p7,void* p8) {
     char filename[260];
     char buffer[512];
@@ -15181,6 +15606,8 @@ extern RefList_9e80 DAT_01071bc8;
 
 static void AddRef_9e80(TESObjectREFR_9e80* item) { DAT_01071bc8.FUN_0049fac0(item); }
 
+// pdb: Script::MarkForDeleteFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: Script::GetLightLevelFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00539e80(void* arg1, void* arg2, TESObjectREFR_9e80* ref)
 {
     TESObjectREFR_9e80* cached = static_cast<TESObjectREFR_9e80* const volatile&>(ref);
@@ -15673,6 +16100,8 @@ public:
  Mid531f60* next;
 };
 extern FUN_0052f920_Mgr* DAT_0107a0d8;
+// pdb: Script::SetClipDistFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00531f60(int a1,int a2,int a3,int a4,int a5,int a6,int a7,int a8) {
  float value=0.0f;
  if (!FUN_00517950(a1,a2,a8,a3,a4,a5,a6,&value)) return false;
@@ -16399,6 +16828,8 @@ struct CodexRecordDD9 {
 };
 struct CodexLookupDD9 { CodexRecordDD9* TESQuest_GetObjective(unsigned); };
 extern bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,CodexLookupDD9**,unsigned*,unsigned*);
+// pdb: Script::GetObjectiveDisplayedFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052dd90(void* a1,void* a2,void* a3,void* a4,void* a5,void* a6,double* result,void* a8) {
     CodexLookupDD9* owner;
     unsigned index;
@@ -16590,6 +17021,8 @@ namespace f3m_0052e560 {
 struct Field52e5 {int unk00;};
 struct Owner52e5 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; Field52e5 unk40;void FUN_004e8130(int);void FUN_004e6c50();};
 extern bool __cdecl FUN_00517950(int,int,int,Owner52e5*,int,int,int,int*);extern void __cdecl FUN_005166a0(Owner52e5*,Field52e5*);extern void __cdecl Script_SetActionFlag(int,Field52e5*,unsigned);extern __declspec(thread) int DAT_0117c278;
+// pdb: Script::TriggerEnterFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052e560(int a,int b,Owner52e5* c,int d,int e,int f,int g,int h){int value=0;if(!FUN_00517950(a,b,h,c,d,e,f,&value))return false;if(c){Field52e5* field=&c->unk40;FUN_005166a0(c,field);Script_SetActionFlag(value,field,0x20000000);Script_SetActionFlag(value,field,0x10000000);c->FUN_004e8130(value);if(DAT_0117c278<5){++DAT_0117c278;c->FUN_004e6c50();--DAT_0117c278;}}return true;}
 }   // namespace f3m_0052e560
 
@@ -16624,6 +17057,8 @@ namespace f3m_00521e30 {
 struct Actor521e {void FUN_006f6120(unsigned,float);};
 struct Info521e {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; unsigned unk44;bool Blocked(){return (unk44>>14)&1;}bool Negative(){return(unk44>>9)&1;}};extern Info521e* DAT_01073eb8[];extern int DAT_00f47aa8,DAT_00f47ac4;extern char DAT_00dd64e4[];extern __declspec(thread) bool DAT_0117c250;
 extern Actor521e* __cdecl FUN_00c0050a(void*,int,void*,void*,int);extern bool __cdecl FUN_00517950(int,int,int,void*,int,int,int,unsigned*,float*);extern const char* __cdecl ActorValue_GetActorValueScriptName(unsigned);extern void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::RestoreActorValueFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::ModActorValueFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00521e30(int a,int b,void* c,int d,int e,int f,int g,int h){unsigned index=0;float value=0.0f;if(!FUN_00517950(a,b,h,c,d,e,f,&index,&value))return false;Actor521e* actor=FUN_00c0050a(c,0,&DAT_00f47aa8,&DAT_00f47ac4,0);if(actor){Info521e* info=DAT_01073eb8[index];if(!info->Blocked()){float amount=info->Negative()?-value:(float)fabs(value);actor->FUN_006f6120(index,amount);return true;}if(DAT_0117c250)FUN_006195d0(DAT_00dd64e4,ActorValue_GetActorValueScriptName(index));}return true;}
 }   // namespace f3m_00521e30
 
@@ -17044,6 +17479,8 @@ struct Object521c00 {VTable521c00* vtable;};
 Object521c00* FUN_00c0050a(void*,int,void*,void*,int);
 bool FUN_00517950(void*,void*,void*,void*,void*,void*,void*,unsigned*,int*);
 const char* ActorValue_GetActorValueScriptName(unsigned);void FUN_006195d0(const char*,...);
+// pdb: Script::ModActorValueFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00521c00(void* a,void* b,void* c,void* d,void* e,void* f,void* g,void* h) {
  unsigned index=0;int value=0;
  if(!FUN_00517950(a,b,h,c,d,e,f,&index,&value)) return false;
@@ -17084,6 +17521,8 @@ extern void* __cdecl FUN_00c0050a(void*,int,const void*,const void*,int);
 extern void* DAT_00f47aa8;
 extern void* DAT_00f47ac4;
 struct CodexCast5BC { void FUN_0070b650(unsigned,unsigned); };
+// pdb: Script::SetFactionRank | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00525bc0(void* a1,void* a2,void* a3,void* a4,void* a5,void* a6,double* result,void* a8) {
     unsigned first=0;
     unsigned second=0;
@@ -17108,6 +17547,8 @@ namespace f3m_0052b8c0 {
 bool __cdecl FUN_005129e0(void*,int,int,double*);
 __declspec(thread) bool DAT_0117c250 = false;
 void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::GetWhichServiceFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052b8c0(int a,int b,void* object,int d,int e,int f,double* result) {
     bool success=FUN_005129e0(object,0,0,result);
     if (DAT_0117c250) FUN_006195d0(DAT_00dd6e84,*result);
@@ -17120,6 +17561,8 @@ namespace f3m_00524230 {
 extern bool DAT_01079b48;
 struct CodexAction423 { void FUN_006d45c0(); };
 extern CodexAction423* DAT_010799fc;
+// pdb: Script::Autosave | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::GetDisease)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00524230() {
     if(DAT_01079b48) DAT_010799fc->FUN_006d45c0();
     return true;
@@ -17146,6 +17589,8 @@ namespace f3m_0052e030 {
 extern bool __cdecl FUN_006c1200(int);
 __declspec(thread) bool DAT_0117c250=false;
 extern void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::GetBroadcastState | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052e030(int a,int b,int c,int d,int e,int f,double* out) {
  *out=FUN_006c1200(c) ? 1.0:0.0;
  if(DAT_0117c250) FUN_006195d0(DAT_00dd74b4,*out);
@@ -17567,6 +18012,8 @@ struct Object531aa0 {VTable531aa0* vtable;
 extern void* DAT_00f47ac4;extern void* DAT_00f47aa8;
 Object531aa0* FUN_00c0050a(void*,int,void*,void*,int);
 bool FUN_00517950(void*,void*,void*,void*,void*,void*,void*,int*);
+// pdb: Script::ResurrectActorFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00531aa0(void* a,void* b,void* c,void* d,void* e,void* f,void* g,void* h) {
  Object531aa0* object=FUN_00c0050a(c,0,&DAT_00f47aa8,&DAT_00f47ac4,0);
  int value=0;
@@ -17585,6 +18032,8 @@ struct Owner;
 struct Table { void* unk00; void* unk04; void* unk08; void* unk0C; void* unk10; void* unk14; bool (__thiscall *Open)(Owner*,int); void (__thiscall *Finish)(Owner*); void* unk20; void (__thiscall *Notify)(Owner*); };
 extern int __cdecl FUN_00c007fc(char*,unsigned,const char*);
 struct Owner { Table* table; char path[260]; bool FUN_00539ff0(const char*); };
+// pdb: SettingCollection<Setting>::ReadSettingsFromFile | XBlendSettings.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apFileName
 bool Owner::FUN_00539ff0(const char* name) { Scope scope; if(name) FUN_00c007fc(path,260,name); else path[0]=0; bool opened=table->Open(this,0); if(opened) { table->Notify(this); table->Finish(this); } return opened; }
 }
 }   // namespace f3m_00539ff0
@@ -17954,6 +18403,8 @@ struct CodexActorAF2 {
     int unk5C;
     CodexOwnerAF2* unk60;
 };
+// pdb: Script::DamageWeaponFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052af20(void* a1,void* a2,void* a3,void* a4,void* a5,void* a6,void*,void* a8) {
     float value=0.0f;
     if(FUN_00517950(a1,a2,a8,a3,a4,a5,a6,&value)) {
@@ -18376,6 +18827,8 @@ struct Tls520340 {
 };
 __declspec(thread) Tls520340 tls={0};
 extern bool DAT_0116ef97;extern const char DAT_00dd6004[],DAT_00dd6000[],DAT_00dd6190[];void FUN_006195d0(const char*,...);
+// pdb: Script::ToggleLiteBriteFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00520340() {DAT_0116ef97=!DAT_0116ef97;if(tls.print)FUN_006195d0(DAT_00dd6190,DAT_0116ef97?DAT_00dd6004:DAT_00dd6000);return true;}
 }
 }   // namespace f3m_00520340
@@ -18591,6 +19044,8 @@ namespace f3m_0052a1b0 {
 
 void __cdecl FUN_00619df0(int mode);
 
+// pdb: Script::ShowRaceMenu | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052a1b0()
 {
     if (DAT_0107a104) {
@@ -18852,6 +19307,8 @@ struct ActorValueSetter521ab0 {
     virtual void Unk0E4();
     virtual void SetActorValue(int actorValue, int value);
 };
+// pdb: Script::SetActorValueFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00521ab0(void* paramInfo, void* scriptData, TESObjectREFR* thisObj, void* containingObj, void* script, void* eventList, double* result, unsigned int* opcodeOffset) {
     int actorValue = 0;
     int value = 0;
@@ -19269,6 +19726,8 @@ unsigned int unkb0;
 bool enabled;
 const char* FUN_004e9a10();
 };
+// pdb: Script::ToggleActorAI | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00520b70(int,int,void* object){
  Owner129* owner=static_cast<Owner129*>(FUN_00c0050a(object,0,&DAT_00f47aa8,&DAT_00f47ac4,0));
  if(owner){owner->enabled=!owner->enabled;if(DAT_0117c250)FUN_006195d0(DAT_00dd622c,owner->FUN_004e9a10(),owner->enabled?DAT_00dd6004:DAT_00dd6000);}
@@ -19354,6 +19813,8 @@ struct ActorView52cf70 {
     bool processing; // +0xb4
     const char* FUN_004e9a10();
 };
+// pdb: Script::SetActorsAIFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052cf70(void* paramInfo, void* scriptData, TESObjectREFR* thisObj, void* containingObj, void* script, void* eventList, double* result, unsigned int* opcodeOffset) {
     if (thisObj->IsActor()) {
         int enable;
@@ -19385,6 +19846,8 @@ void __cdecl FUN_006195d0(const char*,...);
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,...);
 struct Info191{unsigned int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c;int count;};
 struct Object191{Info191* TESQuest_GetObjective(unsigned int);};
+// pdb: Script::GetObjectiveCompletedFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052dce0(void* param,void* data,void* actor,void* container,void* script,void* events,double* result,void* offset){
  Object191* object;unsigned int key,unused;
  if(!FUN_00517950(param,data,offset,actor,container,script,events,&object,&key,&unused))return false;
@@ -19640,6 +20103,8 @@ struct Resource5235 {int unk00;char unk04;int unk08;Resource5235():unk00(-1),unk
 struct Manager5235 {Value5235* FUN_00bcfbb0(Value5235*,const char*,unsigned);};
 extern Manager5235* DAT_011790c8;
 __forceinline Value5235& GetResource5235(Value5235* temp,const char* path,unsigned flags){return *DAT_011790c8->FUN_00bcfbb0(temp,path,flags);}
+// pdb: Script::PlaySoundFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00523590(int a,int b,int c,int d,int e,int f,int g,int h){String5235* text=0;int mode=0;Resource5235 resource;if(FUN_00517950(a,b,h,c,d,e,f,&text,&mode)){Value5235 temp;resource=GetResource5235(&temp,text->unk0C,(mode>0?0x20:0x40000000)|0x101);resource.FUN_00bd00c0(0);}return true;}
 }   // namespace f3m_00523590
 
@@ -19648,6 +20113,8 @@ namespace f3m_005240a0 {
 struct Manager5240a0 {void BGSSaveLoadManager_SaveGame(const char*,int,bool);};
 extern Manager5240a0* DAT_010799fc;
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,char*,int*);
+// pdb: Script::SaveGame | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005240a0(void* a,void* b,void* c,void* d,void* e,void* f,void* g,void* h){char text[512];int mode=0;if(!FUN_00517950(a,b,h,c,d,e,f,text,&mode))return false;DAT_010799fc->BGSSaveLoadManager_SaveGame(text,-1,mode!=0);return true;}
 }   // namespace f3m_005240a0
 
@@ -19666,6 +20133,8 @@ struct Player { char pad000[0x638]; int counter; };
 extern Player* DAT_0107a104;
 }
 bool __cdecl FUN_00517950(void* paramInfo, void* scriptData, unsigned int* opcodeOffset, void* thisObj, void* containingObj, void* script, void* eventList, ...);
+// pdb: Script::ModAmountStolenSoldFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00529400(void* paramInfo, void* scriptData, void* thisObj, void* containingObj, void* script, void* eventList, double* result, unsigned int* opcodeOffset) {
     int amount = 0;
     if (!FUN_00517950(paramInfo, scriptData, opcodeOffset, thisObj, containingObj, script, eventList, &amount)) {
@@ -19857,6 +20326,8 @@ namespace f3m_00530030 {
 
 extern const float DAT_00db38b8; extern const double DAT_00dcd110,DAT_00dc2df0;
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,float*,int*);
+// pdb: Script::CosFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00530030(void* a,void* b,void* c,void* d,void* e,void* f,double* result,void* h) {
  float value=0; int inverse=0;
  if(!FUN_00517950(a,b,h,c,d,e,f,&value,&inverse)) return false;
@@ -19873,6 +20344,8 @@ void* __cdecl FUN_00c0050a(void*,int,void*,void*,int);
 struct Object52c2d0 {int unk00;int unk04;int unk08;int unk0C;int unk10;int unk14;int unk18;void* target;};
 struct Target52c2d0 {void Actor_TrespassAlarm(Object52c2d0*,void*,int);};
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,Target52c2d0**);
+// pdb: Script::SendCrimeAlarmFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052c2d0(void* a,void* b,void* c,void* d,void* e,void* f,void* g,void* h){Target52c2d0* value=0;if(!FUN_00517950(a,b,h,c,d,e,f,&value))return false;Object52c2d0* object=(Object52c2d0*)FUN_00c0050a(c,0,&DAT_00f47aa8,&DAT_00f47ac4,0);if(value && object)value->Actor_TrespassAlarm(object,object->target,-1);return true;}
 }   // namespace f3m_0052c2d0
 
@@ -19923,6 +20396,8 @@ struct StageNode
 
 void __cdecl FUN_006195d0(const char* fmt, ...);
 
+// pdb: Script::ShowQuestsFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: `anonymous namespace'::ShowQuestsFunctor)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005334e0()
 {
     StageNode* node = (StageNode*)(DAT_0106cdcc + 0xd4);
@@ -20176,6 +20651,8 @@ void FUN_0061aed0();
 bool FUN_00619310();
 void __cdecl FUN_006195d0(const char* fmt, ...);
 
+// pdb: Script::ToggleDebugTextFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00520390()
 {
     FUN_0061aed0();
@@ -20296,6 +20773,8 @@ int __cdecl FUN_00c0050a(int inptr, int vfdelta, int srctype, int targettype, in
 
 }
 
+// pdb: Script::DisableAllActors | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00533840(unsigned int unused1, unsigned int unused2, void* thisObj,
                           unsigned int unused3, unsigned int unused4, f3m_00533840::FlagOwner* owner)
 {
@@ -20605,6 +21084,8 @@ int unk9c;
 int unka0;
 ActorProcessStub* pProcess; NiAVObject* FUN_00424eb0(); void FUN_00703ab0(NiAVObject*,float); };
 // @fnv 0x005db290
+// pdb: Script::DrawSkeleton | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005383d0(int paramInfo, int scriptData, TESObjectREFR* thisObj, int containingObj, int scriptObj, int locals, double& result, int opcodeOffsetPtr)
 {
     int c = 0;
@@ -20641,6 +21122,8 @@ bool __cdecl FUN_00517950(const ScriptParameter*, const char*, unsigned int*, TE
 bool __cdecl FUN_00796010(const char*, float);
 void __cdecl FUN_006195d0(const char*, ...);
 extern __declspec(thread) unsigned char DAT_0117c250;
+// pdb: Script::SetCombatActionCostFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052ce50(const ScriptParameter* apParameters,
                          const char* apCompiledParams,
                          TESObjectREFR* apRefObject,
@@ -20955,6 +21438,8 @@ struct ActorLayout {
 struct ActorName { const char* FUN_004e9a10(); };
 extern __declspec(thread) bool DAT_0117c250;
 void __cdecl FUN_006195d0(const char*, ...);
+// pdb: Script::IsActorsAIOff | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00520bf0(void* parameters, const char* scriptData, ::TESObjectREFR* target, void* container, void* script, void* locals, double& result, unsigned int& offset)
 {
     ::Actor* actor = 0;
@@ -21394,6 +21879,8 @@ void __cdecl FUN_006195d0(const char* fmt, ...);
 bool __cdecl FUN_00517950(unsigned int a1, unsigned int a2, unsigned int a8,
     unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6, int* result);
 
+// pdb: Script::IsPlayerTagSkillFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052eb10(unsigned int a1, unsigned int a2, unsigned int a3,
     unsigned int a4, unsigned int a5, unsigned int a6, double* out, unsigned int a8)
 {
@@ -21725,6 +22212,8 @@ public:
     ActorValues values9c;
 };
 
+// pdb: Script::ForceActorValueFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00521f20(void* paramInfo, void* scriptData, void* reference,
     void* containingReference, void* script, void* eventList, double* result, unsigned* opcodeOffset)
 {
@@ -22068,6 +22557,8 @@ extern __declspec(thread) bool t_consoleOn250;
 bool __cdecl FUN_00517950(void*, void*, void*, TESObjectREFR*, void*, void*, void*, ...);
 const char* __cdecl ActorValue_GetActorValueScriptName(int);
 void __cdecl FUN_006195d0(const char* fmt, ...);
+// pdb: Script::DamageActorValueFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00521ce0(void* paramInfo, void* scriptData, TESObjectREFR* thisObj, void* containingObj,
     void* scriptObj, void* eventList, double* result, void* opcodeOffsetPtr)
 {
@@ -22120,6 +22611,8 @@ namespace f3m_0052aae0 {
 bool __cdecl FUN_00517950(void*, void*, unsigned int*, TESObjectREFR*, TESObjectREFR*, void*, void*, ...);
 void __cdecl FUN_006195d0(const char* fmt, ...);
 }
+// pdb: Script::SetBarterGoldFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052aae0(void* paramInfo, void* scriptData, TESObjectREFR* thisObj, TESObjectREFR* containingObj,
                           void* scriptObj, void* eventList, double* result, unsigned int* opcodeOffsetPtr)
 {
@@ -22427,6 +22920,8 @@ struct QMemContext {
     ~QMemContext() { DAT_0117c298 = saved; }
 };
 
+// pdb: Script::PlayMagicShader | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00535100(void* paramInfo, void* scriptData, QRef* thisObj, void* containingObj,
                           void* scriptObj, void* eventList, double* result, void* opcodeOffsetPtr)
 {
@@ -22504,6 +22999,8 @@ extern BoolOption DAT_0108c9a4; // events
 extern BoolOption DAT_0108cbec; // plos
 extern BoolOption DAT_0108c6c4; // area
 
+// pdb: Script::ToggleCombatDebugFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00536ca0(void* paramInfo,void* scriptData,void* thisObject,void* containingObject,
                          void* scriptObject,void* eventList,double* result,unsigned int* opcodeOffset)
 {
@@ -22676,6 +23173,8 @@ void __cdecl FUN_006195d0(const char* message);
 
 extern __declspec(thread) unsigned char tls_flag;
 
+// pdb: Script::FlushPersistantActors | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052bf80(const ScriptParameter* apParameters,
                   const char* apCompiledParams,
                   TESObjectREFR* apRefObject,
@@ -22846,6 +23345,8 @@ struct Player {int unk00,unk04,unk08,unk0c,unk10,unk14,unk18; int fallback;};
 extern Player* DAT_0107a104;
 bool FUN_00517950(int,int,int,int,int,int,int,int*,int*);
 void FUN_005151d0(int,int,int,double*);
+// pdb: Script::GetCellOwnershipFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::UseSkillFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052b250(int a,int b,int c,int d,int e,int f,double* result,int h) {
  *result=0.0;
  int fallback;
@@ -22867,6 +23368,8 @@ struct ScriptParameter; struct TESObjectREFR; struct Script; struct ScriptLocals
 bool __cdecl FUN_00517950(const ScriptParameter*,const char*,unsigned*,TESObjectREFR*,TESObjectREFR*,Script*,ScriptLocals*,...);
 struct Audio {void BSAudio_MuteType(unsigned,unsigned,unsigned);};
 extern Audio* DAT_011790c8;
+// pdb: Script::FadeSFXFunction | TESScriptFunctions.obj | fnv360_0822_retail, uconst, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00523830(const ScriptParameter* params,const char* data,TESObjectREFR* object,TESObjectREFR* actor,Script* script,ScriptLocals* locals,double& result,unsigned& offset) {
  float fadeTime=1.0f;
  if(FUN_00517950(params,data,&offset,object,actor,script,locals,&fadeTime)) {
@@ -22904,6 +23407,8 @@ virtual void v17();
 virtual void Mark(unsigned int);Marker* TESObjectREFR_GetMapMarkerData();};
 bool __cdecl FUN_00517950(const Parameter*,const char*,unsigned*,Ref*,Ref*,Script*,Locals*,...);
 bool __cdecl FUN_0061b850(const char*,int,const char*,const char*,float);
+// pdb: Script::ShowMap | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00526250(const Parameter* params,const char* data,Ref* reference,Ref* container,Script* script,Locals* locals,double& result,unsigned* offset){
  bool marker=false;
  Ref* travel=0;int changed=0;
@@ -22926,6 +23431,8 @@ namespace script1431 {
 struct Params;struct Ref;struct Script;struct Locals;
 bool __cdecl FUN_00517950(const Params*,const char*,unsigned*,Ref*,Ref*,Script*,Locals*,...);
 struct Player {void FUN_0076ca80(int);};extern Player* DAT_0107a104;
+// pdb: Script::RewardKarmaFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052c9a0(const Params* a,const char* b,Ref* c,Ref* d,Script* e,Locals* f,double* result,unsigned* offset){int value=0;if(!FUN_00517950(a,b,offset,c,d,e,f,&value))return false;DAT_0107a104->FUN_0076ca80(value);return true;}
 }
 }   // namespace f3m_0052c9a0
@@ -22950,6 +23457,7 @@ struct SsArr1428 {
  unsigned int size;
  unsigned int capacity;
 };
+// pdb: BSSimpleArray<NavMeshInfo const *,1024>::`scalar deleting destructor' | TESScriptFunctions.obj | fnv360_0822_retail, vtable, medium
 SsArr1428* __fastcall FUN_0053a250(SsArr1428* object, int, unsigned int flags) {
  object->SsArr1428::~SsArr1428();
  if (flags & 1) task1428::DAT_01090a78.FUN_0086ba60(object);
@@ -22967,6 +23475,8 @@ namespace task1514 {
 class ScriptParameter; class TESObjectREFR; class Script; class ScriptLocals;
 void __cdecl FUN_006195d0(const char*,...);
 bool __cdecl FUN_00517950(const ScriptParameter*,const char*,unsigned*,TESObjectREFR*,TESObjectREFR*,Script*,ScriptLocals*,...);
+// pdb: Script::ToggleDecalDebug | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052d610(const ScriptParameter* paramInfo, const char* scriptData, TESObjectREFR* thisObj, TESObjectREFR* containingObj, Script* scriptObj, ScriptLocals* locals, double& result, unsigned int& opcodeOffsetPtr) {
     int val = -1;
     if (!FUN_00517950(paramInfo, scriptData, &opcodeOffsetPtr, thisObj, containingObj, scriptObj, locals, &val)) {
@@ -23053,6 +23563,8 @@ __declspec(thread) TLS tls={0};
 extern const char DAT_00dbb4bc[],DAT_00db3438[],DAT_00dd8234[];
 void __cdecl FUN_006195d0(const char*,...);
 bool __cdecl FUN_00517950(unsigned,unsigned,unsigned,unsigned,unsigned,unsigned,unsigned,...);
+// pdb: Script::SelectPlayerSpellFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00534ed0(unsigned a1,unsigned a2,unsigned a3,unsigned a4,unsigned a5,unsigned a6,unsigned unused,unsigned a8){
  ::TESForm* form=0;
  if(!FUN_00517950(a1,a2,a8,a3,a4,a5,a6,&form))return false;
@@ -23399,6 +23911,8 @@ struct FUN_0052a970_ActorView {
 bool __cdecl FUN_00517950(void* paramInfo, void* scriptData, unsigned* opcodeOffset,
     void* thisObj, void* containingObj, void* script, void* eventList, ...);
 
+// pdb: Script::ForceTakeCoverFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052a970(void* paramInfo, void* scriptData, void* thisObj,
     void* containingObj, void* script, void* eventList, double* result,
     unsigned* opcodeOffset)
@@ -23527,6 +24041,8 @@ public:
     ::TESBoundObject* unk1C;
 };
 
+// pdb: Script::DuplicateNPCStatsFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00524b00(unsigned int a1, unsigned int a2, ScriptRefObj* thisObj,
     unsigned int a4, unsigned int a5, unsigned int a6, unsigned int unused7,
     unsigned int* opcodeOffsetPtr)
@@ -23629,6 +24145,8 @@ extern float DAT_00dd75b0;
 namespace f3m_00530200 {
 namespace Task1602 {
 bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,...);
+// pdb: Script::LogFunction | TESScriptFunctions.obj | fnv360_0822_retail, uconst, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00530200(void* a,void* b,void* c,void* d,void* e,void* f,double* result,void* offset) {
  float value=0.0f;
  float base=DAT_00dd75b0;
@@ -23807,6 +24325,8 @@ struct AddItemLeveledList {void FUN_00456ba0(unsigned short,unsigned short,TESCo
 struct AddItemLeveledForm:TESForm {int unk18,unk1c,unk20,unk24,unk28,unk2c;AddItemLeveledList leveledList;};
 bool FUN_00517950(const ScriptParameter*,const char*,unsigned int*,TESObjectREFR*,TESObjectREFR*,Script*,ScriptLocals*,...);
 void FUN_00887da0(const char*,...);
+// pdb: Script::AddItemHealthPercentFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00537ef0(const ScriptParameter* parameters, const char* compiled,
     TESObjectREFR* reference, TESObjectREFR* container, Script* script,
     ScriptLocals* locals, double& result, unsigned int& offset)
@@ -23977,6 +24497,8 @@ void FUN_006195d0(const char*,...);
 void FUN_00887da0(const char*,...);
 void FUN_006f2050(void*,int,Form*,...);
 void FUN_00522b50(Form*,unsigned char,float);
+// pdb: Script::SetAngleFunction | TESScriptFunctions.obj | fnv360_0721_beta, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00532550(void* params,const char* compiled,Form* ref,Form* container,Form* script,void* locals,double& result,unsigned int& offset) {
  char axis;
  float value=0.0f;
@@ -24025,6 +24547,7 @@ void __cdecl FUN_00887da0(const char* fmt, ...);
 void __cdecl FUN_006f2050(void*, unsigned int, QForm*, QForm*, double, double, double);
 void __cdecl FUN_00528730(QForm* a, QForm* b, float x, float y, float z);
 
+// pdb: Script::MoveToFunction | TESScriptFunctions.obj | tesv_win, objrun, medium
 bool __cdecl FUN_00528a60(void* a1, void* a2, QForm* thisObj, void* a4, QForm* containingObj, void* a6, void* a7, void* a8)
 {
     QForm* target = 0;
@@ -24297,6 +24820,8 @@ void __cdecl FUN_006195d0(const char*,...);
 void __cdecl FUN_00887da0(const char*,...);
 void __cdecl FUN_006f2050(void*,int,Form*,...);
 void __cdecl FUN_00522910(Form*,unsigned char,float);
+// pdb: Script::SetPosFunction | TESScriptFunctions.obj | fnv360_0721_beta, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00532410(const void* params,const char* data,Form* self,Form* container,Form* script,void* locals,double& result,unsigned& offset) {
 char axis;
 float value=0.0f;
@@ -25069,6 +25594,8 @@ extern Player* DAT_0107a104;
 extern char DAT_00f47ac4,DAT_00f47aa8,DAT_00f47bbc,DAT_00f46b24,DAT_00f46b08,DAT_00f460fc;
 void* __cdecl FUN_00c0050a(void*,int,const void*,const void*,int);
 bool FUN_00517950(void*,const char*,unsigned int*,void*,void*,void*,void*,...);
+// pdb: Script::SetLevelFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052abc0(void* params,const char* compiled,void* ref,void* container,void* script,void* locals,double& result,unsigned int& offset){
  int level=0,useCalc=0,iMin=-1,iMax=-1;
  Actor* actor=(Actor*)FUN_00c0050a(ref,0,&DAT_00f47aa8,&DAT_00f47ac4,0);
@@ -25384,6 +25911,8 @@ Process* process; const char* FUN_004e9a10(); };
 struct ActorView : ReferenceView { Package* Actor_GetPackageSetAsPcurrent(); };
 bool __cdecl FUN_00517950(void*,void*,unsigned*,TESObjectREFR*,TESObjectREFR*,void*,void*,...);
 void __cdecl FUN_00887da0(const char*,...);
+// pdb: Script::WaitFunction | TESScriptFunctions.obj | fnv360_0822_debug, ustr_rel, medium, conflict (skyrim: Script::StopWaitingFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005290c0(void* params,void* compiled,TESObjectREFR* ref,TESObjectREFR* container,void* script,void* locals,double& result,unsigned& offset) {
  Package* package=0;
  if(!FUN_00517950(params,compiled,&offset,ref,container,script,locals,&package))return false;
@@ -25602,6 +26131,8 @@ extern char DAT_00f47ac4;
 }
 extern "C" void* __cdecl __RTDynamicCast(void* inptr, long vfDelta, void* srcType, void* targetType, int isReference);
 
+// pdb: Script::SetNoRumorsFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052b810(f3m_0052b810::ParamInfo* paramInfo, void* scriptData,
     f3m_0052b810::TESObjectREFR* thisObj, f3m_0052b810::TESObjectREFR* containingObj,
     f3m_0052b810::Script* scriptObj, f3m_0052b810::ScriptEventList* eventList, double* result,
@@ -25883,6 +26414,8 @@ inline Actor* CastActor(TESObjectREFR* p){return (Actor*)FUN_00c0050a(p,0,DAT_00
 extern bool __cdecl FUN_00517950(const ScriptParameter*,const char*,unsigned int*,TESObjectREFR*,TESObjectREFR*,Script*,ScriptLocals*,...);
 extern void __cdecl FUN_00887da0(const char*,...);
 extern bool __cdecl FUN_0061b850(const char*,int,const char*,const char*,float);
+// pdb: Script::StopWaitingFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005291d0(const ScriptParameter* paramInfo, const char* scriptData, TESObjectREFR* thisObj, TESObjectREFR* containingObj, Script* scriptObj, ScriptLocals* locals, double& result, unsigned int& opcodeOffsetPtr)
 {
     TESPackage* pPackage = 0;
@@ -26589,6 +27122,8 @@ void FUN_006f8de0(Point);
 };
 bool FUN_00517950(const void*,const char*,unsigned*,TESObjectREFR*,TESObjectREFR*,void*,void*,...);
 }
+// pdb: Script::LookFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005267b0(const void* params,const char* data,TESObjectREFR* ref,TESObjectREFR* container,void* script,void* locals,double& result,unsigned& offset){
  using namespace task1785;
  task1785::Ref* item=0;int flag=0;
@@ -26809,6 +27344,8 @@ struct Table {
 };
 struct Owner {Table* table;};
 bool __cdecl FUN_00517950(void*,void*,void*,Owner*,void*,void*,void*,int*,int*,int*);
+// pdb: Script::ModifyWaterShaderShallowColor | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005364c0(void* arg1,void* arg2,Owner* owner,void* arg4,void* arg5,void* arg6,void* arg7,void* arg8)
 {
  int red,green,blue;
@@ -27267,6 +27804,8 @@ struct Actor {
  Process* process;
  Process* GetProcess() {return process;}
 };
+// pdb: Script::ModWeaponHealthPercFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005381d0(const Param* params,const char* data,Actor* actor,Actor* containing,Script* script,Locals* locals,double& result,unsigned& offset) {
  float percentage=1.0f;
  if(!FUN_00517950(params,data,&offset,actor,containing,script,locals,&percentage)) return false;
@@ -27550,6 +28089,8 @@ const char* FUN_004e9a10();
 bool __cdecl FUN_00517950(int,int,int,void*,int,int,int,Item**);
 Actor* __cdecl FUN_00c0050a(void*,int,void*,void*,int);
 void __cdecl FUN_006195d0(const char*,...);
+// pdb: Script::RemoveSpellFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00532e20(int a,int b,void* c,int d,int e,int f,double* result,int h){
  Item* item=0;
  if(!FUN_00517950(a,b,h,c,d,e,f,&item))return false;
@@ -27576,6 +28117,8 @@ namespace task1851 {
 struct Param;struct Ref;struct Script;struct Locals;
 bool __cdecl FUN_00517950(const Param*,const char*,unsigned*,Ref*,Ref*,Script*,Locals*,...);
 struct Mode {void BGSSaveLoadManager_CopySaveGames(bool);};
+// pdb: Script::CopySaveGames | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00524280(const Param* params,const char* data,Ref* ref,Ref* container,Script* script,Locals* locals,double& result,unsigned& offset){
  char buffer[512];
  strcpy(buffer,DAT_00db3438);
@@ -27656,6 +28199,8 @@ struct Owner { Table* table; };
 
 bool __cdecl FUN_00517950(void*, void*, void*, Owner*, void*, void*, void*, int*, int*, int*);
 
+// pdb: Script::ModifyWaterShaderReflectionColor | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00536740(void* arg1, void* arg2, Owner* owner, void* arg4, void* arg5, void* arg6, void* arg7, void* arg8)
 {
     int red, green, blue;
@@ -27685,6 +28230,8 @@ bool __cdecl FUN_00536740(void* arg1, void* arg2, Owner* owner, void* arg4, void
 #include <math.h>
 namespace f3m_00530100 {
 bool __cdecl FUN_00517950(int,int,int,int,int,int,int,float*,int*);
+// pdb: Script::TanFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00530100(int a,int b,int c,int d,int e,int f,double* result,int h) {
     float value=0.0f;
     int inverse=0;
@@ -27934,6 +28481,7 @@ struct Owner53 {
     Owner53();
 };
 
+// pdb: Tile::Tile | Interface.obj | fnv360_0822_retail, call_seq, medium
 Owner53::Owner53()
 {
     ptr.Reset();
@@ -27986,6 +28534,7 @@ struct Cache {
     ~Cache();
 };
 typedef char EntrySize[(sizeof(Entry24)==0x18)?1:-1];
+// pdb: FaceGenNpcData::~FaceGenNpcData | TESScriptFunctions.obj | fnv360_0822_debug, caller, medium
 Cache::~Cache(){list.FUN_006c8220();}
 }
 
@@ -28005,6 +28554,8 @@ extern const char DAT_00dd6870[], DAT_00dd67c8[];
 inline bool hasBit11(unsigned int flags) { return (flags >> 11) & 1; }
 inline bool hasBit14(unsigned int flags) { return (flags >> 14) & 1; }
 
+// pdb: Script::DisableFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00523d40(ParamInfo* paramInfo, void* scriptData, TESForm* thisObj,
     TESForm* containingObj, TESForm* scriptObj, ScriptEventList* eventList, double* result,
     unsigned int* opcodeOffsetPtr)
@@ -28054,6 +28605,8 @@ using f3m_005381d0::Health1826::Locals;
 using f3m_005381d0::Health1826::FUN_00517950;
 using f3m_005381d0::Health1826::FUN_00456720;
 
+// pdb: Script::SetWeaponHealthPercFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005380a0(const Param* params, const char* data, Actor* actor, Actor* containing,
                           Script* script, Locals* locals, int unused, unsigned* offset)
 {
@@ -28096,6 +28649,8 @@ struct Player00529e {
 };
 void __cdecl Interface_CreateLevelUpMenu();
 
+// pdb: Script::AdvanceLevelFunction | TESScriptFunctions.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00529e00(void) {
     if (DAT_0107a104) {
         SubObj00529e* data = ((Player00529e*)DAT_0107a104)->p;
@@ -28111,6 +28666,7 @@ namespace f3m_00527130 {
 namespace f3m_00527130 {
 struct Obj { bool FUN_00518430(int a, int flags); };
 bool __cdecl FUN_00517950(void* a1, void* a2, void* a8, void* a3, void* a4, void* a5, Obj* a6, int* outFlags);
+// pdb: Script::OnDestructionStageChangeFunction | TESScriptFunctions.obj | tesv_win, objrun_prop, low
 bool __cdecl FUN_00527130(void* a1, void* a2, void* a3, void* a4, void* a5, Obj* a6, double* result, void* a8)
 {
     *result = 0.0;
@@ -28191,6 +28747,8 @@ extern bool __cdecl FUN_00517950(void* paramInfo, void* scriptData, unsigned int
     void* thisObj, void* containingObj, void* scriptObj, void* eventList, ...);
 extern void __cdecl FUN_00887da0(const char* format, ...);
 
+// pdb: Script::SetObjectiveDisplayedFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052dc00(void* paramInfo, void* scriptData, void* thisObj, void* containingObj,
     void* scriptObj, void* eventList, void* unused, unsigned int* opcodeOffsetPtr)
 {
@@ -28688,6 +29246,8 @@ struct Actor {
     Process* unk60;
 };
 
+// pdb: Script::ForceFleeFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052a830(void* paramInfo, void* scriptData, void* thisObj,
     void* containingObj, void* script, void* eventList, double* result,
     unsigned* opcodeOffset)
@@ -29458,6 +30018,8 @@ public:
 extern Ref* DAT_0107a104;
 bool __cdecl FUN_00517950(void* paramInfo, void* scriptData, unsigned int* opcodeOffsetPtr, Ref* thisObj, Ref* containingObj, void* scriptObj, void* eventList, ...);
 
+// pdb: Script::StartConversation | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00526360(void* paramInfo, void* scriptData, Ref* thisObj, Ref* containingObj, void* scriptObj, void* eventList, double* result, unsigned int* opcodeOffsetPtr)
 {
     Ref* target = 0;
@@ -29829,6 +30391,8 @@ struct Mgr {
 };
 extern Mgr* DAT_0107a0d8;
 
+// pdb: Script::ShowPivotFunction | TESScriptFunctions.obj | fnv360_0721_beta, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005269a0(void* paramInfo, void* scriptData, Ref* thisObj)
 {
     if (thisObj) {
@@ -30566,6 +31130,8 @@ void FUN_0046c0f0::operator delete(void* p) { FreeBlock(p); }
 FUN_0046c0f0::FUN_0046c0f0(const Point3& pos, const Point2& size, const Matrix& rot) { refs = 0; unk08 = (int)pos.x; unk0C = (int)pos.y; unk10 = (int)size.x; unk14 = (int)rot.m00; Setup(); }
 bool __cdecl FUN_00517950(unsigned a1, unsigned a2, unsigned a8, unsigned a3, unsigned a4, unsigned a5, unsigned a6, float* f1, float* f2);
 
+// pdb: Script::AddOcclusionPlane | TESScriptFunctions.obj | fnv360_0822_retail, uconst, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00539050(unsigned a1, unsigned a2, unsigned a3, unsigned a4, unsigned a5, unsigned a6, unsigned, unsigned a8)
 {
     Point2 size;
@@ -31424,6 +31990,8 @@ float __cdecl FUN_00475740(float a, float b, float c, float d, float e);
 
 inline float Min(float a, float b) { return a < b ? a : b; }
 inline float Max(float a, float b) { return a > b ? a : b; }
+// pdb: Script::SetActorRefractionFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052bd20(void* paramInfo, void* scriptData, Ref* thisObj, Ref* containingObj, void* scriptObj, void* eventList, double* result, unsigned int* opcodeOffsetPtr)
 {
     float v = 0.0f;
@@ -31672,6 +32240,8 @@ bool __cdecl FUN_00724400();
 bool __cdecl FUN_00517950(void* paramInfo, void* scriptData, unsigned int* opcodeOffsetPtr, Ref* thisObj, Ref* containingObj, void* scriptObj, void* eventList, ...);
 extern "C" Actor* __cdecl FUN_00c0050a(Ref* p, int a, void* from, void* to, int b);
 
+// pdb: Script::KillActorFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00522030(void* paramInfo, void* scriptData, Ref* thisObj, Ref* containingObj, void* scriptObj, void* eventList, double* result, unsigned int* opcodeOffsetPtr)
 {
     int v1 = 0;
@@ -32377,6 +32947,8 @@ extern Slot** DAT_011796f8;
 extern int DAT_01179794;
 bool __cdecl FUN_00517950(void* a1, void* a2, void* a8, void* a3, void* a4, void* a5, void* a6, ...);
 
+// pdb: Script::PickRefByIDFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0053b9f0(void* a1, void* a2, void* a3, void* a4, void* a5, void* a6, void* a7, void* a8)
 {
     Form* form = 0;
@@ -32609,6 +33181,8 @@ extern void* DAT_0106e7e4;
 extern "C" int __cdecl FUN_00c009eb(const char*, const char*);
 void __cdecl FUN_00887da0(const char*, ...);
 
+// pdb: Script::PlayExplosionFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00532a00(void* a, void* b, Form* ref) {
     if (ref) {
         Node* node = ref->GetNode();
@@ -32716,6 +33290,8 @@ public:
     virtual void s00();virtual void s04();virtual void s08();virtual void s0c();virtual void s10();virtual void s14();virtual void s18();virtual void s1c();virtual void s20();virtual void s24();virtual void s28();virtual void s2c();virtual void s30();virtual void s34();virtual void s38();virtual void s3c();virtual void s40();virtual void s44();virtual void s48();virtual void s4c();virtual void s50();virtual void s54();virtual void s58();virtual void s5c();virtual void s60();virtual void s64();virtual void s68();virtual void s6c();virtual void s70();virtual void s74();virtual void s78();virtual void s7c();virtual void s80();virtual void s84();virtual void s88();virtual void s8c();virtual void s90();virtual void s94();virtual void s98();virtual void s9c();virtual void sa0();virtual void sa4();virtual void sa8();virtual void sac();virtual void sb0();virtual void sb4();virtual void sb8();virtual void sbc();virtual void sc0();virtual void sc4();virtual void sc8();virtual void scc();virtual void sd0();virtual void sd4();virtual void sd8();virtual void sdc();virtual void se0();virtual void se4();virtual void se8();virtual void sec();virtual void sf0();virtual void sf4();virtual void sf8();virtual void sfc();virtual void s100();virtual void s104();virtual void s108();virtual void s10c();virtual void s110();virtual void s114();virtual void s118();virtual void s11c();virtual void s120();virtual void s124();virtual void s128();virtual void s12c();virtual void s130();virtual void s134();virtual void s138();virtual void s13c();virtual void s140();virtual void s144();virtual void s148();virtual void s14c();virtual void s150();virtual void s154();virtual void s158();virtual void s15c();virtual void s160();virtual void s164();virtual void s168();virtual void s16c();virtual void s170();virtual void s174();virtual void s178();virtual void s17c();virtual void s180();virtual void s184();virtual void s188();virtual void s18c();virtual void s190();virtual void s194();virtual void s198();virtual void s19c();virtual void s1a0();virtual void s1a4();virtual void s1a8();virtual void s1ac();virtual void s1b0();virtual void s1b4();virtual void s1b8();virtual void s1bc();virtual void s1c0();virtual void s1c4();virtual void s1c8();virtual void s1cc();
     virtual Viewer* Get3D();
 };
+// pdb: Script::ShowViewerStringsFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0053b5e0(void* a1, void* a2, Ref* ref) {
     if (ref && ref->Get3D()) {
         Viewer* v = ref->Get3D();
@@ -32770,6 +33346,8 @@ public:
     virtual void s00();virtual void s04();virtual void s08();virtual void s0c();virtual void s10();virtual void s14();virtual void s18();virtual void s1c();virtual void s20();virtual void s24();virtual void s28();virtual void s2c();virtual void s30();virtual void s34();virtual void s38();virtual void s3c();virtual void s40();virtual void s44();virtual void s48();virtual void s4c();virtual void s50();virtual void s54();virtual void s58();virtual void s5c();virtual void s60();virtual void s64();virtual void s68();virtual void s6c();virtual void s70();virtual void s74();virtual void s78();virtual void s7c();virtual void s80();virtual void s84();virtual void s88();virtual void s8c();virtual void s90();virtual void s94();virtual void s98();virtual void s9c();virtual void sa0();virtual void sa4();virtual void sa8();virtual void sac();virtual void sb0();virtual void sb4();virtual void sb8();virtual void sbc();virtual void sc0();virtual void sc4();virtual void sc8();virtual void scc();virtual void sd0();virtual void sd4();virtual void sd8();virtual void sdc();virtual void se0();virtual void se4();virtual void se8();virtual void sec();virtual void sf0();virtual void sf4();virtual void sf8();virtual void sfc();virtual void s100();virtual void s104();virtual void s108();virtual void s10c();virtual void s110();virtual void s114();virtual void s118();virtual void s11c();virtual void s120();virtual void s124();virtual void s128();virtual void s12c();virtual void s130();virtual void s134();virtual void s138();virtual void s13c();virtual void s140();virtual void s144();virtual void s148();virtual void s14c();virtual void s150();virtual void s154();virtual void s158();virtual void s15c();virtual void s160();virtual void s164();virtual void s168();virtual void s16c();virtual void s170();virtual void s174();virtual void s178();virtual void s17c();virtual void s180();virtual void s184();virtual void s188();virtual void s18c();virtual void s190();virtual void s194();virtual void s198();virtual void s19c();virtual void s1a0();virtual void s1a4();virtual void s1a8();virtual void s1ac();virtual void s1b0();virtual void s1b4();virtual void s1b8();virtual void s1bc();virtual void s1c0();virtual void s1c4();virtual void s1c8();virtual void s1cc();
     virtual Root* Get3D();
 };
+// pdb: Script::ModifyWaterShaderDeepColor | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00536600(int a1, int a2, Ref* ref, int a4, int a5, int a6, int a7, int a8) {
     int r, g, b;
     if (!FUN_00517950(a1, a2, a8, ref, a4, a5, a6, &r, &g, &b)) return false;
@@ -32836,6 +33414,8 @@ public:
     int unk04;int unk08;int unk0C;int unk10;int unk14;int unk18;int unk1C;int unk20;int unk24;int unk28;int unk2C;int unk30;int unk34;int unk38;int unk3C;int unk40;int unk44;int unk48;int unk4C;int unk50;int unk54;int unk58;int unk5C;
     Controller* controller;
 };
+// pdb: Script::PlayIdleFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00534c40(void* a1, void* a2, void* a3, void* a4, void* a5, void* a6, void* a7, void* a8) {
     char name[0x200];
     Actor* actor = (Actor*)FUN_00c0050a(a3, 0, DAT_00f47aa8, DAT_00f47ac4, 0);
@@ -32949,6 +33529,8 @@ inline int SlotIndex(int i) {
     }
     return r;
 }
+// pdb: Script::ShowAnimFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00533540(void* a1, void* a2, Actor* ref) {
     if (ref && ref->GetProcess() && ref->IsReady()) {
         Actor* actor = (Actor*)FUN_00c0050a(ref, 0, DAT_00f47aa8, DAT_00f47ac4, 0);
@@ -33037,6 +33619,8 @@ void __cdecl FUN_0055dff0(List* list, ParamResult* result, int a, int b, int c);
 void* __cdecl FUN_00c00610(void* dest, int value, unsigned size);
 char* __cdecl FUN_00c04a03(char* dest, const char* source, unsigned size);
 void __cdecl FUN_006195d0(const char* fmt, ...);
+// pdb: Script::ShowFullQuestLogFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00539ad0(ParamInfo* paramInfo, void* scriptData, TESObjectREFR* thisObj,
     TESObjectREFR* containingObj, Script* scriptObj, ScriptEventList* eventList,
     double* unusedResult, unsigned int* opcodeOffsetPtr)
@@ -33117,6 +33701,8 @@ void __cdecl FUN_0055dff0(List* list, int a, bool flag, int b, int c);
 void* __cdecl FUN_00c00610(void* dest, int value, unsigned size);
 char* __cdecl FUN_00c04a03(char* dest, const char* source, unsigned size);
 void __cdecl FUN_006195d0(const char* fmt, ...);
+// pdb: Script::ShowQuestLogFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00539900(ParamInfo* paramInfo, void* scriptData, TESObjectREFR* thisObj,
     TESObjectREFR* containingObj, Script* scriptObj, ScriptEventList* eventList,
     double* unusedResult, unsigned int* opcodeOffsetPtr)
@@ -33297,6 +33883,8 @@ bool __cdecl FUN_00517950(void* a1, void* a2, unsigned int* opcodeOffsetPtr, voi
                           void* containingObj, void* scriptObj, void* eventList,
                           char* outAxis, int* outValue);
 
+// pdb: Script::RotateFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00522720(void* paramInfo, void* scriptData, Obj52* thisObj,
                           void* containingObj, void* scriptObj, void* eventList, void* unused6,
                           unsigned int* opcodeOffsetPtr)
@@ -33582,6 +34170,8 @@ template<class T> __forceinline T lowerValue(T a, T b) { return a < b ? a : b; }
 template<class T> __forceinline T upperValue(T a, T b) { return a > b ? a : b; }
 template<class T> __forceinline const T& lowerRef(const T& a, const T& b) { return a < b ? a : b; }
 template<class T> __forceinline const T& upperRef(const T& a, const T& b) { return a > b ? a : b; }
+// pdb: Script::SetLightingPassesFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00531b50(void* arg1, void* arg2, ConsoleTarget_531b50* target,
     void* arg4, void* arg5, void* arg6, void* unused, void* arg8)
 {
@@ -33871,6 +34461,8 @@ Controller* __cdecl FUN_00424d50(void* table, const char* key);
 bool __cdecl FUN_00517950(void*, void*, void*, void*, void*, void*, void*, ...);
 void __cdecl FUN_00887da0(const char*, ...);
 
+// pdb: Script::PlayGroupFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00532690(void* a, void* b, Form* ref, void* d, Form* script, void* f, void* g, void* h) {
     int flag = 0;
     int group;
@@ -34160,6 +34752,8 @@ inline float FUN_005b9e80(float v){return (float)cos(v);}
 inline float FUN_005c53d0(float v){return (float)sin(v);}
 EffectInstance* FUN_005b4d20(TESObjectCELL*,float,void*,EffectVector,EffectVector,float,int,int);
 // @fnv 0x005352d0
+// pdb: Script::PlayMagicEffect | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005352d0(const ScriptParameter* parameters, const char* scriptData, EffectReference* reference, TESObjectREFR* container, Script* script, ScriptLocals* locals, double& result, unsigned int& opcodeOffset)
 {
  EffectDefinition* applied = 0;
@@ -34357,6 +34951,8 @@ void __cdecl FUN_0058d6e0(float,void*,int);
 void __cdecl FUN_0058e230(void*,void*,void*,int,float);
 void __cdecl FUN_00592370(void*,int,int,float);
 void __cdecl BSFaceGenManager_CopyFaceGenCoord(void*,void*,int,int);
+// pdb: Script::MatchFaceGeometryBase | TESScriptFunctions.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apRef, apMatchActor, aiValue
 void __cdecl FUN_0053f550(Reference* apTarget, Reference* apSource, int aiPercent)
 {
     if (!apTarget || !apSource)
@@ -35049,6 +35645,8 @@ extern Mgr528 DAT_0107c0a0;
 extern Actor528* DAT_0107a104;
 
 
+// pdb: Script::AddScriptPackageFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005282c0(void* paramInfo, void* scriptData, Ref528* thisObj,
     void* containingObj, void* scriptObj, void* eventList, double* result,
     unsigned int* opcodeOffsetPtr)
@@ -35321,6 +35919,8 @@ extern char DAT_00db3438[];
 extern void __cdecl FUN_006195d0(const char* fmt, ...);
 extern Strategy5377f0* __cdecl FUN_007a66d0(const char* name);
 
+// pdb: Script::ForceCombatGroupStrategyFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005377f0(void* a, void* b, Actor5377f0* obj, void* d, void* e, void* f, void* g, void* h) {
     char name[512];
     strcpy(name, DAT_00db3438);
@@ -35588,6 +36188,7 @@ public:
     }
 };
 
+// pdb: FaceGenNpcData::FaceGenNpcData | TESScriptFunctions.obj | fnv360_0822_retail, call_gap, medium
 Owner53f390::Owner53f390() {
     Reset();
     arr74.RemoveAll();
@@ -36042,6 +36643,8 @@ struct String {char* text;unsigned short length,capacity;String():text(0),length
 const char* TESFullName_GetFullName(Form*);void FUN_00403a00(String*,const char*,...);void FUN_0061b850(const char*,int,const char*,int,float);void Interface_UpdateInventory();
 bool FUN_00517950(const ScriptParameter*,const char*,unsigned int*,Ref*,Ref*,Script*,ScriptLocals*,...);
 // @fnv 0x005d0300
+// pdb: Script::UnEquipItemFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0053d170(const ScriptParameter* param, const char* desc, Ref* obj, Ref* obj2,
                   Script* script, ScriptLocals* locals, double& result, unsigned int& opcode)
 {
@@ -36602,6 +37205,8 @@ bool __cdecl FUN_00517950(const void*,const char*,unsigned*,Ref*,Ref*,Script*,vo
 const char* __cdecl TESFullName_GetFullName(Form*);
 bool __cdecl FUN_0061b850(const char*,int,const char*,const char*,float);
 void __cdecl Interface_UpdateInventory();void __cdecl FUN_00887da0(const char*,...);
+// pdb: Script::EquipItemFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0053cf40(const void* paramInfo,const char* argStr,Ref* thisObj,Ref* containerObj,Script* scriptObj,void* locals,double& result,unsigned& opcodeOffsetPtr){
  int silent;
  {
@@ -37566,6 +38171,8 @@ unsigned int unk704;
 bool field708;bool MobileObject_IsinDialogue();const char* FUN_004e9a10();bool FUN_0076c8e0();
 };
 struct Manager {void ProcessLists_RemoveActorFromTempChangeList(Actor*);};extern Manager DAT_0107c0a0;extern Actor* DAT_0107a104;extern char DAT_00f47aa8,DAT_00f47ac4;extern const char DAT_00dd6578[];void* FUN_00c0050a(void*,int,void*,void*,int);void FUN_00887da0(const char*,...);bool FUN_00517950(unsigned,unsigned,unsigned,void*,unsigned,unsigned,unsigned,...);
+// pdb: Script::StartCombatFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00522fc0(unsigned a1,unsigned a2,void* self,unsigned a4,unsigned a5,unsigned a6,unsigned unused,unsigned a8){
 Actor* target=0;
 if(!FUN_00517950(a1,a2,a8,self,a4,a5,a6,&target))return false;
@@ -37739,6 +38346,8 @@ void FUN_005c8720(bool);void FUN_005c8890(bool);void FUN_005c9bf0(ModeCell*,bool
 struct CellWorld {ModeCell* FUN_00435750();};extern CellWorld* DAT_0107a0d8;
 struct Setting {int* FUN_004241e0();};extern Setting DAT_0106e9c8;
 bool __cdecl FUN_00517950(const void*,const char*,unsigned*,void*,void*,void*,void*,...);
+// pdb: Script::ToggleNavMeshFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00521160(const void* parameters, const char* scriptData,
     void* reference, void* container, void* script,
     void* locals, double& result, unsigned int& offset)
@@ -37881,6 +38490,8 @@ struct CodexNamedListOwner {
     CodexNamedListLink* Head() { return &head; }
     bool FUN_005309c0(const char*,CodexNamedListItem**);
 };
+// pdb: SettingCollectionList<Setting>::Get | TESScriptFunctions.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apID, arpGS
 bool CodexNamedListOwner::FUN_005309c0(const char* name,CodexNamedListItem** output) {
     if (!name) return false;
     for (CodexNamedListLink* link=Head(); link; link=link->next) {
@@ -39026,6 +39637,8 @@ int __cdecl FUN_00403a00(BSStringT* str, const char* fmt, ...);
 void __cdecl FUN_0061b850(const char* message, int type, const char* icon, const char* sound, float duration);
 }
 
+// pdb: Script::AddSpellFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0053bcb0(const f3m_0053bcb0::ScriptParameter* paramInfo, const char* scriptData,
                           TESObjectREFR* thisObj, TESObjectREFR* containingObj, f3m_0053bcb0::Script* scriptObj,
                           f3m_0053bcb0::ScriptLocals* eventList, double* result, unsigned int* opcodeOffsetPtr)
@@ -39858,6 +40471,8 @@ struct Actor {
 };
 extern "C" void* __cdecl FUN_00c0050a(void*, int, void*, void*, int);
 bool __cdecl FUN_00517950(void*, void*, void*, void*, void*, void*, void*, int*);
+// pdb: Script::SetUnconsciousFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00534fe0(void* a, void* b, void* c, void* d, void* e, void* f, void* g, void* h) {
     int value = 0;
     if (!FUN_00517950(a, b, h, c, d, e, f, &value)) return false;
@@ -40596,6 +41211,8 @@ struct Obj52f490 {
 };
 void __cdecl FUN_0058aa00(Base52f490*);
 bool __cdecl FUN_00517950(int,int,int,Obj52f490*,int,int,int,...);
+// pdb: Script::MatchRaceFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052f490(int a1,int a2,Obj52f490* actor,int a4,int a5,int a6,int a7,int a8) {
  Obj52f490* target=0;
  if(!FUN_00517950(a1,a2,a8,actor,a4,a5,a6,&target)) return false;
@@ -41347,6 +41964,8 @@ extern char DAT_00dd81c8[];
 extern "C" void* __cdecl FUN_00c0050a(void*, int, void*, void*, int);
 void __cdecl FUN_006195d0(const char* fmt, ...);
 
+// pdb: Script::PickIdleFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00534b20(void* parameters, void* scriptData, void* thisObject)
 {
     Actor* actor = (Actor*)FUN_00c0050a(thisObject, 0, DAT_00f47aa8, DAT_00f47ac4, 0);
@@ -41532,6 +42151,8 @@ struct Resource523640 {
 struct Manager523640 { Value523640* FUN_00bcfbb0(Value523640*,const char*,unsigned); };
 extern Manager523640* DAT_011790c8;
 __forceinline Value523640& GetResource523640(Value523640* temp,const char* path,unsigned flags){return *DAT_011790c8->FUN_00bcfbb0(temp,path,flags);}
+// pdb: Script::PlaySound3DFunction | TESScriptFunctions.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00523640(int a,int b,Actor523640* actor,int d,int e,int f,int g,int h){
  String523640* text=0;
  Resource523640 resource;
@@ -41765,6 +42386,8 @@ extern Update52b* DAT_0116d138;
 extern Menu52b* DAT_0108ebbc;
 bool __cdecl FUN_00517950(void*, void*, void*, void*, void*, void*, void*, ...);
 
+// pdb: Script::PlayBinkFunction | TESScriptFunctions.obj | fnv360_0721_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052b0b0(void* a1, void* a2, void* a3, void* a4, void* a5, void* a6, double*, void* a8)
 {
     char text[512];
@@ -43052,6 +43675,8 @@ void* __cdecl FUN_00c0050a(void*, int, const void*, const void*, int);
 bool __cdecl FUN_00517950(void*, const char*, unsigned*, Ref*, Ref*, void*, void*, ...);
 void __cdecl Script_SetActionFlag(Topic*, void*, unsigned);
 Actor* __cdecl TESObjectREFR_CreateReference(unsigned, unsigned);
+// pdb: Script::SayFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00534210(void* parameters, const char* scriptData, Ref* subject, Ref* containing,
                            void* script, void* locals, double* result, unsigned* opcodeOffset)
 {
@@ -43428,6 +44053,8 @@ __forceinline void PrintVars(ScriptType* script, Locals* locals) {
   }
  }
 }
+// pdb: Script::ShowVarsFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00532f00(void* p1,void* p2,Object* object) {
  bool printGlobals=true;
  if(object) {
@@ -43470,6 +44097,8 @@ struct Script {static bool __cdecl Script_GetValue(double&,const char*,unsigned 
 template<class T> struct BSStringT {int __cdecl FUN_00403a00(const char*,...);};
 void* __cdecl FUN_00c00610(void*,int,unsigned int);
 // @fnv 0x005b4960
+// pdb: Script::BuildMessageBoxStringFromParameters | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset, apText, aMessage
 bool __cdecl FUN_0053a370(int unused, char const* data, TESObjectREFR* reference1, TESObjectREFR* reference2,
                           Script* script, ScriptLocals* locals, int unused2, unsigned int& value, char const* format,
                           BSStringT<char>* string)
@@ -43579,6 +44208,8 @@ struct Script {
 };
 extern bool __cdecl FUN_00517950(void*, void*, void*, void*, void*, void*, Script*, Form**);
 
+// pdb: Script::OnHitWithFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00534a20(void* arg1, void* arg2, void* reference, void* arg4, void* arg5, Script* script, double* result, void* arg8)
 {
     Form* form = 0;
@@ -44189,6 +44820,8 @@ public:
 };
 extern Manager* DAT_0106ca70;
 bool __cdecl FUN_00517950(void*, void*, void*, void*, void*, void*, void*, Form**);
+// pdb: Script::PreloadMagicEffect | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_005356c0(void* a, void* b, void* c, void* d, void* e, void* f, void* g, void* h) {
     Form* form = 0;
     if (!FUN_00517950(a, b, h, c, d, e, f, &form)) return false;
@@ -44736,6 +45369,7 @@ struct Param6880
 };
 
 union HolderOrValue6880 { Holder6880* holder; float value; };
+// pdb: SetRBMass | TESScriptFunctions.obj | fnv360_0721_beta, objrun, medium
 void __cdecl FUN_00536880(HolderOrValue6880 argument, Param6880* apParam)
 {
     Typed6880* pObj = argument.holder->m_pObj;
@@ -44770,6 +45404,8 @@ struct Player { char pad[0x3c]; Mgr* mgr; Mgr* GetMgr() { return *(Mgr* volatile
 extern Player* DAT_0107a104;
 extern NiColorA DAT_01066a98[10];
 bool __cdecl FUN_00517950(void*, void*, void*, void*, void*, void*, void*, ...);
+// pdb: Script::PlaceLocationMarkerFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052e240(void* a1, void* a2, void* a3, void* a4, void* a5, void* a6, double*, void* a8)
 {
     float x, y, z;
@@ -44806,6 +45442,8 @@ namespace PositionUpdate5229 {
     void* __cdecl FUN_00c0050a(void*, int, const void*, const void*, int);
 }
 
+// pdb: Script::SetPosBase | TESScriptFunctions.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: apRefObject, acAxis, afValue
 void __cdecl FUN_00522910(Actor* reference, signed char axis, float coordinate)
 {
     if (!reference)
@@ -46589,6 +47227,8 @@ unsigned int value;
 };
 extern Player193* DAT_0107a104;
 inline void Context193::Update(int value,int useSecond){if(useSecond)second=value;else{first=value;DAT_0107a104->value=0;}}
+// pdb: Script::SetActiveWeather | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00531040(void* param,void* data,void* actor,void* container,void* script,void* events,double*,void* offset){
  int first=0,second=0;if(!FUN_00517950(param,data,offset,actor,container,script,events,&first,&second))return false;
  Context193* c=Sky_GetInstance();
@@ -48236,6 +48876,8 @@ struct Form530 {
 };
 void FUN_00887da0(const char*, const char*);
 
+// pdb: Script::AddItemFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00530c50(
     void* params,
     void* data,
@@ -49179,6 +49821,8 @@ extern int DAT_00f5e380;
 bool __cdecl FUN_00517950(void*, const char*, unsigned*, Ref*, Ref*, void*, void*, ...);
 void __cdecl Script_SetActionFlag(Topic*, void*, unsigned);
 
+// pdb: Script::SayToFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00534660(void* parameters, const char* scriptData, Actor* subject, Ref* containing,
                           void* script, void* locals, double* result, unsigned* opcodeOffset)
 {
@@ -49474,6 +50118,8 @@ void __cdecl FUN_006195d0(char const* format, ...);   // ORIG: variadic logger, 
 
 typedef void (__thiscall *ReleaseC)(void* self, int mode);   // ORIG: vtable slot +0x10, callee-cleaned ✓✓
 
+// pdb: Script::DeleteReference | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052c000(int first, int second, RefObjC* reference) {
     if (tlsBlockC.flushEnabled != 0) {                // ORIG: TLS access and byte test precede 'push esi' ✓✓
         if (reference != 0) {                         // ORIG: test esi,esi at 0x52C01D with the delete path as the fallthrough ✓✓
@@ -49522,6 +50168,8 @@ bool __cdecl FUN_00619310();                         // ORIG: call sub_619310 ; 
 void __cdecl FUN_0061aed0();                         // ORIG: only reached when the helper above returned false ✓✓
 void __cdecl FUN_006a0440();                         // ORIG: only reached when the manager pointer is null ✓✓
 
+// pdb: Script::TogglePathingInfoFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00521550() {
     if (DAT_0107484c == 0) {                         // ORIG: cmp byte,0 ; jnz tail - the fallthrough is the clear case ✓✓
         DAT_0107484c = 1;                            // ORIG: mov byte_107484C,1 before any call ✓✓
@@ -49584,6 +50232,8 @@ extern Notifier53* DAT_0116efb8;                       // dword_116EFB8 ✓✓
 
 void __cdecl FUN_006195d0(char const* format, ...);    // ORIG: one-argument logging calls with 'add esp,4' cleanup ✓✓
 
+// pdb: Script::ToggleVATSLight | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00537dc0() {
     if (DAT_0108d0cc != 0) {                           // ORIG: test eax,eax ; jz tail - the null case still returns true ✓✓
         if ((DAT_0108d0cc->flags->flags30 & 1UL) != 0) {   // ORIG: mov eax,[eax+0F8h] ; test byte ptr [eax+30h],1 ; jz Off-branch ✓✓
@@ -49744,6 +50394,8 @@ void __cdecl FUN_005595d0(unsigned race, int sex, Buf52* list);
 void __cdecl FUN_00403a00(QStr52* str, const char* format, ...);
 void __cdecl FUN_006195d0(const char* msg);
 
+// pdb: Script::SexChange | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0053cae0(void* paramInfo, void* scriptData, Ref52* thisObj,
     void* containingObj, void* scriptObj, void* eventList, void* result,
     unsigned int* opcodeOffsetPtr)
@@ -49863,6 +50515,8 @@ extern DataHandler* DAT_0106cdcc;
 void __cdecl FUN_00563cf0(int a, int b);
 void __cdecl FUN_0063d430();
 
+// pdb: Script::ResetDialogueFlags | TESScriptFunctions.obj | fnv360_0822_retail, uvref, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00537e30()
 {
     Pair pair;
@@ -49937,6 +50591,8 @@ struct Ref {
 bool __cdecl FUN_00517950(void* paramInfo, void* scriptData, void* opcodeOffsetPtr, void* thisObj, void* containingObj, void* scriptObj, void* eventList, ...);
 void* __cdecl FUN_00c0050a(void* ptr, int offset, int fromType, int toType, int isRef);
 
+// pdb: Script::SetClassFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0052a6b0(void* paramInfo, void* scriptData, void* thisObj, void* containingObj, void* scriptObj, void* eventList, double* result, void* opcodeOffsetPtr)
 {
     int val = 0;
@@ -50120,6 +50776,8 @@ namespace ScriptAction {
 extern Reference* DAT_0107a104;
 bool FUN_00517950(void*, void*, void*, Reference*, void*, void*, void*, int*);
 void FUN_00619b10(Reference*, int);
+// pdb: Script::ShowSurgeryMenu | TESScriptFunctions.obj | fnv360_0822_debug, objrun, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052a230(void* p, void* s, Reference* self, void* owner, void* script, void* events, void* unused, void* offset) {
     int value = 0;
     FUN_00517950(p,s,offset,self,owner,script,events,&value);
@@ -50412,6 +51070,8 @@ class ActorLayout : public TESObjectREFR { public:
     void FUN_006f7510(int);
 };
 bool FUN_00517950(void*,void*,void*,::TESObjectREFR*,void*,void*,void*,int*);
+// pdb: Script::SetCombatStyleFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00528de0(void* p,void* s,::TESObjectREFR* self,void* owner,void* script,void* events,void* unused,void* offset) {
     int value=0;
     if(!FUN_00517950(p,s,offset,self,owner,script,events,&value)) return false;
@@ -50442,6 +51102,8 @@ namespace ActorConsole {
 struct ActorView { int FUN_006f57f0(); };
 bool FUN_00517950(void*,void*,void*,TESObjectREFR*,void*,void*,void*,int*);
 void FUN_006195d0(const char*,...);
+// pdb: Script::ModBarterGoldFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: Script::ResetFallDamageTimerFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052aa40(void* p,void* s,TESObjectREFR* self,void* owner,void* script,void* events,void* unused,void* offset) {
     int value=0;
     ActorView* actor=reinterpret_cast<ActorView*>(dynamic_cast<Actor*>(self));
@@ -50500,6 +51162,8 @@ struct Player {
 };
 extern Player* DAT_0107a104;
 bool FUN_00517950(void*,void*,void*,void*,void*,void*,void*,unsigned int*,int*);
+// pdb: Script::ModPCAttributeFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052ae90(void* p,void* s,void* self,void* owner,void* script,void* events,void* unused,void* offset) {
     unsigned int attribute=0;
     int amount=0;
@@ -50517,6 +51181,7 @@ namespace f3m_00526d30 {
 namespace EventQuery {
 struct Events { bool FUN_00518430(int,int); };
 bool FUN_00517950(void*,void*,void*,void*,void*,void*,Events*,int*);
+// pdb: Script::OnAddFunction | TESScriptFunctions.obj | tesv_win, objrun, medium
 bool FUN_00526d30(void* p,void* s,void* self,void* owner,void* script,Events* events,double* result,void* offset) {
     int value=0;
     if(!FUN_00517950(p,s,offset,self,owner,script,events,&value)) return false;
@@ -50621,6 +51286,8 @@ virtual bool isActor();
 void FUN_006f9040(void*);
 };
 bool FUN_00517950(void*,void*,void*,Ref*,void*,void*,void*,void**);
+// pdb: Script::RemoveFactionFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052cb90(void* p,void* s,Ref* self,void* owner,void* script,void* events,void* unused,void* offset) {
     void* target=0;
     if(!FUN_00517950(p,s,offset,self,owner,script,events,&target)) return false;
@@ -51017,6 +51684,8 @@ namespace f3m_0052e9d0 {
 namespace Command52e9d0 {
 struct Form { void FUN_005512f0(int,int); };
 bool FUN_00517950(void*,void*,void*,void*,void*,void*,void*,Form**);
+// pdb: Script::ClearFactionPlayerEnemyFunction | TESScriptFunctions.obj | fnv360_0822_debug, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052e9d0(void* p,void* s,void* self,void* owner,void* script,void* events,void* result,void* offset) {
  Form* form=0;
  if(!FUN_00517950(p,s,offset,self,owner,script,events,&form)) return false;
@@ -51325,6 +51994,8 @@ virtual void setValue(void*,float);
 };
 extern void* DAT_0107a104;
 extern int DAT_00f62124;
+// pdb: Script::FriendDispositionBoostFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005222e0(void* p,void* s,Ref* self,void* owner,void* script,void* events,void* result,void* offset) {
  if(self && self->isActor()) {
  int value=self->getValue(DAT_0107a104,0);
@@ -51339,6 +52010,8 @@ extern bool DAT_00f4ef38;
 namespace f3m_0052d800 {
 namespace Command52d800 {
 bool FUN_00517950(void*,void*,void*,void*,void*,void*,void*,int*);
+// pdb: Script::SetImageSpaceModifiersEnable | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052d800(void* p,void* s,void* self,void* owner,void* script,void* events,void* result,void* offset) {
  int value=-1;
  if(!FUN_00517950(p,s,offset,self,owner,script,events,&value)) return false;
@@ -51929,6 +52602,8 @@ int unk5c;
 Process* process;
 };
 bool FUN_00517950(void*,void*,void*,Ref*,void*,void*,void*,Ref**);
+// pdb: Script::StartSandmanFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052a4b0(void* p,void* s,Ref* self,void* owner,void* script,void* events,void* result,void* offset) {
  Ref* target=0;
  if(!FUN_00517950(p,s,offset,self,owner,script,events,&target)) return false;
@@ -51986,6 +52661,8 @@ int unk88;
 ActorState state;
 };
 bool FUN_00517950(void*,void*,void*,TESObjectREFR*,void*,void*,void*,Form**,int*);
+// pdb: Script::DispelFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005234a0(void* p,void* s,TESObjectREFR* self,void* owner,void* script,void* events,void* result,void* offset) {
  Form* form=0;
  int value=0;
@@ -52127,6 +52804,8 @@ virtual void* getObject();
 };
 bool FUN_00517950(void*,void*,void*,Ref*,void*,void*,void*,char*,float*);
 void FUN_00570a30(void*,Vector*,int);
+// pdb: Script::SetVelFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00520260(void* p,void* s,Ref* self,void* owner,void* script,void* events,void* result,void* offset) {
  char axis;
  float value=0.0f;
@@ -52271,6 +52950,8 @@ virtual void* getObject();
 struct Manager { int active; void FUN_0069e670(Ref*); void FUN_0069e770(Ref*); };
 Manager* FUN_00619e50();
 bool FUN_00517950(void*,void*,void*,Ref*,void*,void*,void*,float*,float*,float*,float*);
+// pdb: Script::HighlightAdditionalReferenceFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005206a0(void* p,void* s,Ref* self,void* owner,void* script,void* events,void* result,void* offset) {
  float duration=15.0f;
  float a,b,c;
@@ -52292,6 +52973,8 @@ bool FUN_00517950(void*,void*,void*,void*,void*,void*,void*,int*);
 void FUN_006bdcd0(int);
 void FUN_006bebf0();
 void FUN_006bf3a0();
+// pdb: Script::PlayMusicFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::RemoveMusicFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005237e0(void* p,void* s,void* self,void* owner,void* script,void* events,void* result,void* offset) {
  int value;
  if(FUN_00517950(p,s,offset,self,owner,script,events,&value)) {
@@ -52817,6 +53500,8 @@ State state;
 Process* process;
 void FUN_006f8e10();
 };
+// pdb: Script::StopLookFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_005268c0(void* p,void* s,TESObjectREFR* self,void* owner,void* script,void* events,void* result,void* offset) {
  if(self) {
  ActorView* actor=reinterpret_cast<ActorView*>(dynamic_cast<Actor*>(self));
@@ -52961,6 +53646,8 @@ virtual void* getObject();
 struct Query { int count; bool active; int type; float value; int unk10,unk14,unk18; };
 void FUN_00536880();
 void FUN_008d6200(void*,Query*,void(*)());
+// pdb: Script::SetRigidBodyMassBase | TESScriptFunctions.obj | fnv360_0822_retail, callee_sim, low, conflict (skyrim: PlayerCharacter::SetAIControlledPackage)
+// pdb params: apRefObject, afValue
 void FUN_00536910(Object* object,float value) {
  Query query;
  query.count=0;
@@ -53336,6 +54023,8 @@ Ref* target;
 extern Player* DAT_0107a104;
 bool FUN_00517950(void*,void*,void*,void*,void*,void*,void*,Ref**);
 void FUN_0061ab50(void*);
+// pdb: Script::SetLastExtDoorActivated | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: Script::SetEmitterParticleMax)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00530560(void* p,void* s,void* self,void* owner,void* script,void* events,void* result,void* offset) {
  Ref* reference=0;
  if(!FUN_00517950(p,s,offset,self,owner,script,events,&reference)) return false;
@@ -53496,6 +54185,8 @@ extern Context530e30* DAT_0106cdcc;
 extern Player530e30* DAT_0107a104;
 void __cdecl FUN_006195d0(const char* fmt, ...);
 
+// pdb: Script::PlayerSpellBook | TESScriptFunctions.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00530e30()
 {
     ListNode530e30* node = &DAT_0106cdcc->list3c;
@@ -54593,6 +55284,8 @@ extern Actor* DAT_0107a104;
 extern const char DAT_00f47aa8[],DAT_00f47ac4[];
 void* __cdecl FUN_00c0050a(void*,long,const void*,const void*,int);
 void __cdecl Script_SetActionFlag(Script*,Extra*,int);
+// pdb: Script::RemoveScriptPackageFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00528490(void* p1,void* p2,void* reference) {
  Actor* actor=static_cast<Actor*>(FUN_00c0050a(reference,0,DAT_00f47aa8,DAT_00f47ac4,0));
  if(actor) {
@@ -54630,6 +55323,8 @@ bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,Script*,void*,...);
 int __cdecl FUN_00c04515(const char*,const char*,...);
 void __cdecl TESForm_AddCompileIndex(unsigned int*,void*);
 Form* __stdcall FUN_005e9ad0(unsigned int);
+// pdb: Script::DisableNavMesh | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00521370(void* parameters,void* data,void* reference,void* container,Script* script,void* locals,void* result,void* offset) {
  char buffer[512];
  if(!FUN_00517950(parameters,data,offset,reference,container,script,locals,buffer)) return false;
@@ -54652,6 +55347,8 @@ struct Form { unsigned unk00,unk04,unk08,id; };
 bool FUN_00517950(unsigned,unsigned,unsigned,unsigned,unsigned,unsigned,unsigned,...);
 Form* FUN_00539280(unsigned,unsigned,unsigned,unsigned,unsigned,float);
 void FUN_00516790(unsigned*,double*);
+// pdb: Script::PlaceAtMeFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0053ca20(unsigned a,unsigned b,unsigned owner,unsigned d,unsigned e,unsigned f,double* output,unsigned h) {
 
  *output = 0;
@@ -54675,6 +55372,7 @@ struct Form { unsigned unk00,unk04,unk08,id; };
 bool FUN_00517950(unsigned,unsigned,unsigned,unsigned,unsigned,unsigned,unsigned,...);
 Form* FUN_00539280(unsigned,unsigned,unsigned,unsigned,unsigned,float);
 void FUN_00516790(unsigned*,double*);
+// pdb: Script::SavePCFaceFunction | TESScriptFunctions.obj | tesv_win, objopen_prop, low
 bool FUN_00539ed0(unsigned a,unsigned b,unsigned owner,unsigned d,unsigned e,unsigned f,double* output,unsigned h) {
 
  *output = 0;
@@ -54917,6 +55615,8 @@ int unk5c;
 Process* process;
 };
 bool FUN_00517950(void*,void*,void*,Ref*,void*,void*,void*,Ref**,int*,int*);
+// pdb: Script::CreateDetectionEventFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052f850(void* p,void* s,Ref* self,void* owner,void* script,void* events,void* result,void* offset) {
  if(self) {
  Ref* target=0;
@@ -55063,6 +55763,8 @@ virtual void* getNode();
 struct Manager {int active;void FUN_0069e4e0(Ref*,int,int);void FUN_0069e7d0();};
 Manager* FUN_00619e50();
 bool FUN_00517950(void*,void*,void*,Ref*,void*,void*,void*,...);
+// pdb: Script::DeactivateAllHighlightsFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_00520740(void* params,void* data,Ref* self,void* container,void* script,void* locals,void* result,void* offset) {
  float value=15.0f;
  float x,y,z;
@@ -55182,6 +55884,8 @@ Entry* TESQuest_GetObjective(int);
 };
 bool FUN_00517950(void*,void*,void*,void*,void*,void*,void*,Form**,int*,int*);
 void FUN_00887da0(const char*,...);
+// pdb: Script::SetObjectiveCompletedFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: Script::SetObjectiveDisplayedFunction)
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool FUN_0052db10(void* p,void* s,void* self,void* owner,void* script,void* events,void* result,void* offset) {
  Form* form;
  int stage;
@@ -55290,6 +55994,8 @@ QDecalMgr* __cdecl FUN_0046b690();
 __forceinline float QRandU() { QRng* r = FUN_0044a2d0(); return (float)(unsigned int)r->FUN_0086c4b0(-1); }
 __forceinline float QRandRangeR(float max, float min) { return (float)(min + (max - min) * (double)QRandU() * 2.3283064365386963e-10); }
 
+// pdb: Script::AddDecal | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_00532060(void* a1, void* a2, QRef* thisObj)
 {
     QAVObj* camera = DAT_0107a224->unkac;
@@ -56113,6 +56819,8 @@ namespace QuestDiagnostic53cc {
         return FUN_00403870(format, arguments);
     }
     void __cdecl FUN_006195d0(const char*, ...);
+    // pdb: Script::ShowQuestTargetsFunction | TESScriptFunctions.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: `anonymous namespace'::ShowQuestTargetsFunctor::operator())
+    // pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
     bool __cdecl FUN_0053ccf0(const void* apParameters, const char* apCompiledParams, Ref* apRefObject, Ref* apContainer, void* apScript, void* apScriptLocals, double& afReturnValue, unsigned int& auiOffset)
     {
         if (DAT_0107a104->ActiveQuest()) {
@@ -56509,6 +57217,8 @@ bool __cdecl FUN_00517950(void*,void*,void*,void*,void*,void*,void*,int*);
 float __cdecl FUN_006f0300();
 int __cdecl TESObjectCELL_GetSeenValue(const Pt3*);
 AVObj* __cdecl FUN_0047a320(Pt3,Pt3,Pt3,const Rgba&,bool);
+// pdb: Script::TestLocalMap | TESScriptFunctions.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0053a8b0(void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8)
 {
     int fog = 0;
@@ -56707,6 +57417,8 @@ void __cdecl FUN_00619700(const char* text, int unused, const char* title, void 
 bool __cdecl FUN_0061b850(const char* text, int unused, const char* soundA, const char* soundB, float time);
 bool __cdecl FUN_0053a370(void* paramInfo, void* scriptData, Ref* thisObj, void* containingObj, Scr* scriptObj, void* eventList, void* result, unsigned* opcodeOffset, const char* text, Str* out);
 bool __cdecl FUN_00517950(void* paramInfo, void* scriptData, unsigned* opcodeOffset, Ref* thisObj, void* containingObj, Scr* scriptObj, void* eventList, Msg** out);
+// pdb: Script::MessageFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apParameters, apCompiledParams, apRefObject, apContainer, apScript, apScriptLocals, afReturnValue, auiOffset
 bool __cdecl FUN_0053dd40(void* paramInfo, void* scriptData, Ref* thisObj, void* containingObj, Scr* scriptObj, void* eventList, void* result, unsigned* opcodeOffset)
 {
  Msg* msg = 0;
@@ -57044,6 +57756,8 @@ struct CollisionManager {bool FUN_004330f0(SpawnPoint*);void FUN_0043b770(SpawnQ
 extern CollisionManager* DAT_0107a0d8;
 struct PlacementManager {SpawnRef* FUN_0043def0(SpawnItem*,SpawnPoint*,SpawnPoint*,void*,void*,int,int,int);};
 extern PlacementManager* DAT_0106cdcc;
+// pdb: Script::PlaceAtMeFunctionBase | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apPlaceAtRef, apObject, aiCount, aiDistance, aiDirection, afHealthPerc
 SpawnRef* __cdecl FUN_00539280(SpawnRef* source,SpawnItem* item,int count,int distance,int direction,float fraction){
  SpawnRef* result=0;
  if(source && item){

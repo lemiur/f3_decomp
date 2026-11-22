@@ -3,6 +3,8 @@
 #include "nicontrollermanager.h"
 
 // @fnv 0x00a2e220
+// pdb: NiControllerManager::Update | NiControllerManager.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: UpdateData
 void NiControllerManager::Update(NiUpdateData& kData)
 {
     if ((static_cast<unsigned char>(m_uFlags >> 3) & 1) != 0)
@@ -38,6 +40,7 @@ void __cdecl FUN_00a2d5b0(int, int);
 
 // If not already initialized, marks it initialized, stores five function pointers into globals, sets a byte to 0x10, calls FUN_00a2d5b0(1, 5), and returns 1.
 // @fnv 0x00a2d610
+// pdb: NiStepPosKey::RegisterLoader | NiStepPosKey.obj | tesv_win, hash, low
 int __cdecl FUN_00a2d610()
 {
     if (DAT_011f369b)
@@ -77,6 +80,8 @@ __forceinline void init_map(int* map, int size)
 extern int DAT_0109ca08;
 extern int DAT_00dbd304;
 
+// pdb: NiTStringTemplateMap<NiTMap<char const *,TESForm *>,TESForm *>::NiTStringTemplateMap<NiTMap<char const *,TESForm *>,TESForm *> | TESForm.obj | fnv360_0822_retail, call_seq, low
+// pdb params: uiHashSize, bCopy
 int* __fastcall FUN_00a2ed80(int* this_ptr, int, int arg1, int arg2)
 {
     this_ptr[1] = arg1;
@@ -107,6 +112,7 @@ struct HashObj
 
 // Looks up a key in the hash table by key modulo hash size, walking the bucket chain and returning the matching item's value or 0.
 // @fnv 0x00a2ee00
+// pdb: NiTFixedStringMapBase<DFALL<NiTMapItem<NiFixedString,char const *> >,char const *>::GetFirstPos | NiDefaultAVObjectPalette.obj | fnv360_0822_debug, objrun_open, low, conflict (bridge: NiDefaultAVObjectPalette::GetAVObject)
 void* __fastcall FUN_00a2ee00(HashObj* pThis, int, const unsigned int* pKey)
 {
     unsigned int key = *pKey;
@@ -143,6 +149,7 @@ struct NiObject_Helper
 };
 
 // @fnv 0x00a2ee70
+// pdb: NiDefaultAVObjectPalette::`scalar deleting destructor' | NiControllerManager.obj | tesv_win, vtable_prefix, medium
 void* __fastcall FUN_00a2ee70(int* pThis, int, unsigned int flags)
 {
     int* pMap = pThis + 2;
@@ -165,6 +172,7 @@ void __fastcall FUN_00a2ebb0(void* pThis);
 void __cdecl FUN_00aa1460(void* p, size_t size);
 
 // @fnv 0x00a2ef80
+// pdb: NiControllerManager::`scalar deleting destructor' | NiControllerManager.obj | fnv360_0822_retail, objrun, high
 void* __fastcall FUN_00a2ef80(void* pThis, int, unsigned int flags)
 {
     FUN_00a2ebb0(pThis);
@@ -222,6 +230,8 @@ struct CloneableObj
 
 // Clones the controller manager into pkDest: copies the flag at 0x68, clones each sequence and the palette, and updates reference counts.
 // @fnv 0x00a2f380
+// pdb: NiControllerManager::CopyMembers | NiControllerManager.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkDest, kCloning
 void FUN_00a2f380_shell::CloneControllerManager(NiControllerManager* pkDest, CloningProcess* kCloning)
 {
     ((CloneableObj*)this)->FUN_00a6cfe0(pkDest, kCloning);
@@ -258,6 +268,7 @@ void FUN_00a2f380_shell::CloneControllerManager(NiControllerManager* pkDest, Clo
 
 extern const char g_011f4a04_arg1[];
 // @fnv 0x00a2e1e0
+// pdb: BaseProcess::GetCurrentHeadTrackTypeString | BaseProcess.obj | fnv360_0822_retail, vtable, medium
 const char* __cdecl FUN_00a2e1e0()
 {
     return g_011f4a04_arg1;
@@ -298,6 +309,7 @@ struct S460
     void DestroyHashTable();
 };
 // @fnv 0x00a2e550
+// pdb: MagicItemObject::`scalar deleting destructor' | AlchemyItem.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void* __fastcall FUN_00a2e550(S460* self, int edx, unsigned int flags)
 {
     self->DestroyHashTable();
@@ -341,6 +353,7 @@ struct S290
 };
 
 // @fnv 0x00a2ebb0
+// pdb: NiControllerManager::~NiControllerManager | NiControllerManager.obj | fnv360_0822_retail, objrun_prop, medium
 void __fastcall FUN_00a2ebb0(char* self)
 {
     char* b = self + 0x34;
@@ -391,6 +404,8 @@ GlobalObjectO2_00a7b610* __cdecl BSTempNodeManager_GetRTTI()
 }
 
 // @fnv 0x00a2edf0
+// pdb: NiDefaultAVObjectPalette::SetScene | NiControllerManager.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: pkScene
 void __fastcall FUN_00a2edf0(char* self, int edx, void* scene)
 {
     *(void**)(self + 0x18) = scene;
@@ -410,6 +425,7 @@ struct Stub
 typedef NiTFixedStringMapBase<DFALL<NiTMapItem<NiFixedString, const char*> >, const char*> Map;
 
 // @fnv 0x00a2ee40
+// pdb: NiTFixedStringMapBase<DFALL<NiTMapItem<NiFixedString,char const *> >,char const *>::`scalar deleting destructor' | NiDefaultAVObjectPalette.obj | fnv360_0822_debug, objrun_open, low, conflict (bridge: NiDefaultAVObjectPalette::SetAVObject)
 void __fastcall FUN_00a2ee40(char* self, int edx, NiFixedString& name, const char* obj)
 {
     if (!obj)
@@ -461,6 +477,8 @@ struct Owner
 };
 
 // @fnv 0x00a2f0c0
+// pdb: NiControllerManager::AddSequence | NiControllerManager.obj | fnv360_0721_beta, objrun, low
+// pdb params: pkSequence, kName, bStoreTargets
 bool __fastcall AttachSeqToOwner(Owner* pOwner, int edx, Seq* s, int* name, Seq* flag)
 {
     if (pOwner && s->m_pkOwner)
@@ -605,6 +623,7 @@ struct TargetStandIn
 };
 // Resets the vtable, removes all map entries, frees the _08 pointer, and optionally deallocates the object when aFlag has bit 0 set.
 // @fnv 0x00a2e4d0
+// pdb: NiTMapBase<DFALL<NiTMapItem<char const *,Setting *> >,char const *,Setting *>::`scalar deleting destructor' | EffectItem.obj | fnv360_0822_retail, vtable, high
 void* __thiscall TargetStandIn::FUN_00a2e4d0(unsigned int aFlag)
 {
     *(void**)this = (void*)&DAT_01096124;
@@ -638,6 +657,7 @@ struct FUN_00a2e510_Stub
 };
 // Resets two vtable pointers, calls RemoveAll on each, frees the pointer at offset 8, and deallocates this when a2 has bit 0 set.
 // @fnv 0x00a2e510
+// pdb: NiTPointerMap<class NiObject const *,unsigned int>::`vector deleting destructor' | NiStream.obj | tesv_win, vtable, medium
 void* FUN_00a2e510_Stub::DestroyNiTMapBase(unsigned int auiFlags)
 {
     *(void**)this = (void*)&DAT_01096144;
@@ -657,6 +677,7 @@ struct BSFadeNode
     void* FUN_00a2eed0();
 };
 // @fnv 0x00a2f6c0
+// pdb: NiControllerManager::CreateObject | NiControllerManager.obj | fnv360_0822_retail, objrun_prop, medium
 void* __cdecl FUN_00a2f6c0()
 {
     BSFadeNode* p = (BSFadeNode*)BSFadeNode::operator new(0x7c);
@@ -683,6 +704,7 @@ struct NiTFixedStringMap_NiAVObject___
     void* FUN_00a2eb40(unsigned int);
 };
 // @fnv 0x00a2eb40
+// pdb: NiTMapBase<NiTPointerAllocator<unsigned int>,char const *,NiObject * (__cdecl*)(void)>::`scalar deleting destructor' | NiStream.obj | fnv360_0721_beta, objrun_open, low, conflict (skyrim: NiTPointerMap<char const *,class NiObject * (__cdecl*)(void)>::`scalar deleting destructor')
 void* NiTFixedStringMap_NiAVObject___::FUN_00a2eb40(unsigned int auiFlags)
 {
     *(void**)this = &DAT_0109618c;
@@ -826,6 +848,8 @@ struct S00a2efa0
 };
 
 // @fnv 0x00a2efa0
+// pdb: NiControllerManager::NiControllerManager | NiControllerManager.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: pkTarget, bCumulativeAnimations
 S00a2efa0* S00a2efa0::FUN_00a2efa0(NiObjectNET* pkTarget, bool bCumulative)
 {
     FUN_00a6d220(this);
@@ -942,6 +966,8 @@ struct Mgr543
 };
 
 // @fnv 0x00a2f6e0
+// pdb: NiControllerManager::LinkObject | NiControllerManager.obj | fnv360_0822_retail, objrun, low
+// pdb params: kStream
 void FUN_00a2f6e0_shell::FUN_00a2f6e0(NiStream* kStream)
 {
     Mgr543* pkThis = (Mgr543*)this;
@@ -993,6 +1019,7 @@ struct FUN_00a2e460_cls
 
 // Frees each stored value in the hash table when nodes are owned, then releases the table and resets the vtable pointers.
 // @fnv 0x00a2e460
+// pdb: NiTStringTemplateMap<NiTPointerMap<char const *,NiObject * (__cdecl*)(void)>,NiObject * (__cdecl*)(void)>::~NiTStringTemplateMap<NiTPointerMap<char const *,NiObject * (__cdecl*)(void)>,NiObject * (__cdecl*)(void)> | NiStream.obj | fnv360_0721_beta, objrun_open, low
 void FUN_00a2e460_cls::DestroyHashTable()
 {
     m_ppVirtualMethodTable = &DAT_01096164;
@@ -1083,6 +1110,8 @@ void Item::DeleteThis()
 {}
 
 // @fnv 0x00a2e570
+// pdb: NiControllerManager::FindControllerSequence | NiControllerManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apInterpolator, abActiveOnly
 Item* __thiscall Registry::FindItemByBindingId(int aiBindingId, bool abRequireFlag)
 {
     unsigned int uiIndex = 0;
@@ -1204,6 +1233,8 @@ class FUN_00a2e9f0_cls
 
 // Calls FUN_00a6d730, writes m_bFlag and m_usArraySize, saves link IDs for each non-null m_ppArray entry and for m_pkLast.
 // @fnv 0x00a2e9f0
+// pdb: NiControllerManager::SaveBinary | NiControllerManager.obj | fnv360_0822_retail, caller_sim, medium, conflict (bridge: bhkBlendController::SaveBinary)
+// pdb params: kStream
 void FUN_00a2e9f0_cls::FUN_00a2e9f0(NiStreamImpl& stream)
 {
     FUN_00a6d730(stream);
@@ -1308,6 +1339,8 @@ struct FUN_00a2f610_cls : public NiControllerManager
 };
 
 // @fnv 0x00a2f610
+// pdb: NiControllerManager::RegisterStreamables | NiControllerManager.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 bool FUN_00a2f610_cls::FUN_00a2f610(int arg)
 {
     if (!((FnvStandInA*)this)->FUN_00a6d0f0(arg))
@@ -1413,6 +1446,7 @@ class FUN_00a414f0_NiTPrimitiveArray : public NiTArrayStandIn
 
 // Default constructor for the primitive array; the base NiTArray constructor initializes the array fields.
 // @fnv 0x00a414f0
+// pdb: BSAnimNoteListener::BSAnimNoteListener | BSAnimNoteListener.obj | fnv360_0822_retail, call_seq, high
 FUN_00a414f0_NiTPrimitiveArray::FUN_00a414f0_NiTPrimitiveArray()
 {}
 
@@ -1495,6 +1529,8 @@ struct FNV_MapViewFirst
     FNV_MapItem* FUN_004d4210();
 };
 
+// pdb: NiControllerManager::IsEqual | NiControllerManager.obj | fnv360_0721_beta, objrun, medium
+// pdb params: pkObject
 bool FUN_00a2e320_shell::FUN_00a2e320(FUN_00a2e320_shell* apOther)
 {
     FUN_00a2e320_shell* other = apOther;
@@ -1730,6 +1766,8 @@ struct CSeqSetNativeView {
     __declspec(nothrow) void FUN_00887df0(unsigned);
     __declspec(nothrow) unsigned FUN_00887ea0(const SPtr<CSeq>&);
 };
+// pdb: NiControllerManager::ProcessClone | NiControllerManager.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCloning
 void CCtrlMgr::FUN_00a2f420(CloneProc& kCloning)
 {
     ProcessCloneBase(kCloning);
@@ -1791,6 +1829,8 @@ struct CtrlSeqOwner
 
 // Looks up pkObject via FUN_00a2e7d0 and releases the returned NiRefObject, calling DeleteThis when its ref count reaches zero.
 // @fnv 0x00a2ec50
+// pdb: NiAVObject::RemoveProperty | NiAVObject.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: iType
 void CtrlSeqOwner::ReleaseObject(NiRefObject* pkObject)
 {
     NiRefObject* pkFound = 0;
@@ -1941,6 +1981,8 @@ class SeqArr
 };
 
 // @fnv 0x00a2ec90
+// pdb: NiTStringTemplateMap<NiTPointerMap<char const *,NiControllerSequence *>,NiControllerSequence *>::SetAt | NiControllerManager.obj | fnv360_0721_beta, objrun_prop, low, conflict (bridge: NiTArray<NiPointer<NiControllerSequence>,NiTNewInterface<NiPointer<NiControllerSequence> > >::AddLastEmpty)
+// pdb params: pcKey, val
 unsigned int SeqArr::FUN_00a2ec90(const NiPtr<Seq>& element)
 {
     if (element == 0)
@@ -2246,6 +2288,8 @@ inline unsigned S00a2f170_SeqArray::FUN_00a2ec90(const S00a2f170_Ptr<S00a2f170_S
 
 // Finds or creates an inactive sequence, associates it with this manager, and passes it to a method on source.
 // @fnv 0x00a2f170
+// pdb: NiControllerManager::CreateTempBlendSequence | NiControllerManager.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkSequence, pkSequenceToSynchronize
 S00a2f170_Seq* S00a2f170_Mgr::GetTempBlendSequence(S00a2f170_Seq* apSourceSequence, unsigned int option)
 {
     S00a2f170_Seq* sequence = 0;
@@ -2336,6 +2380,7 @@ FUN_00a2eb80::~FUN_00a2eb80()
 {
     ReleaseObjectArray(m_04);
 }
+// pdb: NiTArray<TESObjectCELL *,NiTMallocInterface<TESObjectCELL *> >::`scalar deleting destructor' | TESDataHandler.obj | fnv360_0822_retail, vtable, medium
 void FUN_00a2eb80::operator delete(void* p)
 {
     g_memoryManager.Deallocate(p);

@@ -50,6 +50,8 @@ struct FUN_008464f0_obj
     int unk00;
     FUN_008464f0_mem* unk04;
 };
+// pdb: CombatProcedure::SetLookAtTarget | CombatProcedure.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: BSTArray<class ExtraAttachedArrows3D::DataItem,class BSTArrayHeapAllocator>::~BSTArray<class ExtraAttachedArrows3D::DataItem,class BSTArrayHeapAllocator>)
+// pdb params: arLookAtPoint, acPriority
 void __fastcall FUN_008464f0(char* pThis, FUN_008464f0_arg aStringArg)
 {
     FUN_008464f0_obj* self = (FUN_008464f0_obj*)pThis;

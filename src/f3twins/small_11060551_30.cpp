@@ -30,6 +30,7 @@ Derived::Derived()
 
 void* __cdecl FUN_00c00fcc(void*, void*, unsigned int);
 
+// pdb: NiStrcat | NiKFMTool.obj | tesv_win, call_dedup, low
 void* FUN_00824560(void* a, void* b, unsigned int n)
 {
     FUN_00c00fcc(a, b, n);
@@ -41,6 +42,8 @@ void* FUN_00824560(void* a, void* b, unsigned int n)
 
 
 struct S_0082a710 { int x; int a; short b; };
+// pdb: NiTMapBase<DFALL<NiTMapItem<bhkRigidBody *,unsigned short> >,bhkRigidBody *,unsigned short>::SetValue | LoadedAreaBound.obj | fnv360_0822_retail, vtable, high
+// pdb params: pkItem, key, val
 __declspec(noinline) void __stdcall FUN_0082a710(S_0082a710* p, int a, short b)
 {
     p->a = a;
@@ -75,6 +78,7 @@ NiVertWeightsExtraData* NiVertWeightsExtraData_CreateObject()
 
 
 struct C_0085a2d0 { char FUN_0085a2d0(); };
+// pdb: NiShader::IsInitialized | NiShader.obj | fnv360_0721_beta, objrun_open, low
 char C_0085a2d0::FUN_0085a2d0()
 {
     return *((char*)this + 16);
@@ -114,6 +118,7 @@ D_008604c0::D_008604c0() throw()
     vp = (void*)&DAT_00e25c34;
     f = 0;
 }
+// pdb: NiSortAdjustNode::CreateObject | NiSortAdjustNode.obj | fnv360_0822_retail, objrun_prop, medium
 __declspec(noinline) void* FUN_008604c0()
 {
     return new D_008604c0;

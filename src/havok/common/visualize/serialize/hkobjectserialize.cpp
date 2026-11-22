@@ -120,6 +120,8 @@ struct FUN_00d641f0_cls
 extern int DAT_011697ec;
 void __cdecl FUN_00901e90(void* array, int count, int elementSize);
 
+// pdb: hkpSweptTransformDisplayViewer::removeAllGeometries | hkpSweptTransformDisplayViewer.obj | fnv360_0822_retail, objrun, medium
+// pdb params: worldIndex
 void FUN_00d641f0_cls::ClearSweptEntry(int index)
 {
     SweptEntry* entry = m_30[index];
@@ -373,6 +375,8 @@ template <typename T> __forceinline void GrowItems(hkArray<T>& a,int size) throw
  if(cap<size) {int size2=size; int newCap=cap+cap; int n=size; if(n<newCap)n=newCap; FUN_00901e90(&a,n,sizeof(T));}
  a.m_iElementCount=size;
 }
+// pdb: hkObjectSerialize::readObject | hkObjectSerialize.obj | fnv360_0822_retail, objrun, medium
+// pdb params: s, data, dataSize, globalFixups, klassID
 unsigned __int64 __cdecl ReadRelocatedData(hkStreamReader* stream, char** outBuffer, int* outAllocSize,
                                            hkArray<Item24>& outItems, void* tag)
 {
@@ -630,6 +634,8 @@ struct NativeThreadMemory {
 extern char DAT_00e7a244, DAT_00dcc494;
 extern unsigned long DAT_010f3170;
 extern void __cdecl FUN_00901f10(void*, int);
+// pdb: hkObjectSerialize::writeObject | hkObjectSerialize.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: s, destLayout, dataID, data, klass, globalFixups
 int __cdecl FUN_00e0bd40(Sink* sink, ObjectWriteInfo* layout, unsigned int idLow,
                          unsigned int idHigh, int source, unsigned int size, ObjectWriteArrItem* output)
 {

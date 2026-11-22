@@ -15,6 +15,8 @@ struct bhkRigidBody
 };
 // Calls FUN_00c859e0, reads a count from the stream, then reads that many NiObjects and passes each non-null one to FUN_00c8ef80.
 // @fnv 0x00c8f3c0
+// pdb: bhkRigidBody::LinkObject | bhkRigidBody.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: arStream
 void bhkRigidBody::FUN_00c8f3c0(NiStream* stream)
 {
     FUN_00c859e0(stream);
@@ -53,6 +55,8 @@ struct StrArr
 
 // Appends the MOTION type name string matching type (DYNAMIC, SPHERE, BOX, KEYFRAMED, FIXED, THIN BOX, else INVALID) to arr.
 // @f3 0x00900970 (community match, verified in this file)
+// pdb: bhkRigidBody::AddMotionType | bhkRigidBody.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apStrings, aeType
 void __cdecl AddMotionTypeName(StrArr* arr, int type)
 {
     char* s;
@@ -99,6 +103,7 @@ struct FUN_00c8eb00_s
     void __thiscall FUN_00c8eb00();
 };
 // @fnv 0x00c8eb00
+// pdb: bhkRigidBody::Remove | bhkRigidBody.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void __thiscall FUN_00c8eb00_s::FUN_00c8eb00()
 {
     *(unsigned int*)(this + 0x10) &= 0xffffff77;
@@ -230,6 +235,7 @@ struct RigidLinkSourceF3
     virtual void sc4();
     virtual LinkedRecord* GetLinkedRecord();
 };
+// pdb: bhkConstraint::GethkWorld | bhkConstraint.obj | fnv360_0721_beta, caller, medium
 unsigned int RigidLinkSource::GetLinkedRecordValue()
 {
     unsigned int result = 0;
@@ -518,6 +524,8 @@ struct Slot7BodyPredicates
 };
 extern const NiRTTI DAT_010f2c30;
 extern unsigned char FUN_00f79455;
+// pdb: bhkRigidBody::Add | bhkRigidBody.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apWorld
 bool BodyUpdate::UpdateBody(void* update)
 {
     NativeLink link;
@@ -655,6 +663,7 @@ extern char DAT_01268158;
 
 // Walks the m_14 list; for each node with an ObjBase, checks its v08 list for DAT_0126818c/DAT_01268158 and calls Helper1/Helper2, invoking vA0 if nonzero.
 // @fnv 0x00c8e770
+// pdb: bhkRigidBody::RemoveActionConstraintsFromWorld | bhkRigidBody.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void FUN_00c8e770_cls::ProcessListNodes()
 {
     ListNode* n = &m_14;
@@ -805,6 +814,7 @@ class C8EC60World
 
 // Iterates the world's objects and calls ResetWorldObject on constraints and ref objects that hold a non-null constraint or referenced data.
 // @fnv 0x00c8ec60
+// pdb: bhkRigidBody::RemoveActionConstraints | bhkRigidBody.obj | fnv360_0822_retail, call_gap, medium
 void C8EC60World::FUN_00c8ec60()
 {
     C8EC60Iterator* pkIter = GetIterator();
@@ -890,6 +900,7 @@ struct SpawnedObject : public ChainB_cls
 
 // Allocates and constructs a new SpawnedObject, incrementing the three global counters in its constructors, and returns it.
 // @fnv 0x00c8ed70
+// pdb: bhkRigidBody::CreateObject | bhkRigidBody.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 SpawnedObject* __cdecl FUN_00c8ed70()
 {
     return new SpawnedObject();
@@ -963,6 +974,8 @@ struct NiNode
 };
 extern char DAT_012043f8;
 // @f3 0x00900ce0 (community match, verified in this file)
+// pdb: bhkRigidBody::SetFixed | bhkRigidBody.obj | fnv360_0721_retail, call_seq, high
+// pdb params: apObject, abFix, abAddRemainingConstraints
 void __cdecl ApplyHavokOperation(HavokObject* object, int operation, void* context)
 {
     HavokLookup* __cdecl FUN_00424fe0(HavokObject* object);
@@ -1338,6 +1351,8 @@ struct NativeRigidCloneAttachment {
     void FUN_00900ad0(NiObject* child);
 };
 
+// pdb: bhkRigidBody::CopyMembers | bhkRigidBody.obj | fnv360_0721_beta, caller_sim, low
+// pdb params: apDest, arCloneData
 void RigidBodyS::CopyBodyToClone(RigidBodyS* dest, CloningProcess* context)
 {
     bool bodyStatus;
@@ -1501,6 +1516,7 @@ struct View470:Base470 {
         FUN_00750010();
     }
 };
+// pdb: LowProcess::~LowProcess | LowProcess.obj | fnv360_0822_retail, call_seq, medium
 void Shell_c8da40::FUN_00c8da40() { reinterpret_cast<View470*>(this)->View470::~View470(); }
 
 
@@ -1590,6 +1606,8 @@ class C8DAC0Owner
     void UpdateMatchingNodes(void* pvContext);
 };
 // @fnv 0x00c8dac0
+// pdb: bhkRigidBody::AddActConToWorld | bhkRigidBody.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apWorld
 void C8DAC0Owner::UpdateMatchingNodes(void* pvContext)
 {
     bool bFilterByKind = (bool)(GetField(4, 2) & 1);
@@ -1719,6 +1737,8 @@ class SceneC8E
 };
 // Adds pkObject to the object list if it is a geometry or node, using an allocation tag scope of 0x10.
 // @f3 0x00900ad0 (community match, verified in this file)
+// pdb: bhkRigidBody::AddActCon | bhkRigidBody.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apActCon
 void SceneC8E::FUN_00c8ef80(NiObjectC8E* pkObject)
 {
     if (pkObject && (reinterpret_cast<C8EC60Object*>(pkObject)->IsKindOfType(C8EC60Constraint::ms_kRTTI) || reinterpret_cast<C8EC60Object*>(pkObject)->IsKindOfType(C8EC60RefObject::ms_kRTTI)))
@@ -1758,6 +1778,7 @@ class FUN_00c88990_cls
 };
 
 // @fnv 0x00c88990
+// pdb: BSSimpleList<NiPointer<BSTempEffect> >::RemoveHead | BGSDecalNode.obj | fnv360_0822_retail, call_seq, high
 void FUN_00c88990_cls::PopAndRelease()
 {
     LinkNode* node = m_pNext;
@@ -1796,6 +1817,8 @@ void FUN_00c88990_cls::PopAndRelease()
 // Recursively visits child nodes, calling FUN_00c8ec60 on the linked shape found via FUN_00653290 on each object's property when present.
 // @f3 0x00900500 (community match, verified in this file)
 HavokLookup* __cdecl FUN_00424fe0(HavokObject* object);
+// pdb: bhkRigidBody::RemoveAllActionConstraints | bhkRigidBody.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apObject
 void __cdecl FUN_00c8ecf0(HavokObject* object)
 {
     if (!object)
@@ -2530,6 +2553,8 @@ void* FUN_00ca8c90::operator new(unsigned int size) {
  object->allocationSize=static_cast<unsigned short>(size); return object;
 }
 }
+// pdb: bhkRigidBody::Init | bhkRigidBody.obj | fnv360_0822_retail, uconst, low
+// pdb params: arInfo
 void BodyBuild::ConfigureBody(BuildSettings* input) {
  using namespace f3m_008feed0;
  f3m_008feed0::BodyBuild* self=reinterpret_cast<f3m_008feed0::BodyBuild*>(this);
@@ -2857,6 +2882,8 @@ class Entity_c8ea : public WorldObject_c8ea
 
 // Calls FUN_00c9d4f0, swaps the rigid body's endianness unless a stream byte is 1, clamps a float to 1000, may set a type byte, and reads m_iSlotCount.
 // @f3 0x00900840 (community match, verified in this file)
+// pdb: bhkRigidBody::LoadBinary | bhkRigidBody.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: arStream
 void Entity_c8ea::FUN_00c8ea30(char* pkStream)
 {
     char* s = pkStream;
@@ -3780,6 +3807,7 @@ extern float DAT_00db8b4c;
 extern Obj* __cdecl FUN_0094bba0(Obj* obj, float amount);
 struct ProxyRefC8 { IntegerTriple* FUN_008f81f0(); };
 struct TargetStub { void FUN_00900ad0(Obj* child); };
+// pdb: bhkRigidBody::Fix | bhkRigidBody.obj | fnv360_0822_retail, call_seq, medium
 void Target::FUN_00c8f080()
 {
     if (getFlag() & 1)

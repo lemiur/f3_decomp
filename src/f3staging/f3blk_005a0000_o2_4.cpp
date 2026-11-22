@@ -22,6 +22,8 @@ struct Obj5acc60 {
     Obj5acc60* FUN_005acc60(const Src5acc60* src);
 };
 
+// pdb: PackageLocation::PackageLocation | PackageLocation.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apPLFile
 Obj5acc60* Obj5acc60::FUN_005acc60(const Src5acc60* src)
 {
     type = src->type;

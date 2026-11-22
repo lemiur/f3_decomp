@@ -38,6 +38,8 @@ double DAT_01011588 = 0.5;
 
 void FreeListenerArrays();
 // @fnv 0x00c9e820
+// pdb: NiKeyBasedInterpolator::LoadBinary | NiKeyBasedInterpolator.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: kStream
 void FUN_00c9e820()
 {
     FreeListenerArrays();

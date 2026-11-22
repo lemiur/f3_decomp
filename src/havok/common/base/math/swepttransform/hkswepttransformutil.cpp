@@ -3,6 +3,8 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 // @fnv 0x00cf1480
+// pdb: hkSweptTransformUtil::setTimeInformation | hkSweptTransformUtil.obj | fnv360_0822_retail, call_gap, low
+// pdb params: startTime, invDeltaTime, motionState
 void FUN_00cf1480(float afValue1, float afValue2, int* piTarget)
 {
     *reinterpret_cast<float*>(piTarget + 19) = afValue1;
@@ -457,6 +459,8 @@ __forceinline void LoadIntArray_SetSize(S_00cf10f0_Arr4* a, int n)
     a->m_iElementCount = n;
 }
 
+// pdb: bhkStream::LoadBinary | bhkStream.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arStream, arArray
 int __cdecl LoadIntArray(S_00cf10f0_Stream* kStream, S_00cf10f0_Arr4* pArray)
 {
     int n = 0;
@@ -635,6 +639,7 @@ struct BlobObject
 
 int __cdecl FUN_00cf1f80(int, int, int);
 // @fnv 0x00cf2160
+// pdb: hkSweptTransformUtil::warpToRotation | hkSweptTransformUtil.obj | tesv_win, caller_sim, low
 int __cdecl FUN_00cf2160(unsigned int uiValue, unsigned int arg1)
 {
     unsigned int callResult0 = (unsigned int)FUN_00cf1f80((int)(arg1 + 48u), (int)uiValue, (int)arg1);

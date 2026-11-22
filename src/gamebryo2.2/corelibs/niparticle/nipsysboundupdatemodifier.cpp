@@ -10,6 +10,8 @@ struct NiPSysModifier_shell
 };
 // Clears the flag at offset 0xd9 on the previously attached system, sets it on the new system, then calls FUN_00c31640.
 // @fnv 0x00c2dc70
+// pdb: NiPSysBoundUpdateModifier::SetSystemPointer | NiPSysBoundUpdateModifier.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkTarget
 void NiPSysModifier_shell::FUN_00c2dc70(NiParticleSystem* system)
 {
     NiParticleSystem* pOldSystem = *(NiParticleSystem**)((char*)this + 0x10);
@@ -37,6 +39,7 @@ struct NiPSysBoundUpdateModifier
 };
 // Restores the vtable, frees the stored pointer via the memory manager, calls FUN_00c31750, and optionally deletes this with size 0x20.
 // @fnv 0x00c2dca0
+// pdb: NiPSysBoundUpdateModifier::`scalar deleting destructor' | NiPSysBoundUpdateModifier.obj | fnv360_0822_retail, objrun, high
 void* NiPSysBoundUpdateModifier::Destroy(unsigned int auiFlags)
 {
     void* p = m_pkBounds;
@@ -120,6 +123,8 @@ struct NiPSysBoundUpdateModifier : NiPSysModifier
     void FUN_00c2e3f0(NiStream&);
 };
 // @fnv 0x00c2e3f0
+// pdb: NiPSysBoundUpdateModifier::SaveBinary | NiPSysBoundUpdateModifier.obj | fnv360_0822_retail, objrun, medium, conflict (bridge: NiPSysColliderManager::SaveBinary)
+// pdb params: kStream
 void NiPSysBoundUpdateModifier::FUN_00c2e3f0(NiStream& stream)
 {
     FUN_00c31950(stream);
@@ -388,6 +393,8 @@ struct FUN_00c2e430_shell : Base00c319e0, NiPSysBoundUpdateModifier
 };
 
 // @fnv 0x00c2e430
+// pdb: NiPSysBoundUpdateModifier::GetViewerStrings | NiPSysBoundUpdateModifier.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FUN_00c2e430_shell::FUN_00c2e430(NiStream& stream)
 {
     Base00c319e0::FUN_00c319e0(reinterpret_cast<StrArr*>(&stream));
@@ -529,6 +536,8 @@ struct ModifierHost
 
 // Merges particle bounds into the current bound slot, resets the remaining slots, and advances m_usCurrentBound cyclically.
 // @fnv 0x00c2dce0
+// pdb: NiPSysBoundUpdateModifier::UpdateMeshBounds | NiPSysBoundUpdateModifier.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fTime, pkMeshData
 void ModifierHost::FUN_00c2dce0(float fTime, NiParticleSystem* pkTarget)
 {
     unsigned short usNumParticles = pkTarget->m_usNumParticles;
@@ -660,6 +669,8 @@ struct BoundUpdater
 };
 // Computes the bounding sphere for the current bound slot from position and radius data, merges it into the overall bound, and advances the current bound index.
 // @fnv 0x00c2d880
+// pdb: NiPSysBoundUpdateModifier::UpdateStripBounds | NiPSysBoundUpdateModifier.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fTime, pkStripData
 void BoundUpdater::FUN_00c2d880(float time, TESBoundObjectBounds* apBounds)
 {
     unsigned short count = apBounds->count;
@@ -812,6 +823,8 @@ struct BoundUpdateModifier
 };
 // Computes the particle system's bounding sphere from sampled positions and radii, merging previous samples and storing the result in pkData->m_kBound.
 // @fnv 0x00c2df20
+// pdb: NiPSysBoundUpdateModifier::Update | NiPSysBoundUpdateModifier.obj | fnv360_0822_retail, objrun, high
+// pdb params: fTime, pkData
 void BoundUpdateModifier::UpdateBounds(float fTime, NiPSysData* pkData)
 {
     unsigned short usNumParticles = pkData->m_usNumParticles;

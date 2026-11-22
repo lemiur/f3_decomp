@@ -5,6 +5,8 @@
 extern "C" void* DAT_011b5ff0;
 
 // @fnv 0x00d66bd0
+// pdb: hkpMousePickingViewer::getConsumableCommands | hkpMousePickingViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: commands, numCommands
 void __stdcall FUN_00d66bd0(void** pOut, void** pCount)
 {
     *pOut = &DAT_011b5ff0;
@@ -25,6 +27,8 @@ struct FUN_00d66cb0_class
 };
 
 // @fnv 0x00d66cb0
+// pdb: hkpMousePickingViewer::worldRemovedCallback | hkpMousePickingViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void FUN_00d66cb0_class::FUN_00d66cb0(int aiValue)
 {
     if (aiValue == *(int*)((char*)this + 8))
@@ -49,6 +53,8 @@ struct FUN_00d66b90 : D698B0Base
     FUN_00d66b90(int);
 };
 // @fnv 0x00d66b90
+// pdb: hkpMousePickingViewer::hkpMousePickingViewer | hkpMousePickingViewer.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: contexts
 FUN_00d66b90::FUN_00d66b90(int a) : D698B0Base((void*)a)
 {
     m30 = 1000.0f;
@@ -228,6 +234,8 @@ struct Buf4
 };
 
 // @fnv 0x00d66e10
+// pdb: hkpMousePickingViewer::consumeCommand | hkpMousePickingViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: command
 void Base2::FUN_00d66e10(unsigned char type)
 {
     Buf4 buf;
@@ -330,6 +338,7 @@ struct Node545 {void FUN_0090b500();};
 struct Child545 {virtual ~Child545();unsigned short size;short references;unsigned int active,unk0c,unk10,unk14;Node545* node;};
 struct Context545 {void FUN_009084b0(Child545*);};
 struct OwnerView545 {unsigned int unk0,unk4,unk8,unkc,unk10,unk14,unk18,unk1c,unk20,unk24;Context545* context;Child545* child;};
+// pdb: hkpMousePickingViewer::releaseObject | hkpMousePickingViewer.obj | fnv360_0822_retail, call_seq, medium
 void FUN_00d66c10_cls::FUN_00d66c10() {
     OwnerView545* owner=reinterpret_cast<OwnerView545*>(this);
     Child545* child=owner->child;
@@ -380,6 +389,7 @@ class hkpMousePickingViewer : public FUN_00ddcc60::hkpWorldViewerBase,
 };
 
 // @fnv 0x00d66cd0
+// pdb: hkpMousePickingViewer::~hkpMousePickingViewer | hkpMousePickingViewer.obj | fnv360_0822_retail, objrun, high
 hkpMousePickingViewer::~hkpMousePickingViewer()
 {
     FUN_00d66c10();

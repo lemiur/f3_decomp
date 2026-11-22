@@ -26,6 +26,8 @@ struct NiBlendColorInterpolator
 };
 
 // @fnv 0x00a56040
+// pdb: NiBlendQuaternionInterpolator::LoadBinary | NiBlendQuaternionInterpolator.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: kStream
 void NiBlendColorInterpolator::FUN_00a56040(NiStream& kStream)
 {
     ((FUN_00a37ec0_tgt*)this)->FUN_00a37ec0(kStream);
@@ -46,6 +48,7 @@ extern int DAT_011a943c;
 extern int DAT_0109a58c;
 
 // @fnv 0x00a55ff0
+// pdb: NiBlendColorInterpolator::CreateObject | NiBlendColorInterpolator.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 NiBlendColorInterpolator* __cdecl CreateBlendColorInterpolator()
 {
     NiBlendColorInterpolator* pInterpolator = (NiBlendColorInterpolator*)BSFadeNode::operator new(0x44);
@@ -79,6 +82,8 @@ struct FUN_00a55f80 : NiBlendInterpolator
 };
 // Constructs the object: installs the vtable, copies four ints from DAT_011a9430 into offset 0x30, and clears the flag at the end.
 // @fnv 0x00a55f80
+// pdb: NiBlendColorInterpolator::NiBlendColorInterpolator | NiBlendColorInterpolator.obj | fnv360_1110_retail, objopen_prop, medium
+// pdb params: bManagerControlled, fWeightThreshold, ucArraySize
 FUN_00a55f80::FUN_00a55f80(bool a, float b, unsigned char c) : NiBlendInterpolator(a, b, c)
 {
     *(void**)this = (void*)&DAT_0109a58c;
@@ -127,6 +132,8 @@ struct NiBlendColorInterpolator_shell : public NiBlendInterpolator
 };
 
 // @fnv 0x00a56460
+// pdb: NiBlendColorInterpolator::LoadBinary | NiBlendColorInterpolator.obj | fnv360_0822_retail, objrun, low, conflict (bridge: NiBlendQuaternionInterpolator::LoadBinary)
+// pdb params: kStream
 void NiBlendColorInterpolator_shell::FUN_00a56460(NiStream& kStream)
 {
     ((NiBlendInterpolator*)this)->LoadBinary(kStream);
@@ -189,6 +196,8 @@ struct NiInterpolator
 
 // Calls the interpolator's virtual method at slot 44 and returns its boolean result.
 // @fnv 0x00a55fd0
+// pdb: NiBlendColorInterpolator::InterpolatorIsCorrectType | NiBlendColorInterpolator.obj | fnv360_1110_retail, objrun_open, low
+// pdb params: pkInterpolator
 bool __stdcall FUN_00a55fd0(NiInterpolator* pkInterpolator)
 {
     return pkInterpolator->ControlsTransform();
@@ -251,6 +260,8 @@ struct FUN_00a56400_shell : NiBlendColorInterpolator
 };
 
 // @fnv 0x00a56400
+// pdb: NiBlendColorInterpolator::Update | NiBlendColorInterpolator.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fTime, pkInterpTarget, kValue
 bool FUN_00a56400_shell::InterpolateValue(float fTime, NiObjectNET* pkInterpTarget, RgbaColor& kValue)
 {
     bool bReturnValue = false;
@@ -341,6 +352,8 @@ struct FUN_00a56110_shell
 };
 
 // @fnv 0x00a56110
+// pdb: NiBlendColorInterpolator::StoreSingleValue | NiBlendColorInterpolator.obj | fnv360_0822_retail, objrun, high
+// pdb params: fTime, pkInterpTarget, kValue
 bool FUN_00a56110_shell::GetColorAtTime(float fTime, NiObjectNET* pkTarget, FUN_00a56110_color* kOut)
 {
     if (flags0c & 1)
@@ -378,6 +391,7 @@ struct FUN_00a564a0_cls : NiBlendColorInterpolator
 };
 
 // @fnv 0x00a564a0
+// pdb: NiBlendColorInterpolator::IsEqual | NiBlendColorInterpolator.obj | tesv_win, caller_sim, low
 bool FUN_00a564a0_cls::FUN_00a564a0(void* pkOther)
 {
     if (!FUN_00a36fd0(pkOther))
@@ -518,6 +532,8 @@ struct Blend61c0
     bool UpdateBlend(float fTime, NiObjectNET* pkInterpTarget, CA61c0& kValue);
 };
 // @fnv 0x00a561c0
+// pdb: NiBlendColorInterpolator::BlendValues | NiBlendColorInterpolator.obj | fnv360_0822_retail, objrun, medium
+// pdb params: fTime, pkInterpTarget, kValue
 bool Blend61c0::UpdateBlend(float fTime, NiObjectNET* pkInterpTarget, CA61c0& kValue)
 {
     m_bValueValid = false;

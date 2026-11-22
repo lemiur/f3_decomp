@@ -10,6 +10,7 @@ extern char DAT_00e27c14;
 extern char DAT_00e312f4;
 
 struct C_00854110 { void* FUN_00854110(unsigned char); };
+// pdb: NiVertWeightsExtraData::`scalar deleting destructor' | NiVertWeightsExtraData.obj | fnv360_0822_retail, objrun, high
 void* C_00854110::FUN_00854110(unsigned char f)
 {
     *(void**)((char*)this + 0x0) = (void*)&DAT_00e2468c;
@@ -28,6 +29,7 @@ void* C_0086b240::FUN_0086b240(unsigned char f)
 }
 
 struct C_008d0d00 { void* FUN_008d0d00(unsigned char); };
+// pdb: NiInterpolator::`scalar deleting destructor' | NiInterpolator.obj | fnv360_0822_retail, objrun, medium
 void* C_008d0d00::FUN_008d0d00(unsigned char f)
 {
     *(void**)((char*)this + 0x0) = (void*)&DAT_00e312f4;
@@ -46,6 +48,7 @@ void __fastcall FUN_00ac5e40(void*);
 extern char DAT_00e8b3a4;
 
 struct C_0085dee0 { void* FUN_0085dee0(unsigned char); };
+// pdb: NiVectorExtraData::`scalar deleting destructor' | NiVectorExtraData.obj | fnv360_0822_retail, objrun, high
 void* C_0085dee0::FUN_0085dee0(unsigned char f)
 {
     *(void**)((char*)this + 0x0) = (void*)&DAT_00e2556c;
@@ -55,6 +58,7 @@ void* C_0085dee0::FUN_0085dee0(unsigned char f)
 }
 
 struct C_00864e90 { void* FUN_00864e90(unsigned char); };
+// pdb: NiColorExtraData::`scalar deleting destructor' | NiColorExtraData.obj | fnv360_0822_retail, objrun, high
 void* C_00864e90::FUN_00864e90(unsigned char f)
 {
     *(void**)((char*)this + 0x0) = (void*)&DAT_00e268c4;
@@ -64,6 +68,7 @@ void* C_00864e90::FUN_00864e90(unsigned char f)
 }
 
 struct C_00ab5fb0 { void* FUN_00ab5fb0(unsigned char); };
+// pdb: BSPSysStripUpdateModifier::`scalar deleting destructor' | BSPSysStripUpdateModifier.obj | fnv360_0822_retail, vtable, high
 void* C_00ab5fb0::FUN_00ab5fb0(unsigned char f)
 {
     *(void**)((char*)this + 0x0) = (void*)&DAT_00e8b3a4;
@@ -80,6 +85,7 @@ void __fastcall FUN_008c5d60(void*);
 void __fastcall FUN_008b1190(void*);
 
 struct C_008b5520 { void* FUN_008b5520(unsigned char f); };
+// pdb: NiGeomMorpherController::`scalar deleting destructor' | NiGeomMorpherController.obj | fnv360_0822_retail, caller_sim, high
 void* C_008b5520::FUN_008b5520(unsigned char f)
 {
     FUN_008b4f30(this);
@@ -88,6 +94,7 @@ void* C_008b5520::FUN_008b5520(unsigned char f)
 }
 
 struct C_008c6500 { void* FUN_008c6500(unsigned char f); };
+// pdb: NiLookAtInterpolator::`scalar deleting destructor' | NiLookAtInterpolator.obj | fnv360_0822_retail, objrun, high
 void* C_008c6500::FUN_008c6500(unsigned char f)
 {
     FUN_008c5d60(this);
@@ -96,6 +103,7 @@ void* C_008c6500::FUN_008c6500(unsigned char f)
 }
 
 struct C_008cfc90 { void* FUN_008cfc90(unsigned char f); };
+// pdb: NiBlendColorInterpolator::`scalar deleting destructor' | NiBlendColorInterpolator.obj | fnv360_0822_retail, objrun, medium
 void* C_008cfc90::FUN_008cfc90(unsigned char f)
 {
     FUN_008b1190(this);
@@ -126,6 +134,8 @@ void C_00ac6ce0::NiPSysVortexFieldModifier_LoadBinary(int a)
 }
 
 struct C_00acae20 { void FUN_00ad1a50(int); char p[0x30]; S_0083fa20 s; void FUN_00acae20_(int); };
+// pdb: NiPSysGravityFieldModifier::SaveBinary | NiPSysGravityFieldModifier.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void C_00acae20::FUN_00acae20_(int a)
 {
     FUN_00ad1a50(a);
@@ -138,16 +148,19 @@ struct S_009a9b10 { void __thiscall FUN_009a9a10(int, int, int); void __thiscall
 struct S_009b2b40 { void __thiscall FUN_009b2a80(int, int, int); void __thiscall FUN_009b2b40(int, int); };
 struct S_00a923c0 { void __thiscall FUN_00a91fc0(int, int, int); void __thiscall FUN_00a923c0(int, int); };
 
+// pdb: hkSmallArray<struct hkConstraintInternal>::insertAt | hkpWorldConstraintUtil.obj | tesv_win, call_gap, low
 void S_009a9b10::FUN_009a9b10(int a, int b)
 {
     this->FUN_009a9a10(a, b, 1);
 }
 
+// pdb: hkArrayBase<class hkpEntity *>::_insertAt | hkpContinuousSimulation.obj | tesv_win, call_gap, low
 void S_009b2b40::FUN_009b2b40(int a, int b)
 {
     this->FUN_009b2a80(a, b, 1);
 }
 
+// pdb: hkArrayBase<struct hkpBallSocketChainData::ConstraintInfo>::_insertAt | hkpConstraintChainUtil.obj | tesv_win, call_gap, low
 void S_00a923c0::FUN_00a923c0(int a, int b)
 {
     this->FUN_00a91fc0(a, b, 1);
@@ -163,6 +176,8 @@ void __cdecl FUN_009c3cc0(int, int, int, L_009c4520*);
 struct L_009d4160 { void* vt; char b; int f8; };
 void __cdecl FUN_009d3f20(int, int, int, L_009d4160*);
 
+// pdb: hkpSymmetricAgentLinearCast<hkpMultiSphereTriangleAgent>::staticGetPenetrations | hkpMultiSphereTriangleAgent.obj | fnv360_0822_retail, objrun, high
+// pdb params: bodyA, bodyB, input, collector
 void FUN_009c1aa0(int a1, int a2, int a3, int a4)
 {
     L_009c1aa0 l;
@@ -172,6 +187,8 @@ void FUN_009c1aa0(int a1, int a2, int a3, int a4)
     hkpMultiSphereTriangleAgent_staticGetPenetrations(a2, a1, a3, &l);
 }
 
+// pdb: hkpSymmetricAgentLinearCast<hkpCapsuleTriangleAgent>::staticGetPenetrations | hkpCapsuleTriangleAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: bodyA, bodyB, input, collector
 void FUN_009c4520(int a1, int a2, int a3, int a4)
 {
     L_009c4520 l;
@@ -181,6 +198,8 @@ void FUN_009c4520(int a1, int a2, int a3, int a4)
     FUN_009c3cc0(a2, a1, a3, &l);
 }
 
+// pdb: hkpSymmetricAgentLinearCast<hkpBvAgent>::staticGetPenetrations | hkpBvAgent.obj | fnv360_0822_retail, objrun, medium
+// pdb params: bodyA, bodyB, input, collector
 void FUN_009d4160(int a1, int a2, int a3, int a4)
 {
     L_009d4160 l;
@@ -197,18 +216,23 @@ char __stdcall FUN_00ad18c0(int);
 char __stdcall FUN_0082e410(int);
 
 struct C_00aaf5f0 { bool FUN_00aaf5f0(int a); };
+// pdb: NiBSBoneLODController::RegisterStreamables | NiBSBoneLODController.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 bool C_00aaf5f0::FUN_00aaf5f0(int a)
 {
     return (bool)FUN_00837cd0(a);
 }
 
 struct C_00ac8a30 { bool FUN_00ac8a30(int a); };
+// pdb: NiPSysRadialFieldModifier::IsEqual | NiPSysRadialFieldModifier.obj | tesv_win, caller_sim, low
 bool C_00ac8a30::FUN_00ac8a30(int a)
 {
     return (bool)FUN_00ad18c0(a);
 }
 
 struct C_00ad2870 { bool FUN_00ad2870(int a); };
+// pdb: BSRangeNode::RegisterStreamables | BSRangeNode.obj | fnv360_0822_retail, vtable, medium
+// pdb params: arStream
 bool C_00ad2870::FUN_00ad2870(int a)
 {
     return (bool)FUN_0082e410(a);

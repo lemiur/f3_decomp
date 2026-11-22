@@ -46,6 +46,8 @@ struct NiPSysInitialRotAngleCtlr : BaseStandIn
     bool IsModifierOfType(NiObjectNET*);
 };
 // @fnv 0x00c2a210
+// pdb: NiPSysInitialRotAngleCtlr::InterpTargetIsCorrectType | NiPSysInitialRotAngleCtlr.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: pkTarget
 bool NiPSysInitialRotAngleCtlr::IsModifierOfType(NiObjectNET* pkTarget)
 {
     if (!BaseStandIn::IsTargetParticleSystem(pkTarget))
@@ -72,6 +74,7 @@ struct SpawnedCtlr
 
 // Allocates a 0x40-byte SpawnedObject, initialises it, passes it to FUN_00c32de0 with pArg, and returns it (or null on allocation failure).
 // @fnv 0x00c2a1c0
+// pdb: NiPSysInitialRotAngleCtlr::CreateClone | NiPSysInitialRotAngleCtlr.obj | tesv_win, caller_sim, low
 SpawnedObject* SpawnedCtlr::CreateSpawnedObject(void* pArg)
 {
     SpawnedObject* pkObj = (SpawnedObject*)FUN_00aa13e0(0x40);

@@ -1603,6 +1603,7 @@ struct TempArray {
     }
 };
 
+// pdb: getNodeSampledAtTick | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, call_seq, medium
 static __declspec(noinline) int __cdecl FUN_00a8d480(
     StreamInfo* info, int row, int col, const StreamNodeList& nodes, int height, float range, float value)
 {

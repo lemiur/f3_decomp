@@ -12,6 +12,7 @@ class FnvShapeGetter : public hkpSphereRepShape
 };
 
 // @fnv 0x00d2a5f0
+// pdb: hkpCharacterContext::getState | hkpCharacterContext.obj | fnv360_0822_retail, call_seq, medium
 hkInt32 FnvShapeGetter::FUN_00d2a5f0()
 {
     return unk10;
@@ -81,6 +82,8 @@ struct FUN_00922710_Obj { void FUN_00922710(unsigned int lo, unsigned int hi); }
 struct CopySpheresPair { unsigned int lo; unsigned int hi; };
 struct CopySpheresList { CopySpheresPair* items; int count; };
 
+// pdb: hkStreamStatisticsCollector::_addKnown | hkStreamStatisticsCollector.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: obj
 hkVector4* FUN_00d2a920::CopySpheres(hkVector4* dst)
 {
     reinterpret_cast<FUN_00922cb0_Obj*>(this)->FUN_00922cb0();

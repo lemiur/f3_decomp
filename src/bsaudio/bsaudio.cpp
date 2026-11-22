@@ -34,6 +34,7 @@ __forceinline ContextGuard::~ContextGuard()
 
 __if_not_exists(AudioUpdateStand) { struct AudioUpdateStand { void FUN_00ad7740(); }; }
 
+// pdb: QueuedPlayer::QueueModels | ModelLoader.obj | fnv360_0822_retail, vtable, medium
 __declspec(noinline) void AudioUpdateStand::FUN_00ad7740()
 {
     f3m_0042fda0::Stand* self = reinterpret_cast<f3m_0042fda0::Stand*>(this);

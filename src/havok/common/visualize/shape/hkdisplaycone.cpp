@@ -113,6 +113,7 @@ static __forceinline void* PoolAlloc() {
 }
 }
 
+// pdb: hkDisplayCone::buildGeometry | hkDisplayCone.obj | fnv360_0822_retail, vtable, medium
 void MeshBuilder::InitializeGeometry()
 {
     using namespace na6bfd0;

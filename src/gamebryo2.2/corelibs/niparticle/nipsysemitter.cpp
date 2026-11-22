@@ -3,6 +3,8 @@
 #include "nipsysemitter_decls.h"
 #include "nipsysemitter_types.h"
 // @fnv 0x00c223b0
+// pdb: NiPSysEmitter::LoadBinary | NiPSysEmitter.obj | fnv360_0822_retail, uconst, high
+// pdb params: kStream
 void NiPSysEmitter::LoadBinary(NiStream& stream)
 {
     NiPSysModifier::LoadBinary(stream);
@@ -74,6 +76,8 @@ class FUN_00c226a0_cls
 };
 
 // @fnv 0x00c226a0
+// pdb: NiPSysEmitter::IsEqual | NiPSysEmitter.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pkObject
 bool FUN_00c226a0_cls::Equals(FUN_00c226a0_cls* other)
 {
     if (unk00c31830(other) && other->m_18 == m_18 && other->m_1c == m_1c && other->m_20 == m_20 &&
@@ -84,6 +88,8 @@ bool FUN_00c226a0_cls::Equals(FUN_00c226a0_cls* other)
 }
 
 // @fnv 0x00d070a0
+// pdb: CombatController::ForceFlee | CombatController.obj | fnv360_0721_beta, call_dedup, low
+// pdb params: apFleeFrom, abSwimFlee
 void __stdcall FUN_00d070a0(int, int)
 {}
 

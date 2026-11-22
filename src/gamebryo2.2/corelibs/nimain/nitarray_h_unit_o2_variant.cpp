@@ -32,6 +32,8 @@ struct FUN_00cc6540_Class
 char* __cdecl FUN_00a7d550(char const* name, float value);
 
 // @fnv 0x00cc6540
+// pdb: hkRagdollLimitsConstraintCinfo::GetViewerStrings | bhkRagdollLimitsConstraint.obj | fnv360_0822_retail, strset, low
+// pdb params: apStrings
 void FUN_00cc6540_Class::FUN_00cc6540(StrArr* array)
 {
     FUN_00c8a560(array);
@@ -129,6 +131,8 @@ struct CharPtrArr
 };
 
 // @fnv 0x00a5b4b0
+// pdb: NiTArray<CombatGroup *,NiTMallocInterface<CombatGroup *> >::AddFirstEmpty | CombatManager.obj | fnv360_0822_retail, call_seq, high
+// pdb params: element
 int CharPtrArr::FUN_00a5b4b0(char*& value)
 {
     if (value == 0)
@@ -276,6 +280,8 @@ char* __cdecl FUN_00847e70(const char*, const char*);
 int __cdecl FUN_00403230(char*, unsigned int, const char*, ...);
 char* __cdecl FUN_00847d30(const char*, int);
 
+// pdb: hkConstraintCinfo::GetViewerStrings | bhkConstraint.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apStrings
 void ViewerConstraint::FUN_00c8a560(BC8AD40StringArray* array)
 {
     char* text;
@@ -529,6 +535,8 @@ struct Shell948 {
 Shell948* __cdecl FUN_0097a820(void*);
 struct Data948{int unk00,unk04,unk08,unk0C,unk10,unk14;Inner948* inner;int unk1C;float threshold;unsigned char broken; __forceinline bool IsBroken() const { return broken != 0; }};
 
+// pdb: hkBreakableConstraintCinfo::GetViewerStrings | bhkBreakableConstraint.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apStrings
 void CAA010This::FUN_00caa010(CAA010Arr* array)
 {
     FUN_00c8a560(array);
@@ -584,6 +592,8 @@ struct Holder4a3380 {
     unsigned int FUN_004a3380(CArr4a3380* pkArray);
 };
 
+// pdb: GameSettingCollection::GetViewerStrings | XGameSetting.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apStringsA
 unsigned int Holder4a3380::FUN_004a3380(CArr4a3380* pkArray)
 {
     unsigned int I;

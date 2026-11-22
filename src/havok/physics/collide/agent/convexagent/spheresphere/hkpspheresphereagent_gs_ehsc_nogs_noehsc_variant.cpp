@@ -104,6 +104,8 @@ extern unsigned long DAT_0126835c;
 extern unsigned long DAT_0116913c;
 extern char FUN_00e32798[];
 extern void* (__stdcall* FUN_00d9b080)(unsigned long);
+// pdb: hkpSphereSphereAgent::staticGetPenetrations | hkpSphereSphereAgent.obj | fnv360_0822_retail, call_seq, high
+// pdb params: bodyA, bodyB, input, collector
 extern "C" void __cdecl FUN_00d3f6a0(void* a, void* b, void* c, void* d)
 {
     void* (__stdcall* getTls)(unsigned long) = FUN_00d9b080;

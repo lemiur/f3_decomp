@@ -16,6 +16,8 @@ struct FUN_00d2bcd0_class
 
 // Reads count bytes from the stream at m_0c into buffer; if fread returns no bytes, sets m_10 to 0.
 // @fnv 0x00d2bcd0
+// pdb: hkStdioStreamReader::read | hkStdioStreamReader.obj | fnv360_0822_retail, vtable, high
+// pdb params: buf, nbytes
 void FUN_00d2bcd0_class::ReadOrMarkFailed(void* buffer, unsigned int count)
 {
     if ((int)fread(buffer, 1, count, m_0c) > 0)
@@ -34,6 +36,7 @@ struct FUN_00d2bda0_cls
 
 // Resets the vtable pointers and closes the stored file handle if present.
 // @fnv 0x00d2bda0
+// pdb: hkStdioStreamReader::~hkStdioStreamReader | hkStdioStreamReader.obj | fnv360_0822_retail, objrun, high
 void __thiscall FUN_00d2bda0_cls::DestroyFileHandle()
 {
     int file = *(int*)((char*)this + 0xc);
@@ -66,6 +69,7 @@ void __stdcall FUN_00d2bd10(unsigned char* output)
 }
 
 // @fnv 0x00d2bd20
+// pdb: hkArrayStreamWriter::getClassType | hkOStream.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkArrayStreamWriter::isOk)
 void __stdcall FUN_00d2bd20(char* a1)
 {
     *a1 = 1;
@@ -82,6 +86,8 @@ struct FileObject
     bool Seek(long offset, int origin);
 };
 // @fnv 0x00d2bd30
+// pdb: hkStdioStreamReader::seek | hkStdioStreamReader.obj | fnv360_0822_retail, vtable, high
+// pdb params: offset, whence
 bool FileObject::Seek(long lOffset, int origin)
 {
     return _fseek(stream, lOffset, origin) != 0;
@@ -106,6 +112,8 @@ struct ReaderWithPosition
     int SetPositionFromReader(int unused);
 };
 // @fnv 0x00d2bdd0
+// pdb: hkSeekableStreamReader::setMark | hkStdioStreamReader.obj | fnv360_0822_retail, vtable, high
+// pdb params: markLimit
 int ReaderWithPosition::SetPositionFromReader(int unused)
 {
     int value = GetPosition();
@@ -176,6 +184,8 @@ struct StdioStreamReader
 
 // Initialises the stream object and opens fname in binary read mode, storing the handle and setting the flag to whether opening succeeded.
 // @fnv 0x00d2bd60
+// pdb: hkStdioStreamReader::hkStdioStreamReader | hkStdioStreamReader.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: nameIn
 StdioStreamReader* StdioStreamReader::OpenFile(const char* fname)
 {
     refCount = 1;

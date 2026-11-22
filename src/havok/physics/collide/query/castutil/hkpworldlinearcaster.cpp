@@ -60,6 +60,8 @@ struct FUN_00cfae50_cls
 
 // Looks up a slot target, matches it via m_08, dispatches the handler from the m_20 table by code, and returns m_0c->m_04.
 // @f3 0x0098aaa0 (community match, verified in this file)
+// pdb: hkpWorldLinearCaster::addBroadPhaseHandle | hkpWorldLinearCaster.obj | fnv360_0822_retail, vtable, high
+// pdb params: broadPhaseHandle, castIndex
 float FUN_00cfae50_cls::InvokeSlotHandler(SlotRecord* pRecord, int a2)
 {
     SlotTarget* pTarget = *(SlotTarget**)((int)pRecord + pRecord->m_05);

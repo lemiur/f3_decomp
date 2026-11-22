@@ -53,6 +53,7 @@ struct NiControllerSequence : BaseH
 extern "C" void __cdecl __Dummy_00b6fef0(void*, unsigned int);
 
 // @fnv 0x00a35820
+// pdb: BSTempEffectParticle::`scalar deleting destructor' | BSTempEffectParticle.obj | fnv360_0822_retail, vtable, high
 void* NiControllerSequence::FUN_00a35820(unsigned int flags)
 {
     BaseH::~BaseH();
@@ -68,6 +69,8 @@ struct FUN_00a30580_shell : NiControllerSequence
 
 // Walks the linked list at offset 0x58 from arg and returns false if this is found in it, true otherwise.
 // @fnv 0x00a30580
+// pdb: NiControllerSequence::VerifyDependencies | NiControllerSequence.obj | fnv360_1110_retail, call_seq, medium
+// pdb params: pkSequence
 bool __thiscall FUN_00a30580_shell::IsNotInChain(void* pStart)
 {
     NiControllerSequence* next = static_cast<NiControllerSequence*>(pStart)->m_pkPartnerSequence;
@@ -96,6 +99,7 @@ struct FUN_00a34450_shell
     void* __thiscall FUN_00a34450(unsigned int);
 };
 // @fnv 0x00a34450
+// pdb: NiTArray<BGSAddonNode *,NiTMallocInterface<BGSAddonNode *> >::`scalar deleting destructor' | TESDataHandler.obj | fnv360_0822_retail, vtable, medium
 void* __thiscall FUN_00a34450_shell::FUN_00a34450(unsigned int auiFlags)
 {
     void* p = m_pBase;
@@ -184,6 +188,8 @@ struct FUN_00a33bf0_s : NiObject
 };
 // Links the object to the stream, then writes the name, interpolation array items with their ID tags, scalar fields and the linked object list.
 // @fnv 0x00a33bf0
+// pdb: NiControllerSequence::SaveBinary | NiControllerSequence.obj | fnv360_0822_retail, vtable, high
+// pdb params: kStream
 void FUN_00a33bf0_s::SaveToStream(NiStream& kStream)
 {
     NiObject::LinkObject(kStream);
@@ -233,6 +239,8 @@ struct FUN_00a35030_shell : NiControllerSequence
 };
 // Starts an ease-out with the given time and transition flag, or finishes it by updating the accumulated time and resetting state.
 // @fnv 0x00a35030
+// pdb: NiControllerSequence::Deactivate | NiControllerSequence.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: fEaseOutTime, bTransition
 unsigned char FUN_00a35030_shell::SetEaseOut(float fEaseOutTime, bool bTransition)
 {
     if (!m_eState)
@@ -296,6 +304,7 @@ struct FUN_00a316a0_shell
 };
 
 // @fnv 0x00a326c0
+// pdb: NiControllerSequence::CreateObject | NiControllerSequence.obj | fnv360_0822_retail, caller_sim, medium
 void* __cdecl FUN_00a326c0()
 {
     void* p = A51BF0Base::operator new(0x74);
@@ -342,6 +351,7 @@ struct RefBase
 };
 
 // @fnv 0x00a35640
+// pdb: NiControllerSequence::~NiControllerSequence | NiControllerSequence.obj | fnv360_0822_retail, call_seq, high
 void FUN_00a35640_shell::FUN_00a35640()
 {
     *reinterpret_cast<void**>(this) = &DAT_01096584;
@@ -435,6 +445,8 @@ struct FUN_00a307c0_cls
 };
 
 // @fnv 0x00a307c0
+// pdb: NiControllerSequence::GetObjectNameAt | NiControllerSequence.obj | fnv360_0822_retail, ustr, medium
+// pdb params: uiIndex, pcObjectName
 void FUN_00a307c0_cls::GetEntryText(unsigned int uiIndex, char* out)
 {
     if (out == 0)
@@ -590,6 +602,7 @@ struct S_00a30880_Foo : S_00a30880_Base
 
 // Calls Target(0,0) when unk44 is set, then releases each item's reference-counted object and clears its pointer.
 // @fnv 0x00a30880
+// pdb: NiControllerSequence::ClearTargets | NiControllerSequence.obj | fnv360_0822_retail, call_seq, medium
 void S_00a30880_Foo::ReleaseItems()
 {
     if (unk44 != 0)
@@ -641,6 +654,8 @@ struct SequenceA30970 : NiObject
 };
 // Advances the sequence's accumulated time by frequency times the delta, wraps it into [begin,end] when cycleType is 0, and optionally stores the new state.
 // @fnv 0x00a30970
+// pdb: NiControllerSequence::ComputeScaledTime | NiControllerSequence.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: fTime, bStoreLastTime
 float SequenceA30970::FUN_00a30970(float time, bool update)
 {
     float accumulated = accumulated38;
@@ -760,6 +775,8 @@ struct FUN_00a30cc0_cls
 
 // Compares two objects' key pointers via V23 and returns whether both keys match and m_bFlag0D is equal.
 // @fnv 0x00a30cc0
+// pdb: NiControllerSequence::InterpArrayItem::IsEqual | NiControllerSequence.obj | fnv360_0822_retail, call_gap_sim, high
+// pdb params: kDest
 unsigned char FUN_00a30cc0_cls::Equals(FUN_00a30cc0_cls* other)
 {
     if ((m_pKey0 != 0 && other->m_pKey0 == 0) || (m_pKey0 == 0 && other->m_pKey0 != 0) ||
@@ -937,6 +954,8 @@ struct FUN_00a312d0
 };
 
 // @fnv 0x00a312d0
+// pdb: NiControllerSequence::IDTag::IDTag | NiControllerSequence.obj | fnv360_0822_retail, call_gap, high
+// pdb params: kAVObjectName, kPropertyType, kCtlrType, kCtlrID, kInterpolatorID
 FUN_00a312d0::FUN_00a312d0(const FixedStr& akAVObjectName, const FixedStr& akPropertyType, const FixedStr& akCtlrType,
                            const FixedStr& akCtlrID, const FixedStr& akInterpolatorID)
 {
@@ -985,6 +1004,7 @@ class FUN_00a315b0_cls
 };
 
 // @fnv 0x00a315b0
+// pdb: NiControllerSequence::IDTag::~IDTag | NiControllerSequence.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: NiControllerSequence::IDTag::`vector deleting destructor')
 FUN_00a315b0_cls* FUN_00a315b0_cls::FUN_00a315b0(unsigned char acFlags)
 {
     if (acFlags & 2)
@@ -1059,6 +1079,7 @@ struct FUN_00a31740_cls
 
 // Releases the referenced objects (decrementing refcounts and calling Release at zero) and optionally deallocates this or the array block based on acFlags.
 // @fnv 0x00a31740
+// pdb: NiPointer<BSAnimNote>::`vector deleting destructor' | NiControllerSequence.obj | fnv360_0721_beta, call_gap_sim, low
 void* FUN_00a31740_cls::FUN_00a31740(unsigned char acFlags)
 {
     if (acFlags & 2)
@@ -1141,6 +1162,8 @@ struct FUN_00a317e0_t
 };
 
 // @fnv 0x00a317e0
+// pdb: NiControllerSequence::RemoveInterpolator | NiControllerSequence.obj | fnv360_0822_retail, call_seq, high
+// pdb params: uiIndex, aspInterpolator
 void __thiscall FUN_00a317e0_t::AssignInterpolatorRef(int index, FUN_00a317e0_ref** output)
 {
     FUN_00a317e0_ref* pNewRef = reinterpret_cast<FUN_00a317e0_ref*>(
@@ -1187,6 +1210,8 @@ struct SeqExt : FUN_00a33bf0_s
 
 // Computes time plus an offset, optionally writes time to each controller's time field, and stores the result in m_pad44[4].
 // @fnv 0x00a328b0
+// pdb: NiControllerSequence::SetPhase | NiControllerSequence.obj | fnv360_0822_debug, caller, medium
+// pdb params: afPhase, abUpdateControllers
 void SeqExt::FUN_00a328b0(float time, bool setControllerTimes)
 {
     float currentTime = time + m_fFirstKeyTime;
@@ -1332,6 +1357,7 @@ struct FUN_00a34480_cls
 
 // Walks the linked list from a2's V02() looking for DAT_011f36b4; if found, merges m_word24 into a2->m_word08, copies m_f28 to a2->m_f0c and calls AssignControllers.
 // @fnv 0x00a34480
+// pdb: NiControllerSequence::InterpArrayItem::ClearValues | NiControllerSequence.obj | fnv360_0721_beta, objrun_prop, low
 bool FUN_00a34480_cls::FUN_00a34480(void* a1, FUN_00a34480_obj* pNode)
 {
     FUN_00a34480_obj* cur = 0;
@@ -1449,6 +1475,8 @@ struct Sequence
 
 // Appends the sequence's base data and per-item key/value entries built from each tag and control priority to the output array.
 // @fnv 0x00a34540
+// pdb: NiControllerSequence::GetViewerStrings | NiControllerSequence.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apStrings
 void Sequence::FUN_00a34540(OutputArray* output)
 {
     AppendCameraPathEntries(output);
@@ -1584,6 +1612,8 @@ struct SeqA34f20
 };
 
 // @fnv 0x00a34f20
+// pdb: NiControllerSequence::Activate | NiControllerSequence.obj | fnv360_0822_retail, call_seq, high
+// pdb params: cPriority, bStartOver, fWeight, fEaseInTime, pkTimeSyncSeq, bTransition
 bool SeqA34f20::StartSequence(char m_ucRegionPriority, bool bStartOver, float fWeight, float fEaseInTime,
                               SeqA34f20* pkTimeSyncSeq, bool bTransition)
 {
@@ -1733,6 +1763,8 @@ struct CtlrSeq : BaseH
 };
 
 // @fnv 0x00a351d0
+// pdb: NiControllerSequence::StartMorph | NiControllerSequence.obj | fnv360_0721_beta, objrun_prop, medium
+// pdb params: pkDestSequence, fDuration, iPriority, fSourceWeight, fDestWeight
 bool CtlrSeq::CrossFadeTo(CtlrSeq* pkDestSequence, float fDuration, int iPriority, float fSourceWeight,
                           float fDestWeight)
 {
@@ -1778,6 +1810,8 @@ struct HolderB3718
 extern HolderB3718* DAT_011f6080;
 
 // @fnv 0x00aa10f0
+// pdb: _NiFree | NiMemoryDefines.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: pvMem
 void __cdecl FUN_00aa10f0(void* pv)
 {
     if (pv != 0)
@@ -1795,6 +1829,8 @@ struct FUN_00a30750_shell
 extern int EmptyFS;
 
 // @fnv 0x00a30750
+// pdb: NiPointer<NiInterpController>::operator= | NiControllerSequence.obj | fnv360_0721_beta, call_gap, low
+// pdb params: ptr
 void FUN_00a30750_shell::FUN_00a30750()
 {
     char* p;
@@ -2010,6 +2046,7 @@ class A1400StringGroup
 
 // Assigns each of the five fixed-string members from kOther and returns *this.
 // @fnv 0x00a31400
+// pdb: NiControllerSequence::InterpArrayItem::~InterpArrayItem | NiControllerSequence.obj | fnv360_0721_beta, objrun_prop, low
 A1400StringGroup& A1400StringGroup::FUN_00a31400(const A1400StringGroup& kOther)
 {
     m_kName0 = kOther.m_kName0;
@@ -2196,6 +2233,8 @@ struct IDTagA33a50
 };
 
 // @fnv 0x00a33a50
+// pdb: NiControllerSequence::IDTag::LoadBinary | NiControllerSequence.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: kStream, pvDeprecatedExtraData
 void IDTagA33a50::ReadFromStream(StreamA33a50& kStream, unsigned int& uiPaletteLink)
 {
     if (kStream.m_uiNifVersion < 0x0A010071)
@@ -2328,6 +2367,8 @@ struct AnimationSequence : S_00a30880_Base
     }
 };
 // @fnv 0x00a34ba0
+// pdb: NiControllerSequence::Update | NiControllerSequence.obj | fnv360_0822_retail, caller, medium
+// pdb params: fTime, bUpdateInterpolators
 void AnimationSequence::FUN_00a34ba0(float time, bool update)
 {
     if (state == 0)
@@ -2581,6 +2622,8 @@ struct SequenceLink : NiObject
 };
 
 // @fnv 0x00a326e0
+// pdb: NiControllerSequence::LinkObject | NiControllerSequence.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kStream
 void SequenceLink::LinkSequenceSource(NiSequenceSource* source)
 {
     NiObject::LinkObject(*(NiStream*)source);
@@ -2675,6 +2718,8 @@ struct A33950Object
 };
 
 // @fnv 0x00a33950
+// pdb: NiControllerSequence::InterpArrayItem::LoadBinary | NiControllerSequence.obj | fnv360_0822_retail, uconst, low
+// pdb params: kStream
 void A33950Object::LoadFromStream(A33950Stream* stream)
 {
     A33950RefObject* next = stream->FUN_00a64620();
@@ -2736,6 +2781,8 @@ struct FUN_00a350d0_seq : SeqA34f20
 };
 
 // @fnv 0x00a350d0
+// pdb: NiControllerSequence::StartBlend | NiControllerSequence.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: pkDestSequence, fDuration, fDestFrame, iPriority, fSourceWeight, fDestWeight, pkTimeSyncSeq
 bool FUN_00a350d0_seq::FUN_00a350d0(SeqA34f20* pkTarget, float fTime, float m_fTimeout, int iPriority, float fSeqWeight,
                                     float fTargetWeight, SeqA34f20* pkPartner)
 {
@@ -2811,6 +2858,8 @@ struct SeqIDTagOffsets
 
 // Resolves five string offsets against pkPalette->m_pString, assigning each to the matching OffsetString field when the offset is not -1.
 // @fnv 0x00a30d40
+// pdb: NiControllerSequence::IDTag::HandleDeprecatedExtraData | NiControllerSequence.obj | fnv360_0822_retail, call_gap, high
+// pdb params: pkPalette, kStream
 void SeqIDTagOffsets::LoadFromPalette(NiStringPalette* pkPalette, int iUnused)
 {
     int iAVObjectNameOffset = (int)m_kAVObjectName.m_kHandle;
@@ -2865,6 +2914,7 @@ struct A31500Item
 
 // Releases references for this item or preceding items, conditionally calls another function, and returns this or the count address.
 // @fnv 0x00a31500
+// pdb: NiControllerSequence::InterpArrayItem::`vector deleting destructor' | NiControllerSequence.obj | fnv360_0822_debug, objopen_prop, low
 A31500Item* A31500Item::FUN_00a31500(unsigned char m_ucEntryType)
 {
     if (m_ucEntryType & 2)
@@ -3428,6 +3478,8 @@ int __cdecl FUN_00aa1360(const char*, const char*);
 
 // Interpolates between matching key times in this sequence using surrounding morph-key times from the partner sequence.
 // @fnv 0x00a32010
+// pdb: NiControllerSequence::FindCorrespondingMorphFrame | NiControllerSequence.obj | fnv360_0822_debug, udata, high
+// pdb params: pkSourceSequence, fSourceSequenceTime
 float AnimationSequence::GetMorphedTime(AnimationSequence* pkPartnerSequence, float fFrameTime)
 {
     TimedTextEntry* pkNextKey = 0;
@@ -3657,6 +3709,8 @@ struct CloneSequence
 };
 // Calls FUN_00a5d430, processes or looks up item objects, then assigns mapped or original pointers to the copy's fields.
 // @fnv 0x00a32470
+// pdb: NiControllerSequence::ProcessClone | NiControllerSequence.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kCloning
 void CloneSequence::FUN_00a32470(CloneContext& context)
 {
     FUN_00a5d430(context);
@@ -3767,6 +3821,8 @@ struct Obj43c : Base43c
 
 // Releases each ref returned by pkSrc->AssignInterpolatorRef, calls both controller methods, then invokes the base handler.
 // @fnv 0x00a343c0
+// pdb: NiControllerSequence::CopySequenceMembers | NiControllerSequence.obj | fnv360_0721_retail, call_gap, low
+// pdb params: pDest, kCloning
 void Obj43c::ClearInterpolatorRefs(Src43c* pkSrc, int iArg)
 {
     for (unsigned int i = 0; i < pkSrc->m_uiCount; i++)
@@ -4009,6 +4065,8 @@ extern "C" void __cdecl ConvertOldSequence(DynCastHelper*, S00a35700_NodeRef*) t
 // @f3 0x008af710 (community match, verified in this file)
 extern void* DAT_011f36dc;
 NiNode* __cdecl FUN_00424d50(void** type, DynCastHelper* value);
+// pdb: NiControllerSequence::CreateSequenceFromFile | NiControllerSequence.obj | fnv360_0822_retail, call_gap, low
+// pdb params: kStream, uiIndex, aspControllerSequence
 void __cdecl FUN_00a35700(BinaryDataRecord* stream, unsigned int index, NiPtrNode& out)
 {
     if (index >= stream->count)
@@ -4054,6 +4112,8 @@ struct ActiveArray
 };
 // Returns the index of key in items, or appends it (growing the array if full) and returns the new index.
 // @fnv 0x00e7ec00
+// pdb: NiControllerManager::NotifySequenceActivate | NiControllerSequence.obj | fnv360_1110_retail, call_seq, low, conflict (skyrim: NiTSet<class NiControllerSequence *,class NiTMallocInterface<class NiControllerSequence *> >::AddUnique)
+// pdb params: pkSequence
 unsigned int ActiveArray::FindOrAdd(void* const& key)
 {
     unsigned int i = Find(key);
@@ -4093,6 +4153,7 @@ struct NiControllerSequence
 
 // For each non-null handle, assigns AddString(0)'s result and decrements the old handle's count when it differs from a global handle.
 // @fnv 0x00a30640
+// pdb: NiControllerSequence::InterpArrayItem::ClearValues | NiControllerSequence.obj | fnv360_0822_retail, caller, low, conflict (skyrim: NiControllerSequence::IDTag::ClearValues)
 void NiControllerSequence::ResetStrings()
 {
     char* old = m_kName.m_kHandle;
@@ -4157,6 +4218,8 @@ struct NiControllerSequenceT
 
 // Returns true when both sequences have eligible text keys and each eligible key occurs in the other sequence.
 // @fnv 0x00a30ab0
+// pdb: NiControllerSequence::VerifyMatchingMorphKeys | NiControllerSequence.obj | fnv360_0721_beta, udata, high
+// pdb params: pkTimeSyncSeq
 bool NiControllerSequenceT::MatchesTextKeys(NiControllerSequenceT* pkOther)
 {
     NiTextKeyExtraData* pkKeys = m_spTextKeyData;
@@ -4251,6 +4314,8 @@ class FUN_00a32940_cls
 
 // Stores a NiRefStubB5652 pointer at index idx in m_04, updating m_0a, m_0c and reference counts as needed.
 // @fnv 0x00a32940
+// pdb: NiTArray<NiPointer<NiTexture>,NiTNewInterface<NiPointer<NiTexture> > >::SetAt | TESNPC.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: uiIndex, element
 void FUN_00a32940_cls::SetEntry(unsigned int uiIndex, NiRefStubB5652** apNewStub)
 {
     static StaticKeyB5652 key(0);
@@ -4687,6 +4752,8 @@ static void Clear33130(FUN_00a312d0& tag)
 }
 // Parses objectName into property and controller IDs, then for each controller slot assigns an interpolator and stores a reference to the controller.
 // @fnv 0x00a33130
+// pdb: NiControllerSequence::ConvertOldNameControllerPair | NiControllerSequence.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pcObjectName, pkController
 bool FUN_00a34480_cls::AssignControllers(void* apObjectName, FUN_00a34480_obj* apController)
 {
     char objectName[260];
@@ -5003,6 +5070,8 @@ struct NewSequence : SeqRefObject
 
 // Allocates a NewSequence, copies name and controller data from pkOld, and assigns the result to spOut.
 // @fnv 0x00a349e0
+// pdb: NiControllerSequence::ConvertOldSequence | NiControllerSequence.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: pkOldSequence, aspControllerSequence
 void __cdecl ConvertOldSequence(OldSequence* pkOld, SeqPtr<NewSequence>& spOut) throw()
 
 {
@@ -5191,6 +5260,8 @@ extern unsigned short DAT_01096320;
 
 // Copies cycleType, frequency, beginTime, endTime and interpolator slots from this sequence into destination, optionally clearing destination slots first.
 // @fnv 0x00a32fa0
+// pdb: NiControllerSequence::PopulatePoseSequence | NiControllerSequence.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkPoseSequence, uiArraySize, pkSequenceToSynchronize, abRemInterps
 void S00a32fa0_Seq::FUN_00a32fa0(S00a32fa0_Seq* destination, int, int, bool remove)
 {
     if (remove)
@@ -5270,6 +5341,8 @@ class S00a31880_FUN_00a31880_cls
 
 // Copies reference-counted pointers and plain fields from src, managing ref counts for the two RefObj pointers.
 // @fnv 0x00a31880
+// pdb: NiPointer<NiInterpolator>::operator= | NiControllerSequence.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: ptr
 S00a31880_FUN_00a31880_cls* S00a31880_FUN_00a31880_cls::FUN_00a31880(S00a31880_FUN_00a31880_cls* src)
 {
     S00a31880_RefObj* pOldRef0 = m_00;

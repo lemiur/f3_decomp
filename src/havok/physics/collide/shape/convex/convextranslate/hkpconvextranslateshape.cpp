@@ -37,6 +37,8 @@ class hkpShapeBufferDD5E
 };
 
 // @fnv 0x00dd5e10
+// pdb: hkpConvexTranslateShape::calcSizeForSpu | hkpConvexTranslateShape.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: input, spuBufferSizeLeft
 int hkpShapeBufferDD5E::GetChildShapes(int iKey, int iBufferSize)
 {
     const int iMax = iBufferSize - 0x30;

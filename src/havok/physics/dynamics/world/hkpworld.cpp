@@ -25,6 +25,7 @@ struct FUN_00c91250_Class {
 };
 
 // @f3 0x006f7750 (community match, verified in this file)
+// pdb: Actor::QueueReload | Actor.obj | fnv360_0822_retail, call_gap, medium
 void FUN_00c91250_Class::FUN_00c91250() {
     if (*(void**)((char*)this + 0x60))
         ((void (__thiscall*)(void*, int))(*(void***)*(void**)((char*)this + 0x60))[387])(*(void**)((char*)this + 0x60), 2);
@@ -240,6 +241,8 @@ struct FUN_00caa840_shell {
 };
 
 // @fnv 0x00caa840
+// pdb: hkLimitedHingeConstraintCinfo::SaveBinary | bhkLimitedHingeConstraint.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: arStream
 void FUN_00caa840_shell::WriteToStream(Ctx_00caa840* ctx)
 {
     FUN_00c8a280(ctx);
@@ -270,6 +273,8 @@ struct Owner788 {
     int unk14; int unk18; int unk1c;
     Data788* data;
 };
+// pdb: QueuedFile::NotifyChildFinished | ModelLoader.obj | fnv360_0822_retail, vtable, low, conflict (skyrim: TrespassPackage::ModNumberActors)
+// pdb params: apChild
 void __fastcall FUN_00c90e40(void* self, void*, int)
 {
     Owner788* owner = static_cast<Owner788*>(self);
@@ -282,6 +287,7 @@ struct FUN_00cf86e0_class {
     void FUN_00cf86e0(float);
 };
 // @fnv 0x00c91040
+// pdb: hkpWorld::setFrameTimeMarker | hkpWorld.obj | tesv_win, objrun_prop, low
 void __fastcall FUN_00c91040(void* p, int edx, float afValue)
 {
     ((FUN_00cf86e0_class*)*((char**)p + 2))->FUN_00cf86e0(afValue);
@@ -378,6 +384,7 @@ struct FUN_00c928c0_Context
 
 // Iterates both owner arrays in context and calls physicsSystem->FUN_00d06590 on every action in each owner's action list.
 // @fnv 0x00c928c0
+// pdb: enumerateAllActionsInWorld | hkpWorld.obj | fnv360_0822_retail, call_dedup, low, conflict (bridge: enumerateAllConstraintsInWorld)
 void FUN_00c928c0(
     FUN_00c928c0_Context* context,
     hkpPhysicsSystem* physicsSystem)
@@ -433,6 +440,8 @@ struct FUN_00c97f50_Class {
     void DispatchOrQueue(void* p);
 };
 // @f3 0x009084b0 (community match, verified in this file)
+// pdb: hkpWorld::removeAction | hkpWorld.obj | fnv360_0822_retail, call_gap, high
+// pdb params: action
 void FUN_00c97f50_Class::DispatchOrQueue(void* p)
 {
     if (*(unsigned int*)((char*)this + 0x84)) {
@@ -453,6 +462,7 @@ struct FUN_00c98350_Class {
 };
 void __cdecl _Deallocate(void*);
 // @fnv 0x00c98350
+// pdb: hkpSimpleWorldRayCaster::`scalar deleting destructor' | hkpWorld.obj | fnv360_0822_retail, vtable, medium
 void* __thiscall FUN_00c98350_Class::InitAndMaybeFree(int flags)
 {
     m_p = &DAT_010c3bb8;
@@ -549,6 +559,7 @@ struct FUN_00c90f30_Class {
     void* __thiscall FUN_00c90f30();
 };
 // @fnv 0x00c90f30
+// pdb: hkpMultithreadConfig::hkpMultithreadConfig | hkpWorld.obj | fnv360_0822_retail, call_gap_sim, high
 void* FUN_00c90f30_Class::FUN_00c90f30() { unk00 = 70; return this; }
 
 struct CpuScalar {
@@ -566,6 +577,7 @@ struct CpuObject {
     float FUN_00c91020();
 };
 // @fnv 0x00c91020
+// pdb: hkpWorld::getCurrentTime | hkpWorld.obj | fnv360_0822_debug, call_seq, medium, conflict (bridge: hkpWorld::getCurrentPsiTime)
 float CpuObject::FUN_00c91020()
 {
     return value->value;
@@ -588,6 +600,7 @@ struct CpuObject {
     float FUN_00c91030();
 };
 // @fnv 0x00c91030
+// pdb: hkpWorld::getCurrentTime | hkpWorld.obj | fnv360_0822_retail, call_dedup, low, conflict (skyrim: hkpWorld::getCurrentPsiTime)
 float CpuObject::FUN_00c91030()
 {
     return value->value;
@@ -606,6 +619,8 @@ struct FUN_00c91060_Class {
 };
 
 // @fnv 0x00c91060
+// pdb: hkpWorld::setFrameTimeMarker | hkpWorld.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkpWorld::isSimulationAtMarker)
+// pdb params: frameDeltaTime
 void __thiscall FUN_00c91060_Class::FUN_00c91060()
 {
     m_8->IsFieldEqual();
@@ -625,6 +640,7 @@ struct FUN_00c91070_cls
 };
 
 // @fnv 0x00c91070
+// pdb: hkpWorld::isSimulationAtMarker | hkpWorld.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkpWorld::isSimulationAtPsi)
 void FUN_00c91070_cls::FUN_00c91070()
 {
     m_08->Tail();
@@ -664,6 +680,8 @@ struct FUN_00c91080_cls
 };
 
 // @fnv 0x00c91080
+// pdb: hkpWorld::setMultithreadConfig | hkpWorld.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: config, queue
 int FUN_00c91080_cls::FUN_00c91080(int a)
 {
     return m_08->Tail(a);
@@ -700,6 +718,8 @@ struct FnvCpu_FUN_00c91090_CpuOwner {
     void FUN_00c91090(int arg0);
 };
 // @fnv 0x00c91090
+// pdb: hkpWorld::checkDeterminismOfIslandBroadPhase | hkpWorld.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: island
 void FnvCpu_FUN_00c91090_CpuOwner::FUN_00c91090(int arg0)
 {
     target->Invoke(arg0);
@@ -850,12 +870,15 @@ struct FUN_00c98250_Class {
 };
 
 // @fnv 0x00c98250
+// pdb: BSContentPackage::DisplayName | BSContentPackage_Xenon.obj | fnv360_0822_retail, vtable, high
 void* __thiscall FUN_00c98250_Class::FUN_00c98250(int, int, int)
 {
     return (void*)((char*)this + 8);
 }
 
 // @fnv 0x00c982a0
+// pdb: hkpNullCollisionFilter::isCollisionEnabled | hkpWorld.obj | fnv360_0721_beta, vtable, high
+// pdb params: input, a, b, bContainer, bKey
 void __stdcall FUN_00c982a0(char* pFlag, int a2, int a3, int a4, int a5, int a6)
 {
     *pFlag = 1;
@@ -863,6 +886,8 @@ void __stdcall FUN_00c982a0(char* pFlag, int a2, int a3, int a4, int a5, int a6)
 
 // FUN_00c982b0: stdcall with 8 stack parameters; writes 1 through the first parameter pointer.
 // @fnv 0x00c982b0
+// pdb: hkpNullCollisionFilter::isCollisionEnabled | hkpWorld.obj | fnv360_0721_beta, vtable, high
+// pdb params: input, collectionBodyA, collectionBodyB, containerShapeA, containerShapeB, keyA, keyB
 void __stdcall FUN_00c982b0(unsigned char* flag, int a2, int a3, int a4, int a5, int a6, int a7, int a8)
 {
     *flag = 1;
@@ -1016,6 +1041,8 @@ struct WorldQ
 
 // @f3 0x00902740 (community match, verified in this file)
 struct Sh00902570F3 { void FUN_00902570(QueuedOp* op); };
+// pdb: hkpWorld::reintegrateAndRecollideEntities | hkpWorld.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: entityBatch, numEntities, mode
 void WorldQ::DispatchOp(int aiArg0, int aiArg1, int aiArg2)
 {
     if (*(int*)((char*)this + 0x84))
@@ -1614,6 +1641,7 @@ public:
 };
 
 // @f3 0x009033f0 (community match, verified in this file)
+// pdb: enumerateAllConstraintsInIsland | hkpWorld.obj | fnv360_0822_retail, call_seq, medium, conflict (bridge: hkpPhysicsSystem::addPhantom)
 void __cdecl FUN_00c927f0(hkWorldC927* world, hkSetC927* set)
 {
     for (int i = 0; i < world->m_iActorEntryCount; i++) {
@@ -1706,6 +1734,7 @@ struct WorldWatchDogHolder : hkpWorld {
 };
 
 // @fnv 0x00c93570
+// pdb: TESGrass::GetUnderwaterState | TESGrass.obj | fnv360_0822_retail, vtable, low
 void* WorldWatchDogHolder::FUN_00c93570() {
     return m_pMemoryWatchDog;
 }
@@ -3298,6 +3327,7 @@ struct M4_Entity
     void FUN_0090b500();
 };
 
+// pdb: hkpRigidBody::setLinearVelocityAsCriticalOperation | hkpRigidBody.obj | tesv_win, objrun_open, low
 void hkpEntityCA8A::FUN_00ca8a80(const hkVector3CA8A& v)
 {
     M4_Entity* self = (M4_Entity*)this;
@@ -3405,6 +3435,8 @@ namespace Native1483 {struct Owner {
  int unk7c;
  FUN_00ca94c0_Elem** elements;int count;
 };}
+// pdb: hkpPhantom::fireCollidableAdded | bhkAvoidBox.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: collidable
 int FUN_00ca94c0_Class::FUN_00ca94c0(unsigned int arg){
  Native1483::Owner*self=reinterpret_cast<Native1483::Owner*>(this);
  FUN_00ca94c0_Ctx ctx;ctx.self=this;ctx.arg=arg;ctx.result=0;
@@ -3519,6 +3551,8 @@ void __cdecl FUN_008fe580(void*);
 inline void SwapBlock1255(Blk40& b){unsigned long* u=(unsigned long*)&b;SwapDword(u[12]);SwapDword(u[13]);SwapDword(u[14]);SwapDword(u[15]);FUN_008fe580(&b);}
 inline void Release1255(hkReferencedObject* p){if(p->m_usMemSizeAndFlags){if(--p->m_sReferenceCount==0) delete p;}}
 // @fnv 0x00caa6a0
+// pdb: hkLimitedHingeConstraintCinfo::LoadBinary | bhkLimitedHingeConstraint.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: arStream
 void FUN_00d53200_class::ReadFromStream(NiStream& stream)
 {
     reinterpret_cast<Base1255*>(this)->FUN_008fc580(stream);
@@ -3797,6 +3831,8 @@ char* __cdecl FUN_00847dd0(const char*,float);char* __cdecl FUN_00847e70(const c
 struct NativeStrings {void* table;char** data;unsigned short capacity,size,count,grow;void FUN_00555790(unsigned);void FUN_005b3880(unsigned,char*&);void Append(char* text){unsigned n=size;if(n>=capacity)FUN_00555790(n+grow);FUN_005b3880(n,text);}};
 }
 // @fnv 0x00caa960
+// pdb: hkLimitedHingeConstraintCinfo::GetViewerStrings | bhkLimitedHingeConstraint.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apStrings
 void Owner::AppendConstraintToStrings(Strings* strings) {
 
  ((Task2015::NativeOwner*)this)->FUN_008fc920(strings);
@@ -3868,6 +3904,7 @@ public:
 
 // Initializes the object's m_20 field to 0.
 // @fnv 0x00cbfba0
+// pdb: hkpCollisionFilter::hkpCollisionFilter | hkpCollisionFilter.obj | fnv360_0822_retail, uvref, high
 FUN_00cbfba0::FUN_00cbfba0() throw()
     : m_20(0)
 {
@@ -4051,6 +4088,7 @@ struct Lookup676 {
 
 extern unsigned char DAT_010f2c30;
 
+// pdb: bhkWorld::AdjustForceAddCount | bhkWorld.obj | tesv_win, objopen_prop, low
 void This676::ClearIndexedValues()
 {
     ClearThis676* self = (ClearThis676*)this;
@@ -4263,6 +4301,8 @@ struct EntFO3
     void FUN_009316e0();
 };
 
+// pdb: bhkWorld::Remove | bhkWorld.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: bhkWorld::SetMotionOnObjectIfNotFixed)
+// pdb params: apEntity
 bool WorldC68BF0::FUN_00c68bf0(EntityC68BF0* pkEntity)
 {
     WorldFO3* self = (WorldFO3*)this;
@@ -4408,6 +4448,8 @@ void __cdecl hkpWorldCallbackUtil_fireEntityRemoved(FO3Cls* self, FO3Target* tar
 void __cdecl FUN_00987de0(FO3Target* target);
 void __cdecl FUN_00927460(FO3Cls* self, FO3Target* target);
 
+// pdb: hkpWorld::removeEntity | hkpWorld.obj | fnv360_0822_retail, call_seq, high
+// pdb params: entity
 unsigned char* FUN_00c91620_Class::ProcessTarget(
     unsigned char* result, FUN_00c91620_Target* pTarget)
 {
@@ -4547,6 +4589,8 @@ struct World {
  int indexOf(void* const& t)const{for(int i=0;i<count;++i)if(data[i]==t)return i;return -1;}
 };
 }
+// pdb: hkpWorld::removeActionListener | hkpWorld.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: worldListener
 void hkWorldXc91700::FUN_00c91700(void* entry){
  Native1477::World*self=reinterpret_cast<Native1477::World*>(this);
  self->data[self->indexOf(entry)]=0;
@@ -5160,6 +5204,7 @@ struct zzVal_c92860 { void* v; };
 
 // Calls FUN_00c927f0 on each owner in m_owners1 and m_owners2 with the given value.
 // @fnv 0x00c92860
+// pdb: enumerateAllConstraintsInWorld | hkpWorld.obj | fnv360_0822_retail, call_dedup, low, conflict (bridge: enumerateAllPhantomsInWorld)
 static __declspec(noinline) void InvokeOnAllOwners(FUN_00c928c0_Context* ctx, zzVal_c92860 value)
 {
     void* v = value.v;
@@ -5430,6 +5475,7 @@ struct WorldView92C {
     hkArray92C<ActionC92C*> m_ppActions;
 };
 
+// pdb: hkpWorld::removeAll | hkpWorld.obj | fnv360_0822_retail, call_dedup, low, conflict (skyrim: hkpWorld::removePhantom)
 void WorldC92C::FUN_00c92c70(ActionC92C* pkAction)
 {
     WorldView92C* pkWorld = (WorldView92C*)this;
@@ -6442,6 +6488,8 @@ struct LocalEntity {
     hkpSimulationIslandC97* GetSimulationIsland() const { return m_pSimulationIsland; }
 };
 
+// pdb: hkpWorld::addAction | hkpWorld.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: action
 hkpActionC97* hkpWorldC97::FUN_00c97370(hkpActionC97* pkAction) throw()
 {
     if (this->unk84 != 0) {
@@ -6553,6 +6601,8 @@ struct hkThreadMemoryAlloc {
 };
 }
 
+// pdb: hkpWorld::createAndAddConstraintInstance | hkpWorld.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: bodyA, bodyB, constraintData
 FUN_00cf3ea0* FUN_00c97e30_C::Create(void* a1, void* a2, InfoC97E* a3)
 {
     f3m_009083a0::hkThreadMemoryAlloc* mem = (f3m_009083a0::hkThreadMemoryAlloc*)TlsGetValue(DAT_010f3170);
@@ -6642,6 +6692,8 @@ C97E80Return __thiscall C97E80World::FUN_00c97e80(C97E80Action* action) {
 
 // Returns the larger of fA and fB.
 // @fnv 0x00c98210
+// pdb: TESObjectWEAP::GetVATSToHitChance | CombatFormulas.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: hkMath::max2<float>)
+// pdb params: bModValue
 float __cdecl FUN_00c98210(float fA, float fB)
 {
     return (fA > fB) ? fA : fB;
@@ -6661,6 +6713,8 @@ struct FUN_00c987e0_Cls {
 struct FUN_009094d0_Obj {
     void FUN_009094d0(FUN_00c987e0_Pose* pose, int a2, int a3, int a4, int a5);
 };
+// pdb: hkDebugDisplay::displayRayModelSpace | hkDebugDisplay.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: worldFromModel, start, direction, color, id, tag
 void FUN_00c987e0_Cls::FUN_00c987e0(int a1,int a2,int a3,int a4,int a5)
 {
     FUN_00c987e0_Pose pose;
@@ -6687,6 +6741,8 @@ struct Helper1611 {
  void FUN_009099a0(EC98BE0Vector*,float,int,int);
 };
 }
+// pdb: hkDebugDisplay::displayStarModelSpace | hkDebugDisplay.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: worldFromModel, position, scale, color, id, tag
 void EC98BE0Owner::FUN_00c98be0(int x,int y,float scalar,int a,int b) {
  EC98BE0Vector position;
  position.FUN_00c7f7a0(x,y);
@@ -6756,6 +6812,8 @@ struct C995LockF3
         LeaveCriticalSection(this);
     }
 };
+// pdb: hkDebugDisplay::removeDebugDisplayHandler | hkDebugDisplay.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: debugDisplay
 void hkListenerListC995::RemoveListener(void* listener)
 {
     ((C995LockF3*)m_pWorldLock)->FUN_00908a00();
@@ -6885,6 +6943,8 @@ public:
 };
 // Sets the top two bits of first from a and of second from b, inverting a if (code & 3) < (state & 3) and b if code < state.
 // @f3 0x00902180 (community match, verified in this file)
+// pdb: hkpMotion::setWorldSelectFlagsNeg | hkpWorld.obj | fnv360_0822_retail, call_seq, high
+// pdb params: worldFlag0, worldFlag1, worldDeactivationIntegrateCounter
 void FlagState::SetFlagBits(unsigned int a, unsigned int b, int code)
 {
     int worldFlag0 = static_cast<int>(a);
@@ -6941,6 +7001,7 @@ struct OverlapContext {
 };
 // Adds or removes other from phantom and, when other is type 2, mirrors the change on other's owner based on the filter result.
 // @fnv 0x00c90f40
+// pdb: hkWorld_updateFilterOnSinglePhantom | hkpWorld.obj | fnv360_0822_retail, call_gap_sim, high
 static __declspec(noinline) void SyncOverlap(OverlapPhantom* phantom, OverlapCollidable* other, OverlapContext* context)
 {
     OverlapResult old = phantom->overlaps(other);
@@ -7030,6 +7091,7 @@ struct Context64 {
 };
 // Adds every shape of every element in context to container, then stores whether elementCount is greater than zero in result.
 // @fnv 0x00c92760
+// pdb: enumerateAllActiveEntitiesInWorld | hkpWorld.obj | fnv360_0822_retail, call_dedup, low
 unsigned char* __cdecl CollectShapes(unsigned char* pbHasElements, Context64* context, Container64* volatile container)
 {
     Element64** element = context->elements;
@@ -7135,6 +7197,7 @@ struct Array {hkpPhantom** m_data;int m_iElementCount;int capacity;} m_kPhantoms
 struct Sink {void FUN_00989fb0(hkpPhantom*);};
 }
 // @fnv 0x00c92950
+// pdb: enumerateAllPhantomsInWorld | hkpWorld.obj | fnv360_0822_retail, call_dedup, low, conflict (bridge: enumerateAllActiveEntitiesInWorld)
 static __declspec(noinline) void FUN_00c92950(PhantomWorld* worldInput, PhantomSink* sinkInput)
 {
     phantom1437::World* world=(phantom1437::World*)worldInput; phantom1437::Sink* apSink=(phantom1437::Sink*)sinkInput;
@@ -8165,6 +8228,7 @@ struct BoolResult {
 };
 // Adds rigid bodies of m_owner0 and of each owner in m_owners2 to a3; returns true if m_ownerCount2 > 0 or m_owner0 has bodies.
 // @fnv 0x00c926a0
+// pdb: enumerateAllInactiveEntitiesInWorld | hkpWorld.obj | fnv360_0822_retail, call_dedup, low
 static __declspec(noinline) BoolResult AddBodiesToSystem(Context_s* a2, ...) {
     va_list args;
     va_start(args, a2);
@@ -8517,6 +8581,8 @@ static __declspec(noinline) void InvokeOwners904470(FUN_00c928c0_Context* ctx, z
         FUN_00c927f0(*p, value.v);
 }
 
+// pdb: hkpWorld::getWorldAsSystems | hkpWorld.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: systemsInOut
 void MatchWorld::AddPhysicsSystem(hkArrayXc937a0<FUN_00d065e0*>* systems)
 {
     FUN_00d065e0* system;
@@ -8780,6 +8846,8 @@ struct WorldFieldsF90 {
 
 }
 using S906090::hkThreadMemoryF90; using S906090::LocalPairArrayF90; using S906090::BroadPhaseF90; using S906090::WorldFieldsF90;
+// pdb: hkpWorld::updateCollisionFilterOnPhantom | hkpWorld.obj | fnv360_0822_retail, ustr, high
+// pdb params: phantom, updateShapeCollectionFilter
 void WorldC944::UpdatePhantom(PhantomC944* apPhantom, int abProcessContacts)
 {
     WorldFieldsF90* w = reinterpret_cast<WorldFieldsF90*>(this);
@@ -9290,6 +9358,8 @@ void __cdecl FUN_00987de0(Q6DEntity* e) throw();
 void __cdecl FUN_00927460(Q6DWorld* w, Q6DEntity* e) throw();
 }
 
+// pdb: hkpWorld::removeEntityBatch | hkpWorld.obj | fnv360_0822_retail, ustr, high
+// pdb params: entityBatch, numEntities
 void HostWorld_00c951b0::RemoveEntities(void* const* entityBatch, int numEntities) throw()
 {
     using namespace f3m_00906d80;
@@ -9572,6 +9642,8 @@ struct MgrFix
 };
 void* __cdecl FUN_00926420(MgrFix* mgr, ItemFix* it, unsigned int flag);
 
+// pdb: hkpWorld::addConstraint | hkpWorld.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: constraint
 void* Mgr::FUN_00c97d30(Item* item)
 {
     ItemFix* it = (ItemFix*)item;
@@ -9607,6 +9679,7 @@ void* Mgr::FUN_00c97d30(Item* item)
 
 // Calls AddBodiesToSystem, stores the result of CollectShapes into system->active, and returns that value.
 // @fnv 0x00c927c0
+// pdb: enumerateAllEntitiesInWorld | hkpWorld.obj | fnv360_0822_retail, objrun, medium
 static __declspec(noinline) unsigned char FUN_00c927c0(MatchWorld* world, FUN_00d065e0* system)
 {
     AddBodiesToSystem(world, system);
@@ -9634,6 +9707,8 @@ void __stdcall FUN_00c982c0(unsigned char* out, int a1, int a2, int a3, int a4)
 
 
 // @fnv 0x00c982d0
+// pdb: hkpNullCollisionFilter::isCollisionEnabled | hkpWorld.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: a, b
 void __stdcall FUN_00c982d0(unsigned char* out, int a2, int a3)
 {
     *out = 1;
@@ -12024,6 +12099,8 @@ public:
     }
 };
 
+// pdb: bhkLimitedHingeConstraint::CreateClone | bhkLimitedHingeConstraint.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: arCloneData
 bhkRefObject* caa4a0_Target::FUN_00caa4a0(unsigned int param)
 {
     DAT_00d9b09c(&DAT_010f3194);
@@ -13031,24 +13108,31 @@ namespace AdvanceTimeDetail {
 
 // @f3twin 0x009023f0 of 0x004ae3c0
 struct F3Twin_009023f0 : public WorldWatchDogHolder { void* F3_FUN_009023f0() ; };
+// pdb: hkpWorld::getBroadPhaseBorder | hkpWorld.obj | fnv360_0822_retail, objrun_open, low
 void* F3Twin_009023f0::F3_FUN_009023f0() 
 {
     return m_pMemoryWatchDog;
 }
 
 // @f3twin 0x00a73f40 of 0x009088f0
+// pdb: hkpDisableEntityCollisionFilter::isCollisionEnabled | hkpDisableEntityCollisionFilter.obj | fnv360_0822_retail, vtable, high
+// pdb params: input, a, b, bContainer, bKey
 void __stdcall F3_FUN_00a73f40(char* pFlag, int a2, int a3, int a4, int a5, int a6)
 {
     *pFlag = 1;
 }
 
 // @f3twin 0x00a73f60 of 0x00908900
+// pdb: hkpDisableEntityCollisionFilter::isCollisionEnabled | hkpDisableEntityCollisionFilter.obj | fnv360_0822_retail, vtable, high
+// pdb params: input, collectionBodyA, collectionBodyB, containerShapeA, containerShapeB, keyA, keyB
 void __stdcall F3_FUN_00a73f60(unsigned char* flag, int a2, int a3, int a4, int a5, int a6, int a7, int a8)
 {
     *flag = 1;
 }
 
 // @f3twin 0x00a73f70 of 0x009088e0
+// pdb: hkpDisableEntityCollisionFilter::isCollisionEnabled | hkpDisableEntityCollisionFilter.obj | fnv360_0822_retail, vtable, high
+// pdb params: a, collidableB
 void __stdcall F3_FUN_00a73f70(unsigned char* out, int a2, int a3)
 {
     *out = 1;

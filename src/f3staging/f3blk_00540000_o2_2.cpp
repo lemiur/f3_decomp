@@ -139,6 +139,8 @@ struct Actor55 {
 };
 inline float Max55(float a, float b) { return a > b ? a : b; }
 inline float Min55(float a, float b) { return a < b ? a : b; }
+// pdb: TESNPC::RandomizeFaceCoord | TESNPC.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: abLockAge, abLockComplexion, abLockHairlength
 void Actor55::FUN_0055a310(bool keepFirst, bool keepSecond, bool keepStored)
 {
     Keyframe working[4];
@@ -204,6 +206,7 @@ struct Record1485
     unsigned int unk2C;
     Record1485();
 };
+// pdb: CreatureSounds::CreatureSounds | CreatureSounds.obj | fnv360_0721_beta, call_seq, medium
 Record1485::Record1485()
 {
     FUN_00c00610(this,0,sizeof(*this));
@@ -229,6 +232,7 @@ struct FUN_00553f10 : FUN_00553ea0 {
     bool copyKeys;
     virtual ~FUN_00553f10();
 };
+// pdb: NiTStringTemplateMap<NiTMap<char const *,IDLE_ANIM_ROOT *>,IDLE_ANIM_ROOT *>::~NiTStringTemplateMap<NiTMap<char const *,IDLE_ANIM_ROOT *>,IDLE_ANIM_ROOT *> | TESIdleManager.obj | fnv360_0822_retail, call_seq, medium
 FUN_00553f10::~FUN_00553f10() {
     if (copyKeys) {
         for (unsigned int i=0; i<bucketCount; ++i) {
@@ -283,6 +287,8 @@ struct Choice:Data {
     unsigned int unk5C;
     Choice();
 };
+// pdb: BGSEntryPointFunctionData::CreateFunctionDataOfType | BGSEntryPointFunction.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeFunctionDataType
 Data* __cdecl FUN_005441b0(unsigned int type){
     switch(type){
         case 1:return new One;

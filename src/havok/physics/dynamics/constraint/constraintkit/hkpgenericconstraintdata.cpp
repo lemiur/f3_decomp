@@ -740,6 +740,8 @@ struct FUN_00d50520_s
     void FUN_00d50520(int* o);
 };
 // @fnv 0x00d50520
+// pdb: hkpGenericConstraintData::getConstraintInfo | hkpGenericConstraintData.obj | fnv360_0822_retail, objrun, medium
+// pdb params: info
 void FUN_00d50520_s::FUN_00d50520(int* aiOut)
 {
     aiOut[4] = (int)((char*)this + 0xc);
@@ -775,6 +777,7 @@ void __stdcall hkStdioStreamWriter_markSupported(unsigned char* out)
 }
 
 // @fnv 0x00d50510
+// pdb: CombatProcedureSearch::GetType | CombatProcedureSearch.obj | fnv360_0822_retail, vtable, medium
 int FUN_00d50510()
 {
     return 10;
@@ -787,6 +790,7 @@ class CFoo
 };
 
 // @fnv 0x00d504f0
+// pdb: hkpGenericConstraintData::getScheme | hkpGenericConstraintData.obj | fnv360_0822_retail, objrun, medium
 void* CFoo::FUN_00d504f0()
 {
     return (void*)((char*)this + 0x18);
@@ -824,6 +828,8 @@ struct OwnerM50B {
     void hkpGenericConstraintData_hatchScheme(void* data, SolverItem* item, int index);
 };
 
+// pdb: hkpGenericConstraintData::constrainLinearW | hkpGenericConstraintData.obj | fnv360_0822_debug, objopen_prop, low, conflict (skyrim: hkpGenericConstraintData::buildJacobian)
+// pdb params: currentCommand, currentData, scheme, vars, in, out
 void FUN_00d50bd0_owner::FUN_00d50bd0(SolverItem* item, int index) {
     AppendEventRecord(item, index, item->unk4c, 8);
     OwnerM50B* self = (OwnerM50B*)this;
@@ -896,6 +902,8 @@ void __cdecl FUN_00dcf280(FUN_00d503c0_m* m, void* obj, void* out);
 
 // Copies two vectors from src, sets a third to each unit axis in turn calling FUN_00dcf280 each time, then adds 3 to src->unkB8.
 // @f3 0x009ddb70 (community match, verified in this file)
+// pdb: hkpGenericConstraintData::constrainAllLinearW | hkpGenericConstraintData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: currentCommand, currentData, scheme, vars, in, out
 void __stdcall FUN_00d503c0(int a, int b, int c, FUN_00d503c0_src* src, void* obj, void* out)
 {
     FUN_00d503c0_m m;
@@ -977,6 +985,7 @@ struct FUN_00d50c90 : ReferenceFields
     FUN_00d50c90();
 };
 // @fnv 0x00d50c90
+// pdb: hkpGenericConstraintData::hkpGenericConstraintData | hkpGenericConstraintData.obj | fnv360_0822_retail, caller_sim, high
 FUN_00d50c90::FUN_00d50c90()
 {
     *(volatile int*)&scheme.info.m_iSchemaByteSize += 16;
@@ -1063,6 +1072,8 @@ void __cdecl FUN_00d6cb30(const SolverInfoD510* pkInfo, void* pvA, void* pvB);
 
 // Reads two indices from ppSchema, computes a Jacobian via FUN_00dcfec0, stores it with two floats from ppData, and calls FUN_00d6cb30.
 // @fnv 0x00d51060
+// pdb: hkpGenericConstraintData::setTwistLimitW | hkpGenericConstraintData.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: currentCommand, currentData, scheme, vars, in, out
 void __stdcall FUN_00d51060(const char** ppSchema, const float** ppData, void* pvUnused, SolverStateD510* pkState,
                             void* pvA, void* pvB)
 {
@@ -1141,6 +1152,8 @@ extern "C" void __cdecl DAT_00dcefb0(d51390_item* item, d51390_ctx* ctx, void* a
 
 // Advances the stream, builds an item from a pool record and the cursor value with a destination offset by pool->unkB8, calls DAT_00dcefb0, and increments unkB8.
 // @f3 0x009def70 (community match, verified in this file)
+// pdb: hkpGenericConstraintData::setAngularFrictionW | hkpGenericConstraintData.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: currentCommand, currentData, scheme, vars, in, out
 void __stdcall FUN_00d51390(int** stream, float** cursor, int a3, d51390_pool* pool, d51390_ctx* ctx, void* a6)
 {
     int destBase = ctx->unk4C;
@@ -1268,6 +1281,8 @@ struct __declspec(align(16)) Input457 {
     Vector457 first, second, selected;
 };
 void __cdecl FUN_00a4ebf0(Input457*, int*, int);
+// pdb: hkpGenericConstraintData::constrainAllLinearW | hkpGenericConstraintData.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: hkpGenericConstraintData::constrainLinearW)
+// pdb params: currentCommand, currentData, scheme, vars, in, out
 void __stdcall FUN_00d51100(int** commands, int* unusedData, void* unusedScheme, int* state, int* configuration, int index)
 {
     ++*commands;

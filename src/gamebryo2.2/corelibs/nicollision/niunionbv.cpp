@@ -79,6 +79,7 @@ class NiD3DShaderProgram : public NiGPUProgram
 };
 
 // @fnv 0x0DBBC10
+// pdb: hkpTriSampledHeightFieldCollection::getHeightFieldShape | hkpTriSampledHeightFieldCollection.obj | fnv360_0822_retail, objrun_prop, low
 NiUInt32 NiD3DShaderProgram::GetCodeSize() const
 {
     return m_uiProgramCodeSize;
@@ -95,6 +96,7 @@ struct S
     S* FUN_00e9ee60(void*);
 };
 // @fnv 0x00e9efb0
+// pdb: NiHalfSpaceBV::`scalar deleting destructor' | NiHalfSpaceBV.obj | fnv360_0822_debug, objrun_open, low
 S* __fastcall FUN_00e9efb0(void* self)
 {
     S* p = (S*)g_memoryManager.Allocate(0x18);
@@ -126,6 +128,7 @@ class S00e9e860_Obj
 
 // Deletes each item in m_ppItems, nulls the pointers, and resets m_uCount and m_u10 to zero.
 // @fnv 0x00e9e860
+// pdb: NiUnionBV::RemoveAllBoundingVolumes | NiUnionBV.obj | fnv360_0822_retail, objopen_prop, medium
 void S00e9e860_Obj::FUN_00e9e860()
 {
     {

@@ -8,6 +8,8 @@
 
 // Clones the base NiObject, then recursively clones the next controller in the chain if one exists.
 // @fnv 0x00a6d0c0
+// pdb: NiTimeController::ProcessClone | NiTimeController.obj | fnv360_0822_retail, vtable, medium
+// pdb params: kCloning
 void NiTimeController::ProcessClone(CloningProcess& kCloning)
 {
     NiObject::ProcessClone(kCloning);
@@ -17,6 +19,8 @@ void NiTimeController::ProcessClone(CloningProcess& kCloning)
 }
 //---------------------------------------------------------------------------
 // @fnv 0x00a6d450
+// pdb: NiTimeController::SetTarget | NiTimeController.obj | fnv360_0822_retail, vtable, high
+// pdb params: pkTarget
 void NiTimeController::SetTarget(NiObjectNET* pkTarget)
 {
     if (m_pkTarget == pkTarget)
@@ -56,6 +60,8 @@ void NiTimeController::SetTarget(NiObjectNET* pkTarget)
 }
 //---------------------------------------------------------------------------
 // @fnv 0x00a6d500
+// pdb: NiTimeController::LinkObject | NiTimeController.obj | fnv360_0822_retail, vtable, high
+// pdb params: kStream
 void NiTimeController::LinkObject(NiStream& kStream)
 {
     // FNV 2.2 NiPointer assignment order: release the old object before
@@ -90,6 +96,8 @@ extern int DAT_011a9bdc;
 
 // Copies the four globals DAT_011a9bd0 through DAT_011a9bdc into p[0..3] and returns p.
 // @fnv 0x00a29690
+// pdb: NiColorKey::Interpolate | NiColorKey.obj | fnv360_0721_retail, objrun, high
+// pdb params: fTime, pKey0, pKey1, pResult
 int* __cdecl CopyGlobalsToBuffer(int, int, int, int* pDest)
 {
     pDest[0] = DAT_011a9bd0;
@@ -112,6 +120,8 @@ struct TCEq : NiObject
     NiObject* m_pkTarget;
 };
 // @fnv 0x00a6cc80
+// pdb: NiTimeController::IsEqual | NiTimeController.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkObject
 bool __fastcall FUN_00a6cc80(TCEq* pThis, int edx, NiObject* pkObject)
 {
     TCEq* pkControl = (TCEq*)pkObject;
@@ -154,6 +164,8 @@ struct TCStart
     float m_fLastTime;
 };
 // @fnv 0x00a6cd10
+// pdb: NiTimeController::Start | NiTimeController.obj | fnv360_0822_retail, vtable, medium
+// pdb params: fTime
 void __fastcall InitStartTime(TCStart* p, int edx, float fTime)
 {
     p->m_uiObjectFlags |= 8;
@@ -202,6 +214,7 @@ class FUN_00a6cd30_cls
 };
 
 // @fnv 0x00a6cd30
+// pdb: NiTimeController::Stop | NiTimeController.obj | fnv360_0822_retail, vtable, high
 void FUN_00a6cd30_cls::ResetTiming()
 {
     m_uiObjectFlags &= 0xfff7;
@@ -284,6 +297,8 @@ struct TCAV : TCBase
 };
 
 // @fnv 0x00a6d390
+// pdb: NiTimeController::StartAnimations | NiTimeController.obj | fnv360_0721_beta, objrun, high
+// pdb params: pkObj, fTime
 void __cdecl StartControllersRecursive(TCAV* p, float fTime)
 {
     NiTimeController* c = p->m_pControllers.m_pObject;
@@ -445,6 +460,8 @@ class TCTimeNode
 extern int DAT_011f4280;
 
 // @fnv 0x00a6d2d0
+// pdb: NiTimeController::StartAnimations | NiTimeController.obj | fnv360_0822_debug, caller, medium
+// pdb params: pkObj
 void __cdecl FUN_00a6d2d0(TCTimeNode* obj)
 {
     TCTimeNode* p = obj->m_pChildObject;
@@ -814,6 +831,8 @@ class TCController : public NiTimeController
 };
 
 // @fnv 0x00a6d830
+// pdb: NiTimeController::GetViewerStrings | NiTimeController.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkStrings
 void TCController::FUN_00a6d830(NiViewerStringsArray* pkViewerStrings)
 {
     pkViewerStrings->Add(FUN_00a7d330(DAT_011f49e4));
@@ -1026,6 +1045,8 @@ void* __cdecl _NiMalloc(unsigned int);
 int __cdecl NiSprintf(char*, unsigned int, const char*, ...);
 // Allocates strlen(pcPrefix)+12 bytes; for eType 0 or 1, formats the prefix with APP_TIME or APP_INIT and returns the buffer.
 // @fnv 0x00a6d120
+// pdb: NiTimeController::GetViewerString | NiTimeController.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pcPrefix, eType
 char* __cdecl BuildAppTimeOrInitString(const char* pcPrefix, int eType)
 {
     unsigned int uiLen = (unsigned int)strlen(pcPrefix) + 12;
@@ -1046,6 +1067,8 @@ void* __cdecl _NiMalloc(unsigned int);
 int __cdecl NiSprintf(char*, unsigned int, const char*, ...);
 // Allocates a buffer, formats pcPrefix with LOOP, REVERSE, CLAMP, or UNKNOWN!!! based on eType, and returns it.
 // @fnv 0x00a6d190
+// pdb: NiTimeController::GetViewerString | NiTimeController.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pcPrefix, eType
 char* __cdecl FUN_00a6d190(const char* pcPrefix, int eType)
 {
     unsigned int uiLen = (unsigned int)strlen(pcPrefix) + 11;

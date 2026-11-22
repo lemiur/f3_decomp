@@ -6,6 +6,8 @@ extern unsigned __int64 selected_target_masks[43];
 
 // Stores targetMask at selected_target_masks[selectedIndex] and sets or clears the selectedIndex bit in each of the 43 mask words according to targetMask.
 // @fnv 0x00c82870
+// pdb: bhkCollisionFilter::SetMultiLayerCollision | bhkCollisionFilter.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aeA, uiLayerBits
 void ShadowLightData::SetTargetMaskForSelection(unsigned int selectedIndex, unsigned __int64 ullTargetMask)
 {
     unsigned __int64 ullSelectedBit = ((unsigned __int64)1) << selectedIndex;

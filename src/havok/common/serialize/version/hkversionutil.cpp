@@ -16,6 +16,7 @@ struct FUN_00db7a80_Class
 };
 
 // @fnv 0x00db7a80
+// pdb: hkStaticClassNameRegistry::checkIfReady | hkStaticClassNameRegistry.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 void FUN_00db7a80_Class::EnsureInitialized()
 {
     if (!m_iFourthElementInteger)
@@ -52,6 +53,8 @@ struct FUN_00d871a0
 extern "C" void* __cdecl FUN_00cb1260(void*, const void*, unsigned int);
 
 // @fnv 0x00dc0fc0
+// pdb: hkVersionUtil::renameMember | hkVersionUtil.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: oldObj, oldName, newObj, newName
 void __cdecl FUN_00dc0fc0(void* a1, int a2, void* a3, int a4)
 {
     FUN_00d871a0 obj1(a1, a2);
@@ -157,6 +160,8 @@ struct StubVisitDC12 {
     void FUN_009b2a50(void* pvObject, StubPMDC12& kDone);
 };
 
+// pdb: hkVersionUtil::recomputeClassMemberOffsets | hkVersionUtil.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: classes, classVersion
 extern "C" void __cdecl FUN_00dc1230(int apvList, int iFlags)
 {
     void* const* ppvList = reinterpret_cast<void* const*>(apvList);

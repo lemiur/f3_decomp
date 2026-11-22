@@ -76,6 +76,8 @@ void RenderPassDepthSort();
 struct S_00b0ea50 { void FUN_00b0ea50(void (*)()); };
 
 struct C_00b0f3f0 { void FUN_00b0f3f0(int a, char b); };
+// pdb: BSBatchRenderer::SortAlphaPasses | BSBatchRenderer.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apCamera, abGetSortByClosestPoint
 void C_00b0f3f0::FUN_00b0f3f0(int a, char b)
 {
     DAT_01175ec0 = a;
@@ -92,6 +94,8 @@ struct N_00b0fb60 { N_00b0fb60* a; N_00b0fb60* b; int c; };
 struct P_00b0fb60 { int count; N_00b0fb60* FUN_00423640(); };
 struct L_00b0fb60 { int p0; N_00b0fb60* p4; N_00b0fb60* p8; N_00b0fb60* free; P_00b0fb60 pool; };
 struct C_00b0fb60 { L_00b0fb60 lists[5]; int total; int FUN_00b0fb60(int idx, int data); };
+// pdb: BSBatchRenderer::PassGroup::AddHead | BSBatchRenderer.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiBucket, apRenderPass
 int C_00b0fb60::FUN_00b0fb60(int idx, int data)
 {
     L_00b0fb60* l = &lists[idx];

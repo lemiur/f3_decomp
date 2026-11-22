@@ -438,6 +438,8 @@ struct ExactBaseCall : BaseCall { void FUN_00838420(StrArr*); };
 extern char* DAT_010f32f8;
 extern char FUN_00e363f8[];
 extern char FUN_00e363e0[];
+// pdb: bhkBlendController::GetViewerStrings | bhkBlendController.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apStrings
 void KeyData::FUN_00c9bbb0(StrArr* strings)
 {
     ((ExactBaseCall*)this)->FUN_00838420(strings);
@@ -1733,6 +1735,8 @@ static __forceinline BodyObject* IsKindOf(BodyObject* object, TypeInfo* target)
     }
     return 0;
 }
+// pdb: WeaponObject::Constrain | WeaponObject.obj | fnv360_0721_beta, call_gap, low
+// pdb params: abEnable, aOwnerFilter, apFrom, apTo, abDefaultKeyframed
 void __cdecl FUN_00c88a40(bool create, Filter filter, SceneNode* first, SceneNode* second, bool force)
 {
     if (!first || !second)

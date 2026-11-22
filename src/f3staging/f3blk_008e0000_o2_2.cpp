@@ -582,6 +582,8 @@ public:
     void FUN_008fe050(SourceObject* source);
 };
 
+// pdb: bhkTransformShape::Init | bhkTransformShape.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: arInfo
 void TargetHolder::FUN_008fe050(SourceObject* source)
 {
     if (source != 0)
@@ -855,6 +857,7 @@ inline TlsModeLocal& GetBlendMode()
 {
     return ((TlsLocal*)&g_tls)->mode;
 }
+// pdb: bhkBlendCollisionObject::hktoNiTransform | bhkBlendCollisionObject.obj | fnv360_0822_retail, objrun, medium
 void BlendLocal::FUN_008f3ae0()
 {
     SceneLocal* node = scene;
@@ -1261,6 +1264,8 @@ struct Controller
 
 }  // namespace R8e3570
 
+// pdb: bhkRagdollController::ExtractBipedSetupData | bhkRagdollController.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: arSetupData, arboneNameA
 bool R8e3570::Controller::FUN_008e3570(EffectOutput* pkOutput, EffectRequest* pkRequest)
 {
     SceneObject* pkMidObj;
@@ -1778,6 +1783,8 @@ const V& Angular(){return data?data->angular:DAT_01092a50;}
 void FUN_004e6280(const V*);void FUN_004e62c0(const V*);void FUN_004e60b0(const P*);float FUN_004e6160();
 void FUN_008ffac0(const P*,const Q*);
 };
+// pdb: bhkRigidBody::ApplyHardKeyframe | bhkRigidBody.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arPos, arRot, apSetPosLock
 void Entity::FUN_008ffac0(const P* pos,const Q* quat){
 Body* body=GetData()->body;
 if(!body || !body->userData)return;

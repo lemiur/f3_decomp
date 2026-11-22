@@ -18,6 +18,8 @@ struct FUN_00e3f340_Stand
     void* __thiscall FUN_00447d60(void* p, int n);
 };
 
+// pdb: TESFile::GetChunkData | TESFile.obj | fnv360_0822_retail, call_seq, high
+// pdb params: apData, apData, apData
 void* __thiscall FUN_00e3f340_Class::GetEntryByArg(int arg)
 {
     int* p = (int*)arg;
@@ -76,6 +78,7 @@ struct FUN_00e29620_class
 };
 
 // @fnv 0x00e298f0
+// pdb: hkMatrix6SetInvert | hkMatrix6.obj | tesv_win, call_dedup, low
 void __cdecl FUN_00e298f0(FUN_00e29620_class* object, int param)
 {
     object->FUN_00e29620(param);
@@ -1027,6 +1030,8 @@ struct FUN_00e2d0d0_cls
 };
 
 // @fnv 0x00e2d0d0
+// pdb: hkpWingedEdge::findVisibleTriangles | hkpWingedEdge.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: hkWingedEdge::findVisibleTriangles)
+// pdb params: initialTriangle, pointOfView, chainLength, edgeChain
 int FUN_00e2d0d0_cls::TraverseNode(E2d0Node* apNode, int aiArg, int* piCount, E2d0Ref** papMatch)
 {
     int result = 0;
@@ -1208,6 +1213,7 @@ public:
     TESDescription();
 };
 
+// pdb: TESDescription::TESDescription | TESDescription.obj | fnv360_0822_retail, uvref, high
 TESDescription::TESDescription()
 {
     void* old = DAT_0106dcf8;
@@ -1281,6 +1287,8 @@ struct Pool { void FUN_008f6d90(void* p, unsigned int size, unsigned int tag); }
 }
 using namespace f3m_00a704d0;
 
+// pdb: hkpPoweredChainMapper::setForceLimits | hkpPoweredChainMapper.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: linkIndex, coordinageIndex, minForce, maxForce
 void S_00e3ae70_cls::SetItemValues(unsigned int a1, unsigned int a2, float a3, float a4)
 {
     S_00e3ae70_Array arr;
@@ -1372,6 +1380,8 @@ struct FUN_00e3c5b0 : S_00e3c5b0_Base
 };
 // Initializes the base with type 0x17 and flag 4, stores f in unk3c and sets unk40 to 6.
 // @f3 0x00a72bc0 (community match, verified in this file)
+// pdb: hkpSimpleMeshShape::hkpSimpleMeshShape | hkpSimpleMeshShape.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: radius
 FUN_00e3c5b0::FUN_00e3c5b0(float f) : S_00e3c5b0_Base(0x16)
 {
     unk3c = f;
@@ -1486,6 +1496,7 @@ struct ClassLayout_91ab10
     int unkCC; int unkD0; int m_count;
 };
 
+// pdb: hkMalleableConstraintCinfo::GetStrength | bhkMalleableConstraint.obj | tesv_win, objrun_open, low
 int FUN_00e3ec00_Class::GetTotal()
 {
     ClassLayout_91ab10* self = (ClassLayout_91ab10*)this;
@@ -1741,6 +1752,7 @@ struct FUN_00e39e80_class
     float FUN_00e39e80();
 };
 // @fnv 0x00e39e80
+// pdb: NiIntersector::GetContactTime | NiIntersector.obj | fnv360_0822_retail, objrun_prop, medium
 float FUN_00e39e80_class::FUN_00e39e80()
 {
     return unk1C;
@@ -1898,6 +1910,8 @@ struct QNode
 };
 }
 
+// pdb: TESDataHandler::GetCellByEditorID | TESDataHandler.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apEditorID
 FNVTreeNode* __thiscall FNVTreeNode::FindChildByName(const char* pcName)
 {
     using namespace f3m_0043c600;
@@ -1962,6 +1976,7 @@ struct View
     unsigned char c;
 };
 }
+// pdb: DoorTeleportData::DoorTeleportData | TeleportData.obj | fnv360_0822_retail, uconst, low
 FUN_00e31080::FUN_00e31080()
 {
     v_00423780::View* v = (v_00423780::View*)this;
@@ -1985,6 +2000,7 @@ FUN_00e31080::FUN_00e31080()
 __int64 __cdecl __time64(__int64* t);
 
 // @fnv 0x00e29900
+// pdb: time | hkSystemTime.obj | tesv_win, caller_sim, low
 static __int64 FUN_00e29900(__int64* t)
 {
     return __time64(t);
@@ -2126,6 +2142,7 @@ struct FUN_00d21ce0_cls
     void FUN_00d21ce0(void* arg);
 };
 extern void* DAT_00e87b30;
+// pdb: hkpStiffSpringChainData::hkpStiffSpringChainData | hkpStiffSpringChainData.obj | fnv360_0822_retail, caller_sim, high
 void* S3b010Obj::FUN_00e3b010()
 {
     unk06 = 1;
@@ -3076,6 +3093,8 @@ struct Table93d830
     int* FUN_0093d830(const char* pcName);
 };
 
+// pdb: hkCustomAttributes::getAttribute | hkClass.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: id
 int* Table93d830::FUN_0093d830(const char* pcName)
 {
     for (int i = 0; i < m_iCount; i++)
@@ -3118,6 +3137,7 @@ class hkClassMemberAccessor
 		const hkClassMember* m_member;
 };
 
+// pdb: hkClassMemberAccessor::object | hkClassMemberAccessor.obj | tesv_win, hash, low
 hkClassAccessor hkClassMemberAccessor::FUN_0093d810() const
 {
 	return hkClassAccessor( m_address, &m_member->getStructClass() );

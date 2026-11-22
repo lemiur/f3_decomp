@@ -4,6 +4,7 @@
 
 // Initializes the object by zeroing the first element of an array and setting a flag to false.
 // @fnv 0x00be2200
+// pdb: BSShader::BSShader | BSShader.obj | fnv360_0822_retail, call_dedup, medium
 BSShader::BSShader()
 {
     spRenderPass[0] = 0;
@@ -18,6 +19,8 @@ extern void __splitpath_s(const char*, char*, unsigned, char*, unsigned, char*, 
 extern void FUN_00ec825b(char*, unsigned, const char*, const char*, const char*, const char*);
 
 // @fnv 0x00be0c00
+// pdb: BSShader::MakePath | BSShader.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apFile, apResult
 void FUN_00be0c00(const char* path, char* result)
 {
     char drive[0x10];
@@ -38,6 +41,8 @@ extern char DAT_011f9308[260];
 
 // Builds a cache path from the default or configured directory, an optional "HDR." prefix, and the cache name, writing it into apCachePath.
 // @fnv 0x00be0dc0
+// pdb: ShaderBuffer::Get | ShaderBuffer.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apName
 void __cdecl BuildCachePath(char* apCachePath, const char* apFileName, const char* apCacheName)
 {
     if (apCachePath && apFileName && apCacheName)
@@ -73,6 +78,8 @@ void __cdecl FUN_00b97e30(unsigned int, unsigned int);
 void __cdecl FUN_00b97e80(unsigned int, unsigned int);
 
 // @fnv 0x00be0e50
+// pdb: BSShader::SetupGeometryNonFirstPass | BSShader.obj | fnv360_0721_beta, caller_sim, low, conflict (bridge: BSShader::RestoreGeometryNonFirstPass)
+// pdb params: apState
 void __stdcall FUN_00be0e50(int)
 {
     if (DAT_011f91e4 < 0x252 || DAT_011f91e4 > 0x256)
@@ -139,6 +146,8 @@ void __cdecl FUN_00b98610(int, int);
 
 // Walks the linked list at DAT_0126f74c+0x30's +0x10 and calls FUN_00b98610 with each node's m_val and 0.
 // @fnv 0x00be0ee0
+// pdb: BSShader::ResetFiltering | BSShader.obj | fnv360_0822_debug, objrun_sim, low, conflict (bridge: ShaderIncludes::Close)
+// pdb params: apStage, aiAddressValue
 void __stdcall FUN_00be0ee0(int)
 {
     int p1 = *(int*)(DAT_0126f74c + 0x30);
@@ -201,6 +210,8 @@ public:
     bool m_bGood;
 };
 
+// pdb: ShaderIncludes::Open | BSShader.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: IncludeType, pFileName, pParentData, ppData, pBytes, pFullPath, cbFullPath
 long __stdcall ReadFileIntoMemory(void* pThis, int aiUnused, const char* pFileName,
                                   int aiUnused2, const void** appData, unsigned int* apuiBytes) {
     char fullPath[260];
@@ -348,6 +359,8 @@ struct NiD3DPass_Ex : NiD3DPass
 
 // Iterates the pass list at DAT_0126f74c and calls ShutdownPools_Ex(false) on each non-null pass that is flagged and has a nonzero field at offset 8.
 // @fnv 0x00be2170
+// pdb: BSShader::SetupPassRenderStates | BSShader.obj | fnv360_1110_retail, objrun_open, low
+// pdb params: auiCurrentPass
 void __cdecl FUN_00be2170()
 {
     int p = DAT_0126f74c;
@@ -495,6 +508,8 @@ struct BeamStage
 };
 
 // @fnv 0x00be0cf0
+// pdb: NiD3DTextureStage::CreateNewStage | NiD3DTextureStage.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aspD3DTextureStage
 void __cdecl ConfigureBeamStage(BeamStage* stage, unsigned int uiValue, unsigned int arg3, unsigned int arg4,
                                 bool bFlag)
 {
@@ -531,6 +546,8 @@ struct M64Outer
 };
 // For each item in o->items, if the item's fc is not 1, sets its f8 to 0.
 // @fnv 0x00be0fb0
+// pdb: BSShader::ClearPass | BSShader.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apPass
 void __stdcall FUN_00be0fb0(M64Outer* pOuter)
 {
     if (pOuter)
@@ -564,6 +581,8 @@ struct StructA
 
 // Derives two booleans from param_1's prop10/prop0 flags and DAT_011f91e4, then calls FUN_00b984d0 and FUN_00b97ed0 with them.
 // @fnv 0x00be20e0
+// pdb: BSShader::SetupGeometryRenderStates | BSShader.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: apState, abFirstPass
 void __stdcall FUN_00be20e0(StructA* pStruct, bool bCheckProp0)
 {
     unsigned int v = DAT_011f91e4;
@@ -622,6 +641,8 @@ extern StagePool* DAT_0126f6cc;
 
 // Gets a StageReturn from DAT_0126f6cc, marks it, and refcount-swaps it into output, releasing the previous one.
 // @fnv 0x00e7edf0
+// pdb: NiPointer<NiD3DPass>::operator= | NiD3DPass.obj | fnv360_0822_retail, call_dedup, medium
+// pdb params: ptr
 void AssignStageFromPool(StageReturn*& output)
 {
     StageReturn* stage = DAT_0126f6cc->Get();
@@ -1216,6 +1237,8 @@ struct PixelSourceFile
     unsigned int Read(void* data, unsigned int size) { return ((NiBinaryStream*)this)->Read(data, size); }
 };
 
+// pdb: BSShader::CompilePixelShaderHLSL | BSShader.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apFilename, apMacro, apTarget, apCacheName
 NiD3DPixelShader* FUN_00be1750_shell::FUN_00be1750(char* apFilename, void* apMacro, char* apTarget, char* apCacheName)
 {
     bool bSourceExists;
@@ -1559,6 +1582,8 @@ class BBDF6C0Shader
 
 // Adds a render pass chosen by shader flags (or the geometry's default pass) and sets the first pass's lighting type from the flags.
 // @fnv 0x00bdf6c0
+// pdb: BSShaderPPLightingProperty::AddSilhouettePass_2x | BSShaderPPLightingProperty_Passes_2x.obj | fnv360_0822_retail, objrun, high
+// pdb params: apGeom, abSkinned
 void BBDF6C0Shader::AddPasses(BBDF6C0Geometry* pkGeometry, bool bSkipDefault)
 {
     if (GetFlag(14))
@@ -1699,6 +1724,8 @@ struct FUN_00b71b90_class : LodShaderBase
 };
 
 // @fnv 0x00be08b0
+// pdb: NiParticles::CopyMembers | NiParticles.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pDest, kCloning
 void FUN_00b71b90_class::FUN_00be08b0()
 {
     FUN_00e814b0();
@@ -1724,6 +1751,8 @@ void __cdecl FUN_00b97fa0(int, int);
 void __cdecl AddToTwoCounters(int, int, int);
 // Reads alpha and data from input, checks flags and alpha values, then calls FUN_00b97fa0 and AddToTwoCounters with blend or default counters.
 // @fnv 0x00be1ff0
+// pdb: BSShader::SetupGeometryAlphaBlending | BSShader.obj | fnv360_1110_retail, objrun_prop, low
+// pdb params: apState
 void __stdcall FUN_00be1ff0(Input818* input)
 {
     Alpha818* alpha = input->alpha;
@@ -1857,6 +1886,7 @@ struct ShaderDerived : ShaderBase
 };
 // Releases the referenced ShaderPassTarget when its count reaches zero, then calls a method on the shader manager.
 // @fnv 0x00be0f10
+// pdb: BSShader::~BSShader | BSShader.obj | fnv360_0822_retail, call_seq, medium
 ShaderDerived::~ShaderDerived()
 {
     ShaderPassTarget* p = m_akPasses[0].m_pObject;

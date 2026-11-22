@@ -45,6 +45,8 @@ bool C_00b57d10::SpeedTreeBranchShader_Initialize()
 
 struct V_00b59420 { int a, b, c, d; };
 struct C_00b59420 { char pad[0x10]; unsigned short cap; unsigned short n; V_00b59420* items; int* vals; bool FUN_00b59420(V_00b59420*, int); };
+// pdb: TallGrassGroup::Add | TallGrassGroup.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: apInstanceData, alTerrainChunkSeed
 bool C_00b59420::FUN_00b59420(V_00b59420* p, int v)
 {
     if (n != cap && p) {

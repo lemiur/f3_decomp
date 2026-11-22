@@ -31,6 +31,8 @@ struct S_Buf
 };
 extern ErrorReporter* DAT_010f3364;
 
+// pdb: hkReferenceCountError | hkError.obj | fnv360_0822_retail, ustr, high
+// pdb params: o, why
 void __cdecl ReportReferenceCountError(const void* object, const char* context)
 {
     CharBuffer message;
@@ -112,6 +114,8 @@ class FUN_00cb1600 : public CB1600StreamBase
 
 // Constructs a CB1600MemoryStreamWriter in place at the end of the buffer and stores it as the stream's writer, then removes its reference.
 // @f3 0x00923070 (community match, verified in this file)
+// pdb: hkErrStream::hkErrStream | hkError.obj | fnv360_0822_retail, uvref, high
+// pdb params: buf, bufSize
 FUN_00cb1600::FUN_00cb1600(void* apBuffer, int aiBufferSize) : CB1600StreamBase(0)
 {
     CB1600MemoryStreamWriter* writer =

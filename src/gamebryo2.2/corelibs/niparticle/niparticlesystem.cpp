@@ -9,6 +9,8 @@ struct NiParticleSystem
 };
 
 // @fnv 0x00c1b020
+// pdb: NiParticleSystem::SetSelectiveUpdateFlags | NiParticleSystem.obj | fnv360_0822_retail, objrun, high
+// pdb params: bSelectiveUpdate, bSelectiveUpdateTransforms, bRigid
 void __thiscall NiParticleSystem::SetSelectiveUpdateFlags(bool& bSelectiveUpdate, bool bSelectiveUpdateTransforms,
                                                           bool& bRigid)
 {
@@ -58,6 +60,8 @@ struct NiParticleSystem
 
 // Calls FUN_00a74780, reads a modifier count from the stream, then loads that many modifiers via InsertSorted.
 // @fnv 0x00c1b810
+// pdb: NiParticleSystem::SetSelectiveUpdateFlags | NiParticleSystem.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: NiParticleSystem::LinkObject)
+// pdb params: bSelectiveUpdate, bSelectiveUpdateTransforms, bRigid
 void __thiscall NiParticleSystem::LoadModifiers(NiStream* kStream)
 {
     FUN_00a74780(kStream);
@@ -210,6 +214,8 @@ struct S_00c1b060_Sys : S_00c1b060_Base
 };
 // Calls the base clone handler, looks up this object in the cloning map, then calls ProcessClone on each item in the unkC8 list and on unkB8.
 // @fnv 0x00c1b060
+// pdb: NiParticleSystem::ProcessClone | NiParticleSystem.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kCloning
 void S_00c1b060_Sys::FUN_00c1b060(S_00c1b060_Cloning* pkCloning)
 {
     FUN_00a80a10(pkCloning);
@@ -512,6 +518,8 @@ struct CloneSource
     BSFadeNode* __thiscall FUN_00c1b9e0(unsigned int);
 };
 // @fnv 0x00c1b9e0
+// pdb: NiParticleSystem::CreateClone | NiParticleSystem.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: kCloning
 BSFadeNode* CloneSource::FUN_00c1b9e0(unsigned int flags)
 {
     void* memory = BSFadeNode::operator new(0x110);
@@ -623,6 +631,8 @@ struct FUN_00c1add0_cls
 
 // Calls FUN_00a68c60, copies m_blockA into m_blockB, and when m_bFlag is set overwrites m_blockA's tail fields and head with the DAT globals.
 // @fnv 0x00c1add0
+// pdb: NiParticleSystem::UpdateWorldData | NiParticleSystem.obj | fnv360_0822_retail, objrun, medium
+// pdb params: UpdateData
 void FUN_00c1add0_cls::FUN_00c1add0(void* apValue)
 {
     FUN_00a68c60(apValue);
@@ -777,6 +787,8 @@ struct FUN_00c1aee0_cls
 };
 // Walks the linked list at m_c8 and calls v36 on each node's m_08 item, passing m_b8 and arg.
 // @fnv 0x00c1aee0
+// pdb: NiParticleSystem::InitializeNewParticle | NiParticleSystem.obj | fnv360_0822_retail, callee_sim, medium
+// pdb params: usNewParticle
 void FUN_00c1aee0_cls::FUN_00c1aee0(unsigned int arg)
 {
     void* first = m_b8;
@@ -899,6 +911,7 @@ struct FUN_00c1af60_cls
 };
 
 // @fnv 0x00c1af60
+// pdb: NiParticleSystem::UpdateWorldBound | NiParticleSystem.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: NiGeometry::UpdateWorldBound)
 void __thiscall FUN_00c1af60_cls::FUN_00c1af60()
 {
     ((S_00a80710*)this)->FUN_00a80710();
@@ -1013,6 +1026,7 @@ struct FUN_00c1b0f0_cls
 
 // Walks the linked list at m_c8 and returns the first item whose m_08 equals *key, or null if none matches.
 // @fnv 0x00c1b0f0
+// pdb: NiParticleSystem::GetModifierByName | BSTerrainEffect.obj | tesv_win, call_seq, medium
 void* FUN_00c1b0f0_cls::FUN_00c1b0f0(unsigned int* puiKey)
 {
     ListNode* pos = m_c8;
@@ -1494,6 +1508,8 @@ struct Nps_c1b3a0
 };
 
 // @fnv 0x00c1b3a0
+// pdb: NiParticleSystem::LoadBinary | NiParticleSystem.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: kStream
 void Nps_c1b3a0::FUN_00c1b3a0(Obj_c1b3a0* pObj)
 {
     FUN_00a9b180(pObj);
@@ -1591,6 +1607,8 @@ struct FUN_00c1af20_shell : NiParticleSystem
 };
 // If a.flag05 is set, marks a.flag06 and returns; otherwise, when bit 2 of flags30 is set, calls the virtual at offset 0xb8, then calls UpdateDownwardPassIfSelective with a and b.
 // @fnv 0x00c1af20
+// pdb: NiParticleSystem::UpdateSelectedDownwardPass | NiParticleSystem.obj | fnv360_0822_retail, objrun, medium, conflict (bridge: NiParticleSystem::UpdateDownwardPass)
+// pdb params: UpdateData, uFlags
 void __thiscall FUN_00c1af20_shell::UpdateParticleSystem(FUN_00c1af20_upd& aUpd, unsigned int b)
 {
     FUN_00c1af20_view* v = reinterpret_cast<FUN_00c1af20_view*>(this);
@@ -2046,6 +2064,8 @@ class FUN_00c1b400_cls : public BaseC1B400
 
 // Saves the base data, the m_bFlag byte, the m_eValue enum, and the link IDs of each node in the m_pkHead list to kStream.
 // @fnv 0x00c1b400
+// pdb: NiParticleSystem::SaveBinary | NiParticleSystem.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void FUN_00c1b400_cls::FUN_00c1b400(NiStreamC1B& kStream)
 {
     BaseC1B400::SaveBinary(kStream);
@@ -2174,6 +2194,8 @@ struct FUN_00c1b850_cls
 
 // Appends World Space, NumMods, NumParticles and MaxParticles entries to the list via FUN_00a9b2e0 and FUN_0096ae90, growing it when full.
 // @fnv 0x00c1b850
+// pdb: NiParticleSystem::GetViewerStrings | NiParticleSystem.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FUN_00c1b850_cls::WriteParticleSystemInfo(FUN_00c1b850_list* pList)
 {
     FUN_00a9b2e0(pList);
@@ -2352,6 +2374,7 @@ struct C_00c1b610
 
 // Inserts pkBound into m_kList ordered by m_uiKey, ref-counting it around the list insert, then calls v9c(this) on it.
 // @fnv 0x00c1b610
+// pdb: NiParticleSystem::AddModifier | NiParticleSystem.obj | tesv_win, call_seq, medium
 void C_00c1b610::InsertSorted(Bound* pkBound)
 {
     Bound* pBound = pkBound;
@@ -2459,6 +2482,7 @@ struct Self
 };
 
 // @fnv 0x00c1b520
+// pdb: NiTPointerListBase<class NiTPointerAllocator<unsigned int>,class NiPointer<class NiPSysModifier> >::InsertBefore | NiParticleSystem.obj | tesv_win, call_seq, medium
 Node* __thiscall Self::FUN_00c1b520(Anchor* anchor, Ptr& ref)
 {
     Node* node = unk08.FUN_0043a010();
@@ -3129,6 +3153,8 @@ class BSMultiBoundNode : public NiNodeC1B
 
 // Clones the node's bounds list and multi-bound pointer into pDest via kCloning after calling the base NiNodeC1B clone routine.
 // @fnv 0x00c1b6f0
+// pdb: NiParticleSystem::CopyMembers | NiParticleSystem.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: pkDest, kCloning
 void BSMultiBoundNode::FUN_00c1b6f0(BSMultiBoundNode* pDest, CloningProcess& kCloning)
 {
     NiNodeC1B::FUN_00a9b140(pDest, kCloning);
@@ -3207,6 +3233,8 @@ struct RefObjectList
 };
 
 // @fnv 0x00c1b4a0
+// pdb: NiTPointerListBase<NiTPointerAllocator<unsigned int>,NiPointer<NiProperty> >::AddHead | MultiBoundMarkerData.obj | fnv360_0822_retail, call_seq, high
+// pdb params: element
 void RefObjectList::FUN_00c1b4a0(const NiRefObjectPtr& element)
 {
     ListNode* pkNode = (ListNode*)m_kItemCount.AddHead();

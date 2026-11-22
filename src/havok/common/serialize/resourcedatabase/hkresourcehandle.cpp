@@ -12,6 +12,8 @@ struct D481D0RefVariant
     const void* GetVariantValue() const;
 };
 // @fnv 0x00e2df20
+// pdb: PathingLOSMap::GetOffsetForNavMesh | PathingLOSMap.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: aNavMeshID, aRetOffset
 const void* __fastcall FUN_00e2df20(char* self, int)
 {
     return reinterpret_cast<D481D0RefVariant*>(self + 8)->GetVariantValue();
@@ -31,6 +33,7 @@ struct FUN_00e2df30_class
 };
 
 // @fnv 0x00e2df30
+// pdb: hkDefaultError::enableAll | hkDefaultError.obj | fnv360_0822_retail, vtable, medium
 void FUN_00e2df30_class::FUN_00e2df30(D481D0ReferencedObject* obj, D481D0Class const* cls)
 {
     ((D481D0RefVariant*)((char*)this + 8))->set(obj, cls);
@@ -42,6 +45,8 @@ extern int DAT_010eb288;
 namespace f3m_00600920 {
 struct Helper { void FUN_005fc430(int*); char pad[0x28]; };
 struct X { int m_p; Helper h; int unk2c; int unk30; int unk34; int unk38; X* FUN_00600920(int*, int*); };
+// pdb: PathingNode::PathingNode | PathingNode.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: aLocation, aTangent
 X* X::FUN_00600920(int* p, int* q)
 {
     m_p = 0;
@@ -68,6 +73,7 @@ struct FUN_00e2f1e0_class
 };
 
 // @fnv 0x00e2f1e0
+// pdb: `anonymous namespace'::hkEntitySelectorListed::`scalar deleting destructor' | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, vtable, high
 void* __thiscall FUN_00e2f1e0_class::Destroy(int flags)
 {
     m_base.~S_00e028e0_Base();
@@ -149,6 +155,8 @@ struct Arr_0058b6e0
     Sub_0058b6e0 m[2][2];
 };
 
+// pdb: BSFaceGenManager::CompareFaceGenCoord | BSFaceGenManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCoord1, apCoord2
 bool __cdecl FUN_0058ca80(Arr_0058b6e0* a, Arr_0058b6e0* b)
 {
     if (a == 0 && b == 0)
@@ -482,6 +490,7 @@ extern "C" __declspec(noinline) void __fastcall FUN_00cb0c00(void* self)
 }
 
 // @f3 0x00b4fd80 (community match, verified in this file)
+// pdb: ParallaxShader::RecreateRendererData | ParallaxShader.obj | fnv360_0822_retail, objrun_open, medium
 void S00e2e3f0_Obj::FUN_00e2e3f0()
 {
     void** slot = reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 0x8c);
@@ -590,6 +599,7 @@ extern int DAT_010eb288;
 extern char DAT_00db5760;
 struct Target1203 {void* FUN_0041fd10();};
 struct Reset1203 { void** vtable; Reset1203(void** slot):vtable(slot){} ~Reset1203(){*vtable=&DAT_00db5760;} };
+// pdb: ExtraWaterZoneMap::~ExtraWaterZoneMap | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, medium
 void* FUN_00e2e9e0_class::Ctor() {
  Reset1203 reset(&m_class);
  return reinterpret_cast<Target1203*>(&m_target)->FUN_0041fd10();

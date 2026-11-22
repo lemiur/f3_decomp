@@ -10,6 +10,7 @@ struct FUN_00dc1680
 };
 
 // @fnv 0x00dc1680
+// pdb: hkMonitorStreamStringMap::hkMonitorStreamStringMap | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: hkStructureLayout::hkStructureLayout)
 FUN_00dc1680::FUN_00dc1680(const FUN_00dc1680& other) : m_uiFilterValue(other.m_uiFilterValue)
 {}
 
@@ -50,6 +51,7 @@ __declspec(noinline) int Provider::FUN_00d470d0()
 }
 // Returns -1 for tags 0x18/0x1f, the provider's value8 for tag 0x19, otherwise g_011b6ab8[tag].value.
 // @fnv 0x00d86b40
+// pdb: hkClassMember::getArrayMemberSize | hkClassMember.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 int Owner::GetTagValue()
 {
     if (FUN_00d86b30() == 0x18 || FUN_00d86b30() == 0x1f)
@@ -92,6 +94,7 @@ struct SizeNodeY
 {
     SizeNodeListY* FUN_0093d890();
 };
+// pdb: getLayoutAlignment | hkStructureLayout.obj | fnv360_0822_retail, call_gap, high
 extern "C" int __cdecl FUN_00dc1850(SizeNode* node, int type, int fallback)
 {
     int result = -1;
@@ -199,6 +202,7 @@ int GetMemberSize(Lay_cls* a1, unsigned char* a2, int a3);
 
 // Returns the byte size of a structure member based on its type code, recursing for type 18 and logging an error for unknown types.
 // @f3 0x009b2550 (community match, verified in this file)
+// pdb: computeMemberSize | hkStructureLayout.obj | fnv360_0822_retail, ustr, high
 int GetMemberSize(Lay_cls* pLayout, unsigned char* pMemberData, int iType)
 {
     int r = 0;

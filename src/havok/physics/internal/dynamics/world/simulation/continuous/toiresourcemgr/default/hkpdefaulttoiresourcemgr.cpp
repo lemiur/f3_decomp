@@ -43,6 +43,7 @@ FUN_00d9fc70_Router* _D1A0E0GetMemoryRouter();
 }  // namespace fnv_00d9fc70
 
 // @fnv 0x00d9fb70
+// pdb: hkpSimpleShapePhantom::getType | hkpSimpleShapePhantom.obj | fnv360_0822_retail, objrun_open, low
 int __cdecl FUN_00d9fb70()
 {
     return 1;
@@ -55,6 +56,7 @@ int __cdecl FUN_00d9fb70()
 extern int DAT_0126955c;
 
 // @fnv 0x00d9fc60
+// pdb: getVtablehkpSerializedDisplayMarker | hkpSerializedDisplayMarkerClass.obj | fnv360_0721_beta, objrun_open, low
 int* __cdecl FUN_00d9fc60()
 {
     return &DAT_0126955c;

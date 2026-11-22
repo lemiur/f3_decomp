@@ -5,6 +5,8 @@
 extern "C" bool __stdcall FUN_00a57780(void*);
 
 // @fnv 0x00a461c0
+// pdb: Ni2DBuffer::IsEqual | Ni2DBuffer.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pkObject
 char __stdcall FUN_00a461c0(void* kStream)
 {
     char result = 0;
@@ -19,6 +21,7 @@ struct FUN_00a4d1b0_shell
 };
 
 // @fnv 0x00a4d1b0
+// pdb: NiLightColorController::GetCtlrID | NiLightColorController.obj | fnv360_0822_retail, ustr_rel, medium
 const char* __thiscall FUN_00a4d1b0_shell::GetLightTypeName()
 {
     unsigned char flag = *(unsigned char*)((char*)this + 0x38);
@@ -68,6 +71,8 @@ struct S00a4d150
 };
 // Reads the light's first or second color depending on the flag and writes its RGB components into kValue.
 // @fnv 0x00a4d150
+// pdb: NiLightColorController::GetTargetPoint3Value | NiLightColorController.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: kValue
 void S00a4d150::GetLightColor(NiPoint3& kValue)
 {
     NiColor kColor;
@@ -94,6 +99,8 @@ struct FUN_00a4d1d0_holder
 };
 // Checks pkObject via FUN_00a57c10, then compares bit 0 of the inverted byte at offset 0x38 with the byte at this+0x38 and returns the result.
 // @fnv 0x00a4d1d0
+// pdb: NiLightColorController::IsEqual | NiLightColorController.obj | fnv360_0822_retail, objrun, low
+// pdb params: pkObject
 bool __thiscall FUN_00a4d1d0_holder::FUN_00a4d1d0(NiObject* pkObject)
 {
     NiLightColorController* pkControl = (NiLightColorController*)pkObject;
@@ -120,6 +127,8 @@ struct NiObjectNET
 };
 // Walks the RTTI chain of pkTarget and returns true if it reaches g_011f4a68_arg1, false if pkTarget is null or the chain ends.
 // @fnv 0x00a4d210
+// pdb: NiLightColorController::InterpTargetIsCorrectType | NiLightColorController.obj | fnv360_0721_retail, objrun, medium
+// pdb params: pkTarget
 bool __stdcall FUN_00a4d210(NiObjectNET* pkTarget)
 {
     if (!pkTarget)
@@ -191,6 +200,8 @@ struct Stand840 : Base840
     void __thiscall WriteToStream(NiStream&);
 };
 // @fnv 0x00a4b840
+// pdb: NiLightColorController::SaveBinary | NiLightColorController.obj | fnv360_0721_beta, objrun, high
+// pdb params: kStream
 void __thiscall Stand840::WriteToStream(NiStream& stream)
 {
     Base840::FUN_00a57c00(stream);
@@ -342,6 +353,8 @@ struct Host
 };
 // Reads a stream, and for older versions creates a RefObject from it, swaps it into activeObject with reference counting, then activates it.
 // @fnv 0x00a4d3a0
+// pdb: NiLightColorController::LinkObject | NiLightColorController.obj | fnv360_0721_beta, objrun, medium
+// pdb params: kStream
 void __thiscall Host::LoadActiveObject(VersionedDataBlock* stream)
 {
     FUN_00a57630(stream);
@@ -411,6 +424,8 @@ struct OutputStandIn_0047
 };
 void* __cdecl FUN_00424d50(FakeRTTI* type, NiObject* obj);
 
+// pdb: NiLightColorController::Update | NiLightColorController.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: UpdateData
 void NiTimeController::EvaluateAndApplyOutput(float& parameter)
 {
     if ((unsigned char)(flags08 >> 5) & 1)
@@ -615,6 +630,8 @@ struct LoadHost_d530 : Host
 };
 
 // @fnv 0x00a4d530
+// pdb: NiLightColorController::LoadBinary | NiLightColorController.obj | fnv360_0721_retail, objrun, medium
+// pdb params: kStream
 void LoadHost_d530::ReadFromStream(Stream_d530& stream)
 {
     FUN_00a57c70(stream);

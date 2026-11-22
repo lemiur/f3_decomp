@@ -1531,6 +1531,8 @@ struct ControllerSequence : SeqNiObject
 };
 
 // @fnv 0x00a32a10
+// pdb: NiControllerSequence::NiControllerSequence | NiControllerSequence.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kName, uiArraySize, uiArrayGrowBy
 ControllerSequence::ControllerSequence(const SeqFixedString& kName, unsigned int uiArraySize,
                                        unsigned int uiArrayGrowBy)
     : m_uiNumControlledBlocks(uiArraySize), m_uiNumIDTags(uiArrayGrowBy), m_pInterpArray(0), m_pkSeqTagArray(0),

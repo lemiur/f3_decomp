@@ -5,6 +5,7 @@
 #include "havok/hkpBoxShape.h"
 
 // @fnv 0x00c9db70
+// pdb: CombatProcedureActivateObject::GetType | CombatProcedureActivateObject.obj | fnv360_0822_retail, vtable, medium
 int __cdecl FUN_00c9db70()
 {
     return 8;
@@ -12,6 +13,8 @@ int __cdecl FUN_00c9db70()
 
 // Returns the smaller of the two float arguments.
 // @fnv 0x00c9e0f0
+// pdb: BSMIN | ContainerItemExtra.obj | fnv360_0822_debug, call_gap, low, conflict (skyrim: hkMath::min2<float>)
+// pdb params: fA, fB
 float __cdecl FUN_00c9e0f0(float a, float b)
 {
     return a < b ? a : b;
@@ -39,6 +42,8 @@ struct MemoryManager
 
 // FUN_00c9e1a0: __stdcall stub returning constant 0x30 (two unused stack params).
 // @fnv 0x00c9e1a0
+// pdb: hkpBoxShape::calcSizeForSpu | hkpBoxShape.obj | fnv360_0721_beta, objrun_sim, medium
+// pdb params: input, spuBufferSizeLeft
 int __stdcall FUN_00c9e1a0(int a1, int a2)
 {
     return 0x30;
@@ -55,6 +60,7 @@ struct FUN_00c9dc10_class : public hkpBoxShape
 
 // Computes the shape's AABB by calling ComputeAabbFromTransform with the transform, the shape's half extents and tolerance added to a stored value.
 // @fnv 0x00c9dc10
+// pdb: hkpBoxShape::getAabbImpl | hkpBoxShape.obj | tesv_win, objrun, medium
 void __thiscall FUN_00c9dc10_class::GetAabb(const hkTransform& transform, hkReal tolerance, hkAabb& out) const
 {
     ComputeAabbFromTransform(transform, m_vHalfExtents, m_fSphereRadius + tolerance, out);
@@ -79,6 +85,8 @@ struct CenteredPointBounds {
 
 // @f3 0x00916750 (community match, verified in this file)
 extern void* FUN_00e36504;
+// pdb: hkpBoxShape::hkpBoxShape | hkpBoxShape.obj | fnv360_0822_retail, call_seq, high
+// pdb params: halfExtents, radius
 CenteredPointBounds* CenteredPointBounds::SetExtentsAndRadius(const float* extents, float radius)
 {
     m_fSphereRadius = radius;
@@ -187,6 +195,8 @@ struct hkpBoxShape_Local : public hkpBoxShape
 
 // Copies halfExtents into m_vHalfExtents and stores the minimum of x, y, and z into the w component.
 // @f3 0x009161e0 (community match, verified in this file)
+// pdb: hkpBoxShape::getSupportingVertexImpl | hkpBoxShape.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkpBoxShape::setHalfExtents)
+// pdb params: direction, supportingVertexOut
 void hkpBoxShape_Local::SetHalfExtents(const hkVector4& halfExtents)
 {
     m_vHalfExtents.x = halfExtents.x;

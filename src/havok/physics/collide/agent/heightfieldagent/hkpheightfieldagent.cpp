@@ -102,6 +102,8 @@ void __cdecl FUN_00d319e0(int a, int b, int c, D323B0CollectorBase* collector);
 
 // Constructs a D323B0Collector from d and passes it with b, a, c to FUN_00d319e0.
 // @fnv 0x00d323b0
+// pdb: hkpSymmetricAgentLinearCast<hkpHeightFieldAgent>::staticGetClosestPoints | hkpHeightFieldAgent.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_00d323b0(int aiArg1, int aiArg2, int aiArg3, int aiData)
 {
     D323B0Collector collector(aiData);
@@ -126,6 +128,8 @@ struct Owner {
 };
 // Invokes callback->invoke for each non-0xffff entry in indices, then calls clear(1).
 // @fnv 0x00d31770
+// pdb: hkpHeightFieldAgent::cleanup | hkpHeightFieldAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: constraintOwner
 void Owner::NotifyAndClear(int value) {
     if (callback) {
         for(int index=0; index<count; ++index) {
@@ -140,6 +144,8 @@ void Owner::NotifyAndClear(int value) {
 extern "C" void __cdecl FUN_00d31d30(void* arg0, void* arg1, void* arg2, void* arg3, void* arg4);
 // Forwards all five arguments unchanged to FUN_00d31d30.
 // @fnv 0x00d32030
+// pdb: hkpHeightFieldAgent::linearCast | hkpHeightFieldAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: csBody, hfBody, input, collector, startCollector
 extern "C" void __stdcall FUN_00d32030(void* arg0, void* arg1, void* arg2, void* arg3, void* arg4)
 {
     FUN_00d31d30(arg0, arg1, arg2, arg3, arg4);
@@ -147,6 +153,8 @@ extern "C" void __stdcall FUN_00d32030(void* arg0, void* arg1, void* arg2, void*
 
 extern "C" void __cdecl FUN_00d317d0(void* arg0, void* arg1, void* arg2, void* arg3);
 // @fnv 0x00d32150
+// pdb: hkpHeightFieldAgent::getPenetrations | hkpHeightFieldAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: csBody, hfBody, input, collector
 extern "C" void __stdcall FUN_00d32150(void* arg0, void* arg1, void* arg2, void* arg3)
 {
     FUN_00d317d0(arg0, arg1, arg2, arg3);
@@ -164,6 +172,8 @@ struct FUN_00d32370_cls {
 
 // Builds a FUN_00d32370_cls with vt set to DAT_010ce81c and d set to a4, then calls FUN_00d317d0 with a2, a1, a3 and the struct.
 // @fnv 0x00d32370
+// pdb: hkpSymmetricAgentLinearCast<hkpHeightFieldAgent>::staticGetPenetrations | hkpHeightFieldAgent.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FUN_00d32370(int aiArg1, int aiArg2, int aiArg3, int a4) {
     FUN_00d32370_cls local;
     local.flag = 0;

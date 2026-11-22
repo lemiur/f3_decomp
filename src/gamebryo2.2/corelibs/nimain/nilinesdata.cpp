@@ -28,6 +28,7 @@ struct FUN_00a8a7c0_shell : public FUN_00a68800_shell
 };
 
 // @fnv 0x00a8a7c0
+// pdb: NiLinesData::`scalar deleting destructor' | NiLinesData.obj | fnv360_0822_retail, objrun, high
 void* __thiscall FUN_00a8a7c0_shell::FUN_00a8a7c0(unsigned int flags)
 {
     void* pkFlags = *(void**)((char*)this + 0x40);
@@ -64,6 +65,8 @@ struct NiLinesDataStandIn
 };
 
 // @fnv 0x00a8a730
+// pdb: NiLinesData::IsEqual | NiLinesData.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: pkObject
 bool NiLinesDataStandIn::IsEqual(NiLinesDataStandIn* other)
 {
     if (!NiGeometryData_IsEqual(other))
@@ -333,6 +336,8 @@ struct S_00a8a890_Obj
 };
 
 // @fnv 0x00a8a890
+// pdb: NiFloatsExtraDataController::GetViewerStrings | NiFloatsExtraDataController.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: pkStrings
 void S_00a8a890_Obj::FUN_00a8a890(S_00a8a890_Arr* arr)
 {
     RegisterFields(arr);

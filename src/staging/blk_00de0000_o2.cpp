@@ -35,6 +35,8 @@ struct hkReferencedObject
 extern int DAT_010d3cc0;
 
 // @fnv 0x00dfde30
+// pdb: hkStringMap<hkTypeInfo const *,hkContainerHeapAllocator>::isValid | hkBuiltinTypeRegistry.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: i
 void FUN_00dfde30(void* apObject)
 {
     if (apObject)
@@ -97,6 +99,7 @@ extern int DAT_010dff44;
 
 typedef void(__thiscall* VTable0)(void*, int);
 // @fnv 0x00dfc230
+// pdb: cleanupLoadedObjecthkpDefaultConvexListFilter | hkpCollideReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfc230(void** p)
 {
     ((VTable0*)(*(void***)(p)))[0](p, 0);
@@ -114,6 +117,7 @@ extern int DAT_010e00cc;
 extern int DAT_010e00dc;
 
 // @fnv 0x00dfc380
+// pdb: cleanupLoadedObjecthkpBoxShape | hkpCollideReflections.obj | tesv_win, objopen_prop, low
 void __cdecl FUN_00dfc380(void** p)
 {
     (**(void(__thiscall**)(void*, int))(*p))(p, 0);
@@ -122,6 +126,7 @@ void __cdecl FUN_00dfc380(void** p)
 extern int DAT_010e04ac;
 
 // @fnv 0x00dfc500
+// pdb: cleanupLoadedObjecthkpConvexVerticesConnectivity | hkpCollideReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfc500(void* p)
 {
     ((void(__thiscall*)(void*, int)) * (void**)*(void**)p)(p, 0);
@@ -134,6 +139,7 @@ extern int DAT_0102e368;
 extern int DAT_010d0a64;
 
 // @fnv 0x00dfc700
+// pdb: cleanupLoadedObjecthkpSerializedDisplayMarker | hkpSerializedDisplayMarkerClass.obj | fnv360_0721_beta, objrun_open, low
 void __cdecl FUN_00dfc700(void* p)
 {
     ((void(__thiscall*)(void*, int))(*(void**)*(void**)p))(p, 0);
@@ -159,6 +165,7 @@ extern int DAT_010d0be4;
 
 typedef int(__thiscall* VFunc0)(void*, int);
 // @fnv 0x00dfcd10
+// pdb: cleanupLoadedObjecthkpBoxMotion | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 int __cdecl FUN_00dfcd10(void* self)
 {
     return ((VFunc0*)*(void**)self)[0](self, 0);
@@ -202,6 +209,7 @@ struct FUN_00dfe430_class
     virtual int __thiscall FUN_00cb0a70(int a);
 };
 // @fnv 0x00dfe430
+// pdb: cleanupLoadedObjecthkpLinearParametricCurve | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 int __cdecl FUN_00dfe430(FUN_00dfe430_class* p)
 {
     return p->FUN_00cb0a70(0);
@@ -216,6 +224,7 @@ struct FUN_00dfe670_vt
     virtual void m_iWordAt00(int);
 };
 // @fnv 0x00dfe670
+// pdb: cleanupLoadedObjecthkpSingleShapeContainer | hkpCollideReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfe670(FUN_00dfe670_vt* p)
 {
     p->m_iWordAt00(0);
@@ -320,6 +329,8 @@ struct FUN_00620d30_cls
 };
 extern FUN_00620d30_cls* DAT_01075b24;
 
+// pdb: Interface::ToggleSafeZone | Interface.obj | fnv360_0822_retail, call_gap, low
+// pdb params: abForceSetTo
 void __cdecl FUN_00de8550(FUN_00de8550_t* pObject, int iValue)
 {
     if (DAT_01075b24 && DAT_01075b24->bEnabled)
@@ -329,6 +340,7 @@ void __cdecl FUN_00de8550(FUN_00de8550_t* pObject, int iValue)
 
 typedef void(__thiscall* Vfn0)(void*, int);
 // @fnv 0x00df6460
+// pdb: cleanupLoadedObjecthkpRagdollLimitsData | hkpRagdollLimitsDataClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00df6460(void** p)
 {
     ((Vfn0) * (void**)*p)(p, 0);
@@ -343,6 +355,7 @@ int __cdecl FUN_00dfb270(void* p)
 
 typedef void(__thiscall* VFunc00dfb3f0)(void*, int);
 // @fnv 0x00dfb3f0
+// pdb: finishLoadedObjecthkpRackAndPinionConstraintData | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfb3f0(void** p)
 {
     ((VFunc00dfb3f0) * ((void***)p)[0])(p, 0);
@@ -363,6 +376,7 @@ struct FUN_00dfb890_vt
     virtual void v0(int);
 };
 // @fnv 0x00dfb890
+// pdb: cleanupLoadedObjecthkpPoweredChainData | hkpDynamicshkpPoweredChainDataReflections.obj | tesv_win, objrun, medium
 void __cdecl FUN_00dfb890(FUN_00dfb890_vt* p)
 {
     p->v0(0);
@@ -388,6 +402,7 @@ struct S_00d49310_Lock
     ~S_00d49310_Lock();
 };
 // @fnv 0x00dfbc20
+// pdb: cleanupLoadedObjecthkpSerializedSubTrack1nInfo | hkpUtilitiesReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfbc20(S_00d49310_Lock* self)
 {
     self->S_00d49310_Lock::~S_00d49310_Lock();
@@ -399,6 +414,8 @@ struct S_00dfb720_Elem
 };
 
 // @fnv 0x00dfbca0
+// pdb: hkMemoryAllocator::_bufFree<hkpConstraintChainInstance *> | hkpPoweredChainMapperClass.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: p, numElem
 void __cdecl FUN_00dfbca0(S_00dfb720_Elem* p)
 {
     p->S_00dfb720_Elem::~S_00dfb720_Elem();
@@ -406,6 +423,7 @@ void __cdecl FUN_00dfbca0(S_00dfb720_Elem* p)
 
 typedef void(__thiscall* VTable0)(void*, int);
 // @fnv 0x00dfbcd0
+// pdb: cleanupLoadedObjecthkpBallSocketChainDataConstraintInfo | hkpBallSocketChainDataClass.obj | fnv360_0822_debug, objopen_prop, low
 void __cdecl FUN_00dfbcd0(void* p)
 {
     ((VTable0*)*(void**)p)[0](p, 0);
@@ -413,6 +431,7 @@ void __cdecl FUN_00dfbcd0(void* p)
 
 typedef void(__thiscall* VFunc1)(void*, int);
 // @fnv 0x00dfbdd0
+// pdb: cleanupLoadedObjecthkpBallSocketChainData | hkpDynamicsReflections.obj | tesv_win, objrun, medium
 void __cdecl FUN_00dfbdd0(void* p)
 {
     ((VFunc1*)*(void**)p)[0](p, 0);
@@ -423,6 +442,7 @@ struct FUN_00dfc040_vt
     virtual void __thiscall FUN_00dfc040(int);
 };
 // @fnv 0x00dfc040
+// pdb: cleanupLoadedObjecthkpSimpleMeshShape | hkpSimpleMeshShapeClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00dfc040(FUN_00dfc040_vt* p)
 {
     p->FUN_00dfc040(0);
@@ -451,6 +471,7 @@ void __cdecl FUN_00dfc8d0(void** p)
 
 typedef void(__thiscall* Vfn_00dfcb60)(void*, int);
 // @fnv 0x00dfcb60
+// pdb: cleanupLoadedObjecthkpConstrainedSystemFilter | hkpConstrainedSystemFilterClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00dfcb60(void* p)
 {
     Vfn_00dfcb60 fn = ((Vfn_00dfcb60*)*(void**)p)[0];
@@ -462,6 +483,7 @@ struct FUN_00dfcc30_vt
     virtual void v0(int);
 };
 // @fnv 0x00dfcc30
+// pdb: cleanupLoadedObjecthkpRigidBody | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfcc30(FUN_00dfcc30_vt* p)
 {
     p->v0(0);
@@ -472,6 +494,7 @@ struct FUN_00dfce00_vt
     virtual void __thiscall v0(int);
 };
 // @fnv 0x00dfce00
+// pdb: cleanupLoadedObjecthkpCharacterMotion | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfce00(FUN_00dfce00_vt* p)
 {
     p->v0(0);
@@ -482,6 +505,7 @@ struct FUN_00dfcf00_vt
     virtual void m_iWordAt00(int);
 };
 // @fnv 0x00dfcf00
+// pdb: cleanupLoadedObjecthkpMaxSizeMotion | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfcf00(FUN_00dfcf00_vt* p)
 {
     p->m_iWordAt00(0);
@@ -492,6 +516,7 @@ struct FUN_00dfd240_vt
     virtual void __thiscall FUN_00dfd240(int);
 };
 // @fnv 0x00dfd240
+// pdb: cleanupLoadedObjecthkpWorld | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfd240(FUN_00dfd240_vt* p)
 {
     p->FUN_00dfd240(0);
@@ -512,6 +537,7 @@ void __cdecl FUN_00dfda70(void* p)
 }
 
 // @fnv 0x00dfdb00
+// pdb: cleanupLoadedObjecthkpLinearParametricCurve | hkpLinearParametricCurveClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00dfdb00(void* p)
 {
     ((VFunc0*)*(void**)p)[0](p, 0);
@@ -522,6 +548,7 @@ struct FUN_00dfdb20_vt
     virtual void v0(int);
 };
 // @fnv 0x00dfdb20
+// pdb: cleanupLoadedObjecthkpCallbackConstraintMotor | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfdb20(FUN_00dfdb20_vt* p)
 {
     p->v0(0);
@@ -565,12 +592,14 @@ struct FUN_00dfe4e0_vt
     virtual void m0(int);
 };
 // @fnv 0x00dfe4e0
+// pdb: cleanupLoadedObjecthkpPointToPlaneConstraintData | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfe4e0(FUN_00dfe4e0_vt* p)
 {
     p->m0(0);
 }
 
 // @fnv 0x00dfe590
+// pdb: cleanupLoadedObjecthkpPrismaticConstraintData | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfe590(void* p)
 {
     void(__thiscall * fn)(void*, int);
@@ -594,6 +623,7 @@ void __cdecl FUN_00dfebb0(void** p)
 
 typedef void(__thiscall* Vfn0)(void*, int);
 // @fnv 0x00dfebf0
+// pdb: finishLoadedObjecthkpShapeInfo | hkpCollideReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfebf0(void* p)
 {
     ((Vfn0*)*(void**)p)[0](p, 0);
@@ -604,6 +634,7 @@ struct FUN_00dfec30_vt
     virtual void m0(int);
 };
 // @fnv 0x00dfec30
+// pdb: cleanupLoadedObjecthkpRemoveTerminalsMoppModifier | hkpRemoveTerminalsMoppModifierClass.obj | fnv360_1110_retail, objrun, medium
 void __cdecl FUN_00dfec30(FUN_00dfec30_vt* p)
 {
     p->m0(0);
@@ -614,6 +645,7 @@ struct FUN_00dfecf0_vt
     virtual void v0(int);
 };
 // @fnv 0x00dfecf0
+// pdb: cleanupLoadedObjecthkpGroupFilter | hkpGroupFilterClass.obj | fnv360_0721_beta, objrun_open, low
 void __cdecl FUN_00dfecf0(FUN_00dfecf0_vt* p)
 {
     p->v0(0);
@@ -624,6 +656,7 @@ struct FUN_00dfede0_vt
     virtual void v0(int);
 };
 // @fnv 0x00dfede0
+// pdb: cleanupLoadedObjecthkpGroupFilter | hkpGroupFilterClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00dfede0(FUN_00dfede0_vt* p)
 {
     p->v0(0);
@@ -641,6 +674,7 @@ struct FUN_00dfef00_vt
     virtual void __thiscall m0(int);
 };
 // @fnv 0x00dfef00
+// pdb: cleanupLoadedObjecthkpConvexVerticesConnectivity | hkpConvexVerticesConnectivityClass.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: cleanupLoadedObjecthkpMoppBvTreeShape)
 void __cdecl FUN_00dfef00(FUN_00dfef00_vt* p)
 {
     p->m0(0);
@@ -651,6 +685,7 @@ struct FUN_00dff1d0_vt
     virtual void m0(int);
 };
 // @fnv 0x00dff1d0
+// pdb: cleanupLoadedObjecthkpCollisionFilterList | hkpCollisionFilterListClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00dff1d0(FUN_00dff1d0_vt* p)
 {
     p->m0(0);
@@ -729,6 +764,7 @@ struct FUN_00de3050
 };
 
 // @fnv 0x00de3050
+// pdb: hkpConvexRadiusBuilder::hkpConvexRadiusBuilderEnvironment::hkpConvexRadiusBuilderEnvironment | hkpConvexRadiusBuilder.obj | fnv360_0822_retail, objrun_prop, low
 FUN_00de3050::FUN_00de3050() : m_iWordAt00(DAT_01017d00)
 {}
 
@@ -748,6 +784,8 @@ class FUN_00de3060
 
 // Initializes the object: sets m_06 to 1, points m_00 at DAT_010d8214, copies *src into m_08 and zeroes m_0c.
 // @fnv 0x00de3060
+// pdb: hkpConvexRadiusBuilder::hkpConvexRadiusBuilder | hkpConvexRadiusBuilder.obj | fnv360_0822_retail, uvref, medium
+// pdb params: env
 FUN_00de3060::FUN_00de3060(const unsigned int* src)
 {
     m_06 = 1;
@@ -767,6 +805,7 @@ class FUN_00de3090_cls
 };
 
 // @fnv 0x00de3090
+// pdb: hkpConvexRadiusBuilder::resetCurrentRawGeometry | hkpConvexRadiusBuilder.obj | fnv360_0822_debug, objrun, medium
 void FUN_00de3090_cls::FUN_00de3090()
 {
     m_0c = 0;
@@ -992,6 +1031,7 @@ class FNVFloatGetter_cls
 };
 
 // @fnv 0x00de48e0
+// pdb: hkDisplaySemiCircle::getThetaMin | hkDisplaySemiCircle.obj | fnv360_0822_retail, objrun_open, low
 float FNVFloatGetter_cls::FUN_00de48e0()
 {
     return m_90;
@@ -1041,6 +1081,7 @@ struct FUN_00de48f0_cls
 };
 
 // @fnv 0x00de48f0
+// pdb: hkDisplaySemiCircle::getThetaMax | hkDisplaySemiCircle.obj | fnv360_0822_retail, objrun_open, low
 float FUN_00de48f0_cls::FUN_00de48f0()
 {
     return m_94;
@@ -1090,6 +1131,7 @@ struct CpuObject
     float FUN_00de4900();
 };
 // @fnv 0x00de4900
+// pdb: hkDisplaySemiCircle::getRadius | hkDisplaySemiCircle.obj | fnv360_0822_retail, objrun_open, low
 float CpuObject::FUN_00de4900()
 {
     return value;
@@ -1141,6 +1183,7 @@ struct FUN_00de4910_cls
 };
 
 // @fnv 0x00de4910
+// pdb: TESWorldSpace::GetMusicType | TESWorldSpace.obj | fnv360_0822_retail, call_seq, medium
 int FUN_00de4910_cls::FUN_00de4910()
 {
     return m_9c;
@@ -1197,6 +1240,7 @@ struct FUN_00de4920_cls
 
 // Copies the four components of m_v80 into the four ints pointed to by pOut, reading the last two as one 64-bit value.
 // @fnv 0x00de4920
+// pdb: hkDisplaySemiCircle::getCenter | hkDisplaySemiCircle.obj | fnv360_0822_retail, objopen_prop, medium
 void FUN_00de4920_cls::CopyVec4ToBuffer(int* volatile pOut)
 {
     int* out = pOut;
@@ -1214,6 +1258,7 @@ struct CpuObject
     char* FUN_00de4e00();
 };
 // @fnv 0x00de4e00
+// pdb: ProcessLists::GetAliveActorList | ProcessLists.obj | fnv360_0822_retail, call_seq, low
 char* CpuObject::FUN_00de4e00()
 {
     return reinterpret_cast<char*>(this) + 128;
@@ -1263,6 +1308,7 @@ struct FUN_00de4e10_cls
 };
 
 // @fnv 0x00de4e10
+// pdb: hkDisplayPlane::getExtents | hkDisplayPlane.obj | fnv360_0822_retail, objrun_open, low
 char* FUN_00de4e10_cls::FUN_00de4e10()
 {
     return (char*)this + 0x90;
@@ -1330,6 +1376,7 @@ struct CpuObject
     float FUN_00de5340();
 };
 // @fnv 0x00de5340
+// pdb: TESObjectTREE::GetRustleSpeed | TESObjectTREE.obj | fnv360_0822_retail, vtable, medium
 float CpuObject::FUN_00de5340()
 {
     return value;
@@ -1375,6 +1422,7 @@ struct FUN_00de5350_cls
     float FUN_00de5350();
 };
 // @fnv 0x00de5350
+// pdb: TESObjectTREE::GetRockSpeed | TESObjectTREE.obj | fnv360_0822_retail, vtable, low
 float FUN_00de5350_cls::FUN_00de5350()
 {
     return m_84;
@@ -1387,6 +1435,7 @@ class FUN_00de5360_cls
 };
 
 // @fnv 0x00de5360
+// pdb: DistantLODShaderProperty::GetClampNI | DistantLODShaderProperty.obj | fnv360_0822_debug, objrun_open, low
 void* FUN_00de5360_cls::FUN_00de5360()
 {
     return *(void**)((char*)this + 0x80);
@@ -1419,6 +1468,7 @@ void* FUN_00de8190()
 extern int g_unk01269d78;
 
 // @fnv 0x00de81d0
+// pdb: getVtablehkpConvexVerticesConnectivity | hkpConvexVerticesConnectivityClass.obj | fnv360_0822_retail, objrun_open, low
 void* __cdecl FUN_00de81d0()
 {
     return &g_unk01269d78;
@@ -1487,6 +1537,7 @@ void* __cdecl FUN_00de82b0()
 class GlobalObjectO2_00d472a0;
 extern GlobalObjectO2_00d472a0 g_01269ef8;
 // @fnv 0x00de82d0
+// pdb: LowProcess::GetTarget | HighProcess.obj | fnv360_0822_retail, vtable, high
 GlobalObjectO2_00d472a0* __cdecl FUN_00de82d0()
 {
     return &g_01269ef8;
@@ -1504,6 +1555,7 @@ void* __cdecl BSMultiBound_GetRTTI()
 extern int g_unkGlobal01269f58;
 
 // @fnv 0x00de8310
+// pdb: BSMultiBoundRoom::GetRTTI | BSMultiBoundRoom.obj | fnv360_0822_retail, vtable_prefix, medium
 void* __cdecl FUN_00de8310()
 {
     return &g_unkGlobal01269f58;
@@ -1512,6 +1564,7 @@ void* __cdecl FUN_00de8310()
 extern int DAT_01269f88;
 
 // @fnv 0x00de8330
+// pdb: MessageHandler::GetWarningFileName | MessageHandler.obj | fnv360_0822_retail, call_gap_sim, low
 void* __cdecl FUN_00de8330()
 {
     return &DAT_01269f88;
@@ -1528,6 +1581,7 @@ void* FUN_00de8350()
 extern int DAT_0126a018;
 
 // @fnv 0x00de8390
+// pdb: BSXFlags::GetRTTI | BSXFlags.obj | fnv360_0822_retail, vtable, medium
 void* __cdecl FUN_00de8390()
 {
     return &DAT_0126a018;
@@ -1553,6 +1607,7 @@ CpuOpaque* __cdecl BSNodeReferences_GetRTTI()
 extern int DAT_0126a0a8;
 
 // @fnv 0x00de83f0
+// pdb: BSValueNode::GetRTTI | BSValueNode.obj | fnv360_0822_retail, vtable, medium
 void* __cdecl FUN_00de83f0()
 {
     return &DAT_0126a0a8;
@@ -1569,6 +1624,7 @@ void* __cdecl BSRangeNode_GetRTTI()
 
 extern int DAT_0126a108;
 // @fnv 0x00de8430
+// pdb: BSMultiBoundNode::GetRTTI | BSMultiBoundNode.obj | fnv360_0822_retail, vtable, medium
 int* __cdecl FUN_00de8430()
 {
     return &DAT_0126a108;
@@ -1586,6 +1642,7 @@ void* __cdecl BSWindModifier_GetRTTI()
 extern int DAT_0126a168;
 
 // @fnv 0x00de8470
+// pdb: BSBlastNode::GetRTTI | BSBlastNode.obj | fnv360_0822_retail, vtable, medium
 void* __cdecl FUN_00de8470()
 {
     return &DAT_0126a168;
@@ -1594,6 +1651,7 @@ void* __cdecl FUN_00de8470()
 extern int DAT_0126a198;
 
 // @fnv 0x00de8490
+// pdb: BSDebrisNode::GetRTTI | BSDebrisNode.obj | fnv360_0822_retail, vtable, medium
 int* __cdecl FUN_00de8490()
 {
     return &DAT_0126a198;
@@ -1602,6 +1660,7 @@ int* __cdecl FUN_00de8490()
 extern int DAT_0126a1c8;
 
 // @fnv 0x00de84b0
+// pdb: BSDamageStage::GetRTTI | BSDamageStage1.obj | fnv360_0822_retail, vtable, medium
 void* __cdecl FUN_00de84b0()
 {
     return &DAT_0126a1c8;
@@ -1621,6 +1680,7 @@ FUN_00de87c0_class* __cdecl BSMultiBoundShape_GetRTTI()
 extern int DAT_0126a228;
 
 // @fnv 0x00de84f0
+// pdb: BSPortalSharedNode::GetRTTI | BSPortal.obj | fnv360_0822_retail, vtable, medium
 int* __cdecl FUN_00de84f0()
 {
     return &DAT_0126a228;
@@ -1647,6 +1707,7 @@ int* __cdecl BSSceneGraph_GetRTTI()
 extern int DAT_0126a378;
 
 // @fnv 0x00de8750
+// pdb: NiBSBoneLODController::GetRTTI | NiBSBoneLODController.obj | fnv360_0822_retail, vtable, medium
 void* __cdecl FUN_00de8750()
 {
     return &DAT_0126a378;
@@ -1655,6 +1716,7 @@ void* __cdecl FUN_00de8750()
 extern int g_unk126a3a8;
 
 // @fnv 0x00de8770
+// pdb: BSFurnitureMarker::GetRTTI | BSFurnitureMarker.obj | fnv360_0822_retail, vtable, medium
 void* __cdecl FUN_00de8770()
 {
     return &g_unk126a3a8;
@@ -1724,6 +1786,8 @@ struct JacBlock
 };
 
 // @fnv 0x00df06a0
+// pdb: hkPoweredChain_DisableMotorInMatrixRow_ThisConstraint | hkpPoweredChainSolverUtil.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: motorsState, isNotLastRow, mtxDiag, mtxNextOffdiag
 void __cdecl ResetJacobianRows(unsigned char* flags, bool both, JacBlock* pJacA, JacBlock* pJacB)
 {
     if (*flags)
@@ -1794,6 +1858,7 @@ struct DF25D0Owner
 void __cdecl FUN_00cb3c80(void* pkItem, DF25D0Owner* pkOwner);
 
 // @f3 0x00a7ccf0 (community match, verified in this file)
+// pdb: addConstraintToCriticalLockedIsland | hkpPhysicsCommandMachine.obj | tesv_win, call_seq, medium
 static __declspec(noinline) void __cdecl SetOwnerStateFlags(void* pkItem, DF25D0Owner* pkOwner, unsigned char m_ucEntryType)
 {
     FUN_00cb3c80(pkItem, pkOwner);
@@ -1816,6 +1881,7 @@ struct Handler_cls
 extern int g_0126a430;
 
 // @fnv 0x00df6490
+// pdb: BSBound::GetRTTI | BSBound.obj | fnv360_0822_retail, vtable, medium
 int* __cdecl FUN_00df6490()
 {
     return &g_0126a430;
@@ -1824,6 +1890,7 @@ int* __cdecl FUN_00df6490()
 extern int DAT_0126a478;
 
 // @fnv 0x00df64b0
+// pdb: BSPSysMultiTargetEmitterCtlr::GetRTTI | BSPSysMultiTargetEmitterCtlr.obj | fnv360_0822_retail, vtable, medium
 void* __cdecl FUN_00df64b0()
 {
     return &DAT_0126a478;
@@ -1832,6 +1899,7 @@ void* __cdecl FUN_00df64b0()
 extern "C" int DAT_0126a4a8;
 
 // @fnv 0x00df64c0
+// pdb: BSScissorTriShape::GetRTTI | BSScissorTriShape.obj | fnv360_0822_retail, udata, medium, conflict (skyrim: BSLODTriShape::GetRTTI)
 extern "C" void* __cdecl FUN_00df64c0()
 {
     return &DAT_0126a4a8;
@@ -1897,6 +1965,8 @@ struct FloatPair
 };
 // Initialises first/second from constants, calls ctx->FUN_00e63af0 and, if it returns 1, delegates to TraverseNode; otherwise returns 2.
 // @fnv 0x00dfb040
+// pdb: hkpWingedEdge::findVisibilityBoundaryEdges | hkpConvexPenetrationUtil.obj | fnv360_0822_retail, callee_sim, low, conflict (skyrim: hkWingedEdge::findVisibilityBoundaryEdges)
+// pdb params: initialTriangle, pointOfView, chainLength, edgeChain
 int __thiscall FloatPair::FUN_00dfb040(ParserContext* ctx, int input, int* outA, ParserContext** outB)
 {
     double initial = DAT_010dbb3c;
@@ -1922,6 +1992,7 @@ CpuOpaque* __cdecl BSNiNode_GetRTTI()
 extern int g_unk0126aa18;
 
 // @fnv 0x00dfb280
+// pdb: BSPSysStripUpdateModifier::GetRTTI | BSPSysStripUpdateModifier.obj | fnv360_0822_retail, vtable, medium
 int* __cdecl FUN_00dfb280()
 {
     return &g_unk0126aa18;
@@ -1930,6 +2001,7 @@ int* __cdecl FUN_00dfb280()
 extern int DAT_0126aac0;
 
 // @fnv 0x00dfb360
+// pdb: BSPSysSimpleColorModifier::GetRTTI | BSPSysSimpleColorModifier.obj | fnv360_0822_retail, vtable, medium
 int* __cdecl FUN_00dfb360()
 {
     return &DAT_0126aac0;
@@ -1938,6 +2010,7 @@ int* __cdecl FUN_00dfb360()
 extern int DAT_0126aaf0;
 
 // @fnv 0x00dfb380
+// pdb: BSMultiBoundCapsule::GetRTTI | BSMultiBoundCapsule.obj | fnv360_0822_retail, vtable, medium
 void* __cdecl FUN_00dfb380()
 {
     return &DAT_0126aaf0;
@@ -1946,6 +2019,7 @@ void* __cdecl FUN_00dfb380()
 extern int DAT_0126abe0;
 
 // @fnv 0x00dfb3c0
+// pdb: BSMasterParticleSystem::GetRTTI | BSMasterParticleSystem.obj | fnv360_0822_retail, vtable, medium
 int* __cdecl FUN_00dfb3c0(void)
 {
     return &DAT_0126abe0;
@@ -1954,6 +2028,7 @@ int* __cdecl FUN_00dfb3c0(void)
 extern unsigned char DAT_0126ac10;
 
 // @fnv 0x00dfb420
+// pdb: BSWArray::GetRTTI | BSWArray.obj | fnv360_0822_retail, vtable, medium
 void* __cdecl FUN_00dfb420()
 {
     return &DAT_0126ac10;
@@ -1961,6 +2036,7 @@ void* __cdecl FUN_00dfb420()
 
 extern "C" int DAT_0126ac58;
 // @fnv 0x00dfb480
+// pdb: BSPSysArrayEmitter::GetRTTI | BSPSysArrayEmitter.obj | fnv360_0822_retail, vtable, medium
 int* __cdecl FUN_00dfb480(void)
 {
     return &DAT_0126ac58;
@@ -1969,6 +2045,7 @@ int* __cdecl FUN_00dfb480(void)
 extern int DAT_0126acd0;
 
 // @fnv 0x00dfb4d0
+// pdb: BSParentVelocityModifier::GetRTTI | BSParentVelocityModifier.obj | fnv360_0822_retail, vtable, medium
 int __cdecl FUN_00dfb4d0()
 {
     return reinterpret_cast<int>(&DAT_0126acd0);
@@ -1985,6 +2062,7 @@ void* __cdecl BSDecalPlacementVectorExtraData_GetRTTI()
 extern int DAT_0126ad30;
 
 // @fnv 0x00dfb510
+// pdb: BSTextureData::GetRTTI | BSTextureData.obj | fnv360_0822_retail, vtable, medium
 void* __cdecl FUN_00dfb510()
 {
     return &DAT_0126ad30;
@@ -1993,6 +2071,7 @@ void* __cdecl FUN_00dfb510()
 extern void* DAT_0126ad60;
 
 // @fnv 0x00dfb540
+// pdb: NiParticles::IsParticlesGeom | NiParticleSystem.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: NiParticleSystem::GetRTTI)
 int __cdecl FUN_00dfb540()
 {
     return reinterpret_cast<int>(&DAT_0126ad60);
@@ -2013,6 +2092,7 @@ void FUN_00dfb550(DFB550Object* pkObject)
 extern int DAT_0126ad90;
 
 // @fnv 0x00dfb560
+// pdb: NiPSysEmitterCtlr::GetRTTI | NiPSysEmitterCtlr.obj | fnv360_0822_retail, objrun, medium
 int* __cdecl FUN_00dfb560()
 {
     return &DAT_0126ad90;
@@ -2045,6 +2125,7 @@ class DFB570Object
 extern int DAT_010ddc5c;
 
 // @fnv 0x00dfb590
+// pdb: NiPSysMeshEmitter::GetRTTI | NiPSysMeshEmitter.obj | fnv360_0822_retail, objrun_sim, low
 void* __cdecl FUN_00dfb590()
 {
     return &DAT_010ddc5c;
@@ -2053,6 +2134,7 @@ void* __cdecl FUN_00dfb590()
 extern int DAT_0126add8;
 
 // @fnv 0x00dfb860
+// pdb: NiPSysCylinderEmitter::GetRTTI | NiPSysCylinderEmitter.obj | fnv360_0822_retail, objrun_open, low
 int* __cdecl FUN_00dfb860()
 {
     return &DAT_0126add8;
@@ -2084,6 +2166,7 @@ extern int DAT_010de0ec;  // vtable that gets installed
 extern int DAT_010de0ec;
 
 // @fnv 0x00dfb8d0
+// pdb: NiPSysMeshUpdateModifier::GetRTTI | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: BSPSysHavokUpdateModifier::GetRTTI)
 void* FUN_00dfb8d0()
 {
     return &DAT_010de0ec;
@@ -2092,6 +2175,7 @@ void* FUN_00dfb8d0()
 struct CpuOpaque;
 extern CpuOpaque DAT_0126ae80;
 // @fnv 0x00dfb920
+// pdb: NiPSysRotationModifier::GetRTTI | NiPSysRotationModifier.obj | fnv360_0822_retail, objrun_sim, low
 CpuOpaque* __cdecl FUN_00dfb920()
 {
     return &DAT_0126ae80;
@@ -2100,6 +2184,7 @@ CpuOpaque* __cdecl FUN_00dfb920()
 extern int DAT_0126aeb0;
 
 // @fnv 0x00dfb940
+// pdb: NiMeshParticleSystem::GetRTTI | NiMeshParticleSystem.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: NiPSysEmitter::GetRTTI)
 void* __cdecl FUN_00dfb940()
 {
     return &DAT_0126aeb0;
@@ -2108,6 +2193,7 @@ void* __cdecl FUN_00dfb940()
 extern int DAT_0126aee0;
 
 // @fnv 0x00dfb970
+// pdb: NiPSysEmitter::GetRTTI | NiPSysEmitter.obj | fnv360_0822_retail, objrun_open, low
 int* __cdecl FUN_00dfb970()
 {
     return &DAT_0126aee0;
@@ -2119,6 +2205,8 @@ struct FUN_00ce5370_cls
 };
 
 // @fnv 0x00dfb980
+// pdb: hkArrayBase<hkpSimulationIsland *>::_insertAt | hkpSaveContactPointsUtil.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: cleanupLoadedObjecthkpSerializedTrack1nInfo)
+// pdb params: alloc, index, p, numtoinsert
 void __cdecl FUN_00dfb980(FUN_00ce5370_cls* p)
 {
     p->FUN_00ce5370();
@@ -2127,6 +2215,7 @@ void __cdecl FUN_00dfb980(FUN_00ce5370_cls* p)
 extern int DAT_0126af10;
 
 // @fnv 0x00dfb990
+// pdb: NiPSysGravityModifier::GetRTTI | NiPSysGravityModifier.obj | fnv360_0721_retail, objrun_open, low
 int* __cdecl FUN_00dfb990()
 {
     return &DAT_0126af10;
@@ -2154,6 +2243,7 @@ int __cdecl FUN_00dfb9a0(FUN_00dfb9a0_cls* pObj)
 
 extern int DAT_0126af40;
 // @fnv 0x00dfb9b0
+// pdb: NiPSysSpawnModifier::GetRTTI | NiPSysSpawnModifier.obj | fnv360_0822_retail, objrun_open, low
 int* __cdecl FUN_00dfb9b0(void)
 {
     return &DAT_0126af40;
@@ -2161,6 +2251,7 @@ int* __cdecl FUN_00dfb9b0(void)
 
 extern int DAT_0126af88;
 // @fnv 0x00dfba40
+// pdb: NiPSysData::GetRTTI | NiPSysData.obj | fnv360_0822_retail, objrun_sim, low, conflict (bridge: NiParticlesData::GetActiveVertexCount)
 int* FUN_00dfba40()
 {
     return &DAT_0126af88;
@@ -2169,6 +2260,7 @@ int* FUN_00dfba40()
 extern int g_unk0126afb8;
 
 // @fnv 0x00dfbaa0
+// pdb: BSStripParticleSystem::GetRTTI | BSStripParticleSystem.obj | fnv360_0822_retail, objrun_open, medium
 void* __cdecl FUN_00dfbaa0()
 {
     return &g_unk0126afb8;
@@ -2233,6 +2325,7 @@ void* __cdecl NiPSysVolumeEmitter_GetRTTI()
 extern "C" int DAT_0126b078;
 
 // @fnv 0x00dfbc10
+// pdb: NiPSysModifierCtlr::GetRTTI | NiPSysModifierCtlr.obj | fnv360_0822_retail, udata, high
 extern "C" void* __cdecl FUN_00dfbc10()
 {
     return &DAT_0126b078;
@@ -2250,6 +2343,7 @@ CpuOpaque* __cdecl NiPSysUpdateTask_GetRTTI()
 extern int DAT_0126b0d8;
 
 // @fnv 0x00dfbc60
+// pdb: NiPSysVortexFieldModifier::GetRTTI | NiPSysVortexFieldModifier.obj | fnv360_0822_retail, objrun, medium
 int* __cdecl FUN_00dfbc60()
 {
     return &DAT_0126b0d8;
@@ -2263,6 +2357,7 @@ struct GlobalObject
 extern GlobalObject g_global;
 
 // @fnv 0x00dfbcc0
+// pdb: NiPSysUpdateCtlr::GetRTTI | NiPSysUpdateCtlr.obj | fnv360_0822_retail, objrun_open, low
 GlobalObject* __cdecl FUN_00dfbcc0()
 {
     return &g_global;
@@ -2301,6 +2396,7 @@ void* __cdecl NiPSysSphericalCollider_GetRTTI()
 extern int DAT_0126b180;
 
 // @fnv 0x00dfbdc0
+// pdb: NiPSysResetOnLoopCtlr::GetRTTI | NiPSysResetOnLoopCtlr.obj | fnv360_0822_retail, objrun, medium
 void* __cdecl FUN_00dfbdc0()
 {
     return &DAT_0126b180;
@@ -2318,6 +2414,7 @@ void* __cdecl NiPSysRadialFieldModifier_GetRTTI()
 extern int DAT_0126b1f8;
 
 // @fnv 0x00dfbe90
+// pdb: NiPSysPositionModifier::GetRTTI | NiPSysPositionModifier.obj | fnv360_0822_retail, objrun_open, low
 void* __cdecl FUN_00dfbe90()
 {
     return &DAT_0126b1f8;
@@ -2343,6 +2440,7 @@ void* __cdecl FUN_00dfbed0()
 struct CpuOpaque;
 extern CpuOpaque DAT_0126b288;
 // @fnv 0x00dfbef0
+// pdb: NiPSysAirFieldAirFrictionCtlr::GetRTTI | NiPSysAirFieldAirFrictionCtlr.obj | fnv360_0721_retail, objopen_prop, low, conflict (skyrim: NiPSysInitialRotSpeedCtlr::GetRTTI)
 CpuOpaque* __cdecl FUN_00dfbef0()
 {
     return &DAT_0126b288;
@@ -2370,6 +2468,7 @@ void __cdecl FUN_00dfbf30(void* p)
 extern int DAT_0126b2e8;
 
 // @fnv 0x00dfbf40
+// pdb: NiPSysInitialRotAngleCtlr::GetRTTI | NiPSysInitialRotAngleCtlr.obj | fnv360_0822_retail, objopen_prop, low
 int* __cdecl FUN_00dfbf40()
 {
     return &DAT_0126b2e8;
@@ -2385,6 +2484,7 @@ int* __cdecl NiPSysGrowFadeModifier_GetRTTI()
 extern int DAT_0126b330;
 
 // @fnv 0x00dfc030
+// pdb: NiPSysGravityStrengthCtlr::GetRTTI | NiPSysGravityStrengthCtlr.obj | fnv360_0721_retail, objopen_prop, low
 void* __cdecl FUN_00dfc030()
 {
     return &DAT_0126b330;
@@ -2396,6 +2496,7 @@ void* __cdecl FUN_00dfc030()
 extern int g_target_FUN_00dfc050;
 
 // @fnv 0x00dfc050
+// pdb: NiPSysGravityFieldModifier::GetRTTI | NiPSysGravityFieldModifier.obj | fnv360_0822_retail, objrun_prop, low
 void* __cdecl FUN_00dfc050()
 {
     return &g_target_FUN_00dfc050;
@@ -2412,6 +2513,7 @@ void* FUN_00dfc070()
 extern int DAT_0126b3a8;
 
 // @fnv 0x00dfc100
+// pdb: NiPSysFieldMagnitudeCtlr::GetRTTI | NiPSysFieldMagnitudeCtlr.obj | tesv_win, objrun_open, low
 int* __cdecl FUN_00dfc100()
 {
     return &DAT_0126b3a8;
@@ -2426,6 +2528,7 @@ void __thiscall S_00dfc110_vt::m0(int)
 {}
 
 // @fnv 0x00dfc110
+// pdb: cleanupLoadedObjecthkpMultiRayShape | hkpMultiRayShapeClass.obj | fnv360_0721_beta, objrun_open, low
 void __cdecl FUN_00dfc110(void* p)
 {
     ((S_00dfc110_vt*)p)->m0(0);
@@ -2434,6 +2537,7 @@ void __cdecl FUN_00dfc110(void* p)
 extern int g_0126b3d8;
 
 // @fnv 0x00dfc120
+// pdb: NiPSysFieldAttenuationCtlr::GetRTTI | NiPSysFieldAttenuationCtlr.obj | fnv360_0721_retail, objrun_open, low
 int* __cdecl FUN_00dfc120()
 {
     return &g_0126b3d8;
@@ -2479,6 +2583,7 @@ struct BufferBase
 extern unsigned char DAT_0126b420;
 
 // @fnv 0x00dfc220
+// pdb: NiPSysEmitterPlanarAngleVarCtlr::GetRTTI | NiPSysEmitterPlanarAngleVarCtlr.obj | tesv_win, objrun_open, low
 void* __cdecl FUN_00dfc220()
 {
     return &DAT_0126b420;
@@ -2516,6 +2621,7 @@ void* FUN_00dfc290()
 extern int DAT_010e00dc;
 
 // @fnv 0x00dfc2b0
+// pdb: NiBoolData::GetRTTI | NiPSysEmitterCtlr.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: NiPSysEmitterDeclinationVarCtlr::GetRTTI)
 int* __cdecl FUN_00dfc2b0()
 {
     return &DAT_010e00dc;
@@ -2525,6 +2631,7 @@ int* __cdecl FUN_00dfc2b0()
 extern int DAT_0126b528;
 
 // @fnv 0x00dfc360
+// pdb: NiPSysEmitterCtlr::GetRTTI | NiPSysEmitterCtlr.obj | fnv360_0822_debug, objrun_open, low
 int* __cdecl FUN_00dfc360()
 {
     return &DAT_0126b528;
@@ -2554,6 +2661,7 @@ struct FUN_00e05c20_class
 };
 
 // @fnv 0x00dfc3a0
+// pdb: cleanupLoadedObjecthkpBallSocketChainData | hkpBallSocketChainDataClass.obj | fnv360_0822_debug, objrun_open, low, conflict (bridge: cleanupLoadedObjecthkpGenericConstraintDataScheme)
 void __cdecl FUN_00dfc3a0(FUN_00e05c20_class* p)
 {
     p->FUN_00e05c20();
@@ -2575,6 +2683,7 @@ class VirtualDispatchObj
 };
 
 // @fnv 0x00dfc450
+// pdb: cleanupLoadedObjecthkpConvexPieceStreamData | hkpConvexPieceStreamDataClass.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: cleanupLoadedObjecthkpConvexTranslateShape)
 void __cdecl FUN_00dfc450(VirtualDispatchObj* p)
 {
     p->Invoke0(0);
@@ -2583,6 +2692,7 @@ void __cdecl FUN_00dfc450(VirtualDispatchObj* p)
 extern void* DAT_0126b588;
 
 // @fnv 0x00dfc460
+// pdb: NiPSysColliderManager::GetRTTI | NiPSysColliderManager.obj | fnv360_0822_retail, objrun_open, low
 int __cdecl FUN_00dfc460()
 {
     return reinterpret_cast<int>(&DAT_0126b588);
@@ -2618,6 +2728,7 @@ int* __cdecl NiPSysAgeDeathModifier_GetRTTI()
 extern int DAT_0126b600;
 
 // @fnv 0x00dfc510
+// pdb: NiPSysAirFieldModifier::GetRTTI | NiPSysAirFieldModifier.obj | fnv360_0822_retail, objrun, medium
 int* __cdecl FUN_00dfc510()
 {
     return &DAT_0126b600;
@@ -2626,6 +2737,7 @@ int* __cdecl FUN_00dfc510()
 extern int DAT_010e0654;
 
 // @fnv 0x00dfc530
+// pdb: NiPSysAirFieldModifier::GetRTTI | NiPSysAirFieldModifier.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: NiPSysAirFieldInheritVelocityCtlr::GetRTTI)
 int* __cdecl FUN_00dfc530()
 {
     return &DAT_010e0654;
@@ -2643,6 +2755,7 @@ int* __cdecl NiMeshPSysData_GetRTTI(void)
 // FUN_00dfc5b0 : a one-line function - getter
 extern int g_target_00dfc5b0;
 // @fnv 0x00dfc5b0
+// pdb: NiPSysFieldModifier::GetRTTI | NiPSysFieldModifier.obj | fnv360_0822_retail, objrun, low
 void* FUN_00dfc5b0()
 {
     return &g_target_00dfc5b0;
@@ -2671,6 +2784,7 @@ struct FUN_00dfc600_vt
     virtual void __thiscall m0(int);
 };
 // @fnv 0x00dfc600
+// pdb: cleanupLoadedObjecthkpSerializedDisplayMarkerList | hkpSerializedDisplayMarkerListClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00dfc600(FUN_00dfc600_vt* p)
 {
     p->m0(0);
@@ -2679,6 +2793,7 @@ void __cdecl FUN_00dfc600(FUN_00dfc600_vt* p)
 extern unsigned char DAT_0126b768;
 
 // @fnv 0x00dfc610
+// pdb: NiPSysModifierFloatCtlr::GetRTTI | NiPSysModifierFloatCtlr.obj | fnv360_0822_retail, objrun_open, low
 void* __cdecl FUN_00dfc610()
 {
     return &DAT_0126b768;
@@ -2687,6 +2802,7 @@ void* __cdecl FUN_00dfc610()
 extern int DAT_0102e368;
 
 // @fnv 0x00dfc630
+// pdb: BSFadeNode::GetRTTI | BSFadeNode.obj | fnv360_0822_retail, objrun_prop, low
 int* __cdecl FUN_00dfc630()
 {
     return &DAT_0102e368;
@@ -2724,6 +2840,7 @@ void __cdecl FUN_00dfc690(FUN_00dfc690_vt* p)
 extern int DAT_0126b810;
 
 // @fnv 0x00dfc6a0
+// pdb: ShadowSceneNode::GetRTTI | ShadowSceneNode.obj | fnv360_0822_retail, udata, medium, conflict (skyrim: BSShaderAccumulator::FinishAccumulating_ScreenSplatter)
 void* __cdecl FUN_00dfc6a0()
 {
     return &DAT_0126b810;
@@ -2741,6 +2858,7 @@ int* __cdecl BSShaderAccumulator_GetRTTI()
 extern char DAT_0126b858;
 
 // @fnv 0x00dfc6f0
+// pdb: BSShaderPPLightingProperty::GetRTTI | BSShaderPPLightingProperty.obj | fnv360_0822_retail, objrun_open, low
 void* FUN_00dfc6f0()
 {
     return &DAT_0126b858;
@@ -2749,6 +2867,7 @@ void* FUN_00dfc6f0()
 class GlobalObjectO2_00d472a0;
 extern GlobalObjectO2_00d472a0 g_0126b888;
 // @fnv 0x00dfc710
+// pdb: BSShaderProperty::GetBaseTexture | WaterShaderProperty.obj | fnv360_0721_beta, objrun, low
 GlobalObjectO2_00d472a0* __cdecl FUN_00dfc710()
 {
     return &g_0126b888;
@@ -2757,6 +2876,7 @@ GlobalObjectO2_00d472a0* __cdecl FUN_00dfc710()
 extern int DAT_010d0aac;
 
 // @fnv 0x00dfc740
+// pdb: BSShaderNoLightingProperty::GetRTTI | BSShaderNoLightingProperty.obj | fnv360_0822_retail, objrun, medium
 int* __cdecl FUN_00dfc740()
 {
     return &DAT_010d0aac;
@@ -2875,6 +2995,7 @@ void __cdecl FUN_00dfc940(FUN_00dfc940_class* p)
 extern int DAT_0126ba68;
 
 // @fnv 0x00dfc950
+// pdb: ParticleShaderProperty::GetRTTI | ParticleShaderProperty.obj | fnv360_0822_retail, objrun, medium
 void* __cdecl FUN_00dfc950()
 {
     return &DAT_0126ba68;
@@ -2898,6 +3019,7 @@ struct S_00dfc970_Flag
 extern int DAT_010d0af4;
 
 // @fnv 0x00dfc9a0
+// pdb: SpeedTreeBillboardShaderProperty::GetRTTI | SpeedTreeBillboardShaderProperty.obj | fnv360_0822_retail, objopen_prop, low
 int* __cdecl FUN_00dfc9a0()
 {
     return &DAT_010d0af4;
@@ -3009,6 +3131,7 @@ int* __cdecl SpeedTreeShaderLightingProperty_GetRTTI()
 
 extern int DAT_0126bc18;
 // @fnv 0x00dfcb30
+// pdb: SpeedTreeBranchShaderProperty::GetRTTI | SpeedTreeBranchShaderProperty.obj | fnv360_0822_retail, udata, medium
 void* __cdecl FUN_00dfcb30()
 {
     return &DAT_0126bc18;
@@ -3033,6 +3156,7 @@ int* __cdecl GeometryDecalShaderProperty_GetRTTI()
 extern int DAT_0126bc90;
 
 // @fnv 0x00dfcbb0
+// pdb: Lighting30ShaderProperty::GetRTTI | Lighting30ShaderProperty.obj | fnv360_0822_retail, objrun_sim, low
 int* __cdecl FUN_00dfcbb0()
 {
     return &DAT_0126bc90;
@@ -3046,6 +3170,7 @@ struct FUN_00dfcbc0_vt
 
 // Calls the first virtual of the object passed in as the only argument.
 // @fnv 0x00dfcbc0
+// pdb: cleanupLoadedObjecthkpEntity | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfcbc0(FUN_00dfcbc0_vt* pObject)
 {
     pObject->m0(0);
@@ -3115,6 +3240,7 @@ struct VtblForwarder
 };
 
 // @fnv 0x00dfcca0
+// pdb: cleanupLoadedObjecthkpThinBoxMotion | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 int __cdecl FUN_00dfcca0(VtblForwarder* p)
 {
     return p->v0(0);
@@ -3123,6 +3249,7 @@ int __cdecl FUN_00dfcca0(VtblForwarder* p)
 // FUN_00dfccb0 : a one-line function - getter
 extern int g_target_00dfccb0;
 // @fnv 0x00dfccb0
+// pdb: BoltShaderProperty::GetRTTI | BoltShaderProperty.obj | fnv360_0822_retail, objrun_sim, low
 void* FUN_00dfccb0()
 {
     return &g_target_00dfccb0;
@@ -3148,6 +3275,7 @@ void* __cdecl FUN_00dfcd00()
 struct CpuOpaque;
 extern CpuOpaque DAT_0126be28;
 // @fnv 0x00dfcd20
+// pdb: BSMaterialEmittanceMultController::GetRTTI | BSMaterialEmittanceMultController.obj | fnv360_0721_retail, objrun_open, low
 CpuOpaque* __cdecl FUN_00dfcd20()
 {
     return &DAT_0126be28;
@@ -3156,6 +3284,7 @@ CpuOpaque* __cdecl FUN_00dfcd20()
 extern int DAT_010c91ec;
 
 // @fnv 0x00dfcd50
+// pdb: BSRefractionFirePeriodController::GetRTTI | BSRefractionFirePeriodController.obj | fnv360_0822_retail, objrun_open, low
 int* FUN_00dfcd50()
 {
     return &DAT_010c91ec;
@@ -3214,6 +3343,7 @@ struct VtblForwarder
 };
 
 // @fnv 0x00dfce60
+// pdb: cleanupLoadedObjecthkpFixedRigidMotion | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 int __cdecl FUN_00dfce60(VtblForwarder* p)
 {
     return p->v0(0);
@@ -3223,6 +3353,7 @@ int __cdecl FUN_00dfce60(VtblForwarder* p)
 extern int DAT_0126bf78;
 
 // @fnv 0x00dfce70
+// pdb: BSShaderNoLighting::GetRTTI | BSShaderNoLighting.obj | fnv360_0822_retail, objrun, medium
 void* __cdecl FUN_00dfce70()
 {
     return &DAT_0126bf78;
@@ -3248,6 +3379,7 @@ CpuOpaque* __cdecl GeometryDecalShader_GetRTTI()
 extern int DAT_0126bff0;
 
 // @fnv 0x00dfcef0
+// pdb: ParallaxShader::GetRTTI | ParallaxShader.obj | fnv360_0822_retail, objrun, medium
 void* __cdecl FUN_00dfcef0()
 {
     return &DAT_0126bff0;
@@ -3256,6 +3388,7 @@ void* __cdecl FUN_00dfcef0()
 extern int DAT_0126c020;
 
 // @fnv 0x00dfcf10
+// pdb: SkinShader::GetRTTI | SkinShader.obj | fnv360_0822_retail, objrun, medium
 void* __cdecl FUN_00dfcf10()
 {
     return &DAT_0126c020;
@@ -3278,6 +3411,7 @@ struct FUN_00dfd0d0_cls
 };
 
 // @fnv 0x00dfd0d0
+// pdb: cleanupLoadedObjecthkpSimulation | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void FUN_00dfd0d0(FUN_00dfd0d0_cls* pTarget)
 {
     pTarget->Call(0);
@@ -3343,12 +3477,14 @@ struct FUN_00dfd130_cls
 
 extern unsigned char DAT_0126c0e0;
 // @fnv 0x00dfd1b0
+// pdb: DistantLODShader::GetRTTI | DistantLODShader.obj | fnv360_0822_retail, objrun_sim, low
 unsigned char* __cdecl FUN_00dfd1b0()
 {
     return &DAT_0126c0e0;
 }
 
 // @fnv 0x00dfd1c0
+// pdb: cleanupLoadedObjecthkpPhysicsSystem | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfd1c0(void* p)
 {
     (*(void(__thiscall**)(void*, int)) * (int*)p)(p, 0);
@@ -3366,6 +3502,7 @@ void* __cdecl BSCubeMapCamera_GetRTTI()
 extern int DAT_0126c158;
 
 // @fnv 0x00dfd230
+// pdb: TallGrassTriStrips::GetRTTI | TallGrassTriStrips.obj | fnv360_0822_retail, objrun_open, low
 int* __cdecl FUN_00dfd230()
 {
     return &DAT_0126c158;
@@ -3374,6 +3511,7 @@ int* __cdecl FUN_00dfd230()
 // FUN_00dfd250 : a one-line function - getter
 extern int g_target_00dfd250;
 // @fnv 0x00dfd250
+// pdb: TallGrassTriShape::GetRTTI | TallGrassTriShape.obj | fnv360_0822_retail, objrun_open, low, conflict (bridge: TallGrassTriShape::GetWorldBound)
 void* FUN_00dfd250()
 {
     return &g_target_00dfd250;
@@ -3382,6 +3520,7 @@ void* FUN_00dfd250()
 extern int DAT_0126c1d0;
 
 // @fnv 0x00dfd2a0
+// pdb: Random::Name | RobertDavies_Random.obj | fnv360_0822_retail, vtable, medium
 int* __cdecl FUN_00dfd2a0()
 {
     return &DAT_0126c1d0;
@@ -3390,6 +3529,7 @@ int* __cdecl FUN_00dfd2a0()
 extern int DAT_0126c200;
 
 // @fnv 0x00dfd2c0
+// pdb: Uniform::Name | RobertDavies_Random.obj | fnv360_0822_retail, vtable, medium
 int* __cdecl FUN_00dfd2c0()
 {
     return &DAT_0126c200;
@@ -3398,6 +3538,7 @@ int* __cdecl FUN_00dfd2c0()
 class GlobalObjectO2_00d472a0;
 extern GlobalObjectO2_00d472a0 g_0126c230;
 // @fnv 0x00dfd2d0
+// pdb: Normal::Name | RobertDavies_Random.obj | fnv360_0822_retail, vtable, medium
 GlobalObjectO2_00d472a0* __cdecl FUN_00dfd2d0()
 {
     return &g_0126c230;
@@ -3409,6 +3550,7 @@ struct FUN_00dfd2e0_Class
 };
 
 // @fnv 0x00dfd2e0
+// pdb: cleanupLoadedObjecthkpPointToPathConstraintData | hkpPointToPathConstraintDataClass.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: finishLoadedObjecthkpCogWheelConstraintData)
 void __cdecl FUN_00dfd2e0(FUN_00dfd2e0_Class* param_1)
 {
     param_1->VF00(0);
@@ -3417,6 +3559,7 @@ void __cdecl FUN_00dfd2e0(FUN_00dfd2e0_Class* param_1)
 // FUN_00dfd2f0 : a one-line function - getter
 extern int g_target_00dfd2f0;
 // @fnv 0x00dfd2f0
+// pdb: PosGen::Name | RobertDavies_Random.obj | fnv360_0822_retail, vtable, medium
 void* FUN_00dfd2f0()
 {
     return &g_target_00dfd2f0;
@@ -3433,6 +3576,7 @@ void* FUN_00dfd4e0()
 extern int DAT_0126c2d8;
 
 // @fnv 0x00dfd500
+// pdb: Tile3D::GetTypeName | Tile.obj | fnv360_0822_retail, objrun, medium
 void* __cdecl FUN_00dfd500()
 {
     return &DAT_0126c2d8;
@@ -3441,6 +3585,7 @@ void* __cdecl FUN_00dfd500()
 struct CpuOpaque;
 extern CpuOpaque DAT_0126c308;
 // @fnv 0x00dfd540
+// pdb: DebugTextExtraData::GetRTTI | DebugText.obj | fnv360_0721_beta, vtable, medium
 CpuOpaque* __cdecl FUN_00dfd540()
 {
     return &DAT_0126c308;
@@ -3449,6 +3594,7 @@ CpuOpaque* __cdecl FUN_00dfd540()
 extern int DAT_0126c338;
 
 // @fnv 0x00dfd560
+// pdb: __sys_nerr | syserr.obj | fnv360_0822_retail, call_dedup, low
 int* __cdecl FUN_00dfd560()
 {
     return &DAT_0126c338;
@@ -3457,6 +3603,7 @@ int* __cdecl FUN_00dfd560()
 extern int DAT_0126c368;
 
 // @fnv 0x00dfd590
+// pdb: __sys_errlist | syserr.obj | fnv360_0822_retail, call_dedup, low
 int* __cdecl FUN_00dfd590()
 {
     return &DAT_0126c368;
@@ -3488,6 +3635,7 @@ AllocHolder* __cdecl FUN_00c85750();
 extern int DAT_0126c398;
 
 // @fnv 0x00dfd5f0
+// pdb: __daylight | timeset.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: _set_daylight)
 int __cdecl FUN_00dfd5f0()
 {
     return reinterpret_cast<int>(&DAT_0126c398);
@@ -3496,6 +3644,7 @@ int __cdecl FUN_00dfd5f0()
 // FUN_00dfd650 : a one-line function - getter
 extern int g_target_00dfd650;
 // @fnv 0x00dfd650
+// pdb: __dstbias | timeset.obj | fnv360_0822_retail, udata, medium, conflict (skyrim: _set_dstbias)
 void* FUN_00dfd650()
 {
     return &g_target_00dfd650;
@@ -3504,6 +3653,7 @@ void* FUN_00dfd650()
 extern int DAT_0126c410;
 
 // @fnv 0x00dfd790
+// pdb: __timezone | timeset.obj | fnv360_0822_retail, objrun_prop, low, conflict (skyrim: _set_timezone)
 int* __cdecl FUN_00dfd790()
 {
     return &DAT_0126c410;
@@ -3512,6 +3662,7 @@ int* __cdecl FUN_00dfd790()
 extern int DAT_0126c440;
 
 // @fnv 0x00dfd7b0
+// pdb: __tzname | timeset.obj | tesv_win, call_gap, low
 void* __cdecl FUN_00dfd7b0()
 {
     return &DAT_0126c440;
@@ -3520,6 +3671,7 @@ void* __cdecl FUN_00dfd7b0()
 extern int DAT_0126c488;
 
 // @fnv 0x00dfd930
+// pdb: NiRenderedCubeMap::GetRTTI | NiRenderedCubeMap.obj | fnv360_0822_retail, objrun_open, low
 void* __cdecl FUN_00dfd930()
 {
     return &DAT_0126c488;
@@ -3528,6 +3680,7 @@ void* __cdecl FUN_00dfd930()
 extern int DAT_0126c4b8;
 
 // @fnv 0x00dfd950
+// pdb: NiRenderTargetGroup::GetRTTI | NiRenderTargetGroup.obj | fnv360_0822_retail, objrun_open, low
 int* __cdecl FUN_00dfd950()
 {
     return &DAT_0126c4b8;
@@ -3670,6 +3823,7 @@ extern FUN_00dfe210_manager* __cdecl FUN_00c85750();
 extern int DAT_010e5474;
 
 // @fnv 0x00dfe470
+// pdb: cleanupLoadedObjecthkpPointToPathConstraintData | hkpDynamicsReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfe470(FUN_00dfe430_class* p)
 {
     p->FUN_00cb0a70(0);
@@ -3687,6 +3841,7 @@ struct FUN_00dfe6e0_Class
 };
 
 // @fnv 0x00dfe6e0
+// pdb: cleanupLoadedObjecthkpShapeInfo | hkpCollideReflections.obj | tesv_win, objrun_open, low
 void __cdecl FUN_00dfe6e0(FUN_00dfe6e0_Class* param_1)
 {
     param_1->vf00(0);
@@ -3778,6 +3933,7 @@ class DFEF80Object
 };
 
 // @fnv 0x00dfef80
+// pdb: cleanupLoadedObjecthkpSphereShape | hkpCollideReflections.obj | tesv_win, objrun_open, low
 void FUN_00dfef80(DFEF80Object* pkObject)
 {
     pkObject->~DFEF80Object();
@@ -3805,6 +3961,7 @@ struct FUN_00dff0b0_class
 };
 
 // @fnv 0x00dff0b0
+// pdb: cleanupLoadedObjecthkpConvexPieceMeshShape | hkpConvexPieceMeshShapeClass.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00dff0b0(FUN_00dff0b0_class* p)
 {
     p->m0(0);
@@ -4539,6 +4696,8 @@ struct Header
 };
 // @f3 0x00a7cbc0 (community match, verified in this file)
 void FUN_00a7bcf0(int, FourFloatVector*, Matrix64*, void*, void*, void*, void*, void*, int);
+// pdb: hkPoweredChainBuildJacobian | hkpPoweredChainSolverUtil.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: params, in, out
 void WriteInputHeader(Input* input, void*, Header** ppCursor)
 {
     float a = input->a;
@@ -4728,6 +4887,7 @@ struct FnvCpu_FUN_00de1150_CpuObject
     char* FUN_00de1150();
 };
 // @fnv 0x00de1150
+// pdb: hkDisplayAABB::getMinExtent | hkDisplayAABB.obj | fnv360_0822_retail, objrun_open, low
 char* FnvCpu_FUN_00de1150_CpuObject::FUN_00de1150()
 {
     return reinterpret_cast<char*>(this) + 96;
@@ -4738,6 +4898,7 @@ struct FnvCpu_FUN_00de1160_CpuObject
     char* FUN_00de1160();
 };
 // @fnv 0x00de1160
+// pdb: hkDisplayAABB::getMaxExtent | hkDisplayAABB.obj | fnv360_0822_retail, objrun_open, low
 char* FnvCpu_FUN_00de1160_CpuObject::FUN_00de1160()
 {
     return reinterpret_cast<char*>(this) + 112;
@@ -4748,12 +4909,14 @@ struct FnvCpu_FUN_00de4de0_CpuObject
     char* FUN_00de4de0();
 };
 // @fnv 0x00de4de0
+// pdb: hkDisplayPlane::getNormal | hkDisplayPlane.obj | fnv360_0822_retail, objrun_open, low
 char* FnvCpu_FUN_00de4de0_CpuObject::FUN_00de4de0()
 {
     return reinterpret_cast<char*>(this) + 96;
 }
 
 // @fnv 0x00de4df0
+// pdb: hkDisplayPlane::getCenter | hkDisplayPlane.obj | fnv360_0822_retail, objrun_open, low
 void* __fastcall FUN_00de4df0(char* self, int)
 {
     return self + 0x70;
@@ -4793,6 +4956,7 @@ struct cls_d530
 extern "C" cls_d530* d530_target(void);
 
 // @fnv 0x00def530
+// pdb: hkSolverExportWriteResult64 | hkpSolverExport.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkSolverExportWriteRhs)
 static __declspec(noinline) void FUN_00def530(float value, cls_d530* target)
 {
     target->m_04 = value;
@@ -4810,6 +4974,7 @@ struct d540_cls
 };
 extern "C" d540_cls* d540_target(void);
 // @fnv 0x00def540
+// pdb: hkSolverExportWriteResult128 | hkpSolverExport.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: hkSolverExportWriteResult64)
 static __declspec(noinline) void FUN_00def540(float a, float b, d540_cls* t)
 {
     t->unk00 = a;
@@ -4831,6 +4996,7 @@ struct def550_vec4
 extern "C" def550_vec4* def550_target(void);
 
 // @fnv 0x00def550
+// pdb: hkSolverExportWriteResult128 | hkpSolverExport.obj | tesv_win, hash, low
 static __declspec(noinline) void SetVec4(float afX, float afY, float afZ, float afW, def550_vec4* apVec)
 {
     apVec->m_iWordAt00 = afX;
@@ -4949,6 +5115,7 @@ static __declspec(noinline) float FUN_00df9ae0(void)
 
 // Calls FUN_00df9ae0, computes (t + a) * (b - a), and stores the result into out[0], out[1], and out[2].
 // @fnv 0x00df9b20
+// pdb: randomVector | hkpConvexPenetrationUtil.obj | tesv_win, caller_sim, low
 static __declspec(noinline) void WriteFloatToVector(float a, float b, float* out)
 {
     float t = FUN_00df9ae0();
@@ -6101,6 +6268,7 @@ struct DFB0B0_Owner
 
 // Scans the entries array and returns a pointer to the DFB0B0_Entry with the smallest distance value.
 // @fnv 0x00dfb0b0
+// pdb: hkpWingedEdge::findTriangleOnNearestPlane | hkpConvexPenetrationUtil.obj | fnv360_0822_retail, objrun_prop, low
 DFB0B0_Entry* DFB0B0_Owner::GetNearestEntry()
 {
     DFB0B0_Entry* e = &entries;
@@ -6148,6 +6316,7 @@ struct Owner
     void FUN_007985d0();
 };
 
+// pdb: CombatController::CheckCurrentWeapon | CombatController.obj | fnv360_0822_retail, caller_sim, low
 void Owner::FUN_007985d0()
 {
     if (current && table->entries[current->FUN_004bcca0()] != current)
@@ -7213,6 +7382,7 @@ struct LeafCursor
 
 // @f3twin 0x00a6abc0 of 0x005010f0
 struct F3Twin_00a6abc0 : public FUN_00de4910_cls { int F3_FUN_00a6abc0() ; };
+// pdb: hkDisplaySemiCircle::getNumSegments | hkDisplaySemiCircle.obj | fnv360_0822_retail, objrun_open, low
 int F3Twin_00a6abc0::F3_FUN_00a6abc0() 
 {
     return m_9c;
@@ -7323,6 +7493,8 @@ struct Collector {
     void FUN_00a66d50(Shape* shape, Points& output);
 };
 __declspec(noinline) void __fastcall FUN_00a655e0(Collector* collector) { collector->count = 0; }
+// pdb: hkpShapeDisplayBuilder::buildDisplayGeometries | hkpShapeDisplayBuilder.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: shape, displayGeometries
 void Collector::FUN_00a66d50(Shape* shape, Points& output) {
     Transform transform;
     transform.setIdentity();

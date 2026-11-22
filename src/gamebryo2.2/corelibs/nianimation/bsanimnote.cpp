@@ -5,6 +5,7 @@
 extern "C" void* g_011f3f00;
 
 // @fnv 0x00a44920
+// pdb: NiColorData::GetRTTI | TESImageSpaceModifier.obj | fnv360_0822_retail, vtable, medium
 void* __cdecl FUN_00a44920()
 {
     return &g_011f3f00;
@@ -69,6 +70,8 @@ struct TmpNote
 };
 // Returns true if apObject passes IsSameAs and its eType and fTime equal this object's eType and fTime.
 // @fnv 0x00a44880
+// pdb: BSAnimNote::IsEqual | BSAnimNote.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: apObject
 bool __thiscall TmpNote::Matches(NiObject* apObject)
 {
     if (IsSameAs(apObject))
@@ -169,6 +172,7 @@ struct Holder44970
 };
 // Releases the stored object array: deletes each NiRefObject element, deallocates the array, then destroys the base NiRefObject.
 // @fnv 0x00a44970
+// pdb: BSAnimNotes::~BSAnimNotes | BSAnimNote.obj | fnv360_0822_retail, objrun, medium
 void Holder44970::Destroy()
 {
     m_00 = (void*)&DAT_01097dd4;
@@ -192,6 +196,7 @@ struct BSAnimNotes
 void __cdecl _delete(void*, unsigned int);
 // Calls Destroy, then deletes this with size 0x10 when bit 0 of a1 is set, and returns this.
 // @fnv 0x00a44a10
+// pdb: bhkSerializable::`scalar deleting destructor' | GlobalFunc.obj | fnv360_0822_retail, vtable_prefix, high
 void* BSAnimNotes::DestroyIfFlagged(unsigned int auiFlags)
 {
     Destroy();
@@ -218,6 +223,8 @@ void* BSAnimNotes::DestroyIfFlagged(unsigned int auiFlags)
 extern "C" unsigned char __stdcall MyHelper00a5d2f0(void* pObject);
 
 // @fnv 0x00a84c70
+// pdb: NiCollisionData::RegisterStreamables | NiCollisionData.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: kStream
 bool __stdcall FUN_00a84c70(void* pObject)
 {
     return MyHelper00a5d2f0(pObject);
@@ -266,6 +273,8 @@ class CA449C0Container : public CA449C0Base
 
 // Links the base object from the stream, then fills m_ppkObjects with objects from the stream and increments each one's ref count.
 // @fnv 0x00a449c0
+// pdb: BSAnimNotes::LinkObject | BSAnimNote.obj | fnv360_0822_retail, objrun, high
+// pdb params: arStream
 void CA449C0Container::LinkObjects(CA449C0Stream& kStream)
 {
     CA449C0Base::LinkObject(kStream);
@@ -543,6 +552,8 @@ class C4BF0AnimNote
 };
 
 // @fnv 0x00a44bf0
+// pdb: BSAnimNote::GetViewerStrings | BSAnimNote.obj | fnv360_0822_retail, ustr, medium
+// pdb params: apStrings
 void C4BF0AnimNote::FUN_00a44bf0(C4BF0StringArray* pkStrings)
 {
     BaseGetViewerStrings(pkStrings);
@@ -880,6 +891,8 @@ class LoadObj
 };
 // Reads a group from the load stream, then binary-reads two unsigned int fields (unk08, unk0C) into the object.
 // @fnv 0x00a44a30
+// pdb: BSAnimNote::LoadBinary | BSAnimNote.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: arStream
 void LoadObj::ReadBinaryFields(LoadStream* apLoadStream)
 {
     ReadGroup(apLoadStream);

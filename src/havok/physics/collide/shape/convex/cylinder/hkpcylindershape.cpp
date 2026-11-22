@@ -38,6 +38,8 @@ struct C00d573e0 {
 };
 
 // @fnv 0x00d573e0
+// pdb: hkpCylinderShape::setCylinderRadius | hkpCylinderShape.obj | fnv360_0822_retail, objrun, high
+// pdb params: radius
 void C00d573e0::SetValue(float afValue) {
     f14 = afValue;
     f2c = f10 + afValue;
@@ -69,6 +71,8 @@ static __declspec(noinline) float FUN_009e5290()
     return 0.0f;
 }
 
+// pdb: hkpCylinderShape::hkpCylinderShape | hkpCylinderShape.obj | fnv360_0822_retail, objrun, high
+// pdb params: flag
 S00d57b20_Obj* __thiscall S00d57b20_Obj::FUN_00d57b20(int condition)
 {
     *(unsigned short*)((char*)this + 6) = 1;

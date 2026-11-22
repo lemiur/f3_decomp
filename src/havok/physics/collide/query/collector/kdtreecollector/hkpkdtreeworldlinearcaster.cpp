@@ -17,6 +17,8 @@ struct ThresholdHolder
 };
 // Writes 1 to output when record->value is below 1.0f, otherwise 0, and returns output.
 // @f3 0x005740c0 (community match, verified in this file)
+// pdb: hkContactPoint::operator= | CameraCaster.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: __that
 unsigned char* ThresholdHolder::WriteThresholdFlag(unsigned char* output) {
     unsigned char result;
     if (*(float*)((char*)this + 16) < 1.0f)

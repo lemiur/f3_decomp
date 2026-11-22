@@ -23,6 +23,8 @@ typedef union __declspec(intrin_type) __declspec(align(16)) __m128 {
 } __m128;
 
 // @fnv 0x00d921c0
+// pdb: hkEnum<enum hkpJacobianSchema::SchemaType,signed char>::operator!= | hkpSolver.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: hkp1Lin2AngJacobian::getInvJacDiagSr)
+// pdb params: e
 char* __cdecl FUN_00d921c0(char* dst, const char* src)
 {
     *dst = *src;

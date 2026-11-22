@@ -3,6 +3,8 @@
 #include "nipsysmodifierctlr_decls.h"
 
 // @fnv 0x00c31340
+// pdb: NiPSysModifierCtlr::ProcessClone | NiPSysModifierCtlr.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: kCloning
 void NiPSysModifierCtlr::ProcessClone(CloningProcess& aCloneProcess)
 {
     NiSingleInterpController::ProcessClone(aCloneProcess);
@@ -34,6 +36,8 @@ struct NiPSysModifierCtlr_shell : public NiTimeController, public NiParticleSyst
 };
 // Clears the pointer at offset 0x3c, calls NiTimeController::SetTarget, and if the pointer at 0x2c is set, invokes the particle system method.
 // @fnv 0x00c31500
+// pdb: NiPSysModifierCtlr::SetTarget | NiPSysModifierCtlr.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pkTarget
 void NiPSysModifierCtlr_shell::FUN_00c31500(NiObjectNET* pkTarget)
 {
     *(void**)((char*)this + 0x3c) = 0;
@@ -58,6 +62,8 @@ struct FUN_00a57130_shell
 };
 
 // @fnv 0x00a57130
+// pdb: NiPSysModifierCtlr::SaveBinary | NiPSysModifierCtlr.obj | fnv360_0822_retail, call_seq, high
+// pdb params: kStream
 void FUN_00a57130_shell::FUN_00a57130(NiStream& kStream)
 {
     FUN_00a39010_shell* pBase = (FUN_00a39010_shell*)this;
@@ -125,6 +131,8 @@ struct S_00a39030_Callee
 
 // Compares this object with other via IsCompatibleWith, matching unk3c presence and contents, and returns whether unk38 is equal.
 // @fnv 0x00c313a0
+// pdb: NiPSysModifierCtlr::IsEqual | NiPSysModifierCtlr.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pkObject
 unsigned char S_00c313a0::IsEquivalentTo(S_00c313a0* other)
 {
     if (!reinterpret_cast<S_00a39030_Callee*>(this)->IsCompatibleWith(other))
@@ -181,6 +189,7 @@ struct FUN_00c314a0_cls
 
 // Frees the name buffer and modifier reference, calls FUN_00a6d290, and optionally deallocates the object when acFlags bit 0 is set.
 // @fnv 0x00c314a0
+// pdb: NiPSysModifierCtlr::`scalar deleting destructor' | NiPSysModifierCtlr.obj | fnv360_0822_retail, objrun, medium
 FUN_00c314a0_cls* FUN_00c314a0_cls::Destroy(unsigned char acFlags)
 {
     int(__stdcall * pfnFree)(void*) = DAT_00fdf1c4;
@@ -229,6 +238,8 @@ struct NiPSysModifierCtlrRuntime : NiPSysModifierCtlr
 };
 
 // @fnv 0x00c31530
+// pdb: NiPSysModifierCtlr::InterpTargetIsCorrectType | NiPSysModifierCtlr.obj | fnv360_0822_retail, call_seq, high
+// pdb params: pkTarget
 bool NiPSysModifierCtlrRuntime::IsTargetParticleSystem(NiParticleSystemRuntime* pkTarget)
 {
     if (pkTarget != 0)
@@ -323,6 +334,8 @@ extern void* __cdecl FUN_00a7d5e0(const char* fmt, void* p);
 extern void* DAT_012027c8;
 
 // @fnv 0x00c315b0
+// pdb: NiPSysModifierCtlr::GetViewerStrings | NiPSysModifierCtlr.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void FUN_00c315b0_cls::AppendModifierInfo(void* arg)
 {
     FUN_00c315b0_arr* arr = (FUN_00c315b0_arr*)arg;
@@ -363,6 +376,8 @@ struct FUN_00a57780_shell : BaseFake
     bool FUN_00a57780(NiStream&);
 };
 // @fnv 0x00a57780
+// pdb: Interface::ClearTimer | Interface.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apPointer
 bool FUN_00a57780_shell::FUN_00a57780(NiStream& stream)
 {
     return RegisterInterpolatorStreamables(stream);

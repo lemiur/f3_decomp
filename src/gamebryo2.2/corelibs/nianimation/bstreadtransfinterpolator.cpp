@@ -9,6 +9,8 @@ struct FUN_00a43560_shell : TreadTransf_00a43560
 };
 
 // @fnv 0x00a43560
+// pdb: BSTreadTransfInterpolator::GetKeyType | BSTreadTransfInterpolator.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: BSTreadTransfInterpolator::GetKeyCount)
+// pdb params: usChannel
 int __thiscall FUN_00a43560_shell::FUN_00a43560(short arg)
 {
     if (arg == 0)
@@ -27,6 +29,8 @@ struct FUN_00a43580_shell : TreadTransf_00a43560
 };
 
 // @fnv 0x00a43580
+// pdb: BSTreadTransfInterpolator::GetKeyArray | BSTreadTransfInterpolator.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: BSTreadTransfInterpolator::GetKeyType)
+// pdb params: usChannel
 void* FUN_00a43580_shell::FUN_00a43580(unsigned short flag)
 {
     if (!flag)
@@ -44,6 +48,8 @@ struct FUN_00a435a0_shell : TreadTransf_00a43560
 };
 
 // @fnv 0x00a435a0
+// pdb: BSTreadTransfInterpolator::GetKeyStride | BSTreadTransfInterpolator.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: BSTreadTransfInterpolator::GetKeyArray)
+// pdb params: usChannel
 void* FUN_00a435a0_shell::FUN_00a435a0(short arg1)
 {
     if (arg1 != 0)
@@ -63,6 +69,7 @@ struct BSTreadTransfInterpolator
 extern "C" void __cdecl __Dummy_00b6fef0(void* ptr, unsigned int flags);
 
 // @fnv 0x00a43a50
+// pdb: BSMultiBoundAABB::`scalar deleting destructor' | BGSPrimitive.obj | fnv360_0822_retail, vtable_prefix, medium
 void* BSTreadTransfInterpolator::FUN_00a43a50(unsigned int flags)
 {
     this->~BSTreadTransfInterpolator();
@@ -77,6 +84,8 @@ struct FUN_00a435c0_shell : TreadTransf_00a43560
 };
 
 // @fnv 0x00a435c0
+// pdb: BSTreadTransfInterpolator::GetChannelPosed | BSTreadTransfInterpolator.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: BSTreadTransfInterpolator::GetKeyStride)
+// pdb params: usChannel
 char __thiscall FUN_00a435c0_shell::FUN_00a435c0(short arg)
 {
     if (arg != 0)
@@ -116,6 +125,8 @@ struct FUN_00a434b0_shell
 };
 // Samples the track at time, updates sampleIndex, computes valueDelta from the previous value, stores previousValue and previousTime, and returns true.
 // @fnv 0x00a434b0
+// pdb: BSTreadTransfInterpolator::Update | BSTreadTransfInterpolator.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
+// pdb params: afTime, apInterpTarget, arValue
 bool __thiscall FUN_00a434b0_shell::UpdateSampleValue(float time, int, int)
 {
     SampleTrack* pTrack = track;
@@ -330,6 +341,7 @@ inline void FUN_00a435e0_shell::v37()
 inline void FUN_00a435e0_shell::v38(int)
 {}
 
+// pdb: BSTreadTransfInterpolator::GetChannelPosed | BSTreadTransfInterpolator.obj | tesv_win, objrun_open, low
 bool FUN_00a435e0_shell::FUN_00a435e0(int arg)
 {
     if (unk20 != 0)
@@ -586,6 +598,8 @@ class A43600Controller : public A43600Base
 
 // Saves the base data, entry count, each entry's name and two colors, then the target link ID to the stream.
 // @fnv 0x00a43600
+// pdb: BSTreadTransfInterpolator::SaveBinary | BSTreadTransfInterpolator.obj | fnv360_0721_beta, objrun, medium, conflict (bridge: NiLookAtInterpolator::SaveBinary)
+// pdb params: arStream
 void A43600Controller::FUN_00a43600(A43600Stream& kStream)
 {
     SaveBinaryBase(kStream);
@@ -671,6 +685,8 @@ class TreadTransfInterpolator : public NiKeyBasedInterpolator
 
 // Allocates a new TreadTransfInterpolator, passes it and kCloning to FUN_00a43690, then returns it.
 // @fnv 0x00a439e0
+// pdb: BSTreadTransfInterpolator::CreateClone | BSTreadTransfInterpolator.obj | fnv360_0822_retail, objrun, medium
+// pdb params: kCloning
 TreadTransfInterpolator* TreadTransfInterpolator::FUN_00a439e0(void* kCloning)
 {
     TreadTransfInterpolator* pkClone = new TreadTransfInterpolator;
@@ -723,6 +739,7 @@ class FUN_00a43840
 
 // Frees the element array, decrements the reference count of m_20 and calls Release when it reaches zero, then calls FUN_00a3ca30.
 // @fnv 0x00a43840
+// pdb: BSTreadTransfInterpolator::~BSTreadTransfInterpolator | BSTreadTransfInterpolator.obj | fnv360_0721_beta, objrun, medium
 FUN_00a43840::~FUN_00a43840()
 {
     a43840_Elem* pElements = m_0c;

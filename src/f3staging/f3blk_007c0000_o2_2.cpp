@@ -42,6 +42,7 @@ Ptr member;
 virtual void Slot00();
 ~FUN_007dab20();
 };
+// pdb: CombatProcedureMove::~CombatProcedureMove | CombatProcedureMove.obj | fnv360_0822_retail, call_seq, medium
 FUN_007dab20::~FUN_007dab20() {}
 }
 }   // namespace f3m_007dab20
@@ -287,6 +288,7 @@ struct RefBaseX
     bool FUN_007cc260();
 };
 
+// pdb: Projectile::TestProjectileInTriggerZone | Projectile.obj | fnv360_0721_beta, udata, medium
 bool RefBaseX::FUN_007cc260()
 {
     bool bFound = false;
@@ -531,6 +533,8 @@ struct FUN_007c8280 : Base8280 {
     virtual ~FUN_007c8280();
     virtual void slot();
 };
+// pdb: Projectile::Projectile | Projectile.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apProjectileBase, apShooter, apFromWeapon, aOrigin, afZAngle, afXAngle
 FUN_007c8280::FUN_007c8280(void* base,Source8280* source,Weapon8280* weapon,Point8280 point,float ax,float az)
 {
     unk60=0;

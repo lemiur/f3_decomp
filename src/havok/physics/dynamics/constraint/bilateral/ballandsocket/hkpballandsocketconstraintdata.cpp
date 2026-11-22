@@ -25,6 +25,7 @@ D54270Bool D54270Object::hkStdioStreamWriter_seekTellSupported() const
 }
 
 // @fnv 0x00d54280
+// pdb: hkpConvexListShape::getFirstKey | hkpConvexListShape.obj | fnv360_0822_retail, objrun_sim, low
 int __cdecl FUN_00d54280()
 {
     return 0;

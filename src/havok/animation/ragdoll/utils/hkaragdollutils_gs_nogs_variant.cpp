@@ -294,6 +294,7 @@ extern hkError* DAT_010f3364;
 extern const char DAT_00e7c21c[];
 extern const char DAT_00e7c1a8[];
 
+// pdb: alignConstraintSpacesToChildren | hkaRagdollUtils.obj | fnv360_0822_retail, ustr, high
 extern "C" int __cdecl FUN_00ce9e90(void* p)
 {
     List* list = (List*)p;

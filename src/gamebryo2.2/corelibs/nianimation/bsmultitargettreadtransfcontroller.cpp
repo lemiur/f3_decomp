@@ -2,12 +2,15 @@
 #include "f3_common.h"
 #include "bsmultitargettreadtransfcontroller_decls.h"
 // @fnv 0x00a358a0
+// pdb: BSMultiTargetTreadTransfController::GetInterpolator | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: ausIndex
 NiInterpolator* BSMultiTargetTreadTransfController::GetInterpolator(unsigned short index)
 {
     return reinterpret_cast<NiInterpolator*>(&entries[index]);
 }
 // Increments DAT_011f36a0 and, when the previous value was zero, calls FUN_00aa2080 with DAT_00a2d8a0 and DAT_00a2de70.
 // @fnv 0x00a2e180
+// pdb: NiMainSDM::NiMainSDM | NiMainSDM.obj | fnv360_0822_retail, caller_sim, high
 GlobalObject_00a2e180::GlobalObject_00a2e180()
 {
     if (DAT_011f36a0++ == 0)
@@ -22,6 +25,7 @@ struct FUN_00a35950_shell : public BSMultiTargetTreadTransfController
 extern int g_011f36e4;
 
 // @fnv 0x00a35950
+// pdb: TESTexture::GetDefaultPath | TESTexture.obj | fnv360_0721_beta, objrun, medium
 void* FUN_00a35950_shell::FUN_00a35950()
 {
     return &g_011f36e4;
@@ -53,6 +57,8 @@ struct FUN_00a35fc0_shell : BSMultiTargetTreadTransfController
 
 // Stores val into the slot at idx in the array at this+0x3c and, if val is non-null, sets bit 0x80 in val's field at 0x30.
 // @fnv 0x00a35fc0
+// pdb: BSMultiTargetTreadTransfController::SetInterpolatorTarget | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: ausIndex, apTarget
 void __thiscall FUN_00a35fc0_shell::SetSlotValue(unsigned short usIndex, void* pValue)
 {
     LinkAVObj* slot = pLinksA[usIndex];
@@ -73,6 +79,8 @@ struct FUN_00a35910_shell : BSMultiTargetTreadTransfController
 
 // Scans the array at this+0x3c for an entry whose field at offset 4 equals a, returning its index or INVALID_INDEX.
 // @fnv 0x00a35910
+// pdb: BSMultiTargetTreadTransfController::GetInterpolatorTargetIndex | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: apTarget
 unsigned short __thiscall FUN_00a35910_shell::FindIndexByValue(unsigned short a)
 {
     unsigned short i = 0;
@@ -115,6 +123,8 @@ struct Holder_00a35f30
     unsigned short FindLinkIndex(const Arg_00a35f30& arName);
 };
 // @fnv 0x00a35f30
+// pdb: BSMultiTargetTreadTransfController::GetInterpolatorIndexFx | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, objrun, high
+// pdb params: arName
 unsigned short Holder_00a35f30::FindLinkIndex(const Arg_00a35f30& arName)
 {
     unsigned short us;
@@ -132,6 +142,8 @@ struct FUN_00a35f70_struct : BSMultiTargetTreadTransfController
     void __thiscall SetSlotEntry(unsigned short, void*, unsigned short, void*);
 };
 // @fnv 0x00a35f70
+// pdb: BSMultiTargetTreadTransfController::SetInterpolatorTarget | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, call_gap_sim, medium
+// pdb params: ausIndex, apTarget, ausBlendIdx, apLink
 void __thiscall FUN_00a35f70_struct::SetSlotEntry(unsigned short usIndex, void* a2, unsigned short a3, void* a4)
 {
     pLinksA[usIndex]->pTarget = a2;
@@ -148,6 +160,7 @@ struct S_00a36050
 };
 void __cdecl _delete(void*, unsigned int);
 // @fnv 0x00a36050
+// pdb: ImageSpaceModifierInstanceDRB::`scalar deleting destructor' | ImageSpaceModifierInstance.obj | fnv360_0822_retail, vtable, medium
 void* __thiscall S_00a36050::DestroyIfFlagged(unsigned int uiFlags)
 {
     FUN_00a35960();
@@ -218,6 +231,7 @@ struct Ctrl00a358b0
     void __thiscall FUN_00a358b0(float afStartTime, float afEndTime);
 };
 // @fnv 0x00a358b0
+// pdb: BSMultiTargetTreadTransfController::GuaranteeTimeRange | BSMultiTargetTreadTransfController.obj | tesv_win, objopen_prop, low
 void __thiscall Ctrl00a358b0::FUN_00a358b0(float afStartTime, float afEndTime)
 {
     unsigned short us = 0;
@@ -285,6 +299,8 @@ struct InterpStub_00a2fac0
 };
 
 // @fnv 0x00a2fac0
+// pdb: NiTransformController::InterpolatorIsCorrectType | NiTransformController.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: pkInterpolator, usIndex
 bool __stdcall FUN_00a2fac0(InterpStub_00a2fac0* apInterpolator, unsigned short ausIndex)
 {
     return apInterpolator->IsCorrectType();
@@ -312,6 +328,7 @@ struct FUN_00a35900_cls
 };
 
 // @fnv 0x00a35900
+// pdb: __lvx | NiBlendAccumTransformInterpolator.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: BSMultiTargetTreadTransfController::CreateBlendInterpolator)
 TreadEntry* FUN_00a35900_cls::FUN_00a35900(unsigned short usIndex, int aParam1, int aParam2, int aParam3, int aParam4)
 {
     return &m_pEntries[usIndex];
@@ -379,6 +396,7 @@ struct FUN_00a35b90_cls
 
 // Destroys the object or, when acFlags has bit 2 set, destroys each of the count elements in the array and optionally frees the memory.
 // @fnv 0x00a35b90
+// pdb: BSBlendTreadTransfInterpolator::`vector deleting destructor' | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, objrun, high
 void* FUN_00a35b90_cls::Destroy(unsigned int acFlags)
 {
     if (acFlags & 2)
@@ -461,6 +479,8 @@ extern unsigned short DAT_01096320;
 
 // Finds the first free entry slot, stores the value, id and target in it, sets bit 0x80 on the target, and returns the slot index or DAT_01096320 if none is free.
 // @fnv 0x00a35fe0
+// pdb: BSMultiTargetTreadTransfController::AddInterpolatorTarget | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apTarget, ausBlendIdx, apLink
 unsigned short __thiscall FUN_00a35fe0_shell::FUN_00a35fe0(Target_00a35fe0* target, unsigned short id, void* value)
 {
     for (unsigned short index = 0; index < unk40; ++index)
@@ -566,6 +586,8 @@ void Holder::AssignInterpolatorRef(unsigned int idx, SmartPtr<RefObj>& out) thro
 
 // Clears the entry at idx by moving its RefObj into a temporary SmartPtr, which releases it when the pointer goes out of scope.
 // @fnv 0x00a32b80
+// pdb: NiControllerManager::RemoveSequence | NiControllerManager.obj | fnv360_0721_retail, caller, medium
+// pdb params: pkSequence
 void Holder::FUN_00a32b80(unsigned int uiIndex)
 {
     SmartPtr<RefObj> sp;
@@ -577,6 +599,7 @@ struct NiStream;
 extern void __cdecl LoadBinary(NiStream*);
 
 // @fnv 0x00a35840
+// pdb: TESObjectList::~TESObjectList | TESObject.obj | fnv360_0822_retail, call_dedup, low
 void __cdecl FUN_00a35840(NiStream* stream)
 {
     return LoadBinary(stream);
@@ -766,6 +789,7 @@ struct S00a35960_Cls : FUN_00a2f8c0
 
 // Sets the vtable, disposes of m34 and m3c storage, then calls FUN_00a6d290.
 // @fnv 0x00a35960
+// pdb: BSMultiTargetTreadTransfController::~BSMultiTargetTreadTransfController | BSMultiTargetTreadTransfController.obj | fnv360_0721_beta, objrun, medium
 void S00a35960_Cls::FUN_00a35960()
 {
     S00a35960_Obj* pObj = m34;
@@ -883,6 +907,8 @@ struct FUN_00a35eb0_shell
 
 // Searches the entry array for an interpolator whose name matches name and returns its index, or DAT_01096320 if not found.
 // @fnv 0x00a35eb0
+// pdb: BSMultiTargetTreadTransfController::GetInterpolatorIndex | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, objrun, high
+// pdb params: pcID
 unsigned short __thiscall FUN_00a35eb0_shell::FindByName(const char* name)
 {
     if (name == 0)

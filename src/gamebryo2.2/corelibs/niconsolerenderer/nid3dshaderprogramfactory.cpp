@@ -2,6 +2,8 @@
 #include "f3_common.h"
 #include "nid3dshaderprogramfactory_packet.h"
 // @fnv 0x00e93000
+// pdb: NiD3DShaderProgramFactory::GetNextProgramDirectory | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: kIter
 const char* NiD3DShaderProgramFactory::GetNextName(void*& apPosition)
 {
     DirectoryEntry* entry = static_cast<DirectoryEntry*>(apPosition);
@@ -13,6 +15,8 @@ const char* NiD3DShaderProgramFactory::GetNextName(void*& apPosition)
     return 0;
 }
 // @fnv 0x00e93e70
+// pdb: NiD3DShaderProgramFactory::RegisterShaderCreator | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pcExt, pkCreator
 bool NiD3DShaderProgramFactory::RegisterCreator(const char* pcName, NiD3DShaderProgramCreator* creator)
 {
     char lower[256];
@@ -39,6 +43,7 @@ struct Program
 };
 extern Program* DAT_0126fa10;
 // @fnv 0x00e92ec0
+// pdb: NiD3DShaderProgramFactory::Shutdown | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, call_seq, high
 void DestroyProgram()
 {
     if (DAT_0126fa10)
@@ -47,6 +52,7 @@ void DestroyProgram()
 }
 
 // @fnv 0x00e93df0
+// pdb: NiD3DShaderProgramFactory::_SDMInit | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, objrun, low
 void FUN_00e93df0()
 {
     if (DAT_0126fa14 == 0)
@@ -62,6 +68,7 @@ struct FUN_00e93f30_shell
 };
 
 // @fnv 0x00e93f30
+// pdb: NiD3DGeometryGroupManager::`scalar deleting destructor' | NiD3DGeometryGroupManager.obj | fnv360_0721_beta, objopen_prop, low
 void* __thiscall FUN_00e93f30_shell::DestroyShaderProgramFactory(unsigned int flags)
 {
     NiD3DShaderProgramFactory* self = (NiD3DShaderProgramFactory*)this;
@@ -88,6 +95,8 @@ struct NiD3DShaderProgramFactory_00e93060
 };
 
 // @fnv 0x00e93060
+// pdb: NiD3DShaderProgramFactory::GetPixelShader | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pcShaderName
 ShaderBufferRecord* NiD3DShaderProgramFactory_00e93060::FUN_00e93060(const char* pcShaderName)
 {
     NiTStringPointerMap_00e93060* map = m_pShaderBufferMap;
@@ -110,6 +119,7 @@ extern int DAT_010f0eb0;
 extern int DAT_010f0f50;
 
 // @fnv 0x00e93d80
+// pdb: NiD3DShaderProgramFactory::CreateShaderCreatorMap | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, objrun, medium
 void CreateCreatorMap()
 {
     int* p = (int*)g_memoryManager.Allocate(0x14);
@@ -252,6 +262,8 @@ struct FUN_00e93820_shell
 };
 // If p and m_map are non-null, inserts p into m_map keyed by p->GetName().
 // @fnv 0x00e93820
+// pdb: NiD3DShaderProgramFactory::InsertPixelShaderIntoMap | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkShader
 void FUN_00e93820_shell::RegisterShader(FakeShader_00e93820* apShader)
 {
     if (apShader && m_map)
@@ -268,6 +280,7 @@ struct Owner_00e93ab0
     void* __thiscall DestroyIfFlagged(unsigned int);
 };
 // @fnv 0x00e93ab0
+// pdb: ExtraRunOncePacks::`scalar deleting destructor' | ExtraDataObjects.obj | fnv360_0822_retail, vtable, high
 void* __thiscall Owner_00e93ab0::DestroyIfFlagged(unsigned int flags)
 {
     FUN_00e93540();
@@ -375,6 +388,8 @@ struct FUN_00e937f0_shell
 };
 // If pkShader and the map are non-null, inserts pkShader into the map keyed by pkShader->GetKey().
 // @fnv 0x00e937f0
+// pdb: NiD3DShaderProgramFactory::InsertVertexShaderIntoMap | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pkShader
 void __thiscall FUN_00e937f0_shell::AddShader(ShaderArg* pkShader)
 {
     if (pkShader && m_pTaskMap)
@@ -431,6 +446,8 @@ struct ProgFactoryDirs
 };
 // Normalizes '/' to '\\' in pcDir, returns if it already exists in m_kDirs, otherwise allocates a copy and adds it to the head of the list.
 // @fnv 0x00e93960
+// pdb: NiD3DShaderProgramFactory::AddProgramDirectory | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pacDirectory
 void ProgFactoryDirs::AddDirectory(const char* pcDir)
 {
     if (!pcDir || strcmp(pcDir, "") == 0)
@@ -497,6 +514,8 @@ struct NiD3DShaderProgramFactory_Shell
 
 // Copies pcDirectory into a path buffer, converts '/' to '\\', then removes the matching entry from m_directories if found.
 // @fnv 0x00e93bb0
+// pdb: NiD3DShaderProgramFactory::RemoveProgramDirectory | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pcDirectory
 void __thiscall NiD3DShaderProgramFactory_Shell::RemoveDirectoryEntry(const char* pcDirectory)
 {
     if (!pcDirectory || strcmp(pcDirectory, "") == 0)
@@ -560,6 +579,7 @@ struct FUN_00e93e00_Obj : public FUN_00e93cc0_Obj
 };
 
 // @fnv 0x00e93e00
+// pdb: NiD3DShaderProgramFactory::~NiD3DShaderProgramFactory | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, caller_sim, low
 void FUN_00e93e00_Obj::FUN_00e93e00()
 {
     *reinterpret_cast<int*>(this) = reinterpret_cast<int>(&DAT_010f0f70);
@@ -606,6 +626,8 @@ class NiTMapBase
 
 // Removes pkCreator from the global NiTMapBase at DAT_0126fa14 if found, iterating entries and calling RemoveAt on a matching key.
 // @fnv 0x00e93260
+// pdb: NiD3DShaderProgramFactory::UnregisterShaderCreator | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, objrun, medium
+// pdb params: pkCreator
 void __cdecl FUN_00e93260(NiD3DShaderProgramCreator* pkCreator)
 {
     if (DAT_0126fa14 == 0)
@@ -639,6 +661,8 @@ NiShaderLibraryE93* __cdecl NiD3DShaderProgramFactory_GetShaderCreator(const cha
 
 // Returns the cached entry for pcName, or creates a shader with pkLibrary, registers it, and returns it.
 // @fnv 0x00e938e0
+// pdb: NiD3DShaderProgramFactory::CreatePixelShaderFromBuffer | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, call_gap, low
+// pdb params: pvBuffer, uiBufferSize, pcExt, pcShaderName, pcEntryPoint, pcShaderTarget, bRecoverable
 void* __cdecl FUN_00e938e0(void* pkDesc, void* pkRenderer, const char* pcLibName, const char* pcName, void* pvArg4,
                            void* pvArg5, void* pvArg6)
 {
@@ -761,6 +785,7 @@ class FUN_00e93ad0 : public NiRefObject
 
 // Allocates string maps for NiD3DVertexShaderEntry and NiD3DPixelShaderEntry pointers, each with hash size 59 and copying disabled.
 // @fnv 0x00e93ad0
+// pdb: NiD3DShaderProgramFactory::NiD3DShaderProgramFactory | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, call_gap, low
 FUN_00e93ad0::FUN_00e93ad0() throw()
 {
     m_pVertexShaderMap = new ShaderStringMap<NiD3DVertexShaderEntry*>(59, false);
@@ -805,6 +830,7 @@ struct ShaderEntryListStandIn
 
 void __cdecl FUN_0089e890(void* element);
 
+// pdb: NiD3DShaderProgramFactory::RemoveAllProgramDirectories | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, call_seq, medium
 void ShaderEntryOwner::FUN_00e93cc0()
 {
     ShaderEntryNode* pNode = entries.head;
@@ -878,6 +904,8 @@ NiD3DShaderProgramCreator* NiD3DShaderProgramFactory_GetShaderCreator(const char
 
 // Returns a cached ShaderArg for p3, or creates one via the NiD3DShaderProgramCreator for p2 and registers it with the factory.
 // @fnv 0x00e93850
+// pdb: NiD3DShaderProgramFactory::CreateVertexShaderFromBuffer | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: pvBuffer, uiBufferSize, pcExt, pcShaderName, pcEntryPoint, pcShaderTarget, hDecl, uiUsage, bSoftwareVP, bRecoverable
 ShaderArg* FUN_00e93850(const char* p0, const char* p1, const char* apCreatorName, const char* apShaderName,
                         unsigned int aiParam0, unsigned int aiParam1, unsigned int aiParam2, unsigned int aiParam3,
                         unsigned int aiParam4, unsigned int aiParam5)
@@ -949,6 +977,8 @@ inline ShPF_Factory* ShPF_Get()
 }
 // Resolves a shader program file path by checking registered directories and returns true if the file exists.
 // @fnv 0x00e930a0
+// pdb: NiD3DShaderProgramFactory::ResolveShaderFileName | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pcOriginalName, pcTrueName, uiStringLen
 bool FindShaderProgramFile(const char* pcShaderName, char* pcResolvedPath, unsigned int uiBufferLength)
 {
     if (FUN_00aa1a30(pcShaderName, 0))

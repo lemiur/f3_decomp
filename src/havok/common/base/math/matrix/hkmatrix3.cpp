@@ -28,6 +28,7 @@ static inline void S_00cd4b60_Swap(float& a, float& b)
     b = t;
 }
 // @fnv 0x00cd4b60
+// pdb: hkMatrix3::transpose | hkMatrix3.obj | fnv360_0822_retail, objrun, low, conflict (bridge: hkMatrix3::sub)
 void S_00cd4b60::FUN_00cd4b60()
 {
     S_00cd4b60_Swap(m[1][0], m[0][1]);
@@ -56,6 +57,8 @@ struct CD4BA0Matrix3
 
 // Copies the transpose of s into this matrix: diagonal entries copied directly, off-diagonal entries swapped, and the fourth column zeroed.
 // @fnv 0x00cd4ba0
+// pdb: hkMatrix3::setTranspose | hkMatrix3.obj | fnv360_0822_retail, call_seq, high
+// pdb params: s
 void CD4BA0Matrix3::Transpose(const CD4BA0Matrix3& s)
 {
     m_kColumn0[0] = s.m_kColumn0[0];
@@ -138,6 +141,8 @@ class CMatrixOpsBridge
     void FUN_0091d450(const float* pB, const float* pA, float f);
 };
 
+// pdb: bhkCapsuleShape::Init | bhkCapsuleShape.obj | fnv360_0822_retail, objopen_prop, low
+// pdb params: arInfo
 bool CMatrixOps::FUN_00cd4e90(float epsilon)
 {
     struct S_91db00
@@ -213,6 +218,8 @@ struct CdOwner_cls
 };
 
 // @fnv 0x00cd5880
+// pdb: hkMatrix3::changeBasis | hkMatrix3.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
+// pdb params: r
 void FUN_00cd5880_cls::FUN_00cd5880(unsigned int a1)
 {
     CdBlob_cls blob;
@@ -337,6 +344,8 @@ struct VectorNormBBD320
     float FUN_00bbd320() const;
 };
 
+// pdb: CIdvBezierSpline::CIdvBezierSpline | IdvSpline.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: cRight
 float VectorNormBBD320::FUN_00bbd320() const
 {
     float sum = 0.0f;
@@ -398,6 +407,7 @@ struct Ctl {
     float unk4C;
     Actor* FUN_007abac0();
 };
+// pdb: CombatState::GetBestCombatWeapon | CombatState.obj | fnv360_0822_retail, call_gap, low
 Actor* Ctl::FUN_007abac0()
 {
     float best = 0.0f;

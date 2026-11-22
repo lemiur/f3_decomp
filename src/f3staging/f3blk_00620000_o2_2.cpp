@@ -1887,6 +1887,8 @@ struct Menu26 : MenuStorage {
     unsigned unk054;
     unsigned unk058;
 };
+// pdb: MenuManager::CreateMenuByClass | MenuManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiMenuClass
 void* __stdcall FUN_006315e0(unsigned type) {
     switch (type) {
     case 1047: return new Menu00; // FUN_0063bfb0
@@ -1927,6 +1929,7 @@ namespace f3m_00629180 {
 namespace Palette284{
 struct Base284{unsigned int first,second,count;Base284(){count=0;first=0;second=0;}~Base284();};
 struct Owner284:Base284{unsigned int mode;Owner284();void FUN_00627410(const char*,int,int,int,unsigned int*,int);void FUN_00627510(const char*,int,int,int,int);};
+// pdb: SystemColorManager::SystemColorManager | InterfaceManager.obj | fnv360_0822_retail, ustr, medium
 Owner284::Owner284(){mode=1;FUN_00627410("HUDMain",26,255,128,&DAT_01075b74,1);FUN_00627510("HUDAlt",255,67,42,2);FUN_00627510("Terminal",33,231,121,3);FUN_00627410("Pipboy",26,255,128,&DAT_01075b84,4);FUN_00627510("MainMenu",199,255,165,-1);FUN_00627510("System",26,255,128,-1);}
 }
 }   // namespace f3m_00629180

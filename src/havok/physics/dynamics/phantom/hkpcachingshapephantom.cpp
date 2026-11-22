@@ -16,6 +16,7 @@ struct hkpCachingShapePhantomStandIn
 };
 
 // @fnv 0x00d4c910
+// pdb: hkpCapsuleShape::getNumCollisionSpheresImpl | hkpCapsuleShape.obj | fnv360_0822_retail, objrun_open, low
 int FUN_00d4c910()
 {
     return 2;
@@ -183,6 +184,8 @@ struct W67Phantom
     int m_iCapacityState;
 };
 
+// pdb: hkpCachingShapePhantom::getClosestPoints | hkpCachingShapePhantom.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: collector, input
 void hkpCachingShapePhantomEx::DispatchCollisionAgents(WorldOperationEntry& output, GskAgentInput* input)
 {
     W67Phantom* self = (W67Phantom*)this;
@@ -356,6 +359,8 @@ class hkpCachingShapePhantomD4C9
 
 // Searches the collision detail array for an entry whose collidable pointer equals pkCollidable and returns true if found, otherwise false.
 // @f3 0x009d9570 (community match, verified in this file)
+// pdb: hkpCachingShapePhantom::isOverlappingCollidableAdded | hkpCachingShapePhantom.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: collidable
 hkBoolD4C9 hkpCachingShapePhantomD4C9::ContainsCollidable(const hkpCollidableD4C9* collidable) const
 {
     const hkArrayD4C9<hkpCollisionDetailD4C9>& details =
@@ -550,6 +555,8 @@ struct View557 {
     int count,capacity;
     void hkpPhantom_calcContentStatistics(Collector557*) const;
 };
+// pdb: hkpCachingShapePhantom::calcContentStatistics | hkpCachingShapePhantom.obj | fnv360_0822_retail, ustr, high
+// pdb params: collector, cls
 void hkpCachingShapePhantomD4CD::AddToCollector(hkStatisticsCollectorD4CD* collector) const throw() {
     const View557* self=reinterpret_cast<const View557*>(this);
     Collector557* out=reinterpret_cast<Collector557*>(collector);
@@ -1011,6 +1018,8 @@ struct WorldFn_d4cc
     hkArrayFn_d4cc m_entries;
     unsigned char m_bValueAt0C;
 };
+// pdb: hkpCachingShapePhantom::removeOverlappingCollidable | hkpCachingShapePhantom.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: collidable
 void World_d4cc::FUN_00d4cca0(Owned_d4cc* apOwned)
 {
     Visitor_d4cc visitor;
@@ -1201,6 +1210,7 @@ struct Ca30Derived : public hkpCachingShapePhantomStandIn
 // @f3 0x009d9670 (community match, verified in this file)
 extern int DAT_00e7d9c4;
 
+// pdb: hkpCachingShapePhantom::updateShapeCollectionFilter | hkpCachingShapePhantom.obj | fnv360_0822_retail, objrun_open, low
 void Ca30Derived::QueryCollisionDetails()
 {
     QueryDC4A30 query;

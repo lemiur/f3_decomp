@@ -13,6 +13,7 @@ struct NiPSysAirFieldInheritVelocityCtlr : NiPSysModifierFloatCtlr
 };
 
 // @fnv 0x00c30640
+// pdb: NiPSysAirFieldInheritVelocityCtlr::GetTargetFloatValue | NiPSysAirFieldInheritVelocityCtlr.obj | tesv_win, objrun_open, low
 void __thiscall NiPSysAirFieldInheritVelocityCtlr::FUN_00c30640(float& fValue)
 {
     float* p = *(float**)((char*)this + 0x3c);
@@ -76,6 +77,7 @@ struct S_00c30650
 };
 // Clamps fValue to [0,1] via the modifier's Set and stores it.
 // @fnv 0x00c30650
+// pdb: NiPSysAirFieldInheritVelocityCtlr::SetTargetFloatValue | NiPSysAirFieldInheritVelocityCtlr.obj | tesv_win, hash, low
 void S_00c30650::SetModValue(float fValue)
 {
     m_pkTargetModifier->Set(fValue);
@@ -98,6 +100,7 @@ struct SpawnedHost
 
 // Allocates a 0x40-byte SpawnedCtlr, initialises it, passes it to FUN_00c32de0 with a1, and returns it.
 // @fnv 0x00c306a0
+// pdb: NiPSysAirFieldInheritVelocityCtlr::CreateClone | NiPSysAirFieldInheritVelocityCtlr.obj | tesv_win, caller_sim, low
 SpawnedCtlr* SpawnedHost::CreateSpawnedCtlr(void* a1)
 {
     SpawnedCtlr* obj = (SpawnedCtlr*)FUN_00aa13e0(0x40);

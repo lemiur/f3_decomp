@@ -5,6 +5,7 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 // @fnv 0x00e049c0
+// pdb: hkClassMember::getClass | hkClassMember.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: `anonymous namespace'::min2<int>)
 int __cdecl FUN_00e049c0(int a, int b)
 {
     return a < b ? a : b;
@@ -16,6 +17,7 @@ struct Object {
     void FUN_00e03160();
 };
 // @fnv 0x00e03160
+// pdb: TESAttackDamageForm::~TESAttackDamageForm | TESAttackDamageForm.obj | fnv360_0822_retail, call_dedup, low
 void Object::FUN_00e03160() {
     vtable = &DAT_0102e388;
 }
@@ -72,6 +74,7 @@ public:
 };
 
 // @fnv 0x00e03100
+// pdb: objectCopier_calcCArraySize | hkObjectCopier.obj | tesv_win, call_gap, low
 static int FUN_00e03100(Obj* apObj) {
     if (apObj->m()) {
         return apObj->m();
@@ -101,6 +104,8 @@ struct FUN_00e03120 {
 // Initializes the object from two int pointers and a third int, setting unk14 by comparing the second byte of the two stored ints.
 // @f3 0x009b3190 (community match, verified in this file)
 extern int DAT_00e7e8a0;
+// pdb: hkObjectCopier::hkObjectCopier | hkObjectCopier.obj | fnv360_0822_retail, uvref, high
+// pdb params: layoutIn, layoutOut, flags
 FUN_00e03120::FUN_00e03120(const int* piFirst, const int* piSecond, int aiValue)
 {
     unk06 = 1;
@@ -149,6 +154,7 @@ struct UIntArrayArena {
     char* m_end;
 };
 
+// pdb: writeUlongArray | hkObjectCopier.obj | fnv360_0822_retail, call_gap, high
 static void WriteUIntArray(const unsigned int* data, int count, Writer* pWriter, int elemSize)
 {
     if (elemSize == 4) {

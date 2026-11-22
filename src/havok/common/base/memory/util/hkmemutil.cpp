@@ -8,6 +8,8 @@ namespace fnv_00d2caa0 {
 void* __cdecl _memmove(void* dst, const void* src, unsigned int count);
 
 // @fnv 0x00d2caa0
+// pdb: bhkShape::RegisterStreamables | bhkShape.obj | fnv360_0822_retail, vtable, high
+// pdb params: arStream
 void __cdecl FUN_00d2caa0(void* dst, void* src, unsigned int size)
 {
     _memmove(dst, src, size);
@@ -16,6 +18,8 @@ void __cdecl FUN_00d2caa0(void* dst, void* src, unsigned int size)
 
 void __cdecl FUN_00ec61c0();
 // @fnv 0x00d2cab0
+// pdb: bhkCollisionObject::RegisterStreamables | bhkCollisionObject.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: arStream
 void __cdecl FUN_00d2cab0()
 {
     FUN_00ec61c0();

@@ -64,6 +64,7 @@ struct Vt00cbf1e0
     virtual void* s3(void* a, int b);
 };
 
+// pdb: bhkWorld::bhkConstraintProjector::SetUseLock | bhkWorld.obj | tesv_win, objrun_open, low
 void FUN_00cbf1e0_cls::FUN_00cbf1e0(void** dest, int count, void* arg)
 {
     for (int i = 0; i < count; ++i)

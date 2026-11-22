@@ -279,6 +279,8 @@ struct S6f8ab0
     int __thiscall FUN_006f8ab0(int a1, float a2, void* a3);
 };
 
+// pdb: Actor::SetPathfindingGoal | Actor.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: apReference, afTargetRadius, apAvoidNodes
 int S6f8ab0::FUN_006f8ab0(int a1, float a2, void* a3)
 {
     if (a3 == 0)
@@ -366,6 +368,8 @@ struct StatsCollector
 };
 }
 
+// pdb: hkpAgentMachineUtil::calcNnStatisticsContactMgrsOnly | hkpAgentMachineUtil.obj | fnv360_0822_retail, ustr, high
+// pdb params: track, collector
 void __cdecl CollectSectors(S_00d97360_Track& track, S_00d97360_Collector* collector)
 {
     N_a26e70::StatsCollector* stats = (N_a26e70::StatsCollector*)collector;

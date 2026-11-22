@@ -62,6 +62,7 @@ struct Extra {
  union {Form* form;Object* object;void* pointer;int integer;float scalar;unsigned char byte;short shortValue;Node node;InputActivation activation;InputDoor* door;InputPrimitive* primitive;InputOriented* oriented;InputRadio* radio;InputPower power;};
 };
 struct Owner {unsigned int unk00;Extra* head;Extra* BaseExtraList_GetExtraData(unsigned int);void FUN_0040edd0();};
+// pdb: ExtraDataList::Save | ExtraDataList.obj | fnv360_0822_retail, uconst, low
 void Owner::FUN_0040edd0() {
  DAT_0106c980.FUN_00409a80(0);
  Extra* current=head;

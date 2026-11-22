@@ -48,6 +48,7 @@ struct FUN_00cf86f0_class
 };
 
 // @fnv 0x00cf86f0
+// pdb: hkpSimulation::isSimulationAtMarker | hkpSimulation.obj | fnv360_0822_retail, objrun_open, low
 int FUN_00cf86f0_class::IsFieldEqual()
 {
     if (*(float*)((char*)this + 0x14) == *(float*)((char*)this + 0x20))
@@ -64,6 +65,8 @@ struct FUN_00cf86e0_class
     void FUN_00cf86e0(float f);
 };
 // @fnv 0x00cf86e0
+// pdb: hkpSimulation::setFrameTimeMarker | hkpSimulation.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: frameDeltaTime
 void FUN_00cf86e0_class::FUN_00cf86e0(float f)
 {
     *(float*)((char*)this + 0x20) = *(float*)((char*)this + 0x14) + f;
@@ -183,6 +186,8 @@ struct FUN_00ce5480_cls
 };
 
 // @fnv 0x00ce5480
+// pdb: hkaSkeletonMapperUtils::findSimpleMapping | hkaSkeletonMapperUtils.obj | fnv360_0822_retail, objrun_sim, medium
+// pdb params: boneA, mapperdata
 void* __cdecl FindKeyRecord(unsigned short aKey, FUN_00ce5480_cls* pKeyBox)
 {
     for (int i = 0; i < pKeyBox->m_uiItemCount; i++)
@@ -231,6 +236,8 @@ struct FUN_00cf4490_cls
 
 // Reads three fields (m_14, m_18, m_1c) from the stream after calling FUN_00d86160.
 // @fnv 0x00cf4490
+// pdb: bhkVelocityConstraintMotor::SaveBinary | bhkVelocityConstraintMotor.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: arStream
 void FUN_00cf4490_cls::FUN_00cf4490(void* stream)
 {
     FUN_00d86160(stream, this);
@@ -243,6 +250,7 @@ void FUN_00cf4490_cls::FUN_00cf4490(void* stream)
 struct CpuOpaque;
 extern CpuOpaque DAT_01268740;
 // @fnv 0x00cf45f0
+// pdb: bhkConvexTransformShape::GetRTTI | bhkConvexTransformShape.obj | fnv360_0822_retail, udata, medium
 CpuOpaque* __cdecl FUN_00cf45f0()
 {
     return &DAT_01268740;
@@ -262,6 +270,8 @@ struct SerializedObject
 extern "C" void __cdecl FUN_00d86160(int, SerializedObject*);
 // Writes word14 and word18 to the stream at source+0x250, accumulating bytesWritten, after calling FUN_00d86160.
 // @fnv 0x00cf4670
+// pdb: bhkSpringDamperConstraintMotor::SaveBinary | bhkSpringDamperConstraintMotor.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: arStream
 void SerializedObject::SerializeToStream(int source)
 {
     int saved = source;
@@ -501,6 +511,7 @@ struct FUN_00cf6980_class
 };
 
 // @fnv 0x00cf6980
+// pdb: cleanupLoadedObjecthkLiquidAction | hkLiquidAction.obj | fnv360_0822_retail, objrun_open, low
 void __cdecl FUN_00cf6980(FUN_00cf6980_class* object)
 {
     object->FUN_00cf6980(0);
@@ -576,6 +587,8 @@ struct FUN_00cf6f80_cls
 };
 
 // @fnv 0x00cf6f80
+// pdb: hkAlgorithm::swap<hkpBroadPhaseHandle *> | hkpTypedBroadPhaseDispatcher.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: keyFromPair)
+// pdb params: x, y
 unsigned __int64 FUN_00cf6f80_cls::FUN_00cf6f80()
 {
     return *(unsigned __int64*)&m_ucLowNibble;
@@ -611,6 +624,7 @@ struct FUN_00cf8710_cls
 };
 
 // @fnv 0x00cf8710
+// pdb: hkpSimulation::isSimulationAtPsi | hkpSimulation.obj | fnv360_0822_retail, objrun_open, low
 bool FUN_00cf8710_cls::FUN_00cf8710()
 {
     return m_18 == m_14;
@@ -658,6 +672,8 @@ struct F4A30AllocTagScope
 
 void __cdecl FUN_00ce51f0();
 // @fnv 0x00ce5300
+// pdb: bhkWorld::SethkObject | bhkWorld.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aphkObject
 void __cdecl FUN_00ce5300()
 {
     FUN_00ce51f0();
@@ -859,6 +875,8 @@ static inline void WriteData(Stream* s, void* data, int size)
 
 // Writes each 4-byte field of the Record to the owner's stream via WriteData, skipping unk0C.
 // @fnv 0x00cf09a0
+// pdb: bhkStream::SaveBinary | bhkStream.obj | fnv360_0822_retail, objrun, low, conflict (bridge: bhkPoseArray::bhkPose::SaveBinary)
+// pdb params: arStream, arTransf
 void FUN_00cf09a0(StreamOwner* owner, Record* rec)
 {
     WriteData(owner->stream, &rec->unk00, 4);
@@ -882,6 +900,8 @@ struct ArrayData
 };
 
 // @fnv 0x00cf0e90
+// pdb: bhkStream::SaveBinary | bhkStream.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arStream, arArray
 extern "C" unsigned int __cdecl SaveUIntArray(CF4BC0Stream& kStream, const ArrayData& kArray)
 {
     unsigned int count = kArray.m_iElementCount;
@@ -919,6 +939,7 @@ struct FUN_00cf4190 : FUN_00cdf560
     FUN_00cf4190();
 };
 // @fnv 0x00cf4190
+// pdb: bhkPositionConstraintMotor::bhkPositionConstraintMotor | bhkPositionConstraintMotor.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 FUN_00cf4190::FUN_00cf4190() : FUN_00cdf560(0.0f)
 {
     m0 = (int)&DAT_010cc064;
@@ -927,6 +948,7 @@ FUN_00cf4190::FUN_00cf4190() : FUN_00cdf560(0.0f)
 extern int DAT_01268730;
 
 // @fnv 0x00cf41b0
+// pdb: bhkCylinderShape::GetRTTI | bhkCylinderShape.obj | fnv360_0822_retail, udata, medium
 int* FUN_00cf41b0()
 {
     return &DAT_01268730;
@@ -961,6 +983,8 @@ struct SerializedRecord
 };
 // Calls FUN_00d86100 with the view and this record, then loads m_14, m_18, m_1c and m_20 from the view's stream.
 // @fnv 0x00cf41c0
+// pdb: bhkPositionConstraintMotor::LoadBinary | bhkPositionConstraintMotor.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: arStream
 void SerializedRecord::FUN_00cf41c0(StreamView* view)
 {
     FUN_00d86100(view, this);
@@ -973,6 +997,7 @@ void SerializedRecord::FUN_00cf41c0(StreamView* view)
 struct CpuOpaque;
 extern CpuOpaque DAT_01268738;
 // @fnv 0x00cf43f0
+// pdb: bhkConvexVerticesShape::GetRTTI | bhkConvexVerticesShape.obj | fnv360_0822_retail, objrun_open, low
 CpuOpaque* __cdecl FUN_00cf43f0()
 {
     return &DAT_01268738;
@@ -1026,6 +1051,8 @@ class hkObjCF46
 };
 
 // @fnv 0x00cf4600
+// pdb: bhkSpringDamperConstraintMotor::LoadBinary | bhkSpringDamperConstraintMotor.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: arStream
 void hkObjCF46::SaveToArchive(hkArchiveCF46* ar)
 {
     FUN_00d86100(ar, this);
@@ -1206,6 +1233,8 @@ struct FUN_00cf7490_class
 };
 
 // @fnv 0x00cf7490
+// pdb: bhkNiCollisionObject::SetSceneGraphObject | bhkNiCollisionObject.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: apSceneObject
 void FUN_00cf7490_class::FUN_00cf7490()
 {
     ((CC9F10Shape*)this)->FUN_00c90510();
@@ -1241,6 +1270,8 @@ struct hkBoolCF74
 };
 
 // @fnv 0x00cfb050
+// pdb: hkNullAgent3::create | hkpCollisionDispatcher.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: input, entry, freeMemory
 void* __cdecl FUN_00cfb050(void* pvUnused, bool* pbOut, void* pvResult)
 {
     *pbOut = false;
@@ -1248,6 +1279,8 @@ void* __cdecl FUN_00cfb050(void* pvUnused, bool* pbOut, void* pvResult)
 }
 
 // @fnv 0x00cfb070
+// pdb: hkNullAgent3::process | hkpCollisionDispatcher.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: input, entry, agentData, separatingNormalOut, result
 int __cdecl FUN_00cfb070(int a, int b, int c)
 {
     return c;
@@ -1265,6 +1298,8 @@ extern "C" void _ReadWriteBarrier(void);
 void __cdecl FUN_00ce2d10();
 
 // @fnv 0x00ce2f30
+// pdb: bhkCollisionObject::SaveBinary | bhkCollisionObject.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: arStream
 void __cdecl FUN_00ce2f30()
 {
     FUN_00ce2d10();
@@ -1333,6 +1368,8 @@ class SerializableCF42
 
 // Calls FUN_00d86160 then reads four unsigned int fields from the stream's underlying binary stream.
 // @fnv 0x00cf4260
+// pdb: bhkPositionConstraintMotor::SaveBinary | bhkPositionConstraintMotor.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: arStream
 void SerializableCF42::FUN_00cf4260(NiStreamCF42& kStream)
 {
     FUN_00d86160(kStream, this);
@@ -1409,6 +1446,8 @@ class SerializableCF44
 
 // Calls FUN_00d86100, then reads m_uiValue14, m_uiValue18, and m_ucValue1C from the stream via NiStreamLoadBinaryCF44.
 // @fnv 0x00cf4400
+// pdb: bhkVelocityConstraintMotor::LoadBinary | bhkVelocityConstraintMotor.obj | fnv360_0822_retail, objrun_open, medium
+// pdb params: arStream
 void SerializableCF44::FUN_00cf4400(NiStreamCF44& kStream)
 {
     FUN_00d86100(kStream, this);
@@ -1494,6 +1533,7 @@ class FUN_00cf7060
 };
 
 // @fnv 0x00cf7060
+// pdb: hkpTypedBroadPhaseDispatcher::~hkpTypedBroadPhaseDispatcher | hkpTypedBroadPhaseDispatcher.obj | fnv360_0822_retail, call_dedup, low
 FUN_00cf7060::~FUN_00cf7060()
 {}
 
@@ -1607,6 +1647,8 @@ struct TargetType
 
 // Writes obj->unk24, obj->unk10 and the buffer at obj->unk20 to the stream, returning the buffer size.
 // @f3 0x00979830 (community match, verified in this file)
+// pdb: bhkStream::SaveBinary | bhkStream.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arStream, apMoppCode
 unsigned int FUN_00cf0dc0(CF4BC0Stream& stream, TargetType* obj)
 {
     unsigned int size = 0;
@@ -1673,6 +1715,7 @@ struct FUN_00cf6f90
 
 // Initializes the 8x8 m_apSlots array so that every slot points to the embedded m_kDefault NodeObj instance.
 // @fnv 0x00cf6f90
+// pdb: hkpTypedBroadPhaseDispatcher::hkpTypedBroadPhaseDispatcher | hkpTypedBroadPhaseDispatcher.obj | fnv360_0822_retail, uvref, high
 FUN_00cf6f90::FUN_00cf6f90()
 {
     for (int i = 0; i < 8; i++)
@@ -1762,6 +1805,7 @@ struct Cfd50Range
 };
 
 // @fnv 0x00cfdb50
+// pdb: hkAgentNnMachine_getLastEntry | hkpAgentNnMachine.obj | fnv360_0822_retail, objrun_open, low
 static __declspec(noinline) int FUN_00cfdb50(Cfd50Range* apRange)
 {
     return apRange->m_00 + apRange->m_04[apRange->m_08 - 1] - 0x80;
@@ -2097,6 +2141,8 @@ public:
     void __thiscall FUN_00bee190(int trait, float value, bool notify);
 };
 
+// pdb: StatsMenu::FadeControlCallback | StatsMenu.obj | fnv360_0721_retail, caller_sim, medium
+// pdb params: apTile, aiOn
 bool __cdecl FUN_00684240(Tile* tile, unsigned int gamepad)
 {
     const int alpha = 0xFA9;

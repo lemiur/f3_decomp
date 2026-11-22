@@ -30,6 +30,8 @@ struct FUN_005ecde0_Owner {
     int FUN_005ecde0(int value);
 };
 
+// pdb: BSSimpleArray<PathingLocation,1024>::Add | PathBuilder.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aValue
 int FUN_005ecde0_Owner::FUN_005ecde0(int value) {
     int index = FUN_005ebec0();
     FUN_005eaa60(unk04 + index, 1);
@@ -61,6 +63,7 @@ struct Owner303 {
     void FUN_005ffb40(unsigned int* state, float value);
     void FUN_005ffc00();
 };
+// pdb: PathingLOSGridMap::ClearSeen | PathingLOSGridMap.obj | fnv360_0822_retail, objrun, medium
 void Owner303::FUN_005ffc00() {
     value18 = 0.0f;
     FUN_005ff580();
@@ -74,6 +77,8 @@ public:
     void PathingLocation_SetupData(unsigned int first, unsigned int second, unsigned int third);
     FUN_005fd540(unsigned int first, unsigned int second, unsigned int third);
 };
+// pdb: PathingLocation::PathingLocation | PathingLocation.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BSTSmartPointer<class CraftingSubMenus::EnchantConstructMenu::ItemChangeEntry,struct BSTSmartPointerIntrusiveRefCount>::operator!=)
+// pdb params: aLocation, apCell, apWorldSpace
 FUN_005fd540::FUN_005fd540(unsigned int first, unsigned int second, unsigned int third) {
     PathingLocation_SetupData(first, second, third);
 }
@@ -110,6 +115,7 @@ struct FUN_005f14e0
     FUN_005f14e0();
 };
 
+// pdb: CombatCoverLocation::CombatCoverLocation | Pathfind.obj | fnv360_0822_retail, call_gap_sim, low
 FUN_005f14e0::FUN_005f14e0()
     : b00(0), b01(0), b02(0), unk04(0), pos08(DAT_0108ec68), 
       b70(0), b71(0), b72(0), b73(0), b74(0), b75(0)
@@ -130,6 +136,8 @@ struct Scratch {
 
 bool FUN_005f3f90(int a1, int a2, Scratch* out, int zero, float f, int a4, int a5);
 
+// pdb: Pathing::ComputeTeleportDoorPathLength | Pathfind.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aOrigin, aDestination, aMaxDist, apActorLockData, aeDoorLockDisp
 float FUN_005f4110(int a1, int a2, float f, int a4, int a5)
 {
     Scratch s;
@@ -158,6 +166,7 @@ struct Obj {
     void FUN_005e8d50();
     void FUN_005e9a60();
 };
+// pdb: NavMeshObstacleManager::Release | NavMeshObstacleManager.obj | fnv360_0822_retail, call_gap, low
 void Obj::FUN_005e9a60() {
     FUN_005e8d50();
     if (unkBC) { unkBC->Delete(1); unkBC = 0; }
@@ -176,6 +185,8 @@ inline void DestroyEntries1176(Entry1176* first,unsigned int count) {
  while(count>0) { first->Reset(); ++first; --count; }
 }
 struct Array1176 { int unk00; Entry1176* data04; unsigned int size08,last0C; void FUN_005f24e0(unsigned int,unsigned int); void FUN_005f3610(unsigned int); };
+// pdb: BSSimpleArray<PathingCoverLocation,1024>::SetReservedSize | Pathfind.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiReserveSize
 void Array1176::FUN_005f3610(unsigned int index) {
  if(index!=last0C) {
   if(index<size08) { DestroyEntries1176(data04+index,size08-index); size08=index; }
@@ -214,6 +225,8 @@ public:
 
 bool BuildPathWithDoors(void* apFirst, void* apSecond, PathBuildObj* apPath, int aiFlag, int aiMode);
 
+// pdb: Pathing::ComputeLowPathDistance | Pathfind.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aStartLocation, aGoalLocation, apReturnDistance
 bool FUN_005f54e0(void* apFirst, void* apSecond, float* pfResult)
 {
     PathBuildObj o;
@@ -383,6 +396,8 @@ public:
     void PathingLocation_SetupData(void* apArg,int k);   // thiscall, 1 stack arg
 };
 
+// pdb: PathingLocation::PathingLocation | PathingLocation.obj | fnv360_0721_retail, call_seq, low
+// pdb params: apRef
 FUN_005fd450_cls::FUN_005fd450_cls(PV* apObj)
 {
     *(void**)this=&DAT_00dc4dc0;
@@ -407,6 +422,7 @@ FUN_005fd450_cls::FUN_005fd450_cls(PV* apObj)
 // @f3 0x005fc770 (community match, verified in this file)
 namespace f3m_005fc770 {
 struct Routine_005fc770{unsigned int unk000;unsigned int unk004;unsigned int unk008;unsigned int unk00C;unsigned int unk010;unsigned int unk014;unsigned int unk018;unsigned int unk01C;unsigned int unk020;unsigned short value024;void FUN_005fc770();};
+// pdb: PathingLocation::ClearTriangleData | PathingLocation.obj | fnv360_0822_retail, call_gap, medium
 void Routine_005fc770::FUN_005fc770(){value024=65535;}
 }   // namespace f3m_005fc770
 
@@ -429,6 +445,7 @@ struct FUN_005e9570 : FUN_005e9570_Base {
     virtual ~FUN_005e9570();
 };
 
+// pdb: LockFreeQueue<bhkRigidBody *>::~LockFreeQueue<bhkRigidBody *> | NavMeshObstacleManager.obj | fnv360_0822_debug, call_seq, low, conflict (bridge: LockFreeQueue<bhkRigidBody *>::RemoveAll)
 FUN_005e9570::~FUN_005e9570()
 {
     FUN_005e8c20(1);
@@ -469,6 +486,8 @@ struct Owner5500 {
     void FUN_005e5500(unsigned int value);
 };
 
+// pdb: NavMeshObstacleManager::EnableNavMesh | NavMeshObstacleManager.obj | fnv360_0721_beta, objrun, medium
+// pdb params: aiNavMeshID
 void Owner5500::FUN_005e5500(unsigned int value)
 {
     sub120.FUN_0049fac0(value);
@@ -686,6 +705,8 @@ public:
     FUN_005fd6d0(PVRef* apObj);
 };
 
+// pdb: PathingLocation::PathingLocation | PathingLocation.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aWorldLocation
 FUN_005fd6d0::FUN_005fd6d0(PVRef* apObj)
 {
     unsigned int first = 0;
@@ -755,6 +776,7 @@ struct FUN_005e47c0_Owner {
     bool FUN_005e47c0();
 };
 
+// pdb: NavMeshObstacleManager::SwapNavmeshes | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
 bool FUN_005e47c0_Owner::FUN_005e47c0() {
     bool result = false;
     unsigned int count = unkF0;
@@ -807,6 +829,7 @@ public:
     Entry* data08;
 };
 
+// pdb: ThreadSpecificInterfaceManager<LockFreeQueue<bhkRigidBody *>::LockFreeQueueInterface>::~ThreadSpecificInterfaceManager<LockFreeQueue<bhkRigidBody *>::LockFreeQueueInterface> | NavMeshObstacleManager.obj | fnv360_0822_retail, call_seq, medium
 void Owner::FUN_005e7750()
 {
     for (unsigned int i = 0; i < count00; ++i)
@@ -844,6 +867,7 @@ struct Arr30 {
     int FUN_005eb040(unsigned int ncap, unsigned int count);
 };
 
+// pdb: BSSimpleArray<VirtualPathingNode,1024>::AddUninitialized | PathBuilder.obj | fnv360_0822_retail, caller_sim, low
 int Arr30::FUN_005eb230()
 {
     if (count == cap) {
@@ -897,6 +921,8 @@ struct ArrayCls {
     void FUN_005ebdf0(unsigned int index, bool flag);
 };
 
+// pdb: BSSimpleArray<PathingLocation,1024>::SetSize | PathBuilder.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiNewSize, abFreeMemory
 void ArrayCls::FUN_005ebdf0(unsigned int index, bool flag)
 {
     if (index == 0)
@@ -954,6 +980,8 @@ struct Container {
     void FUN_005eb150(int a1, int a2);
 };
 
+// pdb: BSSimpleArray<NavMeshEdgeLocation,1024>::_ReallocateBuffer | PathBuilder.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiNewSize, aiCopyCount
 void Container::FUN_005eb150(int a1, int a2)
 {
     if (m04 != 0) {
@@ -977,6 +1005,8 @@ namespace f3m_005f7ae0 {
 
 extern int FUN_005f69c0(int a1, int a2, int a3, int a4, int a5);
 
+// pdb: Pathing::CanCreatePath | Pathfind.obj | fnv360_0721_retail, call_seq, medium
+// pdb params: aStartLocation, aGoalLocation, apAvoidNodeArray
 void FUN_005f7ae0(int a1, int a2, int a3)
 {
     FUN_005f69c0(a1, a2, a3, 0, 0);
@@ -992,6 +1022,8 @@ struct Owner5fcba0 {
  void PathingLocation_SetupData(const Point5fcba0*, int, void*);
  void FUN_005fcba0(const Point5fcba0*);
 };
+// pdb: PathingLocation::SetLocation | PathingLocation.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aLocation
 void Owner5fcba0::FUN_005fcba0(const Point5fcba0* point) {
  position=*point;
  unk24=0xffff;
@@ -1013,6 +1045,8 @@ struct Location5fc780 {
  int unk00; Vector5fc780 position; int unk10; int unk14; int unk18; int unk1C; int unk20;
  bool FUN_005fc780(Location5fc780*,float);
 };
+// pdb: PathingLocation::IsCloseTo | PathingLocation.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aOtherLoc, afTolerance
 bool Location5fc780::FUN_005fc780(Location5fc780* other,float radius) {
  if(other->unk1C!=unk1C) return false;
  if(unk1C) { if(other->unk20!=unk20) return false; }
@@ -1040,6 +1074,7 @@ struct Buffer5eb0e0 {
  void FUN_005eab60(void*,void*,unsigned);
  void FUN_005eb0e0(unsigned,unsigned);
 };
+// pdb: BSSimpleArray<PathingLocation,1024>::AddUninitialized | PathBuilder.obj | fnv360_0822_retail, call_seq, low
 void Buffer5eb0e0::FUN_005eb0e0(unsigned size,unsigned oldCount) {
  if(data) {
   if(oldCount==count) data=vtable->resize(this,data,size);
@@ -1059,6 +1094,8 @@ void Buffer5eb0e0::FUN_005eb0e0(unsigned size,unsigned oldCount) {
 
 // @f3 0x005fc720 (community match, verified in this file)
 namespace f3m_005fc720 {
+// pdb: PathingLocation::SetTriangleIndex | PathingLocation.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: aiTriIndex
 struct Owner1429{unsigned int unk00;unsigned int unk04;unsigned int unk08;unsigned int unk0C;unsigned int unk10;unsigned int unk14;unsigned int unk18;unsigned int unk1C;unsigned int unk20;unsigned short value24;void FUN_005fc720(unsigned short);};void Owner1429::FUN_005fc720(unsigned short value){value24=value;}
 }   // namespace f3m_005fc720
 
@@ -1074,6 +1111,7 @@ struct CodexDeleteArray {
     unsigned capacity;
     CodexDeleteArray* FUN_005f39f0(unsigned);
 };
+// pdb: BSSimpleArray<FastNavMeshEdgeLocationProxy,1024>::`scalar deleting destructor' | Pathfind.obj | fnv360_0822_retail, vtable, medium
 CodexDeleteArray* CodexDeleteArray::FUN_005f39f0(unsigned flags) {
     vtable = DAT_00e020b0;
     if (data) {
@@ -1111,6 +1149,7 @@ struct Owner1450
     Target1450* target04;
     int FUN_005ec150();
 };
+// pdb: PathBuilder::UpdatePathMoveToLow | PathBuilder.obj | fnv360_0721_beta, call_gap, low
 int Owner1450::FUN_005ec150()
 {
     target04->FUN_005ec100();
@@ -1172,6 +1211,8 @@ struct FUN_005ffb40_cls
     void FUN_005ffb40(unsigned int aArg, float aF);
 };
 
+// pdb: PathingLOSGridMap::Initialize | PathingLOSGridMap.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arCenter, afRadius
 void FUN_005ffb40_cls::FUN_005ffb40(unsigned int aArg, float aF)
 {
     m_4c.FUN_0086cc50();
@@ -1195,6 +1236,7 @@ void FUN_005ffb40_cls::FUN_005ffb40(unsigned int aArg, float aF)
 namespace f3m_005fcbf0 {
 struct Link5f {int unk00; void** unk04;};
 struct Owner5f {int unk00,unk04,unk08,unk0C; void* unk10; Link5f* unk14; int unk18,unk1C,unk20; unsigned short unk24; unsigned char unk26; void* FUN_005fcbf0();};
+// pdb: PathingLocation::GetBestNavMeshInfo | PathingLocation.obj | fnv360_0822_retail, call_gap, medium
 void* Owner5f::FUN_005fcbf0(){if(unk10)return unk10;if(unk14 && (unk26&1))return *unk14->unk04;return 0;}
 }   // namespace f3m_005fcbf0
 
@@ -1206,6 +1248,7 @@ struct List4850 { Node4850 head; Node4850* Head() { return &head; } void FUN_006
 struct Owner4850 {
 int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C; int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; int unkBC; int unkC0; int unkC4; int unkC8; int unkCC; int unkD0; int unkD4; int unkD8; int unkDC; int unkE0; int unkE4; int unkE8; int unkEC; int unkF0; int unkF4; int unkF8; int unkFC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124;
 List4850 list; bool FUN_005e4850(); };
+// pdb: NavMeshObstacleManager::ProcessDisabledNavMeshes | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
 bool Owner4850::FUN_005e4850() { for(Node4850* node=list.Head(); node; node=node->next) { if(!node->next && !node->value) break; FUN_005bb300(node->value,1); } list.FUN_006c8220(); return true; }
 }   // namespace f3m_005e4850
 
@@ -1291,6 +1334,8 @@ struct Owner1476
     Component1476 component;
     void FUN_005e5520(unsigned int value);
 };
+// pdb: NavMeshObstacleManager::DisableNavMesh | NavMeshObstacleManager.obj | fnv360_0721_beta, objrun, medium
+// pdb params: aiNavMeshID
 void Owner1476::FUN_005e5520(unsigned int value)
 {
     component.FUN_0049fac0(&value);
@@ -1304,6 +1349,8 @@ namespace Allocation1492
     extern Heap DAT_01090a78;
 }
 struct Allocator1492 { void* FUN_005f2450(unsigned int); };
+// pdb: BSSimpleArray<PathingCoverLocation,1024>::_Allocate | Pathfind.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiSizeInItem
 void* Allocator1492::FUN_005f2450(unsigned int count)
 {
     return Allocation1492::DAT_01090a78.FUN_0086b930(count*84);
@@ -1316,6 +1363,8 @@ namespace Allocation1493
     extern Heap DAT_01090a78;
 }
 struct Allocator1493 { void* FUN_005f2470(void*,unsigned int); };
+// pdb: BSSimpleArray<PathingCoverLocation,1024>::_Reallocate | Pathfind.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apBuffer, aiNewSizeInItem
 void* Allocator1493::FUN_005f2470(void* memory,unsigned int count)
 {
     return Allocation1493::DAT_01090a78.FUN_0086bae0(memory,count*84);
@@ -1328,6 +1377,8 @@ namespace Allocation1494
     extern Heap DAT_01090a78;
 }
 struct Allocator1494 { void* FUN_005f2490(void*,unsigned int); };
+// pdb: BSSimpleArray<BGSDistantTreeBlock::InstanceData,1024>::_Reallocate | BGSDistantTreeBlock.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apBuffer, aiNewSizeInItem
 void* Allocator1494::FUN_005f2490(void* memory,unsigned int count)
 {
     return Allocation1494::DAT_01090a78.FUN_0086bae0(memory,count*32);
@@ -1342,6 +1393,8 @@ struct Owner1495
     Map1495 map08;
     bool FUN_005fff60(unsigned int);
 };
+// pdb: PathingLOSMap::IsNavMeshInMap | PathingLOSMap.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiNavMeshID
 bool Owner1495::FUN_005fff60(unsigned int key)
 {
     return map08.FUN_00bea7b0(key,key);
@@ -1355,6 +1408,8 @@ struct State5fc040 {
  int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20;
  void FUN_005fc040(Stream5fc040*);
 };
+// pdb: PathingAvoidNode::SaveGame | PathingAvoidNode.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apSaveGameBuffer
 void State5fc040::FUN_005fc040(Stream5fc040* stream) {
  unsigned char kind=(unsigned char)unk20;
  stream->FUN_006e1830(&kind,1,0);
@@ -1378,6 +1433,7 @@ struct FUN_005ec420 {
  int unk00; int unk04; Entry5EC first; Entry5EC second; void** vtable58; int unk5C; int unk60; int unk64;
  FUN_005ec420();
 };
+// pdb: RayCastPathRequest::RayCastPathRequest | PathBuilder.obj | fnv360_0822_retail, call_gap, low
 FUN_005ec420::FUN_005ec420() { vtable58=DAT_00e01ec4; unk5C=0; unk60=0; unk64=0; }
 }   // namespace f3m_005ec420
 
@@ -1387,6 +1443,7 @@ namespace f3m_005e0250 {
 extern void (__stdcall *DAT_00e01acc)(void*);
 struct Heap5E02 { void FUN_0086ba60(void*); };
 struct Array5E02 { void** vtable; void* buffer; unsigned size; unsigned capacity; void* FUN_005e0250(unsigned); };
+// pdb: BSSimpleArray<NavMeshObstacleVertex *,1024>::`scalar deleting destructor' | NavMeshObstacleCutter.obj | fnv360_0822_retail, vtable, medium
 void* Array5E02::FUN_005e0250(unsigned flags) {
  vtable=DAT_00e01ac4;
  if(buffer) { DAT_00e01acc(buffer); buffer=0; capacity=0; size=0; }
@@ -1400,6 +1457,8 @@ namespace f3m_005eb2f0 {
 struct Element5eb2 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; void FUN_00600960();};
 struct Array5eb2;typedef Element5eb2* (__thiscall *Allocate5eb2)(Array5eb2*,unsigned);typedef void (__thiscall *Free5eb2)(Array5eb2*,Element5eb2*);struct Table5eb2 {int unk00;Allocate5eb2 unk04;Free5eb2 unk08;};
 struct Array5eb2 {Table5eb2* unk00;Element5eb2* unk04;unsigned unk08,unk0C;void FUN_005c44f0(Element5eb2*,Element5eb2*,unsigned);void FUN_005eb2f0(unsigned,bool);};
+// pdb: BSSimpleArray<PathingNode,1024>::Remove | PathBuilder.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiIndex, abShrink
 void Array5eb2::FUN_005eb2f0(unsigned index,bool shrink){if(shrink){if(unk0C>0x400){if(unk08<=unk0C-0x800)goto resize;}else if(unk08<=unk0C/4)goto resize;} {unk04[index].FUN_00600960();FUN_005c44f0(unk04+index,unk04+index+1,unk08-index-1);--unk08;return;}resize: unsigned capacity=unk0C>0x800?unk0C-0x400:unk0C/2;Element5eb2* storage=unk00->unk04(this,capacity);FUN_005c44f0(storage,unk04,index);unk04[index].FUN_00600960();FUN_005c44f0(storage+index,unk04+index+1,unk08-1);unk00->unk08(this,unk04);--unk08;unk04=storage;unk0C=capacity;}
 }   // namespace f3m_005eb2f0
 
@@ -1413,6 +1472,8 @@ struct Owner1500
     Heap1500* heap10;
     void* FUN_005eb7e0(unsigned int);
 };
+// pdb: BSScrapArray<bool,1024>::_Allocate | PathBuilder.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiSizeInItem
 void* Owner1500::FUN_005eb7e0(unsigned int bytes)
 {
     return heap10->ScrapHeap_Allocate(bytes,DAT_00e27ed4);
@@ -1440,6 +1501,8 @@ struct Item5eb0b0 {
  int unk38;
  void FUN_00600960();
 };
+// pdb: BSSimpleArray<PathingNode,1024>::_DestructItems | PathBuilder.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apFirstAddr, aiCount
 void __stdcall FUN_005eb0b0(Item5eb0b0* items,unsigned count) {
  while(count>0) {items->FUN_00600960();++items;--count;}
 }
@@ -1457,6 +1520,8 @@ struct Owner5fc4d0 {
  void* vtable;Vector5fc4d0 position;Source5fc4d0* source;unsigned unk14;void* first;void* second;unsigned id;unsigned short index;unsigned char flags;
  Owner5fc4d0* FUN_005fc4d0(Vector5fc4d0*,Source5fc4d0*);
 };
+// pdb: PathingLocation::PathingLocation | PathingLocation.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aLocation, apNavMeshInfo
 Owner5fc4d0* Owner5fc4d0::FUN_005fc4d0(Vector5fc4d0* point,Source5fc4d0* value) {
  vtable=&DAT_00dc4dc0;position=*point;flags=0;source=value;unk14=0;
  second=FUN_00c0050a(value->Get(),0,&DAT_00f46078,&DAT_00f47a58,0);
@@ -1517,6 +1582,8 @@ struct Holder5fc8f0
     bool FUN_005fc8f0(void** apOut, unsigned short* apIndex);
 };
 
+// pdb: PathingLocation::GetNavMeshAndTriangle | PathingLocation.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aRetNavMesh, aRetTriangle
 bool Holder5fc8f0::FUN_005fc8f0(void** apOut, unsigned short* apIndex)
 {
     if (!unk10)
@@ -1548,6 +1615,8 @@ struct Resource5f2190 {
  Vec5f2190 FUN_005bd630(int);
 };
 struct Subject5f2190 { bool FUN_005fda30(int); bool FUN_005fc8f0(NiPointer<Resource5f2190>*,int*); };
+// pdb: Pathing::GetNavmeshNormalForLocation | Pathfind.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aLocation, aRetNormal
 bool __cdecl FUN_005f2190(Subject5f2190* subject,Vec5f2190* out) {
  if(!subject->FUN_005fda30(0)) return false;
  NiPointer<Resource5f2190> resource; int index;
@@ -1568,6 +1637,8 @@ struct Owner5fc670 {
  void* vtable;Vector5fc670 position;Source5fc670* source;unsigned unk14;void* first;void* second;unsigned id;unsigned short index;unsigned char flags;
  void FUN_005fc670(Source5fc670*);
 };
+// pdb: PathingLocation::SetNavMeshInfo | PathingLocation.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: apNavMeshInfo
 void Owner5fc670::FUN_005fc670(Source5fc670* value) {
  unk14=0;source=value;
  second=FUN_00c0050a(value->Get(),0,&DAT_00f46078,&DAT_00f47a58,0);
@@ -1584,6 +1655,7 @@ namespace Destroy4240 {
 class PathingLocation { public: virtual void FUN_005fc810(void*); __forceinline ~PathingLocation() {} int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; };
 class PathingCoverLocation: public PathingLocation { public: __forceinline ~PathingCoverLocation() {} };
 class CoverArray { public: __forceinline virtual ~CoverArray() { Clear(); } virtual PathingCoverLocation* Allocate(unsigned); virtual void Free(PathingCoverLocation*); PathingCoverLocation* data; unsigned count,capacity; __forceinline void Clear() { if(data) { PathingCoverLocation* p=data; for(unsigned remaining=count;remaining>0;++p,--remaining) p->PathingCoverLocation::~PathingCoverLocation(); Free(data); data=0; capacity=0; count=0; } } void FUN_005f4240(); };
+// pdb: BSSimpleArray<PathingCoverLocation,1024>::~BSSimpleArray<PathingCoverLocation,1024> | Pathfind.obj | fnv360_0822_debug, call_seq, medium
 void CoverArray::FUN_005f4240() { this->CoverArray::~CoverArray(); }
 }
 }   // namespace f3m_005f4240
@@ -1606,6 +1678,7 @@ public:
  virtual __forceinline ~BSScrapArray() {if(pBuffer) {DAT_00e01f1c(pBuffer);pBuffer=0;capacity=0;size=0;}}
  void FUN_005eb9c0();
 };
+// pdb: BSScrapArray<PathBuilder::VirtualNodeSegment,1024>::~BSScrapArray<PathBuilder::VirtualNodeSegment,1024> | PathBuilder.obj | fnv360_0822_debug, call_seq, medium
 void BSScrapArray<Segment5eb9c0,1024>::FUN_005eb9c0() {
  this->BSScrapArray::~BSScrapArray();
 }
@@ -1616,6 +1689,7 @@ namespace f3m_005e6280 {
 extern void (__stdcall *DAT_00e01cec)(void*);
 struct Heap5e6280 { void FUN_0086ba60(void*); };
 struct Owner5e6280 { void* unk00; void* unk04; int unk08; int unk0C; Owner5e6280* FUN_005e6280(unsigned); };
+// pdb: BSSimpleArray<TESObjectCELL *,1024>::`scalar deleting destructor' | NavMeshObstacleManager.obj | fnv360_0822_retail, vtable, medium
 Owner5e6280* Owner5e6280::FUN_005e6280(unsigned flags) {
  unk00=&DAT_00e01ce4;
  if(unk04) { DAT_00e01cec(unk04); unk04=0; unk0C=0; unk08=0; }
@@ -1630,6 +1704,8 @@ Owner5e6280* Owner5e6280::FUN_005e6280(unsigned flags) {
 namespace f3m_005eb440 {
 namespace match5eb440 {
 struct Heap5eb440 {void* FUN_0086b930(unsigned);};extern Heap5eb440 DAT_01090a78;
+// pdb: BSSimpleArray<NavMeshEdgeLocation,1024>::_Allocate | PathBuilder.obj | fnv360_0822_retail, vtable, medium
+// pdb params: aiSizeInItem
 void* __stdcall FUN_005eb440(unsigned count) {return DAT_01090a78.FUN_0086b930(count*24);}
 }
 }   // namespace f3m_005eb440
@@ -1651,6 +1727,7 @@ public:
  virtual __forceinline ~BSScrapArray() {if(pBuffer) {DAT_00e01f08(pBuffer);pBuffer=0;capacity=0;size=0;}}
  void FUN_005eb840();
 };
+// pdb: BSScrapArray<bool,1024>::~BSScrapArray<bool,1024> | PathBuilder.obj | fnv360_0822_debug, call_seq, low
 void BSScrapArray<Segment5eb840,1024>::FUN_005eb840() {
  this->BSScrapArray::~BSScrapArray();
 }
@@ -1659,6 +1736,8 @@ void BSScrapArray<Segment5eb840,1024>::FUN_005eb840() {
 namespace f3m_005ffe10 {
 struct Map5FFE { int unk00; int unk04; int unk08; int unk0C; bool FUN_00bea7b0(unsigned,unsigned*); };
 struct Owner5FFE { int unk00; int unk04; Map5FFE map; char* data; char* FUN_005ffe10(unsigned); };
+// pdb: PathingLOSMap::GetArrayForNavMesh | PathingLOSMap.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aNavMeshID
 char* Owner5FFE::FUN_005ffe10(unsigned key) {
  if(map.FUN_00bea7b0(key,&key)) return data+key;
  return 0;
@@ -1672,6 +1751,8 @@ namespace f3m_005eb970 {
 struct Alloc5eb970 {void* ScrapHeap_Allocate(unsigned int,unsigned int);void ScrapHeap_Deallocate(void*);};
 struct Point5eb970 {float x;float y;float z;};
 struct Array5eb970 {int unk00;Point5eb970* buffer;unsigned int size;unsigned int capacity;Alloc5eb970* allocator;Point5eb970* FUN_005eb970(Point5eb970*,unsigned int);};
+// pdb: BSScrapArray<EffectTaskData,1024>::_Reallocate | ProcessLists.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apBuffer, aiNewSizeInItem
 Point5eb970* Array5eb970::FUN_005eb970(Point5eb970* old,unsigned int count) {
  Point5eb970* replacement=(Point5eb970*)allocator->ScrapHeap_Allocate(count*sizeof(Point5eb970),DAT_00e27ed4);
  memmove(replacement,old,size*sizeof(Point5eb970));
@@ -1683,6 +1764,7 @@ Point5eb970* Array5eb970::FUN_005eb970(Point5eb970* old,unsigned int count) {
 // @f3 0x005ffdf0 (community match, verified in this file)
 namespace f3m_005ffdf0 {
 struct Owner5ffd {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; signed char* unk18;int unk1C,unk20,unk24,unk28;unsigned unk2C;unsigned FUN_005ffdf0();};
+// pdb: PathingLOSMap::ClearUnseenTriangles | PathingLOSMap.obj | fnv360_0822_retail, call_gap_sim, low
 unsigned Owner5ffd::FUN_005ffdf0(){unsigned i;for(i=0;i<unk2C;++i){signed char* value=unk18+i;if(*value<=0)*value=127;}return i;}
 }   // namespace f3m_005ffdf0
 
@@ -1697,6 +1779,7 @@ struct BaseGuard5ebbb0 {
  Owner5ebbb0* p; __forceinline BaseGuard5ebbb0(Owner5ebbb0* owner):p(owner) { p->table=&DAT_00e01f3c; }
  __forceinline ~BaseGuard5ebbb0() { void* buffer=p->buffer; p->table=&DAT_00e00a3c; if(buffer) { DAT_00e00a44(p,buffer); p->buffer=0; p->capacity=0; p->count=0; } }
 };
+// pdb: BSScrapArray<int,1024>::~BSScrapArray<int,1024> | PathBuilder.obj | fnv360_0822_debug, call_seq, medium
 void Owner5ebbb0::FUN_005ebbb0() {
  
  BaseGuard5ebbb0 guard(this);
@@ -1726,6 +1809,8 @@ struct Mgr_5f1240
 
 extern Mgr_5f1240* DAT_0107a0d8;
 
+// pdb: Pathing::GetPotentialNavMeshInfoForLocation | Pathfind.obj | fnv360_0822_retail, call_seq, high
+// pdb params: apCell
 void FUN_005f1240(void* arg)
 {
     DAT_0107a0d8->FUN_00433ff0()->FUN_005d9f10(arg);
@@ -1735,6 +1820,8 @@ void FUN_005f1240(void* arg)
 namespace f3m_005eabd0 {
 extern void* __cdecl FUN_00c01530(void*,const void*,unsigned);
 struct Entry5eabd0 { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; };
+// pdb: BSSimpleArray<NavMeshEdgeLocation,1024>::_MoveItems | PathBuilder.obj | fnv360_0822_retail, call_seq, low
+// pdb params: apDestAddr, apSrcAddr, aiCount
 void __stdcall FUN_005eabd0(Entry5eabd0* dest,Entry5eabd0* source,unsigned count) {
  if(count>0) {
   if(dest<source) { for(unsigned i=0;i<count;++i) FUN_00c01530(dest+i,source+i,24); }
@@ -1765,6 +1852,8 @@ struct CodexFortyArray {
     void FUN_005ebdf0(unsigned,bool);
     void FUN_005ecef0(CodexFortyArray*);
 };
+// pdb: BSSimpleArray<PathingLocation,1024>::CopyTo<1024> | PathBuilder.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: aDestArray
 void CodexFortyArray::FUN_005ecef0(CodexFortyArray* destination) {
     destination->FUN_005ebdf0(size,true);
     for (unsigned i=0;i<size;++i) destination->data[i].FUN_005fc480(&data[i]);
@@ -1848,6 +1937,8 @@ Item5e4ce0* Owner5e4ce0::FUN_005e4ce0(Input5e4ce0* input) {
 namespace f3m_005f2730 {
 namespace Forward2730 {
 extern void __cdecl FUN_005f1970(unsigned,unsigned,unsigned,unsigned,unsigned,unsigned);
+// pdb: Pathing::CheckLineOfSight | Pathfind.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aStartLocation, aGoalLocation, apReturnIntersectionLocation, apFilter
 void FUN_005f2730(unsigned a,unsigned b,unsigned c,unsigned d) { FUN_005f1970(a,b,0,65535,c,d); }
 }
 }   // namespace f3m_005f2730
@@ -1882,6 +1973,8 @@ struct FUN_005eb740 : Array5eb740 {
     virtual ~FUN_005eb740();
 };
 
+// pdb: BSScrapArray<bool,1024>::BSScrapArray<bool,1024> | PathBuilder.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: aiReserveSize, aiInitialSize, apHeap
 FUN_005eb740::FUN_005eb740(unsigned int reserve, unsigned int count, Allocator5eb740* alloc) {
     if (!alloc) alloc = Heap5eb740::DAT_01090a78.FUN_0086bcb0();
     allocator = alloc;
@@ -1910,6 +2003,7 @@ public:
  PathingLOSGridCell** buffer;unsigned int size;unsigned int capacity;
  Array5fe8f0* FUN_005fe8f0(unsigned int);
 };
+// pdb: BSSimpleArray<PathingLOSGridCell *,1024>::`scalar deleting destructor' | PathingLOSGridMap.obj | fnv360_0822_retail, vtable, medium
 Array5fe8f0* Array5fe8f0::FUN_005fe8f0(unsigned int flags) {
  this->BSSimpleArray::~BSSimpleArray();
  if(flags&1) heap5fe8f0::DAT_01090a78.FUN_0086ba60(this);
@@ -1928,6 +2022,8 @@ void Array5F38::FUN_005f3840(){table=DAT_00e02100;if(data){DAT_00e02108(this,dat
 // @f3 0x005e6780 (community match, verified in this file)
 namespace f3m_005e6780 {
 struct Form5e67 {int unk00;unsigned char unk04;bool TESObjectDOOR_IsSlidingDoor();};struct Input5e67 {int unk00,unk04,unk08;void* unk0C;int unk10,unk14,unk18;Form5e67* unk1C;};struct Node5e67 {void* unk00;Node5e67* unk04;};struct List5e67 {Node5e67 head;Node5e67* Head(){return &head;}bool Contains(void* item){for(Node5e67* p=Head();p;p=p->unk04)if(p->unk00==item)return true;return false;}void FUN_00421610(void**);void FUN_0049fac0(void**);};struct Owner5e67 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; List5e67 unk2C;int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; List5e67 unk8C,unk94;void FUN_005e6430(Input5e67*);void FUN_005e6780(Input5e67*);};
+// pdb: NavMeshObstacleManager::OnDoorRemove | NavMeshObstacleManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apDoorRef
 void Owner5e67::FUN_005e6780(Input5e67* input){Input5e67* original=input;Form5e67* form=original->unk1C;if(form->unk04==0x1c&&!form->TESObjectDOOR_IsSlidingDoor())FUN_005e6430(original);unk2C.FUN_00421610((void**)&input);if(unk8C.Contains(original)){unk8C.FUN_00421610((void**)&input);return;}void* id=original->unk0C;if(!unk94.Contains(id)){input=(Input5e67*)id;unk94.FUN_0049fac0((void**)&input);}}
 }   // namespace f3m_005e6780
 
@@ -1943,6 +2039,7 @@ struct CodexDeleteArrayE {
     unsigned capacity;
     CodexDeleteArrayE* FUN_005f3a90(unsigned);
 };
+// pdb: BSSimpleArray<float,1024>::`scalar deleting destructor' | Pathfind.obj | fnv360_0822_retail, vtable, medium
 CodexDeleteArrayE* CodexDeleteArrayE::FUN_005f3a90(unsigned flags) {
     vtable = DAT_00e020ec;
     if (data) {
@@ -2011,6 +2108,8 @@ namespace f3m_005e00d0 {
 extern void* __cdecl FUN_00bffa60(void*,const void*,unsigned);
 struct Allocator5E00 {void* ScrapHeap_Allocate(unsigned,unsigned);void ScrapHeap_Deallocate(void*);};
 struct Array5E00 {int unk00;void* data;unsigned size;unsigned capacity;Allocator5E00* allocator;void* FUN_005e00d0(void*,unsigned);};
+// pdb: BSScrapArray<CombatPlanNode *,1024>::_Reallocate | CombatPlanner.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apBuffer, aiNewSizeInItem
 void* Array5E00::FUN_005e00d0(void* old,unsigned count){
  void* result=allocator->ScrapHeap_Allocate(count*4,DAT_00e27ed4);
  FUN_00bffa60(result,old,size*4);
@@ -2078,6 +2177,7 @@ namespace match5e0200 {
 struct Owner5e0200;extern void* DAT_00e01ab0;extern void (__thiscall *DAT_00e01ab8)(Owner5e0200*,void*);
 struct Heap5e0200 {void FUN_0086ba60(void*);};extern Heap5e0200 DAT_01090a78;
 struct Owner5e0200 {void* vtable;void* data;unsigned count,capacity;Owner5e0200* FUN_005e0200(unsigned);};
+// pdb: BSSimpleArray<PortalEdgeSwap,1024>::`scalar deleting destructor' | NavMeshObstacleCutter.obj | fnv360_0822_retail, vtable, medium
 Owner5e0200* Owner5e0200::FUN_005e0200(unsigned flags) {vtable=&DAT_00e01ab0;if(data){DAT_00e01ab8(this,data);data=0;capacity=0;count=0;}if(flags&1)DAT_01090a78.FUN_0086ba60(this);return this;}
 }
 }   // namespace f3m_005e0200
@@ -2102,6 +2202,8 @@ void Array5F37::FUN_005f3780(){table=DAT_00e020ec;if(data){DAT_00e020f4(this,dat
 // @f3 0x005ebec0 (community match, verified in this file)
 namespace f3m_005ebec0 {
 struct Array5ebec0 { void** table; void* buffer; unsigned count; unsigned capacity; void FUN_005eb0e0(unsigned,unsigned); unsigned FUN_005ebec0(); };
+// pdb: BSSimpleArray<NavMeshStaticAvoidNode,1024>::Add | NavMesh.obj | fnv360_0822_retail, call_seq, low
+// pdb params: aValue
 unsigned Array5ebec0::FUN_005ebec0() {
  if(count==capacity) {
   if(!capacity) { buffer=((void* (__thiscall *)(Array5ebec0*,unsigned))table[1])(this,4); capacity=4; ++count; return count-1; }
@@ -2135,6 +2237,8 @@ struct FUN_005f1460_Cls {
     char __thiscall FUN_005f1460(unsigned short param_2) const;
 };
 
+// pdb: PathingLOSMap::SetAt | Pathfind.obj | fnv360_0721_beta, call_gap, low
+// pdb params: aiOffset, acValue
 char __thiscall FUN_005f1460_Cls::FUN_005f1460(unsigned short param_2) const {
     char result = 0;
     unsigned short* ptr = (unsigned short*)(unk3C + (param_2 * 16) + 6);
@@ -2227,6 +2331,7 @@ struct FUN_005e0650
     ~FUN_005e0650();
 };
 
+// pdb: NavMeshObstacleCutter::~NavMeshObstacleCutter | NavMeshObstacleCutter.obj | fnv360_0822_retail, call_seq, low, conflict (bridge: NavMeshObstacleCutter::ResetNavMeshFromObstacleUndoData)
 FUN_005e0650::~FUN_005e0650()
 {
     for (unsigned int i = 0; i < m30.GetSize(); i++)
@@ -2244,6 +2349,8 @@ struct Point { float x,y,z; Point operator-(const Point& rhs) const { Point p={x
 struct Record { Point start,end; float radius,strength; int kind; __declspec(noinline) float FUN_005fbea0(Point* point) const; };
 __declspec(noinline) float Record::FUN_005fbea0(Point* point) const { float radiusSquared=radius*radius; float distance=DAT_00e02188; float result=0; switch(kind) { case 0: case 2: { Point offset=start-*point; distance=offset.Squared(); break; } case 1: { Point direction=end-start; Point offset=*point-start; float length=direction.Squared(); float projection=direction.Dot(offset); if(projection<0 || length<projection) distance=DAT_00e02188; else distance=offset.Squared()-projection*projection/length; break; } } if(radiusSquared>distance) result=(1-distance/radiusSquared)*strength; return result; }
 struct Array { void* table; Record* data; unsigned count; float FUN_005fc120(Point*); };
+// pdb: PathingAvoidNodeArray::GetCostForPoint | PathingAvoidNode.obj | fnv360_0822_retail, call_seq, low
+// pdb params: arPoint
 float Array::FUN_005fc120(Point* point) { float total=0; unsigned remaining=count; if(remaining>0) { Record* current=data; do { total+=current->FUN_005fbea0(point); ++current; } while(--remaining); } return total; }
 }
 }   // namespace f3m_005fc120
@@ -2253,6 +2360,8 @@ namespace f3m_005fece0 {
 struct Stream5fece0 {void FUN_006e0750(void*,unsigned int);unsigned int BGSLoadGameBuffer_LoadVariableSizedValue();};
 struct Array5fece0 {int unk00;char* buffer;unsigned int size;unsigned int capacity;void FUN_005fe850(unsigned int,int);};
 struct Owner5fece0 {unsigned char kind;unsigned char unk01;unsigned short unk02;Array5fece0 data;int unk14;int unk18;void FUN_005fece0(Stream5fece0*);};
+// pdb: PathingLOSGridCell::LoadGame | PathingLOSGridMap.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apLoadGameBuffer
 void Owner5fece0::FUN_005fece0(Stream5fece0* stream) {
  stream->FUN_006e0750(&kind,1);
  stream->FUN_006e0750(&unk18,4);
@@ -2272,6 +2381,7 @@ extern void (__thiscall *DAT_00e02134)(Base5f3690*,void*);extern void (__thiscal
 struct Base5f3690 {void* vtable;void* data;unsigned count,capacity;~Base5f3690(){vtable=&DAT_00e02118;if(data){DAT_00e02120(this,data);data=0;capacity=0;count=0;}}};
 struct Owner5f3690:Base5f3690 {void FUN_005f3690();};
 struct Cleanup5f3690 {Base5f3690* object;Cleanup5f3690(Base5f3690* p):object(p){object->vtable=&DAT_00e0212c;}~Cleanup5f3690(){object->~Base5f3690();}};
+// pdb: BSScrapArray<PathingNode *,1024>::~BSScrapArray<PathingNode *,1024> | Pathfind.obj | fnv360_0822_debug, call_seq, medium
 void Owner5f3690::FUN_005f3690() {Cleanup5f3690 cleanup(this);if(data){DAT_00e02134(this,data);data=0;capacity=0;count=0;}}
 }
 }   // namespace f3m_005f3690
@@ -2355,6 +2465,7 @@ struct Owner5e4810 {
  int unk11C;
  Node5e4810 head;Node5e4810* Head(){return &head;}bool FUN_005e4810();
 };
+// pdb: NavMeshObstacleManager::ProcessEnabledNavMeshes | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
 bool Owner5e4810::FUN_005e4810() {
  Node5e4810* node=Head();
  while(node && (node->next || node->data)) {FUN_005bb300(node->data,0);node=node->next;}
@@ -2405,6 +2516,8 @@ namespace fo3_5f13e0 {
 void* __cdecl FUN_00c01530(void*,const void*,unsigned int);
 struct CopyRecords {void FUN_005f13e0(char*,char*,unsigned int);};
 // @fnv 0x006dbf20
+// pdb: BSSimpleArray<PathingCoverLocation,1024>::_MoveItems | Pathfind.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apDestAddr, apSrcAddr, aiCount
 void __thiscall CopyRecords::FUN_005f13e0(char* dst, char* src, unsigned int count)
 {
     if (!(count > 0))
@@ -2446,6 +2559,8 @@ struct FUN_005ea3b0_cls {
     void FUN_005ea3b0(unsigned int index, bool shrink);
 };
 
+// pdb: BSSimpleArray<ObstacleTaskNavMeshOperation,1024>::Remove | NavMeshObstacleTask.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiIndex, abShrink
 void FUN_005ea3b0_cls::FUN_005ea3b0(unsigned int index, bool shrink) {
     if (shrink) {
         if (capacity > 0x400) {
@@ -2480,6 +2595,8 @@ struct Counter5e9d60 { void** table; long refs; void IncRefCount() { Interlocked
 struct Resource5e9d60 { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; Counter5e9d60 counter; void IncRefCount() { counter.IncRefCount(); } void DecRefCount() { counter.DecRefCount(); } };
 struct Owner5e9d60 { NiPointer<Counter5e9d60> first; int unk04; int unk08; NiPointer<Resource5e9d60> last; void FUN_005e9d60(); };
 struct Guard5e9d60 { Owner5e9d60* p; __forceinline ~Guard5e9d60() { p->first.~NiPointer(); } };
+// pdb: BSSimpleArray<ObstacleTaskNavMeshOperation,1024>::_DestructItems | NavMeshObstacleTask.obj | fnv360_0822_retail, call_seq, low
+// pdb params: apFirstAddr, aiCount
 void Owner5e9d60::FUN_005e9d60() { Guard5e9d60 guard={this}; Resource5e9d60* object=last; if(object) object->DecRefCount(); }
 }   // namespace f3m_005e9d60
 
@@ -2500,6 +2617,7 @@ struct ArrayBaseCleanup {
   if(storage) { DAT_00e020f4(owner,storage);owner->data=0;owner->capacity=0;owner->size=0; }
  }
 };
+// pdb: BSScrapArray<float,1024>::~BSScrapArray<float,1024> | Pathfind.obj | fnv360_0822_debug, call_seq, low
 void SmallArray::FUN_005f37b0() {
  ArrayBaseCleanup cleanup(this);
  if(data) {DAT_00e02148(data);data=0;capacity=0;size=0;}
@@ -2513,6 +2631,8 @@ struct Temporary6850 { int unk00; int unk04; int unk08; int unk0C; int unk10; in
 void FUN_005ee830(unsigned,unsigned); int FUN_005f0eb0(unsigned,unsigned); void FUN_005f6660();
 __forceinline Temporary6850(unsigned a,unsigned b) { FUN_005ee830(a,b); } __forceinline ~Temporary6850() { FUN_005f6660(); }
 };
+// pdb: Pathing::UpdateSolution | Pathfind.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRequest, apSolution, aiCurrentVirtualNodeIndex, aCurrentActorLocation
 int FUN_005f6850(unsigned a,unsigned b,unsigned c,unsigned d) { Temporary6850 temporary(a,b); return temporary.FUN_005f0eb0(c,d); }
 }   // namespace f3m_005f6850
 
@@ -2539,6 +2659,8 @@ namespace f3m_005e9c10 {
 struct Input5e9 {int unk00;int unk04;int unk08;void*data;};
 struct Result5e9 {void FUN_005e69b0();};
 struct Owner5e9 {Result5e9* FUN_005e9ad0(void*);void FUN_005e9c10(Input5e9*);};
+// pdb: bhkObstacleRemovalListener::entityRemovedCallback | NavMeshObstacleManager.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: entity
 void Owner5e9::FUN_005e9c10(Input5e9*input){if(input&&input->data)FUN_005e9ad0(input->data)->FUN_005e69b0();}
 }   // namespace f3m_005e9c10
 
@@ -2554,6 +2676,8 @@ void Owner::FUN_005f3720(){vtable=&DAT_00e020b0;if(data){DAT_00e020b8(this,data)
 // @f3 0x005eb1c0 (community match, verified in this file)
 namespace f3m_005eb1c0 {
 struct Array5eb1c0 { void** table; void* buffer; unsigned count,capacity; void FUN_005eac40(void*,void*,unsigned); void FUN_005eb1c0(unsigned,unsigned); };
+// pdb: BSSimpleArray<char,1024>::_ReallocateBuffer | PathingLOSGridMap.obj | fnv360_0822_retail, callee_sim, low
+// pdb params: aiNewSize, aiCopyCount
 void Array5eb1c0::FUN_005eb1c0(unsigned size,unsigned copyCount) {
  if(buffer) { if(copyCount==capacity) { buffer=((void* (__thiscall *)(Array5eb1c0*,void*,unsigned))table[3])(this,buffer,size); return; }
  void* replacement=((void* (__thiscall *)(Array5eb1c0*,unsigned))table[1])(this,size);
@@ -2568,6 +2692,8 @@ namespace MatchEB3 {
 struct Element {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;void FUN_00600960();};
 struct Owner;struct Table {void* unk00;void* unk04;void (__thiscall* free)(Owner*,void*);};
 struct Owner {Table* table;Element* data;unsigned count;unsigned capacity;void FUN_005eb3e0(bool);};
+// pdb: BSSimpleArray<PathingNode,1024>::Clear | PathBuilder.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: abFreeMemory
 void Owner::FUN_005eb3e0(bool release){Element* p=data;if(p){unsigned n=count;while(n>0){p->FUN_00600960();++p;--n;}if(release){table->free(this,data);data=0;capacity=0;}count=0;}}
 }
 }   // namespace f3m_005eb3e0
@@ -2575,6 +2701,8 @@ void Owner::FUN_005eb3e0(bool release){Element* p=data;if(p){unsigned n=count;wh
 // @f3 0x005f68d0 (community match, verified in this file)
 namespace f3m_005f68d0 {
 struct Temporary5f68 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; void FUN_005ee830(int,int);unsigned FUN_005ec150();void FUN_005f6660();Temporary5f68(int a,int b){FUN_005ee830(a,b);}~Temporary5f68(){FUN_005f6660();}};
+// pdb: Pathing::UpdateSolutionMoveToLow | Pathfind.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRequest, apSolution
 unsigned FUN_005f68d0(int first,int second){Temporary5f68 temporary(first,second);return temporary.FUN_005ec150();}
 }   // namespace f3m_005f68d0
 
@@ -2583,6 +2711,7 @@ extern void* DAT_00e01d68; extern void* DAT_00db5c04;
 namespace f3m_005e7680 {
 struct Owner5e7680 {void** table;void* data;unsigned count;unsigned capacity;void FUN_00415f50(void*,unsigned);void Clear(){if(data){FUN_00415f50(data,count);((void(__thiscall*)(Owner5e7680*,void*))table[2])(this,data);data=0;capacity=0;count=0;}} ~Owner5e7680(){table=&DAT_00db5c04;Clear();} void FUN_005e7680();};
 struct Cleanup5e7680 {Owner5e7680* p;Cleanup5e7680(Owner5e7680* value):p(value){p->table=&DAT_00e01d68;}~Cleanup5e7680(){p->~Owner5e7680();}};
+// pdb: BSScrapArray<NavMeshPtr,1024>::~BSScrapArray<NavMeshPtr,1024> | NavMeshObstacleManager.obj | fnv360_0822_retail, call_seq, medium
 void Owner5e7680::FUN_005e7680(){Cleanup5e7680 guard(this);Clear();}
 }   // namespace f3m_005e7680
 
@@ -2612,6 +2741,8 @@ struct Object5fc430
     Object5fc430* FUN_005fc430(const Object5fc430& other);
 };
 
+// pdb: PathingLocation::PathingLocation | PathingLocation.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aLoc
 Object5fc430* Object5fc430::FUN_005fc430(const Object5fc430& other)
 {
     vtable = &DAT_00dc4dc0;
@@ -2631,6 +2762,7 @@ Object5fc430* Object5fc430::FUN_005fc430(const Object5fc430& other)
 
 // @f3 0x005e3120 (community match, verified in this file)
 namespace f3m_005e3120 {
+// pdb: NavMeshObstacleManager::GetProcessedTaskCount | NavMeshObstacleManager.obj | fnv360_1110_retail, ustr_rel, medium
 extern "C" __declspec(dllimport) long __stdcall InterlockedCompareExchange(long*,long,long);extern char DAT_00e01be0[];struct Lock5E31 {long owner;long count;void FUN_00409a80(const char*);__forceinline void Unlock(){if(--count==0)InterlockedCompareExchange(&owner,0,owner);}};struct Owner5E31 { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C; int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; int unkBC; int unkC0; int unkC4; int unkC8; int unkCC; int unkD0; int unkD4; int unkD8; int unkDC; int unkE0; int unkE4; int unkE8; int unkEC; void* value;int unkF4;int unkF8;int unkFC;Lock5E31 lock;void* FUN_005e3120();};void* Owner5E31::FUN_005e3120(){lock.FUN_00409a80(DAT_00e01be0);void* result=value;lock.Unlock();return result;}
 }   // namespace f3m_005e3120
 
@@ -2659,6 +2791,7 @@ public:
     ~FUN_005e4e20();
     void FUN_005e3010();
 };
+// pdb: BSSimpleList<NiPointer<BSTempEffect> >::~BSSimpleList<NiPointer<BSTempEffect> > | BGSDecalNode.obj | fnv360_0822_retail, call_dedup, low, conflict (skyrim: BSTArray<class NiPointer<class NiNode>,class BSTArrayHeapAllocator>::~BSTArray<class NiPointer<class NiNode>,class BSTArrayHeapAllocator>)
 FUN_005e4e20::~FUN_005e4e20() {
     FUN_005e3010();
 }
@@ -2674,6 +2807,7 @@ struct Owner85{
  void* vtable;void* data;unsigned int capacity,length;
  void* FUN_005ebd60(unsigned int flags);
 };
+// pdb: BSSimpleArray<FastNavMeshTriHandle,1024>::`scalar deleting destructor' | PathBuilder.obj | fnv360_0822_retail, vtable, medium
 void* Owner85::FUN_005ebd60(unsigned int flags){
  vtable=&DAT_00e01eb0;
  if(data){DAT_00e01eb8(data);data=0;length=0;capacity=0;}
@@ -2691,6 +2825,8 @@ struct Owner103{
  unsigned int first,second,type;
  void FUN_005fc0b0(Reader103*);
 };
+// pdb: PathingAvoidNode::LoadGame | PathingAvoidNode.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apLoadGameBuffer
 void Owner103::FUN_005fc0b0(Reader103* reader){
  unsigned char value=0;reader->FUN_006e0750(&value,1);type=value;
  reader->FUN_006e0750(&first,4);reader->FUN_006e0750(&second,4);reader->FUN_006e0750(&position,12);
@@ -2707,6 +2843,8 @@ struct Owner122{
  Node122 entries;
  void FUN_005e54d0(void*);
 };
+// pdb: NavMeshObstacleManager::AddObstacleForReference | NavMeshObstacleManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apRef
 void Owner122::FUN_005e54d0(void* item){
  if(DAT_01074864){Node122* node=&entries;while(node){if(node->item==item)return;node=node->next;}entries.FUN_0049fac0(&item);}
 }
@@ -2717,6 +2855,7 @@ void Owner122::FUN_005e54d0(void* item){
 extern float DAT_0108d81c,DAT_0108d780,DAT_0108d78c,DAT_00f70e64,DAT_00f70e68,DAT_00f70e6c;
 extern const double DAT_00dc2df0=0.01745329238474369;
 namespace f3m_005f1140 {
+// pdb: Pathing::Init | Pathfind.obj | fnv360_0822_retail, call_gap, medium
 bool __cdecl FUN_005f1140(){
  DAT_00f70e64=cosf(static_cast<float>(DAT_0108d81c*DAT_00dc2df0));
  DAT_00f70e68=cosf(static_cast<float>(DAT_0108d780*DAT_00dc2df0));
@@ -2735,6 +2874,8 @@ struct Owner132{
  unsigned int unk00;Vec132 position;Descriptor132* descriptor;void* primary;void* first;void* second;unsigned int value;unsigned short index;unsigned char flags;
  void FUN_005fc810(Writer132*);
 };
+// pdb: PathingLocation::SaveGame | PathingLocation.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apSaveGameBuffer
 void Owner132::FUN_005fc810(Writer132* writer){
  writer->FUN_006e1830(&position,12,0);
  writer->BGSSaveGameBuffer_SaveFormID(descriptor?descriptor->id:0,0);
@@ -2755,6 +2896,7 @@ struct Owner147{
  void* vtable;void* data;unsigned int capacity,length;
  void* FUN_005f3a40(unsigned int flags);
 };
+// pdb: BSSimpleArray<NavmeshTriFan,1024>::`scalar deleting destructor' | Pathfind.obj | fnv360_0822_retail, vtable, medium
 void* Owner147::FUN_005f3a40(unsigned int flags){
  vtable=&DAT_00e020c4;
  if(data){DAT_00e020cc(data);data=0;length=0;capacity=0;}
@@ -2767,6 +2909,8 @@ void* Owner147::FUN_005f3a40(unsigned int flags){
 // @f3 0x005eb010 (community match, verified in this file)
 namespace f3m_005eb010 {
 struct Entry153{unsigned int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24,unk28,unk2c;void FUN_00600960();};
+// pdb: BSSimpleArray<VirtualPathingNode,1024>::_DestructItems | PathBuilder.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: apFirstAddr, aiCount
 void __stdcall FUN_005eb010(Entry153* entry,unsigned int count){if(count>0){do{entry->FUN_00600960();++entry;}while(--count);}}
 }   // namespace f3m_005eb010
 
@@ -2781,6 +2925,7 @@ struct Owner167{
  void FUN_005e5240(void*,unsigned int);
  void* FUN_005e6df0(unsigned int);
 };
+// pdb: BSSimpleArray<NiPointer<ObstacleData>,1024>::`scalar deleting destructor' | NavMeshObstacleManager.obj | fnv360_0822_retail, vtable, medium
 void* Owner167::FUN_005e6df0(unsigned int flags){
  vtable=&DAT_00e01c5c;if(data){FUN_005e5240(data,count);vtable->Free(this,data);data=0;capacity=0;count=0;}
  if(flags&1)DAT_01090a78.FUN_0086ba60(this);return this;
@@ -2857,6 +3002,7 @@ int unkCC;
 int unkD0;
 int unkD4;
 Array5e5d first;Array5e5d second;bool FUN_005e5de0();};
+// pdb: NavMeshObstacleManager::DeleteCurrentTasks | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
 bool Owner5e5d::FUN_005e5de0(){unsigned count=second.size;for(unsigned i=0;i<count;++i){Object5e5d*object=second.data[i];if(object)((void*(__thiscall*)(Object5e5d*,unsigned))object->table[0])(object,1);}second.Clear();first.Clear();return true;}
 }   // namespace f3m_005e5de0
 
@@ -2865,6 +3011,8 @@ namespace f3m_005f11b0 {
 namespace f3_005f11b0 {
 struct CoverSortItem { unsigned int unk00,unk04,unk08,unk0c,unk10,unk14; float score, angle; };
 // @fnv 0x006d4020
+// pdb: EdgeSortFunction | Pathfind.obj | fnv360_0822_retail, objrun_open, low
+// pdb params: apEdge1, apEdge2
 int __cdecl FUN_005f11b0(const CoverSortItem* first, const CoverSortItem* second)
 {
     bool firstInRange;
@@ -2892,6 +3040,7 @@ int __cdecl FUN_005f11b0(const CoverSortItem* first, const CoverSortItem* second
 
 // @f3 0x005e3160 (community match, verified in this file)
 namespace f3m_005e3160 {
+// pdb: NavMeshObstacleManager::GetBackgroundTaskCount | NavMeshObstacleManager.obj | fnv360_1110_retail, ustr_rel, medium
 extern "C" __declspec(dllimport) long __stdcall InterlockedCompareExchange(long*,long,long);extern char DAT_00e01c10[];struct Lock5E316 {long owner;long count;void FUN_00409a80(const char*);__forceinline void Unlock(){if(--count==0)InterlockedCompareExchange(&owner,0,owner);}};struct Owner5E316 { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C; int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; int unkBC; int unkC0; int unkC4; int unkC8; int unkCC; int unkD0; int unkD4; int unkD8; int unkDC; void* value; int unkE4; int unkE8; int unkEC; int unkF0; int unkF4; int unkF8; int unkFC; Lock5E316 lock;void* FUN_005e3160();};void* Owner5E316::FUN_005e3160(){lock.FUN_00409a80(DAT_00e01c10);void* result=value;lock.Unlock();return result;}
 }   // namespace f3m_005e3160
 
@@ -2923,6 +3072,7 @@ int unk50;
 void* member;
 };
 struct Owner {int unk00;int unk04;int unk08;int unk0C;Data* data;int unk14;int unk18;int unk1C;int unk20;unsigned short index;bool FUN_005fc750();};
+// pdb: PathingLocation::HasNavMeshData | PathingLocation.obj | fnv360_0822_retail, call_dedup, low
 bool Owner::FUN_005fc750(){if(!data)return false;if(!data->member)return false;if(index!=0xffff)return true;return false;}
 }
 }   // namespace f3m_005fc750
@@ -2933,6 +3083,8 @@ namespace MatchFE1 {
 struct Stream {void FUN_006e1830(void*,unsigned,int);void BGSSaveGameBuffer_SaveVariableSizedValue(unsigned);};
 struct Array {void* table;char* data;unsigned count;unsigned capacity;unsigned Size(){return this?count:0;} char& Get(unsigned i){return data[i];}};
 struct Owner {bool skip;unsigned char unk01;unsigned short unk02;Array array;int unk14;unsigned value;Array* GetArray(){return &array;} void FUN_005fe150(Stream*);};
+// pdb: PathingLOSGridCell::SaveGame | PathingLOSGridMap.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apSaveGameBuffer
 void Owner::FUN_005fe150(Stream* stream){stream->FUN_006e1830(this,1,0);stream->FUN_006e1830(&value,4,0);if(!skip){unsigned n=GetArray()?array.count:0;stream->BGSSaveGameBuffer_SaveVariableSizedValue(n);for(unsigned i=0;i<n;++i)stream->FUN_006e1830(&array.Get(i),1,0);}}
 }
 }   // namespace f3m_005fe150
@@ -2959,6 +3111,7 @@ struct FUN_00bce490 { virtual ~FUN_00bce490(); unsigned unk04,unk08,unk0c,unk10,
 struct FUN_005ea860 { unsigned unk00,unk04,unk08,unk0c; ~FUN_005ea860(); };
 struct FUN_005c0ff0 { unsigned unk00; ~FUN_005c0ff0(); };
 struct FUN_005ea970 : FUN_00bce490 { RefHolder first,second; FUN_005ea860 collection; FUN_005c0ff0 auxiliary; virtual ~FUN_005ea970(); };
+// pdb: ObstacleTaskData::~ObstacleTaskData | NavMeshObstacleTask.obj | fnv360_0822_retail, call_seq, high
 FUN_005ea970::~FUN_005ea970() {}
 }
 }   // namespace f3m_005ea970
@@ -2968,6 +3121,7 @@ namespace f3m_005e0330 {
 struct Owner5e03;
 struct Table5e03 {int unk00;void* (__thiscall *allocate)(Owner5e03*,unsigned);};
 struct Owner5e03 {Table5e03* unk00;void* unk04;unsigned unk08,unk0C;void FUN_005df930(unsigned,unsigned);unsigned FUN_005e0330();};
+// pdb: BSSimpleArray<CombatSearchLocation,1024>::AddUninitialized | CombatGroup.obj | fnv360_0721_beta, call_seq, low
 unsigned Owner5e03::FUN_005e0330(){if(unk08==unk0C){if(!unk0C){unk04=unk00->allocate(this,4);unk0C=4;}else{unsigned capacity=unk0C>0x400?unk0C+0x400:unk0C*2;FUN_005df930(capacity,unk08);unk0C=capacity;}}++unk08;return unk08-1;}
 }   // namespace f3m_005e0330
 
@@ -2993,6 +3147,7 @@ Array5f3b70* Array5f3b70::FUN_005f3b70(unsigned int flags) {
 namespace f3m_005eaa60 {
 namespace ConstructAa60 {
 struct FUN_005fc3f0 { unsigned unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24; FUN_005fc3f0(); static void* operator new(unsigned,void* p){return p;} static void operator delete(void*,void*); };
+// pdb: BSSimpleArray<PathingLocation,1024>::AddUninitialized | PathBuilder.obj | fnv360_0721_beta, objrun_prop, low
 void __stdcall FUN_005eaa60(FUN_005fc3f0* buffer,unsigned count) { for(unsigned i=0;i<count;++i) new (buffer+i) FUN_005fc3f0; }
 }
 }   // namespace f3m_005eaa60
@@ -3001,6 +3156,8 @@ void __stdcall FUN_005eaa60(FUN_005fc3f0* buffer,unsigned count) { for(unsigned 
 namespace f3m_005eaae0 {
 void* __cdecl FUN_00c01530(void*,const void*,unsigned);
 struct Value5EAA {int unk00;int unk04;int unk08;int unk0C;int unk10;int unk14;int unk18;int unk1C;int unk20;int unk24;int unk28;int unk2C;};
+// pdb: BSSimpleArray<VirtualPathingNode,1024>::_MoveItems | PathBuilder.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apDestAddr, apSrcAddr, aiCount
 void __stdcall FUN_005eaae0(Value5EAA* destination,const Value5EAA* source,unsigned count){if(count>0){if(destination<source){for(unsigned i=0;i<count;++i)FUN_00c01530(destination+i,source+i,sizeof(Value5EAA));}else if(destination>source){for(int i=count-1;i>=0;--i)FUN_00c01530(destination+i,source+i,sizeof(Value5EAA));}}}
 
 }   // namespace f3m_005eaae0
@@ -3031,6 +3188,8 @@ void* member;bool Disabled(){return (flags>>4)&1;}
 };
 void FUN_005b87d0(void**,void*);
 struct Owner {int unk00;int unk04;int unk08;int unk0C;Data* data;bool FUN_005fc8b0(void**);};
+// pdb: PathingLocation::GetNavMesh | PathingLocation.obj | fnv360_0721_beta, caller, low, conflict (bridge: PathingLocation::HasNavMeshData)
+// pdb params: aRetNavMesh
 bool Owner::FUN_005fc8b0(void** result){if(data&&!data->Disabled()){FUN_005b87d0(result,data->member);if(*result)return true;return false;}return false;}
 }
 }   // namespace f3m_005fc8b0
@@ -3041,6 +3200,8 @@ namespace f3m_005f3870 {
 struct Alloc5f38 {void* ScrapHeap_Allocate(unsigned,unsigned);void ScrapHeap_Deallocate(void*);};
 void* __cdecl FUN_00bffa60(void*,const void*,unsigned);
 struct Array5f38 {void**table;void*data;unsigned size;unsigned capacity;Alloc5f38*allocator;void* FUN_005f3870(void*,unsigned);};
+// pdb: BSScrapArray<OffsetData,1024>::_Reallocate | BGSReconstructFormsInAllFilesMap.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apBuffer, aiNewSizeInItem
 void* Array5f38::FUN_005f3870(void*old,unsigned nextCapacity){void*next=allocator->ScrapHeap_Allocate(nextCapacity*8,DAT_00e27ed4);FUN_00bffa60(next,old,size*8);allocator->ScrapHeap_Deallocate(old);return next;}
 }   // namespace f3m_005f3870
 
@@ -3051,6 +3212,7 @@ struct Base;extern void* DAT_00e01eec;extern void* DAT_00dd8fd0;extern void (__s
 struct Base {void* table;void* data;unsigned count;unsigned capacity;~Base(){table=&DAT_00dd8fd0;if(data){DAT_00dd8fd8(this,data);data=0;capacity=0;count=0;}}};
 struct Owner:Base {void FUN_005eb680();};
 struct Cleanup {Base* object;Cleanup(Base* p):object(p){object->table=&DAT_00e01eec;}~Cleanup(){object->~Base();}};
+// pdb: BSScrapArray<TESObjectREFR *,1024>::~BSScrapArray<TESObjectREFR *,1024> | PathBuilder.obj | fnv360_0822_debug, call_seq, medium
 void Owner::FUN_005eb680(){Cleanup cleanup(this);if(data){DAT_00e01ef4(data);data=0;capacity=0;count=0;}}
 }
 }   // namespace f3m_005eb680
@@ -3059,12 +3221,16 @@ void Owner::FUN_005eb680(){Cleanup cleanup(this);if(data){DAT_00e01ef4(data);dat
 namespace f3m_005eab60 {
 struct Entry5eab60 {int unk00;int unk04;int unk08;int unk0C;int unk10;int unk14;int unk18;int unk1C;int unk20;int unk24;};
 void* __cdecl FUN_00c01530(void*,const void*,unsigned);
+// pdb: BSSimpleArray<PathingLocation,1024>::_ReallocateBuffer | PathBuilder.obj | fnv360_0822_retail, call_seq, low
+// pdb params: aiNewSize, aiCopyCount
 void __stdcall FUN_005eab60(Entry5eab60* dest,Entry5eab60* src,unsigned count){if(count>0){if(dest<src){for(unsigned i=0;i<count;++i)FUN_00c01530(&dest[i],&src[i],40);}else if(dest>src){for(int i=count-1;i>=0;--i)FUN_00c01530(&dest[i],&src[i],40);}}}
 }   // namespace f3m_005eab60
 
 // @f3 0x005eac40 (community match, verified in this file)
 namespace f3m_005eac40 {
 void* __cdecl FUN_00c01530(void*,const void*,unsigned);
+// pdb: BSSimpleArray<char,1024>::_MoveItems | PathingLOSGridMap.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apDestAddr, apSrcAddr, aiCount
 void __stdcall FUN_005eac40(unsigned char* destination,const unsigned char* source,unsigned count){if(count>0){if(destination<source){for(unsigned i=0;i<count;++i)FUN_00c01530(destination+i,source+i,1);}else if(destination>source){for(int i=count-1;i>=0;--i)FUN_00c01530(destination+i,source+i,1);}}}
 }   // namespace f3m_005eac40
 
@@ -3082,6 +3248,8 @@ public:
     void FUN_005f13e0(void* destination, void* source, unsigned int count);
     void FUN_005f24e0(unsigned int newCapacity, unsigned int oldCount);
 };
+// pdb: BSSimpleArray<PathingCoverLocation,1024>::_ReallocateBuffer | Pathfind.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiNewSize, aiCopyCount
 void Array5f24e0::FUN_005f24e0(unsigned int newCapacity, unsigned int oldCount) {
     if (data) {
         if (oldCount == capacity) {
@@ -3101,12 +3269,14 @@ void Array5f24e0::FUN_005f24e0(unsigned int newCapacity, unsigned int oldCount) 
 
 // @f3 0x005ebb20 (community match, verified in this file)
 namespace f3m_005ebb20 {
+// pdb: BSScrapArray<FastNavMeshTriHandle,1024>::~BSScrapArray<FastNavMeshTriHandle,1024> | PathBuilder.obj | fnv360_0822_debug, call_seq, medium
 namespace N5EBB {struct Owner;extern int DAT_00e01f28,DAT_00e01eb0;extern void (__stdcall *DAT_00e01f30)(void*);extern void (__thiscall *DAT_00e01eb8)(Owner*,void*);struct Owner{void* vtable;void* data;unsigned size,capacity;__forceinline void ClearBase(){vtable=&DAT_00e01eb0;if(data){DAT_00e01eb8(this,data);data=0;capacity=0;size=0;}}void FUN_005ebb20();};struct Guard{Owner* owner;Guard(Owner* p):owner(p){p->vtable=&DAT_00e01f28;}~Guard(){owner->ClearBase();}};void Owner::FUN_005ebb20(){Guard cleanup(this);if(data){DAT_00e01f30(data);data=0;capacity=0;size=0;}}}
 }   // namespace f3m_005ebb20
 
 // @f3 0x005f2550 (community match, verified in this file)
 namespace f3m_005f2550 {
 struct Array5f255 {void**table;void*data;unsigned size;unsigned capacity;void FUN_005f24e0(unsigned,unsigned);unsigned FUN_005f2550();};
+// pdb: BSSimpleArray<PathingCoverLocation,1024>::AddUninitialized | Pathfind.obj | fnv360_0822_retail, call_gap, low
 unsigned Array5f255::FUN_005f2550(){if(size==capacity){if(!capacity){data=((void*(__thiscall*)(Array5f255*,unsigned))table[1])(this,4);capacity=4;}else{unsigned next=capacity>1024?capacity+1024:capacity*2;FUN_005f24e0(next,size);capacity=next;}}++size;return size-1;}
 }   // namespace f3m_005f2550
 
@@ -3653,6 +3823,8 @@ namespace MatchF10 {
 struct Sub {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;void FUN_005fc770();};struct Element {int unk00;Sub sub;void FUN_006102c0();};
 struct Storage {int unk00;int unk04;int unk08;Element* data;unsigned count;};
 struct Owner {void* table;Storage* storage;bool FUN_005eacb0(void*,int*,int*);bool PathBuilder_BuildDetailedPath(void*);int FUN_005f1020(void*);};
+// pdb: PathBuilder::UpdatePathMoveToHigh | PathBuilder.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: aiCurrentVirtualNodeIndex
 int Owner::FUN_005f1020(void* value){int last,first;first=-1;last=-1;if(!FUN_005eacb0(value,&first,&last))return 0;for(unsigned i=0;i<storage->count;++i)storage->data[i].sub.FUN_005fc770();if(first<=last){unsigned offset=(unsigned)first*sizeof(Element);unsigned remaining=(unsigned)(last-first+1);do{((Element*)((char*)storage->data+offset))->FUN_006102c0();offset+=sizeof(Element);}while(--remaining); }return PathBuilder_BuildDetailedPath(value)?2:-1;}
 }
 }   // namespace f3m_005f1020
@@ -3700,6 +3872,7 @@ public:
     CBADDynamicArray m_array;
 };
 
+// pdb: ReferenceObstacleArray::~ReferenceObstacleArray | NavMeshObstacleManager.obj | fnv360_0822_retail, call_seq, medium
 FUN_005e6ef0::~FUN_005e6ef0()
 {
     unk08 = 0;
@@ -3843,6 +4016,8 @@ struct Owner
     void FUN_005e69b0(const char* name);
 };
 
+// pdb: NavMeshObstacleManager::OnObstacleLost3D | NavMeshObstacleManager.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apRigidBody
 void Owner::FUN_005e69b0(const char* name)
 {
     NiPointer<RefCountedNamedObject> obj;
@@ -3883,6 +4058,8 @@ void Obj_005f3950::FUN_005f3950()
 // @f3 0x005eb040 (community match, verified in this file)
 namespace f3m_005eb040 {
 struct Array5eb0 {void**table;void*data;unsigned size;unsigned capacity;void FUN_005eaae0(void*,void*,unsigned);void FUN_005eb040(unsigned,unsigned);};
+// pdb: BSSimpleArray<VirtualPathingNode,1024>::_ReallocateBuffer | PathBuilder.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiNewSize, aiCopyCount
 void Array5eb0::FUN_005eb040(unsigned nextCapacity,unsigned copyCount){if(data){if(copyCount==capacity)data=((void*(__thiscall*)(Array5eb0*,void*,unsigned))table[3])(this,data,nextCapacity);else{void*next=((void*(__thiscall*)(Array5eb0*,unsigned))table[1])(this,nextCapacity);FUN_005eaae0(next,data,copyCount);((void(__thiscall*)(Array5eb0*,void*))table[2])(this,data);data=next;}}else{void*next=((void*(__thiscall*)(Array5eb0*,unsigned))table[1])(this,nextCapacity);capacity=nextCapacity;data=next;}}
 }   // namespace f3m_005eb040
 
@@ -3891,6 +4068,7 @@ namespace f3m_005e5350 {
 namespace Match5e53 {
 struct Owner5e53;struct Table5e53 {int unk00;void* (__thiscall *unk04)(Owner5e53*,unsigned);};
 struct Owner5e53 {Table5e53* unk00;void* unk04;unsigned unk08,unk0C;void FUN_00799ae0(unsigned,unsigned);unsigned FUN_005e5350();};
+// pdb: BSSimpleArray<BGSBodyPart *,1024>::AddUninitialized | HitData.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: BSTArray<struct EditorNavMeshBoundsVertex *,class BSScrapArrayAllocator>::Add)
 unsigned Owner5e53::FUN_005e5350(){if(unk08==unk0C){if(!unk0C){unk04=unk00->unk04(this,4);unk0C=4;}else{unsigned capacity=unk0C>0x400?unk0C+0x400:unk0C*2;FUN_00799ae0(capacity,unk08);unk0C=capacity;}}++unk08;return unk08-1;}
 }
 }   // namespace f3m_005e5350
@@ -3970,6 +4148,8 @@ struct CleanupElement { int unk00; int unk04; int unk08; int unk0C; int unk10; i
 struct CleanupContainer;
 struct CleanupVtable { void* unk00; void* unk04; void (__thiscall *release)(CleanupContainer*, CleanupElement*); };
 struct CleanupContainer { CleanupVtable* vtable; CleanupElement* data; unsigned int count; unsigned int capacity; void FUN_005eb290(bool release); };
+// pdb: BSSimpleArray<VirtualPathingNode,1024>::Clear | PathBuilder.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: abFreeMemory
 void CleanupContainer::FUN_005eb290(bool release) { CleanupElement* p=data; if(p) { unsigned int n=count; while(n>0) { p->FUN_00600960(); ++p; --n; } if(release) { vtable->release(this,data); data=0; capacity=0; } count=0; } }
 }   // namespace f3m_005eb290
 
@@ -4017,6 +4197,7 @@ struct FUN_005ec490 {
     ~FUN_005ec490();
 };
 
+// pdb: RayCastPathRequest::~RayCastPathRequest | PathBuilder.obj | fnv360_0721_beta, call_gap, low
 FUN_005ec490::~FUN_005ec490()
 {
 }
@@ -4034,6 +4215,8 @@ struct Arr5eb460 {
     void* FUN_005eb460(void* p, unsigned int count);
 };
 
+// pdb: BSSimpleArray<NavMeshEdgeLocation,1024>::_Reallocate | PathBuilder.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apBuffer, aiNewSizeInItem
 void* Arr5eb460::FUN_005eb460(void* p, unsigned int count)
 {
     return n5eb460::DAT_01090a78.FUN_0086bae0(p, count * sizeof(Elem5eb460));
@@ -4062,6 +4245,8 @@ void FUN_005f6660();
 ~FUN_005ee830() { FUN_005f6660(); }
 int FUN_005f1020(void*);
 };
+// pdb: Pathing::UpdateSolutionMoveToHigh | Pathfind.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRequest, apSolution, aiCurrentVirtualNodeIndex
 int __cdecl FUN_005f6940(void* start,void* goal,void* arg) { FUN_005ee830 scope(start,goal); return scope.FUN_005f1020(arg); }
 }
 }   // namespace f3m_005f6940
@@ -4078,6 +4263,8 @@ public:
     FUN_005fd510(unsigned int first, unsigned int second);
 };
 
+// pdb: PathingLocation::PathingLocation | PathingLocation.obj | fnv360_0822_retail, call_seq, high
+// pdb params: aLocation, apWorldSpace
 FUN_005fd510::FUN_005fd510(unsigned int first, unsigned int second)
 {
     *(void**)this = &DAT_00dc4dc0;
@@ -4105,6 +4292,7 @@ struct Array {
     int size;
     int capacity;
 };
+// pdb: BSSimpleArray<NavMeshEdgeLocation,1024>::`scalar deleting destructor' | PathBuilder.obj | fnv360_0822_retail, vtable, medium
 Array* __fastcall FUN_005ebc40(Array* object, int, unsigned int flags) {
     object->Array::~Array();
     if (flags & 1)
@@ -4133,6 +4321,7 @@ struct ArrayStorage {
     unsigned int count;
     unsigned int capacity;
 };
+// pdb: BSSimpleArray<BoundsTriangleInfo,1024>::`scalar deleting destructor' | NavMeshObstacleCutter.obj | fnv360_0822_retail, vtable, medium
 ArrayStorage* __fastcall FUN_005e01b0(ArrayStorage* object, int, unsigned int flags) {
     object->ArrayStorage::~ArrayStorage();
     if (flags & 1)
@@ -4146,6 +4335,8 @@ namespace PathForward0356 {
 struct Path { void FUN_005d9b20(void*,void*); };
 struct Manager { Path* FUN_00433ff0(); };
 extern Manager* DAT_0107a0d8;
+// pdb: Pathing::GetPotentialNavMeshInfoForLocation | Pathfind.obj | fnv360_0822_retail, call_seq, high
+// pdb params: apWorldSpace, aiCellKey
 void __cdecl FUN_005f1260(void* first,void* second) {
  DAT_0107a0d8->FUN_00433ff0()->FUN_005d9b20(first,second);
 }
@@ -4172,6 +4363,8 @@ struct PathingLocation {
     PathingLocation& FUN_005fc480(const PathingLocation&);
 };
 // @fnv 0x006dcce0
+// pdb: PathingLocation::operator= | PathingLocation.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aLoc
 PathingLocation& PathingLocation::FUN_005fc480(const PathingLocation& other)
 {
     Location = other.Location;
@@ -4222,6 +4415,8 @@ struct Owner5fe7 {
     bool __thiscall FUN_005fe7b0(Input5fe7* input);
 };
 
+// pdb: PathingLOSGridMap::IsLocationSeen | PathingLOSGridMap.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arLocation
 bool Owner5fe7::FUN_005fe7b0(Input5fe7* input) {
     Input5fe7* original = input;
     Key5fe7* keyObject = original->unk10;
@@ -4260,6 +4455,8 @@ struct Target {
     int FUN_004e1bc0(int a, float f, CA0E60Array* arr);
 };
 
+// pdb: Pathing::FindTeleportDoorsForLocation | Pathfind.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apSpace, arLocation, afRadius, apRetDoors
 int FUN_005f41d0(Target* a1, int a2, float f, CA0E60Array* a4)
 {
     if (!a1 || !a4)
@@ -4301,6 +4498,8 @@ struct FUN_005ecf40 : n5ecf40::ArrayBase {
     void* pool;
 };
 
+// pdb: BSScrapArray<int,1024>::BSScrapArray<int,1024> | PathBuilder.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiReserveSize, aiInitialSize, apHeap
 FUN_005ecf40::FUN_005ecf40(unsigned int cap, unsigned int count, void* p)
 {
     if (!p)
@@ -4343,6 +4542,8 @@ public:
     bool FUN_005ead50(int a1, int a2, int a3, PV005ead50* pv, unsigned short index, int a6);
 };
 
+// pdb: CheckLineOfSightFilterWater::CanCrossEdge | PathBuilder.obj | fnv360_0822_retail, vtable, medium
+// pdb params: hEdge, hMatchingEdge
 bool Cls005ead50::FUN_005ead50(int a1, int a2, int a3, PV005ead50* pv, unsigned short index, int a6)
 {
     volatile unsigned int* p = (volatile unsigned int*)((char*)pv->entries + (index << 4));
@@ -4417,6 +4618,7 @@ struct Owner303 {
     Lock m_lock;
     void FUN_005ff580();
 };
+// pdb: PathingLOSGridMap::Clear | PathingLOSGridMap.obj | fnv360_0822_retail, callee_sim, low
 void Owner303::FUN_005ff580() {
     m_lock.FUN_0086cc50();
     {
@@ -4495,6 +4697,7 @@ struct FUN_005e6370 : CompositeBase {
     ~FUN_005e6370();
 };
 
+// pdb: ObstacleData::~ObstacleData | NavMeshObstacleManager.obj | fnv360_0822_retail, call_seq, medium
 FUN_005e6370::~FUN_005e6370() {}
 }
 }   // namespace f3m_005e6370
@@ -4522,6 +4725,8 @@ struct QSpawnData {
     int unk00;
 };
 bool FUN_005f4d90(QSpawn* obj, QPt3* out);
+// pdb: Pathing::FindClosePoint | Pathfind.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apRequest, apRetPt
 void FUN_005f6700(QSpawn* obj, QPt3* out)
 {
     if (FUN_005f4d90(obj, out))
@@ -4550,6 +4755,7 @@ namespace f3m_005ea860 {
 namespace f3m_005ea860 {
 struct FUN_005e9d60 { int values[4]; ~FUN_005e9d60(); };
 class Array5ea860 { public: __forceinline virtual ~Array5ea860() { Clear(); } virtual FUN_005e9d60* Allocate(unsigned); virtual void Free(FUN_005e9d60*); FUN_005e9d60* data; unsigned count,capacity; __forceinline void Clear() { FUN_005e9d60* p=data; if(p) { for(unsigned remaining=count;remaining>0;++p,--remaining) p->~FUN_005e9d60(); Free(data); data=0; capacity=0; count=0; } } void FUN_005ea860(); };
+// pdb: BSSimpleArray<ObstacleTaskNavMeshOperation,1024>::~BSSimpleArray<ObstacleTaskNavMeshOperation,1024> | NavMeshObstacleTask.obj | fnv360_0822_retail, call_seq, medium
 void Array5ea860::FUN_005ea860() { this->Array5ea860::~Array5ea860(); }
 }
 }   // namespace f3m_005ea860
@@ -4607,6 +4813,8 @@ struct PathBuilder
     int FUN_005efc20(int index, PathOutput* output, void* context);
 };
 
+// pdb: PathBuilder::BuildPathToNavMeshSearchStart | PathBuilder.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiFirstVirtualNodeIndex, aRetPath, aRetEdges
 int PathBuilder::FUN_005efc20(int index, PathOutput* output, void* context)
 {
     PathEntry* entry = &table->entries[index];
@@ -4725,6 +4933,8 @@ struct QOwner {
     void FUN_005ff330(QStream* stream);
 };
 
+// pdb: PathingLOSGridMap::LoadGame | PathingLOSGridMap.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apLoadGameBuffer
 void QOwner::FUN_005ff330(QStream* stream)
 {
     unsigned count = stream->BGSLoadGameBuffer_LoadVariableSizedValue();
@@ -4863,6 +5073,8 @@ struct QNode : QAV {
 };
 QExtra* __cdecl FUN_00424fe0(QAV* obj);
 
+// pdb: NavMeshObstacleManager::AddObstaclesFor3DRecursive | NavMeshObstacleManager.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: ap3D, apRetObstacleArray
 bool __cdecl FUN_005e7310(QAV* obj, QOwner** owner) {
     QExtra* extra = FUN_00424fe0(obj);
     if (extra) {
@@ -4903,6 +5115,8 @@ struct Resource { int unk00, unk04, unk08, unk0c, unk10, unk14, unk18; Counter c
 struct Subject { int unk00; Vec vec; unsigned char FUN_005fda30(int); bool FUN_005fc8f0(NiPointer<Resource>*, int*); };
 struct Copy { void FUN_005fc480(Subject*); };
 bool __cdecl FUN_005f1970(Subject*, Vec*, Resource*, int, Copy*, int);
+// pdb: Pathing::CheckLineOfSight | Pathfind.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: BSPathingLocation::BSPathingLocation)
+// pdb params: aStartLocation, aGoalLocation, apReturnIntersectionLocation, apFilter
 unsigned char __cdecl FUN_005f25b0(Subject* first, Subject* second, Copy* dest, int arg) {
     if (dest) dest->FUN_005fc480(first);
     if (!second->FUN_005fda30(0)) return !first->FUN_005fda30(0);
@@ -5044,6 +5258,7 @@ struct Obj005e02c0 {
     Obj005e02c0* FUN_005e02c0(unsigned int flag);
 };
 
+// pdb: BSSimpleArray<NavMeshObstacleEdge *,1024>::`scalar deleting destructor' | NavMeshObstacleCutter.obj | fnv360_0822_retail, vtable, medium
 Obj005e02c0* Obj005e02c0::FUN_005e02c0(unsigned int flag)
 {
     vtable = &DAT_00e01ad8;
@@ -5089,6 +5304,7 @@ struct Derived : Base {
     Allocator* m_pAlloc;
 };
 
+// pdb: BSScrapArray<TESObjectCELL *,1024>::~BSScrapArray<TESObjectCELL *,1024> | NavMeshObstacleManager.obj | fnv360_0822_debug, call_seq, low
 Derived::~Derived() {
     Clear();
 }
@@ -5109,6 +5325,7 @@ struct FUN_005ebcd0 {
     void* pBuffer;
     unsigned int iSize;
     unsigned int SimpleArrayStorage;
+    // pdb: BSSimpleArray<PathBuilder::VirtualNodeSegment,1024>::`scalar deleting destructor' | PathBuilder.obj | fnv360_0822_retail, vtable, medium
     static void operator delete(void* p) { _g_memoryManager._DeallocateAlias(p); }
 };
 FUN_005ebcd0::~FUN_005ebcd0() {
@@ -5146,6 +5363,7 @@ public:
     void* FUN_005e6230(char a2);
 };
 
+// pdb: BSSimpleArray<ObstacleTaskData *,1024>::`scalar deleting destructor' | NavMeshObstacleManager.obj | fnv360_0822_retail, vtable, medium
 void* FUN_005e6230_owner::FUN_005e6230(char a2)
 {
     unk00 = &DAT_00e01cd0;
@@ -5339,6 +5557,7 @@ int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int
 void FUN_005e9600(); void FUN_005e9890();
 Singleton9AD0() { FUN_005e9600(); } ~Singleton9AD0() { FUN_005e9890(); }
 };
+// pdb: NavMeshObstacleManager::GetInstance | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
 Singleton9AD0* FUN_005e9ad0() { Scope9AD0 scope; static Singleton9AD0 instance; return &instance; }
 }   // namespace f3m_005e9ad0
 
@@ -5360,6 +5579,8 @@ struct FUN_005e0030 : SimpleBase5E00 {
  void* allocator;
  FUN_005e0030(unsigned,unsigned,void*);
 };
+// pdb: BSScrapArray<NavMeshObstacleEdge *,1024>::BSScrapArray<NavMeshObstacleEdge *,1024> | NavMeshObstacleCutter.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiReserveSize, aiInitialSize, apHeap
 FUN_005e0030::FUN_005e0030(unsigned capacityRequested,unsigned sizeRequested,void* owner) {
  table=DAT_00e01b08;
  if(!owner) owner=DAT_01090a78.FUN_0086bcb0();
@@ -5396,6 +5617,8 @@ public:
     void* FUN_005eb800(void* block, unsigned int key);
 };
 
+// pdb: BSScrapArray<bool,1024>::_Reallocate | PathBuilder.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apBuffer, aiNewSizeInItem
 void* FUN_005eb800_owner::FUN_005eb800(void* block, unsigned int key) {
     void* moved = allocator->ScrapHeap_Allocate(key, DAT_00e27ed4);
     memcpy(moved, block, size);
@@ -5427,6 +5650,7 @@ struct Obj_005f3980 {
     void* FUN_005f3980(int flags);
 };
 
+// pdb: BSSimpleArray<PathingNode *,1024>::`scalar deleting destructor' | Pathfind.obj | fnv360_0822_retail, vtable, medium
 void* Obj_005f3980::FUN_005f3980(int flags)
 {
     *(void**)this = &DAT_00e02118;
@@ -5467,6 +5691,7 @@ public:
     virtual void FUN_005f3b00_01(int index);
     virtual void FUN_005f3b00_02(void* pointer);
     virtual void FUN_005f3b00_03(int index);
+    // pdb: BSSimpleArray<CrossedTriangle,1024>::`scalar deleting destructor' | Pathfind.obj | fnv360_0822_retail, vtable, medium
     static void operator delete(void* pointer) { DAT_011f6238.Deallocate(pointer); }
 
     void* pBuffer;
@@ -5497,6 +5722,8 @@ struct Base {Table* vtable;void* data;unsigned count,capacity;
  ~Base(){vtable=&DAT_00dd8fd0;if(data){vtable->release(this,data);data=0;capacity=0;count=0;}}
 };
 struct Array:Base {void* allocator;Array(unsigned,unsigned,void*);};
+// pdb: BSScrapArray<TESObjectREFR *,1024>::BSScrapArray<TESObjectREFR *,1024> | PathBuilder.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiReserveSize, aiInitialSize, apHeap
 Array::Array(unsigned initialCapacity,unsigned initialCount,void* memory){
  vtable=&DAT_00e01eec;
  allocator=memory?memory:DAT_01090a78.FUN_0086bcb0();
@@ -5524,6 +5751,8 @@ struct Owner89{
  void* secondary;void* primary;unsigned int value;unsigned short index;unsigned char flags;
  Owner89(const Vec89&,Descriptor89*,unsigned short);
 };
+// pdb: PathingLocation::PathingLocation | PathingLocation.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aLocation, apNavMeshInfo, ausTriangleIndex
 Owner89::Owner89(const Vec89& point,Descriptor89* desc,unsigned short number){
  vtable=&DAT_00dc4dc0;position=point;flags=0;descriptor=desc;unk14=0;
  primary=FUN_00c0050a(desc->GetObject(),0,&DAT_00f46078,&DAT_00f47a58,0);
@@ -5559,6 +5788,8 @@ struct Object5e9c{int unk00;int unk04;int unk08;int unk0C;int unk10;int unk14;in
 __forceinline Block5e9c*RefBlock5e9c(Block5e9c*p){return p;}__forceinline Block5e9c*RefBlock5e9c(Object5e9c*p){return &p->ref;}
 template<class T>struct Ref5e9c{T*p;Ref5e9c():p(0){}__forceinline static void Release(T*value){if(value){Block5e9c*block=RefBlock5e9c(value);if(!InterlockedDecrement(&block->refs))((void(__thiscall*)(Block5e9c*))block->table[1])(block);}}~Ref5e9c(){Release(p);}__forceinline Ref5e9c&operator=(const Ref5e9c&other){T*old=p;if(old!=other.p){Release(old);p=other.p;if(p)InterlockedIncrement(&RefBlock5e9c(p)->refs);}return *this;}};
 struct Owner5e9c{Ref5e9c<Block5e9c>first;int index;int unk08;Ref5e9c<Object5e9c>last;Owner5e9c(const Ref5e9c<Block5e9c>&,int,const Ref5e9c<Object5e9c>&);};
+// pdb: ObstacleTaskNavMeshOperation::PrintDebugText | NavMeshObstacleTask.obj | fnv360_0721_beta, objrun_open, low
+// pdb params: aLoc, apText
 Owner5e9c::Owner5e9c(const Ref5e9c<Block5e9c>&a,int value,const Ref5e9c<Object5e9c>&b){first=a;index=value;last=b;}
 }   // namespace f3m_005e9c80
 
@@ -5599,6 +5830,7 @@ extern DeallocateFn g_deallocateFn;
 
 struct FUN_005fe940 {
     virtual ~FUN_005fe940();
+    // pdb: BSSimpleArray<char,1024>::`scalar deleting destructor' | PathingLOSGridMap.obj | fnv360_0822_retail, vtable, medium
     void operator delete(void* memory) { g_memoryManager.Deallocate(memory); }
     void* unk04;
     int unk08;
@@ -5631,6 +5863,7 @@ struct InitialState {
     InitialState();
 };
 
+// pdb: CombatCoverSearchInfo::CombatCoverSearchInfo | Pathfind.obj | fnv360_0822_retail, objrun, medium
 InitialState::InitialState()
 {
     first = DAT_0108ec68;
@@ -5681,6 +5914,7 @@ struct Q05d0 {
     FUN_005e0030 second;
     Q05d0();
 };
+// pdb: NavMeshObstacleCutter::NavMeshObstacleCutter | NavMeshObstacleCutter.obj | fnv360_0822_retail, call_seq, medium
 Q05d0::Q05d0() : first(0x100, 0, &list), second(0x100, 0, &list)
 {
 }
@@ -5711,6 +5945,8 @@ struct QItem8e0 : QBase8e0 {
     QItem8e0(QInput8e0* in);
     virtual ~QItem8e0();
 };
+// pdb: ObstacleTaskData::ObstacleTaskData | NavMeshObstacleTask.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apNavMesh
 QItem8e0::QItem8e0(QInput8e0* in) : listB(0)
 {
     QRefHolder8e0 t1;
@@ -5768,6 +6004,7 @@ struct ObstacleUndoData : NiRefObject {
  BSSimpleArray<unsigned short,1024> extraTriangles;
  ObstacleUndoData();virtual ~ObstacleUndoData();
 };
+// pdb: ObstacleUndoData::ObstacleUndoData | NavMeshObstacleCutter.obj | fnv360_0822_retail, uvref, medium
 ObstacleUndoData::ObstacleUndoData() : triangleIds(32),triangleInfo(32) { unk08=0; }
 }
 
@@ -5786,6 +6023,8 @@ struct FUN_005ffa60 {
     FUN_005ffa60(int value);
     void FUN_005ff490(int value);
 };
+// pdb: PathingLOSGrid::Setup | PathingLOSGridMap.obj | fnv360_0721_beta, call_dedup, low
+// pdb params: apNavMeshInfo
 FUN_005ffa60::FUN_005ffa60(int value): unk10(0) {
     FUN_005ff490(value);
 }
@@ -5825,6 +6064,7 @@ struct Base5F38 {
  virtual ~Base5F38() { if(data){ DAT_00e02108(this,data); data=0;capacity=0;size=0; } }
 };
 struct FUN_005f38c0 : Base5F38 { virtual ~FUN_005f38c0(); };
+// pdb: BSScrapArray<CrossedTriangle,1024>::~BSScrapArray<CrossedTriangle,1024> | Pathfind.obj | fnv360_0822_debug, call_seq, low
 FUN_005f38c0::~FUN_005f38c0(){ if(data){ DAT_00e0215c(data); data=0;capacity=0;size=0; } }
 }   // namespace f3m_005f38c0
 
@@ -5873,6 +6113,8 @@ public:
     bool FUN_005fe6a0(Request* req);
 };
 
+// pdb: PathingLOSGrid::IsLocationSeen | PathingLOSGridMap.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arLocation
 bool Dispatcher::FUN_005fe6a0(Request* req)
 {
     NiPointer<Finder> finder;
@@ -5911,6 +6153,8 @@ struct Manager {
 };
 extern Manager* DAT_0107a0d8;
 struct Sink { void FUN_0041a4b0(const Smart&); };
+// pdb: Pathing::GetAllLoadedNavmeshes | Pathfind.obj | fnv360_0721_beta, caller_sim, low
+// pdb params: apRetNavMeshes
 bool __cdecl FUN_005f64f0(Sink* out) {
     Group* active=DAT_0107a0d8->active;
     if(active) {
@@ -5943,6 +6187,8 @@ struct Array {
  void Destroy(Element* p,unsigned n){for(unsigned i=0;i<n;++i)p[i].~Element();}
  void FUN_005fe850(unsigned n,bool trim);
 };
+// pdb: BSSimpleArray<char,1024>::SetSize | PathingLOSGridMap.obj | fnv360_0721_beta, call_seq, low
+// pdb params: aiNewSize, abFreeMemory
 void Array::FUN_005fe850(unsigned n,bool trim){
  if(!n){if(data){if(trim){Free(data);data=0;capacity=0;}size=0;}return;}
  if(n>capacity){if(!capacity){data=Allocate(n);capacity=n;}else{FUN_005eb1c0(n,size);capacity=n;}Construct(data+size,n-size);size=n;}
@@ -5983,6 +6229,8 @@ struct Subject
     bool FUN_005fc8f0(ResourcePtr* resource, int* index);
 };
 
+// pdb: Pathing::GetNavMeshZForLocation | Pathfind.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aLocation, aRetHeight
 bool __cdecl FUN_005f2290(Subject* subject, float* out)
 {
     Vec point;
@@ -6034,6 +6282,8 @@ void* FUN_005f1260(TESWorldSpace*,unsigned);
 void* FUN_005f1240(TESObjectCELL*);
 struct Point {float x,y,z;};
 struct Location {unsigned unk00;Point position;void* navmesh;void* meshes;TESObjectCELL* cell;TESWorldSpace* world;unsigned flags;unsigned short triangle;unsigned char state;unsigned char unk27;void FUN_005fc950(Stream*);};
+// pdb: PathingLocation::LoadGame | PathingLocation.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apLoadGameBuffer
 void Location::FUN_005fc950(Stream* stream) {
  stream->FUN_006e0750(&position,12);
  unsigned id=0;
@@ -6067,6 +6317,8 @@ struct FUN_005e7610 : ArrayBase {
  virtual ~FUN_005e7610();
  void* allocator;
 };
+// pdb: NavMeshObstacleManager::AddBoundingBox3DNode | NavMeshObstacleManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aBox
 FUN_005e7610::FUN_005e7610() {
  allocator=DAT_01090a78.FUN_0086bcb0();
  data=0; size=0; capacity=0;
@@ -6111,6 +6363,7 @@ struct FUN_005ffac0 : Base {
     void FUN_005ff580();
     virtual ~FUN_005ffac0();
 };
+// pdb: PathingLOSGridMap::~PathingLOSGridMap | PathingLOSGridMap.obj | fnv360_0822_retail, call_seq, medium
 FUN_005ffac0::~FUN_005ffac0() { FUN_005ff580(); }
 }
 }   // namespace f3m_005ffac0
@@ -6125,6 +6378,8 @@ struct FUN_005fd540 {
  FUN_005fd540(const Point&,Cell*,World*);
 };
 bool __cdecl FUN_005f2290(FUN_005fd540*,void*);
+// pdb: Pathing::GetNavMeshZForLocation | Pathfind.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aLocation, apCell, apWorldSpace, aRetHeight
 bool __cdecl FUN_005f2760(const Point& p,Cell* c,World* w,void* arg) {
  FUN_005fd540 loc(p,c,w);return FUN_005f2290(&loc,arg);
 }
@@ -6140,6 +6395,8 @@ struct RefBase {virtual ~RefBase();long refs;RefBase();};
 inline RefBase::RefBase():refs(0){InterlockedIncrement(&DAT_0108ed80);}
 struct List {virtual ~List();virtual void* Allocate(unsigned);virtual void Deallocate(void*);virtual void* Reallocate(void*,unsigned);void* buffer;unsigned size,capacity;List(unsigned reserve=0){buffer=0;size=0;capacity=0;if(reserve){buffer=Allocate(reserve);capacity=reserve;}}};
 struct FUN_005e6e80:RefBase {void* value;List list;FUN_005e6e80();virtual ~FUN_005e6e80();};
+// pdb: NiPointer<ReferenceObstacleArray>::operator= | NavMeshObstacleManager.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: pObject
 FUN_005e6e80::FUN_005e6e80(){value=0;}
 }
 }   // namespace f3m_005e6e80
@@ -6182,6 +6439,8 @@ struct Point {
  bool FUN_005fcc10();
  bool FUN_005fc8f0(NiPointer<Resource>*,int*);
 };
+// pdb: Pathing::FindClosestPointOnNavmesh | Pathfind.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apWorldSpace, apCell, aLocation, apRetPt
 bool __cdecl FUN_005f1540(void* first,void* second,Vec3* input,Vec3* out){
  ContextGuard guard;
  Point point(input,second,first);
@@ -6248,6 +6507,8 @@ int unk90;
 struct Manager { int FUN_00608b80(void*,Location*,Location*,void*); };
 Manager* FUN_0044f4b0();
 struct Builder { void* request; int FUN_005ed500(Location&,Location&,void*); };
+// pdb: PathBuilder::BuildStraightPathUsingRayCasts | PathBuilder.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aStartLocation, aGoalLocation, aRetPath
 int Builder::FUN_005ed500(Location& start,Location& goal,void* output) {
  if(DAT_01074880) {
   TaskManager* manager=FUN_00bce1f0();
@@ -6753,6 +7014,8 @@ public:
     bool FUN_005e2a10(NavMesh* a_pNavMesh, const NiPointer<ObstacleData>& a_spObstacle, TaskPortalSwap& a_rPortalSwap);
 };
 
+// pdb: NavMeshObstacleCutter::SplitNavMeshFromObstacle | NavMeshObstacleCutter.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apNavMesh, aBox, aPortalSwaps
 bool NavMeshObstacleCutter::FUN_005e2a10(NavMesh* a_pNavMesh, const NiPointer<ObstacleData>& a_spObstacle, TaskPortalSwap& a_rPortalSwap)
 {
     pNavMesh = a_pNavMesh;
@@ -6863,6 +7126,8 @@ struct MemoryContext{int saved;MemoryContext(){saved=DAT_0117c298;DAT_0117c298=6
 struct Entry{Entry* next;bhkRigidBody* data;Entry() throw():next(0),data(0){}};
 struct FUN_005e5280{unsigned int unk00,unk04,unk08,unk0C;FUN_005e5280(unsigned int);};
 struct Queue:InterfacedClass{Entry* head;Entry* tail;unsigned int deleteBatchSize;Entry** deletedBuffers;FUN_005e5280* manager;volatile int count;Queue(unsigned int,unsigned int);virtual ~Queue();};
+// pdb: LockFreeQueue<bhkRigidBody *>::LockFreeQueue<bhkRigidBody *> | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiMaxThreads, aiDeleteBatchSize
 Queue::Queue(unsigned int threads,unsigned int batch){MemoryContext context;count=0;head=new Entry;tail=head;deleteBatchSize=batch;deletedBuffers=new Entry*[threads*2];manager=new FUN_005e5280(threads);}
 }
 
@@ -7000,6 +7265,8 @@ struct PathBuilder {
     bool FUN_005ec900(PathingLocation a_Location, PathingLocation& ar_Result, bool ab_AllowWater);
 };
 
+// pdb: PathBuilder::FindClosestOpenEdge | PathBuilder.obj | fnv360_0721_beta, objrun_prop, low
+// pdb params: aStartLocation, aRetLocation, abStart
 bool PathBuilder::FUN_005ec900(PathingLocation a_Location, PathingLocation& ar_Result, bool ab_AllowWater)
 {
     float fClosestDistSqr = FLT_MAX;
@@ -7063,6 +7330,8 @@ struct Owner5ec080 {
     Array5ec080 array;
     int FUN_005ec080(int a, int b, int c);
 };
+// pdb: PathingSolution::AddVirtualPathingNode | PathBuilder.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apNavMeshInfo, aLocation, apDoor
 int Owner5ec080::FUN_005ec080(int a, int b, int c)
 {
     int index = array.FUN_005eb230();
@@ -7148,6 +7417,8 @@ static __forceinline void Set5e47(Root5e47* root, Ref5e47* slot, unsigned short 
     e->mask |= 1 << index;
     e->slots[index] = value;
 }
+// pdb: NavMeshObstacleManager::CreatePortal | NavMeshObstacleManager.obj | fnv360_0822_retail, call_gap_sim, low, conflict (skyrim: bhkRigidBody::SetHavokAssertState)
+// pdb params: aspNavMesh1, aEdge1, aspNavMesh2, aEdge2
 bool __stdcall FUN_005e4710(Ref5e47* a, Ref5e47* b, Ref5e47* c, Ref5e47* d) {
     Key5e47 key1;
     key1.unk00 = -1;
@@ -7189,6 +7460,8 @@ struct Retained {Shared* value;Retained():value(0){}~Retained(){if(value)value->
 struct Request {int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20;unsigned short id; const unsigned short& GetId()const{return id;} bool FUN_005fc8b0(Retained&);};
 struct Entry {bool FUN_005feb30(Request*,void*);};
 struct Owner {int unk00;Entry** entries;unsigned count;bool FUN_005fed40(Request*,void*);};
+// pdb: PathingLOSGrid::SetLocationSeen | PathingLOSGridMap.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: arLocation, abSeen
 bool Owner::FUN_005fed40(Request* request,void* context){
  Retained retained;
  if(request->FUN_005fc8b0(retained)) {
@@ -7254,6 +7527,8 @@ struct Self {
     void FUN_005fe1c0(Stream* stream);
 };
 
+// pdb: PathingLOSGridMap::SaveGame | PathingLOSGridMap.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apSaveGameBuffer
 void Self::FUN_005fe1c0(Stream* stream)
 {
     unsigned count = 0;
@@ -7321,6 +7596,7 @@ struct __declspec(novtable) Bounds:RefBase {
     Array<unsigned short> added;
     virtual ~Bounds();
 };
+// pdb: ObstacleUndoData::~ObstacleUndoData | NavMeshObstacleCutter.obj | fnv360_0822_retail, call_seq, medium
 Bounds::~Bounds(){}
 }
 
@@ -7384,6 +7660,7 @@ public:
     f3m_005feff0::Grid4c m_4c;
     FUN_005feff0();
 };
+// pdb: PathingLOSGridMap::PathingLOSGridMap | PathingLOSGridMap.obj | fnv360_0822_retail, objrun, medium
 FUN_005feff0::FUN_005feff0() : m_18(0.0f), m_44(0.0f), m_48(0.0f)
 {
 }
@@ -7462,6 +7739,7 @@ struct CutterHelper5e0a {
     bool FUN_005dfc00(NavMeshObstacleVertex* a_pFirst, NavMeshObstacleVertex* a_pSecond);
 };
 
+// pdb: NavMeshObstacleCutter::CreateNewEdges | NavMeshObstacleCutter.obj | fnv360_0822_retail, call_gap, low
 void NavMeshObstacleCutter::FUN_005e0a60() {
     for (unsigned int i = 0; i < Vertices.GetSize(); i++) {
         NavMeshObstacleVertex* pFirst = Vertices[i];
@@ -7559,6 +7837,7 @@ struct FUN_005e62f0 : RefBase {
     FUN_005e62f0();
 };
 
+// pdb: ObstacleData::ObstacleData | NavMeshObstacleManager.obj | fnv360_0822_debug, uvref, medium
 FUN_005e62f0::FUN_005e62f0()
     : payload(*this), enabled(true), array(0), unk88(0)
 {}
@@ -7790,6 +8069,8 @@ struct ScrapArray : ArrayBase {
     ScrapArray(unsigned int reserve, unsigned int count, Allocator* alloc);
     virtual ~ScrapArray();
 };
+// pdb: BSScrapArray<FastNavMeshTriHandle,1024>::BSScrapArray<FastNavMeshTriHandle,1024> | PathBuilder.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiReserveSize, aiInitialSize, apHeap
 ScrapArray::ScrapArray(unsigned int reserve, unsigned int count, Allocator* alloc) {
     if (!alloc) alloc = DAT_01090a78.FUN_0086bcb0();
     allocator = alloc;
@@ -7912,6 +8193,8 @@ struct Builder {
  bool FUN_005ec900(Loc,Loc*,bool);
  int FUN_005eebe0(Loc*,LocArray*,int,Doors*);
 };
+// pdb: PathBuilder::BuildPathToValidNavMeshTriangle | PathBuilder.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aStartLocation, aRetPath, abStart, aRetEdges
 int Builder::FUN_005eebe0(Loc* start,LocArray* output,int allowPartial,Doors* doors) {
  if(*reinterpret_cast<const bool*>(&DAT_01074880)){
   switch(FUN_005f90b0(start,10,doors)) {
@@ -8001,6 +8284,7 @@ struct Array5ec100 { void** table; Element5ec100* data; unsigned count; unsigned
  __forceinline void Clear() { if(data) { Element5ec100* p=data; unsigned remaining=count; while(remaining>0) { p->FUN_00600960(); ++p; --remaining; } ((void (__thiscall *)(Array5ec100*,Element5ec100*))table[2])(this,data); data=0; capacity=0; count=0; } }
 };
 struct Owner5ec100 { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; Array5ec100 array; void FUN_005ec100(); };
+// pdb: PathingSolution::ClearCurrentDetailedPath | PathBuilder.obj | fnv360_0721_beta, call_seq, medium
 void Owner5ec100::FUN_005ec100() {
     Array5ec100& storage=array;
     Element5ec100* element=storage.data;
@@ -8053,6 +8337,8 @@ struct Array {
     void Add(void* p) { m4[FUN_005e5350()] = p; }
 };
 bool __cdecl FUN_005f1280(const NiPoint3& a, const NiPoint3& b, const NiPoint3& c, const NiPoint3& d);
+// pdb: NavMeshObstacleManager::GetCellListForObstacle | NavMeshObstacleManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apData, apReturnCellArray
 bool __cdecl FUN_005e6fa0(Ctx* ctx, Array* out)
 {
     out->Clear();
@@ -8314,6 +8600,7 @@ float time;
     void FUN_005e4850(); void FUN_005e4810(); void FUN_005e80b0(); void FUN_005e7ed0();
     void FUN_005e7d90(); void FUN_005e81f0();
 };
+// pdb: NavMeshObstacleManager::Update | NavMeshObstacleManager.obj | fnv360_0822_retail, call_gap, low
 void StateMachine::FUN_005e8fd0()
 {
     MemoryContext context;
@@ -8416,6 +8703,8 @@ struct Data { Obj* m0; };
 struct Sink { void FUN_0041a4b0(const Smart&); };
 bool __cdecl FUN_005e6fa0(Data* d, Derived* arr);
 bool __cdecl FUN_005f1280(Vec3* a, Vec3* b, Vec3* c, Vec3* d);
+// pdb: NavMeshObstacleManager::GetNavMeshListForObstacle | NavMeshObstacleManager.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apData, apReturnNavMeshArray
 bool __cdecl FUN_005e7120(Data* d, Sink* s)
 {
     Derived arr(32);
@@ -8455,6 +8744,8 @@ struct Base {Table* vtable;void* data;unsigned count,capacity;
  ~Base(){vtable=&DAT_00dd8fe4;if(data){vtable->release(this,data);data=0;capacity=0;count=0;}}
 };
 struct FUN_005eb4b0:Base {void* allocator;FUN_005eb4b0(unsigned,unsigned,void*);};
+// pdb: BSScrapArray<NavMeshInfo const *,1024>::BSScrapArray<NavMeshInfo const *,1024> | PathBuilder.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiReserveSize, aiInitialSize, apHeap
 FUN_005eb4b0::FUN_005eb4b0(unsigned initialCapacity,unsigned initialCount,void* memory){
  vtable=&DAT_00e01ed8;
  allocator=memory?memory:DAT_01090a78.FUN_0086bcb0();
@@ -8477,6 +8768,8 @@ struct Base {Table* vtable;void* data;unsigned count,capacity;
  ~Base(){vtable=&DAT_00e01e9c;if(data){vtable->release(this,data);data=0;capacity=0;count=0;}}
 };
 struct FUN_005eb8d0:Base {void* allocator;FUN_005eb8d0(unsigned,unsigned,void*);};
+// pdb: BSScrapArray<PathBuilder::VirtualNodeSegment,1024>::BSScrapArray<PathBuilder::VirtualNodeSegment,1024> | PathBuilder.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiReserveSize, aiInitialSize, apHeap
 FUN_005eb8d0::FUN_005eb8d0(unsigned initialCapacity,unsigned initialCount,void* memory){
  vtable=&DAT_00e01f14;
  allocator=memory?memory:DAT_01090a78.FUN_0086bcb0();
@@ -8620,6 +8913,8 @@ struct Big {
     Big() { FUN_0060f170(); }
     ~Big() { FUN_0060f1f0(); }
 };
+// pdb: Pathing::BuildTeleportDoorPath | Pathfind.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aOrigin, aDestination, apRetPath, aRestrictions, afMaxDist, apActorLockData, aeDoorLockDisp
 bool FUN_005f3f90(Loc* a1, Loc* a2, PathBuildObj* out, int a4, float f, int a6, int a7)
 {
     TlsScope scope;
@@ -9468,6 +9763,8 @@ struct DetailedBuilder {
     void FUN_0060ebd0(PathingRequest* request, MeshRoute& route, TransitionRoute& transitions, const Vec3& start, const Vec3& end, PathingSolution* solution, unsigned int flags, bool smooth);
 };
 
+// pdb: Pathing::BuildPathToSafeStraightLine | Pathfind.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRequest, apSolution
 bool __cdecl FUN_005f4990(PathingRequest* request, PathingSolution* result)
 {
     AllocTagScope scope;
@@ -9587,6 +9884,8 @@ struct Owner {
     bool FUN_005fe990(Lookup** lookup);
 };
 }
+// pdb: PathingLOSGridCell::SetSeenTrianglesFromLOSMap | PathingLOSGridMap.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aspLOSMap
 bool n5fe990::Owner::FUN_005fe990(Lookup** lookup)
 {
     int k = source->unk00;
@@ -9707,6 +10006,7 @@ inline float GetSquaredXYLength2110(const NiPoint3& a) {
     return a.x * a.x + a.y * a.y;
 }
 
+// pdb: NavMeshObstacleCutter::SplitEdges | NavMeshObstacleCutter.obj | fnv360_0721_beta, objrun, medium
 void NavMeshObstacleCutter::FUN_005e2110() {
 
 
@@ -9897,6 +10197,8 @@ struct Arr {
     }
     void FUN_005ff1d0(Node** src);
 };
+// pdb: PathingLOSGrid::Setup | PathingLOSGridMap.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aspNavMesh
 void Arr::FUN_005ff1d0(Node** src)
 {
     unsigned int n = (*src)->FUN_005b84e0();
@@ -9961,6 +10263,8 @@ public:
     bool FUN_005e0720(NavMesh5e0720* a_pNavMesh, FUN_005e0390* a_pUndoData);
 };
 
+// pdb: NavMeshObstacleCutter::ResetNavMeshFromObstacleUndoData | NavMeshObstacleCutter.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apNavMesh, apUndoData
 bool Cutter5e0720::FUN_005e0720(NavMesh5e0720* a_pNavMesh, FUN_005e0390* a_pUndoData)
 {
     pNavMesh = a_pNavMesh;
@@ -10022,6 +10326,8 @@ public:
     void FUN_005f42a0(unsigned int index, const Elem5f42a0& item);
 };
 
+// pdb: BSSimpleArray<PathingCoverLocation,1024>::Insert | Pathfind.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiIndex, aValue
 void Array5f42a0::FUN_005f42a0(unsigned int index, const Elem5f42a0& item)
 {
     if (index == count)
@@ -10085,6 +10391,7 @@ bool __cdecl FUN_005f4990(Object5fb8c0* object, void* context);
 bool __cdecl FUN_005f8280(Object5fb8c0* object, void* context);
 bool __cdecl FUN_005f89d0(Object5fb8c0* object, void* context);
 
+// pdb: PathingSolution::PathingSolution | PathingSolution.obj | fnv360_0822_retail, call_dedup, low, conflict (bridge: Pathing::BuildPath)
 bool __cdecl FUN_005fb8c0(Object5fb8c0* object, void* context)
 {
     MemoryContext5fb8c0 memoryContext;
@@ -10163,6 +10470,7 @@ public:
 }
 using n5e80b0::Owner5e80b0;
 
+// pdb: NavMeshObstacleManager::ProcessAllObstacles | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
 void Owner5e80b0::FUN_005e80b0()
 {
     using namespace n5e80b0;
@@ -10194,6 +10502,7 @@ __forceinline bool IsCandidate(EdgeInit5e0a* a_pEdge)
 }
 }
 
+// pdb: NavMeshObstacleCutter::CreateRemainingEdges | NavMeshObstacleCutter.obj | fnv360_0822_retail, call_gap, low
 void NavMeshObstacleCutter::FUN_005e0bc0()
 {
     for (unsigned int i = 0; i < Edges.GetSize(); i++) {
@@ -10264,6 +10573,7 @@ struct NavMeshIndexView {
     NavMesh prefix;
     ObstacleIndexBuffer obstaclePOVs;
 };
+// pdb: NavMeshObstacleCutter::AddNewPOVs | NavMeshObstacleCutter.obj | fnv360_0822_retail, call_gap, low
 void NavMeshObstacleCutter::FUN_005e2690()
 {
     for (unsigned int i = 0; i < Vertices.iSize; ++i) {
@@ -10704,6 +11014,8 @@ struct SearchState {
                       TransitionRoute& transitions);
 };
 
+// pdb: Pathing::BuildHidePath | Pathfind.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRequest, apSolution
 bool __cdecl FUN_005f45c0(PathingRequest* request, PathingSolution* result)
 {
     AllocTagScope scope;
@@ -10841,6 +11153,8 @@ struct QPick {
   void FUN_005fd1e0(char* out, unsigned int size);
 };
 
+// pdb: PathingLocation::PrintDebugText | PathingLocation.obj | fnv360_0822_retail, ustr, low, conflict (skyrim: BSPathingLocation::PrintDebugText)
+// pdb params: apBuffer, aiMaxSize
 void QPick::FUN_005fd1e0(char* out, unsigned int size)
 {
   char buf[256];
@@ -11057,6 +11371,8 @@ bool __cdecl FUN_005f8210(RequestBench*, SolutionBench*);
 
 using namespace n5faa80;
 
+// pdb: Pathing::ProfilePathing | Pathfind.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apCell, aLoc, aiTestType, aiNum
 float __cdecl FUN_005faa80(CellOps* cell, const n5faa80::NiPoint3& pos, int mode, unsigned int count)
 {
     float eType;
@@ -11289,6 +11605,8 @@ struct Owner
     void FUN_005e6810(const char* name);
 };
 
+// pdb: NavMeshObstacleManager::ReallyRemoveObstaclesForReference | NavMeshObstacleManager.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aiFormID
 void Owner::FUN_005e6810(const char* name)
 {
     NiPointer<Group> group;
@@ -11350,6 +11668,7 @@ struct DerivedCleanup {
     ~DerivedCleanup() { object->~BaseBuffer(); }
 };
 
+// pdb: BSScrapArray<NavMeshInfo const *,1024>::~BSScrapArray<NavMeshInfo const *,1024> | PathBuilder.obj | fnv360_0822_debug, call_seq, medium
 void Buffer::FUN_005eb550()
 {
     DerivedCleanup cleanup(this);
@@ -11404,6 +11723,8 @@ struct Owner {
     int unk18;
     void FUN_005e8c20(bool keep);
 };
+// pdb: LockFreeQueue<bhkRigidBody *>::RemoveAll | NavMeshObstacleManager.obj | fnv360_0822_debug, caller, medium
+// pdb params: abCalledByDestructor
 void Owner::FUN_005e8c20(bool keep)
 {
     TlsTagGuard guard(6);
@@ -11499,6 +11820,7 @@ struct Owner
     bool FUN_005e5e60();
 };
 
+// pdb: NavMeshObstacleManager::ProcessRemovedDoors | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
 bool Owner::FUN_005e5e60()
 {
     Node* list = &unk94;
@@ -11707,6 +12029,8 @@ class PathHandler
 };
 
 // @fnv 0x006ce8b0
+// pdb: PathBuilder::BuildNavMeshInfoPathInSpace | PathBuilder.obj | fnv360_0822_debug, caller_sim, low
+// pdb params: aStartLocation, aGoalLocation, pSpace, apTeleportDoor
 bool PathHandler::FUN_005ee5a0(const NiPoint3& pt1, const NiPoint3& pt2, PathingContext* ctx, int flag)
 {
     FUN_005fd540 loc1(pt1, ctx->cell, ctx->worldSpace);
@@ -11949,6 +12273,8 @@ struct PathingRequest {
 };
 bool __cdecl FUN_005f8d20(PathingRequest* apRequest, void* apResult, bool abFlag);
 
+// pdb: VATS::GetLineOfSight | VATS.obj | fnv360_1110_retail, call_gap, low
+// pdb params: apCommand
 bool __cdecl FUN_005fb660(Actor* apActor, Actor* apTarget, float afDistance, void* apResult)
 {
     PathingRequest kRequest;
@@ -12135,6 +12461,7 @@ struct Tracker {
     void FUN_005e81f0();
 };
 
+// pdb: NavMeshObstacleManager::ProcessMovingReferences | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
 void Tracker::FUN_005e81f0()
 {
     Link* cursor = &head;
@@ -12203,6 +12530,8 @@ struct Ctl {
     bool FUN_005f09e0();
     int FUN_005f0eb0(int idx, int a2);
 };
+// pdb: PathBuilder::UpdateDetailedPath | PathBuilder.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiCurrentVirtualNodeIndex, aCurrentActorLocation
 int Ctl::FUN_005f0eb0(int idx, int a2)
 {
     int l14 = -1;
@@ -12327,6 +12656,7 @@ struct Graph {
     bool FUN_005fd770();
 };
 
+// pdb: PathingLocation::AreAllMeshesReachable | PathingLocation.obj | fnv360_0822_retail, call_gap, low
 bool Graph::FUN_005fd770()
 {
     FUN_005fd3e0 found;
@@ -12437,6 +12767,8 @@ struct PathCheck {
     bool FUN_005ec510(PathNode* a1, PathNode* a2);
 };
 
+// pdb: PathBuilder::TryBuildStraightPath | PathBuilder.obj | fnv360_0822_retail, uvref, medium
+// pdb params: aStartLocation, aGoalLocation
 bool PathCheck::FUN_005ec510(PathNode* a1, PathNode* a2)
 {
     PathFilter filter;
@@ -12639,6 +12971,7 @@ public:
     void FUN_005e6bb0(Val74* val);
 };
 
+// pdb: NavMeshObstacleManager::QueueTasks | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
 void Owner74::FUN_005e74f0()
 {
     {
@@ -12771,6 +13104,7 @@ struct Pather {
     bool FUN_005ee8c0();
 };
 
+// pdb: PathBuilder::BuildTeleportDoorPath | PathBuilder.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 bool Pather::FUN_005ee8c0()
 {
     Vec3 X, Y;
@@ -13305,6 +13639,8 @@ struct Array5ece20
     }
     void FUN_005ece20(Array5ece20* out);
 };
+// pdb: BSSimpleArray<NavMeshEdgeLocation,1024>::CopyTo<1024> | PathBuilder.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aDestArray
 void Array5ece20::FUN_005ece20(Array5ece20* out)
 {
     out->SetSize(this->size);
@@ -13342,6 +13678,8 @@ public:
     bool FUN_005eccd0(int a, int b);
     bool FUN_005f09e0();
 };
+// pdb: PathBuilder::BuildDetailedPathForLoadedVirtualNodes | PathBuilder.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: pActor
 bool Proc5f09e0::FUN_005f09e0()
 {
     List5f09e0 list(0, 0, unk08);
@@ -13451,6 +13789,7 @@ struct Builder {
  unsigned FindVertex(unsigned short id) {for(unsigned i=0;i<unk1c.unk08;++i) if(unk1c.unk04[i]->unk00==id) return i; return (unsigned)-1;}
  void FUN_005e1810();
 };
+// pdb: NavMeshObstacleCutter::GenerateOutsideVertsAndEdges | NavMeshObstacleCutter.obj | fnv360_0822_retail, call_gap, low
 void Builder::FUN_005e1810() {
  for(unsigned t=0;t<unk08->unk20.unk08;++t) {
   Triangle* tri=&unk00->unk3c[unk08->unk20[t]];
@@ -13705,6 +14044,8 @@ struct Owner {
     Node* volatile* hazard;
     void FUN_005e5070(void* const*);
 };
+// pdb: LockFreeQueue<bhkRigidBody *>::LockFreeQueueInterface::Push | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: arData
 void Owner::FUN_005e5070(void* const* data) {
     Tag tag(6);
     Node* volatile observed=0;
@@ -13796,6 +14137,7 @@ struct S5ea710_Elem {
     bool FUN_005ea710();
 };
 
+// pdb: ObstacleTaskData::ReplaceNavMesh | NavMeshObstacleTask.obj | fnv360_0822_retail, call_seq, medium
 bool S5ea710_Elem::FUN_005ea710() {
     S5ea710_Target* first = unk1C;
     if (!first || !unk20)
@@ -14134,6 +14476,7 @@ struct Cls {
     void FUN_005e8d50();
 };
 
+// pdb: NavMeshObstacleManager::ClearAllObstacles | NavMeshObstacleManager.obj | fnv360_0822_retail, call_gap, low
 void Cls::FUN_005e8d50()
 {
     OwnedPtr<Group> val;
@@ -14250,6 +14593,8 @@ struct S5f16b0_Locator
 
 using namespace S5f16b0_ns;
 
+// pdb: Pathing::FindPointOnNavMesh | Pathfind.obj | fnv360_0721_retail, call_seq, medium
+// pdb params: apWorldSpace, apCell, aLocation, aRadius, apRetPt
 bool __cdecl FUN_005f16b0(void* apInfo, void* apCell, const S5f16b0_Point3& arPos, float afRange, S5f16b0_Point3& arOut)
 {
     S5f16b0_Locator kLocator(&arPos, apCell, apInfo);
@@ -14428,6 +14773,8 @@ struct Owner {
     Lock lock;
     bool FUN_005e6bb0(int value);
 };
+// pdb: NavMeshObstacleManager::PushTask | NavMeshObstacleManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apTaskData
 bool Owner::FUN_005e6bb0(int value)
 {
     BSTasklet job;
@@ -14663,6 +15010,8 @@ struct S005edc00_Builder {
     bool FUN_005edc00(ArgObj* a1, ArgObj* a0, PathingLocation* apOutLocation);
 };
 
+// pdb: PathBuilder::FindEntryPoint | PathBuilder.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apPrevNode, apCurrentNode, aRetLocation
 bool S005edc00_Builder::FUN_005edc00(ArgObj* a1, ArgObj* a0, PathingLocation* apOutLocation)
 {
     a0->FUN_00717e50()->FUN_005fdde0();
@@ -14873,6 +15222,7 @@ struct S5e1c70_Cutter {
     bool FUN_005df730(const NiPoint3& a_rPoint);
 };
 
+// pdb: NavMeshObstacleCutter::GenerateBoxVertsAndEdges | NavMeshObstacleCutter.obj | fnv360_0721_beta, objrun, medium
 void NavMeshObstacleCutter::FUN_005e1c70() {
     S5e1c70_Obstacle* pObs;
     NiPoint3 kCorners[4];
@@ -15364,6 +15714,8 @@ struct Owner {
     bool FUN_005fe560(Arg* arg);
 };
 
+// pdb: PathingLOSGridCell::IsLocationSeen | PathingLOSGridMap.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arLocation
 bool Owner::FUN_005fe560(Arg* arg)
 {
     if (enabled)
@@ -15469,6 +15821,8 @@ struct S005efb00_Path
     bool FUN_005efb00(void* a0, void* a1);
 };
 
+// pdb: PathBuilder::BuildHighLevelPath | PathBuilder.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
+// pdb params: apStartMesh, apGoalMesh
 bool S005efb00_Path::FUN_005efb00(void* a0, void* a1)
 {
     if (a0 && a1 && a0 == a1)
@@ -15534,6 +15888,8 @@ struct FormOwner {
     bool FUN_005feb30(Form* form, bool enable);
 };
 
+// pdb: PathingLOSGridCell::SetLocationSeen | PathingLOSGridMap.obj | fnv360_0822_retail, objrun, medium
+// pdb params: arLocation, abSeen
 bool FormOwner::FUN_005feb30(Form* form, bool enable)
 {
     ResPtr resource;
@@ -15727,6 +16083,8 @@ struct Owner {
     bool FUN_005ff750(void* apParam);
 };
 
+// pdb: PathingLOSGridMap::SetLOSMapFromSeenTriangles | PathingLOSGridMap.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aspLOSMap
 bool Owner::FUN_005ff750(void* apParam) {
     lock.FUN_0086cbf0();
     MeshArray meshes;
@@ -15857,6 +16215,8 @@ struct Holder5FF {                                   // 'this' (EDI) ✓✓
     bool FUN_005fff00(void* firstArgument, void* secondArgument);   // thiscall with two stack parameters ('retn 8'), returning a bool in AL ✓✓
 };
 
+// pdb: PathingLOSMap::GetUnseenNavMeshAndTriangle | PathingLOSMap.obj | fnv360_0721_beta, caller_sim, low
+// pdb params: aRetNavMesh, aRetTriangle
 bool Holder5FF::FUN_005fff00(void* firstArgument, void* secondArgument) {
     if (this->enabled24 == 0)                         // ORIG: cmp dword ptr [edi+24h],0 ; jnz past - the zero case falls straight into its own epilogue copy ✓✓ 
         return false;
@@ -15983,6 +16343,8 @@ struct Owner5eccd0
     bool FUN_005eccd0(unsigned int first, unsigned int last);
 };
 
+// pdb: PathBuilder::BuildStraightPathForVirtualNodes | PathBuilder.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aiFirstVirtualNodeIndex, aiLastVirtualNodeIndex
 bool Owner5eccd0::FUN_005eccd0(unsigned int first, unsigned int last)
 {
     for (unsigned int i = first; i <= last; ++i)
@@ -16029,6 +16391,8 @@ struct Owner {
     Storage* storage;
     bool FUN_005eacb0(int index, int* outStart, int* outEnd);
 };
+// pdb: PathBuilder::FindLoadedNodeIndices | PathBuilder.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: aiFirstHighLevelNode, apFirstLoadedNodeIndex, apLastLoadedNodeIndex
 bool Owner::FUN_005eacb0(int index, int* outStart, int* outEnd) {
     Info* info = storage->At(index)->sub.PathingLocation_GetCell();
     if (!info || info->kind != 6)
@@ -16058,6 +16422,8 @@ struct Item {int unk00,unk04,unk08,unk0c;unsigned* key;int unk14,unk18,unk1c,unk
 struct Target {bool FUN_005fed40(Item*,void*);};
 struct Map {bool FUN_00bea7b0(unsigned,Target**);};
 struct Object {int unk00,unk04;Map map;bool FUN_005ff0c0(Item*,void*);};
+// pdb: PathingLOSGridMap::SetLocationSeen | PathingLOSGridMap.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arLocation, abSeen
 bool Object::FUN_005ff0c0(Item* item,void* context) {
  if(item->key && item->index!=0xffff){
   unsigned key=*item->key;
@@ -16193,6 +16559,8 @@ virtual void slot114();
 virtual void slot115();
 virtual void* get();};
 bool FUN_005e7310(void*,Holder**);
+// pdb: NavMeshObstacleManager::UpdateObstacleDataForReference | NavMeshObstacleManager.obj | fnv360_0721_beta, objrun, medium
+// pdb params: apRef, apRetObstacleArray
 bool FUN_005e7470(Object* object,Holder** holder){Array* array=&(*holder)->array;if(array->data){array->FUN_005e5240(array->data,array->count);array->release(array->data);array->data=0;array->capacity=0;array->count=0;}if(object->get())return FUN_005e7310(object->get(),holder);return false;}
 }
 }   // namespace f3m_005e7470
@@ -16240,6 +16608,8 @@ struct FUN_005ee830 {
     BSSimpleArray<NavMeshPtr, 1024> unk24;
     FUN_005ee830(void* first, void* second);
 };
+// pdb: PathBuilder::PathBuilder | PathBuilder.obj | fnv360_0822_retail, uvref, low
+// pdb params: apRequest, apSolution
 FUN_005ee830::FUN_005ee830(void* first, void* second) {
     unk08 = DAT_01090a78.FUN_0086bcb0();
     unk00 = first;
@@ -16292,6 +16662,7 @@ struct ListNode {
     void FUN_005e3010();
 };
 
+// pdb: BSSimpleList<NiPointer<ObstacleData> >::RemoveAll | NavMeshObstacleManager.obj | fnv360_0822_retail, call_gap, low, conflict (skyrim: bhkRigidBody::Kill)
 void ListNode::FUN_005e3010()
 {
     while (m_next) {
@@ -16314,6 +16685,8 @@ namespace f3m_005f1280 {
 namespace c5f1280 {
 struct Point3 { float x, y, z; };
 }
+// pdb: Pathing::DoAABBsOverlap | Pathfind.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: bound1Min, bound1Max, bound2Min, bound2Max
 bool FUN_005f1280(const c5f1280::Point3& minA, const c5f1280::Point3& maxA, const c5f1280::Point3& minB, const c5f1280::Point3& maxB)
 {
     if (minB.x >= maxA.x)
@@ -16340,6 +16713,7 @@ struct Heap {void* FUN_0086b930(unsigned);};extern Heap DAT_01090a78;extern char
 struct A {void* table;A(){table=&DAT_00e01c48;}static void* operator new(unsigned n){return DAT_01090a78.FUN_0086b930(n);}};
 struct B {void* table;B(){table=&DAT_00e01b6c;}static void* operator new(unsigned n){return DAT_01090a78.FUN_0086b930(n);}};
 struct Object {int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8; int unkac; int unkb0; int unkb4; int unkb8; A* a;B* b;Resource resource;bool FUN_005e31d0();};
+// pdb: NavMeshObstacleManager::Initialize | NavMeshObstacleManager.obj | fnv360_0822_retail, uvref, low
 bool Object::FUN_005e31d0(){Resource* r=&resource;if(!FUN_00bce1f0()->FUN_00bce2c0(r))return false;if(!FUN_00bce1f0()->FUN_00bce2f0(r))return false;a=new A;b=new B;return true;}
 }
 }   // namespace f3m_005e31d0
@@ -16364,6 +16738,8 @@ public:
     void FUN_005f4460(unsigned int index, const float& item);
 };
 
+// pdb: BSSimpleArray<float,1024>::Insert | Pathfind.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aiIndex, aValue
 void FloatArray::FUN_005f4460(unsigned int index, const float& item)
 {
     if (index == size) {
@@ -16421,6 +16797,7 @@ struct PathQuery {
     bool FUN_005f0e10();
     PathElement* GetSecond() { return &storage->second; }
 };
+// pdb: PathBuilder::BuildPath | PathBuilder.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 bool PathQuery::FUN_005f0e10() {
     storage->first.FUN_005fc770();
     storage->second.FUN_005fc770();
@@ -16615,6 +16992,7 @@ struct Owner {
     Map unk7c;
     void FUN_005e7d90();
 };
+// pdb: NavMeshObstacleManager::ProcessActivatedObstacles | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
 void Owner::FUN_005e7d90()
 {
     int key;
@@ -16736,6 +17114,8 @@ public:
     void FUN_005feea0(Stream5fee* a_pStream);
 };
 
+// pdb: PathingLOSGrid::LoadGame | PathingLOSGridMap.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: apLoadGameBuffer
 void FUN_005ff110::FUN_005feea0(Stream5fee* a_pStream) {
     unsigned int uiFormID = 0;
     a_pStream->FUN_006e06d0(&uiFormID);
@@ -16853,6 +17233,8 @@ struct Owner5ffc
     bool FUN_005ffc30(Input5ffc* input);
 };
 
+// pdb: PathingLOSGridMap::SetSeenTrianglesFromLOSMap | PathingLOSGridMap.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aspLOSMap
 bool Owner5ffc::FUN_005ffc30(Input5ffc* input)
 {
     Lock5ffc* guard = &lock;
@@ -16954,6 +17336,8 @@ struct Owner {
     bool FUN_005ea490(const int* key, int type);
 };
 }
+// pdb: ObstacleTaskData::AddOperation | NavMeshObstacleTask.obj | fnv360_0822_retail, call_gap_sim, low
+// pdb params: apObstacle, aeType
 bool n5ea490::Owner::FUN_005ea490(const int* key, int type)
 {
     switch (type) {
@@ -17136,6 +17520,8 @@ struct Builder
     bool FUN_005ed6c0(unsigned int index, EdgeInput* input, PathArray* output);
 };
 
+// pdb: PathBuilder::CheckClosestEdgeToGoal | PathBuilder.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aiLastVirtualNodeIndex, aEndEdges, aEndNodes
 bool Builder::FUN_005ed6c0(unsigned int index, EdgeInput* input, PathArray* output)
 {
     Edge edge;
@@ -17255,6 +17641,7 @@ struct Owner
     void FUN_005e6a60();
 };
 
+// pdb: NavMeshObstacleManager::ProcessRemovedReferences | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
 void Owner::FUN_005e6a60()
 {
     for (NameNode* node = &names; node; )
@@ -17442,6 +17829,8 @@ struct Owner {
     bool FUN_005e6cd0(void** out);
 };
 
+// pdb: LockFreeQueue<bhkRigidBody *>::LockFreeQueueInterface::Pop | NavMeshObstacleManager.obj | fnv360_0822_retail, call_gap, low
+// pdb params: arData
 bool Owner::FUN_005e6cd0(void** out)
 {
     Node* volatile head = 0;
@@ -17515,6 +17904,7 @@ struct EntryNode {
 };
 }
 namespace Q5e53b0 {
+// pdb: LockFreeQueue<bhkRigidBody *>::LockFreeQueueInterface::ScanForDeletedNodes | NavMeshObstacleManager.obj | fnv360_0822_retail, call_seq, low
 void EntryNode::FUN_005e53b0()
 {
     MemoryContext context;
@@ -17745,6 +18135,8 @@ __forceinline void AssignKey(Key& dst, const Key& src)
     dst.extra = src.extra;
 }
 
+// pdb: NavMeshObstacleCutter::CreateSwappedEdgeList | NavMeshObstacleCutter.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aPortalSwaps
 void ScriptHost::FUN_005e27a0(Lists* lists)
 {
     IdArray ids;
@@ -17864,6 +18256,8 @@ struct Weights {
     float& GetAt(int i) { return m4[i]; }
 };
 void __cdecl FUN_005f5590(Elem* e, NiPointer<Obj>& p, int a, float r, float w);
+// pdb: Pathing::ComputeLineOfSightMap | Pathfind.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: aspGridMap, aLocations, apHeadings
 bool __cdecl FUN_005f7b00(NiPointer<Src>& pSource, Data* entries, Weights* weights)
 {
     if (!((Src*)pSource)->IsValid())
@@ -17947,6 +18341,7 @@ struct NavBuilder {
  bool FUN_005dfb10(NavVertex*,NavVertex*,NavVertex*);
  bool FUN_005e0da0();
 };
+// pdb: NavMeshObstacleCutter::CreateNewTriangles | NavMeshObstacleCutter.obj | fnv360_0822_retail, call_gap, low
 bool NavBuilder::FUN_005e0da0() {
  bool changed=false;
  for(unsigned int i=0;i<count;++i) {
@@ -18231,6 +18626,8 @@ inline void ToPt3(Pt3& kOut, const HkVec4& kIn)
 
 using namespace N5e3250;
 
+// pdb: NavMeshObstacleManager::UpdateObstacleData | NavMeshObstacleManager.obj | fnv360_0822_retail, caller, medium
+// pdb params: apObstacle
 bool __cdecl FUN_005e3250(Obstacle* pObstacle)
 {
     CollObj* pCollision = pObstacle->m_pCollision;
@@ -18595,6 +18992,8 @@ struct Owner5ff620
     bool FUN_005ff620(ObjectArray5ff620* objects);
 };
 
+// pdb: PathingLOSGridMap::Setup | PathingLOSGridMap.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aNavMeshes
 bool Owner5ff620::FUN_005ff620(ObjectArray5ff620* objects)
 {
     m_lock.FUN_0086cc50();
@@ -18731,6 +19130,8 @@ struct Owner5e64
     void FUN_005e6430(Ref5e64* input);
 };
 
+// pdb: NavMeshObstacleManager::RemoveObstacleForReference | NavMeshObstacleManager.obj | fnv360_0822_debug, caller, medium
+// pdb params: apRef
 void Owner5e64::FUN_005e6430(Ref5e64* input)
 {
     if (!DAT_01074864)
@@ -18945,6 +19346,8 @@ void __cdecl FUN_005f5eb0(PathingLocation* location, float radius, NearbyMeshes*
 bool __cdecl FUN_005de000(const NiPoint3* first, const NiPoint3* second, const NiPoint3& point, float radius);
 }
 
+// pdb: Pathing::CheckSphere | Pathfind.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aSphereCenter, afRadius
 bool __cdecl FUN_005f7ce0(n5f7ce0::PathingLocation* location, float radius)
 {
     using namespace n5f7ce0;
@@ -19163,6 +19566,8 @@ struct Search {
 
 }
 using namespace n5f1f30;
+// pdb: Pathing::FindClosestReachableLocation | Pathfind.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aStartLocation, aGoalLocation, afMaxPathingDistance
 Location __cdecl FUN_005f1f30(Location& start, Location& end, float cost)
 {
     Triangle from;
@@ -19322,6 +19727,7 @@ struct FUN_005fc5a0 {
     bool FUN_005fdde0();
 };
 
+// pdb: PathingLocation::ResolveNavMeshInfoOnly | PathingLocation.obj | fnv360_0822_retail, call_seq, medium
 bool FUN_005fc5a0::FUN_005fdde0()
 {
     if (IsInvalid())
@@ -19533,6 +19939,8 @@ struct EdgeFilter
 };
 Point2 __cdecl FUN_005dd850(const Point2& a, const Point2& b, const Point2& c, const Point2& d);
 
+// pdb: Pathing::CheckLineOfSight | Pathfind.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: aStartLocation, aGoalLocation, apGoalNavMesh, ausGoalTriangle, apReturnIntersectionLocation, apFilter
 bool __cdecl FUN_005f1970(Location& start, const Point3& end, Mesh* desiredMesh, unsigned short desiredTriangle,
                           Location* output, EdgeFilter* filter)
 {
@@ -19699,6 +20107,8 @@ struct Owner {
     int key;
     bool FUN_005fe3c0(GridOwner* owner);
 };
+// pdb: PathingLOSGridCell::SetLOSMapFromSeenTriangles | PathingLOSGridMap.obj | fnv360_0721_beta, call_gap, low
+// pdb params: aspLOSMap
 bool Owner::FUN_005fe3c0(GridOwner* owner)
 {
     unsigned char* table = owner->GetGrid()->FUN_005ffe10(source->GetKey());
@@ -20211,6 +20621,7 @@ struct Manager {
     void FUN_005e8a10();
 };
 
+// pdb: NavMeshObstacleManager::ProcessNewReferences | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
 void Manager::FUN_005e8a10()
 {
     ItemArray kRemove;
@@ -20438,6 +20849,8 @@ struct Owner {
     void FUN_005e77d0(Param& p);
 };
 
+// pdb: NavMeshObstacleManager::UpdateObstacle | NavMeshObstacleManager.obj | fnv360_1110_retail, call_seq, medium
+// pdb params: spObstacle
 void Owner::FUN_005e77d0(Param& p) {
     if (p->flag74) {
         for (unsigned int i = 0; i < p->arr.GetSize(); i++)
@@ -20554,6 +20967,8 @@ __declspec(noinline) const Pt3* FUN_005def10(Hit* hit, Pt3* a, Pt3* b, Pt3* c)
 }
 using namespace b1261;
 
+// pdb: Pathing::FindClosePointViaNavMesh | Pathfind.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apRequest, apRetPt
 bool FUN_005f4d90(Spawn* spawn, Pt3* out)
 {
     Finder* finder = &spawn->finder;
@@ -20859,6 +21274,8 @@ struct Location {
 
 void __cdecl FUN_005f5eb0(Location* loc, float radius, NavMeshArray* out, int flags);
 
+// pdb: Pathing::FindClosestEdges | Pathfind.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aLocation, aiMaxCount, aRetEdges
 int __cdecl FUN_005f90b0(Location* loc, unsigned int limit, CoverEntryArray* out)
 {
     loc->FUN_005fda30(0);
@@ -21009,6 +21426,8 @@ struct Owner {
 };
 }
 namespace f3m_005f2190 {
+// pdb: PathingLocation::ResolveNavMeshInfo | PathingLocation.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: apFilter
 bool Subject5f2190::FUN_005fda30(int parameter) {
     using namespace f3_5fda30;
     f3_5fda30::Owner* self=reinterpret_cast<f3_5fda30::Owner*>(this);
@@ -21207,6 +21626,8 @@ struct PathRequestF3 {
     bool FUN_005ed960(LocationF3* start, LocationF3* goal, int flags, PathEntriesF3* entries, int mode);
 };
 
+// pdb: PathBuilder::RunPathSmoother | PathBuilder.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aStartLocation, aGoalLocation, aBadNodes, aNodes, aLinks
 bool PathRequestF3::FUN_005ed960(LocationF3* start, LocationF3* goal, int flags, PathEntriesF3* entries, int mode)
 {
     bool result;
@@ -21505,6 +21926,7 @@ struct Owner
     bool FUN_005e8390();
 };
 
+// pdb: NavMeshObstacleManager::ProcessNewDoors | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
 bool Owner::FUN_005e8390()
 {
     Node* list = &unk8C;
@@ -21585,6 +22007,8 @@ struct Entry490 : Entry5ff620
     void FUN_005ff490(Source490* source);
 };
 
+// pdb: PathingLOSGrid::Setup | PathingLOSGridMap.obj | fnv360_0721_beta, caller, medium
+// pdb params: aspNavMesh
 void Entry490::FUN_005ff490(Source490* source)
 {
     cached = source;
@@ -21634,6 +22058,8 @@ struct Box4620 {
     Pt4620 kMinBounds;
     Pt4620 kMaxBounds;
 };
+// pdb: NavMesh::IsPointInsideTriangle | NavMesh_Util.obj | fnv360_0822_retail, call_seq, low
+// pdb params: asTriangleIndex, aLocation, afZDiff, afMaxZdistAbove, afMaxZdistBelow
 bool __cdecl FUN_005e4620(Pt4620* pnt, Box4620** ppB, float c, float fz)
 {
     Box4620* b = *ppB;
@@ -21733,6 +22159,7 @@ struct PathingLocation {
     bool FUN_005fcc10();
 };
 
+// pdb: PathingLocation::ResolveToClosestNavmeshAndTriangle | PathingLocation.obj | fnv360_0822_retail, call_gap, low
 bool PathingLocation::FUN_005fcc10() {
     PathingLocation_SetupData(&location, cell, worldSpace);
     if (!navMeshInfo && !navMeshes)
@@ -21955,6 +22382,8 @@ public:
     void FUN_005e0860(SimpleArray_5e0860<BoundsTri_5e0860>& a_rBoundsTriangles);
 };
 
+// pdb: NavMeshObstacleCutter::GetModifiedTriangleList | NavMeshObstacleCutter.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aBoundsTriangle
 void NavMeshObstacleCutter_5e0860::FUN_005e0860(SimpleArray_5e0860<BoundsTri_5e0860>& a_rBoundsTriangles)
 {
     for (unsigned int i = 0; i < pUndoData->OverlappedTriangles.iSize; i++)
@@ -22013,6 +22442,7 @@ struct S_005e3000 {
     unsigned char m;
     void FUN_005e3000();
 };
+// pdb: NavMeshObstacleManager::QueueUpdateAllObstacle | NavMeshObstacleManager.obj | fnv360_0721_beta, call_seq, medium
 void S_005e3000::FUN_005e3000()
 {
     m = 1;
@@ -22021,6 +22451,8 @@ void S_005e3000::FUN_005e3000()
 
 // @f3 0x005eaa50 (community match, verified in this file)
 namespace f3m_005eaa50 {
+// pdb: PathBuilder::FindTriangleForLocationWaterFilter::IsValidTri | PathBuilder.obj | fnv360_0721_beta, vtable, medium
+// pdb params: aLocation, apNavMesh, aiTri, aPointOnTri
 bool __stdcall FUN_005eaa50(int p0, int p1, int p2, int p3)
 {
     return true;
@@ -22051,6 +22483,8 @@ struct NavMeshSelection {
     bool FUN_005fd720(NavMeshInfoArray* output) const;
 };
 
+// pdb: PathingLocation::GetNavMeshInfos | PathingLocation.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: apRetInfos
 bool NavMeshSelection::FUN_005fd720(NavMeshInfoArray* output) const
 {
     if (pNavMesh != 0) {
@@ -22079,6 +22513,8 @@ struct Slot {
     static void operator delete[](void* p) { DAT_01090a78.FUN_0086ba60(p); }
 };
 
+// pdb: ThreadSpecificInterfaceManager<LockFreeMap<MobileObject *,NiPointer<LipTask> >::LockFreeMapInterface>::ThreadSpecificInterfaceManager<LockFreeMap<MobileObject *,NiPointer<LipTask> >::LockFreeMapInterface> | LipSyncBackgroundManager.obj | fnv360_0822_retail, call_dedup, low
+// pdb params: aiMaxThreads
 FUN_005e5280::FUN_005e5280(unsigned int count)
 {
     TlsTagGuard guard(6);
@@ -22341,6 +22777,8 @@ public:
 };
 }
 
+// pdb: PathingLocation::PathingLocation | PathingLocation.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aLocation, aHintLoc
 f3m_005f0eb0::n5f0eb0::FUN_005fd570::FUN_005fd570(int pointArg, void* hintArg)
 {
     using namespace pathing_location_native;
@@ -22620,6 +23058,8 @@ struct Owner {
     void FUN_005e8650(Record* record);
 };
 
+// pdb: NavMeshObstacleManager::ReallyAddObstaclesForReference | NavMeshObstacleManager.obj | fnv360_0822_retail, objrun, medium
+// pdb params: apRef
 void Owner::FUN_005e8650(Record* record)
 {
     NiPointer<Entry> entry;
@@ -22822,6 +23262,8 @@ __forceinline bool Location::AddNavMesh(Sink* sink) {
 typedef ::BSSimpleArray<TESObjectCELL*,1024> CellArray;
 bool __cdecl FUN_005f1280(Vec3* a, Vec3* b, Vec3* c, Vec3* d);
 
+// pdb: Pathing::FindNavmeshesForLocation | Pathfind.obj | fnv360_0822_retail, call_gap, low
+// pdb params: aLocation, afRadius, apRetNavMeshes, abConnected
 bool __cdecl FUN_005f5eb0(Location* loc, float radius, Sink* sink, bool useLoc)
 {
     Vec3 pos = loc->pos;
@@ -23105,6 +23547,8 @@ void __cdecl FUN_005f90b0(PathingLocation*, int, ResultArray*);
 float __cdecl FUN_005dce20(const Point&, const Point&, const Point&, bool);
 void __cdecl FUN_005dd040(Point*, const Point&, const Point&, const Point&);
 
+// pdb: Pathing::FindClosestOpenEdge | Pathfind.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aLocation, afMaxRadius, aRetEdge
 bool __cdecl FUN_005f9620(PathingLocation* location, float radius, EdgeLocation* result)
 {
     location->FUN_005fda30(0);
@@ -23238,6 +23682,8 @@ struct Track {
     bool FUN_005ffe50(unsigned int time, NiPointer<Key>* out, unsigned short* offset);
 };
 
+// pdb: PathingLOSMap::GetNavMeshAndTriangleForIndex | PathingLOSMap.obj | fnv360_0721_beta, call_seq, medium
+// pdb params: aiIndex, aRetNavMesh, aRetTriangle
 bool Track::FUN_005ffe50(unsigned int time, NiPointer<Key>* out, unsigned short* offset)
 {
     if (!count)
@@ -23402,6 +23848,8 @@ public:
     bool FUN_005e12c0(NavMesh* a_pNavMesh, S5e12c0_UndoData* a_pUndoData, S5e12c0_TaskPortalSwap& a_rPortalSwap);
 };
 
+// pdb: NavMeshObstacleCutter::UndoNavMeshFromObstacleUndoData | NavMeshObstacleCutter.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apNavMesh, apUndoData, aPortalSwaps
 bool S5e12c0_Cutter::FUN_005e12c0(NavMesh* a_pNavMesh, S5e12c0_UndoData* a_pUndoData, S5e12c0_TaskPortalSwap& a_rPortalSwap)
 {
     pNavMesh = a_pNavMesh;
@@ -23780,6 +24228,8 @@ struct S005e7990_Manager
     void FUN_005e7990(int key, int other);
 };
 
+// pdb: NavMeshObstacleManager::UpdateObstaclesForReference | NavMeshObstacleManager.obj | fnv360_0822_retail, objrun, medium
+// pdb params: aiRefID, apRef
 void S005e7990_Manager::FUN_005e7990(int key, int other)
 {
     NiPointer<S005e7990_List> list;
@@ -23906,6 +24356,8 @@ unsigned char __cdecl FUN_005f25b0(Location5f30* from, Location5f30* to, Locatio
 
 using namespace n_005f30c0;
 
+// pdb: Pathing::ComputeFinalTangentForActor | Pathfind.obj | fnv360_0822_retail, call_gap, low
+// pdb params: afHeading, aLocation, afRadius
 Point5f30 FUN_005f30c0(float angle, const Location5f30& context, float radius)
 {
     Matrix5f30 rotation;
@@ -24001,6 +24453,8 @@ struct Matrix3 {
 };
 }
 
+// pdb: Pathing::ComputeInitialTangentForActor | Pathfind.obj | fnv360_0822_retail, uconst, low, conflict (skyrim: BSPathing::ComputeInitialTangentForActor)
+// pdb params: afHeading, aLocation, aNextLocation, afRadius
 f3m_005f27d0::Vec3 __cdecl FUN_005f27d0(float angle, const f3m_005f27d0::PathPoint& first, const f3m_005f27d0::PathPoint& second, float radius)
 {
     using namespace f3m_005f27d0;
@@ -24476,6 +24930,7 @@ void* RefState::FUN_005e3160() { reflock.FUN_00409a80(DAT_00e01c10); void* resul
 
 PMgr* __cdecl FUN_0044f4b0();
 
+// pdb: NavMeshObstacleManager::ForceUpdateAllObstacles | NavMeshObstacleManager.obj | fnv360_0822_retail, call_gap, low
 void RefState::FUN_005e91d0()
 {
     EnterCriticalSection(&cs);
@@ -24755,6 +25210,8 @@ struct PathArray : PathArrayBase {
 // The named constants, the named results and the working variables declared with initialisers at the top of the
 // mesh loop produce no code; they stand in for the original's declarations before the first FUN_005ffe40 call,
 // whose number decides the base/index order of the lea at +0x4c6 (a guess at the source).
+// pdb: Pathing::ComputeLineOfSightMapForLocation | Pathfind.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aLocation, aspRetMap, abClearUnseen, afSightRadius, afHeading
 bool __cdecl FUN_005f5590(PathingLocation* location, NiPointer<LOSMap>& data, bool reset, float maxDistance,
                           float angle)
 {
@@ -25171,6 +25628,7 @@ __declspec(noinline) bool Manager::FUN_005e4710(MeshPtr& first,const PortalInfo&
     return true;
 }
 }
+// pdb: NavMeshObstacleManager::ReconnectPortals | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
 bool PortalMatch5610::Manager::FUN_005e5610()
 {
     const unsigned int obstacleCount=obstacles.GetSize();
@@ -25584,6 +26042,8 @@ unsigned short FUN_005d1f20(float value, int a, int b);
 void FUN_005f5eb0(S5f9_Location* origin, float radius, S5f9_PtrArr* out, int flag);
 bool FUN_005dd4c0(const S5f9_Pt2& p0, const S5f9_Pt2& p1, const S5f9_Pt2& q0, const S5f9_Pt2& q1);
 
+// pdb: Pathing::GetCoverPoints | Pathfind.obj | fnv360_0822_retail, call_gap, low
+// pdb params: apRequest, apReturnArray
 unsigned int FUN_005f9e70(S5f9_Params* p, S5f9_Out* q)
 {
     unsigned int result = 0;
@@ -26612,6 +27072,7 @@ struct Owner {
     void FUN_005e7ed0();
 };
 __declspec(noinline) void Worker::FUN_005e6cd0(Item** out) { *out = (Item*)this; }
+// pdb: NavMeshObstacleManager::ProcessDeactivatedObstacles | NavMeshObstacleManager.obj | fnv360_0822_retail, call_dedup, low
 __declspec(noinline) void Owner::FUN_005e7ed0()
 {
     unsigned int count = factory.Count();
@@ -26914,6 +27375,8 @@ bool __cdecl FUN_005f50d0(PathingLocation* aOrigin, PathingLocation* aDestinatio
                           PathingActorData* apActorLockData, int aeDoorLockDisp);
 }
 
+// pdb: Pathing::BuildLowPath | Pathfind.obj | fnv360_0822_retail, call_gap, medium
+// pdb params: aOrigin, aDestination, apRetPath, apActorLockData, aeDoorLockDisp
 bool __cdecl w5f50d0::FUN_005f50d0(PathingLocation* aOrigin, PathingLocation* aDestination, PathingPath* apRetPath,
                                    PathingActorData* apActorLockData, int aeDoorLockDisp)
 {
@@ -26991,6 +27454,7 @@ struct Target {
     ~Target();
     void* FUN_005fe800(unsigned int flags);
 };
+// pdb: NiTMap<unsigned int,PathingLOSGrid *>::`scalar deleting destructor' | PathingLOSGridMap.obj | fnv360_0822_debug, vtable, medium
 void* Target::FUN_005fe800(unsigned int flags) {
     this->~Target();
     if (flags & 1) {
@@ -27161,6 +27625,7 @@ struct FUN_005e9600 : CriticalSection {
     FUN_005e9600();
 };
 
+// pdb: NavMeshObstacleManager::NavMeshObstacleManager | NavMeshObstacleManager.obj | fnv360_0822_retail, call_gap, low
 FUN_005e9600::FUN_005e9600()
     : references(37), addQueue(7, 8), removeQueue(7, 8), obstacles(37),
       active(37), queued(37), tasks(37), obstacleRoot()
@@ -27245,6 +27710,7 @@ struct FUN_005e9890 : Lock
     void FUN_005e8d50();
     ~FUN_005e9890();
 };
+// pdb: NavMeshObstacleManager::~NavMeshObstacleManager | NavMeshObstacleManager.obj | fnv360_0822_retail, objrun, medium
 FUN_005e9890::~FUN_005e9890()
 {
     FUN_005e8d50();

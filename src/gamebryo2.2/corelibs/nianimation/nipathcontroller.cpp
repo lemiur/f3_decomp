@@ -20,6 +20,8 @@ struct FUN_00a49e10_shell
 };
 // Reads idx, sz and base from p (or zeros), calls DAT_011f3ca8[idx] with f and two base+sz*index pointers, and returns a1.
 // @fnv 0x00a49e10
+// pdb: NiPathController::GenPathInterp | NiPathController.obj | fnv360_0822_retail, call_seq, high
+// pdb params: iI1, iI2, fNormTime
 void* FUN_00a49e10_shell::InvokeIndexedCallback(void* a1, int iIndexA, int iIndexB, float fValue)
 {
     Inner* pInner = p;
@@ -53,6 +55,7 @@ struct FUN_00a4a8c0_shell
 
 // Calls FUN_00a49d60, then deletes this with size 100 if flags has bit 1 set, and returns this.
 // @fnv 0x00a4a8c0
+// pdb: BSTempEffectGeometryDecal::`scalar deleting destructor' | BSTempEffectGeometryDecal.obj | fnv360_0822_retail, vtable, high
 void* __thiscall FUN_00a4a8c0_shell::FUN_00a4a8c0(unsigned int flags)
 {
     FUN_00a49d60();
@@ -131,6 +134,8 @@ struct NiPathController : NiTimeController
     void FUN_00a49c80(CloningProcess&);
 };
 // @fnv 0x00a49c80
+// pdb: NiFloatController::ProcessClone | NiFloatController.obj | fnv360_0822_retail, caller_sim, low, conflict (skyrim: NiPathController::ProcessClone)
+// pdb params: kCloning
 void NiPathController::FUN_00a49c80(CloningProcess& kCloning)
 {
     NiTimeController::ProcessClone(kCloning);
@@ -182,6 +187,8 @@ struct NiPathController : public Base40
     bool FUN_00a49cc0(NiStream&);
 };
 // @fnv 0x00a49cc0
+// pdb: NiFloatController::RegisterStreamables | NiFloatController.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: NiPathController::RegisterStreamables)
+// pdb params: stream
 bool NiPathController::FUN_00a49cc0(NiStream& kStream)
 {
     if (!FUN_00a6d0f0(kStream))
@@ -207,6 +214,8 @@ struct FUN_00a4a6a0_cls
 
 // Sums five weighted samples of GetKeyDerivativeLength at offsets scaled by a3, then multiplies the total by a3.
 // @fnv 0x00a4a6a0
+// pdb: NiPathController::PathLength | NiPathController.obj | fnv360_0822_retail, objrun_prop, medium
+// pdb params: iI0, iI1, fTime
 float FUN_00a4a6a0_cls::FUN_00a4a6a0(int a1, int a2, float afScale)
 {
     float sum = 0.0f;
@@ -254,6 +263,8 @@ inline int S_00a4aeb0_Read(S_00a4aeb0_Source* s, void* p, int n)
     return s->FUN_00a4aeb0_callback(s, p, n, &v, 1);
 }
 // @fnv 0x00a4aeb0
+// pdb: NiPathController::SaveBinary | NiPathController.obj | fnv360_0822_retail, objrun_sim, high
+// pdb params: kStream
 void S_00a4aeb0_Controller::LoadFromStream(S_00a4aeb0_Stream& kStream)
 {
     unsigned char* controller = reinterpret_cast<unsigned char*>(this);
@@ -394,6 +405,7 @@ struct FUN_00a4a8e0_cls
 
 // If totalLength is negative, rebuilds the lengths array from segment lengths and caches the total; returns totalLength.
 // @fnv 0x00a4a8e0
+// pdb: NiPathController::GetTotalPathLength | NiPathController.obj | fnv360_0822_retail, objrun, medium
 float FUN_00a4a8e0_cls::GetTotalLength()
 {
     if (totalLength < 0.0f)
@@ -459,6 +471,8 @@ struct NiPathControllerView
     void ReadFromStream(NiStream* stream);
 };
 // @fnv 0x00a4acb0
+// pdb: NiPathController::LoadBinary | NiPathController.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: kStream
 void NiPathControllerView::ReadFromStream(NiStream* stream)
 {
     func_0x00a6d5e0(stream);
@@ -644,6 +658,8 @@ struct PathCtlr
 
 // Evaluates the percent and path keys at controller time, writes translation to m_pkTarget, and writes rotation when follow is enabled.
 // @fnv 0x00a4afa0
+// pdb: NiPathController::Update | NiPathController.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: UpdateData
 void PathCtlr::UpdatePathTarget(float* apfTime)
 {
     if (!m_pPathInterp)
@@ -707,6 +723,7 @@ struct FUN_00a4a610_shell
 
 // Computes the length of the derivative vector between two animation keys at a given time using a type-specific function pointer.
 // @fnv 0x00a4a610
+// pdb: NiPathController::PathSpeed | NiPathController.obj | tesv_win, call_seq, medium
 float FUN_00a4a610_shell::GetKeyDerivativeLength(unsigned int uiKey1, unsigned int uiKey2, float fTime)
 {
     unsigned int uiRequestType;
@@ -809,6 +826,7 @@ struct PathShell
 };
 // Allocates and initializes a PathObject, then calls NiPathController_CopyMembers with the given value and returns the new object or null.
 // @fnv 0x00a4b330
+// pdb: NiPathController::CreateClone | NiPathController.obj | tesv_win, caller_sim, low
 PathObject* PathShell::CreatePathObject(int value)
 {
     PathObject* object = (PathObject*)FUN_00aa13e0(0x64);
@@ -1014,6 +1032,8 @@ struct FUN_00a4adc0_cls
 
 // Updates m_40 and m_44 from a SpawnedArg, sets a flag in m_34, and computes m_4c and m_5c from the current m_40 sample data.
 // @fnv 0x00a4adc0
+// pdb: NiPathController::LinkObject | NiPathController.obj | fnv360_0822_retail, objrun, high
+// pdb params: kStream
 void FUN_00a4adc0_cls::SetSpawnedArgs(SpawnedArg* apSpawnedArg)
 {
     FUN_00a6d500(apSpawnedArg);

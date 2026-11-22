@@ -332,6 +332,8 @@ struct View : DebuggerReference523
 };
 
 }
+// pdb: hkVisualDebugger::step | hkVisualDebugger.obj | fnv360_0822_retail, vtable, medium
+// pdb params: frameTimeInMs
 void VisualDebugger523::FUN_00cd0ec0(float timeStep)
 {
     Task1679::View* self=(Task1679::View*)this;

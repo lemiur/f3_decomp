@@ -737,6 +737,8 @@ struct SNAEntryElem
 };
 
 // @fnv 0x00e89460
+// pdb: NiTMallocInterface<NiD3DPass *>::Allocate | NiD3DPass.obj | fnv360_0822_debug, objopen_prop, low, conflict (bridge: NiTNewInterface<NiGeomMorpherUpdateTask>::Allocate)
+// pdb params: uiNumElements
 SNAEntryElem* FUN_00e89460(unsigned int count)
 {
     return new SNAEntryElem[count];

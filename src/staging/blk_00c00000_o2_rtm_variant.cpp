@@ -2712,6 +2712,7 @@ struct C17510Shader
 };
 
 // @fnv 0x00c17510
+// pdb: SpeedTreeBranchShader::PresetPasses_2x | SpeedTreeBranchShader_Preset.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 void C17510Shader::FUN_00c17510()
 {
     LocalPassPtr spRenderPass;

@@ -5574,6 +5574,8 @@ inline bhkWorld* GetOwningWorldX(hkpCollidable* c)
 {
     return GetOwningWorldX(GetWorldObject(c)->getWorld());
 }
+// pdb: hkPackedNiTriStripsShape::getCollisionFilterInfo | hkPackedNiTriStripsShape.obj | fnv360_0822_debug, objrun_open, low
+// pdb params: aKey
 extern "C" void __stdcall FUN_00ca0bd0(void* a, hkpCollidable* p)
 {
     RecX r;

@@ -34,6 +34,7 @@ struct FUN_00e368a0_Self : FUN_00e368a0_Class
 
 typedef void(__thiscall* FUN_00e368a0_HitFn)(FUN_00e368a0_Target*, int);
 
+// pdb: CombatGroup::RemoveFromMembers | CombatGroup.obj | fnv360_0721_beta, call_seq, medium
 void FUN_00e368a0_Class::FUN_00e368a0()
 {
     FUN_00e368a0_Self* self = static_cast<FUN_00e368a0_Self*>(this);

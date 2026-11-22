@@ -11,6 +11,7 @@ inline NiPSysModifier* NiParticleFindModifier(NiParticleModifierOwner* owner, co
     return 0;
 }
 // @fnv 0x00C31400
+// pdb: NiPSysModifierCtlr::GetModifierPointerFromName | NiPSysModifierCtlr.obj | fnv360_0822_retail, call_seq, high
 void NiParticleSystem::FindModifier()
 {
     result = NiParticleFindModifier(owner, name);

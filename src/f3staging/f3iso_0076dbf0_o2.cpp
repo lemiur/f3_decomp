@@ -9,6 +9,7 @@
 namespace f3m_0076dbf0 {
 int __cdecl ImageSpaceModifierInstance_Stop(int handle);
 
+// pdb: PlayerCharacter::StopIronSightsImageSpace | PlayerCharacter.obj | fnv360_0822_retail, call_gap_sim, low
 void __fastcall FUN_0076dbf0(void* pThis)
 {
     int file = *(int*)((char*)pThis + 0x578);

@@ -84,6 +84,7 @@ __forceinline hkpContactPointViewer::~hkpContactPointViewer() throw()
         this->hkpPhysicsContextWorldListener::FUN_00de2980(this->contacts->data[i]);
 }
 // @fnv 0x00de2a40
+// pdb: hkpContactPointViewer::~hkpContactPointViewer | hkpContactPointViewer.obj | fnv360_0822_retail, call_seq, medium
 void hkpContactPointViewer::DestroyContactPointViewer() throw()
 {
     this->hkpContactPointViewer::~hkpContactPointViewer();
@@ -144,6 +145,8 @@ struct S_00de2fa0 : S_00de2fa0_Base0, S_00de2fa0_Listener
 
 // Writes profiler markers to the TLS stream, then iterates the array returned by vfn_0c and calls FUN_00de2da0 on each element.
 // @fnv 0x00de2fa0
+// pdb: hkpContactPointViewer::postSimulationCallback | hkpContactPointViewer.obj | fnv360_0822_retail, vtable, low, conflict (F3 string "TthkpActiveContactPointViewer::postSimulationCallback")
+// pdb params: world
 void S_00de2fa0::PostSimulationCallback(S_00de2fa0_Arg* apArg)
 {
     StringCursor* stream = (StringCursor*)TlsGetValue(DAT_0126835c);

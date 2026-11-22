@@ -45,6 +45,7 @@ struct FUN_0049e910_vt
     virtual int v0c();
 };
 
+// pdb: TESRegionData::Save | TESRegionData.obj | fnv360_0822_retail, call_seq, medium
 void FUN_00d5f850_cls::FUN_00d5f850()
 {
     int buf[2];
@@ -85,6 +86,7 @@ struct FUN_00d5fc30_cls
 };
 
 // @fnv 0x00d5fc30
+// pdb: ExteriorCellLoader::QueuedCellCount | ExteriorCellLoader.obj | fnv360_0822_retail, call_gap, low
 void FUN_00d5fc30_cls::FUN_00d5fc30()
 {
     this->v40();

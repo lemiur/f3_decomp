@@ -103,6 +103,8 @@ struct LoopOwnerView942060 {
 };
 }
 
+// pdb: hkArrayBase<hkTimerData>::_expandOne | hkCpuJobThreadPool.obj | fnv360_0822_debug, objrun_open, low, conflict (skyrim: hkgpJobQueue::waitForCompletion)
+// pdb params: alloc
 void FUN_00d2ce90_class::FUN_00d2ce90()
 {
     f3m_00942060::LoopOwnerView942060* self = reinterpret_cast<f3m_00942060::LoopOwnerView942060*>(this);
@@ -405,6 +407,7 @@ class Owner942
     int FUN_00942210();
 };
 
+// pdb: hkCpuJobThreadPool::removeThread | hkCpuJobThreadPool.obj | tesv_win, objopen_prop, low
 int Owner942::FUN_00942210()
 {
     if (this->count148 > 1)

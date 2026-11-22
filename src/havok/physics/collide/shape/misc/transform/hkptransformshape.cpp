@@ -9,6 +9,7 @@ struct FnvCpu_FUN_00cf58f0_CpuObject
     char* FUN_00cf58f0();
 };
 // @fnv 0x00cf58f0
+// pdb: hkpTransformShape::getContainer | hkpTransformShape.obj | fnv360_0822_retail, objrun_sim, medium
 char* FnvCpu_FUN_00cf58f0_CpuObject::FUN_00cf58f0()
 {
     return reinterpret_cast<char*>(this) + 16;
@@ -117,6 +118,8 @@ struct FUN_00cf59e0_Class
 };
 // Builds a PackedTransform from a and quaternion, then forwards it to dispatch->vfn1c with factor and flags.
 // @fnv 0x00cf59e0
+// pdb: hkpTransformShape::getAabbImpl | hkpTransformShape.obj | fnv360_0822_retail, objopen_prop, medium
+// pdb params: localToWorld, tolerance, out
 void FUN_00cf59e0_Class::FUN_00cf59e0(int a, float factor, int flags)
 {
     PackedTransform transformed;

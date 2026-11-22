@@ -23,6 +23,8 @@ struct hkpSymmetricAgentFlipCollector
 };
 // Builds a hkpSymmetricAgentFlipCollector from DAT_0104da48 and arg4, then calls FUN_00d3cc00 with arg2, arg1, arg3 and the collector.
 // @fnv 0x00d3d040
+// pdb: hkpSymmetricAgentLinearCast<hkpSphereBoxAgent>::staticGetClosestPoints | hkpSphereBoxAgent.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: bodyA, bodyB, input, collector
 void __cdecl FlipAndDispatchCollector(void* arg1, void* arg2, int arg3, int arg4)
 {
     hkpSymmetricAgentFlipCollector local;
@@ -87,6 +89,8 @@ class D3CF80Agent
 };
 
 // @fnv 0x00d3cf80
+// pdb: hkpSymmetricAgentLinearCast<hkpSphereBoxAgent>::getPenetrations | hkpSphereBoxAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void D3CF80Agent::CollectFilteredEvents(void* pkA, void* pkB, void* pkInput, int iFilter)
 {
     D3CF80Collector kCollector(iFilter);
@@ -110,6 +114,8 @@ struct CpuObject
 };
 // Builds a CpuCallData from fourth, DAT_0104da48 and DAT_010ce7fc, then forwards second, first, third and the data to FUN_00d3c910.
 // @fnv 0x00d3d000
+// pdb: hkpSymmetricAgentLinearCast<hkpSphereBoxAgent>::getClosestPoints | hkpSphereBoxAgent.obj | fnv360_0822_retail, vtable, high
+// pdb params: bodyA, bodyB, input, collector
 void CpuObject::FUN_00d3d000(void* first, void* second, unsigned int third, unsigned int fourth)
 {
     CpuCallData callData;

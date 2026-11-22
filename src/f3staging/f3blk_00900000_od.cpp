@@ -737,6 +737,8 @@ __forceinline ManifoldCtor* makeManifold(ManifoldCtor* memory) {
     if(memory) {memory->tolerance=0.01f;memory->count=20;result=memory;}
     return result;
 }
+// pdb: hkpWorld::hkpWorld | hkpWorld.obj | fnv360_0822_retail, ustr, high
+// pdb params: info, sdkversion
 WorldCtor* WorldCtor::FUN_00904ea0(WorldInfoCtor* info,int version) {
     references=1;
     vtable=&DAT_00e34e10;

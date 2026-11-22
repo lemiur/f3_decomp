@@ -10,6 +10,7 @@ extern int DAT_01269cd0;
 extern int DAT_01268fbc;
 void* __cdecl FUN_00d62e20();
 // @fnv 0x00d62e60
+// pdb: hkpVehicleViewer::registerViewer | hkpVehicleViewer.obj | fnv360_0822_debug, udata, high
 void __cdecl RegisterWeldingViewer()
 {
     void* result = ((FUN_00dd9380_class*)DAT_01269cd0)->FUN_00dd9380("WeldingViewer", (void*)&FUN_00d62e20);
@@ -41,6 +42,8 @@ struct S_00d62650_D : S_00d62650_B1, S_00d62650_B2, S_00d62650_B3
 
 // Calls FUN_00c93920 on arg, passing this as the argument.
 // @fnv 0x00d62650
+// pdb: hkpSimulationIslandViewer::worldAddedCallback | hkpSimulationIslandViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void S_00d62650_D::DispatchToArg(S_00d62650_Arg* arg)
 {
     arg->FUN_00c93920(this);
@@ -67,6 +70,8 @@ struct HKConstraint
 
 // Passes a pointer to unk08 to the list's add method, or null when the adjusted this pointer is zero.
 // @fnv 0x00d62680
+// pdb: hkpSimulationIslandViewer::worldRemovedCallback | hkpSimulationIslandViewer.obj | fnv360_0822_retail, vtable, medium
+// pdb params: world
 void HKConstraint::FUN_00d62680(HKWorldList* pWorldList)
 {
     pWorldList->IsEntityAdded(((char*)this - 0x20) ? (void*)&unk08 : (void*)0);
@@ -176,6 +181,7 @@ struct FUN_008f6d90_obj
     void FUN_008f6d90(void* p, unsigned int n, int tag);
 };
 
+// pdb: hkpConstraintViewer::~hkpConstraintViewer | hkpConstraintViewer.obj | fnv360_0822_retail, call_seq, medium
 FUN_00d62720::~FUN_00d62720() throw()
 {
     if (m_pOwningWorld)
@@ -228,6 +234,8 @@ struct R1_Viewer
     void* __thiscall FUN_009ef7a0(void* arg);
 };
 
+// pdb: hkpWorldMemoryViewer::create | hkpWorldMemoryViewer.obj | fnv360_0822_debug, objrun, medium
+// pdb params: contexts
 void* __cdecl FUN_00d62e20_impl(void* arg)
 {
     R1_Heap* heap = (R1_Heap*)TlsGetValue(DAT_010f3170);
@@ -241,6 +249,7 @@ void* __cdecl FUN_00d62e20_impl(void* arg)
 extern int g_D62E80Value;
 
 // @fnv 0x00d62e80
+// pdb: Interface::GetDetectionLevel | Interface.obj | fnv360_0822_retail, call_gap, low
 int __cdecl FUN_00d62e80()
 {
     return g_D62E80Value;

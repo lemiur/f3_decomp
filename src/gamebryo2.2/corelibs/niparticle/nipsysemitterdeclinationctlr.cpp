@@ -85,6 +85,7 @@ struct FUN_00c2b9c0_class
 };
 // Allocates a new S_00c2b9c0_Obj, initializes it via FUN_00c32de0 with a, and returns it as S_00c2b9c0_Base.
 // @fnv 0x00c2b9c0
+// pdb: NiPSysEmitterDeclinationCtlr::CreateClone | NiPSysEmitterDeclinationCtlr.obj | tesv_win, caller_sim, low
 S_00c2b9c0_Base* FUN_00c2b9c0_class::CreateObject(unsigned int a) throw()
 {
     S_00c2b9c0_Base* p = new S_00c2b9c0_Obj;

@@ -111,6 +111,8 @@ struct FUN_00dd1bf0_ObjF3
 {
     void __thiscall FUN_00a52bd0(void* target, int a, int b, float c, int d);
 };
+// pdb: hkMoppBvTreeShapeBase::queryObb | hkpMoppBvTreeShape.obj | fnv360_0822_retail, objrun_prop, low
+// pdb params: obbToMopp, extent, tolerance, hits
 void __thiscall FUN_00d54350_Obj::ForwardToTarget(int a, int b, float c, int d)
 {
     FUN_00dd1bf0_Obj local;
@@ -333,6 +335,8 @@ struct Layout427 {
     unsigned int unk3C;
     Reader427 inlineReader;
 };
+// pdb: hkpMoppBvTreeShape::calcSizeForSpu | hkpMoppBvTreeShape.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: input, spuBufferSizeLeft
 int S00d54440_Obj::FUN_00d54440(int argument, int bytes) {
     Layout427* self = reinterpret_cast<Layout427*>(this);
     if (self->status->state == 1)
@@ -619,6 +623,8 @@ struct __declspec(align(16)) S00d54720_VmF3
     void* unk6c;
     void FUN_00a54420(const void* container, const void* code, const void* input, const S00d54720_Body* body, void* collector);
 };
+// pdb: hkpMoppBvTreeShape::castRayWithCollectorImpl | hkpMoppBvTreeShape.obj | fnv360_0822_retail, objrun_sim, low
+// pdb params: input, cdBody, collector
 void S00d54720_MoppShape::FUN_00d54720(const void* apInput, const void* cdBody, void* collector)
 {
     timerD546("TtrcMopp");

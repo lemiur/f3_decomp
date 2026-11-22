@@ -24,6 +24,8 @@ struct Owner
 };
 // Calls v2(value) on the VtableObject at this+0x40 when mode is true, otherwise calls v1(value).
 // @f3 0x005512f0 (community match, verified in this file)
+// pdb: TESFaction::SetFlag | TESFaction.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: aiFlag, abVal
 void Owner::FUN_00d87c20(int value, bool mode)
 {
     if (mode)

@@ -10,6 +10,7 @@ struct FUN_00a77960_shell
 };
 
 // @fnv 0x00a77960
+// pdb: NiPixelFormat::GetCompressed | NiDevImageConverter.obj | tesv_win, call_seq, medium
 int __thiscall FUN_00a77960_shell::IsField4InRange()
 {
     if (field4 >= 4 && field4 <= 6)

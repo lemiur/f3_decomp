@@ -3,6 +3,8 @@
 #include "nibsplinetransforminterpolator_decls.h"
 // Loads the base interpolator and transform, then reads the translation, rotation and scale handles from the stream.
 // @fnv 0x00a50470
+// pdb: NiBSplineTransformInterpolator::LoadBinary | NiBSplineTransformInterpolator.obj | fnv360_0822_retail, caller_sim, high
+// pdb params: kStream
 void NiBSplineTransformInterpolator::LoadBinary(NiStream& stream)
 {
     NiBSplineInterpolator::LoadBinary(stream);
@@ -14,6 +16,8 @@ void NiBSplineTransformInterpolator::LoadBinary(NiStream& stream)
 
 // Maps channel 0 to 3, 1 to 4 and 2 to 1, returning 0 for any other channel.
 // @fnv 0x00a4fde0
+// pdb: NiBSplineTransformInterpolator::GetControlHandle | NiBSplineTransformInterpolator.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: NiBSplineTransformInterpolator::GetDimension)
+// pdb params: usChannel
 unsigned int __stdcall FUN_00a4fde0(unsigned short usChannel)
 {
     switch (usChannel)
@@ -30,6 +34,8 @@ unsigned int __stdcall FUN_00a4fde0(unsigned short usChannel)
 
 // Returns 3 for channels 0, 1 and 2, and 0 for any other channel value.
 // @fnv 0x00a4fe20
+// pdb: NiBSplineTransformInterpolator::SetControlHandle | NiBSplineTransformInterpolator.obj | fnv360_0822_retail, objrun_open, low, conflict (skyrim: NiBSplineTransformInterpolator::GetDegree)
+// pdb params: kControlHandle, usChannel
 unsigned int __stdcall FUN_00a4fe20(unsigned short usChannel)
 {
     switch (usChannel)
@@ -53,6 +59,7 @@ struct FUN_00a4fe50_obj
 };
 // Returns the stored handle for channel 0, 1 or 2 (translation, rotation, scale), or 0xffff for any other channel.
 // @fnv 0x00a4fe50
+// pdb: NiBSplineTransformInterpolator::GetControlHandle | NiBSplineTransformInterpolator.obj | tesv_win, hash, low
 unsigned int __fastcall GetChannelHandle(FUN_00a4fe50_obj* self, int, unsigned short usChannel)
 {
     switch (usChannel)
@@ -76,6 +83,8 @@ struct FUN_00a4fe80_obj
 };
 // Stores kControlHandle into the translation, rotation or scale control-point handle field selected by usChannel (0, 1 or 2).
 // @fnv 0x00a4fe80
+// pdb: NiBSplineTransformInterpolator::GetControlHandle | NiBSplineTransformInterpolator.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low, conflict (skyrim: NiBSplineTransformInterpolator::SetControlHandle)
+// pdb params: usChannel
 void __fastcall SetControlPointHandle(FUN_00a4fe80_obj* self, int, unsigned int kControlHandle,
                                       unsigned short usChannel)
 {
@@ -162,6 +171,8 @@ struct FUN_00a50090_obj
 };
 // Returns true when the given channel has no control points and its stored value differs from _DAT_010241b0; false otherwise.
 // @fnv 0x00a50090
+// pdb: NiBSplineTransformInterpolator::GetChannelPosed | NiBSplineTransformInterpolator.obj | fnv360_0822_retail, objrun, medium
+// pdb params: usChannel
 bool __fastcall FUN_00a50090(FUN_00a50090_obj* self, int, unsigned short usChannel)
 {
     switch (usChannel)
@@ -251,6 +262,8 @@ struct FUN_00a501b0_obj
 };
 // Returns true if the object passes NiBSplineInterpolator_IsEqual, its quaternion matches, and the trans, rot and scale CP handles all match the other object's.
 // @fnv 0x00a501b0
+// pdb: NiBSplineTransformInterpolator::IsEqual | NiBSplineTransformInterpolator.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: pkObject
 bool __fastcall FUN_00a501b0(FUN_00a501b0_obj* self, int, FUN_00a501b0_obj* pkObject)
 {
     if (self->NiBSplineInterpolator_IsEqual(pkObject) && self->m_kDefaultTransform.Equals(&pkObject->m_kDefaultTransform) &&
@@ -272,6 +285,7 @@ struct FUN_00a50070_cls
 };
 
 // @fnv 0x00a50070
+// pdb: BSMultiBoundOBB::`scalar deleting destructor' | BGSPrimitive.obj | fnv360_0822_retail, vtable, high
 FUN_00a50070_cls* FUN_00a50070_cls::Destroy(unsigned char acFlags)
 {
     BaseCleanup();
@@ -325,6 +339,8 @@ struct SplineWork
 };
 // Samples translation, rotation and scale from the spline data at the given time, caches the transform, and returns whether it is valid.
 // @fnv 0x00a50200
+// pdb: NiBSplineTransformInterpolator::Update | NiBSplineTransformInterpolator.obj | fnv360_0822_retail, objrun, high
+// pdb params: fTime, pkInterpTarget, kValue
 bool SplineWork::EvaluateSpline(float time, void*, SplineTransform& output)
 {
     if (lastTime == time)
@@ -625,6 +641,8 @@ struct BSplineTransformLoad : NiBSplineTransformInterpolator
 };
 // Loads the base interpolator, the quaternion transform and the translation, rotation and scale handles from the stream.
 // @fnv 0x00a50500
+// pdb: NiBSplineTransformInterpolator::GetViewerStrings | NiBSplineTransformInterpolator.obj | fnv360_0822_retail, ustr, medium
+// pdb params: pkStrings
 void BSplineTransformLoad::LoadBSplineTransform(NiStream& stream)
 {
     reinterpret_cast<BSplineBaseCalls*>(this)->FUN_00a58200(stream);
@@ -679,6 +697,8 @@ struct FUN_00a57f20_cls
 };
 
 // @fnv 0x00a57f20
+// pdb: NiBSplineInterpolator::NiBSplineInterpolator | NiBSplineInterpolator.obj | fnv360_0822_retail, caller_sim, medium
+// pdb params: pkData, pkBasisData
 FUN_00a57f20_cls* FUN_00a57f20_cls::FUN_00a57f20(void* pFirst, void* pSecond)
 {
     reinterpret_cast<FUN_00a57f20_base*>(this)->Init();

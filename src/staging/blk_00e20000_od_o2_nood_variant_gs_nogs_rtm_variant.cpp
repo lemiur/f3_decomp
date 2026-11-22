@@ -367,6 +367,8 @@ struct S2d6c0_Vector_a99740
     __forceinline void normalize3() {float len=dot3(*this); float inv; if(len!=0.0f) inv=1.0f/(float)sqrt(len); else inv=0.0f; m_vComponents.m128_f32[0] *= inv; m_vComponents.m128_f32[1] = *(volatile float*)&m_vComponents.m128_f32[1] * inv; m_vComponents.m128_f32[2] = *(volatile float*)&m_vComponents.m128_f32[2] * inv; m_vComponents.m128_f32[3] *= inv;}
 };
 struct S2d6c0_Vector;
+// pdb: hkpWingedEdge::find2ClosestMultiTriangles | hkpWingedEdge.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: hkWingedEdge::find2ClosestMultiTriangles)
+// pdb params: we0, we1, directionOut, nearestTriangle0, nearestTriangle1
 extern "C" void __cdecl FUN_00e2d6c0(::Hull* a, ::Hull* b, ::S2d6c0_Vector* outIn,
                           ::Face** pa, ::Face** pb)
 {

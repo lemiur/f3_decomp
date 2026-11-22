@@ -142,6 +142,8 @@ struct TESTopic10 : FormBase10, FullName10 {
     bool FUN_00565710(File10* pFile);
 };
 
+// pdb: TESTopic::Load | TESTopic.obj | fnv360_0822_retail, vtable, medium
+// pdb params: pFile
 bool TESTopic10::FUN_00565710(File10* pFile)
 {
     if (pFile->TESFile_GetTESForm() != 0x45)
@@ -285,6 +287,7 @@ struct TESRace {
     void FUN_00560060();
 };
 
+// pdb: TESRace::Save | TESRace.obj | fnv360_0822_retail, vtable, medium
 void TESRace::FUN_00560060()
 {
     FUN_004547d0();
@@ -791,6 +794,8 @@ struct Race : FormBase, FullName, Description, SpellList, Reaction {
     bool FUN_00561fb0(File* pFile);
 };
 
+// pdb: TESRace::Load | TESRace.obj | fnv360_0822_retail, vtable, medium
+// pdb params: apFile
 bool Race::FUN_00561fb0(File* pFile)
 {
     int iSex = 0;

@@ -1,6 +1,7 @@
 // gamebryo2.2/corelibs/nimain/nitransform.cpp: NiTransform, Transform3D, TransformSaver (4 functions)
 #include "nitransform_decls.h"
 // @fnv 0x00a86bf0
+// pdb: NiTransform::MakeIdentity | NiTransform.obj | fnv360_0822_retail, call_seq, high
 void NiTransform::ResetToIdentity()
 {
     m_kOrientation.ResetToIdentity();
@@ -8,6 +9,8 @@ void NiTransform::ResetToIdentity()
     m_fScale = 1.0f;
 }
 // @fnv 0x00a86c80
+// pdb: NiTransform::LoadBinary | NiTransform.obj | fnv360_0822_retail, call_gap, high
+// pdb params: stream
 void NiTransform::LoadBinary(NiStream& stream)
 {
     m_kOrientation.LoadBinary(stream);
@@ -35,6 +38,8 @@ struct Transform3D
     unsigned int FUN_00a86c30(const Transform3D& other) const;
 };
 // @fnv 0x00a86c30
+// pdb: NiTransform::operator!= | NiTransform.obj | fnv360_0822_retail, call_seq, medium
+// pdb params: xform
 unsigned int Transform3D::FUN_00a86c30(const Transform3D& other) const
 {
     if (rotation.FUN_004d9ae0(other.rotation))

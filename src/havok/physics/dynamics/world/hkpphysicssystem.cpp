@@ -5,6 +5,7 @@
 #include "havok/hkpPhysicsSystem.h"
 
 // @fnv 0x00cb0020
+// pdb: hkpConstraintData::isBuildJacobianCallbackRequired | bhkMalleableConstraint.obj | fnv360_0822_retail, vtable, high
 void __stdcall FUN_00cb0020(unsigned char* output)
 {
     *output = 0;
@@ -135,6 +136,8 @@ class Object9b : public hkRefObjD065 {
     virtual ~Object9b() throw();
 };
 
+// pdb: hkTypeInfoRegistry::hkTypeInfoRegistry | hkBuiltinTypeRegistry.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: finishFlag
 Object9b* __cdecl FUN_009b02d0() {
     Flag9b flag(false);
     return new Object9b(flag);

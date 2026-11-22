@@ -6,6 +6,8 @@ struct FUN_00d93330 {
     void __thiscall UpdateConstraint(int);
 };
 // @fnv 0x00d93330
+// pdb: hkpDeferredConstraintOwner::addConstraintToCriticalLockedIsland | hkpCpuAgentSectorJob.obj | fnv360_0822_retail, vtable, high
+// pdb params: constraint
 void __thiscall FUN_00d93330::UpdateConstraint(int v)
 {
     ++(*(int*)((char*)this + 0x18));
@@ -68,6 +70,8 @@ struct Arg1StructF3 {
     int unk00[10];
     SubTarget* unk28;
 };
+// pdb: hkpDeferredConstraintOwner::addCallbackRequest | hkpCpuAgentSectorJob.obj | fnv360_0822_retail, vtable, high
+// pdb params: constraint, request
 void SimulationIsland::SetFlags(Arg1Struct* a1, unsigned int uiFlags)
 {
     if (((Arg1StructF3*)a1)->unk28) {

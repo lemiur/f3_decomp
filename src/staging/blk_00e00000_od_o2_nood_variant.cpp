@@ -68,6 +68,7 @@ struct __declspec(align(16)) S_00e00cd0_Obj
 };
 
 // @fnv 0x00e00cd0
+// pdb: getVtablehkpFastMeshShape | hkpCollidehkpMeshShapeReflections.obj | tesv_win, hash, low
 const char* __cdecl FUN_00e00cd0()
 {
     hkFinishLoadedObjectFlagX flag;
@@ -406,6 +407,7 @@ class __declspec(align(16)) S00e004d0_Object
 };
 
 // @fnv 0x00e004d0
+// pdb: getVtablehkpAabbPhantom | hkpDynamicsReflections.obj | tesv_win, hash, low
 const void* __cdecl FUN_00e004d0()
 {
     FinishingFlag flag;

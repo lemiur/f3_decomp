@@ -52,6 +52,8 @@ struct E29250Matrix6
 };
 
 // @fnv 0x00e29250
+// pdb: hkMatrix6SetTranspose | hkMatrix6.obj | fnv360_0822_retail, caller_sim, low
+// pdb params: out, in
 void __cdecl FUN_00e29250(E29250Matrix6& out, const E29250Matrix6& in)
 {
     out.m_iUnknownValue2[0][0].SetFromMatrix(in.m_iUnknownValue2[0][0]);
@@ -87,6 +89,8 @@ inline void AddScalar(float& out, float const volatile& value) { out = value + o
 void __cdecl FUN_0096cd80(void* out, const void* a,
                           const void* b);
 
+// pdb: hkMatrix6SetMul | hkMatrix6.obj | fnv360_0822_retail, objrun, medium
+// pdb params: out, a, b
 void __cdecl FUN_00e29470(void* dest, WrappedPointer src, WrappedPointer rhs)
 {
     float* source = (float*)src.p;
