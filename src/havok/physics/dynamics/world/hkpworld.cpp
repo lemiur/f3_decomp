@@ -5295,14 +5295,15 @@ struct hkSmallArrayC92B {
     }
 };
 
+// hkpEntity, at its Fallout 3 offsets (New Vegas Xbox 360 PDB names): the island, the motion's type and the actions.
 class WorldC92B {
 public:
-    int unk00[0xcc / 4];
-    IslandC92B* m_pFixedIsland;
-    int unkD0[(0xe8 - 0xd0) / 4];
-    unsigned char m_iMaxEntriesPerNarrowphaseToiTask;
-    unsigned char unkE9[0x208 - 0xe9];
-    hkSmallArrayC92B<EntityC92B*> m_kActorEntries;
+    int unk00[0xb8 / 4];
+    IslandC92B* m_simulationIsland;                // +0xB8
+    int unkBC[(0xd8 - 0xbc) / 4];
+    unsigned char m_motionType;                    // +0xD8 m_motion.m_type
+    unsigned char unkD9[0x1f8 - 0xd9];
+    hkSmallArrayC92B<EntityC92B*> m_actions;       // +0x1F8
 };
 
 class ListenerC92B {
@@ -5312,14 +5313,14 @@ public:
 
 void __cdecl hkpWorldOperationUtil_mergeIslands(ListenerC92B* pkThis, WorldC92B* pkWorld, int* pkCurrentObject);
 
-// Appends pkEntity to m_kActorEntries; moves it to the fixed island if its island's storage index is 0xffff, else calls hkpWorldOperationUtil_mergeIslands if islands differ.
+// Appends the action to the entity's m_actions; moves it to the fixed island if its island's storage index is 0xffff, else calls hkpWorldOperationUtil_mergeIslands if islands differ.
 // @f3 0x009038e0 (community match, verified in this file)
 void __cdecl FUN_0098a9f0(void* array, int elementSize);
 
 // pdb: hkpWorld::attachActionToEntity | hkpWorld.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|caller_sim) + skyrim(caller_sim), high
 void ListenerC92B::hkpWorld_attachActionToEntity(EntityC92B* pkEntity, WorldC92B* pkWorld)
 {
-    hkSmallArrayC92B<EntityC92B*>* pkEntries = (hkSmallArrayC92B<EntityC92B*>*)((char*)pkWorld + 0x1f8);
+    hkSmallArrayC92B<EntityC92B*>* pkEntries = &pkWorld->m_actions;
     unsigned short usCapacity = (unsigned short)(pkEntries->m_iCapacityState & 0x3fff);
     if (pkEntries->m_iElementCount == usCapacity)
         FUN_0098a9f0(pkEntries, sizeof(EntityC92B*));
@@ -5328,16 +5329,16 @@ void ListenerC92B::hkpWorld_attachActionToEntity(EntityC92B* pkEntity, WorldC92B
     IslandC92B* pkIsland = pkEntity->m_pSimulationIsland;
     if (pkIsland->m_usStorageIndex == 0xffff)
     {
-        if (*((unsigned char*)pkWorld + 0xd8) != 7)
+                if (pkWorld->m_motionType != 7)
         {
             pkIsland->RemoveEntry(pkEntity);
-            (*(IslandC92B**)((char*)pkWorld + 0xb8))->AddItem(pkEntity);
+            pkWorld->m_simulationIsland->AddItem(pkEntity);
             return;
         }
     }
-    if (*(IslandC92B**)((char*)pkWorld + 0xb8) == pkIsland)
+        if (pkWorld->m_simulationIsland == pkIsland)
         return;
-    if (*((unsigned char*)pkWorld + 0xd8) == 7)
+    if (pkWorld->m_motionType == 7)
         return;
     hkpWorldOperationUtil_mergeIslands(this, pkWorld, *pkIsland->m_pEntities);
 }
