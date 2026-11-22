@@ -229,16 +229,20 @@ inline void D338e0Dispatch(D338e0Local* local, int* ownerField, int result)
     hkAgent1nMachine_UpdateShapeCollectionFilter(ownerField, local);
 }
 
-// If unk84 is zero, fills a D338e0Local from the parameters and unk08, calls vf10 on the agent at param2, and dispatches the result with unk30.
+// Outside GSK mode, fills the visitor input from the parameters and the contact manager (unk08), takes body B's shape container, and updates the agent track (unk30).
 // @f3 0x009bd6a0 (community match, verified in this file)
+class hkClass;
+class hkStatisticsCollector;
+// hkpShape: the Fallout 3 slots up to getContainer (the order of the shape vtables, hkpSphereShape 0x00e7c8d4; names
+// from the New Vegas Xbox 360 PDB).
 struct D338e0AgentF3
 {
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0C();
-    virtual void vf10();
-    virtual int vf14();
+    virtual ~D338e0AgentF3();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual float getMaximumProjection(const void* direction) const;
+    virtual void castRayWithCollectorImpl(const void* input, const void* cdBody, void* collector) const;
+    virtual int getContainer() const;
 };
 // pdb: hkpConvexListAgent::updateShapeCollectionFilter | hkpConvexListAgent.obj | fnv360_0822_retail, vtable_prefix + bridge(vtable_prefix|vtable) + skyrim(vtable_prefix), high
 void __thiscall D338e0Owner::hkpConvexListAgent_updateShapeCollectionFilter(int aiArg1, int apAgentPtr, int aiArg3, int aiArg4)
@@ -253,7 +257,7 @@ void __thiscall D338e0Owner::hkpConvexListAgent_updateShapeCollectionFilter(int 
         local.field18 = aiArg4;
 
         D338e0AgentF3** ppAgent = reinterpret_cast<D338e0AgentF3**>(apAgentPtr);
-        int result = (*ppAgent)->vf14();
+        int result = (*ppAgent)->getContainer();
 
         D338e0Dispatch(&local, &unk30, result);
     }
