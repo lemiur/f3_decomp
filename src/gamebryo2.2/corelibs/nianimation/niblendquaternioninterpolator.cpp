@@ -12,10 +12,26 @@ struct RgbaColor
 struct NiBlendInterpolator
 {
     virtual void LoadBinary(NiStream&);
+    unsigned int m_uiRefCount;  // src: FNV360_PDB NiRefObject +0x4
+    float m_fLastTime;  // src: FNV360_PDB NiInterpolator +0x8
+    unsigned char m_uFlags;  // src: FNV360_PDB +0xC
+    unsigned char m_ucArraySize;  // src: FNV360_PDB +0xD
+    unsigned char m_ucInterpCount;  // src: FNV360_PDB +0xE
+    unsigned char m_ucSingleIdx;  // src: FNV360_PDB +0xF
+    char m_cHighPriority;  // src: FNV360_PDB +0x10
+    char m_cNextHighPriority;  // src: FNV360_PDB +0x11
+    void* m_pkInterpArray;  // src: FNV360_PDB +0x14
+    void* m_pkSingleInterpolator;  // src: FNV360_PDB +0x18
+    float m_fWeightThreshold;  // src: FNV360_PDB +0x1C
+    float m_fSingleTime;  // src: FNV360_PDB +0x20
+    float m_fHighSumOfWeights;  // src: FNV360_PDB +0x24
+    float m_fNextHighSumOfWeights;  // src: FNV360_PDB +0x28
+    float m_fHighEaseSpinner;  // src: FNV360_PDB +0x2C
 };
 
 struct NiBlendQuaternionInterpolator : NiBlendInterpolator
 {
+    float m_kQuaternionValue[4];  // src: FNV360_PDB +0x30 (NiQuaternion)
     void FUN_00a554c0(NiStream&);
 };
 
@@ -23,7 +39,7 @@ struct NiBlendQuaternionInterpolator : NiBlendInterpolator
 void NiBlendQuaternionInterpolator::FUN_00a554c0(NiStream& kStream)
 {
     NiBlendInterpolator::LoadBinary(kStream);
-    ((RgbaColor*)((char*)this + 0x30))->LoadBinary(kStream);
+    ((RgbaColor*)m_kQuaternionValue)->LoadBinary(kStream);
 }
 
 namespace fnv_00a554e0 {
@@ -40,6 +56,7 @@ struct NiQuaternion
 struct NiBlendInterpolator
 {
     virtual ~NiBlendInterpolator();
+    unsigned char unk04[0x2c];
 };
 
 struct NiBlendQuaternionInterpolator : NiBlendInterpolator
@@ -57,7 +74,7 @@ struct FUN_00a37ec0_tgt
 void NiBlendQuaternionInterpolator::FUN_00a554e0(NiStream* kStream)
 {
     ((FUN_00a37ec0_tgt*)this)->FUN_00a37ec0(kStream);
-    ((NiQuaternion*)((char*)this + 0x30))->SaveBinary(kStream);
+    m_kQuaternionValue.SaveBinary(kStream);
 }
 }  // namespace fnv_00a554e0
 
@@ -88,11 +105,12 @@ void* __cdecl FUN_00a55470()
     if (p)
     {
         FUN_00a36890(p);
-        *(int**)((char*)p + 0) = &DAT_0109a3ac;
-        *(int*)((char*)p + 0x30) = DAT_011f4208;
-        *(int*)((char*)p + 0x34) = DAT_011f420c;
-        *(int*)((char*)p + 0x38) = DAT_011f4210;
-        *(int*)((char*)p + 0x3c) = DAT_011f4214;
+        *(int**)p = &DAT_0109a3ac;
+        NiBlendQuaternionInterpolator* pkInterp = (NiBlendQuaternionInterpolator*)p;
+        *(int*)&pkInterp->m_kQuaternionValue[0] = DAT_011f4208;
+        *(int*)&pkInterp->m_kQuaternionValue[1] = DAT_011f420c;
+        *(int*)&pkInterp->m_kQuaternionValue[2] = DAT_011f4210;
+        *(int*)&pkInterp->m_kQuaternionValue[3] = DAT_011f4214;
         return p;
     }
     return 0;
@@ -173,14 +191,14 @@ void* FUN_00a55510_shell::CloneInterpolator(void* kCloning)
     {
         FUN_00a36890(pkObject);
         *(int*)pkObject = (int)&DAT_0109a3ac;
-        *(NiQuaternion*)((char*)pkObject + 0x30) = *(NiQuaternion*)&DAT_011f4208;
+        *(NiQuaternion*)((NiBlendQuaternionInterpolator*)pkObject)->m_kQuaternionValue = *(NiQuaternion*)&DAT_011f4208;
     }
     else
     {
         pkObject = 0;
     }
     ((CloneOwner*)this)->FUN_00a37510(pkObject, kCloning);
-    *(NiQuaternion*)((char*)pkObject + 0x30) = *(NiQuaternion*)((char*)this + 0x30);
+    *(NiQuaternion*)((NiBlendQuaternionInterpolator*)pkObject)->m_kQuaternionValue = *(NiQuaternion*)m_kQuaternionValue;
     return pkObject;
 }
 
@@ -208,7 +226,7 @@ struct FUN_00a55920_shell : NiBlendQuaternionInterpolator
 bool FUN_00a55920_shell::Interpolate(float fTime, void* pkInterpTarget, NiQuaternion* kValue)
 {
     bool bReturnValue = false;
-    unsigned char ucCount = *(unsigned char*)((char*)this + 0xe);
+    unsigned char ucCount = m_ucInterpCount;
     if (ucCount == 1)
     {
         bReturnValue = ((FUN_00a555c0_shell*)this)->FUN_00a555c0(fTime, pkInterpTarget, kValue);
@@ -218,7 +236,7 @@ bool FUN_00a55920_shell::Interpolate(float fTime, void* pkInterpTarget, NiQuater
         ((FUN_00a37260_shell*)this)->NormalizeWeights();
         bReturnValue = ((FUN_00a556b0_shell*)this)->FUN_00a556b0(fTime, pkInterpTarget, kValue);
     }
-    *(float*)((char*)this + 8) = fTime;
+    m_fLastTime = fTime;
     return bReturnValue;
 }
 
