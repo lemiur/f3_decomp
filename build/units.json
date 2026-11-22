@@ -585004,13 +585004,7 @@
    ],
    "symbols": {
     "__imp__TlsGetValue@4": "0x00d9b080",
-    "?DAT_0116913c@@3KA": "0x0116913c",
-    "?DAT_00e7d880@@3QBDB": "0x00e7d880",
-    "?DAT_00e32798@@3QBDB": "0x00e32798",
     "?FUN_00988440@@YAXAAUD00370Array@@@Z": "0x00988440",
-    "?g_D015A0TlsIndex@@3KA": "0x0116913c",
-    "?g_D015A0TimerContactCb@@3QBDB": "0x00e7d950",
-    "?g_D015A0TimerEnd@@3QBDB": "0x00e32798",
     "?D015A0CleanupNullPointers@@YAXPAUD015A0ListenerArray@@@Z": "0x00988440",
     "?DAT_00d9b108@f3m_00908a00@@3P6GHPAX@ZA": "0x00d9b108",
     "?DAT_011692e0@f3m_00908a00@@3KA": "0x011692e0",
@@ -585019,7 +585013,11 @@
     "?DAT_00e34b90@f3m_00908a00@@3QBDB": "0x00e34b90",
     "?DAT_00d9b09c@f3m_00908a00@@3P6GHPAX@ZA": "0x00d9b09c",
     "?FUN_00e32798@f3m_00908a00@@3QBDB": "0x00e32798",
-    "?FUN_00984b00@f3m_00908a00@@YA_KXZ": "0x00984b00"
+    "?FUN_00984b00@f3m_00908a00@@YA_KXZ": "0x00984b00",
+    "?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PAVhkMonitorStream@@@@A": "0x0116913c",
+    "??_C@_09IKCMAGLN@TtcpAddCb?$AA@": "0x00e7d880",
+    "??_C@_02DNLMNFDE@Et?$AA@": "0x00e32798",
+    "??_C@_0M@HFNIEPML@TtpostIntCb?$AA@": "0x00e7d950"
    }
   },
   {

@@ -1,4 +1,5 @@
 #include "f3_common.h"
+#include "havok/hkMonitorStream.h"
 // src/havok/physics/dynamics/world/util/hkpworldcallbackutil.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/dynamics/world/util/hkpworldcallbackutil.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
@@ -2112,17 +2113,6 @@ __forceinline D015A0MonitorStream& D015A0GetMonitorStream()
     return *(D015A0MonitorStream*)TlsGetValue(g_D015A0TlsIndex);
 }
 
-__forceinline void D015A0TimerBegin(const char* name, volatile unsigned int& ticks)
-{
-    D015A0MonitorStream& mStream = D015A0GetMonitorStream();
-    if (mStream.memoryAvailable())
-    {
-        D015A0TimerCommand* h = (D015A0TimerCommand*)mStream.m_kRayEnd;
-        h->m_pCommandName = name;
-        h->setTime(ticks);
-        mStream.m_kRayEnd = (char*)(h + 1);
-    }
-}
 
 struct D015A0Listener
 {
@@ -2242,9 +2232,7 @@ struct D015A0World
     int unk150;
     int unk154;
     int unk158;
-    int unk15C;
-    int unk160;
-    int unk164;
+    D015A0ListenerArray m_islandPostIntegrateListeners;  // +0x15C
     int unk168;
     int unk16C;
     int unk170;
@@ -2256,8 +2244,6 @@ struct D015A0World
     D015A0ListenerArray m_kContactListeners;
 };
 
-extern const char g_D015A0TimerContactCb[];
-extern const char g_D015A0TimerEnd[];
 
 // Invokes contactCallback on each non-null listener in world->m_kContactListeners, then removes null entries from the array.
 // @f3 0x009894a0 (community match, verified in this file)
@@ -2279,16 +2265,14 @@ static __declspec(noinline) void D015A0CleanupNullPointers(D015A0ListenerArray* 
 // pdb: hkpWorldCallbackUtil::fireIslandPostIntegrateCallback | hkpWorldCallbackUtil.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap), high
 void __cdecl hkpWorldCallbackUtil_fireIslandPostIntegrateCallback(D015A0World* world, void* apFirst, void* pkSecond)
 {
-    volatile unsigned int ticks1;
-    volatile unsigned int ticks2;
-    D015A0ListenerArray* listeners = reinterpret_cast<D015A0ListenerArray*>(reinterpret_cast<char*>(world) + 0x15c);
+    D015A0ListenerArray* listeners = &world->m_islandPostIntegrateListeners;
     for (int i = listeners->m_iElementCount - 1; i >= 0; i--)
     {
         if (listeners->m_data[i])
         {
-            D015A0TimerBegin(g_D015A0TimerContactCb, ticks1);
+            HK_TIMER_BEGIN("postIntCb", HK_NULL);
             listeners->m_data[i]->contactCallback(apFirst, pkSecond);
-            D015A0TimerBegin(g_D015A0TimerEnd, ticks2);
+            HK_TIMER_END();
         }
     }
     D015A0CleanupNullPointers(listeners);
@@ -3505,8 +3489,6 @@ struct FUN_00d01850_Owner
     D00370Array m_kNode;
 };
 extern DWORD DAT_0116913c;
-extern const char DAT_00e7d880[];
-extern const char DAT_00e32798[];
 namespace task1515 { extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long); struct Item { virtual void callback(S00d01850_Out*); }; }
 __declspec(noinline) static void FUN_00988440(D00370Array& cleanupArray)
 {
@@ -3524,42 +3506,16 @@ __declspec(noinline) static void FUN_00988440(D00370Array& cleanupArray)
 // pdb params: world, event
 void __cdecl FUN_00d01850(S00d01850_Owner* pOwner, S00d01850_Out* pOut)
 {
-    volatile DWORD t1;
-    volatile DWORD t2;
-    volatile DWORD& rT2 = t2;
     FUN_00d01850_Owner* owner = (FUN_00d01850_Owner*)pOwner;
     D00370Array* pCallbacks = &owner->m_kNode;
     pOut->unk0C = 0;
-    int i = pCallbacks->m_iElementCount - 1;
-    if (i >= 0)
+    for (int i = pCallbacks->m_iElementCount - 1; i >= 0; --i)
     {
-        
-        for (; i >= 0; --i)
+        if (pCallbacks->m_data[i] != 0)
         {
-            if (pCallbacks->m_data[i] != 0)
-            {
-                ProfBuf* pBuf = (ProfBuf*)task1515::TlsGetValue(DAT_0116913c);
-                if (pBuf->cur < pBuf->end)
-                {
-                    ProfRec* pRec = pBuf->cur;
-                    pRec->name = DAT_00e7d880;
-                    _ReadWriteBarrier();
-                    t1 = (DWORD)__rdtsc();
-                    pRec->tick = t1;
-                    pBuf->cur = pRec + 1;
-                }
-                ((task1515::Item*)pCallbacks->m_data[i])->callback(pOut);
-                ProfBuf* pBuf2 = (ProfBuf*)task1515::TlsGetValue(DAT_0116913c);
-                if (pBuf2->cur < pBuf2->end)
-                {
-                    ProfRec* pRec2 = pBuf2->cur;
-                    pRec2->name = DAT_00e32798;
-                    _ReadWriteBarrier();
-                    rT2 = (DWORD)__rdtsc();
-                    pRec2->tick = rT2;
-                    pBuf2->cur = pRec2 + 1;
-                }
-            }
+            HK_TIMER_BEGIN("cpAddCb", HK_NULL);
+            ((task1515::Item*)pCallbacks->m_data[i])->callback(pOut);
+            HK_TIMER_END();
         }
     }
     FUN_00988440(*pCallbacks);
