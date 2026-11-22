@@ -9,9 +9,8 @@ struct S_00d53cf0
     int x, y;
 };
 
-struct hkpBallSocketChainData_00d53cf0
+struct hkpBallSocketChainData_00d53cf0 : public hkpBallSocketChainData
 {
-    int m_uiNumConstraints;
     void GetConstraintSizeInfo(bool a, S_00d53cf0* b);
 };
 
@@ -22,7 +21,7 @@ void hkpBallSocketChainData_00d53cf0::GetConstraintSizeInfo(bool abEnabled, S_00
 {
     if (abEnabled)
     {
-        apSizeInfo->y = 3 * *(int*)((char*)this + 0x1c);
+        apSizeInfo->y = 3 * m_pConstraintInfo.m_iElementCount;
         apSizeInfo->x = apSizeInfo->y * 8;
     }
     else
@@ -32,24 +31,24 @@ void hkpBallSocketChainData_00d53cf0::GetConstraintSizeInfo(bool abEnabled, S_00
     }
 }
 
-struct hkpBallSocketChainData_00d53ca0
+struct hkpBallSocketChainData_00d53ca0 : public hkpBallSocketChainData
 {
     void InitChainData(char* out);
 };
-// Initializes the output chain data: stores a pointer to this+0xc, zeroes fields, and sets sizes from the count at this+0x1c.
+// Initializes the output chain data: stores a pointer to the bridge atoms, zeroes fields, and sets sizes from the number of constraint infos.
 // @fnv 0x00d53ca0
 // pdb: hkpBallSocketChainData::getConstraintInfo | hkpBallSocketChainData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 // pdb params: info
 void hkpBallSocketChainData_00d53ca0::InitChainData(char* out)
 {
-    *(int*)(out + 0x10) = (int)(this + 0xc);
+    *(int*)(out + 0x10) = (int)&m_kBridgeAtoms;
     int zero = 0;
     *(int*)(out + 8) = zero;
     *(int*)(out + 0xc) = zero;
     *(int*)out = zero;
     *(int*)(out + 4) = 0x10;
     *(int*)(out + 0x14) = 0xc;
-    int iCount = *(int*)((char*)this + 0x1c);
+    int iCount = m_pConstraintInfo.m_iElementCount;
     int iTripleCount = iCount * 3;
     *(int*)(out + 4) = (((iCount * 0x134 + 0x33) & 0xfffffff0) + 0x10);
     *(int*)(out + 8) = iTripleCount;
