@@ -583273,14 +583273,8 @@
     "?FUN_009316f0@Q78Phantom@f3m_009078c0@@QAEXXZ": "0x009316f0",
     "?FUN_00902550@Q78World@f3m_009078c0@@QAEXXZ": "0x00902550",
     "?FUN_00902570@Q6DWorld@f3m_00906d80@@QAEXPAUQ6DOp@2@@Z": "0x00902570",
-    "?DAT_0116913c@f3m_00906d80@@3KA": "0x0116913c",
-    "?DAT_00e34fc0@f3m_00906d80@@3PADA": "0x00e34fc0",
-    "?DAT_00e34fb0@f3m_00906d80@@3PADA": "0x00e34fb0",
-    "?DAT_00e34fa0@f3m_00906d80@@3PADA": "0x00e34fa0",
-    "?DAT_00e34f94@f3m_00906d80@@3PADA": "0x00e34f94",
     "?FUN_00984cc0@Q6DDispatcher@f3m_00906d80@@QAEXPAUQ6DPair@2@H@Z": "0x00984cc0",
     "?FUN_008f6d90@Q6DRouter@f3m_00906d80@@QAEXPAXHH@Z": "0x008f6d90",
-    "?DAT_00e34f88@f3m_00906d80@@3PADA": "0x00e34f88",
     "?hkpWorldCallbackUtil_fireEntityRemoved@f3m_00906d80@@YAXPAUQ6DWorld@1@PAUQ6DEntity@1@@Z": "0x009886e0",
     "?FUN_00987de0@f3m_00906d80@@YAXPAUQ6DEntity@1@@Z": "0x00987de0",
     "?FUN_00927460@f3m_00906d80@@YAXPAUQ6DWorld@1@PAUQ6DEntity@1@@Z": "0x00927460",
@@ -583330,7 +583324,12 @@
     "??_C@_0BI@FICADLIN@LtUpdateFilterOnPhantom?$AA@": "0x00e34ef0",
     "??_C@_0N@BGCGEMHD@Stbroadphase?$AA@": "0x00e34ee0",
     "??_C@_0BB@MPIBCMB@StUpdateOverlaps?$AA@": "0x00e34ecc",
-    "??_C@_0BD@KGBELEAK@StcollectionFilter?$AA@": "0x00e34eb8"
+    "??_C@_0BD@KGBELEAK@StcollectionFilter?$AA@": "0x00e34eb8",
+    "??_C@_0O@IMFFAEMM@LtRemEntities?$AA@": "0x00e34fc0",
+    "??_C@_0P@DPENHLOI@StInit?$CLCallBck?$AA@": "0x00e34fb0",
+    "??_C@_0N@JHBGMGJC@StBroadPhase?$AA@": "0x00e34fa0",
+    "??_C@_0M@KNJJJFED@StDelAgents?$AA@": "0x00e34f94",
+    "??_C@_0L@CJHKPLD@StRemoveCb?$AA@": "0x00e34f88"
    }
   },
   {

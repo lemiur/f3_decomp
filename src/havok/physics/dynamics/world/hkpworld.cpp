@@ -8613,9 +8613,6 @@ extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern const char str_010c6748[];
 extern const char str_01076f38[];
 
-struct TimerEntryC944 { const char* name; unsigned int ticks; unsigned int unk08; };
-struct TimerEntryC9442 { const char* name; unsigned int ticks; unsigned int unk08; const char* name2; };
-struct TimerBufferC944 { unsigned int unk00; void* current; unsigned int unk08; void* end; };
 
 struct AllocatorC944 {
     virtual void v00();
@@ -8739,12 +8736,6 @@ struct WorldC944 : hkpWorld { void UpdatePhantom(PhantomC944*, int); void FUN_00
 // Queries broad phase for overlaps with a phantom, applies collision filters, and optionally processes contact points.
 // @f3 0x00906090 (community match, verified in this file)
 namespace S906090 {
-extern unsigned int DAT_0116913c;
-extern const char FUN_00e34ef0[];
-extern const char FUN_00e34ee0[];
-extern const char FUN_00e34ecc[];
-extern const char FUN_00e34eb8[];
-extern const char FUN_00e0811c[];
 
 
 struct hkThreadMemoryF90 {
@@ -9024,13 +9015,6 @@ struct HostWorld_00c951b0 : hkpWorld {
 // Removes a batch of entities from the simulation, dispatches broad-phase collision pairs, and invokes per-entity removal callbacks.
 // @f3 0x00906d80 (community match, verified in this file)
 namespace f3m_00906d80 {
-extern char DAT_00e34fc0[];
-extern char DAT_00e34fb0[];
-extern char DAT_00e34fa0[];
-extern char DAT_00e34f94[];
-extern char DAT_00e34f88[];
-extern unsigned long DAT_0116913c;
-struct Q6DMon { int r0; char* cur; int r8; char* end; };
 struct Q6DRouter {
     virtual void s00() throw(); virtual void s04() throw(); virtual void s08() throw();
     virtual void s0c() throw(); virtual void s10() throw();
@@ -9333,22 +9317,7 @@ void HostWorld_00c951b0::RemoveEntities(void* const* entityBatch, int numEntitie
         return;
     }
     w->lock++;
-    {
-        Q6DMon* m = (Q6DMon*)TlsGetValue(DAT_0116913c);
-        char* p = m->cur;
-        if (p < m->end) {
-            *(const char**)p = DAT_00e34fc0;
-            *(const char**)(p + 0xc) = DAT_00e34fb0;
-            _ReadWriteBarrier();
-            unsigned int t;
-            __asm {
-                rdtsc
-                mov dword ptr[t], eax
-            }
-            *(unsigned int*)(p + 4) = t;
-            m->cur = p + 0x10;
-        }
-    }
+    HK_TIMER_BEGIN_LIST("RemEntities", "Init+CallBck");
     w->simulation->removeEntities(entityBatch, numEntities, w, Q6DBool(1));
     void* const* end;
     {
@@ -9360,58 +9329,16 @@ void HostWorld_00c951b0::RemoveEntities(void* const* entityBatch, int numEntitie
             if (c->shape)
                 handles.data[handles.size++] = &c->handle;
         }
-        {
-            Q6DMon* m = (Q6DMon*)TlsGetValue(DAT_0116913c);
-            char* p = m->cur;
-            if (p < m->end) {
-                *(const char**)p = DAT_00e34fa0;
-                _ReadWriteBarrier();
-                unsigned int t;
-            __asm {
-                rdtsc
-                mov dword ptr[t], eax
-            }
-                *(unsigned int*)(p + 4) = t;
-                m->cur = p + 0xc;
-            }
-        }
+        HK_TIMER_SPLIT_LIST("BroadPhase");
         Q6DLocalArray<Q6DPair> pairs;
         pairs.init(w->querySize);
         w->broadPhase->removeObjectBatch(&handles, &pairs);
-        {
-            Q6DMon* m = (Q6DMon*)TlsGetValue(DAT_0116913c);
-            char* p = m->cur;
-            if (p < m->end) {
-                *(const char**)p = DAT_00e34f94;
-                _ReadWriteBarrier();
-                unsigned int t;
-            __asm {
-                rdtsc
-                mov dword ptr[t], eax
-            }
-                *(unsigned int*)(p + 4) = t;
-                m->cur = p + 0xc;
-            }
-        }
+        HK_TIMER_SPLIT_LIST("DelAgents");
         w->dispatcher->FUN_00984cc0(pairs.data, pairs.size);
         pairs.release();
         handles.release();
     }
-    {
-        Q6DMon* m = (Q6DMon*)TlsGetValue(DAT_0116913c);
-        char* p = m->cur;
-        if (p < m->end) {
-            *(const char**)p = DAT_00e34f88;
-            _ReadWriteBarrier();
-            unsigned int t;
-            __asm {
-                rdtsc
-                mov dword ptr[t], eax
-            }
-            *(unsigned int*)(p + 4) = t;
-            m->cur = p + 0xc;
-        }
-    }
+    HK_TIMER_SPLIT_LIST("RemoveCb");
     for (void* const* it = entityBatch; it != end; it++) {
         hkpWorldCallbackUtil_fireEntityRemoved(w, (Q6DEntity*)*it);
         FUN_00987de0((Q6DEntity*)*it);
@@ -9428,21 +9355,7 @@ void HostWorld_00c951b0::RemoveEntities(void* const* entityBatch, int numEntitie
             e2->deallocateInternalArrays();
         ((Q6DEntity*)*it)->FUN_009316f0();
     }
-    {
-        Q6DMon* m = (Q6DMon*)TlsGetValue(DAT_0116913c);
-        char* p = m->cur;
-        if (p < m->end) {
-            *(const char**)p = "lt";
-            _ReadWriteBarrier();
-            unsigned int t;
-            __asm {
-                rdtsc
-                mov dword ptr[t], eax
-            }
-            *(unsigned int*)(p + 4) = t;
-            m->cur = p + 0xc;
-        }
-    }
+    HK_TIMER_END_LIST();
     if (--w->lock == 0 && !w->block && w->pendingCount != 0)
         w->FUN_00902550();
 }
