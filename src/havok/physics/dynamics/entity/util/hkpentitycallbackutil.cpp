@@ -1,4 +1,5 @@
 #include "f3_common.h"
+#include "havok/hkMonitorStream.h"
 // src/havok/physics/dynamics/entity/util/hkpentitycallbackutil.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/dynamics/entity/util/hkpentitycallbackutil.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
@@ -51,182 +52,6 @@ struct Array833
     unsigned short size;
     unsigned short capacity;
 };
-struct World833
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1C;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2C;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3C;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4C;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5C;
-    unsigned int unk60;
-    unsigned int unk64;
-    unsigned int unk68;
-    unsigned int unk6C;
-    unsigned int unk70;
-    unsigned int unk74;
-    unsigned int unk78;
-    unsigned int unk7C;
-    unsigned int unk80;
-    unsigned int unk84;
-    unsigned int unk88;
-    unsigned int unk8C;
-    unsigned int unk90;
-    unsigned int unk94;
-    unsigned int unk98;
-    unsigned int unk9C;
-    unsigned int unkA0;
-    unsigned int unkA4;
-    unsigned int unkA8;
-    unsigned int unkAC;
-    unsigned int unkB0;
-    unsigned int unkB4;
-    unsigned int unkB8;
-    unsigned int unkBC;
-    unsigned int unkC0;
-    unsigned int unkC4;
-    unsigned int unkC8;
-    unsigned int unkCC;
-    unsigned int unkD0;
-    unsigned int unkD4;
-    unsigned int unkD8;
-    unsigned int unkDC;
-    unsigned int unkE0;
-    unsigned int unkE4;
-    unsigned int unkE8;
-    unsigned int unkEC;
-    unsigned int unkF0;
-    unsigned int unkF4;
-    unsigned int unkF8;
-    unsigned int unkFC;
-    unsigned int unk100;
-    unsigned int unk104;
-    unsigned int unk108;
-    unsigned int unk10C;
-    unsigned int unk110;
-    unsigned int unk114;
-    unsigned int unk118;
-    unsigned int unk11C;
-    unsigned int unk120;
-    unsigned int unk124;
-    unsigned int unk128;
-    unsigned int unk12C;
-    unsigned int unk130;
-    unsigned int unk134;
-    unsigned int unk138;
-    unsigned int unk13C;
-    unsigned int unk140;
-    unsigned int unk144;
-    unsigned int unk148;
-    unsigned int unk14C;
-    unsigned int unk150;
-    unsigned int unk154;
-    unsigned int unk158;
-    unsigned int unk15C;
-    unsigned int unk160;
-    unsigned int unk164;
-    unsigned int unk168;
-    unsigned int unk16C;
-    unsigned int unk170;
-    unsigned int unk174;
-    unsigned int unk178;
-    unsigned int unk17C;
-    unsigned int unk180;
-    unsigned int unk184;
-    unsigned int unk188;
-    unsigned int unk18C;
-    unsigned int unk190;
-    unsigned int unk194;
-    unsigned int unk198;
-    unsigned int unk19C;
-    unsigned int unk1A0;
-    unsigned int unk1A4;
-    unsigned int unk1A8;
-    unsigned int unk1AC;
-    unsigned int unk1B0;
-    unsigned int unk1B4;
-    unsigned int unk1B8;
-    unsigned int unk1BC;
-    unsigned int unk1C0;
-    unsigned int unk1C4;
-    unsigned int unk1C8;
-    unsigned int unk1CC;
-    unsigned int unk1D0;
-    unsigned int unk1D4;
-    unsigned int unk1D8;
-    unsigned int unk1DC;
-    unsigned int unk1E0;
-    unsigned int unk1E4;
-    unsigned int unk1E8;
-    unsigned int unk1EC;
-    unsigned int unk1F0;
-    unsigned int unk1F4;
-    unsigned int unk1F8;
-    unsigned int unk1FC;
-    Array833 contactPointListeners;
-};
-
-struct Timer833
-{
-    const char* command;
-    unsigned int time0, time1;
-};
-struct Stream833
-{
-    int unk00;
-    Timer833* end;
-    int unk08;
-    Timer833* capacityEnd;
-};
-static __declspec(noinline) void FUN_00cff9b0(Array833& listeners)
-{
-    for (int index = listeners.size - 1; index >= 0; --index)
-    {
-        if (!listeners.data[index])
-        {
-            --listeners.size;
-            for (int destination = index; destination < listeners.size; ++destination)
-                listeners.data[destination] = listeners.data[destination + 1];
-        }
-    }
-}
-__forceinline void CaptureTicks833(volatile unsigned int& ticks)
-{
-    ticks = (unsigned int)__rdtsc();
-}
-__forceinline void TimerEvent833(const char* name, volatile unsigned int& ticks)
-{
-    Stream833* stream = static_cast<Stream833*>(TlsGetValue(DAT_0126835c));
-    Timer833* command = stream->end;
-    if (command < stream->capacityEnd)
-    {
-        command->command = name;
-        _ReadWriteBarrier();
-        CaptureTicks833(ticks);
-        command->time0 = ticks;
-        stream->end = command + 1;
-    }
-}
-// Invokes HandleContactPointEvent on each non-null contact point listener in world->contactPointListeners, then removes null entries via FUN_00cff9b0.
-// @f3 0x009884d0 (community match, verified in this file)
 class ActionListenerF3
 {
   public:
@@ -239,44 +64,7 @@ struct ActionArrayF3
     int size;
     int capacity;
 };
-void __cdecl FUN_00cfff00(World833* world, ContactPointEvent* event)
-{
-    volatile unsigned beginTicks;
-    volatile unsigned endTicks;
-    ActionArrayF3& listeners = *(ActionArrayF3*)((char*)world + 0xf0);
-    int i = listeners.size - 1;
-    for (; i >= 0; --i)
-    {
-        if (listeners.data[i])
-        {
-            TimerEvent833("TtactAddCb", beginTicks);
-            listeners.data[i]->actionAddedCallback(event);
-            TimerEvent833("Et", endTicks);
-        }
-    }
-    FUN_00cff9b0((Array833&)listeners);
-}
-
-
-namespace fnv_00d00060 {
-extern "C" void _ReadWriteBarrier();
-extern "C" unsigned __int64 __rdtsc();
-extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
-extern unsigned long DAT_0126835c;
-class ContactPointEvent;
-class ContactPointListener
-{
-  public:
-    virtual void HandleContactPointEvent(ContactPointEvent*);
-    virtual void newCollisionCallback(ContactPointEvent*);
-    virtual void finishedCollisionCallback(ContactPointEvent*);
-};
-struct Array833
-{
-    ContactPointListener** data;
-    unsigned short size;
-    unsigned short capacity;
-};
+// hkpWorld: only the members these callbacks read.
 struct World833
 {
     unsigned int unk00;
@@ -339,9 +127,7 @@ struct World833
     unsigned int unkE4;
     unsigned int unkE8;
     unsigned int unkEC;
-    unsigned int unkF0;
-    unsigned int unkF4;
-    unsigned int unkF8;
+    ActionArrayF3 m_actionListeners;  // +0xF0
     unsigned int unkFC;
     unsigned int unk100;
     unsigned int unk104;
@@ -410,18 +196,6 @@ struct World833
     Array833 contactPointListeners;
 };
 
-struct Timer833
-{
-    const char* command;
-    unsigned int time0, time1;
-};
-struct Stream833
-{
-    int unk00;
-    Timer833* end;
-    int unk08;
-    Timer833* capacityEnd;
-};
 static __declspec(noinline) void FUN_00cff9b0(Array833& listeners)
 {
     for (int index = listeners.size - 1; index >= 0; --index)
@@ -434,82 +208,30 @@ static __declspec(noinline) void FUN_00cff9b0(Array833& listeners)
         }
     }
 }
-__forceinline void CaptureTicks833(volatile unsigned int& ticks)
+// Invokes HandleContactPointEvent on each non-null contact point listener in world->contactPointListeners, then removes null entries via FUN_00cff9b0.
+// @f3 0x009884d0 (community match, verified in this file)
+void __cdecl FUN_00cfff00(World833* world, ContactPointEvent* event)
 {
-    ticks = (unsigned int)__rdtsc();
-}
-__forceinline void TimerEvent833(const char* name, volatile unsigned int& ticks)
-{
-    Stream833* stream = static_cast<Stream833*>(TlsGetValue(DAT_0126835c));
-    Timer833* command = stream->end;
-    if (command < stream->capacityEnd)
-    {
-        command->command = name;
-        _ReadWriteBarrier();
-        CaptureTicks833(ticks);
-        command->time0 = ticks;
-        stream->end = command + 1;
-    }
-}
-// Iterates world->contactPointListeners, calls finishedCollisionCallback on each non-null listener, then removes null entries via FUN_00cff9b0.
-// @fnv 0x00d00060
-void __cdecl FUN_00d00060(World833* world, ContactPointEvent* event)
-{
-    volatile unsigned beginTicks;
-    volatile unsigned endTicks;
-    Array833& listeners = world->contactPointListeners;
+    ActionArrayF3& listeners = world->m_actionListeners;
     int i = listeners.size - 1;
     for (; i >= 0; --i)
     {
         if (listeners.data[i])
         {
-            TimerEvent833("TtFinCollCb", beginTicks);
-            listeners.data[i]->finishedCollisionCallback(event);
-            TimerEvent833("Et", endTicks);
+            HK_TIMER_BEGIN("actAddCb", HK_NULL);
+            listeners.data[i]->actionAddedCallback(event);
+            HK_TIMER_END();
         }
     }
-    FUN_00cff9b0(listeners);
+    FUN_00cff9b0((Array833&)listeners);
 }
-}  // namespace fnv_00d00060
+
+
 
 extern unsigned long DAT_0126835c;
 
-struct StringCursor
-{
-    int unk00;
-    char* m_cur;
-    int unk08;
-    char* m_kRayEnd;
-};
 
-static __forceinline void timerBegin(const char* name, volatile unsigned int& tb)
-{
-    StringCursor* stream = (StringCursor*)TlsGetValue(DAT_0126835c);
-    char* cur = stream->m_cur;
-    if (cur < stream->m_kRayEnd)
-    {
-        *(const char**)cur = name;
-        _ReadWriteBarrier();
-        volatile unsigned int& t_begin = tb;
-        t_begin = (unsigned int)__rdtsc();
-        *(unsigned int*)(cur + 4) = t_begin;
-        stream->m_cur = cur + 12;
-    }
-}
 
-static __forceinline void timerEnd(const char* name)
-{
-    StringCursor* stream = (StringCursor*)TlsGetValue(DAT_0126835c);
-    char* cur = stream->m_cur;
-    if (cur < stream->m_kRayEnd)
-    {
-        *(const char**)cur = name;
-        _ReadWriteBarrier();
-        volatile unsigned int t_end = (unsigned int)__rdtsc();
-        *(unsigned int*)(cur + 4) = (unsigned int)t_end;
-        stream->m_cur = cur + 12;
-    }
-}
 
 struct Class_00cffab0;
 
@@ -689,39 +411,38 @@ struct Class_00cffab0
 void __cdecl FUN_00cffab0(Class_00cffab0* obj)
 {
     Container_00cffab0* container = obj->m_container214;
-    volatile unsigned int tb;
     if (container)
     {
         for (int i = container->listeners.m_iElementCount - 1; i >= 0; --i)
         {
             if (container->listeners.m_data[i])
             {
-                timerBegin("TtentRemCb", tb);
+                HK_TIMER_BEGIN("entRemCb", HK_NULL);
                 ((Listener1*)container->listeners.m_data[i])->vfn2(obj);
-                timerEnd("Et");
+                HK_TIMER_END();
             }
         }
     }
 
     while (obj->m_smallArrayAC.m_iElementCount)
     {
-        timerBegin("TtentRemCb", tb);
+        HK_TIMER_BEGIN("entRemCb", HK_NULL);
         ((Listener2*)obj->m_smallArrayAC.m_data[0])->vfn4(obj);
-        timerEnd("Et");
+        HK_TIMER_END();
     }
 
     while (obj->m_arrayB4.m_iElementCount)
     {
-        timerBegin("TtentRemCb", tb);
+        HK_TIMER_BEGIN("entRemCb", HK_NULL);
         obj->m_arrayB4.m_data[0]->vfn4(obj);
-        timerEnd("Et");
+        HK_TIMER_END();
     }
 
     while (obj->m_smallArray208.m_iElementCount)
     {
-        timerBegin("TtentRemCb", tb);
+        HK_TIMER_BEGIN("entRemCb", HK_NULL);
         ((Listener4*)obj->m_smallArray208.m_data[0])->vfn6(obj);
-        timerEnd("Et");
+        HK_TIMER_END();
     }
 }
 
@@ -1110,20 +831,7 @@ extern DWORD DAT_0126835c;
 
 unsigned __int64 __cdecl __rdtsc(void);
 
-struct ProfRec_cffa00
-{
-    const char* m_pName;
-    DWORD m_iTick;
-    DWORD unk08;
-};
 
-struct ProfBuf_cffa00
-{
-    DWORD unk00;
-    ProfRec_cffa00* m_pCur;
-    DWORD unk08;
-    ProfRec_cffa00* m_pRecordEnd;
-};
 
 class ListItem_cffa00
 {
@@ -1140,6 +848,7 @@ struct ItemList_cffa00
     WORD m_wCount;
 };
 
+// hkpEntity: only the member these callbacks read.
 struct ProfOwner_cffa00
 {
     DWORD unk000, unk004, unk008, unk00C, unk010, unk014, unk018, unk01C;
@@ -1148,18 +857,8 @@ struct ProfOwner_cffa00
     DWORD unk060, unk064, unk068, unk06C, unk070, unk074, unk078, unk07C;
     DWORD unk080, unk084, unk088, unk08C, unk090, unk094, unk098, unk09C;
     DWORD unk0A0, unk0A4, unk0A8, unk0AC, unk0B0, unk0B4, unk0B8, unk0BC;
-    DWORD unk0C0, unk0C4, unk0C8, unk0CC, unk0D0, unk0D4, unk0D8, unk0DC;
-    DWORD unk0E0, unk0E4, unk0E8, unk0EC, unk0F0, unk0F4, unk0F8, unk0FC;
-    DWORD unk100, unk104, unk108, unk10C, unk110, unk114, unk118, unk11C;
-    DWORD unk120, unk124, unk128, unk12C, unk130, unk134, unk138, unk13C;
-    DWORD unk140, unk144, unk148, unk14C, unk150, unk154, unk158, unk15C;
-    DWORD unk160, unk164, unk168, unk16C, unk170, unk174, unk178, unk17C;
-    DWORD unk180, unk184, unk188, unk18C, unk190, unk194, unk198, unk19C;
-    DWORD unk1A0, unk1A4, unk1A8, unk1AC, unk1B0, unk1B4, unk1B8, unk1BC;
-    DWORD unk1C0, unk1C4, unk1C8, unk1CC, unk1D0, unk1D4, unk1D8, unk1DC;
-    DWORD unk1E0, unk1E4, unk1E8, unk1EC, unk1F0, unk1F4, unk1F8, unk1FC;
-    DWORD unk200, unk204, unk208, unk20C, unk210;
-    ItemList_cffa00* m_pItems;
+    DWORD unk0C0, unk0C4, unk0C8;
+    ItemList_cffa00* m_extendedListeners;  // +0xCC
 };
 
 // Iterates pOwner->m_pItems in reverse, writing TtentAddCb/Et rdtsc ticks to the TLS ProfBuf and calling vtbl04 on each item.
@@ -1168,42 +867,16 @@ struct ProfOwner_cffa00
 // pdb params: world, entity
 void __cdecl FUN_00cffa00(ProfOwner_cffa00* pOwner)
 {
-    LPVOID(WINAPI * pfnTlsGetValue)(DWORD) = TlsGetValue;
-    ItemList_cffa00* pList = *(ItemList_cffa00**)((char*)pOwner + 0xcc);
-    int i;
-    volatile DWORD ticks[2];
-
+    ItemList_cffa00* pList = pOwner->m_extendedListeners;
     if (pList != 0)
     {
-        i = (int)pList->m_wCount - 1;
-        if (i >= 0)
+        for (int i = (int)pList->m_wCount - 1; i >= 0; i--)
         {
-            for (; i >= 0; i--)
+            if (pList->m_ppItems[i] != 0)
             {
-                if (pList->m_ppItems[i] != 0)
-                {
-                    ProfBuf_cffa00* pBuf = (ProfBuf_cffa00*)pfnTlsGetValue(DAT_0126835c);
-                    if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-                    {
-                        ProfRec_cffa00* pRec = pBuf->m_pCur;
-                        pRec->m_pName = "TtentAddCb";
-                        _ReadWriteBarrier();
-                        ticks[0] = (DWORD)__rdtsc();
-                        pRec->m_iTick = ticks[0];
-                        pBuf->m_pCur = pRec + 1;
-                    }
-                    pList->m_ppItems[i]->vtbl04(pOwner);
-                    ProfBuf_cffa00* pBuf2 = (ProfBuf_cffa00*)pfnTlsGetValue(DAT_0126835c);
-                    if (pBuf2->m_pCur < pBuf2->m_pRecordEnd)
-                    {
-                        ProfRec_cffa00* pRec = pBuf2->m_pCur;
-                        pRec->m_pName = "Et";
-                        _ReadWriteBarrier();
-                        ticks[1] = (DWORD)__rdtsc();
-                        pRec->m_iTick = ticks[1];
-                        pBuf2->m_pCur = pRec + 1;
-                    }
-                }
+                HK_TIMER_BEGIN("entAddCb", HK_NULL);
+                pList->m_ppItems[i]->vtbl04(pOwner);
+                HK_TIMER_END();
             }
         }
     }

@@ -581927,7 +581927,8 @@
     "??_C@_0L@JHADFBHM@TtactAddCb?$AA@": "0x00e7d8b0",
     "?FUN_00cff9b0@@YAXAAUArray833@@@Z": "0x00988440",
     "??_C@_0L@FBOKBFKB@TtentAddCb?$AA@": "0x00e7d84c",
-    "??_C@_0L@JEMAADKO@TtentRemCb?$AA@": "0x00e7d858"
+    "??_C@_0L@JEMAADKO@TtentRemCb?$AA@": "0x00e7d858",
+    "?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PAVhkMonitorStream@@@@A": "0x0116913c"
    }
   },
   {
