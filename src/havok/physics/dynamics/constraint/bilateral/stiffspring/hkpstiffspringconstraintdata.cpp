@@ -22,7 +22,7 @@ void __stdcall FUN_00d4f090(char a, int* pData)
 
 extern "C" void* __cdecl FUN_00d21a60(void* a, int b, int c);
 
-struct FUN_00d4f070_t
+struct FUN_00d4f070_t : public hkpStiffSpringConstraintData
 {
     void* FUN_00d4f070(int a);
 };
@@ -30,7 +30,7 @@ struct FUN_00d4f070_t
 // @fnv 0x00d4f070
 void* FUN_00d4f070_t::FUN_00d4f070(int aiIndex)
 {
-    return FUN_00d21a60((char*)this + 0x10, 0x38, aiIndex);
+    return FUN_00d21a60(&m_kBridgeAtoms, m_kBridgeAtoms.getSizeOfAllAtoms(), aiIndex);
 }
 
 // @fnv 0x00d4f0e0

@@ -23,7 +23,7 @@ void __stdcall FUN_00d84780(unsigned char a, int* pData)
 
 extern "C" void* __cdecl FUN_00d21a60(void*, int, int);
 
-struct FUN_00d84760
+struct FUN_00d84760 : public hkpPointToPlaneConstraintData
 {
     void* PopulateInfo(int a);
 };
@@ -33,7 +33,7 @@ struct FUN_00d84760
 // pdb params: infoOut
 void* FUN_00d84760::PopulateInfo(int a)
 {
-    return FUN_00d21a60((char*)this + 0x10, 0x94, a);
+    return FUN_00d21a60(&m_kBridgeAtoms, m_kBridgeAtoms.getSizeOfAllAtoms(), a);
 }
 
 // @fnv 0x00d847b0

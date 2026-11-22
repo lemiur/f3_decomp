@@ -21,14 +21,14 @@ void __stdcall FUN_00e3b520(char flag, int* out)
 }
 
 void* __cdecl FUN_00d21a60(void*, int, int);
-struct FUN_00e3b500_cls
+struct FUN_00e3b500_cls : public hkpRotationalConstraintData
 {
     void __thiscall FUN_00e3b500(int arg);
 };
 // @fnv 0x00e3b500
 void __thiscall FUN_00e3b500_cls::FUN_00e3b500(int arg)
 {
-    FUN_00d21a60((char*)this + 0x10, 0x74, arg);
+    FUN_00d21a60(&m_kBridgeAtoms, m_kBridgeAtoms.getSizeOfAllAtoms(), arg);
 }
 
 // Returns the constant value 16.

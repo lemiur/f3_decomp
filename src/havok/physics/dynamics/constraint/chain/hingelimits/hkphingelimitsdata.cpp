@@ -5,7 +5,7 @@
 #include "havok/hkpHingeLimitsData.h"
 
 extern "C" void __cdecl FUN_00d21a60(void* a, int b, int c);
-struct hkPhingeLimitsData
+struct hkPhingeLimitsData : public hkpHingeLimitsData
 {
     void __thiscall FUN_00d52f10(int arg);
 };
@@ -14,7 +14,7 @@ struct hkPhingeLimitsData
 // pdb params: infoOut
 void __thiscall hkPhingeLimitsData::FUN_00d52f10(int arg)
 {
-    FUN_00d21a60((char*)this + 0x10, 0x84, arg);
+    FUN_00d21a60(&m_kBridgeAtoms, 0x84, arg);
 }
 
 struct hkHingeLimitsData

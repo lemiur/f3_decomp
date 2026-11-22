@@ -6,7 +6,7 @@
 
 extern "C" void __cdecl FUN_00d21a60(void* p, unsigned int x, unsigned int y);
 
-struct FUN_00d4f130_StandIn
+struct FUN_00d4f130_StandIn : public hkpRagdollLimitsData
 {
     void FUN_00d4f130(unsigned int a);
 };
@@ -16,7 +16,7 @@ struct FUN_00d4f130_StandIn
 // pdb params: infoOut
 void FUN_00d4f130_StandIn::FUN_00d4f130(unsigned int auiValue)
 {
-    FUN_00d21a60((char*)this + 0x10, 0xac, auiValue);
+    FUN_00d21a60(&m_kBridgeAtoms, m_kBridgeAtoms.getSizeOfAllAtoms(), auiValue);
 }
 
 // @fnv 0x00d4f150

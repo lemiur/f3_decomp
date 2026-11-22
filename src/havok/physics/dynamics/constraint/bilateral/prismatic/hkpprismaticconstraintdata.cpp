@@ -6,7 +6,7 @@
 
 extern "C" void* __cdecl FUN_00d21a60(void* self, int a, void* b);
 
-struct FUN_00d4f880_class
+struct FUN_00d4f880_class : public hkpPrismaticConstraintData
 {
     void* __thiscall FUN_00d4f880(int a);
 };
@@ -16,7 +16,7 @@ struct FUN_00d4f880_class
 // pdb params: infoOut
 void* __thiscall FUN_00d4f880_class::FUN_00d4f880(int a)
 {
-    return FUN_00d21a60((char*)this + 0x10, 0xc0, (void*)a);
+    return FUN_00d21a60(&m_kBridgeAtoms, m_kBridgeAtoms.getSizeOfAllAtoms(), (void*)a);
 }
 
 // @fnv 0x00d4f8a0

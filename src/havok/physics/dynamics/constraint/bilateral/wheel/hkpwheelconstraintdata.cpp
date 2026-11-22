@@ -23,7 +23,7 @@ void __stdcall FUN_00d4e580(char a1, int* a2)
 }
 
 void* __cdecl FUN_00d21a60(void* a, int b, int c);
-struct FUN_00d4e560
+struct FUN_00d4e560 : public hkpWheelConstraintData
 {
     void* __thiscall PopulateInfo(int ai);
 };
@@ -32,7 +32,7 @@ struct FUN_00d4e560
 // pdb params: infoOut
 void* __thiscall FUN_00d4e560::PopulateInfo(int aiIndex)
 {
-    return FUN_00d21a60((char*)this + 0x10, 0x124, aiIndex);
+    return FUN_00d21a60(&m_kBridgeAtoms, 0x124, aiIndex);
 }
 
 // @fnv 0x00d4e5b0
