@@ -4405,11 +4405,18 @@ struct FO3Args {
     FO3Target* target;
 };
 
+class hkClass;
+class hkStatisticsCollector;
+// hkpEntity: the six slots of its Fallout 3 vtable (0x00e35ddc), named as the New Vegas Xbox 360 PDB names them.
 struct FO3Target {
-    virtual void vf00(); virtual void vf04(); virtual void vf08();
-    virtual void vf0c(); virtual void vf10(); virtual void vf14();
+    virtual ~FO3Target();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual int setShape(const void* shape);
+    virtual void* getMotionState();
+    virtual void deallocateInternalArrays();
 
-    unsigned short m_04;
+    unsigned short m_04;  // m_memSizeAndFlags
     void* m_08; void* m_0c; void* m_10; void* m_14;
     void* m_18; void* m_1c; void* m_20; void* m_24;
     void* m_28; void* m_2c;
@@ -4483,7 +4490,7 @@ unsigned char* FUN_00c91620_Class::ProcessTarget(
     }
 
     if (target->m_04 == 0) {
-        target->vf14();
+        target->deallocateInternalArrays();
     }
     target->FUN_009316f0();
 
