@@ -396,8 +396,8 @@ void* FUN_00a35b90_cls::Destroy(unsigned int acFlags)
 {
     if (acFlags & 2)
     {
-        char* base = (char*)this - 4;
-        int i = *(int*)base;
+        int* base = (int*)this - 1;
+        int i = *base;
         char* p = (char*)this + i * 0x34;
         i = i - 1;
         if (i >= 0)
